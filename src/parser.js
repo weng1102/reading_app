@@ -6,15 +6,20 @@
  // on markup and compensate for idiosyncracies of the Google Voice API
 
 'use strict';
+const  { altRecognition } = require('../data/altrecognition.json');
 const  { ContentNodeType } = require('../src/parsertypes.js');
 const  { endMarkupTag, TokenType, TokenTag } = require('../src/tokentypes.js');
 const  { Tokenizer } = require('../src/tokenizer.js');
 const  { Logger } = require('../src/utilities.js');
+const fs = require('fs');
+
+const WordSeqNumPlaceholder = "#TBD#";
+const WordSeq = 'wordseq="' + WordSeqNumPlaceholder + '"';
+
 //const ContentNPrefix = "ContentN_";
 
 class BaseClass {
   constructor(parent) {
-    this._parent = parent;
     this._logger = new Logger(this);
   }
   get logger() {
@@ -24,12 +29,37 @@ class BaseClass {
     this._logger = obj;
   }
 }
+class UserContext extends BaseClass {
+  constructor(name) {
+    super();
+//    this._parent = parent;
+    this._name = name;
+    this._pages = new Array();
+    this._altRecognitionMap = new Map();
+    let altRecog = fs.readFileSync("./data/altrecognition.json", "utf-8");
+    let mapEntries = JSON.parse(altRecog);
+    for (let key of Object.keys(mapEntries)) {
+      this._altRecognitionMap.set(key, mapEntries[key]);
+    };
+  }
+  get altRecognitionMap() {
+    return this._altRecognitionMap;
+  }
+  get name() {
+    return this._name;
+  }
+  set name(name) {
+  this._name = name;
+  }
+}
 class Formatter extends BaseClass {
   // formatter (sub)classes strictly manage the transformation of Content, NOT the creation or
   // modification of Content.
     constructor(parent) {
-      super(parent);
+      super();
       this._content = null;
+      this._parent = parent;
+      this._userContext = (typeof parent !== "undefined" && parent !== null && typeof parent.userContext !== "undefined") ? parent.userContext : null;
     }
     get content() {
       return this._content;
@@ -37,11 +67,22 @@ class Formatter extends BaseClass {
     set content(content) {
       this._content = content;
     }
+    get userContext() {   // should be refactored into a parent class below BaseClass: BaseClassWithUserContext
+      if (this._userContext === null) {
+        let e = new Error();
+        e.message = "user context is null";
+        this.logger.error(e.message);
+        throw(e);
+      }
+      else {
+        return this._userContext;
+      }
+    }
+    set userContext(user) {
+      this._userContext = user;
+    }
     transform() {
       this.logger.warning("abstract method referenced with no implementation");
-    }
-    set input(input) {
-      this._content = input;
     }
 }
 class PageFormatter extends Formatter {
@@ -98,17 +139,28 @@ class TestFormatter extends Formatter {
   // Interprets input JSON section as a paragraph with or without line numbers
   constructor(parent) {
     super(parent);
+//    console.log("*************constructor():"+this.constructor.name);
+//    if (typeof this._userContext !== 'undefined') console.log("*************constructor():user.name"+this.constructor.name+this._userContext.name);
   };
   transform() {
     this.logger.diagnosticMode = true;
     this.logger.diagnostic("transforming page");
-    let outputString = "<div class=page>\n";
+    let outputString =  "<html>\n"
+                      + "<head>\n"
+                      + '<style type="text/css">\n'
+                      + ".span {\n"
+                      + " padding: 0px 0px;\n"
+                      + "}\n"
+                      + "</style>\n"
+                      + "</head>\n"
+                      + "<body>\n"
+                      + "<div class=page>\n";
     let sectionFormatter = new ListSectionFormatter(this);
     this.content.sections.forEach(section => {
       sectionFormatter.content = section;
       outputString = outputString + sectionFormatter.transform();
     });
-    return outputString + "</div>\n";
+    return outputString + "</div>\n<body>\n</html>";
   }
 }
 class SectionFormatter extends Formatter {
@@ -154,22 +206,35 @@ class SentenceFormatter extends Formatter {
     super(parent);
   }
   transform() {
+    return this.content.transform();
+    /*
     this.logger.diagnosticMode = true;
     this.logger.diagnostic("transforming sentence ("+this.content.tokens.length+" nodes)");
-    let outputString = "<span "+"sentenceid="+this.content.id+" class=sentence>";
+    let sectionid = this.content.parent.id;
+    let outputString = '<span class"=sentence" sectionid="'+ sectionid + '" sentenceid="'
+                        + this.content.id + '">';
     let nextWordIdx = 0;
     let span = "";
     this.content.tokens.forEach(token => {
-      console.log(token.type);
-        if (token.type !== ContentNodeType.WHITESPACE && token.type !== ContentNodeType.PUNCTUATION) {
-          span = "<span nextwordidx=" + nextWordIdx++ +">";
+      // handle alternate pronunciation attribute
+      if (token.type !== ContentNodeType.WHITESPACE && token.type !== ContentNodeType.PUNCTUATION) {
+        span = "<span nextwordidx=TBD";
+        if (this.userContext != null) {
+          const exclusionList = [ TokenType.MLTAG, TokenType.MLTAG_END ];
+          let altRecog = this.userContext.altRecognitionMap.get(token.content(exclusionList));
+          if (typeof altRecog !== "undefined" && altRecog !== null) span = span + ' altRecognition="' + altRecog + '"';
         }
-        else {
-          span = "<span>";
-        }
-        outputString = outputString + span + token.content() + "</span>";
+        span = span + ">";
+      }
+      else { // no alternate pronunciation
+        span = "<span>";
+      }
+      outputString = outputString + span + token.transform() + "</span>";
     });
-    return outputString + "</span>\n";
+    //replace all nextwordidx=TBD with the proper id
+    //
+    return outputString + "\n";
+    */
   }
 }
 class ListItemFormatter extends SentenceFormatter {
@@ -178,7 +243,7 @@ class ListItemFormatter extends SentenceFormatter {
   }
   transform() {
     this.logger.diagnostic("transforming sentence into list ("+this.content.tokens.length+" nodes)");
-      return "\n<li>" + super.transform() + "</li>";
+    return "<li>" + super.transform() + "</li>\n";
   }
 }
 class Content extends BaseClass {
@@ -186,6 +251,8 @@ class Content extends BaseClass {
     super(parent);
     this._id = "";
     this._name = "";
+    this._parent = parent;
+    this._userContext = (typeof parent !== "undefined" && parent !== null && typeof parent.userContext !== "undefined") ? parent.userContext : null;
   }
   get id() {
     return this._id;
@@ -199,8 +266,25 @@ class Content extends BaseClass {
   set name(name) {
     this._name = name;
   }
+  get parent() {
+    return this._parent;
+  }
+  get userContext() {
+    if (this._userContext === null) {
+      let e = new Error();
+      e.message = "user context is null";
+      this.logger.error(e.message);
+      throw(e);
+    }
+    else {
+      return this._userContext;
+    }
+  }
+  set userContext(userContext) {
+    this._userContext = userContext;
+  }
   parse() {
-      // should be emplemented in subclass
+    this.logger.warning("abstract method referenced with no implementation");
   }
 }
 class PageContent extends Content {
@@ -211,7 +295,7 @@ class PageContent extends Content {
   get sections() {
     return this._sectionNodes;
   }
-  parseSections(page) {
+  parse(page) {
     this.id = page.id;
     this.name = page.id;
     page.sections.forEach(section => {
@@ -219,7 +303,7 @@ class PageContent extends Content {
       let sectionNode = new SectionContent(this);
       sectionNode.id = section.id;
       sectionNode.name = section.name;
-      sectionNode.parseSentences(section.sentences);
+      sectionNode.parse(section.sentences);
       this._sectionNodes.push(sectionNode);
     });
   }
@@ -249,7 +333,7 @@ class SectionContent extends Content {
     get sentences() {
       return this._sentenceNodes;
     }
-    parseSentences(sentenceRecords) {
+    parse(sentenceRecords) {
       sentenceRecords.forEach(sentenceRecord => {
 //
         // must discern subsection vs. sentence. Sentences are parsed with the current sectionNode
@@ -257,7 +341,7 @@ class SectionContent extends Content {
         this.logger.diagnosticMode = true;
         let sentenceNode = new SentenceContent(this);
         this.logger.diagnostic(sentenceRecord.content);
-        sentenceNode.parseSentence(sentenceRecord);
+        sentenceNode.parse(sentenceRecord);
         this._sentenceNodes.push(sentenceNode);
       });
   }
@@ -332,10 +416,7 @@ class SentenceContent extends Content {
   set input(sentence) {
     this._input = sentence;
   }
-  parseSentence(sentenceRecord) {
-///    parseSentence(sentenceRecord.id, sentenceRecord.content);
-///  }
-///  parseSentence(id, sentence) {
+  parse(sentenceRecord) {
     this.id = sentenceRecord.id;
     this.input = sentenceRecord.content;
 //    this.id = sentence.id;
@@ -358,9 +439,11 @@ class SentenceContent extends Content {
             && (tokens[tokenIdx].text.toLowerCase() in this._ParserMarkupNodeClasses)) {
             this.logger.diagnostic("Encountered token type="+ token.type + " with markup tag=" + token.text);
             parserNode = new this._ParserMarkupNodeClasses[token.text.toLowerCase()](this, tokenIdx);
+            parserNode.userContext = this.userContext;
         }
         else if (token.type in this._ContentNodeClasses) {
           parserNode = new this._ContentNodeClasses[token.type](this, tokenIdx);
+          parserNode.userContext = this.userContext;
           this.logger.diagnostic("Encountered token type=" + token.type);
         }
         else {
@@ -420,19 +503,39 @@ class SentenceContent extends Content {
     return nodeList;
   } //serializeForUnitTest
 transform() {
-  this.logger.diagnostic("transforming sentence ("+this._tokens.length+" nodes)");
-  let outputString = "<div>";
+  this.logger.diagnosticMode = true;
+  this.logger.diagnostic("transforming sentence ("+this._parserNodes.length+" nodes)");
+  let sectionid = this.parent.id;
+  let outputString = '<span class"=sentence" sectionid="'+ sectionid + '" sentenceid="'
+                      + this.id + '">\n';
+  this._parserNodes.forEach(node => {
+    outputString = outputString + node.transform();
+  });
+  outputString = outputString + "</span>"; // sentence /span
+
+  //replace all WordSeq placeholders with the proper idx, which is more complex but more robust
+  let nextWordIdx = 0;
+  for (let pos = outputString.indexOf(WordSeqNumPlaceholder), nextWordIdx = 0; pos > 0; nextWordIdx++) {
+    outputString = outputString.slice(0, pos) + nextWordIdx + outputString.slice(pos + WordSeqNumPlaceholder.length);
+    pos = outputString.indexOf(WordSeqNumPlaceholder);
+  }
+  return outputString + "\n";
+}
+/*
   this._parserNodes.forEach(node => {
       outputString = outputString + node.transform();
   });
   return outputString + "</div>";
 }
+*/
+
 unitTest(actual, expected) {
     return this.serializeForUnitTest(actual) === expected;
   }
 };
-class ContentNode {
+class ContentNode extends Content {
   constructor(parent, tokenIdx) {
+    super(parent);
 //    this._tokenList = new Array;  // consider keeping link (by reference) to token list
     this.logger = new Logger(this);
     ///this.logger.diagnosticMode = true;
@@ -441,7 +544,9 @@ class ContentNode {
     this._type = ContentNodeType.TBD; // determined based on token type (e.g., MLTAG) and token value (<contraction>)
     this._tokenStartIdx = null;
     this._tokenEndIdx = null;
-    // get parentType parent.type;
+  }
+  get parent() {
+    return this._parent;
   }
   get type() {
     return this._type;
@@ -473,23 +578,20 @@ class ContentNode {
     nodeJson.END = this._tokenEndIdx;
     return JSON.stringify(nodeJson);
   }
-  content() {
-    this.logger.diagnostic("serializing as HTML content node ("+ this._type+")");
-    // With the exception of this default, each subclass with determine the proper action
+  content(typeExclusionList) {
+    if (typeof typeExclusionList === "undefined") typeExclusionList = [];
     let outputString = "";
-    for (let idx = this._tokenStartIdx; idx <= this._tokenEndIdx; idx++) {
-      outputString = outputString + this._parentNode._tokens[idx].text;
+    for (let idx = this._tokenStartIdx;
+      idx <= this._tokenEndIdx; idx++) {
+        if (!typeExclusionList.includes(this._parentNode._tokens[idx].type)) {
+          outputString = outputString + this._parentNode._tokens[idx].text;
+        }
     }
     return outputString;
   }
   transform() {
     this.logger.diagnostic("transforming content node ("+ this._type+")");
-    // With the exception of this default, each subclass with determine the proper action
-    let outputString = "<span>";
-    for (let idx = this._tokenStartIdx; idx <= this._tokenEndIdx; idx++) {
-      outputString = outputString + this._parentNode._tokens[idx].text;
-    }
-    return outputString = outputString + "</span>";
+    return "<span>" + this.content() + "</span>";
   }
 }
 class ContentNode_WORD extends ContentNode {
@@ -501,8 +603,20 @@ class ContentNode_WORD extends ContentNode {
   parse(tokenIdx) {
     return super.parse(tokenIdx);
   }
+  transform() {
+    const exclusionList = [ TokenType.MLTAG, TokenType.MLTAG_END ];
+    let outputString = '<span ' + WordSeq;
+    let content = this.content(exclusionList);
+    if (this.userContext != null) {
+      let altRecog = this.userContext.altRecognitionMap.get(content);
+      if (typeof altRecog !== "undefined" && altRecog !== null)
+          outputString = outputString + ' altRecognition="' + altRecog + '"';
+    }
+    outputString = outputString + ">";
+    return outputString + content + "</span>";
+  }
 }
-class ContentNode_NUMBER extends ContentNode {
+class ContentNode_NUMBER extends ContentNode_WORD {
   constructor(parent, tokenIdx) {
     super(parent,tokenIdx);
     this._type = ContentNodeType.NUMBER; // determined based on token type (e.g., MLTAG) and token value (<contraction>)
@@ -551,9 +665,23 @@ class ContentNode_MLTAG_ extends ContentNode_MLTAG { // interally handled MLTAGs
     else {
       this._tokenEndIdx = findIdx; // include closing tag iff found
     }
-    ///console.log(this.constructor.name+"::ContentNode_MLTAG_ parse exit: tokenStartIdx="+this._tokenStartIdx);
-    ///console.log(this.constructor.name+"::ContentNode_MLTAG_ parse exit: tokenEndIdx="+this._tokenEndIdx);
     return this._tokenEndIdx + 1;
+  }
+  transform() {
+    const exclusionList = [ TokenType.MLTAG, TokenType.MLTAG_END ];
+    let altRecog, altRecogPattern;
+    let content = this.content(exclusionList);
+    let outputString = '<span ' + WordSeq;
+
+    altRecogPattern = this.userContext.altRecognitionMap.get(content);
+    if (typeof altRecogPattern !== "undefined" && altRecogPattern !== null) {
+      outputString = outputString + ' altRecognition="' + altRecogPattern + '">';
+    }
+    else {
+      outputString = outputString + ">";
+    }
+    outputString = outputString + content + '</span>';   // just default formatting
+    return outputString;
   }
 }
 class ContentNode_MLTAG_END extends ContentNode {
@@ -582,6 +710,35 @@ class ContentNode_MLTAG_PHONENUMBER extends ContentNode_MLTAG_ {
   constructor(parent, tokenIdx) {
     super(parent,tokenIdx);
     this._markupTag = TokenTag.PHONENUMBER;  // used by subclasses
+  }
+  transform() {
+    this.logger.diagnostic("transforming content node ("+ this._type+")");
+    let outputString  = "";
+    let idx = this._tokenStartIdx;
+    if (this._tokenEndIdx - this._tokenStartIdx !== 8
+      || this._parentNode._tokens[this._tokenStartIdx].text !== TokenTag.PHONENUMBER
+      || this._parentNode._tokens[this._tokenEndIdx].text !== endMarkupTag(TokenTag.PHONENUMBER)) {
+      this.logger.warning("phone number is improperly formatted and transformed as standard content");
+      outputString = super.content();   // just default formatting
+    }
+    else {
+      outputString  =
+          '<span> ' + this._parentNode._tokens[idx + 1].text + '</span>' // (
+        + '<span ' + WordSeq + '>'  + this._parentNode._tokens[idx + 2].text.slice(0,1) + '</span>'
+        + '<span ' + WordSeq + '>'  + this._parentNode._tokens[idx + 2].text.slice(1,2) + '</span>'
+        + '<span ' + WordSeq + '>'  + this._parentNode._tokens[idx + 2].text.slice(2,3) + '</span>'
+        + '<span>'                  + this._parentNode._tokens[idx + 3].text            + '</span>' // )
+        + '<span>'                  + this._parentNode._tokens[idx + 4].text            + '</span>' // space
+        + '<span ' + WordSeq + '>'  + this._parentNode._tokens[idx + 5].text.slice(0,1) + '</span>'
+        + '<span ' + WordSeq + '>'  + this._parentNode._tokens[idx + 5].text.slice(1,2) + '</span>'
+        + '<span ' + WordSeq + '>'  + this._parentNode._tokens[idx + 5].text.slice(2,3) + '</span>'
+        + '<span>'                  + this._parentNode._tokens[idx + 6].text            + '</span>' // -
+        + '<span ' + WordSeq + '>'  + this._parentNode._tokens[idx + 7].text.slice(0,1) + '</span>'
+        + '<span ' + WordSeq + '>'  + this._parentNode._tokens[idx + 7].text.slice(1,2) + '</span>'
+        + '<span ' + WordSeq + '>'  + this._parentNode._tokens[idx + 7].text.slice(2,3) + '</span>'
+        + '<span ' + WordSeq + '>'  + this._parentNode._tokens[idx + 7].text.slice(3,4) + '</span>';
+    }
+    return outputString;
   }
 }
 class ContentNode_MLTAG_TIME extends ContentNode_MLTAG_ {
@@ -619,17 +776,48 @@ class ContentNode_MLTAG_NUMBER_WITHCOMMAS extends ContentNode_MLTAG_ {
     super(parent,tokenIdx);
     this._markupTag = TokenTag.NUMBER_WITHCOMMAS;
   }
+  transform() {
+    // remove commas for the altPronunciation. Should check for altPronunciation too!
+    let outputString;
+    let altRecog;
+    const exclusionList = [ TokenType.MLTAG, TokenType.MLTAG_END ];
+    altRecog = super.content(exclusionList).replace(/,/g,'');
+    outputString = '<span ' + WordSeq + ' altrecognition="'+ altRecog + '">'
+                    + super.content(exclusionList); + "</span>";
+    return outputString;
+  }
 }
 class ContentNode_MLTAG_TOKEN extends ContentNode_MLTAG_ {
   constructor(parent, tokenIdx) {
     super(parent,tokenIdx);
     this._markupTag = TokenTag.TOKEN;
   }
+//  transform() { // handled by parent class
+//    return super.transform();
+//  }
 }
 class ContentNode_MLTAG_USD extends ContentNode_MLTAG_ {
   constructor(parent, tokenIdx) {
     super(parent,tokenIdx);
     this._markupTag = TokenTag.USD;
   }
+  transform() {
+    this.logger.diagnostic("transforming content node ("+ this._type+")");
+    let outputString;
+    if (this._parentNode._tokens[this._tokenStartIdx].text !== TokenTag.USD
+        || this._parentNode._tokens[this._tokenEndIdx].text !== endMarkupTag(TokenTag.USD)) {
+      this.logger.warning("US currency is improperly formatted and transformed as standard content");
+      outputString = super.content();   // just default formatting
+    }
+    else {  // at present, this is the same as the default behavior
+      const exclusionList = [ TokenType.MLTAG, TokenType.MLTAG_END ];
+      outputString  = '<span>'
+        + this._parentNode._tokens[this._tokenStartIdx].text  //MLtag
+        + '<span ' + WordSeq + '>'  + super.content(exclusionList);   // just default formatting
+        + this._parentNode._tokens[this._tokenEndIdx].text // ML endTag
+        + '</span>';
+    }
+    return outputString;
+  }
 }
-module.exports = { PageContent, PageFormatter, SectionContent, SentenceContent, TestFormatter };
+module.exports = { PageContent, PageFormatter, SectionContent, SentenceContent, TestFormatter, UserContext };
