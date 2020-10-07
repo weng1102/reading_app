@@ -6,7 +6,7 @@ class AppError extends Error {
     this.name = "AppError";
   }
 }
-const AbbreviatedMonthMap = new Map([
+const AbbreviatedMonthLookup = new Map([
   [ "jan", "january" ],
   [ "feb", "february" ],
   [ "mar", "march" ],
@@ -20,7 +20,7 @@ const AbbreviatedMonthMap = new Map([
   [ "nov", "november" ],
   [ "dec", "december" ]
 ]);
-const OrdinalNumberMap = new Map([
+const OrdinalNumberLookup = new Map([ // could be coded as switch on ones digit except the teens
   [ "1", "1st" ],
   [ "2", "2nd" ],
   [ "3", "3rd" ],
@@ -52,6 +52,21 @@ const OrdinalNumberMap = new Map([
   [ "29", "29th" ],
   [ "30", "30th" ],
   [ "31", "31st" ]
+]);
+
+const AcronymLookup = new Map([
+  [ "SCVMC", "santa,clara,valley,medical,center" ],
+  [ "CSUEB", "cal,state,university,east,bay" ],
+  [ "UCB", "university,california,berkeley" ],
+  [ "SJS", "san,jose,state" ],
+  [ "SJSU", "san,jose,state,university" ],
+  [ "ASAP", "as,soon,as,possible" ],
+  [ "US", "united,states" ],
+  [ "PSA", "pacific,stroke,association" ],
+  [ "TBD", "to,be,determined" ],
+  [ "UCSB", "university,california,santa,barbara" ],
+  [ "UCD", "university,california,davis" ],
+  [ "UCSD", "university,california,san,diego" ],
 ]);
 
 class Logger { // logging from within supported objects
@@ -216,4 +231,4 @@ class MyDate extends Date {
     return yyyymmdd+" "+hh+":"+min+":"+sec;
   }
 }
-module.exports = { AppError, Logger, MyDate, AbbreviatedMonthMap, OrdinalNumberMap };
+module.exports = { AcronymLookup, AppError, Logger, MyDate, AbbreviatedMonthLookup, OrdinalNumberLookup };

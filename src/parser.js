@@ -10,7 +10,7 @@ const  { altRecognition } = require('../data/altrecognition.json');
 const  { ContentNodeType } = require('../src/parsertypes.js');
 const  { endMarkupTag, TokenType, TokenTag } = require('../src/tokentypes.js');
 const  { Tokenizer } = require('../src/tokenizer.js');
-const  { Logger, AbbreviatedMonthMap, OrdinalNumberMap } = require('../src/utilities.js');
+const  { AcronymLookup, Logger, AbbreviatedMonthLookup, OrdinalNumberLookup } = require('../src/utilities.js');
 const fs = require('fs');
 
 const WordSeqNumPlaceholder = "#TBD#";
@@ -40,6 +40,7 @@ class UserContext extends BaseClass {
     let mapEntries = JSON.parse(altRecog);
     for (let key of Object.keys(mapEntries)) {
       this._altRecognitionMap.set(key, mapEntries[key]);
+
     };
   }
   get altRecognitionMap() {
@@ -216,7 +217,7 @@ class SentenceFormatter extends Formatter {
     let nextWordIdx = 0;
     let span = "";
     this.content.tokens.forEach(token => {
-      // handle alternate pronunciation attribute
+      // handle alternate altRecognition attribute
       if (token.type !== ContentNodeType.WHITESPACE && token.type !== ContentNodeType.PUNCTUATION) {
         span = "<span nextwordidx=TBD";
         if (this.userContext != null) {
@@ -226,7 +227,7 @@ class SentenceFormatter extends Formatter {
         }
         span = span + ">";
       }
-      else { // no alternate pronunciation
+      else { // no alternate altRecognition
         span = "<span>";
       }
       outputString = outputString + span + token.transform() + "</span>";
@@ -554,19 +555,19 @@ class ContentNode extends Content {
   get tokens() {
     return this._parentNode._tokens;
   }
-  serializeColumnar(colWidth1, colWidth2) {
-    let tokenList = "";
-    for (let idx = this._tokenStartIdx; idx <= this._tokenEndIdx; idx++) {
-      tokenList = tokenList + this._parentNode._tokens[idx].text;
+  content(typeExclusionList) {
+    if (typeof typeExclusionList === "undefined") typeExclusionList = [];
+    let outputString = "";
+    for (let idx = this._tokenStartIdx;
+      idx <= this._tokenEndIdx; idx++) {
+        if (!typeExclusionList.includes(this.tokens[idx].type)) {
+          outputString = outputString + this.tokens[idx].text;
+        }
     }
-    if (arguments.length < 1) colWidth1 = 25;
-    if (arguments.length < 2) colWidth2 = 10;
-    return ("{" + tokenList + "}").padEnd(colWidth1)
-        + ("("+this._tokenStartIdx+".."+this._tokenEndIdx+") ").padEnd(colWidth2)
-        + "("+this.constructor.name+")";
+    return outputString;
   }
   parse(tokenIdx) {
-    this.logger.diagnostic("Parsing node ="+this._parentNode._tokens[tokenIdx].text);
+    this.logger.diagnostic("Parsing node ="+this.tokens[tokenIdx].text);
     this._tokenStartIdx = tokenIdx;
     this._tokenEndIdx = tokenIdx;
     return ++tokenIdx;
@@ -574,23 +575,23 @@ class ContentNode extends Content {
   serialize() {
     //each node produces its own output
   }
+  serializeColumnar(colWidth1, colWidth2) {
+    let tokenList = "";
+    for (let idx = this._tokenStartIdx; idx <= this._tokenEndIdx; idx++) {
+      tokenList = tokenList + this.tokens[idx].text;
+    }
+    if (arguments.length < 1) colWidth1 = 25;
+    if (arguments.length < 2) colWidth2 = 10;
+    return ("{" + tokenList + "}").padEnd(colWidth1)
+        + ("("+this._tokenStartIdx+".."+this._tokenEndIdx+") ").padEnd(colWidth2)
+        + "("+this.constructor.name+")";
+  }
   serializeForUnitTest() {
     let nodeJson = { TYP: "", START: 0, END: 0 };
     nodeJson.TYP = this._type;
     nodeJson.START = this._tokenStartIdx;
     nodeJson.END = this._tokenEndIdx;
     return JSON.stringify(nodeJson);
-  }
-  content(typeExclusionList) {
-    if (typeof typeExclusionList === "undefined") typeExclusionList = [];
-    let outputString = "";
-    for (let idx = this._tokenStartIdx;
-      idx <= this._tokenEndIdx; idx++) {
-        if (!typeExclusionList.includes(this._parentNode._tokens[idx].type)) {
-          outputString = outputString + this._parentNode._tokens[idx].text;
-        }
-    }
-    return outputString;
   }
   transform() {
     this.logger.diagnostic("transforming content node ("+ this._type+")");
@@ -602,21 +603,37 @@ class ContentNode_WORD extends ContentNode {
     super(parent, tokenIdx);
     this._type = ContentNodeType.WORD; // determined based on token type (e.g., MLTAG) and token value (<contraction>)
   }
-  //
   parse(tokenIdx) {
     return super.parse(tokenIdx);
   }
   transform() {
     const exclusionList = [ TokenType.MLTAG, TokenType.MLTAG_END ];
-    let outputString = '<span ' + WordSeq;
+    let altRecog = "";
+    let outputString = "";
     let content = this.content(exclusionList);
-    if (this.userContext != null) {
-      let altRecog = this.userContext.altRecognitionMap.get(content);
-      if (typeof altRecog !== "undefined" && altRecog !== null)
-          outputString = outputString + ' altRecognition="' + altRecog + '"';
+    // acronym word
+    if (/^[A-Z]{3,}$/.test(content) && AcronymLookup.has(content)) {
+      let acronym = AcronymLookup.get(content);
+      if (acronym !== "undefined" ) {
+        let acronymList = acronym.split(',');
+        if (acronymList.length != content.length)
+          this.logger.error('acronym lookup for "' + content + '" is inconsistent');
+        for (let idx = 0; idx <= content.length - 1; idx++)
+          outputString = outputString + '<span ' + WordSeq + 'altRecognition="'
+                        + acronymList[idx] + '">' + content.slice(idx, idx+1)+"</span>";
+      }
     }
-    outputString = outputString + ">";
-    return outputString + content + "</span>";
+    // normal word
+    else {
+      if (this.userContext != null) {
+        let altRecog = this.userContext.altRecognitionMap.get(content);
+        if (typeof altRecog !== "undefined" && altRecog !== null) {
+          altRecog = ' altRecognition="' + altRecog + '"';
+        }
+      }
+      outputString = '<span ' + WordSeq + altRecog + ">" + content + "</span>";
+    }
+    return outputString;
   }
 }
 class ContentNode_NUMBER extends ContentNode_WORD {
@@ -663,7 +680,7 @@ class ContentNode_MLTAG_ extends ContentNode_MLTAG { // interally handled MLTAGs
   this._tokenStartIdx = tokenIdx;
     let idx = 0;
     let markupTag = this._markupTag;
-    let findIdx = this._parentNode._tokens.map(token => token.text).indexOf(endMarkupTag(this._markupTag), this._tokenStartIdx+1);
+    let findIdx = this.tokens.map(token => token.text).indexOf(endMarkupTag(this._markupTag), this._tokenStartIdx+1);
     if (findIdx < 0) {  // end tag not found
       this.logger.warning("No matching end tag found for "+this._markupTag);
       this._tokenEndIdx = this._tokenStartIdx; // If endTag is not found, then tag is standalone
@@ -721,29 +738,29 @@ class ContentNode_MLTAG_EMAILADDRESS extends ContentNode_MLTAG_ {
     // "fox "123" shall be handled by further tokenizing
     // <token>fox</token><token>123</token> in source. Still needs to be implemented below.
     // OR tokenize baed on valid separators (underscores, dot(s), $, dash
-    // @ w/ altpronunciation="at"
+    // @ w/ altRecognition="at"
     // Consolidate everything right of @ into domain name; additional segmentation
-    // stanford.edu into <token>stanford.</token><token>edu</token> w/ altpronunciation
-    // for EDU in source and . w/ altPronunciation="dot" or dot-com
+    // stanford.edu into <token>stanford.</token><token>edu</token> w/ altRecognition
+    // for EDU in source and . w/ altRecognition="dot" or dot-com
     let atsignIdx = null;
     let outputString = "";
     // ugh. linear search! Fortunately typically only length<10
     for (let idx = this._tokenStartIdx + 1; idx < this._tokenEndIdx && atsignIdx === null; idx++) {
-      if (this._parentNode._tokens[idx].text === "@") atsignIdx = idx ;
+      if (this.tokens[idx].text === "@") atsignIdx = idx ;
     }
     if (atsignIdx !== null) {
         outputString = '<span ' + WordSeq + '>';
         // skip first and last elements of ml tag
         for (let idx = this._tokenStartIdx + 1; idx < atsignIdx; idx++) {
-          outputString = outputString + this._parentNode._tokens[idx].text;
+          outputString = outputString + this.tokens[idx].text;
         }
         outputString = outputString + "</span>"
-                      + '<span pronunciation="at" ' + WordSeq + ">"
-                      + this._parentNode._tokens[atsignIdx].text + "</span>"  //atsign
-                      + "<span "+ WordSeq + ">";
+                      + '<span altRecognition="at" ' + WordSeq + ">"
+                      + this.tokens[atsignIdx].text + "</span>"  //atsign
+                      + "<span "+ WordSeq + ">";  // domain part to follow
 
         for (let idx = atsignIdx + 1; idx < this._tokenEndIdx; idx++) {
-          outputString = outputString + this._parentNode._tokens[idx].text;
+          outputString = outputString + this.tokens[idx].text;
         }
         outputString = outputString + "</span>";
       }
@@ -762,10 +779,11 @@ class ContentNode_MLTAG_PHONENUMBER extends ContentNode_MLTAG_ {
     this.logger.diagnostic("transforming content node ("+ this._type+")");
     let outputString  = "";
     let idx = this._tokenStartIdx;
+    //assert
     if (this._tokenEndIdx - this._tokenStartIdx !== 8
       || this.tokens[this._tokenStartIdx].text !== TokenTag.PHONENUMBER
       || this.tokens[this._tokenEndIdx].text !== endMarkupTag(TokenTag.PHONENUMBER)) {
-      this.logger.warning("phone number is improperly formatted and transformed as standard content");
+      this.logger.error("phone number is improperly formatted and transformed as standard content");
       outputString = super.content();   // just default formatting
     }
     else {
@@ -799,18 +817,21 @@ class ContentNode_MLTAG_DATE1 extends ContentNode_MLTAG_ {
     super(parent,tokenIdx);
     this._markupTag = TokenTag.DATE1;  // used by subclasses
   }
-  transform() {
-    // e.g., 03 Jan(uary) 2020
-  }
+// transform() { // accept default tranform behavior for now. Lose
+// recognition of abbreviated months Jan = January
+    // e.g., 3 Jan(uary) 2020
+//  }
+  //TBD
 }
-class ContentNode_MLTAG_DATE2 extends ContentNode_MLTAG_ {
+class ContentNode_MLTAG_DATE3 extends ContentNode_MLTAG_ {
   constructor(parent, tokenIdx) {
     super(parent,tokenIdx);
-    this._markupTag = TokenTag.DATE2;  // used by subclasses
+    this._markupTag = TokenTag.DATE3;
   }
-  transform() {
+  transform() { // subset of Date2
+    // Jan(uary) DDth with no succeeding comma or year. less restrictive than Date2
     // e.g., Jan(uary) 3, 2020
-    let pronunciationAttr = "";
+    let altRecognitionAttr = "";
     let outputString = "";
 ///    for (let idx = this._tokenStartIdx; idx <= this._tokenEndIdx; idx++) {
 ///      console.log("date 2 ###"+this.tokens[idx].text);
@@ -820,15 +841,15 @@ class ContentNode_MLTAG_DATE2 extends ContentNode_MLTAG_ {
     if (abbreviatedMonth) {
       let abbreviatedMonthTag = this.tokens[currentIdx].text.slice(0,3).toLowerCase();
       try {
-///        pronunciationAttr = 'pronunciation="' + AbbreviatedMonthMap.get(abbreviatedMonthTag.toLowerCase()) +'"';
-        pronunciationAttr = ' pronunciation="' + AbbreviatedMonthMap.get(abbreviatedMonthTag) +'"';
+///        altRecognitionAttr = 'altRecognition="' + AbbreviatedMonthLookup.get(abbreviatedMonthTag.toLowerCase()) +'"';
+        altRecognitionAttr = ' altRecognition="' + AbbreviatedMonthLookup.get(abbreviatedMonthTag) +'"';
       }
       catch(e) {
         console.log(e.message);
         this.logger.error("invalid abbreviated month "+abbreviatedMonthTag);
       }
     }
-    outputString = "<span " + WordSeq + pronunciationAttr + ">"
+    outputString = "<span " + WordSeq + altRecognitionAttr + ">"
                     + this.tokens[currentIdx++].text + "</span>"; // month
     if (abbreviatedMonth)
       outputString = outputString
@@ -837,28 +858,64 @@ class ContentNode_MLTAG_DATE2 extends ContentNode_MLTAG_ {
                     + "<span>" + this.tokens[currentIdx++].text + "</span>"; // space
       let day = this.tokens[currentIdx++].text;
       if(!isNaN(parseInt(day))) {
-        pronunciationAttr = ' pronunciation="'+ OrdinalNumberMap.get(day) + '" ';
+        altRecognitionAttr = ' altRecognition="'+ OrdinalNumberLookup.get(day) + '" ';
       }
       outputString = outputString
-                    + '<span ' + WordSeq + pronunciationAttr + ">" + day + "</span>"
-                    + "<span>" + this.tokens[currentIdx++].text + "</span>" // comma
-                    + "<span>" + this.tokens[currentIdx++].text + "</span>" // space
-                    + "<span "+ WordSeq + ">" + this.tokens[currentIdx++].text + "</span>"; // year
-
-    for (let idx = currentIdx + 1; idx < this._tokenEndIdx; idx++) {
-      outputString = outputString + this.tokens[idx].text;
-    }
-//    outputString = outputString + "</span>";
-    return outputString;
+                    + '<span ' + WordSeq + altRecognitionAttr + ">" + day + "</span>";
+      return outputString;
   }
 }
-class ContentNode_MLTAG_DATE3 extends ContentNode_MLTAG_ {
+class ContentNode_MLTAG_DATE2 extends ContentNode_MLTAG_DATE3 {
   constructor(parent, tokenIdx) {
     super(parent,tokenIdx);
-    this._markupTag = TokenTag.DATE3;
+    this._markupTag = TokenTag.DATE2;  // used by subclasses
   }
   transform() {
-    // Jan(uary) 3
+    // e.g., Jan(uary) 3, 2020
+/*
+    let altRecognitionAttr = "";
+    let outputString = "";
+///    for (let idx = this._tokenStartIdx; idx <= this._tokenEndIdx; idx++) {
+///      console.log("date 2 ###"+this.tokens[idx].text);
+///    }
+    let currentIdx = this._tokenStartIdx + 1; // offset skips mltag
+    let abbreviatedMonth = this.tokens[currentIdx + 1].text === ".";
+    if (abbreviatedMonth) {
+      let abbreviatedMonthTag = this.tokens[currentIdx].text.slice(0,3).toLowerCase();
+      try {
+///        altRecognitionAttr = 'altRecognition="' + AbbreviatedMonthLookup.get(abbreviatedMonthTag.toLowerCase()) +'"';
+        altRecognitionAttr = ' altRecognition="' + AbbreviatedMonthLookup.get(abbreviatedMonthTag) +'"';
+      }
+      catch(e) {
+        console.log(e.message);
+        this.logger.error("invalid abbreviated month "+abbreviatedMonthTag);
+      }
+    }
+    outputString = "<span " + WordSeq + altRecognitionAttr + ">"
+                    + this.tokens[currentIdx++].text + "</span>"; // month
+    if (abbreviatedMonth)
+      outputString = outputString
+                    + "<span>" + this.tokens[currentIdx++].text + "</span>"; // "."
+      outputString = outputString
+                    + "<span>" + this.tokens[currentIdx++].text + "</span>"; // space
+      let day = this.tokens[currentIdx++].text;
+      if(!isNaN(parseInt(day))) {
+        altRecognitionAttr = ' altRecognition="'+ OrdinalNumberLookup.get(day) + '" ';
+      }
+      outputString = outputString
+                    + '<span ' + WordSeq + altRecognitionAttr + ">" + day + "</span>";
+                    */
+      let outputString = super.transform();
+      outputString = outputString
+                    + "<span>" + this.tokens[this._tokenEndIdx - 3].text + "</span>" // comma
+                    + "<span>" + this.tokens[this._tokenEndIdx - 2].text + "</span>" // space
+                    + "<span "+ WordSeq + ">" + this.tokens[this._tokenEndIdx - 1].text + "</span>"; // year
+
+//    for (let idx = currentIdx + 1; idx < this._tokenEndIdx; idx++) {
+//      outputString = outputString + this.tokens[idx].text;
+//    }
+//    outputString = outputString + "</span>";
+    return outputString;
   }
 }
 class ContentNode_MLTAG_CONTRACTION extends ContentNode_MLTAG_ {
@@ -873,7 +930,7 @@ class ContentNode_MLTAG_NUMBER_WITHCOMMAS extends ContentNode_MLTAG_ {
     this._markupTag = TokenTag.NUMBER_WITHCOMMAS;
   }
   transform() {
-    // remove commas for the altPronunciation. Should check for altPronunciation too!
+    // remove commas for the altRecognition. Should check for altRecognition too!
     let outputString;
     let altRecog;
     const exclusionList = [ TokenType.MLTAG, TokenType.MLTAG_END ];
@@ -884,6 +941,7 @@ class ContentNode_MLTAG_NUMBER_WITHCOMMAS extends ContentNode_MLTAG_ {
   }
 }
 class ContentNode_MLTAG_TOKEN extends ContentNode_MLTAG_ {
+  // should be processed first because this is intended to escape tokenizing NOT parsing
   constructor(parent, tokenIdx) {
     super(parent,tokenIdx);
     this._markupTag = TokenTag.TOKEN;
