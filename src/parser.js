@@ -816,9 +816,9 @@ class ContentNode_MLTAG_DATE2 extends ContentNode_MLTAG_ {
 ///      console.log("date 2 ###"+this.tokens[idx].text);
 ///    }
     let currentIdx = this._tokenStartIdx + 1; // offset skips mltag
-    let abbreviatedMonth = this._parentNode._tokens[currentIdx + 1].text === ".";
+    let abbreviatedMonth = this.tokens[currentIdx + 1].text === ".";
     if (abbreviatedMonth) {
-      let abbreviatedMonthTag = this._parentNode._tokens[currentIdx].text.slice(0,3).toLowerCase();
+      let abbreviatedMonthTag = this.tokens[currentIdx].text.slice(0,3).toLowerCase();
       try {
 ///        pronunciationAttr = 'pronunciation="' + AbbreviatedMonthMap.get(abbreviatedMonthTag.toLowerCase()) +'"';
         pronunciationAttr = ' pronunciation="' + AbbreviatedMonthMap.get(abbreviatedMonthTag) +'"';
