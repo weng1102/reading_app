@@ -10,7 +10,7 @@ const  { altRecognition } = require('../data/altrecognition.json');
 const  { ContentNodeType } = require('../src/parsertypes.js');
 const  { endMarkupTag, TokenType, TokenTag } = require('../src/tokentypes.js');
 const  { Tokenizer } = require('../src/tokenizer.js');
-const  { Logger } = require('../src/utilities.js');
+const  { Logger, AbbreviatedMonthMap, OrdinalNumberMap } = require('../src/utilities.js');
 const fs = require('fs');
 
 const WordSeqNumPlaceholder = "#TBD#";
@@ -506,7 +506,7 @@ transform() {
   this.logger.diagnosticMode = true;
   this.logger.diagnostic("transforming sentence ("+this._parserNodes.length+" nodes)");
   let sectionid = this.parent.id;
-  let outputString = '<span class"=sentence" sectionid="'+ sectionid + '" sentenceid="'
+  let outputString = '<span class="sentence" sectionid="'+ sectionid + '" sentenceid="'
                       + this.id + '">\n';
   this._parserNodes.forEach(node => {
     outputString = outputString + node.transform();
@@ -550,6 +550,9 @@ class ContentNode extends Content {
   }
   get type() {
     return this._type;
+  }
+  get tokens() {
+    return this._parentNode._tokens;
   }
   serializeColumnar(colWidth1, colWidth2) {
     let tokenList = "";
@@ -635,7 +638,6 @@ class ContentNode_PUNCTUATION extends ContentNode {
     super(parent,tokenIdx);
     this._type = ContentNodeType.PUNCTUATION; // determined based on token type (e.g., MLTAG) and token value (<contraction>)
   }
-
 }
 class ContentNode_MLTAG extends ContentNode { // ALL markup tags INCLUDING PASSTHRUS
   // 1) manages the stack of markup
@@ -644,6 +646,10 @@ class ContentNode_MLTAG extends ContentNode { // ALL markup tags INCLUDING PASST
     this._markupTag = TokenTag.MLTAG;  // used by subclasses
     this._type = ContentNodeType.MLTAG; // determined based on token type (e.g., MLTAG) and token value (<contraction>)
     //console.log("inside " + this.constructor.name);
+  }
+  transform() {
+    this.logger.diagnostic("transforming content node ("+ this._type+")");
+    return this.content();
   }
 }
 class ContentNode_MLTAG_ extends ContentNode_MLTAG { // interally handled MLTAGs
@@ -699,11 +705,52 @@ class ContentNode_MLTAG_SELFCLOSING extends ContentNode {
     this._type = ContentNodeType.MLTAG;
     this._markupTag = TokenTag.MLTAG_SELFCLOSING;  // used by subclasses
   };
+  transform() {
+    this.logger.diagnostic("transforming content node ("+ this._type+")");
+    return this.content();
+  }
 }
 class ContentNode_MLTAG_EMAILADDRESS extends ContentNode_MLTAG_ {
   constructor(parent, tokenIdx) {
     super(parent,tokenIdx);
     this._markupTag = TokenTag.EMAILADDRESS;  // used by subclasses
+  }
+  transform() {
+    // remove ml tag
+    // Consolidate local part everything to @; additional segmentation fox123 to
+    // "fox "123" shall be handled by further tokenizing
+    // <token>fox</token><token>123</token> in source. Still needs to be implemented below.
+    // OR tokenize baed on valid separators (underscores, dot(s), $, dash
+    // @ w/ altpronunciation="at"
+    // Consolidate everything right of @ into domain name; additional segmentation
+    // stanford.edu into <token>stanford.</token><token>edu</token> w/ altpronunciation
+    // for EDU in source and . w/ altPronunciation="dot" or dot-com
+    let atsignIdx = null;
+    let outputString = "";
+    // ugh. linear search! Fortunately typically only length<10
+    for (let idx = this._tokenStartIdx + 1; idx < this._tokenEndIdx && atsignIdx === null; idx++) {
+      if (this._parentNode._tokens[idx].text === "@") atsignIdx = idx ;
+    }
+    if (atsignIdx !== null) {
+        outputString = '<span ' + WordSeq + '>';
+        // skip first and last elements of ml tag
+        for (let idx = this._tokenStartIdx + 1; idx < atsignIdx; idx++) {
+          outputString = outputString + this._parentNode._tokens[idx].text;
+        }
+        outputString = outputString + "</span>"
+                      + '<span pronunciation="at" ' + WordSeq + ">"
+                      + this._parentNode._tokens[atsignIdx].text + "</span>"  //atsign
+                      + "<span "+ WordSeq + ">";
+
+        for (let idx = atsignIdx + 1; idx < this._tokenEndIdx; idx++) {
+          outputString = outputString + this._parentNode._tokens[idx].text;
+        }
+        outputString = outputString + "</span>";
+      }
+      else {
+          this.logger.error("missing @ in email");
+      }
+    return outputString;
   }
 }
 class ContentNode_MLTAG_PHONENUMBER extends ContentNode_MLTAG_ {
@@ -716,27 +763,27 @@ class ContentNode_MLTAG_PHONENUMBER extends ContentNode_MLTAG_ {
     let outputString  = "";
     let idx = this._tokenStartIdx;
     if (this._tokenEndIdx - this._tokenStartIdx !== 8
-      || this._parentNode._tokens[this._tokenStartIdx].text !== TokenTag.PHONENUMBER
-      || this._parentNode._tokens[this._tokenEndIdx].text !== endMarkupTag(TokenTag.PHONENUMBER)) {
+      || this.tokens[this._tokenStartIdx].text !== TokenTag.PHONENUMBER
+      || this.tokens[this._tokenEndIdx].text !== endMarkupTag(TokenTag.PHONENUMBER)) {
       this.logger.warning("phone number is improperly formatted and transformed as standard content");
       outputString = super.content();   // just default formatting
     }
     else {
       outputString  =
-          '<span> ' + this._parentNode._tokens[idx + 1].text + '</span>' // (
-        + '<span ' + WordSeq + '>'  + this._parentNode._tokens[idx + 2].text.slice(0,1) + '</span>'
-        + '<span ' + WordSeq + '>'  + this._parentNode._tokens[idx + 2].text.slice(1,2) + '</span>'
-        + '<span ' + WordSeq + '>'  + this._parentNode._tokens[idx + 2].text.slice(2,3) + '</span>'
-        + '<span>'                  + this._parentNode._tokens[idx + 3].text            + '</span>' // )
-        + '<span>'                  + this._parentNode._tokens[idx + 4].text            + '</span>' // space
-        + '<span ' + WordSeq + '>'  + this._parentNode._tokens[idx + 5].text.slice(0,1) + '</span>'
-        + '<span ' + WordSeq + '>'  + this._parentNode._tokens[idx + 5].text.slice(1,2) + '</span>'
-        + '<span ' + WordSeq + '>'  + this._parentNode._tokens[idx + 5].text.slice(2,3) + '</span>'
-        + '<span>'                  + this._parentNode._tokens[idx + 6].text            + '</span>' // -
-        + '<span ' + WordSeq + '>'  + this._parentNode._tokens[idx + 7].text.slice(0,1) + '</span>'
-        + '<span ' + WordSeq + '>'  + this._parentNode._tokens[idx + 7].text.slice(1,2) + '</span>'
-        + '<span ' + WordSeq + '>'  + this._parentNode._tokens[idx + 7].text.slice(2,3) + '</span>'
-        + '<span ' + WordSeq + '>'  + this._parentNode._tokens[idx + 7].text.slice(3,4) + '</span>';
+          '<span> ' + this.tokens[idx + 1].text + '</span>' // (
+        + '<span ' + WordSeq + '>'  + this.tokens[idx + 2].text.slice(0,1) + '</span>'
+        + '<span ' + WordSeq + '>'  + this.tokens[idx + 2].text.slice(1,2) + '</span>'
+        + '<span ' + WordSeq + '>'  + this.tokens[idx + 2].text.slice(2,3) + '</span>'
+        + '<span>'                  + this.tokens[idx + 3].text            + '</span>' // )
+        + '<span>'                  + this.tokens[idx + 4].text            + '</span>' // space
+        + '<span ' + WordSeq + '>'  + this.tokens[idx + 5].text.slice(0,1) + '</span>'
+        + '<span ' + WordSeq + '>'  + this.tokens[idx + 5].text.slice(1,2) + '</span>'
+        + '<span ' + WordSeq + '>'  + this.tokens[idx + 5].text.slice(2,3) + '</span>'
+        + '<span>'                  + this.tokens[idx + 6].text            + '</span>' // -
+        + '<span ' + WordSeq + '>'  + this.tokens[idx + 7].text.slice(0,1) + '</span>'
+        + '<span ' + WordSeq + '>'  + this.tokens[idx + 7].text.slice(1,2) + '</span>'
+        + '<span ' + WordSeq + '>'  + this.tokens[idx + 7].text.slice(2,3) + '</span>'
+        + '<span ' + WordSeq + '>'  + this.tokens[idx + 7].text.slice(3,4) + '</span>';
     }
     return outputString;
   }
@@ -752,17 +799,66 @@ class ContentNode_MLTAG_DATE1 extends ContentNode_MLTAG_ {
     super(parent,tokenIdx);
     this._markupTag = TokenTag.DATE1;  // used by subclasses
   }
+  transform() {
+    // e.g., 03 Jan(uary) 2020
+  }
 }
 class ContentNode_MLTAG_DATE2 extends ContentNode_MLTAG_ {
   constructor(parent, tokenIdx) {
     super(parent,tokenIdx);
     this._markupTag = TokenTag.DATE2;  // used by subclasses
   }
+  transform() {
+    // e.g., Jan(uary) 3, 2020
+    let pronunciationAttr = "";
+    let outputString = "";
+///    for (let idx = this._tokenStartIdx; idx <= this._tokenEndIdx; idx++) {
+///      console.log("date 2 ###"+this.tokens[idx].text);
+///    }
+    let currentIdx = this._tokenStartIdx + 1; // offset skips mltag
+    let abbreviatedMonth = this._parentNode._tokens[currentIdx + 1].text === ".";
+    if (abbreviatedMonth) {
+      let abbreviatedMonthTag = this._parentNode._tokens[currentIdx].text.slice(0,3).toLowerCase();
+      try {
+///        pronunciationAttr = 'pronunciation="' + AbbreviatedMonthMap.get(abbreviatedMonthTag.toLowerCase()) +'"';
+        pronunciationAttr = ' pronunciation="' + AbbreviatedMonthMap.get(abbreviatedMonthTag) +'"';
+      }
+      catch(e) {
+        console.log(e.message);
+        this.logger.error("invalid abbreviated month "+abbreviatedMonthTag);
+      }
+    }
+    outputString = "<span " + WordSeq + pronunciationAttr + ">"
+                    + this.tokens[currentIdx++].text + "</span>"; // month
+    if (abbreviatedMonth)
+      outputString = outputString
+                    + "<span>" + this.tokens[currentIdx++].text + "</span>"; // "."
+      outputString = outputString
+                    + "<span>" + this.tokens[currentIdx++].text + "</span>"; // space
+      let day = this.tokens[currentIdx++].text;
+      if(!isNaN(parseInt(day))) {
+        pronunciationAttr = ' pronunciation="'+ OrdinalNumberMap.get(day) + '" ';
+      }
+      outputString = outputString
+                    + '<span ' + WordSeq + pronunciationAttr + ">" + day + "</span>"
+                    + "<span>" + this.tokens[currentIdx++].text + "</span>" // comma
+                    + "<span>" + this.tokens[currentIdx++].text + "</span>" // space
+                    + "<span "+ WordSeq + ">" + this.tokens[currentIdx++].text + "</span>"; // year
+
+    for (let idx = currentIdx + 1; idx < this._tokenEndIdx; idx++) {
+      outputString = outputString + this.tokens[idx].text;
+    }
+//    outputString = outputString + "</span>";
+    return outputString;
+  }
 }
 class ContentNode_MLTAG_DATE3 extends ContentNode_MLTAG_ {
   constructor(parent, tokenIdx) {
     super(parent,tokenIdx);
     this._markupTag = TokenTag.DATE3;
+  }
+  transform() {
+    // Jan(uary) 3
   }
 }
 class ContentNode_MLTAG_CONTRACTION extends ContentNode_MLTAG_ {
@@ -803,19 +899,18 @@ class ContentNode_MLTAG_USD extends ContentNode_MLTAG_ {
   }
   transform() {
     this.logger.diagnostic("transforming content node ("+ this._type+")");
+
     let outputString;
-    if (this._parentNode._tokens[this._tokenStartIdx].text !== TokenTag.USD
-        || this._parentNode._tokens[this._tokenEndIdx].text !== endMarkupTag(TokenTag.USD)) {
-      this.logger.warning("US currency is improperly formatted and transformed as standard content");
-      outputString = super.content();   // just default formatting
+    const exclusionList = [ TokenType.MLTAG, TokenType.MLTAG_END ];
+    if (this.tokens[this._tokenStartIdx].text !== TokenTag.USD
+        || this.tokens[this._tokenEndIdx].text !== endMarkupTag(TokenTag.USD)) {
+      this.logger.error("US currency is improperly formatted and transformed as standard content");
+      outputString = super.content(exckusionList);   // just default formatting
     }
     else {  // at present, this is the same as the default behavior
-      const exclusionList = [ TokenType.MLTAG, TokenType.MLTAG_END ];
-      outputString  = '<span>'
-        + this._parentNode._tokens[this._tokenStartIdx].text  //MLtag
-        + '<span ' + WordSeq + '>'  + super.content(exclusionList);   // just default formatting
-        + this._parentNode._tokens[this._tokenEndIdx].text // ML endTag
-        + '</span>';
+      outputString  =
+         '<span ' + WordSeq + '>'  + super.content(exclusionList) + '</span>';   // just default formatting
+
     }
     return outputString;
   }
