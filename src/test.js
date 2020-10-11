@@ -85,7 +85,7 @@ console.log("Tokenizer01 Overall total: " + totalPassCount + "/" + totalCount + 
 tokens = null;
 totalPassCount = 0;
 totalCount = 0;
-logger.diagnosticMode = true;
+//logger.diagnosticMode = true;
 logger.adorn("*********************************************");
 logger.adorn("* S E N T E N C E  P A R S E R **************");
 if (utoutput) fs.writeFileSync(utparserout, timestamp+"\n");
@@ -148,7 +148,6 @@ for (let secIdx = 0; secIdx < ut_parser.Parser01.sections.length; secIdx++) {
   paragraphNode.parse(ut_parser.Parser01.sections[secIdx].sentences);
   logger.info(paragraphNode.unitTest(ut_parser.Parser01.sections[secIdx].sentences));
   logger.diagnostic((paragraphNode.serializeAsTable(30, 10, 10)));
-  logger.diagnosticMode = true;
   htmlstring = htmlstring + paragraphNode.transform();
   if (htmloutput) fs.writeFileSync(htmloutput, htmlstring);
 }
@@ -160,12 +159,9 @@ logger.adorn(testSectionLabel+": "+ ut_parser.Parser01.name);
 pageNode = new PageContent(this);
 pageNode.userContext = userRonlyn;
 pageNode.parse(ut_parser.Parser01);
-logger.info(pageNode.unitTest(ut_parser.Parser01));
 logger.diagnostic((pageNode.serializeAsTable(40, 10, 10)));
-
 let pageFormatter = new TestFormatter(this);
 pageFormatter.userContext = userRonlyn;
-console.log("test:name="+pageFormatter.userContext.name);
 pageFormatter.content = pageNode;
 let htmlString = pageFormatter.transform();
 if (htmloutput) fs.writeFileSync(htmloutput, htmlString);

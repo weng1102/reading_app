@@ -4,9 +4,16 @@ class AppError extends Error {
   }
   set name(name) {
     this.name = "AppError";
-  }
+  };
 }
-const AbbreviatedMonthLookup = new Map([
+const RecognitionMap = new Map([
+  [ "Ronlyn", "^(ron|ro[ns]a{0,1}l[aiye]nd{0,1})$" ],
+  [ "Ronlyn's", "^(ron|ro[ns]a{0,1}l[aiye]nd{0,1}'s)$" ],
+  [ "Goo", "^(g[ou])" ],
+  [ "Wen", "^(wh{0,1}en)$" ],
+  [ "Wen's", "^(wh{0,1}en's)$" ]
+]);
+const MonthFromAbbreviationMap = new Map([
   [ "jan", "january" ],
   [ "feb", "february" ],
   [ "mar", "march" ],
@@ -20,7 +27,7 @@ const AbbreviatedMonthLookup = new Map([
   [ "nov", "november" ],
   [ "dec", "december" ]
 ]);
-const OrdinalNumberLookup = new Map([ // could be coded as switch on ones digit except the teens
+const OrdinalNumberMap = new Map([ // could be coded as switch on ones digit except the teens
   [ "1", "1st" ],
   [ "2", "2nd" ],
   [ "3", "3rd" ],
@@ -54,7 +61,7 @@ const OrdinalNumberLookup = new Map([ // could be coded as switch on ones digit 
   [ "31", "31st" ]
 ]);
 
-const AcronymLookup = new Map([
+const AcronymMap = new Map([
   [ "SCVMC", "santa,clara,valley,medical,center" ],
   [ "CSUEB", "cal,state,university,east,bay" ],
   [ "UCB", "university,california,berkeley" ],
@@ -231,4 +238,4 @@ class MyDate extends Date {
     return yyyymmdd+" "+hh+":"+min+":"+sec;
   }
 }
-module.exports = { AcronymLookup, AppError, Logger, MyDate, AbbreviatedMonthLookup, OrdinalNumberLookup };
+module.exports = { AcronymMap, AppError, Logger, MyDate, MonthFromAbbreviationMap, OrdinalNumberMap, RecognitionMap };
