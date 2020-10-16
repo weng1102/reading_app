@@ -17,6 +17,10 @@ const altPronun = fs.readFileSync("./data/altpronunciation.json", "utf-8"); // s
 
 const WordSeqNumPlaceholder = "#TBD#";
 const WordSeq = 'wordseq="' + WordSeqNumPlaceholder + '"';
+const AltRecognitionAttr = "altrecognition"; // user specific
+const RecognitionAttr = "recognition";  // built-in patterns e.g., abbreviated month, ordinal day
+const AltPronunciationAttr = "altpronunciation"; // user specific
+const PronunciationAttr = "pronunciation"; // TBD
 
 //const ContentNPrefix = "ContentN_";
 
@@ -334,11 +338,8 @@ class PageContent extends Content {
     });
     return table.slice(0,-1);
   }
-
   unitTest(page) {
-
   }
-
 }
 class SectionContent extends Content {
   // a section is defined as a group of sentences or group of sections
@@ -504,16 +505,6 @@ class SentenceContent extends Content {
     }
     return table.slice(0,-1);
   }
-  /*
-  serializeAsHTML() {
-    this.logger.diagnostic("transforming sentence ("+this._tokens.length+" nodes)");
-    let outputString = "<div>";
-    this._parserNodes.forEach(node => {
-        outputString = outputString + node.transform();
-    });
-    return outputString + "</div>";
-  }
-  */
   serializeForUnitTest() {
     let nodeList = "";
       this._parserNodes.forEach(node => {
@@ -529,8 +520,6 @@ transform() {
   this.logger.diagnostic("transforming sentence ("+this._parserNodes.length+" nodes)");
   let sectionid = this.parent.id;
   let outputString = this.spanStartTag(this.parent.id, this.id)+"\n";
-//  let outputString = '<span class="sentence" sectionid="'+ sectionid + '" sentenceid="'
-//                      + this.id + '">\n';
   this._parserNodes.forEach(node => {
     outputString = outputString + node.transform();
   });
@@ -544,14 +533,6 @@ transform() {
   }
   return outputString + "\n";
 }
-/*
-  this._parserNodes.forEach(node => {
-      outputString = outputString + node.transform();
-  });
-  return outputString + "</div>";
-}
-*/
-
 unitTest(actual, expected) {
     return this.serializeForUnitTest(actual) === expected;
   }
@@ -629,7 +610,6 @@ class ContentNode_AUDIBLE extends ContentNode {
   spanStartTag(content, recogPatternArg) {
     let outputString;
     let recogPattern;
-    let recogMap;
 
     if (content === undefined) {
       outputString = super.spanStartTag();
@@ -637,23 +617,23 @@ class ContentNode_AUDIBLE extends ContentNode {
     else {
       outputString = super.spanStartTag().slice(0,-1) + " " + WordSeq;
 
-      if (recogPatternArg !== undefined) {
+      if (recogPatternArg !== undefined && content.toLowerCase() !== recogPatternArg) {
         recogPattern = recogPatternArg; // argument overrides default map value
       }
       else {
         let recogPattern = RecognitionMap.get(content);
       }
       if (recogPattern !== undefined) {
-        outputString = outputString + ' recognition="' + recogPattern + '"';
+        outputString = outputString + ' ' + RecognitionAttr + '="' + recogPattern + '"';
       }
       if (this.userContext != null) {
         let altRecogPattern = this.userContext.altRecognitionMap.get(content);
         if (altRecogPattern !== undefined) {
-          outputString = outputString + ' altrecognition="' + altRecogPattern + '"';
+          outputString = outputString + ' ' + AltRecognitionAttr + '="' + altRecogPattern + '"';
         }
         let pronunciation = this.userContext.altPronunciationMap.get(content);
         if (pronunciation !== undefined) {
-          outputString = outputString + ' altpronunciation="' + pronunciation + '"';
+          outputString = outputString + ' ' + AltPronunciationAttr + '="' + pronunciation + '"';
         }
       }
       else {
@@ -742,6 +722,7 @@ class ContentNode_MLTAG_ extends ContentNode_AUDIBLE { // interally handled MLTA
   // 1) manages the stack of markup
   constructor(parent, tokenIdx) {
     super(parent,tokenIdx);
+    this._type = ContentNodeType.MLTAG; // determined based on token type (e.g., MLTAG) and token value (<contraction>)
     this._markupTag = TokenTag.MLTAG;  // used by subclasses
 //    this._type = TokenType.UNHANDLED; // determined based on token type (e.g., MLTAG) and token value (<contraction>)
   };
@@ -797,8 +778,8 @@ class ContentNode_MLTAG_EMAILADDRESS extends ContentNode_MLTAG_ {
     // OR tokenize baed on valid separators (underscores, dot(s), $, dash
     // @ w/ altRecognition="at"
     // Consolidate everything right of @ into domain name; additional segmentation
-    // stanford.edu into <token>stanford.</token><token>edu</token> w/ altRecognition
-    // for EDU in source and . w/ altRecognition="dot" or dot-com
+    // e.g. stanford.edu into <token>stanford.</token><token>edu</token> w/ altRecognition
+    // for EDU in source and "." w/ altRecognition="dot" or dot-com
     let atsignIdx = null;
     let domainPart = "";
     let localPart = "";
@@ -822,7 +803,7 @@ class ContentNode_MLTAG_EMAILADDRESS extends ContentNode_MLTAG_ {
       }
       else {
         this.logger.warning('email token missing "@" in token from sectionId=' + this.parent.parent.id + " sendtenceId="+ this.parent.id);
-        outputString = "";
+        outputString = super.content();
       }
     return outputString;
   }
@@ -864,39 +845,6 @@ class ContentNode_MLTAG_PHONENUMBER extends ContentNode_MLTAG_ {
         let subscriberDigit = this.tokens[subscriberIdx].text.slice(subscriberDigitPos, subscriberDigitPos + 1);
         outputString = outputString + this.spanStartTag(subscriberDigit) + subscriberDigit + this.spanEndTag();
       }
-  /*
-//        + this.spanStartTag(this.tokens[idx + 2].text.slice(0,1) + this.spanEndTag()
-//        + this.spanStartTag(this.tokens[idx + 2].text.slice(1,2) + this.spanEndTag()
-//        + this.spanStartTag(this.tokens[idx + 2].text.slice(2,3) + this.spanEndTag()
-
-/*
-        outputString = outputString+ super.spanStartTag() + this.tokens[idx + 3].text            + this.spanEndTag(); // )
-        outputString = outputString+ super.spanStartTag() + this.tokens[idx + 4].text       + this.spanEndTag(); // space
-        outputString = outputString+ this.spanStartTag(this.tokens[idx + 5].text.slice(0,1) + this.spanEndTag();
-        outputString = outputString+ this.spanStartTag(this.tokens[idx + 5].text.slice(1,2) + this.spanEndTag();
-        outputString = outputString+ this.spanStartTag(this.tokens[idx + 5].text.slice(2,3) + this.spanEndTag();
-        outputString = outputString+ super.spanStartTag() + this.tokens[idx + 6].text            + this.spanEndTag(); // -
-        outputString = outputString+ this.spanStartTag(this.tokens[idx + 7].text.slice(0,1) + this.spanEndTag();
-        outputString = outputString+ this.spanStartTag(this.tokens[idx + 7].text.slice(1,2) + this.spanEndTag();
-        outputString = outputString+ this.spanStartTag(this.tokens[idx + 7].text.slice(2,3) + this.spanEndTag();
-        outputString = outputString+ this.spanStartTag(this.tokens[idx + 7].text.slice(3,4) + this.spanEndTag();
-  */      /*
-        '<span> ' + this.tokens[idx + 1].text + this.spanEndTag() // (
-      + '<span ' + WordSeq + '>'  + this.tokens[idx + 2].text.slice(0,1) + this.spanEndTag()
-      + '<span ' + WordSeq + '>'  + this.tokens[idx + 2].text.slice(1,2) + this.spanEndTag()
-      + '<span ' + WordSeq + '>'  + this.tokens[idx + 2].text.slice(2,3) + this.spanEndTag()
-      + '<span>'                  + this.tokens[idx + 3].text            + this.spanEndTag() // )
-      + '<span>'                  + this.tokens[idx + 4].text            + this.spanEndTag() // space
-      + '<span ' + WordSeq + '>'  + this.tokens[idx + 5].text.slice(0,1) + this.spanEndTag()
-      + '<span ' + WordSeq + '>'  + this.tokens[idx + 5].text.slice(1,2) + this.spanEndTag()
-      + '<span ' + WordSeq + '>'  + this.tokens[idx + 5].text.slice(2,3) + this.spanEndTag()
-      + '<span>'                  + this.tokens[idx + 6].text            + this.spanEndTag() // -
-      + '<span ' + WordSeq + '>'  + this.tokens[idx + 7].text.slice(0,1) + this.spanEndTag()
-      + '<span ' + WordSeq + '>'  + this.tokens[idx + 7].text.slice(1,2) + this.spanEndTag()
-      + '<span ' + WordSeq + '>'  + this.tokens[idx + 7].text.slice(2,3) + this.spanEndTag()
-      + '<span ' + WordSeq + '>'  + this.tokens[idx + 7].text.slice(3,4) + this.spanEndTag();
-*/
-
     }
     return outputString;
   }
@@ -912,11 +860,32 @@ class ContentNode_MLTAG_DATE1 extends ContentNode_MLTAG_ {
     super(parent,tokenIdx);
     this._markupTag = TokenTag.DATE1;  // used by subclasses
   }
-// transform() { // accept default tranform behavior for now. Lose
-// recognition of abbreviated months Jan = January
-    // e.g., 3 Jan(uary) 2020
-//  }
-  //TBD
+  transform() { // accept default tranform behavior for now. Lose
+    // e.g.,<date1>3 Jan(uary) 2020</date1> => 3rd of January 2020
+    // token[0] = <date1>
+    // token[1] = day
+    // token[2] = \s
+    // token[3] = mon(th)
+    // token[4] = \s
+    // token[5] = year
+    // token[6] = </date1>
+    let outputString;
+    let currentIdx = this._tokenStartIdx + 1; // offset skips mltag
+    let day = this.tokens[currentIdx++].text;
+    let whitespace1 = this.tokens[currentIdx++].text;
+    let month = this.tokens[currentIdx++].text;
+    let monthName = MonthFromAbbreviationMap.get(month.slice(0,3).toLowerCase());
+    let whitespace2 = this.tokens[currentIdx++].text;
+    let year = this.tokens[currentIdx++].text;
+    outputString = this.spanStartTag(day, OrdinalNumberMap.get(day))
+                   + day + this.spanEndTag()
+                   + this.spanStartTag() + whitespace1 + this.spanEndTag()
+                   + this.spanStartTag(month, monthName) + month
+                   + this.spanEndTag()
+                   + this.spanStartTag() + whitespace2 + this.spanEndTag()
+                   + this.spanStartTag() + year + this.spanEndTag();
+    return outputString;
+  }
 }
 class ContentNode_MLTAG_DATE3 extends ContentNode_MLTAG_ {
   constructor(parent, tokenIdx) {
@@ -926,42 +895,25 @@ class ContentNode_MLTAG_DATE3 extends ContentNode_MLTAG_ {
   transform() { // subset of Date2
     // Jan(uary) DDth with no succeeding comma or year. less restrictive than Date2
     // e.g., Jan(uary) 3, 2020
-    let month = "";
-    let recognitionAttr = "";
-    let outputString = "";
-///    for (let idx = this._tokenStartIdx; idx <= this._tokenEndIdx; idx++) {
-///      console.log("date 2 ###"+this.tokens[idx].text);
-///    }
-    let currentIdx = this._tokenStartIdx + 1; // offset skips mltag
-    let abbreviatedMonth = this.tokens[currentIdx + 1].text === ".";  // could detect space too?
-    if (abbreviatedMonth) {
-      let abbreviatedMonthTag = this.tokens[currentIdx].text.slice(0,3).toLowerCase();
-      try {
-        month = MonthFromAbbreviationMap.get(abbreviatedMonthTag);
-      }
-      catch(e) {
-        // should never happen if regexp tokenizer is properly formed
-        console.log(e.message);
-        this.logger.error("invalid abbreviated month " + month);
-      }
-    }
-    if (abbreviatedMonth) {
-      outputString = this.spanStartTag(this.tokens[currentIdx].text, month)
-                      + this.tokens[currentIdx++].text + this.spanEndTag() // month
-                      + this.spanStartTag() + this.tokens[currentIdx++].text
-                      + this.spanEndTag(); // "."
-    }
-    else {
-      outputString = this.spanStartTag(this.tokens[currentIdx].text)
-                      + this.tokens[currentIdx++].text + this.spanEndTag(); // month
-    }
-    outputString = outputString + this.spanStartTag()
-                                + this.tokens[currentIdx++].text
-                                + this.spanEndTag(); // space
+    // token[idx] = <date3>
+    // token[idx++] = mon(th)
+    // token[idx++] = '.' //optional
+    // token[idx++] = \s
+    // token[idx++] = day
+    // since this object transforms part of <Date2> the endTokenIdx is not necessarily valid
 
-    let day = this.tokens[currentIdx].text;
-    outputString = outputString + this.spanStartTag(day, OrdinalNumberMap.get(day))
-                                + day +this.spanEndTag();
+    let outputString;
+    let currentIdx = this._tokenStartIdx + 1; // offset skips mltag
+    let month = this.tokens[currentIdx++].text;
+    let monthName = MonthFromAbbreviationMap.get(month.slice(0,3).toLowerCase());
+    let dot = (this.tokens[currentIdx].text == TokenTag.DOT ? this.tokens[currentIdx++].text : "");
+    let whitespace = this.tokens[currentIdx++].text;
+    let day = this.tokens[currentIdx++].text;
+    let whatever = this.tokens[currentIdx++].text;
+    outputString = this.spanStartTag(month, monthName) + month + this.spanEndTag()
+                    + this.spanStartTag() + dot + this.spanEndTag()
+                    + this.spanStartTag() + whitespace + this.spanEndTag()
+                    + this.spanStartTag(day, OrdinalNumberMap.get(day)) + day + this.spanEndTag();
     return outputString;
   }
 }

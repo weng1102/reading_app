@@ -23,7 +23,7 @@ const basepath = "D:\\users\\wen\\documents\\personal\\ronlyn\\medical\\therapy\
 const htmloutput = basepath+"test2_parser.html";
 const uttokenout = basepath+"data\\ut01token.txt";
 const utparserout = basepath+"data\\ut01parse.txt";
-const utoutput = false; // create expected values for unit test
+const utoutput = true; // create expected values for unit test
 
 let logger = new Logger();
 let pageNode = new PageContent(this);
@@ -106,7 +106,8 @@ for (let secIdx = 0; secIdx < ut_parser.Parser01.sections.length; secIdx++) {
     let sentenceNode = new SentenceContent(this);
     sentenceNode.userContext = userRonlyn;
     let actual = sentenceNode.parse(input);
-//    logger.diagnostic(sentenceNode.serializeAsTable());
+//    logger.diagnosticMode = true;
+//    logger.diagnostic(sentenceNode.serializeAsTable(25,10,10));
     unitTestSuccessful = sentenceNode.unitTest(actual, input.expected);
     if (unitTestSuccessful) {
       passCount++;
