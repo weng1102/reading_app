@@ -12,8 +12,8 @@ const  { endMarkupTag, TokenType, TokenTag } = require('../src/tokentypes.js');
 const  { Tokenizer } = require('../src/tokenizer.js');
 const  { AcronymMap, Logger, MyDate, MonthFromAbbreviationMap, OrdinalNumberMap, RecognitionMap } = require('../src/utilities.js');
 const fs = require('fs');
-const altRecog = fs.readFileSync("./data/altrecognition.json", "utf-8"); // should be user specific
-const altPronun = fs.readFileSync("./data/altpronunciation.json", "utf-8"); // should be user specific
+const FileAltRecog = fs.readFileSync("./data/altrecognition.json", "utf-8"); // should be user specific
+const FileAltPronun = fs.readFileSync("./data/altpronunciation.json", "utf-8"); // should be user specific
 
 const WordSeqNumPlaceholder = "#TBD#";
 const WordSeq = 'wordseq="' + WordSeqNumPlaceholder + '"';
@@ -44,12 +44,12 @@ class UserContext extends BaseClass {
     this._pages = new Array();
 
     this._altRecognitionMap = new Map();
-    mapEntries = JSON.parse(altRecog);
+    mapEntries = JSON.parse(FileAltRecog);
     for (let key of Object.keys(mapEntries)) {
       this._altRecognitionMap.set(key, mapEntries[key]);
     }
     this._altPronunciationMap = new Map();
-    mapEntries = JSON.parse(altPronun);
+    mapEntries = JSON.parse(FileAltPronun);
     for (let key of Object.keys(mapEntries)) {
       this._altPronunciationMap.set(key, mapEntries[key]);
     };
@@ -512,28 +512,28 @@ class SentenceContent extends Content {
     } );
     return nodeList;
   } //serializeForUnitTest
-spanStartTag(sectionId, sentenceId) {
-  return '<span class="sentence" sectionid="' + sectionId + '" sentenceid="' + sentenceId + '">';
-}
-transform() {
-//  this.logger.diagnosticMode = true;
-  this.logger.diagnostic("transforming sentence ("+this._parserNodes.length+" nodes)");
-  let sectionid = this.parent.id;
-  let outputString = this.spanStartTag(this.parent.id, this.id)+"\n";
-  this._parserNodes.forEach(node => {
-    outputString = outputString + node.transform();
-  });
-  outputString = outputString + this.spanEndTag();
-
-  //replace all WordSeq placeholders with the proper idx, which is more complex but more robust
-  let nextWordIdx = 0;
-  for (let pos = outputString.indexOf(WordSeqNumPlaceholder), nextWordIdx = 0; pos > 0; nextWordIdx++) {
-    outputString = outputString.slice(0, pos) + nextWordIdx + outputString.slice(pos + WordSeqNumPlaceholder.length);
-    pos = outputString.indexOf(WordSeqNumPlaceholder);
+  spanStartTag(sectionId, sentenceId) {
+    return '<span class="sentence" sectionid="' + sectionId + '" sentenceid="' + sentenceId + '">';
   }
-  return outputString + "\n";
-}
-unitTest(actual, expected) {
+  transform() {
+  //  this.logger.diagnosticMode = true;
+    this.logger.diagnostic("transforming sentence ("+this._parserNodes.length+" nodes)");
+    let sectionid = this.parent.id;
+    let outputString = this.spanStartTag(this.parent.id, this.id)+"\n";
+    this._parserNodes.forEach(node => {
+      outputString = outputString + node.transform();
+    });
+    outputString = outputString + this.spanEndTag();
+
+    //replace all WordSeq placeholders with the proper idx, which is more complex but more robust
+    let nextWordIdx = 0;
+    for (let pos = outputString.indexOf(WordSeqNumPlaceholder), nextWordIdx = 0; pos > 0; nextWordIdx++) {
+      outputString = outputString.slice(0, pos) + nextWordIdx + outputString.slice(pos + WordSeqNumPlaceholder.length);
+      pos = outputString.indexOf(WordSeqNumPlaceholder);
+    }
+    return outputString + "\n";
+  }
+  unitTest(actual, expected) {
     return this.serializeForUnitTest(actual) === expected;
   }
 };
