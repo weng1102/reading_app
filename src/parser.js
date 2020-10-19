@@ -534,7 +534,8 @@ class SentenceContent extends Content {
     return outputString + "\n";
   }
   unitTest(actual, expected) {
-    return this.serializeForUnitTest(actual) === expected;
+//    return this.serializeForUnitTest(actual) === expected;
+    return (actual === expected);
   }
 };
 class ContentNode extends Content {
@@ -937,7 +938,7 @@ class ContentNode_MLTAG_DATE2 extends ContentNode_MLTAG_DATE3 {
     year =  this.tokens[this._tokenEndIdx - 1].text;
     outputString = outputString + this.spanStartTag() + comma + this.spanEndTag()
                                 + this.spanStartTag() + whitespace + this.spanEndTag()
-                                + this.spanStartTag() + year + this.spanEndTag();
+                                + this.spanStartTag(year) + year + this.spanEndTag();
     return outputString;
   }
 }

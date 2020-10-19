@@ -230,7 +230,8 @@ tokenize(sentence) {
     return type;
   };
   unitTest(actual, expected) {
-    return this.serializeForUnitTest(actual) === expected;
+    //return this.serializeForUnitTest(actual) === expected;
+    return (actual === expected);
   } // unitTest
 } // tokenizer class
 class Token {
