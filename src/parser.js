@@ -192,7 +192,9 @@ class SectionFormatter extends Formatter {
   transform() {
 ///    this.logger.diagnosticMode = true;
     this.logger.diagnostic("transforming sections");
-    let outputString = "<div sectionid="+this.content.id+" class=section><span>"+this.content.name + "</span>\n";
+    let outputString = "<div sectionid="
+                      + this.content.id + " class=section><span>"
+                      + this.content.name + "</span>\n";
 ///    let sentenceFormatter = new SentenceFormatter(this);
     this.content.sentences.forEach(sentence => {
       this.sentenceFormatter.content = sentence;
@@ -374,24 +376,18 @@ class SectionContent extends Content {
     return table.slice(0,-1);
   }
   transform() {
-    let  outputString = "<br>"+this.name;
-    this.logger.diagnostic("transforming section ("+this._sentenceNodes.length+" sentences)");
-    this._sentenceNodes.forEach(sentence => {
+    //    let  outputString = "<br>"+this.name;
+    let  outputString = "";
+    this.logger.diagnostic("transforming section ("+this.sentences.length+" sentences)");
+    this.sentences.forEach(sentence => {
       outputString = outputString + sentence.transform()+"\n";
       //this.logger.info(str);
     });
     return outputString.slice(0,-1);
   }
-  unitTest(expectedValues) {
-    let passCount = 0;
-    let totalCount = this._sentenceNodes.length;
-    for (let sentIdx = 0; sentIdx < totalCount; sentIdx++) {
-      let actual = this._sentenceNodes[sentIdx].serializeForUnitTest();
-      let expected = expectedValues[sentIdx].expected;
-      if (this._sentenceNodes[sentIdx].unitTest(actual, expected)) passCount++;
+  unitTest(actual, expected) {
+    return actual == expected;
     }
-    return "section["+this.id+"]:" + this.name+": "+passCount +"/" + totalCount  + " PASSED";
-  }
 }
 class SentenceContent extends Content {
   constructor(parent) {
