@@ -119,7 +119,7 @@ for (let secIdx = 0; secIdx < ut_sentences01.UnitTest01.sections.length; secIdx+
     unitTestSuccessful = tokenizer.unitTest(
                             tokenizer.serializeForUnitTest(tokenizer.tokenize(result)),
                             input.expected.tokenizer);
-    logger.adorn(testSentLabel + ((unitTestSuccessful) ? "PASSED" : "FAILED"));
+    logger.info(testSentLabel + ((unitTestSuccessful) ? "PASSED" : "FAILED"), false, false, false, false);
     if (unitTestSuccessful) {
       passCount++;
     }
@@ -210,10 +210,9 @@ for (let secIdx = 0; secIdx < ut_sentences01.UnitTest01.sections.length; secIdx+
   //utoutput
   resultsSecIdx = results.sections.push({id: secId,
       name: ut_sentences01.UnitTest01.sections[secIdx].name, sentences:[] }) - 1;
-  testSectionLabel = "Trasformer01 SECTION[" + secId + "]";
+  testSectionLabel = "Transformer01 SECTION[" + secId + "]";
   logger.adorn("*********************************************");
   logger.adorn(testSectionLabel+": "+ ut_sentences01.UnitTest01.sections[secIdx].name);
-//  console.log("UT01:SECTION["+secIdx+"]: "+testSource.UT01.section[secIdx].name);
   for(let sentIdx = 0; sentIdx < ut_sentences01.UnitTest01.sections[secIdx].sentences.length; sentIdx++) {
     sentId = ut_sentences01.UnitTest01.sections[secIdx].sentences.id;
     testSentLabel = testSectionLabel + "[" + sentIdx + "]: ";
