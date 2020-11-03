@@ -55,7 +55,7 @@ class UserContext extends BaseClass {
     };
   }
   get altPronunciationMap() {
-    return this._altRecognitionMap;
+    return this._altPronunciationMap;
   }
   get altRecognitionMap() {
     return this._altRecognitionMap;
@@ -323,7 +323,7 @@ class PageContent extends Content {
   }
   parse(page) {
     this.id = page.id;
-    this.name = page.id;
+    this.name = page.name;
     page.sections.forEach(section => {
 //        this.logger.diagnosticMode = true;
       let sectionNode = new SectionContent(this);
@@ -395,7 +395,7 @@ class SentenceContent extends Content {
     this._input = "";
     this._tokenizer = new Tokenizer(this);
     this._parserNodes = new Array;
-    this._tokens = tokens;
+    //this._tokens = tokens;
     // Generic token typesidentified by tokenizer
     this._ContentNodeClasses = {
       [TokenType.WORD]: ContentNode_WORD,
@@ -508,14 +508,16 @@ class SentenceContent extends Content {
     } );
     return nodeList;
   } //serializeForUnitTest
-  spanStartTag(sectionId, sentenceId) {
-    return '<span class="sentence" sectionid="' + sectionId + '" sentenceid="' + sentenceId + '">';
+  spanStartTag(pageId, sectionId, sentenceId) {
+    return '<span class="sentence" pageid="' + pageId + '" sectionid="' + sectionId + '" sentenceid="' + sentenceId + '">';
   }
   transform() {
   //  this.logger.diagnosticMode = true;
+//    let pageId;
     this.logger.diagnostic("transforming sentence ("+this._parserNodes.length+" nodes)");
     let sectionid = this.parent.id;
-    let outputString = this.spanStartTag(this.parent.id, this.id)+"\n";
+    let pageId = (this.parent.parent === undefined ? undefined : this.parent.parent.id);
+    let outputString = this.spanStartTag(pageId, this.parent.id, this.id)+"\n";
     this._parserNodes.forEach(node => {
       outputString = outputString + node.transform();
     });

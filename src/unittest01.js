@@ -1,15 +1,27 @@
-var  { Logger, MyDate } = require('../src/utilities.js');
-var  { Tokenizer } = require('../src/tokenizer.js');
-var  { PageContent, SectionContent, SentenceContent, UserContext } = require('../src/parser.js');
-var  { PageFormatter, TestFormatter } = require('../src/parser.js');
+const path = require('path');
+const fs = require('fs');
+const AppInfo = require(path.resolve('./appinfo.json')); // should use module.paths and find-me.js
+const  { Logger, MyDate } = require('../src/utilities.js');
+const  { Tokenizer } = require('../src/tokenizer.js');
+const  { PageContent, SectionContent, SentenceContent, UserContext } = require('../src/parser.js');
+const  { PageFormatter, TestFormatter } = require('../src/parser.js');
 const { TokenTypes }  = require('../src/tokentypes.js');
 
-const ut_tokenizer = require('../data/unittest_tokenizer.json');
-const ut_parser = require('../data/unittest_parser.json');
-const ut_transformer = require('../data/unittest_transformer.json');
-var  ut_sentences01 = require('../data/unittest_sentences01.json');
-const fs = require('fs');
-const path = require('path');
+// unit tests
+const ut_tokenizer = require('../unittest/unittest_tokenizer.json');
+const ut_parser = require('../unittest/unittest_parser.json');
+const ut_transformer = require('../unittest/unittest_transformer.json');
+const ut_sentences01 = require('../unittest/unittest_sentences01.json');
+// unit test outputs (optional based on utoutput boolean below)
+const basepath = path.resolve();
+const htmloutput = path.join(basepath, "unittest01.html");
+const utresultDir = path.join(basepath, AppInfo.path.relative.unittest, AppInfo.path.relative.results);
+const uttokenout = path.join(utresultDir, "ut01token_sentences.json");
+const utparseout = path.join(utresultDir, "ut01parse_sentences.json");
+const uttransformout = path.join(utresultDir, "ut01transform_sentences.json");
+const uttransformsectionout = path.join(utresultDir, "ut01transform_sections.json");
+const utoutput = false; // should be command switch
+
 var tokenType;
 var spanTree;
 var outputHTML;
@@ -58,20 +70,13 @@ const utjson2 = {
   expected: ""
 };
 
-const basepath = "D:\\users\\wen\\documents\\personal\\ronlyn\\medical\\therapy\\SLP\\reading_app\\";
-const htmloutput = basepath+"unittest01.html";
-//const utcombinedout = basepath+"data\\ut01combined.txt";
-const uttokenout = basepath+"data\\ut01token_sentences.json";
-const utparseout = basepath+"data\\ut01parse_sentences.json";
-const uttransformout = basepath+"data\\ut01transform_sentences.json";
-//const uttransformsentout = basepath+"data\\ut01transform_sent.txt";
-const uttransformsectionout = basepath+"data\\ut01transform_sections.json";
-const utoutput = false; // create expected values for unit test
 let logger = new Logger();
 let pageNode = new PageContent(this);
 let passCount = 0;
 let secId = 0;
 let sentId = 0;
+let grandTotalCount = 0;
+let grandTotalPassCount = 0;
 let totalCount = 0;
 let totalPassCount = 0;
 let timestamp = new MyDate().yyyymmddhhmmss();
@@ -91,30 +96,30 @@ logger.info("unit test output mode: " + (utoutput ? "ON" : "OFF"), false, false,
 let resultsSecIdx;
 totalPassCount = 0;
 totalCount = 0;
-logger.adorn("*********************************************");
-logger.adorn("* S E N T E N C E  T O K E N I Z E R ********");
+logger.adorn("*********************************************", false, false, false, false);
+logger.adorn("* S E N T E N C E  T O K E N I Z E R ********", false, false, false, false);
 let results = new Object();
 results.timestamp = timestamp;
 results.sections = [];
-for (let secIdx = 0; secIdx < ut_sentences01.UnitTest01.sections.length; secIdx++) {
+for (let secIdx = 0; secIdx <  ut_sentences01.sections.length; secIdx++) {
   passCount = 0;
-  secId = ut_sentences01.UnitTest01.sections[secIdx].id;
+  secId =  ut_sentences01.sections[secIdx].id;
   //utoutput
   resultsSecIdx = results.sections.push({id: secId,
-      name: ut_sentences01.UnitTest01.sections[secIdx].name, sentences:[] }) - 1;
+      name:  ut_sentences01.sections[secIdx].name, sentences:[] }) - 1;
   testSectionLabel = "Tokenizer01 SECTION[" + secId + "]";
-  logger.adorn("*********************************************");
-  logger.adorn(testSectionLabel+": "+ ut_sentences01.UnitTest01.sections[secIdx].name);
-  for (let sentIdx = 0; sentIdx < ut_sentences01.UnitTest01.sections[secIdx].sentences.length; sentIdx++) {
-    sentId = ut_sentences01.UnitTest01.sections[secIdx].sentences.id;
+  logger.adorn("*********************************************", false, false, false, false);
+  logger.adorn(testSectionLabel+": "+  ut_sentences01.sections[secIdx].name, false, false, false, false);
+  for (let sentIdx = 0; sentIdx <  ut_sentences01.sections[secIdx].sentences.length; sentIdx++) {
+    sentId =  ut_sentences01.sections[secIdx].sentences.id;
     testSentLabel = testSectionLabel + "[" + sentIdx + "]: ";
-    logger.adorn("---------------------------------------------");
-    logger.adorn(testSentLabel + ut_sentences01.UnitTest01.sections[secIdx].name);
-    logger.adorn(testSentLabel + ut_sentences01.UnitTest01.sections[secIdx].sentences[sentIdx].content);
-    let input = ut_sentences01.UnitTest01.sections[secIdx].sentences[sentIdx];
+    logger.adorn("---------------------------------------------", false, false, false, false);
+    logger.adorn(testSentLabel +  ut_sentences01.sections[secIdx].name, false, false, false, false);
+    logger.adorn(testSentLabel +  ut_sentences01.sections[secIdx].sentences[sentIdx].content, false, false, false, false);
+    let input =  ut_sentences01.sections[secIdx].sentences[sentIdx];
     let tokenizer = new Tokenizer(this);
     let result = tokenizer.insertMarkupTags(input.content);
-    logger.adorn(testSentLabel + result + " (Marked up)");
+    logger.adorn(testSentLabel + result + " (Marked up)", false, false, false, false);
     let tokens = tokenizer.tokenize(result);
     unitTestSuccessful = tokenizer.unitTest(
                             tokenizer.serializeForUnitTest(tokenizer.tokenize(result)),
@@ -133,46 +138,47 @@ for (let secIdx = 0; secIdx < ut_sentences01.UnitTest01.sections.length; secIdx+
                                   tokenizer: tokenizer.serializeForUnitTest(tokens)});
   }
   logger.info(testSectionLabel + ": " + passCount + "/"
-              + ut_sentences01.UnitTest01.sections[secIdx].sentences.length + " PASSED",
+              +  ut_sentences01.sections[secIdx].sentences.length + " PASSED",
               false, false, false, false);
   totalPassCount += passCount;
-  totalCount += ut_sentences01.UnitTest01.sections[secIdx].sentences.length;
+  totalCount +=  ut_sentences01.sections[secIdx].sentences.length;
 }
 if (utoutput) fs.writeFileSync(uttokenout, JSON.stringify(results));
 logger.info("Tokenizer01 Overall total: " + totalPassCount + "/" + totalCount + " PASSED",
             false, false, false, false);
-
+grandTotalPassCount = totalPassCount;
+grandTotalCount = totalCount;
 tokens = null;
 totalPassCount = 0;
 totalCount = 0;
 //logger.diagnosticMode = true;
-logger.adorn("*********************************************");
-logger.adorn("* S E N T E N C E  P A R S E R **************");
+logger.adorn("*********************************************", false, false, false, false);
+logger.adorn("* S E N T E N C E  P A R S E R **************", false, false, false, false);
 results = new Object();
 results.timestamp = timestamp;
 results.sections = [];
-for (let secIdx = 0; secIdx < ut_sentences01.UnitTest01.sections.length; secIdx++) {
+for (let secIdx = 0; secIdx <  ut_sentences01.sections.length; secIdx++) {
   passCount = 0;
-  secId = ut_sentences01.UnitTest01.sections[secIdx].id;
+  secId =  ut_sentences01.sections[secIdx].id;
   //utoutput
   resultsSecIdx = results.sections.push({id: secId,
-      name: ut_sentences01.UnitTest01.sections[secIdx].name, sentences:[] }) - 1;
+      name:  ut_sentences01.sections[secIdx].name, sentences:[] }) - 1;
   testSectionLabel = "Parser01 SECTION[" + secId + "]";
-  logger.adorn("*********************************************");
-  logger.adorn(testSectionLabel+": "+ ut_sentences01.UnitTest01.sections[secIdx].name);
-  for(let sentIdx = 0; sentIdx < ut_sentences01.UnitTest01.sections[secIdx].sentences.length; sentIdx++) {
-    sentId = ut_sentences01.UnitTest01.sections[secIdx].sentences.id;
+  logger.adorn("*********************************************", false, false, false, false);
+  logger.adorn(testSectionLabel+": "+  ut_sentences01.sections[secIdx].name, false, false, false, false);
+  for(let sentIdx = 0; sentIdx <  ut_sentences01.sections[secIdx].sentences.length; sentIdx++) {
+    sentId =  ut_sentences01.sections[secIdx].sentences.id;
     testSentLabel = testSectionLabel + "[" + sentIdx + "]: ";
-    logger.adorn("---------------------------------------------");
-//    logger.adorn(testSectionLabel + ": " + ut_sentences01.UnitTest01.section[secIdx].name);
-    logger.adorn(testSentLabel + ut_sentences01.UnitTest01.sections[secIdx].sentences[sentIdx].content);
-    let input = ut_sentences01.UnitTest01.sections[secIdx].sentences[sentIdx];  // need id and content
+    logger.adorn("---------------------------------------------", false, false, false, false);
+//    logger.adorn(testSectionLabel + ": " +  ut_sentences01.section[secIdx].name);
+    logger.adorn(testSentLabel +  ut_sentences01.sections[secIdx].sentences[sentIdx].content, false, false, false, false);
+    let input =  ut_sentences01.sections[secIdx].sentences[sentIdx];  // need id and content
     let sentenceNode = new SentenceContent(this);
     sentenceNode.userContext = userRonlyn;
     let actual = sentenceNode.serializeForUnitTest(sentenceNode.parse(input));
     let expected = input.expected.parser;
     unitTestSuccessful = sentenceNode.unitTest(actual, expected);
-    logger.adorn(testSentLabel + ((unitTestSuccessful) ? "PASSED" : "FAILED"));
+    logger.adorn(testSentLabel + ((unitTestSuccessful) ? "PASSED" : "FAILED"), false, false, false, false);
     if (unitTestSuccessful) {
       passCount++;
     }
@@ -188,38 +194,40 @@ for (let secIdx = 0; secIdx < ut_sentences01.UnitTest01.sections.length; secIdx+
                                     parser: JSON.stringify(actual) });
   }
   logger.info(testSectionLabel + ": " + passCount +"/"
-              + ut_sentences01.UnitTest01.sections[secIdx].sentences.length + " PASSED",
+              +  ut_sentences01.sections[secIdx].sentences.length + " PASSED",
               false, false, false, false);
   totalPassCount += passCount;
-  totalCount += ut_sentences01.UnitTest01.sections[secIdx].sentences.length;
+  totalCount +=  ut_sentences01.sections[secIdx].sentences.length;
 }
 if (utoutput) fs.writeFileSync(utparseout, JSON.stringify(results));
 logger.info("Parser01 Overall total: " + totalPassCount + "/" + totalCount + " PASSED",
             false, false, false, false);
+grandTotalPassCount += totalPassCount;
+grandTotalCount += totalCount;
 
 totalPassCount = 0;
 totalCount = 0;
-logger.adorn("*********************************************");
-logger.adorn("* S E N T E N C E   T R A N S F O R M E R ***");
+logger.adorn("*********************************************", false, false, false, false);
+logger.adorn("* S E N T E N C E   T R A N S F O R M E R ***", false, false, false, false);
 results = new Object();
 results.timestamp = timestamp;
 results.sections = [];
-for (let secIdx = 0; secIdx < ut_sentences01.UnitTest01.sections.length; secIdx++) {
+for (let secIdx = 0; secIdx <  ut_sentences01.sections.length; secIdx++) {
   passCount = 0;
-  secId = ut_sentences01.UnitTest01.sections[secIdx].id;
+  secId =  ut_sentences01.sections[secIdx].id;
   //utoutput
   resultsSecIdx = results.sections.push({id: secId,
-      name: ut_sentences01.UnitTest01.sections[secIdx].name, sentences:[] }) - 1;
+      name:  ut_sentences01.sections[secIdx].name, sentences:[] }) - 1;
   testSectionLabel = "Transformer01 SECTION[" + secId + "]";
-  logger.adorn("*********************************************");
-  logger.adorn(testSectionLabel+": "+ ut_sentences01.UnitTest01.sections[secIdx].name);
-  for(let sentIdx = 0; sentIdx < ut_sentences01.UnitTest01.sections[secIdx].sentences.length; sentIdx++) {
-    sentId = ut_sentences01.UnitTest01.sections[secIdx].sentences.id;
+  logger.adorn("*********************************************", false, false, false, false);
+  logger.adorn(testSectionLabel+": "+  ut_sentences01.sections[secIdx].name, false, false, false, false);
+  for(let sentIdx = 0; sentIdx <  ut_sentences01.sections[secIdx].sentences.length; sentIdx++) {
+    sentId =  ut_sentences01.sections[secIdx].sentences.id;
     testSentLabel = testSectionLabel + "[" + sentIdx + "]: ";
-    logger.adorn("---------------------------------------------");
-//    logger.adorn(testSectionLabel + ": " + ut_sentences01.UnitTest01.section[secIdx].name);
-    logger.adorn(testSentLabel + ut_sentences01.UnitTest01.sections[secIdx].sentences[sentIdx].content);
-    let input = ut_sentences01.UnitTest01.sections[secIdx].sentences[sentIdx];
+    logger.adorn("---------------------------------------------", false, false, false, false);
+//    logger.adorn(testSectionLabel + ": " +  ut_sentences01.section[secIdx].name);
+    logger.adorn(testSentLabel +  ut_sentences01.sections[secIdx].sentences[sentIdx].content, false, false, false, false);
+    let input =  ut_sentences01.sections[secIdx].sentences[sentIdx];
     let sentenceNode = new SentenceContent(this);
     sentenceNode.userContext = userRonlyn;
     sentenceNode.parse(input);
@@ -239,66 +247,77 @@ for (let secIdx = 0; secIdx < ut_sentences01.UnitTest01.sections.length; secIdx+
                                                     transformer: actual });
   }
   logger.info(testSectionLabel + ": " + passCount +"/"
-              + ut_sentences01.UnitTest01.sections[secIdx].sentences.length + " PASSED",
+              +  ut_sentences01.sections[secIdx].sentences.length + " PASSED",
               false, false, false, false);
   totalPassCount += passCount;
-  totalCount += ut_sentences01.UnitTest01.sections[secIdx].sentences.length;
+  totalCount +=  ut_sentences01.sections[secIdx].sentences.length;
 }
 if (utoutput) fs.writeFileSync(uttransformout, JSON.stringify(results));
 logger.info("Transformer01 Overall total: " + totalPassCount + "/" + totalCount + " PASSED",
             false, false, false, false);
+grandTotalPassCount += totalPassCount;
+grandTotalCount += totalCount;
 
 passCount = 0;
 totalCount = 0;
-logger.adorn("*********************************************");
-logger.adorn("* S E C T I O N  T R A N S F O R M E R ******");
+logger.adorn("*********************************************", false, false, false, false);
+logger.adorn("* S E C T I O N  T R A N S F O R M E R ******", false, false, false, false);
 results = new Object();
 results.timestamp = timestamp;
 results.sections = [];
 let sectionNode;
 let htmlstring = "<html>";
-for (let secIdx = 0; secIdx < ut_sentences01.UnitTest01.sections.length; secIdx++) {
+for (let secIdx = 0; secIdx <  ut_sentences01.sections.length; secIdx++) {
   totalCount++;
-  secId = ut_sentences01.UnitTest01.sections[secIdx].id;
+  secId =  ut_sentences01.sections[secIdx].id;
   testSectionLabel = "Transformer01 SECTION[" + secId + "]: ";
-  logger.adorn("*********************************************");
-  logger.adorn(testSectionLabel + ut_sentences01.UnitTest01.sections[secIdx].name);
+  logger.adorn("*********************************************", false, false, false, false);
+  logger.adorn(testSectionLabel +  ut_sentences01.sections[secIdx].name, false, false, false, false);
   sectionNode = new SectionContent(this);
   sectionNode.userContext = userRonlyn;
-  sectionNode.id = ut_sentences01.UnitTest01.sections[secIdx].id;
-  sectionNode.name = ut_sentences01.UnitTest01.sections[secIdx].name;
-  sectionNode.parse(ut_sentences01.UnitTest01.sections[secIdx].sentences);
+  sectionNode.id =  ut_sentences01.sections[secIdx].id;
+  sectionNode.name =  ut_sentences01.sections[secIdx].name;
+  sectionNode.parse( ut_sentences01.sections[secIdx].sentences);
   let actual = sectionNode.transform();
-  let expected = ut_sentences01.UnitTest01.sections[secIdx].expected;
+  let expected =  ut_sentences01.sections[secIdx].expected;
   //utoutput
-  results.sections.push({id: secId, name: ut_sentences01.UnitTest01.sections[secIdx].name,
+  results.sections.push({id: secId, name:  ut_sentences01.sections[secIdx].name,
                         actual: actual, expected: expected });
-//  logger.info(sectionNode.unitTest(ut_sentences01.UnitTest01.sections[secIdx].sentences));
+//  logger.info(sectionNode.unitTest( ut_sentences01.sections[secIdx].sentences));
   let unitTestSuccessful = sectionNode.unitTest(actual, expected);
   if (unitTestSuccessful) {
     passCount++;
   }
   else {
+    logger.diagnosticMode = true;
     logger.diagnostic((sectionNode.serializeAsTable(30, 10, 10)));
     logger.diagnostic("actual:   " + sectionNode.transform());
-    logger.diagnostic("expected: " + input.expected.transformer);
+    logger.diagnostic("expected: " + expected.transformer);
   }
-  logger.adorn(testSectionLabel + ((unitTestSuccessful) ? "PASSED" : "FAILED"));
+  logger.adorn(testSectionLabel + ((unitTestSuccessful) ? "PASSED" : "FAILED"), false, false, false, false);
 }
 if (utoutput) fs.writeFileSync(uttransformsectionout, JSON.stringify(results));
 logger.info("Transformer01 SECTION Overall total: " + passCount + "/" + totalCount + " PASSED",
             false, false, false, false);
+grandTotalPassCount += passCount;
+grandTotalCount += totalCount;
 
-logger.adorn("********************************************");
-logger.adorn("* P A G E  P A R S E R *********************");
-testSectionLabel = "Parser01 page";
-logger.adorn("********************************************");
+logger.adorn("********************************************", false, false, false, false);
+logger.adorn("* P A G E  P A R S E R *********************", false, false, false, false);
+testSectionLabel = "Tranformer01 PAGE";
+logger.adorn("********************************************", false, false, false, false);
 pageNode = new PageContent(this);
 pageNode.userContext = userRonlyn;
-pageNode.parse(ut_sentences01.UnitTest01);
+pageNode.parse( ut_sentences01);
 logger.diagnostic((pageNode.serializeAsTable(40, 10, 10)));
 let pageFormatter = new TestFormatter(this);
 pageFormatter.userContext = userRonlyn;
 pageFormatter.content = pageNode;
 let htmlString = pageFormatter.transform();
 if (htmloutput) fs.writeFileSync(htmloutput, htmlString);
+logger.info(testSectionLabel+": Browse " + htmloutput, false, false, false, false);
+
+logger.adorn("********************************************", false, false, false, false);
+logger.info(path.basename(__filename) + " GRAND TOTAL:" + grandTotalPassCount + "/" + grandTotalCount + " PASSED",
+            false, false, false, false);
+logger.adorn("********************************************", false, false, false, false);

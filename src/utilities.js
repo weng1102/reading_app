@@ -1,3 +1,8 @@
+'use strict';
+function WildcardToRegex(pattern) {
+  // some problems with multiple *
+  return "^" + pattern.replace("*", ".*").replace("?", ".") + "$";
+};
 class AppError extends Error {
   constructor(args) {
     super(args);
@@ -135,20 +140,27 @@ class Logger { // logging from within supported objects
                                 this._showModuleLocation));
     }
   }
-  showTimestamp(onOff) {
+  set showTimestamp(onOff) {
     this._showTimestamp = onOff;
   }
-  adorn(message) {
+  set showFunctionName(onOff) {
+    this._showFunctionName = onOff;
+  }
+  adorn(message, showSeverity, showFunctionName, showTimestamp, showModuleName) {
     if (this._verboseMode && this._adornMode) {
-    console.log(this.logEntry("ADORN", message, false, false, false, false));
+    console.log(this.logEntry("ADORN", message,
+    (showSeverity === undefined ? this._showSeverity : showSeverity),
+    (showFunctionName === undefined ? this._showFunctionName : showFunctionName),
+    (showTimestamp === undefined ? this._showTimestamp : showTimestamp),
+    (showModuleName === undefined ? this._showModuleLocation : showModuleName)));
     }
   }
-  info(message) {
+  info(message, showSeverity, showFunctionName, showTimestamp, showModuleName) {
       console.log(this.logEntry("INFO", message,
-                                this._showSeverity,
-                                this._showFunctionName,
-                                this._showTimestamp,
-                                this._showModuleLocation));
+                  (showSeverity === undefined ? this._showSeverity : showSeverity),
+                  (showFunctionName === undefined ? this._showFunctionName : showFunctionName),
+                  (showTimestamp === undefined ? this._showTimestamp : showTimestamp),
+                  (showModuleName === undefined ? this._showModuleLocation : showModuleName)));
   }
   error(message) { // Operational or programmatic try to fix
     console.error(this.logEntry("ERROR", message, true, true, true, true));
@@ -238,4 +250,4 @@ class MyDate extends Date {
     return yyyymmdd+" "+hh+":"+min+":"+sec;
   }
 }
-module.exports = { AcronymMap, AppError, Logger, MyDate, MonthFromAbbreviationMap, OrdinalNumberMap, RecognitionMap };
+module.exports = { AcronymMap, AppError, Logger, MyDate, MonthFromAbbreviationMap, OrdinalNumberMap, RecognitionMap, WildcardToRegex };

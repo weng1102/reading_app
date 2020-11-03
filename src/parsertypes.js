@@ -1,3 +1,4 @@
+'use strict';
 const ContentNodeType = { // must be unique
   WORD: 'WORD',
   DATE: 'DATE',

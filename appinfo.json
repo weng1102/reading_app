@@ -1,0 +1,26 @@
+{
+  "name": "Ronlyn's Reading App",
+  "short_name": "readapp",
+  "description": "multi-modal reading application for Ronlyn to practice reading",
+  "path": {
+    "root": "reading_app",
+    "relative": {
+      "curriculum": "curriculum",
+      "data": "data",
+      "distribution": "dist",
+      "images": "img",
+      "log": "log",
+      "results": "results",
+      "source": "src",
+      "styles": "styles",
+      "unittest": "unittest"
+    }
+  },
+  "prefixes": {
+    "unittest": "ut_"
+  },
+  "suffixes": {
+    "result": "_result",
+    "spantree": "_spantree"
+  }
+}
