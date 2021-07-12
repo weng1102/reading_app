@@ -112,7 +112,7 @@ const ParserNodeType = { // must be unique
   TBD: 'TBD',
   WORD: 'WORD'
 };
-const MarkupTokenTypeList = [
+const MarkupTokenTypeList1 = [
   { tag: TokenTag.USD,
     type: TokenType.USD,
     pattern: /(?<=^|\W)\$(([1-9]\d{0,2}(,\d{3})*)|(([1-9]\d*)?\d))(\.\d\d)?(?=\s|\W|$|[.!?\\-])/g },
@@ -165,7 +165,7 @@ function isValidMarkupTag(tag) {
   return ((tag.length > 2) && (tag.slice(0,1) === TokenTag.LANGLEBRACKET)
           && (tag.slice(-1)===TokenTag.RANGLEBRACKET));
 };
-function endMarkupTag(tag) {
+export function endMarkupTag(tag) {
   let retValue = null;
   if (isValidMarkupTag(tag)) {
     retValue = tag.slice(0,1)+"/"+tag.slice(1);

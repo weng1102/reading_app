@@ -1,0 +1,56 @@
+//SectionParagraphType
+page: Sentencebank
+heading1: Who am I
+paragraph:
+My name is Ronlyn Goo.
+I am 58 years old.
+I have a Bachelor's degree in Chemical Engineering from UC Berkeley.
+I also have an MBA degree from Stanford.
+I live at 20680 Seaton Ave.
+My current occupation is stroke recovery.
+My cell phone number is (408) 206-5963.
+In case of emergency, please call Wen at (408) 267-6076.
+
+heading1: What happened to me
+I had a hemorrhagic stroke in 2015. A bleed in my head damaged my brain.
+I was initially paralyzed on my right side and had severe aphasia.
+Aphasia is the loss of language skills.
+Each stroke victim is affected differently.
+Survivors recover at different rates.
+I could only say one word after my stroke.
+I am starting to speak in sentences again.
+I get frustrated when I cannot say what I am thinking.
+I have problems with simple math and remembering things.
+
+//SectionHeadingVariantType
+page: Headingtest
+heading1: heading 1.0
+sentence 1 after heading 1
+heading2: heading 1.1
+sentence 1 after heading 2
+sentence 2 after heading 2
+heading1: heading 2.0
+
+//SectionUnorderedListVariantType
+page: unordered list
+heading1: unorder list example
+unordered_list:
+sentence 1
+sentence 2
+sentence 3
+sentence 4
+heading1: ordered list example
+ordered_list:
+sentence 1
+sentence 2
+sentence 3
+sentence 4
+//SectionPhotoEntryType
+page:
+
+
+type SectionVariantType =
+  | SectionOrderedListVariantType
+  | SectionFillinType
+  | SectionFillinListType
+  | SectionPhotoEntryType

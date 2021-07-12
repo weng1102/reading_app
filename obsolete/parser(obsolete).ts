@@ -6,14 +6,47 @@
  // on markup and compensate for idiosyncracies of the Google Voice API
 
 'use strict';
-const  { altRecognition } = require('../data/altrecognition.json');
-const  { ContentNodeType } = require('../src/parsertypes.js');
-const  { endMarkupTag, TokenType, TokenTag } = require('../src/tokentypes.js');
-const  { Tokenizer } = require('../src/tokenizer.js');
-const  { AcronymMap, Logger, MyDate, MonthFromAbbreviationMap, OrdinalNumberMap, RecognitionMap } = require('../src/utilities.js');
-const fs = require('fs');
-const FileAltRecog = fs.readFileSync("./data/altrecognition.json", "utf-8"); // should be user specific
-const FileAltPronun = fs.readFileSync("./data/altpronunciation.json", "utf-8"); // should be user specific
+const enum ContentNodeType { // must be unique
+  WORD = "WORD",
+  DATE = "DATE",
+  TIME = "TIME",
+  WHITESPACE = "WHITESPACE",
+  MLSELFCLOSINGTAG = "HTMLSELFCLOSINGTAG",
+  // Requires semantic analysis to recombine WORD+, PUNCTUATIONS+
+  EMAILADDRESS = "EMAILADDRESS",
+  URL = "URL",
+  STREETNUMBER = "STREETNUMBER", // 20680 pronounced "2","0","6","8","0"
+  POSSESSIVE = "POSSESSIVE",
+  PHONENUMBER = "PHONENUMBER",
+  CONTRACTION = "CONTRACTION",
+  TOKEN = "TOKEN", // EXPLICIT token <token>ABC</token> to escape further parsing
+  USD = "USD", // perhaps required to escape default pronunciation?
+  NUMBER = "NUMBER", // perhaps required to escape default pronunciation?
+  DECIMAL = "DECIMAL", // perhaps required to escape default pronunciation?
+  TITLE = "TITLE", // Mr. should be a single span ; should be special case of abbreviations
+
+  // These HTMLtags and attributes will be propagated for FORMATTING ONLY
+  MLSTARTTAG = "MLSTARTTAG", //not necessarily HTML
+  MLENDTAG = "MLENDTAG",
+  MLTAG = "MLTAG",
+  HTMLSTARTTAG = "HTMLSTARTTAG",
+  HTMLENDTAG = "HTMLENDTAG",
+  HTMLATTRLIST = "HTMLATTRLIST", // needed for propagation across span tree
+  HTMLSELFCLOSINGTAG = "HTMLTAG_SELFCLOSE", //not supported
+  PUNCTUATION = "PUNCTUATION",
+  TBD = "TBD"
+};
+
+import { PronunciationDictionary, RecognitionDictionary } from './dictionary';
+import { UserContext } from './utilities';
+import PageContentType, { PageFormatEnumType, SectionVariantEnumType } from './pageContentType';
+import { Tokenizer, TokenType, MarkupTokenType, endMarkupTag } from './tokenizer';
+import { AcronymMap, BaseClass, Logger, MyDate, MonthFromAbbreviationMap, OrdinalNumberMap } from './utilities';
+import  fs from 'fs';
+//import unittestdata from './unittest_sentences01';
+import unittestdata, {UnittestDataType, UnittestSentenceType} from './unittest_sentences01';
+//const FileAltRecog = fs.readFileSync("./data/altrecognition.json", "utf-8"); // should be user specific
+//const FileAltPronun = fs.readFileSync("./data/altpronunciation.json", "utf-8"); // should be user specific
 
 const WordSeqNumPlaceholder = "#TBD#";
 const WordSeq = 'wordseq="' + WordSeqNumPlaceholder + '"';
@@ -22,51 +55,11 @@ const RecognitionAttr = "recognition";  // built-in patterns e.g., abbreviated m
 const AltPronunciationAttr = "altpronunciation"; // user specific
 const PronunciationAttr = "pronunciation"; // TBD
 
+type ContentNodeClassDictionaryType = Record<TokenType, ContentNode>;
+
 //const ContentNPrefix = "ContentN_";
 
-class BaseClass {
-  constructor(parent) {
-    this._logger = new Logger(this);
-  }
-  get logger() {
-    return this._logger;
-  }
-  set logger(obj) {
-    this._logger = obj;
-  }
-}
-class UserContext extends BaseClass {
-  constructor(name) {
-    super();
-//    this._parent = parent;
-    let mapEntries;
-    this._name = name;
-    this._pages = new Array();
-
-    this._altRecognitionMap = new Map();
-    mapEntries = JSON.parse(FileAltRecog);
-    for (let key of Object.keys(mapEntries)) {
-      this._altRecognitionMap.set(key, mapEntries[key]);
-    }
-    this._altPronunciationMap = new Map();
-    mapEntries = JSON.parse(FileAltPronun);
-    for (let key of Object.keys(mapEntries)) {
-      this._altPronunciationMap.set(key, mapEntries[key]);
-    };
-  }
-  get altPronunciationMap() {
-    return this._altPronunciationMap;
-  }
-  get altRecognitionMap() {
-    return this._altRecognitionMap;
-  }
-  get name() {
-    return this._name;
-  }
-  set name(name) {
-  this._name = name;
-  }
-}
+/*
 class Formatter extends BaseClass {
   // formatter (sub)classes strictly manage the transformation of Content, NOT the creation or
   // modification of Content.
@@ -150,6 +143,8 @@ class StoryFormatter extends Formatter {
 
   };
 }
+*/
+/*
 class TestFormatter extends Formatter {
   // Interprets input JSON section as a paragraph with or without line numbers
   constructor(parent) {
@@ -224,34 +219,34 @@ class SentenceFormatter extends Formatter {
   }
   transform() {
     return this.content.transform();
-    /*
-    this.logger.diagnosticMode = true;
-    this.logger.diagnostic("transforming sentence ("+this.content.tokens.length+" nodes)");
-    let sectionid = this.content.parent.id;
-    let outputString = '<span class"=sentence" sectionid="'+ sectionid + '" sentenceid="'
-                        + this.content.id + '">';
-    let nextWordIdx = 0;
-    let span = "";
-    this.content.tokens.forEach(token => {
-      // handle alternate altRecognition attribute
-      if (token.type !== ContentNodeType.WHITESPACE && token.type !== ContentNodeType.PUNCTUATION) {
-        span = "<span nextwordidx=TBD";
-        if (this.userContext != null) {
-          const exclusionList = [ TokenType.MLTAG, TokenType.MLTAG_END ];
-          let altRecog = this.userContext.altRecognitionMap.get(token.content(exclusionList));
-          if (typeof altRecog !== "undefined" && altRecog !== null) span = span + ' altRecognition="' + altRecog + '"';
-        }
-        span = span + ">";
-      }
-      else { // no alternate altRecognition
-        span = "<span>";
-      }
-      outputString = outputString + span + token.transform() + this.spanEndTag);
-    });
-    //replace all nextwordidx=TBD with the proper id
     //
-    return outputString + "\n";
-    */
+    // this.logger.diagnosticMode = true;
+    // this.logger.diagnostic("transforming sentence ("+this.content.tokens.length+" nodes)");
+    // let sectionid = this.content.parent.id;
+    // let outputString = '<span class"=sentence" sectionid="'+ sectionid + '" sentenceid="'
+    //                     + this.content.id + '">';
+    // let nextWordIdx = 0;
+    // let span = "";
+    // this.content.tokens.forEach(token => {
+    //   // handle alternate altRecognition attribute
+    //   if (token.type !== ContentNodeType.WHITESPACE && token.type !== ContentNodeType.PUNCTUATION) {
+    //     span = "<span nextwordidx=TBD";
+    //     if (this.userContext != null) {
+    //       const exclusionList = [ TokenType.MLTAG, TokenType.MLTAG_END ];
+    //       let altRecog = this.userContext.altRecognitionMap.get(token.content(exclusionList));
+    //       if (typeof altRecog !== "undefined" && altRecog !== null) span = span + ' altRecognition="' + altRecog + '"';
+    //     }
+    //     span = span + ">";
+    //   }
+    //   else { // no alternate altRecognition
+    //     span = "<span>";
+    //   }
+    //   outputString = outputString + span + token.transform() + this.spanEndTag);
+    // });
+    // //replace all nextwordidx=TBD with the proper id
+    // //
+    // return outputString + "\n";
+
   }
 }
 class ListItemFormatter extends SentenceFormatter {
@@ -263,10 +258,15 @@ class ListItemFormatter extends SentenceFormatter {
     return "<li>" + super.transform() + "</li>\n";
   }
 }
-class Content extends BaseClass {
-  constructor(parent) {
+*/
+abstract class Content extends BaseClass {
+  protected _id?: number | null;
+  protected _name?: string;
+  protected _parent?: BaseClass;
+  protected _userContext?: UserContext | null;
+  constructor(parent: Content) {
     super(parent);
-    this._id = "";
+    this._id = null;
     this._name = "";
     this._parent = parent;
     this._userContext = (typeof parent !== "undefined" && parent !== null && typeof parent.userContext !== "undefined") ? parent.userContext : null;
@@ -300,28 +300,21 @@ class Content extends BaseClass {
   set userContext(userContext) {
     this._userContext = userContext;
   }
-  parse() {
+  parse(arg1) {
     this.logger.warning("abstract method referenced with no implementation");
-  }
-spanElement(content) {
-    return this.spanStartTag(content) + content + this.spanEndTag();
-  }
-  spanStartTag() {
-    return "<span>";
-  }
-  spanEndTag() {
-    return "</span>";
   }
 }
 class PageContent extends Content {
+  // Emits PageContentType .ts
+  protected pageFormat: PageFormatEnumType = PageFormatEnumType.default;
+  protected _sectionNodes: SectionContent[] = [];
   constructor(parent) {
     super(parent);
-    this._sectionNodes = new Array();
   }
   get sections() {
     return this._sectionNodes;
   }
-  parse(page) {
+  parse(page: UnittestDataType) {
     this.id = page.id;
     this.name = page.name;
     page.sections.forEach(section => {
@@ -335,7 +328,7 @@ class PageContent extends Content {
   }
   serializeAsTable(col1, col2, col3) {
     let table = "";
-    this._sectionNodes.forEach(sectionNode => {
+    this._sectionNodes.forEach(sectionNode: SectionNode => {
       table =  "\nsection["+sectionNode.id+"]: "+sectionNode.name+"\n"+sectionNode.input + "\n" + sectionNode.serializeAsTable(col1, col2, col3)+"\n";
     });
     return table.slice(0,-1);
@@ -345,18 +338,30 @@ class PageContent extends Content {
 }
 class SectionContent extends Content {
   // a section is defined as a group of sentences or group of sections
-  // aka (un)ordered list of sentences aka paragraph, aka journal entry (including images)
-  // object is responsible for reading a section of a JSON object including the section details
-  // and the associated sentences and return a parse tree.
-    constructor(parent) {
+  // aka chapter. (un)ordered list of sentences aka paragraph, aka journal entry
+  // (including images) object is responsible for reading a section of a JSON
+  // object including the section details and the associated sentences and
+  // return a parse tree.
+  // Emits variants:
+  // heading,
+  // unordered_list,
+  // ordered_list,
+  // paragraph,
+  // fillin,
+  // fillin_list,
+  // photo_entry
+  protected _sentenceNodes: SentenceContent [] = [];
+  protected _sectionType: SectionVariantEnumType = SectionVariantEnumType.ordered_list;
+  protected _name: string = "";
+    constructor(parent: PageContent | any) {
       super(parent);
-      this._sectionNodes = new Array();
-      this._sentenceNodes = new Array();
+      //sectionType: SectionVariantEnumType should be determined within this object
+      //  if (sectionType !== undefined) this._sectionType = sectionType;
     }
-    get sentences() {
+    get sentences(): SentenceContent[] {
       return this._sentenceNodes;
     }
-    parse(sentenceRecords) {
+    parse(sentenceRecords: UnittestSentenceType[] ) { // should be some PageSourceType subtype
       sentenceRecords.forEach(sentenceRecord => {
 //
         // must discern subsection vs. sentence. Sentences are parsed with the current sectionNode
@@ -370,7 +375,7 @@ class SectionContent extends Content {
   }
   serializeAsTable(col1, col2, col3) {
     let table = "";
-    this._sentenceNodes.forEach(sentenceNode => {
+    this._sentenceNodes.sentence.forEach(sentenceNode: UnittestSentenceType => {
       table = table + "section["+this.id+"] "+this.name+"\n" + sentenceNode.serializeAsTable(col1, col2, col3)+"\n";
     });
     return table.slice(0,-1);
@@ -378,9 +383,9 @@ class SectionContent extends Content {
   transform() {
     //    let  outputString = "<br>"+this.name;
     let  outputString = "";
-    this.logger.diagnostic("transforming section ("+this.sentences.length+" sentences)");
-    this.sentences.forEach(sentence => {
-      outputString = outputString + sentence.transform()+"\n";
+    this.logger.diagnostic(`transforming section (${this._sentenceNodes.length} sentences)`);
+    this.sentenceNodes.forEach(sentenceNode: SentenceNode => {
+      outputString = outputString + sentenceNode.transform()+"\n";
       //this.logger.info(str);
     });
     return outputString.slice(0,-1);
@@ -389,12 +394,16 @@ class SectionContent extends Content {
     return actual == expected;
     }
 }
-class SentenceContent extends Content {
-  constructor(parent) {
+export class SentenceContent extends Content {
+  protected _input: string;
+  _tokenizer: Tokenizer;
+  _parserNodes: ContentNode[];
+  _ContentNodeClasses: ContentNode;
+  constructor(parent: SectionContent) {
     super(parent);
     this._input = "";
     this._tokenizer = new Tokenizer(this);
-    this._parserNodes = new Array;
+    this._parserNodes = [];
     //this._tokens = tokens;
     // Generic token typesidentified by tokenizer
     this._ContentNodeClasses = {
@@ -424,6 +433,9 @@ class SentenceContent extends Content {
 //    this._parserNodes = new Array;
 //    this._tokens = null;
   };
+  get sentence() {
+    return this._sentence;
+  }
   get tokens() {
     return this._parserNodes;
   }
@@ -536,10 +548,13 @@ class SentenceContent extends Content {
     return (actual === expected);
   }
 };
-class ContentNode extends Content {
+export abstract class ContentNode extends Content {
+  protected  _type?: ContentNodeType = ContentNodeType.TBD; // determined based on token type (e.g., MLTAG) and token value (<contraction>)
+  protected _tokenStartIdx?: number | null = null;
+  protected _tokenEndIdx?: number | null = null;
+  protected _parentNode?;
   constructor(parent, tokenIdx) {
     super(parent);
-//    this._tokenList = new Array;  // consider keeping link (by reference) to token list
     this.logger = new Logger(this);
     ///this.logger.diagnosticMode = true;
     this._parentNode = parent;
@@ -558,7 +573,8 @@ class ContentNode extends Content {
     return this._parentNode._tokens;
   }
   content(typeExclusionList) {
-    if (typeof typeExclusionList === "undefined") typeExclusionList = [];
+//    if (typeof typeExclusionList === "undefined") typeExclusionList = [];
+    if (typeExclusionList === undefined) typeExclusionList = [];
     let outputString = "";
     for (let idx = this._tokenStartIdx;
       idx <= this._tokenEndIdx; idx++) {
@@ -648,7 +664,7 @@ class ContentNode_NONAUDIBLE extends ContentNode {
     super(parent, tokenIdx);
   }
 }
-class ContentNode_WORD extends ContentNode_AUDIBLE {
+export class ContentNode_WORD extends ContentNode_AUDIBLE {
   constructor(parent, tokenIdx) {
     super(parent, tokenIdx);
     this._type = ContentNodeType.WORD; // determined based on token type (e.g., MLTAG) and token value (<contraction>)
@@ -717,7 +733,7 @@ class ContentNode_MLTAG extends ContentNode_NONAUDIBLE { // ALL markup tags INCL
     return this.content();    // passthru
   }
 }
-class ContentNode_MLTAG_ extends ContentNode_AUDIBLE { // interally handled MLTAGs
+class ContentNode_MLTAG_ extends ContentNode_AUDIBLE { // internally handled MLTAGs
   // 1) manages the stack of markup
   constructor(parent, tokenIdx) {
     super(parent,tokenIdx);
@@ -995,4 +1011,31 @@ class ContentNode_MLTAG_USD extends ContentNode_MLTAG_ {
     return outputString;
   }
 }
-module.exports = { PageContent, PageFormatter, SectionContent, SentenceContent, TestFormatter, UserContext };
+type ContentNodeClassType = (
+   typeof ContentNode_WORD
+  |  typeof ContentNode_NUMBER
+  |  typeof ContentNode_PUNCTUATION
+  |  typeof ContentNode_MLTAG
+  |  typeof ContentNode_MLTAG_END
+  |  typeof ContentNode_MLTAG_SELFCLOSING
+  |  typeof ContentNode_WHITESPACE
+);
+type ContentNodeDictionaryType = Record<TokenType, ContentNodeClassType>;
+const ContentNodeDictionary: ContentNodeDictionaryType = {
+  [TokenType.WORD]: ContentNode_WORD,
+  [TokenType.PUNCTUATION]: ContentNode_PUNCTUATION,
+  [TokenType.MLTAG]: ContentNode_MLTAG,
+  [TokenType.MLTAG_END]: ContentNode_MLTAG_END,
+  [TokenType.MLTAG_SELFCLOSING]: ContentNode_MLTAG_SELFCLOSING,
+  [TokenType.WHITESPACE]: ContentNode_WHITESPACE,
+  [TokenType.NUMBER]: ContentNode_NUMBER
+}
+
+// generic types
+interface Box<Type> {
+  contents:Type;
+}
+let box1: Box<ContentNode_WORD>
+
+// return object and not a class
+let contentNode:<what type here?> = ContentNodeFactory.create(TokenType);

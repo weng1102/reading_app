@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution" : "node",
+    "baseUrl": ".",
+    "paths": { "*": ["src/*", "unittest/*", "node_modules/*"] },
+    "outDir": "./build",
+    "esModuleInterop": true,
+    "strict": true,
+    "allowJs": true,
+    "checkJs": true,
+    "alwaysStrict": true,
+    "noImplicitAny": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": true,
+    "pretty": true,
+    "strictNullChecks": true,
+    "sourceMap": true
+},
+  "lib": ["es2015"],
+  "include": [
+    "src"
+  ]
+}

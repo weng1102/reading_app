@@ -81,7 +81,7 @@ const AcronymMap = new Map([
   [ "UCSD", "university,california,san,diego" ],
 ]);
 
-class Logger { // logging from within supported objects
+export class Logger { // logging from within supported objects
   constructor(parent) {
     this._parent = parent; // required to find proper stack frame
     this._terseFormat = false;  // do not show only severity with message
@@ -230,7 +230,7 @@ class Logger { // logging from within supported objects
                 + message;
   }
 }
-class MyDate extends Date {
+export class MyDate extends Date {
   constructor() {
     super();
   }
@@ -250,4 +250,4 @@ class MyDate extends Date {
     return yyyymmdd+" "+hh+":"+min+":"+sec;
   }
 }
-module.exports = { AcronymMap, AppError, Logger, MyDate, MonthFromAbbreviationMap, OrdinalNumberMap, RecognitionMap, WildcardToRegex };
+module.exports = { AcronymMap, AppError, MonthFromAbbreviationMap, OrdinalNumberMap, RecognitionMap, WildcardToRegex };
