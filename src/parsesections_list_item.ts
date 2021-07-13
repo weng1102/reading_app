@@ -1,3 +1,12 @@
+/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+ *
+ * File name: parsesections_list_items.ts
+ *
+ * Create section list items objects from serialized input.
+ *
+ * Version history:
+ *
+ **/
 import { strict as assert } from "assert";
 import {
   // BaseClass,

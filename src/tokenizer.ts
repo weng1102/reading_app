@@ -5,7 +5,7 @@
 
 "use strict";
 ///import { endMarkupTag, TokenLiteral } from './tokentypes';
-import { Logger } from "./utilities";
+import { Logger } from "./logger";
 // Definition of tokens to be tokenized (Map guarantees order)
 
 // Add additional patterns to be processed as parser markup directives.

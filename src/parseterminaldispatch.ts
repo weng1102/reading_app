@@ -1,3 +1,12 @@
+/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+ *
+ * File name: parseterminaldispatch.ts
+ *
+ * Map markup type to terminal objects.
+ *
+ * Version history:
+ *
+ **/
 import { strict as assert } from "assert";
 import { AcronymMap } from "./utilities";
 import { MarkupLabelType, TokenType, Token } from "./tokenizer";

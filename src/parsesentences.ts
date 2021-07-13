@@ -1,3 +1,12 @@
+/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+ *
+ * File name: parsesentences.ts
+ *
+ * Create sentence objects from serialized input.
+ *
+ * Version history:
+ *
+ **/
 import { strict as assert } from "assert";
 // import { AcronymMap } from "./utilities";
 import { Token, Tokenizer, TokenListType } from "./tokenizer";

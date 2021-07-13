@@ -2,10 +2,11 @@ import * as path from "path";
 import * as fs from "fs";
 
 const AppInfo = require(path.resolve("./appinfo.json")); // should use module.paths and find-me.js
-import { Logger, MyDate, UserContext } from "./utilities";
+import { MyDate } from "./utilities";
+import { Logger } from "./logger";
 import { TokenListType, Tokenizer } from "./tokenizer";
 import { SentenceNode } from "./parsesentences";
-import { ParseNodeSerializeFormatEnumType } from "./baseClasses";
+import { ParseNodeSerializeFormatEnumType, UserContext } from "./baseClasses";
 //import { dataAdapter } from "./dataadapter";
 ///import  { PageContent } from 'parser.js';
 //import  { SectionContent } from 'parser.js';

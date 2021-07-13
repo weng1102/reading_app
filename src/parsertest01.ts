@@ -1,7 +1,7 @@
 import * as path from "path";
 //import * as fs from "fs";
 import { ParseNodeSerializeFormatEnumType } from "./baseClasses";
-import { Logger, UserContext } from "./utilities";
+import { Logger } from "./logger";
 import { FileParseNode } from "./parsefiles";
 import { PageParseNode } from "./parsepages";
 PageParseNode;

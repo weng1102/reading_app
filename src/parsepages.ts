@@ -1,3 +1,12 @@
+/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+ *
+ * File name: parsepages.ts
+ *
+ * Create page object from serialized input
+
+ * Version history:
+ *
+ **/
 import { strict as assert } from "assert";
 import { TaggedStringType } from "./dataadapter";
 import { IPageContent, PageFormatEnumType } from "./pageContentType";

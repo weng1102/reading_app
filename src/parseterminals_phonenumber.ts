@@ -1,9 +1,12 @@
-/**
- * terminals.ts
+/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
  *
- * Definitions of terminal node classes
+ * File name: parsesections_phonenumvwe.ts
  *
- */
+ * Create terminal phone number objects from serialized input.
+ *
+ * Version history:
+ *
+ **/
 import { strict as assert } from "assert";
 import {
   // BaseClass,

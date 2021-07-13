@@ -1,12 +1,13 @@
-/**
- * Defines following interface and abstract classes to support object parse tree
+/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
  *
- * IContent, Content
- * IPageContent, AbstractPageContent
- * ISectionContent,
- * ISentenceContent,
- * ITerminalContent,
- */
+ * File name: baseclasses.ts
+ *
+ * Defines base classes, abstract classes and (enum) constants,
+ * interface and abstract classes to support object parse tree
+ *
+ * Version history:
+ *
+ **/
 import DictionaryType, {
   PronunciationDictionary
   // RecognitionDictionary
@@ -36,7 +37,7 @@ import {
   Logger
   // MonthFromAbbreviationMap,
   // OrdinalNumberMap
-} from "./utilities";
+} from "./logger";
 import {
   IDataSource,
   //  MarkdownSectionTagType,
@@ -46,35 +47,14 @@ import {
 } from "./dataadapter";
 
 //const SectionNodeMap = new Map([MarkdownParsedTagType
-const enum TerminalNodeEnumType {
-  WORD = 0,
-  NUMBER,
-  PUNCTUATION,
-  MLTAG,
-  MLTAG_END,
-  MLTAG_SELFCLOSING,
-  WHITESPACE
-}
-// const TerminalNodeEnumMap = new Map([
-//   [TerminalNodeEnumType.WORD, "WORD"],
-//   [TerminalNodeEnumType.NUMBER, "NUMBER"],
-//   [TerminalNodeEnumType.PUNCTUATION, "PUNCTUATION"],
-//   [TerminalNodeEnumType.MLTAG, "MLTAG"],
-//   [TerminalNodeEnumType.MLTAG_END, "MLTAG_END"],
-//   [TerminalNodeEnumType.MLTAG_SELFCLOSING, "MLTAG_SELFCLOSING"],
-//   [TerminalNodeEnumType.WHITESPACE, "WHITESPACE"]
-// ]);
-// const enum MarkupNodeEnumType { //MarkupLabelType
-//   EMAILADDRESS = "<emailaddress>",
-//   PHONENUMBER = "<phonenumber>",
-//   TIME = "<time>",
-//   DATE1 = "<date1>",
-//   DATE2 = "<date2>",
-//   DATE3 = "<date3>",
-//   CONTRACTION = "<contraction>",
-//   NUMBER_WITHCOMMAS = "<number_withcommas>",
-//   TOKEN = "<token>",
-//   USD = "usd"
+// const enum TerminalNodeEnumType {
+//   WORD = 0,
+//   NUMBER,
+//   PUNCTUATION,
+//   MLTAG,
+//   MLTAG_END,
+//   MLTAG_SELFCLOSING,
+//   WHITESPACE
 // }
 export abstract class BaseClass {
   logger: Logger;

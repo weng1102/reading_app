@@ -1,9 +1,14 @@
-/**
- * terminals.ts
+/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
  *
- * Definitions of terminal node classes
+ * File name: parseterminals.ts
  *
- */
+ * Create various terminal objects from serialized input. As
+ * each type of object becomes implemented, separate parseterminals_*
+ * files are created to keep the file size manageable.
+ *
+ * Version history:
+ *
+ **/
 import { strict as assert } from "assert";
 import {
   // BaseClass,

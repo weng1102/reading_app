@@ -1,4 +1,13 @@
-//import { strict as assert } from "assert";
+/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+ *
+ * File name: parsesectiondispatch.ts
+ *
+ * Map markdown type to section objects.
+ *
+ * Version history:
+ *
+ **/
+import { strict as assert } from "assert";
 import { MarkdownTagType } from "./dataadapter";
 //import { MarkdownTagType, MarkdownSectionTagType } from "./dataadapter";
 import { IPageNode } from "./parsepages";

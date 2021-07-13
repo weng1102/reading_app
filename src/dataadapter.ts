@@ -1,13 +1,25 @@
-/***
+/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+ *
+ * File name: dataadapter.ts
+ *
  * Read line-based modified markdown-format page content
- * PROPOSED ENHANCEMENT: detect type of datasource by files
+
+ * Proposed enhancement: detect type of datasource by file
  * extension e.g., .txt, .md, etc)
- */
-import * as path from "path";
+ *
+ * Version history:
+ *
+ **/
+//import * as path from "path";
 import * as fs from "fs";
-import { ParseNodeSerializeFormatEnumType } from "./baseClasses";
-const AppInfo = require(path.resolve("./appinfo.json")); // should use module.paths and find-me.js
-import { Logger, BaseClass, MyDate, UserContext } from "./utilities";
+import {
+  BaseClass,
+  //  UserContext,
+  ParseNodeSerializeFormatEnumType
+} from "./baseClasses";
+//const AppInfo = require(path.resolve("./appinfo.json")); // should use module.paths and find-me.js
+//import { MyDate } from "./utilities";
+//import { Logger } from "./logger";
 import { IPageContent } from "./PageContentType";
 // import * as rl from 'readline-sync';
 export const enum MarkdownTagType {
@@ -292,7 +304,7 @@ const MarkdownPatternDictionary: MarkdownPatternDictionaryType = {
 
 export interface IDataSource {
   connect(fileName: string): number;
-  disconnect();
+  disconnect(): void;
   parse(
     depth: number,
     buffer: string[],

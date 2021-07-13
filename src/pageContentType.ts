@@ -1,3 +1,12 @@
+/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+ *
+ * File name: PageContentType.ts
+ *
+ * Defines interface between markdown input and react front end
+ *
+ * Version history:
+ *
+ **/
 import { ITerminalNode } from "./parseterminals";
 import { ISectionNode } from "./parsesections";
 import { ISentenceNode } from "./parsesentences";

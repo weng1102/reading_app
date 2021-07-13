@@ -1,6 +1,16 @@
+/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+ *
+ * File name: parsesections.ts
+ *
+ * Create various section objects from serialized input. As
+ * each type of object becomes implemented, separate parsesections_*
+ * files are created to keep the file size manageable.
+
+ * Version history:
+ *
+ **/
 import { strict as assert } from "assert";
 import {
-  BaseClass,
   IParseNode,
   ParseNode,
   ParseNodeSerializeFormatEnumType
@@ -15,39 +25,39 @@ import {
   //MarkdownEndTagType
 } from "./dataadapter";
 import {
-  IPageContent,
+  //  IPageContent,
   ISectionContent,
-  ISectionBlockquoteVariant,
-  ISectionBlockquoteVariantInitializer,
+  // ISectionBlockquoteVariant,
+  // ISectionBlockquoteVariantInitializer,
   ISectionEmptyVariant,
   ISectionEmptyVariantInitializer,
   ISectionFillinVariant,
   ISectionFillinVariantInitializer,
-  ISectionHeadingVariant,
-  ISectionHeadingVariantInitializer,
-  ISectionOrderedListVariant,
-  ISectionOrderedListVariantInitializer,
-  ISectionUnorderedListVariant,
-  ISectionUnorderedListVariantInitializer,
-  ISectionParagraphVariant,
-  ISectionParagraphVariantInitializer,
-  ISentenceContent,
-  ITerminalContent,
-  TerminalMetaType,
-  TerminalMetaEnumType,
-  OrderedListTypeEnumType,
-  PageFormatEnumType,
+  // ISectionHeadingVariant,
+  // ISectionHeadingVariantInitializer,
+  // ISectionOrderedListVariant,
+  // ISectionOrderedListVariantInitializer,
+  // ISectionUnorderedListVariant,
+  // ISectionUnorderedListVariantInitializer,
+  // ISectionParagraphVariant,
+  // ISectionParagraphVariantInitializer,
+  // ISentenceContent,
+  // ITerminalContent,
+  // TerminalMetaType,
+  // TerminalMetaEnumType,
+  // OrderedListTypeEnumType,
+  // PageFormatEnumType,
   SectionVariantEnumType,
   SectionVariantType,
-  UnorderedListMarkerEnumType,
+  // UnorderedListMarkerEnumType,
   ISectionTbdVariant,
-  ISectionTbdVariantInitializer,
-  IWordTerminalMeta,
-  IWordTerminalMetaInitializer
+  ISectionTbdVariantInitializer
+  // IWordTerminalMeta,
+  // IWordTerminalMetaInitializer
 } from "./pageContentType";
 import { IPageNode } from "./parsepages";
-import { ISentenceNode, SentenceNode } from "./parsesentences";
-import { SectionParseNode_PARAGRAPH } from "./parsesections_paragraph";
+// import { ISentenceNode, SentenceNode } from "./parsesentences";
+// import { SectionParseNode_PARAGRAPH } from "./parsesections_paragraph";
 // type SectionNodeMarkdownClassType =
 //   | typeof SectionParseNode_BLOCKQUOTE
 //   | typeof SectionParseNode_HEADING
