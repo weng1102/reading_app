@@ -49,13 +49,13 @@ export interface ISectionContent {
   firstTermIdx: number;
   items: ISectionNode[];
   //  sentences: ISentenceContent[];
-  //  type: SectionVariantEnumType; // included in meta making initializer simplier
+  type: SectionVariantEnumType; // included in meta making initializer simplier
   meta: SectionVariantType;
 }
 export type SectionVariantType =
   | ISectionEmptyVariant
   | ISectionHeadingVariant
-  | ISectionItemListVariant
+  | ISectionListitemVariant
   | ISectionUnorderedListVariant
   | ISectionOrderedListVariant
   | ISectionParagraphVariant
@@ -67,7 +67,7 @@ export type SectionVariantType =
 export enum SectionVariantEnumType {
   heading = "heading",
   subsection = "subsection",
-  itemlist = "itemlist",
+  listitem = "listitem",
   unordered_list = "unordered_list",
   ordered_list = "ordered_list",
   paragraph = "paragraph",
@@ -145,12 +145,12 @@ export function ISectionEmptyVariantInitializer() {
     count: 0
   };
 }
-export interface ISectionItemListVariant {
+export interface ISectionListitemVariant {
   depth: number;
   startNumber: number;
   listType: ListTypeEnumType;
 }
-export function ISectionItemListVariantInitializer(): ISectionItemListVariant {
+export function ISectionListitemVariantInitializer(): ISectionListitemVariant {
   return {
     depth: 0,
     startNumber: 0,

@@ -53,7 +53,7 @@ import {
   // IWordTerminalMetaInitializer
 } from "./pageContentType";
 import { IPageNode } from "./parsepages";
-import { SectionParseNode, ISectionNode } from "./parsesections";
+import { ISectionNode } from "./parsesections";
 import { SectionParseNode_LIST } from "./parsesections";
 import { ISentenceNode, SentenceNode } from "./parsesentences";
 export class SectionParseNode_PARAGRAPH extends SectionParseNode_LIST
@@ -86,16 +86,19 @@ export class SectionParseNode_PARAGRAPH extends SectionParseNode_LIST
           `encountered ${current.tagType} expected ${MarkdownTagType.SENTENCE} at line ${current.lineNo}`
         );
         let sentence: ISentenceNode = new SentenceNode(this);
-        sentence.parse();
         this.meta.sentences.push(sentence);
+        sentence.parse();
+        current = this.dataSource.currentRecord(); // update current within this scope
       }
       assert(
         current.tagType === MarkdownTagType.PARAGRAPH_END,
         `expected ${MarkdownTagType.PARAGRAPH_END} to ${MarkdownTagType.PARAGRAPH}`
       );
-      current = this.dataSource.nextRecord(); // move to next grouping
+      if (current.tagType === MarkdownTagType.PARAGRAPH_END)
+        this.dataSource.nextRecord(); // move to next grouping
     } catch (e) {
       this.logger.error(e.message);
+      this.dataSource.nextRecord(); // move to next grouping
       // forward record to next SECTION_END
     }
     return 0;
@@ -103,57 +106,45 @@ export class SectionParseNode_PARAGRAPH extends SectionParseNode_LIST
   serialize(
     format?: ParseNodeSerializeFormatEnumType,
     label?: string,
-    prefix?: string,
-    colWidth0?: number,
-    colWidth1?: number,
-    colWidth2?: number,
-    colWidth3?: number,
-    colWidth4?: number
+    prefix?: string
   ): string {
-    label = "paragraph";
-    // return super.serialize(
-    //   format,
-    //   label,
-    //   prefix,
-    //   colWidth0,
-    //   colWidth1,
-    //   colWidth2,
-    //   colWidth3,
-    //   colWidth4
-    // );
     let outputStr: string = "";
     switch (format) {
-      case ParseNodeSerializeFormatEnumType.JSON: {
-        outputStr = JSON.stringify(this);
+      case ParseNodeSerializeFormatEnumType.TREEVIEW: {
+        outputStr = `${super.serialize(format, label, prefix)}`;
+        for (let sentence of this.meta.sentences) {
+          outputStr = `${outputStr}${sentence.serialize(
+            format,
+            label,
+            //            prefix + " ".padEnd(2)
+            prefix + "| "
+          )}`;
+        }
+        //        outputStr = outputStr.slice(0, -1);
         break;
       }
       case ParseNodeSerializeFormatEnumType.TABULAR: {
-        if (label === undefined) label = "";
-        if (prefix === undefined) prefix = "+-";
-        if (colWidth0 === undefined) colWidth0 = 2;
-        if (colWidth1 === undefined) colWidth1 = 15;
-        if (colWidth2 === undefined) colWidth2 = 12;
-        if (colWidth3 === undefined) colWidth3 = 25;
-        if (colWidth4 === undefined) colWidth4 = 50;
-        outputStr = `${prefix}${label}:\n`;
+        // prefix =
+        //   prefix === undefined
+        //     ? ""
+        //     : " ".padEnd(colWidth0 !== undefined ? colWidth0 : 2) + prefix;
+        //        label = "paragraph";
+        outputStr = super.serialize(format, label, prefix) + "\n";
+        //        if (colWidth0 === undefined) colWidth0 = 2;
         for (let sentence of this.meta.sentences) {
           outputStr =
             outputStr +
-            `${sentence.serialize(
-              ParseNodeSerializeFormatEnumType.TABULAR,
-              label,
-              " ".padEnd(colWidth0) + prefix,
-              colWidth0,
-              colWidth1,
-              colWidth2,
-              colWidth3,
-              colWidth4
-            )}\n`;
+            `${sentence.serialize(format, label, " ".padEnd(2) + prefix)}\n`;
         }
         outputStr = outputStr.slice(0, -1);
         break;
       }
       case ParseNodeSerializeFormatEnumType.UNITTEST: {
+        break;
+      }
+      case ParseNodeSerializeFormatEnumType.JSON:
+      default: {
+        outputStr = JSON.stringify(this);
         break;
       }
     }

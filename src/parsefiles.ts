@@ -1,4 +1,4 @@
-// Goal: parser cretaes a parse tree for page object that has 1 or more section
+// Goal: parser creates a parse tree for page object that has 1 or more section
 // objects that each have 0 or more sentence objects that each can have one or
 // more terminal objects. After completely parsing content, The parse tree can
 // be serialized into json/ts based on PageContentType and its subtypes. The
@@ -9,80 +9,80 @@
 // TerminalNode = terminalNode = leafNode
 import { strict as assert } from "assert";
 import {
-  endMarkupTag,
-  isValidMarkupTag,
-  Tokenizer,
-  TokenType,
-  TokenLabelType,
-  TokenListType,
-  TokenLiteral,
-  Token,
-  MarkupLabelType
+  // endMarkupTag,
+  // isValidMarkupTag,
+  // Tokenizer,
+  // TokenType,
+  // TokenLabelType,
+  TokenListType
+  // TokenLiteral,
+  // Token,
+  // MarkupLabelType
 } from "./tokenizer";
 //import { MarkdownType, MarkdownTagType } from "./dataadapter";
 import {
   IPageContent,
   ISectionContent,
-  ISectionBlockquoteVariant,
-  ISectionBlockquoteVariantInitializer,
-  ISectionFillinVariant,
-  ISectionFillinVariantInitializer,
-  ISectionHeadingVariant,
-  ISectionHeadingVariantInitializer,
-  ISectionOrderedListVariant,
-  ISectionOrderedListVariantInitializer,
-  ISectionUnorderedListVariant,
-  ISectionUnorderedListVariantInitializer,
-  ISectionParagraphVariant,
-  ISectionParagraphVariantInitializer,
-  ISentenceContent,
-  ITerminalContent,
-  TerminalMetaType,
-  TerminalMetaEnumType,
-  IWordTerminalMeta,
-  IWordTerminalMetaInitializer,
-  OrderedListTypeEnumType,
-  PageFormatEnumType,
-  SectionVariantEnumType,
-  SectionVariantType,
-  UnorderedListMarkerEnumType
+  // ISectionBlockquoteVariant,
+  // ISectionBlockquoteVariantInitializer,
+  // ISectionFillinVariant,
+  // ISectionFillinVariantInitializer,
+  // ISectionHeadingVariant,
+  // ISectionHeadingVariantInitializer,
+  // ISectionOrderedListVariant,
+  // ISectionOrderedListVariantInitializer,
+  // ISectionUnorderedListVariant,
+  // ISectionUnorderedListVariantInitializer,
+  // ISectionParagraphVariant,
+  // ISectionParagraphVariantInitializer,
+  // ISentenceContent,
+  // ITerminalContent,
+  // TerminalMetaType,
+  // TerminalMetaEnumType,
+  // IWordTerminalMeta,
+  // IWordTerminalMetaInitializer,
+  // OrderedListTypeEnumType,
+  PageFormatEnumType
+  // SectionVariantEnumType,
+  // SectionVariantType,
+  // UnorderedListMarkerEnumType
 } from "./pageContentType";
-import DictionaryType, {
-  PronunciationDictionary,
-  RecognitionDictionary
-} from "./dictionary";
+// import DictionaryType, {
+//   PronunciationDictionary,
+//   RecognitionDictionary
+// } from "./dictionary";
+// import { Logger } from "./logger";
+// import {
+//   AcronymMap,
+//   //  BaseClass,
+//   CardinalNumberMap,
+//   MonthFromAbbreviationMap,
+//   OrdinalNumberMap
+// } from "./utilities";
 import {
-  AcronymMap,
-  //  BaseClass,
-  CardinalNumberMap,
-  Logger,
-  MonthFromAbbreviationMap,
-  OrdinalNumberMap,
-  UserContext
-} from "./utilities";
-import {
-  IDataSource,
+  // IDataSource,
   //  MarkdownSectionTagType,
-  BasicMarkdownSource,
-  RawMarkdownSource,
+  // BasicMarkdownSource,
+  // RawMarkdownSource,
   TaggedStringType
 } from "./dataadapter";
 import {
-  BaseClass,
+  //  BaseClass,
   ParseNode,
   ParseNodeSerializeFormatEnumType
+  //  UserContext
 } from "./baseClasses";
 // import { TerminalNode_MLTAG_EMAILADDRESS } from "./parseterminals_emailaddress";
 // import { TerminalNode_MLTAG_PHONENUMBER } from "./parseterminals_phonenumber";
 //   import {
 //   TerminalNode_MLTAG_TIME
 // } from "./parseterminals_time";
-import { ISentenceNode, SentenceNode } from "./parsesentences";
-import {
-  TerminalNode_MLTAG_DATE1,
-  TerminalNode_MLTAG_DATE2,
-  TerminalNode_MLTAG_DATE3
-} from "./parseterminals_dates";
+//import { ISentenceNode, SentenceNode } from "./parsesentences";
+// import {
+//   TerminalNode_MLTAG_DATE1,
+//   TerminalNode_MLTAG_DATE2,
+//   TerminalNode_MLTAG_DATE3
+// } from "./parseterminals_dates";
 // import { UserNode } from "./baseClasses"
 //const SectionNodeMap = new Map([MarkdownParsedTagType
 // const enum TerminalNodeEnumType {
@@ -244,7 +244,7 @@ export class PageParseNode extends ParseNode implements IPageContent {
     super(parent);
   }
   parse() {
-    let current: TaggedStringType;
+    //    let current: TaggedStringType;
     try {
       assert(this.parent !== undefined, `parent is undefined`);
       assert(this.dataSource !== undefined, `dataSource is undefined`);

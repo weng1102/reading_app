@@ -107,24 +107,10 @@ export class SectionParseNode_BLOCKQUOTE extends SectionParseNode_LIST
   serialize(
     format?: ParseNodeSerializeFormatEnumType,
     label?: string,
-    prefix?: string,
-    colWidth0?: number,
-    colWidth1?: number,
-    colWidth2?: number,
-    colWidth3?: number,
-    colWidth4?: number
+    prefix?: string
   ): string {
     label = "blockquote";
-    return super.serialize(
-      format,
-      label,
-      prefix,
-      colWidth0,
-      colWidth1,
-      colWidth2,
-      colWidth3,
-      colWidth4
-    );
+    return super.serialize(format, label, prefix);
   }
   transform() {
     return 0;

@@ -114,8 +114,14 @@ export abstract class SectionParseNode extends ParseNode
   constructor(parent: IPageNode | ISectionNode) {
     super(parent);
   }
-  // should use abstract to force implmenetation in derived classes
   parse() {
+    // default section parsing
+    let current: TaggedStringType;
+    current = this.dataSource.currentRecord();
+    this.logger.diagnostic(
+      `parsing ${current.content} of type ${current.tagType} at ${current.lineNo}`
+    );
+    this.dataSource.nextRecord();
     return 0;
   }
   transform() {
@@ -124,47 +130,56 @@ export abstract class SectionParseNode extends ParseNode
   serialize(
     format?: ParseNodeSerializeFormatEnumType,
     label?: string,
-    prefix?: string,
-    colWidth0?: number,
-    colWidth1?: number,
-    colWidth2?: number,
-    colWidth3?: number,
-    colWidth4?: number
+    prefix?: string
   ): string {
     let outputStr: string = "";
+    label =
+      label === undefined
+        ? `${this.type} w/ ${this.items.length} subsections`
+        : label;
+    outputStr = super.serialize(format, label, prefix);
     switch (format) {
-      case ParseNodeSerializeFormatEnumType.JSON: {
-        outputStr = JSON.stringify(this);
+      case ParseNodeSerializeFormatEnumType.TREEVIEW: {
+        prefix = this.items.length > 0 ? prefix + "| " : "  ";
+
+        // for (let subsectionNode of this.items) {
+        //   outputStr = `${outputStr}${subsectionNode.serialize(
+        //     format,
+        //     undefined,
+        //     //            prefix + " ".padEnd(2)
+        //     prefix
+        //   )}`;
+        // }
+        for (const [i, value] of this.items.entries()) {
+          console.log(i);
+          outputStr = `${outputStr}${value.serialize(
+            format,
+            undefined,
+            prefix
+            //            i < this.items.length - 1 ? prefix + "|," : "  "
+          )}`;
+        }
+
+        //      outputStr = outputStr.slice(0, -1);
         break;
       }
       case ParseNodeSerializeFormatEnumType.TABULAR: {
-        if (label === undefined) label = "section";
-        if (prefix === undefined) prefix = "+-";
-        if (colWidth0 === undefined) colWidth0 = 2;
-        if (colWidth1 === undefined) colWidth1 = 15;
-        if (colWidth2 === undefined) colWidth2 = 12;
-        if (colWidth3 === undefined) colWidth3 = 25;
-        if (colWidth4 === undefined) colWidth4 = 50;
-        outputStr = `${prefix}${label}[${this.id}]: name:${this.name} type:${this.type}\n`;
-        if (prefix === undefined) prefix = "+-";
         for (let subsectionNode of this.items) {
+          label === undefined
+            ? `subsection: ${subsectionNode.type} ${subsectionNode.name}`
+            : label;
           outputStr =
             outputStr +
             `${subsectionNode.serialize(
-              ParseNodeSerializeFormatEnumType.TABULAR,
+              format,
               label,
-              " ".padEnd(prefix.length) + prefix,
-              colWidth0,
-              colWidth1,
-              colWidth2,
-              colWidth3,
-              colWidth4
-            )}\n`;
+              prefix + " ".padEnd(2)
+            )}`;
         }
-        outputStr = outputStr.slice(0, -1);
         break;
       }
-      case ParseNodeSerializeFormatEnumType.UNITTEST: {
+      default: {
+        outputStr = super.serialize(format);
         break;
       }
     }
@@ -220,9 +235,9 @@ export class SectionParseNode_EMPTY extends SectionParseNode_LIST
       ) {
         this.meta.count++;
       }
-      if (!this.dataSource.EOF()) {
-        this.dataSource.previousRecord();
-      }
+      // // if (!this.dataSource.EOF()) {
+      // //   this.dataSource.previousRecord();
+      // }
     } catch (e) {
       this.logger.error(e.message);
       if (this.logger.verboseMode) console.log(e.stack);
@@ -233,34 +248,28 @@ export class SectionParseNode_EMPTY extends SectionParseNode_LIST
   serialize(
     format?: ParseNodeSerializeFormatEnumType,
     label?: string,
-    prefix?: string,
-    colWidth0?: number,
-    colWidth1?: number,
-    colWidth2?: number,
-    colWidth3?: number,
-    colWidth4?: number
+    prefix?: string
   ): string {
     let outputStr: string = "";
+    label = `empty: ${this.meta.count} occurence${
+      this.meta.count === 1 ? "" : "s"
+    }`;
     switch (format) {
-      case ParseNodeSerializeFormatEnumType.JSON: {
-        outputStr = JSON.stringify(this);
+      case ParseNodeSerializeFormatEnumType.TREEVIEW: {
+        outputStr = super.serialize(format, label, prefix);
         break;
       }
       case ParseNodeSerializeFormatEnumType.TABULAR: {
-        if (label === undefined) label = "";
-        label = "empty";
-        if (prefix === undefined) prefix = "+-";
-        if (colWidth0 === undefined) colWidth0 = 2;
-        if (colWidth1 === undefined) colWidth1 = 15;
-        if (colWidth2 === undefined) colWidth2 = 12;
-        if (colWidth3 === undefined) colWidth3 = 25;
-        if (colWidth4 === undefined) colWidth4 = 50;
-        outputStr = `${prefix}${label}: ${this.meta.count} occurence${
-          this.meta.count === 1 ? "" : "s"
-        }`;
+        outputStr = super.serialize(format, label, prefix);
+        //        outputStr = outputStr.slice(0, -1);
         break;
       }
       case ParseNodeSerializeFormatEnumType.UNITTEST: {
+        break;
+      }
+      case ParseNodeSerializeFormatEnumType.JSON:
+      default: {
+        outputStr = JSON.stringify(this);
         break;
       }
     }

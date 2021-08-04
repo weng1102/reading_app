@@ -1,21 +1,25 @@
+import * as fs from "fs";
 import * as path from "path";
 //import * as fs from "fs";
 import { ParseNodeSerializeFormatEnumType } from "./baseClasses";
 import { Logger } from "./logger";
-import { FileParseNode } from "./parsefiles";
+//import { FileParseNode } from "./parsefiles";
 import { PageParseNode } from "./parsepages";
 PageParseNode;
 
 //const zeroPad = (num, places) => String(num).padStart(places, "0");
 
-let fileNode: FileParseNode;
+//let fileNode: FileParseNode;
 //let pageNode: PageParseNode;
 let linesParsed: number;
 let inputMdFile: string;
 inputMdFile = "curriculum/test1.md";
 //inputMdFile = "curriculum/blockquote.md";
 //inputMdFile = "curriculum/paraheading.md";
-//inputMdFile = "curriculum/lists.md";
+inputMdFile = "curriculum/lists.md";
+inputMdFile = "curriculum/shortlists.md";
+//inputMdFile = "curriculum/terminals.md";
+//inputMdFile = "curriculum/terminals_date3.md";
 let logger = new Logger(this);
 ///let pageNode = new PageContent(this);
 //let timestamp: string = new MyDate().yyyymmddhhmmss();
@@ -58,14 +62,8 @@ linesParsed = pageNode.dataSource.connect(inputMdFile);
 pageNode.dataSource.serialize();
 pageNode.parse();
 console.log(
-  pageNode.dataSource.serialize(
-    ParseNodeSerializeFormatEnumType.TABULAR,
-    "",
-    5,
-    35
-  )
+  pageNode.dataSource.serialize(ParseNodeSerializeFormatEnumType.TABULAR, "")
 );
-
 // fileNode = new FileParseNode(this);
 // linesParsed = fileNode.connect(inputMdFile);
 // fileNode.parse();
@@ -88,4 +86,10 @@ logger.info(
   false,
   false
 );
-console.log(pageNode.serialize(ParseNodeSerializeFormatEnumType.TABULAR));
+console.log(
+  pageNode.serialize(ParseNodeSerializeFormatEnumType.TREEVIEW, "page", "")
+);
+fs.writeFileSync(
+  "./src/parsetest.json",
+  pageNode.serialize(ParseNodeSerializeFormatEnumType.JSON)
+);

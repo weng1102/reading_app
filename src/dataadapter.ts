@@ -192,12 +192,8 @@ const PARAGRAPH_TO_SENTENCES1: RegExp = /([\.\?!][\'\"\u2018\u2019\u201c\u201d\)
 // premature termination based on that same pattern
 
 //const PARAGRAPH_TO_SENTENCES2: RegExp = /(?<!\w\.\w.)(?<![A-Z][a-z][a-z]\.)([\.\?!][\"\u2018\u2019\u201c\u201d\)\]]*\s*(?<![A-Z][a-z]\.)(?<![A-Z]\.)\s+)/;
-const PARAGRAPH_PATTERN: RegExp = /^(["']?[A-Za-z\$\@]{1}.*)$/m;
+const PARAGRAPH_PATTERN: RegExp = /^([ "'\(]?[A-Za-z0-9\$\@]{1}.*)$/m;
 const MarkdownPatternDictionary: MarkdownPatternDictionaryType = {
-  [MarkdownType.PARAGRAPH]: {
-    pattern: PARAGRAPH_PATTERN,
-    tagType: MarkdownTagType.PARAGRAPH
-  },
   [MarkdownType.HEADING01]: {
     pattern: /^#\s([^\s].*)$/,
     tagType: MarkdownTagType.HEADING
@@ -258,6 +254,10 @@ const MarkdownPatternDictionary: MarkdownPatternDictionaryType = {
   [MarkdownType.LISTITEM_ORDERED04]: {
     pattern: /^\s{6}[0-9]+\.\s([^\s].*)$/,
     tagType: MarkdownTagType.LISTITEM_ORDERED
+  },
+  [MarkdownType.PARAGRAPH]: {
+    pattern: PARAGRAPH_PATTERN,
+    tagType: MarkdownTagType.PARAGRAPH
   },
   [MarkdownType.COMMENT1]: {
     pattern: /^\[\/\/\]:\s(.*)$/,
@@ -533,7 +533,7 @@ export class BasicMarkdownSource extends RawMarkdownSource
       for (
         let sentenceIdx = 0;
         sentenceIdx <= sentences.length - 1;
-        sentenceIdx = sentenceIdx + 2
+        sentenceIdx = sentenceIdx + 1
       ) {
         resultBuffer.push({
           content:
@@ -592,13 +592,17 @@ export class BasicMarkdownSource extends RawMarkdownSource
     currentInputIdx: number,
     resultBuffer: TaggedStringType[]
   ): number {
-    let idx: number = inputBuffer.length - 1;
-    if (currentInputIdx > inputBuffer.length - 1) {
-      return idx; // EOF
+    if (currentInputIdx > inputBuffer.length) {
+      return inputBuffer.length; // EOF
     }
-    for (idx = currentInputIdx; idx < inputBuffer.length - 1; idx++) {
+    let idx: number = 0;
+    for (idx = currentInputIdx; idx < inputBuffer.length; idx++) {
       let current: TaggedStringType = this.lookup(inputBuffer[idx]);
+      this.logger.diagnosticMode = true;
       current.lineNo = idx + 1;
+      this.logger.diagnostic(
+        `markdown looking up: "${inputBuffer[idx]}" as ${current.tagType} at line ${current.lineNo}`
+      );
       if (current.depth < depth) {
         // just pop call stack and allow completion of (current.depth > depth)
         //  condition handle it (recursively)

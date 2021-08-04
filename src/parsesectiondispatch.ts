@@ -7,7 +7,6 @@
  * Version history:
  *
  **/
-import { strict as assert } from "assert";
 import { MarkdownTagType } from "./dataadapter";
 //import { MarkdownTagType, MarkdownSectionTagType } from "./dataadapter";
 import { IPageNode } from "./parsepages";
@@ -21,9 +20,11 @@ import {
 import { SectionParseNode_PARAGRAPH } from "./parsesections_paragraph";
 import {
   //  SectionParseNode_LIST_ITEMS,
-  SectionParseNode_LIST_ITEMS_ORDERED,
-  SectionParseNode_LIST_ITEMS_UNORDERED
-} from "./parsesections_list_item";
+  SectionParseNode_SECTION_ORDERED,
+  SectionParseNode_SECTION_UNORDERED,
+  SectionParseNode_LISTITEM_ORDERED,
+  SectionParseNode_LISTITEM_UNORDERED
+} from "./parsesections_listitem";
 import { SectionParseNode_BLOCKQUOTE } from "./parsesections_blockquote";
 import { SectionParseNode_HEADING } from "./parsesections_heading";
 
@@ -53,7 +54,7 @@ export function GetSectionNode(
       //   `dispatch: ${tagType} ${tagType ===
       //     MarkdownTagType.SECTION_ORDERED}`
       // );
-      sectionNode = new SectionParseNode_LIST_ITEMS_ORDERED(parent);
+      sectionNode = new SectionParseNode_SECTION_ORDERED(parent);
       break;
     }
     case MarkdownTagType.SECTION_UNORDERED: {
@@ -61,7 +62,23 @@ export function GetSectionNode(
       //   `dispatch: ${tagType} ${tagType ===
       //     MarkdownTagType.SECTION_UNORDERED}`
       // );
-      sectionNode = new SectionParseNode_LIST_ITEMS_UNORDERED(parent);
+      sectionNode = new SectionParseNode_SECTION_UNORDERED(parent);
+      break;
+    }
+    case MarkdownTagType.LISTITEM_ORDERED: {
+      // console.log(
+      //   `dispatch: ${tagType} ${tagType ===
+      //     MarkdownTagType.SECTION_ORDERED}`
+      // );
+      sectionNode = new SectionParseNode_LISTITEM_ORDERED(parent);
+      break;
+    }
+    case MarkdownTagType.LISTITEM_UNORDERED: {
+      // console.log(
+      //   `dispatch: ${tagType} ${tagType ===
+      //     MarkdownTagType.SECTION_UNORDERED}`
+      // );
+      sectionNode = new SectionParseNode_LISTITEM_UNORDERED(parent);
       break;
     }
     case MarkdownTagType.FILLIN: {

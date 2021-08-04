@@ -389,17 +389,14 @@ for (let secIdx = 0; secIdx < ut_sentences01.sections.length; secIdx++) {
       logger.diagnostic("expected: " + expected);
       logger.diagnostic(
         `${sentenceNode.serialize(
-          ParseNodeSerializeFormatEnumType.TABULAR,
+          ParseNodeSerializeFormatEnumType.TREEVIEW,
           "+-"
         )}`
       );
       logger.diagnosticMode = false;
     }
     console.log(
-      `${sentenceNode.serialize(
-        ParseNodeSerializeFormatEnumType.TABULAR,
-        "+-"
-      )}`
+      `${sentenceNode.serialize(ParseNodeSerializeFormatEnumType.TREEVIEW, "")}`
     );
 
     //utoutput

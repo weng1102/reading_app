@@ -12,7 +12,9 @@ import {
   // BaseClass,
   // IParseNode,
   // ParseNode,
-  ParseNodeSerializeFormatEnumType
+  ParseNodeSerializeFormatEnumType,
+  ParseNodeSerializeColumnWidths,
+  ParseNodeSerializeColumnPad
 } from "./baseclasses";
 import {
   // endMarkupTag,
@@ -70,6 +72,7 @@ import {
   ITerminalInfoInitializer
   // IYearTerminalMeta
 } from "./pageContentType";
+import { ISentenceNode } from "./parsesentences";
 import {
   ITerminalNode,
   // ITerminalParseNode,
@@ -101,7 +104,7 @@ import {
 // } from "./dataadapter";
 export class TerminalNode_MLTAG_PHONENUMBER extends TerminalNode_MLTAG_
   implements ITerminalNode {
-  constructor(parent) {
+  constructor(parent: ISentenceNode) {
     super(parent);
     Object.defineProperty(this, "userContext", { enumerable: false });
   }
@@ -193,12 +196,7 @@ export class TerminalNode_MLTAG_PHONENUMBER extends TerminalNode_MLTAG_
   serialize(
     format?: ParseNodeSerializeFormatEnumType,
     label?: string,
-    prefix?: string,
-    colWidth0?: number,
-    colWidth1?: number,
-    colWidth2?: number,
-    colWidth3?: number,
-    colWidth4?: number
+    prefix?: string
   ): string {
     /// serialize only the non-meta fields. Subclasses Should
     /// call this via super.serialize(...).
@@ -206,42 +204,61 @@ export class TerminalNode_MLTAG_PHONENUMBER extends TerminalNode_MLTAG_
     //  this.logger.diagnostic(`AbstractTerminalNode: ${this.content}`);
     //    let outputStr1: string = "";
     switch (format) {
+      case ParseNodeSerializeFormatEnumType.TREEVIEW: {
+        if (prefix === undefined) prefix = "";
+        outputStr = super.serialize(format, this.content, prefix);
+        prefix = " ".padEnd(2) + prefix;
+        outputStr =
+          outputStr +
+          super.serialize(format, `{${this.meta.openBracket}}`, prefix) +
+          super.serialize(
+            format,
+            `{${this.meta.areaCode[0].content}${this.meta.areaCode[1].content}${this.meta.areaCode[2].content}}`,
+            prefix
+          ) +
+          super.serialize(format, `{${this.meta.closeBracket}}`, prefix) +
+          super.serialize(format, `{${this.meta.separator1}}`, prefix) +
+          super.serialize(
+            format,
+            `{${this.meta.exchangeCode[0].content}${this.meta.exchangeCode[1].content}${this.meta.exchangeCode[2].content}}`,
+            prefix
+          ) +
+          super.serialize(format, `{${this.meta.separator2}}`, prefix) +
+          super.serialize(
+            format,
+            `{${this.meta.lineNumber[0].content}${this.meta.lineNumber[1].content}${this.meta.lineNumber[2].content}${this.meta.lineNumber[3].content}}`,
+            prefix
+          );
+        break;
+      }
       case ParseNodeSerializeFormatEnumType.TABULAR: {
         if (label === undefined) label = "";
         if (prefix === undefined) prefix = "";
-        if (colWidth0 === undefined) colWidth0 = 2;
-        if (colWidth1 === undefined) colWidth1 = 15;
-        if (colWidth2 === undefined) colWidth2 = 12;
-        if (colWidth3 === undefined) colWidth3 = 25;
-        if (colWidth4 === undefined) colWidth4 = 50;
         outputStr =
-          " ".padEnd(colWidth0) +
-          `${prefix}{${this.content}}`.padEnd(colWidth1) +
-          `${this.constructor.name}`.padEnd(colWidth2);
-        colWidth0 += 2;
+          //          " ".padEnd(colWidth0) +
+          `${prefix}{${this.content}}`.padEnd(
+            ParseNodeSerializeColumnWidths[1]
+          ) +
+          `${this.constructor.name}`.padEnd(ParseNodeSerializeColumnWidths[2]);
+        //        colWidth0 += 2;
         outputStr =
           outputStr +
-          `\n${" ".padEnd(colWidth0)}${prefix}{${
-            this.meta.openBracket
-          }}\n${" ".padEnd(colWidth0)}${prefix}{${this.meta.areaCode[0]
-            .content +
+          `\n${" ".padEnd(2)}${prefix}{${this.meta.openBracket}}\n${" ".padEnd(
+            2
+          )}${prefix}{${this.meta.areaCode[0].content +
             this.meta.areaCode[1].content +
-            this.meta.areaCode[2].content}}\n${" ".padEnd(
-            colWidth0
-          )}${prefix}{${this.meta.closeBracket}}\n${" ".padEnd(
-            colWidth0
-          )}${prefix}{${this.meta.separator1}}\n${" ".padEnd(
-            colWidth0
+            this.meta.areaCode[2].content}}\n${" ".padEnd(2)}${prefix}{${
+            this.meta.closeBracket
+          }}\n${" ".padEnd(2)}${prefix}{${this.meta.separator1}}\n${" ".padEnd(
+            2
           )}${prefix}{${this.meta.exchangeCode[0].content +
             this.meta.exchangeCode[1].content +
-            this.meta.exchangeCode[2].content}}\n${" ".padEnd(
-            colWidth0
-          )}${prefix}{${this.meta.separator2}}\n${" ".padEnd(
-            colWidth0
-          )}${prefix}{${this.meta.lineNumber[0].content +
+            this.meta.exchangeCode[2].content}}\n${" ".padEnd(2)}${prefix}{${
+            this.meta.separator2
+          }}\n${" ".padEnd(2)}${prefix}{${this.meta.lineNumber[0].content +
             this.meta.lineNumber[1].content +
             this.meta.lineNumber[2].content +
-            this.meta.lineNumber[3].content}}`;
+            this.meta.lineNumber[3].content}}\n`;
         //      this.logger.diagnostic(`AbstractTerminalNode: outputStr=${outputStr}`);
         break;
       }

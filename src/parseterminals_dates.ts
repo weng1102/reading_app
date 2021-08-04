@@ -12,6 +12,7 @@ import {
   // BaseClass,
   // IParseNode,
   // ParseNode,
+  ParseNodeSerializeColumnPad,
   ParseNodeSerializeFormatEnumType
 } from "./baseclasses";
 import {
@@ -223,12 +224,7 @@ export class TerminalNode_MLTAG_DATE1 extends TerminalNode_MLTAG_DATE
   serialize(
     format?: ParseNodeSerializeFormatEnumType,
     label?: string,
-    prefix?: string,
-    colWidth0?: number,
-    colWidth1?: number,
-    colWidth2?: number,
-    colWidth3?: number,
-    colWidth4?: number
+    prefix?: string
   ): string {
     /// serialize only the non-meta fields. Subclasses Should
     /// call this via super.serialize(...).
@@ -236,35 +232,58 @@ export class TerminalNode_MLTAG_DATE1 extends TerminalNode_MLTAG_DATE
     //  this.logger.diagnostic(`AbstractTerminalNode: ${this.content}`);
     //    let outputStr1: string = "";
     switch (format) {
-      case ParseNodeSerializeFormatEnumType.TABULAR: {
-        if (label === undefined) label = "";
-        if (prefix === undefined) prefix = "";
-        if (colWidth0 === undefined) colWidth0 = 2;
-        if (colWidth1 === undefined) colWidth1 = 15;
-        if (colWidth2 === undefined) colWidth2 = 12;
-        if (colWidth3 === undefined) colWidth3 = 25;
-        if (colWidth4 === undefined) colWidth4 = 50;
-        outputStr =
-          " ".padEnd(colWidth0) +
-          `${prefix}{${this.content}}`.padEnd(colWidth1) +
-          `${this.constructor.name}`.padEnd(colWidth2);
-        colWidth0 += 2;
+      case ParseNodeSerializeFormatEnumType.TREEVIEW: {
+        outputStr = super.serialize(format, this.content, prefix);
+        prefix = " ".padEnd(2) + prefix;
         outputStr =
           outputStr +
-          `\n${" ".padEnd(colWidth0)}${prefix}{${
-            this.meta.day.content
-          }}\n${" ".padEnd(colWidth0)}${prefix}{${
-            this.meta.punctuation1.content
-          }}\n${" ".padEnd(colWidth0)}${prefix}{${
-            this.meta.whitespace1.content
-          }}\n${" ".padEnd(colWidth0)}${prefix}{${this.meta.month.content}  ${
+          super.serialize(format, `{${this.meta.day.content}}`, prefix) +
+          super.serialize(
+            format,
+            `{${this.meta.whitespace1.content}}`,
+            prefix
+          ) +
+          super.serialize(
+            format,
+            `{${this.meta.month.content}} ${this.meta.month.altpronunciation}`,
+            prefix
+          ) +
+          super.serialize(
+            format,
+            `{${this.meta.whitespace2.content}}`,
+            prefix
+          ) +
+          super.serialize(
+            format,
+            `{${this.meta.year.century.content}${this.meta.year.withinCentury.content}}`,
+            prefix
+          ); //      this.logger.diagnostic(`AbstractTerminalNode: outputStr=${outputStr}`);
+        break;
+      }
+      case ParseNodeSerializeFormatEnumType.TABULAR: {
+        if (label === undefined) label = "";
+        prefix = prefix === undefined ? "" : " ".padEnd(2) + prefix;
+        outputStr =
+          " ".padEnd(2) +
+          `${prefix}{${this.content}}`.padEnd(2) +
+          `${this.constructor.name}`.padEnd(2);
+        prefix = " ".padEnd(2) + prefix;
+        outputStr =
+          outputStr +
+          `\n${" ".padEnd(2)}${prefix}{${this.meta.day.content}}\n${" ".padEnd(
+            2
+          )}${prefix}{${this.meta.punctuation1.content}}\n${" ".padEnd(
+            2
+          )}${prefix}{${this.meta.whitespace1.content}}\n${" ".padEnd(
+            2
+          )}${prefix}{${this.meta.month.content}  ${
             this.meta.month.altpronunciation
           }
-          }\n${" ".padEnd(colWidth0)}${prefix}{${
+        }\n${" ".padEnd(2)}${prefix}{${
             this.meta.whitespace2.content
-          }}\n${" ".padEnd(colWidth0)}${prefix}{${
-            this.meta.year.century.content
-          }${this.meta.year.withinCentury.content}}`;
+          }}\n${" ".padEnd(2)}${prefix}{${this.meta.year.century.content}${
+            this.meta.year.withinCentury.content
+          }}\n`;
         //      this.logger.diagnostic(`AbstractTerminalNode: outputStr=${outputStr}`);
         break;
       }
@@ -401,31 +420,56 @@ export class TerminalNode_MLTAG_DATE2 extends TerminalNode_MLTAG_DATE
   serialize(
     format?: ParseNodeSerializeFormatEnumType,
     label?: string,
-    prefix?: string,
-    colWidth0?: number,
-    colWidth1?: number,
-    colWidth2?: number,
-    colWidth3?: number,
-    colWidth4?: number
+    prefix?: string
   ): string {
-    /// serialize only the non-meta fields. Subclasses Should
-    /// call this via super.serialize(...).
     let outputStr: string = "";
-    //  this.logger.diagnostic(`AbstractTerminalNode: ${this.content}`);
-    //    let outputStr1: string = "";
     switch (format) {
+      case ParseNodeSerializeFormatEnumType.TREEVIEW: {
+        outputStr = super.serialize(format, this.content, prefix);
+        prefix = " ".padEnd(2) + prefix;
+        outputStr =
+          outputStr +
+          super.serialize(
+            format,
+            `{${this.meta.month.content}} ${this.meta.month.altpronunciation}`,
+            prefix
+          ) +
+          super.serialize(
+            format,
+            `{${this.meta.punctuation1.content}}`,
+            prefix
+          ) +
+          super.serialize(
+            format,
+            `{${this.meta.whitespace1.content}}`,
+            prefix
+          ) +
+          super.serialize(format, `{${this.meta.day.content}}`, prefix) +
+          super.serialize(
+            format,
+            `{${this.meta.punctuation2.content}}`,
+            prefix
+          ) +
+          super.serialize(
+            format,
+            `{${this.meta.whitespace2.content}}`,
+            prefix
+          ) +
+          super.serialize(
+            format,
+            `{${this.meta.year.century.content}${this.meta.year.withinCentury.content}}`,
+            prefix
+          );
+        break;
+      }
       case ParseNodeSerializeFormatEnumType.TABULAR: {
         if (prefix === undefined) prefix = "";
         if (label === undefined) label = "";
-        if (colWidth0 === undefined) colWidth0 = 2;
-        if (colWidth1 === undefined) colWidth1 = 15;
-        if (colWidth2 === undefined) colWidth2 = 12;
-        if (colWidth3 === undefined) colWidth3 = 25;
-        if (colWidth4 === undefined) colWidth4 = 50;
+        let colWidth0 = 2;
         outputStr =
           " ".padEnd(colWidth0) +
-          `${prefix}{${this.content}}`.padEnd(colWidth1) +
-          `${this.constructor.name}`.padEnd(colWidth2);
+          `${prefix}{${this.content}}`.padEnd(2) +
+          `${this.constructor.name}`.padEnd(2);
         colWidth0 += 2;
         outputStr =
           outputStr +
@@ -443,7 +487,7 @@ export class TerminalNode_MLTAG_DATE2 extends TerminalNode_MLTAG_DATE
             this.meta.whitespace2.content
           }}\n${" ".padEnd(colWidth0)}${prefix}{${
             this.meta.year.century.content
-          }${this.meta.year.withinCentury.content}}`;
+          }${this.meta.year.withinCentury.content}}\n`;
         //      this.logger.diagnostic(`AbstractTerminalNode: outputStr=${outputStr}`);
         break;
       }
@@ -518,12 +562,7 @@ export class TerminalNode_MLTAG_DATE3 extends TerminalNode_MLTAG_DATE
   serialize(
     format?: ParseNodeSerializeFormatEnumType,
     label?: string,
-    prefix?: string,
-    colWidth0?: number,
-    colWidth1?: number,
-    colWidth2?: number,
-    colWidth3?: number,
-    colWidth4?: number
+    prefix?: string
   ): string {
     /// serialize only the non-meta fields. Subclasses Should
     /// call this via super.serialize(...).
@@ -531,18 +570,40 @@ export class TerminalNode_MLTAG_DATE3 extends TerminalNode_MLTAG_DATE
     //  this.logger.diagnostic(`AbstractTerminalNode: ${this.content}`);
     //    let outputStr1: string = "";
     switch (format) {
+      case ParseNodeSerializeFormatEnumType.TREEVIEW: {
+        //      label = `{${}}`;
+        //    label = label + ParseNodeSerializeColumnPad(0, prefix, label) + ""; //  `${this.constructor.name}`;
+        outputStr = super.serialize(format, this.content, prefix);
+        prefix = " ".padEnd(2) + prefix;
+        outputStr =
+          outputStr +
+          super.serialize(
+            format,
+            `{${this.meta.month.content}}` +
+              ` ${this.meta.month.altpronunciation}`,
+            prefix
+          ) +
+          super.serialize(
+            format,
+            `{${this.meta.punctuation1.content}}`,
+            prefix
+          ) +
+          super.serialize(
+            format,
+            `{${this.meta.whitespace1.content}}`,
+            prefix
+          ) +
+          super.serialize(format, `{${this.meta.day.content}}`, prefix);
+        break;
+      }
       case ParseNodeSerializeFormatEnumType.TABULAR: {
         if (label === undefined) label = "";
         if (prefix === undefined) prefix = "";
-        if (colWidth0 === undefined) colWidth0 = 2;
-        if (colWidth1 === undefined) colWidth1 = 15;
-        if (colWidth2 === undefined) colWidth2 = 12;
-        if (colWidth3 === undefined) colWidth3 = 25;
-        if (colWidth4 === undefined) colWidth4 = 50;
+        let colWidth0 = 2;
         outputStr =
           " ".padEnd(colWidth0) +
-          `${prefix}{${this.content}}`.padEnd(colWidth1) +
-          `${this.constructor.name}`.padEnd(colWidth2);
+          `${prefix}{${this.content}}`.padEnd(20) +
+          `${this.constructor.name}`.padEnd(20);
         colWidth0 += 2;
         outputStr =
           outputStr +
@@ -553,7 +614,7 @@ export class TerminalNode_MLTAG_DATE3 extends TerminalNode_MLTAG_DATE
             this.meta.punctuation1.content
           }}\n${" ".padEnd(colWidth0)}${prefix}{${
             this.meta.whitespace1.content
-          }}\n${" ".padEnd(colWidth0)}${prefix}{${this.meta.day.content}`;
+          }}\n${" ".padEnd(colWidth0)}${prefix}{${this.meta.day.content}\n`;
         //      this.logger.diagnostic(`AbstractTerminalNode: outputStr=${outputStr}`);
         break;
       }

@@ -63,7 +63,11 @@ export abstract class BaseClass {
     if (parent !== undefined || parent !== null) {
       this.parent = parent;
     }
-    if (this.parent !== null && this.parent.logger !== undefined) {
+    if (
+      this.parent !== undefined &&
+      this.parent !== null &&
+      this.parent.logger !== undefined
+    ) {
       this.logger = parent.logger; // inherit existing logger handle
     } else {
       this.logger = new Logger(this); // create new logger handle
@@ -145,20 +149,35 @@ export class FileNode extends UserNode implements IFileNode {
 export const enum ParseNodeSerializeFormatEnumType {
   JSON = "JSON",
   TABULAR = "TABULAR",
-  UNITTEST = "UNITTEST"
+  TREEVIEW = "TREEVIEW",
+  UNITTEST = "UNITTEST" // similar to JSON but with enumerable definitions or or replaceer()
+}
+export const ParseNodeSerializeColumnWidths: number[] = [25, 20, 20, 20, 20];
+export function ParseNodeSerializeColumnPad(
+  colNum: number,
+  field0?: string,
+  field1?: string,
+  field2?: string,
+  field3?: string
+): string {
+  let width: number = 0;
+  if (field0 !== undefined) width = width + field0.length;
+  if (field1 !== undefined) width = width + field1.length;
+  if (field2 !== undefined) width = width + field2.length;
+  if (field3 !== undefined) width = width + field3.length;
+  colNum =
+    colNum < 0 || colNum > ParseNodeSerializeColumnWidths.length ? colNum : 0;
+  return " ".repeat(
+    Math.max(ParseNodeSerializeColumnWidths[colNum] - width, 0)
+  );
 }
 export interface IParseNode {
   parse(tokenList?: TokenListType): number;
   transform(): number;
   serialize(
     format?: ParseNodeSerializeFormatEnumType,
-    label?: string,
-    prefix?: string,
-    col0?: number,
-    col1?: number,
-    col2?: number,
-    col3?: number,
-    col4?: number
+    label?: string, // overrides default values defined with objects: file, page, section, sentence...
+    prefix?: string // primarily used for treeview
   ): string;
 }
 //export abstract class ParseNode extends BaseClass implements IParseNode {
@@ -187,24 +206,45 @@ export abstract class ParseNode extends BaseClass implements IParseNode {
       this.dataSource = new BasicMarkdownSource(this);
     }
     Object.defineProperty(this, "dataSource", { enumerable: false });
-    Object.defineProperty(this, "userContent", { enumerable: false });
+    Object.defineProperty(this, "userContext", { enumerable: false });
     //  Object.defineProperty(this, "dataSource", { enumerable: false });
   }
   userContext!: UserContext;
   // PROPOSED ENHANCEMENT: use file extension to determine datasource type
   // For now, assume basic .md
   dataSource!: IDataSource;
-  //  abstract parse(): number;
   abstract parse(tokenList?: TokenListType): number;
   abstract transform(): number;
-  abstract serialize(
-    format?: ParseNodeSerializeFormatEnumType,
-    label?: string,
-    prefix?: string,
-    colWidth0?: number,
-    colWidth1?: number,
-    colWidth2?: number,
-    colWidth3?: number,
-    colWidth4?: number
-  ): string;
+  serialize(
+    format: ParseNodeSerializeFormatEnumType = ParseNodeSerializeFormatEnumType.JSON,
+    label: string = this.constructor.name,
+    prefix: string = "" // parent/child depth
+  ): string {
+    let outputStr: string = "";
+    // format =
+    //   format === undefined ? ParseNodeSerializeFormatEnumType.JSON : format;
+    switch (format) {
+      case ParseNodeSerializeFormatEnumType.TREEVIEW: {
+        // zero or more {|, } followed by +- OR looks like {| }+(+-)
+        if (prefix.length !== 0) prefix = prefix + "+-";
+        outputStr = `\n${prefix}${label}`;
+        break;
+      }
+      case ParseNodeSerializeFormatEnumType.TABULAR: {
+        outputStr = label.padEnd(ParseNodeSerializeColumnWidths[0]);
+        break;
+      }
+      case ParseNodeSerializeFormatEnumType.UNITTEST: {
+        // may require setting "enumerable" or replacer
+        outputStr = JSON.stringify(this);
+        break;
+      }
+      case ParseNodeSerializeFormatEnumType.JSON:
+      default: {
+        outputStr = JSON.stringify(this);
+        break;
+      }
+    }
+    return outputStr;
+  }
 }

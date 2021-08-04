@@ -12,6 +12,7 @@ import {
   // BaseClass,
   // IParseNode,
   // ParseNode,
+  ParseNodeSerializeColumnWidths,
   ParseNodeSerializeFormatEnumType
 } from "./baseclasses";
 import {
@@ -70,6 +71,7 @@ import {
   ITerminalInfoInitializer
   // IYearTerminalMeta
 } from "./pageContentType";
+import { ISentenceNode } from "./parsesentences";
 import {
   ITerminalNode,
   // ITerminalParseNode,
@@ -102,7 +104,7 @@ import {
 // } from "./dataadapter";
 export class TerminalNode_MLTAG_EMAILADDRESS extends TerminalNode_MLTAG_
   implements ITerminalNode {
-  constructor(parent) {
+  constructor(parent: ISentenceNode) {
     super(parent);
     Object.defineProperty(this, "userContext", { enumerable: false });
 
@@ -179,12 +181,7 @@ export class TerminalNode_MLTAG_EMAILADDRESS extends TerminalNode_MLTAG_
   serialize(
     format?: ParseNodeSerializeFormatEnumType,
     label?: string,
-    prefix?: string,
-    colWidth0?: number,
-    colWidth1?: number,
-    colWidth2?: number,
-    colWidth3?: number,
-    colWidth4?: number
+    prefix?: string
   ): string {
     /// serialize only the non-meta fields. Subclasses Should
     /// call this via super.serialize(...).
@@ -192,37 +189,60 @@ export class TerminalNode_MLTAG_EMAILADDRESS extends TerminalNode_MLTAG_
     //  this.logger.diagnostic(`AbstractTerminalNode: ${this.content}`);
     //    let outputStr1: string = "";
     switch (format) {
-      case ParseNodeSerializeFormatEnumType.TABULAR: {
-        if (label === undefined) label = "";
-        if (prefix === undefined) prefix = "";
-        if (colWidth0 === undefined) colWidth0 = 2;
-        if (colWidth1 === undefined) colWidth1 = 15;
-        if (colWidth2 === undefined) colWidth2 = 12;
-        if (colWidth3 === undefined) colWidth3 = 25;
-        if (colWidth4 === undefined) colWidth4 = 50;
-        outputStr =
-          " ".padEnd(colWidth0) +
-          `${prefix}{${this.content}}`.padEnd(colWidth1) +
-          `${this.constructor.name}`.padEnd(colWidth2);
-        colWidth0 += 2;
+      case ParseNodeSerializeFormatEnumType.TREEVIEW: {
+        //        outputStr = super.serialize(format,
+        outputStr = super.serialize(format, this.content, prefix);
+        prefix = " ".padEnd(2) + prefix;
         this.meta.userName.forEach(term => {
           outputStr =
             outputStr +
-            `\n${" ".padEnd(colWidth0!)}${prefix}{${term.content}} ${
-              term.altpronunciation
-            }`;
+            super.serialize(
+              format,
+              `{${term.content}}  ${term.altpronunciation}`,
+              prefix
+            );
         });
         outputStr =
           outputStr +
-          `\n${" ".padEnd(colWidth0)}${prefix}{${
-            this.meta.separator.content
-          }} ${this.meta.separator.altpronunciation}`;
+          super.serialize(
+            format,
+            `{${this.meta.separator.content}} ${this.meta.separator.altpronunciation}`,
+            prefix
+          );
         this.meta.domainName.forEach(term => {
           outputStr =
             outputStr +
-            `\n${" ".padEnd(colWidth0!)}${prefix}{${term.content}} ${
-              term.altpronunciation
-            }`;
+            super.serialize(
+              format,
+              `{${term.content}}  ${term.altpronunciation}`,
+              prefix
+            );
+        });
+        break;
+      }
+      case ParseNodeSerializeFormatEnumType.TABULAR: {
+        if (label === undefined) label = "";
+        if (prefix === undefined) prefix = "";
+        let colWidth0 = 2;
+        let colWidth1 = 15;
+        let colWidth2 = 12;
+        //        prefix = " ".padEnd(colWidth0 !== undefined ? colWidth0 : 2) + prefix;
+        outputStr =
+          //          " ".padEnd(colWidth0) +
+          `${prefix}{${this.content}}`.padEnd(colWidth1) +
+          `${this.constructor.name}`.padEnd(colWidth2);
+        colWidth0 += 2;
+        prefix = " ".padEnd(colWidth0 !== undefined ? colWidth0 : 2) + prefix;
+        this.meta.userName.forEach(term => {
+          outputStr =
+            outputStr + `\n${prefix}{${term.content}} ${term.altpronunciation}`;
+        });
+        outputStr =
+          outputStr +
+          `\n${prefix}{${this.meta.separator.content}} ${this.meta.separator.altpronunciation}`;
+        this.meta.domainName.forEach(term => {
+          outputStr =
+            outputStr + `\n${prefix}{${term.content}} ${term.altpronunciation}`;
         });
         break;
       }

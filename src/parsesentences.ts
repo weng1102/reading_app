@@ -77,55 +77,37 @@ abstract class AbstractSentenceNode extends ParseNode implements ISentenceNode {
   //   });
   //   return output;
   // }
-  StringifyReplacerForParseTest(key: string, value) {
+  StringifyReplacerForParseTest(key: string, value: any) {
     return key === "id" ? undefined : value;
   }
   serialize(
     format?: ParseNodeSerializeFormatEnumType,
     label?: string,
-    prefix?: string,
-    colWidth0?: number,
-    colWidth1?: number,
-    colWidth2?: number,
-    colWidth3?: number,
-    colWidth4?: number
+    prefix?: string
   ): string {
     let outputStr: string = "";
-    //    this.logger.diagnostic(`AbstractSentenceNode.serialize: ${this.content}`);
     switch (format) {
-      case ParseNodeSerializeFormatEnumType.TABULAR: {
-        label = "sentence";
-        if (label === undefined) label = "";
-        if (prefix === undefined) prefix = "+-";
-        if (colWidth0 === undefined) colWidth0 = 2;
-        if (colWidth1 === undefined) colWidth1 = 15;
-        if (colWidth2 === undefined) colWidth2 = 12;
-        if (colWidth3 === undefined) colWidth3 = 25;
-        if (colWidth4 === undefined) colWidth4 = 50;
-        //    console.log(`AbstractSentenceNode`);
-        outputStr = `${prefix}${label}[${this.id}]: ${this.content}\n`;
-        //        console.log(`terminalnodes.length=${this.terminals.length}`);
-        // for (let i: number = 0; i < this.terminals.length; i++) {
-        //   console.log(`terminal=${this.terminals[i].content}`);
-        // }
+      case ParseNodeSerializeFormatEnumType.TREEVIEW: {
+        label = `sentence[${this.id}]: ${this.content}`;
+        outputStr = super.serialize(format, label, prefix);
+        //        prefix = " ".padEnd(2) + prefix;
+        //        prefix = "| " + prefix;
+        //        if (this.parent.sentences.length > 1)
+        prefix = this.terminals.length > 0 ? prefix + "| " : "  ";
         for (let terminalNode of this.terminals) {
           outputStr =
-            outputStr +
-            `${terminalNode.serialize(
-              ParseNodeSerializeFormatEnumType.TABULAR,
-              label,
-              " ".padEnd(colWidth0) + prefix,
-              colWidth0,
-              colWidth1,
-              colWidth2,
-              colWidth3,
-              colWidth4
-            )}\n`;
+            outputStr + terminalNode.serialize(format, undefined, prefix);
+        }
+        break;
+      }
+      case ParseNodeSerializeFormatEnumType.TABULAR: {
+        label = `sentence[${this.id}]: ${this.content}\n`;
+        outputStr = super.serialize(format, label, prefix);
+        prefix = " ".padEnd(2) + prefix;
+        for (let terminalNode of this.terminals) {
+          outputStr = outputStr + terminalNode.serialize(format, label, prefix);
         }
         outputStr = outputStr.slice(0, -1);
-        //      outputStr = outputStr.slice(0, -1);
-        //        console.log(outputStr);
-        //        console.log(`AbstractSentenceNode(${format}): ${outputStr}`);
         break;
       }
       case ParseNodeSerializeFormatEnumType.UNITTEST:
@@ -150,9 +132,6 @@ export class SentenceNode extends AbstractSentenceNode
     Object.defineProperty(this, "userContext", { enumerable: false });
   }
   parse() {
-    this.logger.diagnostic(
-      `${this.constructor.name} parsing "${this.content}"`
-    );
     try {
       assert(
         !(this.content === undefined && this.dataSource === undefined),
@@ -161,6 +140,9 @@ export class SentenceNode extends AbstractSentenceNode
       if (this.content.length === 0 && this.dataSource !== undefined) {
         this.content = this.dataSource.currentRecord().content;
       }
+      this.logger.diagnostic(
+        `${this.constructor.name} parsing "${this.content}"`
+      );
       // console.log(`this.dataSource.length()=${this.dataSource.length()}`);
       // console.log(
       //   `this.dataSource.currentIdx()=${this.dataSource.currentIdx()}`

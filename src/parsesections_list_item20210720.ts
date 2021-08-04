@@ -94,6 +94,9 @@ export class SectionParseNode_LIST_ITEMS extends SectionParseNode_LIST
               `pushed section ${current.content} at ${current.lineNo}`
             );
             section.parse();
+            // SECTION record defines depth. LISTITEM* defines the actual list items
+            // When SECTION is encountered, depth increases. When SECTION_END is
+            // encountered the depth of next record decreases
             current = this.dataSource.currentRecord();
             assert(
               current.tagType === MarkdownTagType.SECTION_END ||
@@ -126,6 +129,8 @@ export class SectionParseNode_LIST_ITEMS extends SectionParseNode_LIST
             current.depth === depth,
             `expected depth=${depth} but encountered depth=${current.depth}} at line ${current.lineNo}`
           );
+          let listItem = GetSectionNode(current.tagType, this);
+          this.items.push(listItem);
           current = this.dataSource.nextRecord();
           assert(
             current.tagType === MarkdownTagType.PARAGRAPH,
@@ -133,7 +138,8 @@ export class SectionParseNode_LIST_ITEMS extends SectionParseNode_LIST
             at line ${current.lineNo}`
           );
           let paragraph = GetSectionNode(current.tagType, this);
-          this.items.push(paragraph);
+          //          this.items.push(paragraph);
+          listItem.items.push(paragraph);
           this.logger.diagnostic(
             `pushed paragraph ${current.content} at ${current.lineNo}`
           );
@@ -187,12 +193,7 @@ export class SectionParseNode_LIST_ITEMS extends SectionParseNode_LIST
   serialize(
     format?: ParseNodeSerializeFormatEnumType,
     label?: string,
-    prefix?: string,
-    colWidth0?: number,
-    colWidth1?: number,
-    colWidth2?: number,
-    colWidth3?: number,
-    colWidth4?: number
+    prefix?: string
   ): string {
     let outputStr: string = "";
     switch (format) {
@@ -200,33 +201,30 @@ export class SectionParseNode_LIST_ITEMS extends SectionParseNode_LIST
         outputStr = JSON.stringify(this);
         break;
       }
-      case ParseNodeSerializeFormatEnumType.TABULAR: {
-        label = "list";
-        if (label === undefined) label = "";
-        if (prefix === undefined) prefix = "+-";
-        if (colWidth0 === undefined) colWidth0 = 2;
-        if (colWidth1 === undefined) colWidth1 = 15;
-        if (colWidth2 === undefined) colWidth2 = 12;
-        if (colWidth3 === undefined) colWidth3 = 25;
-        if (colWidth4 === undefined) colWidth4 = 50;
-        outputStr = `${prefix}${label} (${
+      case ParseNodeSerializeFormatEnumType.TREEVIEW: {
+        label = `list (${
           this.meta.listType === ListTypeEnumType.bulleted
             ? "unordered"
             : "ordered"
-        }):\n`;
+        })`;
+        outputStr = super.serialize(format, label, prefix);
+        prefix = " ".padEnd(2) + prefix;
         for (let item of this.items) {
-          outputStr =
-            outputStr +
-            `${item.serialize(
-              ParseNodeSerializeFormatEnumType.TABULAR,
-              label,
-              " ".padEnd(colWidth0) + prefix,
-              colWidth0,
-              colWidth1,
-              colWidth2,
-              colWidth3,
-              colWidth4
-            )}\n`;
+          label = `${item.name} list item (${item.type})`;
+          outputStr = outputStr + item.serialize(format, label, prefix);
+        }
+        break;
+      }
+      case ParseNodeSerializeFormatEnumType.TABULAR: {
+        label = `list (${
+          this.meta.listType === ListTypeEnumType.bulleted
+            ? "unordered"
+            : "ordered"
+        })`;
+        outputStr = super.serialize(format, label, prefix);
+        prefix = " ".padEnd(2) + prefix;
+        for (let item of this.items) {
+          outputStr = outputStr + `${item.serialize(format, label, prefix)}\n`;
         }
         outputStr = outputStr.slice(0, -1);
         break;

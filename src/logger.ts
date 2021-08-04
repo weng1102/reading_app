@@ -188,24 +188,60 @@ export class Logger {
     if (this._parent === undefined) {
       objectNameLocator = " at Object.<anonymous>";
     } else {
-      objectNameLocator = " at " + this._parent.constructor.name + ".";
+      objectNameLocator = "    at " + this.constructor.name + "."; // the caller of logger
     }
-    frame =
-      stackFrames[
-        stackFrames.findIndex(element => element.includes(objectNameLocator))
-      ];
+    //    console.log(`stackFrames=${stackFrames}`);
+    let reverseStackFrames: string[] = stackFrames.slice().reverse();
+
+    let callerFrameIdx =
+      reverseStackFrames.findIndex(
+        element =>
+          element.substring(0, objectNameLocator.length) === objectNameLocator
+      ) - 1;
+    //  console.log(`callerFrameIdx=${callerFrameIdx}`);
+    frame = reverseStackFrames[callerFrameIdx];
+    //  console.log(`frame=${frame}`);
     // console.log(
     //   `objectNameLocator=${objectNameLocator} for stackFrame=${stackFrames.split("\n")}`
     // );
     if (frame !== undefined && frame.length > 0) {
-      methodName = frame
-        .substring(frame.indexOf(objectNameLocator) + 4)
-        .split(" ")[0];
+      // console.log(frame.substring(4).split(" "));
+      methodName = frame.substring(4).split(" ")[1];
     } else {
-      methodName = "unknown";
+      //      methodName = "unknown";
     }
+    //    console.log(`methodName=${methodName}`);
     return methodName;
   }
+  // getMethodNamesave() {
+  //   // search back through call stack for certain patterns.
+  //   // A convenience and NOT robust
+  //   let frame: string;
+  //   let methodName: string = "<unknown method>";
+  //   let objectNameLocator: string = "";
+  //   let stackFrames: string[] = new Error()?.stack?.split("\n") as string[]; // optional chaining
+  //   if (this._parent === undefined) {
+  //     objectNameLocator = " at Object.<anonymous>";
+  //   } else {
+  //     objectNameLocator = " at " + this._parent.constructor.name + "."; // the caller of logger
+  //   }
+  //   frame =
+  //     stackFrames[
+  //       stackFrames.findIndex(element => element.includes(objectNameLocator))
+  //     ];
+  //   // console.log(
+  //   //   `objectNameLocator=${objectNameLocator} for stackFrame=${stackFrames.split("\n")}`
+  //   // );
+  //   if (frame !== undefined && frame.length > 0) {
+  //     methodName = frame
+  //       .substring(frame.indexOf(objectNameLocator) + 4)
+  //       .split(" ")[0];
+  //   } else {
+  //     //      methodName = "unknown";
+  //   }
+  //   console.log(`methodName=${methodName}`);
+  //   return methodName;
+  // }
   getModuleLocation() {
     let frame: string;
     let frameIdx: number;
