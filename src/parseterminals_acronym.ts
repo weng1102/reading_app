@@ -155,7 +155,7 @@ export class TerminalNode_ACRONYM extends AbstractTerminalNode
         if (prefix === undefined) prefix = "";
         //        prefix = " ".padEnd(colWidth0 !== undefined ? colWidth0 : 2) + prefix;
         outputStr = super.serialize(format, this.content, prefix);
-        prefix = " ".padEnd(2) + prefix;
+        prefix = prefix + "| ";
         this.meta.letters.forEach(letter => {
           outputStr =
             outputStr +

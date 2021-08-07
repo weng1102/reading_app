@@ -77,20 +77,24 @@ export class PageParseNode extends ParseNode implements IPageContent {
         // parent prefix determines this depth's prefix
         //        prefix = prefix + "+-";
         outputStr = super.serialize(format, label, prefix);
-        for (let sectionNode of this.sections) {
-          label = `${sectionNode.type}`;
-          prefix = "  ";
-          outputStr = `${outputStr}${sectionNode.serialize(
+        // for (let sectionNode of this.sections) {
+        //   label = `${sectionNode.type}`;
+        //   prefix = "  ";
+        //   outputStr = `${outputStr}${sectionNode.serialize(
+        //     format,
+        //     label,
+        //     prefix
+        //   )}`;
+        // }
+        prefix = prefix + "  ";
+        for (const [i, value] of this.sections.entries()) {
+          label = `${value.type}`;
+          outputStr = `${outputStr}${value.serialize(
             format,
             label,
-            prefix
+            prefix + (i < this.sections.length - 1 ? "| " : "  ")
           )}`;
         }
-        // for (const [i, value] of this.sections.entries()) {
-        //   label = `${value.type}`;
-        //   prefix = i < this.sections.length - 1 ? prefix + "| " : "  ";
-        //   outputStr = `${outputStr}${value.serialize(format, label, prefix)}`;
-        // }
         break;
       }
       case ParseNodeSerializeFormatEnumType.TABULAR: {

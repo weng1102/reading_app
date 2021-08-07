@@ -186,7 +186,7 @@ export class TerminalNode_MLTAG_PHONENUMBER extends TerminalNode_MLTAG_
       });
       this.content = this.content + token.content;
 
-      token = tokenList.shift()!; // discarding </phonenumber>
+      token = tokenList.shift()!; // discard </phonenumber> endtag
     } catch (e) {
       this.logger.error(`${this.constructor.name}: ${e.message}`);
       throw e;
@@ -207,7 +207,8 @@ export class TerminalNode_MLTAG_PHONENUMBER extends TerminalNode_MLTAG_
       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
         if (prefix === undefined) prefix = "";
         outputStr = super.serialize(format, this.content, prefix);
-        prefix = " ".padEnd(2) + prefix;
+
+        prefix = prefix + "| ";
         outputStr =
           outputStr +
           super.serialize(format, `{${this.meta.openBracket}}`, prefix) +

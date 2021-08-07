@@ -93,11 +93,20 @@ abstract class AbstractSentenceNode extends ParseNode implements ISentenceNode {
         //        prefix = " ".padEnd(2) + prefix;
         //        prefix = "| " + prefix;
         //        if (this.parent.sentences.length > 1)
-        prefix = this.terminals.length > 0 ? prefix + "| " : "  ";
-        for (let terminalNode of this.terminals) {
-          outputStr =
-            outputStr + terminalNode.serialize(format, undefined, prefix);
+        //    prefix = this.terminals.length > 0 ? prefix + "| " : "  ";
+        // for (let terminalNode of this.terminals) {
+        //   outputStr =
+        //     outputStr + terminalNode.serialize(format, undefined, prefix);
+        // }
+        for (const [i, value] of this.terminals.entries()) {
+          label = `${value.type}`;
+          outputStr = `${outputStr}${value.serialize(
+            format,
+            undefined,
+            prefix + (i < this.terminals.length - 1 ? "| " : "  ")
+          )}`;
         }
+
         break;
       }
       case ParseNodeSerializeFormatEnumType.TABULAR: {

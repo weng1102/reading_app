@@ -396,7 +396,11 @@ for (let secIdx = 0; secIdx < ut_sentences01.sections.length; secIdx++) {
       logger.diagnosticMode = false;
     }
     console.log(
-      `${sentenceNode.serialize(ParseNodeSerializeFormatEnumType.TREEVIEW, "")}`
+      `${sentenceNode.serialize(
+        ParseNodeSerializeFormatEnumType.TREEVIEW,
+        "ut",
+        ""
+      )}`
     );
 
     //utoutput

@@ -1,4 +1,6 @@
-May 28 and 
+May 28 and June 30
+Jen was born on May 3, 1969.
+Wen was born on 02 Nov 1961 wow.
 
 # email address formats
 weng1102@gmail.com

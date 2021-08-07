@@ -171,7 +171,7 @@ export class TerminalNode_MLTAG_EMAILADDRESS extends TerminalNode_MLTAG_
           this.content = this.content + part;
         });
       }
-      tokenList.shift(); //discard engTag
+      //      tokenList.shift(); //discard endTag
     } catch (e) {
       this.logger.error(`${e.message} `);
     } finally {
@@ -192,7 +192,7 @@ export class TerminalNode_MLTAG_EMAILADDRESS extends TerminalNode_MLTAG_
       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
         //        outputStr = super.serialize(format,
         outputStr = super.serialize(format, this.content, prefix);
-        prefix = " ".padEnd(2) + prefix;
+        prefix = prefix + " ".padEnd(2);
         this.meta.userName.forEach(term => {
           outputStr =
             outputStr +

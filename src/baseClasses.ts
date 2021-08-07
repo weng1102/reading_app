@@ -56,6 +56,7 @@ import {
 //   MLTAG_SELFCLOSING,
 //   WHITESPACE
 // }
+export const TREEVIEW_PREFIX = "+-";
 export abstract class BaseClass {
   logger: Logger;
   parent: any;
@@ -226,7 +227,9 @@ export abstract class ParseNode extends BaseClass implements IParseNode {
     switch (format) {
       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
         // zero or more {|, } followed by +- OR looks like {| }+(+-)
-        if (prefix.length !== 0) prefix = prefix + "+-";
+        if (prefix.length >= TREEVIEW_PREFIX.length)
+          prefix = prefix.slice(0, -TREEVIEW_PREFIX.length) + TREEVIEW_PREFIX;
+        // if (prefix.length !== 0) prefix = prefix + "+-";
         outputStr = `\n${prefix}${label}`;
         break;
       }

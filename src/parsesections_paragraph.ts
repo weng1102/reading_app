@@ -112,12 +112,13 @@ export class SectionParseNode_PARAGRAPH extends SectionParseNode_LIST
     switch (format) {
       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
         outputStr = `${super.serialize(format, label, prefix)}`;
-        for (let sentence of this.meta.sentences) {
-          outputStr = `${outputStr}${sentence.serialize(
+        ///        for (let sentence of this.meta.sentences) {
+        for (const [i, value] of this.meta.sentences.entries()) {
+          outputStr = `${outputStr}${value.serialize(
             format,
             label,
             //            prefix + " ".padEnd(2)
-            prefix + "| "
+            prefix + (i < this.meta.sentences.length - 1 ? "| " : "  ")
           )}`;
         }
         //        outputStr = outputStr.slice(0, -1);

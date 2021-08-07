@@ -140,7 +140,7 @@ export abstract class SectionParseNode extends ParseNode
     outputStr = super.serialize(format, label, prefix);
     switch (format) {
       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
-        prefix = this.items.length > 0 ? prefix + "| " : "  ";
+        //  prefix = this.items.length > 0 ? prefix + "| " : "  ";
 
         // for (let subsectionNode of this.items) {
         //   outputStr = `${outputStr}${subsectionNode.serialize(
@@ -151,12 +151,11 @@ export abstract class SectionParseNode extends ParseNode
         //   )}`;
         // }
         for (const [i, value] of this.items.entries()) {
-          console.log(i);
+          label = `${value.type}`;
           outputStr = `${outputStr}${value.serialize(
             format,
-            undefined,
-            prefix
-            //            i < this.items.length - 1 ? prefix + "|," : "  "
+            label,
+            prefix + (i < this.items.length - 1 ? "| " : "  ")
           )}`;
         }
 

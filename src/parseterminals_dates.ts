@@ -234,7 +234,7 @@ export class TerminalNode_MLTAG_DATE1 extends TerminalNode_MLTAG_DATE
     switch (format) {
       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
         outputStr = super.serialize(format, this.content, prefix);
-        prefix = " ".padEnd(2) + prefix;
+        prefix = prefix + "  ";
         outputStr =
           outputStr +
           super.serialize(format, `{${this.meta.day.content}}`, prefix) +
@@ -426,7 +426,7 @@ export class TerminalNode_MLTAG_DATE2 extends TerminalNode_MLTAG_DATE
     switch (format) {
       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
         outputStr = super.serialize(format, this.content, prefix);
-        prefix = " ".padEnd(2) + prefix;
+        prefix = prefix + "  ";
         outputStr =
           outputStr +
           super.serialize(
@@ -574,7 +574,7 @@ export class TerminalNode_MLTAG_DATE3 extends TerminalNode_MLTAG_DATE
         //      label = `{${}}`;
         //    label = label + ParseNodeSerializeColumnPad(0, prefix, label) + ""; //  `${this.constructor.name}`;
         outputStr = super.serialize(format, this.content, prefix);
-        prefix = " ".padEnd(2) + prefix;
+        prefix = prefix + "  ";
         outputStr =
           outputStr +
           super.serialize(

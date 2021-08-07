@@ -532,9 +532,15 @@ export class BasicMarkdownSource extends RawMarkdownSource
     try {
       for (
         let sentenceIdx = 0;
-        sentenceIdx <= sentences.length - 1;
-        sentenceIdx = sentenceIdx + 1
+        sentenceIdx < sentences.length;
+        sentenceIdx = sentenceIdx + 2 // [odd] capture group (setnence) followed by [evem] terminator
       ) {
+        this.logger.diagnostic(
+          `sentence[${sentenceIdx}]=${sentences[sentenceIdx] +
+            (sentences[sentenceIdx + 1] !== undefined
+              ? sentences[sentenceIdx + 1]
+              : "")}`
+        );
         resultBuffer.push({
           content:
             sentences[sentenceIdx] +
