@@ -13,43 +13,13 @@ import { Token, Tokenizer, TokenListType } from "./tokenizer";
 import {
   IParseNode,
   ParseNode,
+  ParseNodeSerializeTabular,
   ParseNodeSerializeFormatEnumType
 } from "./baseclasses";
-// import { MarkdownTagType, TaggedStringType } from "./dataadapter";
 import { ISectionNode } from "./parsesections";
 import { ITerminalNode } from "./parseterminals";
-import {
-  GetTerminalNode
-  // TerminalNodeClassMap,
-  // TerminalNodeMarkupClassMap
-} from "./parseterminaldispatch";
-import {
-  // IPageContent,
-  // ISectionContent,
-  // ISectionBlockquoteVariant,
-  // ISectionBlockquoteVariantInitializer,
-  // ISectionFillinVariant,
-  // ISectionFillinVariantInitializer,
-  // ISectionHeadingVariant,
-  // ISectionHeadingVariantInitializer,
-  // ISectionOrderedListVariant,
-  // ISectionOrderedListVariantInitializer,
-  // ISectionUnorderedListVariant,
-  // ISectionUnorderedListVariantInitializer,
-  // ISectionParagraphVariant,
-  // ISectionParagraphVariantInitializer,
-  ISentenceContent
-  // ITerminalContent,
-  // TerminalMetaType,
-  // TerminalMetaEnumType,
-  // OrderedListTypeEnumType,
-  // PageFormatEnumType,
-  // SectionVariantEnumType,
-  // SectionVariantType,
-  // UnorderedListMarkerEnumType,
-  // IWordTerminalMeta,
-  // IWordTerminalMetaInitializer
-} from "./pageContentType";
+import { GetTerminalNode } from "./parseterminaldispatch";
+import { ISentenceContent, ITerminalContent } from "./pageContentType";
 
 export type ISentenceNode = ISentenceContent & IParseNode;
 abstract class AbstractSentenceNode extends ParseNode implements ISentenceNode {
@@ -67,18 +37,21 @@ abstract class AbstractSentenceNode extends ParseNode implements ISentenceNode {
   transform() {
     return 0;
   }
-  // serializeForUnitTest(): string {
-  //   let output: string = "";
-  //   //let terminalNode: ITerminalNode;
-  //   this.terminals.forEach(terminalNode => {
-  //     output =
-  //       output +
-  //       terminalNode.serialize(ParseNodeSerializeFormatEnumType.UNITTEST);
-  //   });
-  //   return output;
-  // }
-  StringifyReplacerForParseTest(key: string, value: any) {
-    return key === "id" ? undefined : value;
+  stringifyReplacerForParseTest(key: string, value: any) {
+    // only include fields relevant otherwise ignore
+    switch (key) {
+      case "id":
+      case "termIdx":
+      case "firstTermIdx":
+      case "nextTermIdx":
+      case "prevTermIdx":
+      case "recitable":
+      case "audible":
+      case "visible":
+        return undefined;
+      default:
+        return value;
+    }
   }
   serialize(
     format?: ParseNodeSerializeFormatEnumType,
@@ -88,16 +61,8 @@ abstract class AbstractSentenceNode extends ParseNode implements ISentenceNode {
     let outputStr: string = "";
     switch (format) {
       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
-        label = `sentence[${this.id}]: ${this.content}`;
+        label = `sentence: ${this.content}`;
         outputStr = super.serialize(format, label, prefix);
-        //        prefix = " ".padEnd(2) + prefix;
-        //        prefix = "| " + prefix;
-        //        if (this.parent.sentences.length > 1)
-        //    prefix = this.terminals.length > 0 ? prefix + "| " : "  ";
-        // for (let terminalNode of this.terminals) {
-        //   outputStr =
-        //     outputStr + terminalNode.serialize(format, undefined, prefix);
-        // }
         for (const [i, value] of this.terminals.entries()) {
           label = `${value.type}`;
           outputStr = `${outputStr}${value.serialize(
@@ -106,24 +71,55 @@ abstract class AbstractSentenceNode extends ParseNode implements ISentenceNode {
             prefix + (i < this.terminals.length - 1 ? "| " : "  ")
           )}`;
         }
-
         break;
       }
       case ParseNodeSerializeFormatEnumType.TABULAR: {
-        label = `sentence[${this.id}]: ${this.content}\n`;
+        label = ParseNodeSerializeTabular(this.constructor.name, this.content);
         outputStr = super.serialize(format, label, prefix);
-        prefix = " ".padEnd(2) + prefix;
         for (let terminalNode of this.terminals) {
-          outputStr = outputStr + terminalNode.serialize(format, label, prefix);
+          outputStr = outputStr + terminalNode.serialize(format);
         }
-        outputStr = outputStr.slice(0, -1);
         break;
       }
-      case ParseNodeSerializeFormatEnumType.UNITTEST:
-        {
-          outputStr = JSON.stringify(this, this.StringifyReplacerForParseTest);
-        }
+      case ParseNodeSerializeFormatEnumType.UNITTEST: {
+        let replacer: any = (key, value) => {
+          // if we get a function, give us the code for that function
+          switch (key) {
+            case "id":
+            case "termIdx":
+            case "firstTermIdx":
+            case "nextTermIdx":
+            case "prevTermIdx":
+            case "recitable":
+            case "audible":
+            case "visible":
+              return undefined;
+            default:
+              return value;
+          }
+        };
+        outputStr = JSON.stringify(this, replacer);
+        // for (let terminalNode of this.terminals) {
+        //   outputStr =
+        //     outputStr + terminalNode.whiteList(format, label, prefix);
+        // }
+
+        // outputStr = JSON.stringify(this, [
+        //   "content",
+        //   "type",
+        //   "terminals",
+        //   "altpronunciation",
+        //   "altrecognition",
+        //   "meta",
+        //   "day",
+        //   "month",
+        //   "year",
+        //   "century",
+        //   "withinCentury",
+        //   "letters"
+        // ]);
         break;
+      }
     }
     return outputStr;
   }
@@ -152,12 +148,6 @@ export class SentenceNode extends AbstractSentenceNode
       this.logger.diagnostic(
         `${this.constructor.name} parsing "${this.content}"`
       );
-      // console.log(`this.dataSource.length()=${this.dataSource.length()}`);
-      // console.log(
-      //   `this.dataSource.currentIdx()=${this.dataSource.currentIdx()}`
-      // );
-      // console.log(`this.content=${this.content}`);
-      // assert(this.content !== undefined, `this.content is undefined`);
       let markedUpSentence: string = this.tokenizer.insertMarkupTags(
         this.content
       );

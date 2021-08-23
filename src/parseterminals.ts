@@ -11,132 +11,37 @@
  **/
 import { strict as assert } from "assert";
 import {
-  // BaseClass,
-  // IParseNode,
   ParseNode,
   ParseNodeSerializeFormatEnumType,
-  ParseNodeSerializeColumnPad
+  ParseNodeSerializeTabular,
+  ParseNodeSerializeColumnPad,
+  ParseNodeSerializePaddedColumn
 } from "./baseclasses";
 import {
   endMarkupTag,
   isValidMarkupTag,
-  // Tokenizer,
-  // TokenType,
-  // TokenLabelType,
   TokenListType,
-  // TokenLiteral,
   Token
-  // MarkupLabelType
 } from "./tokenizer";
-// import { MarkdownType, MarkdownTagType } from "./dataadapter";
 import {
-  // IPageContent,
-  // ISectionContent,
-  // ISectionBlockquoteVariant,
-  // ISectionBlockquoteVariantInitializer,
-  // ISectionFillinVariant,
-  // ISectionFillinVariantInitializer,
-  // ISectionHeadingVariant,
-  // ISectionHeadingVariantInitializer,
-  // ISectionOrderedListVariant,
-  // ISectionOrderedListVariantInitializer,
-  // ISectionUnorderedListVariant,
-  // ISectionUnorderedListVariantInitializer,
-  // ISectionParagraphVariant,
-  // ISectionParagraphVariantInitializer,
-  // ISentenceContent,
   ITerminalContent,
   TerminalMetaType,
   TerminalMetaEnumType,
-  // OrderedListTypeEnumType,
-  // PageFormatEnumType,
-  // SectionVariantEnumType,
-  // SectionVariantType,
-  // UnorderedListMarkerEnumType,
-  // IAcronymTerminalMeta,
-  // IAcronymTerminalMetaInitializer,
   IWordTerminalMeta,
   IWordTerminalMetaInitializer,
   ICurrencyTerminalMeta,
   ICurrencyTerminalMetaInitializer,
-  // IDateTerminalMeta,
-  // IDateTerminalMetaInitializer,
-  // DateFormatEnumType,
-  // IPhoneNumberTerminalMeta,
-  // IPhoneNumberTerminalMetaInitializer,
   IPunctuationTerminalMeta,
   IPunctuationTerminalMetaInitializer
-  // IReferenceTerminalMeta,
-  // ITimeTerminalMeta,
-  // IWhitespaceTerminalMeta,
-  // IEmailAddressTerminalMeta,
-  // IEmailAddressTerminalMetaInitializer,
-  // ITerminalInfo,
-  // ITerminalInfoInitializer,
-  // IYearTerminalMeta
 } from "./pageContentType";
 import { ISentenceNode } from "./parsesentences";
-// import {
-//   TerminalNode_MLTAG_DATE1,
-//   TerminalNode_MLTAG_DATE2,
-//   TerminalNode_MLTAG_DATE3
-// } from "./parseterminals_dates";
-// import { TerminalNode_MLTAG_PHONENUMBER } from "./parseterminals_phonenumber";
-// import { TerminalNode_MLTAG_EMAILADDRESS } from "./parseterminals_emailaddress";
-// import DictionaryType, {
-//   PronunciationDictionary,
-//   RecognitionDictionary
-// } from "./dictionary";
-// // import {
-// //   AcronymMap,
-// //   CardinalNumberMap,
-// //   Logger,
-// //   MonthFromAbbreviationMap,
-// //   OrdinalNumberMap,
-// //   UserContext
-// // } from "./utilities";
-// import {
-//   IDataSource,
-//   //  MarkdownSectionTagType,
-//   BasicMarkdownSource,
-//   RawMarkdownSource,
-//   TaggedStringType
-// } from "./dataadapter";
-
-// export interface INodeJsonUnitTest {
-//   ID: number;
-//   TERM: string;
-//   TYPE: number;
-//   PRON: string;
-//   RECO: string;
-// }
-// export function INodeJsonUnitTestInitializer(
-//   id?: number,
-//   term?: string,
-//   type?: number,
-//   pron?: string,
-//   reco?: string
-// ): INodeJsonUnitTest {
-//   return {
-//     ID: (id !== undefined ? 0 : id)!,
-//     TERM: (term === undefined ? "" : term)!,
-//     TYPE: (type === undefined ? 0 : type)!,
-//     PRON: (pron === undefined ? "" : pron)!,
-//     RECO: (reco === undefined ? "" : reco)!
-//   };
-// }
 export interface ITerminalParseNode {
   parse(tokenList: TokenListType): number;
   serialize(
     format?: ParseNodeSerializeFormatEnumType,
     label?: string,
     prefix?: string
-  ): // colWidth0?: number,
-  // colWidth1?: number,
-  // colWidth2?: number,
-  // colWidth3?: number,
-  // colWidth4?: number
-  string;
+  ): string;
   transform(): number;
 }
 export type ITerminalNode = ITerminalContent & ITerminalParseNode;
@@ -153,9 +58,6 @@ export abstract class AbstractTerminalNode extends ParseNode
     Object.defineProperty(this, "userContext", { enumerable: false });
     //Object.defineProperty(this, "id", { enumerable: false });
   }
-  //  abstract parse(list: TokenListType): number;
-  //  abstract parse(noneOrList: | TokenListType): number;
-
   parse(tokenList: TokenListType): number {
     let token: Token;
     if (tokenList !== undefined) {
@@ -164,11 +66,24 @@ export abstract class AbstractTerminalNode extends ParseNode
         this.content = token.content;
       }
     }
-    // this.logger.diagnostic(
-    //   `abstract parseTokenList(): Parsing ${this.content}`
-    // );
     return tokenList.length;
   }
+  stringifyReplacerForParseTest(key: string, value: any) {
+    switch (key) {
+      //      case "id":
+      case "termIdx":
+      case "firstTermIdx":
+      case "nextTermIdx":
+      case "prevTermIdx":
+      case "recitable":
+      case "audible":
+      case "visible":
+        return undefined;
+      default:
+        return value;
+    }
+  }
+
   serialize(
     format?: ParseNodeSerializeFormatEnumType,
     label?: string,
@@ -185,16 +100,21 @@ export abstract class AbstractTerminalNode extends ParseNode
           label === undefined || label.length === 0
             ? `{${this.content}}`
             : label;
+        //        let termIdx: string = (this.termIdx !==0? "(termIdx="+this.termIdx.toString()+")":"";
         label =
           label +
-          ParseNodeSerializeColumnPad(0, prefix, label) +
-          `${this.constructor.name}`;
+          ParseNodeSerializeColumnPad(0, prefix + label) +
+          this.constructor.name +
+          ParseNodeSerializeColumnPad(1, this.constructor.name);
         outputStr = `${super.serialize(format, label, prefix)}`;
         break;
       }
       case ParseNodeSerializeFormatEnumType.TABULAR: {
-        label = `{${this.content}}`.padEnd(2) + `${this.constructor.name}`;
-        outputStr = `${super.serialize(format, label, prefix)}\n`;
+        label =
+          label === undefined
+            ? ParseNodeSerializeTabular(this.constructor.name, this.content)
+            : label;
+        outputStr = super.serialize(format, label);
         break;
       }
       case ParseNodeSerializeFormatEnumType.JSON: {
@@ -202,8 +122,26 @@ export abstract class AbstractTerminalNode extends ParseNode
         break;
       }
       case ParseNodeSerializeFormatEnumType.UNITTEST: {
-        Object.defineProperty(this, "id", { enumerable: false });
-        outputStr = outputStr + JSON.stringify(this);
+        // Object.defineProperty(this, "id", { enumerable: false });
+        // Object.defineProperty(this, "terminals.meta.termIdx", {
+        //   enumerable: false
+        // });
+        let replacer: any = (key, value) => {
+          // if we get a function, give us the code for that function
+          switch (key) {
+            case "termIdx":
+            case "firstTermIdx":
+            //            case "nextTermIdx":
+            //            case "prevTermIdx":
+            case "recitable":
+            case "audible":
+            case "visible":
+              return undefined;
+            default:
+              return value;
+          }
+        };
+        outputStr = outputStr + JSON.stringify(this, replacer);
         break;
       }
       default: {
@@ -226,8 +164,32 @@ export class TerminalNode_WORD extends AbstractTerminalNode
   type = TerminalMetaEnumType.word;
   meta: IWordTerminalMeta = IWordTerminalMetaInitializer();
   parse(tokenList: TokenListType) {
-    return super.parse(tokenList);
+    let retVal = super.parse(tokenList);
+    //    this.meta.termIdx = this.userContext.terminals.push(this.meta) - 1;
+    this.userContext.terminals.push(this.meta);
+    //    console.log(`WORD meta terminalIdx=${this.meta.termIdx}`);
+    //.termIdx = this.userContext.nextTerminalIdx;
+    return retVal;
   }
+  // serialize(format: ParseNodeSerializeFormatEnumType, label?: string): string {
+  //   switch (format) {
+  //     case ParseNodeSerializeFormatEnumType.TABULAR: {
+  //       label =
+  //         label === undefined
+  //           ? ParseNodeSerializeTabular(
+  //               this.constructor.name,
+  //               this.content,
+  //               this.meta.altpronunciation,
+  //               this.meta.termIdx.toString()
+  //             )
+  //           : label;
+  //       break;
+  //     }
+  //     default:
+  //       break;
+  //   }
+  //   return super.serialize(format, label);
+  // }
   transform() {
     return 0;
   }
@@ -239,8 +201,30 @@ export class TerminalNode_NUMBER extends AbstractTerminalNode
   }
   type = TerminalMetaEnumType.word;
   meta: IWordTerminalMeta = IWordTerminalMetaInitializer();
-  // parse() {
-  //   return 0;
+  parse(tokenList: TokenListType) {
+    let retVal = super.parse(tokenList);
+    this.userContext.terminals.push(this.meta);
+    //    this.meta.termIdx = this.userContext.nextTerminalIdx;
+    return retVal;
+  }
+  // serialize(format: ParseNodeSerializeFormatEnumType, label?: string): string {
+  //   switch (format) {
+  //     case ParseNodeSerializeFormatEnumType.TABULAR: {
+  //       label =
+  //         label === undefined
+  //           ? ParseNodeSerializeTabular(
+  //               this.constructor.name,
+  //               this.content,
+  //               this.meta.altpronunciation,
+  //               this.meta.termIdx.toString()
+  //             )
+  //           : label;
+  //       break;
+  //     }
+  //     default:
+  //       break;
+  //   }
+  //   return super.serialize(format, label);
   // }
   transform() {
     return 0;
@@ -317,7 +301,6 @@ export abstract class TerminalNode_MLTAG_ extends AbstractTerminalNode
       let endTag: string = endMarkupTag(startTag);
 
       tokenList.shift(); // remove startTag
-      //      this.content == ""; // assumes initialization at declaration/constructor
       let token: Token = tokenList.shift()!;
       while (token !== undefined && token.content !== endTag) {
         this.content = this.content + token.content;
@@ -340,33 +323,73 @@ export class TerminalNode_MLTAG_CONTRACTION extends TerminalNode_MLTAG_
   implements ITerminalNode {
   constructor(parent: ISentenceNode) {
     super(parent);
-    this.type = TerminalMetaEnumType.word;
-    this.meta = IWordTerminalMetaInitializer();
   }
+  type = TerminalMetaEnumType.word;
+  meta = IWordTerminalMetaInitializer();
   parse(tokenList: TokenListType): number {
-    return super.parse(tokenList);
+    let tokenListCount = super.parse(tokenList);
+    this.userContext.terminals.push(this.meta);
+    //    this.meta.termIdx = this.userContext.nextTerminalIdx;
+    return tokenListCount;
   }
+  // serialize(format: ParseNodeSerializeFormatEnumType, label?: string): string {
+  //   switch (format) {
+  //     case ParseNodeSerializeFormatEnumType.TABULAR: {
+  //       label =
+  //         label === undefined
+  //           ? ParseNodeSerializeTabular(
+  //               this.constructor.name,
+  //               this.content,
+  //               "",
+  //               this.meta.termIdx.toString()
+  //             )
+  //           : label;
+  //       break;
+  //     }
+  //     default:
+  //       break;
+  //   }
+  //   return super.serialize(format, label);
+  // }
 }
 export class TerminalNode_MLTAG_NUMBER_WITHCOMMAS extends TerminalNode_MLTAG_
   implements ITerminalNode {
   constructor(parent: ISentenceNode) {
     super(parent);
-    ///    this.type = TerminalNodeEnumType.NUMBER;
   }
-  type = TerminalMetaEnumType.word;
+  type = TerminalMetaEnumType.numberwithcommas;
   meta: IWordTerminalMeta = IWordTerminalMetaInitializer();
   parse(tokenList: TokenListType): number {
-    // parse into word with recogition without comma
     let tokenListCount: number = super.parse(tokenList);
     // replace comma with [.]?
     this.meta.altrecognition = this.content.replace(/,/g, "[,]?");
+    this.userContext.terminals.push(this.meta);
+    //  this.meta.termIdx = this.userContext.nextTerminalIdx;
     // check for additional processing for this.content
-    // acronymMap lookup. If necessary, create children terminalNodes
 
     // check for additional attributes for this.content
     // pronunciationDictionary
     // recognitionpattern
     return tokenListCount;
+  }
+  serialize(format: ParseNodeSerializeFormatEnumType, label?: string): string {
+    switch (format) {
+      case ParseNodeSerializeFormatEnumType.TABULAR: {
+        label =
+          label === undefined
+            ? ParseNodeSerializeTabular(
+                this.constructor.name,
+                this.content,
+                this.meta.altpronunciation,
+                this.meta.termIdx.toString()
+              )
+            : label;
+        break;
+      }
+      default:
+        break;
+    }
+    return super.serialize(format, label);
   }
 }
 export class TerminalNode_MLTAG_TOKEN extends TerminalNode_MLTAG_
@@ -377,6 +400,31 @@ export class TerminalNode_MLTAG_TOKEN extends TerminalNode_MLTAG_
   }
   type = TerminalMetaEnumType.word;
   meta: IWordTerminalMeta = IWordTerminalMetaInitializer();
+  parse(tokenList: TokenListType): number {
+    let tokenListCount: number = super.parse(tokenList);
+    this.userContext.terminals.push(this.meta);
+    //    this.meta.termIdx = this.userContext.nextTerminalIdx;
+    return tokenListCount;
+  }
+  // serialize(format: ParseNodeSerializeFormatEnumType, label?: string): string {
+  //   switch (format) {
+  //     case ParseNodeSerializeFormatEnumType.TABULAR: {
+  //       label =
+  //         label === undefined
+  //           ? ParseNodeSerializeTabular(
+  //               this.constructor.name,
+  //               this.content,
+  //               this.meta.altpronunciation,
+  //               this.meta.termIdx.toString()
+  //             )
+  //           : label;
+  //       break;
+  //     }
+  //     default:
+  //       break;
+  //   }
+  //   return super.serialize(format, label);
+  // }
 }
 export class TerminalNode_MLTAG_USD extends TerminalNode_MLTAG_
   implements ITerminalNode {
@@ -386,4 +434,29 @@ export class TerminalNode_MLTAG_USD extends TerminalNode_MLTAG_
   }
   type = TerminalMetaEnumType.currency;
   meta: ICurrencyTerminalMeta = ICurrencyTerminalMetaInitializer();
+  parse(tokenList: TokenListType): number {
+    let tokenListCount: number = super.parse(tokenList);
+    this.userContext.terminals.push(this.meta.currency);
+    // this.meta.currency.termIdx = this.userContext.nextTerminalIdx;
+    return tokenListCount;
+  }
+  // serialize(format: ParseNodeSerializeFormatEnumType, label?: string): string {
+  //   switch (format) {
+  //     case ParseNodeSerializeFormatEnumType.TABULAR: {
+  //       label =
+  //         label === undefined
+  //           ? ParseNodeSerializeTabular(
+  //               this.constructor.name,
+  //               this.content,
+  //               this.meta.currency.content,
+  //               this.meta.currency.termIdx.toString()
+  //             )
+  //           : label;
+  //       break;
+  //     }
+  //     default:
+  //       break;
+  //   }
+  //   return super.serialize(format, label);
+  // }
 }

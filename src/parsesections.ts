@@ -10,97 +10,26 @@
  *
  **/
 import { strict as assert } from "assert";
+import { ParseNodeSerializeTabular } from "./baseclasses";
 import {
   IParseNode,
   ParseNode,
   ParseNodeSerializeFormatEnumType
 } from "./baseclasses";
+import { MarkdownTagType, TaggedStringType } from "./dataadapter";
 import {
-  // IDataSource,
-  //  MarkdownSectionTagType,
-  MarkdownTagType,
-  // BasicMarkdownSource,
-  // RawMarkdownSource,
-  TaggedStringType
-  //MarkdownEndTagType
-} from "./dataadapter";
-import {
-  //  IPageContent,
   ISectionContent,
-  // ISectionBlockquoteVariant,
-  // ISectionBlockquoteVariantInitializer,
   ISectionEmptyVariant,
   ISectionEmptyVariantInitializer,
   ISectionFillinVariant,
   ISectionFillinVariantInitializer,
-  // ISectionHeadingVariant,
-  // ISectionHeadingVariantInitializer,
-  // ISectionOrderedListVariant,
-  // ISectionOrderedListVariantInitializer,
-  // ISectionUnorderedListVariant,
-  // ISectionUnorderedListVariantInitializer,
-  // ISectionParagraphVariant,
-  // ISectionParagraphVariantInitializer,
-  // ISentenceContent,
-  // ITerminalContent,
-  // TerminalMetaType,
-  // TerminalMetaEnumType,
-  // OrderedListTypeEnumType,
-  // PageFormatEnumType,
   SectionVariantEnumType,
   SectionVariantType,
-  // UnorderedListMarkerEnumType,
   ISectionTbdVariant,
   ISectionTbdVariantInitializer
-  // IWordTerminalMeta,
-  // IWordTerminalMetaInitializer
 } from "./pageContentType";
 import { IPageNode } from "./parsepages";
-// import { ISentenceNode, SentenceNode } from "./parsesentences";
-// import { SectionParseNode_PARAGRAPH } from "./parsesections_paragraph";
-// type SectionNodeMarkdownClassType =
-//   | typeof SectionParseNode_BLOCKQUOTE
-//   | typeof SectionParseNode_HEADING
-//   | typeof SectionParseNode_PARAGRAPH
-//   | typeof SectionParseNode_LIST_ORDERED
-//   | typeof SectionParseNode_LIST_UNORDERED
-//   | typeof SectionParseNode_FILLIN
-//   | typeof SectionParseNode_PHOTOENTRY;
-//   LIST_UNORDERED = "LIST_UNORDERED",
-//   LIST_ORDERED = "LIST_ORDERED",
-//   COMMENT = "COMMENT",
-//   BLOCKQUOTE = "BLOCKQUOTE",
-//   PASSTHRUTAG = "PASSTHRUTAG",
-//   PHOTOENTRY = "PHOTOENTRY",
-//   FILLIN = "FILLIN",
-//   PAGE = "PAGE",
-//   SENTENCE = "SENTENCE",
-//   UNKNOWN = "UNKNOWN" // should always be last
-//
 export type ISectionNode = ISectionContent & IParseNode;
-// interface ISectionNode {
-//   id: number;
-//   name: string;
-//   description: string;
-//   firstTermIdx: number;
-//   sentenceNodes: ISentenceContent[];
-//   parse(): any; // any to avoid compilation error, should be removed
-//   transform(): any;
-//   serialize(): string; // any to avoid compilation error, should be removed
-//   // all of the finer details are hidden from the interface and conveyed via the (variants of) SectionContentType
-// }
-//type ISectionNode = ISectionContent & IContentMethods;
-// interface ISentenceMethods {
-//   serializeColumnar(
-//     prefix?: string,
-//     col0?: number,
-//     col1?: number,
-//     col2?: number,
-//     col3?: number
-//   ): string;
-//   serializeForUnitTest(): string;
-// }
-//
 export abstract class SectionParseNode extends ParseNode
   implements ISectionContent {
   // based on SectionVariantEnumType
@@ -124,9 +53,6 @@ export abstract class SectionParseNode extends ParseNode
     this.dataSource.nextRecord();
     return 0;
   }
-  transform() {
-    return 0;
-  }
   serialize(
     format?: ParseNodeSerializeFormatEnumType,
     label?: string,
@@ -140,16 +66,6 @@ export abstract class SectionParseNode extends ParseNode
     outputStr = super.serialize(format, label, prefix);
     switch (format) {
       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
-        //  prefix = this.items.length > 0 ? prefix + "| " : "  ";
-
-        // for (let subsectionNode of this.items) {
-        //   outputStr = `${outputStr}${subsectionNode.serialize(
-        //     format,
-        //     undefined,
-        //     //            prefix + " ".padEnd(2)
-        //     prefix
-        //   )}`;
-        // }
         for (const [i, value] of this.items.entries()) {
           label = `${value.type}`;
           outputStr = `${outputStr}${value.serialize(
@@ -158,23 +74,44 @@ export abstract class SectionParseNode extends ParseNode
             prefix + (i < this.items.length - 1 ? "| " : "  ")
           )}`;
         }
-
-        //      outputStr = outputStr.slice(0, -1);
         break;
       }
       case ParseNodeSerializeFormatEnumType.TABULAR: {
-        for (let subsectionNode of this.items) {
-          label === undefined
-            ? `subsection: ${subsectionNode.type} ${subsectionNode.name}`
-            : label;
-          outputStr =
-            outputStr +
-            `${subsectionNode.serialize(
-              format,
-              label,
-              prefix + " ".padEnd(2)
-            )}`;
+        let items: ISectionNode[] = [];
+        let data = JSON.parse(JSON.stringify(this));
+        outputStr = prefix === undefined ? "" : prefix;
+        for (let [key, value] of Object.entries(data)) {
+          if (key === "items") {
+            outputStr = `${outputStr} item[${key.length}],`;
+            items.push(<ISectionNode>value); // save for the end of list
+          } else {
+            let strval = `${value}`;
+            if (strval.length > 0) {
+              outputStr = `${outputStr} ${key}=${strval},`;
+            }
+          }
         }
+
+        ///
+        for (const [i, item] of this.items.entries()) {
+          prefix = `${prefix}:items[${i}]`;
+          outputStr = `${outputStr}\n${item.serialize(format, "", prefix)}`;
+        }
+        //
+        // label === undefined
+        //   ? `subsection: ${subsectionNode.type} ${subsectionNode.name}`
+        //   : label;
+        // outputStr =
+        //   outputStr +
+        //   `${items.serialize(
+        //     format,
+        //     ParseNodeSerializeTabular(
+        //       "subsection",
+        //       subsectionNode.type,
+        //       subsectionNode.name
+        //     )
+        //   )}`;
+        // }
         break;
       }
       default: {
@@ -184,14 +121,20 @@ export abstract class SectionParseNode extends ParseNode
     }
     return outputStr;
   }
+  transform() {
+    let terminalIdx: number = 0;
+    super.transform();
+    for (let item of this.items) {
+      terminalIdx = item.transform();
+    }
+    return terminalIdx;
+  }
 }
 export abstract class SectionParseNode_LIST extends SectionParseNode
   implements ISectionNode {
   constructor(parent: IPageNode | ISectionNode) {
     super(parent);
-    //  console.log("creating blockquote section");
   }
-  //serialize code for subclasses removes multiple implementations
 }
 export class SectionParseNode_FILLIN extends SectionParseNode_LIST
   implements ISectionNode {
@@ -206,7 +149,6 @@ export class SectionParseNode_PHOTOENTRY extends SectionParseNode_LIST
   implements ISectionNode {
   constructor(parent: IPageNode | ISectionNode) {
     super(parent);
-    //  console.log("creating ordered photoentry section");
   }
   readonly type = SectionVariantEnumType.photo_entry;
   meta = ISectionFillinVariantInitializer();
@@ -234,9 +176,6 @@ export class SectionParseNode_EMPTY extends SectionParseNode_LIST
       ) {
         this.meta.count++;
       }
-      // // if (!this.dataSource.EOF()) {
-      // //   this.dataSource.previousRecord();
-      // }
     } catch (e) {
       this.logger.error(e.message);
       if (this.logger.verboseMode) console.log(e.stack);
@@ -259,7 +198,11 @@ export class SectionParseNode_EMPTY extends SectionParseNode_LIST
         break;
       }
       case ParseNodeSerializeFormatEnumType.TABULAR: {
-        outputStr = super.serialize(format, label, prefix);
+        outputStr = super.serialize(
+          format,
+          ParseNodeSerializeTabular(label),
+          prefix
+        );
         //        outputStr = outputStr.slice(0, -1);
         break;
       }

@@ -395,13 +395,13 @@ for (let secIdx = 0; secIdx < ut_sentences01.sections.length; secIdx++) {
       );
       logger.diagnosticMode = false;
     }
-    console.log(
-      `${sentenceNode.serialize(
-        ParseNodeSerializeFormatEnumType.TREEVIEW,
-        "ut",
-        ""
-      )}`
-    );
+    // console.log(
+    //   `${sentenceNode.serialize(
+    //     ParseNodeSerializeFormatEnumType.TREEVIEW,
+    //     "ut",
+    //     ""
+    //   )}`
+    // );
 
     //utoutput
     results.sections[resultsSecIdx].sentences.push({
@@ -410,9 +410,13 @@ for (let secIdx = 0; secIdx < ut_sentences01.sections.length; secIdx++) {
       expected: {
         tokenizer: tokenizerResult,
         parser: parserResult,
-        transformer: ""
+        transformer: "%%%%%%"
       }
     });
+    fs.appendFileSync(
+      utparseout,
+      `section[${secId}][${sentId}]: ${parserResult}\n`
+    );
   }
   logger.info(
     testSectionLabel +
@@ -430,7 +434,7 @@ for (let secIdx = 0; secIdx < ut_sentences01.sections.length; secIdx++) {
   totalCount += ut_sentences01.sections[secIdx].sentences.length;
 }
 if (utoutput) {
-  fs.writeFileSync(utparseout, JSON.stringify(results));
+  //  fs.writeFileSync(utparseout, JSON.stringify(results));
 }
 logger.info(
   "Parser01 Overall total: " + totalPassCount + "/" + totalCount + " PASSED",

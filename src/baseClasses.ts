@@ -12,50 +12,10 @@ import DictionaryType, {
   PronunciationDictionary
   // RecognitionDictionary
 } from "./dictionary";
-import {
-  // endMarkupTag,
-  // isValidMarkupTag,
-  // Tokenizer,
-  // TokenType,
-  // TokenLabelType,
-  TokenListType
-  // TokenLiteral,
-  // Token,
-  // MarkupLabelType
-} from "./tokenizer";
-//import { MarkdownType, MarkdownTagType } from "./dataadapter";
-// import {
-//   IPageContent,
-//   ISectionContent,
-//   ISentenceContent,
-//   ITerminalContent,
-//   PageFormatEnumType
-// } from "./pageContentType";
-import {
-  // AcronymMap,
-  // CardinalNumberMap,
-  Logger
-  // MonthFromAbbreviationMap,
-  // OrdinalNumberMap
-} from "./logger";
-import {
-  IDataSource,
-  //  MarkdownSectionTagType,
-  BasicMarkdownSource
-  //  RawMarkdownSource,
-  //  TaggedStringType
-} from "./dataadapter";
-
-//const SectionNodeMap = new Map([MarkdownParsedTagType
-// const enum TerminalNodeEnumType {
-//   WORD = 0,
-//   NUMBER,
-//   PUNCTUATION,
-//   MLTAG,
-//   MLTAG_END,
-//   MLTAG_SELFCLOSING,
-//   WHITESPACE
-// }
+import { TokenListType } from "./tokenizer";
+import { Logger } from "./logger";
+import { IDataSource, BasicMarkdownSource } from "./dataadapter";
+import { ITerminalInfo } from "./pagecontentType";
 export const TREEVIEW_PREFIX = "+-";
 export abstract class BaseClass {
   logger: Logger;
@@ -75,6 +35,47 @@ export abstract class BaseClass {
     }
     Object.defineProperty(this, "parent", { enumerable: false });
     Object.defineProperty(this, "logger", { enumerable: false });
+  }
+}
+class TerminalArray extends Array<ITerminalInfo> {
+  constructor(...args) {
+    super(...args);
+  }
+  previousTerminalIdx: number = -1;
+  push(terminal: ITerminalInfo) {
+    //    super.push(terminal); just extends and not overload not overridden
+    terminal.termIdx = this.length;
+    terminal.prevTermIdx.push(this.previousTerminalIdx);
+    if (
+      this.previousTerminalIdx >= 0 &&
+      this.previousTerminalIdx < this.length
+    ) {
+      this[this.previousTerminalIdx].nextTermIdx.push(terminal.termIdx);
+    }
+    this.previousTerminalIdx = terminal.termIdx;
+    // console.log(
+    //   `#######termIdx=${terminal.termIdx}#######content=${terminal.content}`
+    // );
+    return super.push(terminal);
+  }
+  serialize(): string {
+    let outputStr: string = "[idx ]  term next prev \n";
+    for (let i = 0; i < this.length - 1; i++) {
+      outputStr = `${outputStr}[${i.toString().padStart(4, "0")}]: ${this[
+        i
+      ].termIdx
+        .toString()
+        .padStart(5)}${
+        this[i].nextTermIdx.length === 0
+          ? "na".padStart(5)
+          : this[i].nextTermIdx[0].toString().padStart(5)
+      }${
+        this[i].prevTermIdx.length === 0
+          ? "na".padEnd(5)
+          : this[i].prevTermIdx[0].toString().padStart(5)
+      }\n`;
+    }
+    return outputStr;
   }
 }
 export class UserContext {
@@ -107,12 +108,23 @@ export class UserContext {
     }
   }*/
   readonly username: string;
+  terminals: TerminalArray;
   // need authentication infoblock at some point
   constructor(name: string) {
     //    this._parent = parent;
+    this.terminals = new TerminalArray();
     this.username = name;
     ////    this._pages = new Array();
   }
+  // protected terminalIdx: number = 0;
+  // get currentTerminalIdx(): number {
+  //   return this.terminalIdx;
+  // }
+  // function terminals(idx: number): ITerminalInfo {
+  //   if (idx >=0 && idx < this.terminals.length) {
+  //     return this.terminals[idx];
+  //     else
+  // }
   get pronunciationDictionary(): DictionaryType {
     // should actually return the combined user and general dictionary
     return PronunciationDictionary;
@@ -153,7 +165,33 @@ export const enum ParseNodeSerializeFormatEnumType {
   TREEVIEW = "TREEVIEW",
   UNITTEST = "UNITTEST" // similar to JSON but with enumerable definitions or or replaceer()
 }
-export const ParseNodeSerializeColumnWidths: number[] = [25, 20, 20, 20, 20];
+export const ParseNodeSerializeColumnWidths: number[] = [
+  40,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20
+];
+export function ParseNodeSerializeTabular(...fields: string[]): string {
+  let outputStr = "";
+  fields.forEach((field, i) => {
+    outputStr = `${outputStr} ${field
+      .substring(0, ParseNodeSerializeColumnWidths[i])
+      .padEnd(ParseNodeSerializeColumnWidths[i])}`;
+  });
+  return outputStr;
+}
+export function ParseNodeSerializePaddedColumn(
+  colNum: number,
+  field: string
+): string {
+  return field.padEnd(
+    Math.max(ParseNodeSerializeColumnWidths[colNum] - field.length, 0)
+  );
+}
 export function ParseNodeSerializeColumnPad(
   colNum: number,
   field0?: string,
@@ -161,6 +199,7 @@ export function ParseNodeSerializeColumnPad(
   field2?: string,
   field3?: string
 ): string {
+  //generates column pad  based on field widths in arglist AND ParseNodeSerialColumnWidths[]
   let width: number = 0;
   if (field0 !== undefined) width = width + field0.length;
   if (field1 !== undefined) width = width + field1.length;
@@ -215,26 +254,21 @@ export abstract class ParseNode extends BaseClass implements IParseNode {
   // For now, assume basic .md
   dataSource!: IDataSource;
   abstract parse(tokenList?: TokenListType): number;
-  abstract transform(): number;
   serialize(
     format: ParseNodeSerializeFormatEnumType = ParseNodeSerializeFormatEnumType.JSON,
     label: string = this.constructor.name,
-    prefix: string = "" // parent/child depth
+    prefix: string = ""
   ): string {
     let outputStr: string = "";
-    // format =
-    //   format === undefined ? ParseNodeSerializeFormatEnumType.JSON : format;
     switch (format) {
       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
-        // zero or more {|, } followed by +- OR looks like {| }+(+-)
         if (prefix.length >= TREEVIEW_PREFIX.length)
           prefix = prefix.slice(0, -TREEVIEW_PREFIX.length) + TREEVIEW_PREFIX;
-        // if (prefix.length !== 0) prefix = prefix + "+-";
         outputStr = `\n${prefix}${label}`;
         break;
       }
       case ParseNodeSerializeFormatEnumType.TABULAR: {
-        outputStr = label.padEnd(ParseNodeSerializeColumnWidths[0]);
+        outputStr = `\n${label}`;
         break;
       }
       case ParseNodeSerializeFormatEnumType.UNITTEST: {
@@ -249,5 +283,8 @@ export abstract class ParseNode extends BaseClass implements IParseNode {
       }
     }
     return outputStr;
+  }
+  transform(): number {
+    return this.userContext.terminals.length;
   }
 }

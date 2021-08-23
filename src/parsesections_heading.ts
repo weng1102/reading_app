@@ -8,72 +8,15 @@
  *
  **/
 import { strict as assert } from "assert";
+import { IParseNode, ParseNodeSerializeFormatEnumType } from "./baseclasses";
+import { MarkdownTagType, TaggedStringType } from "./dataadapter";
 import {
-  // BaseClass,
-  IParseNode,
-  //  ParseNode,
-  ParseNodeSerializeFormatEnumType
-} from "./baseclasses";
-import {
-  // IDataSource,
-  //  MarkdownSectionTagType,
-  MarkdownTagType,
-  // BasicMarkdownSource,
-  // RawMarkdownSource,
-  TaggedStringType
-  //  MarkdownEndTagType
-} from "./dataadapter";
-import {
-  // IPageContent,
   ISectionContent,
-  // ISectionBlockquoteVariant,
-  // ISectionBlockquoteVariantInitializer,
-  // ISectionEmptyVariant,
-  // ISectionEmptyVariantInitializer,
-  // ISectionFillinVariant,
-  // ISectionFillinVariantInitializer,
   ISectionHeadingVariant,
   ISectionHeadingVariantInitializer,
-  // ISectionOrderedListVariant,
-  // ISectionOrderedListVariantInitializer,
-  // ISectionUnorderedListVariant,
-  // ISectionUnorderedListVariantInitializer,
-  // ISectionParagraphVariant,
-  // ISectionParagraphVariantInitializer,
-  // ISentenceContent,
-  // ITerminalContent,
-  // TerminalMetaType,
-  // TerminalMetaEnumType,
-  // OrderedListTypeEnumType,
-  // PageFormatEnumType,
   SectionVariantEnumType
-  //  SectionVariantType
-  // UnorderedListMarkerEnumType,
-  // IWordTerminalMeta,
-  // IWordTerminalMetaInitializer
 } from "./pageContentType";
 import { IPageNode } from "./parsepages";
-// import { ISentenceNode, SentenceNode } from "./parsesentences";
-// import { SectionParseNode_PARAGRAPH } from "./parsesections_paragraph";
-// type SectionNodeMarkdownClassType =
-//   | typeof SectionParseNode_BLOCKQUOTE
-//   | typeof SectionParseNode_HEADING
-//   | typeof SectionParseNode_PARAGRAPH
-//   | typeof SectionParseNode_LIST_ORDERED
-//   | typeof SectionParseNode_LIST_UNORDERED
-//   | typeof SectionParseNode_FILLIN
-//   | typeof SectionParseNode_PHOTOENTRY;
-//   LIST_UNORDERED = "LIST_UNORDERED",
-//   LIST_ORDERED = "LIST_ORDERED",
-//   COMMENT = "COMMENT",
-//   BLOCKQUOTE = "BLOCKQUOTE",
-//   PASSTHRUTAG = "PASSTHRUTAG",
-//   PHOTOENTRY = "PHOTOENTRY",
-//   FILLIN = "FILLIN",
-//   PAGE = "PAGE",
-//   SENTENCE = "SENTENCE",
-//   UNKNOWN = "UNKNOWN" // should always be last
-//
 import { SectionParseNode } from "./parsesections";
 export type ISectionNode = ISectionContent & IParseNode;
 export class SectionParseNode_HEADING extends SectionParseNode

@@ -14,6 +14,8 @@ import {
   //  FileNode,
   ParseNode,
   IParseNode,
+  ParseNodeSerializeColumnPad,
+  ParseNodeSerializeTabular,
   ParseNodeSerializeFormatEnumType
 } from "./baseclasses";
 import { ISectionNode } from "./parsesections";
@@ -44,9 +46,7 @@ export class PageParseNode extends ParseNode implements IPageContent {
     this.logger.diagnosticMode = true;
     this.logger.diagnostic(`${this.constructor.name}`);
     try {
-      //assert(this.parent !== undefined, `parent is undefined`);
       assert(this.dataSource !== undefined, `dataSource is undefined`);
-      // assume datasource is a page (sections where depth=0), parse all direct children i.e., depth=0
       for (
         let current: TaggedStringType = this.dataSource.firstRecord();
         !this.dataSource.EOF();
@@ -74,22 +74,11 @@ export class PageParseNode extends ParseNode implements IPageContent {
     let outputStr: string = "";
     switch (format) {
       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
-        // parent prefix determines this depth's prefix
-        //        prefix = prefix + "+-";
         outputStr = super.serialize(format, label, prefix);
-        // for (let sectionNode of this.sections) {
-        //   label = `${sectionNode.type}`;
-        //   prefix = "  ";
-        //   outputStr = `${outputStr}${sectionNode.serialize(
-        //     format,
-        //     label,
-        //     prefix
-        //   )}`;
-        // }
         prefix = prefix + "  ";
-        for (const [i, value] of this.sections.entries()) {
-          label = `${value.type}`;
-          outputStr = `${outputStr}${value.serialize(
+        for (const [i, section] of this.sections.entries()) {
+          label = `${section.type}`;
+          outputStr = `${outputStr}${section.serialize(
             format,
             label,
             prefix + (i < this.sections.length - 1 ? "| " : "  ")
@@ -98,23 +87,85 @@ export class PageParseNode extends ParseNode implements IPageContent {
         break;
       }
       case ParseNodeSerializeFormatEnumType.TABULAR: {
-        label = label === undefined ? `page` : label;
-        outputStr = super.serialize(format, label);
-        // prefix =
-        //   prefix === undefined
-        //     ? ""
-        //     : " ".padEnd(colWidth0 !== undefined ? colWidth0 : 2) + prefix;
-        // console.log(`page prefix ${prefix}`);
-        if (this.sections.length > 0) {
-          //          prefix = prefix
-          outputStr = `${outputStr}\n`;
-          for (let sectionNode of this.sections) {
-            //            label = `${sectionNode.type}[id=${sectionNode.id}]:`;
-            outputStr =
-              outputStr + `${sectionNode.serialize(format, label, prefix)}\n`;
+        let replacer: any = (key, value) => {
+          // if we get a function, give us the code for that function
+          switch (key) {
+            case "id":
+            case "firstTermIdx":
+            //            case "nextTermIdx":
+            //            case "prevTermIdx":
+            case "recitable":
+            case "audible":
+            case "visible":
+              return undefined;
+            default:
+              return value;
           }
-          outputStr = outputStr.slice(0, -1);
-        }
+        };
+        //        console.log(JSON.stringify(this, null, 2));
+        // console.log(JSON.stringify(this, null, 2));
+        //        let sections: ISectionNode[] = [];
+        // outputStr = JSON.parse(
+        //   JSON.stringify(this, this.stringifyReplacerForTabular)
+        // );
+        outputStr = JSON.stringify(this, replacer, 2);
+        //console.log(JSON.parse(JSON.stringify(this)));
+        // outputStr = "page:";
+        // for (let [key, value] of Object.entries(data)) {
+        //   if (key === "sections") {
+        //     outputStr = `${outputStr} section[${key.length}],`;
+        //     //            sections = <ISectionNode[]>value; // save for the end of list
+        //   } else {
+        //     let strval = `${value}`;
+        //     if (strval.length > 0) {
+        //       outputStr = `${outputStr} ${key}=${strval},`;
+        //     }
+        //   }
+        // }
+        // outputStr = outputStr.slice(0, -1);
+        // for (const [i, section] of sections.entries()) {
+        //   prefix = `page:section[${i}]`;
+        //   outputStr = `${outputStr}\n${section.serialize(format, "", prefix)}`;
+        // }
+        // outputStr = super.serialize(
+        //   format,
+        //   ParseNodeSerializeTabular(this.constructor.name)
+        // );
+        // if (this.sections.length > 0) {
+        //   outputStr = `\n${outputStr}`;
+        //   for (let sectionNode of this.sections) {
+        //     outputStr = `${outputStr}${sectionNode.serialize(
+        //       format,
+        //       ParseNodeSerializeTabular(sectionNode.constructor.name)
+        //     )}`;
+        //     // outputStr = `${outputStr}\n${ParseNodeSerializeTabular(
+        //     //   "section",
+        //     //   sectionNode.constructor.name
+        //     // )}`;
+        //   }
+        // }
+        break;
+      }
+      case ParseNodeSerializeFormatEnumType.JSON: {
+        outputStr = JSON.stringify(this, null, 2);
+        // console.log(
+        //   JSON.stringify(
+        //     this,
+        //     [
+        //       "sections",
+        //       "items",
+        //       "sentences",
+        //       "content",
+        //       "terminals",
+        //       "meta",
+        //       //"sections.items.sentences.meta.terminals.meta.letters",
+        //       "letters",
+        //       "termIdx"
+        //     ],
+        //     2
+        //   )
+        // );
+        // console.log(JSON.parse(JSON.stringify(this, ["termIdx"])));
         break;
       }
       default: {
@@ -124,7 +175,27 @@ export class PageParseNode extends ParseNode implements IPageContent {
     }
     return outputStr;
   }
+  stringifyReplacerForTabular(key: string, value: any) {
+    // only include fields relevant otherwise ignore
+    switch (key) {
+      case "id":
+      case "firstTermIdx":
+      case "nextTermIdx":
+      case "prevTermIdx":
+      case "recitable":
+      case "audible":
+      case "visible":
+        return undefined;
+      default:
+        return value;
+    }
+  }
   transform(): number {
+    //     super.transform();
+    //     for (let section of this.sections) {
+    // /      terminalIdx = section.transform();
+    //     }
+    //     return terminalIdx;
     return 0;
   }
 }

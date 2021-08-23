@@ -9,105 +9,30 @@
  **/
 import { strict as assert } from "assert";
 import {
-  // BaseClass,
-  // IParseNode,
-  // ParseNode,
   ParseNodeSerializeColumnWidths,
   ParseNodeSerializeFormatEnumType
 } from "./baseclasses";
 import {
   endMarkupTag,
   isValidMarkupTag,
-  // Tokenizer,
-  // TokenType,
-  // TokenLabelType,
   TokenListType,
   TokenLiteral,
-  // Token,
   MarkupLabelType
 } from "./tokenizer";
-// import { MarkdownType, MarkdownTagType } from "./dataadapter";
 import {
-  // IPageContent,
-  // ISectionContent,
-  // ISectionBlockquoteVariant,
-  // ISectionBlockquoteVariantInitializer,
-  // ISectionFillinVariant,
-  // ISectionFillinVariantInitializer,
-  // ISectionHeadingVariant,
-  // ISectionHeadingVariantInitializer,
-  // ISectionOrderedListVariant,
-  // ISectionOrderedListVariantInitializer,
-  // ISectionUnorderedListVariant,
-  // ISectionUnorderedListVariantInitializer,
-  // ISectionParagraphVariant,
-  // ISectionParagraphVariantInitializer,
-  // ISentenceContent,
-  // ITerminalContent,
-  // TerminalMetaType,
   TerminalMetaEnumType,
-  // OrderedListTypeEnumType,
-  // PageFormatEnumType,
-  // SectionVariantEnumType,
-  // SectionVariantType,
-  // UnorderedListMarkerEnumType,
-  // IWordTerminalMeta,
-  // IWordTerminalMetaInitializer,
-  // ICurrencyTerminalMeta,
-  // ICurrencyTerminalMetaInitializer,
-  // IDateTerminalMeta,
-  // IDateTerminalMetaInitializer,
-  // DateFormatEnumType,
-  // IPhoneNumberTerminalMeta,
-  // IPhoneNumberTerminalMetaInitializer,
-  // IPunctuationTerminalMeta,
-  // IPunctuationTerminalMetaInitializer,
-  // IReferenceTerminalMeta,
-  // ITimeTerminalMeta,
-  // IWhitespaceTerminalMeta,
   IEmailAddressTerminalMeta,
   IEmailAddressTerminalMetaInitializer,
-  // ITerminalInfo,
   ITerminalInfoInitializer
-  // IYearTerminalMeta
 } from "./pageContentType";
 import { ISentenceNode } from "./parsesentences";
-import {
-  ITerminalNode,
-  // ITerminalParseNode,
-  TerminalNode_MLTAG_
-  // TerminalNode_NUMBER,
-  // TerminalNode_PUNCTUATION,
-  // TerminalNode_WHITESPACE,
-  // TerminalNode_WORD
-} from "./parseterminals";
-// import DictionaryType, {
-//   PronunciationDictionary,
-//   RecognitionDictionary
-// } from "./dictionary";
-import {
-  // AcronymMap,
-  //  BaseClass,
-  // CardinalNumberMap,
-  // Logger,
-  // MonthFromAbbreviationMap,
-  // OrdinalNumberMap,
-  SymbolPronunciationMap
-  // UserContext
-} from "./utilities";
-// import {
-//   IDataSource,
-//   //  MarkdownSectionTagType,
-//   BasicMarkdownSource,
-//   RawMarkdownSource,
-//   TaggedStringType
-// } from "./dataadapter";
+import { ITerminalNode, TerminalNode_MLTAG_ } from "./parseterminals";
+import { SymbolPronunciationMap } from "./utilities";
 export class TerminalNode_MLTAG_EMAILADDRESS extends TerminalNode_MLTAG_
   implements ITerminalNode {
   constructor(parent: ISentenceNode) {
     super(parent);
     Object.defineProperty(this, "userContext", { enumerable: false });
-
     //    this.type = TerminalNodeEnumType.MLTAG;
   }
   type = TerminalMetaEnumType.emailaddress;
@@ -143,9 +68,11 @@ export class TerminalNode_MLTAG_EMAILADDRESS extends TerminalNode_MLTAG_
       ) {
         let parts: string[] = token.content.split(emailSeparators); // look for _ + - as separators. If other valid characters are desired, the regex in the tokenizer
         parts.forEach(part => {
-          this.meta.userName.push(
-            ITerminalInfoInitializer(part, SymbolPronunciationMap.get(part))
-          );
+          let idx: number =
+            this.meta.userName.push(
+              ITerminalInfoInitializer(part, SymbolPronunciationMap.get(part))
+            ) - 1;
+          this.userContext.terminals.push(this.meta.userName[idx]);
           this.content = this.content + part;
         });
       }
@@ -159,15 +86,19 @@ export class TerminalNode_MLTAG_EMAILADDRESS extends TerminalNode_MLTAG_
         token.content,
         SymbolPronunciationMap.get(token.content)
       );
+      this.userContext.terminals.push(this.meta.separator);
+      //      this.userContext.terminals.push(this.meta.userName);
       this.content = this.content + token.content;
 
       token = tokenList.shift()!;
       for (; token.content !== endTag; token = tokenList.shift()!) {
         let parts: string[] = token.content.split(emailSeparators);
         parts.forEach(part => {
-          this.meta.domainName.push(
-            ITerminalInfoInitializer(part, SymbolPronunciationMap.get(part))
-          );
+          let idx: number =
+            this.meta.domainName.push(
+              ITerminalInfoInitializer(part, SymbolPronunciationMap.get(part))
+            ) - 1;
+          this.userContext.terminals.push(this.meta.domainName[idx]);
           this.content = this.content + part;
         });
       }

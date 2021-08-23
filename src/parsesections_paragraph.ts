@@ -9,48 +9,14 @@
  **/
 import { strict as assert } from "assert";
 import {
-  // BaseClass,
-  // IParseNode,
-  // ParseNode,
+  ParseNodeSerializeTabular,
   ParseNodeSerializeFormatEnumType
 } from "./baseclasses";
+import { MarkdownTagType, TaggedStringType } from "./dataadapter";
 import {
-  // IDataSource,
-  //  MarkdownSectionTagType,
-  MarkdownTagType,
-  // BasicMarkdownSource,
-  // RawMarkdownSource,
-  TaggedStringType
-  //  MarkdownEndTagType
-} from "./dataadapter";
-import {
-  // IPageContent,
-  // ISectionContent,
-  // ISectionBlockquoteVariant,
-  // ISectionBlockquoteVariantInitializer,
-  // ISectionEmptyVariant,
-  // ISectionEmptyVariantInitializer,
-  // ISectionFillinVariant,
-  // ISectionFillinVariantInitializer,
-  // ISectionHeadingVariant,
-  // ISectionHeadingVariantInitializer,
-  // ISectionOrderedListVariant,
-  // ISectionOrderedListVariantInitializer,
-  // ISectionUnorderedListVariant,
-  // ISectionUnorderedListVariantInitializer,
   ISectionParagraphVariant,
   ISectionParagraphVariantInitializer,
-  // ISentenceContent,
-  // ITerminalContent,
-  // TerminalMetaType,
-  // TerminalMetaEnumType,
-  // OrderedListTypeEnumType,
-  // PageFormatEnumType,
   SectionVariantEnumType
-  // SectionVariantType,
-  // UnorderedListMarkerEnumType,
-  // IWordTerminalMeta,
-  // IWordTerminalMetaInitializer
 } from "./pageContentType";
 import { IPageNode } from "./parsepages";
 import { ISectionNode } from "./parsesections";
@@ -125,19 +91,23 @@ export class SectionParseNode_PARAGRAPH extends SectionParseNode_LIST
         break;
       }
       case ParseNodeSerializeFormatEnumType.TABULAR: {
-        // prefix =
-        //   prefix === undefined
-        //     ? ""
-        //     : " ".padEnd(colWidth0 !== undefined ? colWidth0 : 2) + prefix;
-        //        label = "paragraph";
-        outputStr = super.serialize(format, label, prefix) + "\n";
+        outputStr = super.serialize(
+          format,
+          ParseNodeSerializeTabular(
+            this.constructor.name,
+            `sentence count=${this.meta.sentences.length}`
+          )
+        );
         //        if (colWidth0 === undefined) colWidth0 = 2;
         for (let sentence of this.meta.sentences) {
           outputStr =
             outputStr +
-            `${sentence.serialize(format, label, " ".padEnd(2) + prefix)}\n`;
+            sentence.serialize(
+              format,
+              sentence.constructor.name,
+              sentence.content
+            );
         }
-        outputStr = outputStr.slice(0, -1);
         break;
       }
       case ParseNodeSerializeFormatEnumType.UNITTEST: {

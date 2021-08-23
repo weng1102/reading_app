@@ -272,11 +272,12 @@ export interface ITerminalInfo {
 export function ITerminalInfoInitializer(
   content?: string,
   altpronunciation?: string,
-  altrecognition?: string
+  altrecognition?: string,
+  termIdx?: number
 ): ITerminalInfo {
   return {
     content: (content === undefined ? "" : content)!,
-    termIdx: 0,
+    termIdx: (termIdx === undefined ? 0 : termIdx)!,
     nextTermIdx: [],
     prevTermIdx: [],
     altpronunciation: (altpronunciation === undefined ? "" : altpronunciation)!,

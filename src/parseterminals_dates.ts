@@ -9,99 +9,34 @@
  **/
 import { strict as assert } from "assert";
 import {
-  // BaseClass,
-  // IParseNode,
-  // ParseNode,
-  ParseNodeSerializeColumnPad,
+  ParseNodeSerializeTabular,
   ParseNodeSerializeFormatEnumType
 } from "./baseclasses";
 import {
-  // endMarkupTag,
   isValidMarkupTag,
-  // Tokenizer,
   TokenType,
-  // TokenLabelType,
   TokenListType,
   TokenLiteral,
   Token,
   MarkupLabelType
 } from "./tokenizer";
-// import { MarkdownType, MarkdownTagType } from "./dataadapter";
 import {
-  // IPageContent,
-  // ISectionContent,
-  // ISectionBlockquoteVariant,
-  // ISectionBlockquoteVariantInitializer,
-  // ISectionFillinVariant,
-  // ISectionFillinVariantInitializer,
-  // ISectionHeadingVariant,
-  // ISectionHeadingVariantInitializer,
-  // ISectionOrderedListVariant,
-  // ISectionOrderedListVariantInitializer,
-  // ISectionUnorderedListVariant,
-  // ISectionUnorderedListVariantInitializer,
-  // ISectionParagraphVariant,
-  // ISectionParagraphVariantInitializer,
-  // ISentenceContent,
-  // ITerminalContent,
-  // TerminalMetaType,
   TerminalMetaEnumType,
-  // OrderedListTypeEnumType,
-  // PageFormatEnumType,
-  // SectionVariantEnumType,
-  // SectionVariantType,
-  // UnorderedListMarkerEnumType,
-  // IWordTerminalMeta,
-  // IWordTerminalMetaInitializer,
-  // ICurrencyTerminalMeta,
-  // ICurrencyTerminalMetaInitializer,
   IDateTerminalMeta,
   IDateTerminalMetaInitializer,
   DateFormatEnumType,
-  // IPhoneNumberTerminalMeta,
-  // IPhoneNumberTerminalMetaInitializer,
-  // IPunctuationTerminalMeta,
-  // IPunctuationTerminalMetaInitializer,
-  // IReferenceTerminalMeta,
-  // ITimeTerminalMeta,
-  // IWhitespaceTerminalMeta,
-  // IEmailAddressTerminalMeta,
-  // IEmailAddressTerminalMetaInitializer,
   ITerminalInfo,
   ITerminalInfoInitializer,
   IYearTerminalMeta,
   IYearTerminalMetaInitializer
 } from "./pageContentType";
 import { ISentenceNode } from "./parsesentences";
+import { ITerminalNode, TerminalNode_MLTAG_ } from "./parseterminals";
 import {
-  ITerminalNode,
-  // ITerminalParseNode,
-  TerminalNode_MLTAG_
-  // TerminalNode_NUMBER,
-  // TerminalNode_PUNCTUATION,
-  // TerminalNode_WHITESPACE,
-  // TerminalNode_WORD
-} from "./parseterminals";
-// import DictionaryType, {
-//   PronunciationDictionary,
-//   RecognitionDictionary
-// } from "./dictionary";
-import {
-  // AcronymMap,
-  //  BaseClass,
   CardinalNumberMap,
-  // Logger,
   MonthFromAbbreviationMap,
   OrdinalNumberMap
-  // UserContext
 } from "./utilities";
-// import {
-//   IDataSource,
-//   //  MarkdownSectionTagType,
-//   BasicMarkdownSource,
-//   RawMarkdownSource,
-//   TaggedStringType
-// } from "./dataadapter";
 
 export class TerminalNode_MLTAG_DATE extends TerminalNode_MLTAG_
   implements ITerminalNode {
@@ -196,6 +131,8 @@ export class TerminalNode_MLTAG_DATE1 extends TerminalNode_MLTAG_DATE
 
       token = tokenList.shift()!;
       this.meta.day = this.parseDay(token);
+      this.userContext.terminals.push(this.meta.day);
+      // this.meta.day.termIdx = this.userContext.nextTerminalIdx;
       this.content = this.content + token.content;
 
       token = tokenList.shift()!;
@@ -204,6 +141,8 @@ export class TerminalNode_MLTAG_DATE1 extends TerminalNode_MLTAG_DATE
 
       token = tokenList.shift()!;
       this.meta.month = this.parseMonth(token);
+      this.userContext.terminals.push(this.meta.month);
+      // this.meta.month.termIdx = this.userContext.nextTerminalIdx;
       this.content = this.content + token.content;
 
       token = tokenList.shift()!;
@@ -212,6 +151,10 @@ export class TerminalNode_MLTAG_DATE1 extends TerminalNode_MLTAG_DATE
 
       token = tokenList.shift()!;
       this.meta.year = this.parseYear(token);
+      this.userContext.terminals.push(this.meta.year.century);
+      this.userContext.terminals.push(this.meta.year.withinCentury);
+      // this.meta.year.century.termIdx = this.userContext.nextTerminalIdx;
+      // this.meta.year.withinCentury.termIdx = this.userContext.nextTerminalIdx;
       this.content = this.content + token.content;
       tokenList.shift(); // discard endtag
     } catch (e) {
@@ -237,7 +180,11 @@ export class TerminalNode_MLTAG_DATE1 extends TerminalNode_MLTAG_DATE
         prefix = prefix + "  ";
         outputStr =
           outputStr +
-          super.serialize(format, `{${this.meta.day.content}}`, prefix) +
+          super.serialize(
+            format,
+            `[${this.meta.day.termIdx}]:{${this.meta.day.content}}`,
+            prefix
+          ) +
           super.serialize(
             format,
             `{${this.meta.whitespace1.content}}`,
@@ -245,7 +192,7 @@ export class TerminalNode_MLTAG_DATE1 extends TerminalNode_MLTAG_DATE
           ) +
           super.serialize(
             format,
-            `{${this.meta.month.content}} ${this.meta.month.altpronunciation}`,
+            `[${this.meta.month.termIdx}]:{${this.meta.month.content}} ${this.meta.month.altpronunciation}`,
             prefix
           ) +
           super.serialize(
@@ -255,7 +202,7 @@ export class TerminalNode_MLTAG_DATE1 extends TerminalNode_MLTAG_DATE
           ) +
           super.serialize(
             format,
-            `{${this.meta.year.century.content}${this.meta.year.withinCentury.content}}`,
+            `[${this.meta.year.century.termIdx},${this.meta.year.withinCentury.termIdx}]:{${this.meta.year.century.content}${this.meta.year.withinCentury.content}}`,
             prefix
           ); //      this.logger.diagnostic(`AbstractTerminalNode: outputStr=${outputStr}`);
         break;
@@ -264,26 +211,64 @@ export class TerminalNode_MLTAG_DATE1 extends TerminalNode_MLTAG_DATE
         if (label === undefined) label = "";
         prefix = prefix === undefined ? "" : " ".padEnd(2) + prefix;
         outputStr =
-          " ".padEnd(2) +
-          `${prefix}{${this.content}}`.padEnd(2) +
-          `${this.constructor.name}`.padEnd(2);
-        prefix = " ".padEnd(2) + prefix;
-        outputStr =
-          outputStr +
-          `\n${" ".padEnd(2)}${prefix}{${this.meta.day.content}}\n${" ".padEnd(
-            2
-          )}${prefix}{${this.meta.punctuation1.content}}\n${" ".padEnd(
-            2
-          )}${prefix}{${this.meta.whitespace1.content}}\n${" ".padEnd(
-            2
-          )}${prefix}{${this.meta.month.content}  ${
-            this.meta.month.altpronunciation
-          }
-        }\n${" ".padEnd(2)}${prefix}{${
-            this.meta.whitespace2.content
-          }}\n${" ".padEnd(2)}${prefix}{${this.meta.year.century.content}${
-            this.meta.year.withinCentury.content
-          }}\n`;
+          super.serialize(format) +
+          super.serialize(
+            format,
+            ParseNodeSerializeTabular(
+              "day",
+              this.meta.day.content,
+              this.meta.day.altpronunciation,
+              this.meta.day.termIdx.toString()
+            )
+          ) +
+          super.serialize(
+            format,
+            ParseNodeSerializeTabular(
+              "punctuation (optional)",
+              this.meta.punctuation1.content
+            )
+          ) +
+          super.serialize(
+            format,
+            ParseNodeSerializeTabular(
+              "whitespace",
+              this.meta.whitespace1.content
+            )
+          ) +
+          super.serialize(
+            format,
+            ParseNodeSerializeTabular(
+              "month",
+              this.meta.month.content,
+              this.meta.month.altpronunciation,
+              this.meta.month.termIdx.toString()
+            )
+          ) +
+          super.serialize(
+            format,
+            ParseNodeSerializeTabular(
+              "whitespace",
+              this.meta.whitespace2.content
+            )
+          ) +
+          super.serialize(
+            format,
+            ParseNodeSerializeTabular(
+              "century",
+              this.meta.year.century.content,
+              this.meta.year.century.altpronunciation,
+              this.meta.year.century.termIdx.toString()
+            )
+          ) +
+          super.serialize(
+            format,
+            ParseNodeSerializeTabular(
+              "year",
+              this.meta.year.withinCentury.content,
+              this.meta.year.withinCentury.altpronunciation,
+              this.meta.year.withinCentury.termIdx.toString()
+            )
+          );
         //      this.logger.diagnostic(`AbstractTerminalNode: outputStr=${outputStr}`);
         break;
       }
@@ -368,6 +353,8 @@ export class TerminalNode_MLTAG_DATE2 extends TerminalNode_MLTAG_DATE
 
       token = tokenList.shift()!;
       this.meta.month = this.parseMonth(token);
+      this.userContext.terminals.push(this.meta.month);
+      // this.meta.month.termIdx = this.userContext.nextTerminalIdx;
       this.content = this.content + token.content;
 
       // optional punctuation for abbreviated month
@@ -387,6 +374,8 @@ export class TerminalNode_MLTAG_DATE2 extends TerminalNode_MLTAG_DATE
 
       token = tokenList.shift()!;
       this.meta.day = this.parseDay(token);
+      this.userContext.terminals.push(this.meta.day);
+      // this.meta.day.termIdx = this.userContext.nextTerminalIdx;
       this.content = this.content + token.content;
 
       token = tokenList.shift()!;
@@ -409,6 +398,10 @@ export class TerminalNode_MLTAG_DATE2 extends TerminalNode_MLTAG_DATE
         this.content +
         this.meta.year.century.content +
         this.meta.year.withinCentury.content;
+      this.userContext.terminals.push(this.meta.year.century);
+      this.userContext.terminals.push(this.meta.year.withinCentury);
+      //      this.meta.year.century.termIdx = this.userContext.nextTerminalIdx;
+      //      this.meta.year.withinCentury.termIdx = this.userContext.nextTerminalIdx;
       tokenList.shift(); // discard endtag
     } catch (e) {
       this.logger.error(`${this.constructor.name}: ${e.message}`);
@@ -431,7 +424,7 @@ export class TerminalNode_MLTAG_DATE2 extends TerminalNode_MLTAG_DATE
           outputStr +
           super.serialize(
             format,
-            `{${this.meta.month.content}} ${this.meta.month.altpronunciation}`,
+            `[${this.meta.month.termIdx}]:{${this.meta.month.content}} ${this.meta.month.altpronunciation}`,
             prefix
           ) +
           super.serialize(
@@ -444,7 +437,11 @@ export class TerminalNode_MLTAG_DATE2 extends TerminalNode_MLTAG_DATE
             `{${this.meta.whitespace1.content}}`,
             prefix
           ) +
-          super.serialize(format, `{${this.meta.day.content}}`, prefix) +
+          super.serialize(
+            format,
+            `[${this.meta.day.termIdx}]:{${this.meta.day.content}}`,
+            prefix
+          ) +
           super.serialize(
             format,
             `{${this.meta.punctuation2.content}}`,
@@ -463,31 +460,52 @@ export class TerminalNode_MLTAG_DATE2 extends TerminalNode_MLTAG_DATE
         break;
       }
       case ParseNodeSerializeFormatEnumType.TABULAR: {
-        if (prefix === undefined) prefix = "";
-        if (label === undefined) label = "";
-        let colWidth0 = 2;
-        outputStr =
-          " ".padEnd(colWidth0) +
-          `${prefix}{${this.content}}`.padEnd(2) +
-          `${this.constructor.name}`.padEnd(2);
-        colWidth0 += 2;
+        outputStr = ParseNodeSerializeTabular(
+          this.constructor.name,
+          this.content,
+          label === undefined ? "" : label
+        );
         outputStr =
           outputStr +
-          `\n${" ".padEnd(colWidth0)}${prefix}{${this.meta.month.content}} ${
-            this.meta.month.altpronunciation
-          }\n${" ".padEnd(colWidth0)}${prefix}{${
+          `\n${ParseNodeSerializeTabular(
+            "month",
+            this.meta.month.content,
+            this.meta.month.altpronunciation,
+            this.meta.month.termIdx.toString()
+          )}` +
+          `\n${ParseNodeSerializeTabular(
+            "punctuation (optional)",
             this.meta.punctuation1.content
-          }}\n${" ".padEnd(colWidth0)}${prefix}{${
+          )}` +
+          `\n${ParseNodeSerializeTabular(
+            "whitespace",
             this.meta.whitespace1.content
-          }}\n${" ".padEnd(colWidth0)}${prefix}{${
-            this.meta.day.content
-          }}\n${" ".padEnd(colWidth0)}${prefix}{${
+          )}` +
+          `\n${ParseNodeSerializeTabular(
+            "day",
+            this.meta.day.content,
+            this.meta.day.altpronunciation,
+            this.meta.day.termIdx.toString()
+          )}` +
+          `\n${ParseNodeSerializeTabular(
+            "punctuation",
             this.meta.punctuation2.content
-          }}\n${" ".padEnd(colWidth0)}${prefix}{${
+          )}` +
+          `\n${ParseNodeSerializeTabular(
+            "whitespace",
             this.meta.whitespace2.content
-          }}\n${" ".padEnd(colWidth0)}${prefix}{${
+          )}` +
+          `\n${ParseNodeSerializeTabular(
+            "century",
             this.meta.year.century.content
-          }${this.meta.year.withinCentury.content}}\n`;
+            //            this.meta.year.century.termIdx.toString()
+          )}` +
+          `\n${ParseNodeSerializeTabular(
+            "year",
+            this.meta.year.withinCentury.content,
+            this.meta.year.century.termIdx.toString()
+          )}`;
+
         //      this.logger.diagnostic(`AbstractTerminalNode: outputStr=${outputStr}`);
         break;
       }
@@ -531,6 +549,8 @@ export class TerminalNode_MLTAG_DATE3 extends TerminalNode_MLTAG_DATE
 
       token = tokenList.shift()!;
       this.meta.month = this.parseMonth(token);
+      this.userContext.terminals.push(this.meta.month);
+      //      this.meta.month.termIdx = this.userContext.nextTerminalIdx;
       this.content = this.content + token.content;
 
       token = tokenList.shift()!;
@@ -549,6 +569,8 @@ export class TerminalNode_MLTAG_DATE3 extends TerminalNode_MLTAG_DATE
 
       token = tokenList.shift()!;
       this.meta.day = this.parseDay(token);
+      this.userContext.terminals.push(this.meta.day);
+      //      this.meta.day.termIdx = this.userContext.nextTerminalIdx;
       this.content = this.content + token.content;
 
       tokenList.shift(); // discard endtag
@@ -579,7 +601,7 @@ export class TerminalNode_MLTAG_DATE3 extends TerminalNode_MLTAG_DATE
           outputStr +
           super.serialize(
             format,
-            `{${this.meta.month.content}}` +
+            `[${this.meta.month.termIdx}]{${this.meta.month.content}}` +
               ` ${this.meta.month.altpronunciation}`,
             prefix
           ) +
@@ -593,29 +615,50 @@ export class TerminalNode_MLTAG_DATE3 extends TerminalNode_MLTAG_DATE
             `{${this.meta.whitespace1.content}}`,
             prefix
           ) +
-          super.serialize(format, `{${this.meta.day.content}}`, prefix);
+          super.serialize(
+            format,
+            `[${this.meta.day.termIdx}]{${this.meta.day.content}}`,
+            prefix
+          );
         break;
       }
       case ParseNodeSerializeFormatEnumType.TABULAR: {
         if (label === undefined) label = "";
         if (prefix === undefined) prefix = "";
-        let colWidth0 = 2;
         outputStr =
-          " ".padEnd(colWidth0) +
-          `${prefix}{${this.content}}`.padEnd(20) +
-          `${this.constructor.name}`.padEnd(20);
-        colWidth0 += 2;
-        outputStr =
-          outputStr +
-          `\n${" ".padEnd(colWidth0)}${prefix}{${this.meta.month.content}  ${
-            this.meta.month.altpronunciation
-          }
-          }}\n${" ".padEnd(colWidth0)}${prefix}{${
-            this.meta.punctuation1.content
-          }}\n${" ".padEnd(colWidth0)}${prefix}{${
-            this.meta.whitespace1.content
-          }}\n${" ".padEnd(colWidth0)}${prefix}{${this.meta.day.content}\n`;
-        //      this.logger.diagnostic(`AbstractTerminalNode: outputStr=${outputStr}`);
+          super.serialize(format) +
+          super.serialize(
+            format,
+            ParseNodeSerializeTabular(
+              "month",
+              this.meta.month.content,
+              this.meta.month.altpronunciation,
+              this.meta.month.termIdx.toString()
+            )
+          ) +
+          super.serialize(
+            format,
+            ParseNodeSerializeTabular(
+              "punctuation (optional)",
+              this.meta.punctuation1.content
+            )
+          ) +
+          super.serialize(
+            format,
+            ParseNodeSerializeTabular(
+              "whitespace",
+              this.meta.whitespace1.content
+            )
+          ) +
+          super.serialize(
+            format,
+            ParseNodeSerializeTabular(
+              "day",
+              this.meta.day.content,
+              this.meta.day.altpronunciation,
+              this.meta.day.termIdx.toString()
+            )
+          );
         break;
       }
       case ParseNodeSerializeFormatEnumType.JSON: {

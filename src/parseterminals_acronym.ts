@@ -9,98 +9,21 @@
  **/
 import { strict as assert } from "assert";
 import {
-  // BaseClass,
-  // IParseNode,
-  // ParseNode,
+  ParseNodeSerializeColumnWidths,
   ParseNodeSerializeFormatEnumType,
-  ParseNodeSerializeColumnWidths
+  ParseNodeSerializeTabular
 } from "./baseclasses";
+import { TokenListType, Token } from "./tokenizer";
 import {
-  // endMarkupTag,
-  // isValidMarkupTag,
-  // Tokenizer,
-  // TokenType,
-  // TokenLabelType,
-  TokenListType,
-  // TokenLiteral,
-  Token
-  // MarkupLabelType
-} from "./tokenizer";
-// import { MarkdownType, MarkdownTagType } from "./dataadapter";
-import {
-  // IPageContent,
-  // ISectionContent,
-  // ISectionBlockquoteVariant,
-  // ISectionBlockquoteVariantInitializer,
-  // ISectionFillinVariant,
-  // ISectionFillinVariantInitializer,
-  // ISectionHeadingVariant,
-  // ISectionHeadingVariantInitializer,
-  // ISectionOrderedListVariant,
-  // ISectionOrderedListVariantInitializer,
-  // ISectionUnorderedListVariant,
-  // ISectionUnorderedListVariantInitializer,
-  // ISectionParagraphVariant,
-  // ISectionParagraphVariantInitializer,
-  // ISentenceContent,
-  // ITerminalContent,
-  // TerminalMetaType,
   TerminalMetaEnumType,
-  // OrderedListTypeEnumType,
-  // PageFormatEnumType,
-  // SectionVariantEnumType,
-  // SectionVariantType,
-  // UnorderedListMarkerEnumType,
-  // IWordTerminalMeta,
-  // IWordTerminalMetaInitializer,
-  // ICurrencyTerminalMeta,
-  // ICurrencyTerminalMetaInitializer,
-  // IDateTerminalMeta,
-  // IDateTerminalMetaInitializer,
-  // DateFormatEnumType,
   IAcronymTerminalMeta,
   IAcronymTerminalMetaInitializer,
-  // IPunctuationTerminalMeta,
-  // IPunctuationTerminalMetaInitializer,
-  // IReferenceTerminalMeta,
-  // ITimeTerminalMeta,
-  // IWhitespaceTerminalMeta,
-  // IEmailAddressTerminalMeta,
-  // IEmailAddressTerminalMetaInitializer,
-  // ITerminalInfo,
+  ITerminalInfo,
   ITerminalInfoInitializer
-  // IYearTerminalMeta
 } from "./pageContentType";
 import { ISentenceNode } from "./parsesentences";
-import {
-  AbstractTerminalNode,
-  ITerminalNode
-  // ITerminalParseNode,
-  // TerminalNode_NUMBER,
-  // TerminalNode_PUNCTUATION,
-  // TerminalNode_WHITESPACE,
-  // TerminalNode_WORD
-} from "./parseterminals";
-// import DictionaryType, {
-//   PronunciationDictionary,
-//   RecognitionDictionary
-// } from "./dictionary";
-import {
-  AcronymMap
-  //  BaseClass,
-  // CardinalNumberMap,
-  // Logger,
-  // MonthFromAbbreviationMap,
-  // OrdinalNumberMap,
-  // UserContext
-} from "./utilities";
-// import {
-//   IDataSource,
-//   //  MarkdownSectionTagType,
-//   BasicMarkdownSource,
-//   RawMarkdownSource,
-//   TaggedStringType
-// } from "./dataadapter";
+import { AbstractTerminalNode, ITerminalNode } from "./parseterminals";
+import { AcronymMap } from "./utilities";
 export class TerminalNode_ACRONYM extends AbstractTerminalNode
   implements ITerminalNode {
   constructor(parent: ISentenceNode) {
@@ -125,13 +48,15 @@ export class TerminalNode_ACRONYM extends AbstractTerminalNode
       let expansionList = expansionCsv.split(",");
       let letter = [...token.content];
       for (let pos = 0; pos < letter.length; pos++) {
-        this.meta.letters.push(
-          ITerminalInfoInitializer(
-            letter[pos],
-            expansionList[pos],
-            expansionList[pos]
-          )
-        );
+        let idx =
+          this.meta.letters.push(
+            ITerminalInfoInitializer(
+              letter[pos],
+              expansionList[pos], //altpronunication
+              expansionList[pos] //altrecognition
+            )
+          ) - 1;
+        this.userContext.terminals.push(this.meta.letters[idx]);
       }
     } catch (e) {
       this.logger.error(`${e.message} `);
@@ -179,11 +104,16 @@ export class TerminalNode_ACRONYM extends AbstractTerminalNode
           `${this.constructor.name}`.padEnd(ParseNodeSerializeColumnWidths[1]);
         //        colWidth0 += 2;
         this.meta.letters.forEach(letter => {
+          let termIdx: string =
+            letter.termIdx !== 0 ? `termIdx=${letter.termIdx}` : "";
           outputStr =
             outputStr +
-            `\n${" ".padEnd(2)}${prefix}{${letter.content}} ${
-              letter.altrecognition
-            }`;
+            `\n${ParseNodeSerializeTabular(
+              "letter",
+              letter.content,
+              letter.altpronunciation,
+              termIdx
+            )}`;
         });
         outputStr = `${outputStr}\n`;
         break;

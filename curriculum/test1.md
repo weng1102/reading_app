@@ -44,7 +44,7 @@ This paragraph is terminated by an empty newline.
 
 This paragraph is an implicit new paragraph that follows an empty newline.
 
-My name is Ronlyn Goo. I am 58 years old. I have a Bachelor's degree in Chemical Engineering from UC Berkeley. I also have an MBA degree from Stanford. I live at 20680 Seaton Ave. My current occupation is stroke recovery. My cell phone number is (408) 206-5963. In case of emergency, please call Wen at (408) 267-6076. Yay! // blank line terminates paragraph. (Good luck with parenthetics.) What about lasting [sic]. Sentences ending with "quotes." What about sentences ending with "quotes?" What about abbreviations like Ca. or Or. trailing sentence with no formal terminal punctuation
+My name is Ronlyn Goo. I am 58 years old. I have a Bachelor's degree in Chemical Engineering from UC Berkeley. I also have an MBA degree from Stanford. I live at 20680 Seaton Ave. My current occupation is stroke recovery. My cell phone number is (408) 206-5963. In case of emergency, please call Wen at (408) 267-6076. Yay! // blank line terminates paragraph. (Good luck with parentheticals.) What about lasting [sic]. Sentences ending with "quotes." What about sentences ending with "quotes?" What about abbreviations like Ca. or Or. trailing sentence with no formal terminal punctuation
 
 ## heading level 2
 
