@@ -5,6 +5,7 @@
 
 "use strict";
 ///import { endMarkupTag, TokenLiteral } from './tokentypes';
+import { IsError } from "./utilities";
 import { Logger } from "./logger";
 // Definition of tokens to be tokenized (Map guarantees order)
 
@@ -325,10 +326,13 @@ export class Tokenizer {
       this.logger.diagnostic(this.serialize(tokenList));
       return tokenList;
     } catch (e) {
-      // try
-      console.log(
-        `Tokenizer.tokenize() caught/rethrew exception - ${e.message}`
-      );
+      if (IsError(e)) {
+        this.logger.error(
+          `Tokenizer.tokenize() caught/rethrew exception - ${e.message}`
+        );
+      } else {
+        throw e;
+      }
       throw e;
     } // catch
   } //tokens method
@@ -392,12 +396,16 @@ export class Tokenizer {
           //          console.log("no matches on "+appSpecificTag.label);
         }
       } // for-in
-      return result;
     } catch (e) {
-      console.error(
-        `Tokenizer.insertMarkupTags(): Caught exception - ${e.message}`
-      );
-      throw e;
+      if (IsError(e)) {
+        this.logger.error(
+          `Tokenizer.insertMarkupTags(): Caught exception - ${e.message}`
+        );
+      } else {
+        throw e;
+      }
+    } finally {
+      return result;
     }
   }
   serialize(tokenList: TokenListType) {

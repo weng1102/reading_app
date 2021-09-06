@@ -8,6 +8,7 @@
  *
  **/
 import { strict as assert } from "assert";
+import { IsError } from "./utilities";
 import {
   ParseNodeSerializeTabular,
   ParseNodeSerializeFormatEnumType
@@ -63,9 +64,11 @@ export class SectionParseNode_PARAGRAPH extends SectionParseNode_LIST
       if (current.tagType === MarkdownTagType.PARAGRAPH_END)
         this.dataSource.nextRecord(); // move to next grouping
     } catch (e) {
-      this.logger.error(e.message);
-      this.dataSource.nextRecord(); // move to next grouping
-      // forward record to next SECTION_END
+      if (IsError(e)) {
+        this.logger.error(e.message);
+      } else {
+        throw e;
+      }
     }
     return 0;
   }

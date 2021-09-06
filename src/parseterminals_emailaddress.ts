@@ -8,6 +8,7 @@
  *
  **/
 import { strict as assert } from "assert";
+import { IsError } from "./utilities";
 import {
   ParseNodeSerializeColumnWidths,
   ParseNodeSerializeFormatEnumType
@@ -70,7 +71,14 @@ export class TerminalNode_MLTAG_EMAILADDRESS extends TerminalNode_MLTAG_
         parts.forEach(part => {
           let idx: number =
             this.meta.userName.push(
-              ITerminalInfoInitializer(part, SymbolPronunciationMap.get(part))
+              ITerminalInfoInitializer(
+                part,
+                SymbolPronunciationMap.get(part),
+                undefined,
+                true,
+                true,
+                true
+              )
             ) - 1;
           this.userContext.terminals.push(this.meta.userName[idx]);
           this.content = this.content + part;
@@ -84,7 +92,11 @@ export class TerminalNode_MLTAG_EMAILADDRESS extends TerminalNode_MLTAG_
       );
       this.meta.separator = ITerminalInfoInitializer(
         token.content,
-        SymbolPronunciationMap.get(token.content)
+        SymbolPronunciationMap.get(token.content),
+        undefined,
+        true,
+        true,
+        true
       );
       this.userContext.terminals.push(this.meta.separator);
       //      this.userContext.terminals.push(this.meta.userName);
@@ -96,7 +108,14 @@ export class TerminalNode_MLTAG_EMAILADDRESS extends TerminalNode_MLTAG_
         parts.forEach(part => {
           let idx: number =
             this.meta.domainName.push(
-              ITerminalInfoInitializer(part, SymbolPronunciationMap.get(part))
+              ITerminalInfoInitializer(
+                part,
+                SymbolPronunciationMap.get(part),
+                undefined,
+                true,
+                true,
+                true
+              )
             ) - 1;
           this.userContext.terminals.push(this.meta.domainName[idx]);
           this.content = this.content + part;
@@ -104,7 +123,11 @@ export class TerminalNode_MLTAG_EMAILADDRESS extends TerminalNode_MLTAG_
       }
       //      tokenList.shift(); //discard endTag
     } catch (e) {
-      this.logger.error(`${e.message} `);
+      if (IsError(e)) {
+        this.logger.error(e.message);
+      } else {
+        throw e;
+      }
     } finally {
       return tokenList.length;
     }

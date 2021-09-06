@@ -279,7 +279,7 @@ tokenize(sentence: string): TokenListType {
       this.logger.diagnostic(this.serialize(tokenList));
       return tokenList;
     } // try
-    catch(e) {
+    catch(e: any) {
       console.log("Tokenizer.tokenize() caught/rethrew exception - "+e.message);
       throw(e);
     } // catch
@@ -326,7 +326,7 @@ tokenize(sentence: string): TokenListType {
       }); // appSpecificTag.forEach()
       return result;
     }
-    catch(e) {
+    catch(e: any) {
       console.error("Tokenizer.insertMarkupTags(): Caught exception - "+e.message);
       throw(e);
     }

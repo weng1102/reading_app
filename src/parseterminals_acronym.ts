@@ -8,6 +8,7 @@
  *
  **/
 import { strict as assert } from "assert";
+import { IsError } from "./utilities";
 import {
   ParseNodeSerializeColumnWidths,
   ParseNodeSerializeFormatEnumType,
@@ -59,7 +60,11 @@ export class TerminalNode_ACRONYM extends AbstractTerminalNode
         this.userContext.terminals.push(this.meta.letters[idx]);
       }
     } catch (e) {
-      this.logger.error(`${e.message} `);
+      if (IsError(e)) {
+        this.logger.error(e.message);
+      } else {
+        throw e;
+      }
     } finally {
       return tokenList.length;
     }

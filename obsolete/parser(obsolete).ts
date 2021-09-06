@@ -490,7 +490,7 @@ export class SentenceContent extends Content {
           tokenIdx++;
         }
       }
-      catch(e) {
+      catch(e: any) {
         this.logger.error("Unexpected error: "+e.message);
         console.log(e.stack);
         tokenIdx++;

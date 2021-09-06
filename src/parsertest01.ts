@@ -19,12 +19,13 @@ inputMdFile = "curriculum/test1.md";
 //inputMdFile = "curriculum/lists.md";
 //inputMdFile = "curriculum/shortlists.md";
 //inputMdFile = "curriculum/terminals_date3.md";
-inputMdFile = "curriculum/terminals_date1.md";
 //inputMdFile = "curriculum/terminals_email.md";
 inputMdFile = "curriculum/terminals.md";
-inputMdFile = "curriculum/terminals_email.md";
-inputMdFile = "curriculum/test1.md";
 inputMdFile = "curriculum/terminals_acronym.md";
+inputMdFile = "curriculum/test1.md";
+inputMdFile = "curriculum/terminals_date2.md";
+inputMdFile = "curriculum/terminals.md";
+inputMdFile = "curriculum/terminals_email.md";
 let logger = new Logger(this);
 ///let pageNode = new PageContent(this);
 //let timestamp: string = new MyDate().yyyymmddhhmmss();
@@ -64,7 +65,9 @@ logger.info(
 );
 let pageNode = new PageParseNode(this);
 linesParsed = pageNode.dataSource.connect(inputMdFile);
-pageNode.dataSource.serialize();
+console.log(
+  pageNode.dataSource.serialize(ParseNodeSerializeFormatEnumType.TABULAR)
+);
 pageNode.parse();
 pageNode.transform();
 //console.log(`nextWordIdx=${pageNode.userContext.nextTerminalIdx}`);
@@ -81,7 +84,7 @@ console.log(
 console.log(
   pageNode.serialize(ParseNodeSerializeFormatEnumType.TABULAR, "page", "")
 );
-//console.log(pageNode.userContext.terminals.serialize());
+console.log(pageNode.userContext.terminals.serialize());
 // pageNode.userContext.terminals[566].termIdx = 8888;
 // pageNode.userContext.terminals[567].termIdx = 9999;
 // console.log(pageNode.userContext.terminals.serialize());

@@ -8,6 +8,7 @@
  *
  **/
 import { strict as assert } from "assert";
+import { IsError } from "./utilities";
 import {
   ParseNodeSerializeTabular,
   ParseNodeSerializeFormatEnumType
@@ -96,12 +97,21 @@ export class TerminalNode_MLTAG_DATE extends TerminalNode_MLTAG_
   }
   parseWhitespace(token: Token): ITerminalInfo {
     let ws: ITerminalInfo = ITerminalInfoInitializer();
+    // content: string = "",
+    // altpronunciation: string = "",
+    // altrecognition: string = "",
+    // recitable: boolean = true,
+    // audible: boolean = true,
+    // visible: boolean = true
     const postfix = "parsing whitespace";
     assert(token !== undefined, `token undefined ${postfix}`);
     assert(
       token.type === TokenType.WHITESPACE,
       `expected whitespace not "${token.content}" ${postfix}`
     );
+    ws.visible = true;
+    ws.audible = false;
+    ws.recitable = false;
     ws.content = token.content;
     return ws;
   }
@@ -132,11 +142,11 @@ export class TerminalNode_MLTAG_DATE1 extends TerminalNode_MLTAG_DATE
       token = tokenList.shift()!;
       this.meta.day = this.parseDay(token);
       this.userContext.terminals.push(this.meta.day);
-      // this.meta.day.termIdx = this.userContext.nextTerminalIdx;
       this.content = this.content + token.content;
 
       token = tokenList.shift()!;
       this.meta.whitespace1 = this.parseWhitespace(token);
+      this.userContext.terminals.push(this.meta.whitespace1);
       this.content = this.content + token.content;
 
       token = tokenList.shift()!;
@@ -147,19 +157,21 @@ export class TerminalNode_MLTAG_DATE1 extends TerminalNode_MLTAG_DATE
 
       token = tokenList.shift()!;
       this.meta.whitespace2 = this.parseWhitespace(token);
+      this.userContext.terminals.push(this.meta.whitespace2);
       this.content = this.content + token.content;
 
       token = tokenList.shift()!;
       this.meta.year = this.parseYear(token);
       this.userContext.terminals.push(this.meta.year.century);
       this.userContext.terminals.push(this.meta.year.withinCentury);
-      // this.meta.year.century.termIdx = this.userContext.nextTerminalIdx;
-      // this.meta.year.withinCentury.termIdx = this.userContext.nextTerminalIdx;
       this.content = this.content + token.content;
       tokenList.shift(); // discard endtag
     } catch (e) {
-      this.logger.error(`${this.constructor.name}: ${e.message}`);
-      throw e;
+      if (IsError(e)) {
+        this.logger.error(`${this.constructor.name}: ${e.message}`);
+      } else {
+        throw e;
+      }
     } finally {
       return tokenList.length;
     }
@@ -338,6 +350,7 @@ export class TerminalNode_MLTAG_DATE2 extends TerminalNode_MLTAG_DATE
     super(parent);
     this.meta.format = DateFormatEnumType.date2;
   }
+  meta: IDateTerminalMeta = IDateTerminalMetaInitializer();
   parse(tokenList: TokenListType): number {
     //      this.logger.diagnosticMode = true;
     try {
@@ -354,7 +367,6 @@ export class TerminalNode_MLTAG_DATE2 extends TerminalNode_MLTAG_DATE
       token = tokenList.shift()!;
       this.meta.month = this.parseMonth(token);
       this.userContext.terminals.push(this.meta.month);
-      // this.meta.month.termIdx = this.userContext.nextTerminalIdx;
       this.content = this.content + token.content;
 
       // optional punctuation for abbreviated month
@@ -366,16 +378,20 @@ export class TerminalNode_MLTAG_DATE2 extends TerminalNode_MLTAG_DATE
         this.meta.month.content.length === 3 // will erroneously match "May."
       ) {
         this.meta.punctuation1.content = token.content;
+        // this.meta.punctuation1.visible = true;
+        // this.meta.punctuation1.audible = false;
+        // this.meta.punctuation1.recitable = false;
+        this.userContext.terminals.push(this.meta.punctuation1);
         this.content = this.content + token.content;
         token = tokenList.shift()!;
       }
       this.meta.whitespace1 = this.parseWhitespace(token);
+      this.userContext.terminals.push(this.meta.whitespace1);
       this.content = this.content + token.content;
 
       token = tokenList.shift()!;
       this.meta.day = this.parseDay(token);
       this.userContext.terminals.push(this.meta.day);
-      // this.meta.day.termIdx = this.userContext.nextTerminalIdx;
       this.content = this.content + token.content;
 
       token = tokenList.shift()!;
@@ -385,11 +401,16 @@ export class TerminalNode_MLTAG_DATE2 extends TerminalNode_MLTAG_DATE
         token.content === TokenLiteral.COMMA
       ) {
         this.meta.punctuation2.content = token.content;
+        // this.meta.punctuation2.visible = true;
+        // this.meta.punctuation2.audible = false;
+        // this.meta.punctuation2.recitable = false;
+        this.userContext.terminals.push(this.meta.punctuation2);
         this.content = this.content + token.content;
         token = tokenList.shift()!;
       }
       if (token !== undefined && token.type === TokenType.WHITESPACE) {
         this.meta.whitespace2 = this.parseWhitespace(token);
+        this.userContext.terminals.push(this.meta.whitespace2);
         this.content = this.content + token.content;
         token = tokenList.shift()!;
       }
@@ -404,8 +425,11 @@ export class TerminalNode_MLTAG_DATE2 extends TerminalNode_MLTAG_DATE
       //      this.meta.year.withinCentury.termIdx = this.userContext.nextTerminalIdx;
       tokenList.shift(); // discard endtag
     } catch (e) {
-      this.logger.error(`${this.constructor.name}: ${e.message}`);
-      throw e;
+      if (IsError(e)) {
+        this.logger.error(`${this.constructor.name}: ${e.message}`);
+      } else {
+        throw e;
+      }
     } finally {
       return tokenList.length;
     }
@@ -550,7 +574,6 @@ export class TerminalNode_MLTAG_DATE3 extends TerminalNode_MLTAG_DATE
       token = tokenList.shift()!;
       this.meta.month = this.parseMonth(token);
       this.userContext.terminals.push(this.meta.month);
-      //      this.meta.month.termIdx = this.userContext.nextTerminalIdx;
       this.content = this.content + token.content;
 
       token = tokenList.shift()!;
@@ -561,21 +584,29 @@ export class TerminalNode_MLTAG_DATE3 extends TerminalNode_MLTAG_DATE
         this.meta.month.content.length === 3 // will erroneously match "May."
       ) {
         this.meta.punctuation1.content = token.content;
+        this.meta.punctuation1.visible = true;
+        this.meta.punctuation1.audible = false;
+        this.meta.punctuation1.recitable = false;
+        this.userContext.terminals.push(this.meta.punctuation1);
         this.content = this.content + token.content;
         token = tokenList.shift()!;
       }
       this.meta.whitespace1 = this.parseWhitespace(token);
+      this.userContext.terminals.push(this.meta.whitespace1);
       this.content = this.content + token.content;
 
       token = tokenList.shift()!;
       this.meta.day = this.parseDay(token);
       this.userContext.terminals.push(this.meta.day);
-      //      this.meta.day.termIdx = this.userContext.nextTerminalIdx;
       this.content = this.content + token.content;
 
       tokenList.shift(); // discard endtag
     } catch (e) {
-      this.logger.error(`${e.message}; ${errorMsg} ${errorMsgPostFix}`);
+      if (IsError(e)) {
+        this.logger.error(`${e.message}; ${errorMsg} ${errorMsgPostFix}`);
+      } else {
+        throw e;
+      }
       throw e;
     } finally {
       return tokenList.length;

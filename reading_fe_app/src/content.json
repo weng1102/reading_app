@@ -1,0 +1,357 @@
+{
+  "id": 0,
+  "name": "Three-Word Sentences",
+  "doctype": "Sentence bank",
+  "description": "",
+  "created": "2020/11/02",
+  "modified": "2020/11/02",
+  "transformed": "2020/11/03 11:07:15",
+  "lastWordSeq": 22,
+  "sections": [
+    {
+      "id": 0,
+      "name": "Ronlyn's three-word sentences",
+      "date": "",
+      "description": "",
+      "format": "ul",
+      "wordseqlast": 2,
+      "owner": "Ronlyn",
+      "firstSectionWordSeq": 0,
+      "prevSectionWordSeq": 0,
+      "nextSectionWordSeq": 6,
+      "sentences": [
+        {
+          "id": 0,
+          "content": "I'm Ronlyn Goo.",
+          "prevSentenceWordSeq": 0,
+          "nextSentenceWordSeq": 3,
+          "words": [
+            {
+              "id": 0,
+              "wordNodeIdx": 0,
+              "nextSentenceWordSeq": 3,
+              "nextWordSeq": [1],
+              "prevWordSeq": [0],
+              "active": false,
+              "visited": false,
+              "word": "I'm"
+            },
+            {
+              "word": " "
+            },
+            {
+              "id": 1,
+              "wordNodeIdx": 1,
+              "prevWordSeq": [0],
+              "nextWordSeq": [2],
+              "active": true,
+              "altrecognition": "\"^(ron|ro[ns]a{0,1}l[aiye]nd{0,1})$\"",
+              "visited": false,
+              "word": "Ronlyn"
+            },
+            {
+              "word": " "
+            },
+            {
+              "id": 2,
+              "wordNodeIdx": 2,
+              "prevWordSeq": [1],
+              "nextWordSeq": [3],
+              "active": false,
+              "altrecognition": "\"^(g[ou])\"",
+              "visited": false,
+              "word": "Goo"
+            },
+            {
+              "word": "."
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "content": "I'm a woman.",
+          "prevSentenceWordSeq": 3,
+          "nextSentenceWordSeq": 6,
+          "words": [
+            {
+              "id": 0,
+              "wordNodeIdx": 3,
+              "prevWordSeq": [2],
+              "nextWordSeq": [4],
+              "active": false,
+              "visited": false,
+              "word": "I'm"
+            },
+            {
+              "word": " "
+            },
+            {
+              "id": 1,
+              "wordNodeIdx": 4,
+              "prevWordSeq": [3],
+              "nextWordSeq": [5],
+              "active": false,
+              "visited": false,
+              "word": "a"
+            },
+            {
+              "word": " "
+            },
+            {
+              "id": 2,
+              "wordNodeIdx": 5,
+              "prevWordSeq": [4],
+              "nextWordSeq": [6],
+              "active": false,
+              "visited": false,
+              "word": "woman"
+            },
+            {
+              "word": "."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Ronlyn's random sentence list:",
+      "date": "",
+      "description": "",
+      "format": "ul",
+      "owner": "Ronlyn",
+      "nextSectionWordSeq": 0,
+      "sentences": [
+        {
+          "id": 0,
+          "content": "ant crawls fast",
+          "prevSentenceWordSeq": 6,
+          "nextSentenceWordSeq": 10,
+          "words": [
+            {
+              "id": 0,
+              "wordNodeIdx": 6,
+              "prevWordSeq": [5],
+              "nextWordSeq": [7],
+              "active": false,
+              "visited": false,
+              "word": "ants"
+            },
+            {
+              "word": " "
+            },
+            {
+              "id": 0,
+              "wordNodeIdx": 7,
+              "prevWordSeq": [6],
+              "nextWordSeq": [8],
+              "active": false,
+              "visited": false,
+              "word": "crawl"
+            },
+            {
+              "word": " "
+            },
+            {
+              "id": 1,
+              "wordNodeIdx": 8,
+              "prevWordSeq": [7],
+              "nextWordSeq": [9],
+              "active": false,
+              "visited": false,
+              "word": "very"
+            },
+            {
+              "word": " "
+            },
+            {
+              "id": 2,
+              "wordNodeIdx": 9,
+              "prevWordSeq": [8],
+              "nextWordSeq": [10],
+              "active": false,
+              "visited": false,
+              "word": "fast"
+            },
+            {
+              "word": "."
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "content": "cats says meow.",
+          "prevSentenceWordSeq": 10,
+          "nextSentenceWordSeq": 0,
+          "words": [
+            {
+              "id": 0,
+              "wordNodeIdx": 10,
+              "prevWordSeq": [9],
+              "nextWordSeq": [11],
+              "active": false,
+              "visited": false,
+              "word": "cat"
+            },
+            {
+              "word": " "
+            },
+            {
+              "id": 0,
+              "wordNodeIdx": 11,
+              "prevWordSeq": [10],
+              "nextWordSeq": [12],
+              "active": false,
+              "visited": false,
+              "word": "says"
+            },
+            {
+              "word": " "
+            },
+            {
+              "id": 1,
+              "wordNodeIdx": 12,
+              "prevWordSeq": [11],
+              "nextWordSeq": [13],
+              "active": false,
+              "visited": false,
+              "word": "a"
+            },
+            {
+              "word": " "
+            },
+            {
+              "id": 22,
+              "wordNodeIdx": 13,
+              "prevWordSeq": [12],
+              "nextWordSeq": [14],
+              "active": false,
+              "visited": false,
+              "word": "meow"
+            },
+            {
+              "word": "."
+            }
+          ]
+
+        },
+        {
+          "id": 2,
+          "content": "the quick brown fox jumped over the lazy dog.",
+          "prevSentenceWordSeq": 10,
+          "nextSentenceWordSeq": 0,
+          "words": [
+            {
+              "id": 0,
+              "wordNodeIdx": 14,
+              "prevWordSeq": [13],
+              "nextWordSeq": [15],
+              "active": false,
+              "visited": false,
+              "word": "the"
+            },
+            {
+              "word": " "
+            },
+            {
+              "id": 0,
+              "wordNodeIdx": 15,
+              "prevWordSeq": [14],
+              "nextWordSeq": [16],
+              "active": false,
+              "visited": false,
+              "word": "quick"
+            },
+            {
+              "word": " "
+            },
+            {
+              "id": 1,
+              "wordNodeIdx": 16,
+              "prevWordSeq": [15],
+              "nextWordSeq": [17],
+              "active": false,
+              "visited": false,
+              "word": "brown"
+            },
+            {
+              "word": " "
+            },
+            {
+              "id": 22,
+              "wordNodeIdx": 17,
+              "prevWordSeq": [16],
+              "nextWordSeq": [18],
+              "active": false,
+              "visited": false,
+              "word": "fox"
+            },
+            {
+              "word": " "
+            },
+            {
+              "id": 22,
+              "wordNodeIdx": 18,
+              "prevWordSeq": [17],
+              "nextWordSeq": [19],
+              "active": false,
+              "visited": false,
+              "word": "jumped"
+            },
+            {
+              "word": " "
+            },
+            {
+              "id": 22,
+              "wordNodeIdx": 19,
+              "prevWordSeq": [18],
+              "nextWordSeq": [20],
+              "active": false,
+              "visited": false,
+              "word": "over"
+            },
+            {
+              "word": " "
+            },
+            {
+              "id": 22,
+              "wordNodeIdx": 20,
+              "prevWordSeq": [19],
+              "nextWordSeq": [21],
+              "active": false,
+              "visited": false,
+              "word": "the"
+            },
+            {
+              "word": " "
+            },
+            {
+              "id": 22,
+              "wordNodeIdx": 21,
+              "prevWordSeq": [20],
+              "nextWordSeq": [22],
+              "active": false,
+              "visited": false,
+              "word": "lazy"
+            },
+            {
+              "word": " "
+            },
+            {
+              "id": 22,
+              "wordNodeIdx": 22,
+              "prevWordSeq": [21],
+              "nextWordSeq": [],
+              "active": false,
+              "visited": false,
+              "word": "dog"
+            },
+            {
+              "word": "."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

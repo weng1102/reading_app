@@ -26,6 +26,7 @@ export interface IPageContent {
   firstTermIdx: number;
   lastTermIdx: number;
   sections: ISectionNode[];
+  terminalList: ITerminalInfo[];
 }
 export function PageContentInitializer(): IPageContent {
   return {
@@ -39,7 +40,8 @@ export function PageContentInitializer(): IPageContent {
     transformed: null!,
     firstTermIdx: 0,
     lastTermIdx: 0,
-    sections: []
+    sections: [],
+    terminalList: []
   };
 }
 export interface ISectionContent {
@@ -222,6 +224,7 @@ export interface ISentenceContent {
   // description: string;
   content: string;
   firstTermIdx: number;
+  lastTermIdx: number;
   terminals: ITerminalNode[];
 }
 export enum TerminalMetaEnumType {
@@ -241,7 +244,9 @@ export enum TerminalMetaEnumType {
 }
 export interface ITerminalContent {
   id: number;
-  content: string;
+  firstTermIdx: number;
+  lastTermIdx: number;
+  content: string; // not necessary
   type: TerminalMetaEnumType;
   meta: TerminalMetaType;
 }
@@ -268,23 +273,30 @@ export interface ITerminalInfo {
   recitable: boolean;
   audible: boolean;
   visible: boolean;
+  fillin: boolean;
+  //cues: string[] includes terminal type word, day, month, year, number, area code,...
 }
 export function ITerminalInfoInitializer(
-  content?: string,
-  altpronunciation?: string,
-  altrecognition?: string,
-  termIdx?: number
+  content: string = "",
+  altpronunciation: string = "",
+  altrecognition: string = "",
+  recitable: boolean = true,
+  audible: boolean = true,
+  visible: boolean = true,
+  fillin: boolean = false
+  //cues
 ): ITerminalInfo {
   return {
     content: (content === undefined ? "" : content)!,
-    termIdx: (termIdx === undefined ? 0 : termIdx)!,
+    termIdx: -1,
     nextTermIdx: [],
     prevTermIdx: [],
-    altpronunciation: (altpronunciation === undefined ? "" : altpronunciation)!,
-    altrecognition: (altrecognition === undefined ? "" : altrecognition)!,
-    recitable: false,
-    audible: false,
-    visible: false
+    altpronunciation: altpronunciation,
+    altrecognition: altrecognition,
+    recitable: recitable, // selectable
+    audible: audible,
+    visible: visible,
+    fillin: fillin
   };
 }
 export interface IAcronymTerminalMeta {
@@ -339,44 +351,114 @@ export function IDateTerminalMetaInitializer(): IDateTerminalMeta {
   return {
     format: DateFormatEnumType.unknown,
     month: ITerminalInfoInitializer(),
-    punctuation1: ITerminalInfoInitializer(),
-    whitespace1: ITerminalInfoInitializer(),
+    punctuation1: ITerminalInfoInitializer(
+      undefined,
+      undefined,
+      undefined,
+      false,
+      false,
+      true,
+      false
+    ),
+    whitespace1: ITerminalInfoInitializer(
+      undefined,
+      undefined,
+      undefined,
+      false,
+      false,
+      true,
+      false
+    ),
     day: ITerminalInfoInitializer(),
-    punctuation2: ITerminalInfoInitializer(),
-    whitespace2: ITerminalInfoInitializer(),
+    punctuation2: ITerminalInfoInitializer(
+      undefined,
+      undefined,
+      undefined,
+      false,
+      false,
+      true,
+      false
+    ),
+    whitespace2: ITerminalInfoInitializer(
+      undefined,
+      undefined,
+      undefined,
+      false,
+      false,
+      true,
+      false
+    ),
     year: IYearTerminalMetaInitializer() // e.g., {19,61}, {20,10}, {2000,1}
   };
 }
 export interface IPhoneNumberTerminalMeta {
   //(408) 267-6076 or 408.267.6076 or 408-267-6076
   countryCode: ITerminalInfo;
-  openBracket: string;
+  openBracket: ITerminalInfo; //ITerminalInfo;
   areaCode: ITerminalInfo[];
-  closeBracket: string;
-  separator1: string;
+  closeBracket: ITerminalInfo; //ITerminalInfo;
+  separator1: ITerminalInfo; //ITerminalInfo;
   exchangeCode: ITerminalInfo[];
-  separator2: string;
+  separator2: ITerminalInfo; //ITerminalInfo;
   lineNumber: ITerminalInfo[];
 }
 export function IPhoneNumberTerminalMetaInitializer(): IPhoneNumberTerminalMeta {
   return {
     countryCode: ITerminalInfoInitializer(),
-    openBracket: "(", // could be "."
+    openBracket: ITerminalInfoInitializer(
+      undefined,
+      undefined,
+      undefined,
+      false,
+      false,
+      true,
+      false
+    ),
     areaCode: [],
-    closeBracket: ")", // could be "."
-    separator1: "",
+    closeBracket: ITerminalInfoInitializer(
+      undefined,
+      undefined,
+      undefined,
+      false,
+      false,
+      true,
+      false
+    ), // could be "."
+    separator1: ITerminalInfoInitializer(
+      undefined,
+      undefined,
+      undefined,
+      false,
+      false,
+      true,
+      false
+    ),
     exchangeCode: [],
-    separator2: "-", // could be "."
+    separator2: ITerminalInfoInitializer(
+      undefined,
+      undefined,
+      undefined,
+      false,
+      false,
+      true,
+      false
+    ), // could be "."
     lineNumber: []
   };
 }
-export interface IPunctuationTerminalMeta {
-  punctuationType: string;
-}
-export function IPunctuationTerminalMetaInitializer(): IPunctuationTerminalMeta {
-  return {
-    punctuationType: ""
-  };
+export type IPunctuationTerminalMeta = ITerminalInfo;
+export function IPunctuationTerminalMetaInitializer(
+  content?: string
+): ITerminalInfo {
+  return ITerminalInfoInitializer(
+    content,
+    undefined,
+    undefined,
+    false,
+    false,
+    true,
+    false
+  );
 }
 export interface IReferenceTerminalMeta {
   //  type: TerminalMetaEnumType.reference;
@@ -387,9 +469,19 @@ export interface ITimeTerminalMeta {
   hour: string;
   minute: string;
 }
-export interface IWhitespaceTerminalMeta {
-  //  type: TerminalMetaEnumType.whitespace;
-  whitespaceType: string;
+export type IWhitespaceTerminalMeta = ITerminalInfo;
+export function IWhitespaceTerminalMetaInitializer(
+  content?: string
+): ITerminalInfo {
+  return ITerminalInfoInitializer(
+    content,
+    undefined,
+    undefined,
+    false,
+    false,
+    true,
+    false
+  );
 }
 export type IWordTerminalMeta = ITerminalInfo;
 export function IWordTerminalMetaInitializer(

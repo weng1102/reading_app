@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "moduleResolution" : "node",
+    "moduleResolution": "node",
     "baseUrl": ".",
     "paths": { "*": ["src/*", "unittest/*", "node_modules/*"] },
     "outDir": "./build",
@@ -16,10 +16,9 @@
     "noUnusedParameters": true,
     "pretty": true,
     "strictNullChecks": true,
+    "jsx": "react",
     "sourceMap": true
-},
+  },
   "lib": ["es2015"],
-  "include": [
-    "src"
-  ]
+  "include": ["src", "img"]
 }

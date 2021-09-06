@@ -33,6 +33,16 @@ import { PronunciationDictionary, RecognitionDictionary } from "./dictionary";
 //     return PronunciationDictionary;
 //   }
 // }
+export const IsError = (exception: any): exception is Error => {
+  return (
+    typeof exception == "object" &&
+    exception !== null &&
+    "name" in exception &&
+    typeof exception.name === "string" &&
+    "message" in exception &&
+    typeof exception.message === "string"
+  );
+};
 function WildcardToRegex(pattern: string) {
   // some problems with multiple *
   return "^" + pattern.replace("*", ".*").replace("?", ".") + "$";

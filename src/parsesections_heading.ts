@@ -8,6 +8,7 @@
  *
  **/
 import { strict as assert } from "assert";
+import { IsError } from "./utilities";
 import { IParseNode, ParseNodeSerializeFormatEnumType } from "./baseclasses";
 import { MarkdownTagType, TaggedStringType } from "./dataadapter";
 import {
@@ -44,8 +45,12 @@ export class SectionParseNode_HEADING extends SectionParseNode
       this.meta.level = current.headingLevel;
       this.dataSource.nextRecord(); // position to next record
     } catch (e) {
-      this.logger.error(e.message);
-      if (this.logger.verboseMode) console.log(e.stack);
+      if (IsError(e)) {
+        this.logger.error(e.message);
+        if (this.logger.verboseMode) console.log(e.stack);
+      } else {
+        throw e;
+      }
     } finally {
       return 1;
     }

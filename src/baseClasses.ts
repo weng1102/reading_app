@@ -17,6 +17,7 @@ import { Logger } from "./logger";
 import { IDataSource, BasicMarkdownSource } from "./dataadapter";
 import { ITerminalInfo } from "./pagecontentType";
 export const TREEVIEW_PREFIX = "+-";
+export const IDX_INITIALIZER = -9999;
 export abstract class BaseClass {
   logger: Logger;
   parent: any;
@@ -45,7 +46,8 @@ class TerminalArray extends Array<ITerminalInfo> {
   push(terminal: ITerminalInfo) {
     //    super.push(terminal); just extends and not overload not overridden
     terminal.termIdx = this.length;
-    terminal.prevTermIdx.push(this.previousTerminalIdx);
+    if (this.previousTerminalIdx !== -1)
+      terminal.prevTermIdx.push(this.previousTerminalIdx);
     if (
       this.previousTerminalIdx >= 0 &&
       this.previousTerminalIdx < this.length
@@ -59,19 +61,33 @@ class TerminalArray extends Array<ITerminalInfo> {
     return super.push(terminal);
   }
   serialize(): string {
-    let outputStr: string = "[idx ]  term next prev \n";
-    for (let i = 0; i < this.length - 1; i++) {
+    let outputStr: string = "[idx ]:  term content    ARVF  next prev \n";
+    for (let i = 0; i < this.length; i++) {
       outputStr = `${outputStr}[${i.toString().padStart(4, "0")}]: ${this[
         i
       ].termIdx
         .toString()
-        .padStart(5)}${
+        .padStart(5)} ${this[i].content
+        .substring(0, 10)
+        .padEnd(10, " ")} ${this[i].audible
+        .toString()
+        .substring(0, 1)
+        .toUpperCase()}${this[i].recitable
+        .toString()
+        .substring(0, 1)
+        .toUpperCase()}${this[i].visible
+        .toString()
+        .substring(0, 1)
+        .toUpperCase()}${this[i].fillin
+        .toString()
+        .substring(0, 1)
+        .toUpperCase()} ${
         this[i].nextTermIdx.length === 0
           ? "na".padStart(5)
           : this[i].nextTermIdx[0].toString().padStart(5)
       }${
         this[i].prevTermIdx.length === 0
-          ? "na".padEnd(5)
+          ? "na".padStart(5)
           : this[i].prevTermIdx[0].toString().padStart(5)
       }\n`;
     }

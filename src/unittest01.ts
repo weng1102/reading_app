@@ -29,11 +29,13 @@ const utresultDir = path.join(
   AppInfo.path.relative.unittest,
   AppInfo.path.relative.results
 );
+const uttokenoutPrefix = path.join(utresultDir, "ut01token_sentences");
 const uttokenout = path.join(utresultDir, "ut01token_sentences.json");
+const utparseoutPrefix = path.join(utresultDir, "ut01parse_sentences");
 const utparseout = path.join(utresultDir, "ut01parse_sentences.json");
 const uttransformout = path.join(utresultDir, "ut01transform_sentences.json");
 ///const uttransformsectionout = path.join(utresultDir, "ut01transform_sections.json");
-const utoutput = true; // should be command switch
+const utoutput = false; // should be command switch
 /*
 const utSentencesJson =  {
   UnitTest01: {
@@ -124,6 +126,18 @@ logger.adornMode = true;
 let testSectionLabel: string = "";
 let unitTestSuccessful: boolean;
 //logger.diagnosticMode = true;
+
+const tokenizerResultsFilename = (secId: number, sentId: number): string => {
+  return `${uttokenoutPrefix}${secId
+    .toString()
+    .padStart(2, "0")}${sentId.toString().padStart(2, "0")}.json`;
+};
+const parseResultsFilename = (secId: number, sentId: number): string => {
+  return `${utparseoutPrefix}${secId
+    .toString()
+    .padStart(2, "0")}${sentId.toString().padStart(2, "0")}.json`;
+};
+
 logger.info(
   `${path.basename(__filename)} started at ${timestamp}`,
   false,
@@ -240,10 +254,19 @@ for (let secIdx = 0; secIdx < ut_sentences01.sections.length; secIdx++) {
     );
     let tokenList: TokenListType;
     tokenList = tokenizer.tokenize(result);
-    unitTestSuccessful = tokenizer.unitTest(
-      tokenizer.serializeForUnitTest(tokenList),
-      input.expected.tokenizer
-    );
+    let expected = "";
+    try {
+      expected = fs
+        .readFileSync(tokenizerResultsFilename(secId, sentId))
+        .toString("utf-8");
+    } catch {
+      logger.error(`Could not read ${tokenizerResultsFilename(secId, sentId)}`);
+    } finally {
+      unitTestSuccessful = tokenizer.unitTest(
+        JSON.stringify(tokenList),
+        expected
+      );
+    }
     logger.info(
       `${testSentLabel}${unitTestSuccessful ? "PASSED" : "FAILED"}`,
       false,
@@ -255,19 +278,27 @@ for (let secIdx = 0; secIdx < ut_sentences01.sections.length; secIdx++) {
       passCount++;
     } else {
       // dump
-      //      logger.diagnosticMode = true;
+      logger.diagnosticMode = true;
+      logger.diagnostic(`actual:   ${JSON.stringify(tokenList)}`);
+      logger.diagnostic(`expected: ${expected}`);
       logger.diagnostic(tokenizer.serializeAsTable(tokenList));
+      logger.diagnosticMode = false;
     }
     //utoutput
-    results.sections[resultsSecIdx].sentences.push({
-      id: sentId,
-      content: input.content,
-      expected: {
-        tokenizer: tokenizer.serializeForUnitTest(tokenList),
-        parser: "",
-        transformer: ""
-      }
-    });
+    // results.sections[resultsSecIdx].sentences.push({
+    //   id: sentId,
+    //   content: input.content,
+    //   expected: {
+    //     tokenizer: tokenizer.serializeForUnitTest(tokenList),
+    //     parser: "",
+    //     transformer: ""
+    //   }
+    // });
+    if (utoutput) {
+      let fd = fs.openSync(tokenizerResultsFilename(secId, sentId), "w+");
+      fs.writeSync(fd, JSON.stringify(tokenList));
+      fs.closeSync(fd);
+    }
   }
   logger.info(
     `${testSectionLabel}: ${passCount}/` +
@@ -279,8 +310,8 @@ for (let secIdx = 0; secIdx < ut_sentences01.sections.length; secIdx++) {
   );
   totalPassCount += passCount;
   totalCount += ut_sentences01.sections[secIdx].sentences.length;
+  //if (utoutput) fs.writeFileSync(uttokenout, JSON.stringify(results));
 }
-if (utoutput) fs.writeFileSync(uttokenout, JSON.stringify(results));
 logger.info(
   `Tokenizer01 Overall total: ${totalPassCount}/${totalCount} PASSED`,
   false,
@@ -372,8 +403,16 @@ for (let secIdx = 0; secIdx < ut_sentences01.sections.length; secIdx++) {
     let parserResult: string = sentenceNode.serialize(
       ParseNodeSerializeFormatEnumType.UNITTEST
     );
-    let expected = input.expected.parser;
-    unitTestSuccessful = sentenceNode.unitTest(parserResult, expected);
+    let expected = "";
+    try {
+      expected = fs
+        .readFileSync(parseResultsFilename(secId, sentId))
+        .toString("utf-8");
+    } catch {
+      logger.error(`Could not read ${parseResultsFilename(secId, sentId)}`);
+    } finally {
+      unitTestSuccessful = sentenceNode.unitTest(parserResult, expected);
+    }
     logger.adorn(
       testSentLabel + (unitTestSuccessful ? "PASSED" : "FAILED"),
       false,
@@ -404,19 +443,20 @@ for (let secIdx = 0; secIdx < ut_sentences01.sections.length; secIdx++) {
     // );
 
     //utoutput
-    results.sections[resultsSecIdx].sentences.push({
-      id: sentId,
-      content: input.content,
-      expected: {
-        tokenizer: tokenizerResult,
-        parser: parserResult,
-        transformer: "%%%%%%"
-      }
-    });
-    fs.appendFileSync(
-      utparseout,
-      `section[${secId}][${sentId}]: ${parserResult}\n`
-    );
+    // results.sections[resultsSecIdx].sentences.push({
+    //   id: sentId,
+    //   content: input.content,
+    //   expected: {
+    //     tokenizer: tokenizerResult,
+    //     parser: parserResult,
+    //     transformer: "%%%%%%"
+    //   }
+    // });
+    if (utoutput) {
+      let fd = fs.openSync(parseResultsFilename(secId, sentId), "w+");
+      fs.writeSync(fd, parserResult);
+      fs.closeSync(fd);
+    }
   }
   logger.info(
     testSectionLabel +
@@ -434,7 +474,7 @@ for (let secIdx = 0; secIdx < ut_sentences01.sections.length; secIdx++) {
   totalCount += ut_sentences01.sections[secIdx].sentences.length;
 }
 if (utoutput) {
-  //  fs.writeFileSync(utparseout, JSON.stringify(results));
+  fs.writeFileSync(utparseout, JSON.stringify(results));
 }
 logger.info(
   "Parser01 Overall total: " + totalPassCount + "/" + totalCount + " PASSED",

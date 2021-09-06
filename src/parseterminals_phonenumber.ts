@@ -8,100 +8,26 @@
  *
  **/
 import { strict as assert } from "assert";
+import { IsError } from "./utilities";
 import {
-  // BaseClass,
-  // IParseNode,
-  // ParseNode,
   ParseNodeSerializeFormatEnumType,
-  ParseNodeSerializeColumnWidths,
-  ParseNodeSerializeColumnPad
+  ParseNodeSerializeColumnWidths
 } from "./baseclasses";
 import {
-  // endMarkupTag,
   isValidMarkupTag,
-  // Tokenizer,
-  // TokenType,
-  // TokenLabelType,
   TokenListType,
   TokenLiteral,
   Token,
   MarkupLabelType
 } from "./tokenizer";
-// import { MarkdownType, MarkdownTagType } from "./dataadapter";
 import {
-  // IPageContent,
-  // ISectionContent,
-  // ISectionBlockquoteVariant,
-  // ISectionBlockquoteVariantInitializer,
-  // ISectionFillinVariant,
-  // ISectionFillinVariantInitializer,
-  // ISectionHeadingVariant,
-  // ISectionHeadingVariantInitializer,
-  // ISectionOrderedListVariant,
-  // ISectionOrderedListVariantInitializer,
-  // ISectionUnorderedListVariant,
-  // ISectionUnorderedListVariantInitializer,
-  // ISectionParagraphVariant,
-  // ISectionParagraphVariantInitializer,
-  // ISentenceContent,
-  // ITerminalContent,
-  // TerminalMetaType,
   TerminalMetaEnumType,
-  // OrderedListTypeEnumType,
-  // PageFormatEnumType,
-  // SectionVariantEnumType,
-  // SectionVariantType,
-  // UnorderedListMarkerEnumType,
-  // IWordTerminalMeta,
-  // IWordTerminalMetaInitializer,
-  // ICurrencyTerminalMeta,
-  // ICurrencyTerminalMetaInitializer,
-  // IDateTerminalMeta,
-  // IDateTerminalMetaInitializer,
-  // DateFormatEnumType,
   IPhoneNumberTerminalMeta,
   IPhoneNumberTerminalMetaInitializer,
-  // IPunctuationTerminalMeta,
-  // IPunctuationTerminalMetaInitializer,
-  // IReferenceTerminalMeta,
-  // ITimeTerminalMeta,
-  // IWhitespaceTerminalMeta,
-  // IEmailAddressTerminalMeta,
-  // IEmailAddressTerminalMetaInitializer,
-  // ITerminalInfo,
   ITerminalInfoInitializer
-  // IYearTerminalMeta
 } from "./pageContentType";
 import { ISentenceNode } from "./parsesentences";
-import {
-  ITerminalNode,
-  // ITerminalParseNode,
-  TerminalNode_MLTAG_
-  // TerminalNode_NUMBER,
-  // TerminalNode_PUNCTUATION,
-  // TerminalNode_WHITESPACE,
-  // TerminalNode_WORD
-} from "./parseterminals";
-// import DictionaryType, {
-//   PronunciationDictionary,
-//   RecognitionDictionary
-// } from "./dictionary";
-// import {
-// AcronymMap,
-//  BaseClass,
-//   CardinalNumberMap,
-//   Logger,
-//   MonthFromAbbreviationMap,
-//   OrdinalNumberMap,
-//   UserContext
-// } from "./utilities";
-// import {
-//   IDataSource,
-//   //  MarkdownSectionTagType,
-//   BasicMarkdownSource,
-//   RawMarkdownSource,
-//   TaggedStringType
-// } from "./dataadapter";
+import { ITerminalNode, TerminalNode_MLTAG_ } from "./parseterminals";
 export class TerminalNode_MLTAG_PHONENUMBER extends TerminalNode_MLTAG_
   implements ITerminalNode {
   constructor(parent: ISentenceNode) {
@@ -141,7 +67,7 @@ export class TerminalNode_MLTAG_PHONENUMBER extends TerminalNode_MLTAG_
         token.content === TokenLiteral.LPAREN,
         `invalid prefix open delimiter "${token.content}" parsing phone number`
       );
-      this.meta.openBracket = token.content;
+      this.meta.openBracket.content = token.content;
       this.content = this.content + token.content;
 
       token = tokenList.shift()!;
@@ -159,11 +85,11 @@ export class TerminalNode_MLTAG_PHONENUMBER extends TerminalNode_MLTAG_
         token.content === TokenLiteral.RPAREN,
         `invalid prefix close delimiter "${token.content}" parsing phone number`
       );
-      this.meta.closeBracket = token.content;
+      this.meta.closeBracket.content = token.content;
       this.content = this.content + token.content;
 
       token = tokenList.shift()!;
-      this.meta.separator1 = token.content;
+      this.meta.separator1.content = token.content;
       this.content = this.content + token.content;
 
       token = tokenList.shift()!;
@@ -177,7 +103,7 @@ export class TerminalNode_MLTAG_PHONENUMBER extends TerminalNode_MLTAG_
         token.content === TokenLiteral.DASH,
         `expected dash not "${token.content}" parsing phone number`
       );
-      this.meta.separator2 = token.content;
+      this.meta.separator2.content = token.content;
       this.content = this.content + token.content;
 
       token = tokenList.shift()!;
@@ -188,7 +114,12 @@ export class TerminalNode_MLTAG_PHONENUMBER extends TerminalNode_MLTAG_
 
       token = tokenList.shift()!; // discard </phonenumber> endtag
     } catch (e) {
-      this.logger.error(`${this.constructor.name}: ${e.message}`);
+      if (IsError(e)) {
+        this.logger.error(`${this.constructor.name}: ${e.message}`);
+      } else {
+        throw e;
+      }
+
       throw e;
     }
     return tokenList.length;

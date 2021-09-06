@@ -8,9 +8,11 @@
  *
  **/
 import { strict as assert } from "assert";
+import { IsError } from "./utilities";
 // import { AcronymMap } from "./utilities";
 import { Token, Tokenizer, TokenListType } from "./tokenizer";
 import {
+  IDX_INITIALIZER,
   IParseNode,
   ParseNode,
   ParseNodeSerializeTabular,
@@ -25,7 +27,8 @@ export type ISentenceNode = ISentenceContent & IParseNode;
 abstract class AbstractSentenceNode extends ParseNode implements ISentenceNode {
   id: number = 0;
   content: string = "";
-  firstTermIdx: number = 0;
+  firstTermIdx: number = IDX_INITIALIZER;
+  lastTermIdx: number = IDX_INITIALIZER;
   terminals: ITerminalNode[] = [];
   constructor(parent: ISectionNode | null) {
     super(parent);
@@ -90,9 +93,11 @@ abstract class AbstractSentenceNode extends ParseNode implements ISentenceNode {
             case "firstTermIdx":
             case "nextTermIdx":
             case "prevTermIdx":
+            case "lastTermIdx":
             case "recitable":
             case "audible":
             case "visible":
+            case "fillin":
               return undefined;
             default:
               return value;
@@ -154,8 +159,11 @@ export class SentenceNode extends AbstractSentenceNode
       let tokenList: TokenListType = this.tokenizer.tokenize(markedUpSentence);
       this.parseTokens(tokenList);
     } catch (e) {
-      this.logger.error(e.message);
-      // forward record to next SECTION_END
+      if (IsError(e)) {
+        this.logger.error(e.message);
+      } else {
+        throw e;
+      }
     } finally {
       return this.terminals.length;
     }
@@ -183,8 +191,12 @@ export class SentenceNode extends AbstractSentenceNode
       }
       this.parseTokens(tokens);
     } catch (e) {
-      this.logger.error(`Unexpected error: ${e.message}`);
-      console.log(e.stack);
+      if (IsError(e)) {
+        this.logger.error(`Unexpected error: ${e.message}`);
+        console.log(e.stack);
+      } else {
+        throw e;
+      }
     } finally {
       return tokens.length;
     }

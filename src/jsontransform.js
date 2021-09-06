@@ -44,7 +44,7 @@ for (let jsonFile of jsonFiles) {
     fs.writeFileSync(path.join(curriculumDistPath, targetFilename), JSON.stringify(sourceJson));
     transformCount++;
   }
-  catch(e) {
+  catch(e: any) {
     logger.error("Unexpected error processing "+ jsonFile + ": "+e.message);
   }
 }

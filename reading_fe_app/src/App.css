@@ -1,0 +1,218 @@
+.App {
+  text-align: left;
+  --header-height: 200px;  /* consider expanding real estate to allow basic format changes (.e.g., font) */
+  --nav-width: 200px;
+  font-family: sans-serif;
+}
+.content-container {
+  padding-right: 3em;
+  position: fixed;
+  top: var(--header-height);
+  left: var(--nav-width); /* Set this to the width of the navigation frame */
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+  margin-left: 0px;
+  background-color: linen;
+  cursor: pointer;
+}
+.header {
+  --header-left-percent-width: 50%;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+   position: absolute;
+   top:0;
+   left:0px;
+   padding-left: 10px;
+   padding-right: 10px;
+   grid-gap: 0px;
+   width:100%;
+   height: var(--header-height);
+   overflow: hidden; /* Disables scrollbars on the navigation frame. To enable scrollbars, change "hidden" to "scroll" */
+   background: #ccc;
+}
+.header > * { /* all children */
+  position: absolute;
+  height: var(--header-height);
+}
+
+.headerleft {
+  width: var(--header-left-percent-width);
+  margin-left: 0;
+}
+.header-container-controls {
+  margin-left: var(--header-left-percent-width);
+  max-width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  width: auto;
+  height: inherit;
+  overflow-y: auto;
+}
+.headertitle {
+  line-height: var(--header-height); /* required to vertically align */
+  position: relative;
+  font-size: 24px;
+  font-weight: bold;
+  left: 10px; /* distance from microphone button */
+}
+.microphone {
+  line-height: var(--header-height); /* required to vertically align */
+  position: relative;
+  left: 0;
+}
+.listenButton { /* look of microphone button component */
+  vertical-align: middle;
+  background-color: transparent;
+  color: transparent;
+  background-repeat:no-repeat;
+  border: none;
+  overflow: hidden;
+  padding: 0px 0px 0px 0px;
+  margin: none;
+  outline:none;
+}
+.listenButtonImg {  /* look of microphone button component */
+  margin-top: 0px;
+  width: 40px;
+  height: 40px;
+  box-shadow: none;
+}
+.shortcuts {
+  padding-bottom: .10em;
+  padding-right: .10em;
+  width: auto;
+}
+.ddlb-shortcuts {
+  display: flex;
+  float: right;
+  font-size: 15px;
+  width: 100%;
+  min-width: 200px;
+  box-sizing: border-box;
+  border-radius: .25em;
+  border: 1px solid #aaa;
+	box-shadow: 0 2px 0 1px rgba(0,0,0,.04);
+  padding: .2em .2em .2em .2em; /* around the text */
+  background: transparent;
+
+  /* change the down arrow */
+  -moz-appearance: none;  /* remove existing down arrow */
+	-webkit-appearance: none;  /* remove existing down arrow */
+	appearance: none; /* remove existing down arrow */
+	background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat, repeat;
+	background-position: right .7em top 50%, 0 0;
+	background-size: .65em auto, 100%;
+}
+.ddlb-recitationmode {
+  display: flex;
+  float: right;
+  font-size: 15px;
+  width: 100%;
+  min-width: 200px;
+  box-sizing: border-box;
+  border-radius: .25em;
+  border: 1px solid #aaa;
+	box-shadow: 0 2px 0 1px rgba(0,0,0,.04);
+  padding: .2em .2em .2em .2em; /* around the text */
+  background: transparent;
+
+  /* change the down arrow */
+  -moz-appearance: none;  /* remove existing down arrow */
+	-webkit-appearance: none;  /* remove existing down arrow */
+	appearance: none; /* remove existing down arrow */
+	background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat, repeat;
+	background-position: right .7em top 50%, 0 0;
+	background-size: .65em auto, 100%;
+}
+.wordsheard {
+  background: transparent;
+  height: 16px;
+  text-align: left;
+  min-width: 200px;
+  font-size: 16px;
+  float: right;
+  border-radius: .25em;
+  border: 1px solid #aaa;
+}
+.wordcontrol {
+    display: flex;
+    height: 40px;
+}
+.readingMontior
+{
+  display: block;
+  border: 1px solid #aaa;
+}
+.navbar {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-backface-visibility: hidden;
+  position: absolute;
+  top: var(--header-height);
+  bottom: 0;
+  left: 0;
+  width: var(--nav-width); /* Width of navigation frame */
+  overflow: hidden; /* Disables scrollbars on the navigation frame. To enable scrollbars, change "hidden" to "scroll" */
+  background: #eee;
+}
+.navbar:hover {
+  cursor: pointer;
+}
+.navbar-li
+ {
+   min-height: 50px;
+   font-weight:bold;
+   font-size:16px;
+   text-align: left;
+   padding-left: 10px;
+   padding-top: 5px;
+ }
+ .navbar-li:nth-child(even) {
+  background: white;
+}
+[currentWord="true"] {
+  text-decoration:underline;
+}
+
+table {
+  display: flex;
+  justify-content: center;
+  border: 1px solid gray;
+}
+td {
+  border: 1px solid gray;
+  width: 30em;
+}
+h1 {
+  font-size: 18px;
+}
+.labelled-textarea * {
+  font-size: 12px;
+  height: 16px;
+  vertical-align: middle;
+  width: 24px;
+  resize: none;
+}
+/* testing ref */
+.slide {
+  height: 4em;
+  vertical-align: middle;
+  text-align: center;
+}
+#test {
+  overflow: scroll;
+  max-height: 40em;
+}
+.audible-sentence.active {
+}
+.audible-word.active {
+  text-decoration:underline;
+color: blue;
+}
+.visited {
+color: Grey;
+}
+/* testing ref */

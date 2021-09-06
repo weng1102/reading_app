@@ -10,7 +10,9 @@
  *
  **/
 import { strict as assert } from "assert";
+import { IsError } from "./utilities";
 import {
+  IDX_INITIALIZER,
   ParseNode,
   ParseNodeSerializeFormatEnumType,
   ParseNodeSerializeTabular,
@@ -32,7 +34,9 @@ import {
   ICurrencyTerminalMeta,
   ICurrencyTerminalMetaInitializer,
   IPunctuationTerminalMeta,
-  IPunctuationTerminalMetaInitializer
+  IPunctuationTerminalMetaInitializer,
+  IWhitespaceTerminalMeta,
+  IWhitespaceTerminalMetaInitializer
 } from "./pageContentType";
 import { ISentenceNode } from "./parsesentences";
 export interface ITerminalParseNode {
@@ -49,6 +53,8 @@ export abstract class AbstractTerminalNode extends ParseNode
   implements ITerminalParseNode {
   id: number = 0;
   content: string = "";
+  firstTermIdx: number = IDX_INITIALIZER;
+  lastTermIdx: number = IDX_INITIALIZER;
   type!: TerminalMetaEnumType;
   meta!: TerminalMetaType;
   //  tokenList: TokenListType = [];
@@ -63,7 +69,9 @@ export abstract class AbstractTerminalNode extends ParseNode
     if (tokenList !== undefined) {
       token = tokenList.shift()!;
       if (token !== undefined) {
-        this.content = token.content;
+        this.content = token.content; // should be TerminalInfo
+        this.meta = IWordTerminalMetaInitializer(token.content);
+        this.userContext.terminals.push(this.meta);
       }
     }
     return tokenList.length;
@@ -163,32 +171,14 @@ export class TerminalNode_WORD extends AbstractTerminalNode
   }
   type = TerminalMetaEnumType.word;
   meta: IWordTerminalMeta = IWordTerminalMetaInitializer();
-  parse(tokenList: TokenListType) {
-    let retVal = super.parse(tokenList);
-    //    this.meta.termIdx = this.userContext.terminals.push(this.meta) - 1;
-    this.userContext.terminals.push(this.meta);
-    //    console.log(`WORD meta terminalIdx=${this.meta.termIdx}`);
-    //.termIdx = this.userContext.nextTerminalIdx;
-    return retVal;
-  }
-  // serialize(format: ParseNodeSerializeFormatEnumType, label?: string): string {
-  //   switch (format) {
-  //     case ParseNodeSerializeFormatEnumType.TABULAR: {
-  //       label =
-  //         label === undefined
-  //           ? ParseNodeSerializeTabular(
-  //               this.constructor.name,
-  //               this.content,
-  //               this.meta.altpronunciation,
-  //               this.meta.termIdx.toString()
-  //             )
-  //           : label;
-  //       break;
-  //     }
-  //     default:
-  //       break;
-  //   }
-  //   return super.serialize(format, label);
+  // parse(tokenList: TokenListType) {
+  //   let retVal = super.parse(tokenList);
+  //   //    this.meta.termIdx = this.userContext.terminals.push(this.meta) - 1;
+  //   this.meta.content = this.content;
+  //   this.userContext.terminals.push(this.meta);
+  //   //    console.log(`WORD meta terminalIdx=${this.meta.termIdx}`);
+  //   //.termIdx = this.userContext.nextTerminalIdx;
+  //   return retVal;
   // }
   transform() {
     return 0;
@@ -201,30 +191,12 @@ export class TerminalNode_NUMBER extends AbstractTerminalNode
   }
   type = TerminalMetaEnumType.word;
   meta: IWordTerminalMeta = IWordTerminalMetaInitializer();
-  parse(tokenList: TokenListType) {
-    let retVal = super.parse(tokenList);
-    this.userContext.terminals.push(this.meta);
-    //    this.meta.termIdx = this.userContext.nextTerminalIdx;
-    return retVal;
-  }
-  // serialize(format: ParseNodeSerializeFormatEnumType, label?: string): string {
-  //   switch (format) {
-  //     case ParseNodeSerializeFormatEnumType.TABULAR: {
-  //       label =
-  //         label === undefined
-  //           ? ParseNodeSerializeTabular(
-  //               this.constructor.name,
-  //               this.content,
-  //               this.meta.altpronunciation,
-  //               this.meta.termIdx.toString()
-  //             )
-  //           : label;
-  //       break;
-  //     }
-  //     default:
-  //       break;
-  //   }
-  //   return super.serialize(format, label);
+  // parse(tokenList: TokenListType) {
+  //   let retVal = super.parse(tokenList);
+  //   this.meta.content = this.content;
+  //   this.userContext.terminals.push(this.meta);
+  //   //    this.meta.termIdx = this.userContext.nextTerminalIdx;
+  //   return retVal;
   // }
   transform() {
     return 0;
@@ -237,6 +209,19 @@ export class TerminalNode_PUNCTUATION extends AbstractTerminalNode
   }
   type: TerminalMetaEnumType = TerminalMetaEnumType.punctuation;
   meta: IPunctuationTerminalMeta = IPunctuationTerminalMetaInitializer();
+  parse(tokenList: TokenListType): number {
+    let token: Token;
+    if (tokenList !== undefined) {
+      token = tokenList.shift()!;
+      if (token !== undefined) {
+        this.content = token.content; // should be TerminalInfo
+        this.meta.content = token.content;
+        this.userContext.terminals.push(this.meta);
+      }
+    }
+    return tokenList.length;
+  }
+
   transform() {
     return 0;
   }
@@ -276,6 +261,19 @@ export class TerminalNode_WHITESPACE extends AbstractTerminalNode
     super(parent);
   }
   type = TerminalMetaEnumType.whitespace;
+  meta: IWhitespaceTerminalMeta = IWhitespaceTerminalMetaInitializer();
+  parse(tokenList: TokenListType): number {
+    let token: Token;
+    if (tokenList !== undefined) {
+      token = tokenList.shift()!;
+      if (token !== undefined) {
+        this.content = token.content; // should be TerminalInfo
+        this.meta.content = token.content;
+        this.userContext.terminals.push(this.meta);
+      }
+    }
+    return tokenList.length;
+  }
 }
 export abstract class TerminalNode_MLTAG_ extends AbstractTerminalNode
   implements ITerminalNode {
@@ -306,8 +304,15 @@ export abstract class TerminalNode_MLTAG_ extends AbstractTerminalNode
         this.content = this.content + token.content;
         token = tokenList.shift()!;
       }
+      // handled in the subclass
+      // this.meta = IWordTerminalMetaInitializer(token.content);
+      // this.userContext.terminals.push(this.meta);
     } catch (e) {
-      this.logger.error(`${this.constructor.name}: ${e.message}`);
+      if (IsError(e)) {
+        this.logger.error(`${this.constructor.name}: ${e.message}`);
+      } else {
+        throw e;
+      }
     } finally {
       return tokenList.length;
     }
@@ -328,6 +333,7 @@ export class TerminalNode_MLTAG_CONTRACTION extends TerminalNode_MLTAG_
   meta = IWordTerminalMetaInitializer();
   parse(tokenList: TokenListType): number {
     let tokenListCount = super.parse(tokenList);
+    this.meta.content = this.content;
     this.userContext.terminals.push(this.meta);
     //    this.meta.termIdx = this.userContext.nextTerminalIdx;
     return tokenListCount;
@@ -362,6 +368,7 @@ export class TerminalNode_MLTAG_NUMBER_WITHCOMMAS extends TerminalNode_MLTAG_
   parse(tokenList: TokenListType): number {
     let tokenListCount: number = super.parse(tokenList);
     // replace comma with [.]?
+    this.meta.content = this.content;
     this.meta.altrecognition = this.content.replace(/,/g, "[,]?");
     this.userContext.terminals.push(this.meta);
     //  this.meta.termIdx = this.userContext.nextTerminalIdx;
@@ -402,6 +409,7 @@ export class TerminalNode_MLTAG_TOKEN extends TerminalNode_MLTAG_
   meta: IWordTerminalMeta = IWordTerminalMetaInitializer();
   parse(tokenList: TokenListType): number {
     let tokenListCount: number = super.parse(tokenList);
+    this.meta.content = this.content;
     this.userContext.terminals.push(this.meta);
     //    this.meta.termIdx = this.userContext.nextTerminalIdx;
     return tokenListCount;

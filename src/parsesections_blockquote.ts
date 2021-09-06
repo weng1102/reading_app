@@ -8,49 +8,13 @@
  *
  **/
 import { strict as assert } from "assert";
+import { IsError } from "./utilities";
+import { ParseNodeSerializeFormatEnumType } from "./baseclasses";
+import { MarkdownTagType, TaggedStringType } from "./dataadapter";
 import {
-  // BaseClass,
-  // IParseNode,
-  // ParseNode,
-  ParseNodeSerializeFormatEnumType
-} from "./baseclasses";
-import {
-  // IDataSource,
-  //  MarkdownSectionTagType,
-  MarkdownTagType,
-  // BasicMarkdownSource,
-  // RawMarkdownSource,
-  TaggedStringType
-  //  MarkdownEndTagType
-} from "./dataadapter";
-import {
-  // IPageContent,
-  // ISectionContent,
   ISectionBlockquoteVariant,
   ISectionBlockquoteVariantInitializer,
-  // // ISectionEmptyVariant,
-  // // ISectionEmptyVariantInitializer,
-  // // ISectionFillinVariant,
-  // // ISectionFillinVariantInitializer,
-  // // ISectionHeadingVariant,
-  // // ISectionHeadingVariantInitializer,
-  // // ISectionOrderedListVariant,
-  // // ISectionOrderedListVariantInitializer,
-  // // ISectionUnorderedListVariant,
-  // // ISectionUnorderedListVariantInitializer,
-  // // ISectionParagraphVariant,
-  // // ISectionParagraphVariantInitializer,
-  // // ISentenceContent,
-  // // ITerminalContent,
-  // // TerminalMetaType,
-  // // TerminalMetaEnumType,
-  // // OrderedListTypeEnumType,
-  // PageFormatEnumType,
   SectionVariantEnumType
-  // SectionVariantType,
-  // UnorderedListMarkerEnumType,
-  // IWordTerminalMeta,
-  // IWordTerminalMetaInitializer
 } from "./pageContentType";
 import { IPageNode } from "./parsepages";
 // import { ISentenceNode, SentenceNode } from "./parsesentences";
@@ -99,8 +63,12 @@ export class SectionParseNode_BLOCKQUOTE extends SectionParseNode_LIST
       this.dataSource.nextRecord(); // move passed SECTION_END
     } catch (e) {
       // forward record to next SECTION_END
-      this.logger.error(e.message);
-      if (this.logger.verboseMode) console.log(e.stack);
+      if (IsError(e)) {
+        this.logger.error(e.message);
+        if (this.logger.verboseMode) console.log(e.stack);
+      } else {
+        throw e;
+      }
     }
     return 0;
   }

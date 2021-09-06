@@ -8,11 +8,17 @@
  *
  **/
 import { strict as assert } from "assert";
+import { IsError } from "./utilities";
 import { TaggedStringType } from "./dataadapter";
-import { IPageContent, PageFormatEnumType } from "./pageContentType";
+import {
+  IPageContent,
+  PageFormatEnumType,
+  ITerminalInfo
+} from "./pageContentType";
 import {
   //  FileNode,
   ParseNode,
+  IDX_INITIALIZER,
   IParseNode,
   ParseNodeSerializeColumnPad,
   ParseNodeSerializeTabular,
@@ -36,9 +42,10 @@ export class PageParseNode extends ParseNode implements IPageContent {
   created!: Date;
   modified!: Date;
   transformed!: Date;
-  firstTermIdx: number = -1;
-  lastTermIdx: number = -1;
+  firstTermIdx: number = IDX_INITIALIZER;
+  lastTermIdx: number = IDX_INITIALIZER;
   sections: ISectionNode[] = []; //needs to be reflected in _data.sections[]
+  terminalList: ITerminalInfo[] = [];
   constructor(parent?: PageParseNode) {
     super(parent);
   }
@@ -60,12 +67,22 @@ export class PageParseNode extends ParseNode implements IPageContent {
         );
         sectionNode.parse();
       }
+      // transfer wordIdx from userContext to pages
+      this.terminalList = this.userContext.terminals;
+      // this.wordIdx.forEach(wordIdx =>{
+      //   wordIdx.termIdx
+      // })
     } catch (e) {
-      this.logger.error(e.message);
+      if (IsError(e)) {
+        this.logger.error(e.message);
+      } else {
+        throw e;
+      }
     } finally {
       return this.sections.length;
     }
   }
+
   serialize(
     format?: ParseNodeSerializeFormatEnumType,
     label?: string,

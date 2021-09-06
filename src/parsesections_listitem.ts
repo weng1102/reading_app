@@ -8,61 +8,16 @@
  *
  **/
 import { strict as assert } from "assert";
+import { IsError } from "./utilities";
+import { MarkdownTagType, TaggedStringType } from "./dataadapter";
 import {
-  // BaseClass,
-  // IParseNode,
-  // ParseNode,
-  ParseNodeSerializeFormatEnumType
-} from "./baseclasses";
-import {
-  // IDataSource,
-  //  MarkdownSectionTagType,
-  MarkdownTagType,
-  // BasicMarkdownSource,
-  // RawMarkdownSource,
-  TaggedStringType
-  //  MarkdownEndTagType
-} from "./dataadapter";
-import {
-  // IPageContent,
-  // ISectionContent,
-  // ISectionBlockquoteVariant,
-  // ISectionBlockquoteVariantInitializer,
-  // ISectionEmptyVariant,
-  // ISectionEmptyVariantInitializer,
-  // ISectionFillinVariant,
-  // ISectionFillinVariantInitializer,
-  // ISectionHeadingVariant,
-  // ISectionHeadingVariantInitializer,
   ISectionListitemVariant,
   ISectionListitemVariantInitializer,
-  // ISectionOrderedListVariant,
-  // ISectionOrderedListVariantInitializer,
-  // ISectionUnorderedListVariant,
-  // ISectionUnorderedListVariantInitializer,
-  // ISectionParagraphVariant,
-  // ISectionParagraphVariantInitializer,
-  // ISentenceContent,
-  // ITerminalContent,
   ListTypeEnumType,
-  // TerminalMetaType,
-  // TerminalMetaEnumType,
-  // OrderedListTypeEnumType,
-  // PageFormatEnumType,
   SectionVariantEnumType
-  // SectionVariantType,
-  // UnorderedListMarkerEnumType,
-  // IWordTerminalMeta,
-  // IWordTerminalMetaInitializer
 } from "./pageContentType";
 import { IPageNode } from "./parsepages";
-// import { ISentenceNode, SentenceNode } from "./parsesentences";
-import {
-  // SectionParseNode,
-  ISectionNode,
-  SectionParseNode_LIST
-} from "./parsesections";
-// import { SectionParseNode_PARAGRAPH } from "./parsesections_paragraph";
+import { ISectionNode, SectionParseNode_LIST } from "./parsesections";
 import { GetSectionNode } from "./parsesectiondispatch";
 
 abstract class SectionParseNode_SECTION extends SectionParseNode_LIST
@@ -126,6 +81,11 @@ abstract class SectionParseNode_SECTION extends SectionParseNode_LIST
       if (current.tagType === MarkdownTagType.SECTION_END)
         this.dataSource.nextRecord();
     } catch (e) {
+      if (IsError(e)) {
+        this.logger.error(e.message);
+      } else {
+        throw e;
+      }
     } finally {
       return 0;
     }

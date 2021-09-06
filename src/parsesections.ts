@@ -10,6 +10,7 @@
  *
  **/
 import { strict as assert } from "assert";
+import { IsError } from "./utilities";
 import { ParseNodeSerializeTabular } from "./baseclasses";
 import {
   IParseNode,
@@ -177,8 +178,12 @@ export class SectionParseNode_EMPTY extends SectionParseNode_LIST
         this.meta.count++;
       }
     } catch (e) {
-      this.logger.error(e.message);
-      if (this.logger.verboseMode) console.log(e.stack);
+      if (IsError(e)) {
+        this.logger.error(e.message);
+      } else {
+        throw e;
+      }
+      //  if (this.logger.verboseMode) console.log(e.stack);
     } finally {
       return 1;
     }
