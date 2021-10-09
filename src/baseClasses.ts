@@ -9,13 +9,17 @@
  *
  **/
 import DictionaryType, {
-  PronunciationDictionary
-  // RecognitionDictionary
+  PronunciationDictionary,
+  RecognitionDictionary
 } from "./dictionary";
 import { TokenListType } from "./tokenizer";
 import { Logger } from "./logger";
 import { IDataSource, BasicMarkdownSource } from "./dataadapter";
-import { ITerminalInfo } from "./pagecontentType";
+import {
+  IHeadingListItem,
+  IRangeItem,
+  ITerminalListItem
+} from "./pagecontentType";
 export const TREEVIEW_PREFIX = "+-";
 export const IDX_INITIALIZER = -9999;
 export abstract class BaseClass {
@@ -38,15 +42,22 @@ export abstract class BaseClass {
     Object.defineProperty(this, "logger", { enumerable: false });
   }
 }
-class TerminalArray extends Array<ITerminalInfo> {
+class TerminalArray extends Array<ITerminalListItem> {
   constructor(...args) {
     super(...args);
   }
-  previousTerminalIdx: number = -1;
-  push(terminal: ITerminalInfo) {
+  previousTerminalIdx: number = IDX_INITIALIZER;
+  // get lastIdx(): number {
+  //   return this.length - 1
+  // }
+  get lastIdx(): number {
+    return this.length - 1;
+  }
+  push(terminal: ITerminalListItem): number {
     //    super.push(terminal); just extends and not overload not overridden
-    terminal.termIdx = this.length;
-    if (this.previousTerminalIdx !== -1)
+    //  terminal.termIdx = this.length - 1;
+    terminal.termIdx = super.push(terminal) - 1;
+    if (this.previousTerminalIdx !== IDX_INITIALIZER)
       terminal.prevTermIdx.push(this.previousTerminalIdx);
     if (
       this.previousTerminalIdx >= 0 &&
@@ -58,42 +69,134 @@ class TerminalArray extends Array<ITerminalInfo> {
     // console.log(
     //   `#######termIdx=${terminal.termIdx}#######content=${terminal.content}`
     // );
-    return super.push(terminal);
+    //    return super.push(terminal);
+    return terminal.termIdx;
+  }
+  parse(): number {
+    this.forEach(terminal => {
+      if (terminal.altrecognition.length === 0)
+        terminal.altrecognition =
+          RecognitionDictionary[terminal.content] !== undefined
+            ? RecognitionDictionary[terminal.content]
+            : "";
+      if (terminal.altpronunciation.length === 0)
+        terminal.altpronunciation =
+          PronunciationDictionary[terminal.content] !== undefined
+            ? PronunciationDictionary[terminal.content]
+            : "";
+    });
+    return this.length;
   }
   serialize(): string {
-    let outputStr: string = "[idx ]:  term content    ARVF  next prev \n";
-    for (let i = 0; i < this.length; i++) {
-      outputStr = `${outputStr}[${i.toString().padStart(4, "0")}]: ${this[
-        i
-      ].termIdx
+    let outputStr: string = "[idx ]:  term ARVF  next prev sent sect content\n";
+    for (const [i, element] of this.entries()) {
+      outputStr = `${outputStr}[${i
         .toString()
-        .padStart(5)} ${this[i].content
-        .substring(0, 10)
-        .padEnd(10, " ")} ${this[i].audible
+        .padStart(4, "0")}]: ${element.termIdx
+        .toString()
+        .padStart(5)} ${element.audible
         .toString()
         .substring(0, 1)
-        .toUpperCase()}${this[i].recitable
+        .toUpperCase()}${element.recitable
         .toString()
         .substring(0, 1)
-        .toUpperCase()}${this[i].visible
+        .toUpperCase()}${element.visible
         .toString()
         .substring(0, 1)
-        .toUpperCase()}${this[i].fillin
+        .toUpperCase()}${element.fillin
         .toString()
         .substring(0, 1)
         .toUpperCase()} ${
-        this[i].nextTermIdx.length === 0
+        element.nextTermIdx.length === 0
           ? "na".padStart(5)
-          : this[i].nextTermIdx[0].toString().padStart(5)
+          : element.nextTermIdx[0].toString().padStart(5)
       }${
-        this[i].prevTermIdx.length === 0
+        element.prevTermIdx.length === 0
           ? "na".padStart(5)
-          : this[i].prevTermIdx[0].toString().padStart(5)
+          : element.prevTermIdx[0].toString().padStart(5)
+      } ${element.sentenceIdx
+        .toString()
+        .padStart(4)} ${element.sectionIdx.toString().padStart(4)} ${
+        element.content
       }\n`;
     }
     return outputStr;
   }
 }
+class HeadingArray extends Array<IHeadingListItem> {
+  constructor(...args) {
+    super(...args);
+  }
+  push(heading: IHeadingListItem): number {
+    // needs to store the nearest termIdx so that parse can later find
+    // the actual visible, recitable terminal in parse
+    return super.push(heading);
+  }
+  parse(terminals: ITerminalListItem[]): number {
+    // starting from nearest termIdx, traverse and find
+    // the actual visible, recitable terminal in parse
+    for (const element of this) {
+      if (element.terminalCountPriorToHeading <= 0) {
+        element.termIdx = 0; // default to beginning of terminals array
+      } else {
+        let idx: number;
+        for (
+          idx = element.terminalCountPriorToHeading + 1;
+          !(terminals[idx].visible && terminals[idx].recitable);
+          idx++
+        );
+        element.termIdx = idx;
+      }
+      //console.log(`HeadingArray prior=${element.terminalCountPriorToHeading} term=${element.termIdx}`);
+    }
+    return this.length;
+  }
+  serialize(): string {
+    let outputStr: string = "[hidx]: lvl pcnt  idx title\n";
+    for (const [i, element] of this.entries()) {
+      outputStr = `${outputStr}[${i
+        .toString()
+        .padStart(4, "0")}]: ${element.headingLevel
+        .toString()
+        .padStart(
+          3,
+          " "
+        )} ${element.terminalCountPriorToHeading
+        .toString()
+        .padStart(4, " ")} ${element.termIdx.toString().padStart(4, " ")} ${
+        element.title
+      }\n`;
+    }
+    return outputStr;
+  }
+}
+class RangeArray extends Array<IRangeItem> {
+  constructor(...args) {
+    super(...args);
+  }
+  push(range: IRangeItem): number {
+    // needs to store the nearest termIdx so that parse can later find
+    // the actual visible, recitable terminal in parse
+    return super.push(range);
+  }
+  parse(): number {
+    return this.length;
+  }
+  serialize(): string {
+    let outputStr: string = "[ idx]:  1st last\n";
+    for (const [i, element] of this.entries()) {
+      outputStr = `${outputStr}[${i
+        .toString()
+        .padStart(4, "0")}]: ${element.firstTermIdx
+        .toString()
+        .padStart(4, " ")} ${element.lastTermIdx
+        .toString()
+        .padStart(4, " ")}\n`;
+    }
+    return outputStr;
+  }
+}
+
 export class UserContext {
   /* look at the altPro and altRec that are for personalized entries
      should be readable from an external file that will not require recompile
@@ -125,11 +228,17 @@ export class UserContext {
   }*/
   readonly username: string;
   terminals: TerminalArray;
+  headings: HeadingArray;
+  sentences: RangeArray;
+  sections: RangeArray;
   // need authentication infoblock at some point
   constructor(name: string) {
     //    this._parent = parent;
-    this.terminals = new TerminalArray();
     this.username = name;
+    this.terminals = new TerminalArray();
+    this.headings = new HeadingArray();
+    this.sentences = new RangeArray();
+    this.sections = new RangeArray();
     ////    this._pages = new Array();
   }
   // protected terminalIdx: number = 0;

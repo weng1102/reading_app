@@ -10,7 +10,7 @@
 // import { ITerminalNode } from "./parseterminals";
 // import { ISectionNode } from "./parsesections";
 // import { ISentenceNode } from "./parsesentences";
-const IDX_INITIALIZER = -9999;
+
 export enum PageFormatEnumType {
   default = 0
 }
@@ -302,7 +302,7 @@ export function ITerminalInfoInitializer(
 ): ITerminalInfo {
   return {
     content: (content === undefined ? "" : content)!,
-    termIdx: IDX_INITIALIZER,
+    termIdx: -11,
     nextTermIdx: [],
     prevTermIdx: [],
     altpronunciation: (altpronunciation === undefined ? "" : altpronunciation)!,
@@ -501,8 +501,8 @@ export function IWhitespaceTerminalMetaInitializer(
 export type IWordTerminalMeta = ITerminalInfo;
 export function IWordTerminalMetaInitializer(
   content?: string,
-  altPronunciation?: string,
-  altRecognition?: string
+  altPronunciation: string = "",
+  altRecognition: string = ""
 ): ITerminalInfo {
   return ITerminalInfoInitializer(content, altPronunciation, altRecognition);
 }

@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "baseUrl": "",
+    "baseUrl": ".",
     "lib": [
       "dom",
       "dom.iterable",
@@ -23,6 +23,8 @@
   },
   "include": [
     "src",
-    "img"
+    "img",
+    "../../src",
+    "content"
   ]
 }

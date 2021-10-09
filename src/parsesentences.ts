@@ -21,7 +21,7 @@ import {
 import { ISectionNode } from "./parsesections";
 import { ITerminalNode } from "./parseterminals";
 import { GetTerminalNode } from "./parseterminaldispatch";
-import { ISentenceContent, ITerminalContent } from "./pageContentType";
+import { ISentenceContent, ISentenceListItemInitializer, ITerminalContent } from "./pageContentType";
 
 export type ISentenceNode = ISentenceContent & IParseNode;
 abstract class AbstractSentenceNode extends ParseNode implements ISentenceNode {
@@ -66,9 +66,9 @@ abstract class AbstractSentenceNode extends ParseNode implements ISentenceNode {
       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
         label = `sentence: ${this.content}`;
         outputStr = super.serialize(format, label, prefix);
-        for (const [i, value] of this.terminals.entries()) {
-          label = `${value.type}`;
-          outputStr = `${outputStr}${value.serialize(
+        for (const [i, sentence] of this.terminals.entries()) {
+          label = `${sentence.type}`;
+          outputStr = `${outputStr}${sentence.serialize(
             format,
             undefined,
             prefix + (i < this.terminals.length - 1 ? "| " : "  ")
@@ -79,13 +79,14 @@ abstract class AbstractSentenceNode extends ParseNode implements ISentenceNode {
       case ParseNodeSerializeFormatEnumType.TABULAR: {
         label = ParseNodeSerializeTabular(this.constructor.name, this.content);
         outputStr = super.serialize(format, label, prefix);
-        for (let terminalNode of this.terminals) {
+        for (let terminal of this.terminals) {
+          let terminalNode: ITerminalNode = <ITerminalNode>terminal
           outputStr = outputStr + terminalNode.serialize(format);
         }
         break;
       }
       case ParseNodeSerializeFormatEnumType.UNITTEST: {
-        let replacer: any = (key, value) => {
+        let replacer: any = (key: string, value) => {
           // if we get a function, give us the code for that function
           switch (key) {
             case "id":
@@ -157,7 +158,17 @@ export class SentenceNode extends AbstractSentenceNode
         this.content
       );
       let tokenList: TokenListType = this.tokenizer.tokenize(markedUpSentence);
+      this.firstTermIdx = this.userContext.terminals.lastIdx + 1; //nextIdx
       this.parseTokens(tokenList);
+      this.lastTermIdx = this.userContext.terminals.lastIdx;
+      // update all above terminals
+//      this.id = this.userContext.sentences.push( { firstTermIdx: this.firstTermIdx, lastTermIdx: this.lastTermIdx});
+      // got each terminal and update sentence id
+      this.id = this.userContext.sentences.push(ISentenceListItemInitializer(this.firstTermIdx, this.lastTermIdx)) - 1;
+      for (let idx = this.firstTermIdx; idx <= this.lastTermIdx; idx++) {
+          this.userContext.terminals[idx].sentenceIdx = this.id;
+      }
+
     } catch (e) {
       if (IsError(e)) {
         this.logger.error(e.message);
@@ -169,8 +180,9 @@ export class SentenceNode extends AbstractSentenceNode
     }
   }
   parseTokens(tokens: TokenListType) {
-    if (tokens.length === 0) return 0;
-    //    this.logger.diagnostic(`token.name=$(token.content}`);
+    if (tokens.length === 0) {
+      return 0;
+    }
     try {
       let terminalNode: ITerminalNode | undefined;
       let token: Token = tokens[0]; // peek

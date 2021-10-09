@@ -13,19 +13,22 @@ PageParseNode;
 //let pageNode: PageParseNode;
 let linesParsed: number;
 let inputMdFile: string;
-inputMdFile = "curriculum/test1.md";
-//inputMdFile = "curriculum/blockquote.md";
-//inputMdFile = "curriculum/paraheading.md";
-//inputMdFile = "curriculum/lists.md";
-//inputMdFile = "curriculum/shortlists.md";
-//inputMdFile = "curriculum/terminals_date3.md";
-//inputMdFile = "curriculum/terminals_email.md";
-inputMdFile = "curriculum/terminals.md";
-inputMdFile = "curriculum/terminals_acronym.md";
-inputMdFile = "curriculum/test1.md";
-inputMdFile = "curriculum/terminals_date2.md";
-inputMdFile = "curriculum/terminals.md";
-inputMdFile = "curriculum/terminals_email.md";
+let outputFile: string;
+const inputPath: string = "curriculum/";
+const outputPath: string = "reading_fe_app/src/content/";
+const inputType: string = "md"; // markdown
+const outputType: string = "json";
+const filenameList: string[] = [
+  "blockquote",
+  "terminals",
+  "terminals_acronym",
+  "terminals",
+  "3wordsentences",
+  "terminals_email",
+  "terminals_date2",
+  "test1",
+  "shortlists"
+];
 let logger = new Logger(this);
 ///let pageNode = new PageContent(this);
 //let timestamp: string = new MyDate().yyyymmddhhmmss();
@@ -34,13 +37,6 @@ logger.verboseMode = true;
 logger.adornMode = true;
 //logger.diagnosticMode = true;
 //
-// logger.info(
-//   `${path.basename(__filename)} started at ${timestamp}`,
-//   false,
-//   false,
-//   false,
-//   false
-// );
 logger.info(
   `verbose mode: ${logger.verboseMode ? "ON" : "OFF"}`,
   false,
@@ -56,43 +52,49 @@ logger.info(
   false
 );
 
-logger.info(
-  `input file: ${path.basename(inputMdFile)}`,
-  false,
-  false,
-  false,
-  false
-);
-let pageNode = new PageParseNode(this);
-linesParsed = pageNode.dataSource.connect(inputMdFile);
-console.log(
-  pageNode.dataSource.serialize(ParseNodeSerializeFormatEnumType.TABULAR)
-);
-pageNode.parse();
-pageNode.transform();
-//console.log(`nextWordIdx=${pageNode.userContext.nextTerminalIdx}`);
-logger.info(
-  `${linesParsed} source line(s) parsed into ${pageNode.dataSource.length()} annotated line(s)`,
-  false,
-  false,
-  false,
-  false
-);
-console.log(
-  pageNode.serialize(ParseNodeSerializeFormatEnumType.TREEVIEW, "page", "")
-);
-console.log(
-  pageNode.serialize(ParseNodeSerializeFormatEnumType.TABULAR, "page", "")
-);
-console.log(pageNode.userContext.terminals.serialize());
-// pageNode.userContext.terminals[566].termIdx = 8888;
-// pageNode.userContext.terminals[567].termIdx = 9999;
-// console.log(pageNode.userContext.terminals.serialize());
-// console.log(
-//   pageNode.serialize(ParseNodeSerializeFormatEnumType.TABULAR, "page", "")
-// );
-//console.log(pageNode.serialize(ParseNodeSerializeFormatEnumType.JSON));
-// fs.writeFileSync(
-//   "./src/parsetest.json",
-//   pageNode.serialize(ParseNodeSerializeFormatEnumType.JSON)
-// );
+for (let fileName of filenameList) {
+  inputMdFile = `${inputPath}${fileName}.${inputType}`;
+  outputFile = `${outputPath}${fileName}.${outputType}`;
+
+  logger.info(
+    `parsing file: ${path.basename(inputMdFile)}`,
+    false,
+    false,
+    false,
+    false
+  );
+  let pageNode = new PageParseNode(this);
+  linesParsed = pageNode.dataSource.connect(inputMdFile);
+  // console.log(
+  //   pageNode.dataSource.serialize(ParseNodeSerializeFormatEnumType.TABULAR)
+  // );
+  pageNode.parse();
+  pageNode.transform();
+  //console.log(`nextWordIdx=${pageNode.userContext.nextTerminalIdx}`);
+  // logger.info(
+  //   `${linesParsed} source line(s) parsed into ${pageNode.dataSource.length()} annotated line(s)`,
+  //   false,
+  //   false,
+  //   false,
+  //   false
+  // );
+  // console.log(`tree view:
+  //   ${pageNode.serialize(ParseNodeSerializeFormatEnumType.TREEVIEW, "page", "")}`);
+  // console.log(`tabular view:
+  //   ${pageNode.serialize(ParseNodeSerializeFormatEnumType.TABULAR, "page", "")}`);
+  // console.log(`terminal List:`);
+  // console.log(pageNode.userContext.terminals.serialize());
+  // console.log(`heading List:`);
+  // console.log(pageNode.userContext.headings.serialize());
+  // console.log(`sentence List (of consecutive terminals):`);
+  // console.log(pageNode.userContext.sentences.serialize());
+  // console.log(`section List (of consecutive terminals):`);
+  // console.log(pageNode.userContext.sections.serialize());
+  // console.log(pageNode.serialize(ParseNodeSerializeFormatEnumType.JSON));
+  pageNode.name = `${fileName}`;
+  // console.log(`writing file ${outputFile}`);
+  fs.writeFileSync(
+    outputFile,
+    pageNode.serialize(ParseNodeSerializeFormatEnumType.JSON)
+  );
+}

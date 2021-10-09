@@ -166,7 +166,7 @@ export class SectionParseNode_LIST_ITEMS extends SectionParseNode_LIST
   }
   parse() {
     // parses a single depth and is innvoked recursively to parse successively deeper
-    this.logger.diagnosticMode = true;
+    //this.logger.diagnosticMode = true;
     this.logger.diagnostic(
       `${this.constructor.name} ${
         this.meta.listType === ListTypeEnumType.bulleted

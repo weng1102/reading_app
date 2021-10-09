@@ -24,7 +24,8 @@ import {
   TerminalMetaEnumType,
   IPhoneNumberTerminalMeta,
   IPhoneNumberTerminalMetaInitializer,
-  ITerminalInfoInitializer
+  ITerminalInfoInitializer,
+  ITerminalListItemInitializer
 } from "./pageContentType";
 import { ISentenceNode } from "./parsesentences";
 import { ITerminalNode, TerminalNode_MLTAG_ } from "./parseterminals";
@@ -69,6 +70,7 @@ export class TerminalNode_MLTAG_PHONENUMBER extends TerminalNode_MLTAG_
       );
       this.meta.openBracket.content = token.content;
       this.content = this.content + token.content;
+      //      this.meta.openBracket.termIdx = this.userContext.terminals.push(ITerminalListItemInitializer(this.meta.openBracket));
 
       token = tokenList.shift()!;
       assert(
@@ -76,8 +78,14 @@ export class TerminalNode_MLTAG_PHONENUMBER extends TerminalNode_MLTAG_
         `invalid prefix length "${token.content}" parsing phone number`
       );
       [...token.content].forEach(digit => {
-        this.meta.areaCode.push(ITerminalInfoInitializer(digit));
+        let idx = this.meta.areaCode.push(ITerminalInfoInitializer(digit)) - 1;
+        this.meta.areaCode[idx].termIdx = this.userContext.terminals.push(
+          ITerminalListItemInitializer(this.meta.areaCode[idx])
+        );
       });
+      if (this.meta.areaCode.length > 0)
+        this.firstTermIdx = this.meta.areaCode[0].termIdx;
+
       this.content = this.content + token.content;
 
       token = tokenList.shift()!;
@@ -87,14 +95,20 @@ export class TerminalNode_MLTAG_PHONENUMBER extends TerminalNode_MLTAG_
       );
       this.meta.closeBracket.content = token.content;
       this.content = this.content + token.content;
+      //      this.meta.closeBracket.termIdx = this.userContext.terminals.push(ITerminalListItemInitializer(this.meta.closeBracket));
 
       token = tokenList.shift()!;
       this.meta.separator1.content = token.content;
+      //      this.meta.separator1.termIdx = this.userContext.terminals.push(ITerminalListItemInitializer(this.meta.separator1));
       this.content = this.content + token.content;
 
       token = tokenList.shift()!;
       [...token.content].forEach(digit => {
-        this.meta.exchangeCode.push(ITerminalInfoInitializer(digit));
+        let idx =
+          this.meta.exchangeCode.push(ITerminalInfoInitializer(digit)) - 1;
+        this.meta.exchangeCode[idx].termIdx = this.userContext.terminals.push(
+          ITerminalListItemInitializer(this.meta.exchangeCode[idx])
+        );
       });
       this.content = this.content + token.content;
 
@@ -104,12 +118,22 @@ export class TerminalNode_MLTAG_PHONENUMBER extends TerminalNode_MLTAG_
         `expected dash not "${token.content}" parsing phone number`
       );
       this.meta.separator2.content = token.content;
+      //      this.meta.separator2.termIdx = this.userContext.terminals.push(ITerminalListItemInitializer(this.meta.separator2));
       this.content = this.content + token.content;
 
       token = tokenList.shift()!;
       [...token.content].forEach(digit => {
-        this.meta.lineNumber.push(ITerminalInfoInitializer(digit));
+        let idx =
+          this.meta.lineNumber.push(ITerminalInfoInitializer(digit)) - 1;
+        this.meta.lineNumber[idx].termIdx = this.userContext.terminals.push(
+          ITerminalListItemInitializer(this.meta.lineNumber[idx])
+        );
       });
+      if (this.meta.lineNumber.length > 0)
+        this.lastTermIdx = this.meta.lineNumber[
+          this.meta.lineNumber.length - 1
+        ].termIdx;
+
       this.content = this.content + token.content;
 
       token = tokenList.shift()!; // discard </phonenumber> endtag

@@ -24,6 +24,7 @@ import {
   TerminalMetaEnumType,
   IEmailAddressTerminalMeta,
   IEmailAddressTerminalMetaInitializer,
+  ITerminalListItemInitializer,
   ITerminalInfoInitializer
 } from "./pageContentType";
 import { ISentenceNode } from "./parsesentences";
@@ -80,10 +81,14 @@ export class TerminalNode_MLTAG_EMAILADDRESS extends TerminalNode_MLTAG_
                 true
               )
             ) - 1;
-          this.userContext.terminals.push(this.meta.userName[idx]);
+          this.meta.userName[idx].termIdx = this.userContext.terminals.push(
+            ITerminalListItemInitializer(this.meta.userName[idx])
+          );
           this.content = this.content + part;
         });
       }
+      if (this.meta.userName.length > 0)
+        this.firstTermIdx = this.meta.userName[0].termIdx;
 
       // token = tokenList.shift()!;
       assert(
@@ -98,7 +103,9 @@ export class TerminalNode_MLTAG_EMAILADDRESS extends TerminalNode_MLTAG_
         true,
         true
       );
-      this.userContext.terminals.push(this.meta.separator);
+      this.termIdx = this.userContext.terminals.push(
+        ITerminalListItemInitializer(this.meta.separator)
+      );
       //      this.userContext.terminals.push(this.meta.userName);
       this.content = this.content + token.content;
 
@@ -117,10 +124,17 @@ export class TerminalNode_MLTAG_EMAILADDRESS extends TerminalNode_MLTAG_
                 true
               )
             ) - 1;
-          this.userContext.terminals.push(this.meta.domainName[idx]);
+          this.meta.domainName[idx].termIdx = this.userContext.terminals.push(
+            ITerminalListItemInitializer(this.meta.domainName[idx])
+          );
           this.content = this.content + part;
         });
       }
+      if (this.meta.domainName.length > 0)
+        this.lastTermIdx = this.meta.domainName[
+          this.meta.domainName.length - 1
+        ].termIdx;
+
       //      tokenList.shift(); //discard endTag
     } catch (e) {
       if (IsError(e)) {

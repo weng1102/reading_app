@@ -7,13 +7,19 @@
  * Version history:
  *
  **/
+const INITIALDATE = "9/21/2015 17:03";
+const InitialDate = new Date(INITIALDATE).toString();
 import { strict as assert } from "assert";
 import { IsError } from "./utilities";
 import { TaggedStringType } from "./dataadapter";
 import {
+  IHeadingListItem,
   IPageContent,
   PageFormatEnumType,
-  ITerminalInfo
+  IRangeItem,
+  ISentenceListItem,
+  ITerminalInfo,
+  ITerminalListItem
 } from "./pageContentType";
 import {
   //  FileNode,
@@ -39,19 +45,23 @@ export class PageParseNode extends ParseNode implements IPageContent {
   description: string = "";
   owner: string = "";
   pageFormatType = PageFormatEnumType.default;
-  created!: Date;
-  modified!: Date;
-  transformed!: Date;
+  created: string = InitialDate;
+  modified: string = InitialDate;
+  transformed: string = InitialDate;
   firstTermIdx: number = IDX_INITIALIZER;
   lastTermIdx: number = IDX_INITIALIZER;
   sections: ISectionNode[] = []; //needs to be reflected in _data.sections[]
-  terminalList: ITerminalInfo[] = [];
+  terminalList: ITerminalListItem[] = [];
+  headingList: IHeadingListItem[] = [];
+  sentenceList: ISentenceListItem[] = [];
+  sectionList: IRangeItem[] = [];
   constructor(parent?: PageParseNode) {
     super(parent);
   }
   parse() {
-    this.logger.diagnosticMode = true;
+    //this.logger.diagnosticMode = true;
     this.logger.diagnostic(`${this.constructor.name}`);
+    this.created = new Date(Date.now()).toString();
     try {
       assert(this.dataSource !== undefined, `dataSource is undefined`);
       for (
@@ -68,10 +78,15 @@ export class PageParseNode extends ParseNode implements IPageContent {
         sectionNode.parse();
       }
       // transfer wordIdx from userContext to pages
+      this.userContext.terminals.parse();
       this.terminalList = this.userContext.terminals;
-      // this.wordIdx.forEach(wordIdx =>{
-      //   wordIdx.termIdx
-      // })
+
+      this.userContext.headings.parse(this.terminalList);
+      this.headingList = this.userContext.headings;
+
+      this.sentenceList = this.userContext.sentences;
+      this.sectionList = this.userContext.sections;
+      this.modified = new Date(Date.now()).toString();
     } catch (e) {
       if (IsError(e)) {
         this.logger.error(e.message);
@@ -95,7 +110,8 @@ export class PageParseNode extends ParseNode implements IPageContent {
         prefix = prefix + "  ";
         for (const [i, section] of this.sections.entries()) {
           label = `${section.type}`;
-          outputStr = `${outputStr}${section.serialize(
+          let sectionNode: ISectionNode = <ISectionNode>section;
+          outputStr = `${outputStr}${sectionNode.serialize(
             format,
             label,
             prefix + (i < this.sections.length - 1 ? "| " : "  ")
@@ -107,8 +123,8 @@ export class PageParseNode extends ParseNode implements IPageContent {
         let replacer: any = (key, value) => {
           // if we get a function, give us the code for that function
           switch (key) {
-            case "id":
-            case "firstTermIdx":
+            // case "id":
+            // case "firstTermIdx":
             //            case "nextTermIdx":
             //            case "prevTermIdx":
             case "recitable":
@@ -195,10 +211,10 @@ export class PageParseNode extends ParseNode implements IPageContent {
   stringifyReplacerForTabular(key: string, value: any) {
     // only include fields relevant otherwise ignore
     switch (key) {
-      case "id":
-      case "firstTermIdx":
-      case "nextTermIdx":
-      case "prevTermIdx":
+      // case "id":
+      // case "firstTermIdx":
+      // case "nextTermIdx":
+      // case "prevTermIdx":
       case "recitable":
       case "audible":
       case "visible":
@@ -213,6 +229,7 @@ export class PageParseNode extends ParseNode implements IPageContent {
     // /      terminalIdx = section.transform();
     //     }
     //     return terminalIdx;
+    this.transformed = new Date(Date.now()).toString();
     return 0;
   }
 }

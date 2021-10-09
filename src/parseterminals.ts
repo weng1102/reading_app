@@ -35,6 +35,7 @@ import {
   ICurrencyTerminalMetaInitializer,
   IPunctuationTerminalMeta,
   IPunctuationTerminalMetaInitializer,
+  ITerminalListItemInitializer,
   IWhitespaceTerminalMeta,
   IWhitespaceTerminalMetaInitializer
 } from "./pageContentType";
@@ -52,6 +53,7 @@ export type ITerminalNode = ITerminalContent & ITerminalParseNode;
 export abstract class AbstractTerminalNode extends ParseNode
   implements ITerminalParseNode {
   id: number = 0;
+  termIdx: number = IDX_INITIALIZER;
   content: string = "";
   firstTermIdx: number = IDX_INITIALIZER;
   lastTermIdx: number = IDX_INITIALIZER;
@@ -70,8 +72,6 @@ export abstract class AbstractTerminalNode extends ParseNode
       token = tokenList.shift()!;
       if (token !== undefined) {
         this.content = token.content; // should be TerminalInfo
-        this.meta = IWordTerminalMetaInitializer(token.content);
-        this.userContext.terminals.push(this.meta);
       }
     }
     return tokenList.length;
@@ -134,7 +134,7 @@ export abstract class AbstractTerminalNode extends ParseNode
         // Object.defineProperty(this, "terminals.meta.termIdx", {
         //   enumerable: false
         // });
-        let replacer: any = (key, value) => {
+        let replacer: any = (key: string, value) => {
           // if we get a function, give us the code for that function
           switch (key) {
             case "termIdx":
@@ -171,15 +171,23 @@ export class TerminalNode_WORD extends AbstractTerminalNode
   }
   type = TerminalMetaEnumType.word;
   meta: IWordTerminalMeta = IWordTerminalMetaInitializer();
-  // parse(tokenList: TokenListType) {
-  //   let retVal = super.parse(tokenList);
-  //   //    this.meta.termIdx = this.userContext.terminals.push(this.meta) - 1;
-  //   this.meta.content = this.content;
-  //   this.userContext.terminals.push(this.meta);
-  //   //    console.log(`WORD meta terminalIdx=${this.meta.termIdx}`);
-  //   //.termIdx = this.userContext.nextTerminalIdx;
-  //   return retVal;
-  // }
+  parse(tokenList: TokenListType): number {
+    // let token: Token;
+    // if (tokenList !== undefined) {
+    //   token = tokenList.shift()!;
+    //   if (token !== undefined) {
+    //     this.content = token.content; // should be TerminalInfo
+    super.parse(tokenList);
+    this.meta.content = this.content;
+    this.termIdx = this.userContext.terminals.push(
+      ITerminalListItemInitializer(this.meta)
+    );
+    this.meta.termIdx = this.termIdx;
+    this.firstTermIdx = this.termIdx;
+    this.lastTermIdx = this.termIdx;
+    return tokenList.length;
+  }
+
   transform() {
     return 0;
   }
@@ -216,7 +224,9 @@ export class TerminalNode_PUNCTUATION extends AbstractTerminalNode
       if (token !== undefined) {
         this.content = token.content; // should be TerminalInfo
         this.meta.content = token.content;
-        this.userContext.terminals.push(this.meta);
+        // this.termIdx = this.userContext.terminals.push(
+        //   ITerminalListItemInitializer(this.meta)
+        // );
       }
     }
     return tokenList.length;
@@ -269,7 +279,9 @@ export class TerminalNode_WHITESPACE extends AbstractTerminalNode
       if (token !== undefined) {
         this.content = token.content; // should be TerminalInfo
         this.meta.content = token.content;
-        this.userContext.terminals.push(this.meta);
+        // this.termIdx = this.userContext.terminals.push(
+        //   ITerminalListItemInitializer(this.meta)
+        // );
       }
     }
     return tokenList.length;
@@ -334,7 +346,13 @@ export class TerminalNode_MLTAG_CONTRACTION extends TerminalNode_MLTAG_
   parse(tokenList: TokenListType): number {
     let tokenListCount = super.parse(tokenList);
     this.meta.content = this.content;
-    this.userContext.terminals.push(this.meta);
+    this.termIdx = this.userContext.terminals.push(
+      ITerminalListItemInitializer(this.meta)
+    );
+    this.meta.termIdx = this.termIdx;
+    this.firstTermIdx = this.termIdx;
+    this.lastTermIdx = this.termIdx;
+
     //    this.meta.termIdx = this.userContext.nextTerminalIdx;
     return tokenListCount;
   }
@@ -370,13 +388,13 @@ export class TerminalNode_MLTAG_NUMBER_WITHCOMMAS extends TerminalNode_MLTAG_
     // replace comma with [.]?
     this.meta.content = this.content;
     this.meta.altrecognition = this.content.replace(/,/g, "[,]?");
-    this.userContext.terminals.push(this.meta);
-    //  this.meta.termIdx = this.userContext.nextTerminalIdx;
-    // check for additional processing for this.content
+    this.termIdx = this.userContext.terminals.push(
+      ITerminalListItemInitializer(this.meta)
+    );
+    this.meta.termIdx = this.termIdx;
+    this.firstTermIdx = this.termIdx;
+    this.lastTermIdx = this.termIdx;
 
-    // check for additional attributes for this.content
-    // pronunciationDictionary
-    // recognitionpattern
     return tokenListCount;
   }
   serialize(format: ParseNodeSerializeFormatEnumType, label?: string): string {
@@ -410,7 +428,13 @@ export class TerminalNode_MLTAG_TOKEN extends TerminalNode_MLTAG_
   parse(tokenList: TokenListType): number {
     let tokenListCount: number = super.parse(tokenList);
     this.meta.content = this.content;
-    this.userContext.terminals.push(this.meta);
+    this.termIdx = this.userContext.terminals.push(
+      ITerminalListItemInitializer(this.meta)
+    );
+    this.meta.termIdx = this.termIdx;
+    this.firstTermIdx = this.termIdx;
+    this.lastTermIdx = this.termIdx;
+
     //    this.meta.termIdx = this.userContext.nextTerminalIdx;
     return tokenListCount;
   }
@@ -444,7 +468,12 @@ export class TerminalNode_MLTAG_USD extends TerminalNode_MLTAG_
   meta: ICurrencyTerminalMeta = ICurrencyTerminalMetaInitializer();
   parse(tokenList: TokenListType): number {
     let tokenListCount: number = super.parse(tokenList);
-    this.userContext.terminals.push(this.meta.currency);
+    this.termIdx = this.userContext.terminals.push(
+      ITerminalListItemInitializer(this.meta.currency)
+    );
+    this.firstTermIdx = this.termIdx;
+    this.lastTermIdx = this.termIdx;
+
     // this.meta.currency.termIdx = this.userContext.nextTerminalIdx;
     return tokenListCount;
   }

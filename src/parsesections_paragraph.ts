@@ -10,11 +10,13 @@
 import { strict as assert } from "assert";
 import { IsError } from "./utilities";
 import {
+  IDX_INITIALIZER,
   ParseNodeSerializeTabular,
   ParseNodeSerializeFormatEnumType
 } from "./baseclasses";
 import { MarkdownTagType, TaggedStringType } from "./dataadapter";
 import {
+  ISectionListItemInitializer,
   ISectionParagraphVariant,
   ISectionParagraphVariantInitializer,
   SectionVariantEnumType
@@ -32,7 +34,7 @@ export class SectionParseNode_PARAGRAPH extends SectionParseNode_LIST
   type = SectionVariantEnumType.paragraph;
   meta: ISectionParagraphVariant = ISectionParagraphVariantInitializer();
   parse() {
-    this.logger.diagnosticMode = true;
+    //this.logger.diagnosticMode = true;
     this.logger.diagnostic(`${this.constructor.name}`);
     try {
       assert(this.dataSource !== undefined, `dataSource is undefined`);
@@ -42,6 +44,7 @@ export class SectionParseNode_PARAGRAPH extends SectionParseNode_LIST
         current.tagType === MarkdownTagType.PARAGRAPH,
         `expected ${MarkdownTagType.PARAGRAPH} at line ${current.lineNo}`
       );
+      this.firstTermIdx = this.userContext.terminals.lastIdx + 1;
       for (
         current = this.dataSource.nextRecord();
         !this.dataSource.EOF() &&
@@ -61,8 +64,14 @@ export class SectionParseNode_PARAGRAPH extends SectionParseNode_LIST
         current.tagType === MarkdownTagType.PARAGRAPH_END,
         `expected ${MarkdownTagType.PARAGRAPH_END} to ${MarkdownTagType.PARAGRAPH}`
       );
-      if (current.tagType === MarkdownTagType.PARAGRAPH_END)
+      if (current.tagType === MarkdownTagType.PARAGRAPH_END) {
+        this.lastTermIdx = this.userContext.terminals.lastIdx;
+        this.id = this.userContext.sections.push(ISectionListItemInitializer(this.firstTermIdx, this.lastTermIdx));
+        for (let idx = this.firstTermIdx; idx <= this.lastTermIdx; idx++) {
+            this.userContext.terminals[idx].sectionIdx = this.id;
+        }
         this.dataSource.nextRecord(); // move to next grouping
+      }
     } catch (e) {
       if (IsError(e)) {
         this.logger.error(e.message);
@@ -82,8 +91,9 @@ export class SectionParseNode_PARAGRAPH extends SectionParseNode_LIST
       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
         outputStr = `${super.serialize(format, label, prefix)}`;
         ///        for (let sentence of this.meta.sentences) {
-        for (const [i, value] of this.meta.sentences.entries()) {
-          outputStr = `${outputStr}${value.serialize(
+        for (const [i, sentence] of this.meta.sentences.entries()) {
+          let sentenceNode: ISentenceNode = <SentenceNode>sentence;
+          outputStr = `${outputStr}${sentenceNode.serialize(
             format,
             label,
             //            prefix + " ".padEnd(2)
@@ -103,9 +113,10 @@ export class SectionParseNode_PARAGRAPH extends SectionParseNode_LIST
         );
         //        if (colWidth0 === undefined) colWidth0 = 2;
         for (let sentence of this.meta.sentences) {
+          let sentenceNode: ISentenceNode = <SentenceNode>sentence
           outputStr =
             outputStr +
-            sentence.serialize(
+            sentenceNode.serialize(
               format,
               sentence.constructor.name,
               sentence.content

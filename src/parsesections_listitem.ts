@@ -28,7 +28,7 @@ abstract class SectionParseNode_SECTION extends SectionParseNode_LIST
   }
   meta = ISectionListitemVariantInitializer();
   parse(): number {
-    this.logger.diagnosticMode = true;
+    //this.logger.diagnosticMode = true;
     this.logger.diagnostic(`${this.constructor.name}`);
     try {
       assert(this.dataSource !== undefined, `dataSource is undefined`);
@@ -116,7 +116,7 @@ abstract class SectionParseNode_LISTITEM extends SectionParseNode_LIST
   readonly type = SectionVariantEnumType.listitem;
   meta: ISectionListitemVariant = ISectionListitemVariantInitializer();
   parse() {
-    this.logger.diagnosticMode = true;
+    //this.logger.diagnosticMode = true;
     this.logger.diagnostic(`${this.constructor.name}`);
     try {
       assert(this.dataSource !== undefined, `dataSource is undefined`);

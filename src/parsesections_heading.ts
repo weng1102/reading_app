@@ -9,7 +9,7 @@
  **/
 import { strict as assert } from "assert";
 import { IsError } from "./utilities";
-import { IParseNode, ParseNodeSerializeFormatEnumType } from "./baseclasses";
+import { IDX_INITIALIZER, IParseNode, ParseNodeSerializeFormatEnumType } from "./baseclasses";
 import { MarkdownTagType, TaggedStringType } from "./dataadapter";
 import {
   ISectionContent,
@@ -43,6 +43,12 @@ export class SectionParseNode_HEADING extends SectionParseNode
       );
       this.meta.title = current.content;
       this.meta.level = current.headingLevel;
+      this.userContext.headings.push( {
+        headingLevel: current.headingLevel,
+        title: current.content,
+        termIdx: IDX_INITIALIZER,
+        terminalCountPriorToHeading: this.userContext.terminals.length
+      })
       this.dataSource.nextRecord(); // position to next record
     } catch (e) {
       if (IsError(e)) {

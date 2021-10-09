@@ -1,19 +1,8 @@
 import React from "react"; // define glocal var
+import { ITerminalInfo, ITerminalInfoInitializer } from "./pageContentType"
 const WordNodes = React.createContext(null); // should be called wordList
 
-const InitialWordNodeState = {
-  word: "",
-  wordNodeIdx: 0,
-  nextWordNodeIdx: [],
-  prevWordNodeIdx: [],
-  wordPattern: "",
-  wordId: 0,
-  sentenceId: 0,
-  sectionId: 0,
-  pageId: 0,
-  altRecognition: "",
-  visited: false
-};
+const InitialWordNodeState: ITerminalInfo = ITerminalInfoInitializer();
 // should be a class
 class WordNodesClass {
   constructor(content: any) {

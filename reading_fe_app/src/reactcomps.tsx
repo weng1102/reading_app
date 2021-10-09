@@ -1,18 +1,57 @@
+/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+ *
+ * File name: reactcomps.tsx
+ *
+ * Defines React front end functional components.
+ *
+ * Terminals represent the group of words, punctuations, whitespace,
+ * references, etc that can be rendered.
+ * "Words" refer to terminals that where the current cursor can be active;
+ * that terminals that are visible and recitable as opposed to punctuations,
+ * whitespace and other syntactical sugar.
+ *
+ * Version history:
+ *
+ **/
 import React from "react";
 import "./App.css";
-import mic_listening from "./mic1-xparent.gif";
-import mic_notlistening from "./mic1-inactive-xparent.gif";
-import mic_unavailable from "./mic1-ghosted.gif";
-import { WordNodes, WordNodesClass } from "./wordnodes";
-import { WordActions, WordNodeActions, ListeningActions } from "./reducers";
+// import mic_listening from "./mic1-xparent.gif";
+// import mic_notlistening from "./mic1-inactive-xparent.gif";
+// import mic_unavailable from "./mic1-ghosted.gif";
+import { Request } from "./reducers";
 import { useAppDispatch, useAppSelector } from "./hooks";
-//import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState, useContext } from "react";
-import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
+import { ReadItButton } from "./reactcomp_speech";
+
+// is this really necessary if availablility is removed below
+import SpeechRecognition, {
+  useSpeechRecognition
+} from "react-speech-recognition";
+
+import {
+  IPageContent,
+  IHeadingListItem,
+  ISectionContent,
+  ISentenceContent,
+  ITerminalContent,
+  ITerminalInfo,
+  IAcronymTerminalMeta,
+  IWordTerminalMeta,
+  TerminalMetaEnumType,
+  SectionVariantEnumType,
+  ISectionParagraphVariant
+} from "./pageContentType";
+import { IPageContext, PageContext, PageContextInitializer } from "./termnodes";
+import { NavBar } from "./reactcomp_navbar";
+import { PageHeader } from "./reactcomp_pageheader";
+import { ListeningMonitor, ListenButton } from "./reactcomp_listening";
+import { SpeechSynthesizer } from "./reactcomp_speech";
 //import data from "content";
 //import ReactDOM from 'react-dom';
-var content = require("./content.json");
-var contentts = require("./content.ts");
+//var content = require("./content.json");
+//var content = require("../../src/parsetest20210915.json");
+import content from "./content/3wordsentences.json";
+//import content from "content/terminals.json";//var contentts = require("./content.ts");
 //const SpeechRecogition = new SpeechRecogition();
 
 const SectionType = {
@@ -28,11 +67,18 @@ const SectionType = {
 ////INSTEAD use SpeechRecognition.startListening(for the above parameters)
 export const ReadingApp = () => {
   let dispatch = useAppDispatch();
-  let wordNodes: any = useContext(WordNodes);
-  if (wordNodes === null) wordNodes = new WordNodesClass(content);
-  dispatch(WordNodeActions.setWordNodes(wordNodes));
+  //  let terminalNodes: any = useContext(TerminalNodes);
+
+  // if (terminalNodes === null) {
+  //   terminalNodes = new CTerminalNodes(
+  //     content.terminalList,
+  //     content.headingList,
+  //     content.sectionList,
+  //     content.sentenceList);
+  // }
+  //dispatch(WordNodeActions.setWordNodes(terminalNodes));
   dispatch(
-    ListeningActions.available(
+    Request.Recognition_setAvailability(
       SpeechRecognition.browserSupportsSpeechRecognition()
     )
   );
@@ -40,30 +86,48 @@ export const ReadingApp = () => {
   // console.log(`page name=${contentts.name}`);
   // console.log(`section name=${contentts.sections[0].name}`);
   return (
-    // create page state in redux
-    <WordNodes.Provider value={wordNodes}>
+    <PageContext.Provider
+      value={PageContextInitializer(
+        content.terminalList,
+        content.headingList,
+        content.sectionList,
+        content.sentenceList
+      )}
+    >
       <Page content={content} />
-    </WordNodes.Provider>
+    </PageContext.Provider>
+    // create page state in redux
+    // <TerminalNodes.Provider value={terminalNodes}>
+    //   <Page content={content} />
+    // </TerminalNodes.Provider>
   );
 };
-interface PagePropsType {
+interface IPagePropsType {
   content: any;
 }
-export const Page = React.memo((props: PagePropsType) => {
+export const Page = React.memo((props: IPagePropsType) => {
+  //give access to page context to reducers
+  let pageContext: IPageContext = useContext(PageContext)!;
+  let dispatch = useAppDispatch();
+  dispatch(Request.Page_setContext(pageContext)); // required for all pageContext changes
+  dispatch(Request.Cursor_gotoFirstSection());
   return (
     // create page state in redux
     <>
       <PageHeader title={props.content.name} />
-      <NavBar sections={props.content.sections} />
+      <NavBar headings={props.content.headingList} />
       <Content content={props.content} />
     </>
   );
-}) as any;
-interface ContentPropsType {
-  content: any
+});
+//PageHeader = React.memo(PageHeader);
+
+interface IContentPropsType {
+  content: IPageContent;
 }
-export const Content = React.memo((props: ContentPropsType) => {
-//let Content = (props: ContentPropsType) => {
+export const Content = React.memo((props: IContentPropsType): any => {
+  console.log(`<Content>`);
+  //let Content = (props: ContentPropsType) => {
   // Callback when section changes (via navbar)
   // page>section(chapter|paragraph)+>sentences>sentence>words>word
   //let pageid = useSelector(store => store.currentWorld.pageid);
@@ -73,36 +137,157 @@ export const Content = React.memo((props: ContentPropsType) => {
   //  let section = useSelector(store.WordSeqReducer.sectionId);
   //mapStateToProps()
   //  const [wordNodes, setWordNodes] = useContext(WordNodes);
-  //  let currentWordSeq = useSelector(store => store.WordActionReducer.wordNodeIdx);
+  //  let currentWordSeq = useSelector(store => store.CursorActionReducer.wordNodeIdx);
   //  console.log(`<Content> currentWordSeq=${currentWordSeq}`);
 
   //  let currentSectionId = useContext(WordNodes).props(currentWordSeq).sectionId;
-  let currentSectionId = useAppSelector(
-    store => store.WordActionReducer.sectionId
+
+  // SAVE THIS FOR FUTURE labelling active section feature
+  const currentSectionIdx: number = useAppSelector(
+    store => store.cursor_sectionIdx
   );
-  console.log(`<Content> currentSectionId=${currentSectionId}`);
+  return (
+    <div className="content-container">
+      {props.content.sections.map(
+        (section: ISectionContent, keyvalue: number) => (
+          <SectionDispatcher
+            key={keyvalue}
+            //            keyvalue={keyvalue}
+            active={currentSectionIdx === section.id}
+            section={section}
+          />
+        ) // =>
+      )}
+    </div>
+  ); // return
+});
+//Content = React.memo(Content);
+interface ISectionFormatPropsType {
+  listFormat: string;
+  children: any;
+}
+interface ISectionPropsType1 {
+  //  key: number;
+  //  keyvalue: number;
+  active: boolean;
+  section: ISectionContent;
+}
+export const SectionDispatcher = React.memo((props: ISectionPropsType1) => {
+  // console.log(`<SectionDispatcher type=${props.section.type}`);
+  switch (props.section.type) {
+    case SectionVariantEnumType.empty:
+      return (
+        <Section_empty
+          //          key={props.key}
+          //          active={props.active}
+          section={props.section}
+        />
+      );
+    case SectionVariantEnumType.paragraph:
+      return (
+        <Section_paragraph
+          //          keyvalue={props.keyvalue}
+          active={props.active}
+          section={props.section}
+        />
+      );
+    case SectionVariantEnumType.tbd:
+      return (
+        <div className="section-tbd">
+          rendering unknown format for section type={props.section.type}
+        </div>
+      );
+    case SectionVariantEnumType.subsection:
+    case SectionVariantEnumType.listitem:
+      return <li>list item</li>;
+    case SectionVariantEnumType.unordered_list:
+    case SectionVariantEnumType.ordered_list:
+    case SectionVariantEnumType.fillin:
+    case SectionVariantEnumType.fillin_list:
+    case SectionVariantEnumType.photo_entry:
+    case SectionVariantEnumType.blockquote:
+    case SectionVariantEnumType.unittest:
+    default:
+      return (
+        <div className="section-unsupported">
+          rendering unsupported for section type={props.section.type}
+        </div>
+      );
+  } //switch
+});
+export const Section_empty = (props: ISectionInactivePropsType1) => {
+  let br = "<br>"; // or <p> or empty based on configuration
+  // console.log(`<Section_Empty>`);
+  return <>{br}</>;
+};
+interface ISectionInactivePropsType1 {
+  section: ISectionContent;
+}
+interface ISectionPropsType1 {
+  //  key: number;
+  active: boolean;
+  section: ISectionContent;
+}
+interface ISectionParagraphPropsType {
+  //  key: number;
+  active: boolean;
+  paragraph: ISectionContent;
+}
+export const Section_paragraph = React.memo(
+  (props: ISectionPropsType1): any => {
+    console.log(`<Section_Paragraph active=${props.active}>`);
+    const currentSentenceIdx: number = useAppSelector(
+      store => store.cursor_sentenceIdx
+    );
+    //  if (props.paragraph.type === SectionVariantEnumType.paragraph) {
+    let paragraph: ISectionParagraphVariant = props.section
+      .meta as ISectionParagraphVariant;
+    // console.log(
+    //   `<Section_Paragraph> has ${paragraph.sentences.length} sentences`
+    // );
+    return (
+      <>
+        <p>
+          {paragraph.sentences.map(
+            (sentence: ISentenceContent, keyvalue: number) => (
+              <Sentence1
+                key={keyvalue}
+                active={currentSentenceIdx === sentence.id}
+                sentence={sentence}
+              />
+            )
+          )}
+        </p>
+      </>
+    );
+  }
+);
+interface ISentencePropsType1 {
+  //  key: number;
+  active: boolean;
+  sentence: ISentenceContent;
+}
+export const Sentence1 = React.memo((props: ISentencePropsType1) => {
+  // const currentTerminalIdx: number = useAppSelector(
+  //   store => store.cursor_terminalIdx
+  // );
+  console.log(
+    `<Sentence1 sentenceIdx=${props.sentence.id} active=${props.active}>`
+  );
   return (
     <>
-      <div className="content-container">
-        {props.content.sections.map((sectionObj: any, keyvalue: any) => (
-          <Section
-            key={keyvalue}
-            active={sectionObj.id === currentSectionId}
-            listFormat={SectionType.UNORDEREDLIST}
-            sectionObj={sectionObj}
-            //          activeWordNodeIdx={currentWordSeq}
-          />
-        ))}
-      </div>
+      <span className="sentence">
+        {props.sentence.terminals.map(
+          (terminal: ITerminalContent, keyvalue: number) => (
+            <TerminalDispatcher key={keyvalue} terminal={terminal} />
+          )
+        )}
+      </span>
     </>
   );
-} ) as any;
-//Content = React.memo(Content);
-interface SectionFormatPropsType {
-  listFormat: string,
-  children: any
-}
-export const SectionFormat = React.memo((props: SectionFormatPropsType) => {
+});
+
+export const SectionFormat = React.memo((props: ISectionFormatPropsType) => {
   console.log(`<SectionFormat>`);
   switch (props.listFormat) {
     case "ul":
@@ -112,58 +297,98 @@ export const SectionFormat = React.memo((props: SectionFormatPropsType) => {
     default:
       return <>{props.children}</>;
   }
-}) as any;
+});
 //SectionFormat = React.memo(SectionFormat);
-interface SectionHeadingPropsType {
-  headingLevel: number,
-  anchorId: any,
-  sectionId: number,
-  sectionName: string,
+interface ISectionHeadingPropsType {
+  headingLevel: number;
+  anchorId: any;
+  sectionId: number;
+  sectionName: string;
 }
-interface HeadingTagPropsType {
-  level: number,
-  sectionId: number,
-  sectionName: string
+// const HeadingTag1 = (props: IHeadingTagPropsType) => {
+// const headingLevels = ["p", "h1", "h2", "h3", "h4", "h5", "h6"];
+// const validHeadingLevel =
+//   props.level > 0 && props.level < headingLevels.length - 1
+//     ? props.level
+//     : 0;
+//    return (React.createElement(headingLevels[validHeadingLevel], null, props.sectionName));
+// }
+// const HeadingTag = (props: IHeadingTagPropsType) => {
+//   const headingLevels = ["p", "h1", "h2", "h3", "h4", "h5", "h6"];
+//   const validHeadingLevel =
+//     props.level > 0 && props.level < headingLevels.length - 1
+//       ? props.level
+//       : 0;
+//   return (<>{headingLevels[validHeadingLevel]}</>);
+// }
+const SectionHeading = React.memo((props: ISectionHeadingPropsType) => {
+  interface IHeadingTagPropsType {
+    level: number;
+    sectionId: number;
+    sectionName: string;
+  }
+  const HeadingTag = (props: IHeadingTagPropsType) => {
+    const headingLevels = ["p", "h1", "h2", "h3", "h4", "h5", "h6"];
+    const validHeadingLevel =
+      props.level > 0 && props.level < headingLevels.length - 1
+        ? props.level
+        : 0;
+    //        return (React.createElement(headingLevels[validHeadingLevel], null, props.sectionName));
+    return React.createElement(
+      headingLevels[validHeadingLevel],
+      null,
+      props.sectionName
+    );
+  };
+  //  const HeadingTag =(props: HeadingTagPropsType) => headingLevels[validHeadingLevel];
+  //  if (props.anchorId !== "undefined") {
+  // const headingLevels = ["p", "h1", "h2", "h3", "h4", "h5", "h6"];
+  // // const HeadingTag1 = (props: IHeadingTagPropsType) => {
+  // // //const headingLevels = ["p", "h1", "h2", "h3", "h4", "h5", "h6"];
+  // const validHeadingLevel = props.headingLevel > 0 && props.headingLevel < headingLevels.length - 1
+  //     ? props.headingLevel
+  //     : 0;
+  //   let headingLevel = headingLevels[validHeadingLevel];
+  //   return (React.createElement(headingLevel, null, props.sectionName));
+  // const HeadingTag2 = (
+  //   <HeadingTag
+  // )
+  // const HeadingTag = (props:any) => { headingLevels[
+  //   props.headingLevel > 0 && props.headingLevel < headingLevels.length - 1
+  //     ? props.headingLevel
+  //     : 0];
+  //   }
+  return (
+    //      <HeadingTag headingLevel={props.headingLevel}>
+    <HeadingTag
+      level={props.headingLevel}
+      sectionId={props.sectionId}
+      sectionName={props.sectionName}
+    />
+    // <HeadingTag>
+    //   <a id={props.sectionId.toString()}>{props.sectionName}</a>
+    // </HeadingTag>
+    //  );
+    // } else {
+    //   return (
+    //     <HeadingTag1>
+    //       {props.sectionName}
+    //     </HeadingTag1>
+  );
+});
+interface ISectionPropsType {
+  active: boolean;
+  sectionObj: any;
+  listFormat: any;
 }
-const HeadingTag1 = (props: any) => {
-  const headingLevels = ["p", "h1", "h2", "h3", "h4", "h5", "h6"];
-  const validHeadingLevel =
-    props.headingLevel > 0 && props.headingLevel < headingLevels.length - 1
-      ? props.headingLevel
-      : 0;
-  return (<>{headingLevels[validHeadingLevel]}</>);
-}
-const SectionHeading = React.memo((props: SectionHeadingPropsType) => {
-  const headingLevels = ["p", "h1", "h2", "h3", "h4", "h5", "h6"];
-//  const HeadingTag =(props: HeadingTagPropsType) => headingLevels[validHeadingLevel];
-//  if (props.anchorId !== "undefined") {
-    return (
-      <HeadingTag1>
-        <a id={props.sectionId.toString()}>{props.sectionName}</a>
-      </HeadingTag1>
-  //  );
-  // } else {
-  //   return (
-  //     <HeadingTag1>
-  //       {props.sectionName}
-  //     </HeadingTag1>
-  )
-}) as any;
-interface SectionPropsType {
-  active: boolean,
-  sectionObj: any,
-  listFormat: any
-}
-let Section = React.memo((props: SectionPropsType) => {
+let Section = React.memo((props: ISectionPropsType) => {
   console.log(
     `<Section> props.active=${props.active} props.listFormat=${props.listFormat} props.sectionObj=${props.sectionObj}`
   );
   ////
   // should be written to handle nested (recursive) sections using a props.level
   let level = 1; // reminder to keep track of depth of headings
-  let currentSentenceId = useAppSelector(
-    store => store.WordActionReducer.sentenceId
-  );
+  const currentSentenceId = useAppSelector(store => store.cursor_sentenceIdx);
   console.log(`<Section> currentSentenceId=${currentSentenceId}`);
   return (
     <>
@@ -177,7 +402,7 @@ let Section = React.memo((props: SectionPropsType) => {
       <SectionFormat listFormat={props.listFormat}>
         {props.sectionObj.sentences.map((sentenceObj: any, keyvalue: any) => (
           <Sentence
-            key={props.sectionObj.id + "." + keyvalue}
+            key={props.sectionObj.id * 1000 + keyvalue}
             active={props.active && sentenceObj.id === currentSentenceId}
             listFormat={props.listFormat}
             sentenceObj={sentenceObj}
@@ -186,13 +411,13 @@ let Section = React.memo((props: SectionPropsType) => {
       </SectionFormat>
     </>
   );
-}) as any;
+});
 //Section = React.memo(Section);
-interface SentenceFormatPropsType {
-  listFormat: any,
-  children: any
+interface ISentenceFormatPropsType {
+  listFormat: any;
+  children: any;
 }
-let SentenceFormat = React.memo((props:SentenceFormatPropsType) => {
+let SentenceFormat = React.memo((props: ISentenceFormatPropsType) => {
   console.log(`<SentenceFormat> ${props.listFormat}`);
   switch (props.listFormat) {
     case "ul" || "ol":
@@ -200,430 +425,251 @@ let SentenceFormat = React.memo((props:SentenceFormatPropsType) => {
     default:
       return <>{props.children}</>;
   }
-}) as any;
+});
 //SentenceFormat = React.memo(SentenceFormat);
-interface SentencePropsType {
-  key: number,
-  active: boolean,
-  listFormat: any,
-  sentenceObj: any,
-  wordObj: any
+interface ISentencePropsType {
+  active: boolean;
+  listFormat: any;
+  sentenceObj: any;
+  wordObj?: any;
 }
-export const Sentence = React.memo((props: SentencePropsType) => {
-  console.log(
-    `<Sentence> props.active=${props.active} props.listFormat=${props.listFormat} props.sentenceObj=${props.sentenceObj}`
-  );
-  let currentWordNodeIdx = useAppSelector(
-    store => store.WordActionReducer.wordNodeIdx
-  ); // cause rerendering of all sentences
-  return (
-    <SentenceFormat listFormat={props.listFormat}>
-      <span className={`audible-sentence ${props.active ? "active" : ""}`}>
-        {props.sentenceObj.words.map((wordObj:any, keyvalue:any) => (
-          <Word
-            key={props.sentenceObj.id + "." + keyvalue}
-            active={props.active && wordObj.wordNodeIdx === currentWordNodeIdx}
-            wordObj={wordObj}
-          />
-        ))}
-      </span>
-    </SentenceFormat>
-  );
-}) as any;
+export const Sentence = React.memo((props: ISentencePropsType) => {
+  return <></>;
+}); //replaced deprecated code below
+//   console.log(
+//     `<Sentence> props.active=${props.active} props.listFormat=${props.listFormat} props.sentenceObj=${props.sentenceObj}`
+//   );
+//   const currentWordNodeIdx = useAppSelector(store => store.cursor_terminalIdx); // cause rerendering of all sentences
+//   return (
+//     <SentenceFormat listFormat={props.listFormat}>
+//       <span className={`audible-sentence ${props.active ? "active" : ""}`}>
+//         {props.sentenceObj.words.map((wordObj: any, keyvalue: any) => (
+//           <Word
+//             key={props.sentenceObj.id * 1000 + keyvalue}
+//             active={props.active && wordObj.wordNodeIdx === currentWordNodeIdx}
+//             wordObj={wordObj}
+//           />
+//         ))}
+//       </span>
+//     </SentenceFormat>
+//   );
+// });
 //Sentence = React.memo(Sentence);
-interface WordPropsType {
-  key: number,
-  active: boolean,
-  wordObj: any,
-  visited: boolean
+interface IWordPropsType {
+  active: boolean;
+  wordObj: any;
+  visited?: boolean;
 }
-let Word = React.memo((props: WordPropsType) => {
-  console.log(
-    `<Word> props.active=${props.active} props.wordObj=${props.wordObj}`
-  );
-  console.log(`<Word> word=${props.wordObj.word}`);
-  if (Number.isInteger(props.wordObj.wordNodeIdx)) {
-    // call wordNode.validWordNodeIndx
-    return (
-      <AudibleWord
-        key={props.wordObj.wordNodeIdx}
-        active={props.active}
-        wordObj={props.wordObj}
-        visited={false}
-        //        visited={visited}
-      />
+interface ITerminalPropsType {
+  active: boolean;
+  terminal: ITerminalContent;
+}
+interface ITerminalInactivePropsType {
+  //  key: number;
+  //  active: boolean;
+  terminal: ITerminalContent;
+  //  visited?: boolean;
+}
+interface ITerminalDispatcherPropsType {
+  //  keyvalue: number;
+  terminal: ITerminalContent;
+  //  visited?: boolean;
+}
+let TerminalDispatcher = React.memo(
+  (props: ITerminalDispatcherPropsType): any => {
+    const currentTerminalIdx = useAppSelector(
+      store => store.cursor_terminalIdx
     );
-  } else {
-    return (
-      <Whitespace key={props.wordObj.wordNodeIdx} wordObj={props.wordObj} />
-    );
+    //*********
+    //RERENDERING ISSUE
+    // useSelector(currentTerminalIdx) that changes EVERYTIME word advances thus triggers
+    // rerendering of TerminalDispatcher but NOT actual screen update.
+    // cause rerendering of all sentences
+    // console.log(
+    //   `<TerminalDispatcher content=${props.terminal.content} />` // props.active=${props.active} props.terminal=${props.terminal} />`
+    // );
+    // for all terminals made of multiple TerminalInfo blocks, active must identify the specific terminalList
+    // So even if the the component renders the entire compound terminal, active can only be set for a single
+    // terminal
+    //
+    //
+    // Explore using props.children in dispatcher to tranparently dispatch without triggering rerender via useSelector
+    //
+    // *********
+    switch (props.terminal.type) {
+      case TerminalMetaEnumType.acronym:
+        return (
+          <Terminal_Acronym
+            //          active={true} //currentTerminalNodeIdx===props.terminal.termIdx}
+            //            key={props.keyvalue}
+            active={
+              currentTerminalIdx >= props.terminal.firstTermIdx &&
+              currentTerminalIdx <= props.terminal.lastTermIdx
+            }
+            terminal={props.terminal}
+          />
+        );
+        break;
+      case TerminalMetaEnumType.word:
+        let meta = props.terminal.meta as IWordTerminalMeta;
+        let active = currentTerminalIdx === meta.termIdx;
+        ///      active = currentTermIdx === meta.termIdx;
+        return <Terminal_Word active={active} terminal={props.terminal} />;
+        break;
+      case TerminalMetaEnumType.whitespace:
+        return <Terminal_Whitespace active={false} terminal={props.terminal} />;
+        break;
+      case TerminalMetaEnumType.currency:
+        break;
+      case TerminalMetaEnumType.date:
+        break;
+      case TerminalMetaEnumType.emailaddress:
+        break;
+      case TerminalMetaEnumType.numberwithcommas:
+        break;
+      case TerminalMetaEnumType.phonenumber:
+        break;
+      case TerminalMetaEnumType.punctuation:
+        return (
+          <Terminal_Whitespace
+            //        active={active}
+            //            key={props.keyvalue}
+            active={false}
+            terminal={props.terminal}
+          />
+        );
+        break;
+      case TerminalMetaEnumType.tbd:
+        break;
+      case TerminalMetaEnumType.time:
+        break;
+      case TerminalMetaEnumType.token:
+        break;
+      case TerminalMetaEnumType.year:
+        break;
+      default:
+        return <>unknown terminal {props.terminal.content}</>;
+        break;
+    }
   }
-}) as any;
-//Word = React.memo(Word);
-interface WhitespacePropsType {
-  wordObj: any
-}
-export const Whitespace = React.memo((props: WhitespacePropsType) => {
-  console.log(`<Whitespace> rendering whitespace/punctuations`);
-  return (
-    <>
-      <span>{props.wordObj.word}</span>
-    </>
-  );
-}) as any;
-//Whitespace = React.memo(Whitespace);
-interface AudiblePropsType {
-  active: boolean,
-  visited: boolean,
-  wordObj: any
-}
-export const AudibleWord = React.memo((props: AudiblePropsType) => {
-  console.log(
-    `<AudibleWord> props.active=${props.active} props.wordObj=${props.wordObj} props.visited`
-  );
+);
+let Terminal_Acronym = React.memo((props: ITerminalPropsType): any => {
+  console.log(`<Terminal_acronym> active=${props.active}`);
+  // Rather not trigger dispatch via useSelector but necessary for all multiple terminal words
+  // Rerenders only when acronym is active theough
+  const currentTerminalIdx = useAppSelector(store => store.cursor_terminalIdx); // cause rerendering of all sentences
   let dispatch = useAppDispatch();
-  let active = props.active ? "active" : "";
+  let acronym: IAcronymTerminalMeta = props.terminal
+    .meta as IAcronymTerminalMeta;
+  //  let active = props.active ? "active" : "";
   return (
     <>
-      <span
-        key={props.wordObj.wordNodeIdx}
-        className={`audible-word ${active} ${props.visited}`}
-        onClick={() =>
-          dispatch(WordActions.gotoSelectedWord(props.wordObj.wordNodeIdx))
-        }
-      >
-        {props.wordObj.word}
-      </span>
-    </>
-  );
-}) as any;
-//AudibleWord = React.memo(AudibleWord);
-interface PageHeaderPropsType {
-  title: string
-}
-export const PageHeader = React.memo((props: PageHeaderPropsType) => {
-  const floatLeft: React.CSSProperties = { float: "left" };
-  console.log(`<PageHeader>`);
-  return (
-    <header className="header">
-      <div className="headerleft" style={floatLeft}>
-        <div className="listen" style={floatLeft}>
-          <ListenButton />
-        </div>
-        <div className="headertitle" style={floatLeft}>
-          {props.title}
-        </div>
-      </div>
-      <div className="header-container-controls">
-        <div className="shortcuts">
-          <Shortcuts />
-        </div>
-        <div className="recitationmode">
-          <RecitationMode />
-        </div>
-        <div className="wordsheard">
-          <WordsHeard />
-        </div>
-        <div className="wordcontrol">
-          <WordControl />
-        </div>
-        <div className="readingMonitor">
-          <ReadingMonitor />
-        </div>
-      </div>
-    </header>
-  );
-}) as any;
-//PageHeader = React.memo(PageHeader);
-const ListenButton = () => {
-  //
-  let listeningAvailable = useAppSelector(
-    store => store.ListeningReducer.listeningAvailable
-  );
-  let listening = useAppSelector(store => store.ListeningReducer.listening);
-  console.log(`listenbutton listening=${listening}`);
-  console.log(`listenbutton listeningAvailable=${listeningAvailable}`);
-  const dispatch = useAppDispatch();
-  return (
-    <button
-      className="listenButton"
-      onClick={() =>
-        listeningAvailable ? dispatch(ListeningActions.toggle()) : undefined
-      }
-    >
-      <img
-        className="listenButtonImg"
-        src={
-          listeningAvailable
-            ? listening
-              ? mic_listening
-              : mic_notlistening
-            : mic_unavailable
-        }
-        alt="mic"
-      />
-    </button>
-  );
-};
-const RecitationMode = () => {
-  // handlechange
-  return (
-    <select className="ddlb-recitationmode">
-      <option value="recitationmode">
-        Recitation mode...
-      </option>
-      <option value="wordonly">Word Only</option>
-      <option value="uptoword">Up to word</option>
-      <option value="entiresentence">Entire sentence</option>
-    </select>
-  );
-};
-interface ShortcutsPropsType {}
-const Shortcuts = () => {
-  // handlechange
-  return (
-    <select className="ddlb-shortcuts">
-      <option value="shortcuts...">
-        Shortcuts...
-      </option>
-      <option value="the">the</option>
-      <option value="quick">quick</option>
-      <option value="3-Word Sentences">3-Word Sentences</option>
-      <option value="fox">fox</option>
-      <option value="jumped">jumped</option>
-      <option value="the quick brown fox jumped">
-        the quick brown fox jumped
-      </option>
-    </select>
-  );
-};
-interface WordsHeardPropsType {}
-const WordsHeard = () => {
-  const readOnly = { readonly: "true" };
-  return (
-    <textarea
-      className="wordsheard"
-      readOnly
-      value="I can't hear you? Are you there?"
-    />
-  );
-};
-interface WordControlPropsType {}
-const WordControl = () => {
-  return (
-    <>
-      <div className="wordNodeIdxvalue">
-        <IdField
-          name="LastWordIdx"
-          id={useAppSelector(store => store.WordActionReducer.lastWordNodeIdx)}
-        />
-      </div>
-      <div className="wordNodeIdxvalue">
-        <IdField
-          name="Current"
-          id={useAppSelector(store => store.WordActionReducer.wordNodeIdx)}
-        />
-      </div>
-      <div className="resetwordbutton">
-        <ResetWordButton />
-      </div>
-      <div className="prevwordbutton">
-        <PrevWordButton />
-      </div>
-      <div className="nextwordbutton">
-        <NextWordButton />
-      </div>
-    </>
-  );
-};
-interface IdFieldPropsType {
-  name: string,
-  id: string
-}
-const IdField = (props: IdFieldPropsType) => {
-  return (
-    <>
-      <span className="labelled-textarea">
-        <label>{props.name}: </label>
-        <textarea
-          readOnly
-          value={props.id}
-          className="text"
-          name={props.name}
-          rows={1}
-        />
-      </span>
-    </>
-  );
-};
-interface ResetButtonPropsType {}
-const ResetWordButton = () => {
-  const dispatch = useAppDispatch();
-  return (
-    <button
-      className="resetWordButton"
-      onClick={() => dispatch(WordActions.gotoFirstWord())}
-    >
-      Reset
-    </button>
-  );
-};
-interface PrevWordButtonPropsType {}
-const PrevWordButton = () => {
-  let dispatch = useAppDispatch();
-  return (
-    <button
-      className="prevWordButton"
-      onClick={() => dispatch(WordActions.gotoPreviousWord())}
-    >
-      Prev
-    </button>
-  );
-};
-interface NextWordButtonPropsType {}
-const NextWordButton = () => {
-  let dispatch = useAppDispatch();
-  return (
-    <button
-      className="nextWordButton"
-      onClick={() => dispatch(WordActions.gotoNextWord())}
-    >
-      Next
-    </button>
-  );
-};
-interface NavPropsType {
-  sections: any
-}
-let NavBar = React.memo((props: NavPropsType) => {
-  // should jump to first word in the section basedsection to wordSeq lookup from  on wordNodes.wordSeqBySectionId(sectionid) method !!!!
-  // should this code be here or in the redux?
-  console.log(`<NavBar>`);
-  const dispatch = useAppDispatch();
-  return (
-    <div className="navbar">
-      {props.sections.map((section: any, keyvalue: any) => (
-        <div
-          className="navbar-li"
+      {acronym.letters.map((letter: ITerminalInfo, keyvalue: number) => (
+        <span
           key={keyvalue}
-          onClick={() => dispatch(WordActions.gotoSelectedSection(section.id))}
+          className={`${letter.recitable ? "recitable-word" : "word"} ${
+            props.active && currentTerminalIdx === letter.termIdx
+              ? "active"
+              : ""
+          }`}
+          onClick={() => dispatch(Request.Cursor_gotoWordByIdx(letter.termIdx))}
         >
-          {section.name}
-        </div>
+          {letter.content}
+        </span>
       ))}
-      ;
-    </div>
+    </>
+  ); // return
+});
+let Terminal_Word = React.memo((props: ITerminalPropsType): any => {
+  let dispatch = useAppDispatch();
+  // const currentTerminalIdx = useAppSelector(
+  //   store => store.CursorActionReducer.terminalIdx
+  // ); // cause rerendering of all sentences
+  // let currentTerminalIdx = 0;
+  console.log(
+    `<Terminal_word active=${props.active} content=${props.terminal.content}/>`
   );
-}) as any;
-//NavBar = React.memo(NavBar);
-const SpeechSynthesis = () => {
-  let currentWord = useAppSelector(store => store.WordActionReducer.wordNodeIdx);
-  // to recite just the words
-
-  // to recite the sentence
-
-  // to receite the section
-
-  // retrieve
-};
-const ReadingMonitor = () => {
-  const [deferredDispatchStartTime, setDeferredDispatchStartTime] = useState(0);
-  const [silenceCheckpoint, setSilenceCheckpoint] = useState(0);
-  const dispatch = useAppDispatch();
-  let listeningRequested = useAppSelector(
-    store => store.ListeningReducer.listening
-  );
-  const {
-    transcript,
-    interimTranscript,
-    finalTranscript,
-    resetTranscript,
-    listening
-  } = useSpeechRecognition();
-
-  // Start and stop listening manually
-  useEffect(() => {
-    if (listening) {
-      if (!listeningRequested) {
-        console.log("stop listening");
-        SpeechRecognition.stopListening();
-      }
-    } else if (listeningRequested) {
-      console.log("start listening");
-      if (silenceCheckpoint === 0) {
-        setSilenceCheckpoint(Date.now()); // will only works continuuous=false
-        console.log(`set silence checkpoint=${silenceCheckpoint}`);
-      }
-      if (deferredDispatchStartTime === 0) {
-        setDeferredDispatchStartTime(Date.now());
-      }
-      SpeechRecognition.startListening(); // timeout periodically not continuous: true
-    } else {
-      console.log("keep not listening");
-      SpeechRecognition.abortListening(); //just in case
-      console.log(`reset silence checkpoint`);
-      setSilenceCheckpoint(0);
-    }
-  }, [
-    listening,
-    listeningRequested,
-    deferredDispatchStartTime,
-    silenceCheckpoint,
-    setSilenceCheckpoint
-  ]);
-
-  //detect speech
-  useEffect(() => {
-    // must have [listening] as dependency to allow effect to periodically
-    // trigger based on SpeechRecognition internal trigger.
-    let words: string;
-    if (finalTranscript !== "") {
-      console.log(`final transcript=${finalTranscript} `);
-      words = finalTranscript;
-      resetTranscript();
-    } else {
-      words = interimTranscript;
-    }
-    // defer dispatch(WordActions.matchWord()) to allow speechrecognition to
-    // gather additional context. The SpeechRecogition object only triggers
-    // (asynchronously) when it detects speech (and when it detects silence
-    // for several seconds). This effect must balance this with the component
-    // updating the current word recited.
-    const timeoutLimit = 20; // seconds
-    if (words.length === 0) {
-      let timeoutDuration = Math.round((Date.now() - silenceCheckpoint) / 1000);
-      console.log(`timeout in ${timeoutLimit - timeoutDuration}s`);
-      if (timeoutDuration > timeoutLimit) {
-        dispatch(ListeningActions.stop());
-      }
-    } else {
-      setSilenceCheckpoint(Date.now());
-      const msecBeforeDispatch = 10; //msec
-      let deferredDispatchWaitDuration = Date.now() - deferredDispatchStartTime;
-      if (deferredDispatchWaitDuration > msecBeforeDispatch) {
-        console.log(`dispatch timeout after ${deferredDispatchWaitDuration}ms`);
-        dispatch(WordActions.matchWords(words)); // required to update current word on page
-        setDeferredDispatchStartTime(Date.now());
-        // NOTE: only reset transcript at the end of sentence!!!!!!!
-      } else {
-        console.log(`deferring dispatch for interimTranscript=${words}`);
-      }
-    }
-  }, [
-    listening,
-    deferredDispatchStartTime,
-    setDeferredDispatchStartTime,
-    silenceCheckpoint,
-    setSilenceCheckpoint,
-    interimTranscript,
-    finalTranscript,
-    resetTranscript,
-    dispatch
-  ]);
-  if (SpeechRecognition.browserSupportsSpeechRecognition()) {
-    // listenButton disallows already
-    return <div>{interimTranscript}</div>;
+  let termInfo = props.terminal.meta as ITerminalInfo;
+  let recitableWordClass = termInfo.recitable ? "recitable-word" : "word";
+  if (termInfo.audible) {
+    return (
+      <span
+        className={`${recitableWordClass} ${
+          //          currentTerminalIdx === termInfo.termIdx ? "active" : ""
+          props.active ? "active" : ""
+        }`}
+        onClick={() => dispatch(Request.Cursor_gotoWordByIdx(termInfo.termIdx))}
+      >
+        {props.terminal.content}
+      </span>
+    );
   } else {
-    return <div>Reading monitor cannot recognize speech</div>;
+    return <span>{props.terminal.content}</span>;
   }
-};
+});
+let Terminal_Whitespace = React.memo((props: ITerminalPropsType): any => {
+  console.log(
+    `<Terminal_whitespace props.terminal=${props.terminal} content=${props.terminal.content}/>`
+  );
+  return <span>{props.terminal.content}</span>;
+});
+// let Word = React.memo((props: IWordPropsType) => {
+//   console.log(
+//     `<Word> props.active=${props.active} props.wordObj=${props.wordObj}`
+//   );
+//   console.log(`<Word> word=${props.wordObj.word}`);
+//   if (Number.isInteger(props.wordObj.wordNodeIdx)) {
+//     // call wordNode.validWordNodeIndx
+//     return (
+//       <AudibleWord
+//         key={props.wordObj.wordNodeIdx}
+//         active={props.active}
+//         wordObj={props.wordObj}
+//         visited={false}
+//         //        visited={visited}
+//       />
+//     );
+//   } else {
+//     return (
+//       <Whitespace key={props.wordObj.wordNodeIdx} wordObj={props.wordObj} />
+//     );
+//   }
+// });
+// //Word = React.memo(Word);
+// interface IWhitespacePropsType {
+//   wordObj: any;
+// }
+// export const Whitespace = React.memo((props: IWhitespacePropsType) => {
+//   console.log(`<Whitespace> rendering whitespace/punctuations`);
+//   return (
+//     <>
+//       <span>{props.wordObj.word}</span>
+//     </>
+//   );
+// });
+//Whitespace = React.memo(Whitespace);
+// interface IAudiblePropsType {
+//   active: boolean;
+//   visited: boolean;
+//   wordObj: any;
+// }
+// export const AudibleWord = React.memo((props: IAudiblePropsType) => {
+//   console.log(
+//     `<AudibleWord> props.active=${props.active} props.wordObj=${props.wordObj} props.visited`
+//   );
+//   let dispatch = useAppDispatch();
+//   let active = props.active ? "active" : "";
+//   return (
+//     <>
+//       <span
+//         key={props.wordObj.wordNodeIdx}
+//         className={`audible-word ${active} ${props.visited}`}
+//         onClick={() =>
+//           dispatch(Request.Cursor_gotoWordByIdx(props.wordObj.wordNodeIdx))
+//         }
+//       >
+//         {props.wordObj.word}
+//       </span>
+//     </>
+//   );
+// });

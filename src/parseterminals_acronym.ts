@@ -19,8 +19,9 @@ import {
   TerminalMetaEnumType,
   IAcronymTerminalMeta,
   IAcronymTerminalMetaInitializer,
-  ITerminalInfo,
-  ITerminalInfoInitializer
+  //ITerminalInfo,
+  ITerminalInfoInitializer,
+  ITerminalListItemInitializer
 } from "./pageContentType";
 import { ISentenceNode } from "./parsesentences";
 import { AbstractTerminalNode, ITerminalNode } from "./parseterminals";
@@ -57,7 +58,13 @@ export class TerminalNode_ACRONYM extends AbstractTerminalNode
               expansionList[pos] //altrecognition
             )
           ) - 1;
-        this.userContext.terminals.push(this.meta.letters[idx]);
+        this.meta.letters[idx].termIdx = this.userContext.terminals.push(
+          ITerminalListItemInitializer(this.meta.letters[idx])
+        );
+        this.firstTermIdx = this.meta.letters[0].termIdx;
+        this.lastTermIdx = this.meta.letters[
+          this.meta.letters.length - 1
+        ].termIdx;
       }
     } catch (e) {
       if (IsError(e)) {

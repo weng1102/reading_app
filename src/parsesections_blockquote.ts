@@ -46,7 +46,6 @@ export class SectionParseNode_BLOCKQUOTE extends SectionParseNode_LIST
         current = this.dataSource.nextRecord();
         !this.dataSource.EOF() &&
         current.tagType !== MarkdownTagType.SECTION_END; // end of blockquote
-        current = this.dataSource.nextRecord()
       ) {
         assert(
           current.tagType === MarkdownTagType.PARAGRAPH,
@@ -55,12 +54,14 @@ export class SectionParseNode_BLOCKQUOTE extends SectionParseNode_LIST
         let paragraph: ISectionNode = new SectionParseNode_PARAGRAPH(this);
         paragraph.parse();
         this.items.push(paragraph);
+        current = this.dataSource.currentRecord()
       }
       assert(
         current.tagType === MarkdownTagType.SECTION_END,
         `expected ${MarkdownTagType.SECTION_END} to ${MarkdownTagType.BLOCKQUOTE}`
       );
-      this.dataSource.nextRecord(); // move passed SECTION_END
+      current = this.dataSource.nextRecord(); // move passed SECTION_END
+
     } catch (e) {
       // forward record to next SECTION_END
       if (IsError(e)) {

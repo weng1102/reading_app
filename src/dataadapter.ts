@@ -604,7 +604,7 @@ export class BasicMarkdownSource extends RawMarkdownSource
     let idx: number = 0;
     for (idx = currentInputIdx; idx < inputBuffer.length; idx++) {
       let current: TaggedStringType = this.lookup(inputBuffer[idx]);
-      this.logger.diagnosticMode = true;
+      //this.logger.diagnosticMode = true;
       current.lineNo = idx + 1;
       this.logger.diagnostic(
         `markdown looking up: "${inputBuffer[idx]}" as ${current.tagType} at line ${current.lineNo}`

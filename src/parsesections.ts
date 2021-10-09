@@ -13,6 +13,7 @@ import { strict as assert } from "assert";
 import { IsError } from "./utilities";
 import { ParseNodeSerializeTabular } from "./baseclasses";
 import {
+  IDX_INITIALIZER,
   IParseNode,
   ParseNode,
   ParseNodeSerializeFormatEnumType
@@ -34,10 +35,11 @@ export type ISectionNode = ISectionContent & IParseNode;
 export abstract class SectionParseNode extends ParseNode
   implements ISectionContent {
   // based on SectionVariantEnumType
-  readonly id: number = 0;
+  id: number = 0;
   name: string = "";
   description: string = "";
-  firstTermIdx: number = 0;
+  firstTermIdx: number = IDX_INITIALIZER;
+  lastTermIdx: number = IDX_INITIALIZER;
   items: ISectionNode[] = [];
   type!: SectionVariantEnumType; // initialized in subclass
   meta!: SectionVariantType; // initialized in subclass
@@ -67,9 +69,9 @@ export abstract class SectionParseNode extends ParseNode
     outputStr = super.serialize(format, label, prefix);
     switch (format) {
       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
-        for (const [i, value] of this.items.entries()) {
-          label = `${value.type}`;
-          outputStr = `${outputStr}${value.serialize(
+        for (const [i, section] of this.items.entries()) {
+          label = `${section.type}`;
+          outputStr = `${outputStr}${section.serialize(
             format,
             label,
             prefix + (i < this.items.length - 1 ? "| " : "  ")
@@ -81,12 +83,12 @@ export abstract class SectionParseNode extends ParseNode
         let items: ISectionNode[] = [];
         let data = JSON.parse(JSON.stringify(this));
         outputStr = prefix === undefined ? "" : prefix;
-        for (let [key, value] of Object.entries(data)) {
+        for (let [key, section] of Object.entries(data)) {
           if (key === "items") {
             outputStr = `${outputStr} item[${key.length}],`;
-            items.push(<ISectionNode>value); // save for the end of list
+            items.push(<ISectionNode>section); // save for the end of list
           } else {
-            let strval = `${value}`;
+            let strval = `${section}`;
             if (strval.length > 0) {
               outputStr = `${outputStr} ${key}=${strval},`;
             }
