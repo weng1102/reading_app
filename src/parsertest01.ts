@@ -5,7 +5,7 @@ import { ParseNodeSerializeFormatEnumType } from "./baseClasses";
 import { Logger } from "./logger";
 //import { FileParseNode } from "./parsefiles";
 import { PageParseNode } from "./parsepages";
-PageParseNode;
+///PageParseNode;
 
 //const zeroPad = (num, places) => String(num).padStart(places, "0");
 
@@ -15,20 +15,10 @@ let linesParsed: number;
 let inputMdFile: string;
 let outputFile: string;
 const inputPath: string = "curriculum/";
-const outputPath: string = "reading_fe_app/src/content/";
-const inputType: string = "md"; // markdown
-const outputType: string = "json";
-const filenameList: string[] = [
-  "blockquote",
-  "terminals",
-  "terminals_acronym",
-  "terminals",
-  "3wordsentences",
-  "terminals_email",
-  "terminals_date2",
-  "test1",
-  "shortlists"
-];
+const outputPath: string = "dist/";
+const inputExtension: string = ".md"; // markdown
+const outputExtension: string = ".json";
+
 let logger = new Logger(this);
 ///let pageNode = new PageContent(this);
 //let timestamp: string = new MyDate().yyyymmddhhmmss();
@@ -51,20 +41,12 @@ logger.info(
   false,
   false
 );
-
-for (let fileName of filenameList) {
-  inputMdFile = `${inputPath}${fileName}.${inputType}`;
-  outputFile = `${outputPath}${fileName}.${outputType}`;
-
-  logger.info(
-    `parsing file: ${path.basename(inputMdFile)}`,
-    false,
-    false,
-    false,
-    false
-  );
+let inputFileSpecs: string[] = process.argv
+  .slice(2)
+  .filter(mdFiles => mdFiles.endsWith(inputExtension));
+for (let inputFileSpec of inputFileSpecs) {
   let pageNode = new PageParseNode(this);
-  linesParsed = pageNode.dataSource.connect(inputMdFile);
+  linesParsed = pageNode.dataSource.connect(inputFileSpec);
   // console.log(
   //   pageNode.dataSource.serialize(ParseNodeSerializeFormatEnumType.TABULAR)
   // );
@@ -91,10 +73,22 @@ for (let fileName of filenameList) {
   // console.log(`section List (of consecutive terminals):`);
   // console.log(pageNode.userContext.sections.serialize());
   // console.log(pageNode.serialize(ParseNodeSerializeFormatEnumType.JSON));
-  pageNode.name = `${fileName}`;
-  // console.log(`writing file ${outputFile}`);
+  let fileName = inputFileSpec.substring(
+    inputFileSpec.indexOf("/") + 1,
+    inputFileSpec.indexOf(".")
+  );
+  pageNode.filename = `${fileName}${outputExtension}`;
+  let outputFileSpec = `${outputPath}${fileName}${outputExtension}`;
+  logger.info(
+    `generating file ${path.basename(outputFileSpec)}`,
+    false,
+    false,
+    false,
+    false
+  );
+
   fs.writeFileSync(
-    outputFile,
+    outputFileSpec,
     pageNode.serialize(ParseNodeSerializeFormatEnumType.JSON)
   );
 }

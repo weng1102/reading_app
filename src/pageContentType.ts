@@ -16,7 +16,8 @@ export enum PageFormatEnumType {
 }
 export interface IPageContent {
   id: number | undefined;
-  name: string;
+  title: string;
+  filename: string;
   description: string;
   owner: string;
   pageFormatType: PageFormatEnumType;
@@ -28,15 +29,15 @@ export interface IPageContent {
   sections: ISectionContent[];
   terminalList: ITerminalListItem[];
   headingList: IHeadingListItem[]; // first terminal of each section for Navbar
-  // terminalMembershipMap: ITerminalMembershipItem[];
-  sentenceList: ISentenceListItem[]; // maps sentence index to first and last Terminal index
   sectionList: ISectionListItem[]; // maps section index to first and last Terminal index
+  sentenceList: ISentenceListItem[]; // maps sentence index to first and last Terminal index
   //  sentenceList: ITerminalInfo[] // first terminal of each sentence
 }
 export function PageContentInitializer(): IPageContent {
   return {
     id: 0,
-    name: "",
+    title: "",
+    filename: "",
     description: "",
     owner: "",
     pageFormatType: PageFormatEnumType.default,
@@ -48,8 +49,8 @@ export function PageContentInitializer(): IPageContent {
     sections: [],
     terminalList: [],
     headingList: [],
-    sentenceList: [],
-    sectionList: []
+    sectionList: [],
+    sentenceList: []
   };
 }
 export interface ISectionContent {
@@ -59,8 +60,6 @@ export interface ISectionContent {
   firstTermIdx: number;
   lastTermIdx: number;
   items: ISectionContent[];
-  //  items: ISectionNode[];
-  //  sentences: ISentenceContent[];
   type: SectionVariantEnumType; // included in meta making initializer simplier
   meta: SectionVariantType;
 }
@@ -255,6 +254,7 @@ export enum TerminalMetaEnumType {
 }
 export interface ITerminalContent {
   id: number;
+  termIdx: number;
   firstTermIdx: number;
   lastTermIdx: number;
   content: string; // not necessary
@@ -569,17 +569,30 @@ export interface IRangeItem {
   firstTermIdx: number;
   lastTermIdx: number;
 }
+// export interface ISectionListItem extends IRangeItem {
+//   //  type: SectionVariantEnumType | string;
+// }
+// export function ISectionListItemInitializer(
+//   firstTermIdx: number = -1,
+//   lastTermIdx: number = -1
+//   //  type: SectionVariantEnumType | string = SectionVariantEnumType.tbd
+// ): ISectionListItem {
+//   return { firstTermIdx, lastTermIdx };
+// }
+export interface ISectionListItem extends IRangeItem {
+  type: SectionVariantEnumType | string;
+}
+export function ISectionListItemInitializer(
+  firstTermIdx: number = -1,
+  lastTermIdx: number = -1,
+  type: SectionVariantEnumType | string = SectionVariantEnumType.tbd
+): ISectionListItem {
+  return { firstTermIdx, lastTermIdx, type };
+}
 export type ISentenceListItem = IRangeItem;
 export function ISentenceListItemInitializer(
   firstTermIdx: number = -1,
   lastTermIdx: number = -1
 ): ISentenceListItem {
-  return { firstTermIdx, lastTermIdx };
-}
-export type ISectionListItem = IRangeItem;
-export function ISectionListItemInitializer(
-  firstTermIdx: number = -1,
-  lastTermIdx: number = -1
-): ISectionListItem {
   return { firstTermIdx, lastTermIdx };
 }

@@ -12,20 +12,20 @@ import {
 export interface IPageContext {
   terminalList: ITerminalListItem[];
   headingList: IHeadingListItem[];
-  sentenceList: ISentenceListItem[];
   sectionList: ISectionListItem[];
+  sentenceList: ISentenceListItem[];
 }
 export function PageContextInitializer(
   terminalList: ITerminalListItem[] = [],
   headingList: IHeadingListItem[] = [],
-  sentenceList: ISentenceListItem[] = [],
-  sectionList: ISectionListItem[] = []
-) {
+  sectionList: ISectionListItem[] = [],
+  sentenceList: ISentenceListItem[] = []
+): IPageContext {
   return {
     terminalList: terminalList,
     headingList: headingList,
-    sentenceList: sentenceList,
-    sectionList: sectionList
+    sectionList: sectionList,
+    sentenceList: sentenceList
   };
 }
 export const PageContext = React.createContext(<IPageContext | null>null);
@@ -34,8 +34,8 @@ export class CTerminalNodes {
   constructor(
     terminalList: ITerminalListItem[],
     headingList: IHeadingListItem[],
-    sentenceList: ISentenceListItem[],
-    sectionList: ISectionListItem[]
+    sectionList: ISectionListItem[],
+    sentenceList: ISentenceListItem[]
   ) {
     this.terminalList = terminalList;
     this.headingList = headingList;
@@ -44,8 +44,8 @@ export class CTerminalNodes {
   }
   terminalList: ITerminalInfo[];
   headingList: IHeadingListItem[];
-  sentenceList: ISentenceListItem[];
   sectionList: ISectionListItem[];
+  sentenceList: ISentenceListItem[];
 
   get firstTermNodeIdx(): number {
     return 0;
@@ -60,6 +60,7 @@ export class CTerminalNodes {
       termNodeIdx <= this.lastTermNodeIdx
     );
   }
+  /*
   updateImmutableState(state: any) {
     let termNodeIdx = state.termNodeIdx;
     if (this.validTermNodeIdx(termNodeIdx)) {
@@ -84,17 +85,18 @@ export class CTerminalNodes {
           visible: this.terminalList[termNodeIdx].visible,
           fillin: this.terminalList[termNodeIdx].fillin,
           visited: this.terminalList[termNodeIdx].visited
-          //          termPattern: this.terminalList[termNodeIdx].termPattern,
-          //          termId: this.terminalList[termNodeIdx].termId,
-          //          sentenceId: this.terminalList[termNodeIdx].sentenceId,
-          //          sectionId: this.terminalList[termNodeIdx].sectionId,
-          //          pageId: this.terminalList[termNodeIdx].pageId,
+//          termPattern: this.terminalList[termNodeIdx].termPattern,
+//          termId: this.terminalList[termNodeIdx].termId,
+//          sentenceId: this.terminalList[termNodeIdx].sentenceId,
+//          sectionId: this.terminalList[termNodeIdx].sectionId,
+//          pageId: this.terminalList[termNodeIdx].pageId,
         };
       }
     } else {
       return state;
     }
   }
+  */
   // alternatively, create an index interface word(idx).word and not word[idx]
   //   which would mimic array but not completely
   props(termNodeIdx: number) {

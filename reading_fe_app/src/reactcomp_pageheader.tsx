@@ -15,13 +15,11 @@ import "./App.css";
 import { Request } from "./reducers";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { useEffect, useState, useContext } from "react";
-import { ReadItButton } from "./reactcomp_speech";
 
 // is this really necessary if availablility is removed below
 import SpeechRecognition, {
   useSpeechRecognition
 } from "react-speech-recognition";
-
 import {
   IPageContent,
   IHeadingListItem,
@@ -37,12 +35,12 @@ import {
 } from "./pageContentType";
 import { IPageContext, PageContext, PageContextInitializer } from "./termnodes";
 import { ListeningMonitor, ListenButton } from "./reactcomp_listening";
-import { SpeechSynthesizer } from "./reactcomp_speech";
+import { SpeechSynthesizer, ReadItButton } from "./reactcomp_speech";
 //import data from "content";
 //import ReactDOM from 'react-dom';
 //var content = require("./content.json");
 //var content = require("../../src/parsetest20210915.json");
-import content from "./content/3wordsentences.json";
+//import content from "./content/3wordsentences.json";
 //import content from "content/terminals.json";//var contentts = require("./content.ts");
 //const SpeechRecogition interface IPageHeaderPropsType {
 interface IPageHeaderPropsType {
@@ -62,11 +60,11 @@ export const PageHeader = React.memo((props: IPageHeaderPropsType) => {
         </div>
       </div>
       <div className="header-container-controls">
+        <div className="speechSynthesizer">
+          <SpeechSynthesizer />
+        </div>
         <div className="shortcuts">
           <Shortcuts />
-        </div>
-        <div className="recitationmode">
-          <RecitationMode />
         </div>
         <div className="wordsheard">
           <WordsHeard />
@@ -80,24 +78,10 @@ export const PageHeader = React.memo((props: IPageHeaderPropsType) => {
         <div className="listeningMonitor">
           <ListeningMonitor />
         </div>
-        <div className="speechSynthesizer">
-          <SpeechSynthesizer />
-        </div>
       </div>
     </header>
   );
 });
-const RecitationMode = () => {
-  // handlechange
-  return (
-    <select className="ddlb-recitationmode">
-      <option value="recitationmode">Recitation mode...</option>
-      <option value="wordonly">Word Only</option>
-      <option value="uptoword">Up to word</option>
-      <option value="entiresentence">Entire sentence</option>
-    </select>
-  );
-};
 //interface IShortcutsPropsType {}
 const Shortcuts = () => {
   // handlechange

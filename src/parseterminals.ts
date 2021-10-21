@@ -134,7 +134,7 @@ export abstract class AbstractTerminalNode extends ParseNode
         // Object.defineProperty(this, "terminals.meta.termIdx", {
         //   enumerable: false
         // });
-        let replacer: any = (key: string, value) => {
+        let replacer: any = (key: string, value: any) => {
           // if we get a function, give us the code for that function
           switch (key) {
             case "termIdx":

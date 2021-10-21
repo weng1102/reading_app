@@ -347,7 +347,8 @@ export class Tokenizer {
       let markupTokenItem: MarkupTokenItemType;
       let tokenList: RegExpMatchArray | null;
       for (let key in MarkupTokenDictionary) {
-        markupTokenItem = MarkupTokenDictionary[key];
+        let key1: any = key as unknown; //ugh
+        markupTokenItem = MarkupTokenDictionary[<MarkupTokenType>key1];
         let markupTokenLength: number = markupTokenItem.label.length;
         tokenList = sentence.match(markupTokenItem.pattern); // with global flag set
         if (tokenList !== null) {

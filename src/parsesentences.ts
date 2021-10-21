@@ -21,7 +21,11 @@ import {
 import { ISectionNode } from "./parsesections";
 import { ITerminalNode } from "./parseterminals";
 import { GetTerminalNode } from "./parseterminaldispatch";
-import { ISentenceContent, ISentenceListItemInitializer, ITerminalContent } from "./pageContentType";
+import {
+  ISentenceContent,
+  ISentenceListItemInitializer,
+  ITerminalContent
+} from "./pageContentType";
 
 export type ISentenceNode = ISentenceContent & IParseNode;
 abstract class AbstractSentenceNode extends ParseNode implements ISentenceNode {
@@ -80,13 +84,13 @@ abstract class AbstractSentenceNode extends ParseNode implements ISentenceNode {
         label = ParseNodeSerializeTabular(this.constructor.name, this.content);
         outputStr = super.serialize(format, label, prefix);
         for (let terminal of this.terminals) {
-          let terminalNode: ITerminalNode = <ITerminalNode>terminal
+          let terminalNode: ITerminalNode = <ITerminalNode>terminal;
           outputStr = outputStr + terminalNode.serialize(format);
         }
         break;
       }
       case ParseNodeSerializeFormatEnumType.UNITTEST: {
-        let replacer: any = (key: string, value) => {
+        let replacer: any = (key: string, value: any) => {
           // if we get a function, give us the code for that function
           switch (key) {
             case "id":
@@ -162,13 +166,15 @@ export class SentenceNode extends AbstractSentenceNode
       this.parseTokens(tokenList);
       this.lastTermIdx = this.userContext.terminals.lastIdx;
       // update all above terminals
-//      this.id = this.userContext.sentences.push( { firstTermIdx: this.firstTermIdx, lastTermIdx: this.lastTermIdx});
+      //      this.id = this.userContext.sentences.push( { firstTermIdx: this.firstTermIdx, lastTermIdx: this.lastTermIdx});
       // got each terminal and update sentence id
-      this.id = this.userContext.sentences.push(ISentenceListItemInitializer(this.firstTermIdx, this.lastTermIdx)) - 1;
+      this.id =
+        this.userContext.sentences.push(
+          ISentenceListItemInitializer(this.firstTermIdx, this.lastTermIdx)
+        ) - 1;
       for (let idx = this.firstTermIdx; idx <= this.lastTermIdx; idx++) {
-          this.userContext.terminals[idx].sentenceIdx = this.id;
+        this.userContext.terminals[idx].sentenceIdx = this.id;
       }
-
     } catch (e) {
       if (IsError(e)) {
         this.logger.error(e.message);

@@ -66,9 +66,16 @@ export class SectionParseNode_PARAGRAPH extends SectionParseNode_LIST
       );
       if (current.tagType === MarkdownTagType.PARAGRAPH_END) {
         this.lastTermIdx = this.userContext.terminals.lastIdx;
-        this.id = this.userContext.sections.push(ISectionListItemInitializer(this.firstTermIdx, this.lastTermIdx));
+        this.id =
+          this.userContext.sections.push(
+            ISectionListItemInitializer(
+              this.firstTermIdx,
+              this.lastTermIdx,
+              this.type.toString()
+            )
+          ) - 1;
         for (let idx = this.firstTermIdx; idx <= this.lastTermIdx; idx++) {
-            this.userContext.terminals[idx].sectionIdx = this.id;
+          this.userContext.terminals[idx].sectionIdx = this.id;
         }
         this.dataSource.nextRecord(); // move to next grouping
       }
@@ -113,7 +120,7 @@ export class SectionParseNode_PARAGRAPH extends SectionParseNode_LIST
         );
         //        if (colWidth0 === undefined) colWidth0 = 2;
         for (let sentence of this.meta.sentences) {
-          let sentenceNode: ISentenceNode = <SentenceNode>sentence
+          let sentenceNode: ISentenceNode = <SentenceNode>sentence;
           outputStr =
             outputStr +
             sentenceNode.serialize(

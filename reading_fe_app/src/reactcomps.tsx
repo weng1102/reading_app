@@ -15,13 +15,15 @@
  **/
 import React from "react";
 import "./App.css";
+import path from "path";
+import glob from "glob";
+//import { readFileSync } from "fs";
 // import mic_listening from "./mic1-xparent.gif";
 // import mic_notlistening from "./mic1-inactive-xparent.gif";
 // import mic_unavailable from "./mic1-ghosted.gif";
 import { Request } from "./reducers";
-import { useAppDispatch, useAppSelector } from "./hooks";
-import { useEffect, useState, useContext } from "react";
-import { ReadItButton } from "./reactcomp_speech";
+import { useAppDispatch, useAppSelector, useSpanRef, useDivRef } from "./hooks";
+import { useEffect, useState, useContext, useRef } from "react";
 
 // is this really necessary if availablility is removed below
 import SpeechRecognition, {
@@ -36,6 +38,7 @@ import {
   ITerminalContent,
   ITerminalInfo,
   IAcronymTerminalMeta,
+  ISectionHeadingVariant,
   IWordTerminalMeta,
   TerminalMetaEnumType,
   SectionVariantEnumType,
@@ -44,66 +47,67 @@ import {
 import { IPageContext, PageContext, PageContextInitializer } from "./termnodes";
 import { NavBar } from "./reactcomp_navbar";
 import { PageHeader } from "./reactcomp_pageheader";
-import { ListeningMonitor, ListenButton } from "./reactcomp_listening";
-import { SpeechSynthesizer } from "./reactcomp_speech";
-//import data from "content";
-//import ReactDOM from 'react-dom';
-//var content = require("./content.json");
-//var content = require("../../src/parsetest20210915.json");
-import content from "./content/3wordsentences.json";
-//import content from "content/terminals.json";//var contentts = require("./content.ts");
-//const SpeechRecogition = new SpeechRecogition();
+import { Settings } from "./reactcomp_settings";
 
 const SectionType = {
   ORDEREDLIST: "ol",
   UNORDEREDLIST: "ul",
   PARAGRAPH: "none"
 };
-//const speechRecognition = new SpeechRecognition();
-// SpeechRecognition.continuous = true;
-// SpeechRecognition.interimResults = true;
-// SpeechRecognition.lang = "en-US";
+let url: string =
+  "https://weng1102.github.io/reading_app/dist/terminals_acronym.json";
 
-////INSTEAD use SpeechRecognition.startListening(for the above parameters)
 export const ReadingApp = () => {
+  const [error, setError] = useState(null);
+  const [jsonContent, setJsonContent] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false); // is this necessary if jsonContent is used as a dependency fo useEffect()
   let dispatch = useAppDispatch();
-  //  let terminalNodes: any = useContext(TerminalNodes);
+  useEffect(() => {
+    fetch(url)
+      .then(response => response.json())
+      .then(
+        data => {
+          setJsonContent(data);
+          setIsLoaded(true);
+        },
+        error => {
+          setError(error);
+        }
+      );
+  }, [url]);
 
-  // if (terminalNodes === null) {
-  //   terminalNodes = new CTerminalNodes(
-  //     content.terminalList,
-  //     content.headingList,
-  //     content.sectionList,
-  //     content.sentenceList);
-  // }
-  //dispatch(WordNodeActions.setWordNodes(terminalNodes));
   dispatch(
     Request.Recognition_setAvailability(
       SpeechRecognition.browserSupportsSpeechRecognition()
     )
   );
-  //  console.log(`contentts=${contentts.name}`);
-  // console.log(`page name=${contentts.name}`);
-  // console.log(`section name=${contentts.sections[0].name}`);
-  return (
-    <PageContext.Provider
-      value={PageContextInitializer(
-        content.terminalList,
-        content.headingList,
-        content.sectionList,
-        content.sentenceList
-      )}
-    >
-      <Page content={content} />
-    </PageContext.Provider>
-    // create page state in redux
-    // <TerminalNodes.Provider value={terminalNodes}>
-    //   <Page content={content} />
-    // </TerminalNodes.Provider>
-  );
+  if (error) {
+    let error1 = error as Error;
+    return (
+      <div className="loadingAnnouncement">
+        Error while loading: {error1.message}
+      </div>
+    );
+  } else if (!isLoaded) {
+    return <div className="loadingAnnouncement">loading...</div>;
+  } else {
+    let content: IPageContent = jsonContent! as IPageContent;
+    return (
+      <PageContext.Provider
+        value={PageContextInitializer(
+          content.terminalList,
+          content.headingList,
+          content.sectionList,
+          content.sentenceList
+        )}
+      >
+        <Page content={content} />
+      </PageContext.Provider>
+    );
+  }
 };
 interface IPagePropsType {
-  content: any;
+  content: IPageContent;
 }
 export const Page = React.memo((props: IPagePropsType) => {
   //give access to page context to reducers
@@ -114,7 +118,7 @@ export const Page = React.memo((props: IPagePropsType) => {
   return (
     // create page state in redux
     <>
-      <PageHeader title={props.content.name} />
+      <PageHeader title={props.content.title} />
       <NavBar headings={props.content.headingList} />
       <Content content={props.content} />
     </>
@@ -166,13 +170,13 @@ interface ISectionFormatPropsType {
   listFormat: string;
   children: any;
 }
-interface ISectionPropsType1 {
+interface ISectionPropsType {
   //  key: number;
   //  keyvalue: number;
   active: boolean;
   section: ISectionContent;
 }
-export const SectionDispatcher = React.memo((props: ISectionPropsType1) => {
+export const SectionDispatcher = React.memo((props: ISectionPropsType) => {
   // console.log(`<SectionDispatcher type=${props.section.type}`);
   switch (props.section.type) {
     case SectionVariantEnumType.empty:
@@ -191,6 +195,8 @@ export const SectionDispatcher = React.memo((props: ISectionPropsType1) => {
           section={props.section}
         />
       );
+    case SectionVariantEnumType.heading:
+      return <Section_heading active={props.active} section={props.section} />;
     case SectionVariantEnumType.tbd:
       return (
         <div className="section-tbd">
@@ -216,52 +222,47 @@ export const SectionDispatcher = React.memo((props: ISectionPropsType1) => {
   } //switch
 });
 export const Section_empty = (props: ISectionInactivePropsType1) => {
-  let br = "<br>"; // or <p> or empty based on configuration
+  let br = ""; // or <p> or empty based on configuration
   // console.log(`<Section_Empty>`);
   return <>{br}</>;
 };
 interface ISectionInactivePropsType1 {
   section: ISectionContent;
 }
-interface ISectionPropsType1 {
-  //  key: number;
-  active: boolean;
-  section: ISectionContent;
-}
+// interface ISectionPropsType1 {
+//   //  key: number;
+//   active: boolean;
+//   section: ISectionContent;
+// }
 interface ISectionParagraphPropsType {
   //  key: number;
   active: boolean;
   paragraph: ISectionContent;
 }
-export const Section_paragraph = React.memo(
-  (props: ISectionPropsType1): any => {
-    console.log(`<Section_Paragraph active=${props.active}>`);
-    const currentSentenceIdx: number = useAppSelector(
-      store => store.cursor_sentenceIdx
-    );
-    //  if (props.paragraph.type === SectionVariantEnumType.paragraph) {
-    let paragraph: ISectionParagraphVariant = props.section
-      .meta as ISectionParagraphVariant;
-    // console.log(
-    //   `<Section_Paragraph> has ${paragraph.sentences.length} sentences`
-    // );
-    return (
-      <>
-        <p>
-          {paragraph.sentences.map(
-            (sentence: ISentenceContent, keyvalue: number) => (
-              <Sentence1
-                key={keyvalue}
-                active={currentSentenceIdx === sentence.id}
-                sentence={sentence}
-              />
-            )
-          )}
-        </p>
-      </>
-    );
-  }
-);
+export const Section_paragraph = React.memo((props: ISectionPropsType): any => {
+  console.log(`<Section_Paragraph active=${props.active}>`);
+  const currentSentenceIdx: number = useAppSelector(
+    store => store.cursor_sentenceIdx
+  );
+  //  if (props.paragraph.type === SectionVariantEnumType.paragraph) {
+  let paragraph: ISectionParagraphVariant = props.section
+    .meta as ISectionParagraphVariant;
+  return (
+    <>
+      <p>
+        {paragraph.sentences.map(
+          (sentence: ISentenceContent, keyvalue: number) => (
+            <Sentence1
+              key={keyvalue}
+              active={currentSentenceIdx === sentence.id}
+              sentence={sentence}
+            />
+          )
+        )}
+      </p>
+    </>
+  );
+});
 interface ISentencePropsType1 {
   //  key: number;
   active: boolean;
@@ -300,88 +301,54 @@ export const SectionFormat = React.memo((props: ISectionFormatPropsType) => {
 });
 //SectionFormat = React.memo(SectionFormat);
 interface ISectionHeadingPropsType {
+  active: boolean;
+  sectionIdx: number;
   headingLevel: number;
-  anchorId: any;
-  sectionId: number;
-  sectionName: string;
+  title: string;
 }
-// const HeadingTag1 = (props: IHeadingTagPropsType) => {
-// const headingLevels = ["p", "h1", "h2", "h3", "h4", "h5", "h6"];
-// const validHeadingLevel =
-//   props.level > 0 && props.level < headingLevels.length - 1
-//     ? props.level
-//     : 0;
-//    return (React.createElement(headingLevels[validHeadingLevel], null, props.sectionName));
-// }
-// const HeadingTag = (props: IHeadingTagPropsType) => {
-//   const headingLevels = ["p", "h1", "h2", "h3", "h4", "h5", "h6"];
-//   const validHeadingLevel =
-//     props.level > 0 && props.level < headingLevels.length - 1
-//       ? props.level
-//       : 0;
-//   return (<>{headingLevels[validHeadingLevel]}</>);
-// }
-const SectionHeading = React.memo((props: ISectionHeadingPropsType) => {
-  interface IHeadingTagPropsType {
-    level: number;
-    sectionId: number;
-    sectionName: string;
-  }
-  const HeadingTag = (props: IHeadingTagPropsType) => {
-    const headingLevels = ["p", "h1", "h2", "h3", "h4", "h5", "h6"];
-    const validHeadingLevel =
-      props.level > 0 && props.level < headingLevels.length - 1
-        ? props.level
-        : 0;
-    //        return (React.createElement(headingLevels[validHeadingLevel], null, props.sectionName));
-    return React.createElement(
-      headingLevels[validHeadingLevel],
-      null,
-      props.sectionName
-    );
-  };
-  //  const HeadingTag =(props: HeadingTagPropsType) => headingLevels[validHeadingLevel];
-  //  if (props.anchorId !== "undefined") {
-  // const headingLevels = ["p", "h1", "h2", "h3", "h4", "h5", "h6"];
-  // // const HeadingTag1 = (props: IHeadingTagPropsType) => {
-  // // //const headingLevels = ["p", "h1", "h2", "h3", "h4", "h5", "h6"];
-  // const validHeadingLevel = props.headingLevel > 0 && props.headingLevel < headingLevels.length - 1
-  //     ? props.headingLevel
-  //     : 0;
-  //   let headingLevel = headingLevels[validHeadingLevel];
-  //   return (React.createElement(headingLevel, null, props.sectionName));
-  // const HeadingTag2 = (
-  //   <HeadingTag
-  // )
-  // const HeadingTag = (props:any) => { headingLevels[
-  //   props.headingLevel > 0 && props.headingLevel < headingLevels.length - 1
-  //     ? props.headingLevel
-  //     : 0];
-  //   }
-  return (
-    //      <HeadingTag headingLevel={props.headingLevel}>
-    <HeadingTag
-      level={props.headingLevel}
-      sectionId={props.sectionId}
-      sectionName={props.sectionName}
-    />
-    // <HeadingTag>
-    //   <a id={props.sectionId.toString()}>{props.sectionName}</a>
-    // </HeadingTag>
-    //  );
-    // } else {
-    //   return (
-    //     <HeadingTag1>
-    //       {props.sectionName}
-    //     </HeadingTag1>
-  );
+const SectionHeading = React.memo(() => {
+  return <></>;
 });
-interface ISectionPropsType {
+interface IHeadingTagPropsType {
+  headingLevel: number;
+}
+const Section_heading = React.memo((props: ISectionPropsType) => {
+  const headingRef = useDivRef();
+  const sectionIdx = props.section.id;
+  let meta = props.section.meta as ISectionHeadingVariant;
+  const headingLevels = ["p", "h1", "h2", "h3", "h4", "h5", "h6"];
+  const validHeadingLevel =
+    meta.level > 0 && meta.level < headingLevels.length - 1 ? meta.level : 0;
+  const HeadingTag = headingLevels[
+    validHeadingLevel
+  ] as keyof JSX.IntrinsicElements;
+  return (
+    <div
+      className="section-heading"
+      id={sectionIdx.toString()}
+      ref={headingRef}
+    >
+      <HeadingTag>{meta.title}</HeadingTag>
+    </div>
+  );
+  ///////////////    React.createElement(HeadingTag, null, meta.title);
+  //      <HeadingTag headingLevel={props.headingLevel}>
+  // <HeadingTag>
+  //   <a id={props.sectionId.toString()}>{props.sectionName}</a>
+  // </HeadingTag>
+  //  );
+  // } else {
+  //   return (
+  //     <HeadingTag1>
+  //       {props.sectionName}
+  //     </HeadingTag1>
+});
+interface ISectionPropsTypeDeprecated {
   active: boolean;
   sectionObj: any;
   listFormat: any;
 }
-let Section = React.memo((props: ISectionPropsType) => {
+let Section = React.memo((props: ISectionPropsTypeDeprecated) => {
   console.log(
     `<Section> props.active=${props.active} props.listFormat=${props.listFormat} props.sectionObj=${props.sectionObj}`
   );
@@ -392,12 +359,7 @@ let Section = React.memo((props: ISectionPropsType) => {
   console.log(`<Section> currentSentenceId=${currentSentenceId}`);
   return (
     <>
-      <SectionHeading
-        headingLevel={1}
-        sectionId={props.sectionObj.id}
-        sectionName={props.sectionObj.name}
-        anchorId={props.sectionObj.id}
-      />
+      <SectionHeading />
 
       <SectionFormat listFormat={props.listFormat}>
         {props.sectionObj.sentences.map((sentenceObj: any, keyvalue: any) => (
@@ -483,7 +445,8 @@ let TerminalDispatcher = React.memo(
     //*********
     //RERENDERING ISSUE
     // useSelector(currentTerminalIdx) that changes EVERYTIME word advances thus triggers
-    // rerendering of TerminalDispatcher but NOT actual screen update.
+    // rerendering of TerminalDispatcher but NOT actual screen update. Could keep an active/inactive array for all words
+    // on page in state but array are immutable and thus even a single element change requires a copy of entire array
     // cause rerendering of all sentences
     // console.log(
     //   `<TerminalDispatcher content=${props.terminal.content} />` // props.active=${props.active} props.terminal=${props.terminal} />`
@@ -582,6 +545,30 @@ let Terminal_Acronym = React.memo((props: ITerminalPropsType): any => {
 });
 let Terminal_Word = React.memo((props: ITerminalPropsType): any => {
   let dispatch = useAppDispatch();
+  //  const termRef = useSpanRef();
+  const terminalRef = useSpanRef();
+  useEffect(() => {
+    console.log(`<Terminal Word> useEffect() active, expecting scrollToView()`);
+    /* Consider multiple scrollIntoView modes:
+      interparagraph/section: scroll to top of new sectionName
+      intraparagraph: scroll lin-by-line until new section/paragraph
+    */
+    /*
+    behavior (Optional) Defines the transition animation. One of auto or smooth. Defaults to auto.
+    block (Optional) Defines vertical alignment. One of start, center, end, or nearest. Defaults to start.
+    inline Optional Defines horizontal alignment. One of start, center, end, or nearest. Defaults to nearest.
+*/
+    if (terminalRef.current != null) {
+      let rect = terminalRef.current.getBoundingClientRect();
+      if (rect.top < 200 || rect.bottom > window.innerHeight) {
+        terminalRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+          inline: "nearest"
+        });
+      }
+    }
+  }, [props.active]);
   // const currentTerminalIdx = useAppSelector(
   //   store => store.CursorActionReducer.terminalIdx
   // ); // cause rerendering of all sentences
@@ -594,10 +581,8 @@ let Terminal_Word = React.memo((props: ITerminalPropsType): any => {
   if (termInfo.audible) {
     return (
       <span
-        className={`${recitableWordClass} ${
-          //          currentTerminalIdx === termInfo.termIdx ? "active" : ""
-          props.active ? "active" : ""
-        }`}
+        className={`${recitableWordClass} ${props.active ? "active" : ""}`}
+        ref={terminalRef}
         onClick={() => dispatch(Request.Cursor_gotoWordByIdx(termInfo.termIdx))}
       >
         {props.terminal.content}
@@ -609,9 +594,10 @@ let Terminal_Word = React.memo((props: ITerminalPropsType): any => {
 });
 let Terminal_Whitespace = React.memo((props: ITerminalPropsType): any => {
   console.log(
-    `<Terminal_whitespace props.terminal=${props.terminal} content=${props.terminal.content}/>`
+    `<Terminal_whitespace props.terminal=${props.terminal} content="${props.terminal.content}"/>`
   );
-  return <span>{props.terminal.content}</span>;
+  //  return <span>{props.terminal.content}</span>;
+  return <span className="whitespace">{props.terminal.content}</span>;
 });
 // let Word = React.memo((props: IWordPropsType) => {
 //   console.log(

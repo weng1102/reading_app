@@ -18,6 +18,7 @@ import { IDataSource, BasicMarkdownSource } from "./dataadapter";
 import {
   IHeadingListItem,
   IRangeItem,
+  ISectionListItem,
   ITerminalListItem
 } from "./pagecontentType";
 export const TREEVIEW_PREFIX = "+-";
@@ -25,7 +26,7 @@ export const IDX_INITIALIZER = -9999;
 export abstract class BaseClass {
   logger: Logger;
   parent: any;
-  constructor(parent) {
+  constructor(parent: any) {
     if (parent !== undefined || parent !== null) {
       this.parent = parent;
     }
@@ -43,7 +44,7 @@ export abstract class BaseClass {
   }
 }
 class TerminalArray extends Array<ITerminalListItem> {
-  constructor(...args) {
+  constructor(...args: any) {
     super(...args);
   }
   previousTerminalIdx: number = IDX_INITIALIZER;
@@ -124,7 +125,7 @@ class TerminalArray extends Array<ITerminalListItem> {
   }
 }
 class HeadingArray extends Array<IHeadingListItem> {
-  constructor(...args) {
+  constructor(...args: any) {
     super(...args);
   }
   push(heading: IHeadingListItem): number {
@@ -141,7 +142,7 @@ class HeadingArray extends Array<IHeadingListItem> {
       } else {
         let idx: number;
         for (
-          idx = element.terminalCountPriorToHeading + 1;
+          idx = element.terminalCountPriorToHeading;
           !(terminals[idx].visible && terminals[idx].recitable);
           idx++
         );
@@ -171,7 +172,7 @@ class HeadingArray extends Array<IHeadingListItem> {
   }
 }
 class RangeArray extends Array<IRangeItem> {
-  constructor(...args) {
+  constructor(...args: any) {
     super(...args);
   }
   push(range: IRangeItem): number {
@@ -192,6 +193,32 @@ class RangeArray extends Array<IRangeItem> {
         .padStart(4, " ")} ${element.lastTermIdx
         .toString()
         .padStart(4, " ")}\n`;
+    }
+    return outputStr;
+  }
+}
+class SectionArray extends Array<ISectionListItem> {
+  constructor(...args: any) {
+    super(...args);
+  }
+  push(section: ISectionListItem): number {
+    // needs to store the nearest termIdx so that parse can later find
+    // the actual visible, recitable terminal in parse
+    return super.push(section);
+  }
+  parse(): number {
+    return this.length;
+  }
+  serialize(): string {
+    let outputStr: string = "[ idx]:  1st last type\n";
+    for (const [i, element] of this.entries()) {
+      outputStr = `${outputStr}[${i
+        .toString()
+        .padStart(4, "0")}]: ${element.firstTermIdx
+        .toString()
+        .padStart(4, " ")} ${element.lastTermIdx
+        .toString()
+        .padStart(4, " ")} ${element.type.toString().padStart(4, " ")}\n`;
     }
     return outputStr;
   }
@@ -229,16 +256,16 @@ export class UserContext {
   readonly username: string;
   terminals: TerminalArray;
   headings: HeadingArray;
+  sections: SectionArray;
   sentences: RangeArray;
-  sections: RangeArray;
   // need authentication infoblock at some point
   constructor(name: string) {
     //    this._parent = parent;
     this.username = name;
     this.terminals = new TerminalArray();
     this.headings = new HeadingArray();
+    this.sections = new SectionArray();
     this.sentences = new RangeArray();
-    this.sections = new RangeArray();
     ////    this._pages = new Array();
   }
   // protected terminalIdx: number = 0;
@@ -279,7 +306,7 @@ type IFileNode = IUserContent & IFileContent;
 export class FileNode extends UserNode implements IFileNode {
   dataSource!: IDataSource;
   // markdown file can contain one or more pages
-  constructor(parent) {
+  constructor(parent: any) {
     super(parent);
     Object.defineProperty(this, "dataSource", { enumerable: false });
   }

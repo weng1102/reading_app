@@ -1,12 +1,13 @@
 {
   "id": 0,
-  "name": "test1",
+  "title": "",
+  "filename": "test1.json",
   "description": "",
   "owner": "",
   "pageFormatType": 0,
-  "created": "Thu Oct 07 2021 09:27:12 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Thu Oct 07 2021 09:27:12 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Thu Oct 07 2021 09:27:12 GMT-0700 (Pacific Daylight Time)",
+  "created": "Sun Oct 17 2021 23:29:36 GMT-0700 (Pacific Daylight Time)",
+  "modified": "Sun Oct 17 2021 23:29:36 GMT-0700 (Pacific Daylight Time)",
+  "transformed": "Sun Oct 17 2021 23:29:36 GMT-0700 (Pacific Daylight Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -39851,104 +39852,421 @@
     {
       "headingLevel": 2,
       "title": "heading 2 expected",
-      "termIdx": 10,
+      "termIdx": 9,
       "terminalCountPriorToHeading": 9
     },
     {
       "headingLevel": 3,
       "title": "heading 3 expected",
-      "termIdx": 19,
+      "termIdx": 18,
       "terminalCountPriorToHeading": 18
     },
     {
       "headingLevel": 4,
       "title": "heading 4 expected",
-      "termIdx": 28,
+      "termIdx": 27,
       "terminalCountPriorToHeading": 27
     },
     {
       "headingLevel": 5,
       "title": "heading 5 expected",
-      "termIdx": 37,
+      "termIdx": 36,
       "terminalCountPriorToHeading": 36
     },
     {
       "headingLevel": 6,
       "title": "heading 6 expected",
-      "termIdx": 46,
+      "termIdx": 45,
       "terminalCountPriorToHeading": 45
     },
     {
       "headingLevel": 6,
       "title": "heading 4 expected",
-      "termIdx": 55,
+      "termIdx": 54,
       "terminalCountPriorToHeading": 54
     },
     {
       "headingLevel": 1,
       "title": "Testing SectionParagraphType",
-      "termIdx": 64,
+      "termIdx": 63,
       "terminalCountPriorToHeading": 63
     },
     {
       "headingLevel": 2,
       "title": "Heading level 2",
-      "termIdx": 98,
+      "termIdx": 97,
       "terminalCountPriorToHeading": 97
     },
     {
       "headingLevel": 2,
       "title": "heading level 2",
-      "termIdx": 233,
+      "termIdx": 232,
       "terminalCountPriorToHeading": 232
     },
     {
       "headingLevel": 3,
       "title": "Heading level 3",
-      "termIdx": 314,
+      "termIdx": 313,
       "terminalCountPriorToHeading": 313
     },
     {
       "headingLevel": 1,
       "title": "Testing comments",
-      "termIdx": 314,
+      "termIdx": 313,
       "terminalCountPriorToHeading": 313
     },
     {
       "headingLevel": 1,
       "title": "Testing SectionHeadingVariantType",
-      "termIdx": 314,
+      "termIdx": 313,
       "terminalCountPriorToHeading": 313
     },
     {
       "headingLevel": 2,
       "title": "heading 1.1",
-      "termIdx": 317,
+      "termIdx": 316,
       "terminalCountPriorToHeading": 316
     },
     {
       "headingLevel": 1,
       "title": "heading 2.0",
-      "termIdx": 323,
+      "termIdx": 322,
       "terminalCountPriorToHeading": 322
     },
     {
       "headingLevel": 1,
       "title": "unorder list example",
-      "termIdx": 326,
+      "termIdx": 325,
       "terminalCountPriorToHeading": 325
     },
     {
       "headingLevel": 1,
       "title": "heading1 ordered list example",
-      "termIdx": 365,
+      "termIdx": 364,
       "terminalCountPriorToHeading": 364
     },
     {
       "headingLevel": 1,
       "title": "mixed list example",
-      "termIdx": 386,
+      "termIdx": 385,
       "terminalCountPriorToHeading": 385
+    }
+  ],
+  "sectionList": [
+    {
+      "firstTermIdx": 0,
+      "lastTermIdx": 8,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 9,
+      "lastTermIdx": 17,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 18,
+      "lastTermIdx": 26,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 27,
+      "lastTermIdx": 35,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 36,
+      "lastTermIdx": 44,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 45,
+      "lastTermIdx": 53,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 54,
+      "lastTermIdx": 62,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 63,
+      "lastTermIdx": 73,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 74,
+      "lastTermIdx": 81,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 82,
+      "lastTermIdx": 87,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 88,
+      "lastTermIdx": 96,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 97,
+      "lastTermIdx": 102,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 103,
+      "lastTermIdx": 110,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 111,
+      "lastTermIdx": 122,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 123,
+      "lastTermIdx": 231,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 232,
+      "lastTermIdx": 245,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 246,
+      "lastTermIdx": 257,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 258,
+      "lastTermIdx": 264,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 265,
+      "lastTermIdx": 270,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 271,
+      "lastTermIdx": 275,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 276,
+      "lastTermIdx": 284,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 285,
+      "lastTermIdx": 292,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 293,
+      "lastTermIdx": 303,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 304,
+      "lastTermIdx": 312,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 313,
+      "lastTermIdx": 315,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 316,
+      "lastTermIdx": 318,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 319,
+      "lastTermIdx": 321,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 322,
+      "lastTermIdx": 324,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 325,
+      "lastTermIdx": 325,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 326,
+      "lastTermIdx": 326,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 327,
+      "lastTermIdx": 327,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 328,
+      "lastTermIdx": 328,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 329,
+      "lastTermIdx": 341,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 342,
+      "lastTermIdx": 359,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 360,
+      "lastTermIdx": 360,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 361,
+      "lastTermIdx": 361,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 362,
+      "lastTermIdx": 362,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 363,
+      "lastTermIdx": 363,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 364,
+      "lastTermIdx": 365,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 366,
+      "lastTermIdx": 366,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 367,
+      "lastTermIdx": 367,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 368,
+      "lastTermIdx": 368,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 369,
+      "lastTermIdx": 369,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 370,
+      "lastTermIdx": 370,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 371,
+      "lastTermIdx": 371,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 372,
+      "lastTermIdx": 374,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 375,
+      "lastTermIdx": 377,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 378,
+      "lastTermIdx": 378,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 379,
+      "lastTermIdx": 381,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 382,
+      "lastTermIdx": 384,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 385,
+      "lastTermIdx": 386,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 387,
+      "lastTermIdx": 388,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 389,
+      "lastTermIdx": 390,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 391,
+      "lastTermIdx": 392,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 393,
+      "lastTermIdx": 472,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 473,
+      "lastTermIdx": 474,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 475,
+      "lastTermIdx": 476,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 477,
+      "lastTermIdx": 484,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 485,
+      "lastTermIdx": 492,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 493,
+      "lastTermIdx": 500,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 501,
+      "lastTermIdx": 508,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 509,
+      "lastTermIdx": 515,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 516,
+      "lastTermIdx": 522,
+      "type": "paragraph"
     }
   ],
   "sentenceList": [
@@ -40306,260 +40624,6 @@
     },
     {
       "firstTermIdx": 469,
-      "lastTermIdx": 472
-    },
-    {
-      "firstTermIdx": 473,
-      "lastTermIdx": 474
-    },
-    {
-      "firstTermIdx": 475,
-      "lastTermIdx": 476
-    },
-    {
-      "firstTermIdx": 477,
-      "lastTermIdx": 484
-    },
-    {
-      "firstTermIdx": 485,
-      "lastTermIdx": 492
-    },
-    {
-      "firstTermIdx": 493,
-      "lastTermIdx": 500
-    },
-    {
-      "firstTermIdx": 501,
-      "lastTermIdx": 508
-    },
-    {
-      "firstTermIdx": 509,
-      "lastTermIdx": 515
-    },
-    {
-      "firstTermIdx": 516,
-      "lastTermIdx": 522
-    }
-  ],
-  "sectionList": [
-    {
-      "firstTermIdx": 0,
-      "lastTermIdx": 8
-    },
-    {
-      "firstTermIdx": 9,
-      "lastTermIdx": 17
-    },
-    {
-      "firstTermIdx": 18,
-      "lastTermIdx": 26
-    },
-    {
-      "firstTermIdx": 27,
-      "lastTermIdx": 35
-    },
-    {
-      "firstTermIdx": 36,
-      "lastTermIdx": 44
-    },
-    {
-      "firstTermIdx": 45,
-      "lastTermIdx": 53
-    },
-    {
-      "firstTermIdx": 54,
-      "lastTermIdx": 62
-    },
-    {
-      "firstTermIdx": 63,
-      "lastTermIdx": 73
-    },
-    {
-      "firstTermIdx": 74,
-      "lastTermIdx": 81
-    },
-    {
-      "firstTermIdx": 82,
-      "lastTermIdx": 87
-    },
-    {
-      "firstTermIdx": 88,
-      "lastTermIdx": 96
-    },
-    {
-      "firstTermIdx": 97,
-      "lastTermIdx": 102
-    },
-    {
-      "firstTermIdx": 103,
-      "lastTermIdx": 110
-    },
-    {
-      "firstTermIdx": 111,
-      "lastTermIdx": 122
-    },
-    {
-      "firstTermIdx": 123,
-      "lastTermIdx": 231
-    },
-    {
-      "firstTermIdx": 232,
-      "lastTermIdx": 245
-    },
-    {
-      "firstTermIdx": 246,
-      "lastTermIdx": 257
-    },
-    {
-      "firstTermIdx": 258,
-      "lastTermIdx": 264
-    },
-    {
-      "firstTermIdx": 265,
-      "lastTermIdx": 270
-    },
-    {
-      "firstTermIdx": 271,
-      "lastTermIdx": 275
-    },
-    {
-      "firstTermIdx": 276,
-      "lastTermIdx": 284
-    },
-    {
-      "firstTermIdx": 285,
-      "lastTermIdx": 292
-    },
-    {
-      "firstTermIdx": 293,
-      "lastTermIdx": 303
-    },
-    {
-      "firstTermIdx": 304,
-      "lastTermIdx": 312
-    },
-    {
-      "firstTermIdx": 313,
-      "lastTermIdx": 315
-    },
-    {
-      "firstTermIdx": 316,
-      "lastTermIdx": 318
-    },
-    {
-      "firstTermIdx": 319,
-      "lastTermIdx": 321
-    },
-    {
-      "firstTermIdx": 322,
-      "lastTermIdx": 324
-    },
-    {
-      "firstTermIdx": 325,
-      "lastTermIdx": 325
-    },
-    {
-      "firstTermIdx": 326,
-      "lastTermIdx": 326
-    },
-    {
-      "firstTermIdx": 327,
-      "lastTermIdx": 327
-    },
-    {
-      "firstTermIdx": 328,
-      "lastTermIdx": 328
-    },
-    {
-      "firstTermIdx": 329,
-      "lastTermIdx": 341
-    },
-    {
-      "firstTermIdx": 342,
-      "lastTermIdx": 359
-    },
-    {
-      "firstTermIdx": 360,
-      "lastTermIdx": 360
-    },
-    {
-      "firstTermIdx": 361,
-      "lastTermIdx": 361
-    },
-    {
-      "firstTermIdx": 362,
-      "lastTermIdx": 362
-    },
-    {
-      "firstTermIdx": 363,
-      "lastTermIdx": 363
-    },
-    {
-      "firstTermIdx": 364,
-      "lastTermIdx": 365
-    },
-    {
-      "firstTermIdx": 366,
-      "lastTermIdx": 366
-    },
-    {
-      "firstTermIdx": 367,
-      "lastTermIdx": 367
-    },
-    {
-      "firstTermIdx": 368,
-      "lastTermIdx": 368
-    },
-    {
-      "firstTermIdx": 369,
-      "lastTermIdx": 369
-    },
-    {
-      "firstTermIdx": 370,
-      "lastTermIdx": 370
-    },
-    {
-      "firstTermIdx": 371,
-      "lastTermIdx": 371
-    },
-    {
-      "firstTermIdx": 372,
-      "lastTermIdx": 374
-    },
-    {
-      "firstTermIdx": 375,
-      "lastTermIdx": 377
-    },
-    {
-      "firstTermIdx": 378,
-      "lastTermIdx": 378
-    },
-    {
-      "firstTermIdx": 379,
-      "lastTermIdx": 381
-    },
-    {
-      "firstTermIdx": 382,
-      "lastTermIdx": 384
-    },
-    {
-      "firstTermIdx": 385,
-      "lastTermIdx": 386
-    },
-    {
-      "firstTermIdx": 387,
-      "lastTermIdx": 388
-    },
-    {
-      "firstTermIdx": 389,
-      "lastTermIdx": 390
-    },
-    {
-      "firstTermIdx": 391,
-      "lastTermIdx": 392
-    },
-    {
-      "firstTermIdx": 393,
       "lastTermIdx": 472
     },
     {

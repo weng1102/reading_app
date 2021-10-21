@@ -11,13 +11,14 @@ const INITIALDATE = "9/21/2015 17:03";
 const InitialDate = new Date(INITIALDATE).toString();
 import { strict as assert } from "assert";
 import { IsError } from "./utilities";
-import { TaggedStringType } from "./dataadapter";
+import { MarkdownTagType, TaggedStringType } from "./dataadapter";
 import {
   IHeadingListItem,
   IPageContent,
   PageFormatEnumType,
   IRangeItem,
   ISentenceListItem,
+  ISectionListItem,
   ITerminalInfo,
   ITerminalListItem
 } from "./pageContentType";
@@ -41,7 +42,8 @@ export type IPageNode = IPageContent & IParseNode;
 export class PageParseNode extends ParseNode implements IPageContent {
   //  _data: PageContentType = InitialPageContentType;
   id: number = 0;
-  name: string = "";
+  title: string = "";
+  filename: string = "";
   description: string = "";
   owner: string = "";
   pageFormatType = PageFormatEnumType.default;
@@ -53,8 +55,8 @@ export class PageParseNode extends ParseNode implements IPageContent {
   sections: ISectionNode[] = []; //needs to be reflected in _data.sections[]
   terminalList: ITerminalListItem[] = [];
   headingList: IHeadingListItem[] = [];
+  sectionList: ISectionListItem[] = [];
   sentenceList: ISentenceListItem[] = [];
-  sectionList: IRangeItem[] = [];
   constructor(parent?: PageParseNode) {
     super(parent);
   }
@@ -70,12 +72,17 @@ export class PageParseNode extends ParseNode implements IPageContent {
         //        current = this.dataSource.nextRecord()
         current = this.dataSource.currentRecord()
       ) {
-        let sectionNode: ISectionNode = GetSectionNode(current.tagType, this);
-        this.sections.push(sectionNode);
-        this.logger.diagnostic(
-          `pushed section=${current.tagType} ${sectionNode.constructor.name} ${current.content}`
-        );
-        sectionNode.parse();
+        if (current.tagType === MarkdownTagType.PAGETITLE) {
+          this.title = current.content;
+          current = this.dataSource.nextRecord();
+        } else {
+          let sectionNode: ISectionNode = GetSectionNode(current.tagType, this);
+          this.sections.push(sectionNode);
+          this.logger.diagnostic(
+            `pushed section=${current.tagType} ${sectionNode.constructor.name} ${current.content}`
+          );
+          sectionNode.parse();
+        }
       }
       // transfer wordIdx from userContext to pages
       this.userContext.terminals.parse();
@@ -84,7 +91,10 @@ export class PageParseNode extends ParseNode implements IPageContent {
       this.userContext.headings.parse(this.terminalList);
       this.headingList = this.userContext.headings;
 
+      this.userContext.sentences.parse();
       this.sentenceList = this.userContext.sentences;
+
+      this.userContext.sections.parse();
       this.sectionList = this.userContext.sections;
       this.modified = new Date(Date.now()).toString();
     } catch (e) {
@@ -120,7 +130,7 @@ export class PageParseNode extends ParseNode implements IPageContent {
         break;
       }
       case ParseNodeSerializeFormatEnumType.TABULAR: {
-        let replacer: any = (key, value) => {
+        let replacer: any = (key: string, value: any) => {
           // if we get a function, give us the code for that function
           switch (key) {
             // case "id":

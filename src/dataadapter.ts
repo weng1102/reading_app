@@ -33,6 +33,7 @@ export const enum MarkdownTagType {
   LISTITEM_ORDERED = "LISTITEM_ORDERED",
   LISTITEM_UNORDERED = "LISTITEM_UNORDERED",
   PAGE = "PAGE",
+  PAGETITLE = "PAGETITLE",
   PARAGRAPH = "PARAGRAPH",
   PARAGRAPH_END = "PARAGRAPH_END",
   PASSTHRUTAG = "PASSTHRUTAG",
@@ -141,6 +142,7 @@ export const enum MarkdownType {
   FILLIN = "LIST_FILLIN",
   FILLIN_END = "LIST_FILLIN_END",
   PAGE = "PAGE",
+  PAGETITLE = "PAGETITLE",
   PHOTOENTRY = "PHOTOENTRY",
   PHOTOENTRY_END = "PHOTOENTRY_END",
   TBD = "TBD" // should always be last
@@ -182,14 +184,21 @@ type MarkdownPatternDictionaryType = Record<
 ///const PARAGRAPH_PATTERN: RegExp = /["']?[A-Z][^.?!]+((?![.?!]['"]?\s["']?[A-Z][^.?!]).)+[.?!'"]+/g;
 //const PARAGRAPH_TO_SENTENCES: RegExp = /[^\.\!\?]*[\.\!\?]/;
 //const PARAGRAPH_TO_SENTENCES: RegExp = /?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s/m;
-const PARAGRAPH_TO_SENTENCES1: RegExp = /([\.\?!][\'\"\u2018\u2019\u201c\u201d\)\]]*\s*)(?<!\w\.\w.)(?<![A-Z][a-z][a-z]\.)(?<![A-Z][a-z]\.)(?<![A-Z]\.)\s+/;
+const PARAGRAPH_TO_SENTENCES: RegExp = /([\.\?!][\'\"\u2018\u2019\u201c\u201d\)\]]*\s*)(?<!\w\.\w.)(?<![A-Z][a-z][a-z]\.)(?<![A-Z][a-z]\.)(?<![A-Z]\.)\s+/;
 // matches the first capture group: standard terminating punctuations and
 // the occasional bracketing characters e.g. parentheticals but excluding
 // certain other conditions where punctuations are appropriate but not
 // necessarily terminating. For instance, certain abbreviations that occur
 // at the end of sentence will be incorrectly detected: [A-Z][a-z]\.,
 // [A-Z][a-z][a-z]\. But the probability of this is less than that of a
-// premature termination based on that same pattern
+// premature termination based on that same pattern. unicode characters u2018,
+// u2019, u201c, u201d correspond to single and double left and right quotes
+// respectively.
+//
+// The negative lookbehind looks backward into the expression to check if the
+// text inside the lookbehind can be matched. (?<!a)b matches "b" NOT preceded
+// by "a". In this case, it tries to match ellipsis (but ignores invisible
+// characters at the end of sentence.
 
 //const PARAGRAPH_TO_SENTENCES2: RegExp = /(?<!\w\.\w.)(?<![A-Z][a-z][a-z]\.)([\.\?!][\"\u2018\u2019\u201c\u201d\)\]]*\s*(?<![A-Z][a-z]\.)(?<![A-Z]\.)\s+)/;
 const PARAGRAPH_PATTERN: RegExp = /^([ "'\(]?[A-Za-z0-9\$\@]{1}.*)$/m;
@@ -283,6 +292,10 @@ const MarkdownPatternDictionary: MarkdownPatternDictionaryType = {
     pattern: /\[\/\/page\]:\s(.*)$/i,
     tagType: MarkdownTagType.PAGE
   },
+  [MarkdownType.PAGETITLE]: {
+    pattern: /\[\/\/page title\]:\s(.*)$/i,
+    tagType: MarkdownTagType.PAGETITLE
+  },
   [MarkdownType.FILLIN]: {
     pattern: /\[\/\/fill-in\]:(.*)$/,
     tagType: MarkdownTagType.FILLIN
@@ -334,7 +347,7 @@ abstract class MarkdownSource extends BaseClass implements IDataSource {
   protected buffer: TaggedStringType[] = [];
   protected pageContent!: IPageContent;
   protected bufferIdx: number = -1;
-  constructor(parent) {
+  constructor(parent: any) {
     super(parent);
     //Object.defineProperty(this, "dataSource", { enumerable: false });
     // Object.defineProperty(this, "buffer", { enumerable: false });
@@ -439,7 +452,7 @@ abstract class MarkdownSource extends BaseClass implements IDataSource {
 }
 export class RawMarkdownSource extends MarkdownSource implements IDataSource {
   readonly parent: any;
-  constructor(parent) {
+  constructor(parent: any) {
     super(parent);
   }
   connect(fileName: string): number {
@@ -465,7 +478,7 @@ export class RawMarkdownSource extends MarkdownSource implements IDataSource {
     return inputCount;
   }
   parse(
-    depth,
+    depth: number,
     inputBuffer: string[],
     currentIdx: number,
     resultBuffer: TaggedStringType[]
@@ -501,7 +514,7 @@ export class RawMarkdownSource extends MarkdownSource implements IDataSource {
 export class BasicMarkdownSource extends RawMarkdownSource
   implements IDataSource {
   buffer: TaggedStringType[] = [];
-  constructor(parent) {
+  constructor(parent: any) {
     super(parent);
     Object.defineProperty(this, "_logger", { enumerable: false });
     Object.defineProperty(this, "_parent", { enumerable: false });
@@ -521,7 +534,7 @@ export class BasicMarkdownSource extends RawMarkdownSource
     //   });
     //   return;
     // }
-    let sentences = current.content.split(PARAGRAPH_TO_SENTENCES1);
+    let sentences = current.content.split(PARAGRAPH_TO_SENTENCES);
     resultBuffer.push({
       content: "[PARAGRAPH]",
       tagType: MarkdownTagType.PARAGRAPH,
@@ -636,6 +649,10 @@ export class BasicMarkdownSource extends RawMarkdownSource
         });
       } else {
         switch (current.tagType) {
+          case MarkdownTagType.PAGETITLE: {
+            resultBuffer.push(current);
+            break;
+          }
           case MarkdownTagType.EMPTY: {
             this.buffer.push(current); //EMPTY
             break;

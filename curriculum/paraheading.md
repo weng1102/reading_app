@@ -1,9 +1,12 @@
+[//page title]: Testing Paragraph heading
+
 # Testing headings
+
 the quick brown fox jumped over heading "Testing headings"
+
 ## heading 2 expected
+
 the quick brown fox jumped over heading "headings 2 expected."
-
-
 
 ### heading 3 expected
 
@@ -53,5 +56,3 @@ I could only say one word after my stroke.
 I am starting to speak in sentences again.
 I get frustrated when I cannot say what I am thinking.
 I have problems with simple math and remembering things.
-
-
