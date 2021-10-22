@@ -55,7 +55,7 @@ const SectionType = {
   PARAGRAPH: "none"
 };
 let url: string =
-  "https://weng1102.github.io/reading_app/dist/terminals_acronym.json";
+  "https://weng1102.github.io/reading_app/dist/terminals_dates.json";
 
 export const ReadingApp = () => {
   const [error, setError] = useState(null);
