@@ -5,9 +5,9 @@
   "description": "",
   "owner": "",
   "pageFormatType": 0,
-  "created": "Fri Oct 22 2021 09:21:43 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Fri Oct 22 2021 09:21:43 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Fri Oct 22 2021 09:21:43 GMT-0700 (Pacific Daylight Time)",
+  "created": "Fri Oct 22 2021 09:24:20 GMT-0700 (Pacific Daylight Time)",
+  "modified": "Fri Oct 22 2021 09:24:20 GMT-0700 (Pacific Daylight Time)",
+  "transformed": "Fri Oct 22 2021 09:24:20 GMT-0700 (Pacific Daylight Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -25,14 +25,29 @@
     },
     {
       "id": 0,
-      "name": "TBD",
+      "name": "",
       "description": "",
       "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
-      "type": "tbd",
+      "type": "heading",
       "meta": {
-        "context": ""
+        "title": "Date format: 1 DD MMM YYYY",
+        "recitable": false,
+        "audible": false,
+        "level": 1
+      }
+    },
+    {
+      "id": 0,
+      "name": "",
+      "description": "",
+      "firstTermIdx": -9999,
+      "lastTermIdx": -9999,
+      "items": [],
+      "type": "empty",
+      "meta": {
+        "count": 1
       }
     },
     {
@@ -1392,14 +1407,29 @@
     },
     {
       "id": 0,
-      "name": "TBD",
+      "name": "",
       "description": "",
       "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
-      "type": "tbd",
+      "type": "heading",
       "meta": {
-        "context": ""
+        "title": "Date format 2: MMM DDD, YYYY",
+        "recitable": false,
+        "audible": false,
+        "level": 1
+      }
+    },
+    {
+      "id": 0,
+      "name": "",
+      "description": "",
+      "firstTermIdx": -9999,
+      "lastTermIdx": -9999,
+      "items": [],
+      "type": "empty",
+      "meta": {
+        "count": 1
       }
     },
     {
@@ -2496,14 +2526,17 @@
     },
     {
       "id": 0,
-      "name": "TBD",
+      "name": "",
       "description": "",
       "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
-      "type": "tbd",
+      "type": "heading",
       "meta": {
-        "context": ""
+        "title": "Date format 3: MMM DD",
+        "recitable": false,
+        "audible": false,
+        "level": 1
       }
     },
     {
@@ -5151,7 +5184,26 @@
       "sectionIdx": 9
     }
   ],
-  "headingList": [],
+  "headingList": [
+    {
+      "headingLevel": 1,
+      "title": "Date format: 1 DD MMM YYYY",
+      "termIdx": 0,
+      "terminalCountPriorToHeading": 0
+    },
+    {
+      "headingLevel": 1,
+      "title": "Date format 2: MMM DDD, YYYY",
+      "termIdx": 27,
+      "terminalCountPriorToHeading": 27
+    },
+    {
+      "headingLevel": 1,
+      "title": "Date format 3: MMM DD",
+      "termIdx": 51,
+      "terminalCountPriorToHeading": 51
+    }
+  ],
   "sectionList": [
     {
       "firstTermIdx": 0,
