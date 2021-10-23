@@ -5,9 +5,9 @@
   "description": "",
   "owner": "",
   "pageFormatType": 0,
-  "created": "Sat Oct 23 2021 14:55:45 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Sat Oct 23 2021 14:55:45 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Sat Oct 23 2021 14:55:45 GMT-0700 (Pacific Daylight Time)",
+  "created": "Sat Oct 23 2021 15:18:04 GMT-0700 (Pacific Daylight Time)",
+  "modified": "Sat Oct 23 2021 15:18:04 GMT-0700 (Pacific Daylight Time)",
+  "transformed": "Sat Oct 23 2021 15:18:04 GMT-0700 (Pacific Daylight Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -3184,16 +3184,16 @@
       "name": "",
       "description": "",
       "firstTermIdx": 63,
-      "lastTermIdx": 67,
+      "lastTermIdx": 68,
       "items": [],
       "type": "paragraph",
       "meta": {
         "sentences": [
           {
             "id": 8,
-            "content": "New year's Day is Jan. 1.",
+            "content": "New year's Day is Jan. 10.",
             "firstTermIdx": 63,
-            "lastTermIdx": 67,
+            "lastTermIdx": 68,
             "terminals": [
               {
                 "id": 0,
@@ -3381,90 +3381,127 @@
               },
               {
                 "id": 0,
-                "termIdx": 67,
-                "content": "Jan",
+                "termIdx": -9999,
+                "content": "Jan. 10",
                 "firstTermIdx": 67,
-                "lastTermIdx": 67,
-                "type": 11,
+                "lastTermIdx": 68,
+                "type": 2,
                 "meta": {
-                  "content": "Jan",
-                  "termIdx": 67,
-                  "nextTermIdx": [
-                    68
-                  ],
-                  "prevTermIdx": [
-                    66
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": ".",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 6,
-                "meta": {
-                  "content": ".",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 10,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": "1",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 11,
-                "meta": {
-                  "content": "",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
+                  "format": 2,
+                  "month": {
+                    "content": "Jan",
+                    "termIdx": 67,
+                    "nextTermIdx": [
+                      68
+                    ],
+                    "prevTermIdx": [
+                      66
+                    ],
+                    "altpronunciation": "january",
+                    "altrecognition": "",
+                    "recitable": true,
+                    "audible": true,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "punctuation1": {
+                    "content": ".",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "whitespace1": {
+                    "content": " ",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "day": {
+                    "content": "10",
+                    "termIdx": 68,
+                    "nextTermIdx": [
+                      69
+                    ],
+                    "prevTermIdx": [
+                      67
+                    ],
+                    "altpronunciation": "10th",
+                    "altrecognition": "",
+                    "recitable": true,
+                    "audible": true,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "punctuation2": {
+                    "content": "",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "whitespace2": {
+                    "content": "",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "year": {
+                    "century": {
+                      "content": "",
+                      "termIdx": -9999,
+                      "nextTermIdx": [],
+                      "prevTermIdx": [],
+                      "altpronunciation": "",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    },
+                    "withinCentury": {
+                      "content": "",
+                      "termIdx": -9999,
+                      "nextTermIdx": [],
+                      "prevTermIdx": [],
+                      "altpronunciation": "",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    }
+                  }
                 }
               },
               {
@@ -3498,73 +3535,27 @@
       "id": 9,
       "name": "",
       "description": "",
-      "firstTermIdx": 68,
-      "lastTermIdx": 72,
+      "firstTermIdx": 69,
+      "lastTermIdx": 74,
       "items": [],
       "type": "paragraph",
       "meta": {
         "sentences": [
           {
             "id": 9,
-            "content": "New year's Day is January 1.",
-            "firstTermIdx": 68,
-            "lastTermIdx": 72,
+            "content": "New year's Day is January 10.",
+            "firstTermIdx": 69,
+            "lastTermIdx": 74,
             "terminals": [
               {
                 "id": 0,
-                "termIdx": 68,
-                "content": "New",
-                "firstTermIdx": 68,
-                "lastTermIdx": 68,
-                "type": 11,
-                "meta": {
-                  "content": "New",
-                  "termIdx": 68,
-                  "nextTermIdx": [
-                    69
-                  ],
-                  "prevTermIdx": [
-                    67
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 10,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
                 "termIdx": 69,
-                "content": "year's",
+                "content": "New",
                 "firstTermIdx": 69,
                 "lastTermIdx": 69,
                 "type": 11,
                 "meta": {
-                  "content": "year's",
+                  "content": "New",
                   "termIdx": 69,
                   "nextTermIdx": [
                     70
@@ -3605,12 +3596,12 @@
               {
                 "id": 0,
                 "termIdx": 70,
-                "content": "Day",
+                "content": "year's",
                 "firstTermIdx": 70,
                 "lastTermIdx": 70,
                 "type": 11,
                 "meta": {
-                  "content": "Day",
+                  "content": "year's",
                   "termIdx": 70,
                   "nextTermIdx": [
                     71
@@ -3651,12 +3642,12 @@
               {
                 "id": 0,
                 "termIdx": 71,
-                "content": "is",
+                "content": "Day",
                 "firstTermIdx": 71,
                 "lastTermIdx": 71,
                 "type": 11,
                 "meta": {
-                  "content": "is",
+                  "content": "Day",
                   "termIdx": 71,
                   "nextTermIdx": [
                     72
@@ -3697,12 +3688,12 @@
               {
                 "id": 0,
                 "termIdx": 72,
-                "content": "January",
+                "content": "is",
                 "firstTermIdx": 72,
                 "lastTermIdx": 72,
                 "type": 11,
                 "meta": {
-                  "content": "January",
+                  "content": "is",
                   "termIdx": 72,
                   "nextTermIdx": [
                     73
@@ -3743,22 +3734,126 @@
               {
                 "id": 0,
                 "termIdx": -9999,
-                "content": "1",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 11,
+                "content": "January 10",
+                "firstTermIdx": 73,
+                "lastTermIdx": 74,
+                "type": 2,
                 "meta": {
-                  "content": "",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
+                  "format": 2,
+                  "month": {
+                    "content": "January",
+                    "termIdx": 73,
+                    "nextTermIdx": [
+                      74
+                    ],
+                    "prevTermIdx": [
+                      72
+                    ],
+                    "altpronunciation": "january",
+                    "altrecognition": "",
+                    "recitable": true,
+                    "audible": true,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "punctuation1": {
+                    "content": "",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "whitespace1": {
+                    "content": " ",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "day": {
+                    "content": "10",
+                    "termIdx": 74,
+                    "nextTermIdx": [
+                      75
+                    ],
+                    "prevTermIdx": [
+                      73
+                    ],
+                    "altpronunciation": "10th",
+                    "altrecognition": "",
+                    "recitable": true,
+                    "audible": true,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "punctuation2": {
+                    "content": "",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "whitespace2": {
+                    "content": "",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "year": {
+                    "century": {
+                      "content": "",
+                      "termIdx": -9999,
+                      "nextTermIdx": [],
+                      "prevTermIdx": [],
+                      "altpronunciation": "",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    },
+                    "withinCentury": {
+                      "content": "",
+                      "termIdx": -9999,
+                      "nextTermIdx": [],
+                      "prevTermIdx": [],
+                      "altpronunciation": "",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    }
+                  }
                 }
               },
               {
@@ -3792,119 +3887,27 @@
       "id": 10,
       "name": "",
       "description": "",
-      "firstTermIdx": 73,
-      "lastTermIdx": 81,
+      "firstTermIdx": 75,
+      "lastTermIdx": 84,
       "items": [],
       "type": "paragraph",
       "meta": {
         "sentences": [
           {
             "id": 10,
-            "content": "New year's Day is Jan. 1 in middle of sentence.",
-            "firstTermIdx": 73,
-            "lastTermIdx": 81,
+            "content": "New year's Day is Jan. 12 in middle of sentence.",
+            "firstTermIdx": 75,
+            "lastTermIdx": 84,
             "terminals": [
               {
                 "id": 0,
-                "termIdx": 73,
-                "content": "New",
-                "firstTermIdx": 73,
-                "lastTermIdx": 73,
-                "type": 11,
-                "meta": {
-                  "content": "New",
-                  "termIdx": 73,
-                  "nextTermIdx": [
-                    74
-                  ],
-                  "prevTermIdx": [
-                    72
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 10,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": 74,
-                "content": "year's",
-                "firstTermIdx": 74,
-                "lastTermIdx": 74,
-                "type": 11,
-                "meta": {
-                  "content": "year's",
-                  "termIdx": 74,
-                  "nextTermIdx": [
-                    75
-                  ],
-                  "prevTermIdx": [
-                    73
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 10,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
                 "termIdx": 75,
-                "content": "Day",
+                "content": "New",
                 "firstTermIdx": 75,
                 "lastTermIdx": 75,
                 "type": 11,
                 "meta": {
-                  "content": "Day",
+                  "content": "New",
                   "termIdx": 75,
                   "nextTermIdx": [
                     76
@@ -3945,12 +3948,12 @@
               {
                 "id": 0,
                 "termIdx": 76,
-                "content": "is",
+                "content": "year's",
                 "firstTermIdx": 76,
                 "lastTermIdx": 76,
                 "type": 11,
                 "meta": {
-                  "content": "is",
+                  "content": "year's",
                   "termIdx": 76,
                   "nextTermIdx": [
                     77
@@ -3991,12 +3994,12 @@
               {
                 "id": 0,
                 "termIdx": 77,
-                "content": "Jan",
+                "content": "Day",
                 "firstTermIdx": 77,
                 "lastTermIdx": 77,
                 "type": 11,
                 "meta": {
-                  "content": "Jan",
+                  "content": "Day",
                   "termIdx": 77,
                   "nextTermIdx": [
                     78
@@ -4004,69 +4007,6 @@
                   "prevTermIdx": [
                     76
                   ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": ".",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 6,
-                "meta": {
-                  "content": ".",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 10,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": "1",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 11,
-                "meta": {
-                  "content": "",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
                   "altpronunciation": "",
                   "altrecognition": "",
                   "recitable": true,
@@ -4100,12 +4040,12 @@
               {
                 "id": 0,
                 "termIdx": 78,
-                "content": "in",
+                "content": "is",
                 "firstTermIdx": 78,
                 "lastTermIdx": 78,
                 "type": 11,
                 "meta": {
-                  "content": "in",
+                  "content": "is",
                   "termIdx": 78,
                   "nextTermIdx": [
                     79
@@ -4145,73 +4085,127 @@
               },
               {
                 "id": 0,
-                "termIdx": 79,
-                "content": "middle",
-                "firstTermIdx": 79,
-                "lastTermIdx": 79,
-                "type": 11,
-                "meta": {
-                  "content": "middle",
-                  "termIdx": 79,
-                  "nextTermIdx": [
-                    80
-                  ],
-                  "prevTermIdx": [
-                    78
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
                 "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 10,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": 80,
-                "content": "of",
-                "firstTermIdx": 80,
+                "content": "Jan. 12",
+                "firstTermIdx": 79,
                 "lastTermIdx": 80,
-                "type": 11,
+                "type": 2,
                 "meta": {
-                  "content": "of",
-                  "termIdx": 80,
-                  "nextTermIdx": [
-                    81
-                  ],
-                  "prevTermIdx": [
-                    79
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
+                  "format": 2,
+                  "month": {
+                    "content": "Jan",
+                    "termIdx": 79,
+                    "nextTermIdx": [
+                      80
+                    ],
+                    "prevTermIdx": [
+                      78
+                    ],
+                    "altpronunciation": "january",
+                    "altrecognition": "",
+                    "recitable": true,
+                    "audible": true,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "punctuation1": {
+                    "content": ".",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "whitespace1": {
+                    "content": " ",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "day": {
+                    "content": "12",
+                    "termIdx": 80,
+                    "nextTermIdx": [
+                      81
+                    ],
+                    "prevTermIdx": [
+                      79
+                    ],
+                    "altpronunciation": "12th",
+                    "altrecognition": "",
+                    "recitable": true,
+                    "audible": true,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "punctuation2": {
+                    "content": "",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "whitespace2": {
+                    "content": "",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "year": {
+                    "century": {
+                      "content": "",
+                      "termIdx": -9999,
+                      "nextTermIdx": [],
+                      "prevTermIdx": [],
+                      "altpronunciation": "",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    },
+                    "withinCentury": {
+                      "content": "",
+                      "termIdx": -9999,
+                      "nextTermIdx": [],
+                      "prevTermIdx": [],
+                      "altpronunciation": "",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    }
+                  }
                 }
               },
               {
@@ -4238,18 +4232,156 @@
               {
                 "id": 0,
                 "termIdx": 81,
-                "content": "sentence",
+                "content": "in",
                 "firstTermIdx": 81,
                 "lastTermIdx": 81,
                 "type": 11,
                 "meta": {
-                  "content": "sentence",
+                  "content": "in",
                   "termIdx": 81,
                   "nextTermIdx": [
                     82
                   ],
                   "prevTermIdx": [
                     80
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 82,
+                "content": "middle",
+                "firstTermIdx": 82,
+                "lastTermIdx": 82,
+                "type": 11,
+                "meta": {
+                  "content": "middle",
+                  "termIdx": 82,
+                  "nextTermIdx": [
+                    83
+                  ],
+                  "prevTermIdx": [
+                    81
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 83,
+                "content": "of",
+                "firstTermIdx": 83,
+                "lastTermIdx": 83,
+                "type": 11,
+                "meta": {
+                  "content": "of",
+                  "termIdx": 83,
+                  "nextTermIdx": [
+                    84
+                  ],
+                  "prevTermIdx": [
+                    82
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 84,
+                "content": "sentence",
+                "firstTermIdx": 84,
+                "lastTermIdx": 84,
+                "type": 11,
+                "meta": {
+                  "content": "sentence",
+                  "termIdx": 84,
+                  "nextTermIdx": [
+                    85
+                  ],
+                  "prevTermIdx": [
+                    83
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -4291,165 +4423,27 @@
       "id": 11,
       "name": "",
       "description": "",
-      "firstTermIdx": 82,
-      "lastTermIdx": 90,
+      "firstTermIdx": 85,
+      "lastTermIdx": 94,
       "items": [],
       "type": "paragraph",
       "meta": {
         "sentences": [
           {
             "id": 11,
-            "content": "New year's Day is January 1 in middle of sentence.",
-            "firstTermIdx": 82,
-            "lastTermIdx": 90,
+            "content": "New year's Day is January 11 in middle of sentence.",
+            "firstTermIdx": 85,
+            "lastTermIdx": 94,
             "terminals": [
               {
                 "id": 0,
-                "termIdx": 82,
-                "content": "New",
-                "firstTermIdx": 82,
-                "lastTermIdx": 82,
-                "type": 11,
-                "meta": {
-                  "content": "New",
-                  "termIdx": 82,
-                  "nextTermIdx": [
-                    83
-                  ],
-                  "prevTermIdx": [
-                    81
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 10,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": 83,
-                "content": "year's",
-                "firstTermIdx": 83,
-                "lastTermIdx": 83,
-                "type": 11,
-                "meta": {
-                  "content": "year's",
-                  "termIdx": 83,
-                  "nextTermIdx": [
-                    84
-                  ],
-                  "prevTermIdx": [
-                    82
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 10,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": 84,
-                "content": "Day",
-                "firstTermIdx": 84,
-                "lastTermIdx": 84,
-                "type": 11,
-                "meta": {
-                  "content": "Day",
-                  "termIdx": 84,
-                  "nextTermIdx": [
-                    85
-                  ],
-                  "prevTermIdx": [
-                    83
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 10,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
                 "termIdx": 85,
-                "content": "is",
+                "content": "New",
                 "firstTermIdx": 85,
                 "lastTermIdx": 85,
                 "type": 11,
                 "meta": {
-                  "content": "is",
+                  "content": "New",
                   "termIdx": 85,
                   "nextTermIdx": [
                     86
@@ -4490,12 +4484,12 @@
               {
                 "id": 0,
                 "termIdx": 86,
-                "content": "January",
+                "content": "year's",
                 "firstTermIdx": 86,
                 "lastTermIdx": 86,
                 "type": 11,
                 "meta": {
-                  "content": "January",
+                  "content": "year's",
                   "termIdx": 86,
                   "nextTermIdx": [
                     87
@@ -4535,55 +4529,13 @@
               },
               {
                 "id": 0,
-                "termIdx": -9999,
-                "content": "1",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 11,
-                "meta": {
-                  "content": "",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 10,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
                 "termIdx": 87,
-                "content": "in",
+                "content": "Day",
                 "firstTermIdx": 87,
                 "lastTermIdx": 87,
                 "type": 11,
                 "meta": {
-                  "content": "in",
+                  "content": "Day",
                   "termIdx": 87,
                   "nextTermIdx": [
                     88
@@ -4624,12 +4576,12 @@
               {
                 "id": 0,
                 "termIdx": 88,
-                "content": "middle",
+                "content": "is",
                 "firstTermIdx": 88,
                 "lastTermIdx": 88,
                 "type": 11,
                 "meta": {
-                  "content": "middle",
+                  "content": "is",
                   "termIdx": 88,
                   "nextTermIdx": [
                     89
@@ -4669,19 +4621,165 @@
               },
               {
                 "id": 0,
-                "termIdx": 89,
-                "content": "of",
+                "termIdx": -9999,
+                "content": "January 11",
                 "firstTermIdx": 89,
-                "lastTermIdx": 89,
+                "lastTermIdx": 90,
+                "type": 2,
+                "meta": {
+                  "format": 2,
+                  "month": {
+                    "content": "January",
+                    "termIdx": 89,
+                    "nextTermIdx": [
+                      90
+                    ],
+                    "prevTermIdx": [
+                      88
+                    ],
+                    "altpronunciation": "january",
+                    "altrecognition": "",
+                    "recitable": true,
+                    "audible": true,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "punctuation1": {
+                    "content": "",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "whitespace1": {
+                    "content": " ",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "day": {
+                    "content": "11",
+                    "termIdx": 90,
+                    "nextTermIdx": [
+                      91
+                    ],
+                    "prevTermIdx": [
+                      89
+                    ],
+                    "altpronunciation": "11th",
+                    "altrecognition": "",
+                    "recitable": true,
+                    "audible": true,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "punctuation2": {
+                    "content": "",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "whitespace2": {
+                    "content": "",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "year": {
+                    "century": {
+                      "content": "",
+                      "termIdx": -9999,
+                      "nextTermIdx": [],
+                      "prevTermIdx": [],
+                      "altpronunciation": "",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    },
+                    "withinCentury": {
+                      "content": "",
+                      "termIdx": -9999,
+                      "nextTermIdx": [],
+                      "prevTermIdx": [],
+                      "altpronunciation": "",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    }
+                  }
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 91,
+                "content": "in",
+                "firstTermIdx": 91,
+                "lastTermIdx": 91,
                 "type": 11,
                 "meta": {
-                  "content": "of",
-                  "termIdx": 89,
+                  "content": "in",
+                  "termIdx": 91,
                   "nextTermIdx": [
-                    90
+                    92
                   ],
                   "prevTermIdx": [
-                    88
+                    90
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -4715,17 +4813,109 @@
               },
               {
                 "id": 0,
-                "termIdx": 90,
+                "termIdx": 92,
+                "content": "middle",
+                "firstTermIdx": 92,
+                "lastTermIdx": 92,
+                "type": 11,
+                "meta": {
+                  "content": "middle",
+                  "termIdx": 92,
+                  "nextTermIdx": [
+                    93
+                  ],
+                  "prevTermIdx": [
+                    91
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 93,
+                "content": "of",
+                "firstTermIdx": 93,
+                "lastTermIdx": 93,
+                "type": 11,
+                "meta": {
+                  "content": "of",
+                  "termIdx": 93,
+                  "nextTermIdx": [
+                    94
+                  ],
+                  "prevTermIdx": [
+                    92
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 94,
                 "content": "sentence",
-                "firstTermIdx": 90,
-                "lastTermIdx": 90,
+                "firstTermIdx": 94,
+                "lastTermIdx": 94,
                 "type": 11,
                 "meta": {
                   "content": "sentence",
-                  "termIdx": 90,
+                  "termIdx": 94,
                   "nextTermIdx": [],
                   "prevTermIdx": [
-                    89
+                    93
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -6057,7 +6247,26 @@
       "prevTermIdx": [
         66
       ],
-      "altpronunciation": "",
+      "altpronunciation": "january",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 8,
+      "sectionIdx": 8
+    },
+    {
+      "content": "10",
+      "termIdx": 68,
+      "nextTermIdx": [
+        69
+      ],
+      "prevTermIdx": [
+        67
+      ],
+      "altpronunciation": "10th",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
@@ -6069,25 +6278,6 @@
     },
     {
       "content": "New",
-      "termIdx": 68,
-      "nextTermIdx": [
-        69
-      ],
-      "prevTermIdx": [
-        67
-      ],
-      "altpronunciation": "",
-      "altrecognition": "",
-      "recitable": true,
-      "audible": true,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "sentenceIdx": 9,
-      "sectionIdx": 9
-    },
-    {
-      "content": "year's",
       "termIdx": 69,
       "nextTermIdx": [
         70
@@ -6106,7 +6296,7 @@
       "sectionIdx": 9
     },
     {
-      "content": "Day",
+      "content": "year's",
       "termIdx": 70,
       "nextTermIdx": [
         71
@@ -6125,7 +6315,7 @@
       "sectionIdx": 9
     },
     {
-      "content": "is",
+      "content": "Day",
       "termIdx": 71,
       "nextTermIdx": [
         72
@@ -6144,7 +6334,7 @@
       "sectionIdx": 9
     },
     {
-      "content": "January",
+      "content": "is",
       "termIdx": 72,
       "nextTermIdx": [
         73
@@ -6163,7 +6353,7 @@
       "sectionIdx": 9
     },
     {
-      "content": "New",
+      "content": "January",
       "termIdx": 73,
       "nextTermIdx": [
         74
@@ -6171,18 +6361,18 @@
       "prevTermIdx": [
         72
       ],
-      "altpronunciation": "",
+      "altpronunciation": "january",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 10,
-      "sectionIdx": 10
+      "sentenceIdx": 9,
+      "sectionIdx": 9
     },
     {
-      "content": "year's",
+      "content": "10",
       "termIdx": 74,
       "nextTermIdx": [
         75
@@ -6190,18 +6380,18 @@
       "prevTermIdx": [
         73
       ],
-      "altpronunciation": "",
+      "altpronunciation": "10th",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 10,
-      "sectionIdx": 10
+      "sentenceIdx": 9,
+      "sectionIdx": 9
     },
     {
-      "content": "Day",
+      "content": "New",
       "termIdx": 75,
       "nextTermIdx": [
         76
@@ -6220,7 +6410,7 @@
       "sectionIdx": 10
     },
     {
-      "content": "is",
+      "content": "year's",
       "termIdx": 76,
       "nextTermIdx": [
         77
@@ -6239,7 +6429,7 @@
       "sectionIdx": 10
     },
     {
-      "content": "Jan",
+      "content": "Day",
       "termIdx": 77,
       "nextTermIdx": [
         78
@@ -6258,7 +6448,7 @@
       "sectionIdx": 10
     },
     {
-      "content": "in",
+      "content": "is",
       "termIdx": 78,
       "nextTermIdx": [
         79
@@ -6277,7 +6467,7 @@
       "sectionIdx": 10
     },
     {
-      "content": "middle",
+      "content": "Jan",
       "termIdx": 79,
       "nextTermIdx": [
         80
@@ -6285,7 +6475,7 @@
       "prevTermIdx": [
         78
       ],
-      "altpronunciation": "",
+      "altpronunciation": "january",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
@@ -6296,7 +6486,7 @@
       "sectionIdx": 10
     },
     {
-      "content": "of",
+      "content": "12",
       "termIdx": 80,
       "nextTermIdx": [
         81
@@ -6304,7 +6494,7 @@
       "prevTermIdx": [
         79
       ],
-      "altpronunciation": "",
+      "altpronunciation": "12th",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
@@ -6315,7 +6505,7 @@
       "sectionIdx": 10
     },
     {
-      "content": "sentence",
+      "content": "in",
       "termIdx": 81,
       "nextTermIdx": [
         82
@@ -6334,7 +6524,7 @@
       "sectionIdx": 10
     },
     {
-      "content": "New",
+      "content": "middle",
       "termIdx": 82,
       "nextTermIdx": [
         83
@@ -6349,11 +6539,11 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 11,
-      "sectionIdx": 11
+      "sentenceIdx": 10,
+      "sectionIdx": 10
     },
     {
-      "content": "year's",
+      "content": "of",
       "termIdx": 83,
       "nextTermIdx": [
         84
@@ -6368,11 +6558,11 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 11,
-      "sectionIdx": 11
+      "sentenceIdx": 10,
+      "sectionIdx": 10
     },
     {
-      "content": "Day",
+      "content": "sentence",
       "termIdx": 84,
       "nextTermIdx": [
         85
@@ -6387,11 +6577,11 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 11,
-      "sectionIdx": 11
+      "sentenceIdx": 10,
+      "sectionIdx": 10
     },
     {
-      "content": "is",
+      "content": "New",
       "termIdx": 85,
       "nextTermIdx": [
         86
@@ -6410,7 +6600,7 @@
       "sectionIdx": 11
     },
     {
-      "content": "January",
+      "content": "year's",
       "termIdx": 86,
       "nextTermIdx": [
         87
@@ -6429,7 +6619,7 @@
       "sectionIdx": 11
     },
     {
-      "content": "in",
+      "content": "Day",
       "termIdx": 87,
       "nextTermIdx": [
         88
@@ -6448,7 +6638,7 @@
       "sectionIdx": 11
     },
     {
-      "content": "middle",
+      "content": "is",
       "termIdx": 88,
       "nextTermIdx": [
         89
@@ -6467,13 +6657,89 @@
       "sectionIdx": 11
     },
     {
-      "content": "of",
+      "content": "January",
       "termIdx": 89,
       "nextTermIdx": [
         90
       ],
       "prevTermIdx": [
         88
+      ],
+      "altpronunciation": "january",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 11,
+      "sectionIdx": 11
+    },
+    {
+      "content": "11",
+      "termIdx": 90,
+      "nextTermIdx": [
+        91
+      ],
+      "prevTermIdx": [
+        89
+      ],
+      "altpronunciation": "11th",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 11,
+      "sectionIdx": 11
+    },
+    {
+      "content": "in",
+      "termIdx": 91,
+      "nextTermIdx": [
+        92
+      ],
+      "prevTermIdx": [
+        90
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 11,
+      "sectionIdx": 11
+    },
+    {
+      "content": "middle",
+      "termIdx": 92,
+      "nextTermIdx": [
+        93
+      ],
+      "prevTermIdx": [
+        91
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 11,
+      "sectionIdx": 11
+    },
+    {
+      "content": "of",
+      "termIdx": 93,
+      "nextTermIdx": [
+        94
+      ],
+      "prevTermIdx": [
+        92
       ],
       "altpronunciation": "",
       "altrecognition": "",
@@ -6487,10 +6753,10 @@
     },
     {
       "content": "sentence",
-      "termIdx": 90,
+      "termIdx": 94,
       "nextTermIdx": [],
       "prevTermIdx": [
-        89
+        93
       ],
       "altpronunciation": "",
       "altrecognition": "",
@@ -6566,22 +6832,22 @@
     },
     {
       "firstTermIdx": 63,
-      "lastTermIdx": 67,
+      "lastTermIdx": 68,
       "type": "paragraph"
     },
     {
-      "firstTermIdx": 68,
-      "lastTermIdx": 72,
+      "firstTermIdx": 69,
+      "lastTermIdx": 74,
       "type": "paragraph"
     },
     {
-      "firstTermIdx": 73,
-      "lastTermIdx": 81,
+      "firstTermIdx": 75,
+      "lastTermIdx": 84,
       "type": "paragraph"
     },
     {
-      "firstTermIdx": 82,
-      "lastTermIdx": 90,
+      "firstTermIdx": 85,
+      "lastTermIdx": 94,
       "type": "paragraph"
     }
   ],
@@ -6620,19 +6886,19 @@
     },
     {
       "firstTermIdx": 63,
-      "lastTermIdx": 67
+      "lastTermIdx": 68
     },
     {
-      "firstTermIdx": 68,
-      "lastTermIdx": 72
+      "firstTermIdx": 69,
+      "lastTermIdx": 74
     },
     {
-      "firstTermIdx": 73,
-      "lastTermIdx": 81
+      "firstTermIdx": 75,
+      "lastTermIdx": 84
     },
     {
-      "firstTermIdx": 82,
-      "lastTermIdx": 90
+      "firstTermIdx": 85,
+      "lastTermIdx": 94
     }
   ]
 }
