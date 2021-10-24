@@ -5,9 +5,9 @@
   "description": "",
   "owner": "",
   "pageFormatType": 0,
-  "created": "Sun Oct 24 2021 10:21:25 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Sun Oct 24 2021 10:21:25 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Sun Oct 24 2021 10:21:25 GMT-0700 (Pacific Daylight Time)",
+  "created": "Sun Oct 24 2021 10:32:26 GMT-0700 (Pacific Daylight Time)",
+  "modified": "Sun Oct 24 2021 10:32:26 GMT-0700 (Pacific Daylight Time)",
+  "transformed": "Sun Oct 24 2021 10:32:26 GMT-0700 (Pacific Daylight Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -681,16 +681,16 @@
       "name": "",
       "description": "",
       "firstTermIdx": 14,
-      "lastTermIdx": 18,
+      "lastTermIdx": 21,
       "items": [],
       "type": "paragraph",
       "meta": {
         "sentences": [
           {
             "id": 2,
-            "content": "New year's Day is 1 Jan. 2022.",
+            "content": "New year's Day is 1 Jan 2022.",
             "firstTermIdx": 14,
-            "lastTermIdx": 18,
+            "lastTermIdx": 21,
             "terminals": [
               {
                 "id": 0,
@@ -879,131 +879,134 @@
               {
                 "id": 0,
                 "termIdx": -9999,
-                "content": "1",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 11,
-                "meta": {
-                  "content": "",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 10,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": 18,
-                "content": "Jan",
+                "content": "1 Jan 2022",
                 "firstTermIdx": 18,
-                "lastTermIdx": 18,
-                "type": 11,
+                "lastTermIdx": 21,
+                "type": 2,
                 "meta": {
-                  "content": "Jan",
-                  "termIdx": 18,
-                  "nextTermIdx": [
-                    19
-                  ],
-                  "prevTermIdx": [
-                    17
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": ".",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 6,
-                "meta": {
-                  "content": ".",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 10,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": "2022",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 11,
-                "meta": {
-                  "content": "",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
+                  "format": 0,
+                  "month": {
+                    "content": "Jan",
+                    "termIdx": 19,
+                    "nextTermIdx": [
+                      20
+                    ],
+                    "prevTermIdx": [
+                      18
+                    ],
+                    "altpronunciation": "january",
+                    "altrecognition": "",
+                    "recitable": true,
+                    "audible": true,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "punctuation1": {
+                    "content": "",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "whitespace1": {
+                    "content": " ",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "day": {
+                    "content": "1",
+                    "termIdx": 18,
+                    "nextTermIdx": [
+                      19
+                    ],
+                    "prevTermIdx": [
+                      17
+                    ],
+                    "altpronunciation": "1st",
+                    "altrecognition": "",
+                    "recitable": true,
+                    "audible": true,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "punctuation2": {
+                    "content": "",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "whitespace2": {
+                    "content": " ",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "year": {
+                    "century": {
+                      "content": "20",
+                      "termIdx": 20,
+                      "nextTermIdx": [
+                        21
+                      ],
+                      "prevTermIdx": [
+                        19
+                      ],
+                      "altpronunciation": "(two thousand)",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    },
+                    "withinCentury": {
+                      "content": "22",
+                      "termIdx": 21,
+                      "nextTermIdx": [
+                        22
+                      ],
+                      "prevTermIdx": [
+                        20
+                      ],
+                      "altpronunciation": "(twenty-two)",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    }
+                  }
                 }
               },
               {
@@ -1037,165 +1040,27 @@
       "id": 3,
       "name": "",
       "description": "",
-      "firstTermIdx": 19,
-      "lastTermIdx": 26,
+      "firstTermIdx": 22,
+      "lastTermIdx": 32,
       "items": [],
       "type": "paragraph",
       "meta": {
         "sentences": [
           {
             "id": 3,
-            "content": "New year's Day is 1 Jan. 2022 not at end.",
-            "firstTermIdx": 19,
-            "lastTermIdx": 26,
+            "content": "New year's Day is 1 Jan 2022 not at end.",
+            "firstTermIdx": 22,
+            "lastTermIdx": 32,
             "terminals": [
               {
                 "id": 0,
-                "termIdx": 19,
-                "content": "New",
-                "firstTermIdx": 19,
-                "lastTermIdx": 19,
-                "type": 11,
-                "meta": {
-                  "content": "New",
-                  "termIdx": 19,
-                  "nextTermIdx": [
-                    20
-                  ],
-                  "prevTermIdx": [
-                    18
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 10,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": 20,
-                "content": "year's",
-                "firstTermIdx": 20,
-                "lastTermIdx": 20,
-                "type": 11,
-                "meta": {
-                  "content": "year's",
-                  "termIdx": 20,
-                  "nextTermIdx": [
-                    21
-                  ],
-                  "prevTermIdx": [
-                    19
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 10,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": 21,
-                "content": "Day",
-                "firstTermIdx": 21,
-                "lastTermIdx": 21,
-                "type": 11,
-                "meta": {
-                  "content": "Day",
-                  "termIdx": 21,
-                  "nextTermIdx": [
-                    22
-                  ],
-                  "prevTermIdx": [
-                    20
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 10,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
                 "termIdx": 22,
-                "content": "is",
+                "content": "New",
                 "firstTermIdx": 22,
                 "lastTermIdx": 22,
                 "type": 11,
                 "meta": {
-                  "content": "is",
+                  "content": "New",
                   "termIdx": 22,
                   "nextTermIdx": [
                     23
@@ -1235,55 +1100,13 @@
               },
               {
                 "id": 0,
-                "termIdx": -9999,
-                "content": "1",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 11,
-                "meta": {
-                  "content": "",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 10,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
                 "termIdx": 23,
-                "content": "Jan",
+                "content": "year's",
                 "firstTermIdx": 23,
                 "lastTermIdx": 23,
                 "type": 11,
                 "meta": {
-                  "content": "Jan",
+                  "content": "year's",
                   "termIdx": 23,
                   "nextTermIdx": [
                     24
@@ -1291,69 +1114,6 @@
                   "prevTermIdx": [
                     22
                   ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": ".",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 6,
-                "meta": {
-                  "content": ".",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 10,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": "2022",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 11,
-                "meta": {
-                  "content": "",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
                   "altpronunciation": "",
                   "altrecognition": "",
                   "recitable": true,
@@ -1387,12 +1147,12 @@
               {
                 "id": 0,
                 "termIdx": 24,
-                "content": "not",
+                "content": "Day",
                 "firstTermIdx": 24,
                 "lastTermIdx": 24,
                 "type": 11,
                 "meta": {
-                  "content": "not",
+                  "content": "Day",
                   "termIdx": 24,
                   "nextTermIdx": [
                     25
@@ -1433,12 +1193,12 @@
               {
                 "id": 0,
                 "termIdx": 25,
-                "content": "at",
+                "content": "is",
                 "firstTermIdx": 25,
                 "lastTermIdx": 25,
                 "type": 11,
                 "meta": {
-                  "content": "at",
+                  "content": "is",
                   "termIdx": 25,
                   "nextTermIdx": [
                     26
@@ -1478,19 +1238,265 @@
               },
               {
                 "id": 0,
-                "termIdx": 26,
-                "content": "end",
+                "termIdx": -9999,
+                "content": "1 Jan 2022",
                 "firstTermIdx": 26,
-                "lastTermIdx": 26,
+                "lastTermIdx": 29,
+                "type": 2,
+                "meta": {
+                  "format": 0,
+                  "month": {
+                    "content": "Jan",
+                    "termIdx": 27,
+                    "nextTermIdx": [
+                      28
+                    ],
+                    "prevTermIdx": [
+                      26
+                    ],
+                    "altpronunciation": "january",
+                    "altrecognition": "",
+                    "recitable": true,
+                    "audible": true,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "punctuation1": {
+                    "content": "",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "whitespace1": {
+                    "content": " ",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "day": {
+                    "content": "1",
+                    "termIdx": 26,
+                    "nextTermIdx": [
+                      27
+                    ],
+                    "prevTermIdx": [
+                      25
+                    ],
+                    "altpronunciation": "1st",
+                    "altrecognition": "",
+                    "recitable": true,
+                    "audible": true,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "punctuation2": {
+                    "content": "",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "whitespace2": {
+                    "content": " ",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "year": {
+                    "century": {
+                      "content": "20",
+                      "termIdx": 28,
+                      "nextTermIdx": [
+                        29
+                      ],
+                      "prevTermIdx": [
+                        27
+                      ],
+                      "altpronunciation": "(two thousand)",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    },
+                    "withinCentury": {
+                      "content": "22",
+                      "termIdx": 29,
+                      "nextTermIdx": [
+                        30
+                      ],
+                      "prevTermIdx": [
+                        28
+                      ],
+                      "altpronunciation": "(twenty-two)",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    }
+                  }
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 30,
+                "content": "not",
+                "firstTermIdx": 30,
+                "lastTermIdx": 30,
+                "type": 11,
+                "meta": {
+                  "content": "not",
+                  "termIdx": 30,
+                  "nextTermIdx": [
+                    31
+                  ],
+                  "prevTermIdx": [
+                    29
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 31,
+                "content": "at",
+                "firstTermIdx": 31,
+                "lastTermIdx": 31,
+                "type": 11,
+                "meta": {
+                  "content": "at",
+                  "termIdx": 31,
+                  "nextTermIdx": [
+                    32
+                  ],
+                  "prevTermIdx": [
+                    30
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 32,
+                "content": "end",
+                "firstTermIdx": 32,
+                "lastTermIdx": 32,
                 "type": 11,
                 "meta": {
                   "content": "end",
-                  "termIdx": 26,
+                  "termIdx": 32,
                   "nextTermIdx": [
-                    27
+                    33
                   ],
                   "prevTermIdx": [
-                    25
+                    31
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -1532,8 +1538,8 @@
       "id": 4,
       "name": "",
       "description": "",
-      "firstTermIdx": 27,
-      "lastTermIdx": 34,
+      "firstTermIdx": 33,
+      "lastTermIdx": 40,
       "items": [],
       "type": "paragraph",
       "meta": {
@@ -1541,24 +1547,24 @@
           {
             "id": 4,
             "content": "New year's Day is 1 January 2022.",
-            "firstTermIdx": 27,
-            "lastTermIdx": 34,
+            "firstTermIdx": 33,
+            "lastTermIdx": 40,
             "terminals": [
               {
                 "id": 0,
-                "termIdx": 27,
+                "termIdx": 33,
                 "content": "New",
-                "firstTermIdx": 27,
-                "lastTermIdx": 27,
+                "firstTermIdx": 33,
+                "lastTermIdx": 33,
                 "type": 11,
                 "meta": {
                   "content": "New",
-                  "termIdx": 27,
+                  "termIdx": 33,
                   "nextTermIdx": [
-                    28
+                    34
                   ],
                   "prevTermIdx": [
-                    26
+                    32
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -1592,19 +1598,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 28,
+                "termIdx": 34,
                 "content": "year's",
-                "firstTermIdx": 28,
-                "lastTermIdx": 28,
+                "firstTermIdx": 34,
+                "lastTermIdx": 34,
                 "type": 11,
                 "meta": {
                   "content": "year's",
-                  "termIdx": 28,
+                  "termIdx": 34,
                   "nextTermIdx": [
-                    29
+                    35
                   ],
                   "prevTermIdx": [
-                    27
+                    33
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -1638,19 +1644,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 29,
+                "termIdx": 35,
                 "content": "Day",
-                "firstTermIdx": 29,
-                "lastTermIdx": 29,
+                "firstTermIdx": 35,
+                "lastTermIdx": 35,
                 "type": 11,
                 "meta": {
                   "content": "Day",
-                  "termIdx": 29,
+                  "termIdx": 35,
                   "nextTermIdx": [
-                    30
+                    36
                   ],
                   "prevTermIdx": [
-                    28
+                    34
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -1684,19 +1690,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 30,
+                "termIdx": 36,
                 "content": "is",
-                "firstTermIdx": 30,
-                "lastTermIdx": 30,
+                "firstTermIdx": 36,
+                "lastTermIdx": 36,
                 "type": 11,
                 "meta": {
                   "content": "is",
-                  "termIdx": 30,
+                  "termIdx": 36,
                   "nextTermIdx": [
-                    31
+                    37
                   ],
                   "prevTermIdx": [
-                    29
+                    35
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -1732,19 +1738,19 @@
                 "id": 0,
                 "termIdx": -9999,
                 "content": "1 January 2022",
-                "firstTermIdx": 31,
-                "lastTermIdx": 34,
+                "firstTermIdx": 37,
+                "lastTermIdx": 40,
                 "type": 2,
                 "meta": {
                   "format": 0,
                   "month": {
                     "content": "January",
-                    "termIdx": 32,
+                    "termIdx": 38,
                     "nextTermIdx": [
-                      33
+                      39
                     ],
                     "prevTermIdx": [
-                      31
+                      37
                     ],
                     "altpronunciation": "january",
                     "altrecognition": "",
@@ -1782,12 +1788,12 @@
                   },
                   "day": {
                     "content": "1",
-                    "termIdx": 31,
+                    "termIdx": 37,
                     "nextTermIdx": [
-                      32
+                      38
                     ],
                     "prevTermIdx": [
-                      30
+                      36
                     ],
                     "altpronunciation": "1st",
                     "altrecognition": "",
@@ -1826,12 +1832,12 @@
                   "year": {
                     "century": {
                       "content": "20",
-                      "termIdx": 33,
+                      "termIdx": 39,
                       "nextTermIdx": [
-                        34
+                        40
                       ],
                       "prevTermIdx": [
-                        32
+                        38
                       ],
                       "altpronunciation": "(two thousand)",
                       "altrecognition": "",
@@ -1843,12 +1849,12 @@
                     },
                     "withinCentury": {
                       "content": "22",
-                      "termIdx": 34,
+                      "termIdx": 40,
                       "nextTermIdx": [
-                        35
+                        41
                       ],
                       "prevTermIdx": [
-                        33
+                        39
                       ],
                       "altpronunciation": "(twenty-two)",
                       "altrecognition": "",
@@ -1931,8 +1937,8 @@
       "id": 5,
       "name": "",
       "description": "",
-      "firstTermIdx": 35,
-      "lastTermIdx": 42,
+      "firstTermIdx": 41,
+      "lastTermIdx": 48,
       "items": [],
       "type": "paragraph",
       "meta": {
@@ -1940,24 +1946,24 @@
           {
             "id": 5,
             "content": "Mommy's birthday is on Oct. 28, 2021.",
-            "firstTermIdx": 35,
-            "lastTermIdx": 42,
+            "firstTermIdx": 41,
+            "lastTermIdx": 48,
             "terminals": [
               {
                 "id": 0,
-                "termIdx": 35,
+                "termIdx": 41,
                 "content": "Mommy's",
-                "firstTermIdx": 35,
-                "lastTermIdx": 35,
+                "firstTermIdx": 41,
+                "lastTermIdx": 41,
                 "type": 11,
                 "meta": {
                   "content": "Mommy's",
-                  "termIdx": 35,
+                  "termIdx": 41,
                   "nextTermIdx": [
-                    36
+                    42
                   ],
                   "prevTermIdx": [
-                    34
+                    40
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -1991,19 +1997,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 36,
+                "termIdx": 42,
                 "content": "birthday",
-                "firstTermIdx": 36,
-                "lastTermIdx": 36,
+                "firstTermIdx": 42,
+                "lastTermIdx": 42,
                 "type": 11,
                 "meta": {
                   "content": "birthday",
-                  "termIdx": 36,
+                  "termIdx": 42,
                   "nextTermIdx": [
-                    37
+                    43
                   ],
                   "prevTermIdx": [
-                    35
+                    41
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -2037,19 +2043,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 37,
+                "termIdx": 43,
                 "content": "is",
-                "firstTermIdx": 37,
-                "lastTermIdx": 37,
+                "firstTermIdx": 43,
+                "lastTermIdx": 43,
                 "type": 11,
                 "meta": {
                   "content": "is",
-                  "termIdx": 37,
+                  "termIdx": 43,
                   "nextTermIdx": [
-                    38
+                    44
                   ],
                   "prevTermIdx": [
-                    36
+                    42
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -2083,19 +2089,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 38,
+                "termIdx": 44,
                 "content": "on",
-                "firstTermIdx": 38,
-                "lastTermIdx": 38,
+                "firstTermIdx": 44,
+                "lastTermIdx": 44,
                 "type": 11,
                 "meta": {
                   "content": "on",
-                  "termIdx": 38,
+                  "termIdx": 44,
                   "nextTermIdx": [
-                    39
+                    45
                   ],
                   "prevTermIdx": [
-                    37
+                    43
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -2131,19 +2137,19 @@
                 "id": 0,
                 "termIdx": -9999,
                 "content": "Oct. 28, 2021",
-                "firstTermIdx": 39,
-                "lastTermIdx": 42,
+                "firstTermIdx": 45,
+                "lastTermIdx": 48,
                 "type": 2,
                 "meta": {
                   "format": 1,
                   "month": {
                     "content": "Oct",
-                    "termIdx": 39,
+                    "termIdx": 45,
                     "nextTermIdx": [
-                      40
+                      46
                     ],
                     "prevTermIdx": [
-                      38
+                      44
                     ],
                     "altpronunciation": "october",
                     "altrecognition": "",
@@ -2181,12 +2187,12 @@
                   },
                   "day": {
                     "content": "28",
-                    "termIdx": 40,
+                    "termIdx": 46,
                     "nextTermIdx": [
-                      41
+                      47
                     ],
                     "prevTermIdx": [
-                      39
+                      45
                     ],
                     "altpronunciation": "28th",
                     "altrecognition": "",
@@ -2225,12 +2231,12 @@
                   "year": {
                     "century": {
                       "content": "20",
-                      "termIdx": 41,
+                      "termIdx": 47,
                       "nextTermIdx": [
-                        42
+                        48
                       ],
                       "prevTermIdx": [
-                        40
+                        46
                       ],
                       "altpronunciation": "(two thousand)",
                       "altrecognition": "",
@@ -2242,12 +2248,12 @@
                     },
                     "withinCentury": {
                       "content": "21",
-                      "termIdx": 42,
+                      "termIdx": 48,
                       "nextTermIdx": [
-                        43
+                        49
                       ],
                       "prevTermIdx": [
-                        41
+                        47
                       ],
                       "altpronunciation": "(twenty-one)",
                       "altrecognition": "",
@@ -2291,8 +2297,8 @@
       "id": 6,
       "name": "",
       "description": "",
-      "firstTermIdx": 43,
-      "lastTermIdx": 50,
+      "firstTermIdx": 49,
+      "lastTermIdx": 56,
       "items": [],
       "type": "paragraph",
       "meta": {
@@ -2300,24 +2306,24 @@
           {
             "id": 6,
             "content": "New year's Day is Jan. 1, 2022.",
-            "firstTermIdx": 43,
-            "lastTermIdx": 50,
+            "firstTermIdx": 49,
+            "lastTermIdx": 56,
             "terminals": [
               {
                 "id": 0,
-                "termIdx": 43,
+                "termIdx": 49,
                 "content": "New",
-                "firstTermIdx": 43,
-                "lastTermIdx": 43,
+                "firstTermIdx": 49,
+                "lastTermIdx": 49,
                 "type": 11,
                 "meta": {
                   "content": "New",
-                  "termIdx": 43,
+                  "termIdx": 49,
                   "nextTermIdx": [
-                    44
+                    50
                   ],
                   "prevTermIdx": [
-                    42
+                    48
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -2351,19 +2357,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 44,
+                "termIdx": 50,
                 "content": "year's",
-                "firstTermIdx": 44,
-                "lastTermIdx": 44,
+                "firstTermIdx": 50,
+                "lastTermIdx": 50,
                 "type": 11,
                 "meta": {
                   "content": "year's",
-                  "termIdx": 44,
+                  "termIdx": 50,
                   "nextTermIdx": [
-                    45
+                    51
                   ],
                   "prevTermIdx": [
-                    43
+                    49
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -2397,19 +2403,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 45,
+                "termIdx": 51,
                 "content": "Day",
-                "firstTermIdx": 45,
-                "lastTermIdx": 45,
+                "firstTermIdx": 51,
+                "lastTermIdx": 51,
                 "type": 11,
                 "meta": {
                   "content": "Day",
-                  "termIdx": 45,
+                  "termIdx": 51,
                   "nextTermIdx": [
-                    46
+                    52
                   ],
                   "prevTermIdx": [
-                    44
+                    50
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -2443,19 +2449,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 46,
+                "termIdx": 52,
                 "content": "is",
-                "firstTermIdx": 46,
-                "lastTermIdx": 46,
+                "firstTermIdx": 52,
+                "lastTermIdx": 52,
                 "type": 11,
                 "meta": {
                   "content": "is",
-                  "termIdx": 46,
+                  "termIdx": 52,
                   "nextTermIdx": [
-                    47
+                    53
                   ],
                   "prevTermIdx": [
-                    45
+                    51
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -2491,19 +2497,19 @@
                 "id": 0,
                 "termIdx": -9999,
                 "content": "Jan. 1, 2022",
-                "firstTermIdx": 47,
-                "lastTermIdx": 50,
+                "firstTermIdx": 53,
+                "lastTermIdx": 56,
                 "type": 2,
                 "meta": {
                   "format": 1,
                   "month": {
                     "content": "Jan",
-                    "termIdx": 47,
+                    "termIdx": 53,
                     "nextTermIdx": [
-                      48
+                      54
                     ],
                     "prevTermIdx": [
-                      46
+                      52
                     ],
                     "altpronunciation": "january",
                     "altrecognition": "",
@@ -2541,12 +2547,12 @@
                   },
                   "day": {
                     "content": "1",
-                    "termIdx": 48,
+                    "termIdx": 54,
                     "nextTermIdx": [
-                      49
+                      55
                     ],
                     "prevTermIdx": [
-                      47
+                      53
                     ],
                     "altpronunciation": "1st",
                     "altrecognition": "",
@@ -2585,12 +2591,12 @@
                   "year": {
                     "century": {
                       "content": "20",
-                      "termIdx": 49,
+                      "termIdx": 55,
                       "nextTermIdx": [
-                        50
+                        56
                       ],
                       "prevTermIdx": [
-                        48
+                        54
                       ],
                       "altpronunciation": "(two thousand)",
                       "altrecognition": "",
@@ -2602,12 +2608,12 @@
                     },
                     "withinCentury": {
                       "content": "22",
-                      "termIdx": 50,
+                      "termIdx": 56,
                       "nextTermIdx": [
-                        51
+                        57
                       ],
                       "prevTermIdx": [
-                        49
+                        55
                       ],
                       "altpronunciation": "(twenty-two)",
                       "altrecognition": "",
@@ -2651,8 +2657,8 @@
       "id": 7,
       "name": "",
       "description": "",
-      "firstTermIdx": 51,
-      "lastTermIdx": 58,
+      "firstTermIdx": 57,
+      "lastTermIdx": 64,
       "items": [],
       "type": "paragraph",
       "meta": {
@@ -2660,24 +2666,24 @@
           {
             "id": 7,
             "content": "New year's Day is January 1, 2022.",
-            "firstTermIdx": 51,
-            "lastTermIdx": 58,
+            "firstTermIdx": 57,
+            "lastTermIdx": 64,
             "terminals": [
               {
                 "id": 0,
-                "termIdx": 51,
+                "termIdx": 57,
                 "content": "New",
-                "firstTermIdx": 51,
-                "lastTermIdx": 51,
+                "firstTermIdx": 57,
+                "lastTermIdx": 57,
                 "type": 11,
                 "meta": {
                   "content": "New",
-                  "termIdx": 51,
+                  "termIdx": 57,
                   "nextTermIdx": [
-                    52
+                    58
                   ],
                   "prevTermIdx": [
-                    50
+                    56
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -2711,19 +2717,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 52,
+                "termIdx": 58,
                 "content": "year's",
-                "firstTermIdx": 52,
-                "lastTermIdx": 52,
+                "firstTermIdx": 58,
+                "lastTermIdx": 58,
                 "type": 11,
                 "meta": {
                   "content": "year's",
-                  "termIdx": 52,
+                  "termIdx": 58,
                   "nextTermIdx": [
-                    53
+                    59
                   ],
                   "prevTermIdx": [
-                    51
+                    57
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -2757,19 +2763,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 53,
+                "termIdx": 59,
                 "content": "Day",
-                "firstTermIdx": 53,
-                "lastTermIdx": 53,
+                "firstTermIdx": 59,
+                "lastTermIdx": 59,
                 "type": 11,
                 "meta": {
                   "content": "Day",
-                  "termIdx": 53,
+                  "termIdx": 59,
                   "nextTermIdx": [
-                    54
+                    60
                   ],
                   "prevTermIdx": [
-                    52
+                    58
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -2803,19 +2809,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 54,
+                "termIdx": 60,
                 "content": "is",
-                "firstTermIdx": 54,
-                "lastTermIdx": 54,
+                "firstTermIdx": 60,
+                "lastTermIdx": 60,
                 "type": 11,
                 "meta": {
                   "content": "is",
-                  "termIdx": 54,
+                  "termIdx": 60,
                   "nextTermIdx": [
-                    55
+                    61
                   ],
                   "prevTermIdx": [
-                    53
+                    59
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -2851,19 +2857,19 @@
                 "id": 0,
                 "termIdx": -9999,
                 "content": "January 1, 2022",
-                "firstTermIdx": 55,
-                "lastTermIdx": 58,
+                "firstTermIdx": 61,
+                "lastTermIdx": 64,
                 "type": 2,
                 "meta": {
                   "format": 1,
                   "month": {
                     "content": "January",
-                    "termIdx": 55,
+                    "termIdx": 61,
                     "nextTermIdx": [
-                      56
+                      62
                     ],
                     "prevTermIdx": [
-                      54
+                      60
                     ],
                     "altpronunciation": "january",
                     "altrecognition": "",
@@ -2901,12 +2907,12 @@
                   },
                   "day": {
                     "content": "1",
-                    "termIdx": 56,
+                    "termIdx": 62,
                     "nextTermIdx": [
-                      57
+                      63
                     ],
                     "prevTermIdx": [
-                      55
+                      61
                     ],
                     "altpronunciation": "1st",
                     "altrecognition": "",
@@ -2945,12 +2951,12 @@
                   "year": {
                     "century": {
                       "content": "20",
-                      "termIdx": 57,
+                      "termIdx": 63,
                       "nextTermIdx": [
-                        58
+                        64
                       ],
                       "prevTermIdx": [
-                        56
+                        62
                       ],
                       "altpronunciation": "(two thousand)",
                       "altrecognition": "",
@@ -2962,12 +2968,12 @@
                     },
                     "withinCentury": {
                       "content": "22",
-                      "termIdx": 58,
+                      "termIdx": 64,
                       "nextTermIdx": [
-                        59
+                        65
                       ],
                       "prevTermIdx": [
-                        57
+                        63
                       ],
                       "altpronunciation": "(twenty-two)",
                       "altrecognition": "",
@@ -3050,8 +3056,8 @@
       "id": 8,
       "name": "",
       "description": "",
-      "firstTermIdx": 59,
-      "lastTermIdx": 70,
+      "firstTermIdx": 65,
+      "lastTermIdx": 76,
       "items": [],
       "type": "paragraph",
       "meta": {
@@ -3059,24 +3065,24 @@
           {
             "id": 8,
             "content": "Mommy's birthday is on October 28 which is a Thursday this year.",
-            "firstTermIdx": 59,
-            "lastTermIdx": 70,
+            "firstTermIdx": 65,
+            "lastTermIdx": 76,
             "terminals": [
               {
                 "id": 0,
-                "termIdx": 59,
+                "termIdx": 65,
                 "content": "Mommy's",
-                "firstTermIdx": 59,
-                "lastTermIdx": 59,
+                "firstTermIdx": 65,
+                "lastTermIdx": 65,
                 "type": 11,
                 "meta": {
                   "content": "Mommy's",
-                  "termIdx": 59,
+                  "termIdx": 65,
                   "nextTermIdx": [
-                    60
+                    66
                   ],
                   "prevTermIdx": [
-                    58
+                    64
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -3110,19 +3116,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 60,
+                "termIdx": 66,
                 "content": "birthday",
-                "firstTermIdx": 60,
-                "lastTermIdx": 60,
+                "firstTermIdx": 66,
+                "lastTermIdx": 66,
                 "type": 11,
                 "meta": {
                   "content": "birthday",
-                  "termIdx": 60,
+                  "termIdx": 66,
                   "nextTermIdx": [
-                    61
+                    67
                   ],
                   "prevTermIdx": [
-                    59
+                    65
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -3156,19 +3162,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 61,
+                "termIdx": 67,
                 "content": "is",
-                "firstTermIdx": 61,
-                "lastTermIdx": 61,
+                "firstTermIdx": 67,
+                "lastTermIdx": 67,
                 "type": 11,
                 "meta": {
                   "content": "is",
-                  "termIdx": 61,
+                  "termIdx": 67,
                   "nextTermIdx": [
-                    62
+                    68
                   ],
                   "prevTermIdx": [
-                    60
+                    66
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -3202,19 +3208,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 62,
+                "termIdx": 68,
                 "content": "on",
-                "firstTermIdx": 62,
-                "lastTermIdx": 62,
+                "firstTermIdx": 68,
+                "lastTermIdx": 68,
                 "type": 11,
                 "meta": {
                   "content": "on",
-                  "termIdx": 62,
+                  "termIdx": 68,
                   "nextTermIdx": [
-                    63
+                    69
                   ],
                   "prevTermIdx": [
-                    61
+                    67
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -3250,19 +3256,19 @@
                 "id": 0,
                 "termIdx": -9999,
                 "content": "October 28",
-                "firstTermIdx": 63,
-                "lastTermIdx": 64,
+                "firstTermIdx": 69,
+                "lastTermIdx": 70,
                 "type": 2,
                 "meta": {
                   "format": 2,
                   "month": {
                     "content": "October",
-                    "termIdx": 63,
+                    "termIdx": 69,
                     "nextTermIdx": [
-                      64
+                      70
                     ],
                     "prevTermIdx": [
-                      62
+                      68
                     ],
                     "altpronunciation": "october",
                     "altrecognition": "",
@@ -3300,12 +3306,12 @@
                   },
                   "day": {
                     "content": "28",
-                    "termIdx": 64,
+                    "termIdx": 70,
                     "nextTermIdx": [
-                      65
+                      71
                     ],
                     "prevTermIdx": [
-                      63
+                      69
                     ],
                     "altpronunciation": "28th",
                     "altrecognition": "",
@@ -3394,19 +3400,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 65,
+                "termIdx": 71,
                 "content": "which",
-                "firstTermIdx": 65,
-                "lastTermIdx": 65,
+                "firstTermIdx": 71,
+                "lastTermIdx": 71,
                 "type": 11,
                 "meta": {
                   "content": "which",
-                  "termIdx": 65,
+                  "termIdx": 71,
                   "nextTermIdx": [
-                    66
+                    72
                   ],
                   "prevTermIdx": [
-                    64
+                    70
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -3440,19 +3446,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 66,
+                "termIdx": 72,
                 "content": "is",
-                "firstTermIdx": 66,
-                "lastTermIdx": 66,
+                "firstTermIdx": 72,
+                "lastTermIdx": 72,
                 "type": 11,
                 "meta": {
                   "content": "is",
-                  "termIdx": 66,
+                  "termIdx": 72,
                   "nextTermIdx": [
-                    67
+                    73
                   ],
                   "prevTermIdx": [
-                    65
+                    71
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -3486,19 +3492,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 67,
+                "termIdx": 73,
                 "content": "a",
-                "firstTermIdx": 67,
-                "lastTermIdx": 67,
+                "firstTermIdx": 73,
+                "lastTermIdx": 73,
                 "type": 11,
                 "meta": {
                   "content": "a",
-                  "termIdx": 67,
+                  "termIdx": 73,
                   "nextTermIdx": [
-                    68
+                    74
                   ],
                   "prevTermIdx": [
-                    66
+                    72
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -3532,19 +3538,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 68,
+                "termIdx": 74,
                 "content": "Thursday",
-                "firstTermIdx": 68,
-                "lastTermIdx": 68,
+                "firstTermIdx": 74,
+                "lastTermIdx": 74,
                 "type": 11,
                 "meta": {
                   "content": "Thursday",
-                  "termIdx": 68,
+                  "termIdx": 74,
                   "nextTermIdx": [
-                    69
+                    75
                   ],
                   "prevTermIdx": [
-                    67
+                    73
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -3578,19 +3584,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 69,
+                "termIdx": 75,
                 "content": "this",
-                "firstTermIdx": 69,
-                "lastTermIdx": 69,
+                "firstTermIdx": 75,
+                "lastTermIdx": 75,
                 "type": 11,
                 "meta": {
                   "content": "this",
-                  "termIdx": 69,
+                  "termIdx": 75,
                   "nextTermIdx": [
-                    70
+                    76
                   ],
                   "prevTermIdx": [
-                    68
+                    74
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -3624,19 +3630,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 70,
+                "termIdx": 76,
                 "content": "year",
-                "firstTermIdx": 70,
-                "lastTermIdx": 70,
+                "firstTermIdx": 76,
+                "lastTermIdx": 76,
                 "type": 11,
                 "meta": {
                   "content": "year",
-                  "termIdx": 70,
+                  "termIdx": 76,
                   "nextTermIdx": [
-                    71
+                    77
                   ],
                   "prevTermIdx": [
-                    69
+                    75
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -3678,358 +3684,6 @@
       "id": 9,
       "name": "",
       "description": "",
-      "firstTermIdx": 71,
-      "lastTermIdx": 76,
-      "items": [],
-      "type": "paragraph",
-      "meta": {
-        "sentences": [
-          {
-            "id": 9,
-            "content": "New year's Day is Jan. 10.",
-            "firstTermIdx": 71,
-            "lastTermIdx": 76,
-            "terminals": [
-              {
-                "id": 0,
-                "termIdx": 71,
-                "content": "New",
-                "firstTermIdx": 71,
-                "lastTermIdx": 71,
-                "type": 11,
-                "meta": {
-                  "content": "New",
-                  "termIdx": 71,
-                  "nextTermIdx": [
-                    72
-                  ],
-                  "prevTermIdx": [
-                    70
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 10,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": 72,
-                "content": "year's",
-                "firstTermIdx": 72,
-                "lastTermIdx": 72,
-                "type": 11,
-                "meta": {
-                  "content": "year's",
-                  "termIdx": 72,
-                  "nextTermIdx": [
-                    73
-                  ],
-                  "prevTermIdx": [
-                    71
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 10,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": 73,
-                "content": "Day",
-                "firstTermIdx": 73,
-                "lastTermIdx": 73,
-                "type": 11,
-                "meta": {
-                  "content": "Day",
-                  "termIdx": 73,
-                  "nextTermIdx": [
-                    74
-                  ],
-                  "prevTermIdx": [
-                    72
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 10,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": 74,
-                "content": "is",
-                "firstTermIdx": 74,
-                "lastTermIdx": 74,
-                "type": 11,
-                "meta": {
-                  "content": "is",
-                  "termIdx": 74,
-                  "nextTermIdx": [
-                    75
-                  ],
-                  "prevTermIdx": [
-                    73
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 10,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": "Jan. 10",
-                "firstTermIdx": 75,
-                "lastTermIdx": 76,
-                "type": 2,
-                "meta": {
-                  "format": 2,
-                  "month": {
-                    "content": "Jan",
-                    "termIdx": 75,
-                    "nextTermIdx": [
-                      76
-                    ],
-                    "prevTermIdx": [
-                      74
-                    ],
-                    "altpronunciation": "january",
-                    "altrecognition": "",
-                    "recitable": true,
-                    "audible": true,
-                    "visible": true,
-                    "fillin": false,
-                    "visited": false
-                  },
-                  "punctuation1": {
-                    "content": ".",
-                    "termIdx": -9999,
-                    "nextTermIdx": [],
-                    "prevTermIdx": [],
-                    "altpronunciation": "",
-                    "altrecognition": "",
-                    "recitable": false,
-                    "audible": false,
-                    "visible": true,
-                    "fillin": false,
-                    "visited": false
-                  },
-                  "whitespace1": {
-                    "content": " ",
-                    "termIdx": -9999,
-                    "nextTermIdx": [],
-                    "prevTermIdx": [],
-                    "altpronunciation": "",
-                    "altrecognition": "",
-                    "recitable": false,
-                    "audible": false,
-                    "visible": true,
-                    "fillin": false,
-                    "visited": false
-                  },
-                  "day": {
-                    "content": "10",
-                    "termIdx": 76,
-                    "nextTermIdx": [
-                      77
-                    ],
-                    "prevTermIdx": [
-                      75
-                    ],
-                    "altpronunciation": "10th",
-                    "altrecognition": "",
-                    "recitable": true,
-                    "audible": true,
-                    "visible": true,
-                    "fillin": false,
-                    "visited": false
-                  },
-                  "punctuation2": {
-                    "content": "",
-                    "termIdx": -9999,
-                    "nextTermIdx": [],
-                    "prevTermIdx": [],
-                    "altpronunciation": "",
-                    "altrecognition": "",
-                    "recitable": false,
-                    "audible": false,
-                    "visible": true,
-                    "fillin": false,
-                    "visited": false
-                  },
-                  "whitespace2": {
-                    "content": "",
-                    "termIdx": -9999,
-                    "nextTermIdx": [],
-                    "prevTermIdx": [],
-                    "altpronunciation": "",
-                    "altrecognition": "",
-                    "recitable": false,
-                    "audible": false,
-                    "visible": true,
-                    "fillin": false,
-                    "visited": false
-                  },
-                  "year": {
-                    "century": {
-                      "content": "",
-                      "termIdx": -9999,
-                      "nextTermIdx": [],
-                      "prevTermIdx": [],
-                      "altpronunciation": "",
-                      "altrecognition": "",
-                      "recitable": true,
-                      "audible": true,
-                      "visible": true,
-                      "fillin": false,
-                      "visited": false
-                    },
-                    "withinCentury": {
-                      "content": "",
-                      "termIdx": -9999,
-                      "nextTermIdx": [],
-                      "prevTermIdx": [],
-                      "altpronunciation": "",
-                      "altrecognition": "",
-                      "recitable": true,
-                      "audible": true,
-                      "visible": true,
-                      "fillin": false,
-                      "visited": false
-                    }
-                  }
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": ".",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 6,
-                "meta": {
-                  "content": ".",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              }
-            ]
-          }
-        ],
-        "style": ""
-      }
-    },
-    {
-      "id": 10,
-      "name": "",
-      "description": "",
       "firstTermIdx": 77,
       "lastTermIdx": 82,
       "items": [],
@@ -4037,8 +3691,8 @@
       "meta": {
         "sentences": [
           {
-            "id": 10,
-            "content": "New year's Day is January 1.",
+            "id": 9,
+            "content": "New year's Day is Jan. 10.",
             "firstTermIdx": 77,
             "lastTermIdx": 82,
             "terminals": [
@@ -4229,14 +3883,14 @@
               {
                 "id": 0,
                 "termIdx": -9999,
-                "content": "January 1",
+                "content": "Jan. 10",
                 "firstTermIdx": 81,
                 "lastTermIdx": 82,
                 "type": 2,
                 "meta": {
                   "format": 2,
                   "month": {
-                    "content": "January",
+                    "content": "Jan",
                     "termIdx": 81,
                     "nextTermIdx": [
                       82
@@ -4253,7 +3907,7 @@
                     "visited": false
                   },
                   "punctuation1": {
-                    "content": "",
+                    "content": ".",
                     "termIdx": -9999,
                     "nextTermIdx": [],
                     "prevTermIdx": [],
@@ -4279,7 +3933,7 @@
                     "visited": false
                   },
                   "day": {
-                    "content": "1",
+                    "content": "10",
                     "termIdx": 82,
                     "nextTermIdx": [
                       83
@@ -4287,7 +3941,7 @@
                     "prevTermIdx": [
                       81
                     ],
-                    "altpronunciation": "1st",
+                    "altpronunciation": "10th",
                     "altrecognition": "",
                     "recitable": true,
                     "audible": true,
@@ -4379,7 +4033,7 @@
       }
     },
     {
-      "id": 11,
+      "id": 10,
       "name": "",
       "description": "",
       "firstTermIdx": 83,
@@ -4389,8 +4043,8 @@
       "meta": {
         "sentences": [
           {
-            "id": 11,
-            "content": "New year's Day is January 2.",
+            "id": 10,
+            "content": "New year's Day is January 1.",
             "firstTermIdx": 83,
             "lastTermIdx": 88,
             "terminals": [
@@ -4581,7 +4235,7 @@
               {
                 "id": 0,
                 "termIdx": -9999,
-                "content": "January 2",
+                "content": "January 1",
                 "firstTermIdx": 87,
                 "lastTermIdx": 88,
                 "type": 2,
@@ -4631,7 +4285,7 @@
                     "visited": false
                   },
                   "day": {
-                    "content": "2",
+                    "content": "1",
                     "termIdx": 88,
                     "nextTermIdx": [
                       89
@@ -4639,7 +4293,7 @@
                     "prevTermIdx": [
                       87
                     ],
-                    "altpronunciation": "2nd",
+                    "altpronunciation": "1st",
                     "altrecognition": "",
                     "recitable": true,
                     "audible": true,
@@ -4731,7 +4385,7 @@
       }
     },
     {
-      "id": 12,
+      "id": 11,
       "name": "",
       "description": "",
       "firstTermIdx": 89,
@@ -4741,8 +4395,8 @@
       "meta": {
         "sentences": [
           {
-            "id": 12,
-            "content": "New year's Day is January 09.",
+            "id": 11,
+            "content": "New year's Day is January 2.",
             "firstTermIdx": 89,
             "lastTermIdx": 94,
             "terminals": [
@@ -4933,7 +4587,7 @@
               {
                 "id": 0,
                 "termIdx": -9999,
-                "content": "January 09",
+                "content": "January 2",
                 "firstTermIdx": 93,
                 "lastTermIdx": 94,
                 "type": 2,
@@ -4983,7 +4637,7 @@
                     "visited": false
                   },
                   "day": {
-                    "content": "09",
+                    "content": "2",
                     "termIdx": 94,
                     "nextTermIdx": [
                       95
@@ -4991,7 +4645,7 @@
                     "prevTermIdx": [
                       93
                     ],
-                    "altpronunciation": "",
+                    "altpronunciation": "2nd",
                     "altrecognition": "",
                     "recitable": true,
                     "audible": true,
@@ -5083,7 +4737,7 @@
       }
     },
     {
-      "id": 13,
+      "id": 12,
       "name": "",
       "description": "",
       "firstTermIdx": 95,
@@ -5093,8 +4747,8 @@
       "meta": {
         "sentences": [
           {
-            "id": 13,
-            "content": "New year's Day is January 10.",
+            "id": 12,
+            "content": "New year's Day is January 09.",
             "firstTermIdx": 95,
             "lastTermIdx": 100,
             "terminals": [
@@ -5285,7 +4939,7 @@
               {
                 "id": 0,
                 "termIdx": -9999,
-                "content": "January 10",
+                "content": "January 09",
                 "firstTermIdx": 99,
                 "lastTermIdx": 100,
                 "type": 2,
@@ -5335,7 +4989,7 @@
                     "visited": false
                   },
                   "day": {
-                    "content": "10",
+                    "content": "09",
                     "termIdx": 100,
                     "nextTermIdx": [
                       101
@@ -5343,7 +4997,7 @@
                     "prevTermIdx": [
                       99
                     ],
-                    "altpronunciation": "10th",
+                    "altpronunciation": "",
                     "altrecognition": "",
                     "recitable": true,
                     "audible": true,
@@ -5435,7 +5089,7 @@
       }
     },
     {
-      "id": 14,
+      "id": 13,
       "name": "",
       "description": "",
       "firstTermIdx": 101,
@@ -5445,7 +5099,7 @@
       "meta": {
         "sentences": [
           {
-            "id": 14,
+            "id": 13,
             "content": "New year's Day is January 10.",
             "firstTermIdx": 101,
             "lastTermIdx": 106,
@@ -5787,20 +5441,20 @@
       }
     },
     {
-      "id": 15,
+      "id": 14,
       "name": "",
       "description": "",
       "firstTermIdx": 107,
-      "lastTermIdx": 116,
+      "lastTermIdx": 112,
       "items": [],
       "type": "paragraph",
       "meta": {
         "sentences": [
           {
-            "id": 15,
-            "content": "New year's Day is Jan. 12 in middle of sentence.",
+            "id": 14,
+            "content": "New year's Day is January 10.",
             "firstTermIdx": 107,
-            "lastTermIdx": 116,
+            "lastTermIdx": 112,
             "terminals": [
               {
                 "id": 0,
@@ -5989,20 +5643,372 @@
               {
                 "id": 0,
                 "termIdx": -9999,
-                "content": "Jan. 12",
+                "content": "January 10",
                 "firstTermIdx": 111,
                 "lastTermIdx": 112,
                 "type": 2,
                 "meta": {
                   "format": 2,
                   "month": {
-                    "content": "Jan",
+                    "content": "January",
                     "termIdx": 111,
                     "nextTermIdx": [
                       112
                     ],
                     "prevTermIdx": [
                       110
+                    ],
+                    "altpronunciation": "january",
+                    "altrecognition": "",
+                    "recitable": true,
+                    "audible": true,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "punctuation1": {
+                    "content": "",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "whitespace1": {
+                    "content": " ",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "day": {
+                    "content": "10",
+                    "termIdx": 112,
+                    "nextTermIdx": [
+                      113
+                    ],
+                    "prevTermIdx": [
+                      111
+                    ],
+                    "altpronunciation": "10th",
+                    "altrecognition": "",
+                    "recitable": true,
+                    "audible": true,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "punctuation2": {
+                    "content": "",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "whitespace2": {
+                    "content": "",
+                    "termIdx": -9999,
+                    "nextTermIdx": [],
+                    "prevTermIdx": [],
+                    "altpronunciation": "",
+                    "altrecognition": "",
+                    "recitable": false,
+                    "audible": false,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "year": {
+                    "century": {
+                      "content": "",
+                      "termIdx": -9999,
+                      "nextTermIdx": [],
+                      "prevTermIdx": [],
+                      "altpronunciation": "",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    },
+                    "withinCentury": {
+                      "content": "",
+                      "termIdx": -9999,
+                      "nextTermIdx": [],
+                      "prevTermIdx": [],
+                      "altpronunciation": "",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    }
+                  }
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": ".",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 6,
+                "meta": {
+                  "content": ".",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              }
+            ]
+          }
+        ],
+        "style": ""
+      }
+    },
+    {
+      "id": 15,
+      "name": "",
+      "description": "",
+      "firstTermIdx": 113,
+      "lastTermIdx": 122,
+      "items": [],
+      "type": "paragraph",
+      "meta": {
+        "sentences": [
+          {
+            "id": 15,
+            "content": "New year's Day is Jan. 12 in middle of sentence.",
+            "firstTermIdx": 113,
+            "lastTermIdx": 122,
+            "terminals": [
+              {
+                "id": 0,
+                "termIdx": 113,
+                "content": "New",
+                "firstTermIdx": 113,
+                "lastTermIdx": 113,
+                "type": 11,
+                "meta": {
+                  "content": "New",
+                  "termIdx": 113,
+                  "nextTermIdx": [
+                    114
+                  ],
+                  "prevTermIdx": [
+                    112
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 114,
+                "content": "year's",
+                "firstTermIdx": 114,
+                "lastTermIdx": 114,
+                "type": 11,
+                "meta": {
+                  "content": "year's",
+                  "termIdx": 114,
+                  "nextTermIdx": [
+                    115
+                  ],
+                  "prevTermIdx": [
+                    113
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 115,
+                "content": "Day",
+                "firstTermIdx": 115,
+                "lastTermIdx": 115,
+                "type": 11,
+                "meta": {
+                  "content": "Day",
+                  "termIdx": 115,
+                  "nextTermIdx": [
+                    116
+                  ],
+                  "prevTermIdx": [
+                    114
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 116,
+                "content": "is",
+                "firstTermIdx": 116,
+                "lastTermIdx": 116,
+                "type": 11,
+                "meta": {
+                  "content": "is",
+                  "termIdx": 116,
+                  "nextTermIdx": [
+                    117
+                  ],
+                  "prevTermIdx": [
+                    115
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": "Jan. 12",
+                "firstTermIdx": 117,
+                "lastTermIdx": 118,
+                "type": 2,
+                "meta": {
+                  "format": 2,
+                  "month": {
+                    "content": "Jan",
+                    "termIdx": 117,
+                    "nextTermIdx": [
+                      118
+                    ],
+                    "prevTermIdx": [
+                      116
                     ],
                     "altpronunciation": "january",
                     "altrecognition": "",
@@ -6040,12 +6046,12 @@
                   },
                   "day": {
                     "content": "12",
-                    "termIdx": 112,
+                    "termIdx": 118,
                     "nextTermIdx": [
-                      113
+                      119
                     ],
                     "prevTermIdx": [
-                      111
+                      117
                     ],
                     "altpronunciation": "12th",
                     "altrecognition": "",
@@ -6134,19 +6140,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 113,
+                "termIdx": 119,
                 "content": "in",
-                "firstTermIdx": 113,
-                "lastTermIdx": 113,
+                "firstTermIdx": 119,
+                "lastTermIdx": 119,
                 "type": 11,
                 "meta": {
                   "content": "in",
-                  "termIdx": 113,
+                  "termIdx": 119,
                   "nextTermIdx": [
-                    114
+                    120
                   ],
                   "prevTermIdx": [
-                    112
+                    118
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -6180,19 +6186,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 114,
+                "termIdx": 120,
                 "content": "middle",
-                "firstTermIdx": 114,
-                "lastTermIdx": 114,
+                "firstTermIdx": 120,
+                "lastTermIdx": 120,
                 "type": 11,
                 "meta": {
                   "content": "middle",
-                  "termIdx": 114,
+                  "termIdx": 120,
                   "nextTermIdx": [
-                    115
+                    121
                   ],
                   "prevTermIdx": [
-                    113
+                    119
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -6226,19 +6232,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 115,
+                "termIdx": 121,
                 "content": "of",
-                "firstTermIdx": 115,
-                "lastTermIdx": 115,
+                "firstTermIdx": 121,
+                "lastTermIdx": 121,
                 "type": 11,
                 "meta": {
                   "content": "of",
-                  "termIdx": 115,
+                  "termIdx": 121,
                   "nextTermIdx": [
-                    116
+                    122
                   ],
                   "prevTermIdx": [
-                    114
+                    120
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -6272,19 +6278,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 116,
+                "termIdx": 122,
                 "content": "sentence",
-                "firstTermIdx": 116,
-                "lastTermIdx": 116,
+                "firstTermIdx": 122,
+                "lastTermIdx": 122,
                 "type": 11,
                 "meta": {
                   "content": "sentence",
-                  "termIdx": 116,
+                  "termIdx": 122,
                   "nextTermIdx": [
-                    117
+                    123
                   ],
                   "prevTermIdx": [
-                    115
+                    121
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -6326,8 +6332,8 @@
       "id": 16,
       "name": "",
       "description": "",
-      "firstTermIdx": 117,
-      "lastTermIdx": 126,
+      "firstTermIdx": 123,
+      "lastTermIdx": 132,
       "items": [],
       "type": "paragraph",
       "meta": {
@@ -6335,24 +6341,24 @@
           {
             "id": 16,
             "content": "New year's Day is January 11 in middle of sentence.",
-            "firstTermIdx": 117,
-            "lastTermIdx": 126,
+            "firstTermIdx": 123,
+            "lastTermIdx": 132,
             "terminals": [
               {
                 "id": 0,
-                "termIdx": 117,
+                "termIdx": 123,
                 "content": "New",
-                "firstTermIdx": 117,
-                "lastTermIdx": 117,
+                "firstTermIdx": 123,
+                "lastTermIdx": 123,
                 "type": 11,
                 "meta": {
                   "content": "New",
-                  "termIdx": 117,
+                  "termIdx": 123,
                   "nextTermIdx": [
-                    118
+                    124
                   ],
                   "prevTermIdx": [
-                    116
+                    122
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -6386,19 +6392,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 118,
+                "termIdx": 124,
                 "content": "year's",
-                "firstTermIdx": 118,
-                "lastTermIdx": 118,
+                "firstTermIdx": 124,
+                "lastTermIdx": 124,
                 "type": 11,
                 "meta": {
                   "content": "year's",
-                  "termIdx": 118,
+                  "termIdx": 124,
                   "nextTermIdx": [
-                    119
+                    125
                   ],
                   "prevTermIdx": [
-                    117
+                    123
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -6432,19 +6438,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 119,
+                "termIdx": 125,
                 "content": "Day",
-                "firstTermIdx": 119,
-                "lastTermIdx": 119,
+                "firstTermIdx": 125,
+                "lastTermIdx": 125,
                 "type": 11,
                 "meta": {
                   "content": "Day",
-                  "termIdx": 119,
+                  "termIdx": 125,
                   "nextTermIdx": [
-                    120
+                    126
                   ],
                   "prevTermIdx": [
-                    118
+                    124
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -6478,19 +6484,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 120,
+                "termIdx": 126,
                 "content": "is",
-                "firstTermIdx": 120,
-                "lastTermIdx": 120,
+                "firstTermIdx": 126,
+                "lastTermIdx": 126,
                 "type": 11,
                 "meta": {
                   "content": "is",
-                  "termIdx": 120,
+                  "termIdx": 126,
                   "nextTermIdx": [
-                    121
+                    127
                   ],
                   "prevTermIdx": [
-                    119
+                    125
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -6526,19 +6532,19 @@
                 "id": 0,
                 "termIdx": -9999,
                 "content": "January 11",
-                "firstTermIdx": 121,
-                "lastTermIdx": 122,
+                "firstTermIdx": 127,
+                "lastTermIdx": 128,
                 "type": 2,
                 "meta": {
                   "format": 2,
                   "month": {
                     "content": "January",
-                    "termIdx": 121,
+                    "termIdx": 127,
                     "nextTermIdx": [
-                      122
+                      128
                     ],
                     "prevTermIdx": [
-                      120
+                      126
                     ],
                     "altpronunciation": "january",
                     "altrecognition": "",
@@ -6576,12 +6582,12 @@
                   },
                   "day": {
                     "content": "11",
-                    "termIdx": 122,
+                    "termIdx": 128,
                     "nextTermIdx": [
-                      123
+                      129
                     ],
                     "prevTermIdx": [
-                      121
+                      127
                     ],
                     "altpronunciation": "11th",
                     "altrecognition": "",
@@ -6670,19 +6676,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 123,
+                "termIdx": 129,
                 "content": "in",
-                "firstTermIdx": 123,
-                "lastTermIdx": 123,
+                "firstTermIdx": 129,
+                "lastTermIdx": 129,
                 "type": 11,
                 "meta": {
                   "content": "in",
-                  "termIdx": 123,
+                  "termIdx": 129,
                   "nextTermIdx": [
-                    124
+                    130
                   ],
                   "prevTermIdx": [
-                    122
+                    128
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -6716,19 +6722,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 124,
+                "termIdx": 130,
                 "content": "middle",
-                "firstTermIdx": 124,
-                "lastTermIdx": 124,
+                "firstTermIdx": 130,
+                "lastTermIdx": 130,
                 "type": 11,
                 "meta": {
                   "content": "middle",
-                  "termIdx": 124,
+                  "termIdx": 130,
                   "nextTermIdx": [
-                    125
+                    131
                   ],
                   "prevTermIdx": [
-                    123
+                    129
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -6762,19 +6768,19 @@
               },
               {
                 "id": 0,
-                "termIdx": 125,
+                "termIdx": 131,
                 "content": "of",
-                "firstTermIdx": 125,
-                "lastTermIdx": 125,
+                "firstTermIdx": 131,
+                "lastTermIdx": 131,
                 "type": 11,
                 "meta": {
                   "content": "of",
-                  "termIdx": 125,
+                  "termIdx": 131,
                   "nextTermIdx": [
-                    126
+                    132
                   ],
                   "prevTermIdx": [
-                    124
+                    130
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -6808,17 +6814,17 @@
               },
               {
                 "id": 0,
-                "termIdx": 126,
+                "termIdx": 132,
                 "content": "sentence",
-                "firstTermIdx": 126,
-                "lastTermIdx": 126,
+                "firstTermIdx": 132,
+                "lastTermIdx": 132,
                 "type": 11,
                 "meta": {
                   "content": "sentence",
-                  "termIdx": 126,
+                  "termIdx": 132,
                   "nextTermIdx": [],
                   "prevTermIdx": [
-                    125
+                    131
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -7211,7 +7217,7 @@
       "sectionIdx": 2
     },
     {
-      "content": "Jan",
+      "content": "1",
       "termIdx": 18,
       "nextTermIdx": [
         19
@@ -7219,7 +7225,26 @@
       "prevTermIdx": [
         17
       ],
-      "altpronunciation": "",
+      "altpronunciation": "1st",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 2,
+      "sectionIdx": 2
+    },
+    {
+      "content": "Jan",
+      "termIdx": 19,
+      "nextTermIdx": [
+        20
+      ],
+      "prevTermIdx": [
+        18
+      ],
+      "altpronunciation": "january",
       "altrecognition": "january",
       "recitable": true,
       "audible": true,
@@ -7230,26 +7255,7 @@
       "sectionIdx": 2
     },
     {
-      "content": "New",
-      "termIdx": 19,
-      "nextTermIdx": [
-        20
-      ],
-      "prevTermIdx": [
-        18
-      ],
-      "altpronunciation": "",
-      "altrecognition": "",
-      "recitable": true,
-      "audible": true,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "sentenceIdx": 3,
-      "sectionIdx": 3
-    },
-    {
-      "content": "year's",
+      "content": "20",
       "termIdx": 20,
       "nextTermIdx": [
         21
@@ -7257,18 +7263,18 @@
       "prevTermIdx": [
         19
       ],
-      "altpronunciation": "",
+      "altpronunciation": "(two thousand)",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 3,
-      "sectionIdx": 3
+      "sentenceIdx": 2,
+      "sectionIdx": 2
     },
     {
-      "content": "Day",
+      "content": "22",
       "termIdx": 21,
       "nextTermIdx": [
         22
@@ -7276,18 +7282,18 @@
       "prevTermIdx": [
         20
       ],
-      "altpronunciation": "",
+      "altpronunciation": "(twenty-two)",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 3,
-      "sectionIdx": 3
+      "sentenceIdx": 2,
+      "sectionIdx": 2
     },
     {
-      "content": "is",
+      "content": "New",
       "termIdx": 22,
       "nextTermIdx": [
         23
@@ -7306,7 +7312,7 @@
       "sectionIdx": 3
     },
     {
-      "content": "Jan",
+      "content": "year's",
       "termIdx": 23,
       "nextTermIdx": [
         24
@@ -7315,7 +7321,7 @@
         22
       ],
       "altpronunciation": "",
-      "altrecognition": "january",
+      "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
@@ -7325,7 +7331,7 @@
       "sectionIdx": 3
     },
     {
-      "content": "not",
+      "content": "Day",
       "termIdx": 24,
       "nextTermIdx": [
         25
@@ -7344,7 +7350,7 @@
       "sectionIdx": 3
     },
     {
-      "content": "at",
+      "content": "is",
       "termIdx": 25,
       "nextTermIdx": [
         26
@@ -7363,7 +7369,7 @@
       "sectionIdx": 3
     },
     {
-      "content": "end",
+      "content": "1",
       "termIdx": 26,
       "nextTermIdx": [
         27
@@ -7371,7 +7377,7 @@
       "prevTermIdx": [
         25
       ],
-      "altpronunciation": "",
+      "altpronunciation": "1st",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
@@ -7382,7 +7388,7 @@
       "sectionIdx": 3
     },
     {
-      "content": "New",
+      "content": "Jan",
       "termIdx": 27,
       "nextTermIdx": [
         28
@@ -7390,18 +7396,18 @@
       "prevTermIdx": [
         26
       ],
-      "altpronunciation": "",
-      "altrecognition": "",
+      "altpronunciation": "january",
+      "altrecognition": "january",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 4,
-      "sectionIdx": 4
+      "sentenceIdx": 3,
+      "sectionIdx": 3
     },
     {
-      "content": "year's",
+      "content": "20",
       "termIdx": 28,
       "nextTermIdx": [
         29
@@ -7409,18 +7415,18 @@
       "prevTermIdx": [
         27
       ],
-      "altpronunciation": "",
+      "altpronunciation": "(two thousand)",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 4,
-      "sectionIdx": 4
+      "sentenceIdx": 3,
+      "sectionIdx": 3
     },
     {
-      "content": "Day",
+      "content": "22",
       "termIdx": 29,
       "nextTermIdx": [
         30
@@ -7428,18 +7434,18 @@
       "prevTermIdx": [
         28
       ],
-      "altpronunciation": "",
+      "altpronunciation": "(twenty-two)",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 4,
-      "sectionIdx": 4
+      "sentenceIdx": 3,
+      "sectionIdx": 3
     },
     {
-      "content": "is",
+      "content": "not",
       "termIdx": 30,
       "nextTermIdx": [
         31
@@ -7454,11 +7460,11 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 4,
-      "sectionIdx": 4
+      "sentenceIdx": 3,
+      "sectionIdx": 3
     },
     {
-      "content": "1",
+      "content": "at",
       "termIdx": 31,
       "nextTermIdx": [
         32
@@ -7466,18 +7472,18 @@
       "prevTermIdx": [
         30
       ],
-      "altpronunciation": "1st",
+      "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 4,
-      "sectionIdx": 4
+      "sentenceIdx": 3,
+      "sectionIdx": 3
     },
     {
-      "content": "January",
+      "content": "end",
       "termIdx": 32,
       "nextTermIdx": [
         33
@@ -7485,18 +7491,18 @@
       "prevTermIdx": [
         31
       ],
-      "altpronunciation": "january",
+      "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 4,
-      "sectionIdx": 4
+      "sentenceIdx": 3,
+      "sectionIdx": 3
     },
     {
-      "content": "20",
+      "content": "New",
       "termIdx": 33,
       "nextTermIdx": [
         34
@@ -7504,7 +7510,7 @@
       "prevTermIdx": [
         32
       ],
-      "altpronunciation": "(two thousand)",
+      "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
@@ -7515,7 +7521,7 @@
       "sectionIdx": 4
     },
     {
-      "content": "22",
+      "content": "year's",
       "termIdx": 34,
       "nextTermIdx": [
         35
@@ -7523,7 +7529,7 @@
       "prevTermIdx": [
         33
       ],
-      "altpronunciation": "(twenty-two)",
+      "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
@@ -7534,7 +7540,7 @@
       "sectionIdx": 4
     },
     {
-      "content": "Mommy's",
+      "content": "Day",
       "termIdx": 35,
       "nextTermIdx": [
         36
@@ -7549,11 +7555,11 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 5,
-      "sectionIdx": 5
+      "sentenceIdx": 4,
+      "sectionIdx": 4
     },
     {
-      "content": "birthday",
+      "content": "is",
       "termIdx": 36,
       "nextTermIdx": [
         37
@@ -7568,11 +7574,11 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 5,
-      "sectionIdx": 5
+      "sentenceIdx": 4,
+      "sectionIdx": 4
     },
     {
-      "content": "is",
+      "content": "1",
       "termIdx": 37,
       "nextTermIdx": [
         38
@@ -7580,18 +7586,18 @@
       "prevTermIdx": [
         36
       ],
-      "altpronunciation": "",
+      "altpronunciation": "1st",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 5,
-      "sectionIdx": 5
+      "sentenceIdx": 4,
+      "sectionIdx": 4
     },
     {
-      "content": "on",
+      "content": "January",
       "termIdx": 38,
       "nextTermIdx": [
         39
@@ -7599,62 +7605,24 @@
       "prevTermIdx": [
         37
       ],
-      "altpronunciation": "",
+      "altpronunciation": "january",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 5,
-      "sectionIdx": 5
+      "sentenceIdx": 4,
+      "sectionIdx": 4
     },
     {
-      "content": "Oct",
+      "content": "20",
       "termIdx": 39,
       "nextTermIdx": [
         40
       ],
       "prevTermIdx": [
         38
-      ],
-      "altpronunciation": "october",
-      "altrecognition": "october",
-      "recitable": true,
-      "audible": true,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "sentenceIdx": 5,
-      "sectionIdx": 5
-    },
-    {
-      "content": "28",
-      "termIdx": 40,
-      "nextTermIdx": [
-        41
-      ],
-      "prevTermIdx": [
-        39
-      ],
-      "altpronunciation": "28th",
-      "altrecognition": "",
-      "recitable": true,
-      "audible": true,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "sentenceIdx": 5,
-      "sectionIdx": 5
-    },
-    {
-      "content": "20",
-      "termIdx": 41,
-      "nextTermIdx": [
-        42
-      ],
-      "prevTermIdx": [
-        40
       ],
       "altpronunciation": "(two thousand)",
       "altrecognition": "",
@@ -7663,19 +7631,38 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 5,
-      "sectionIdx": 5
+      "sentenceIdx": 4,
+      "sectionIdx": 4
     },
     {
-      "content": "21",
-      "termIdx": 42,
+      "content": "22",
+      "termIdx": 40,
       "nextTermIdx": [
-        43
-      ],
-      "prevTermIdx": [
         41
       ],
-      "altpronunciation": "(twenty-one)",
+      "prevTermIdx": [
+        39
+      ],
+      "altpronunciation": "(twenty-two)",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 4,
+      "sectionIdx": 4
+    },
+    {
+      "content": "Mommy's",
+      "termIdx": 41,
+      "nextTermIdx": [
+        42
+      ],
+      "prevTermIdx": [
+        40
+      ],
+      "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
@@ -7686,7 +7673,26 @@
       "sectionIdx": 5
     },
     {
-      "content": "New",
+      "content": "birthday",
+      "termIdx": 42,
+      "nextTermIdx": [
+        43
+      ],
+      "prevTermIdx": [
+        41
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 5,
+      "sectionIdx": 5
+    },
+    {
+      "content": "is",
       "termIdx": 43,
       "nextTermIdx": [
         44
@@ -7701,11 +7707,11 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 6,
-      "sectionIdx": 6
+      "sentenceIdx": 5,
+      "sectionIdx": 5
     },
     {
-      "content": "year's",
+      "content": "on",
       "termIdx": 44,
       "nextTermIdx": [
         45
@@ -7720,11 +7726,11 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 6,
-      "sectionIdx": 6
+      "sentenceIdx": 5,
+      "sectionIdx": 5
     },
     {
-      "content": "Day",
+      "content": "Oct",
       "termIdx": 45,
       "nextTermIdx": [
         46
@@ -7732,18 +7738,18 @@
       "prevTermIdx": [
         44
       ],
-      "altpronunciation": "",
-      "altrecognition": "",
+      "altpronunciation": "october",
+      "altrecognition": "october",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 6,
-      "sectionIdx": 6
+      "sentenceIdx": 5,
+      "sectionIdx": 5
     },
     {
-      "content": "is",
+      "content": "28",
       "termIdx": 46,
       "nextTermIdx": [
         47
@@ -7751,62 +7757,24 @@
       "prevTermIdx": [
         45
       ],
-      "altpronunciation": "",
+      "altpronunciation": "28th",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 6,
-      "sectionIdx": 6
+      "sentenceIdx": 5,
+      "sectionIdx": 5
     },
     {
-      "content": "Jan",
+      "content": "20",
       "termIdx": 47,
       "nextTermIdx": [
         48
       ],
       "prevTermIdx": [
         46
-      ],
-      "altpronunciation": "january",
-      "altrecognition": "january",
-      "recitable": true,
-      "audible": true,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "sentenceIdx": 6,
-      "sectionIdx": 6
-    },
-    {
-      "content": "1",
-      "termIdx": 48,
-      "nextTermIdx": [
-        49
-      ],
-      "prevTermIdx": [
-        47
-      ],
-      "altpronunciation": "1st",
-      "altrecognition": "",
-      "recitable": true,
-      "audible": true,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "sentenceIdx": 6,
-      "sectionIdx": 6
-    },
-    {
-      "content": "20",
-      "termIdx": 49,
-      "nextTermIdx": [
-        50
-      ],
-      "prevTermIdx": [
-        48
       ],
       "altpronunciation": "(two thousand)",
       "altrecognition": "",
@@ -7815,19 +7783,38 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 6,
-      "sectionIdx": 6
+      "sentenceIdx": 5,
+      "sectionIdx": 5
     },
     {
-      "content": "22",
-      "termIdx": 50,
+      "content": "21",
+      "termIdx": 48,
       "nextTermIdx": [
-        51
-      ],
-      "prevTermIdx": [
         49
       ],
-      "altpronunciation": "(twenty-two)",
+      "prevTermIdx": [
+        47
+      ],
+      "altpronunciation": "(twenty-one)",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 5,
+      "sectionIdx": 5
+    },
+    {
+      "content": "New",
+      "termIdx": 49,
+      "nextTermIdx": [
+        50
+      ],
+      "prevTermIdx": [
+        48
+      ],
+      "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
@@ -7838,7 +7825,26 @@
       "sectionIdx": 6
     },
     {
-      "content": "New",
+      "content": "year's",
+      "termIdx": 50,
+      "nextTermIdx": [
+        51
+      ],
+      "prevTermIdx": [
+        49
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 6,
+      "sectionIdx": 6
+    },
+    {
+      "content": "Day",
       "termIdx": 51,
       "nextTermIdx": [
         52
@@ -7853,11 +7859,11 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 7,
-      "sectionIdx": 7
+      "sentenceIdx": 6,
+      "sectionIdx": 6
     },
     {
-      "content": "year's",
+      "content": "is",
       "termIdx": 52,
       "nextTermIdx": [
         53
@@ -7872,11 +7878,11 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 7,
-      "sectionIdx": 7
+      "sentenceIdx": 6,
+      "sectionIdx": 6
     },
     {
-      "content": "Day",
+      "content": "Jan",
       "termIdx": 53,
       "nextTermIdx": [
         54
@@ -7884,62 +7890,24 @@
       "prevTermIdx": [
         52
       ],
-      "altpronunciation": "",
-      "altrecognition": "",
+      "altpronunciation": "january",
+      "altrecognition": "january",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 7,
-      "sectionIdx": 7
+      "sentenceIdx": 6,
+      "sectionIdx": 6
     },
     {
-      "content": "is",
+      "content": "1",
       "termIdx": 54,
       "nextTermIdx": [
         55
       ],
       "prevTermIdx": [
         53
-      ],
-      "altpronunciation": "",
-      "altrecognition": "",
-      "recitable": true,
-      "audible": true,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "sentenceIdx": 7,
-      "sectionIdx": 7
-    },
-    {
-      "content": "January",
-      "termIdx": 55,
-      "nextTermIdx": [
-        56
-      ],
-      "prevTermIdx": [
-        54
-      ],
-      "altpronunciation": "january",
-      "altrecognition": "",
-      "recitable": true,
-      "audible": true,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "sentenceIdx": 7,
-      "sectionIdx": 7
-    },
-    {
-      "content": "1",
-      "termIdx": 56,
-      "nextTermIdx": [
-        57
-      ],
-      "prevTermIdx": [
-        55
       ],
       "altpronunciation": "1st",
       "altrecognition": "",
@@ -7948,17 +7916,17 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 7,
-      "sectionIdx": 7
+      "sentenceIdx": 6,
+      "sectionIdx": 6
     },
     {
       "content": "20",
-      "termIdx": 57,
+      "termIdx": 55,
       "nextTermIdx": [
-        58
+        56
       ],
       "prevTermIdx": [
-        56
+        54
       ],
       "altpronunciation": "(two thousand)",
       "altrecognition": "",
@@ -7967,19 +7935,38 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 7,
-      "sectionIdx": 7
+      "sentenceIdx": 6,
+      "sectionIdx": 6
     },
     {
       "content": "22",
-      "termIdx": 58,
+      "termIdx": 56,
       "nextTermIdx": [
-        59
-      ],
-      "prevTermIdx": [
         57
       ],
+      "prevTermIdx": [
+        55
+      ],
       "altpronunciation": "(twenty-two)",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 6,
+      "sectionIdx": 6
+    },
+    {
+      "content": "New",
+      "termIdx": 57,
+      "nextTermIdx": [
+        58
+      ],
+      "prevTermIdx": [
+        56
+      ],
+      "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
@@ -7990,7 +7977,26 @@
       "sectionIdx": 7
     },
     {
-      "content": "Mommy's",
+      "content": "year's",
+      "termIdx": 58,
+      "nextTermIdx": [
+        59
+      ],
+      "prevTermIdx": [
+        57
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 7,
+      "sectionIdx": 7
+    },
+    {
+      "content": "Day",
       "termIdx": 59,
       "nextTermIdx": [
         60
@@ -8005,11 +8011,11 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 8,
-      "sectionIdx": 8
+      "sentenceIdx": 7,
+      "sectionIdx": 7
     },
     {
-      "content": "birthday",
+      "content": "is",
       "termIdx": 60,
       "nextTermIdx": [
         61
@@ -8024,11 +8030,11 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 8,
-      "sectionIdx": 8
+      "sentenceIdx": 7,
+      "sectionIdx": 7
     },
     {
-      "content": "is",
+      "content": "January",
       "termIdx": 61,
       "nextTermIdx": [
         62
@@ -8036,18 +8042,18 @@
       "prevTermIdx": [
         60
       ],
-      "altpronunciation": "",
+      "altpronunciation": "january",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 8,
-      "sectionIdx": 8
+      "sentenceIdx": 7,
+      "sectionIdx": 7
     },
     {
-      "content": "on",
+      "content": "1",
       "termIdx": 62,
       "nextTermIdx": [
         63
@@ -8055,18 +8061,18 @@
       "prevTermIdx": [
         61
       ],
-      "altpronunciation": "",
+      "altpronunciation": "1st",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 8,
-      "sectionIdx": 8
+      "sentenceIdx": 7,
+      "sectionIdx": 7
     },
     {
-      "content": "October",
+      "content": "20",
       "termIdx": 63,
       "nextTermIdx": [
         64
@@ -8074,18 +8080,18 @@
       "prevTermIdx": [
         62
       ],
-      "altpronunciation": "october",
+      "altpronunciation": "(two thousand)",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 8,
-      "sectionIdx": 8
+      "sentenceIdx": 7,
+      "sectionIdx": 7
     },
     {
-      "content": "28",
+      "content": "22",
       "termIdx": 64,
       "nextTermIdx": [
         65
@@ -8093,18 +8099,18 @@
       "prevTermIdx": [
         63
       ],
-      "altpronunciation": "28th",
+      "altpronunciation": "(twenty-two)",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 8,
-      "sectionIdx": 8
+      "sentenceIdx": 7,
+      "sectionIdx": 7
     },
     {
-      "content": "which",
+      "content": "Mommy's",
       "termIdx": 65,
       "nextTermIdx": [
         66
@@ -8123,7 +8129,7 @@
       "sectionIdx": 8
     },
     {
-      "content": "is",
+      "content": "birthday",
       "termIdx": 66,
       "nextTermIdx": [
         67
@@ -8142,7 +8148,7 @@
       "sectionIdx": 8
     },
     {
-      "content": "a",
+      "content": "is",
       "termIdx": 67,
       "nextTermIdx": [
         68
@@ -8161,7 +8167,7 @@
       "sectionIdx": 8
     },
     {
-      "content": "Thursday",
+      "content": "on",
       "termIdx": 68,
       "nextTermIdx": [
         69
@@ -8180,7 +8186,7 @@
       "sectionIdx": 8
     },
     {
-      "content": "this",
+      "content": "October",
       "termIdx": 69,
       "nextTermIdx": [
         70
@@ -8188,7 +8194,7 @@
       "prevTermIdx": [
         68
       ],
-      "altpronunciation": "",
+      "altpronunciation": "october",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
@@ -8199,7 +8205,7 @@
       "sectionIdx": 8
     },
     {
-      "content": "year",
+      "content": "28",
       "termIdx": 70,
       "nextTermIdx": [
         71
@@ -8207,7 +8213,7 @@
       "prevTermIdx": [
         69
       ],
-      "altpronunciation": "",
+      "altpronunciation": "28th",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
@@ -8218,7 +8224,7 @@
       "sectionIdx": 8
     },
     {
-      "content": "New",
+      "content": "which",
       "termIdx": 71,
       "nextTermIdx": [
         72
@@ -8233,11 +8239,11 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 9,
-      "sectionIdx": 9
+      "sentenceIdx": 8,
+      "sectionIdx": 8
     },
     {
-      "content": "year's",
+      "content": "is",
       "termIdx": 72,
       "nextTermIdx": [
         73
@@ -8252,11 +8258,11 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 9,
-      "sectionIdx": 9
+      "sentenceIdx": 8,
+      "sectionIdx": 8
     },
     {
-      "content": "Day",
+      "content": "a",
       "termIdx": 73,
       "nextTermIdx": [
         74
@@ -8271,11 +8277,11 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 9,
-      "sectionIdx": 9
+      "sentenceIdx": 8,
+      "sectionIdx": 8
     },
     {
-      "content": "is",
+      "content": "Thursday",
       "termIdx": 74,
       "nextTermIdx": [
         75
@@ -8290,11 +8296,11 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 9,
-      "sectionIdx": 9
+      "sentenceIdx": 8,
+      "sectionIdx": 8
     },
     {
-      "content": "Jan",
+      "content": "this",
       "termIdx": 75,
       "nextTermIdx": [
         76
@@ -8302,18 +8308,18 @@
       "prevTermIdx": [
         74
       ],
-      "altpronunciation": "january",
-      "altrecognition": "january",
+      "altpronunciation": "",
+      "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 9,
-      "sectionIdx": 9
+      "sentenceIdx": 8,
+      "sectionIdx": 8
     },
     {
-      "content": "10",
+      "content": "year",
       "termIdx": 76,
       "nextTermIdx": [
         77
@@ -8321,15 +8327,15 @@
       "prevTermIdx": [
         75
       ],
-      "altpronunciation": "10th",
+      "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 9,
-      "sectionIdx": 9
+      "sentenceIdx": 8,
+      "sectionIdx": 8
     },
     {
       "content": "New",
@@ -8347,8 +8353,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 10,
-      "sectionIdx": 10
+      "sentenceIdx": 9,
+      "sectionIdx": 9
     },
     {
       "content": "year's",
@@ -8366,8 +8372,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 10,
-      "sectionIdx": 10
+      "sentenceIdx": 9,
+      "sectionIdx": 9
     },
     {
       "content": "Day",
@@ -8385,8 +8391,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 10,
-      "sectionIdx": 10
+      "sentenceIdx": 9,
+      "sectionIdx": 9
     },
     {
       "content": "is",
@@ -8404,11 +8410,11 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 10,
-      "sectionIdx": 10
+      "sentenceIdx": 9,
+      "sectionIdx": 9
     },
     {
-      "content": "January",
+      "content": "Jan",
       "termIdx": 81,
       "nextTermIdx": [
         82
@@ -8417,17 +8423,17 @@
         80
       ],
       "altpronunciation": "january",
-      "altrecognition": "",
+      "altrecognition": "january",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 10,
-      "sectionIdx": 10
+      "sentenceIdx": 9,
+      "sectionIdx": 9
     },
     {
-      "content": "1",
+      "content": "10",
       "termIdx": 82,
       "nextTermIdx": [
         83
@@ -8435,15 +8441,15 @@
       "prevTermIdx": [
         81
       ],
-      "altpronunciation": "1st",
+      "altpronunciation": "10th",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 10,
-      "sectionIdx": 10
+      "sentenceIdx": 9,
+      "sectionIdx": 9
     },
     {
       "content": "New",
@@ -8461,8 +8467,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 11,
-      "sectionIdx": 11
+      "sentenceIdx": 10,
+      "sectionIdx": 10
     },
     {
       "content": "year's",
@@ -8480,8 +8486,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 11,
-      "sectionIdx": 11
+      "sentenceIdx": 10,
+      "sectionIdx": 10
     },
     {
       "content": "Day",
@@ -8499,8 +8505,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 11,
-      "sectionIdx": 11
+      "sentenceIdx": 10,
+      "sectionIdx": 10
     },
     {
       "content": "is",
@@ -8518,8 +8524,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 11,
-      "sectionIdx": 11
+      "sentenceIdx": 10,
+      "sectionIdx": 10
     },
     {
       "content": "January",
@@ -8537,11 +8543,11 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 11,
-      "sectionIdx": 11
+      "sentenceIdx": 10,
+      "sectionIdx": 10
     },
     {
-      "content": "2",
+      "content": "1",
       "termIdx": 88,
       "nextTermIdx": [
         89
@@ -8549,15 +8555,15 @@
       "prevTermIdx": [
         87
       ],
-      "altpronunciation": "2nd",
+      "altpronunciation": "1st",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 11,
-      "sectionIdx": 11
+      "sentenceIdx": 10,
+      "sectionIdx": 10
     },
     {
       "content": "New",
@@ -8575,8 +8581,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 12,
-      "sectionIdx": 12
+      "sentenceIdx": 11,
+      "sectionIdx": 11
     },
     {
       "content": "year's",
@@ -8594,8 +8600,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 12,
-      "sectionIdx": 12
+      "sentenceIdx": 11,
+      "sectionIdx": 11
     },
     {
       "content": "Day",
@@ -8613,8 +8619,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 12,
-      "sectionIdx": 12
+      "sentenceIdx": 11,
+      "sectionIdx": 11
     },
     {
       "content": "is",
@@ -8632,8 +8638,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 12,
-      "sectionIdx": 12
+      "sentenceIdx": 11,
+      "sectionIdx": 11
     },
     {
       "content": "January",
@@ -8651,11 +8657,11 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 12,
-      "sectionIdx": 12
+      "sentenceIdx": 11,
+      "sectionIdx": 11
     },
     {
-      "content": "09",
+      "content": "2",
       "termIdx": 94,
       "nextTermIdx": [
         95
@@ -8663,15 +8669,15 @@
       "prevTermIdx": [
         93
       ],
-      "altpronunciation": "",
+      "altpronunciation": "2nd",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 12,
-      "sectionIdx": 12
+      "sentenceIdx": 11,
+      "sectionIdx": 11
     },
     {
       "content": "New",
@@ -8689,8 +8695,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 13,
-      "sectionIdx": 13
+      "sentenceIdx": 12,
+      "sectionIdx": 12
     },
     {
       "content": "year's",
@@ -8708,8 +8714,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 13,
-      "sectionIdx": 13
+      "sentenceIdx": 12,
+      "sectionIdx": 12
     },
     {
       "content": "Day",
@@ -8727,8 +8733,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 13,
-      "sectionIdx": 13
+      "sentenceIdx": 12,
+      "sectionIdx": 12
     },
     {
       "content": "is",
@@ -8746,8 +8752,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 13,
-      "sectionIdx": 13
+      "sentenceIdx": 12,
+      "sectionIdx": 12
     },
     {
       "content": "January",
@@ -8765,11 +8771,11 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 13,
-      "sectionIdx": 13
+      "sentenceIdx": 12,
+      "sectionIdx": 12
     },
     {
-      "content": "10",
+      "content": "09",
       "termIdx": 100,
       "nextTermIdx": [
         101
@@ -8777,15 +8783,15 @@
       "prevTermIdx": [
         99
       ],
-      "altpronunciation": "10th",
+      "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 13,
-      "sectionIdx": 13
+      "sentenceIdx": 12,
+      "sectionIdx": 12
     },
     {
       "content": "New",
@@ -8803,8 +8809,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 14,
-      "sectionIdx": 14
+      "sentenceIdx": 13,
+      "sectionIdx": 13
     },
     {
       "content": "year's",
@@ -8822,8 +8828,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 14,
-      "sectionIdx": 14
+      "sentenceIdx": 13,
+      "sectionIdx": 13
     },
     {
       "content": "Day",
@@ -8841,8 +8847,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 14,
-      "sectionIdx": 14
+      "sentenceIdx": 13,
+      "sectionIdx": 13
     },
     {
       "content": "is",
@@ -8860,8 +8866,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 14,
-      "sectionIdx": 14
+      "sentenceIdx": 13,
+      "sectionIdx": 13
     },
     {
       "content": "January",
@@ -8879,8 +8885,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 14,
-      "sectionIdx": 14
+      "sentenceIdx": 13,
+      "sectionIdx": 13
     },
     {
       "content": "10",
@@ -8898,8 +8904,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 14,
-      "sectionIdx": 14
+      "sentenceIdx": 13,
+      "sectionIdx": 13
     },
     {
       "content": "New",
@@ -8917,8 +8923,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 15,
-      "sectionIdx": 15
+      "sentenceIdx": 14,
+      "sectionIdx": 14
     },
     {
       "content": "year's",
@@ -8936,8 +8942,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 15,
-      "sectionIdx": 15
+      "sentenceIdx": 14,
+      "sectionIdx": 14
     },
     {
       "content": "Day",
@@ -8955,8 +8961,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 15,
-      "sectionIdx": 15
+      "sentenceIdx": 14,
+      "sectionIdx": 14
     },
     {
       "content": "is",
@@ -8974,11 +8980,11 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 15,
-      "sectionIdx": 15
+      "sentenceIdx": 14,
+      "sectionIdx": 14
     },
     {
-      "content": "Jan",
+      "content": "January",
       "termIdx": 111,
       "nextTermIdx": [
         112
@@ -8987,17 +8993,17 @@
         110
       ],
       "altpronunciation": "january",
-      "altrecognition": "january",
+      "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 15,
-      "sectionIdx": 15
+      "sentenceIdx": 14,
+      "sectionIdx": 14
     },
     {
-      "content": "12",
+      "content": "10",
       "termIdx": 112,
       "nextTermIdx": [
         113
@@ -9005,18 +9011,18 @@
       "prevTermIdx": [
         111
       ],
-      "altpronunciation": "12th",
+      "altpronunciation": "10th",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 15,
-      "sectionIdx": 15
+      "sentenceIdx": 14,
+      "sectionIdx": 14
     },
     {
-      "content": "in",
+      "content": "New",
       "termIdx": 113,
       "nextTermIdx": [
         114
@@ -9035,7 +9041,7 @@
       "sectionIdx": 15
     },
     {
-      "content": "middle",
+      "content": "year's",
       "termIdx": 114,
       "nextTermIdx": [
         115
@@ -9054,7 +9060,7 @@
       "sectionIdx": 15
     },
     {
-      "content": "of",
+      "content": "Day",
       "termIdx": 115,
       "nextTermIdx": [
         116
@@ -9073,7 +9079,7 @@
       "sectionIdx": 15
     },
     {
-      "content": "sentence",
+      "content": "is",
       "termIdx": 116,
       "nextTermIdx": [
         117
@@ -9092,7 +9098,7 @@
       "sectionIdx": 15
     },
     {
-      "content": "New",
+      "content": "Jan",
       "termIdx": 117,
       "nextTermIdx": [
         118
@@ -9100,18 +9106,18 @@
       "prevTermIdx": [
         116
       ],
-      "altpronunciation": "",
-      "altrecognition": "",
+      "altpronunciation": "january",
+      "altrecognition": "january",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 16,
-      "sectionIdx": 16
+      "sentenceIdx": 15,
+      "sectionIdx": 15
     },
     {
-      "content": "year's",
+      "content": "12",
       "termIdx": 118,
       "nextTermIdx": [
         119
@@ -9119,18 +9125,18 @@
       "prevTermIdx": [
         117
       ],
-      "altpronunciation": "",
+      "altpronunciation": "12th",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 16,
-      "sectionIdx": 16
+      "sentenceIdx": 15,
+      "sectionIdx": 15
     },
     {
-      "content": "Day",
+      "content": "in",
       "termIdx": 119,
       "nextTermIdx": [
         120
@@ -9145,11 +9151,11 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 16,
-      "sectionIdx": 16
+      "sentenceIdx": 15,
+      "sectionIdx": 15
     },
     {
-      "content": "is",
+      "content": "middle",
       "termIdx": 120,
       "nextTermIdx": [
         121
@@ -9164,11 +9170,11 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 16,
-      "sectionIdx": 16
+      "sentenceIdx": 15,
+      "sectionIdx": 15
     },
     {
-      "content": "January",
+      "content": "of",
       "termIdx": 121,
       "nextTermIdx": [
         122
@@ -9176,18 +9182,18 @@
       "prevTermIdx": [
         120
       ],
-      "altpronunciation": "january",
+      "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 16,
-      "sectionIdx": 16
+      "sentenceIdx": 15,
+      "sectionIdx": 15
     },
     {
-      "content": "11",
+      "content": "sentence",
       "termIdx": 122,
       "nextTermIdx": [
         123
@@ -9195,18 +9201,18 @@
       "prevTermIdx": [
         121
       ],
-      "altpronunciation": "11th",
+      "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 16,
-      "sectionIdx": 16
+      "sentenceIdx": 15,
+      "sectionIdx": 15
     },
     {
-      "content": "in",
+      "content": "New",
       "termIdx": 123,
       "nextTermIdx": [
         124
@@ -9225,7 +9231,7 @@
       "sectionIdx": 16
     },
     {
-      "content": "middle",
+      "content": "year's",
       "termIdx": 124,
       "nextTermIdx": [
         125
@@ -9244,7 +9250,7 @@
       "sectionIdx": 16
     },
     {
-      "content": "of",
+      "content": "Day",
       "termIdx": 125,
       "nextTermIdx": [
         126
@@ -9263,11 +9269,125 @@
       "sectionIdx": 16
     },
     {
-      "content": "sentence",
+      "content": "is",
       "termIdx": 126,
-      "nextTermIdx": [],
+      "nextTermIdx": [
+        127
+      ],
       "prevTermIdx": [
         125
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 16,
+      "sectionIdx": 16
+    },
+    {
+      "content": "January",
+      "termIdx": 127,
+      "nextTermIdx": [
+        128
+      ],
+      "prevTermIdx": [
+        126
+      ],
+      "altpronunciation": "january",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 16,
+      "sectionIdx": 16
+    },
+    {
+      "content": "11",
+      "termIdx": 128,
+      "nextTermIdx": [
+        129
+      ],
+      "prevTermIdx": [
+        127
+      ],
+      "altpronunciation": "11th",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 16,
+      "sectionIdx": 16
+    },
+    {
+      "content": "in",
+      "termIdx": 129,
+      "nextTermIdx": [
+        130
+      ],
+      "prevTermIdx": [
+        128
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 16,
+      "sectionIdx": 16
+    },
+    {
+      "content": "middle",
+      "termIdx": 130,
+      "nextTermIdx": [
+        131
+      ],
+      "prevTermIdx": [
+        129
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 16,
+      "sectionIdx": 16
+    },
+    {
+      "content": "of",
+      "termIdx": 131,
+      "nextTermIdx": [
+        132
+      ],
+      "prevTermIdx": [
+        130
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 16,
+      "sectionIdx": 16
+    },
+    {
+      "content": "sentence",
+      "termIdx": 132,
+      "nextTermIdx": [],
+      "prevTermIdx": [
+        131
       ],
       "altpronunciation": "",
       "altrecognition": "",
@@ -9290,14 +9410,14 @@
     {
       "headingLevel": 1,
       "title": "Date format 2: MMM DDD, YYYY",
-      "termIdx": 35,
-      "terminalCountPriorToHeading": 35
+      "termIdx": 41,
+      "terminalCountPriorToHeading": 41
     },
     {
       "headingLevel": 1,
       "title": "Date format 3: MMM DD",
-      "termIdx": 59,
-      "terminalCountPriorToHeading": 59
+      "termIdx": 65,
+      "terminalCountPriorToHeading": 65
     }
   ],
   "sectionList": [
@@ -9313,41 +9433,36 @@
     },
     {
       "firstTermIdx": 14,
-      "lastTermIdx": 18,
+      "lastTermIdx": 21,
       "type": "paragraph"
     },
     {
-      "firstTermIdx": 19,
-      "lastTermIdx": 26,
+      "firstTermIdx": 22,
+      "lastTermIdx": 32,
       "type": "paragraph"
     },
     {
-      "firstTermIdx": 27,
-      "lastTermIdx": 34,
+      "firstTermIdx": 33,
+      "lastTermIdx": 40,
       "type": "paragraph"
     },
     {
-      "firstTermIdx": 35,
-      "lastTermIdx": 42,
+      "firstTermIdx": 41,
+      "lastTermIdx": 48,
       "type": "paragraph"
     },
     {
-      "firstTermIdx": 43,
-      "lastTermIdx": 50,
+      "firstTermIdx": 49,
+      "lastTermIdx": 56,
       "type": "paragraph"
     },
     {
-      "firstTermIdx": 51,
-      "lastTermIdx": 58,
+      "firstTermIdx": 57,
+      "lastTermIdx": 64,
       "type": "paragraph"
     },
     {
-      "firstTermIdx": 59,
-      "lastTermIdx": 70,
-      "type": "paragraph"
-    },
-    {
-      "firstTermIdx": 71,
+      "firstTermIdx": 65,
       "lastTermIdx": 76,
       "type": "paragraph"
     },
@@ -9378,12 +9493,17 @@
     },
     {
       "firstTermIdx": 107,
-      "lastTermIdx": 116,
+      "lastTermIdx": 112,
       "type": "paragraph"
     },
     {
-      "firstTermIdx": 117,
-      "lastTermIdx": 126,
+      "firstTermIdx": 113,
+      "lastTermIdx": 122,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 123,
+      "lastTermIdx": 132,
       "type": "paragraph"
     }
   ],
@@ -9398,34 +9518,30 @@
     },
     {
       "firstTermIdx": 14,
-      "lastTermIdx": 18
+      "lastTermIdx": 21
     },
     {
-      "firstTermIdx": 19,
-      "lastTermIdx": 26
+      "firstTermIdx": 22,
+      "lastTermIdx": 32
     },
     {
-      "firstTermIdx": 27,
-      "lastTermIdx": 34
+      "firstTermIdx": 33,
+      "lastTermIdx": 40
     },
     {
-      "firstTermIdx": 35,
-      "lastTermIdx": 42
+      "firstTermIdx": 41,
+      "lastTermIdx": 48
     },
     {
-      "firstTermIdx": 43,
-      "lastTermIdx": 50
+      "firstTermIdx": 49,
+      "lastTermIdx": 56
     },
     {
-      "firstTermIdx": 51,
-      "lastTermIdx": 58
+      "firstTermIdx": 57,
+      "lastTermIdx": 64
     },
     {
-      "firstTermIdx": 59,
-      "lastTermIdx": 70
-    },
-    {
-      "firstTermIdx": 71,
+      "firstTermIdx": 65,
       "lastTermIdx": 76
     },
     {
@@ -9450,11 +9566,15 @@
     },
     {
       "firstTermIdx": 107,
-      "lastTermIdx": 116
+      "lastTermIdx": 112
     },
     {
-      "firstTermIdx": 117,
-      "lastTermIdx": 126
+      "firstTermIdx": 113,
+      "lastTermIdx": 122
+    },
+    {
+      "firstTermIdx": 123,
+      "lastTermIdx": 132
     }
   ]
 }
