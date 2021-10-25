@@ -1,0 +1,2424 @@
+  "id": 0,
+  "title": "Testing email",
+  "filename": "terminals_email.json",
+  "description": "",
+  "owner": "",
+  "pageFormatType": 0,
+  "created": "Mon Oct 25 2021 10:50:35 GMT-0700 (Pacific Daylight Time)",
+  "modified": "Mon Oct 25 2021 10:50:35 GMT-0700 (Pacific Daylight Time)",
+  "transformed": "Mon Oct 25 2021 10:50:35 GMT-0700 (Pacific Daylight Time)",
+  "firstTermIdx": -9999,
+  "lastTermIdx": -9999,
+  "sections": [
+    {
+      "id": 0,
+      "name": "",
+      "description": "",
+      "firstTermIdx": -9999,
+      "lastTermIdx": -9999,
+      "items": [],
+      "type": "empty",
+      "meta": {
+        "count": 1
+      }
+    },
+    {
+      "id": 0,
+      "name": "",
+      "description": "",
+      "firstTermIdx": 0,
+      "lastTermIdx": 10,
+      "items": [],
+      "type": "paragraph",
+      "meta": {
+        "sentences": [
+          {
+            "id": 0,
+            "content": "wen_eng@yahoo.com is my email address.",
+            "firstTermIdx": 0,
+            "lastTermIdx": 10,
+            "terminals": [
+              {
+                "id": 0,
+                "termIdx": 3,
+                "content": "wen_eng@yahoo.com",
+                "firstTermIdx": 0,
+                "lastTermIdx": 6,
+                "type": 3,
+                "meta": {
+                  "userName": [
+                    {
+                      "content": "wen",
+                      "termIdx": 0,
+                      "nextTermIdx": [
+                        1
+                      ],
+                      "prevTermIdx": [],
+                      "altpronunciation": "",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    },
+                    {
+                      "content": "_",
+                      "termIdx": 1,
+                      "nextTermIdx": [
+                        2
+                      ],
+                      "prevTermIdx": [
+                        0
+                      ],
+                      "altpronunciation": "underscore",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    },
+                    {
+                      "content": "eng",
+                      "termIdx": 2,
+                      "nextTermIdx": [
+                        3
+                      ],
+                      "prevTermIdx": [
+                        1
+                      ],
+                      "altpronunciation": "",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    }
+                  ],
+                  "separator": {
+                    "content": "@",
+                    "termIdx": -9999,
+                    "nextTermIdx": [
+                      4
+                    ],
+                    "prevTermIdx": [
+                      2
+                    ],
+                    "altpronunciation": "at",
+                    "altrecognition": "",
+                    "recitable": true,
+                    "audible": true,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "domainName": [
+                    {
+                      "content": "yahoo",
+                      "termIdx": 4,
+                      "nextTermIdx": [
+                        5
+                      ],
+                      "prevTermIdx": [
+                        3
+                      ],
+                      "altpronunciation": "",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    },
+                    {
+                      "content": ".",
+                      "termIdx": 5,
+                      "nextTermIdx": [
+                        6
+                      ],
+                      "prevTermIdx": [
+                        4
+                      ],
+                      "altpronunciation": "dot",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    },
+                    {
+                      "content": "com",
+                      "termIdx": 6,
+                      "nextTermIdx": [
+                        7
+                      ],
+                      "prevTermIdx": [
+                        5
+                      ],
+                      "altpronunciation": "",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    }
+                  ]
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 7,
+                "content": "is",
+                "firstTermIdx": 7,
+                "lastTermIdx": 7,
+                "type": 11,
+                "meta": {
+                  "content": "is",
+                  "termIdx": 7,
+                  "nextTermIdx": [
+                    8
+                  ],
+                  "prevTermIdx": [
+                    6
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 8,
+                "content": "my",
+                "firstTermIdx": 8,
+                "lastTermIdx": 8,
+                "type": 11,
+                "meta": {
+                  "content": "my",
+                  "termIdx": 8,
+                  "nextTermIdx": [
+                    9
+                  ],
+                  "prevTermIdx": [
+                    7
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 9,
+                "content": "email",
+                "firstTermIdx": 9,
+                "lastTermIdx": 9,
+                "type": 11,
+                "meta": {
+                  "content": "email",
+                  "termIdx": 9,
+                  "nextTermIdx": [
+                    10
+                  ],
+                  "prevTermIdx": [
+                    8
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 10,
+                "content": "address",
+                "firstTermIdx": 10,
+                "lastTermIdx": 10,
+                "type": 11,
+                "meta": {
+                  "content": "address",
+                  "termIdx": 10,
+                  "nextTermIdx": [
+                    11
+                  ],
+                  "prevTermIdx": [
+                    9
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": ".",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 6,
+                "meta": {
+                  "content": ".",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              }
+            ]
+          }
+        ],
+        "style": ""
+      }
+    },
+    {
+      "id": 1,
+      "name": "",
+      "description": "",
+      "firstTermIdx": 11,
+      "lastTermIdx": 22,
+      "items": [],
+      "type": "paragraph",
+      "meta": {
+        "sentences": [
+          {
+            "id": 1,
+            "content": "Wen's email is wen_eng@yahoo.com or not.",
+            "firstTermIdx": 11,
+            "lastTermIdx": 22,
+            "terminals": [
+              {
+                "id": 0,
+                "termIdx": 11,
+                "content": "Wen's",
+                "firstTermIdx": 11,
+                "lastTermIdx": 11,
+                "type": 11,
+                "meta": {
+                  "content": "Wen's",
+                  "termIdx": 11,
+                  "nextTermIdx": [
+                    12
+                  ],
+                  "prevTermIdx": [
+                    10
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 12,
+                "content": "email",
+                "firstTermIdx": 12,
+                "lastTermIdx": 12,
+                "type": 11,
+                "meta": {
+                  "content": "email",
+                  "termIdx": 12,
+                  "nextTermIdx": [
+                    13
+                  ],
+                  "prevTermIdx": [
+                    11
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 13,
+                "content": "is",
+                "firstTermIdx": 13,
+                "lastTermIdx": 13,
+                "type": 11,
+                "meta": {
+                  "content": "is",
+                  "termIdx": 13,
+                  "nextTermIdx": [
+                    14
+                  ],
+                  "prevTermIdx": [
+                    12
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 17,
+                "content": "wen_eng@yahoo.com",
+                "firstTermIdx": 14,
+                "lastTermIdx": 20,
+                "type": 3,
+                "meta": {
+                  "userName": [
+                    {
+                      "content": "wen",
+                      "termIdx": 14,
+                      "nextTermIdx": [
+                        15
+                      ],
+                      "prevTermIdx": [
+                        13
+                      ],
+                      "altpronunciation": "",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    },
+                    {
+                      "content": "_",
+                      "termIdx": 15,
+                      "nextTermIdx": [
+                        16
+                      ],
+                      "prevTermIdx": [
+                        14
+                      ],
+                      "altpronunciation": "underscore",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    },
+                    {
+                      "content": "eng",
+                      "termIdx": 16,
+                      "nextTermIdx": [
+                        17
+                      ],
+                      "prevTermIdx": [
+                        15
+                      ],
+                      "altpronunciation": "",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    }
+                  ],
+                  "separator": {
+                    "content": "@",
+                    "termIdx": -9999,
+                    "nextTermIdx": [
+                      18
+                    ],
+                    "prevTermIdx": [
+                      16
+                    ],
+                    "altpronunciation": "at",
+                    "altrecognition": "",
+                    "recitable": true,
+                    "audible": true,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "domainName": [
+                    {
+                      "content": "yahoo",
+                      "termIdx": 18,
+                      "nextTermIdx": [
+                        19
+                      ],
+                      "prevTermIdx": [
+                        17
+                      ],
+                      "altpronunciation": "",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    },
+                    {
+                      "content": ".",
+                      "termIdx": 19,
+                      "nextTermIdx": [
+                        20
+                      ],
+                      "prevTermIdx": [
+                        18
+                      ],
+                      "altpronunciation": "dot",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    },
+                    {
+                      "content": "com",
+                      "termIdx": 20,
+                      "nextTermIdx": [
+                        21
+                      ],
+                      "prevTermIdx": [
+                        19
+                      ],
+                      "altpronunciation": "",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    }
+                  ]
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 21,
+                "content": "or",
+                "firstTermIdx": 21,
+                "lastTermIdx": 21,
+                "type": 11,
+                "meta": {
+                  "content": "or",
+                  "termIdx": 21,
+                  "nextTermIdx": [
+                    22
+                  ],
+                  "prevTermIdx": [
+                    20
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 22,
+                "content": "not",
+                "firstTermIdx": 22,
+                "lastTermIdx": 22,
+                "type": 11,
+                "meta": {
+                  "content": "not",
+                  "termIdx": 22,
+                  "nextTermIdx": [
+                    23
+                  ],
+                  "prevTermIdx": [
+                    21
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": ".",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 6,
+                "meta": {
+                  "content": ".",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              }
+            ]
+          }
+        ],
+        "style": ""
+      }
+    },
+    {
+      "id": 2,
+      "name": "",
+      "description": "",
+      "firstTermIdx": 23,
+      "lastTermIdx": 33,
+      "items": [],
+      "type": "paragraph",
+      "meta": {
+        "sentences": [
+          {
+            "id": 2,
+            "content": "what about wen.eng@post.office.com",
+            "firstTermIdx": 23,
+            "lastTermIdx": 33,
+            "terminals": [
+              {
+                "id": 0,
+                "termIdx": 23,
+                "content": "what",
+                "firstTermIdx": 23,
+                "lastTermIdx": 23,
+                "type": 11,
+                "meta": {
+                  "content": "what",
+                  "termIdx": 23,
+                  "nextTermIdx": [
+                    24
+                  ],
+                  "prevTermIdx": [
+                    22
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 24,
+                "content": "about",
+                "firstTermIdx": 24,
+                "lastTermIdx": 24,
+                "type": 11,
+                "meta": {
+                  "content": "about",
+                  "termIdx": 24,
+                  "nextTermIdx": [
+                    25
+                  ],
+                  "prevTermIdx": [
+                    23
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 28,
+                "content": "wen.eng@post.office.com",
+                "firstTermIdx": 25,
+                "lastTermIdx": 33,
+                "type": 3,
+                "meta": {
+                  "userName": [
+                    {
+                      "content": "wen",
+                      "termIdx": 25,
+                      "nextTermIdx": [
+                        26
+                      ],
+                      "prevTermIdx": [
+                        24
+                      ],
+                      "altpronunciation": "",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    },
+                    {
+                      "content": ".",
+                      "termIdx": 26,
+                      "nextTermIdx": [
+                        27
+                      ],
+                      "prevTermIdx": [
+                        25
+                      ],
+                      "altpronunciation": "dot",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    },
+                    {
+                      "content": "eng",
+                      "termIdx": 27,
+                      "nextTermIdx": [
+                        28
+                      ],
+                      "prevTermIdx": [
+                        26
+                      ],
+                      "altpronunciation": "",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    }
+                  ],
+                  "separator": {
+                    "content": "@",
+                    "termIdx": -9999,
+                    "nextTermIdx": [
+                      29
+                    ],
+                    "prevTermIdx": [
+                      27
+                    ],
+                    "altpronunciation": "at",
+                    "altrecognition": "",
+                    "recitable": true,
+                    "audible": true,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "domainName": [
+                    {
+                      "content": "post",
+                      "termIdx": 29,
+                      "nextTermIdx": [
+                        30
+                      ],
+                      "prevTermIdx": [
+                        28
+                      ],
+                      "altpronunciation": "",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    },
+                    {
+                      "content": ".",
+                      "termIdx": 30,
+                      "nextTermIdx": [
+                        31
+                      ],
+                      "prevTermIdx": [
+                        29
+                      ],
+                      "altpronunciation": "dot",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    },
+                    {
+                      "content": "office",
+                      "termIdx": 31,
+                      "nextTermIdx": [
+                        32
+                      ],
+                      "prevTermIdx": [
+                        30
+                      ],
+                      "altpronunciation": "",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    },
+                    {
+                      "content": ".",
+                      "termIdx": 32,
+                      "nextTermIdx": [
+                        33
+                      ],
+                      "prevTermIdx": [
+                        31
+                      ],
+                      "altpronunciation": "dot",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    },
+                    {
+                      "content": "com",
+                      "termIdx": 33,
+                      "nextTermIdx": [
+                        34
+                      ],
+                      "prevTermIdx": [
+                        32
+                      ],
+                      "altpronunciation": "",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "style": ""
+      }
+    },
+    {
+      "id": 3,
+      "name": "",
+      "description": "",
+      "firstTermIdx": 34,
+      "lastTermIdx": 42,
+      "items": [],
+      "type": "paragraph",
+      "meta": {
+        "sentences": [
+          {
+            "id": 3,
+            "content": "Mommy's email address is ronlyngoo@gmail.com.",
+            "firstTermIdx": 34,
+            "lastTermIdx": 42,
+            "terminals": [
+              {
+                "id": 0,
+                "termIdx": 34,
+                "content": "Mommy's",
+                "firstTermIdx": 34,
+                "lastTermIdx": 34,
+                "type": 11,
+                "meta": {
+                  "content": "Mommy's",
+                  "termIdx": 34,
+                  "nextTermIdx": [
+                    35
+                  ],
+                  "prevTermIdx": [
+                    33
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 35,
+                "content": "email",
+                "firstTermIdx": 35,
+                "lastTermIdx": 35,
+                "type": 11,
+                "meta": {
+                  "content": "email",
+                  "termIdx": 35,
+                  "nextTermIdx": [
+                    36
+                  ],
+                  "prevTermIdx": [
+                    34
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 36,
+                "content": "address",
+                "firstTermIdx": 36,
+                "lastTermIdx": 36,
+                "type": 11,
+                "meta": {
+                  "content": "address",
+                  "termIdx": 36,
+                  "nextTermIdx": [
+                    37
+                  ],
+                  "prevTermIdx": [
+                    35
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 37,
+                "content": "is",
+                "firstTermIdx": 37,
+                "lastTermIdx": 37,
+                "type": 11,
+                "meta": {
+                  "content": "is",
+                  "termIdx": 37,
+                  "nextTermIdx": [
+                    38
+                  ],
+                  "prevTermIdx": [
+                    36
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 39,
+                "content": "ronlyngoo@gmail.com",
+                "firstTermIdx": 38,
+                "lastTermIdx": 42,
+                "type": 3,
+                "meta": {
+                  "userName": [
+                    {
+                      "content": "ronlyngoo",
+                      "termIdx": 38,
+                      "nextTermIdx": [
+                        39
+                      ],
+                      "prevTermIdx": [
+                        37
+                      ],
+                      "altpronunciation": "",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    }
+                  ],
+                  "separator": {
+                    "content": "@",
+                    "termIdx": -9999,
+                    "nextTermIdx": [
+                      40
+                    ],
+                    "prevTermIdx": [
+                      38
+                    ],
+                    "altpronunciation": "at",
+                    "altrecognition": "",
+                    "recitable": true,
+                    "audible": true,
+                    "visible": true,
+                    "fillin": false,
+                    "visited": false
+                  },
+                  "domainName": [
+                    {
+                      "content": "gmail",
+                      "termIdx": 40,
+                      "nextTermIdx": [
+                        41
+                      ],
+                      "prevTermIdx": [
+                        39
+                      ],
+                      "altpronunciation": "",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    },
+                    {
+                      "content": ".",
+                      "termIdx": 41,
+                      "nextTermIdx": [
+                        42
+                      ],
+                      "prevTermIdx": [
+                        40
+                      ],
+                      "altpronunciation": "dot",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    },
+                    {
+                      "content": "com",
+                      "termIdx": 42,
+                      "nextTermIdx": [
+                        43
+                      ],
+                      "prevTermIdx": [
+                        41
+                      ],
+                      "altpronunciation": "",
+                      "altrecognition": "",
+                      "recitable": true,
+                      "audible": true,
+                      "visible": true,
+                      "fillin": false,
+                      "visited": false
+                    }
+                  ]
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": ".",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 6,
+                "meta": {
+                  "content": ".",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              }
+            ]
+          }
+        ],
+        "style": ""
+      }
+    },
+    {
+      "id": 4,
+      "name": "",
+      "description": "",
+      "firstTermIdx": 43,
+      "lastTermIdx": 44,
+      "items": [],
+      "type": "paragraph",
+      "meta": {
+        "sentences": [
+          {
+            "id": 4,
+            "content": "The end.",
+            "firstTermIdx": 43,
+            "lastTermIdx": 44,
+            "terminals": [
+              {
+                "id": 0,
+                "termIdx": 43,
+                "content": "The",
+                "firstTermIdx": 43,
+                "lastTermIdx": 43,
+                "type": 11,
+                "meta": {
+                  "content": "The",
+                  "termIdx": 43,
+                  "nextTermIdx": [
+                    44
+                  ],
+                  "prevTermIdx": [
+                    42
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 10,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 44,
+                "content": "end",
+                "firstTermIdx": 44,
+                "lastTermIdx": 44,
+                "type": 11,
+                "meta": {
+                  "content": "end",
+                  "termIdx": 44,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [
+                    43
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": ".",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 6,
+                "meta": {
+                  "content": ".",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false
+                }
+              }
+            ]
+          }
+        ],
+        "style": ""
+      }
+    },
+    {
+      "id": 0,
+      "name": "",
+      "description": "",
+      "firstTermIdx": -9999,
+      "lastTermIdx": -9999,
+      "items": [],
+      "type": "empty",
+      "meta": {
+        "count": 1
+      }
+    }
+  ],
+  "terminalList": [
+    {
+      "content": "wen",
+      "termIdx": 0,
+      "nextTermIdx": [
+        1
+      ],
+      "prevTermIdx": [],
+      "altpronunciation": "",
+      "altrecognition": "^(wh{0,1}en)$",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 0,
+      "sectionIdx": 0
+    },
+    {
+      "content": "_",
+      "termIdx": 1,
+      "nextTermIdx": [
+        2
+      ],
+      "prevTermIdx": [
+        0
+      ],
+      "altpronunciation": "underscore",
+      "altrecognition": "underscore",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 0,
+      "sectionIdx": 0
+    },
+    {
+      "content": "eng",
+      "termIdx": 2,
+      "nextTermIdx": [
+        3
+      ],
+      "prevTermIdx": [
+        1
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 0,
+      "sectionIdx": 0
+    },
+    {
+      "content": "@",
+      "termIdx": 3,
+      "nextTermIdx": [
+        4
+      ],
+      "prevTermIdx": [
+        2
+      ],
+      "altpronunciation": "at",
+      "altrecognition": "at",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 0,
+      "sectionIdx": 0
+    },
+    {
+      "content": "yahoo",
+      "termIdx": 4,
+      "nextTermIdx": [
+        5
+      ],
+      "prevTermIdx": [
+        3
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 0,
+      "sectionIdx": 0
+    },
+    {
+      "content": ".",
+      "termIdx": 5,
+      "nextTermIdx": [
+        6
+      ],
+      "prevTermIdx": [
+        4
+      ],
+      "altpronunciation": "dot",
+      "altrecognition": "dot",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 0,
+      "sectionIdx": 0
+    },
+    {
+      "content": "com",
+      "termIdx": 6,
+      "nextTermIdx": [
+        7
+      ],
+      "prevTermIdx": [
+        5
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 0,
+      "sectionIdx": 0
+    },
+    {
+      "content": "is",
+      "termIdx": 7,
+      "nextTermIdx": [
+        8
+      ],
+      "prevTermIdx": [
+        6
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 0,
+      "sectionIdx": 0
+    },
+    {
+      "content": "my",
+      "termIdx": 8,
+      "nextTermIdx": [
+        9
+      ],
+      "prevTermIdx": [
+        7
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 0,
+      "sectionIdx": 0
+    },
+    {
+      "content": "email",
+      "termIdx": 9,
+      "nextTermIdx": [
+        10
+      ],
+      "prevTermIdx": [
+        8
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 0,
+      "sectionIdx": 0
+    },
+    {
+      "content": "address",
+      "termIdx": 10,
+      "nextTermIdx": [
+        11
+      ],
+      "prevTermIdx": [
+        9
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 0,
+      "sectionIdx": 0
+    },
+    {
+      "content": "Wen's",
+      "termIdx": 11,
+      "nextTermIdx": [
+        12
+      ],
+      "prevTermIdx": [
+        10
+      ],
+      "altpronunciation": "",
+      "altrecognition": "^(wh{0,1}en's)$",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "email",
+      "termIdx": 12,
+      "nextTermIdx": [
+        13
+      ],
+      "prevTermIdx": [
+        11
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "is",
+      "termIdx": 13,
+      "nextTermIdx": [
+        14
+      ],
+      "prevTermIdx": [
+        12
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "wen",
+      "termIdx": 14,
+      "nextTermIdx": [
+        15
+      ],
+      "prevTermIdx": [
+        13
+      ],
+      "altpronunciation": "",
+      "altrecognition": "^(wh{0,1}en)$",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "_",
+      "termIdx": 15,
+      "nextTermIdx": [
+        16
+      ],
+      "prevTermIdx": [
+        14
+      ],
+      "altpronunciation": "underscore",
+      "altrecognition": "underscore",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "eng",
+      "termIdx": 16,
+      "nextTermIdx": [
+        17
+      ],
+      "prevTermIdx": [
+        15
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "@",
+      "termIdx": 17,
+      "nextTermIdx": [
+        18
+      ],
+      "prevTermIdx": [
+        16
+      ],
+      "altpronunciation": "at",
+      "altrecognition": "at",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "yahoo",
+      "termIdx": 18,
+      "nextTermIdx": [
+        19
+      ],
+      "prevTermIdx": [
+        17
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": ".",
+      "termIdx": 19,
+      "nextTermIdx": [
+        20
+      ],
+      "prevTermIdx": [
+        18
+      ],
+      "altpronunciation": "dot",
+      "altrecognition": "dot",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "com",
+      "termIdx": 20,
+      "nextTermIdx": [
+        21
+      ],
+      "prevTermIdx": [
+        19
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "or",
+      "termIdx": 21,
+      "nextTermIdx": [
+        22
+      ],
+      "prevTermIdx": [
+        20
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "not",
+      "termIdx": 22,
+      "nextTermIdx": [
+        23
+      ],
+      "prevTermIdx": [
+        21
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "what",
+      "termIdx": 23,
+      "nextTermIdx": [
+        24
+      ],
+      "prevTermIdx": [
+        22
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 2,
+      "sectionIdx": 2
+    },
+    {
+      "content": "about",
+      "termIdx": 24,
+      "nextTermIdx": [
+        25
+      ],
+      "prevTermIdx": [
+        23
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 2,
+      "sectionIdx": 2
+    },
+    {
+      "content": "wen",
+      "termIdx": 25,
+      "nextTermIdx": [
+        26
+      ],
+      "prevTermIdx": [
+        24
+      ],
+      "altpronunciation": "",
+      "altrecognition": "^(wh{0,1}en)$",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 2,
+      "sectionIdx": 2
+    },
+    {
+      "content": ".",
+      "termIdx": 26,
+      "nextTermIdx": [
+        27
+      ],
+      "prevTermIdx": [
+        25
+      ],
+      "altpronunciation": "dot",
+      "altrecognition": "dot",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 2,
+      "sectionIdx": 2
+    },
+    {
+      "content": "eng",
+      "termIdx": 27,
+      "nextTermIdx": [
+        28
+      ],
+      "prevTermIdx": [
+        26
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 2,
+      "sectionIdx": 2
+    },
+    {
+      "content": "@",
+      "termIdx": 28,
+      "nextTermIdx": [
+        29
+      ],
+      "prevTermIdx": [
+        27
+      ],
+      "altpronunciation": "at",
+      "altrecognition": "at",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 2,
+      "sectionIdx": 2
+    },
+    {
+      "content": "post",
+      "termIdx": 29,
+      "nextTermIdx": [
+        30
+      ],
+      "prevTermIdx": [
+        28
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 2,
+      "sectionIdx": 2
+    },
+    {
+      "content": ".",
+      "termIdx": 30,
+      "nextTermIdx": [
+        31
+      ],
+      "prevTermIdx": [
+        29
+      ],
+      "altpronunciation": "dot",
+      "altrecognition": "dot",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 2,
+      "sectionIdx": 2
+    },
+    {
+      "content": "office",
+      "termIdx": 31,
+      "nextTermIdx": [
+        32
+      ],
+      "prevTermIdx": [
+        30
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 2,
+      "sectionIdx": 2
+    },
+    {
+      "content": ".",
+      "termIdx": 32,
+      "nextTermIdx": [
+        33
+      ],
+      "prevTermIdx": [
+        31
+      ],
+      "altpronunciation": "dot",
+      "altrecognition": "dot",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 2,
+      "sectionIdx": 2
+    },
+    {
+      "content": "com",
+      "termIdx": 33,
+      "nextTermIdx": [
+        34
+      ],
+      "prevTermIdx": [
+        32
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 2,
+      "sectionIdx": 2
+    },
+    {
+      "content": "Mommy's",
+      "termIdx": 34,
+      "nextTermIdx": [
+        35
+      ],
+      "prevTermIdx": [
+        33
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 3,
+      "sectionIdx": 3
+    },
+    {
+      "content": "email",
+      "termIdx": 35,
+      "nextTermIdx": [
+        36
+      ],
+      "prevTermIdx": [
+        34
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 3,
+      "sectionIdx": 3
+    },
+    {
+      "content": "address",
+      "termIdx": 36,
+      "nextTermIdx": [
+        37
+      ],
+      "prevTermIdx": [
+        35
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 3,
+      "sectionIdx": 3
+    },
+    {
+      "content": "is",
+      "termIdx": 37,
+      "nextTermIdx": [
+        38
+      ],
+      "prevTermIdx": [
+        36
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 3,
+      "sectionIdx": 3
+    },
+    {
+      "content": "ronlyngoo",
+      "termIdx": 38,
+      "nextTermIdx": [
+        39
+      ],
+      "prevTermIdx": [
+        37
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 3,
+      "sectionIdx": 3
+    },
+    {
+      "content": "@",
+      "termIdx": 39,
+      "nextTermIdx": [
+        40
+      ],
+      "prevTermIdx": [
+        38
+      ],
+      "altpronunciation": "at",
+      "altrecognition": "at",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 3,
+      "sectionIdx": 3
+    },
+    {
+      "content": "gmail",
+      "termIdx": 40,
+      "nextTermIdx": [
+        41
+      ],
+      "prevTermIdx": [
+        39
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 3,
+      "sectionIdx": 3
+    },
+    {
+      "content": ".",
+      "termIdx": 41,
+      "nextTermIdx": [
+        42
+      ],
+      "prevTermIdx": [
+        40
+      ],
+      "altpronunciation": "dot",
+      "altrecognition": "dot",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 3,
+      "sectionIdx": 3
+    },
+    {
+      "content": "com",
+      "termIdx": 42,
+      "nextTermIdx": [
+        43
+      ],
+      "prevTermIdx": [
+        41
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 3,
+      "sectionIdx": 3
+    },
+    {
+      "content": "The",
+      "termIdx": 43,
+      "nextTermIdx": [
+        44
+      ],
+      "prevTermIdx": [
+        42
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 4,
+      "sectionIdx": 4
+    },
+    {
+      "content": "end",
+      "termIdx": 44,
+      "nextTermIdx": [],
+      "prevTermIdx": [
+        43
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "sentenceIdx": 4,
+      "sectionIdx": 4
+    }
+  ],
+  "headingList": [],
+  "sectionList": [
+    {
+      "firstTermIdx": 0,
+      "lastTermIdx": 10,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 11,
+      "lastTermIdx": 22,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 23,
+      "lastTermIdx": 33,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 34,
+      "lastTermIdx": 42,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 43,
+      "lastTermIdx": 44,
+      "type": "paragraph"
+    }
+  ],
+  "sentenceList": [
+    {
+      "firstTermIdx": 0,
+      "lastTermIdx": 10
+    },
+    {
+      "firstTermIdx": 11,
+      "lastTermIdx": 22
+    },
+    {
+      "firstTermIdx": 23,
+      "lastTermIdx": 33
+    },
+    {
+      "firstTermIdx": 34,
+      "lastTermIdx": 42
+    },
+    {
+      "firstTermIdx": 43,
+      "lastTermIdx": 44
+    }
+  ]
+}
