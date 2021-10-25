@@ -5,9 +5,9 @@
   "description": "",
   "owner": "",
   "pageFormatType": 0,
-  "created": "Mon Oct 25 2021 16:41:31 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Mon Oct 25 2021 16:41:31 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Mon Oct 25 2021 16:41:31 GMT-0700 (Pacific Daylight Time)",
+  "created": "Mon Oct 25 2021 16:43:34 GMT-0700 (Pacific Daylight Time)",
+  "modified": "Mon Oct 25 2021 16:43:34 GMT-0700 (Pacific Daylight Time)",
+  "transformed": "Mon Oct 25 2021 16:43:34 GMT-0700 (Pacific Daylight Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -25,14 +25,29 @@
     },
     {
       "id": 0,
-      "name": "TBD",
+      "name": "",
       "description": "",
       "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
-      "type": "tbd",
+      "type": "heading",
       "meta": {
-        "context": ""
+        "title": "phone format standalone",
+        "recitable": false,
+        "audible": false,
+        "level": 1
+      }
+    },
+    {
+      "id": 0,
+      "name": "",
+      "description": "",
+      "firstTermIdx": -9999,
+      "lastTermIdx": -9999,
+      "items": [],
+      "type": "empty",
+      "meta": {
+        "count": 1
       }
     },
     {
@@ -320,14 +335,29 @@
     },
     {
       "id": 0,
-      "name": "TBD",
+      "name": "",
       "description": "",
       "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
-      "type": "tbd",
+      "type": "heading",
       "meta": {
-        "context": ""
+        "title": "phone format embedded",
+        "recitable": false,
+        "audible": false,
+        "level": 1
+      }
+    },
+    {
+      "id": 0,
+      "name": "",
+      "description": "",
+      "firstTermIdx": -9999,
+      "lastTermIdx": -9999,
+      "items": [],
+      "type": "empty",
+      "meta": {
+        "count": 1
       }
     },
     {
@@ -1732,14 +1762,29 @@
     },
     {
       "id": 0,
-      "name": "TBD",
+      "name": "",
       "description": "",
       "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
-      "type": "tbd",
+      "type": "heading",
       "meta": {
-        "context": ""
+        "title": "phone format: near misses",
+        "recitable": false,
+        "audible": false,
+        "level": 1
+      }
+    },
+    {
+      "id": 0,
+      "name": "",
+      "description": "",
+      "firstTermIdx": -9999,
+      "lastTermIdx": -9999,
+      "items": [],
+      "type": "empty",
+      "meta": {
+        "count": 1
       }
     },
     {
@@ -4477,7 +4522,26 @@
       "sectionIdx": 8
     }
   ],
-  "headingList": [],
+  "headingList": [
+    {
+      "headingLevel": 1,
+      "title": "phone format standalone",
+      "termIdx": 0,
+      "terminalCountPriorToHeading": 0
+    },
+    {
+      "headingLevel": 1,
+      "title": "phone format embedded",
+      "termIdx": 10,
+      "terminalCountPriorToHeading": 10
+    },
+    {
+      "headingLevel": 1,
+      "title": "phone format: near misses",
+      "termIdx": 51,
+      "terminalCountPriorToHeading": 51
+    }
+  ],
   "sectionList": [
     {
       "firstTermIdx": 0,
