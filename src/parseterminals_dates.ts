@@ -83,13 +83,12 @@ export class TerminalNode_MLTAG_DATE extends TerminalNode_MLTAG_
     year.century.content = token.content.substring(0, 2);
     year.withinCentury.content = token.content.substring(2, 4);
     if (year.century.content.substr(1, 1) === "0") {
-      //special case: first decade of century cannot be thousand one (1001),
-      // thousand two (2002)...or ten two. twenty two but should be either
-      // one thousand one (2001), two thousand two (2002)...
-      // OR ten O one, twenty O two
+      // special case: first decade of millennia (and perhaps first century
+      // for simplicity) should be pronounced one thousand (1001),
+      // thousand two (2002) vs. ten or twenty respectively
       year.century.altpronunciation = `(${CardinalNumberMap.get(
         year.century.content.slice(0, 1)
-      )} thousand) | (${CardinalNumberMap.get(year.century.content)})`;
+      )} thousand)`;
       year.withinCentury.altpronunciation = `(${CardinalNumberMap.get(
         year.withinCentury.content
       )})`;
@@ -377,10 +376,10 @@ export class TerminalNode_MLTAG_DATE2 extends TerminalNode_MLTAG_DATE
 
       token = tokenList.shift()!;
       this.meta.month = this.parseMonth(token);
-      this.termIdx = this.userContext.terminals.push(
+      this.meta.month.termIdx = this.userContext.terminals.push(
         ITerminalListItemInitializer(this.meta.month)
       );
-      this.firstTermIdx = this.termIdx;
+      this.firstTermIdx = this.meta.month.termIdx;
       this.content = this.content + token.content;
 
       // optional punctuation for abbreviated month
@@ -405,7 +404,7 @@ export class TerminalNode_MLTAG_DATE2 extends TerminalNode_MLTAG_DATE
 
       token = tokenList.shift()!;
       this.meta.day = this.parseDay(token);
-      this.termIdx = this.userContext.terminals.push(
+      this.meta.day.termIdx = this.userContext.terminals.push(
         ITerminalListItemInitializer(this.meta.day)
       );
       this.content = this.content + token.content;
@@ -435,13 +434,13 @@ export class TerminalNode_MLTAG_DATE2 extends TerminalNode_MLTAG_DATE
         this.content +
         this.meta.year.century.content +
         this.meta.year.withinCentury.content;
-      this.termIdx = this.userContext.terminals.push(
+      this.meta.year.century.termIdx = this.userContext.terminals.push(
         ITerminalListItemInitializer(this.meta.year.century)
       );
-      this.termIdx = this.userContext.terminals.push(
+      this.meta.year.withinCentury.termIdx = this.userContext.terminals.push(
         ITerminalListItemInitializer(this.meta.year.withinCentury)
       );
-      this.lastTermIdx = this.termIdx;
+      this.lastTermIdx = this.meta.year.withinCentury.termIdx;
       //      this.meta.year.century.termIdx = this.userContext.nextTerminalIdx;
       //      this.meta.year.withinCentury.termIdx = this.userContext.nextTerminalIdx;
       tokenList.shift(); // discard endtag
@@ -594,10 +593,10 @@ export class TerminalNode_MLTAG_DATE3 extends TerminalNode_MLTAG_DATE
 
       token = tokenList.shift()!;
       this.meta.month = this.parseMonth(token);
-      this.termIdx = this.userContext.terminals.push(
+      this.meta.month.termIdx = this.userContext.terminals.push(
         ITerminalListItemInitializer(this.meta.month)
       );
-      this.firstTermIdx = this.termIdx;
+      this.firstTermIdx = this.meta.month.termIdx;
       this.content = this.content + token.content;
 
       token = tokenList.shift()!;
@@ -621,10 +620,10 @@ export class TerminalNode_MLTAG_DATE3 extends TerminalNode_MLTAG_DATE
 
       token = tokenList.shift()!;
       this.meta.day = this.parseDay(token);
-      this.termIdx = this.userContext.terminals.push(
+      this.meta.day.termIdx = this.userContext.terminals.push(
         ITerminalListItemInitializer(this.meta.day)
       );
-      this.lastTermIdx = this.termIdx;
+      this.lastTermIdx = this.meta.day.termIdx;
       this.content = this.content + token.content;
 
       tokenList.shift(); // discard endtag

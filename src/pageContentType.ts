@@ -290,8 +290,8 @@ export interface ITerminalInfo {
 }
 export function ITerminalInfoInitializer(
   content: string = "",
-  altpronunciation?: string,
-  altrecognition?: string,
+  altpronunciation: string = "",
+  altrecognition: string = "",
   recitable: boolean = true,
   audible: boolean = true,
   visible: boolean = true,
@@ -305,8 +305,14 @@ export function ITerminalInfoInitializer(
     termIdx: IDX_INITIALIZER,
     nextTermIdx: [],
     prevTermIdx: [],
-    altpronunciation: (altpronunciation === undefined ? "" : altpronunciation)!,
-    altrecognition: (altrecognition === undefined ? "" : altrecognition)!,
+    altpronunciation:
+      altpronunciation === undefined || altpronunciation === null
+        ? ""
+        : altpronunciation,
+    altrecognition:
+      altrecognition === undefined || altrecognition === null // could use  altrecognition || ''
+        ? ""
+        : altrecognition,
     recitable: recitable, // selectable
     audible: audible,
     visible: visible,
@@ -501,8 +507,8 @@ export function IWhitespaceTerminalMetaInitializer(
 export type IWordTerminalMeta = ITerminalInfo;
 export function IWordTerminalMetaInitializer(
   content?: string,
-  altPronunciation?: string,
-  altRecognition?: string
+  altPronunciation: string = "",
+  altRecognition: string = ""
 ): ITerminalInfo {
   return ITerminalInfoInitializer(content, altPronunciation, altRecognition);
 }

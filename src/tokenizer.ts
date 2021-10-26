@@ -199,7 +199,7 @@ const MarkupTokenDictionary: MarkupTokenDictionaryType = {
   [MarkupTokenType.DATE3]: {
     type: MarkupTokenType.DATE3,
     label: MarkupLabelType.DATE3,
-    pattern: /(?<=^|\W)((Jan(.|(uary))?|Feb(.|(ruary))?|Ma(r(.|(ch))?|y)|Apr(.|(il))?|Jul(.|(y))?|Jun(.|(e))?|Aug(.|(ust))?|Oct(.|(ober))?|(Sep(?=\b|t)t?|Nov|Dec)(.|(ember))?)\ ((31(?!\ (Feb(ruary)?|Apr(il)?|June?|(Sep(?=\b|t)t?|Nov)(ember)?)))|((30|29)(?!\ Feb(ruary)?))|(29(?=\ Feb(ruary)?\s*(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))|(0?[1-9])|1\d|2[0-8]))[0-9](?!,|[1-9])(?=[\s\.,\?\!]|$)/g //MMM* DD\
+    pattern: /(?<=^|\W)((Jan(.|(uary))?|Feb(.|(ruary))?|Ma(r(.|(ch))?|y)|Apr(.|(il))?|Jul(.|(y))?|Jun(.|(e))?|Aug(.|(ust))?|Oct(.|(ober))?|(Sep(?=\b|t)t?|Nov|Dec)(.|(ember))?)\ ((31(?!\ (Feb(ruary)?|Apr(il)?|June?|(Sep(?=\b|t)t?|Nov)(ember)?)))|((30|29)(?!\ Feb(ruary)?))|(29(?=\ Feb(ruary)?\s*(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))|(0?[1-9])|1\d|2[0-8]))(?!,|[1-9])(?=[\s\.,\?\!]|$)/g //MMM* DD\
   },
   [MarkupTokenType.CONTRACTION_D]: {
     type: MarkupTokenType.CONTRACTION_D,

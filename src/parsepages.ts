@@ -22,6 +22,7 @@ import {
   ITerminalInfo,
   ITerminalListItem
 } from "./pageContentType";
+import util from "util";
 import {
   //  FileNode,
   ParseNode,
@@ -84,7 +85,7 @@ export class PageParseNode extends ParseNode implements IPageContent {
           sectionNode.parse();
         }
       }
-      // transfer wordIdx from userContext to pages
+      // transfer termIdx from userContext to pages
       this.userContext.terminals.parse();
       this.terminalList = this.userContext.terminals;
 
@@ -190,7 +191,27 @@ export class PageParseNode extends ParseNode implements IPageContent {
         break;
       }
       case ParseNodeSerializeFormatEnumType.JSON: {
+        // check altrecogition field for non stringify
+        // console.log(`checking terminalList.altrecognition values`);
+        // this.terminalList.forEach(terminal => {
+        //   console.log(
+        //     `terminalList[${terminal.termIdx}] contains ${terminal.altrecognition}`
+        //   );
+        //   if (terminal.altrecognition === undefined) {
+        //     console.log(`- terminalList[${terminal.termIdx}] is undefined`);
+        //   } else if (terminal.altrecognition === null) {
+        //     console.log(`- terminalList[${terminal.termIdx}] is null`);
+        //   } else if (terminal.altrecognition.length === 0) {
+        //     console.log(`- terminalList[${terminal.termIdx}] is empty`);
+        //   } else {
+        //     console.log(
+        //       `terminalList[${terminal.termIdx}] of length=${terminal.altrecognition.length}`
+        //     );
+        //   }
+        // });
         outputStr = JSON.stringify(this, null, 2);
+        // let tempstr = util.inspect(this);
+        // console.log(tempstr);
         // console.log(
         //   JSON.stringify(
         //     this,

@@ -199,13 +199,22 @@ export class TerminalNode_NUMBER extends AbstractTerminalNode
   }
   type = TerminalMetaEnumType.word;
   meta: IWordTerminalMeta = IWordTerminalMetaInitializer();
-  // parse(tokenList: TokenListType) {
-  //   let retVal = super.parse(tokenList);
-  //   this.meta.content = this.content;
-  //   this.userContext.terminals.push(this.meta);
-  //   //    this.meta.termIdx = this.userContext.nextTerminalIdx;
-  //   return retVal;
-  // }
+  parse(tokenList: TokenListType): number {
+    // let token: Token;
+    // if (tokenList !== undefined) {
+    //   token = tokenList.shift()!;
+    //   if (token !== undefined) {
+    //     this.content = token.content; // should be TerminalInfo
+    super.parse(tokenList);
+    this.meta.content = this.content;
+    this.termIdx = this.userContext.terminals.push(
+      ITerminalListItemInitializer(this.meta)
+    );
+    this.meta.termIdx = this.termIdx;
+    this.firstTermIdx = this.termIdx;
+    this.lastTermIdx = this.termIdx;
+    return tokenList.length;
+  }
   transform() {
     return 0;
   }
@@ -344,7 +353,7 @@ export class TerminalNode_MLTAG_CONTRACTION extends TerminalNode_MLTAG_
   type = TerminalMetaEnumType.word;
   meta = IWordTerminalMetaInitializer();
   parse(tokenList: TokenListType): number {
-    let tokenListCount = super.parse(tokenList);
+    super.parse(tokenList);
     this.meta.content = this.content;
     this.termIdx = this.userContext.terminals.push(
       ITerminalListItemInitializer(this.meta)
@@ -354,7 +363,7 @@ export class TerminalNode_MLTAG_CONTRACTION extends TerminalNode_MLTAG_
     this.lastTermIdx = this.termIdx;
 
     //    this.meta.termIdx = this.userContext.nextTerminalIdx;
-    return tokenListCount;
+    return tokenList.length;
   }
   // serialize(format: ParseNodeSerializeFormatEnumType, label?: string): string {
   //   switch (format) {
@@ -384,18 +393,19 @@ export class TerminalNode_MLTAG_NUMBER_WITHCOMMAS extends TerminalNode_MLTAG_
   type = TerminalMetaEnumType.numberwithcommas;
   meta: IWordTerminalMeta = IWordTerminalMetaInitializer();
   parse(tokenList: TokenListType): number {
-    let tokenListCount: number = super.parse(tokenList);
+    super.parse(tokenList);
     // replace comma with [.]?
     this.meta.content = this.content;
-    this.meta.altrecognition = this.content.replace(/,/g, "[,]?");
+    this.meta.altrecognition = this.content.replace(/,/g, "[,]?"); // override word.parse
     this.termIdx = this.userContext.terminals.push(
       ITerminalListItemInitializer(this.meta)
     );
     this.meta.termIdx = this.termIdx;
     this.firstTermIdx = this.termIdx;
     this.lastTermIdx = this.termIdx;
+    return tokenList.length;
 
-    return tokenListCount;
+    return tokenList.length;
   }
   serialize(format: ParseNodeSerializeFormatEnumType, label?: string): string {
     switch (format) {
@@ -427,6 +437,7 @@ export class TerminalNode_MLTAG_TOKEN extends TerminalNode_MLTAG_
   meta: IWordTerminalMeta = IWordTerminalMetaInitializer();
   parse(tokenList: TokenListType): number {
     let tokenListCount: number = super.parse(tokenList);
+    //KNOWN ISSUE IF TOKEN CONTAINS MULTIPLE WORDS
     this.meta.content = this.content;
     this.termIdx = this.userContext.terminals.push(
       ITerminalListItemInitializer(this.meta)
@@ -467,7 +478,8 @@ export class TerminalNode_MLTAG_USD extends TerminalNode_MLTAG_
   type = TerminalMetaEnumType.currency;
   meta: ICurrencyTerminalMeta = ICurrencyTerminalMetaInitializer();
   parse(tokenList: TokenListType): number {
-    let tokenListCount: number = super.parse(tokenList);
+    super.parse(tokenList);
+    // KNOWN ISSUE HERE
     this.termIdx = this.userContext.terminals.push(
       ITerminalListItemInitializer(this.meta.currency)
     );
@@ -475,7 +487,7 @@ export class TerminalNode_MLTAG_USD extends TerminalNode_MLTAG_
     this.lastTermIdx = this.termIdx;
 
     // this.meta.currency.termIdx = this.userContext.nextTerminalIdx;
-    return tokenListCount;
+    return tokenList.length;
   }
   // serialize(format: ParseNodeSerializeFormatEnumType, label?: string): string {
   //   switch (format) {

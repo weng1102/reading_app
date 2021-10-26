@@ -31,6 +31,7 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 
 import {
+  DateFormatEnumType,
   IPageContent,
   IHeadingListItem,
   ISectionContent,
@@ -38,6 +39,7 @@ import {
   ITerminalContent,
   ITerminalInfo,
   IAcronymTerminalMeta,
+  IDateTerminalMeta,
   ISectionHeadingVariant,
   IWordTerminalMeta,
   TerminalMetaEnumType,
@@ -48,20 +50,45 @@ import { IPageContext, PageContext, PageContextInitializer } from "./termnodes";
 import { NavBar } from "./reactcomp_navbar";
 import { PageHeader } from "./reactcomp_pageheader";
 import { Settings } from "./reactcomp_settings";
+import { ITerminalPropsType, TerminalDispatcher } from "./reactcomps_terminals";
 
 const SectionType = {
   ORDEREDLIST: "ol",
   UNORDEREDLIST: "ul",
   PARAGRAPH: "none"
 };
-let url: string =
-  "https://weng1102.github.io/reading_app/dist/terminals_dates.json";
+let urlFileRequested: string;
+urlFileRequested = "terminals_email.json";
+urlFileRequested = "terminals_phonenumbers.json";
+let urlRequested: string =
+  "https://weng1102.github.io/reading_app/dist/" + urlFileRequested;
 
 export const ReadingApp = () => {
-  const [error, setError] = useState(null);
-  const [jsonContent, setJsonContent] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false); // is this necessary if jsonContent is used as a dependency fo useEffect()
+  const [responseError, setResponseError] = useState<string | null>(null);
+  const [parseError, setParseError] = useState<string | null>(null);
+  const [jsonContent, setJsonContent] = useState<IPageContent | null>(null);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false); // is this necessary if jsonContent is used as a dependency fo useEffect()
   let dispatch = useAppDispatch();
+
+  function fetchRequest<IPageContent>(url: string) {
+    fetch(url)
+      .then(
+        response => {
+          return response.json();
+        },
+        error => {
+          setResponseError(error);
+        }
+      )
+      .then(data => {
+        setJsonContent(data);
+        setIsLoaded(true);
+      });
+  }
+  useEffect(() => {
+    fetchRequest(urlRequested);
+  }, [urlRequested]);
+  /*
   useEffect(() => {
     fetch(url)
       .then(response => response.json())
@@ -75,21 +102,38 @@ export const ReadingApp = () => {
         }
       );
   }, [url]);
-
+*/
   dispatch(
     Request.Recognition_setAvailability(
       SpeechRecognition.browserSupportsSpeechRecognition()
     )
   );
-  if (error) {
-    let error1 = error as Error;
+  if (responseError) {
+    console.log(
+      `Response Error encountered while loading "${urlFileRequested}": ${responseError}`
+    );
     return (
       <div className="loadingAnnouncement">
-        Error while loading: {error1.message}
+        Error encountered while loading "{urlFileRequested}": {responseError}
+      </div>
+    );
+  } else if (parseError) {
+    return (
+      <div className="loadingAnnouncement">
+        Error encountered while parsing "{urlFileRequested}": {parseError}
+      </div>
+    );
+  } else if (jsonContent === null) {
+    return (
+      <div className="loadingAnnouncement">
+        Warning while loading {urlFileRequested}: no properly formatted content
+        provided
       </div>
     );
   } else if (!isLoaded) {
-    return <div className="loadingAnnouncement">loading...</div>;
+    return (
+      <div className="loadingAnnouncement">Loading {jsonContent.title}...</div>
+    );
   } else {
     let content: IPageContent = jsonContent! as IPageContent;
     return (
@@ -280,7 +324,11 @@ export const Sentence1 = React.memo((props: ISentencePropsType1) => {
       <span className="sentence">
         {props.sentence.terminals.map(
           (terminal: ITerminalContent, keyvalue: number) => (
-            <TerminalDispatcher key={keyvalue} terminal={terminal} />
+            <TerminalDispatcher
+              key={keyvalue}
+              active={props.active}
+              terminal={terminal}
+            />
           )
         )}
       </span>
@@ -417,188 +465,6 @@ export const Sentence = React.memo((props: ISentencePropsType) => {
 //   );
 // });
 //Sentence = React.memo(Sentence);
-interface IWordPropsType {
-  active: boolean;
-  wordObj: any;
-  visited?: boolean;
-}
-interface ITerminalPropsType {
-  active: boolean;
-  terminal: ITerminalContent;
-}
-interface ITerminalInactivePropsType {
-  //  key: number;
-  //  active: boolean;
-  terminal: ITerminalContent;
-  //  visited?: boolean;
-}
-interface ITerminalDispatcherPropsType {
-  //  keyvalue: number;
-  terminal: ITerminalContent;
-  //  visited?: boolean;
-}
-let TerminalDispatcher = React.memo(
-  (props: ITerminalDispatcherPropsType): any => {
-    const currentTerminalIdx = useAppSelector(
-      store => store.cursor_terminalIdx
-    );
-    //*********
-    //RERENDERING ISSUE
-    // useSelector(currentTerminalIdx) that changes EVERYTIME word advances thus triggers
-    // rerendering of TerminalDispatcher but NOT actual screen update. Could keep an active/inactive array for all words
-    // on page in state but array are immutable and thus even a single element change requires a copy of entire array
-    // cause rerendering of all sentences
-    // console.log(
-    //   `<TerminalDispatcher content=${props.terminal.content} />` // props.active=${props.active} props.terminal=${props.terminal} />`
-    // );
-    // for all terminals made of multiple TerminalInfo blocks, active must identify the specific terminalList
-    // So even if the the component renders the entire compound terminal, active can only be set for a single
-    // terminal
-    //
-    //
-    // Explore using props.children in dispatcher to tranparently dispatch without triggering rerender via useSelector
-    //
-    // *********
-    switch (props.terminal.type) {
-      case TerminalMetaEnumType.acronym:
-        return (
-          <Terminal_Acronym
-            //          active={true} //currentTerminalNodeIdx===props.terminal.termIdx}
-            //            key={props.keyvalue}
-            active={
-              currentTerminalIdx >= props.terminal.firstTermIdx &&
-              currentTerminalIdx <= props.terminal.lastTermIdx
-            }
-            terminal={props.terminal}
-          />
-        );
-        break;
-      case TerminalMetaEnumType.word:
-        let meta = props.terminal.meta as IWordTerminalMeta;
-        let active = currentTerminalIdx === meta.termIdx;
-        ///      active = currentTermIdx === meta.termIdx;
-        return <Terminal_Word active={active} terminal={props.terminal} />;
-        break;
-      case TerminalMetaEnumType.whitespace:
-        return <Terminal_Whitespace active={false} terminal={props.terminal} />;
-        break;
-      case TerminalMetaEnumType.currency:
-        break;
-      case TerminalMetaEnumType.date:
-        break;
-      case TerminalMetaEnumType.emailaddress:
-        break;
-      case TerminalMetaEnumType.numberwithcommas:
-        break;
-      case TerminalMetaEnumType.phonenumber:
-        break;
-      case TerminalMetaEnumType.punctuation:
-        return (
-          <Terminal_Whitespace
-            //        active={active}
-            //            key={props.keyvalue}
-            active={false}
-            terminal={props.terminal}
-          />
-        );
-        break;
-      case TerminalMetaEnumType.tbd:
-        break;
-      case TerminalMetaEnumType.time:
-        break;
-      case TerminalMetaEnumType.token:
-        break;
-      case TerminalMetaEnumType.year:
-        break;
-      default:
-        return <>unknown terminal {props.terminal.content}</>;
-        break;
-    }
-  }
-);
-let Terminal_Acronym = React.memo((props: ITerminalPropsType): any => {
-  console.log(`<Terminal_acronym> active=${props.active}`);
-  // Rather not trigger dispatch via useSelector but necessary for all multiple terminal words
-  // Rerenders only when acronym is active theough
-  const currentTerminalIdx = useAppSelector(store => store.cursor_terminalIdx); // cause rerendering of all sentences
-  let dispatch = useAppDispatch();
-  let acronym: IAcronymTerminalMeta = props.terminal
-    .meta as IAcronymTerminalMeta;
-  //  let active = props.active ? "active" : "";
-  return (
-    <>
-      {acronym.letters.map((letter: ITerminalInfo, keyvalue: number) => (
-        <span
-          key={keyvalue}
-          className={`${letter.recitable ? "recitable-word" : "word"} ${
-            props.active && currentTerminalIdx === letter.termIdx
-              ? "active"
-              : ""
-          }`}
-          onClick={() => dispatch(Request.Cursor_gotoWordByIdx(letter.termIdx))}
-        >
-          {letter.content}
-        </span>
-      ))}
-    </>
-  ); // return
-});
-let Terminal_Word = React.memo((props: ITerminalPropsType): any => {
-  let dispatch = useAppDispatch();
-  //  const termRef = useSpanRef();
-  const terminalRef = useSpanRef();
-  useEffect(() => {
-    console.log(`<Terminal Word> useEffect() active, expecting scrollToView()`);
-    /* Consider multiple scrollIntoView modes:
-      interparagraph/section: scroll to top of new sectionName
-      intraparagraph: scroll lin-by-line until new section/paragraph
-    */
-    /*
-    behavior (Optional) Defines the transition animation. One of auto or smooth. Defaults to auto.
-    block (Optional) Defines vertical alignment. One of start, center, end, or nearest. Defaults to start.
-    inline Optional Defines horizontal alignment. One of start, center, end, or nearest. Defaults to nearest.
-*/
-    if (terminalRef.current != null) {
-      let rect = terminalRef.current.getBoundingClientRect();
-      if (rect.top < 200 || rect.bottom > window.innerHeight) {
-        terminalRef.current.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-          inline: "nearest"
-        });
-      }
-    }
-  }, [props.active]);
-  // const currentTerminalIdx = useAppSelector(
-  //   store => store.CursorActionReducer.terminalIdx
-  // ); // cause rerendering of all sentences
-  // let currentTerminalIdx = 0;
-  console.log(
-    `<Terminal_word active=${props.active} content=${props.terminal.content}/>`
-  );
-  let termInfo = props.terminal.meta as ITerminalInfo;
-  let recitableWordClass = termInfo.recitable ? "recitable-word" : "word";
-  if (termInfo.audible) {
-    return (
-      <span
-        className={`${recitableWordClass} ${props.active ? "active" : ""}`}
-        ref={terminalRef}
-        onClick={() => dispatch(Request.Cursor_gotoWordByIdx(termInfo.termIdx))}
-      >
-        {props.terminal.content}
-      </span>
-    );
-  } else {
-    return <span>{props.terminal.content}</span>;
-  }
-});
-let Terminal_Whitespace = React.memo((props: ITerminalPropsType): any => {
-  console.log(
-    `<Terminal_whitespace props.terminal=${props.terminal} content="${props.terminal.content}"/>`
-  );
-  //  return <span>{props.terminal.content}</span>;
-  return <span className="whitespace">{props.terminal.content}</span>;
-});
 // let Word = React.memo((props: IWordPropsType) => {
 //   console.log(
 //     `<Word> props.active=${props.active} props.wordObj=${props.wordObj}`

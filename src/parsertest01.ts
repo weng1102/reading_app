@@ -5,6 +5,7 @@ import { ParseNodeSerializeFormatEnumType } from "./baseClasses";
 import { Logger } from "./logger";
 //import { FileParseNode } from "./parsefiles";
 import { PageParseNode } from "./parsepages";
+import { IPageContent } from "./pageContentType";
 ///PageParseNode;
 
 //const zeroPad = (num, places) => String(num).padStart(places, "0");
@@ -86,9 +87,16 @@ for (let inputFileSpec of inputFileSpecs) {
     false,
     false
   );
-
-  fs.writeFileSync(
-    outputFileSpec,
-    pageNode.serialize(ParseNodeSerializeFormatEnumType.JSON)
-  );
+  let json: string = pageNode.serialize(ParseNodeSerializeFormatEnumType.JSON);
+  fs.writeFileSync(outputFileSpec, json);
+  // // let reloaded: IPageContent = JSON.parse(json);
+  // // if (reloaded !== pageNode.serialize(ParseNodeSerializeFormatEnumType.JSON)) {
+  // //   logger.info(
+  // //     `integrity failed for file ${path.basename(outputFileSpec)}`,
+  // //     false,
+  // //     false,
+  // //     false,
+  // //     false
+  // //   );
+  // }
 }

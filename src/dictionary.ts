@@ -1,9 +1,12 @@
-export default interface DictionaryType {[key: string]: string };
+export default interface DictionaryType {
+  [key: string]: string;
+};;;;;;;;;;
 export const RecognitionDictionary: DictionaryType = {
   ["Ronlyn"]: "^(ron|ro[ns]a{0,1}l[aiye]nd{0,1})$",
   ["Ronlyn's"]: "^(ron|ro[ns]a{0,1}l[aiye]nd{0,1}'s)$",
   ["Goo"]: "^(g[ou])",
   ["Wen"]: "^(wh{0,1}en)$",
+  ["wen"]: "^(wh{0,1}en)$",
   ["Wen's"]: "^(wh{0,1}en's)$",
   ["Aruna"]: "^([ai]runa)$",
   ["Berna"]: "^(b[eu]rn[ae]t{0,2})$",
@@ -88,8 +91,25 @@ export const RecognitionDictionary: DictionaryType = {
   ["Paige"]: "[Pp]age",
   ["Handicapables"]: "handi-capable",
   ["0"]: "zero",
-  ["@"]: "at"
-}
+  ["@"]: "at",
+  ["Jan"]: "january",
+  ["Feb"]: "february",
+  ["Mar"]: "march",
+  ["Apr"]: "april",
+  ["Jun"]: "june",
+  ["Jul"]: "july",
+  ["Aug"]: "august",
+  ["Sep"]: "september",
+  ["Sept"]: "september",
+  ["Oct"]: "october",
+  ["Nov"]: "november",
+  ["Dec"]: "december",
+  ["CA"]: "california",
+  ["Ca"]: "california",
+  ["."]: "dot",
+  ["_"]: "underscore",
+  ["-"]: "dash"
+};
 export const PronunciationDictionary: DictionaryType = {
   ["@"]: "at",
   ["SPARC"]: "spark",
@@ -121,4 +141,4 @@ export const PronunciationDictionary: DictionaryType = {
   ["writes"]: "rights",
   ["sells"]: "cells",
   ["Paratransit"]: "pair-ah-transit"
-}
+};

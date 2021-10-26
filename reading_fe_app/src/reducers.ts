@@ -479,38 +479,51 @@ export const rootReducer = (
       }
       return state;
     case WORD_MATCH:
-      let words: string = action.payload as string;
+      let wordsHeard: string = action.payload as string;
       if (
-        words !== undefined &&
+        wordsHeard !== undefined &&
         state.pageContext !== undefined &&
         state.pageContext !== null
       ) {
-        console.log(`WORD_MATCH: words=${words}`);
-        for (let word of words.split(" ")) {
-          console.log(`WORD_MATCH: word=${word}`);
+        let expecting: string =
+          state.pageContext.terminalList[state.cursor_terminalIdx].content;
+        let expectingAlt: string =
+          state.pageContext.terminalList[state.cursor_terminalIdx]
+            .altrecognition; // should .split(" ")
+        console.log(
+          `WORD_MATCH: heard=${wordsHeard} expecting ${expecting} or ${expectingAlt}`
+        );
+        // need to handle altRecognition word list against consecutive words heard
+        //   1) Lookahead in words heard list to allow a peek.
+        //      Requires changing for/of loop (straightforward but messy)
+        //   2) create internal state that reflects interim condition without
+        //      advancing terminal state, resetting that state when completely
+        //      or state is no longer valid (matching or not matching the entire
+        //      altReg list words heard.)
+        for (let wordHeard of wordsHeard.split(" ")) {
+          console.log(`WORD_MATCH: word=${wordHeard}`);
           if (state.listen_flush) {
-            break; // escape to prevent further processing that may match words in next sentence
-          } else if (
-            state.pageContext.terminalList[
-              state.cursor_terminalIdx
-            ].content.toLowerCase() === word.toLowerCase()
-          ) {
+            // escape to prevent further processing that may match words in
+            // next sentence
+            break;
+          } else if (expecting.toLowerCase() === wordHeard.toLowerCase()) {
+            setToNextTerminalState(state.cursor_terminalIdx);
+          } else if (expectingAlt.toLowerCase() === wordHeard.toLowerCase()) {
             setToNextTerminalState(state.cursor_terminalIdx);
           } else if (
-            state.pageContext.terminalList[state.cursor_terminalIdx]
-              .altrecognition !== null &&
-            state.pageContext.terminalList[state.cursor_terminalIdx]
-              .altrecognition.length > 0
+            expectingAlt.length > 0 &&
+            patternMatch(wordHeard.toLowerCase(), expectingAlt)
           ) {
-            let pattern = new RegExp(
-              state.pageContext.terminalList[
-                state.cursor_terminalIdx
-              ].altrecognition
-            );
-            if (word.toLowerCase().match(pattern) !== null) {
-              setToNextTerminalState(state.cursor_terminalIdx);
-            }
+            setToNextTerminalState(state.cursor_terminalIdx);
           } else {
+            console.log(
+              `No WORD_MATCH:\nwords heard=${wordsHeard}\nbut looking for ${
+                state.pageContext.terminalList[state.cursor_terminalIdx].content
+              }\nor ${
+                state.pageContext.terminalList[state.cursor_terminalIdx]
+                  .altrecognition
+              }`
+            );
             // no match
           }
         }
@@ -856,3 +869,7 @@ const ListeningReducer = (state: any = InitialListeningState, action: any) => {
 //   CursorActionReducer,
 //   ListeningReducer
 // });
+function patternMatch(content: string, altRecognitionPattern: string): boolean {
+  let pattern: RegExp = new RegExp(altRecognitionPattern);
+  return pattern.test(content);
+}
