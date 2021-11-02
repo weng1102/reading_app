@@ -15,6 +15,7 @@
  **/
 import React from "react";
 import "./App.css";
+import http from "http";
 import path from "path";
 import glob from "glob";
 //import { readFileSync } from "fs";
@@ -56,7 +57,7 @@ import { SectionDispatcher, ISectionPropsType } from "./reactcomps_sections";
 let urlFileRequested: string;
 urlFileRequested = ".json";
 urlFileRequested = "terminals_phonenumbers.json";
-urlFileRequested = "lists.json";
+urlFileRequested = "7wordsentences.json";
 let urlRequested: string =
   "https://weng1102.github.io/reading_app/dist/" + urlFileRequested;
 
@@ -67,7 +68,10 @@ export const ReadingApp = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false); // is this necessary if jsonContent is used as a dependency fo useEffect()
   let dispatch = useAppDispatch();
 
-  function fetchRequest<IPageContent>(url: string) {
+// Consider node-fetch instead
+
+//  let urlRequest: HttpRequest = new Request(url);
+  function fetchRequest(url: string) {
     fetch(url)
       .then(
         response => {
@@ -111,6 +115,7 @@ export const ReadingApp = () => {
       </div>
     );
   } else if (jsonContent === null) {
+    console.log(`parserError=${parseError}`);
     return (
       <div className="loadingAnnouncement">
         Warning while loading {urlFileRequested}: no properly formatted content
