@@ -1,0 +1,63 @@
+WORD
+1    super.parse(tokenList);
+2    this.meta.content = this.content + "#1";
+3    this.termIdx = this.userContext.terminals.push(ITerminalListItemInitializer(this.meta));
+4    this.meta.termIdx = this.termIdx;
+5    this.firstTermIdx = this.termIdx;
+6    this.lastTermIdx = this.termIdx;
+7    return tokenList.length;
+  }
+NUMBER
+1    super.parse(tokenList);
+2    this.meta.content = this.content + "#1";
+3    this.termIdx = this.userContext.terminals.push(ITerminalListItemInitializer(this.meta));
+4    this.meta.termIdx = this.termIdx;
+5    this.firstTermIdx = this.termIdx;
+6    this.lastTermIdx = this.termIdx;
+7    return tokenList.length;
+  }
+CONTRACTION
+1    let tokenListCount = super.parse(tokenList);
+2    this.meta.content = this.content + "#2";
+3    this.termIdx = this.userContext.terminals.push(ITerminalListItemInitializer(this.meta));
+4    this.meta.termIdx = this.termIdx;
+5    this.firstTermIdx = this.termIdx;
+6    this.lastTermIdx = this.termIdx;
+
+    //    this.meta.termIdx = this.userContext.nextTerminalIdx;
+7    return tokenListCount;
+
+NUMBERSWITHVCOMMAS
+1  let tokenListCount: number = super.parse(tokenList);
+    // replace comma with [.]?
+2    this.meta.content = this.content + "#3";
+    this.meta.altrecognition = this.content.replace(/,/g, "[,]?"); // override word.parse
+3    this.termIdx = this.userContext.terminals.push(ITerminalListItemInitializer(this.meta));
+4    this.meta.termIdx = this.termIdx;
+5    this.firstTermIdx = this.termIdx;
+6    this.lastTermIdx = this.termIdx;
+
+7    return tokenListCount;
+  }
+
+TOKEN 
+1    let tokenListCount: number = super.parse(tokenList);
+2    this.meta.content = this.content + "#4";
+3    this.termIdx = this.userContext.terminals.push(ITerminalListItemInitializer(this.meta));
+4    this.meta.termIdx = this.termIdx;
+5    this.firstTermIdx = this.termIdx;
+6    this.lastTermIdx = this.termIdx;
+
+    //    this.meta.termIdx = this.userContext.nextTerminalIdx;
+7    return tokenListCount;
+
+CURRENCY
+1    let tokenListCount: number = super.parse(tokenList);
+2
+3a   this.termIdx = this.userContext.terminals.push(ITerminalListItemInitializer(this.meta.currency));
+
+5    this.firstTermIdx = this.termIdx;
+6    this.lastTermIdx = this.termIdx;
+7
+    // this.meta.currency.termIdx = this.userContext.nextTerminalIdx;
+    return tokenListCount;

@@ -42,9 +42,13 @@ logger.info(
   false,
   false
 );
-let inputFileSpecs: string[] = process.argv
-  .slice(2)
-  .filter(mdFiles => mdFiles.endsWith(inputExtension));
+let inputFileSpecs: string[];
+let switches: string[] = [];
+let args: string[] = process.argv.slice(2);
+while (args.length > 0 && args[0].length > 0 && args[0][0] === "-") {
+  switches.push(args.shift()!);
+}
+inputFileSpecs = args.filter(mdFiles => mdFiles.endsWith(inputExtension));
 for (let inputFileSpec of inputFileSpecs) {
   let pageNode = new PageParseNode(this);
   linesParsed = pageNode.dataSource.connect(inputFileSpec);
@@ -61,8 +65,6 @@ for (let inputFileSpec of inputFileSpecs) {
   //   false,
   //   false
   // );
-  // console.log(`tree view:
-  //   ${pageNode.serialize(ParseNodeSerializeFormatEnumType.TREEVIEW, "page", "")}`);
   // console.log(`tabular view:
   //   ${pageNode.serialize(ParseNodeSerializeFormatEnumType.TABULAR, "page", "")}`);
   // console.log(`terminal List:`);
@@ -80,8 +82,83 @@ for (let inputFileSpec of inputFileSpecs) {
   );
   pageNode.filename = `${fileName}${outputExtension}`;
   let outputFileSpec = `${outputPath}${fileName}${outputExtension}`;
+  if (switches.includes("-dumptree")) {
+    logger.info(
+      `dumping tree for ${path.basename(outputFileSpec)}`,
+      false,
+      false,
+      false,
+      false
+    );
+    logger.info(pageNode.serialize(ParseNodeSerializeFormatEnumType.TREEVIEW),
+      false,
+      false,
+      false,
+      false
+    )
+  }
+  if (switches.includes("-dumpjson")) {
+    logger.info(
+      `dumping json for ${path.basename(outputFileSpec)}`,
+      false,
+      false,
+      false,
+      false
+    );
+    logger.info(pageNode.serialize(ParseNodeSerializeFormatEnumType.TABULAR),
+      false,
+      false,
+      false,
+      false
+    )
+  }
+  if (switches.includes("-dumpterminals")) {
+    logger.info(
+      `dumping terminal list for ${path.basename(outputFileSpec)}`,
+      false,
+      false,
+      false,
+      false
+    );
+    logger.info(pageNode.userContext.terminals.serialize(),
+      false,
+      false,
+      false,
+      false
+    )
+  }
+  if (switches.includes("-dumpsentences")) {
+    logger.info(
+      `dumping sentence list for ${path.basename(outputFileSpec)}`,
+      false,
+      false,
+      false,
+      false
+    );
+    logger.info(pageNode.userContext.sentences.serialize(),
+      false,
+      false,
+      false,
+      false
+    )
+  }
+  if (switches.includes("-dumpsections")) {
+    logger.info(
+      `dumping section list for ${path.basename(outputFileSpec)}`,
+      false,
+      false,
+      false,
+      false
+    );
+    logger.info(pageNode.userContext.sections.serialize(),
+      false,
+      false,
+      false,
+      false
+    )
+  }
   logger.info(
-    `generating file ${path.basename(outputFileSpec)}`,
+    `generating json file ${path.basename(outputFileSpec)}`,
     false,
     false,
     false,

@@ -402,7 +402,9 @@ interface IReduxState {
   cursor_terminalIdx: number;
   cursor_newSentenceTransition: boolean;
   cursor_newSectionTransition: boolean;
+  cursor_beginningOfPageReached: boolean;
   cursor_newPageTransition: boolean;
+  cursor_endOfPageReached: boolean;
 
   pageContext: IPageContext;
 }
@@ -423,6 +425,8 @@ const IReduxStateInitialState: IReduxState = {
   cursor_newSentenceTransition: false,
   cursor_newSectionTransition: false,
   cursor_newPageTransition: false,
+  cursor_beginningOfPageReached: false,
+  cursor_endOfPageReached: false,
 
   pageContext: PageContextInitializer()
 };
@@ -447,14 +451,24 @@ export const rootReducer = (
       state.cursor_sectionIdx !== priorSectionIdx;
   };
   const setToNextTerminalState = (terminalIdx: number) => {
-    setTerminalState(
-      state.pageContext.terminalList[terminalIdx].nextTermIdx[0]
-    );
+    if (state.pageContext.terminalList[terminalIdx].nextTermIdx.length === 0) {
+      state.cursor_endOfPageReached = true;
+      state.listen_active = false;
+    } else {
+      //      state.cursor_endOfPageReached = false;
+      setTerminalState(
+        state.pageContext.terminalList[terminalIdx].nextTermIdx[0]
+      );
+    }
   };
   const setToPrevTerminalState = (terminalIdx: number) => {
-    setTerminalState(
-      state.pageContext.terminalList[terminalIdx].prevTermIdx[0]
-    );
+    if (state.pageContext.terminalList[terminalIdx].prevTermIdx.length === 0) {
+      state.cursor_beginningOfPageReached = true;
+    } else {
+      setTerminalState(
+        state.pageContext.terminalList[terminalIdx].prevTermIdx[0]
+      );
+    }
   };
   //  const queueAccouncement(state.announcement)
   switch (action.type) {
@@ -607,6 +621,8 @@ export const rootReducer = (
       state.cursor_newPageTransition = false;
       state.cursor_newSectionTransition = false;
       state.cursor_newSentenceTransition = false;
+      state.cursor_beginningOfPageReached = false;
+      state.cursor_endOfPageReached = false;
       return state;
     default:
       return state;

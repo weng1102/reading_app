@@ -9,9 +9,7 @@
  *
  **/
 import React from "react";
-// import "./App.css";
-import { useAppDispatch, useAppSelector, useSpanRef, useDivRef } from "./hooks";
-import { useEffect, useState, useContext, useRef } from "react";
+import { useAppSelector } from "./hooks";
 
 import { ITerminalInfo, IPhoneNumberTerminalMeta } from "./pageContentType";
 import { TerminalNode, ITerminalPropsType } from "./reactcomps_terminals";
