@@ -15,41 +15,13 @@
  **/
 import React from "react";
 import "./App.css";
-import path from "path";
-import glob from "glob";
 //import { readFileSync } from "fs";
 // import mic_listening from "./mic1-xparent.gif";
 // import mic_notlistening from "./mic1-inactive-xparent.gif";
 // import mic_unavailable from "./mic1-ghosted.gif";
-import { Request } from "./reducers";
-import { useAppDispatch, useAppSelector, useSpanRef, useDivRef } from "./hooks";
-import { useEffect, useState, useContext, useRef } from "react";
-
-// is this really necessary if availablility is removed below
-import SpeechRecognition, {
-  useSpeechRecognition
-} from "react-speech-recognition";
-
-import {
-  DateFormatEnumType,
-  IPageContent,
-  IHeadingListItem,
-  ISectionContent,
-  ISentenceContent,
-  ITerminalContent,
-  ITerminalInfo,
-  IAcronymTerminalMeta,
-  IDateTerminalMeta,
-  ISectionHeadingVariant,
-  IWordTerminalMeta,
-  TerminalMetaEnumType
-} from "./pageContentType";
-import { IPageContext, PageContext, PageContextInitializer } from "./termnodes";
-import {
-  TerminalNode,
-  ITerminalPropsType,
-  ITerminalNodePropsType
-} from "./reactcomps_terminals";
+import { useAppSelector } from "./hooks";
+import { DateFormatEnumType, IDateTerminalMeta } from "./pageContentType";
+import { TerminalNode, ITerminalPropsType } from "./reactcomps_terminals";
 // import { NavBar } from "./reactcomp_navbar";
 // import { PageHeader } from "./reactcomp_pageheader";
 // import { Settings } from "./reactcomp_settings";

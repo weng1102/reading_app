@@ -13,8 +13,7 @@
  * Version history:
  *
  **/
-import React from "react";
-import "./App.css";
+//import "./App.css";
 import { Request } from "./reducers";
 import readitImg from "./readit.png";
 import { useAppDispatch, useAppSelector } from "./hooks";
@@ -58,6 +57,10 @@ export const SpeechSynthesizer = () => {
   );
   const newSection = useAppSelector(store => store.cursor_newSectionTransition);
   const sectionIdx = useAppSelector(store => store.cursor_sectionIdx);
+  const beginningOfPage = useAppSelector(
+    store => store.cursor_beginningOfPageReached
+  );
+  const endOfPage = useAppSelector(store => store.cursor_endOfPageReached);
   const listening = useAppSelector(store => store.listen_active);
   let message: string = "";
   //  const message = useAppSelector(store => store.announce_message);
@@ -90,11 +93,19 @@ export const SpeechSynthesizer = () => {
         console.log(`speaking "${message}"`);
         Synthesizer.speak(message);
         dispatch(Request.Cursor_acknowledgeTransition());
+      } else if (beginningOfPage) {
+        message = `beginning of page`;
+        Synthesizer.speak(message);
+        dispatch(Request.Cursor_acknowledgeTransition());
+      } else if (endOfPage) {
+        message = `end of page`;
+        Synthesizer.speak(message);
+        dispatch(Request.Cursor_acknowledgeTransition());
       } else {
         console.log(`NOT speaking ${message}"`);
       }
     },
-    [sectionIdx, newSentence] // to recite just the words
+    [sectionIdx, newSentence, beginningOfPage, endOfPage] // to recite just the words
   );
   useEffect(
     () => {

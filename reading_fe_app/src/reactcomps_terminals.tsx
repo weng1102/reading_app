@@ -14,37 +14,22 @@
  *
  **/
 import React from "react";
-import "./App.css";
-import path from "path";
-import glob from "glob";
+//import "./App.css";
 //import { readFileSync } from "fs";
 // import mic_listening from "./mic1-xparent.gif";
 // import mic_notlistening from "./mic1-inactive-xparent.gif";
 // import mic_unavailable from "./mic1-ghosted.gif";
 import { Request } from "./reducers";
-import { useAppDispatch, useAppSelector, useSpanRef, useDivRef } from "./hooks";
-import { useEffect, useState, useContext, useRef } from "react";
+import { useAppDispatch, useAppSelector, useSpanRef } from "./hooks";
+import { useEffect } from "react";
 
 // is this really necessary if availablility is removed below
-import SpeechRecognition, {
-  useSpeechRecognition
-} from "react-speech-recognition";
-
 import {
-  DateFormatEnumType,
-  IPageContent,
-  IHeadingListItem,
-  ISectionContent,
-  ISentenceContent,
   ITerminalContent,
   ITerminalInfo,
   IAcronymTerminalMeta,
-  IDateTerminalMeta,
-  ISectionHeadingVariant,
-  IWordTerminalMeta,
   TerminalMetaEnumType
 } from "./pageContentType";
-import { IPageContext, PageContext, PageContextInitializer } from "./termnodes";
 // import { NavBar } from "./reactcomp_navbar";
 // import { PageHeader } from "./reactcomp_pageheader";
 // import { Settings } from "./reactcomp_settings";
@@ -185,34 +170,6 @@ export const Terminal_Acronym = React.memo((props: ITerminalPropsType): any => {
   ); // return
 });
 export const Terminal_Word = React.memo((props: ITerminalPropsType): any => {
-  //  const termRef = useSpanRef();
-  //  const terminalRef = useSpanRef();
-  // useEffect(() => {
-  //   console.log(`<Terminal Word> useEffect() active, expecting scrollToView()`);
-  /* Consider multiple scrollIntoView modes:
-      interparagraph/section: scroll to top of new sectionName
-      intraparagraph: scroll lin-by-line until new section/paragraph
-    */
-  /*
-    behavior (Optional) Defines the transition animation. One of auto or smooth. Defaults to auto.
-    block (Optional) Defines vertical alignment. One of start, center, end, or nearest. Defaults to start.
-    inline Optional Defines horizontal alignment. One of start, center, end, or nearest. Defaults to nearest.
-*/
-  //   if (terminalRef.current != null) {
-  //     let rect = terminalRef.current.getBoundingClientRect();
-  //     if (rect.top < 200 || rect.bottom > window.innerHeight) {
-  //       terminalRef.current.scrollIntoView({
-  //         behavior: "smooth",
-  //         block: "start",
-  //         inline: "nearest"
-  //       });
-  //     }
-  //   }
-  // }, [props.active]);
-  // const currentTerminalIdx = useAppSelector(
-  //   store => store.CursorActionReducer.terminalIdx
-  // ); // cause rerendering of all sentences
-  // let currentTerminalIdx = 0;
   console.log(
     `<Terminal_word active=${props.active} content=${props.terminal.content}/>`
   );
@@ -249,7 +206,7 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
     console.log(`<TerminalNode> useEffect() active, expecting scrollToView()`);
     /* Consider multiple scrollIntoView modes:
       interparagraph/section: scroll to top of new sectionName
-      intraparagraph: scroll lin-by-line until new section/paragraph
+      intraparagraph: scroll line-by-line until new section/paragraph
     */
     /*
     behavior (Optional) Defines the transition animation. One of auto or smooth. Defaults to auto.
@@ -290,63 +247,3 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
     return <span>{props.terminalInfo.content}</span>;
   }
 });
-// let Word = React.memo((props: IWordPropsType) => {
-//   console.log(
-//     `<Word> props.active=${props.active} props.wordObj=${props.wordObj}`
-//   );
-//   console.log(`<Word> word=${props.wordObj.word}`);
-//   if (Number.isInteger(props.wordObj.wordNodeIdx)) {
-//     // call wordNode.validWordNodeIndx
-//     return (
-//       <AudibleWord
-//         key={props.wordObj.wordNodeIdx}
-//         active={props.active}
-//         wordObj={props.wordObj}
-//         visited={false}
-//         //        visited={visited}
-//       />
-//     );
-//   } else {
-//     return (
-//       <Whitespace key={props.wordObj.wordNodeIdx} wordObj={props.wordObj} />
-//     );
-//   }
-// });
-// //Word = React.memo(Word);
-// interface IWhitespacePropsType {
-//   wordObj: any;
-// }
-// export const Whitespace = React.memo((props: IWhitespacePropsType) => {
-//   console.log(`<Whitespace> rendering whitespace/punctuations`);
-//   return (
-//     <>
-//       <span>{props.wordObj.word}</span>
-//     </>
-//   );
-// });
-//Whitespace = React.memo(Whitespace);
-// interface IAudiblePropsType {
-//   active: boolean;
-//   visited: boolean;
-//   wordObj: any;
-// }
-// export const AudibleWord = React.memo((props: IAudiblePropsType) => {
-//   console.log(
-//     `<AudibleWord> props.active=${props.active} props.wordObj=${props.wordObj} props.visited`
-//   );
-//   let dispatch = useAppDispatch();
-//   let active = props.active ? "active" : "";
-//   return (
-//     <>
-//       <span
-//         key={props.wordObj.wordNodeIdx}
-//         className={`audible-word ${active} ${props.visited}`}
-//         onClick={() =>
-//           dispatch(Request.Cursor_gotoWordByIdx(props.wordObj.wordNodeIdx))
-//         }
-//       >
-//         {props.wordObj.word}
-//       </span>
-//     </>
-//   );
-// });
