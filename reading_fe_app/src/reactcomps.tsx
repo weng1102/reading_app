@@ -87,6 +87,7 @@ export const ReadingApp = () => {
           setIsLoaded(true);
         },
         error => {
+          console.log(`JSONPARSERERROR=${error}`)
           setParseError(error);
         }
       ); // should consider capturing parser error

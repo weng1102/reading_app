@@ -166,14 +166,17 @@ for (let inputFileSpec of inputFileSpecs) {
   );
   let json: string = pageNode.serialize(ParseNodeSerializeFormatEnumType.JSON);
   fs.writeFileSync(outputFileSpec, json);
-  // // let reloaded: IPageContent = JSON.parse(json);
-  // // if (reloaded !== pageNode.serialize(ParseNodeSerializeFormatEnumType.JSON)) {
-  // //   logger.info(
-  // //     `integrity failed for file ${path.basename(outputFileSpec)}`,
-  // //     false,
-  // //     false,
-  // //     false,
-  // //     false
-  // //   );
-  // }
+  if (switches.includes("-testreload")) {
+    let inputStr: string = fs.readFileSync(outputFileSpec).toString()
+    let reloaded: IPageContent = JSON.parse(inputStr);
+    if (reloaded !== pageNode) {
+      logger.info(
+        `integrity failed for file ${path.basename(outputFileSpec)}`,
+        false,
+        false,
+        false,
+        false
+      );
+    }
+  }
 }
