@@ -1,5 +1,6 @@
 [//page title]: Seven word sentences
 
+# first ten
 My children and I go to school.
 She said hello to the little girl.
 He has as many children as them.
@@ -10,6 +11,8 @@ She said that she needed my help.
 They have two girls and one boy.
 Can you change the way you dress?
 She would like to answer that question.
+
+# second ten
 We can all learn from this exercise.
 You can have any thing you want.
 Does your boss need any new workers?

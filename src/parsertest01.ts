@@ -82,7 +82,22 @@ for (let inputFileSpec of inputFileSpecs) {
   );
   pageNode.filename = `${fileName}${outputExtension}`;
   let outputFileSpec = `${outputPath}${fileName}${outputExtension}`;
-  if (switches.includes("-dumptree")) {
+  if (switches.includes("-dumpdatasource")) {
+    logger.info(
+      `dumping datasource for ${path.basename(outputFileSpec)}`,
+      false,
+      false,
+      false,
+      false
+    );
+    logger.info(pageNode.dataSource.serialize(ParseNodeSerializeFormatEnumType.TABULAR),
+      false,
+      false,
+      false,
+      false
+    )
+  }
+if (switches.includes("-dumptree")) {
     logger.info(
       `dumping tree for ${path.basename(outputFileSpec)}`,
       false,

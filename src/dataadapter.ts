@@ -293,7 +293,7 @@ const MarkdownPatternDictionary: MarkdownPatternDictionaryType = {
     tagType: MarkdownTagType.PAGE
   },
   [MarkdownType.PAGETITLE]: {
-    pattern: /\[\/\/page title\]:\s(.*)$/i,
+    pattern: /\[\/\/page title\]:\s(.*)/i,
     tagType: MarkdownTagType.PAGETITLE
   },
   [MarkdownType.FILLIN]: {
@@ -467,7 +467,7 @@ export class RawMarkdownSource extends MarkdownSource implements IDataSource {
       // .replace(/\u2019/g, "'") // single left quote to apostrophe
       .replace(/\[u201C\u201D]/g, '\"') // double left quote to double quote
       // .replace(/\u201C/g, '\"') // double right quote to double quote
-      // .replace(/\u201D/g, '\"') // double right quote to double quote
+      .replace(/\r/g, "") // double right quote to double quote
       .replace(/[\u0000-\u0008]+/g,"") // non-printables
       .replace(/[\u0009]+/g,"\t") // non-printables
       .split("\n");
