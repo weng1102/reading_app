@@ -57,7 +57,11 @@ import { SectionDispatcher, ISectionPropsType } from "./reactcomps_sections";
 let urlFileRequested: string;
 urlFileRequested = ".json";
 urlFileRequested = "terminals_phonenumbers.json";
+<<<<<<< HEAD
 urlFileRequested = "7wordsentences.json";
+=======
+urlFileRequested = "lists.json";
+>>>>>>> 9c5a07c07733226ed94aedeeee9b6d9e545a4f80
 let urlRequested: string =
   "https://weng1102.github.io/reading_app/dist/" + urlFileRequested;
 
@@ -87,7 +91,10 @@ export const ReadingApp = () => {
           setIsLoaded(true);
         },
         error => {
+<<<<<<< HEAD
           console.log(`JSONPARSERERROR=${error}`)
+=======
+>>>>>>> 9c5a07c07733226ed94aedeeee9b6d9e545a4f80
           setParseError(error);
         }
       ); // should consider capturing parser error
