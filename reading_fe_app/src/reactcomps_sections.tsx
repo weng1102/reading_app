@@ -10,17 +10,7 @@
  **/
 import React from "react";
 import "./App.css";
-//import { readFileSync } from "fs";
-// import mic_listening from "./mic1-xparent.gif";
-// import mic_notlistening from "./mic1-inactive-xparent.gif";
-// import mic_unavailable from "./mic1-ghosted.gif";
-import { useAppSelector, useSpanRef, useDivRef } from "./hooks";
-//import { useEffect, useState, useContext } from "react";
-
-// is this really necessary if availablility is removed below
-// import SpeechRecognition, {
-//   useSpeechRecognition
-// } from "react-speech-recognition";
+import { useAppSelector, useDivRef } from "./hooks";
 import {
   ISectionContent,
   ISentenceContent,
@@ -32,15 +22,6 @@ import {
 import { Settings } from "./reactcomp_settings";
 import { Sentence } from "./reactcomps_sentences";
 
-const SectionType = {
-  ORDEREDLIST: "ol",
-  UNORDEREDLIST: "ul",
-  PARAGRAPH: "none"
-};
-// interface ISectionFormatPropsType {
-//   listFormat: string;
-//   children: any;
-// }
 export interface ISectionPropsType {
   active: boolean;
   section: ISectionContent;
@@ -92,25 +73,15 @@ export const Section_empty = (props: ISectionPropsType) => {
   // console.log(`<Section_Empty>`);
   return <>{br}</>;
 };
-// interface ISectionInactivePropsType1 {
-//   section: ISectionContent;
-// }
 interface ISectionListPropsType {
   //   //  key: number;
   active: boolean;
   section: ISectionContent;
-//  children: ISectionContent[] //actually items that can be either: unorder list ordered list or listitem
 }
-// const Section_Node = (props: ISectionListPropsType) => {
-//   return (
-//     <div>Section_Node type={props.section.type}</div>
-//   )
-// }
 export const Section_Lists = (props: ISectionListPropsType) => {
-//  let sectionLists: ISectionContent = props.section.items;
 let children = props.section.items.map((subsection, key) => (
     <SectionDispatcher key={key} active={props.active} section={subsection}/>))
-    
+
 if (props.section.type === SectionVariantEnumType.unordered_list) {
   return (
     <ul>{children}</ul>
@@ -132,17 +103,11 @@ if (props.section.type === SectionVariantEnumType.unordered_list) {
     )
   }
 };
-// interface ISectionParagraphPropsType {
-//   //  key: number;
-//   active: boolean;
-//   paragraph: ISectionContent;
-// }
 export const Section_paragraph = React.memo((props: ISectionPropsType): any => {
   console.log(`<Section_Paragraph active=${props.active}>`);
   const currentSentenceIdx: number = useAppSelector(
     store => store.cursor_sentenceIdx
   );
-  //  if (props.paragraph.type === SectionVariantEnumType.paragraph) {
   let paragraph: ISectionParagraphVariant = props.section
     .meta as ISectionParagraphVariant;
   return (
@@ -161,35 +126,6 @@ export const Section_paragraph = React.memo((props: ISectionPropsType): any => {
     </>
   );
 });
-// interface ISentencePropsType1 {
-//   //  key: number;
-//   active: boolean;
-//   sentence: ISentenceContent;
-// }
-// export const SectionFormat = React.memo((props: ISectionFormatPropsType) => {
-//   console.log(`<SectionFormat>`);
-//   switch (props.listFormat) {
-//     case "ul":
-//       return <ul>{props.children}</ul>;
-//     case "ol":
-//       return <ol>{props.children}</ol>;
-//     default:
-//       return <>{props.children}</>;
-//   }
-// });
-//SectionFormat = React.memo(SectionFormat);
-// interface ISectionHeadingPropsType {
-//   active: boolean;
-//   sectionIdx: number;
-//   headingLevel: number;
-//   title: string;
-// }
-// const SectionHeading = React.memo(() => {
-//   return <></>;
-// });
-// interface IHeadingTagPropsType {
-//   headingLevel: number;
-// }
 const Section_heading = React.memo((props: ISectionPropsType) => {
   const headingRef = useDivRef();
   const sectionIdx = props.section.id;
@@ -210,55 +146,3 @@ const Section_heading = React.memo((props: ISectionPropsType) => {
     </div>
   );
 });
-// interface ISectionPropsTypeDeprecated {
-//   active: boolean;
-//   sectionObj: any;
-//   listFormat: any;
-// }
-// let Section = React.memo((props: ISectionPropsTypeDeprecated) => {
-//   console.log(
-//     `<Section> props.active=${props.active} props.listFormat=${props.listFormat} props.sectionObj=${props.sectionObj}`
-//   );
-//   ////
-//   // should be written to handle nested (recursive) sections using a props.level
-//   let level = 1; // reminder to keep track of depth of headings
-//   const currentSentenceId = useAppSelector(store => store.cursor_sentenceIdx);
-//   console.log(`<Section> currentSentenceId=${currentSentenceId}`);
-//   return (
-//     <>
-//       <SectionFormat listFormat={props.listFormat}>
-//         {props.sectionObj.sentences.map((sentenceObj: any, keyvalue: any) => (
-//           <Sentence1
-//             key={props.sectionObj.id * 1000 + keyvalue}
-//             active={props.active && sentenceObj.id === currentSentenceId}
-//             listFormat={props.listFormat}
-//             sentenceObj={sentenceObj}
-//           />
-//         ))}
-//       </SectionFormat>
-//     </>
-//   );
-// });
-// //Section = React.memo(Section);
-// interface ISentenceFormatPropsType {
-//   listFormat: any;
-//   children: any;
-// }
-// let SentenceFormat = React.memo((props: ISentenceFormatPropsType) => {
-//   console.log(`<SentenceFormat> ${props.listFormat}`);
-//   switch (props.listFormat) {
-//     case "ul" || "ol":
-//       return <li>{props.children}</li>;
-//     default:
-//       return <>{props.children}</>;
-//   }
-// });
-// interface ISentencePropsType1 {
-//   active: boolean;
-//   listFormat: any;
-//   sentenceObj: any;
-//   wordObj?: any;
-// }
-// export const Sentence1 = React.memo((props: ISentencePropsType1) => {
-//   return <></>;
-// });

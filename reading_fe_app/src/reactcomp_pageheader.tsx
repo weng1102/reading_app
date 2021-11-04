@@ -117,7 +117,7 @@ const WordControl = () => {
   return (
     <>
       <div className="wordNodeIdxvalue">
-        <IdField name="LastWordIdx" id={lastTerminalIdx.toString()} />
+        <IdField name="lastWordIdx" id={lastTerminalIdx.toString()} />
       </div>
       <div className="wordNodeIdxvalue">
         <IdField

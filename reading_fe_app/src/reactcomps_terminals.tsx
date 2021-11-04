@@ -14,11 +14,6 @@
  *
  **/
 import React from "react";
-//import "./App.css";
-//import { readFileSync } from "fs";
-// import mic_listening from "./mic1-xparent.gif";
-// import mic_notlistening from "./mic1-inactive-xparent.gif";
-// import mic_unavailable from "./mic1-ghosted.gif";
 import { Request } from "./reducers";
 import { useAppDispatch, useAppSelector, useSpanRef } from "./hooks";
 import { useEffect } from "react";
@@ -30,9 +25,6 @@ import {
   IAcronymTerminalMeta,
   TerminalMetaEnumType
 } from "./pageContentType";
-// import { NavBar } from "./reactcomp_navbar";
-// import { PageHeader } from "./reactcomp_pageheader";
-// import { Settings } from "./reactcomp_settings";
 
 import { Terminal_Date } from "./reactcomps_terminals_dates";
 import { Terminal_Emailaddress } from "./reactcomps_terminals_emailaddress";
@@ -203,7 +195,7 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
   //  const termRef = useSpanRef();
   const terminalRef = useSpanRef();
   useEffect(() => {
-    console.log(`<TerminalNode> useEffect() active, expecting scrollToView()`);
+//    console.log(`<TerminalNode> useEffect() active, expecting scrollToView()`);
     /* Consider multiple scrollIntoView modes:
       interparagraph/section: scroll to top of new sectionName
       intraparagraph: scroll line-by-line until new section/paragraph
@@ -213,7 +205,7 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
     block (Optional) Defines vertical alignment. One of start, center, end, or nearest. Defaults to start.
     inline Optional Defines horizontal alignment. One of start, center, end, or nearest. Defaults to nearest.
 */
-    if (terminalRef.current != null) {
+    if (props.active && terminalRef.current != null) {
       let rect = terminalRef.current.getBoundingClientRect();
       if (rect.top < 200 || rect.bottom > window.innerHeight) {
         //200 header height

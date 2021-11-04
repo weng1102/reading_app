@@ -15,42 +15,11 @@
  **/
 import React from "react";
 import "./App.css";
-//import { readFileSync } from "fs";
-// import mic_listening from "./mic1-xparent.gif";
-// import mic_notlistening from "./mic1-inactive-xparent.gif";
-// import mic_unavailable from "./mic1-ghosted.gif";
 import { useAppSelector } from "./hooks";
 import { DateFormatEnumType, IDateTerminalMeta } from "./pageContentType";
 import { TerminalNode, ITerminalPropsType } from "./reactcomps_terminals";
-// import { NavBar } from "./reactcomp_navbar";
-// import { PageHeader } from "./reactcomp_pageheader";
-// import { Settings } from "./reactcomp_settings";
 
 export const Terminal_Date = React.memo((props: ITerminalPropsType): any => {
-  //   const terminalRef = useSpanRef();
-  //   useEffect(() => {
-  //     console.log(`<Terminal Date> useEffect() active, expecting scrollToView()`);
-  //     /* Consider multiple scrollIntoView modes:
-  //       interparagraph/section: scroll to top of new sectionName
-  //       intraparagraph: scroll lin-by-line until new section/paragraph
-  //     */
-  //     /*
-  //     behavior (Optional) Defines the transition animation. One of auto or smooth. Defaults to auto.
-  //     block (Optional) Defines vertical alignment. One of start, center, end, or nearest. Defaults to start.
-  //     inline Optional Defines horizontal alignment. One of start, center, end, or nearest. Defaults to nearest.
-  // */
-  //     // this scrolling should be in a separate function called after any component renders?
-  //     if (terminalRef.current != null) {
-  //       let rect = terminalRef.current.getBoundingClientRect();
-  //       if (rect.top < 200 || rect.bottom > window.innerHeight) {
-  //         terminalRef.current.scrollIntoView({
-  //           behavior: "smooth",
-  //           block: "start",
-  //           inline: "nearest"
-  //         });
-  //       }
-  //     }
-  //   }, [props.active]);
   const currentTerminalIdx = useAppSelector(store => store.cursor_terminalIdx); // cause rerendering
   console.log(
     `<Terminal_date active=${props.active} content=${props.terminal.content}/>`

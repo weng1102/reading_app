@@ -10,10 +10,6 @@
  **/
 import React from "react";
 import "./App.css";
-//import { readFileSync } from "fs";
-// import mic_listening from "./mic1-xparent.gif";
-// import mic_notlistening from "./mic1-inactive-xparent.gif";
-// import mic_unavailable from "./mic1-ghosted.gif";
 import { useAppDispatch, useAppSelector, useSpanRef, useDivRef } from "./hooks";
 
 // is this really necessary if availablility is removed below
