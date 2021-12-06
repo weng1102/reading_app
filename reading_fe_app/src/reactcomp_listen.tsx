@@ -89,12 +89,12 @@ export const ListeningMonitor = () => {
     // (asynchronously) when it detects speech (and when it detects silence
     // for several seconds). This effect must balance this with the component
     // updating the current word recited.
-    const timeoutLimit = 20;
-    const silenceTimeout = 20; // seconds
+    //    const timeoutLimit = 20;
+    //  const silenceTimeout = 20; // seconds
     if (words.length === 0) {
       let timeoutDuration = Math.round((Date.now() - silenceCheckpoint) / 1000);
-      console.log(`timeout in ${timeoutLimit - timeoutDuration}s`);
-      if (timeoutDuration > timeoutLimit) {
+      console.log(`timeout in ${silenceTimeout - timeoutDuration}s`);
+      if (timeoutDuration > silenceTimeout) {
         dispatch(Request.Recognition_stop());
       }
     } else {
