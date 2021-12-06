@@ -19,7 +19,7 @@ import {
   ISectionParagraphVariant,
   ISectionUnorderedListVariant
 } from "./pageContentType";
-import { Settings } from "./reactcomp_settings";
+//import { Settings } from "./reactcomp_settings";
 import { Sentence } from "./reactcomps_sentences";
 
 export interface ISectionPropsType {
@@ -51,13 +51,14 @@ export const SectionDispatcher = React.memo((props: ISectionPropsType) => {
     case SectionVariantEnumType.unordered_list:
     case SectionVariantEnumType.ordered_list:
     case SectionVariantEnumType.listitem:
-    // need to group because component will recursively render zero or more of each
-      return (
-        <Section_Lists active={props.active} section={props.section} />
-      );
+      // need to group because component will recursively render zero or more of each
+      return <Section_Lists active={props.active} section={props.section} />;
     case SectionVariantEnumType.fillin:
     case SectionVariantEnumType.fillin_list:
-    case SectionVariantEnumType.photo_entry:
+    case SectionVariantEnumType.image_entry:
+      return (
+        <Section_imageEntry active={props.active} section={props.section} />
+      );
     case SectionVariantEnumType.blockquote:
     case SectionVariantEnumType.unittest:
     default:
@@ -79,32 +80,25 @@ interface ISectionListPropsType {
   section: ISectionContent;
 }
 export const Section_Lists = (props: ISectionListPropsType) => {
-let children = props.section.items.map((subsection, key) => (
-    <SectionDispatcher key={key} active={props.active} section={subsection}/>))
+  let children = props.section.items.map((subsection, key) => (
+    <SectionDispatcher key={key} active={props.active} section={subsection} />
+  ));
 
-if (props.section.type === SectionVariantEnumType.unordered_list) {
-  return (
-    <ul>{children}</ul>
-    )
-  }
-  else if (props.section.type === SectionVariantEnumType.ordered_list) {
+  if (props.section.type === SectionVariantEnumType.unordered_list) {
+    return <ul>{children}</ul>;
+  } else if (props.section.type === SectionVariantEnumType.ordered_list) {
+    return <ol>{children}</ol>;
+  } else if (props.section.type === SectionVariantEnumType.listitem) {
     return (
-      <ol>{children}</ol>
-      )
-  }
-  else if (props.section.type === SectionVariantEnumType.listitem) {
-    return (
-//      <li key={key}>{children}</li>
+      //      <li key={key}>{children}</li>
       <li>{children}</li>
-    )
+    );
   } else {
-    return (
-      <div>section list formatting problem type={props.section.type}</div>
-    )
+    return <div>section list formatting problem type={props.section.type}</div>;
   }
 };
 export const Section_paragraph = React.memo((props: ISectionPropsType): any => {
-  console.log(`<Section_Paragraph active=${props.active}>`);
+  // console.log(`<Section_Paragraph active=${props.active}>`);
   const currentSentenceIdx: number = useAppSelector(
     store => store.cursor_sentenceIdx
   );
@@ -145,4 +139,8 @@ const Section_heading = React.memo((props: ISectionPropsType) => {
       <HeadingTag>{meta.title}</HeadingTag>
     </div>
   );
+});
+const Section_imageEntry = React.memo((props: ISectionPropsType) => {
+  // cosnider using css grid to format image/caption block
+  return <div>image</div>;
 });

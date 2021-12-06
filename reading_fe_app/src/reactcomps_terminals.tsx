@@ -141,7 +141,7 @@ export const TerminalDispatcher = React.memo(
   }
 );
 export const Terminal_Acronym = React.memo((props: ITerminalPropsType): any => {
-  console.log(`<Terminal_acronym> active=${props.active}`);
+  //  console.log(`<Terminal_acronym> active=${props.active}`);
   // Rather not trigger dispatch via useSelector but necessary for all multiple terminal words
   // Rerenders only when acronym is active theough
   const currentTerminalIdx = useAppSelector(store => store.cursor_terminalIdx); // cause rerendering
@@ -162,9 +162,9 @@ export const Terminal_Acronym = React.memo((props: ITerminalPropsType): any => {
   ); // return
 });
 export const Terminal_Word = React.memo((props: ITerminalPropsType): any => {
-  console.log(
-    `<Terminal_word active=${props.active} content=${props.terminal.content}/>`
-  );
+  // console.log(
+  //   `<Terminal_word active=${props.active} content=${props.terminal.content}/>`
+  // );
   let wordInfo = props.terminal.meta as ITerminalInfo;
   return (
     <TerminalNode class="word" active={props.active} terminalInfo={wordInfo} />
@@ -172,9 +172,9 @@ export const Terminal_Word = React.memo((props: ITerminalPropsType): any => {
 });
 export const Terminal_Whitespace = React.memo(
   (props: ITerminalPropsType): any => {
-    console.log(
-      `<Terminal_whitespace props.active=${props.active} props.terminal=${props.terminal} content="${props.terminal.content}"/>`
-    );
+    // console.log(
+    //   `<Terminal_whitespace props.active=${props.active} props.terminal=${props.terminal} content="${props.terminal.content}"/>`
+    // );
     let terminalInfo = props.terminal.meta as ITerminalInfo;
     return (
       <TerminalNode
@@ -195,7 +195,7 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
   //  const termRef = useSpanRef();
   const terminalRef = useSpanRef();
   useEffect(() => {
-//    console.log(`<TerminalNode> useEffect() active, expecting scrollToView()`);
+    //    console.log(`<TerminalNode> useEffect() active, expecting scrollToView()`);
     /* Consider multiple scrollIntoView modes:
       interparagraph/section: scroll to top of new sectionName
       intraparagraph: scroll line-by-line until new section/paragraph
@@ -217,9 +217,9 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
       }
     }
   }, [props.active]);
-  console.log(
-    `<TerminalNode active=${props.active} content="${props.terminalInfo.content}"/>`
-  );
+  // console.log(
+  //   `<TerminalNode active=${props.active} content="${props.terminalInfo.content}"/>`
+  // );
   let attribute: string = props.terminalInfo.recitable ? "recitable-word" : "";
   if (props.terminalInfo.recitable) {
     return (

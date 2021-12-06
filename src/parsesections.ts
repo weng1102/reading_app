@@ -153,7 +153,7 @@ export class SectionParseNode_PHOTOENTRY extends SectionParseNode_LIST
   constructor(parent: IPageNode | ISectionNode) {
     super(parent);
   }
-  readonly type = SectionVariantEnumType.photo_entry;
+  readonly type = SectionVariantEnumType.image_entry;
   meta = ISectionFillinVariantInitializer();
 }
 export class SectionParseNode_EMPTY extends SectionParseNode_LIST

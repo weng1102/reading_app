@@ -5,7 +5,6 @@ import { ReadingApp } from "./reactcomps";
 
 function App() {
   //      <ReadingApp />
-
   return (
     <div className="App">
       <ReadingApp />

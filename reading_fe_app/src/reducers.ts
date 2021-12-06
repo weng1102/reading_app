@@ -1,9 +1,20 @@
-import React from "react";
-import { useContext } from "react";
-import { useAppDispatch } from "./hooks";
-import { combineReducers } from "redux";
-import { ITerminalInfoInitializer } from "./pageContentType";
-import { IPageContext, PageContextInitializer, PageContext } from "./termnodes";
+/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+ *
+ * File name: reducer.ts
+ *
+ * Defines React redux states and transition.
+ *
+ *
+ * Version history:
+ *
+ **/
+//import React from "react";
+//import { useContext } from "react";
+//import { useAppDispatch } from "./hooks";
+//import { combineReducers } from "redux";
+//import { ITerminalInfoInitializer } from "./pageContentType";
+//import { CPageContext, PageContextInitializer, PageContext } from "./pageContext";
+import { CPageContext } from "./pageContext";
 
 /**
  * This is a reducer - a function that takes a current state value and an
@@ -75,6 +86,8 @@ const WORDS_VISITED_RESET = "wordsvisited/reset";
 const WORDS_VISITED = "wordsvisited/set";
 
 const TRANSITION_ACKNOWLEDGE = "transition/acknowledge";
+
+const SETTINGS_TOGGLE = "settings/toggle";
 
 // const PAGE_RESET_VALUE = 0;
 // const SECTION_RESET_VALUE = 0;
@@ -208,9 +221,22 @@ const Cursor_gotoNextWord = () => {
     type: WORD_NEXT
   };
 };
+const Cursor_gotoNextSentence = () => {
+  console.log(`nextsentence`);
+  return {
+    type: SENTENCE_NEXT
+  };
+};
 const Cursor_gotoPreviousWord = () => {
+  console.log(`prevword`);
   return {
     type: WORD_PREVIOUS
+  };
+};
+const Cursor_gotoPreviousSentence = () => {
+  console.log(`prevsentence`);
+  return {
+    type: SENTENCE_PREVIOUS
   };
 };
 const Cursor_gotoWordByIdx = (terminalIdx: number) => {
@@ -267,10 +293,15 @@ const Recognition_setAvailability = (speechRecognitionSupported: boolean) => {
 //     type: ANNOUNCE_TRANSITIONACKNOWLEDGED
 // }
 // }
-const Page_setContext = (context: IPageContext) => {
+const Page_setContext = (context: CPageContext) => {
   return {
     type: CONTEXT_SET,
     payload: context
+  };
+};
+const Settings_toggle = () => {
+  return {
+    type: SETTINGS_TOGGLE
   };
 };
 export const Request = {
@@ -279,6 +310,8 @@ export const Request = {
   Cursor_gotoFirstSentence, // first word in section
   Cursor_gotoFirstWord, // first word in sentence
   Cursor_gotoNextWord,
+  Cursor_gotoPreviousSentence,
+  Cursor_gotoNextSentence,
   Cursor_gotoPreviousWord,
   Cursor_gotoWordByIdx,
   Cursor_gotoSectionByIdx,
@@ -292,6 +325,8 @@ export const Request = {
   Recognition_flushed,
   Recognition_start,
   Recognition_stop,
+
+  Settings_toggle,
 
   Speech_setAvailability,
   Speech_acknowledged,
@@ -406,7 +441,9 @@ interface IReduxState {
   cursor_newPageTransition: boolean;
   cursor_endOfPageReached: boolean;
 
-  pageContext: IPageContext;
+  pageContext: CPageContext;
+
+  settings_toggle: boolean;
 }
 const IReduxStateInitialState: IReduxState = {
   announce_available: false,
@@ -425,58 +462,89 @@ const IReduxStateInitialState: IReduxState = {
   cursor_newSentenceTransition: false,
   cursor_newSectionTransition: false,
   cursor_newPageTransition: false,
-  cursor_beginningOfPageReached: false,
+  cursor_beginningOfPageReached: true,
   cursor_endOfPageReached: false,
 
-  pageContext: PageContextInitializer()
+  pageContext: new CPageContext(),
+
+  settings_toggle: false
+  //  pageContext: PageContextInitializer()
 };
 export const rootReducer = (
   state: IReduxState = IReduxStateInitialState,
   action: any
 ) => {
-  const setTerminalState = (terminalIdx: number) => {
-    state.cursor_newSentenceTransition = false;
-    state.cursor_newSectionTransition = false;
-    let priorSentenceIdx: number = state.cursor_sentenceIdx;
-    let priorSectionIdx: number = state.cursor_sectionIdx;
-    state.cursor_terminalIdx = terminalIdx;
-    state.cursor_sectionIdx =
-      state.pageContext.terminalList[terminalIdx].sectionIdx;
-    state.cursor_sentenceIdx =
-      state.pageContext.terminalList[terminalIdx].sentenceIdx;
-    state.cursor_newSentenceTransition =
-      state.cursor_sentenceIdx !== priorSentenceIdx;
-    if (state.cursor_newSentenceTransition) state.listen_flush = true;
-    state.cursor_newSectionTransition =
-      state.cursor_sectionIdx !== priorSectionIdx;
+  const setSentenceState = (
+    terminalIdx: number,
+    currentSentenceIdx: number
+  ): [number, boolean] => {
+    let sentenceIdx: number = state.pageContext.sentenceIdx(terminalIdx);
+    return [sentenceIdx, sentenceIdx !== currentSentenceIdx];
   };
-  const setToNextTerminalState = (terminalIdx: number) => {
-    if (state.pageContext.terminalList[terminalIdx].nextTermIdx.length === 0) {
-      state.cursor_endOfPageReached = true;
-      state.listen_active = false;
+  const setSectionState = (
+    terminalIdx: number,
+    currentSectionIdx: number
+  ): [number, boolean] => {
+    let sectionIdx: number = state.pageContext.sectionIdx(terminalIdx);
+    return [sectionIdx, sectionIdx !== currentSectionIdx];
+  };
+  const setTerminalState = (terminalIdxs: number[]) => {
+    if (terminalIdxs.length <= 0) {
+      console.log(`setTerminalState no state transition`);
+    } else if (terminalIdxs.length === 1) {
+      console.log(`setTerminalState single state transition`);
+      if (state.pageContext.validTerminalIdx(terminalIdxs[0])) {
+        /// set single state
+        state.cursor_terminalIdx = terminalIdxs[0];
+        [
+          state.cursor_sentenceIdx,
+          state.cursor_newSentenceTransition
+        ] = setSentenceState(terminalIdxs[0], state.cursor_sentenceIdx);
+        [
+          state.cursor_sectionIdx,
+          state.cursor_newSectionTransition
+        ] = setSectionState(terminalIdxs[0], state.cursor_sectionIdx);
+        state.cursor_beginningOfPageReached =
+          state.cursor_terminalIdx === state.pageContext.firstTerminalIdx;
+        state.cursor_endOfPageReached =
+          state.cursor_terminalIdx === state.pageContext.lastTerminalIdx;
+      } else {
+        console.log(
+          `setTerminalState single state transition encountered invalid terminalIdx=${terminalIdxs[0]}`
+        );
+      }
     } else {
-      //      state.cursor_endOfPageReached = false;
-      setTerminalState(
-        state.pageContext.terminalList[terminalIdx].nextTermIdx[0]
-      );
+      console.log(`setTerminalState multiple state transition encountered`);
     }
   };
-  const setToPrevTerminalState = (terminalIdx: number) => {
-    if (state.pageContext.terminalList[terminalIdx].prevTermIdx.length === 0) {
-      state.cursor_beginningOfPageReached = true;
-    } else {
-      setTerminalState(
-        state.pageContext.terminalList[terminalIdx].prevTermIdx[0]
-      );
-    }
+  const setToNextTerminalState = () => {
+    setTerminalState(
+      state.pageContext.nextTerminalIdx(state.cursor_terminalIdx)
+    );
+  };
+  const setToPrevTerminalState = () => {
+    setTerminalState(
+      state.pageContext.previousTerminalIdx(state.cursor_terminalIdx)
+    );
+  };
+  const setToNextSentenceTerminalState = () => {
+    setTerminalState([
+      state.pageContext.nextSentenceTerminalIdx(state.cursor_terminalIdx)
+    ]);
+  };
+  const setToPrevSentenceTerminalState = () => {
+    setTerminalState([
+      state.pageContext.previousSentenceTerminalIdx(state.cursor_terminalIdx)
+    ]);
   };
   //  const queueAccouncement(state.announcement)
   switch (action.type) {
     case CONTEXT_SET:
-      state.pageContext = action.payload as IPageContext; // strictly a read only reference to react context NOT a copy
+      // convert this to object with methods
+      state.pageContext = action.payload as CPageContext; // strictly a read only reference to react context NOT a copy
       return state;
     case PAGE_TOP:
-      setTerminalState(0); // should be first actionable terminal i.e. , no syntactical sugar
+      setTerminalState([state.pageContext.firstTerminalIdx]); // should be first actionable terminal i.e. , no syntactical sugar
       return state;
     case SECTION_CHANGE:
       let sectionIdx: number = +action.payload;
@@ -521,14 +589,14 @@ export const rootReducer = (
             // next sentence
             break;
           } else if (expecting.toLowerCase() === wordHeard.toLowerCase()) {
-            setToNextTerminalState(state.cursor_terminalIdx);
+            setToNextTerminalState();
           } else if (expectingAlt.toLowerCase() === wordHeard.toLowerCase()) {
-            setToNextTerminalState(state.cursor_terminalIdx);
+            setToNextTerminalState();
           } else if (
             expectingAlt.length > 0 &&
             patternMatch(wordHeard.toLowerCase(), expectingAlt)
           ) {
-            setToNextTerminalState(state.cursor_terminalIdx);
+            setToNextTerminalState();
           } else {
             console.log(
               `No WORD_MATCH:\nwords heard=${wordsHeard}\nbut looking for ${
@@ -544,13 +612,19 @@ export const rootReducer = (
       }
       return state;
     case WORD_NEXT:
-      setToNextTerminalState(state.cursor_terminalIdx);
+      setToNextTerminalState();
       return state;
     case WORD_PREVIOUS:
-      setToPrevTerminalState(state.cursor_terminalIdx);
+      setToPrevTerminalState();
+      return state;
+    case SENTENCE_NEXT:
+      setToNextSentenceTerminalState();
+      return state;
+    case SENTENCE_PREVIOUS:
+      setToPrevSentenceTerminalState();
       return state;
     case WORD_SELECT:
-      setTerminalState(+action.payload);
+      setTerminalState([+action.payload]);
       return state;
     // case WORDS_VISITED_RESET:
     //   // state.visited[0] = false;
@@ -623,6 +697,10 @@ export const rootReducer = (
       state.cursor_newSentenceTransition = false;
       state.cursor_beginningOfPageReached = false;
       state.cursor_endOfPageReached = false;
+      return state;
+
+    case SETTINGS_TOGGLE:
+      state.settings_toggle = !state.settings_toggle;
       return state;
     default:
       return state;

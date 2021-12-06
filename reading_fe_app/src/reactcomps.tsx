@@ -15,39 +15,37 @@
  **/
 import React from "react";
 import "./App.css";
-import http from "http";
-import path from "path";
-import glob from "glob";
-//import { readFileSync } from "fs";
-// import mic_listening from "./mic1-xparent.gif";
-// import mic_notlistening from "./mic1-inactive-xparent.gif";
-// import mic_unavailable from "./mic1-ghosted.gif";
 import { Request } from "./reducers";
-import { useAppDispatch, useAppSelector, useSpanRef, useDivRef } from "./hooks";
+import { useAppDispatch, useAppSelector, useDialog } from "./hooks";
 import { useEffect, useState, useContext } from "react";
 
 // is this really necessary if availablility is removed below
-import SpeechRecognition, {
-  useSpeechRecognition
-} from "react-speech-recognition";
+import SpeechRecognition from "react-speech-recognition";
 
 import {
   IPageContent,
-  ISectionContent,
-  ISentenceContent,
-  ITerminalContent,
-  ISectionHeadingVariant,
-  IWordTerminalMeta,
-  TerminalMetaEnumType,
-  SectionVariantEnumType,
-  ISectionParagraphVariant
+  ISectionContent
+  // ISentenceContent,
+  // ITerminalContent,
+  // ISectionHeadingVariant,
+  // IWordTerminalMeta,
+  // TerminalMetaEnumType,
+  // SectionVariantEnumType,
+  // ISectionParagraphVariant
 } from "./pageContentType";
-import { IPageContext, PageContext, PageContextInitializer } from "./termnodes";
+import { CPageContext, PageContext } from "./pageContext";
+import {
+  SettingsContext,
+  ISettings,
+  ISettingsContext,
+  SettingsInitializer
+} from "./settingsContext";
 import { NavBar } from "./reactcomp_navbar";
 import { PageHeader } from "./reactcomp_pageheader";
-import { Settings } from "./reactcomp_settings";
-import { TerminalDispatcher } from "./reactcomps_terminals";
-import { SectionDispatcher, ISectionPropsType } from "./reactcomps_sections";
+import { PageFooter } from "./reactcomp_pagefooter";
+import { SettingsDialog } from "./reactcomp_settings";
+//import { TerminalDispatcher } from "./reactcomps_terminals";
+import { SectionDispatcher } from "./reactcomps_sections";
 
 // const SectionType = {
 //   ORDEREDLIST: "ol",
@@ -60,17 +58,22 @@ urlFileRequested = "terminals_phonenumbers.json";
 urlFileRequested = "7wordsentences.json";
 let urlRequested: string =
   "https://weng1102.github.io/reading_app/dist/" + urlFileRequested;
-
 export const ReadingApp = () => {
   const [responseError, setResponseError] = useState<string | null>(null);
   const [parseError, setParseError] = useState<string | null>(null);
   const [jsonContent, setJsonContent] = useState<IPageContent | null>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false); // is this necessary if jsonContent is used as a dependency fo useEffect()
   let dispatch = useAppDispatch();
+  const [_settings, _setSettings] = useState(SettingsInitializer());
+  const settingsContext: ISettingsContext = {
+    settings: _settings,
+    saveSettings: _setSettings
+  };
+  //  SettingsContext = React.createContext(settingsContext);
 
-// Consider node-fetch instead
+  // Consider node-fetch instead
 
-//  let urlRequest: HttpRequest = new Request(url);
+  //  let urlRequest: HttpRequest = new Request(url);
   function fetchRequest(url: string) {
     fetch(url)
       .then(
@@ -94,6 +97,7 @@ export const ReadingApp = () => {
   useEffect(() => {
     fetchRequest(urlRequested);
   }, [urlRequested]);
+
   dispatch(
     Request.Recognition_setAvailability(
       SpeechRecognition.browserSupportsSpeechRecognition()
@@ -128,17 +132,38 @@ export const ReadingApp = () => {
     );
   } else {
     let content: IPageContent = jsonContent! as IPageContent;
+    let pageContext: CPageContext = new CPageContext(
+      content.terminalList,
+      content.headingList,
+      content.sectionList,
+      content.sentenceList
+    );
+    // should be retrieved from persistent store
+
+    // return (
+    //   <>
+    //     <PageContext.Provider
+    //       value={PageContextInitializer(
+    //         content.terminalList,
+    //         content.headingList,
+    //         content.sectionList,
+    //         content.sentenceList
+    //       )}
+    //     >
+    //       <Page content={content} />
+    //     </PageContext.Provider>
+    //   </>
+    // );
+    // TODO: retrieve settings to initialize
+
     return (
-      <PageContext.Provider
-        value={PageContextInitializer(
-          content.terminalList,
-          content.headingList,
-          content.sectionList,
-          content.sentenceList
-        )}
-      >
-        <Page content={content} />
-      </PageContext.Provider>
+      <>
+        <PageContext.Provider value={pageContext}>
+          <SettingsContext.Provider value={settingsContext}>
+            <Page content={content} />
+          </SettingsContext.Provider>
+        </PageContext.Provider>
+      </>
     );
   }
 };
@@ -146,18 +171,21 @@ interface IPagePropsType {
   content: IPageContent;
 }
 export const Page = React.memo((props: IPagePropsType) => {
+  const { isActive, toggle } = useDialog();
   //give access to page context to reducers
-  let pageContext: IPageContext = useContext(PageContext)!;
+  let pageContext: CPageContext = useContext(PageContext)!;
   let dispatch = useAppDispatch();
   dispatch(Request.Page_setContext(pageContext)); // required for all pageContext changes
   dispatch(Request.Cursor_gotoFirstSection());
   return (
     // create page state in redux
-    <>
+    <div className="page">
       <PageHeader title={props.content.title} />
+      <SettingsDialog isActive={isActive} hide={toggle} />
       <NavBar headings={props.content.headingList} />
       <Content content={props.content} />
-    </>
+      <PageFooter />
+    </div>
   );
 });
 //PageHeader = React.memo(PageHeader);
@@ -187,7 +215,7 @@ export const Content = React.memo((props: IContentPropsType): any => {
     store => store.cursor_sectionIdx
   );
   return (
-    <div className="content-container">
+    <main>
       {props.content.sections.map(
         (section: ISectionContent, keyvalue: number) => (
           <SectionDispatcher
@@ -197,6 +225,6 @@ export const Content = React.memo((props: IContentPropsType): any => {
           />
         ) // =>
       )}
-    </div>
+    </main>
   ); // return
 });

@@ -16,20 +16,19 @@ import "./App.css";
 import { Request } from "./reducers";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { useEffect, useState, useContext } from "react";
-import { ReadItButton } from "./reactcomp_speech";
 import { IHeadingListItem } from "./pageContentType";
-import { IPageContext, PageContext } from "./termnodes";
+import { IPageContext, PageContext } from "./pageContext";
+
 interface INavPropsType {
   headings: IHeadingListItem[];
 }
-
 export const NavBar = React.memo((props: INavPropsType) => {
   // should jump to first word in the section basedsection to wordSeq lookup from  on wordNodes.wordSeqBySectionId(sectionid) method !!!!
   // should this code be here or in the redux?
   console.log(`<NavBar>`);
   const dispatch = useAppDispatch();
   return (
-    <div className="navbar">
+    <nav>
       {props.headings.map((headings: IHeadingListItem, keyvalue: any) => (
         <div
           className="navbar-li"
@@ -42,6 +41,6 @@ export const NavBar = React.memo((props: INavPropsType) => {
         </div>
       ))}
       ;
-    </div>
+    </nav>
   );
 });

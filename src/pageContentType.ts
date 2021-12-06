@@ -84,7 +84,7 @@ export enum SectionVariantEnumType {
   paragraph = "paragraph",
   fillin = "fillin",
   fillin_list = "fillin_list",
-  photo_entry = "photo_entry",
+  image_entry = "image_entry",
   blockquote = "blockquote",
   unittest = "unittest",
   empty = "empty",
@@ -170,7 +170,6 @@ export function ISectionListitemVariantInitializer(): ISectionListitemVariant {
 }
 export interface ISectionUnorderedListVariant {
   items: ISectionContent[];
-  //  items: ISectionNode[];
   depth: number;
   marker: UnorderedListMarkerEnumType; // overrides css but not user profile
 }

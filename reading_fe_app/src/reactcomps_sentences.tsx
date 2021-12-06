@@ -18,7 +18,6 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 
 import { ISentenceContent, ITerminalContent } from "./pageContentType";
-import { Settings } from "./reactcomp_settings";
 import { TerminalDispatcher } from "./reactcomps_terminals";
 
 const SectionType = {
@@ -35,9 +34,9 @@ export const Sentence = React.memo((props: ISentencePropsType) => {
   // const currentTerminalIdx: number = useAppSelector(
   //   store => store.cursor_terminalIdx
   // );
-  console.log(
-    `<Sentence1 sentenceIdx=${props.sentence.id} active=${props.active}>`
-  );
+  // console.log(
+  //   `<Sentence1 sentenceIdx=${props.sentence.id} active=${props.active}>`
+  // );
   return (
     <>
       <span className="sentence">
@@ -58,12 +57,12 @@ export interface ISentenceFormatPropsType {
   listFormat: any;
   children: any;
 }
-export const SentenceFormat = React.memo((props: ISentenceFormatPropsType) => {
-  console.log(`<SentenceFormat> ${props.listFormat}`);
-  switch (props.listFormat) {
-    case "ul" || "ol":
-      return <li>{props.children}</li>;
-    default:
-      return <>{props.children}</>;
-  }
-});
+// export const SentenceFormat = React.memo((props: ISentenceFormatPropsType) => {
+//   console.log(`<SentenceFormat> ${props.listFormat}`);
+//   switch (props.listFormat) {
+//     case "ul" || "ol":
+//       return <li>{props.children}</li>;
+//     default:
+//       return <>{props.children}</>;
+//   }
+// });
