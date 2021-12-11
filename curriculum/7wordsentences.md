@@ -1,6 +1,7 @@
 [//page title]: Seven word sentences
 
 # first ten
+
 My children and I go to school.
 She said hello to the little girl.
 He has as many children as them.
@@ -13,6 +14,7 @@ Can you change the way you dress?
 She would like to answer that question.
 
 # second ten
+
 We can all learn from this exercise.
 You can have any thing you want.
 Does your boss need any new workers?
@@ -406,7 +408,7 @@ Who is that man at the gate?
 Can you hear me in this noise?
 How much did you earn last month?
 They stopped us at the passport control.
-I have to practise this all day.
+I have to practice this all day.
 Can you smell this smoke or something?
 What do you think of this problem?
 Do you know who her clerk is?

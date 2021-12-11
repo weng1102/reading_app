@@ -234,6 +234,7 @@ export interface ISentenceContent {
   firstTermIdx: number;
   lastTermIdx: number;
   terminals: ITerminalContent[];
+  lastPunctuation: string;
   //  terminals: ITerminalNode[];
 }
 export enum TerminalMetaEnumType {
@@ -568,7 +569,7 @@ export interface IHeadingListItem {
   headingLevel: number;
   title: string;
   termIdx: number; // either first word of section title OR first word in section body
-  terminalCountPriorToHeading: number; // numbrt og terminals immediately preceding this section heading
+  terminalCountPriorToHeading: number; // number of terminals immediately preceding this section heading
 }
 export interface IRangeItem {
   firstTermIdx: number;
@@ -590,14 +591,18 @@ export interface ISectionListItem extends IRangeItem {
 export function ISectionListItemInitializer(
   firstTermIdx: number = -1,
   lastTermIdx: number = -1,
-  type: SectionVariantEnumType | string = SectionVariantEnumType.tbd
+  type: string = SectionVariantEnumType.tbd
 ): ISectionListItem {
+  type = type.toString();
   return { firstTermIdx, lastTermIdx, type };
 }
-export type ISentenceListItem = IRangeItem;
+export interface ISentenceListItem extends IRangeItem {
+  lastPunctuation: string;
+}
 export function ISentenceListItemInitializer(
   firstTermIdx: number = -1,
-  lastTermIdx: number = -1
+  lastTermIdx: number = -1,
+  lastPunctuation: string = "."
 ): ISentenceListItem {
-  return { firstTermIdx, lastTermIdx };
+  return { firstTermIdx, lastTermIdx, lastPunctuation };
 }

@@ -307,6 +307,10 @@ h1 {
   padding-left: 5px;
   user-select: none;
   align-items: center;
+  grid-template-columns: auto
+}
+.settings-grid-section-item-recitation-control-group {
+  padding-top: 5px;
 }
 .recitation-radioButton {
   font-size: 14px;

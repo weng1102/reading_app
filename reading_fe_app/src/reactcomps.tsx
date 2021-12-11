@@ -56,6 +56,7 @@ let urlFileRequested: string;
 urlFileRequested = ".json";
 urlFileRequested = "terminals_phonenumbers.json";
 urlFileRequested = "7wordsentences.json";
+urlFileRequested = "paragraph.json";
 let urlRequested: string =
   "https://weng1102.github.io/reading_app/dist/" + urlFileRequested;
 export const ReadingApp = () => {

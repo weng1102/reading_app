@@ -24,7 +24,7 @@ import { GetTerminalNode } from "./parseterminaldispatch";
 import {
   ISentenceContent,
   ISentenceListItemInitializer,
-  ITerminalContent
+  TerminalMetaEnumType
 } from "./pageContentType";
 
 export type ISentenceNode = ISentenceContent & IParseNode;
@@ -34,6 +34,7 @@ abstract class AbstractSentenceNode extends ParseNode implements ISentenceNode {
   firstTermIdx: number = IDX_INITIALIZER;
   lastTermIdx: number = IDX_INITIALIZER;
   terminals: ITerminalNode[] = [];
+  lastPunctuation: string = "";
   constructor(parent: ISectionNode | null) {
     super(parent);
   }
@@ -170,7 +171,11 @@ export class SentenceNode extends AbstractSentenceNode
       // got each terminal and update sentence id
       this.id =
         this.userContext.sentences.push(
-          ISentenceListItemInitializer(this.firstTermIdx, this.lastTermIdx)
+          ISentenceListItemInitializer(
+            this.firstTermIdx,
+            this.lastTermIdx,
+            this.lastPunctuation
+          )
         ) - 1;
       for (let idx = this.firstTermIdx; idx <= this.lastTermIdx; idx++) {
         this.userContext.terminals[idx].sentenceIdx = this.id;
@@ -186,7 +191,22 @@ export class SentenceNode extends AbstractSentenceNode
     }
   }
   parseTokens(tokens: TokenListType) {
+    // end of sentence. Look for trailing punctuation
+    let idx: number;
+    let found: boolean = false;
     if (tokens.length === 0) {
+      //find last punctuation mark from the end of terminals
+      for (let terminal of this.terminals.slice().reverse()) {
+        found =
+          terminal.type === TerminalMetaEnumType.punctuation &&
+          terminal.content !== "'" &&
+          terminal.content !== '"';
+        if (found) {
+          this.lastPunctuation = terminal.content;
+          console.log(`punctuation=${this.lastPunctuation}`);
+          break;
+        }
+      }
       return 0;
     }
     try {

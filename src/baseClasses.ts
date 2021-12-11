@@ -17,7 +17,7 @@ import { Logger } from "./logger";
 import { IDataSource, BasicMarkdownSource } from "./dataadapter";
 import {
   IHeadingListItem,
-  IRangeItem,
+  ISentenceListItem,
   ISectionListItem,
   ITerminalListItem
 } from "./pagecontentType";
@@ -171,28 +171,26 @@ class HeadingArray extends Array<IHeadingListItem> {
     return outputStr;
   }
 }
-class RangeArray extends Array<IRangeItem> {
+class SentenceArray extends Array<ISentenceListItem> {
   constructor(...args: any) {
     super(...args);
   }
-  push(range: IRangeItem): number {
-    // needs to store the nearest termIdx so that parse can later find
-    // the actual visible, recitable terminal in parse
-    return super.push(range);
+  push(sentence: ISentenceListItem): number {
+    return super.push(sentence);
   }
   parse(): number {
     return this.length;
   }
   serialize(): string {
-    let outputStr: string = "[ idx]:  1st last\n";
+    let outputStr: string = "[ idx]:  1st last punct\n";
     for (const [i, element] of this.entries()) {
       outputStr = `${outputStr}[${i
         .toString()
         .padStart(4, "0")}]: ${element.firstTermIdx
         .toString()
-        .padStart(4, " ")} ${element.lastTermIdx
-        .toString()
-        .padStart(4, " ")}\n`;
+        .padStart(4, " ")} ${element.lastTermIdx.toString().padStart(4, " ")} ${
+        element.lastPunctuation
+      }\n`;
     }
     return outputStr;
   }
@@ -202,8 +200,6 @@ class SectionArray extends Array<ISectionListItem> {
     super(...args);
   }
   push(section: ISectionListItem): number {
-    // needs to store the nearest termIdx so that parse can later find
-    // the actual visible, recitable terminal in parse
     return super.push(section);
   }
   parse(): number {
@@ -257,7 +253,7 @@ export class UserContext {
   terminals: TerminalArray;
   headings: HeadingArray;
   sections: SectionArray;
-  sentences: RangeArray;
+  sentences: SentenceArray;
   // need authentication infoblock at some point
   constructor(name: string) {
     //    this._parent = parent;
@@ -265,7 +261,7 @@ export class UserContext {
     this.terminals = new TerminalArray();
     this.headings = new HeadingArray();
     this.sections = new SectionArray();
-    this.sentences = new RangeArray();
+    this.sentences = new SentenceArray();
     ////    this._pages = new Array();
   }
   // protected terminalIdx: number = 0;

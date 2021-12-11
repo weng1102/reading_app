@@ -170,7 +170,6 @@ export function ISectionListitemVariantInitializer(): ISectionListitemVariant {
 }
 export interface ISectionUnorderedListVariant {
   items: ISectionContent[];
-  //  items: ISectionNode[];
   depth: number;
   marker: UnorderedListMarkerEnumType; // overrides css but not user profile
 }
@@ -235,6 +234,7 @@ export interface ISentenceContent {
   firstTermIdx: number;
   lastTermIdx: number;
   terminals: ITerminalContent[];
+  lastPunctuation: string;
   //  terminals: ITerminalNode[];
 }
 export enum TerminalMetaEnumType {
@@ -255,9 +255,9 @@ export enum TerminalMetaEnumType {
 export interface ITerminalContent {
   id: number;
   termIdx: number;
-  content: string; // not necessary
   firstTermIdx: number;
   lastTermIdx: number;
+  content: string; // not necessary
   type: TerminalMetaEnumType;
   meta: TerminalMetaType;
 }
@@ -305,8 +305,14 @@ export function ITerminalInfoInitializer(
     termIdx: IDX_INITIALIZER,
     nextTermIdx: [],
     prevTermIdx: [],
-    altpronunciation: (altpronunciation === undefined ? "" : altpronunciation)!,
-    altrecognition: (altrecognition === undefined ? "" : altrecognition)!,
+    altpronunciation:
+      altpronunciation === undefined || altpronunciation === null
+        ? ""
+        : altpronunciation,
+    altrecognition:
+      altrecognition === undefined || altrecognition === null // could use  altrecognition || ''
+        ? ""
+        : altrecognition,
     recitable: recitable, // selectable
     audible: audible,
     visible: visible,
@@ -563,7 +569,7 @@ export interface IHeadingListItem {
   headingLevel: number;
   title: string;
   termIdx: number; // either first word of section title OR first word in section body
-  terminalCountPriorToHeading: number; // numbrt og terminals immediately preceding this section heading
+  terminalCountPriorToHeading: number; // number of terminals immediately preceding this section heading
 }
 export interface IRangeItem {
   firstTermIdx: number;
@@ -580,20 +586,23 @@ export interface IRangeItem {
 //   return { firstTermIdx, lastTermIdx };
 // }
 export interface ISectionListItem extends IRangeItem {
-  type: string;
+  type: SectionVariantEnumType | string;
 }
 export function ISectionListItemInitializer(
   firstTermIdx: number = -1,
   lastTermIdx: number = -1,
-  type: string = SectionVariantEnumType.tbd.toString()
+  type: string = SectionVariantEnumType.tbd
 ): ISectionListItem {
   type = type.toString();
   return { firstTermIdx, lastTermIdx, type };
 }
-export type ISentenceListItem = IRangeItem;
+export interface ISentenceListItem extends IRangeItem {
+  lastPunctuation: string;
+}
 export function ISentenceListItemInitializer(
   firstTermIdx: number = -1,
-  lastTermIdx: number = -1
+  lastTermIdx: number = -1,
+  lastPunctuation: string = "."
 ): ISentenceListItem {
-  return { firstTermIdx, lastTermIdx };
+  return { firstTermIdx, lastTermIdx, lastPunctuation };
 }

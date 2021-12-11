@@ -24,9 +24,10 @@ import { useState } from "react";
 
 export enum RecitationMode {
   wordOnly = "word only",
-  entireSentence = "sentence",
-  uptoExclusive = "upto word (exclusive)",
-  uptoInclusive = "upto word (inclusive)"
+  entireSentence = "entire sentence",
+  uptoExclusive = "partial up to word (exclusive)",
+  uptoInclusive = "partial up to word (inclusive)",
+  section = "section, paragraph, etc."
 }
 export enum NotificationMode {
   sound = "sound",

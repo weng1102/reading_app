@@ -21,7 +21,12 @@ import { useEffect, useState, useContext } from "react";
 import { CPageContext, PageContext } from "./pageContext";
 import speakIcon from "./button_speak.png";
 import speakGhostedIcon from "./button_speak_ghosted.png";
-import { ISpeechSettings, RecitationMode } from "./settingsContext";
+import {
+  ISpeechSettings,
+  ISettingsContext,
+  RecitationMode,
+  SettingsContext
+} from "./settingsContext";
 // this entire Synthezier object is a kludge until the settings object can be
 // implemented that reflects a <ronlyn>_configig.json permanent store. See
 // reactcomps_settings.tsx for further info.
@@ -183,19 +188,102 @@ export const VoiceSelect = (props: IVoiceSelectorProps) => {
 };
 */
 export const SpeakButton = () => {
+  let message: string = "";
   let icon: string =
     window.speechSynthesis === null ? speakGhostedIcon : speakIcon;
   const pageContext: CPageContext = useContext(PageContext)!;
-  const termIdx = useAppSelector(store => store.cursor_terminalIdx);
-  let message =
-    pageContext.terminalList[termIdx].altpronunciation !== ""
+  const wordToSay = (termIdx: number): string => {
+    return pageContext.terminalList[termIdx].altpronunciation !== ""
       ? pageContext.terminalList[termIdx].altpronunciation
       : pageContext.terminalList[termIdx].content;
-  let wordOnly = true;
-  let entireSentence = false;
-  let uptoWord = false;
-  if (wordOnly) {
+  };
+  // const sentenceToSay = (
+  //   firstTermIdx: number,
+  //   lastTermIdx: number,
+  //   lastPunctuation: string
+  // ): string => {
+  //   let str: string = "";
+  //   for (let idx = firstTermIdx; idx <= lastTermIdx; idx++) {
+  //     str = str + " " + wordToSay(idx);
+  //   }
+  //   //add punctuation for inflection
+  //   str = str + lastPunctuation;
+  //   return str;
+  // };
+  const sentenceToSay = (
+    sentenceIdx: number,
+    lastTermIdxInSentence?: number,
+    lastPunctuation?: string
+  ): string => {
+    firstTermIdx = pageContext.sentenceList[sentenceIdx].firstTermIdx;
+    if (lastTermIdxInSentence === undefined) {
+      lastTermIdx = pageContext.sentenceList[sentenceIdx].lastTermIdx;
+      lastPunctuation = pageContext.sentenceList[sentenceIdx].lastPunctuation;
+    } else {
+      lastTermIdx = lastTermIdxInSentence;
+    }
+    let str: string = "";
+    for (let idx = firstTermIdx; idx <= lastTermIdx; idx++) {
+      str = str + " " + wordToSay(idx);
+    }
+    //add punctuation for inflection
+    str = str + (lastPunctuation === undefined ? "" : lastPunctuation);
+    return str;
+  };
+  const sectionToSay = (sectionIdx: number): string => {
+    //find sentences in section. unfortunately, the sectionlist only has first and last terminal idxs and not sentences
+    let str: string = "";
+    let firstTermIdx: number = pageContext.sectionList[sectionIdx].firstTermIdx;
+    let lastTermIdx: number = pageContext.sectionList[sectionIdx].lastTermIdx;
+    let firstSentenceIdx: number =
+      pageContext.terminalList[firstTermIdx].sentenceIdx;
+    let lastSentenceIdx: number =
+      pageContext.terminalList[lastTermIdx].sentenceIdx;
+    for (
+      let sentenceIdx = firstSentenceIdx;
+      sentenceIdx <= lastSentenceIdx;
+      sentenceIdx++
+    ) {
+      str = str + sentenceToSay(sentenceIdx);
+    }
+    return str;
+  };
+  // should move all this message assembly code somewhere outside of react so
+  // that code executed iff the button is activated and not when setting
+  // state//changes: all code here should be activated by event handler.
+  const settingsContext: ISettingsContext = useContext(SettingsContext)!;
+  const termIdx = useAppSelector(store => store.cursor_terminalIdx);
+  const recitationMode: RecitationMode =
+    settingsContext.settings.speech.recitationMode;
+  let firstTermIdx, lastTermIdx: number;
+  // given all the array accessing, should wrap in try/catch
+  switch (recitationMode) {
+    case RecitationMode.wordOnly:
+      message = wordToSay(termIdx);
+      break;
+    case RecitationMode.entireSentence:
+      message = sentenceToSay(pageContext.terminalList[termIdx].sentenceIdx);
+      break;
+    case RecitationMode.uptoExclusive:
+      message = sentenceToSay(
+        pageContext.terminalList[termIdx].sentenceIdx,
+        termIdx - 1, // excluding current terminal
+        "?" // not end of sentence
+      );
+      break;
+    case RecitationMode.uptoInclusive:
+      message = sentenceToSay(
+        pageContext.terminalList[termIdx].sentenceIdx,
+        termIdx, // including current terminal
+        "?" // not end of sentence
+      );
+      break;
+    case RecitationMode.section:
+      message = sectionToSay(pageContext.terminalList[termIdx].sectionIdx);
+      break;
+    default:
   }
+  console.log(`message=${message}`);
   return (
     <>
       <img
@@ -270,40 +358,60 @@ export const RecitationModeRadioButton = (
         className="recitation-radioButton settings-grid-section-item-recitation"
         onChange={onChangeValue}
       >
-        <input
-          type="radio"
-          value={RecitationMode.wordOnly}
-          name="recitationMode"
-          defaultChecked={props.recitationMode === RecitationMode.wordOnly}
-        />
-        {RecitationMode.wordOnly}
-        <input
-          type="radio"
-          value={RecitationMode.entireSentence}
-          name="recitationMode"
-          defaultChecked={
-            props.recitationMode === RecitationMode.entireSentence
-          }
-        />
-        {RecitationMode.entireSentence}
-        <input
-          type="radio"
-          value={RecitationMode.uptoExclusive}
-          name="recitationMode"
-          defaultChecked={props.recitationMode === RecitationMode.uptoExclusive}
-        />
-        {RecitationMode.uptoExclusive}
-        <input
-          type="radio"
-          value={RecitationMode.uptoInclusive}
-          name="recitationMode"
-          defaultChecked={props.recitationMode === RecitationMode.uptoInclusive}
-        />
-        {RecitationMode.uptoInclusive}
+        <div className="settings-grid-section-item-recitation-control-group">
+          <input
+            type="radio"
+            value={RecitationMode.wordOnly}
+            name="recitationMode"
+            defaultChecked={props.recitationMode === RecitationMode.wordOnly}
+          />
+          {RecitationMode.wordOnly}
+        </div>
+        <div className="settings-grid-section-item-recitation-control-group">
+          <input
+            type="radio"
+            id="2"
+            value={RecitationMode.entireSentence}
+            name="recitationMode"
+            defaultChecked={
+              props.recitationMode === RecitationMode.entireSentence
+            }
+          />
+          {RecitationMode.entireSentence}
+          <input
+            type="radio"
+            value={RecitationMode.uptoExclusive}
+            name="recitationMode"
+            defaultChecked={
+              props.recitationMode === RecitationMode.uptoExclusive
+            }
+          />
+          {RecitationMode.uptoExclusive}
+          <input
+            type="radio"
+            value={RecitationMode.uptoInclusive}
+            name="recitationMode"
+            defaultChecked={
+              props.recitationMode === RecitationMode.uptoInclusive
+            }
+          />
+          {RecitationMode.uptoInclusive}
+        </div>
+        <div className="settings-grid-section-item-recitation-control-group">
+          <input
+            type="radio"
+            value={RecitationMode.section}
+            name="recitationMode"
+            defaultChecked={props.recitationMode === RecitationMode.section}
+          />
+          {RecitationMode.section}
+        </div>
       </div>
       <div className="settings-grid-section-footer">
         Recitation mode determines how prose are recited when speak button is
-        activated.
+        activated. The "partial" (sentence) options determine whether the
+        current word is included or excluded in the recitation of the current
+        sentence.
       </div>
     </>
   );
