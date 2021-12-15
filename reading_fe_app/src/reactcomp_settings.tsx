@@ -100,10 +100,12 @@ export const SettingsDialog = (props: ISettingsDialogPropsType) => {
     props.hide();
   };
   let OkIcons = modified ? OkIcon : OkIcon_ghosted;
+  let dispatch = useAppDispatch();
   // could do deep compare between temp and current contexts
   if (!props.isActive) {
     return null;
   } else {
+    dispatch(Request.Recognition_stop());
     return (
       <>
         <div className="settings-overlay" />

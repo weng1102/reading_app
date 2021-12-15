@@ -15,12 +15,13 @@
  **/
 //import "./App.css";
 import { Request } from "./reducers";
-//import readitImg from "./readit.png";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { useEffect, useState, useContext } from "react";
 import { CPageContext, PageContext } from "./pageContext";
 import speakIcon from "./button_speak.png";
 import speakGhostedIcon from "./button_speak_ghosted.png";
+import speakActiveIcon from "./button_speak_activeRed.gif";
+import speakInactiveIcon from "./button_speak.png";
 import {
   ISpeechSettings,
   ISettingsContext,
@@ -58,13 +59,23 @@ class CSpeechSynthesizer {
   paramObj: SpeechSynthesisUtterance;
   voiceList: SpeechSynthesisVoice[] = [];
   selectedVoiceIndex: number = 2;
-
   get voices(): SpeechSynthesisVoice[] {
     return this.voiceList;
   }
   setVoice(voice: string, selectedIndex: number) {
     console.log(`voice=${voice}`);
     //    this.paramObj.voice = this.voiceList[voice];
+  }
+  speakSync(message: string, setSpeakingNow: (toggle: boolean) => void) {
+    this.paramObj.onend = () => setSpeakingNow(false);
+    if (this.voiceList.length === 0) {
+      this.voiceList = window.speechSynthesis.getVoices();
+    }
+    this.paramObj.text = message;
+    this.paramObj.voice = this.voiceList[this.selectedVoiceIndex];
+    setSpeakingNow(true);
+    window.speechSynthesis.speak(this.paramObj);
+    ///    window.speechSynthesis.speak(this.paramObj);
   }
   speak(message: string) {
     if (this.voiceList.length === 0) {
@@ -75,7 +86,7 @@ class CSpeechSynthesizer {
     window.speechSynthesis.speak(this.paramObj);
   }
 }
-const Synthesizer: CSpeechSynthesizer = new CSpeechSynthesizer();
+export const Synthesizer: CSpeechSynthesizer = new CSpeechSynthesizer();
 
 export const SpeechMonitor = () => {
   const dispatch = useAppDispatch();
@@ -91,16 +102,6 @@ export const SpeechMonitor = () => {
   const endOfPage = useAppSelector(store => store.cursor_endOfPageReached);
   const listening = useAppSelector(store => store.listen_active);
   let message: string = "";
-  //  const message = useAppSelector(store => store.announce_message);
-  // useEffect(
-  //   () => {
-  //     console.log(`speaking ${message}`);
-  //     SpeechSynthesizer.text = message;
-  //     window.speechSynthesis.speak(SpeechSynthesizer);
-  //     dispatch(Request.Speech_acknowledged());
-  //   },
-  //   [message] // to recite just the words
-  // );
   useEffect(() => {
     Synthesizer.voiceList = window.speechSynthesis.getVoices(); // loaded asynchronously
     Synthesizer.paramObj.voice = Synthesizer.voiceList[2]; // US woman
@@ -148,152 +149,6 @@ export const SpeechMonitor = () => {
     [listening] // to recite just the words
   );
   return <div>{message}</div>;
-};
-export function speak(message: string) {
-  Synthesizer.speak(message);
-}
-// interface VoiceSelectPropsType {
-//   synthesizer: CSpeechSynthesizer;
-// }
-/*
-export const VoiceSelect = (props: IVoiceSelectorProps) => {
-  const [selectedOption, setSelectdOption] = useState("");
-  const [voicesAvailable, setVoicesAvailable] = useState(false);
-  useEffect(() => {
-    setVoicesAvailable(true); // force rerender of component
-  }, [window.speechSynthesis.onvoiceschanged]);
-  //  let voices: SpeechSynthesisVoice[] = Synthesizer.voices;
-  return (
-    <>
-      <div className="settings-grid-section-header">Voice Selection</div>
-      <div className="settings-subheader">Voice</div>
-      <select
-        className="ddlb-voiceselect"
-        defaultValue={props.voice.name}
-        //      onChange={evt => setSelectdOption(evt.target.value)}
-        onChange={evt =>
-          Synthesizer.setVoice(evt.target.value, evt.target.selectedIndex)
-        }
-      >
-        {window.speechSynthesis
-          .getVoices()
-          .map((voice: SpeechSynthesisVoice, key: any) => (
-            <option id={key} key={voice.voiceURI}>
-              {voice.name}
-            </option>
-          ))}
-      </select>
-    </>
-  );
-};
-*/
-export const SpeakButton = () => {
-  let message: string = "";
-  let icon: string =
-    window.speechSynthesis === null ? speakGhostedIcon : speakIcon;
-  const pageContext: CPageContext = useContext(PageContext)!;
-  const wordToSay = (termIdx: number): string => {
-    return pageContext.terminalList[termIdx].altpronunciation !== ""
-      ? pageContext.terminalList[termIdx].altpronunciation
-      : pageContext.terminalList[termIdx].content;
-  };
-  // const sentenceToSay = (
-  //   firstTermIdx: number,
-  //   lastTermIdx: number,
-  //   lastPunctuation: string
-  // ): string => {
-  //   let str: string = "";
-  //   for (let idx = firstTermIdx; idx <= lastTermIdx; idx++) {
-  //     str = str + " " + wordToSay(idx);
-  //   }
-  //   //add punctuation for inflection
-  //   str = str + lastPunctuation;
-  //   return str;
-  // };
-  const sentenceToSay = (
-    sentenceIdx: number,
-    lastTermIdxInSentence?: number,
-    lastPunctuation?: string
-  ): string => {
-    firstTermIdx = pageContext.sentenceList[sentenceIdx].firstTermIdx;
-    if (lastTermIdxInSentence === undefined) {
-      lastTermIdx = pageContext.sentenceList[sentenceIdx].lastTermIdx;
-      lastPunctuation = pageContext.sentenceList[sentenceIdx].lastPunctuation;
-    } else {
-      lastTermIdx = lastTermIdxInSentence;
-    }
-    let str: string = "";
-    for (let idx = firstTermIdx; idx <= lastTermIdx; idx++) {
-      str = str + " " + wordToSay(idx);
-    }
-    //add punctuation for inflection
-    str = str + (lastPunctuation === undefined ? "" : lastPunctuation);
-    return str;
-  };
-  const sectionToSay = (sectionIdx: number): string => {
-    //find sentences in section. unfortunately, the sectionlist only has first and last terminal idxs and not sentences
-    let str: string = "";
-    let firstTermIdx: number = pageContext.sectionList[sectionIdx].firstTermIdx;
-    let lastTermIdx: number = pageContext.sectionList[sectionIdx].lastTermIdx;
-    let firstSentenceIdx: number =
-      pageContext.terminalList[firstTermIdx].sentenceIdx;
-    let lastSentenceIdx: number =
-      pageContext.terminalList[lastTermIdx].sentenceIdx;
-    for (
-      let sentenceIdx = firstSentenceIdx;
-      sentenceIdx <= lastSentenceIdx;
-      sentenceIdx++
-    ) {
-      str = str + sentenceToSay(sentenceIdx);
-    }
-    return str;
-  };
-  // should move all this message assembly code somewhere outside of react so
-  // that code executed iff the button is activated and not when setting
-  // state//changes: all code here should be activated by event handler.
-  const settingsContext: ISettingsContext = useContext(SettingsContext)!;
-  const termIdx = useAppSelector(store => store.cursor_terminalIdx);
-  const recitationMode: RecitationMode =
-    settingsContext.settings.speech.recitationMode;
-  let firstTermIdx, lastTermIdx: number;
-  // given all the array accessing, should wrap in try/catch
-  switch (recitationMode) {
-    case RecitationMode.wordOnly:
-      message = wordToSay(termIdx);
-      break;
-    case RecitationMode.entireSentence:
-      message = sentenceToSay(pageContext.terminalList[termIdx].sentenceIdx);
-      break;
-    case RecitationMode.uptoExclusive:
-      message = sentenceToSay(
-        pageContext.terminalList[termIdx].sentenceIdx,
-        termIdx - 1, // excluding current terminal
-        "?" // not end of sentence
-      );
-      break;
-    case RecitationMode.uptoInclusive:
-      message = sentenceToSay(
-        pageContext.terminalList[termIdx].sentenceIdx,
-        termIdx, // including current terminal
-        "?" // not end of sentence
-      );
-      break;
-    case RecitationMode.section:
-      message = sectionToSay(pageContext.terminalList[termIdx].sectionIdx);
-      break;
-    default:
-  }
-  console.log(`message=${message}`);
-  return (
-    <>
-      <img
-        className="icon"
-        alt="speak"
-        src={icon}
-        onClick={() => Synthesizer.speak(message)}
-      />
-    </>
-  );
 };
 interface ISpeechSettingsProps {
   speechSettings: ISpeechSettings;
@@ -458,46 +313,6 @@ interface IVolumeSliderProps {
   volume: number;
   setVolume: (volume: number) => void;
 }
-/*
-export const VolumeSlider = (props: IVolumeSliderProps) => {
-  const onChangeValue = (event: any) => {
-    console.log(`onchange=${event.target.value}`);
-    props.setVolume(+event.target.value);
-  };
-  return (
-    <>
-      <div className="settings-grid-col2-label-control">
-        <div className="settings-grid-col2-label">Volume:</div>
-        <div className="settings-grid-col2-control">
-          <input
-            onChange={onChangeValue}
-            className="volume-slider"
-            type="range"
-            min="0"
-            max="1"
-            step="0.10"
-            list="steplist"
-          />
-          <datalist id="steplist">
-            <option value="0.0" label="min"></option>
-            <option>0.10</option>
-            <option>0.20</option>
-            <option>0.30</option>
-            <option>0.40</option>
-            <option>0.50</option>
-            <option>0.60</option>
-            <option>0.70</option>
-            <option>0.80</option>
-            <option>0.90</option>
-            <option value="1.0" label="min"></option>
-            <option>1.00</option>
-          </datalist>
-        </div>
-      </div>
-    </>
-  );
-};
-*/
 export const VolumeSlider = (props: IVolumeSliderProps) => {
   const onChangeValue = (event: any) => {
     console.log(`onchange=${event.target.value}`);

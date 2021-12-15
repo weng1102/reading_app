@@ -87,6 +87,15 @@ const WORDS_VISITED = "wordsvisited/set";
 
 const TRANSITION_ACKNOWLEDGE = "transition/acknowledge";
 
+//const RECITING = "reciting"; // state of reciting
+const RECITING = "reciting"; // actual state of reciting
+// const RECITING_BEGIN = "reciting/start"; // actual state of reciting begin
+// const RECITING_END = "reciting/end"; // actual reciting end (stopped)
+
+//const RECITE = "recite";  // requests to start and stop recite
+const RECITE_START = "recite/start";
+const RECITE_STOP = "recite/stop";
+const RECITE_TOGGLE = "recite/toggle"; // request from recite button
 const SETTINGS_TOGGLE = "settings/toggle";
 
 // const PAGE_RESET_VALUE = 0;
@@ -299,6 +308,42 @@ const Page_setContext = (context: CPageContext) => {
     payload: context
   };
 };
+const Reciting_start = () => {
+  return {
+    type: RECITING,
+    payload: true
+  };
+};
+const Reciting_stop = () => {
+  return {
+    type: RECITING,
+    payload: false
+  };
+};
+const Reciting = (on?: boolean) => {
+  // state of reciting
+  return {
+    type: RECITING,
+    payload: on
+  };
+};
+const Recite_start = () => {
+  //  recite requesting start
+  return {
+    type: RECITE_START
+  };
+};
+const Recite_stop = () => {
+  //  recite requesting stop
+  return {
+    type: RECITE_STOP
+  };
+};
+const Recite_toggle = () => {
+  return {
+    type: RECITE_TOGGLE
+  };
+};
 const Settings_toggle = () => {
   return {
     type: SETTINGS_TOGGLE
@@ -326,6 +371,12 @@ export const Request = {
   Recognition_start,
   Recognition_stop,
 
+  Reciting,
+  Reciting_start,
+  Reciting_stop,
+  Recite_start,
+  Recite_stop,
+  Recite_toggle, // strictly for button event
   Settings_toggle,
 
   Speech_setAvailability,
@@ -443,6 +494,8 @@ interface IReduxState {
 
   pageContext: CPageContext;
 
+  recite_requested: boolean;
+  reciting: boolean;
   settings_toggle: boolean;
 }
 const IReduxStateInitialState: IReduxState = {
@@ -466,6 +519,9 @@ const IReduxStateInitialState: IReduxState = {
   cursor_endOfPageReached: false,
 
   pageContext: new CPageContext(),
+
+  recite_requested: false,
+  reciting: false,
 
   settings_toggle: false
   //  pageContext: PageContextInitializer()
@@ -699,9 +755,25 @@ export const rootReducer = (
       state.cursor_endOfPageReached = false;
       return state;
 
+    case RECITING:
+      state.reciting = state.reciting = action.payload;
+      return state;
+    case RECITE_START:
+      state.recite_requested = true;
+      return state;
+    case RECITE_STOP:
+      state.recite_requested = false;
+      return state;
+
+    case RECITE_TOGGLE:
+      state.recite_requested = !state.recite_requested;
+      return state;
+
     case SETTINGS_TOGGLE:
       state.settings_toggle = !state.settings_toggle;
+      if (state.settings_toggle) state.listen_active = false;
       return state;
+
     default:
       return state;
   }

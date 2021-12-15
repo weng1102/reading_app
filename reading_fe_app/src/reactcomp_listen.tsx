@@ -61,7 +61,7 @@ export const ListeningMonitor = () => {
       }
       SpeechRecognition.startListening(); // timeout periodically not continuous: true
     } else {
-      console.log("keep not listening");
+      console.log("continue not listening");
       SpeechRecognition.abortListening(); //just in case
       console.log(`reset silence checkpoint`);
       setSilenceCheckpoint(0);
