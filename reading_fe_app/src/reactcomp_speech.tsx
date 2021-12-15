@@ -66,23 +66,19 @@ class CSpeechSynthesizer {
     console.log(`voice=${voice}`);
     //    this.paramObj.voice = this.voiceList[voice];
   }
-  speakSync(message: string, setSpeakingNow: (toggle: boolean) => void) {
-    this.paramObj.onend = () => setSpeakingNow(false);
-    if (this.voiceList.length === 0) {
-      this.voiceList = window.speechSynthesis.getVoices();
-    }
-    this.paramObj.text = message;
-    this.paramObj.voice = this.voiceList[this.selectedVoiceIndex];
-    setSpeakingNow(true);
-    window.speechSynthesis.speak(this.paramObj);
-    ///    window.speechSynthesis.speak(this.paramObj);
+  set volume(vol: number) {
+    this.paramObj.volume = vol;
   }
-  speak(message: string) {
+  speak(message: string, setSpeakingNow?: (toggle: boolean) => void) {
+    if (setSpeakingNow !== undefined) {
+      this.paramObj.onend = () => setSpeakingNow(false);
+    }
     if (this.voiceList.length === 0) {
       this.voiceList = window.speechSynthesis.getVoices();
     }
     this.paramObj.text = message;
     this.paramObj.voice = this.voiceList[this.selectedVoiceIndex];
+    if (setSpeakingNow !== undefined) setSpeakingNow(true);
     window.speechSynthesis.speak(this.paramObj);
   }
 }
@@ -101,6 +97,7 @@ export const SpeechMonitor = () => {
   );
   const endOfPage = useAppSelector(store => store.cursor_endOfPageReached);
   const listening = useAppSelector(store => store.listen_active);
+  const settingsContext: ISettingsContext = useContext(SettingsContext)!;
   let message: string = "";
   useEffect(() => {
     Synthesizer.voiceList = window.speechSynthesis.getVoices(); // loaded asynchronously
@@ -108,6 +105,7 @@ export const SpeechMonitor = () => {
   }, [window.speechSynthesis.onvoiceschanged]);
   useEffect(
     () => {
+      Synthesizer.volume = settingsContext.settings.speech.volume;
       if (newSection) {
         console.log(`speaking sectionIdx=${sectionIdx}`);
         let sectionType: string = pageContext.sectionList[sectionIdx].type;

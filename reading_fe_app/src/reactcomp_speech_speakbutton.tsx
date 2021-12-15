@@ -102,7 +102,8 @@ export const SpeakButton = () => {
         console.log(
           `q changed effect: reciting=${reciting} q=${recitationQueue}`
         );
-        Synthesizer.speakSync(sentence, setSpeakingNow);
+        Synthesizer.volume = settingsContext.settings.speech.volume;
+        Synthesizer.speak(sentence, setSpeakingNow);
       }
     }
     //      dispatch(Request.Recite_toggle());
