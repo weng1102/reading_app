@@ -37,25 +37,13 @@ export const SpeakButton = () => {
 
   useEffect(() => {
     // stop speaking when termIdx changes
-    console.log(
-      `termidx changed: termidx=${termIdx} reciteRequested=${reciteRequested} reciting=${reciting}`
-    );
     if (reciting) {
-      console.log(
-        `termidx changed, reciting cancelled: termidx=${termIdx}
-         reciteRequested=${reciteRequested} reciting=${reciting}`
-      );
-      ////      dispatch(Request.Recite_stop());
       setReciting(false);
     }
   }, [termIdx]);
   useEffect(() => {
-    console.log(
-      `reciting changed: termidx=${termIdx} reciteRequested=${reciteRequested} reciting=${reciting}`
-    );
     if (reciting) {
       setRecitationQueue(somethingToRecite());
-      console.log(`reciting changed, reciting=true: q=${somethingToRecite()}`);
     }
   }, [reciting]);
   useEffect(() => {
@@ -66,16 +54,11 @@ export const SpeakButton = () => {
     // Only two of the four possible states are relevant:
     // state change from requested to reciting and vice versa.
     if (reciteRequested && !reciting) {
-      console.log(`2a. reciteRequested effect: Reciting_start`);
       setRecitationQueue(somethingToRecite());
-      ////      dispatch(Request.Recite_start());
       setReciting(true);
     } else if (!reciteRequested && reciting) {
-      // already reciting but stop
-      console.log(`2b. reciteRequested effect: Reciting_stop`);
       setReciting(false);
       setRecitationQueue([]);
-      ////      dispatch(Request.Recite_stop());
     } else {
       // not reciting and not requested
     }
@@ -84,29 +67,16 @@ export const SpeakButton = () => {
     // need to chop up the message so cancel request can can be polled
     // especially for longer passages.
     // pop recitationQueue
-    console.log(`q changed effect: reciting=${reciting} q=${recitationQueue}`);
-
     if (!reciting || recitationQueue.length === 0) {
-      console.log(
-        `q changed effect: reciting=${reciting} q=empty reciting stopped`
-      );
       dispatch(Request.Recite_stop());
     } else {
       if (!speakingNow) {
-        // do not queue until current recitation is complete
         let sentence: string = recitationQueue.shift() as string;
-        console.log(
-          `q changed effect: reciting=${reciting} q.head=${sentence}`
-        );
         setRecitationQueue([...recitationQueue]);
-        console.log(
-          `q changed effect: reciting=${reciting} q=${recitationQueue}`
-        );
         Synthesizer.volume = settingsContext.settings.speech.volume;
         Synthesizer.speak(sentence, setSpeakingNow);
       }
     }
-    //      dispatch(Request.Recite_toggle());
   }, [speakingNow, recitationQueue]);
   const somethingToRecite = (): string[] => {
     let messageQueue: string[] = [];
@@ -192,12 +162,9 @@ export const SpeakButton = () => {
         break;
       default:
     }
-    console.log(`somethingToRecite(): messageQ=${messageQueue}`);
     return messageQueue;
   }; //somethingToRecite
-  console.log(
-    `1. speak button reciteRequested=${reciteRequested} reciting=${reciting}`
-  );
+  dispatch(Request.Recognition_stop);
   return (
     <>
       <img

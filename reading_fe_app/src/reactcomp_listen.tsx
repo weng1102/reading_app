@@ -188,6 +188,8 @@ export const ListenButton = () => {
   console.log(`listenbutton listening=${listening}`);
   console.log(`listenbutton listeningAvailable=${listeningAvailable}`);
   const dispatch = useAppDispatch();
+  dispatch(Request.Recite_stop()); // disable reciting
+
   return (
     <>
       <img
