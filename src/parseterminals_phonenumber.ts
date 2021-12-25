@@ -1,6 +1,6 @@
 /** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
  *
- * File name: parsesections_phonenumvwe.ts
+ * File name: parsesections_phonenumber.ts
  *
  * Create terminal phone number objects from serialized input.
  *
@@ -166,20 +166,28 @@ export class TerminalNode_MLTAG_PHONENUMBER extends TerminalNode_MLTAG_
         prefix = prefix + "| ";
         outputStr =
           outputStr +
-          super.serialize(format, `{${this.meta.openBracket}}`, prefix) +
+          super.serialize(
+            format,
+            `{${this.meta.openBracket.content}}`,
+            prefix
+          ) +
           super.serialize(
             format,
             `{${this.meta.areaCode[0].content}${this.meta.areaCode[1].content}${this.meta.areaCode[2].content}}`,
             prefix
           ) +
-          super.serialize(format, `{${this.meta.closeBracket}}`, prefix) +
-          super.serialize(format, `{${this.meta.separator1}}`, prefix) +
+          super.serialize(
+            format,
+            `{${this.meta.closeBracket.content}}`,
+            prefix
+          ) +
+          super.serialize(format, `{${this.meta.separator1.content}}`, prefix) +
           super.serialize(
             format,
             `{${this.meta.exchangeCode[0].content}${this.meta.exchangeCode[1].content}${this.meta.exchangeCode[2].content}}`,
             prefix
           ) +
-          super.serialize(format, `{${this.meta.separator2}}`, prefix) +
+          super.serialize(format, `{${this.meta.separator2.content}}`, prefix) +
           super.serialize(
             format,
             `{${this.meta.lineNumber[0].content}${this.meta.lineNumber[1].content}${this.meta.lineNumber[2].content}${this.meta.lineNumber[3].content}}`,
