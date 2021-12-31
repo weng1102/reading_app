@@ -14,9 +14,9 @@ import {
   ISectionNode,
   SectionParseNode_EMPTY,
   SectionParseNode_FILLIN,
-  SectionParseNode_PHOTOENTRY,
   SectionParseNode_TBD
 } from "./parsesections";
+import { SectionParseNode_IMAGEENTRY } from "./parsesections_images";
 import { SectionParseNode_PARAGRAPH } from "./parsesections_paragraph";
 import {
   //  SectionParseNode_LIST_ITEMS,
@@ -88,11 +88,11 @@ export function GetSectionNode(
       sectionNode = new SectionParseNode_FILLIN(parent);
       break;
     }
-    case MarkdownTagType.PHOTOENTRY: {
+    case MarkdownTagType.IMAGEENTRY: {
       // console.log(
       //   `dispatch: ${tagType} ${tagType === MarkdownTagType.PHOTOENTRY}`
       // );
-      sectionNode = new SectionParseNode_PHOTOENTRY(parent);
+      sectionNode = new SectionParseNode_IMAGEENTRY(parent);
       break;
     }
     case MarkdownTagType.BLOCKQUOTE: {

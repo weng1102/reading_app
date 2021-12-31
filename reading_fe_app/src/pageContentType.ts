@@ -7,7 +7,7 @@
  * Version history:
  *
  **/
-// import { ITerminalNode } from "./parseterminals";
+import { ITerminalNode } from "../../src/parseterminals";
 // import { ISectionNode } from "./parsesections";
 // import { ISentenceNode } from "./parsesentences";
 const IDX_INITIALIZER = -9999;
@@ -73,7 +73,7 @@ export type SectionVariantType =
   | ISectionFillinVariant
   | ISectionBlockquoteVariant
   | ISectionFillinListVariant
-  | ISectionPhotoEntryVariant;
+  | ISectionImageEntryVariant;
 
 export enum SectionVariantEnumType {
   heading = "heading",
@@ -212,12 +212,14 @@ export function ISectionFillinBariantInitializer() {}
 interface ISectionFillinListVariant {}
 export function ISectionFillinListVariantInitializer() {}
 
-interface ISectionPhotoEntryVariant {
-  image: string; // path to img/filename
+export interface ISectionImageEntryVariant {
+  images: ITerminalContent[]; // path to img/filenames
+  captions: ISectionContent[];
 }
-export function ISectionPhotoEntryVariantInitializer() {
+export function ISectionImageEntryVariantInitializer() {
   return {
-    image: ""
+    images: [],
+    captions: []
   };
 }
 export interface ISectionTbdVariant {
@@ -242,6 +244,8 @@ export enum TerminalMetaEnumType {
   currency,
   date,
   emailaddress,
+  image,
+  link,
   numberwithcommas,
   phonenumber,
   punctuation,
@@ -266,6 +270,8 @@ export type TerminalMetaType =
   | ICurrencyTerminalMeta
   | IDateTerminalMeta
   | IEmailAddressTerminalMeta
+  | IImageTerminalMeta
+  | ICurriculumLinkTerminalMeta
   | IPhoneNumberTerminalMeta
   | IPunctuationTerminalMeta
   | IReferenceTerminalMeta
@@ -410,6 +416,42 @@ export function IDateTerminalMetaInitializer(): IDateTerminalMeta {
       false
     ),
     year: IYearTerminalMetaInitializer() // e.g., {19,61}, {20,10}, {2000,1}
+  };
+}
+export interface IImageTerminalMeta {
+  src: string;
+  label: string;
+  width: number;
+  height: number;
+  attributes: string;
+  style: string; // most specific style
+}
+export function IImageTerminalMetaInitializer(): IImageTerminalMeta {
+  return {
+    src: "",
+    label: "",
+    width: 0,
+    height: 0,
+    attributes: "",
+    style: "" // most specific style
+  };
+}
+export interface ICurriculumLinkTerminalMeta {
+  src: string;
+  label: string;
+  destinationDir: string; // if omitted, current dist/ directory
+  destinationPage: string; // .json filename
+  destinationTermIdx: number;
+  style: string; // most specific style
+}
+export function ICurriculumLinkTerminalMetaInitializer(): ICurriculumLinkTerminalMeta {
+  return {
+    src: "",
+    label: "",
+    destinationDir: "",
+    destinationPage: "",
+    destinationTermIdx: 0,
+    style: "" // most specific style
   };
 }
 export interface IPhoneNumberTerminalMeta {

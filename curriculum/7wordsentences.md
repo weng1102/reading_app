@@ -1,4 +1,9 @@
-[//page title]: Seven word sentences
+[[page: Seven word sentences, Wen Eng /]]
+
+# Sentence Banks
+
+[Three word sentences](3wordsentences)
+[Four word sentences](4wordsentences)
 
 # first ten
 

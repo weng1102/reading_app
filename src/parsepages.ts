@@ -73,8 +73,12 @@ export class PageParseNode extends ParseNode implements IPageContent {
         //        current = this.dataSource.nextRecord()
         current = this.dataSource.currentRecord()
       ) {
-        if (current.tagType === MarkdownTagType.PAGETITLE) {
-          this.title = current.content;
+        if (current.tagType === MarkdownTagType.PAGE) {
+          // special case that is NOT a section
+          let attributes: string[] = current.content.split(",");
+          if (attributes[0] !== undefined) this.title = attributes[0];
+          if (attributes[1] !== undefined) this.owner = attributes[1];
+          if (attributes[2] !== undefined) this.description = attributes[2];
           current = this.dataSource.nextRecord();
         } else {
           let sectionNode: ISectionNode = GetSectionNode(current.tagType, this);

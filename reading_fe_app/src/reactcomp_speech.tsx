@@ -28,30 +28,6 @@ import {
   RecitationMode,
   SettingsContext
 } from "./settingsContext";
-// this entire Synthezier object is a kludge until the settings object can be
-// implemented that reflects a <ronlyn>_configig.json permanent store. See
-// reactcomps_settings.tsx for further info.
-// export function SpeechSettingsInitializer(
-//   recitationMode: RecitationMode = RecitationMode.wordOnly,
-//   lang: string = "en-US",
-//   pitch: number = 0,
-//   rate: number = 0,
-//   volume: number = 0.5,
-//   selectedVoiceIndex: number = 0
-// ): ISpeechSettings {
-//   return {
-//     recitationMode,
-//     lang,
-//     pitch,
-//     rate,
-//     volume,
-//     selectedVoiceIndex
-//   };
-// }
-
-// interface ISpeechSettingsProps {
-//   speechSettings: CSpeechSettings;
-// }
 class CSpeechSynthesizer {
   constructor() {
     this.paramObj = new SpeechSynthesisUtterance();

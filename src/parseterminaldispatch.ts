@@ -34,6 +34,7 @@ import {
   TerminalNode_MLTAG_DATE3
 } from "./parseterminals_dates";
 import { TerminalNode_MLTAG_PHONENUMBER } from "./parseterminals_phonenumber";
+import { TerminalNode_MLTAG_IMAGE } from "./parseterminals_image";
 import { TerminalNode_MLTAG_EMAILADDRESS } from "./parseterminals_emailaddress";
 export function GetTerminalNode(
   token: Token,
@@ -69,6 +70,10 @@ export function GetTerminalNode(
         }
         case MarkupLabelType.CONTRACTION: {
           termNode = new TerminalNode_MLTAG_CONTRACTION(parent);
+          break;
+        }
+        case MarkupLabelType.IMAGE: {
+          termNode = new TerminalNode_MLTAG_IMAGE(parent);
           break;
         }
         case MarkupLabelType.NUMBER_WITHCOMMAS: {

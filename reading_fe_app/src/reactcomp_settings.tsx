@@ -26,10 +26,15 @@ import settingsIcon from "./settingicon.png";
 import OkIcon from "./button_OK.png";
 import OkIcon_ghosted from "./button_OK_ghosted.png";
 import CancelIcon from "./button_cancel.png";
-//import CancelIcon_ghosted from "./button_cancel_ghosted.png";
+//import CancelIcon_ghosted from "./button_cancel_ghosted.png"
+import { ConfigSettings } from "./reactcomp_config";
 import { SpeechSettings } from "./reactcomp_speech";
 import { ListenSettings } from "./reactcomp_listen";
-import { IListenSettings, ISpeechSettings } from "./settingsContext";
+import {
+  IConfigSettings,
+  IListenSettings,
+  ISpeechSettings
+} from "./settingsContext";
 import {
   ISettings,
   ISettingsContext,
@@ -44,6 +49,9 @@ export const SettingsDialog = (props: ISettingsDialogPropsType) => {
     SettingsContext
   ) as ISettingsContext;
 
+  const [configSettings, _setConfigSettings] = useState(
+    settingsContext.settings.config
+  );
   const [speechSettings, _setSpeechSettings] = useState(
     settingsContext.settings.speech
   );
@@ -62,6 +70,12 @@ export const SettingsDialog = (props: ISettingsDialogPropsType) => {
   //     console.log(`Settings changed`);
   //   }
   // }, [speechSettings, listenSettings]);
+  const setConfigSettings = (configSettings: IConfigSettings) => {
+    _setConfigSettings(configSettings);
+    // if (!initial) setModified(true); // skip initial value initializations
+    // setInitial(false);
+    setModified(true);
+  };
   const setSpeechSettings = (speechSettings: ISpeechSettings) => {
     _setSpeechSettings(speechSettings);
     // if (!initial) setModified(true); // skip initial value initializations
@@ -83,6 +97,7 @@ export const SettingsDialog = (props: ISettingsDialogPropsType) => {
       // };
       //      settingsContext.saveSettings(settings);
       settingsContext.saveSettings({
+        config: configSettings,
         speech: speechSettings,
         listen: listenSettings
       });
@@ -121,7 +136,10 @@ export const SettingsDialog = (props: ISettingsDialogPropsType) => {
                 listenSettings={listenSettings}
                 setListenSettings={setListenSettings}
               />
-              <PersonalInfoSettings />
+              <ConfigSettings
+                configSettings={configSettings}
+                setConfigSettings={setConfigSettings}
+              />
             </div>
             <div className="settings-footer">
               <div className="controlBar-container">

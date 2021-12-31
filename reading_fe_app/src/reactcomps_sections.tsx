@@ -19,6 +19,7 @@ import {
   ISectionParagraphVariant,
   ISectionUnorderedListVariant
 } from "./pageContentType";
+import { Section_imageEntry } from "./reactcomps_sections_imageEntry";
 //import { Settings } from "./reactcomp_settings";
 import { Sentence } from "./reactcomps_sentences";
 
@@ -139,8 +140,4 @@ const Section_heading = React.memo((props: ISectionPropsType) => {
       <HeadingTag>{meta.title}</HeadingTag>
     </div>
   );
-});
-const Section_imageEntry = React.memo((props: ISectionPropsType) => {
-  // cosnider using css grid to format image/caption block
-  return <div>image</div>;
 });

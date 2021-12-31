@@ -37,8 +37,8 @@ export const enum MarkdownTagType {
   PARAGRAPH = "PARAGRAPH",
   PARAGRAPH_END = "PARAGRAPH_END",
   PASSTHRUTAG = "PASSTHRUTAG",
-  PHOTOENTRY = "PHOTOENTRY",
-  PHOTOENTRY_END = "PHOTOENTRY_END",
+  IMAGEENTRY = "IMAGEENTRY",
+  IMAGEENTRY_END = "IMAGEENTRY_END",
   SECTION_END = "SECTION_END",
   SECTION_ORDERED = "SECTION_ORDERED",
   SECTION_UNORDERED = "SECTION_UNORDERED",
@@ -51,7 +51,7 @@ export const enum MarkdownTagType {
 //   SECTION_ORDERED = "SECTION_ORDERED",
 //   SECTION_UNORDERED = "SECTION_UNORDERED",
 //   BLOCKQUOTE = "BLOCKQUOTE",
-//   PHOTOENTRY = "PHOTOENTRY",
+//   IMAGEENTRY = "IMAGEENTRY",
 //   FILLIN = "FILLIN",
 //   EMPTY = "EMPTY",
 //   TBD = "TBD"
@@ -70,7 +70,7 @@ export const enum MarkdownTagType {
 //   FILLIN_END = "FILLIN_END",
 //   LISTITEM_END = "LISTITEM_END",
 //   PARAGRAPH_END = "PARAGRAPH_END",
-//   PHOTOENTRY_END = "PHOTOENTRY_END",
+//   IMAGEENTRY_END = "IMAGEENTRY_END",
 //   SECTION_END = "SECTION_END"
 // }
 // export enum MarkdownLastTagType {
@@ -109,8 +109,8 @@ export const enum MarkdownTagType {
 //   COMMENT = "COMMENT",
 //   BLOCKQUOTE = "BLOCKQUOTE",
 //   PASSTHRUTAG = "PASSTHRUTAG",
-//   PHOTOENTRY = "PHOTOENTRY",
-//   PHOTOENTRY_END = "PHOTOENTRY_END",
+//   IMAGEENTRY = "IMAGEENTRY",
+//   IMAGEENTRY_END = "IMAGEENTRY_END",
 //   FILLIN = "FILLIN",
 //   FILLIN_END = "FILLIN_END",
 //   PAGE = "PAGE",
@@ -142,9 +142,9 @@ export const enum MarkdownType {
   FILLIN = "LIST_FILLIN",
   FILLIN_END = "LIST_FILLIN_END",
   PAGE = "PAGE",
-  PAGETITLE = "PAGETITLE",
-  PHOTOENTRY = "PHOTOENTRY",
-  PHOTOENTRY_END = "PHOTOENTRY_END",
+  //  PAGETITLE = "PAGETITLE",
+  IMAGEENTRY = "IMAGEENTRY",
+  IMAGEENTRY_END = "IMAGEENTRY_END",
   TBD = "TBD" // should always be last
 }
 // const enum MarkDownSectionTagType {
@@ -201,7 +201,10 @@ const PARAGRAPH_TO_SENTENCES: RegExp = /([\.\?!][\'\"\u2018\u2019\u201c\u201d\)\
 // characters at the end of sentence.
 
 //const PARAGRAPH_TO_SENTENCES2: RegExp = /(?<!\w\.\w.)(?<![A-Z][a-z][a-z]\.)([\.\?!][\"\u2018\u2019\u201c\u201d\)\]]*\s*(?<![A-Z][a-z]\.)(?<![A-Z]\.)\s+)/;
-const PARAGRAPH_PATTERN: RegExp = /^([ "'\(]?[A-Za-z0-9\$\@]{1}.*)$/m;
+//const PARAGRAPH_PATTERN: RegExp = /^([ "'\(\!]?[A-Za-z0-9\$\@]{1}.*)$/m;
+const PARAGRAPH_PATTERN: RegExp = /^(([\[ "'\(]?|\!\[)[A-Za-z0-9\$\@]{1}.*)$/m;
+// ![ only to support ![image]
+// [ only to support [link]
 const MarkdownPatternDictionary: MarkdownPatternDictionaryType = {
   [MarkdownType.HEADING01]: {
     pattern: /^#\s([^\s].*)$/,
@@ -280,28 +283,28 @@ const MarkdownPatternDictionary: MarkdownPatternDictionaryType = {
     pattern: /^\[comment]:\s(.*)$/,
     tagType: MarkdownTagType.COMMENT
   },
-  [MarkdownType.PHOTOENTRY]: {
-    pattern: /\[\/\/photo-entry\]:\s(image=.*)$/i,
-    tagType: MarkdownTagType.PHOTOENTRY
+  [MarkdownType.IMAGEENTRY]: {
+    pattern: /^\[\[image-entry:\s(.*)\]\]$/i, // [[image-entry: *]]
+    tagType: MarkdownTagType.IMAGEENTRY
   },
-  [MarkdownType.PHOTOENTRY_END]: {
-    pattern: /\[\/\/photo-entry-end\]$/i,
-    tagType: MarkdownTagType.PHOTOENTRY_END
+  [MarkdownType.IMAGEENTRY_END]: {
+    pattern: /^\[\[\/image-entry\]\]$/i, // [[/image-entry]]
+    tagType: MarkdownTagType.IMAGEENTRY_END
   },
   [MarkdownType.PAGE]: {
-    pattern: /\[\/\/page\]:\s(.*)$/i,
+    pattern: /^\[\[page:\s(.*)\/\]\]$/i, // [[page: */]] should contain title and other info
     tagType: MarkdownTagType.PAGE
   },
-  [MarkdownType.PAGETITLE]: {
-    pattern: /\[\/\/page title\]:\s(.*)/i,
-    tagType: MarkdownTagType.PAGETITLE
-  },
+  // [MarkdownType.PAGETITLE]: {
+  //   pattern: /\[\[page-title:\s(.*)\/\]\]$/i, // [[page-title: */]]
+  //   tagType: MarkdownTagType.PAGETITLE
+  // },
   [MarkdownType.FILLIN]: {
-    pattern: /\[\/\/fill-in\]:(.*)$/,
+    pattern: /\[\[fill-in:\s(.*)\]\]$/,
     tagType: MarkdownTagType.FILLIN
   },
   [MarkdownType.FILLIN_END]: {
-    pattern: /\[\/\/fill-in-end\]$/,
+    pattern: /\[\/\/fill-in\]$/,
     tagType: MarkdownTagType.FILLIN_END
   },
   [MarkdownType.PASSTHRUTAG]: {
@@ -463,10 +466,10 @@ export class RawMarkdownSource extends MarkdownSource implements IDataSource {
       .readFileSync(fileName)
       .toString()
       .replace(/[\u2018\u2019]/g, "'") // single { left | right } quote to apostrophe
-      .replace(/\[u201C\u201D]/g, '\"') // double { left | right } quote to double quote
+      .replace(/\[u201C\u201D]/g, '"') // double { left | right } quote to double quote
       .replace(/\r/g, "") // explicit carriage return
-      .replace(/[\u0000-\u0008]+/g,"") // non-printables
-      .replace(/[\u0009]+/g,"\t") // non-printables
+      .replace(/[\u0000-\u0008]+/g, "") // non-printables
+      .replace(/[\u0009]+/g, "\t") // non-printables
       .split("\n");
 
     let inputCount = this.parse(0, inputBuffer, 0, this.buffer);
@@ -653,7 +656,7 @@ export class BasicMarkdownSource extends RawMarkdownSource
         });
       } else {
         switch (current.tagType) {
-          case MarkdownTagType.PAGETITLE: {
+          case MarkdownTagType.PAGE: {
             resultBuffer.push(current);
             break;
           }
@@ -710,6 +713,16 @@ export class BasicMarkdownSource extends RawMarkdownSource
           }
           case MarkdownTagType.PARAGRAPH: {
             this.parseParagraph(current.depth, current, this.buffer);
+            break;
+          }
+          case MarkdownTagType.IMAGEENTRY: {
+            resultBuffer.push({
+              content: current.content,
+              tagType: MarkdownTagType.IMAGEENTRY,
+              depth: current.depth,
+              headingLevel: current.headingLevel,
+              lineNo: current.lineNo
+            });
             break;
           }
           default: {

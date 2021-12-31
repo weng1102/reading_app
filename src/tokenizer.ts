@@ -26,9 +26,12 @@ export const enum TokenLiteral { // literals used as comparators
   DASH = "-", // for phone numbers
   DOUBLEQUOTE = '""',
   DOT = ".", // for decimals, doman names
+  EXCLAMATION = "!", // for image
   FORWARDSLASH = "/",
   LPAREN = "(", // for phone numbers
   RPAREN = ")", // for phone numbers
+  LBRACKET = "[",
+  RBRACKET = "]",
   LANGLEBRACKET = "<",
   RANGLEBRACKET = ">",
   UNDERSCORE = "_",
@@ -74,6 +77,8 @@ export const enum MarkupTokenType { // labels used for markup in interim output
   CONTRACTION_NT,
   CONTRACTION_S,
   CONTRACTION_VE,
+  IMAGE,
+  LINK,
   NUMBER_WITHCOMMAS
 }
 // used as markup labels for intermediate serialization between tokenizing and parsing
@@ -85,6 +90,8 @@ export const enum MarkupLabelType {
   DATE2 = "<date2>",
   DATE3 = "<date3>",
   EMAILADDRESS = "<emailaddress>",
+  IMAGE = "<image>",
+  LINK = "<link>",
   NUMBER_WITHCOMMAS = "<numberwcommas>",
   PHONENUMBER = "<telephone number>",
   TIME = "<time>",
@@ -240,6 +247,18 @@ const MarkupTokenDictionary: MarkupTokenDictionaryType = {
     type: MarkupTokenType.NUMBER_WITHCOMMAS,
     label: MarkupLabelType.NUMBER_WITHCOMMAS,
     pattern: /(?<=^|\s|^$)(\d{0,3},)?(\d{3},)*(\d{1,3},\d{3})(?=\s|\W|$|[.!?\\-])/g
+    // scan for token that require potential markup tags
+  },
+  [MarkupTokenType.IMAGE]: {
+    type: MarkupTokenType.IMAGE,
+    label: MarkupLabelType.IMAGE,
+    pattern: /(?<=^|\W)(!\[)([a-zA-Z0-9 _\-\.!]+\])(\(.+\))/g
+    // scan for token that require potential markup tags
+  },
+  [MarkupTokenType.LINK]: {
+    type: MarkupTokenType.LINK,
+    label: MarkupLabelType.LINK,
+    pattern: /(?<=^|\W)(?<!\!)\[[a-zA-Z0-9 _\-\.!]+\](\(.+\))/g
     // scan for token that require potential markup tags
   }
 };

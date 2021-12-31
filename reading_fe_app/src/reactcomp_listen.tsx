@@ -27,6 +27,9 @@ export const ListeningMonitor = () => {
     store => store.listen_active
   );
   const flushRequested: boolean = useAppSelector(store => store.listen_flush);
+  const newSentence: boolean = useAppSelector(
+    store => store.cursor_newSentenceTransition
+  );
   let settingsContext: ISettingsContext = useContext(
     SettingsContext
   ) as ISettingsContext;
@@ -138,6 +141,16 @@ interface IListenSettingsProps {
   setListenSettings: (listeningSettings: IListenSettings) => void;
 }
 export const ListenSettings = (props: IListenSettingsProps) => {
+  const [stopAtEOS, _setStopAtEOS] = useState(
+    props.listenSettings.stopAtEndOfSentence
+  );
+  const setStopAtEOS = (stopAtEOS: boolean) => {
+    _setStopAtEOS(stopAtEOS);
+    props.setListenSettings({
+      ...props.listenSettings,
+      stopAtEndOfSentence: stopAtEOS
+    });
+  };
   const [timeout, _setTimeout] = useState(props.listenSettings.timeout);
   const setTimeout = (timeout: number) => {
     _setTimeout(timeout);
@@ -169,6 +182,7 @@ export const ListenSettings = (props: IListenSettingsProps) => {
   return (
     <>
       <div className="settings-section-header">Listen</div>
+      <StopAtEOS stopAtEOS={stopAtEOS} setStopAtEOS={setStopAtEOS} />
       <Timeout timeout={timeout} setTimeout={setTimeout} />
       <ListeningInterval
         listeningInterval={listeningInterval}
@@ -208,6 +222,35 @@ export const ListenButton = () => {
             : undefined
         }
       />
+    </>
+  );
+};
+interface IStopAtEOSProps {
+  stopAtEOS: boolean;
+  setStopAtEOS: (stopAtEOS: boolean) => void;
+}
+const StopAtEOS = (props: IStopAtEOSProps) => {
+  const onChangeValue = (event: any) => {
+    console.log(`onchange=${event.target.checked}`);
+    props.setStopAtEOS(event.target.checked);
+  };
+  return (
+    <>
+      <div className="settings-grid-section-header">Performance</div>
+      <div className="checkbox-container stopAtEOS-checkbox-container">
+        <input
+          onChange={onChangeValue}
+          className="checkbox-control"
+          type="checkbox"
+          checked={props.stopAtEOS}
+        />
+        <label>Stop listening at the end of each sentence</label>
+      </div>
+      <div className="settings-grid-section-footer">
+        Listening automatically stops at the end of each sentence as a
+        convenience to the user. This also resets the listening recognition
+        engine that improves recognition accuracy for the subsequent sentence.
+      </div>
     </>
   );
 };
@@ -308,7 +351,7 @@ const ListeningInterval = (props: IListeningIntervalProps) => {
       <div className="settings-grid-section-footer">
         Queuing duration defines the buffering interval before word recognition
         occurs (in milliseconds). Shorter durations will result in better screen
-        responsiveness, while overall recognition accuracy will likely decline.
+        responsiveness while overall recognition accuracy will likely decline.
         Vice versa for longer durations.
       </div>
     </>

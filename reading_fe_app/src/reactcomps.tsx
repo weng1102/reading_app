@@ -52,13 +52,14 @@ import { SectionDispatcher } from "./reactcomps_sections";
 //   UNORDEREDLIST: "ul",
 //   PARAGRAPH: "none"
 // };
+let distDir: string = "https://weng1102.github.io/reading_app/dist/";
 let urlFileRequested: string;
 urlFileRequested = ".json";
-urlFileRequested = "terminals_phonenumbers.json";
-urlFileRequested = "7wordsentences.json";
 urlFileRequested = "paragraph.json";
-let urlRequested: string =
-  "https://weng1102.github.io/reading_app/dist/" + urlFileRequested;
+urlFileRequested = "7wordsentences.json";
+urlFileRequested = "terminals_phonenumbers.json";
+urlFileRequested = "images.json";
+let urlRequested: string = distDir + urlFileRequested;
 export const ReadingApp = () => {
   const [responseError, setResponseError] = useState<string | null>(null);
   const [parseError, setParseError] = useState<string | null>(null);

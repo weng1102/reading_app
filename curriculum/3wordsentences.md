@@ -1,4 +1,4 @@
-[//page title]: Three word sentences
+[[page: Three word sentences, Wen Eng /]]
 
 # Three word sentence
 

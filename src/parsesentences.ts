@@ -28,7 +28,8 @@ import {
 } from "./pageContentType";
 
 export type ISentenceNode = ISentenceContent & IParseNode;
-abstract class AbstractSentenceNode extends ParseNode implements ISentenceNode {
+export abstract class AbstractSentenceNode extends ParseNode
+  implements ISentenceNode {
   id: number = 0;
   content: string = "";
   firstTermIdx: number = IDX_INITIALIZER;
@@ -203,7 +204,6 @@ export class SentenceNode extends AbstractSentenceNode
           terminal.content !== '"';
         if (found) {
           this.lastPunctuation = terminal.content;
-          console.log(`punctuation=${this.lastPunctuation}`);
           break;
         }
       }

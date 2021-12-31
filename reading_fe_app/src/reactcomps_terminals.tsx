@@ -29,7 +29,7 @@ import {
 import { Terminal_Date } from "./reactcomps_terminals_dates";
 import { Terminal_Emailaddress } from "./reactcomps_terminals_emailaddress";
 import { Terminal_PhoneNumber } from "./reactcomps_terminals_phonenumber";
-
+import { Terminal_Image } from "./reactcomps_terminals_image";
 export interface ITerminalPropsType {
   active: boolean;
   terminal: ITerminalContent;
@@ -102,6 +102,17 @@ export const TerminalDispatcher = React.memo(
       case TerminalMetaEnumType.emailaddress:
         return (
           <Terminal_Emailaddress
+            active={
+              currentTerminalIdx >= props.terminal.firstTermIdx &&
+              currentTerminalIdx <= props.terminal.lastTermIdx
+            }
+            terminal={props.terminal}
+          />
+        );
+        break;
+      case TerminalMetaEnumType.image:
+        return (
+          <Terminal_Image
             active={
               currentTerminalIdx >= props.terminal.firstTermIdx &&
               currentTerminalIdx <= props.terminal.lastTermIdx
