@@ -1,16 +1,28 @@
 {
   "id": 0,
-  "title": "Testing Dates email and acronym format",
+  "title": "",
   "filename": "terminals_date3.json",
   "description": "",
   "owner": "",
   "pageFormatType": 0,
-  "created": "Thu Oct 21 2021 11:22:15 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Thu Oct 21 2021 11:22:15 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Thu Oct 21 2021 11:22:15 GMT-0700 (Pacific Daylight Time)",
+  "created": "Fri Dec 31 2021 11:39:37 GMT-0800 (Pacific Standard Time)",
+  "modified": "Fri Dec 31 2021 11:39:37 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Fri Dec 31 2021 11:39:37 GMT-0800 (Pacific Standard Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
+    {
+      "id": 0,
+      "name": "TBD",
+      "description": "",
+      "firstTermIdx": -9999,
+      "lastTermIdx": -9999,
+      "items": [],
+      "type": "tbd",
+      "meta": {
+        "context": ""
+      }
+    },
     {
       "id": 0,
       "name": "",
@@ -29,7 +41,7 @@
             "terminals": [
               {
                 "id": 0,
-                "termIdx": 1,
+                "termIdx": -9999,
                 "content": "May 28",
                 "firstTermIdx": 0,
                 "lastTermIdx": 1,
@@ -38,7 +50,7 @@
                   "format": 2,
                   "month": {
                     "content": "May",
-                    "termIdx": -9999,
+                    "termIdx": 0,
                     "nextTermIdx": [
                       1
                     ],
@@ -79,7 +91,7 @@
                   },
                   "day": {
                     "content": "28",
-                    "termIdx": -9999,
+                    "termIdx": 1,
                     "nextTermIdx": [
                       2
                     ],
@@ -156,7 +168,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -177,7 +189,7 @@
                 "content": "and",
                 "firstTermIdx": 2,
                 "lastTermIdx": 2,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "and",
                   "termIdx": 2,
@@ -202,7 +214,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -219,7 +231,7 @@
               },
               {
                 "id": 0,
-                "termIdx": 4,
+                "termIdx": -9999,
                 "content": "June 30",
                 "firstTermIdx": 3,
                 "lastTermIdx": 4,
@@ -228,7 +240,7 @@
                   "format": 2,
                   "month": {
                     "content": "June",
-                    "termIdx": -9999,
+                    "termIdx": 3,
                     "nextTermIdx": [
                       4
                     ],
@@ -271,7 +283,7 @@
                   },
                   "day": {
                     "content": "30",
-                    "termIdx": -9999,
+                    "termIdx": 4,
                     "nextTermIdx": [
                       5
                     ],
@@ -342,7 +354,8 @@
                   }
                 }
               }
-            ]
+            ],
+            "lastPunctuation": ""
           }
         ],
         "style": ""
@@ -370,7 +383,7 @@
                 "content": "Jen",
                 "firstTermIdx": 5,
                 "lastTermIdx": 5,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "Jen",
                   "termIdx": 5,
@@ -395,7 +408,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -416,7 +429,7 @@
                 "content": "was",
                 "firstTermIdx": 6,
                 "lastTermIdx": 6,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "was",
                   "termIdx": 6,
@@ -441,7 +454,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -462,7 +475,7 @@
                 "content": "born",
                 "firstTermIdx": 7,
                 "lastTermIdx": 7,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "born",
                   "termIdx": 7,
@@ -487,7 +500,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -508,7 +521,7 @@
                 "content": "on",
                 "firstTermIdx": 8,
                 "lastTermIdx": 8,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "on",
                   "termIdx": 8,
@@ -533,7 +546,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -550,7 +563,7 @@
               },
               {
                 "id": 0,
-                "termIdx": 12,
+                "termIdx": -9999,
                 "content": "May 3, 1969",
                 "firstTermIdx": 9,
                 "lastTermIdx": 12,
@@ -559,7 +572,7 @@
                   "format": 1,
                   "month": {
                     "content": "May",
-                    "termIdx": -9999,
+                    "termIdx": 9,
                     "nextTermIdx": [
                       10
                     ],
@@ -602,7 +615,7 @@
                   },
                   "day": {
                     "content": "3",
-                    "termIdx": -9999,
+                    "termIdx": 10,
                     "nextTermIdx": [
                       11
                     ],
@@ -646,7 +659,7 @@
                   "year": {
                     "century": {
                       "content": "19",
-                      "termIdx": -9999,
+                      "termIdx": 11,
                       "nextTermIdx": [
                         12
                       ],
@@ -663,7 +676,7 @@
                     },
                     "withinCentury": {
                       "content": "69",
-                      "termIdx": -9999,
+                      "termIdx": 12,
                       "nextTermIdx": [
                         13
                       ],
@@ -687,7 +700,7 @@
                 "content": ".",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 6,
+                "type": 8,
                 "meta": {
                   "content": ".",
                   "termIdx": -9999,
@@ -702,7 +715,8 @@
                   "visited": false
                 }
               }
-            ]
+            ],
+            "lastPunctuation": "."
           }
         ],
         "style": ""
@@ -730,7 +744,7 @@
                 "content": "Wen",
                 "firstTermIdx": 13,
                 "lastTermIdx": 13,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "Wen",
                   "termIdx": 13,
@@ -755,7 +769,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -776,7 +790,7 @@
                 "content": "was",
                 "firstTermIdx": 14,
                 "lastTermIdx": 14,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "was",
                   "termIdx": 14,
@@ -801,7 +815,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -822,7 +836,7 @@
                 "content": "born",
                 "firstTermIdx": 15,
                 "lastTermIdx": 15,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "born",
                   "termIdx": 15,
@@ -847,7 +861,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -868,7 +882,7 @@
                 "content": "on",
                 "firstTermIdx": 16,
                 "lastTermIdx": 16,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "on",
                   "termIdx": 16,
@@ -893,7 +907,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -1047,7 +1061,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -1068,7 +1082,7 @@
                 "content": "wow",
                 "firstTermIdx": 21,
                 "lastTermIdx": 21,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "wow",
                   "termIdx": 21,
@@ -1093,7 +1107,7 @@
                 "content": ".",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 6,
+                "type": 8,
                 "meta": {
                   "content": ".",
                   "termIdx": -9999,
@@ -1108,7 +1122,8 @@
                   "visited": false
                 }
               }
-            ]
+            ],
+            "lastPunctuation": "."
           }
         ],
         "style": ""
@@ -1285,7 +1300,8 @@
                   ]
                 }
               }
-            ]
+            ],
+            "lastPunctuation": ""
           }
         ],
         "style": ""
@@ -1440,7 +1456,8 @@
                   ]
                 }
               }
-            ]
+            ],
+            "lastPunctuation": ""
           }
         ],
         "style": ""
@@ -1561,7 +1578,8 @@
                   ]
                 }
               }
-            ]
+            ],
+            "lastPunctuation": ""
           }
         ],
         "style": ""
@@ -1784,7 +1802,8 @@
                   ]
                 }
               }
-            ]
+            ],
+            "lastPunctuation": ""
           }
         ],
         "style": ""
@@ -1851,7 +1870,7 @@
                 "content": "I",
                 "firstTermIdx": 51,
                 "lastTermIdx": 51,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "I",
                   "termIdx": 51,
@@ -1876,7 +1895,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -1897,7 +1916,7 @@
                 "content": "attend",
                 "firstTermIdx": 52,
                 "lastTermIdx": 52,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "attend",
                   "termIdx": 52,
@@ -1922,7 +1941,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -1943,7 +1962,7 @@
                 "content": "rehab",
                 "firstTermIdx": 53,
                 "lastTermIdx": 53,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "rehab",
                   "termIdx": 53,
@@ -1968,7 +1987,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -1989,7 +2008,7 @@
                 "content": "at",
                 "firstTermIdx": 54,
                 "lastTermIdx": 54,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "at",
                   "termIdx": 54,
@@ -2014,7 +2033,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -2132,7 +2151,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -2153,7 +2172,7 @@
                 "content": "today",
                 "firstTermIdx": 60,
                 "lastTermIdx": 60,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "today",
                   "termIdx": 60,
@@ -2178,7 +2197,7 @@
                 "content": ".",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 6,
+                "type": 8,
                 "meta": {
                   "content": ".",
                   "termIdx": -9999,
@@ -2193,7 +2212,8 @@
                   "visited": false
                 }
               }
-            ]
+            ],
+            "lastPunctuation": "."
           }
         ],
         "style": ""
@@ -2221,7 +2241,7 @@
                 "content": "I",
                 "firstTermIdx": 61,
                 "lastTermIdx": 61,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "I",
                   "termIdx": 61,
@@ -2246,7 +2266,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -2267,7 +2287,7 @@
                 "content": "attend",
                 "firstTermIdx": 62,
                 "lastTermIdx": 62,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "attend",
                   "termIdx": 62,
@@ -2292,7 +2312,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -2313,7 +2333,7 @@
                 "content": "SPARC",
                 "firstTermIdx": 63,
                 "lastTermIdx": 63,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "SPARC",
                   "termIdx": 63,
@@ -2338,7 +2358,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -2359,7 +2379,7 @@
                 "content": "three",
                 "firstTermIdx": 64,
                 "lastTermIdx": 64,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "three",
                   "termIdx": 64,
@@ -2384,7 +2404,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -2405,7 +2425,7 @@
                 "content": "times",
                 "firstTermIdx": 65,
                 "lastTermIdx": 65,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "times",
                   "termIdx": 65,
@@ -2430,7 +2450,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -2451,7 +2471,7 @@
                 "content": "a",
                 "firstTermIdx": 66,
                 "lastTermIdx": 66,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "a",
                   "termIdx": 66,
@@ -2476,7 +2496,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -2497,7 +2517,7 @@
                 "content": "week",
                 "firstTermIdx": 67,
                 "lastTermIdx": 67,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "week",
                   "termIdx": 67,
@@ -2516,7 +2536,8 @@
                   "visited": false
                 }
               }
-            ]
+            ],
+            "lastPunctuation": ""
           }
         ],
         "style": ""
@@ -2544,7 +2565,7 @@
                 "content": "I",
                 "firstTermIdx": 68,
                 "lastTermIdx": 68,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "I",
                   "termIdx": 68,
@@ -2569,7 +2590,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -2590,7 +2611,7 @@
                 "content": "attend",
                 "firstTermIdx": 69,
                 "lastTermIdx": 69,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "attend",
                   "termIdx": 69,
@@ -2615,7 +2636,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -2733,7 +2754,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -2754,7 +2775,7 @@
                 "content": "every",
                 "firstTermIdx": 75,
                 "lastTermIdx": 75,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "every",
                   "termIdx": 75,
@@ -2779,7 +2800,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -2800,7 +2821,7 @@
                 "content": "week",
                 "firstTermIdx": 76,
                 "lastTermIdx": 76,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "week",
                   "termIdx": 76,
@@ -2817,7 +2838,8 @@
                   "visited": false
                 }
               }
-            ]
+            ],
+            "lastPunctuation": ""
           }
         ],
         "style": ""
@@ -3187,7 +3209,7 @@
         17
       ],
       "altpronunciation": "november",
-      "altrecognition": "",
+      "altrecognition": "november",
       "recitable": true,
       "audible": true,
       "visible": true,
@@ -3339,7 +3361,7 @@
         25
       ],
       "altpronunciation": "dot",
-      "altrecognition": "",
+      "altrecognition": "dot",
       "recitable": true,
       "audible": true,
       "visible": true,
@@ -3377,7 +3399,7 @@
         27
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "^(wh{0,1}en)$",
       "recitable": true,
       "audible": true,
       "visible": true,
@@ -3396,7 +3418,7 @@
         28
       ],
       "altpronunciation": "underscore",
-      "altrecognition": "",
+      "altrecognition": "underscore",
       "recitable": true,
       "audible": true,
       "visible": true,
@@ -3472,7 +3494,7 @@
         32
       ],
       "altpronunciation": "dot",
-      "altrecognition": "",
+      "altrecognition": "dot",
       "recitable": true,
       "audible": true,
       "visible": true,
@@ -3567,7 +3589,7 @@
         37
       ],
       "altpronunciation": "dot",
-      "altrecognition": "",
+      "altrecognition": "dot",
       "recitable": true,
       "audible": true,
       "visible": true,
@@ -3605,7 +3627,7 @@
         39
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "^(wh{0,1}en)$",
       "recitable": true,
       "audible": true,
       "visible": true,
@@ -3624,7 +3646,7 @@
         40
       ],
       "altpronunciation": "dot",
-      "altrecognition": "",
+      "altrecognition": "dot",
       "recitable": true,
       "audible": true,
       "visible": true,
@@ -3700,7 +3722,7 @@
         44
       ],
       "altpronunciation": "dot",
-      "altrecognition": "",
+      "altrecognition": "dot",
       "recitable": true,
       "audible": true,
       "visible": true,
@@ -3738,7 +3760,7 @@
         46
       ],
       "altpronunciation": "dot",
-      "altrecognition": "",
+      "altrecognition": "dot",
       "recitable": true,
       "audible": true,
       "visible": true,
@@ -3776,7 +3798,7 @@
         48
       ],
       "altpronunciation": "dot",
-      "altrecognition": "",
+      "altrecognition": "dot",
       "recitable": true,
       "audible": true,
       "visible": true,
@@ -4366,43 +4388,53 @@
   "sentenceList": [
     {
       "firstTermIdx": 0,
-      "lastTermIdx": 4
+      "lastTermIdx": 4,
+      "lastPunctuation": ""
     },
     {
       "firstTermIdx": 5,
-      "lastTermIdx": 12
+      "lastTermIdx": 12,
+      "lastPunctuation": "."
     },
     {
       "firstTermIdx": 13,
-      "lastTermIdx": 21
+      "lastTermIdx": 21,
+      "lastPunctuation": "."
     },
     {
       "firstTermIdx": 22,
-      "lastTermIdx": 27
+      "lastTermIdx": 27,
+      "lastPunctuation": ""
     },
     {
       "firstTermIdx": 28,
-      "lastTermIdx": 34
+      "lastTermIdx": 34,
+      "lastPunctuation": ""
     },
     {
       "firstTermIdx": 35,
-      "lastTermIdx": 39
+      "lastTermIdx": 39,
+      "lastPunctuation": ""
     },
     {
       "firstTermIdx": 40,
-      "lastTermIdx": 50
+      "lastTermIdx": 50,
+      "lastPunctuation": ""
     },
     {
       "firstTermIdx": 51,
-      "lastTermIdx": 60
+      "lastTermIdx": 60,
+      "lastPunctuation": "."
     },
     {
       "firstTermIdx": 61,
-      "lastTermIdx": 67
+      "lastTermIdx": 67,
+      "lastPunctuation": ""
     },
     {
       "firstTermIdx": 68,
-      "lastTermIdx": 76
+      "lastTermIdx": 76,
+      "lastPunctuation": ""
     }
   ]
 }

@@ -5,9 +5,9 @@
   "description": "",
   "owner": "",
   "pageFormatType": 0,
-  "created": "Thu Oct 21 2021 11:22:15 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Thu Oct 21 2021 11:22:15 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Thu Oct 21 2021 11:22:15 GMT-0700 (Pacific Daylight Time)",
+  "created": "Fri Dec 31 2021 11:39:37 GMT-0800 (Pacific Standard Time)",
+  "modified": "Fri Dec 31 2021 11:39:37 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Fri Dec 31 2021 11:39:37 GMT-0800 (Pacific Standard Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -48,7 +48,7 @@
                 "content": "the",
                 "firstTermIdx": 0,
                 "lastTermIdx": 0,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "the",
                   "termIdx": 0,
@@ -71,7 +71,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -92,7 +92,7 @@
                 "content": "beginning",
                 "firstTermIdx": 1,
                 "lastTermIdx": 1,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "beginning",
                   "termIdx": 1,
@@ -111,7 +111,8 @@
                   "visited": false
                 }
               }
-            ]
+            ],
+            "lastPunctuation": ""
           }
         ],
         "style": ""
@@ -151,7 +152,7 @@
                 "content": "the",
                 "firstTermIdx": 2,
                 "lastTermIdx": 2,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "the",
                   "termIdx": 2,
@@ -176,7 +177,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -197,7 +198,7 @@
                 "content": "middle",
                 "firstTermIdx": 3,
                 "lastTermIdx": 3,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "middle",
                   "termIdx": 3,
@@ -216,7 +217,8 @@
                   "visited": false
                 }
               }
-            ]
+            ],
+            "lastPunctuation": ""
           }
         ],
         "style": ""
@@ -256,7 +258,7 @@
                 "content": "the",
                 "firstTermIdx": 4,
                 "lastTermIdx": 4,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "the",
                   "termIdx": 4,
@@ -281,7 +283,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -302,7 +304,7 @@
                 "content": "end",
                 "firstTermIdx": 5,
                 "lastTermIdx": 5,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "end",
                   "termIdx": 5,
@@ -319,7 +321,8 @@
                   "visited": false
                 }
               }
-            ]
+            ],
+            "lastPunctuation": ""
           }
         ],
         "style": ""
@@ -478,15 +481,18 @@
   "sentenceList": [
     {
       "firstTermIdx": 0,
-      "lastTermIdx": 1
+      "lastTermIdx": 1,
+      "lastPunctuation": ""
     },
     {
       "firstTermIdx": 2,
-      "lastTermIdx": 3
+      "lastTermIdx": 3,
+      "lastPunctuation": ""
     },
     {
       "firstTermIdx": 4,
-      "lastTermIdx": 5
+      "lastTermIdx": 5,
+      "lastPunctuation": ""
     }
   ]
 }

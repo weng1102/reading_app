@@ -1,16 +1,28 @@
 {
   "id": 0,
-  "title": "Testing Date2 format",
+  "title": "",
   "filename": "terminals_date2.json",
   "description": "",
   "owner": "",
   "pageFormatType": 0,
-  "created": "Thu Oct 21 2021 11:22:15 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Thu Oct 21 2021 11:22:15 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Thu Oct 21 2021 11:22:15 GMT-0700 (Pacific Daylight Time)",
+  "created": "Fri Dec 31 2021 11:39:37 GMT-0800 (Pacific Standard Time)",
+  "modified": "Fri Dec 31 2021 11:39:37 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Fri Dec 31 2021 11:39:37 GMT-0800 (Pacific Standard Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
+    {
+      "id": 0,
+      "name": "TBD",
+      "description": "",
+      "firstTermIdx": -9999,
+      "lastTermIdx": -9999,
+      "items": [],
+      "type": "tbd",
+      "meta": {
+        "context": ""
+      }
+    },
     {
       "id": 0,
       "name": "",
@@ -130,7 +142,7 @@
                       "prevTermIdx": [
                         1
                       ],
-                      "altpronunciation": "(two thousand) | (twenty)",
+                      "altpronunciation": "(two thousand)",
                       "altrecognition": "",
                       "recitable": true,
                       "audible": true,
@@ -164,7 +176,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -185,7 +197,7 @@
                 "content": "was",
                 "firstTermIdx": 4,
                 "lastTermIdx": 4,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "was",
                   "termIdx": 4,
@@ -210,7 +222,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -231,7 +243,7 @@
                 "content": "last",
                 "firstTermIdx": 5,
                 "lastTermIdx": 5,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "last",
                   "termIdx": 5,
@@ -256,7 +268,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -277,7 +289,7 @@
                 "content": "Christmas",
                 "firstTermIdx": 6,
                 "lastTermIdx": 6,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "Christmas",
                   "termIdx": 6,
@@ -302,7 +314,7 @@
                 "content": ".",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 6,
+                "type": 8,
                 "meta": {
                   "content": ".",
                   "termIdx": -9999,
@@ -317,7 +329,8 @@
                   "visited": false
                 }
               }
-            ]
+            ],
+            "lastPunctuation": "."
           }
         ],
         "style": ""
@@ -345,7 +358,7 @@
                 "content": "Mommy's",
                 "firstTermIdx": 7,
                 "lastTermIdx": 7,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "Mommy's",
                   "termIdx": 7,
@@ -370,7 +383,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -391,7 +404,7 @@
                 "content": "birthday",
                 "firstTermIdx": 8,
                 "lastTermIdx": 8,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "birthday",
                   "termIdx": 8,
@@ -416,7 +429,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -437,7 +450,7 @@
                 "content": "is",
                 "firstTermIdx": 9,
                 "lastTermIdx": 9,
-                "type": 11,
+                "type": 13,
                 "meta": {
                   "content": "is",
                   "termIdx": 9,
@@ -462,7 +475,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 10,
+                "type": 12,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -479,7 +492,7 @@
               },
               {
                 "id": 0,
-                "termIdx": 13,
+                "termIdx": -9999,
                 "content": "October 28, 2021",
                 "firstTermIdx": 10,
                 "lastTermIdx": 13,
@@ -488,7 +501,7 @@
                   "format": 1,
                   "month": {
                     "content": "October",
-                    "termIdx": -9999,
+                    "termIdx": 10,
                     "nextTermIdx": [
                       11
                     ],
@@ -531,7 +544,7 @@
                   },
                   "day": {
                     "content": "28",
-                    "termIdx": -9999,
+                    "termIdx": 11,
                     "nextTermIdx": [
                       12
                     ],
@@ -575,14 +588,14 @@
                   "year": {
                     "century": {
                       "content": "20",
-                      "termIdx": -9999,
+                      "termIdx": 12,
                       "nextTermIdx": [
                         13
                       ],
                       "prevTermIdx": [
                         11
                       ],
-                      "altpronunciation": "(two thousand) | (twenty)",
+                      "altpronunciation": "(two thousand)",
                       "altrecognition": "",
                       "recitable": true,
                       "audible": true,
@@ -592,7 +605,7 @@
                     },
                     "withinCentury": {
                       "content": "21",
-                      "termIdx": -9999,
+                      "termIdx": 13,
                       "nextTermIdx": [],
                       "prevTermIdx": [
                         12
@@ -614,7 +627,7 @@
                 "content": ".",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 6,
+                "type": 8,
                 "meta": {
                   "content": ".",
                   "termIdx": -9999,
@@ -629,7 +642,8 @@
                   "visited": false
                 }
               }
-            ]
+            ],
+            "lastPunctuation": "."
           }
         ],
         "style": ""
@@ -694,7 +708,7 @@
       "prevTermIdx": [
         1
       ],
-      "altpronunciation": "(two thousand) | (twenty)",
+      "altpronunciation": "(two thousand)",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
@@ -884,7 +898,7 @@
       "prevTermIdx": [
         11
       ],
-      "altpronunciation": "(two thousand) | (twenty)",
+      "altpronunciation": "(two thousand)",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
@@ -928,11 +942,13 @@
   "sentenceList": [
     {
       "firstTermIdx": 0,
-      "lastTermIdx": 6
+      "lastTermIdx": 6,
+      "lastPunctuation": "."
     },
     {
       "firstTermIdx": 7,
-      "lastTermIdx": 13
+      "lastTermIdx": 13,
+      "lastPunctuation": "."
     }
   ]
 }
