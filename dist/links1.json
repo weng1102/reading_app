@@ -5,9 +5,9 @@
   "description": "",
   "owner": "",
   "pageFormatType": 0,
-  "created": "Fri Jan 28 2022 08:36:35 GMT-0800 (Pacific Standard Time)",
-  "modified": "Fri Jan 28 2022 08:36:36 GMT-0800 (Pacific Standard Time)",
-  "transformed": "Fri Jan 28 2022 08:36:36 GMT-0800 (Pacific Standard Time)",
+  "created": "Fri Jan 28 2022 19:38:57 GMT-0800 (Pacific Standard Time)",
+  "modified": "Fri Jan 28 2022 19:38:57 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Fri Jan 28 2022 19:38:57 GMT-0800 (Pacific Standard Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -1943,27 +1943,43 @@
   ],
   "linkList": [
     {
-      "destination": "link2",
-      "sectionIdx": 6,
-      "terminalIdx": -9999,
+      "label": "and I'm at the start",
+      "destination": {
+        "page": "link2",
+        "directory": "",
+        "sectionIdx": 6,
+        "terminalIdx": -9999
+      },
       "valid": true
     },
     {
-      "destination": "test2",
-      "sectionIdx": 1,
-      "terminalIdx": -9999,
+      "label": "I'm at the start",
+      "destination": {
+        "page": "test2",
+        "directory": "",
+        "sectionIdx": 1,
+        "terminalIdx": -9999
+      },
       "valid": true
     },
     {
-      "destination": "test2",
-      "sectionIdx": -9999,
-      "terminalIdx": -9999,
+      "label": "at the start I'm",
+      "destination": {
+        "page": "test2",
+        "directory": "",
+        "sectionIdx": -9999,
+        "terminalIdx": -9999
+      },
       "valid": true
     },
     {
-      "destination": "",
-      "sectionIdx": 13,
-      "terminalIdx": -9999,
+      "label": "(308) 267-6076",
+      "destination": {
+        "page": "",
+        "directory": "",
+        "sectionIdx": 13,
+        "terminalIdx": -9999
+      },
       "valid": true
     }
   ]
