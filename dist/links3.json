@@ -1,0 +1,352 @@
+{
+  "id": 0,
+  "title": "",
+  "filename": "links3.json",
+  "description": "",
+  "owner": "",
+  "pageFormatType": 0,
+  "created": "Sat Jan 29 2022 20:06:07 GMT-0800 (Pacific Standard Time)",
+  "modified": "Sat Jan 29 2022 20:06:07 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Sat Jan 29 2022 20:06:07 GMT-0800 (Pacific Standard Time)",
+  "firstTermIdx": -9999,
+  "lastTermIdx": -9999,
+  "sections": [
+    {
+      "id": 0,
+      "name": "",
+      "description": "",
+      "firstTermIdx": 0,
+      "lastTermIdx": 3,
+      "items": [],
+      "type": "paragraph",
+      "meta": {
+        "sentences": [
+          {
+            "id": 0,
+            "content": "The quick [brown fox](link1)",
+            "firstTermIdx": 0,
+            "lastTermIdx": 3,
+            "terminals": [
+              {
+                "id": 0,
+                "termIdx": 0,
+                "content": "The",
+                "firstTermIdx": 0,
+                "lastTermIdx": 0,
+                "type": 13,
+                "meta": {
+                  "content": "The",
+                  "termIdx": 0,
+                  "nextTermIdx": [
+                    1
+                  ],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 12,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 1,
+                "content": "quick",
+                "firstTermIdx": 1,
+                "lastTermIdx": 1,
+                "type": 13,
+                "meta": {
+                  "content": "quick",
+                  "termIdx": 1,
+                  "nextTermIdx": [
+                    2
+                  ],
+                  "prevTermIdx": [
+                    0
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 12,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": "brown fox",
+                "firstTermIdx": 2,
+                "lastTermIdx": 3,
+                "type": 5,
+                "meta": {
+                  "label": [
+                    {
+                      "id": 0,
+                      "termIdx": 2,
+                      "content": "brown",
+                      "firstTermIdx": 2,
+                      "lastTermIdx": 2,
+                      "type": 13,
+                      "meta": {
+                        "content": "brown",
+                        "termIdx": 2,
+                        "nextTermIdx": [
+                          3
+                        ],
+                        "prevTermIdx": [
+                          1
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "fillin": false,
+                        "visited": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " ",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 12,
+                      "meta": {
+                        "content": " ",
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "fillin": false,
+                        "visited": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 3,
+                      "content": "fox",
+                      "firstTermIdx": 3,
+                      "lastTermIdx": 3,
+                      "type": 13,
+                      "meta": {
+                        "content": "fox",
+                        "termIdx": 3,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [
+                          2
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "fillin": false,
+                        "visited": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999
+                      }
+                    }
+                  ],
+                  "destination": {
+                    "page": "link1",
+                    "directory": "",
+                    "sectionIdx": -9999,
+                    "terminalIdx": -9999
+                  },
+                  "className": "",
+                  "style": "",
+                  "linkIdx": 0
+                }
+              }
+            ],
+            "lastPunctuation": ""
+          }
+        ],
+        "style": ""
+      }
+    }
+  ],
+  "terminalList": [
+    {
+      "content": "The",
+      "termIdx": 0,
+      "nextTermIdx": [
+        1
+      ],
+      "prevTermIdx": [],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 0,
+      "sectionIdx": 0
+    },
+    {
+      "content": "quick",
+      "termIdx": 1,
+      "nextTermIdx": [
+        2
+      ],
+      "prevTermIdx": [
+        0
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 0,
+      "sectionIdx": 0
+    },
+    {
+      "content": "brown",
+      "termIdx": 2,
+      "nextTermIdx": [
+        3
+      ],
+      "prevTermIdx": [
+        1
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": 0,
+      "hintsIdx": -9999,
+      "sentenceIdx": 0,
+      "sectionIdx": 0
+    },
+    {
+      "content": "fox",
+      "termIdx": 3,
+      "nextTermIdx": [],
+      "prevTermIdx": [
+        2
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": 0,
+      "hintsIdx": -9999,
+      "sentenceIdx": 0,
+      "sectionIdx": 0
+    }
+  ],
+  "headingList": [],
+  "sectionList": [
+    {
+      "firstTermIdx": 0,
+      "lastTermIdx": 3,
+      "type": "paragraph"
+    }
+  ],
+  "sentenceList": [
+    {
+      "firstTermIdx": 0,
+      "lastTermIdx": 3,
+      "lastPunctuation": ""
+    }
+  ],
+  "linkList": [
+    {
+      "label": "brown fox",
+      "destination": {
+        "page": "link1",
+        "directory": "",
+        "sectionIdx": -9999,
+        "terminalIdx": -9999
+      },
+      "valid": true
+    }
+  ]
+}
