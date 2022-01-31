@@ -5,9 +5,9 @@
   "description": "",
   "owner": "",
   "pageFormatType": 0,
-  "created": "Sat Jan 29 2022 20:10:41 GMT-0800 (Pacific Standard Time)",
-  "modified": "Sat Jan 29 2022 20:10:41 GMT-0800 (Pacific Standard Time)",
-  "transformed": "Sat Jan 29 2022 20:10:41 GMT-0800 (Pacific Standard Time)",
+  "created": "Sun Jan 30 2022 21:37:35 GMT-0800 (Pacific Standard Time)",
+  "modified": "Sun Jan 30 2022 21:37:35 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Sun Jan 30 2022 21:37:35 GMT-0800 (Pacific Standard Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -15,17 +15,45 @@
       "id": 0,
       "name": "",
       "description": "",
+      "firstTermIdx": -9999,
+      "lastTermIdx": -9999,
+      "items": [],
+      "type": "heading",
+      "meta": {
+        "title": "list of links",
+        "separator": "",
+        "recitable": false,
+        "audible": false,
+        "level": 1
+      }
+    },
+    {
+      "id": 0,
+      "name": "",
+      "description": "",
+      "firstTermIdx": -9999,
+      "lastTermIdx": -9999,
+      "items": [],
+      "type": "empty",
+      "meta": {
+        "count": 1
+      }
+    },
+    {
+      "id": 0,
+      "name": "",
+      "description": "",
       "firstTermIdx": 0,
-      "lastTermIdx": 1,
+      "lastTermIdx": 2,
       "items": [],
       "type": "paragraph",
       "meta": {
         "sentences": [
           {
             "id": 0,
-            "content": "the ending",
+            "content": "the [link1](link1)",
             "firstTermIdx": 0,
-            "lastTermIdx": 1,
+            "lastTermIdx": 2,
             "terminals": [
               {
                 "id": 0,
@@ -79,410 +107,65 @@
               },
               {
                 "id": 0,
-                "termIdx": 1,
-                "content": "ending",
+                "termIdx": -9999,
+                "content": "link1",
                 "firstTermIdx": 1,
-                "lastTermIdx": 1,
-                "type": 13,
-                "meta": {
-                  "content": "ending",
-                  "termIdx": 1,
-                  "nextTermIdx": [
-                    2
-                  ],
-                  "prevTermIdx": [
-                    0
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "linkable": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false,
-                  "linkIdx": -9999,
-                  "hintsIdx": -9999
-                }
-              }
-            ],
-            "lastPunctuation": ""
-          }
-        ],
-        "style": ""
-      }
-    },
-    {
-      "id": 1,
-      "name": "",
-      "description": "",
-      "firstTermIdx": 2,
-      "lastTermIdx": 12,
-      "items": [],
-      "type": "paragraph",
-      "meta": {
-        "sentences": [
-          {
-            "id": 1,
-            "content": "the [(308) 267-6076](link1)",
-            "firstTermIdx": 2,
-            "lastTermIdx": 12,
-            "terminals": [
-              {
-                "id": 0,
-                "termIdx": 2,
-                "content": "the",
-                "firstTermIdx": 2,
                 "lastTermIdx": 2,
-                "type": 13,
-                "meta": {
-                  "content": "the",
-                  "termIdx": 2,
-                  "nextTermIdx": [
-                    3
-                  ],
-                  "prevTermIdx": [
-                    1
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "linkable": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false,
-                  "linkIdx": -9999,
-                  "hintsIdx": -9999
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 12,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "linkable": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false,
-                  "linkIdx": -9999,
-                  "hintsIdx": -9999
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": "(308) 267-6076",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
                 "type": 5,
                 "meta": {
                   "label": [
                     {
                       "id": 0,
-                      "termIdx": -9999,
-                      "content": "(308) 267-6076",
-                      "firstTermIdx": 3,
-                      "lastTermIdx": 12,
-                      "type": 7,
+                      "termIdx": 1,
+                      "content": "link",
+                      "firstTermIdx": 1,
+                      "lastTermIdx": 1,
+                      "type": 13,
                       "meta": {
-                        "countryCode": {
-                          "content": "",
-                          "termIdx": -9999,
-                          "nextTermIdx": [],
-                          "prevTermIdx": [],
-                          "altpronunciation": "",
-                          "altrecognition": "",
-                          "recitable": true,
-                          "audible": true,
-                          "linkable": false,
-                          "visible": true,
-                          "fillin": false,
-                          "visited": false,
-                          "linkIdx": -9999,
-                          "hintsIdx": -9999
-                        },
-                        "openBracket": {
-                          "content": "(",
-                          "termIdx": -9999,
-                          "nextTermIdx": [],
-                          "prevTermIdx": [],
-                          "altpronunciation": "",
-                          "altrecognition": "",
-                          "recitable": false,
-                          "audible": false,
-                          "linkable": false,
-                          "visible": true,
-                          "fillin": false,
-                          "visited": false,
-                          "linkIdx": -9999,
-                          "hintsIdx": -9999
-                        },
-                        "areaCode": [
-                          {
-                            "content": "3",
-                            "termIdx": 3,
-                            "nextTermIdx": [
-                              4
-                            ],
-                            "prevTermIdx": [
-                              2
-                            ],
-                            "altpronunciation": "",
-                            "altrecognition": "",
-                            "recitable": true,
-                            "audible": true,
-                            "linkable": false,
-                            "visible": true,
-                            "fillin": false,
-                            "visited": false,
-                            "linkIdx": -9999,
-                            "hintsIdx": -9999
-                          },
-                          {
-                            "content": "0",
-                            "termIdx": 4,
-                            "nextTermIdx": [
-                              5
-                            ],
-                            "prevTermIdx": [
-                              3
-                            ],
-                            "altpronunciation": "",
-                            "altrecognition": "",
-                            "recitable": true,
-                            "audible": true,
-                            "linkable": false,
-                            "visible": true,
-                            "fillin": false,
-                            "visited": false,
-                            "linkIdx": -9999,
-                            "hintsIdx": -9999
-                          },
-                          {
-                            "content": "8",
-                            "termIdx": 5,
-                            "nextTermIdx": [
-                              6
-                            ],
-                            "prevTermIdx": [
-                              4
-                            ],
-                            "altpronunciation": "",
-                            "altrecognition": "",
-                            "recitable": true,
-                            "audible": true,
-                            "linkable": false,
-                            "visible": true,
-                            "fillin": false,
-                            "visited": false,
-                            "linkIdx": -9999,
-                            "hintsIdx": -9999
-                          }
+                        "content": "link",
+                        "termIdx": 1,
+                        "nextTermIdx": [
+                          2
                         ],
-                        "closeBracket": {
-                          "content": ")",
-                          "termIdx": -9999,
-                          "nextTermIdx": [],
-                          "prevTermIdx": [],
-                          "altpronunciation": "",
-                          "altrecognition": "",
-                          "recitable": false,
-                          "audible": false,
-                          "linkable": false,
-                          "visible": true,
-                          "fillin": false,
-                          "visited": false,
-                          "linkIdx": -9999,
-                          "hintsIdx": -9999
-                        },
-                        "separator1": {
-                          "content": " ",
-                          "termIdx": -9999,
-                          "nextTermIdx": [],
-                          "prevTermIdx": [],
-                          "altpronunciation": "",
-                          "altrecognition": "",
-                          "recitable": false,
-                          "audible": false,
-                          "linkable": false,
-                          "visible": true,
-                          "fillin": false,
-                          "visited": false,
-                          "linkIdx": -9999,
-                          "hintsIdx": -9999
-                        },
-                        "exchangeCode": [
-                          {
-                            "content": "2",
-                            "termIdx": 6,
-                            "nextTermIdx": [
-                              7
-                            ],
-                            "prevTermIdx": [
-                              5
-                            ],
-                            "altpronunciation": "",
-                            "altrecognition": "",
-                            "recitable": true,
-                            "audible": true,
-                            "linkable": false,
-                            "visible": true,
-                            "fillin": false,
-                            "visited": false,
-                            "linkIdx": -9999,
-                            "hintsIdx": -9999
-                          },
-                          {
-                            "content": "6",
-                            "termIdx": 7,
-                            "nextTermIdx": [
-                              8
-                            ],
-                            "prevTermIdx": [
-                              6
-                            ],
-                            "altpronunciation": "",
-                            "altrecognition": "",
-                            "recitable": true,
-                            "audible": true,
-                            "linkable": false,
-                            "visible": true,
-                            "fillin": false,
-                            "visited": false,
-                            "linkIdx": -9999,
-                            "hintsIdx": -9999
-                          },
-                          {
-                            "content": "7",
-                            "termIdx": 8,
-                            "nextTermIdx": [
-                              9
-                            ],
-                            "prevTermIdx": [
-                              7
-                            ],
-                            "altpronunciation": "",
-                            "altrecognition": "",
-                            "recitable": true,
-                            "audible": true,
-                            "linkable": false,
-                            "visible": true,
-                            "fillin": false,
-                            "visited": false,
-                            "linkIdx": -9999,
-                            "hintsIdx": -9999
-                          }
+                        "prevTermIdx": [
+                          0
                         ],
-                        "separator2": {
-                          "content": "-",
-                          "termIdx": -9999,
-                          "nextTermIdx": [],
-                          "prevTermIdx": [],
-                          "altpronunciation": "",
-                          "altrecognition": "",
-                          "recitable": false,
-                          "audible": false,
-                          "linkable": false,
-                          "visible": true,
-                          "fillin": false,
-                          "visited": false,
-                          "linkIdx": -9999,
-                          "hintsIdx": -9999
-                        },
-                        "lineNumber": [
-                          {
-                            "content": "6",
-                            "termIdx": 9,
-                            "nextTermIdx": [
-                              10
-                            ],
-                            "prevTermIdx": [
-                              8
-                            ],
-                            "altpronunciation": "",
-                            "altrecognition": "",
-                            "recitable": true,
-                            "audible": true,
-                            "linkable": false,
-                            "visible": true,
-                            "fillin": false,
-                            "visited": false,
-                            "linkIdx": -9999,
-                            "hintsIdx": -9999
-                          },
-                          {
-                            "content": "0",
-                            "termIdx": 10,
-                            "nextTermIdx": [
-                              11
-                            ],
-                            "prevTermIdx": [
-                              9
-                            ],
-                            "altpronunciation": "",
-                            "altrecognition": "",
-                            "recitable": true,
-                            "audible": true,
-                            "linkable": false,
-                            "visible": true,
-                            "fillin": false,
-                            "visited": false,
-                            "linkIdx": -9999,
-                            "hintsIdx": -9999
-                          },
-                          {
-                            "content": "7",
-                            "termIdx": 11,
-                            "nextTermIdx": [
-                              12
-                            ],
-                            "prevTermIdx": [
-                              10
-                            ],
-                            "altpronunciation": "",
-                            "altrecognition": "",
-                            "recitable": true,
-                            "audible": true,
-                            "linkable": false,
-                            "visible": true,
-                            "fillin": false,
-                            "visited": false,
-                            "linkIdx": -9999,
-                            "hintsIdx": -9999
-                          },
-                          {
-                            "content": "6",
-                            "termIdx": 12,
-                            "nextTermIdx": [
-                              13
-                            ],
-                            "prevTermIdx": [
-                              11
-                            ],
-                            "altpronunciation": "",
-                            "altrecognition": "",
-                            "recitable": true,
-                            "audible": true,
-                            "linkable": false,
-                            "visible": true,
-                            "fillin": false,
-                            "visited": false,
-                            "linkIdx": -9999,
-                            "hintsIdx": -9999
-                          }
-                        ]
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "fillin": false,
+                        "visited": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 2,
+                      "content": "1",
+                      "firstTermIdx": 2,
+                      "lastTermIdx": 2,
+                      "type": 13,
+                      "meta": {
+                        "content": "1",
+                        "termIdx": 2,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [
+                          1
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "fillin": false,
+                        "visited": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999
                       }
                     }
                   ],
@@ -503,374 +186,6 @@
         ],
         "style": ""
       }
-    },
-    {
-      "id": 0,
-      "name": "",
-      "description": "",
-      "firstTermIdx": -9999,
-      "lastTermIdx": -9999,
-      "items": [
-        {
-          "id": 0,
-          "name": "",
-          "description": "",
-          "firstTermIdx": -9999,
-          "lastTermIdx": -9999,
-          "items": [
-            {
-              "id": 2,
-              "name": "",
-              "description": "",
-              "firstTermIdx": 13,
-              "lastTermIdx": 22,
-              "items": [],
-              "type": "paragraph",
-              "meta": {
-                "sentences": [
-                  {
-                    "id": 2,
-                    "content": "[(308) 267-6076](link1)",
-                    "firstTermIdx": 13,
-                    "lastTermIdx": 22,
-                    "terminals": [
-                      {
-                        "id": 0,
-                        "termIdx": -9999,
-                        "content": "(308) 267-6076",
-                        "firstTermIdx": -9999,
-                        "lastTermIdx": -9999,
-                        "type": 5,
-                        "meta": {
-                          "label": [
-                            {
-                              "id": 0,
-                              "termIdx": -9999,
-                              "content": "(308) 267-6076",
-                              "firstTermIdx": 13,
-                              "lastTermIdx": 22,
-                              "type": 7,
-                              "meta": {
-                                "countryCode": {
-                                  "content": "",
-                                  "termIdx": -9999,
-                                  "nextTermIdx": [],
-                                  "prevTermIdx": [],
-                                  "altpronunciation": "",
-                                  "altrecognition": "",
-                                  "recitable": true,
-                                  "audible": true,
-                                  "linkable": false,
-                                  "visible": true,
-                                  "fillin": false,
-                                  "visited": false,
-                                  "linkIdx": -9999,
-                                  "hintsIdx": -9999
-                                },
-                                "openBracket": {
-                                  "content": "(",
-                                  "termIdx": -9999,
-                                  "nextTermIdx": [],
-                                  "prevTermIdx": [],
-                                  "altpronunciation": "",
-                                  "altrecognition": "",
-                                  "recitable": false,
-                                  "audible": false,
-                                  "linkable": false,
-                                  "visible": true,
-                                  "fillin": false,
-                                  "visited": false,
-                                  "linkIdx": -9999,
-                                  "hintsIdx": -9999
-                                },
-                                "areaCode": [
-                                  {
-                                    "content": "3",
-                                    "termIdx": 13,
-                                    "nextTermIdx": [
-                                      14
-                                    ],
-                                    "prevTermIdx": [
-                                      12
-                                    ],
-                                    "altpronunciation": "",
-                                    "altrecognition": "",
-                                    "recitable": true,
-                                    "audible": true,
-                                    "linkable": false,
-                                    "visible": true,
-                                    "fillin": false,
-                                    "visited": false,
-                                    "linkIdx": -9999,
-                                    "hintsIdx": -9999
-                                  },
-                                  {
-                                    "content": "0",
-                                    "termIdx": 14,
-                                    "nextTermIdx": [
-                                      15
-                                    ],
-                                    "prevTermIdx": [
-                                      13
-                                    ],
-                                    "altpronunciation": "",
-                                    "altrecognition": "",
-                                    "recitable": true,
-                                    "audible": true,
-                                    "linkable": false,
-                                    "visible": true,
-                                    "fillin": false,
-                                    "visited": false,
-                                    "linkIdx": -9999,
-                                    "hintsIdx": -9999
-                                  },
-                                  {
-                                    "content": "8",
-                                    "termIdx": 15,
-                                    "nextTermIdx": [
-                                      16
-                                    ],
-                                    "prevTermIdx": [
-                                      14
-                                    ],
-                                    "altpronunciation": "",
-                                    "altrecognition": "",
-                                    "recitable": true,
-                                    "audible": true,
-                                    "linkable": false,
-                                    "visible": true,
-                                    "fillin": false,
-                                    "visited": false,
-                                    "linkIdx": -9999,
-                                    "hintsIdx": -9999
-                                  }
-                                ],
-                                "closeBracket": {
-                                  "content": ")",
-                                  "termIdx": -9999,
-                                  "nextTermIdx": [],
-                                  "prevTermIdx": [],
-                                  "altpronunciation": "",
-                                  "altrecognition": "",
-                                  "recitable": false,
-                                  "audible": false,
-                                  "linkable": false,
-                                  "visible": true,
-                                  "fillin": false,
-                                  "visited": false,
-                                  "linkIdx": -9999,
-                                  "hintsIdx": -9999
-                                },
-                                "separator1": {
-                                  "content": " ",
-                                  "termIdx": -9999,
-                                  "nextTermIdx": [],
-                                  "prevTermIdx": [],
-                                  "altpronunciation": "",
-                                  "altrecognition": "",
-                                  "recitable": false,
-                                  "audible": false,
-                                  "linkable": false,
-                                  "visible": true,
-                                  "fillin": false,
-                                  "visited": false,
-                                  "linkIdx": -9999,
-                                  "hintsIdx": -9999
-                                },
-                                "exchangeCode": [
-                                  {
-                                    "content": "2",
-                                    "termIdx": 16,
-                                    "nextTermIdx": [
-                                      17
-                                    ],
-                                    "prevTermIdx": [
-                                      15
-                                    ],
-                                    "altpronunciation": "",
-                                    "altrecognition": "",
-                                    "recitable": true,
-                                    "audible": true,
-                                    "linkable": false,
-                                    "visible": true,
-                                    "fillin": false,
-                                    "visited": false,
-                                    "linkIdx": -9999,
-                                    "hintsIdx": -9999
-                                  },
-                                  {
-                                    "content": "6",
-                                    "termIdx": 17,
-                                    "nextTermIdx": [
-                                      18
-                                    ],
-                                    "prevTermIdx": [
-                                      16
-                                    ],
-                                    "altpronunciation": "",
-                                    "altrecognition": "",
-                                    "recitable": true,
-                                    "audible": true,
-                                    "linkable": false,
-                                    "visible": true,
-                                    "fillin": false,
-                                    "visited": false,
-                                    "linkIdx": -9999,
-                                    "hintsIdx": -9999
-                                  },
-                                  {
-                                    "content": "7",
-                                    "termIdx": 18,
-                                    "nextTermIdx": [
-                                      19
-                                    ],
-                                    "prevTermIdx": [
-                                      17
-                                    ],
-                                    "altpronunciation": "",
-                                    "altrecognition": "",
-                                    "recitable": true,
-                                    "audible": true,
-                                    "linkable": false,
-                                    "visible": true,
-                                    "fillin": false,
-                                    "visited": false,
-                                    "linkIdx": -9999,
-                                    "hintsIdx": -9999
-                                  }
-                                ],
-                                "separator2": {
-                                  "content": "-",
-                                  "termIdx": -9999,
-                                  "nextTermIdx": [],
-                                  "prevTermIdx": [],
-                                  "altpronunciation": "",
-                                  "altrecognition": "",
-                                  "recitable": false,
-                                  "audible": false,
-                                  "linkable": false,
-                                  "visible": true,
-                                  "fillin": false,
-                                  "visited": false,
-                                  "linkIdx": -9999,
-                                  "hintsIdx": -9999
-                                },
-                                "lineNumber": [
-                                  {
-                                    "content": "6",
-                                    "termIdx": 19,
-                                    "nextTermIdx": [
-                                      20
-                                    ],
-                                    "prevTermIdx": [
-                                      18
-                                    ],
-                                    "altpronunciation": "",
-                                    "altrecognition": "",
-                                    "recitable": true,
-                                    "audible": true,
-                                    "linkable": false,
-                                    "visible": true,
-                                    "fillin": false,
-                                    "visited": false,
-                                    "linkIdx": -9999,
-                                    "hintsIdx": -9999
-                                  },
-                                  {
-                                    "content": "0",
-                                    "termIdx": 20,
-                                    "nextTermIdx": [
-                                      21
-                                    ],
-                                    "prevTermIdx": [
-                                      19
-                                    ],
-                                    "altpronunciation": "",
-                                    "altrecognition": "",
-                                    "recitable": true,
-                                    "audible": true,
-                                    "linkable": false,
-                                    "visible": true,
-                                    "fillin": false,
-                                    "visited": false,
-                                    "linkIdx": -9999,
-                                    "hintsIdx": -9999
-                                  },
-                                  {
-                                    "content": "7",
-                                    "termIdx": 21,
-                                    "nextTermIdx": [
-                                      22
-                                    ],
-                                    "prevTermIdx": [
-                                      20
-                                    ],
-                                    "altpronunciation": "",
-                                    "altrecognition": "",
-                                    "recitable": true,
-                                    "audible": true,
-                                    "linkable": false,
-                                    "visible": true,
-                                    "fillin": false,
-                                    "visited": false,
-                                    "linkIdx": -9999,
-                                    "hintsIdx": -9999
-                                  },
-                                  {
-                                    "content": "6",
-                                    "termIdx": 22,
-                                    "nextTermIdx": [],
-                                    "prevTermIdx": [
-                                      21
-                                    ],
-                                    "altpronunciation": "",
-                                    "altrecognition": "",
-                                    "recitable": true,
-                                    "audible": true,
-                                    "linkable": false,
-                                    "visible": true,
-                                    "fillin": false,
-                                    "visited": false,
-                                    "linkIdx": -9999,
-                                    "hintsIdx": -9999
-                                  }
-                                ]
-                              }
-                            }
-                          ],
-                          "destination": {
-                            "page": "link1",
-                            "directory": "",
-                            "sectionIdx": -9999,
-                            "terminalIdx": -9999
-                          },
-                          "className": "",
-                          "style": "",
-                          "linkIdx": 1
-                        }
-                      }
-                    ],
-                    "lastPunctuation": ""
-                  }
-                ],
-                "style": ""
-              }
-            }
-          ],
-          "type": "listitem",
-          "meta": {
-            "depth": 0,
-            "startNumber": 0,
-            "listType": 0
-          }
-        }
-      ],
-      "meta": {
-        "depth": 1,
-        "startNumber": 0,
-        "listType": 6
-      },
-      "type": "unordered_list"
     },
     {
       "id": 0,
@@ -907,7 +222,7 @@
       "sectionIdx": 0
     },
     {
-      "content": "ending",
+      "content": "link",
       "termIdx": 1,
       "nextTermIdx": [
         2
@@ -923,17 +238,15 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "linkIdx": -9999,
+      "linkIdx": 0,
       "hintsIdx": -9999,
       "sentenceIdx": 0,
       "sectionIdx": 0
     },
     {
-      "content": "the",
+      "content": "1",
       "termIdx": 2,
-      "nextTermIdx": [
-        3
-      ],
+      "nextTermIdx": [],
       "prevTermIdx": [
         1
       ],
@@ -945,498 +258,37 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "linkIdx": -9999,
-      "hintsIdx": -9999,
-      "sentenceIdx": 1,
-      "sectionIdx": 1
-    },
-    {
-      "content": "3",
-      "termIdx": 3,
-      "nextTermIdx": [
-        4
-      ],
-      "prevTermIdx": [
-        2
-      ],
-      "altpronunciation": "",
-      "altrecognition": "",
-      "recitable": true,
-      "audible": true,
-      "linkable": false,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
       "linkIdx": 0,
       "hintsIdx": -9999,
-      "sentenceIdx": 1,
-      "sectionIdx": 1
-    },
-    {
-      "content": "0",
-      "termIdx": 4,
-      "nextTermIdx": [
-        5
-      ],
-      "prevTermIdx": [
-        3
-      ],
-      "altpronunciation": "",
-      "altrecognition": "zero",
-      "recitable": true,
-      "audible": true,
-      "linkable": false,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "linkIdx": 0,
-      "hintsIdx": -9999,
-      "sentenceIdx": 1,
-      "sectionIdx": 1
-    },
-    {
-      "content": "8",
-      "termIdx": 5,
-      "nextTermIdx": [
-        6
-      ],
-      "prevTermIdx": [
-        4
-      ],
-      "altpronunciation": "",
-      "altrecognition": "",
-      "recitable": true,
-      "audible": true,
-      "linkable": false,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "linkIdx": 0,
-      "hintsIdx": -9999,
-      "sentenceIdx": 1,
-      "sectionIdx": 1
-    },
-    {
-      "content": "2",
-      "termIdx": 6,
-      "nextTermIdx": [
-        7
-      ],
-      "prevTermIdx": [
-        5
-      ],
-      "altpronunciation": "",
-      "altrecognition": "",
-      "recitable": true,
-      "audible": true,
-      "linkable": false,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "linkIdx": 0,
-      "hintsIdx": -9999,
-      "sentenceIdx": 1,
-      "sectionIdx": 1
-    },
-    {
-      "content": "6",
-      "termIdx": 7,
-      "nextTermIdx": [
-        8
-      ],
-      "prevTermIdx": [
-        6
-      ],
-      "altpronunciation": "",
-      "altrecognition": "",
-      "recitable": true,
-      "audible": true,
-      "linkable": false,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "linkIdx": 0,
-      "hintsIdx": -9999,
-      "sentenceIdx": 1,
-      "sectionIdx": 1
-    },
-    {
-      "content": "7",
-      "termIdx": 8,
-      "nextTermIdx": [
-        9
-      ],
-      "prevTermIdx": [
-        7
-      ],
-      "altpronunciation": "",
-      "altrecognition": "",
-      "recitable": true,
-      "audible": true,
-      "linkable": false,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "linkIdx": 0,
-      "hintsIdx": -9999,
-      "sentenceIdx": 1,
-      "sectionIdx": 1
-    },
-    {
-      "content": "6",
-      "termIdx": 9,
-      "nextTermIdx": [
-        10
-      ],
-      "prevTermIdx": [
-        8
-      ],
-      "altpronunciation": "",
-      "altrecognition": "",
-      "recitable": true,
-      "audible": true,
-      "linkable": false,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "linkIdx": 0,
-      "hintsIdx": -9999,
-      "sentenceIdx": 1,
-      "sectionIdx": 1
-    },
-    {
-      "content": "0",
-      "termIdx": 10,
-      "nextTermIdx": [
-        11
-      ],
-      "prevTermIdx": [
-        9
-      ],
-      "altpronunciation": "",
-      "altrecognition": "zero",
-      "recitable": true,
-      "audible": true,
-      "linkable": false,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "linkIdx": 0,
-      "hintsIdx": -9999,
-      "sentenceIdx": 1,
-      "sectionIdx": 1
-    },
-    {
-      "content": "7",
-      "termIdx": 11,
-      "nextTermIdx": [
-        12
-      ],
-      "prevTermIdx": [
-        10
-      ],
-      "altpronunciation": "",
-      "altrecognition": "",
-      "recitable": true,
-      "audible": true,
-      "linkable": false,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "linkIdx": 0,
-      "hintsIdx": -9999,
-      "sentenceIdx": 1,
-      "sectionIdx": 1
-    },
-    {
-      "content": "6",
-      "termIdx": 12,
-      "nextTermIdx": [
-        13
-      ],
-      "prevTermIdx": [
-        11
-      ],
-      "altpronunciation": "",
-      "altrecognition": "",
-      "recitable": true,
-      "audible": true,
-      "linkable": false,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "linkIdx": 0,
-      "hintsIdx": -9999,
-      "sentenceIdx": 1,
-      "sectionIdx": 1
-    },
-    {
-      "content": "3",
-      "termIdx": 13,
-      "nextTermIdx": [
-        14
-      ],
-      "prevTermIdx": [
-        12
-      ],
-      "altpronunciation": "",
-      "altrecognition": "",
-      "recitable": true,
-      "audible": true,
-      "linkable": false,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "linkIdx": 1,
-      "hintsIdx": -9999,
-      "sentenceIdx": 2,
-      "sectionIdx": 2
-    },
-    {
-      "content": "0",
-      "termIdx": 14,
-      "nextTermIdx": [
-        15
-      ],
-      "prevTermIdx": [
-        13
-      ],
-      "altpronunciation": "",
-      "altrecognition": "zero",
-      "recitable": true,
-      "audible": true,
-      "linkable": false,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "linkIdx": 1,
-      "hintsIdx": -9999,
-      "sentenceIdx": 2,
-      "sectionIdx": 2
-    },
-    {
-      "content": "8",
-      "termIdx": 15,
-      "nextTermIdx": [
-        16
-      ],
-      "prevTermIdx": [
-        14
-      ],
-      "altpronunciation": "",
-      "altrecognition": "",
-      "recitable": true,
-      "audible": true,
-      "linkable": false,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "linkIdx": 1,
-      "hintsIdx": -9999,
-      "sentenceIdx": 2,
-      "sectionIdx": 2
-    },
-    {
-      "content": "2",
-      "termIdx": 16,
-      "nextTermIdx": [
-        17
-      ],
-      "prevTermIdx": [
-        15
-      ],
-      "altpronunciation": "",
-      "altrecognition": "",
-      "recitable": true,
-      "audible": true,
-      "linkable": false,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "linkIdx": 1,
-      "hintsIdx": -9999,
-      "sentenceIdx": 2,
-      "sectionIdx": 2
-    },
-    {
-      "content": "6",
-      "termIdx": 17,
-      "nextTermIdx": [
-        18
-      ],
-      "prevTermIdx": [
-        16
-      ],
-      "altpronunciation": "",
-      "altrecognition": "",
-      "recitable": true,
-      "audible": true,
-      "linkable": false,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "linkIdx": 1,
-      "hintsIdx": -9999,
-      "sentenceIdx": 2,
-      "sectionIdx": 2
-    },
-    {
-      "content": "7",
-      "termIdx": 18,
-      "nextTermIdx": [
-        19
-      ],
-      "prevTermIdx": [
-        17
-      ],
-      "altpronunciation": "",
-      "altrecognition": "",
-      "recitable": true,
-      "audible": true,
-      "linkable": false,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "linkIdx": 1,
-      "hintsIdx": -9999,
-      "sentenceIdx": 2,
-      "sectionIdx": 2
-    },
-    {
-      "content": "6",
-      "termIdx": 19,
-      "nextTermIdx": [
-        20
-      ],
-      "prevTermIdx": [
-        18
-      ],
-      "altpronunciation": "",
-      "altrecognition": "",
-      "recitable": true,
-      "audible": true,
-      "linkable": false,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "linkIdx": 1,
-      "hintsIdx": -9999,
-      "sentenceIdx": 2,
-      "sectionIdx": 2
-    },
-    {
-      "content": "0",
-      "termIdx": 20,
-      "nextTermIdx": [
-        21
-      ],
-      "prevTermIdx": [
-        19
-      ],
-      "altpronunciation": "",
-      "altrecognition": "zero",
-      "recitable": true,
-      "audible": true,
-      "linkable": false,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "linkIdx": 1,
-      "hintsIdx": -9999,
-      "sentenceIdx": 2,
-      "sectionIdx": 2
-    },
-    {
-      "content": "7",
-      "termIdx": 21,
-      "nextTermIdx": [
-        22
-      ],
-      "prevTermIdx": [
-        20
-      ],
-      "altpronunciation": "",
-      "altrecognition": "",
-      "recitable": true,
-      "audible": true,
-      "linkable": false,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "linkIdx": 1,
-      "hintsIdx": -9999,
-      "sentenceIdx": 2,
-      "sectionIdx": 2
-    },
-    {
-      "content": "6",
-      "termIdx": 22,
-      "nextTermIdx": [],
-      "prevTermIdx": [
-        21
-      ],
-      "altpronunciation": "",
-      "altrecognition": "",
-      "recitable": true,
-      "audible": true,
-      "linkable": false,
-      "visible": true,
-      "fillin": false,
-      "visited": false,
-      "linkIdx": 1,
-      "hintsIdx": -9999,
-      "sentenceIdx": 2,
-      "sectionIdx": 2
+      "sentenceIdx": 0,
+      "sectionIdx": 0
     }
   ],
-  "headingList": [],
+  "headingList": [
+    {
+      "headingLevel": 1,
+      "title": "list of links",
+      "termIdx": 0,
+      "terminalCountPriorToHeading": 0
+    }
+  ],
   "sectionList": [
     {
       "firstTermIdx": 0,
-      "lastTermIdx": 1,
-      "type": "paragraph"
-    },
-    {
-      "firstTermIdx": 2,
-      "lastTermIdx": 12,
-      "type": "paragraph"
-    },
-    {
-      "firstTermIdx": 13,
-      "lastTermIdx": 22,
+      "lastTermIdx": 2,
       "type": "paragraph"
     }
   ],
   "sentenceList": [
     {
       "firstTermIdx": 0,
-      "lastTermIdx": 1,
-      "lastPunctuation": ""
-    },
-    {
-      "firstTermIdx": 2,
-      "lastTermIdx": 12,
-      "lastPunctuation": ""
-    },
-    {
-      "firstTermIdx": 13,
-      "lastTermIdx": 22,
+      "lastTermIdx": 2,
       "lastPunctuation": ""
     }
   ],
   "linkList": [
     {
-      "label": "(308) 267-6076",
-      "destination": {
-        "page": "link1",
-        "directory": "",
-        "sectionIdx": -9999,
-        "terminalIdx": -9999
-      },
-      "valid": true
-    },
-    {
-      "label": "(308) 267-6076",
+      "label": "link1",
       "destination": {
         "page": "link1",
         "directory": "",
