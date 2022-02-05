@@ -1,8 +1,8 @@
-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
- * File name: reactcomps.tsx
+ * File name: reactcomps_terminals.tsx
  *
- * Defines React front end functional components.
+ * Defines React front end functional components for terminals.
  *
  * Terminals represent the group of words, punctuations, whitespace,
  * references, etc that can be rendered.
@@ -30,6 +30,8 @@ import { Terminal_Date } from "./reactcomps_terminals_dates";
 import { Terminal_Emailaddress } from "./reactcomps_terminals_emailaddress";
 import { Terminal_PhoneNumber } from "./reactcomps_terminals_phonenumber";
 import { Terminal_Image } from "./reactcomps_terminals_image";
+import { Terminal_Link } from "./reactcomps_terminals_link";
+
 export interface ITerminalPropsType {
   active: boolean;
   terminal: ITerminalContent;
@@ -111,8 +113,20 @@ export const TerminalDispatcher = React.memo(
         );
         break;
       case TerminalMetaEnumType.image:
+        //active should be false regardless
         return (
           <Terminal_Image
+            active={
+              currentTerminalIdx >= props.terminal.firstTermIdx &&
+              currentTerminalIdx <= props.terminal.lastTermIdx
+            }
+            terminal={props.terminal}
+          />
+        );
+        break;
+      case TerminalMetaEnumType.link:
+        return (
+          <Terminal_Link
             active={
               currentTerminalIdx >= props.terminal.firstTermIdx &&
               currentTerminalIdx <= props.terminal.lastTermIdx
@@ -146,7 +160,7 @@ export const TerminalDispatcher = React.memo(
       case TerminalMetaEnumType.year:
         break;
       default:
-        return <>unknown terminal {props.terminal.content}</>;
+        return <>unknown terminal "{props.terminal.content}"</>;
         break;
     }
   }
