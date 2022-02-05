@@ -1,9 +1,10 @@
-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
  * File name: pageContext.ts
  *
  * Defines complementary data and behavior of the page data associated with
- * props passed directly to react functional objects.
+ * props passed directly to react functional objects. Context represents lists
+ * and setter for lists.
  *
  *
  * Version history:
@@ -11,52 +12,83 @@
  **/
 import React from "react"; // define glocal var
 //import { ITerminalInfo, ITerminalInfoInitializer, IPageContent } from "../../src/pageContentType";
+import { useState } from "react"; // define global var
 import {
   IHeadingListItem,
+  ILinkListItem,
   ISentenceListItem,
   ISectionListItem,
-  ITerminalListItem,
-  ITerminalInfo
+  ITerminalListItem
 } from "./pageContentType";
 
+// export interface IPageContext1 {
+//   pageLists: CPageLists;
+//   setPageLists: (lists: CPageLists) => void;
+// }
+
+// export interface IPageContext {
+//   pageLists: CPageLists;
+//   setPageLists: (lists: CPageLists) => void;
+// }
 //export const TerminalNodes = React.createContext(null); // should be called wordList
-export interface IPageContext {
+export interface IPageLists {
   terminalList: ITerminalListItem[];
   headingList: IHeadingListItem[];
   sectionList: ISectionListItem[];
   sentenceList: ISentenceListItem[];
+  linkList: ILinkListItem[];
 }
-export function PageContextInitializer(
+export function PageListsInitializer(
   terminalList: ITerminalListItem[] = [],
   headingList: IHeadingListItem[] = [],
   sectionList: ISectionListItem[] = [],
-  sentenceList: ISentenceListItem[] = []
-): IPageContext {
+  sentenceList: ISentenceListItem[] = [],
+  linkList: ILinkListItem[] = []
+): IPageLists {
   return {
     terminalList: terminalList,
     headingList: headingList,
     sectionList: sectionList,
-    sentenceList: sentenceList
+    sentenceList: sentenceList,
+    linkList: linkList
   };
 }
-export const PageContext = React.createContext(<CPageContext | null>null);
+// export const PageContext = React.createContext(null as IPageContext | null);
+export const PageContext = React.createContext(null as CPageLists | null);
+// export const PageLists = React.createContext(null as CPageLists | null);
+/*
 
-export class CPageContext {
+export const PageListsContext = React.createContext(
+  <IPageListsContext | null>null
+);
+const PageListsContextProvider = (props:any) => {
+  const [context, setContext] = useState(PageContextInitializer())
+  return (
+    <PageListsContext.Provider value={[context, setContext]}>
+      {props.children}
+    </PageListsContext.Provider>
+  )
+}
+*/
+export class CPageLists {
   constructor(
     terminalList: ITerminalListItem[] = [],
     headingList: IHeadingListItem[] = [],
     sectionList: ISectionListItem[] = [],
-    sentenceList: ISentenceListItem[] = []
+    sentenceList: ISentenceListItem[] = [],
+    linkList: ILinkListItem[] = []
   ) {
     this.terminalList = terminalList;
     this.headingList = headingList;
     this.sectionList = sectionList;
     this.sentenceList = sentenceList;
+    this.linkList = linkList;
   }
   terminalList: ITerminalListItem[];
   headingList: IHeadingListItem[];
   sectionList: ISectionListItem[];
   sentenceList: ISentenceListItem[];
+  linkList: ILinkListItem[];
 
   get firstTerminalIdx(): number {
     return 0;
@@ -74,17 +106,17 @@ export class CPageContext {
     // could include sentence and section check but not heading
   }
   nextTerminalIdx(terminalIdx: number): number[] {
-    return this.validTerminalIdx(terminalIdx)
+    return this.isValidTerminalIdx(terminalIdx)
       ? this.terminalList[terminalIdx].nextTermIdx
       : [];
   }
   nextSentenceTerminalIdx(terminalIdx: number): number {
     let nextIdx: number = this.lastTerminalIdx; // default to last word on page
-    if (this.validTerminalIdx(terminalIdx)) {
+    if (this.isValidTerminalIdx(terminalIdx)) {
       let lastIdxInSentence: number = this.sentenceList[
         this.terminalList[terminalIdx].sentenceIdx
       ].lastTermIdx;
-      if (this.validTerminalIdx(lastIdxInSentence + 1)) {
+      if (this.isValidTerminalIdx(lastIdxInSentence + 1)) {
         nextIdx = lastIdxInSentence + 1;
       }
     }
@@ -92,7 +124,7 @@ export class CPageContext {
   }
   previousSentenceTerminalIdx(terminalIdx: number): number {
     let prevIdx: number = this.firstTerminalIdx; // default to first word on page
-    if (this.validTerminalIdx(terminalIdx)) {
+    if (this.isValidTerminalIdx(terminalIdx)) {
       let firstIdxInSentence: number = this.sentenceList[
         this.terminalList[terminalIdx].sentenceIdx
       ].firstTermIdx;
@@ -100,7 +132,7 @@ export class CPageContext {
         prevIdx = firstIdxInSentence;
       } else {
         // goto beginning of previous sentence
-        if (this.validTerminalIdx(firstIdxInSentence - 1)) {
+        if (this.isValidTerminalIdx(firstIdxInSentence - 1)) {
           prevIdx = this.sentenceList[
             this.terminalList[firstIdxInSentence - 1].sentenceIdx
           ].firstTermIdx;
@@ -110,22 +142,39 @@ export class CPageContext {
     return prevIdx;
   }
   previousTerminalIdx(terminalIdx: number): number[] {
-    return this.validTerminalIdx(terminalIdx)
+    return this.isValidTerminalIdx(terminalIdx)
       ? this.terminalList[terminalIdx].prevTermIdx
       : [];
   }
   sectionIdx(terminalIdx: number): number {
-    return this.validTerminalIdx(terminalIdx)
+    return this.isValidTerminalIdx(terminalIdx)
       ? this.terminalList[terminalIdx].sectionIdx
       : -1;
   }
   sentenceIdx(terminalIdx: number): number {
-    return this.validTerminalIdx(terminalIdx)
+    return this.isValidTerminalIdx(terminalIdx)
       ? this.terminalList[terminalIdx].sentenceIdx
       : -1;
   }
-  validTerminalIdx(terminalIdx: number) {
+  isValidSectionIdx(sectionIdx: number): boolean {
     return (
+      this.sectionList !== undefined &&
+      this.sectionList !== null &&
+      sectionIdx >= 0 &&
+      sectionIdx < this.sectionList.length
+    );
+  }
+  isValidSentenceIdx(sentenceIdx: number): boolean {
+    return (
+      this.sentenceList !== undefined &&
+      this.sentenceList !== null &&
+      sentenceIdx >= 0 &&
+      sentenceIdx < this.sentenceList.length
+    );
+  }
+  isValidTerminalIdx(terminalIdx: number): boolean {
+    return (
+      // should consider explicit terminalList bounds checking
       terminalIdx >= this.firstTerminalIdx &&
       terminalIdx <= this.lastTerminalIdx
     );
