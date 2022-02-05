@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
  * File name: PageContentType.ts
  *
@@ -7,10 +7,7 @@
  * Version history:
  *
  **/
-import { ITerminalNode } from "./parseterminals";
-// import { ISectionNode } from "./parsesections";
-// import { ISentenceNode } from "./parsesentences";
-const IDX_INITIALIZER = -9999;
+export const IDX_INITIALIZER = -9999;
 export enum PageFormatEnumType {
   default = 0
 }
@@ -28,10 +25,10 @@ export interface IPageContent {
   lastTermIdx: number;
   sections: ISectionContent[];
   terminalList: ITerminalListItem[];
-  headingList: IHeadingListItem[]; // first terminal of each section for Navbar
-  sectionList: ISectionListItem[]; // maps section index to first and last Terminal index
-  sentenceList: ISentenceListItem[]; // maps sentence index to first and last Terminal index
-  //  sentenceList: ITerminalInfo[] // first terminal of each sentence
+  headingList: IHeadingListItem[];
+  sectionList: ISectionListItem[];
+  sentenceList: ISentenceListItem[];
+  linkList: ILinkListItem[];
 }
 export function PageContentInitializer(): IPageContent {
   return {
@@ -50,7 +47,8 @@ export function PageContentInitializer(): IPageContent {
     terminalList: [],
     headingList: [],
     sectionList: [],
-    sentenceList: []
+    sentenceList: [],
+    linkList: []
   };
 }
 export interface ISectionContent {
@@ -123,6 +121,7 @@ export function ISectionFillinVariantInitializer(): ISectionFillinVariant {
 }
 export interface ISectionHeadingVariant {
   title: string; // ISentenceContent where audible/recitable can be disabled at run time.
+  separator: string;
   recitable: boolean;
   audible: boolean;
   level: number;
@@ -130,6 +129,7 @@ export interface ISectionHeadingVariant {
 export function ISectionHeadingVariantInitializer(): ISectionHeadingVariant {
   return {
     title: "", // overrides name and description above
+    separator: "",
     recitable: false,
     audible: false,
     level: 0
@@ -212,12 +212,24 @@ export function ISectionFillinBariantInitializer() {}
 export interface ISectionFillinListVariant {}
 export function ISectionFillinListVariantInitializer() {}
 
+export enum ImageEntryLayoutEnumType {
+  left = "left", // default, image to the left of caption
+  above = "above" // image above caption
+}
 export interface ISectionImageEntryVariant {
+  title: string;
+  layout: ImageEntryLayoutEnumType;
+  percent: string;
+  separator: string;
   images: ITerminalContent[]; // path to img/filenames
   captions: ISectionContent[];
 }
 export function ISectionImageEntryVariantInitializer() {
   return {
+    title: "",
+    layout: ImageEntryLayoutEnumType.left,
+    percent: "33%",
+    separator: "",
     images: [],
     captions: []
   };
@@ -289,9 +301,12 @@ export interface ITerminalInfo {
   altrecognition: string;
   recitable: boolean;
   audible: boolean;
+  linkable: boolean;
   visible: boolean;
   fillin: boolean;
   visited: boolean;
+  linkIdx: number;
+  hintsIdx: number;
   //cues: string[] includes terminal type word, day, month, year, number, area code,...
 }
 export function ITerminalInfoInitializer(
@@ -300,10 +315,12 @@ export function ITerminalInfoInitializer(
   altrecognition: string = "",
   recitable: boolean = true,
   audible: boolean = true,
+  linkable: boolean = false,
   visible: boolean = true,
   fillin: boolean = false,
-  visited: boolean = false
-
+  visited: boolean = false,
+  linkIdx: number = IDX_INITIALIZER,
+  hintsIdx: number = IDX_INITIALIZER
   //cues
 ): ITerminalInfo {
   return {
@@ -321,9 +338,12 @@ export function ITerminalInfoInitializer(
         : altrecognition,
     recitable: recitable, // selectable
     audible: audible,
+    linkable: linkable,
     visible: visible,
     fillin: fillin,
-    visited: visited
+    visited: visited,
+    linkIdx: linkIdx,
+    hintsIdx: hintsIdx
   };
 }
 export interface IAcronymTerminalMeta {
@@ -379,41 +399,49 @@ export function IDateTerminalMetaInitializer(): IDateTerminalMeta {
     format: DateFormatEnumType.unknown,
     month: ITerminalInfoInitializer(),
     punctuation1: ITerminalInfoInitializer(
-      undefined,
-      undefined,
-      undefined,
-      false,
-      false,
-      true,
-      false
+      undefined, // accept default content
+      undefined, // accept default altpro
+      undefined, // accept default altreg
+      false, // not recitable
+      false, // not audible
+      undefined, // accept default linkable
+      undefined, // accept default visible
+      undefined, // accept default fillin
+      undefined // accept default visited
     ),
     whitespace1: ITerminalInfoInitializer(
-      undefined,
-      undefined,
-      undefined,
-      false,
-      false,
-      true,
-      false
+      undefined, // accept default content
+      undefined, // accept default altpro
+      undefined, // accept default altreg
+      false, // not recitable
+      false, // not audible
+      undefined, // accept default linkable
+      undefined, // accept default visible
+      undefined, // accept default fillin
+      undefined // accept default visited
     ),
     day: ITerminalInfoInitializer(),
     punctuation2: ITerminalInfoInitializer(
-      undefined,
-      undefined,
-      undefined,
-      false,
-      false,
-      true,
-      false
+      undefined, // accept default content
+      undefined, // accept default altpro
+      undefined, // accept default altreg
+      true, // recitable
+      true, //audible
+      undefined, // accept default linkable
+      undefined, // accept default visible
+      undefined, // accept default fillin
+      undefined // accept default visited
     ),
     whitespace2: ITerminalInfoInitializer(
-      undefined,
-      undefined,
-      undefined,
-      false,
-      false,
-      true,
-      false
+      undefined, // accept default content
+      undefined, // accept default altpro
+      undefined, // accept default altreg
+      false, // not recitable
+      false, // not audible
+      undefined, // accept default linkable
+      undefined, // accept default visible
+      undefined, // accept default fillin
+      undefined // accept default visited
     ),
     year: IYearTerminalMetaInitializer() // e.g., {19,61}, {20,10}, {2000,1}
   };
@@ -424,6 +452,7 @@ export interface IImageTerminalMeta {
   width: number;
   height: number;
   attributes: string;
+  className: string;
   style: string; // most specific style
 }
 export function IImageTerminalMetaInitializer(): IImageTerminalMeta {
@@ -433,25 +462,38 @@ export function IImageTerminalMetaInitializer(): IImageTerminalMeta {
     width: 0,
     height: 0,
     attributes: "",
+    className: "",
     style: "" // most specific style
   };
 }
+interface ILinkDestination {
+  page: string;
+  directory: string; // if omitted, current dist/ directory
+  sectionIdx: number;
+  terminalIdx: number;
+}
+function ILinkDestinationInitializer() {
+  return {
+    page: "",
+    directory: "",
+    sectionIdx: IDX_INITIALIZER,
+    terminalIdx: IDX_INITIALIZER
+  };
+}
 export interface ICurriculumLinkTerminalMeta {
-  src: string;
-  label: string;
-  destinationDir: string; // if omitted, current dist/ directory
-  destinationPage: string; // .json filename
-  destinationTermIdx: number;
+  label: ITerminalContent[];
+  destination: ILinkDestination;
+  className: string;
   style: string; // most specific style
+  linkIdx: number;
 }
 export function ICurriculumLinkTerminalMetaInitializer(): ICurriculumLinkTerminalMeta {
   return {
-    src: "",
-    label: "",
-    destinationDir: "",
-    destinationPage: "",
-    destinationTermIdx: 0,
-    style: "" // most specific style
+    label: [],
+    destination: ILinkDestinationInitializer(),
+    className: "",
+    style: "", // most specific style
+    linkIdx: IDX_INITIALIZER
   };
 }
 export interface IPhoneNumberTerminalMeta {
@@ -469,42 +511,50 @@ export function IPhoneNumberTerminalMetaInitializer(): IPhoneNumberTerminalMeta 
   return {
     countryCode: ITerminalInfoInitializer(),
     openBracket: ITerminalInfoInitializer(
-      undefined,
-      undefined,
-      undefined,
-      false,
-      false,
-      true,
-      false
+      undefined, // accept default content
+      undefined, // accept default altpro
+      undefined, // accept default altreg
+      false, // not recitable
+      false, // not audible
+      undefined, // accept default linkable
+      undefined, // accept default visible
+      undefined, // accept default fillin
+      undefined // accept default visited
     ),
     areaCode: [],
     closeBracket: ITerminalInfoInitializer(
-      undefined,
-      undefined,
-      undefined,
-      false,
-      false,
-      true,
-      false
+      undefined, // accept default content
+      undefined, // accept default altpro
+      undefined, // accept default altreg
+      false, // not recitable
+      false, // not audible
+      undefined, // accept default linkable
+      undefined, // accept default visible
+      undefined, // accept default fillin
+      undefined // accept default visited
     ), // could be "."
     separator1: ITerminalInfoInitializer(
-      undefined,
-      undefined,
-      undefined,
-      false,
-      false,
-      true,
-      false
+      undefined, // accept default content
+      undefined, // accept default altpro
+      undefined, // accept default altreg
+      false, // not recitable
+      false, // not audible
+      undefined, // accept default linkable
+      undefined, // accept default visible
+      undefined, // accept default fillin
+      undefined // accept default visited
     ),
     exchangeCode: [],
     separator2: ITerminalInfoInitializer(
-      undefined,
-      undefined,
-      undefined,
-      false,
-      false,
-      true,
-      false
+      undefined, // accept default content
+      undefined, // accept default altpro
+      undefined, // accept default altreg
+      false, // not recitable
+      false, // not audible
+      undefined, // accept default linkable
+      undefined, // accept default visible
+      undefined, // accept default fillin
+      undefined // accept default visited
     ), // could be "."
     lineNumber: []
   };
@@ -515,12 +565,14 @@ export function IPunctuationTerminalMetaInitializer(
 ): ITerminalInfo {
   return ITerminalInfoInitializer(
     content,
-    undefined,
-    undefined,
-    false,
-    false,
-    true,
-    false
+    undefined, // accept default altpro
+    undefined, // accept default altreg
+    false, // not recitable
+    false, // not audible
+    undefined, // accept default linkable
+    undefined, // accept default visible
+    undefined, // accept default fillin
+    undefined // accept default visited
   );
 }
 export interface IReferenceTerminalMeta {
@@ -538,12 +590,14 @@ export function IWhitespaceTerminalMetaInitializer(
 ): ITerminalInfo {
   return ITerminalInfoInitializer(
     content,
-    undefined,
-    undefined,
-    false,
-    false,
-    true,
-    false
+    undefined, // accept default altpro
+    undefined, // accept default altreg
+    false, // not recitable
+    false, // not audible
+    undefined, // accept default linkable
+    undefined, // accept default visible
+    undefined, // accept default fillin
+    undefined // accept default visited
   );
 }
 export type IWordTerminalMeta = ITerminalInfo;
@@ -631,8 +685,8 @@ export interface ISectionListItem extends IRangeItem {
   type: SectionVariantEnumType | string;
 }
 export function ISectionListItemInitializer(
-  firstTermIdx: number = -1,
-  lastTermIdx: number = -1,
+  firstTermIdx: number = IDX_INITIALIZER,
+  lastTermIdx: number = IDX_INITIALIZER,
   type: string = SectionVariantEnumType.tbd
 ): ISectionListItem {
   type = type.toString();
@@ -642,9 +696,26 @@ export interface ISentenceListItem extends IRangeItem {
   lastPunctuation: string;
 }
 export function ISentenceListItemInitializer(
-  firstTermIdx: number = -1,
-  lastTermIdx: number = -1,
+  firstTermIdx: number = IDX_INITIALIZER,
+  lastTermIdx: number = IDX_INITIALIZER,
   lastPunctuation: string = "."
 ): ISentenceListItem {
   return { firstTermIdx, lastTermIdx, lastPunctuation };
+}
+export interface ILinkListItem {
+  label: string;
+  destination: ILinkDestination;
+  valid: boolean;
+}
+export function ILinkListItemInitializer(
+  label: string = "",
+  destination: ILinkDestination = {
+    page: "",
+    directory: "",
+    sectionIdx: IDX_INITIALIZER,
+    terminalIdx: IDX_INITIALIZER
+  },
+  valid = false
+): ILinkListItem {
+  return { label, destination, valid };
 }
