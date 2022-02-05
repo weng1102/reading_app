@@ -19,28 +19,32 @@ import {
   IHeadingListItem,
   ISentenceListItem,
   ISectionListItem,
-  ITerminalListItem
-} from "./pagecontentType";
+  ITerminalListItem,
+  ILinkListItem
+} from "./pageContentType";
 export const TREEVIEW_PREFIX = "+-";
 export const IDX_INITIALIZER = -9999;
 export abstract class BaseClass {
-  logger: Logger;
-  parent: any;
+  _logger: Logger;
+  _parent: any;
   constructor(parent: any) {
-    if (parent !== undefined || parent !== null) {
-      this.parent = parent;
+    if (parent !== undefined && parent !== null) {
+      this._parent = parent;
     }
     if (
-      this.parent !== undefined &&
-      this.parent !== null &&
-      this.parent.logger !== undefined
+      this._parent !== undefined &&
+      this._parent !== null &&
+      this._parent._logger !== undefined
     ) {
-      this.logger = parent.logger; // inherit existing logger handle
+      this._logger = parent._logger; // inherit existing _logger handle
     } else {
-      this.logger = new Logger(this); // create new logger handle
+      this._logger = new Logger(this); // create new logger handle
     }
-    Object.defineProperty(this, "parent", { enumerable: false });
-    Object.defineProperty(this, "logger", { enumerable: false });
+    Object.defineProperty(this, "_parent", { enumerable: false });
+    Object.defineProperty(this, "_logger", { enumerable: false });
+  }
+  get logger(): Logger {
+    return this._logger;
   }
 }
 class TerminalArray extends Array<ITerminalListItem> {
@@ -89,7 +93,8 @@ class TerminalArray extends Array<ITerminalListItem> {
     return this.length;
   }
   serialize(): string {
-    let outputStr: string = "[idx ]:  term ARVF  next prev sent sect content\n";
+    let outputStr: string =
+      "[idx ]:  term ARLVF  next prev sent sect  link content\n";
     for (const [i, element] of this.entries()) {
       outputStr = `${outputStr}[${i
         .toString()
@@ -99,6 +104,9 @@ class TerminalArray extends Array<ITerminalListItem> {
         .toString()
         .substring(0, 1)
         .toUpperCase()}${element.recitable
+        .toString()
+        .substring(0, 1)
+        .toUpperCase()}${element.linkable
         .toString()
         .substring(0, 1)
         .toUpperCase()}${element.visible
@@ -115,11 +123,14 @@ class TerminalArray extends Array<ITerminalListItem> {
         element.prevTermIdx.length === 0
           ? "na".padStart(5)
           : element.prevTermIdx[0].toString().padStart(5)
-      } ${element.sentenceIdx
+      }${element.sentenceIdx
         .toString()
-        .padStart(4)} ${element.sectionIdx.toString().padStart(4)} ${
-        element.content
-      }\n`;
+        .padStart(4)}  ${element.sectionIdx
+        .toString()
+        .padStart(4)} ${(element.linkIdx < 0
+        ? "na"
+        : element.linkIdx.toString()
+      ).padStart(5)} ${element.content}\n`;
     }
     return outputStr;
   }
@@ -219,7 +230,39 @@ class SectionArray extends Array<ISectionListItem> {
     return outputStr;
   }
 }
-
+class LinkArray extends Array<ILinkListItem> {
+  constructor(...args: any) {
+    super(...args);
+  }
+  push(link: ILinkListItem): number {
+    return super.push(link);
+  }
+  parse(): number {
+    return this.length;
+  }
+  serialize(): string {
+    let outputStr: string = "[idx ]  page/url            sect term  valid \n";
+    for (const [i, element] of this.entries()) {
+      outputStr += `[${i.toString().padStart(4, "0")}]: ${(element.destination
+        .page.length === 0
+        ? "(current page)"
+        : element.destination.page
+      ).padEnd(20, " ")}${(element.destination.sectionIdx !== IDX_INITIALIZER
+        ? +element.destination.sectionIdx
+        : "na"
+      )
+        .toString()
+        .padStart(4, " ")} ${(element.destination.terminalIdx !==
+      IDX_INITIALIZER
+        ? +element.destination.terminalIdx
+        : "na"
+      )
+        .toString()
+        .padStart(4, " ")}  ${element.valid}\n`;
+    }
+    return outputStr;
+  }
+}
 export class UserContext {
   /* look at the altPro and altRec that are for personalized entries
      should be readable from an external file that will not require recompile
@@ -254,6 +297,7 @@ export class UserContext {
   headings: HeadingArray;
   sections: SectionArray;
   sentences: SentenceArray;
+  links: LinkArray;
   // need authentication infoblock at some point
   constructor(name: string) {
     //    this._parent = parent;
@@ -262,6 +306,7 @@ export class UserContext {
     this.headings = new HeadingArray();
     this.sections = new SectionArray();
     this.sentences = new SentenceArray();
+    this.links = new LinkArray();
     ////    this._pages = new Array();
   }
   // protected terminalIdx: number = 0;
