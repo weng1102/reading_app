@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
  * File name: reactcomps_header.tsx
  *
@@ -38,20 +38,7 @@ import {
   SectionVariantEnumType,
   ISectionParagraphVariant
 } from "./pageContentType";
-import {
-  IPageContext,
-  PageContext,
-  PageContextInitializer
-} from "./pageContext";
-//import { ListeningMonitor, ListenButton } from "./reactcomp_listen";
-//import { SpeechSynthesizer, ReadItButton } from "./reactcomp_speech";
-//import data from "content";
-//import ReactDOM from 'react-dom';
-//var content = require("./content.json");
-//var content = require("../../src/parsetest20210915.json");
-//import content from "./content/3wordsentences.json";
-//import content from "content/terminals.json";//var contentts = require("./content.ts");
-//const SpeechRecogition interface IPageHeaderPropsType {
+
 interface IPageHeaderPropsType {
   title: string;
 }

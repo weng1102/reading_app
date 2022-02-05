@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
  * File name: reactcomps_settings.tsx
  *
@@ -19,7 +19,7 @@
  * Version history:
  *
  **/
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useAppDispatch } from "./hooks";
 import { Request } from "./reducers";
 import settingsIcon from "./settingicon.png";
@@ -35,11 +35,7 @@ import {
   IListenSettings,
   ISpeechSettings
 } from "./settingsContext";
-import {
-  ISettings,
-  ISettingsContext,
-  SettingsContext
-} from "./settingsContext";
+import { ISettingsContext, SettingsContext } from "./settingsContext";
 interface ISettingsDialogPropsType {
   isActive: boolean;
   hide: () => void;
