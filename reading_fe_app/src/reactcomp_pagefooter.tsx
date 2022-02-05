@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
  * File name: reactcomps_footer.tsx
  *
@@ -10,18 +10,14 @@
  **/
 import React from "react";
 import "./App.css";
-// import mic_listening from "./mic1-xparent.gif";
-// import mic_notlistening from "./mic1-inactive-xparent.gif";
-// import mic_unavailable from "./mic1-ghosted.gif";
-import { useContext } from "react";
 import { useAppDispatch, useAppSelector } from "./hooks";
+import { useContext } from "react";
+import { CPageLists, PageContext } from "./pageContext";
+//import { ISettingsContext, SettingsContext } from "./settingsContext";
 import { Request } from "./reducers";
-import { CPageContext } from "./pageContext";
 import { SpeechMonitor } from "./reactcomp_speech";
 import { SpeakButton } from "./reactcomp_speech_speakbutton";
 import { ListenButton, ListeningMonitor } from "./reactcomp_listen";
-import speakIcon from "./button_speak.png";
-import speakGhostedIcon from "./button_speak_ghosted.png";
 import nextwordIcon from "./button_nextword.png";
 import prevwordIcon from "./button_prevword.png";
 import prevsentenceIcon from "./button_prevsentence.png";
@@ -30,35 +26,9 @@ import nextwordGhostedIcon from "./button_nextword_ghosted.png";
 import prevwordGhostedIcon from "./button_prevword_ghosted.png";
 import prevsentenceGhostedIcon from "./button_prevsentence_ghosted.png";
 import nextsentenceGhostedIcon from "./button_nextsentence_ghosted.png";
-// import mic_unavailable from "./mic1-ghosted.gif";
+import gotoLinkIcon from "./button_link.png";
+import gotoLinkGhostedIcon from "./button_link_ghosted.png";
 
-// is this really necessary if availablility is removed below
-// import SpeechRecognition, {
-//   useSpeechRecognition
-// } from "react-speech-recognition";
-// import {
-//   IPageContent,
-//   IHeadingListItem,
-//   ISectionContent,
-//   ISentenceContent,
-//   ITerminalContent,
-//   ITerminalInfo,
-//   IAcronymTerminalMeta,
-//   IWordTerminalMeta,
-//   TerminalMetaEnumType,
-//   SectionVariantEnumType,
-//   ISectionParagraphVariant
-// } from "./pageContentType";
-import { PageContext } from "./pageContext";
-//import { ListeningMonitor } from "./reactcomp_listen";
-//import { SpeechSynthesizer, ReadItButton } from "./reactcomp_speech";
-//import data from "content";
-//import ReactDOM from 'react-dom';
-//var content = require("./content.json");
-//var content = require("../../src/parsetest20210915.json");
-//import content from "./content/3wordsentences.json";
-//import content from "content/terminals.json";//var contentts = require("./content.ts");
-//const SpeechRecogition interface IPageHeaderPropsType {
 interface IPageFooterPropsType {
   title: string;
 }
@@ -86,14 +56,15 @@ export const PageFooter = React.memo(() => {
         <div className="footer-grid-nextSentence">
           <NextSentenceButton />
         </div>
+        <div className="footer-grid-link">
+          <LinkButton />
+        </div>
       </div>
       <div className="footer-statusBar">
-        <StatusBar
-          message={`status: Expecting to hear "forteenth" The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog.`}
-        />
-        <SpeechMonitor />
-        <ListeningMonitor />
+        <StatusBar />
       </div>
+      <SpeechMonitor />
+      <ListeningMonitor />
     </footer>
   );
 });
@@ -149,11 +120,13 @@ export const PreviousWordButton = () => {
 };
 export const NextWordButton = () => {
   let dispatch = useAppDispatch();
+  let pageContext: CPageLists = useContext(PageContext)!;
   let icon: string;
   let active: boolean;
   if (
     useAppSelector(store => store.cursor_terminalIdx) ===
-    useAppSelector(store => store.pageContext.terminalList).length - 1
+    pageContext.terminalList.length - 1
+    //    useAppSelector(store => store.pageContext.terminalList).length - 1
   ) {
     icon = nextwordGhostedIcon;
     active = false;
@@ -177,11 +150,20 @@ export const NextWordButton = () => {
 };
 export const NextSentenceButton = () => {
   let dispatch = useAppDispatch();
+  let pageContext: CPageLists = useContext(PageContext)!;
   let icon: string;
   let active: boolean;
+  console.log(
+    `last sentence Idx: ${pageContext.sentenceList.length} via context`
+  );
+  console.log(
+    `last sentence Idx: ${useAppSelector(
+      store => store.cursor_sentenceIdx
+    )} via reducer`
+  );
   if (
     useAppSelector(store => store.cursor_sentenceIdx) ===
-    useAppSelector(store => store.pageContext.sentenceList).length - 1
+    pageContext.sentenceList.length - 1
   ) {
     icon = nextsentenceGhostedIcon;
     active = false;
@@ -203,9 +185,37 @@ export const NextSentenceButton = () => {
     </>
   );
 };
-interface StatusBarPropsType {
-  message: string;
-}
-export const StatusBar = (props: StatusBarPropsType) => {
-  return <>{props.message}</>;
+export const LinkButton = () => {
+  let dispatch = useAppDispatch();
+  let pageContext: CPageLists = useContext(PageContext)!;
+  let icon: string;
+  let active: boolean;
+  let termIdx = useAppSelector(store => store.cursor_terminalIdx);
+  active = pageContext.terminalList[termIdx].linkIdx >= 0;
+  if (active) {
+    icon = gotoLinkIcon;
+  } else {
+    icon = gotoLinkGhostedIcon;
+  }
+  const onButtonClick = () => {
+    if (active) dispatch(Request.Page_gotoLink());
+  };
+  return (
+    <>
+      <img
+        className="icon"
+        alt="goto link"
+        src={icon}
+        onClick={() => onButtonClick()}
+      />
+    </>
+  );
+};
+interface StatusBarPropsType {}
+export const StatusBar = () => {
+  return (
+    <>
+      <div>{useAppSelector(store => store.message)}</div>
+    </>
+  );
 };
