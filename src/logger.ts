@@ -1,11 +1,12 @@
 import { MyDate } from "./utilities";
 export class Logger {
   // logging from within supported objects
+  protected _appName: string = "";
   protected _parent: any = undefined;
   protected _terseFormat: boolean = false; // do not show only severity with message
   protected _adornMode: boolean = false; // do not show adorning messages
   protected _verboseMode: boolean = false; // do not show info and adorn messages
-  protected _diagnosticMode: boolean = false; // do not show debug messages
+  protected _diagnosticMode: boolean = false; // do not show diagnostic messages
   protected _errorObject!: Error;
   protected _showSeverity: boolean = true;
   protected _showFunctionName: boolean = true;
@@ -15,7 +16,15 @@ export class Logger {
   protected _fatalCount: number = 0;
   protected _warningCount: number = 0;
   constructor(parent: any | null | undefined) {
-    if (parent !== undefined && parent !== null) this._parent = parent; // required to find proper stack frame
+    if (parent !== undefined && parent !== null) {
+      this._parent = parent; // required to find proper stack frame
+    }
+  }
+  get appName() {
+    return this._appName;
+  }
+  set appName(name: string) {
+    this._appName = name;
   }
   get adornMode() {
     return this._adornMode;
@@ -246,8 +255,8 @@ export class Logger {
     let frame: string;
     let frameIdx: number;
     let stackFrames: string[] = new Error()?.stack?.split("\n") as string[]; // optional chaining
-    let moduleLocation: string = "<unknown module location>";
-    let modulePath: string;
+    let moduleLocation: string = "<unknown>";
+    let modulePath: string = "<unknown>";
     let objectNameLocator: string = " at Object.";
 
     if (this._parent === undefined) {
@@ -258,22 +267,28 @@ export class Logger {
     frameIdx = stackFrames.findIndex(element =>
       element.includes(objectNameLocator)
     );
-    modulePath = stackFrames[frameIdx]
-      .split(" ")
-      .slice(-1)[0]
-      .slice(0, -1)
-      .split(":")[1];
-    frame =
-      stackFrames[
-        stackFrames.findIndex(element => element.includes(modulePath))
-      ];
-    moduleLocation = frame
-      .split("\\")
-      .slice(-1)[0]
-      .slice(0, -1)
-      .split(":")
-      .slice(0, -1)
-      .join(":");
+    if (
+      frameIdx !== undefined &&
+      frameIdx >= 0 &&
+      frameIdx < stackFrames.length
+    ) {
+      modulePath = stackFrames[frameIdx]
+        .split(" ")
+        .slice(-1)[0]
+        .slice(0, -1)
+        .split(":")[1];
+      frame =
+        stackFrames[
+          stackFrames.findIndex(element => element.includes(modulePath))
+        ];
+      moduleLocation = frame
+        .split("\\")
+        .slice(-1)[0]
+        .slice(0, -1)
+        .split(":")
+        .slice(0, -1)
+        .join(":");
+    }
     return moduleLocation;
   }
   logEntry(
