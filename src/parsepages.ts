@@ -11,16 +11,18 @@ const INITIALDATE = "9/21/2015 17:03";
 const InitialDate = new Date(INITIALDATE).toString();
 import { strict as assert } from "assert";
 import { IsError } from "./utilities";
+import { Logger } from "./logger";
 import { MarkdownTagType, TaggedStringType } from "./dataadapter";
 import {
   IHeadingListItem,
+  ILinkListItem,
   IPageContent,
-  PageFormatEnumType,
   IRangeItem,
   ISentenceListItem,
   ISectionListItem,
   ITerminalInfo,
-  ITerminalListItem
+  ITerminalListItem,
+  PageFormatEnumType
 } from "./pageContentType";
 import util from "util";
 import {
@@ -32,6 +34,7 @@ import {
   ParseNodeSerializeTabular,
   ParseNodeSerializeFormatEnumType
 } from "./baseclasses";
+import { AppNode } from "./parseapp";
 import { ISectionNode } from "./parsesections";
 import { GetSectionNode } from "./parsesectiondispatch";
 export interface PageContentMethods {
@@ -58,7 +61,8 @@ export class PageParseNode extends ParseNode implements IPageContent {
   headingList: IHeadingListItem[] = [];
   sectionList: ISectionListItem[] = [];
   sentenceList: ISentenceListItem[] = [];
-  constructor(parent?: PageParseNode) {
+  linkList: ILinkListItem[] = [];
+  constructor(parent?: PageParseNode | AppNode) {
     super(parent);
   }
   parse() {
@@ -101,6 +105,9 @@ export class PageParseNode extends ParseNode implements IPageContent {
 
       this.userContext.sections.parse();
       this.sectionList = this.userContext.sections;
+
+      this.userContext.links.parse();
+      this.linkList = this.userContext.links;
       this.modified = new Date(Date.now()).toString();
     } catch (e) {
       if (IsError(e)) {
