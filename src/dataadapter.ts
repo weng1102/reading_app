@@ -142,7 +142,6 @@ export const enum MarkdownType {
   FILLIN = "LIST_FILLIN",
   FILLIN_END = "LIST_FILLIN_END",
   PAGE = "PAGE",
-  //  PAGETITLE = "PAGETITLE",
   IMAGEENTRY = "IMAGEENTRY",
   IMAGEENTRY_END = "IMAGEENTRY_END",
   TBD = "TBD" // should always be last
@@ -202,9 +201,10 @@ const PARAGRAPH_TO_SENTENCES: RegExp = /([\.\?!][\'\"\u2018\u2019\u201c\u201d\)\
 
 //const PARAGRAPH_TO_SENTENCES2: RegExp = /(?<!\w\.\w.)(?<![A-Z][a-z][a-z]\.)([\.\?!][\"\u2018\u2019\u201c\u201d\)\]]*\s*(?<![A-Z][a-z]\.)(?<![A-Z]\.)\s+)/;
 //const PARAGRAPH_PATTERN: RegExp = /^([ "'\(\!]?[A-Za-z0-9\$\@]{1}.*)$/m;
-const PARAGRAPH_PATTERN: RegExp = /^(([\[ "'\(]?|\!\[)[A-Za-z0-9\$\@]{1}.*)$/m;
-// ![ only to support ![image]
-// [ only to support [link]
+const PARAGRAPH_PATTERN: RegExp = /^((["'\(\[]?|\!\[|\[\()[A-Za-z0-9\$\@]{1}.*)$/m;
+// \!\[ added to support ![image]
+// \[\ added to support leading image
+// \[\( only to support [link] where link starts with ( Need to careful what is considered beginning of a paragraph
 const MarkdownPatternDictionary: MarkdownPatternDictionaryType = {
   [MarkdownType.HEADING01]: {
     pattern: /^#\s([^\s].*)$/,
@@ -575,7 +575,7 @@ export class BasicMarkdownSource extends RawMarkdownSource
       }
     } catch (e) {
       this.logger.error(
-        `unexpected error encountered parsing sentences at line ${current.lineNo}`
+        `Unexpected error encountered parsing sentences at line ${current.lineNo}`
       );
     }
     resultBuffer.push({
