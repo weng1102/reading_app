@@ -2,9 +2,6 @@
 
 # Sentence Banks
 
-[Three word sentences](3wordsentences)
-[Four word sentences](4wordsentences)
-
 # first ten
 
 My children and I go to school.
