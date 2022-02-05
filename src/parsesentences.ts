@@ -72,9 +72,9 @@ export abstract class AbstractSentenceNode extends ParseNode
       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
         label = `sentence: ${this.content}`;
         outputStr = super.serialize(format, label, prefix);
-        for (const [i, sentence] of this.terminals.entries()) {
-          label = `${sentence.type}`;
-          outputStr = `${outputStr}${sentence.serialize(
+        for (const [i, terminal] of this.terminals.entries()) {
+          label = `${terminal.type}`;
+          outputStr = `${outputStr}${terminal.serialize(
             format,
             undefined,
             prefix + (i < this.terminals.length - 1 ? "| " : "  ")
@@ -214,8 +214,7 @@ export class SentenceNode extends AbstractSentenceNode
       let token: Token = tokens[0]; // peek
       assert(token !== undefined, `undefined token detected`);
 
-      terminalNode = GetTerminalNode(token, this); // encapsulating the following
-
+      terminalNode = GetTerminalNode(token, this);
       if (terminalNode) {
         this.logger.diagnostic(
           `Created terminalNode type=${terminalNode.constructor.name} for "${token.content}"`
