@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
  * File name: reactcomps_speech_speakbutton.tsx
  *
@@ -15,7 +15,7 @@ import speakActiveIcon from "./button_speak_activeRed.gif";
 import speakInactiveIcon from "./button_speak.png";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { useEffect, useState, useContext } from "react";
-import { CPageContext, PageContext } from "./pageContext";
+import { CPageLists, PageContext } from "./pageContext";
 import {
   ISettingsContext,
   RecitationMode,
@@ -30,7 +30,9 @@ export const SpeakButton = () => {
   const [speakingNow, setSpeakingNow] = useState(false);
   const reciteRequested = useAppSelector(store => store.recite_requested); // from recite_toggle
   const termIdx = useAppSelector(store => store.cursor_terminalIdx);
-  const pageContext: CPageContext = useContext(PageContext)!;
+  let pageContext: CPageLists = useAppSelector(store => store.pageContext);
+  // cannot use useContext(PageContext) because context is only scoped within
+  // a page
   const settingsContext: ISettingsContext = useContext(SettingsContext)!;
   const recitationMode: RecitationMode =
     settingsContext.settings.speech.recitationMode;
@@ -80,11 +82,17 @@ export const SpeakButton = () => {
   }, [speakingNow, recitationQueue]);
   const somethingToRecite = (): string[] => {
     let messageQueue: string[] = [];
+    // const wordToRecite = (termIdx: number): string => {
+    //   return pageContext.terminalList[termIdx].altpronunciation !== ""
+    //     ? pageContext.terminalList[termIdx].altpronunciation
+    //     : pageContext.terminalList[termIdx].content;
+    // };
     const wordToRecite = (termIdx: number): string => {
       return pageContext.terminalList[termIdx].altpronunciation !== ""
         ? pageContext.terminalList[termIdx].altpronunciation
         : pageContext.terminalList[termIdx].content;
     };
+
     const sentenceToRecite = (
       sentenceIdx: number,
       lastTermIdxInSentence?: number,
@@ -110,6 +118,13 @@ export const SpeakButton = () => {
     const sectionToRecite = (sectionIdx: number): string[] => {
       //find sentences in section. unfortunately, the sectionlist only has first and last terminal idxs and not sentences
       let strQ: string[] = [];
+      // let firstTermIdx: number =
+      //   pageContext.sectionList[sectionIdx].firstTermIdx;
+      // let lastTermIdx: number = pageContext.sectionList[sectionIdx].lastTermIdx;
+      // let firstSentenceIdx: number =
+      //   pageContext.terminalList[firstTermIdx].sentenceIdx;
+      // let lastSentenceIdx: number =
+      //   pageContext.terminalList[lastTermIdx].sentenceIdx;
       let firstTermIdx: number =
         pageContext.sectionList[sectionIdx].firstTermIdx;
       let lastTermIdx: number = pageContext.sectionList[sectionIdx].lastTermIdx;
