@@ -45,11 +45,17 @@ export class TerminalNode_MLTAG_IMAGE extends TerminalNode_MLTAG_
       //      this.logger.diagnosticMode = true;
       let token: Token | undefined;
 
-      assert(tokenList.length >= 10, "invalid number of tokens parsing image");
-      assert(isValidMarkupTag(startTag), `invalid markup tag(s) parsing image`);
+      assert(
+        tokenList.length >= 10,
+        "Expected at least 10 tokens parsing image token"
+      );
+      assert(
+        isValidMarkupTag(startTag),
+        `Expected valid markup tag but ecnountered "${startTag}" parsing image token`
+      );
       assert(
         startTag.toLowerCase === MarkupLabelType.IMAGE.toLowerCase,
-        `invalid markup tag "${startTag}" parsing image`
+        `Expected markup tag ${MarkupLabelType.IMAGE.toLowerCase} but encountered "${startTag}" parsing image token`
       );
       tokenList.shift(); // discard startTag
 
@@ -61,12 +67,12 @@ export class TerminalNode_MLTAG_IMAGE extends TerminalNode_MLTAG_
       token = tokenList.shift()!;
       assert(
         token.content === TokenLiteral.EXCLAMATION,
-        `expected exclamation but encountered "${token.content}" while parsing image`
+        `Expected "${TokenLiteral.EXCLAMATION}" but encountered "${token.content}" while parsing image token`
       );
       token = tokenList.shift()!;
       assert(
         token.content === TokenLiteral.LBRACKET,
-        `expected left bracket but encountered "${token.content}" while parsing image`
+        `Expected "${TokenLiteral.LBRACKET}" but encountered "${token.content}" while parsing image token`
       );
       let label: string = "";
       for (
@@ -78,14 +84,14 @@ export class TerminalNode_MLTAG_IMAGE extends TerminalNode_MLTAG_
       }
       assert(
         token.content === TokenLiteral.RBRACKET,
-        `expected right bracket but encountered "${token.content}" while parsing image`
+        `Expected ${TokenLiteral.RBRACKET} but encountered "${token.content}" while parsing image token`
       );
       this.meta.label = label;
       this.content = label;
       token = tokenList.shift()!;
       assert(
         token.content === TokenLiteral.LPAREN,
-        `expected left parenthesis but encountered "${token.content}" while parsing image`
+        `Expected "${TokenLiteral.LPAREN} but encountered "${token.content}" while parsing image token`
       );
       let src: string = "";
       for (
@@ -97,19 +103,24 @@ export class TerminalNode_MLTAG_IMAGE extends TerminalNode_MLTAG_
       }
       assert(
         token.content === TokenLiteral.RPAREN,
-        `expected right parenthesis but encountered "${token.content}" while parsing image`
+        `Expected right parenthesis but encountered "${token.content}" while parsing image`
       );
-      let chunks: string[] = src.split(",");
-      console.log(`image src=${chunks}`);
-      if (chunks[0] !== undefined) this.meta.src = chunks[0];
-      if (chunks[1] !== undefined) this.meta.width = +chunks[1];
-      if (chunks[2] !== undefined) this.meta.height = +chunks[2];
-      if (chunks[3] !== undefined) this.meta.attributes = chunks[3].trim();
+      let chunks: string[] = src.split(",").map(chunk => chunk.trim());
+      if (chunks[0] !== undefined && chunks[0].length > 0)
+        this.meta.src = chunks[0];
+      if (chunks[1] !== undefined && chunks[0].length > 0)
+        this.meta.width = +chunks[1]; // no units; assumed px
+      if (chunks[2] !== undefined && chunks[0].length > 0)
+        this.meta.height = +chunks[2]; // no units; assumed px
+      if (chunks[3] !== undefined && chunks[0].length > 0)
+        this.meta.attributes = chunks[3];
 
       token = tokenList.shift()!;
       assert(
         token.content === endMarkupTag(startTag),
-        `expected closing  tag </image> while parsing image`
+        `Expected closing tag "${endMarkupTag(
+          startTag
+        )}" while parsing image token`
       );
     } catch (e) {
       if (IsError(e)) {
