@@ -1,10 +1,10 @@
 # embedded links
 
-[xyz](123) in the beginning
-This link is [link: xyz](123) in the middle
-This link is at the end [link: xyz](123).
+[I'm at the start](test2) in the beginning
+This link is [xyz is the link name](test2) in the middle
+This link is at the end [xyz is the link name](test2).
 
-#images
+# images
 
 ![abc](123) image in the beginning
 This image is ![abc](123) in the middle
