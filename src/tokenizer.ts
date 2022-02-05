@@ -176,90 +176,92 @@ const MarkupTokenDictionary: MarkupTokenDictionaryType = {
   [MarkupTokenType.USD]: {
     type: MarkupTokenType.USD,
     label: MarkupLabelType.USD,
-    pattern: /(?<=^|\W)\$(([1-9]\d{0,2}(,\d{3})*)|(([1-9]\d*)?\d))(\.\d\d)?(?=\s|\W|$|[.!?\\-])/g
+    pattern: /(?<=^|\W|\[|\()\$(([1-9]\d{0,2}(,\d{3})*)|(([1-9]\d*)?\d))(\.\d\d)?(?=\s|\W|$|[.!?\\-])/g
   },
   [MarkupTokenType.EMAILADDRESS]: {
     type: MarkupTokenType.EMAILADDRESS,
     label: MarkupLabelType.EMAILADDRESS,
-    pattern: /(?<=^|\W)([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})(?=(?=\s|\W|$|[.!?\\-]))/g
+    pattern: /(?<=^|\W|\[|\()([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})(?=(?=\s|\W|$|[.!?\\-]))/g
   },
   [MarkupTokenType.PHONENUMBER]: {
     type: MarkupTokenType.PHONENUMBER,
     label: MarkupLabelType.PHONENUMBER,
-    pattern: /(?<=^|\W)\(\d{3}\)\s\d{3}-\d{4}(?=(\W|$))/g
+    pattern: /(?<=^|\W|\[|\()\(\d{3}\)\s\d{3}-\d{4}(?=(\W|$))/g
   },
   [MarkupTokenType.TIME]: {
     type: MarkupTokenType.TIME,
     label: MarkupLabelType.TIME,
-    pattern: /(?<=^|\W)([0-9]|[0-1][0-9]|[2][0-3]):([0-5][0-9])(?=(\W|$))/g
+    pattern: /(?<=^|\W|\[|\()([0-9]|[0-1][0-9]|[2][0-3]):([0-5][0-9])(?=(\W|$))/g
   },
   [MarkupTokenType.DATE1]: {
     type: MarkupTokenType.DATE1,
     label: MarkupLabelType.DATE1,
-    pattern: /(?<=^|\W)((31(?!\ (Feb(ruary)?|Apr(il)?|June?|(Sep(?=\b|t)t?|Nov)(ember)?)))|((30|29)(?!\ Feb(ruary)?))|(29(?=\ Feb(ruary)?\ (((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))|(0?[1-9])|1\d|2[0-8])\s*(Jan(uary)?|Feb(ruary)?|Ma(r(ch)?|y)|Apr(il)?|Ju((ly?)|(ne?))|Aug(ust)?|Oct(ober)?|(Sep(?=\b|t)t?|Nov|Dec)(ember)?)\ ((1[6-9]|[2-9]\d)\d{2})(?=[\s\.,\?\!]|$)/g //DD MMM YYYY
+    pattern: /(?<=^|\W|\[|\()((31(?!\ (Feb(ruary)?|Apr(il)?|June?|(Sep(?=\b|t)t?|Nov)(ember)?)))|((30|29)(?!\ Feb(ruary)?))|(29(?=\ Feb(ruary)?\ (((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))|(0?[1-9])|1\d|2[0-8])\s*(Jan(uary)?|Feb(ruary)?|Ma(r(ch)?|y)|Apr(il)?|Ju((ly?)|(ne?))|Aug(ust)?|Oct(ober)?|(Sep(?=\b|t)t?|Nov|Dec)(ember)?)\ ((1[6-9]|[2-9]\d)\d{2})(?=[\s\.,\?\!]|$)/g //DD MMM YYYY
   },
   [MarkupTokenType.DATE2]: {
     type: MarkupTokenType.DATE2,
     label: MarkupLabelType.DATE2,
-    pattern: /(?<=^|\W)(Jan(.|(uary))?|Feb(.|(ruary))?|Ma(r(.|(ch))?|y)|Apr(.|(il))?|Jul(.|(y))?|Jun(.|(e))?|Aug(.|(ust))?|Oct(.|(ober))?|(Sep(?=\b|t)t?|Nov|Dec)(.|(ember))?)\ ((31(?!\ (Feb(ruary)?|Apr(il)?|June?|(Sep(?=\b|t)t?|Nov)(ember)?)))|((30|29)(?!\ Feb(ruary)?))|(29(?=\ Feb(ruary)?\s*(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))|(0?[1-9])|1\d|2[0-8]),[\s]*((1[6-9]|[2-9]\d)\d{2})(?=(\W|$))/g //MMM* DD,YYYY
+    pattern: /(?<=^|\W|\[|\()(Jan(.|(uary))?|Feb(.|(ruary))?|Ma(r(.|(ch))?|y)|Apr(.|(il))?|Jul(.|(y))?|Jun(.|(e))?|Aug(.|(ust))?|Oct(.|(ober))?|(Sep(?=\b|t)t?|Nov|Dec)(.|(ember))?)\ ((31(?!\ (Feb(ruary)?|Apr(il)?|June?|(Sep(?=\b|t)t?|Nov)(ember)?)))|((30|29)(?!\ Feb(ruary)?))|(29(?=\ Feb(ruary)?\s*(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))|(0?[1-9])|1\d|2[0-8]),[\s]*((1[6-9]|[2-9]\d)\d{2})(?=(\W|$))/g //MMM* DD,YYYY
   },
   [MarkupTokenType.DATE3]: {
     type: MarkupTokenType.DATE3,
     label: MarkupLabelType.DATE3,
-    pattern: /(?<=^|\W)((Jan(.|(uary))?|Feb(.|(ruary))?|Ma(r(.|(ch))?|y)|Apr(.|(il))?|Jul(.|(y))?|Jun(.|(e))?|Aug(.|(ust))?|Oct(.|(ober))?|(Sep(?=\b|t)t?|Nov|Dec)(.|(ember))?)\ ((31(?!\ (Feb(ruary)?|Apr(il)?|June?|(Sep(?=\b|t)t?|Nov)(ember)?)))|((30|29)(?!\ Feb(ruary)?))|(29(?=\ Feb(ruary)?\s*(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))|(0?[1-9])|1\d|2[0-8]))(?!,|[1-9])(?=[\s\.,\?\!]|$)/g //MMM* DD\
+    pattern: /(?<=^|\W|\[|\()((Jan(.|(uary))?|Feb(.|(ruary))?|Ma(r(.|(ch))?|y)|Apr(.|(il))?|Jul(.|(y))?|Jun(.|(e))?|Aug(.|(ust))?|Oct(.|(ober))?|(Sep(?=\b|t)t?|Nov|Dec)(.|(ember))?)\ ((31(?!\ (Feb(ruary)?|Apr(il)?|June?|(Sep(?=\b|t)t?|Nov)(ember)?)))|((30|29)(?!\ Feb(ruary)?))|(29(?=\ Feb(ruary)?\s*(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))|(0?[1-9])|1\d|2[0-8]))(?!,|[1-9])(?=[\s\.,\?\!]|$)/g //MMM* DD\
   },
   [MarkupTokenType.CONTRACTION_D]: {
     type: MarkupTokenType.CONTRACTION_D,
     label: MarkupLabelType.CONTRACTION,
-    pattern: /(?<=^|\s|^$)([A-Za-z]+)\'d(?=\s|\W|$|[.!?\\-])/g
+    pattern: /(?<=^|\s|\[|\(|^$)([A-Za-z]+)\'d(?=\s|\W|$|[.!?\\-])/g
   },
   [MarkupTokenType.CONTRACTION_LL]: {
     type: MarkupTokenType.CONTRACTION_LL,
     label: MarkupLabelType.CONTRACTION,
-    pattern: /(?<=^|\s|^$)([A-Za-z]+)\'ll(?=\s|\W|$|[.!?\\-])/g
+    pattern: /(?<=^|\s|\[|\(|^$)([A-Za-z]+)\'ll(?=\s|\W|$|[.!?\\-])/g
   },
   [MarkupTokenType.CONTRACTION_M]: {
     type: MarkupTokenType.CONTRACTION_M,
     label: MarkupLabelType.CONTRACTION,
-    pattern: /(?<=^|\s|^$)I\'m(?=\s|\W|$|[.!?\\-])/g
+    pattern: /(?<=^|\s|\[|\(|^$)I\'m(?=\s|\W|$|[.!?\\-])/g
   },
   [MarkupTokenType.CONTRACTION_RE]: {
     type: MarkupTokenType.CONTRACTION_RE,
     label: MarkupLabelType.CONTRACTION,
-    pattern: /(?<=^|\W|^$)(([Yy]ou|[Ww]e|[Tt]hey|[Ww]hat)\'re)(?=\s|\W|$|[.!?\\-])/g
+    pattern: /(?<=^|\W|\[|\(|^$)(([Yy]ou|[Ww]e|[Tt]hey|[Ww]hat)\'re)(?=\s|\W|$|[.!?\\-])/g
   },
   [MarkupTokenType.CONTRACTION_NT]: {
     type: MarkupTokenType.CONTRACTION_NT,
     label: MarkupLabelType.CONTRACTION,
-    pattern: /(?<=^|\W|^$)([Ii]s|[Aa]re|[Ww]as|[Ww]ere|[Hh]ave|[Hh]as|[Hh]ad|[Ww]o|[Ww]ould|[Dd]o|[Dd]oes|[Dd]id|[Cc]a|[Cc]ould|[Ss]hould|[Mm]igh|[Mm]ust])n\'t(?=\s|\W|$|[.!?\\-])/g
+    pattern: /(?<=^|\W|\[|\(|^$)([Ii]s|[Aa]re|[Ww]as|[Ww]ere|[Hh]ave|[Hh]as|[Hh]ad|[Ww]o|[Ww]ould|[Dd]o|[Dd]oes|[Dd]id|[Cc]a|[Cc]ould|[Ss]hould|[Mm]igh|[Mm]ust])n\'t(?=\s|\W|$|[.!?\\-])/g
   },
   [MarkupTokenType.CONTRACTION_S]: {
     type: MarkupTokenType.CONTRACTION_S,
     label: MarkupLabelType.CONTRACTION,
-    pattern: /(?<=^|\s|^$)([A-Za-z]+)\'s(?=\s|\W|$|[.!?\\-])/g // also includes possessives
+    pattern: /(?<=^|\s|\[|\(|^$)([A-Za-z]+)\'s(?=\s|\W|$|[.!?\\-])/g // also includes possessives
   },
   [MarkupTokenType.CONTRACTION_VE]: {
     type: MarkupTokenType.CONTRACTION_VE,
     label: MarkupLabelType.CONTRACTION,
-    pattern: /(?<=^|\s|^$)(I|[Yy]ou|[Ww]e|[Tt]hey|[Ss]hould|[Cc]ould|[Ww]ould|[Mm]ight|[Mm]ust)\'ve(?=\s|\W|$|[.!?\\-])/g
+    pattern: /(?<=^|\s|\[|\(|^$)(I|[Yy]ou|[Ww]e|[Tt]hey|[Ss]hould|[Cc]ould|[Ww]ould|[Mm]ight|[Mm]ust)\'ve(?=\s|\W|$|[.!?\\-])/g
   },
   [MarkupTokenType.NUMBER_WITHCOMMAS]: {
     type: MarkupTokenType.NUMBER_WITHCOMMAS,
     label: MarkupLabelType.NUMBER_WITHCOMMAS,
-    pattern: /(?<=^|\s|^$)(\d{0,3},)?(\d{3},)*(\d{1,3},\d{3})(?=\s|\W|$|[.!?\\-])/g
+    pattern: /(?<=^|\s|\[|\(|^$)(\d{0,3},)?(\d{3},)*(\d{1,3},\d{3})(?=\s|\W|$|[.!?\\-])/g
     // scan for token that require potential markup tags
   },
   [MarkupTokenType.IMAGE]: {
     type: MarkupTokenType.IMAGE,
     label: MarkupLabelType.IMAGE,
-    pattern: /(?<=^|\W)(!\[)([a-zA-Z0-9 _\-\.!]+\])(\(.+\))/g
-    // scan for token that require potential markup tags
+    //    pattern: /(?<=^|\W)(!\[)([a-zA-Z0-9 _\-\.!]+\])(\(.+\))/g
+    pattern: /(!\[)([a-zA-Z0-9 _\-\.!]+\])(\([^\(]*\))/g
+    // lookbehind must be preceded by beginning of line or any word
   },
   [MarkupTokenType.LINK]: {
     type: MarkupTokenType.LINK,
     label: MarkupLabelType.LINK,
-    pattern: /(?<=^|\W)(?<!\!)\[[a-zA-Z0-9 _\-\.!]+\](\(.+\))/g
-    // scan for token that require potential markup tags
+    pattern: /(?<!\!)(\[.+\])(\([^\(]*\))/g
+    // (["'\(\[]?|\!\[|\[\()
+    // scan for token that require potential markup tags [link name](url)
   }
 };
 export type TokenListType = Array<Token>;
@@ -369,7 +371,8 @@ export class Tokenizer {
         let key1: any = key as unknown; //ugh
         markupTokenItem = MarkupTokenDictionary[<MarkupTokenType>key1];
         let markupTokenLength: number = markupTokenItem.label.length;
-        tokenList = sentence.match(markupTokenItem.pattern); // with global flag set
+        //tokenList = sentence.match(markupTokenItem.pattern); // with global flag set
+        tokenList = result.match(markupTokenItem.pattern); // with global flag set
         if (tokenList !== null) {
           let startPos = 0;
           let tokenPos = 0;
@@ -398,11 +401,11 @@ export class Tokenizer {
             } else {
               // splice in the markup tags
               result =
-                result.slice(0, tokenPos) + // sentence before token
+                result.slice(0, tokenPos) + // portion of sentence before token
                 markupTokenItem.label +
                 token +
                 endMarkupTag(markupTokenItem.label) +
-                result.slice(tokenPos + token.length); // sentence after token
+                result.slice(tokenPos + token.length); // portion of sentence after token
               startPos =
                 markupTokenLength +
                 tokenPos +
