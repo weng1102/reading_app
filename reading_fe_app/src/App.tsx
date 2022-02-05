@@ -1,8 +1,5 @@
-import React from "react";
 import "./App.css";
-import { ReadingApp } from "./reactcomps";
-//import { ReadableText } from "./refs.js";
-
+import { ReadingApp } from "./reactcomps_main";
 function App() {
   //      <ReadingApp />
   return (

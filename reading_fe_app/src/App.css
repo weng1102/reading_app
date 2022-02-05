@@ -2,6 +2,8 @@
   --header-height: 50px;  /* consider expanding real estate to allow basic format changes (.e.g., font) */
   --footer-height: 50px;
   --nav-width: 150px;
+  --imageentry-min-image-width: 200px;
+  --imageentry-min-image-height: 300px;
 }
 .page {
   display: grid;
@@ -23,6 +25,7 @@ main {
   padding: 5px;
   background-color: linen;
   overflow: auto;
+  font-size: 20px;
 }
 nav {
   background-color: linen;
@@ -67,7 +70,7 @@ nav {
 }
 .controlBar-container {
   display: grid;
-  grid-template-columns: var(--footer-height) var(--footer-height) var(--footer-height) var(--footer-height) var(--footer-height) var(--footer-height);
+  grid-template-columns: var(--footer-height) var(--footer-height) var(--footer-height) var(--footer-height) var(--footer-height) var(--footer-height) var(--footer-height);
   align-items: center;
   height: 100%;
   font-size: 8px;
@@ -111,6 +114,10 @@ nav {
   padding:10px
 }
 .footer-grid-nextSentence {
+  display: flex;
+padding:10px
+}
+.footer-grid-link {
   display: flex;
 padding:10px
 }
@@ -327,29 +334,69 @@ input[type="radio"]{
   font-size: 14px;
   padding-left: 5px
 }
-.image-entry-left {
+* {
+  box-sizing: border-box;
+}
+.imageentry-container-left {
   display: grid;
-  grid-template-columns: [image] auto, [caption] 4fr
+  gap: 10px;
+  grid-template-columns: [images] minmax(var(--imageentry-min-image-width), 1fr) [captions] 2fr;
 }
-.image-entry-right {
+.imageentry-images-left {
+  grid-column: images;
+  max-width: var(--min-image-width);
+}
+.imageentry-captions-left {
+  grid-column: captions;
+}
+.imageentry-container-above {
   display: grid;
-  grid-template-columns: [caption] 4fr, [image] auto
+  gap: 10px;
+  grid-template-rows: [image] minmax(var(--imageentry-min-image-height), 1fr) [captions] auto;
 }
-.image-entry-top {
+.imageentry-images-above {
+  min-height: var(--imageentry-min-image-height);
+  max-height: var(--imageentry-min-image-height);
+}
+.imageentry-image {
+  margin: 0px 10px 10px 0px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px gray;
+  background-color: white;
+}
+.imageentry-image-left {
+  width: 100%;
+}
+.imageentry-image-above {
+  min-height: var(--imageentry-min-image-height);
+  max-height: var(--imageentry-min-image-height);
+}
+.image-entry-horizontal-container {
   display: grid;
-  grid-template-rows: [caption] 1fr, [image] auto
+  gap: 10px; /* kludge that includes horizontal margins and padding and box-shadow */
+  grid-template-columns: [image] minmax(200px, 1fr) [captions] 2fr;
 }
-.image-entry-bottom {
+.image-entry-vertical-container {
   display: grid;
-  grid-template-rows: [image] auto, [caption] 1fr
+  gap: 10px;
+  grid-template-rows: [image] minmax(300px, 1fr) [captions] auto;
 }
-.image-entry-grid-template-column
-  grid-template-columns: 1fr, 4fr
-.image-entry-grid-col1 {
-
+.image-entry-image {
+  margin: 0px 10px 10px 0px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px gray;
+  background-color: white;
 }
-.image-entry-grid-col2 {
-
+.image-entry-image-left-right {
+  width: 100%;
+  max-width: 500px;
+}
+.image-entry-image-top-bootom {
+  min-height: 300px;
+  max-height: 300px;
+}
+.link-label {
+  text-decoration: underline dotted;
 }
 .textbox-control {
   height: auto;
