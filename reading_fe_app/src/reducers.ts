@@ -1,23 +1,9 @@
-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
- * File name: reducer.ts
+ * File name: reducers.ts
  *
  * Defines React redux states and transition.
- *
- *
- * Version history:
- *
- **/
-//import React from "react";
-//import { useContext } from "react";
-//import { useAppDispatch } from "./hooks";
-//import { combineReducers } from "redux";
-//import { ITerminalInfoInitializer } from "./pageContentType";
-//import { CPageContext, PageContextInitializer, PageContext } from "./pageContext";
-import { CPageContext } from "./pageContext";
-
-/**
- * This is a reducer - a function that takes a current state value and an
+ * Reducer - a function that takes a current state value and an
  * action object describing "what happened", and returns a new state value.
  * A reducer's function signature is: (state, action) => newState
  *
@@ -25,45 +11,42 @@ import { CPageContext } from "./pageContext";
  * The root state value is usually an object.  It's important that you should
  * not mutate the state object, but return a new object if the state changes.
  *
- * You can use any conditional logic you want in a reducer. In this example,
- * we use a switch statement, but it's not required.
+ * Version history:
  *
- * The following actions must be unique!
- */
-//export const SECTION_CHANGED = "section/changed";
-//const SENTENCE_CHANGED = "sentence/changed";
+ **/
+import { CPageLists } from "./pageContext";
+const IDX_INITIALIZER = -9999; // should be same as baseclasses.ts
 
-// intrapage actions (user initiated)
-const WORD_MATCH = "word/match"; // match word with argument word with current wordNode
-const WORD_VISIT = "word/visit"; // match word with argument word with current wordNode
+// word actions
+const WORD_MATCH = "word/match"; // match word with argument with current word
+//const WORD_VISIT = "word/visit"; // visit word with argument
 const WORD_NEXT = "word/next"; // next word in sentence
 const WORD_PREVIOUS = "word/previous"; // previous word in sentence
-const WORD_RESET = "word/reset"; // first word in page
+//const WORD_RESET = "word/reset"; // first word in page
 const WORD_SELECT = "word/select"; // selected word in sentence
-const WORD_RESELECT = "word/reselect"; // reselected word in sentence (used for synthesis)
 
-const SENTENCE_FIRST = "sentence/first"; // first word in first sentence of current section
-const SENTENCE_NEXT = "sentence/next"; // first word of next sentence
+// sentence actions
+const SENTENCE_FIRST = "sentence/first"; // position at first word in sent.
+const SENTENCE_NEXT = "sentence/next"; // position at first word of next sent.
 const SENTENCE_PREVIOUS = "sentence/prev"; // first word of previous sentence
-const SENTENCE_RESET = "sentence/reset"; // first word in section
 
-const SECTION_FIRST = "section/first"; // first word in first section
-const SECTION_NEXT = "section/next";
-const SECTION_PREVIOUS = "section/prev";
-const SECTION_RESET = "section/reset"; // first section in sections
+// section actions
+// const SECTION_FIRST = "section/first"; // first word in first section
+// const SECTION_NEXT = "section/next";
+// const SECTION_PREVIOUS = "section/prev";
+// const SECTION_RESET = "section/reset"; // first section in sections
 const SECTION_CHANGE = "section/change"; // absolute positioning e.g., navbar
 
-const PAGE_CHANGED = "page/changed";
+// page actions
+const PAGE_LOAD = "page/load";
+const PAGE_LOADED = "page/loaded";
 const PAGE_TOP = "page/top";
-const PAGE_RESET = "page/reset";
+//const PAGE_RESET = "page/reset";
+const PAGE_LINKTO = "page/link to";
 
 // intrapage administrative actions (non-user initiated)
-//nodeList actions
 const CONTEXT_SET = "context/set";
 
-// const WORDNODEIDX_SET = "wordNodeIdx/set current"; // first word index on page
-
-// speaking actions
 //listening actions
 const LISTENING_AVAILABLE = "listening/available";
 const LISTENING_FLUSH = "listening/flush"; // clear transcript
@@ -72,21 +55,23 @@ const LISTENING_START = "listening/start";
 const LISTENING_STOP = "listening/stop";
 const LISTENING_TOGGLE = "listening/toggle"; // related to start/stop
 
+// speaking actions
 const ANNOUNCE_MESSAGE = "announce/message";
 const ANNOUNCE_ACKNOWLEDGED = "announce/message acknowledged";
 //const ANNOUNCE_SELECTEDCONTENT = "announce/selected content"; // acknowledge completion of speaking
 // const ANNOUNCE_CURRENTSENTENCE = "announce/selected content";  // acknowledge completion of speaking
 const ANNOUNCE_AVAILABILITY = "announce/available";
-const ANNOUNCE_NEWSENTENCE = "announce/new sentence";
-const ANNOUNCE_NEWSECTION = "announce/new section";
+// const ANNOUNCE_NEWSENTENCE = "announce/new sentence";
+// const ANNOUNCE_NEWSECTION = "announce/new section";
 //const SPEAKING_START = "announce/start";
 //const SPEAKING_STOP = "announce/available";
 
-const WORDS_VISITED_RESET = "wordsvisited/reset";
-const WORDS_VISITED = "wordsvisited/set";
+// const WORDS_VISITED_RESET = "wordsvisited/reset";
+// const WORDS_VISITED = "wordsvisited/set";
 
 const TRANSITION_ACKNOWLEDGE = "transition/acknowledge";
 
+// reciting
 //const RECITING = "reciting"; // state of reciting
 const RECITING = "reciting"; // actual state of reciting
 // const RECITING_BEGIN = "reciting/start"; // actual state of reciting begin
@@ -98,53 +83,9 @@ const RECITE_STOP = "recite/stop";
 const RECITE_TOGGLE = "recite/toggle"; // request from recite button
 const SETTINGS_TOGGLE = "settings/toggle";
 
-// const PAGE_RESET_VALUE = 0;
-// const SECTION_RESET_VALUE = 0;
-// const SENTENCE_RESET_VALUE = 0;
-// const WORD_RESET_VALUE = 0;
-// const WORDNODEIDX_RESET_VALUE = 0;
-
-// Initial states
-//const initialWordState = ITerminalInfoInitializer();
-// word: "",
-// wordNodeIdx: 0,
-// nextWordNodeIdx: [],
-// prevWordNodeIdx: [],
-// wordPattern: "",
-// wordId: 0,
-// sentenceId: 0,
-// sectionId: 0,
-// pageId: 0,
-// altRecognition: "",
-// visited: false
-
-// content: string; // to word match but is static
-// termIdx: number; //
-// nextTermIdx: number[]; // to move forward
-// prevTermIdx: number[]; // to move backward
-// altpronunciation: string; // inlline
-// altrecognition: string; // to alternatively match
-// recitable: boolean; //
-// audible: boolean;
-// visible: boolean;
-// fillin: boolean;
-// visited: boolean;
-
-//   pageId: PAGE_RESET_VALUE,
-//   sectionId: SECTION_RESET_VALUE, // should be []
-//   sentenceId: SENTENCE_RESET_VALUE,
-//   wordId: WORD_RESET_VALUE,
-//   word: null,
-//   altRecognition: null,
-//   visited: false
-// };
-// const initialNodeListState = {
-//   nodeList: [],
-//   wordNodeIdx: WORDNODEIDX_RESET_VALUE,
-//   firstWordNodeIdx: WORDNODEIDX_RESET_VALUE,
-//   lastWordNodeIdx: WORDNODEIDX_RESET_VALUE
-// };
-
+// message/status bar actions
+const MESSAGE_SET = "message/set";
+const MESSAGE_CLEAR = "message/clear";
 // Actions
 const Speech_acknowledged = () => {
   return {
@@ -225,25 +166,21 @@ const Cursor_gotoFirstWord = () => {
   };
 };
 const Cursor_gotoNextWord = () => {
-  console.log(`nextword`);
   return {
     type: WORD_NEXT
   };
 };
 const Cursor_gotoNextSentence = () => {
-  console.log(`nextsentence`);
   return {
     type: SENTENCE_NEXT
   };
 };
 const Cursor_gotoPreviousWord = () => {
-  console.log(`prevword`);
   return {
     type: WORD_PREVIOUS
   };
 };
 const Cursor_gotoPreviousSentence = () => {
-  console.log(`prevsentence`);
   return {
     type: SENTENCE_PREVIOUS
   };
@@ -263,6 +200,41 @@ const Cursor_gotoSectionByIdx = (sectionIdx: number) => {
 const Cursor_acknowledgeTransition = () => {
   return {
     type: TRANSITION_ACKNOWLEDGE
+  };
+};
+const Message_set = (message: string) => {
+  return {
+    type: MESSAGE_SET,
+    payload: message
+  };
+};
+const Message_clear = () => {
+  return {
+    type: MESSAGE_SET,
+    payload: ""
+  };
+};
+const Page_load = (page: string) => {
+  return {
+    type: PAGE_LOAD,
+    payload: page
+  };
+};
+const Page_loaded = (loaded: boolean) => {
+  return {
+    type: PAGE_LOADED,
+    payload: loaded
+  };
+};
+const Page_gotoLink = () => {
+  return {
+    type: PAGE_LINKTO
+  };
+};
+const Page_setContext = (context: CPageLists) => {
+  return {
+    type: CONTEXT_SET,
+    payload: context
   };
 };
 const Recognition_toggle = () => {
@@ -302,12 +274,6 @@ const Recognition_setAvailability = (speechRecognitionSupported: boolean) => {
 //     type: ANNOUNCE_TRANSITIONACKNOWLEDGED
 // }
 // }
-const Page_setContext = (context: CPageContext) => {
-  return {
-    type: CONTEXT_SET,
-    payload: context
-  };
-};
 const Reciting_start = () => {
   return {
     type: RECITING,
@@ -362,7 +328,13 @@ export const Request = {
   Cursor_gotoSectionByIdx,
   Cursor_acknowledgeTransition,
 
+  Message_set,
+  Message_clear,
+
+  Page_load,
+  Page_loaded,
   Page_setContext,
+  Page_gotoLink,
 
   Recognition_toggle,
   Recognition_setAvailability,
@@ -492,11 +464,18 @@ interface IReduxState {
   cursor_newPageTransition: boolean;
   cursor_endOfPageReached: boolean;
 
-  pageContext: CPageContext;
+  page_requested: string;
+  cursor_terminalIdx_fromLink: number;
+  cursor_sectionIdx_fromLink: number;
+  page_loaded: boolean;
+  page_section: number;
+  //page_lists: CPageLists;
+  pageContext: CPageLists;
 
   recite_requested: boolean;
   reciting: boolean;
   settings_toggle: boolean;
+  message: string;
 }
 const IReduxStateInitialState: IReduxState = {
   announce_available: false,
@@ -518,12 +497,19 @@ const IReduxStateInitialState: IReduxState = {
   cursor_beginningOfPageReached: true,
   cursor_endOfPageReached: false,
 
-  pageContext: new CPageContext(),
+  page_requested: "",
+  page_loaded: false,
+  page_section: 0,
+  cursor_terminalIdx_fromLink: 0,
+  cursor_sectionIdx_fromLink: 0,
+  //page_lists: new CPageLists(),
+  pageContext: new CPageLists(),
 
   recite_requested: false,
   reciting: false,
 
-  settings_toggle: false
+  settings_toggle: false,
+  message: ""
   //  pageContext: PageContextInitializer()
 };
 export const rootReducer = (
@@ -549,7 +535,7 @@ export const rootReducer = (
       console.log(`setTerminalState no state transition`);
     } else if (terminalIdxs.length === 1) {
       console.log(`setTerminalState single state transition`);
-      if (state.pageContext.validTerminalIdx(terminalIdxs[0])) {
+      if (state.pageContext.isValidTerminalIdx(terminalIdxs[0])) {
         /// set single state
         state.cursor_terminalIdx = terminalIdxs[0];
         [
@@ -593,14 +579,94 @@ export const rootReducer = (
       state.pageContext.previousSentenceTerminalIdx(state.cursor_terminalIdx)
     ]);
   };
+  const proposeLinkedTerminalState = (linkIdx?: number) => {
+    if (
+      linkIdx !== undefined &&
+      linkIdx !== null &&
+      linkIdx >= 0 &&
+      linkIdx < state.pageContext.linkList.length
+    ) {
+      state.cursor_sectionIdx_fromLink =
+        state.pageContext.linkList[linkIdx].destination.sectionIdx;
+      state.cursor_terminalIdx_fromLink =
+        state.pageContext.linkList[linkIdx].destination.terminalIdx;
+    } else {
+      state.cursor_terminalIdx_fromLink = IDX_INITIALIZER;
+      state.cursor_sectionIdx_fromLink = IDX_INITIALIZER;
+    }
+  };
+  const setLinkedTerminalState = () => {
+    if (state.cursor_terminalIdx_fromLink === state.cursor_terminalIdx) {
+      // do nothing
+    } else if (
+      state.pageContext.isValidSectionIdx(state.cursor_sectionIdx_fromLink)
+    ) {
+      setTerminalState([
+        state.pageContext.sectionList[state.cursor_sectionIdx_fromLink]
+          .firstTermIdx
+      ]);
+    } else if (
+      state.pageContext.isValidTerminalIdx(state.cursor_terminalIdx_fromLink)
+    ) {
+      setTerminalState([state.cursor_terminalIdx_fromLink]);
+    } else {
+      state.cursor_terminalIdx = 0;
+    }
+    proposeLinkedTerminalState(); //resets proposal
+  };
   //  const queueAccouncement(state.announcement)
   switch (action.type) {
-    case CONTEXT_SET:
-      // convert this to object with methods
-      state.pageContext = action.payload as CPageContext; // strictly a read only reference to react context NOT a copy
+    case PAGE_LOAD:
+      state.page_requested = action.payload as string;
+      state.cursor_sectionIdx_fromLink = 0; // needed because linkTo may specify initial sectionIdx within link definition
+      state.cursor_terminalIdx_fromLink = 0;
+      state.page_loaded = false;
       return state;
+    case PAGE_LOADED:
+      state.page_loaded = action.payload as boolean;
+      return state;
+    // case PAGE_SETLISTS:
+    //   state.page_lists = action.payload as CPageLists;
+    //   return state;
     case PAGE_TOP:
       setTerminalState([state.pageContext.firstTerminalIdx]); // should be first actionable terminal i.e. , no syntactical sugar
+      return state;
+    case PAGE_LINKTO:
+      // get current terminal and retrieve linked page
+      let linkIdx =
+        state.pageContext.terminalList[state.cursor_terminalIdx].linkIdx;
+      proposeLinkedTerminalState(linkIdx);
+      if (linkIdx >= 0 && linkIdx < state.pageContext.linkList.length) {
+        if (state.pageContext.linkList.length === 0) {
+          console.log(`linkList is empty`);
+        } else if (
+          state.page_requested ===
+          state.pageContext.linkList[linkIdx].destination.page
+        ) {
+          console.log(`linking within explicitly specified page`);
+          setLinkedTerminalState();
+        } else if (
+          state.pageContext.linkList[linkIdx].destination.page.length === 0
+        ) {
+          console.log(`linking within (current default) page`);
+          setLinkedTerminalState();
+        } else {
+          state.page_requested =
+            state.pageContext.linkList[linkIdx].destination.page + ".json";
+          // save the proposed linked idxs for use when the above page context
+          // is loaded into reducer
+          state.page_loaded = false;
+        }
+      }
+      return state;
+    case CONTEXT_SET:
+      // cast object into class instance with methods
+      // strictly a read only reference to react context NOT a copy.
+      // alternatively, could access via useContext iff in provider/consumer
+      // scope
+      state.pageContext = action.payload as CPageLists;
+
+      setLinkedTerminalState();
       return state;
     case SECTION_CHANGE:
       let sectionIdx: number = +action.payload;
@@ -609,11 +675,22 @@ export const rootReducer = (
         state.pageContext !== undefined &&
         sectionIdx in state.pageContext.sectionList
       ) {
-        state.cursor_sectionIdx = sectionIdx;
-        state.cursor_terminalIdx =
-          state.pageContext.sectionList[sectionIdx].firstTermIdx;
-        state.cursor_sentenceIdx =
-          state.pageContext.terminalList[state.cursor_terminalIdx].sentenceIdx;
+        if (
+          sectionIdx >= 0 &&
+          sectionIdx < state.pageContext.sectionList.length
+        ) {
+          state.cursor_sectionIdx = sectionIdx;
+          state.cursor_terminalIdx =
+            state.pageContext.sectionList[sectionIdx].firstTermIdx;
+          state.cursor_sentenceIdx =
+            state.pageContext.terminalList[
+              state.cursor_terminalIdx
+            ].sentenceIdx;
+        } else {
+          // should report out-of-bound condition. How?
+          state.cursor_sectionIdx = 0;
+          state.cursor_terminalIdx = 0;
+        }
       }
       return state;
     case WORD_MATCH:
@@ -682,42 +759,6 @@ export const rootReducer = (
     case WORD_SELECT:
       setTerminalState([+action.payload]);
       return state;
-    // case WORDS_VISITED_RESET:
-    //   // state.visited[0] = false;
-    //   return state;
-    // case WORDS_VISITED:
-    //   // state.wordsVisited = [...state.wordsVisited];
-    //   // state.wordsVisited[action.payload] = true;
-    //   return state;
-    // case WORD_VISIT:
-    // need a boolean array: visited[0..lastTerminalIdx-1] = { true | false }
-
-    //   console.log(`word visit=${action.payload}`);
-    //   console.log(`state.wordNodeIdx=${state.wordNodeIdx}`);
-    //   //    console.log(`state.nodeList.validWordNodeIdx()=${state.nodeList.validWordNodeIdx(state.wordNodeIdx)}`);
-    //   console.log(`wordNode=${state.nodeList.props(state.wordNodeIdx)}`);
-    //   console.log(
-    //     `compare=${state.nodeList.props(state.wordNodeIdx).word ===
-    //       action.payload}`
-    //   );
-    //   console.log(`word=${state.nodeList.props(state.wordNodeIdx).word}`);
-    //   console.log(`payload word=${action.payload}`);
-    //   if (
-    //     state.wordNodeIdx !== undefined &&
-    //     //        && state.nodeList.validWordNodeIdx()
-    //     state.nodeList.props(state.wordNodeIdx).word === action.payload
-    //   ) {
-    //     // should use RegExp with (alt)Recognition string
-    //     console.log(`word visited=${action.payload}`);
-    //     //      state.wordsVisited = [...state.wordsVisited]; // copy to immutable array before updating element below
-    //     //      state.wordsVisited[state.wordNodeIdx] = true;
-    //     ///      console.log(`state.wordVisited=${state.wordsVisited}`);
-    //     state.wordNodeIdx = state.nodeList.props(
-    //       state.wordNodeIdx
-    //     ).nextWordNodeIdx[0];
-    //     state = state.nodeList.updateImmutableState(state);
-    //   }
-    // return state;
     case LISTENING_TOGGLE:
       if (state.listen_available) {
         state.listen_active = !state.listen_active;
@@ -774,267 +815,13 @@ export const rootReducer = (
       if (state.settings_toggle) state.listen_active = false;
       return state;
 
-    default:
-      return state;
-  }
-};
-/*
-const CursorActionReducer = (
-  state: ICursorState = ICursorStateInitializer(),
-  action: any
-) => {
-  const setTerminalState = (terminalIdx: number) => {
-    let priorSentenceIdx: number = state.sentenceIdx;
-    let priorSectionIdx: number = state.sectionIdx;
-    state.terminalIdx = terminalIdx;
-    state.sectionIdx = state.pageContext.terminalList[terminalIdx].sectionIdx;
-    state.sentenceIdx = state.pageContext.terminalList[terminalIdx].sentenceIdx;
-    state.newSentence = state.sentenceIdx !== priorSentenceIdx;
-    ListeningActions.flush = true;
-    state.newSection = state.sectionIdx !== priorSectionIdx;
-  };
-  const setToNextTerminalState = (terminalIdx: number) => {
-    setTerminalState(
-      // update sentence, section transitions
-      state.pageContext.terminalList[terminalIdx].nextTermIdx[0]
-    );
-  };
-  const setToPrevTerminalState = (terminalIdx: number) => {
-    setTerminalState(
-      state.pageContext.terminalList[terminalIdx].prevTermIdx[0]
-    );
-  };
-  switch (action.type) {
-    case CONTEXT_SET:
-      state.pageContext = action.payload as IPageContext; // strictly a read only reference to react context NOT a copy
-      return state;
-    case PAGE_FIRST:
-      setTerminalState(0); // should be first actionable terminal i.e. , no syntactical sugar
-      return state;
-    case SECTION_CHANGE:
-      let sectionIdx: number = +action.payload;
-      if (
-        state.pageContext !== null &&
-        state.pageContext !== undefined &&
-        sectionIdx in state.pageContext.sectionList
-      ) {
-        state.sectionIdx = sectionIdx;
-        state.terminalIdx =
-          state.pageContext.sectionList[sectionIdx].firstTermIdx;
-        state.sentenceIdx =
-          state.pageContext.terminalList[state.terminalIdx].sentenceIdx;
-      }
-      return state;
-    case WORD_MATCH:
-      let words: string = action.payload as string;
-      if (
-        words !== undefined &&
-        state.pageContext !== undefined &&
-        state.pageContext !== null
-      ) {
-        console.log(`WORD_MATCH: words=${words}`);
-        for (let word of words.split(" ")) {
-          console.log(`WORD_MATCH: word=${word}`);
-          if (
-            state.pageContext.terminalList[
-              state.terminalIdx
-            ].content.toLowerCase() === word.toLowerCase()
-          ) {
-            // should use RegExp with (alt)Recognition string
-            setToNextTerminalState(state.terminalIdx);
-            // state.terminalIdx =
-            //   nodes.terminalList[state.terminalIdx].nextTermIdx[0]; // does not account for multiple paths i.e., [1..n]
-            // state.sectionIdx = nodes.terminalList[state.terminalIdx].sectionIdx;
-            // state.sentenceIdx =
-            //   nodes.terminalList[state.terminalIdx].sentenceIdx;
-          } else if (
-            state.pageContext.terminalList[state.terminalIdx].altrecognition !==
-              null &&
-            state.pageContext.terminalList[state.terminalIdx].altrecognition
-              .length > 0
-          ) {
-            let pattern = new RegExp(
-              state.pageContext.terminalList[state.terminalIdx].altrecognition
-            );
-            if (word.toLowerCase().match(pattern) !== null) {
-              setToNextTerminalState(state.terminalIdx);
-            }
-          } else {
-            // no match
-          }
-        }
-      }
-      return state;
-    case WORD_VISIT:
-      // need a boolean array: visited[0..lastTerminalIdx-1] = { true | false }
-
-      //   console.log(`word visit=${action.payload}`);
-      //   console.log(`state.wordNodeIdx=${state.wordNodeIdx}`);
-      //   //    console.log(`state.nodeList.validWordNodeIdx()=${state.nodeList.validWordNodeIdx(state.wordNodeIdx)}`);
-      //   console.log(`wordNode=${state.nodeList.props(state.wordNodeIdx)}`);
-      //   console.log(
-      //     `compare=${state.nodeList.props(state.wordNodeIdx).word ===
-      //       action.payload}`
-      //   );
-      //   console.log(`word=${state.nodeList.props(state.wordNodeIdx).word}`);
-      //   console.log(`payload word=${action.payload}`);
-      //   if (
-      //     state.wordNodeIdx !== undefined &&
-      //     //        && state.nodeList.validWordNodeIdx()
-      //     state.nodeList.props(state.wordNodeIdx).word === action.payload
-      //   ) {
-      //     // should use RegExp with (alt)Recognition string
-      //     console.log(`word visited=${action.payload}`);
-      //     //      state.wordsVisited = [...state.wordsVisited]; // copy to immutable array before updating element below
-      //     //      state.wordsVisited[state.wordNodeIdx] = true;
-      //     ///      console.log(`state.wordVisited=${state.wordsVisited}`);
-      //     state.wordNodeIdx = state.nodeList.props(
-      //       state.wordNodeIdx
-      //     ).nextWordNodeIdx[0];
-      //     state = state.nodeList.updateImmutableState(state);
-      //   }
-      return state;
-    case WORD_NEXT:
-      setToNextTerminalState(state.terminalIdx);
-      return state;
-    case WORD_PREVIOUS:
-      setToPrevTerminalState(state.terminalIdx);
-      return state;
-    case WORD_SELECT:
-      let selectedTerminalIdx: number = +action.payload;
-      setTerminalState(selectedTerminalIdx);
-      return state;
-    case WORDS_VISITED_RESET:
-      // state.visited[0] = false;
-      return state;
-    case WORDS_VISITED:
-      // state.wordsVisited = [...state.wordsVisited];
-      // state.wordsVisited[action.payload] = true;
-      return state;
-    }
-  }
-};
-*/
-// const WordActionReducer = (
-//   state: any = ITerminalInfoInitializer(),
-//   action: any
-// ) => {
-//   switch (action.type) {
-//     case SECTION_CHANGE:
-//       /// should be based on wordNodeIdx change
-//       state.sectionId = action.payload;
-//       return state;
-//     case WORD_MATCH:
-//       let words: string = action.payload as string;
-//       if (words !== undefined) {
-//         console.log(`WORD_MATCH: words=${words}`);
-//         for (let word of words.split(" ")) {
-//           console.log(`WORD_MATCH: word=${word}`);
-//           if (
-//             state.nodeList.props(state.wordNodeIdx).word.toLowerCase() ===
-//             word.toLowerCase()
-//           ) {
-//             // should use RegExp with (alt)Recognition string
-//             state.wordNodeIdx = state.nodeList.props(
-//               state.wordNodeIdx
-//             ).nextWordNodeIdx[0];
-//             state = state.nodeList.updateImmutableState(state);
-//           }
-//         }
-//         /*
-//       if (state.nodeList.props(state.wordNodeIdx).word === action.payload) {  // should use RegExp with (alt)Recognition string
-//         state.wordNodeIdx = state.nodeList[state.wordNodeIdx].nextWordNodeIdx[0];
-//         state = state.nodeList.updateImmutableState(state);
-//       }
-//       */
-//       }
-//       return state;
-//     case WORD_VISIT:
-//       console.log(`word visit=${action.payload}`);
-//       console.log(`state.wordNodeIdx=${state.wordNodeIdx}`);
-//       //    console.log(`state.nodeList.validWordNodeIdx()=${state.nodeList.validWordNodeIdx(state.wordNodeIdx)}`);
-//       console.log(`wordNode=${state.nodeList.props(state.wordNodeIdx)}`);
-//       console.log(
-//         `compare=${state.nodeList.props(state.wordNodeIdx).word ===
-//           action.payload}`
-//       );
-//       console.log(`word=${state.nodeList.props(state.wordNodeIdx).word}`);
-//       console.log(`payload word=${action.payload}`);
-//       if (
-//         state.wordNodeIdx !== undefined &&
-//         //        && state.nodeList.validWordNodeIdx()
-//         state.nodeList.props(state.wordNodeIdx).word === action.payload
-//       ) {
-//         // should use RegExp with (alt)Recognition string
-//         console.log(`word visited=${action.payload}`);
-//         //      state.wordsVisited = [...state.wordsVisited]; // copy to immutable array before updating element below
-//         //      state.wordsVisited[state.wordNodeIdx] = true;
-//         ///      console.log(`state.wordVisited=${state.wordsVisited}`);
-//         state.wordNodeIdx = state.nodeList.props(
-//           state.wordNodeIdx
-//         ).nextWordNodeIdx[0];
-//         state = state.nodeList.updateImmutableState(state);
-//       }
-//       return state;
-//     case WORD_NEXT:
-//       state.wordNodeIdx = state.nodeList.props(
-//         state.wordNodeIdx
-//       ).nextWordNodeIdx[0];
-//       state = state.nodeList.updateImmutableState(state);
-//       return state;
-//     case WORD_PREVIOUS:
-//       state.wordNodeIdx = state.nodeList.props(
-//         state.wordNodeIdx
-//       ).prevWordNodeIdx[0];
-//       state = state.nodeList.updateImmutableState(state);
-//       return state;
-//     case WORD_SELECT:
-//       state.wordNodeIdx = action.payload;
-//       state = state.nodeList.updateImmutableState(state);
-//       return state;
-//     case WORDS_VISITED_RESET:
-//       state.visited[0] = false;
-//       return state;
-//     case WORDS_VISITED:
-//       state.wordsVisited = [...state.wordsVisited];
-//       state.wordsVisited[action.payload] = true;
-//       return state;
-//     // case WORDNODEIDX_SET:
-//     //   state.wordNodeIdx = action.payload;
-//     //   return state;
-//     default:
-//       return state;
-//   }
-// };
-/************
-const ListeningReducer = (state: any = InitialListeningState, action: any) => {
-  switch (action.type) {
-    case LISTENING_TOGGLE:
-      if (state.listeningAvailable) {
-        state.listening = !state.listening;
-      }
-      return state;
-    case LISTENING_STOP:
-      state.listening = false;
-      return state;
-    case LISTENING_AVAILABLE:
-      state.listeningAvailable = action.payload;
-      return state;
-    case LISTENING_FLUSH:
-      state.flush = true; // resets transcript
-      return state;
-    case LISTENING_FLUSHED:
-      state.flush = false; // resets transcript
+    case MESSAGE_SET:
+      state.message = action.payload;
       return state;
     default:
       return state;
   }
 };
-************/
-// export const rootReducer = combineReducers({
-//   CursorActionReducer,
-//   ListeningReducer
-// });
 function patternMatch(content: string, altRecognitionPattern: string): boolean {
   let pattern: RegExp = new RegExp(altRecognitionPattern);
   return pattern.test(content);
