@@ -14,10 +14,8 @@ import "./App.css";
 // import mic_notlistening from "./mic1-inactive-xparent.gif";
 // import mic_unavailable from "./mic1-ghosted.gif";
 import { Request } from "./reducers";
-import { useAppDispatch, useAppSelector } from "./hooks";
-import { useEffect, useState, useContext } from "react";
+import { useAppDispatch } from "./hooks";
 import { IHeadingListItem } from "./pageContentType";
-import { IPageContext, PageContext } from "./pageContext";
 
 interface INavPropsType {
   headings: IHeadingListItem[];
