@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
  * File name: reactcomps_speech.tsx
  *
@@ -17,11 +17,7 @@
 import { Request } from "./reducers";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { useEffect, useState, useContext } from "react";
-import { CPageContext, PageContext } from "./pageContext";
-import speakIcon from "./button_speak.png";
-import speakGhostedIcon from "./button_speak_ghosted.png";
-import speakActiveIcon from "./button_speak_activeRed.gif";
-import speakInactiveIcon from "./button_speak.png";
+import { CPageLists, PageContext } from "./pageContext";
 import {
   ISpeechSettings,
   ISettingsContext,
@@ -62,7 +58,9 @@ export const Synthesizer: CSpeechSynthesizer = new CSpeechSynthesizer();
 
 export const SpeechMonitor = () => {
   const dispatch = useAppDispatch();
-  let pageContext: CPageContext = useContext(PageContext)!;
+  let pageContext: CPageLists = useAppSelector(store => store.pageContext);
+  // cannot use useContext(PageContext) because context is only scoped within
+  // a page
   const newSentence = useAppSelector(
     store => store.cursor_newSentenceTransition
   );
@@ -82,7 +80,11 @@ export const SpeechMonitor = () => {
   useEffect(
     () => {
       Synthesizer.volume = settingsContext.settings.speech.volume;
-      if (newSection) {
+      if (beginningOfPage) {
+        message = `beginning of page`;
+        Synthesizer.speak(message);
+        dispatch(Request.Cursor_acknowledgeTransition());
+      } else if (newSection) {
         console.log(`speaking sectionIdx=${sectionIdx}`);
         let sectionType: string = pageContext.sectionList[sectionIdx].type;
         message = `new ${
@@ -94,10 +96,6 @@ export const SpeechMonitor = () => {
       } else if (newSentence) {
         message = "new sentence";
         console.log(`speaking "${message}"`);
-        Synthesizer.speak(message);
-        dispatch(Request.Cursor_acknowledgeTransition());
-      } else if (beginningOfPage) {
-        message = `beginning of page`;
         Synthesizer.speak(message);
         dispatch(Request.Cursor_acknowledgeTransition());
       } else if (endOfPage) {
