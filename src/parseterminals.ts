@@ -62,7 +62,7 @@ export abstract class AbstractTerminalNode extends ParseNode
   //  tokenList: TokenListType = [];
   constructor(parent: ISentenceNode) {
     super(parent);
-    this.parent = parent;
+    this._parent = parent;
     Object.defineProperty(this, "userContext", { enumerable: false });
     //Object.defineProperty(this, "id", { enumerable: false });
   }
@@ -70,6 +70,7 @@ export abstract class AbstractTerminalNode extends ParseNode
     let token: Token;
     if (tokenList !== undefined) {
       token = tokenList.shift()!;
+      //      token = tokenList[0];
       if (token !== undefined) {
         this.content = token.content; // should be TerminalInfo
       }
@@ -85,6 +86,7 @@ export abstract class AbstractTerminalNode extends ParseNode
       case "prevTermIdx":
       case "recitable":
       case "audible":
+      case "linkable":
       case "visible":
         return undefined;
       default:
@@ -143,6 +145,7 @@ export abstract class AbstractTerminalNode extends ParseNode
             //            case "prevTermIdx":
             case "recitable":
             case "audible":
+            case "linkable":
             case "visible":
               return undefined;
             default:
