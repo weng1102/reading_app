@@ -72,6 +72,7 @@ import {
   ParseNodeSerializeFormatEnumType
   //  UserContext
 } from "./baseClasses";
+import { PageParseNode } from "./parsepages";
 // import { TerminalNode_MLTAG_EMAILADDRESS } from "./parseterminals_emailaddress";
 // import { TerminalNode_MLTAG_PHONENUMBER } from "./parseterminals_phonenumber";
 //   import {
@@ -196,7 +197,8 @@ export class FileParseNode extends ParseNode {
   // markdown file can contain one or more pages
   //  dataSource!: IDataSource;
   pageNodes: IPageNode[] = [];
-  constructor(parent) {
+  constructor(parent: any) {
+    // should be FileParseNode
     super(parent);
   }
   connect(fileName: string) {
@@ -205,7 +207,7 @@ export class FileParseNode extends ParseNode {
     //    this.dataSource; //
     //    this._markdownDataSource = new RawMarkdownSource(this);
     let result = this.dataSource.connect(fileName);
-    let pageNode = new PageParseNode(this);
+    let pageNode = new PageParseNode(); // should be FileParseNode as parent
     //  pageNode.connect(fileName);
     this.dataSource.serialize();
     return result;
@@ -226,78 +228,78 @@ export class FileParseNode extends ParseNode {
     return "";
   } // any to avoid compilation error, should be removed
 }
-type ISectionNode = ISectionContent & IParseNode;
-export class PageParseNode extends ParseNode implements IPageContent {
-  //  _data: PageContentType = InitialPageContentType;
-  id: number = 0;
-  name: string = "";
-  description: string = "";
-  owner: string = "";
-  pageFormatType = PageFormatEnumType.default;
-  created!: Date;
-  modified!: Date;
-  transformed!: Date;
-  firstTermIdx: number = -1;
-  lastTermIdx: number = -1;
-  sections: ISectionNode[] = []; //needs to be reflected in _data.sections[]
-  constructor(parent) {
-    super(parent);
-  }
-  parse() {
-    //    let current: TaggedStringType;
-    try {
-      assert(this.parent !== undefined, `parent is undefined`);
-      assert(this.dataSource !== undefined, `dataSource is undefined`);
-      // assume datasource is a page (sections where depth=0), parse all direct children i.e., depth=0
-      for (
-        let current = this.dataSource.firstRecord();
-        !this.dataSource.EOF();
-        current = this.dataSource.nextRecord()
-      ) {
-        //        assert(current.tagType === "<page>", `expected page` );
-        console.log(`page.parse:current.content ${current.content}`);
-        //          this.sections.push(section);
-        //          section.parse();
-      }
-    } catch (e) {
-      this.logger.error(e.message);
-    } finally {
-      return 0;
-    }
-  }
-  serialize(): string {
-    // replace all this with JSON.stringify(pageNode)
-    // let sectionContent: ISectionContent[] = [];
-    // this._data.description = "hi there!";
-    // this._data.created = new Date("2021-05-24");
-    // let str: string = JSON.stringify(this._data);
-    // console.log(str);
-    // let pageContent: PageContentType = JSON.parse(str);
-    // console.log(`stringified then parsed=${pageContent.description}`);
-    // console.log(`stringified then parsed=${pageContent.created}`);
-    // this._markdownDataSource.serialize();
-    // for (let section of this.sectionNodes) {
-    //   // could embed as Big arrow function below
-    //   //    sectionContent.firstTermIdx(section.serialize()); // where sectionContent = results.sections
-    // }
-    // let result: IPageContent = {
-    //   id: this.id,
-    //   name: this.name,
-    //   description: this.description,
-    //   owner: "",
-    //   pageFormatType: this.pageFormatType,
-    //   created: this.created,
-    //   modified: this.modified === undefined ? this.created : this.modified,
-    //   transformed:
-    //     this.transformed === undefined ? this.created : this.transformed,
-    //   firstTermIdx: this.firstTermIdx,
-    //   lastTermIdx: this.lastTermIdx,
-    //   sections: sectionContent
-    // };
-    return "";
-  }
-  transform(): any {}
-}
+// type ISectionNode = ISectionContent & IParseNode;
+// export class FileParseNode extends ParseNode implements IPageContent {
+//   //  _data: PageContentType = InitialPageContentType;
+//   id: number = 0;
+//   name: string = "";
+//   description: string = "";
+//   owner: string = "";
+//   pageFormatType = PageFormatEnumType.default;
+//   created!: Date;
+//   modified!: Date;
+//   transformed!: Date;
+//   firstTermIdx: number = -1;
+//   lastTermIdx: number = -1;
+//   sections: ISectionNode[] = []; //needs to be reflected in _data.sections[]
+//   constructor(parent) {
+//     super(parent);
+//   }
+//   parse() {
+//     //    let current: TaggedStringType;
+//     try {
+//       assert(this._parent !== undefined, `parent is undefined`);
+//       assert(this.dataSource !== undefined, `dataSource is undefined`);
+//       // assume datasource is a page (sections where depth=0), parse all direct children i.e., depth=0
+//       for (
+//         let current = this.dataSource.firstRecord();
+//         !this.dataSource.EOF();
+//         current = this.dataSource.nextRecord()
+//       ) {
+//         //        assert(current.tagType === "<page>", `expected page` );
+//         console.log(`page.parse:current.content ${current.content}`);
+//         //          this.sections.push(section);
+//         //          section.parse();
+//       }
+//     } catch (e) {
+//       this.logger.error(e.message);
+//     } finally {
+//       return 0;
+//     }
+//   }
+//   serialize(): string {
+//     // replace all this with JSON.stringify(pageNode)
+//     // let sectionContent: ISectionContent[] = [];
+//     // this._data.description = "hi there!";
+//     // this._data.created = new Date("2021-05-24");
+//     // let str: string = JSON.stringify(this._data);
+//     // console.log(str);
+//     // let pageContent: PageContentType = JSON.parse(str);
+//     // console.log(`stringified then parsed=${pageContent.description}`);
+//     // console.log(`stringified then parsed=${pageContent.created}`);
+//     // this._markdownDataSource.serialize();
+//     // for (let section of this.sectionNodes) {
+//     //   // could embed as Big arrow function below
+//     //   //    sectionContent.firstTermIdx(section.serialize()); // where sectionContent = results.sections
+//     // }
+//     // let result: IPageContent = {
+//     //   id: this.id,
+//     //   name: this.name,
+//     //   description: this.description,
+//     //   owner: "",
+//     //   pageFormatType: this.pageFormatType,
+//     //   created: this.created,
+//     //   modified: this.modified === undefined ? this.created : this.modified,
+//     //   transformed:
+//     //     this.transformed === undefined ? this.created : this.transformed,
+//     //   firstTermIdx: this.firstTermIdx,
+//     //   lastTermIdx: this.lastTermIdx,
+//     //   sections: sectionContent
+//     // };
+//     return "";
+//   }
+//   transform(): any {}
+// }
 // interface ISectionNode {
 //   id: number;
 //   name: string;
