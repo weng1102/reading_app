@@ -5,9 +5,9 @@
   "description": "",
   "owner": " Wen Eng ",
   "pageFormatType": 0,
-  "created": "Sun Feb 06 2022 12:56:59 GMT-0800 (Pacific Standard Time)",
-  "modified": "Sun Feb 06 2022 12:56:59 GMT-0800 (Pacific Standard Time)",
-  "transformed": "Sun Feb 06 2022 12:56:59 GMT-0800 (Pacific Standard Time)",
+  "created": "Sun Feb 06 2022 12:59:00 GMT-0800 (Pacific Standard Time)",
+  "modified": "Sun Feb 06 2022 12:59:00 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Sun Feb 06 2022 12:59:00 GMT-0800 (Pacific Standard Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -1505,7 +1505,7 @@
         "sentences": [
           {
             "id": 3,
-            "content": "link goes to [links internal](linksinternal)",
+            "content": "link goes to [links internal](linksinternal,0)",
             "firstTermIdx": 26,
             "lastTermIdx": 30,
             "terminals": [
@@ -1758,7 +1758,7 @@
                   "destination": {
                     "page": "linksinternal",
                     "directory": "",
-                    "sectionIdx": -9999,
+                    "sectionIdx": 0,
                     "terminalIdx": -9999
                   },
                   "className": "",
@@ -3019,7 +3019,7 @@
       "destination": {
         "page": "linksinternal",
         "directory": "",
-        "sectionIdx": -9999,
+        "sectionIdx": 0,
         "terminalIdx": -9999
       },
       "valid": true
