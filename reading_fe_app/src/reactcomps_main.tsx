@@ -37,8 +37,7 @@ export const ReadingApp = () => {
       SpeechRecognition.browserSupportsSpeechRecognition()
     )
   );
-  dispatch(Request.Page_load("links1.json"));
-  dispatch(Request.Cursor_gotoSectionByIdx(0));
+  dispatch(Request.Page_load("links1", 1));
   return (
     <>
       <SettingsContext.Provider value={settingsContext}>
