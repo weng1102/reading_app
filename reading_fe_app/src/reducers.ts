@@ -84,8 +84,8 @@ const RECITE_TOGGLE = "recite/toggle"; // request from recite button
 const SETTINGS_TOGGLE = "settings/toggle";
 
 // message/status bar actions
-const MESSAGE_SET = "message/set";
-const MESSAGE_CLEAR = "message/clear";
+const STATUSBAR_MESSAGE_SET = "status message/set";
+const STATUSBAR_MESSAGE_CLEAR = "status message/clear";
 // Actions
 const Speech_acknowledged = () => {
   return {
@@ -202,22 +202,22 @@ const Cursor_acknowledgeTransition = () => {
     type: TRANSITION_ACKNOWLEDGE
   };
 };
-const Message_set = (message: string) => {
+const StatusBar_Message_set = (message: string) => {
   return {
-    type: MESSAGE_SET,
+    type: STATUSBAR_MESSAGE_SET,
     payload: message
   };
 };
-const Message_clear = () => {
+const StatusBar_Message_clear = () => {
   return {
-    type: MESSAGE_SET,
+    type: STATUSBAR_MESSAGE_SET,
     payload: ""
   };
 };
-const Page_load = (page: string) => {
+const Page_load = (page: string, sectionIdx?: number, terminalIdx?: number) => {
   return {
     type: PAGE_LOAD,
-    payload: page
+    payload: { page: page, sectionIdx: sectionIdx, terminalIdx: terminalIdx }
   };
 };
 const Page_loaded = (loaded: boolean) => {
@@ -328,8 +328,8 @@ export const Request = {
   Cursor_gotoSectionByIdx,
   Cursor_acknowledgeTransition,
 
-  Message_set,
-  Message_clear,
+  StatusBar_Message_set,
+  StatusBar_Message_clear,
 
   Page_load,
   Page_loaded,
@@ -465,8 +465,8 @@ interface IReduxState {
   cursor_endOfPageReached: boolean;
 
   page_requested: string;
-  cursor_terminalIdx_fromLink: number;
-  cursor_sectionIdx_fromLink: number;
+  cursor_terminalIdx_proposed: number;
+  cursor_sectionIdx_proposed: number;
   page_loaded: boolean;
   page_section: number;
   //page_lists: CPageLists;
@@ -475,7 +475,7 @@ interface IReduxState {
   recite_requested: boolean;
   reciting: boolean;
   settings_toggle: boolean;
-  message: string;
+  statusBar_message: string;
 }
 const IReduxStateInitialState: IReduxState = {
   announce_available: false,
@@ -500,8 +500,8 @@ const IReduxStateInitialState: IReduxState = {
   page_requested: "",
   page_loaded: false,
   page_section: 0,
-  cursor_terminalIdx_fromLink: 0,
-  cursor_sectionIdx_fromLink: 0,
+  cursor_terminalIdx_proposed: 0,
+  cursor_sectionIdx_proposed: 0,
   //page_lists: new CPageLists(),
   pageContext: new CPageLists(),
 
@@ -509,7 +509,7 @@ const IReduxStateInitialState: IReduxState = {
   reciting: false,
 
   settings_toggle: false,
-  message: ""
+  statusBar_message: ""
   //  pageContext: PageContextInitializer()
 };
 export const rootReducer = (
@@ -579,84 +579,65 @@ export const rootReducer = (
       state.pageContext.previousSentenceTerminalIdx(state.cursor_terminalIdx)
     ]);
   };
-  const proposeLinkedTerminalState = (linkIdx?: number) => {
-    if (
-      linkIdx !== undefined &&
-      linkIdx !== null &&
-      linkIdx >= 0 &&
-      linkIdx < state.pageContext.linkList.length
-    ) {
-      state.cursor_sectionIdx_fromLink =
-        state.pageContext.linkList[linkIdx].destination.sectionIdx;
-      state.cursor_terminalIdx_fromLink =
-        state.pageContext.linkList[linkIdx].destination.terminalIdx;
-    } else {
-      state.cursor_terminalIdx_fromLink = IDX_INITIALIZER;
-      state.cursor_sectionIdx_fromLink = IDX_INITIALIZER;
-    }
+  const saveProposedCursorState = (sectionIdx: number, terminalIdx: number) => {
+    state.cursor_terminalIdx_proposed = terminalIdx;
+    state.cursor_sectionIdx_proposed = sectionIdx; //
+    // }
   };
-  const setLinkedTerminalState = () => {
-    if (state.cursor_terminalIdx_fromLink === state.cursor_terminalIdx) {
-      // do nothing
+  const setProposedCursorState = () => {
+    if (state.cursor_terminalIdx_proposed === state.cursor_terminalIdx) {
+      // accept default
     } else if (
-      state.pageContext.isValidSectionIdx(state.cursor_sectionIdx_fromLink)
+      state.pageContext.isValidTerminalIdx(state.cursor_terminalIdx_proposed)
+    ) {
+      setTerminalState([state.cursor_terminalIdx_proposed]);
+    } else if (
+      state.pageContext.isValidSectionIdx(state.cursor_sectionIdx_proposed)
     ) {
       setTerminalState([
-        state.pageContext.sectionList[state.cursor_sectionIdx_fromLink]
+        state.pageContext.sectionList[state.cursor_sectionIdx_proposed]
           .firstTermIdx
       ]);
-    } else if (
-      state.pageContext.isValidTerminalIdx(state.cursor_terminalIdx_fromLink)
-    ) {
-      setTerminalState([state.cursor_terminalIdx_fromLink]);
     } else {
       state.cursor_terminalIdx = 0;
     }
-    proposeLinkedTerminalState(); //resets proposal
   };
-  //  const queueAccouncement(state.announcement)
   switch (action.type) {
     case PAGE_LOAD:
-      state.page_requested = action.payload as string;
-      state.cursor_sectionIdx_fromLink = 0; // needed because linkTo may specify initial sectionIdx within link definition
-      state.cursor_terminalIdx_fromLink = 0;
+      state.page_requested = (action.payload.page as string) + ".json";
+      // cannot validate these idxs without proper context that will not
+      // be available until the accompanying (payload) page is loaded
+      saveProposedCursorState(
+        action.payload.sectionIdx,
+        action.payload.terminalIdx
+      );
       state.page_loaded = false;
       return state;
     case PAGE_LOADED:
       state.page_loaded = action.payload as boolean;
       return state;
-    // case PAGE_SETLISTS:
-    //   state.page_lists = action.payload as CPageLists;
-    //   return state;
     case PAGE_TOP:
-      setTerminalState([state.pageContext.firstTerminalIdx]); // should be first actionable terminal i.e. , no syntactical sugar
+      setTerminalState([state.pageContext.firstTerminalIdx]);
       return state;
     case PAGE_LINKTO:
-      // get current terminal and retrieve linked page
-      let linkIdx =
+      let linkIdx: number =
         state.pageContext.terminalList[state.cursor_terminalIdx].linkIdx;
-      proposeLinkedTerminalState(linkIdx);
-      if (linkIdx >= 0 && linkIdx < state.pageContext.linkList.length) {
-        if (state.pageContext.linkList.length === 0) {
-          console.log(`linkList is empty`);
-        } else if (
-          state.page_requested ===
-          state.pageContext.linkList[linkIdx].destination.page
-        ) {
-          console.log(`linking within explicitly specified page`);
-          setLinkedTerminalState();
-        } else if (
-          state.pageContext.linkList[linkIdx].destination.page.length === 0
-        ) {
-          console.log(`linking within (current default) page`);
-          setLinkedTerminalState();
-        } else {
-          state.page_requested =
-            state.pageContext.linkList[linkIdx].destination.page + ".json";
-          // save the proposed linked idxs for use when the above page context
-          // is loaded into reducer
-          state.page_loaded = false;
-        }
+      saveProposedCursorState(
+        state.pageContext.linkList[linkIdx].destination.sectionIdx,
+        state.pageContext.linkList[linkIdx].destination.terminalIdx
+      );
+      if (
+        // requested page is already current
+        state.page_requested ===
+          state.pageContext.linkList[linkIdx].destination.page ||
+        state.pageContext.linkList[linkIdx].destination.page.length === 0
+      ) {
+        setProposedCursorState();
+      } else {
+        // defer proposed cursor state
+        state.page_requested =
+          state.pageContext.linkList[linkIdx].destination.page + ".json";
+        state.page_loaded = false;
       }
       return state;
     case CONTEXT_SET:
@@ -665,32 +646,25 @@ export const rootReducer = (
       // alternatively, could access via useContext iff in provider/consumer
       // scope
       state.pageContext = action.payload as CPageLists;
-
-      setLinkedTerminalState();
+      setProposedCursorState();
       return state;
     case SECTION_CHANGE:
       let sectionIdx: number = +action.payload;
+      console.log(sectionIdx in state.pageContext.sectionList);
       if (
-        state.pageContext !== null &&
         state.pageContext !== undefined &&
+        state.pageContext !== null &&
         sectionIdx in state.pageContext.sectionList
       ) {
-        if (
-          sectionIdx >= 0 &&
-          sectionIdx < state.pageContext.sectionList.length
-        ) {
-          state.cursor_sectionIdx = sectionIdx;
-          state.cursor_terminalIdx =
-            state.pageContext.sectionList[sectionIdx].firstTermIdx;
-          state.cursor_sentenceIdx =
-            state.pageContext.terminalList[
-              state.cursor_terminalIdx
-            ].sentenceIdx;
-        } else {
-          // should report out-of-bound condition. How?
-          state.cursor_sectionIdx = 0;
-          state.cursor_terminalIdx = 0;
-        }
+        state.cursor_sectionIdx = sectionIdx;
+        state.cursor_terminalIdx =
+          state.pageContext.sectionList[sectionIdx].firstTermIdx;
+        state.cursor_sentenceIdx =
+          state.pageContext.terminalList[state.cursor_terminalIdx].sentenceIdx;
+      } else {
+        // should report out-of-bound condition. How?
+        state.cursor_sectionIdx = 0;
+        state.cursor_terminalIdx = 0;
       }
       return state;
     case WORD_MATCH:
@@ -815,8 +789,8 @@ export const rootReducer = (
       if (state.settings_toggle) state.listen_active = false;
       return state;
 
-    case MESSAGE_SET:
-      state.message = action.payload;
+    case STATUSBAR_MESSAGE_SET:
+      state.statusBar_message = action.payload;
       return state;
     default:
       return state;

@@ -215,7 +215,7 @@ interface StatusBarPropsType {}
 export const StatusBar = () => {
   return (
     <>
-      <div>{useAppSelector(store => store.message)}</div>
+      <div>{useAppSelector(store => store.statusBar_message)}</div>
     </>
   );
 };
