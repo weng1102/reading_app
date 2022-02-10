@@ -5,9 +5,9 @@
   "description": "",
   "owner": "",
   "pageFormatType": 0,
-  "created": "Wed Feb 09 2022 13:05:05 GMT-0800 (Pacific Standard Time)",
-  "modified": "Wed Feb 09 2022 13:05:05 GMT-0800 (Pacific Standard Time)",
-  "transformed": "Wed Feb 09 2022 13:05:05 GMT-0800 (Pacific Standard Time)",
+  "created": "Wed Feb 09 2022 20:55:28 GMT-0800 (Pacific Standard Time)",
+  "modified": "Wed Feb 09 2022 20:55:28 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Wed Feb 09 2022 20:55:28 GMT-0800 (Pacific Standard Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -16,7 +16,7 @@
       "name": "",
       "description": "",
       "firstTermIdx": 0,
-      "lastTermIdx": 9,
+      "lastTermIdx": 10,
       "items": [],
       "type": "paragraph",
       "meta": {
@@ -33,7 +33,7 @@
                 "content": "The",
                 "firstTermIdx": 0,
                 "lastTermIdx": 0,
-                "type": 13,
+                "type": 14,
                 "meta": {
                   "content": "The",
                   "termIdx": 0,
@@ -59,7 +59,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 12,
+                "type": 13,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -83,7 +83,7 @@
                 "content": "quick",
                 "firstTermIdx": 1,
                 "lastTermIdx": 1,
-                "type": 13,
+                "type": 14,
                 "meta": {
                   "content": "quick",
                   "termIdx": 1,
@@ -111,7 +111,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 12,
+                "type": 13,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -135,7 +135,7 @@
                 "content": "brown",
                 "firstTermIdx": 2,
                 "lastTermIdx": 2,
-                "type": 13,
+                "type": 14,
                 "meta": {
                   "content": "brown",
                   "termIdx": 2,
@@ -163,7 +163,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 12,
+                "type": 13,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -187,7 +187,7 @@
                 "content": "fox",
                 "firstTermIdx": 3,
                 "lastTermIdx": 3,
-                "type": 13,
+                "type": 14,
                 "meta": {
                   "content": "fox",
                   "termIdx": 3,
@@ -240,7 +240,7 @@
             "id": 1,
             "content": "100% Jumped over the lazy dog.",
             "firstTermIdx": 4,
-            "lastTermIdx": 9,
+            "lastTermIdx": 10,
             "terminals": [
               {
                 "id": 0,
@@ -248,7 +248,7 @@
                 "content": "100",
                 "firstTermIdx": 4,
                 "lastTermIdx": 4,
-                "type": 13,
+                "type": 14,
                 "meta": {
                   "content": "100",
                   "termIdx": 4,
@@ -272,45 +272,13 @@
               },
               {
                 "id": 0,
-                "termIdx": -9999,
-                "content": "%",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 9
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 12,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "linkable": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false,
-                  "linkIdx": -9999,
-                  "hintsIdx": -9999
-                }
-              },
-              {
-                "id": 0,
                 "termIdx": 5,
-                "content": "Jumped",
+                "content": "%",
                 "firstTermIdx": 5,
                 "lastTermIdx": 5,
-                "type": 13,
+                "type": 9,
                 "meta": {
-                  "content": "Jumped",
+                  "content": "%",
                   "termIdx": 5,
                   "nextTermIdx": [
                     6
@@ -318,8 +286,8 @@
                   "prevTermIdx": [
                     4
                   ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
+                  "altpronunciation": "percent",
+                  "altrecognition": "percent",
                   "recitable": true,
                   "audible": true,
                   "linkable": false,
@@ -336,7 +304,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 12,
+                "type": 13,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -357,12 +325,12 @@
               {
                 "id": 0,
                 "termIdx": 6,
-                "content": "over",
+                "content": "Jumped",
                 "firstTermIdx": 6,
                 "lastTermIdx": 6,
-                "type": 13,
+                "type": 14,
                 "meta": {
-                  "content": "over",
+                  "content": "Jumped",
                   "termIdx": 6,
                   "nextTermIdx": [
                     7
@@ -388,7 +356,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 12,
+                "type": 13,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -409,12 +377,12 @@
               {
                 "id": 0,
                 "termIdx": 7,
-                "content": "the",
+                "content": "over",
                 "firstTermIdx": 7,
                 "lastTermIdx": 7,
-                "type": 13,
+                "type": 14,
                 "meta": {
-                  "content": "the",
+                  "content": "over",
                   "termIdx": 7,
                   "nextTermIdx": [
                     8
@@ -440,7 +408,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 12,
+                "type": 13,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -461,12 +429,12 @@
               {
                 "id": 0,
                 "termIdx": 8,
-                "content": "lazy",
+                "content": "the",
                 "firstTermIdx": 8,
                 "lastTermIdx": 8,
-                "type": 13,
+                "type": 14,
                 "meta": {
-                  "content": "lazy",
+                  "content": "the",
                   "termIdx": 8,
                   "nextTermIdx": [
                     9
@@ -492,7 +460,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 12,
+                "type": 13,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -513,16 +481,68 @@
               {
                 "id": 0,
                 "termIdx": 9,
-                "content": "dog",
+                "content": "lazy",
                 "firstTermIdx": 9,
                 "lastTermIdx": 9,
-                "type": 13,
+                "type": 14,
                 "meta": {
-                  "content": "dog",
+                  "content": "lazy",
                   "termIdx": 9,
-                  "nextTermIdx": [],
+                  "nextTermIdx": [
+                    10
+                  ],
                   "prevTermIdx": [
                     8
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 13,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 10,
+                "content": "dog",
+                "firstTermIdx": 10,
+                "lastTermIdx": 10,
+                "type": 14,
+                "meta": {
+                  "content": "dog",
+                  "termIdx": 10,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [
+                    9
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -690,7 +710,7 @@
       "sectionIdx": 0
     },
     {
-      "content": "Jumped",
+      "content": "%",
       "termIdx": 5,
       "nextTermIdx": [
         6
@@ -698,8 +718,8 @@
       "prevTermIdx": [
         4
       ],
-      "altpronunciation": "",
-      "altrecognition": "",
+      "altpronunciation": "percent",
+      "altrecognition": "percent",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -712,7 +732,7 @@
       "sectionIdx": 0
     },
     {
-      "content": "over",
+      "content": "Jumped",
       "termIdx": 6,
       "nextTermIdx": [
         7
@@ -734,7 +754,7 @@
       "sectionIdx": 0
     },
     {
-      "content": "the",
+      "content": "over",
       "termIdx": 7,
       "nextTermIdx": [
         8
@@ -756,7 +776,7 @@
       "sectionIdx": 0
     },
     {
-      "content": "lazy",
+      "content": "the",
       "termIdx": 8,
       "nextTermIdx": [
         9
@@ -778,11 +798,33 @@
       "sectionIdx": 0
     },
     {
-      "content": "dog",
+      "content": "lazy",
       "termIdx": 9,
-      "nextTermIdx": [],
+      "nextTermIdx": [
+        10
+      ],
       "prevTermIdx": [
         8
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 1,
+      "sectionIdx": 0
+    },
+    {
+      "content": "dog",
+      "termIdx": 10,
+      "nextTermIdx": [],
+      "prevTermIdx": [
+        9
       ],
       "altpronunciation": "",
       "altrecognition": "",
@@ -802,7 +844,7 @@
   "sectionList": [
     {
       "firstTermIdx": 0,
-      "lastTermIdx": 9,
+      "lastTermIdx": 10,
       "type": "paragraph"
     }
   ],
@@ -814,7 +856,7 @@
     },
     {
       "firstTermIdx": 4,
-      "lastTermIdx": 9,
+      "lastTermIdx": 10,
       "lastPunctuation": "."
     }
   ],
