@@ -5,9 +5,9 @@
   "description": "",
   "owner": " Wen Eng ",
   "pageFormatType": 0,
-  "created": "Wed Feb 09 2022 22:37:44 GMT-0800 (Pacific Standard Time)",
-  "modified": "Wed Feb 09 2022 22:37:44 GMT-0800 (Pacific Standard Time)",
-  "transformed": "Wed Feb 09 2022 22:37:44 GMT-0800 (Pacific Standard Time)",
+  "created": "Thu Feb 10 2022 11:54:34 GMT-0800 (Pacific Standard Time)",
+  "modified": "Thu Feb 10 2022 11:54:34 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Thu Feb 10 2022 11:54:34 GMT-0800 (Pacific Standard Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -53,9 +53,38 @@
               "className": "imageentry-image",
               "style": ""
             }
+          },
+          {
+            "id": 0,
+            "termIdx": -9999,
+            "content": "Who Am I",
+            "firstTermIdx": -9999,
+            "lastTermIdx": -9999,
+            "type": 4,
+            "meta": {
+              "src": "ronlynbrain.jpg",
+              "label": "Who Am I",
+              "width": 0,
+              "height": 0,
+              "attributes": "",
+              "className": "imageentry-image",
+              "style": ""
+            }
           }
         ],
         "captions": [
+          {
+            "id": 0,
+            "name": "",
+            "description": "",
+            "firstTermIdx": -9999,
+            "lastTermIdx": -9999,
+            "items": [],
+            "type": "empty",
+            "meta": {
+              "count": 1
+            }
+          },
           {
             "id": 0,
             "name": "",
@@ -361,7 +390,7 @@
               "sentences": [
                 {
                   "id": 2,
-                  "content": "I had a severe hemorrhagic stroke in September  2015.  ",
+                  "content": "I had a severe hemorrhagic stroke in September 2015.",
                   "firstTermIdx": 5,
                   "lastTermIdx": 13,
                   "terminals": [
@@ -760,12 +789,12 @@
                     {
                       "id": 0,
                       "termIdx": -9999,
-                      "content": "  ",
+                      "content": " ",
                       "firstTermIdx": -9999,
                       "lastTermIdx": -9999,
                       "type": 13,
                       "meta": {
-                        "content": "  ",
+                        "content": " ",
                         "termIdx": -9999,
                         "nextTermIdx": [],
                         "prevTermIdx": [],
@@ -818,30 +847,6 @@
                       "type": 8,
                       "meta": {
                         "content": ".",
-                        "termIdx": -9999,
-                        "nextTermIdx": [],
-                        "prevTermIdx": [],
-                        "altpronunciation": "",
-                        "altrecognition": "",
-                        "recitable": false,
-                        "audible": false,
-                        "linkable": false,
-                        "visible": true,
-                        "fillin": false,
-                        "visited": false,
-                        "linkIdx": -9999,
-                        "hintsIdx": -9999
-                      }
-                    },
-                    {
-                      "id": 0,
-                      "termIdx": -9999,
-                      "content": "  ",
-                      "firstTermIdx": -9999,
-                      "lastTermIdx": -9999,
-                      "type": 13,
-                      "meta": {
-                        "content": "  ",
                         "termIdx": -9999,
                         "nextTermIdx": [],
                         "prevTermIdx": [],
@@ -1344,7 +1349,7 @@
         "sentences": [
           {
             "id": 4,
-            "content": "I studied Chemical Engineering at UC Berkeley.  ",
+            "content": "I studied Chemical Engineering at UC Berkeley.",
             "firstTermIdx": 23,
             "lastTermIdx": 29,
             "terminals": [
@@ -1697,30 +1702,6 @@
                 "type": 8,
                 "meta": {
                   "content": ".",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "linkable": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false,
-                  "linkIdx": -9999,
-                  "hintsIdx": -9999
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": "  ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 13,
-                "meta": {
-                  "content": "  ",
                   "termIdx": -9999,
                   "nextTermIdx": [],
                   "prevTermIdx": [],
@@ -2527,7 +2508,7 @@
         "sentences": [
           {
             "id": 7,
-            "content": "After Stanford,   I was a management consultant.",
+            "content": "After Stanford, I was a management consultant.",
             "firstTermIdx": 44,
             "lastTermIdx": 50,
             "terminals": [
@@ -2638,12 +2619,12 @@
               {
                 "id": 0,
                 "termIdx": -9999,
-                "content": "   ",
+                "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
                 "type": 13,
                 "meta": {
-                  "content": "   ",
+                  "content": " ",
                   "termIdx": -9999,
                   "nextTermIdx": [],
                   "prevTermIdx": [],
@@ -24881,7 +24862,7 @@
     {
       "firstTermIdx": 0,
       "lastTermIdx": -1,
-      "lastPunctuation": ""
+      "lastPunctuation": ","
     },
     {
       "firstTermIdx": 0,
