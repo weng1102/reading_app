@@ -5,9 +5,9 @@
   "description": "",
   "owner": "",
   "pageFormatType": 0,
-  "created": "Wed Feb 09 2022 20:55:28 GMT-0800 (Pacific Standard Time)",
-  "modified": "Wed Feb 09 2022 20:55:28 GMT-0800 (Pacific Standard Time)",
-  "transformed": "Wed Feb 09 2022 20:55:28 GMT-0800 (Pacific Standard Time)",
+  "created": "Wed Feb 09 2022 21:55:41 GMT-0800 (Pacific Standard Time)",
+  "modified": "Wed Feb 09 2022 22:05:43 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Wed Feb 09 2022 22:05:43 GMT-0800 (Pacific Standard Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -23,7 +23,7 @@
         "sentences": [
           {
             "id": 0,
-            "content": "The quick brown fox.",
+            "content": "The quick brown fox.   ",
             "firstTermIdx": 0,
             "lastTermIdx": 3,
             "terminals": [
@@ -232,13 +232,37 @@
                   "linkIdx": -9999,
                   "hintsIdx": -9999
                 }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": "   ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 13,
+                "meta": {
+                  "content": "   ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
               }
             ],
             "lastPunctuation": "."
           },
           {
             "id": 1,
-            "content": "100% Jumped over the lazy dog.",
+            "content": "100% Jumped over the lazy dog.  ",
             "firstTermIdx": 4,
             "lastTermIdx": 10,
             "terminals": [
@@ -579,9 +603,41 @@
                   "linkIdx": -9999,
                   "hintsIdx": -9999
                 }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": "  ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 13,
+                "meta": {
+                  "content": "  ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
               }
             ],
             "lastPunctuation": "."
+          },
+          {
+            "id": 2,
+            "content": "",
+            "firstTermIdx": 11,
+            "lastTermIdx": 10,
+            "terminals": [],
+            "lastPunctuation": ""
           }
         ],
         "style": ""
@@ -858,6 +914,11 @@
       "firstTermIdx": 4,
       "lastTermIdx": 10,
       "lastPunctuation": "."
+    },
+    {
+      "firstTermIdx": 11,
+      "lastTermIdx": 10,
+      "lastPunctuation": ""
     }
   ],
   "linkList": []
