@@ -76,6 +76,7 @@ export const TerminalDispatcher = React.memo(
         );
         break;
       case TerminalMetaEnumType.word:
+      case TerminalMetaEnumType.symbol:
         return (
           <Terminal_Word
             active={
@@ -242,16 +243,14 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
       }
     }
   }, [props.active]);
-  // console.log(
-  //   `<TerminalNode active=${props.active} content="${props.terminalInfo.content}"/>`
-  // );
-  let attribute: string = props.terminalInfo.recitable ? "recitable-word" : "";
+  // refactor the following
   if (props.terminalInfo.recitable) {
+    let attribute: string = `${
+      props.terminalInfo.recitable ? "recitable-word" : ""
+    } ${props.active ? "active" : ""}`;
     return (
       <span
-        className={`${props.class} ${attribute} ${
-          props.active ? "active" : ""
-        }`}
+        className={`${props.class} ${attribute}`}
         ref={terminalRef}
         onClick={() =>
           dispatch(Request.Cursor_gotoWordByIdx(props.terminalInfo.termIdx))
@@ -259,6 +258,10 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
       >
         {props.terminalInfo.content}
       </span>
+    );
+  } else if (props.class.length > 0) {
+    return (
+      <span className={`${props.class}`}>{props.terminalInfo.content}</span>
     );
   } else {
     return <span>{props.terminalInfo.content}</span>;

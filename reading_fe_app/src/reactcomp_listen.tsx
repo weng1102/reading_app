@@ -1,9 +1,9 @@
 //import React from "react";
 import "./App.css";
-import mic_listening from "./mic1-xparent.gif";
-import mic_notlistening from "./mic1-inactive-xparent.gif";
-import mic_unavailable from "./mic1-ghosted.gif";
-import listenGreenActiveIcon from "./button_listen_activeGreen.gif";
+// import mic_listening from "./mic1-xparent.gif";
+// import mic_notlistening from "./mic1-inactive-xparent.gif";
+// import mic_unavailable from "./mic1-ghosted.gif";
+// import listenGreenActiveIcon from "./button_listen_activeGreen.gif";
 import listenRedActiveIcon from "./button_listen_activeRed.gif";
 import listenIcon from "./button_listen.png";
 import listenGhostedIcon from "./button_listen_ghosted.png";
@@ -26,10 +26,13 @@ export const ListeningMonitor = () => {
   const listeningRequested: boolean = useAppSelector(
     store => store.listen_active
   );
-  const flushRequested: boolean = useAppSelector(store => store.listen_flush);
-  const newSentence: boolean = useAppSelector(
-    store => store.cursor_newSentenceTransition
+  const endOfPageReached: boolean = useAppSelector(
+    store => store.cursor_endOfPageReached
   );
+  const flushRequested: boolean = useAppSelector(store => store.listen_flush);
+  // const newSentence: boolean = useAppSelector(
+  //   store => store.cursor_newSentenceTransition
+  // );
   let settingsContext: ISettingsContext = useContext(
     SettingsContext
   ) as ISettingsContext;
@@ -45,11 +48,20 @@ export const ListeningMonitor = () => {
   } = useSpeechRecognition();
 
   // Start and stop listening manually
+  // useEffect(() => {
+  //   if (endOfPageReached) {
+  //     console.log("stopped listening at end of page");
+  //     dispatch(Request.Recognition_stop());
+  //   }
+  // }, [endOfPageReached]);
   useEffect(() => {
     if (listening) {
-      if (!listeningRequested) {
-        console.log("stop listening");
-        SpeechRecognition.stopListening();
+      if (endOfPageReached) {
+        console.log("stopped listening at end of page");
+        dispatch(Request.Recognition_stop());
+      } else if (!listeningRequested) {
+        dispatch(Request.Recognition_stop());
+        console.log("stop listening requested");
       }
     } else if (listeningRequested) {
       console.log(
@@ -74,7 +86,8 @@ export const ListeningMonitor = () => {
     listeningRequested,
     deferredDispatchStartTime,
     silenceCheckpoint,
-    setSilenceCheckpoint
+    setSilenceCheckpoint,
+    endOfPageReached
   ]);
   useEffect(() => {
     // must have [listening] as dependency to allow effect to periodically

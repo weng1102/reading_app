@@ -52,6 +52,7 @@ export const Section_imageEntry = React.memo(
       imageEntry.layout.charAt(0).toLowerCase() === "l"
         ? "imageentry-container-" + ImageEntryLayoutEnumType.left.toString()
         : "imageentry-container-" + ImageEntryLayoutEnumType.above.toString();
+    console.log(`imageEntry.percent ${imageEntry.percent}`);
     return (
       <>
         <div className={className}>

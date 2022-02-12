@@ -161,7 +161,7 @@ export const Page = React.memo((props: IPagePropsType) => {
     );
   } else {
     // no statusbar for initial load
-    message = `Waiting to load "${pageRequested}"`;
+    //  message = `Waiting to load "${pageRequested}"`;
     console.log(message);
     return <div className="loadingAnnouncement">{message}</div>;
   }
