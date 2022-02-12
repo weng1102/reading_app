@@ -22,6 +22,7 @@ import {
 import {
   endMarkupTag,
   isValidMarkupTag,
+  TokenLiteral,
   TokenListType,
   Token
 } from "./tokenizer";
@@ -29,6 +30,8 @@ import {
   ITerminalContent,
   TerminalMetaType,
   TerminalMetaEnumType,
+  ISymbolTerminalMeta,
+  ISymbolTerminalMetaInitializer,
   IWordTerminalMeta,
   IWordTerminalMetaInitializer,
   ICurrencyTerminalMeta,
@@ -182,6 +185,42 @@ export class TerminalNode_WORD extends AbstractTerminalNode
     //     this.content = token.content; // should be TerminalInfo
     super.parse(tokenList);
     this.meta.content = this.content;
+    this.termIdx = this.userContext.terminals.push(
+      ITerminalListItemInitializer(this.meta)
+    );
+    this.meta.termIdx = this.termIdx;
+    this.firstTermIdx = this.termIdx;
+    this.lastTermIdx = this.termIdx;
+    return tokenList.length;
+  }
+
+  transform() {
+    return 0;
+  }
+}
+export class TerminalNode_SYMBOL extends AbstractTerminalNode
+  implements ITerminalNode {
+  constructor(parent: ISentenceNode) {
+    super(parent);
+  }
+  type = TerminalMetaEnumType.symbol;
+  meta: ISymbolTerminalMeta = ISymbolTerminalMetaInitializer();
+  parse(tokenList: TokenListType): number {
+    // let token: Token;
+    // if (tokenList !== undefined) {
+    //   token = tokenList.shift()!;
+    //   if (token !== undefined) {
+    //     this.content = token.content; // should be TerminalInfo
+    super.parse(tokenList);
+    this.meta.content = this.content;
+    switch (this.content) {
+      case TokenLiteral.PERCENTSIGN:
+        this.meta.altpronunciation = "percent";
+        this.meta.altrecognition = "percent";
+        break;
+    }
+    // should lookup altrecognition
+    // should lookup altpronunciation
     this.termIdx = this.userContext.terminals.push(
       ITerminalListItemInitializer(this.meta)
     );

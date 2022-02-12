@@ -1,15 +1,21 @@
-My name is Ronlyn Goo.
+[[page: My Stroke, Wen Eng /]]
+[[image-entry: Who Am I, left, 20%]]
+![Who Am I](rmg.png),![Who Am I](ronlynbrain.jpg)
 
-I had a severe hemorrhagic stroke in September 2015. About 15% of stroke survivors were like me.
+- My name is Ronlyn Goo.
+- I live in Saratoga, California.
+- I studied Chemical Engineering at UC Berkeley. I worked at Dow Chemical.
+- Then I went to Stanford GSB for an MBA.
+- After Stanford, I was a management consultant.
 
-I studied Chemical Engineering at UC Berkeley. I worked at Dow Chemical.
-Then I went to Stanford GSB for an MBA.
+[[image-entry: I had a stroke, left, 20%]]
+![my stroke](ronlynbrain.jpg)
 
-After Stanford, I was a management consultant.
-
-I was a CEO presenting to my board when I had my stroke. I was initially in a coma for a week. I woke with right side impairment and severe aphasia. I could only speak one word: “after”.
-
-After spending a month in the neuro ICU, I had a month in the stroke recovery word. Then I had transitional rehab at home followed by nearly 400 out-patient therapy sessions.
+- I had a severe hemorrhagic stroke in September 2015.
+- About 15% of stroke survivors were like me.
+- I was a CEO presenting to my board when I had my stroke. I was initially in a coma for a week. I woke with right side impairment and severe aphasia. I could only speak one word: “after”.
+- After spending a month in the neuro ICU, I had a month in the stroke recovery ward. Then I had transitional rehab at home followed by nearly 400 out-patient therapy sessions.
+  [[/image-entry]]
 
 Now, I attend Voices of Hope for Aphasia at “Name That Song”, Aphasia Book Club where we are currently reading Where the Crawdads Sing, art, reading and writing group, chat and exercises.
 

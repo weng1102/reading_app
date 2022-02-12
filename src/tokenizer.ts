@@ -35,7 +35,17 @@ export const enum TokenLiteral { // literals used as comparators
   LANGLEBRACKET = "<",
   RANGLEBRACKET = ">",
   UNDERSCORE = "_",
-  USDSIGN = "$" // for US currency
+  USDSIGN = "$", // for US currency
+  PERCENTSIGN = "%",
+  PLUSSIGN = "+",
+  LESSTHANSIGN = "<",
+  GREATERTHANSIGN = ">",
+  EQUALSIGN = "=",
+  AMPERSAND = "&",
+  NUMBERSIGN = "#",
+  DEGREE = "\u00B0",
+  DEGREES_C = "\u00B0C",
+  DEGREES_F = "\u00B0F"
 }
 export const enum TokenType {
   WORD = 0,
@@ -45,10 +55,12 @@ export const enum TokenType {
   PUNCTUATION,
   WHITESPACE,
   MLTAG_SELFCLOSING,
+  SYMBOL,
   TBD
 }
 export const enum TokenLabelType { // must correspond to TokenType
   WORD = "WORD",
+  SYMBOL = "SYMBOL",
   MLTAG = "MLTAG",
   MLTAG_END = "MLTAG_END",
   NUMBER = "NUMBER",
@@ -127,10 +139,15 @@ const TokenDictionary: TokenDictionaryType = {
     label: TokenLabelType.NUMBER,
     pattern: /([0-9]+)/
   },
+  [TokenType.SYMBOL]: {
+    type: TokenType.SYMBOL,
+    label: TokenLabelType.SYMBOL,
+    pattern: /([@#%&\+])/
+  },
   [TokenType.PUNCTUATION]: {
     type: TokenType.PUNCTUATION,
     label: TokenLabelType.PUNCTUATION,
-    pattern: /([,.\/#$%\^&\*;:{}=\-_'~()\"\?\.!@])/
+    pattern: /([,.\/$\^\*;:{}=\-_'~()\"\?\.!])/
   },
   [TokenType.MLTAG]: {
     type: TokenType.MLTAG,
@@ -145,7 +162,7 @@ const TokenDictionary: TokenDictionaryType = {
   [TokenType.WHITESPACE]: {
     type: TokenType.WHITESPACE,
     label: TokenLabelType.WHITESPACE,
-    pattern: /(<[\w\s="/.':;#-\/\?]+>)/
+    pattern: /(<[\w\s="/.':;\-\/\?]+>)/
   },
   [TokenType.MLTAG_SELFCLOSING]: {
     type: TokenType.MLTAG_SELFCLOSING,
@@ -162,6 +179,8 @@ const TokenizingPatternSource: string =
   TokenDictionary[TokenType.WORD].pattern.source +
   "|" +
   TokenDictionary[TokenType.NUMBER].pattern.source +
+  "|" +
+  TokenDictionary[TokenType.SYMBOL].pattern.source +
   "|" +
   TokenDictionary[TokenType.PUNCTUATION].pattern.source +
   "|" +
@@ -472,6 +491,8 @@ export class Tokenizer {
       } else {
         type = TokenType.MLTAG;
       }
+    } else if (tokenContent.match(TokenDictionary[TokenType.SYMBOL].pattern)) {
+      type = TokenType.SYMBOL;
     } else if (
       tokenContent.match(TokenDictionary[TokenType.PUNCTUATION].pattern)
     ) {

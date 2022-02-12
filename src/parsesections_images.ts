@@ -163,12 +163,19 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
     let outputStr: string = "";
     switch (format) {
       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
+        label += `: title="${this.meta.title}", layout=${this.meta.layout}, width=${this.meta.percent}`;
         outputStr = `${super.serialize(format, label, prefix)}`;
+        outputStr = `${outputStr}${super.serialize(
+          format,
+          "images:",
+          prefix + "| "
+        )}`;
         for (const [i, image] of this.meta.images.entries()) {
+          let imageNode: IImageTerminalMeta = image.meta as IImageTerminalMeta;
           outputStr = `${outputStr}${super.serialize(
             format,
-            `image: ${image.content}`,
-            prefix + (i < this.meta.images.length - 1 ? "| " : "  ")
+            imageNode.src,
+            prefix + "| " + (i < this.meta.images.length - 1 ? "| " : "  ")
           )}`;
         }
         for (const [i, section] of this.meta.captions.entries()) {

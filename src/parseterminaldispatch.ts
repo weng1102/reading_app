@@ -15,6 +15,7 @@ import {
   ITerminalNode,
   TerminalNode_WORD,
   TerminalNode_NUMBER,
+  TerminalNode_SYMBOL,
   TerminalNode_PUNCTUATION,
   TerminalNode_MLTAG,
   TerminalNode_MLTAG_CONTRACTION,
@@ -110,6 +111,10 @@ export function GetTerminalNode(
       } else {
         termNode = new TerminalNode_WORD(parent);
       }
+      break;
+    }
+    case TokenType.SYMBOL: {
+      termNode = new TerminalNode_SYMBOL(parent);
       break;
     }
     case TokenType.PUNCTUATION: {

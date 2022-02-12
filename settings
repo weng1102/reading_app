@@ -1,0 +1,4287 @@
+warning: LF will be replaced by CRLF in reading_fe_app/src/App.css.
+The file will have its original line endings in your working directory.
+warning: LF will be replaced by CRLF in reading_fe_app/src/App.tsx.
+The file will have its original line endings in your working directory.
+[1mdiff --git a/curriculum/7wordsentences.md b/curriculum/7wordsentences.md[m
+[1mindex 50d6d3c..364c43c 100644[m
+[1m--- a/curriculum/7wordsentences.md[m
+[1m+++ b/curriculum/7wordsentences.md[m
+[36m@@ -2,9 +2,6 @@[m
+ [m
+ # Sentence Banks[m
+ [m
+[31m-[Three word sentences](3wordsentences)[m
+[31m-[Four word sentences](4wordsentences)[m
+[31m-[m
+ # first ten[m
+ [m
+ My children and I go to school.[m
+[1mdiff --git a/curriculum/links.md b/curriculum/links.md[m
+[1mindex 3dc7c45..d2eb00c 100644[m
+[1m--- a/curriculum/links.md[m
+[1m+++ b/curriculum/links.md[m
+[36m@@ -1,10 +1,10 @@[m
+ # embedded links[m
+ [m
+[31m-[xyz](123) in the beginning[m
+[31m-This link is [link: xyz](123) in the middle[m
+[31m-This link is at the end [link: xyz](123).[m
+[32m+[m[32m[I'm at the start](test2) in the beginning[m
+[32m+[m[32mThis link is [xyz is the link name](test2) in the middle[m
+[32m+[m[32mThis link is at the end [xyz is the link name](test2).[m
+ [m
+[31m-#images[m
+[32m+[m[32m# images[m
+ [m
+ ![abc](123) image in the beginning[m
+ This image is ![abc](123) in the middle[m
+[1mdiff --git a/diff.txt b/diff.txt[m
+[1mdeleted file mode 100644[m
+[1mindex e69de29..0000000[m
+[1mdiff --git a/reading_fe_app/src/App.css b/reading_fe_app/src/App.css[m
+[1mindex c76ae2a..61df5be 100644[m
+[1m--- a/reading_fe_app/src/App.css[m
+[1m+++ b/reading_fe_app/src/App.css[m
+[36m@@ -2,6 +2,8 @@[m
+   --header-height: 50px;  /* consider expanding real estate to allow basic format changes (.e.g., font) */[m
+   --footer-height: 50px;[m
+   --nav-width: 150px;[m
+[32m+[m[32m  --imageentry-min-image-width: 200px;[m
+[32m+[m[32m  --imageentry-min-image-height: 300px;[m
+ }[m
+ .page {[m
+   display: grid;[m
+[36m@@ -23,6 +25,7 @@[m [mmain {[m
+   padding: 5px;[m
+   background-color: linen;[m
+   overflow: auto;[m
+[32m+[m[32m  font-size: 20px;[m
+ }[m
+ nav {[m
+   background-color: linen;[m
+[36m@@ -67,7 +70,7 @@[m [mnav {[m
+ }[m
+ .controlBar-container {[m
+   display: grid;[m
+[31m-  grid-template-columns: var(--footer-height) var(--footer-height) var(--footer-height) var(--footer-height) var(--footer-height) var(--footer-height);[m
+[32m+[m[32m  grid-template-columns: var(--footer-height) var(--footer-height) var(--footer-height) var(--footer-height) var(--footer-height) var(--footer-height) var(--footer-height);[m
+   align-items: center;[m
+   height: 100%;[m
+   font-size: 8px;[m
+[36m@@ -114,6 +117,10 @@[m [mnav {[m
+   display: flex;[m
+ padding:10px[m
+ }[m
+[32m+[m[32m.footer-grid-link {[m
+[32m+[m[32m  display: flex;[m
+[32m+[m[32mpadding:10px[m
+[32m+[m[32m}[m
+ .footer-statusBar {[m
+   display: flex;[m
+   height:100%;[m
+[36m@@ -327,29 +334,69 @@[m [minput[type="radio"]{[m
+   font-size: 14px;[m
+   padding-left: 5px[m
+ }[m
+[31m-.image-entry-left {[m
+[32m+[m[32m* {[m
+[32m+[m[32m  box-sizing: border-box;[m
+[32m+[m[32m}[m
+[32m+[m[32m.imageentry-container-left {[m
+   display: grid;[m
+[31m-  grid-template-columns: [image] auto, [caption] 4fr[m
+[32m+[m[32m  gap: 10px;[m
+[32m+[m[32m  grid-template-columns: [images] minmax(var(--imageentry-min-image-width), 1fr) [captions] 2fr;[m
+[32m+[m[32m}[m
+[32m+[m[32m.imageentry-images-left {[m
+[32m+[m[32m  grid-column: images;[m
+[32m+[m[32m  max-width: var(--min-image-width);[m
+ }[m
+[31m-.image-entry-right {[m
+[32m+[m[32m.imageentry-captions-left {[m
+[32m+[m[32m  grid-column: captions;[m
+[32m+[m[32m}[m
+[32m+[m[32m.imageentry-container-above {[m
+   display: grid;[m
+[31m-  grid-template-columns: [caption] 4fr, [image] auto[m
+[32m+[m[32m  gap: 10px;[m
+[32m+[m[32m  grid-template-rows: [image] minmax(var(--imageentry-min-image-height), 1fr) [captions] auto;[m
+[32m+[m[32m}[m
+[32m+[m[32m.imageentry-images-above {[m
+[32m+[m[32m  min-height: var(--imageentry-min-image-height);[m
+[32m+[m[32m  max-height: var(--imageentry-min-image-height);[m
+ }[m
+[31m-.image-entry-top {[m
+[32m+[m[32m.imageentry-image {[m
+[32m+[m[32m  margin: 0px 10px 10px 0px;[m
+[32m+[m[32m  border-radius: 5px;[m
+[32m+[m[32m  box-shadow: 5px 5px 10px gray;[m
+[32m+[m[32m  background-color: white;[m
+[32m+[m[32m}[m
+[32m+[m[32m.imageentry-image-left {[m
+[32m+[m[32m  width: 100%;[m
+[32m+[m[32m}[m
+[32m+[m[32m.imageentry-image-above {[m
+[32m+[m[32m  min-height: var(--imageentry-min-image-height);[m
+[32m+[m[32m  max-height: var(--imageentry-min-image-height);[m
+[32m+[m[32m}[m
+[32m+[m[32m.image-entry-horizontal-container {[m
+   display: grid;[m
+[31m-  grid-template-rows: [caption] 1fr, [image] auto[m
+[32m+[m[32m  gap: 10px; /* kludge that includes horizontal margins and padding and box-shadow */[m
+[32m+[m[32m  grid-template-columns: [image] minmax(200px, 1fr) [captions] 2fr;[m
+ }[m
+[31m-.image-entry-bottom {[m
+[32m+[m[32m.image-entry-vertical-container {[m
+   display: grid;[m
+[31m-  grid-template-rows: [image] auto, [caption] 1fr[m
+[32m+[m[32m  gap: 10px;[m
+[32m+[m[32m  grid-template-rows: [image] minmax(300px, 1fr) [captions] auto;[m
+ }[m
+[31m-.image-entry-grid-template-column[m
+[31m-  grid-template-columns: 1fr, 4fr[m
+[31m-.image-entry-grid-col1 {[m
+[31m-[m
+[32m+[m[32m.image-entry-image {[m
+[32m+[m[32m  margin: 0px 10px 10px 0px;[m
+[32m+[m[32m  border-radius: 5px;[m
+[32m+[m[32m  box-shadow: 5px 5px 10px gray;[m
+[32m+[m[32m  background-color: white;[m
+ }[m
+[31m-.image-entry-grid-col2 {[m
+[31m-[m
+[32m+[m[32m.image-entry-image-left-right {[m
+[32m+[m[32m  width: 100%;[m
+[32m+[m[32m  max-width: 500px;[m
+[32m+[m[32m}[m
+[32m+[m[32m.image-entry-image-top-bootom {[m
+[32m+[m[32m  min-height: 300px;[m
+[32m+[m[32m  max-height: 300px;[m
+[32m+[m[32m}[m
+[32m+[m[32m.link-label {[m
+[32m+[m[32m  text-decoration: underline dotted;[m
+ }[m
+ .textbox-control {[m
+   height: auto;[m
+[1mdiff --git a/reading_fe_app/src/App.tsx b/reading_fe_app/src/App.tsx[m
+[1mindex 6d82754..a849c16 100644[m
+[1m--- a/reading_fe_app/src/App.tsx[m
+[1m+++ b/reading_fe_app/src/App.tsx[m
+[36m@@ -1,8 +1,5 @@[m
+[31m-import React from "react";[m
+ import "./App.css";[m
+[31m-import { ReadingApp } from "./reactcomps";[m
+[31m-//import { ReadableText } from "./refs.js";[m
+[31m-[m
+[32m+[m[32mimport { ReadingApp } from "./reactcomps_main";[m
+ function App() {[m
+   //      <ReadingApp />[m
+   return ([m
+[1mdiff --git a/reading_fe_app/src/pageContentType.ts b/reading_fe_app/src/pageContentType.ts[m
+[1mindex 3d8c6a3..cd03b40 100644[m
+[1m--- a/reading_fe_app/src/pageContentType.ts[m
+[1m+++ b/reading_fe_app/src/pageContentType.ts[m
+[36m@@ -1,4 +1,4 @@[m
+[31m-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved[m
+[32m+[m[32m/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved[m
+  *[m
+  * File name: PageContentType.ts[m
+  *[m
+[36m@@ -7,10 +7,7 @@[m
+  * Version history:[m
+  *[m
+  **/[m
+[31m-import { ITerminalNode } from "../../src/parseterminals";[m
+[31m-// import { ISectionNode } from "./parsesections";[m
+[31m-// import { ISentenceNode } from "./parsesentences";[m
+[31m-const IDX_INITIALIZER = -9999;[m
+[32m+[m[32mexport const IDX_INITIALIZER = -9999;[m
+ export enum PageFormatEnumType {[m
+   default = 0[m
+ }[m
+[36m@@ -28,10 +25,10 @@[m [mexport interface IPageContent {[m
+   lastTermIdx: number;[m
+   sections: ISectionContent[];[m
+   terminalList: ITerminalListItem[];[m
+[31m-  headingList: IHeadingListItem[]; // first terminal of each section for Navbar[m
+[31m-  sectionList: ISectionListItem[]; // maps section index to first and last Terminal index[m
+[31m-  sentenceList: ISentenceListItem[]; // maps sentence index to first and last Terminal index[m
+[31m-  //  sentenceList: ITerminalInfo[] // first terminal of each sentence[m
+[32m+[m[32m  headingList: IHeadingListItem[];[m
+[32m+[m[32m  sectionList: ISectionListItem[];[m
+[32m+[m[32m  sentenceList: ISentenceListItem[];[m
+[32m+[m[32m  linkList: ILinkListItem[];[m
+ }[m
+ export function PageContentInitializer(): IPageContent {[m
+   return {[m
+[36m@@ -50,7 +47,8 @@[m [mexport function PageContentInitializer(): IPageContent {[m
+     terminalList: [],[m
+     headingList: [],[m
+     sectionList: [],[m
+[31m-    sentenceList: [][m
+[32m+[m[32m    sentenceList: [],[m
+[32m+[m[32m    linkList: [][m
+   };[m
+ }[m
+ export interface ISectionContent {[m
+[36m@@ -123,6 +121,7 @@[m [mexport function ISectionFillinVariantInitializer(): ISectionFillinVariant {[m
+ }[m
+ export interface ISectionHeadingVariant {[m
+   title: string; // ISentenceContent where audible/recitable can be disabled at run time.[m
+[32m+[m[32m  separator: string;[m
+   recitable: boolean;[m
+   audible: boolean;[m
+   level: number;[m
+[36m@@ -130,6 +129,7 @@[m [mexport interface ISectionHeadingVariant {[m
+ export function ISectionHeadingVariantInitializer(): ISectionHeadingVariant {[m
+   return {[m
+     title: "", // overrides name and description above[m
+[32m+[m[32m    separator: "",[m
+     recitable: false,[m
+     audible: false,[m
+     level: 0[m
+[36m@@ -209,15 +209,27 @@[m [mexport function ISectionParagraphVariantInitializer(): ISectionParagraphVariant[m
+ export interface ISectionFillinVariant {}[m
+ export function ISectionFillinBariantInitializer() {}[m
+ [m
+[31m-interface ISectionFillinListVariant {}[m
+[32m+[m[32mexport interface ISectionFillinListVariant {}[m
+ export function ISectionFillinListVariantInitializer() {}[m
+ [m
+[32m+[m[32mexport enum ImageEntryLayoutEnumType {[m
+[32m+[m[32m  left = "left", // default, image to the left of caption[m
+[32m+[m[32m  above = "above" // image above caption[m
+[32m+[m[32m}[m
+ export interface ISectionImageEntryVariant {[m
+[32m+[m[32m  title: string;[m
+[32m+[m[32m  layout: ImageEntryLayoutEnumType;[m
+[32m+[m[32m  percent: string;[m
+[32m+[m[32m  separator: string;[m
+   images: ITerminalContent[]; // path to img/filenames[m
+   captions: ISectionContent[];[m
+ }[m
+ export function ISectionImageEntryVariantInitializer() {[m
+   return {[m
+[32m+[m[32m    title: "",[m
+[32m+[m[32m    layout: ImageEntryLayoutEnumType.left,[m
+[32m+[m[32m    percent: "33%",[m
+[32m+[m[32m    separator: "",[m
+     images: [],[m
+     captions: [][m
+   };[m
+[36m@@ -289,9 +301,12 @@[m [mexport interface ITerminalInfo {[m
+   altrecognition: string;[m
+   recitable: boolean;[m
+   audible: boolean;[m
+[32m+[m[32m  linkable: boolean;[m
+   visible: boolean;[m
+   fillin: boolean;[m
+   visited: boolean;[m
+[32m+[m[32m  linkIdx: number;[m
+[32m+[m[32m  hintsIdx: number;[m
+   //cues: string[] includes terminal type word, day, month, year, number, area code,...[m
+ }[m
+ export function ITerminalInfoInitializer([m
+[36m@@ -300,10 +315,12 @@[m [mexport function ITerminalInfoInitializer([m
+   altrecognition: string = "",[m
+   recitable: boolean = true,[m
+   audible: boolean = true,[m
+[32m+[m[32m  linkable: boolean = false,[m
+   visible: boolean = true,[m
+   fillin: boolean = false,[m
+[31m-  visited: boolean = false[m
+[31m-[m
+[32m+[m[32m  visited: boolean = false,[m
+[32m+[m[32m  linkIdx: number = IDX_INITIALIZER,[m
+[32m+[m[32m  hintsIdx: number = IDX_INITIALIZER[m
+   //cues[m
+ ): ITerminalInfo {[m
+   return {[m
+[36m@@ -321,9 +338,12 @@[m [mexport function ITerminalInfoInitializer([m
+         : altrecognition,[m
+     recitable: recitable, // selectable[m
+     audible: audible,[m
+[32m+[m[32m    linkable: linkable,[m
+     visible: visible,[m
+     fillin: fillin,[m
+[31m-    visited: visited[m
+[32m+[m[32m    visited: visited,[m
+[32m+[m[32m    linkIdx: linkIdx,[m
+[32m+[m[32m    hintsIdx: hintsIdx[m
+   };[m
+ }[m
+ export interface IAcronymTerminalMeta {[m
+[36m@@ -379,41 +399,49 @@[m [mexport function IDateTerminalMetaInitializer(): IDateTerminalMeta {[m
+     format: DateFormatEnumType.unknown,[m
+     month: ITerminalInfoInitializer(),[m
+     punctuation1: ITerminalInfoInitializer([m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      false,[m
+[31m-      false,[m
+[31m-      true,[m
+[31m-      false[m
+[32m+[m[32m      undefined, // accept default content[m
+[32m+[m[32m      undefined, // accept default altpro[m
+[32m+[m[32m      undefined, // accept default altreg[m
+[32m+[m[32m      false, // not recitable[m
+[32m+[m[32m      false, // not audible[m
+[32m+[m[32m      undefined, // accept default linkable[m
+[32m+[m[32m      undefined, // accept default visible[m
+[32m+[m[32m      undefined, // accept default fillin[m
+[32m+[m[32m      undefined // accept default visited[m
+     ),[m
+     whitespace1: ITerminalInfoInitializer([m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      false,[m
+[31m-      false,[m
+[31m-      true,[m
+[31m-      false[m
+[32m+[m[32m      undefined, // accept default content[m
+[32m+[m[32m      undefined, // accept default altpro[m
+[32m+[m[32m      undefined, // accept default altreg[m
+[32m+[m[32m      false, // not recitable[m
+[32m+[m[32m      false, // not audible[m
+[32m+[m[32m      undefined, // accept default linkable[m
+[32m+[m[32m      undefined, // accept default visible[m
+[32m+[m[32m      undefined, // accept default fillin[m
+[32m+[m[32m      undefined // accept default visited[m
+     ),[m
+     day: ITerminalInfoInitializer(),[m
+     punctuation2: ITerminalInfoInitializer([m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      false,[m
+[31m-      false,[m
+[31m-      true,[m
+[31m-      false[m
+[32m+[m[32m      undefined, // accept default content[m
+[32m+[m[32m      undefined, // accept default altpro[m
+[32m+[m[32m      undefined, // accept default altreg[m
+[32m+[m[32m      true, // recitable[m
+[32m+[m[32m      true, //audible[m
+[32m+[m[32m      undefined, // accept default linkable[m
+[32m+[m[32m      undefined, // accept default visible[m
+[32m+[m[32m      undefined, // accept default fillin[m
+[32m+[m[32m      undefined // accept default visited[m
+     ),[m
+     whitespace2: ITerminalInfoInitializer([m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      false,[m
+[31m-      false,[m
+[31m-      true,[m
+[31m-      false[m
+[32m+[m[32m      undefined, // accept default content[m
+[32m+[m[32m      undefined, // accept default altpro[m
+[32m+[m[32m      undefined, // accept default altreg[m
+[32m+[m[32m      false, // not recitable[m
+[32m+[m[32m      false, // not audible[m
+[32m+[m[32m      undefined, // accept default linkable[m
+[32m+[m[32m      undefined, // accept default visible[m
+[32m+[m[32m      undefined, // accept default fillin[m
+[32m+[m[32m      undefined // accept default visited[m
+     ),[m
+     year: IYearTerminalMetaInitializer() // e.g., {19,61}, {20,10}, {2000,1}[m
+   };[m
+[36m@@ -424,6 +452,7 @@[m [mexport interface IImageTerminalMeta {[m
+   width: number;[m
+   height: number;[m
+   attributes: string;[m
+[32m+[m[32m  className: string;[m
+   style: string; // most specific style[m
+ }[m
+ export function IImageTerminalMetaInitializer(): IImageTerminalMeta {[m
+[36m@@ -433,25 +462,38 @@[m [mexport function IImageTerminalMetaInitializer(): IImageTerminalMeta {[m
+     width: 0,[m
+     height: 0,[m
+     attributes: "",[m
+[32m+[m[32m    className: "",[m
+     style: "" // most specific style[m
+   };[m
+ }[m
+[32m+[m[32minterface ILinkDestination {[m
+[32m+[m[32m  page: string;[m
+[32m+[m[32m  directory: string; // if omitted, current dist/ directory[m
+[32m+[m[32m  sectionIdx: number;[m
+[32m+[m[32m  terminalIdx: number;[m
+[32m+[m[32m}[m
+[32m+[m[32mfunction ILinkDestinationInitializer() {[m
+[32m+[m[32m  return {[m
+[32m+[m[32m    page: "",[m
+[32m+[m[32m    directory: "",[m
+[32m+[m[32m    sectionIdx: IDX_INITIALIZER,[m
+[32m+[m[32m    terminalIdx: IDX_INITIALIZER[m
+[32m+[m[32m  };[m
+[32m+[m[32m}[m
+ export interface ICurriculumLinkTerminalMeta {[m
+[31m-  src: string;[m
+[31m-  label: string;[m
+[31m-  destinationDir: string; // if omitted, current dist/ directory[m
+[31m-  destinationPage: string; // .json filename[m
+[31m-  destinationTermIdx: number;[m
+[32m+[m[32m  label: ITerminalContent[];[m
+[32m+[m[32m  destination: ILinkDestination;[m
+[32m+[m[32m  className: string;[m
+   style: string; // most specific style[m
+[32m+[m[32m  linkIdx: number;[m
+ }[m
+ export function ICurriculumLinkTerminalMetaInitializer(): ICurriculumLinkTerminalMeta {[m
+   return {[m
+[31m-    src: "",[m
+[31m-    label: "",[m
+[31m-    destinationDir: "",[m
+[31m-    destinationPage: "",[m
+[31m-    destinationTermIdx: 0,[m
+[31m-    style: "" // most specific style[m
+[32m+[m[32m    label: [],[m
+[32m+[m[32m    destination: ILinkDestinationInitializer(),[m
+[32m+[m[32m    className: "",[m
+[32m+[m[32m    style: "", // most specific style[m
+[32m+[m[32m    linkIdx: IDX_INITIALIZER[m
+   };[m
+ }[m
+ export interface IPhoneNumberTerminalMeta {[m
+[36m@@ -469,42 +511,50 @@[m [mexport function IPhoneNumberTerminalMetaInitializer(): IPhoneNumberTerminalMeta[m
+   return {[m
+     countryCode: ITerminalInfoInitializer(),[m
+     openBracket: ITerminalInfoInitializer([m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      false,[m
+[31m-      false,[m
+[31m-      true,[m
+[31m-      false[m
+[32m+[m[32m      undefined, // accept default content[m
+[32m+[m[32m      undefined, // accept default altpro[m
+[32m+[m[32m      undefined, // accept default altreg[m
+[32m+[m[32m      false, // not recitable[m
+[32m+[m[32m      false, // not audible[m
+[32m+[m[32m      undefined, // accept default linkable[m
+[32m+[m[32m      undefined, // accept default visible[m
+[32m+[m[32m      undefined, // accept default fillin[m
+[32m+[m[32m      undefined // accept default visited[m
+     ),[m
+     areaCode: [],[m
+     closeBracket: ITerminalInfoInitializer([m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      false,[m
+[31m-      false,[m
+[31m-      true,[m
+[31m-      false[m
+[32m+[m[32m      undefined, // accept default content[m
+[32m+[m[32m      undefined, // accept default altpro[m
+[32m+[m[32m      undefined, // accept default altreg[m
+[32m+[m[32m      false, // not recitable[m
+[32m+[m[32m      false, // not audible[m
+[32m+[m[32m      undefined, // accept default linkable[m
+[32m+[m[32m      undefined, // accept default visible[m
+[32m+[m[32m      undefined, // accept default fillin[m
+[32m+[m[32m      undefined // accept default visited[m
+     ), // could be "."[m
+     separator1: ITerminalInfoInitializer([m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      false,[m
+[31m-      false,[m
+[31m-      true,[m
+[31m-      false[m
+[32m+[m[32m      undefined, // accept default content[m
+[32m+[m[32m      undefined, // accept default altpro[m
+[32m+[m[32m      undefined, // accept default altreg[m
+[32m+[m[32m      false, // not recitable[m
+[32m+[m[32m      false, // not audible[m
+[32m+[m[32m      undefined, // accept default linkable[m
+[32m+[m[32m      undefined, // accept default visible[m
+[32m+[m[32m      undefined, // accept default fillin[m
+[32m+[m[32m      undefined // accept default visited[m
+     ),[m
+     exchangeCode: [],[m
+     separator2: ITerminalInfoInitializer([m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      false,[m
+[31m-      false,[m
+[31m-      true,[m
+[31m-      false[m
+[32m+[m[32m      undefined, // accept default content[m
+[32m+[m[32m      undefined, // accept default altpro[m
+[32m+[m[32m      undefined, // accept default altreg[m
+[32m+[m[32m      false, // not recitable[m
+[32m+[m[32m      false, // not audible[m
+[32m+[m[32m      undefined, // accept default linkable[m
+[32m+[m[32m      undefined, // accept default visible[m
+[32m+[m[32m      undefined, // accept default fillin[m
+[32m+[m[32m      undefined // accept default visited[m
+     ), // could be "."[m
+     lineNumber: [][m
+   };[m
+[36m@@ -515,12 +565,14 @@[m [mexport function IPunctuationTerminalMetaInitializer([m
+ ): ITerminalInfo {[m
+   return ITerminalInfoInitializer([m
+     content,[m
+[31m-    undefined,[m
+[31m-    undefined,[m
+[31m-    false,[m
+[31m-    false,[m
+[31m-    true,[m
+[31m-    false[m
+[32m+[m[32m    undefined, // accept default altpro[m
+[32m+[m[32m    undefined, // accept default altreg[m
+[32m+[m[32m    false, // not recitable[m
+[32m+[m[32m    false, // not audible[m
+[32m+[m[32m    undefined, // accept default linkable[m
+[32m+[m[32m    undefined, // accept default visible[m
+[32m+[m[32m    undefined, // accept default fillin[m
+[32m+[m[32m    undefined // accept default visited[m
+   );[m
+ }[m
+ export interface IReferenceTerminalMeta {[m
+[36m@@ -538,12 +590,14 @@[m [mexport function IWhitespaceTerminalMetaInitializer([m
+ ): ITerminalInfo {[m
+   return ITerminalInfoInitializer([m
+     content,[m
+[31m-    undefined,[m
+[31m-    undefined,[m
+[31m-    false,[m
+[31m-    false,[m
+[31m-    true,[m
+[31m-    false[m
+[32m+[m[32m    undefined, // accept default altpro[m
+[32m+[m[32m    undefined, // accept default altreg[m
+[32m+[m[32m    false, // not recitable[m
+[32m+[m[32m    false, // not audible[m
+[32m+[m[32m    undefined, // accept default linkable[m
+[32m+[m[32m    undefined, // accept default visible[m
+[32m+[m[32m    undefined, // accept default fillin[m
+[32m+[m[32m    undefined // accept default visited[m
+   );[m
+ }[m
+ export type IWordTerminalMeta = ITerminalInfo;[m
+[36m@@ -631,8 +685,8 @@[m [mexport interface ISectionListItem extends IRangeItem {[m
+   type: SectionVariantEnumType | string;[m
+ }[m
+ export function ISectionListItemInitializer([m
+[31m-  firstTermIdx: number = -1,[m
+[31m-  lastTermIdx: number = -1,[m
+[32m+[m[32m  firstTermIdx: number = IDX_INITIALIZER,[m
+[32m+[m[32m  lastTermIdx: number = IDX_INITIALIZER,[m
+   type: string = SectionVariantEnumType.tbd[m
+ ): ISectionListItem {[m
+   type = type.toString();[m
+[36m@@ -642,9 +696,27 @@[m [mexport interface ISentenceListItem extends IRangeItem {[m
+   lastPunctuation: string;[m
+ }[m
+ export function ISentenceListItemInitializer([m
+[31m-  firstTermIdx: number = -1,[m
+[31m-  lastTermIdx: number = -1,[m
+[32m+[m[32m  firstTermIdx: number = IDX_INITIALIZER,[m
+[32m+[m[32m  lastTermIdx: number = IDX_INITIALIZER,[m
+   lastPunctuation: string = "."[m
+ ): ISentenceListItem {[m
+   return { firstTermIdx, lastTermIdx, lastPunctuation };[m
+ }[m
+[32m+[m[32mexport interface ILinkListItem {[m
+[32m+[m[32m  label: string;[m
+[32m+[m[32m  destination: ILinkDestination;[m
+[32m+[m[32m  valid: boolean;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mexport function ILinkListItemInitializer([m
+[32m+[m[32m  label: string = "",[m
+[32m+[m[32m  destination: ILinkDestination = {[m
+[32m+[m[32m    page: "",[m
+[32m+[m[32m    directory: "",[m
+[32m+[m[32m    sectionIdx: IDX_INITIALIZER,[m
+[32m+[m[32m    terminalIdx: IDX_INITIALIZER[m
+[32m+[m[32m  },[m
+[32m+[m[32m  valid = false[m
+[32m+[m[32m): ILinkListItem {[m
+[32m+[m[32m  return { label, destination, valid };[m
+[32m+[m[32m}[m
+[1mdiff --git a/reading_fe_app/src/pageContext.ts b/reading_fe_app/src/pageContext.ts[m
+[1mindex fbf0006..e40fcbb 100644[m
+[1m--- a/reading_fe_app/src/pageContext.ts[m
+[1m+++ b/reading_fe_app/src/pageContext.ts[m
+[36m@@ -1,9 +1,10 @@[m
+[31m-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved[m
+[32m+[m[32m/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved[m
+  *[m
+  * File name: pageContext.ts[m
+  *[m
+  * Defines complementary data and behavior of the page data associated with[m
+[31m- * props passed directly to react functional objects.[m
+[32m+[m[32m * props passed directly to react functional objects. Context represents lists[m
+[32m+[m[32m * and setter for lists.[m
+  *[m
+  *[m
+  * Version history:[m
+[36m@@ -11,52 +12,83 @@[m
+  **/[m
+ import React from "react"; // define glocal var[m
+ //import { ITerminalInfo, ITerminalInfoInitializer, IPageContent } from "../../src/pageContentType";[m
+[32m+[m[32mimport { useState } from "react"; // define global var[m
+ import {[m
+   IHeadingListItem,[m
+[32m+[m[32m  ILinkListItem,[m
+   ISentenceListItem,[m
+   ISectionListItem,[m
+[31m-  ITerminalListItem,[m
+[31m-  ITerminalInfo[m
+[32m+[m[32m  ITerminalListItem[m
+ } from "./pageContentType";[m
+ [m
+[32m+[m[32m// export interface IPageContext1 {[m
+[32m+[m[32m//   pageLists: CPageLists;[m
+[32m+[m[32m//   setPageLists: (lists: CPageLists) => void;[m
+[32m+[m[32m// }[m
+[32m+[m
+[32m+[m[32m// export interface IPageContext {[m
+[32m+[m[32m//   pageLists: CPageLists;[m
+[32m+[m[32m//   setPageLists: (lists: CPageLists) => void;[m
+[32m+[m[32m// }[m
+ //export const TerminalNodes = React.createContext(null); // should be called wordList[m
+[31m-export interface IPageContext {[m
+[32m+[m[32mexport interface IPageLists {[m
+   terminalList: ITerminalListItem[];[m
+   headingList: IHeadingListItem[];[m
+   sectionList: ISectionListItem[];[m
+   sentenceList: ISentenceListItem[];[m
+[32m+[m[32m  linkList: ILinkListItem[];[m
+ }[m
+[31m-export function PageContextInitializer([m
+[32m+[m[32mexport function PageListsInitializer([m
+   terminalList: ITerminalListItem[] = [],[m
+   headingList: IHeadingListItem[] = [],[m
+   sectionList: ISectionListItem[] = [],[m
+[31m-  sentenceList: ISentenceListItem[] = [][m
+[31m-): IPageContext {[m
+[32m+[m[32m  sentenceList: ISentenceListItem[] = [],[m
+[32m+[m[32m  linkList: ILinkListItem[] = [][m
+[32m+[m[32m): IPageLists {[m
+   return {[m
+     terminalList: terminalList,[m
+     headingList: headingList,[m
+     sectionList: sectionList,[m
+[31m-    sentenceList: sentenceList[m
+[32m+[m[32m    sentenceList: sentenceList,[m
+[32m+[m[32m    linkList: linkList[m
+   };[m
+ }[m
+[31m-export const PageContext = React.createContext(<CPageContext | null>null);[m
+[32m+[m[32m// export const PageContext = React.createContext(null as IPageContext | null);[m
+[32m+[m[32mexport const PageContext = React.createContext(null as CPageLists | null);[m
+[32m+[m[32m// export const PageLists = React.createContext(null as CPageLists | null);[m
+[32m+[m[32m/*[m
+ [m
+[31m-export class CPageContext {[m
+[32m+[m[32mexport const PageListsContext = React.createContext([m
+[32m+[m[32m  <IPageListsContext | null>null[m
+[32m+[m[32m);[m
+[32m+[m[32mconst PageListsContextProvider = (props:any) => {[m
+[32m+[m[32m  const [context, setContext] = useState(PageContextInitializer())[m
+[32m+[m[32m  return ([m
+[32m+[m[32m    <PageListsContext.Provider value={[context, setContext]}>[m
+[32m+[m[32m      {props.children}[m
+[32m+[m[32m    </PageListsContext.Provider>[m
+[32m+[m[32m  )[m
+[32m+[m[32m}[m
+[32m+[m[32m*/[m
+[32m+[m[32mexport class CPageLists {[m
+   constructor([m
+     terminalList: ITerminalListItem[] = [],[m
+     headingList: IHeadingListItem[] = [],[m
+     sectionList: ISectionListItem[] = [],[m
+[31m-    sentenceList: ISentenceListItem[] = [][m
+[32m+[m[32m    sentenceList: ISentenceListItem[] = [],[m
+[32m+[m[32m    linkList: ILinkListItem[] = [][m
+   ) {[m
+     this.terminalList = terminalList;[m
+     this.headingList = headingList;[m
+     this.sectionList = sectionList;[m
+     this.sentenceList = sentenceList;[m
+[32m+[m[32m    this.linkList = linkList;[m
+   }[m
+   terminalList: ITerminalListItem[];[m
+   headingList: IHeadingListItem[];[m
+   sectionList: ISectionListItem[];[m
+   sentenceList: ISentenceListItem[];[m
+[32m+[m[32m  linkList: ILinkListItem[];[m
+ [m
+   get firstTerminalIdx(): number {[m
+     return 0;[m
+[36m@@ -74,17 +106,17 @@[m [mexport class CPageContext {[m
+     // could include sentence and section check but not heading[m
+   }[m
+   nextTerminalIdx(terminalIdx: number): number[] {[m
+[31m-    return this.validTerminalIdx(terminalIdx)[m
+[32m+[m[32m    return this.isValidTerminalIdx(terminalIdx)[m
+       ? this.terminalList[terminalIdx].nextTermIdx[m
+       : [];[m
+   }[m
+   nextSentenceTerminalIdx(terminalIdx: number): number {[m
+     let nextIdx: number = this.lastTerminalIdx; // default to last word on page[m
+[31m-    if (this.validTerminalIdx(terminalIdx)) {[m
+[32m+[m[32m    if (this.isValidTerminalIdx(terminalIdx)) {[m
+       let lastIdxInSentence: number = this.sentenceList[[m
+         this.terminalList[terminalIdx].sentenceIdx[m
+       ].lastTermIdx;[m
+[31m-      if (this.validTerminalIdx(lastIdxInSentence + 1)) {[m
+[32m+[m[32m      if (this.isValidTerminalIdx(lastIdxInSentence + 1)) {[m
+         nextIdx = lastIdxInSentence + 1;[m
+       }[m
+     }[m
+[36m@@ -92,7 +124,7 @@[m [mexport class CPageContext {[m
+   }[m
+   previousSentenceTerminalIdx(terminalIdx: number): number {[m
+     let prevIdx: number = this.firstTerminalIdx; // default to first word on page[m
+[31m-    if (this.validTerminalIdx(terminalIdx)) {[m
+[32m+[m[32m    if (this.isValidTerminalIdx(terminalIdx)) {[m
+       let firstIdxInSentence: number = this.sentenceList[[m
+         this.terminalList[terminalIdx].sentenceIdx[m
+       ].firstTermIdx;[m
+[36m@@ -100,7 +132,7 @@[m [mexport class CPageContext {[m
+         prevIdx = firstIdxInSentence;[m
+       } else {[m
+         // goto beginning of previous sentence[m
+[31m-        if (this.validTerminalIdx(firstIdxInSentence - 1)) {[m
+[32m+[m[32m        if (this.isValidTerminalIdx(firstIdxInSentence - 1)) {[m
+           prevIdx = this.sentenceList[[m
+             this.terminalList[firstIdxInSentence - 1].sentenceIdx[m
+           ].firstTermIdx;[m
+[36m@@ -110,22 +142,39 @@[m [mexport class CPageContext {[m
+     return prevIdx;[m
+   }[m
+   previousTerminalIdx(terminalIdx: number): number[] {[m
+[31m-    return this.validTerminalIdx(terminalIdx)[m
+[32m+[m[32m    return this.isValidTerminalIdx(terminalIdx)[m
+       ? this.terminalList[terminalIdx].prevTermIdx[m
+       : [];[m
+   }[m
+   sectionIdx(terminalIdx: number): number {[m
+[31m-    return this.validTerminalIdx(terminalIdx)[m
+[32m+[m[32m    return this.isValidTerminalIdx(terminalIdx)[m
+       ? this.terminalList[terminalIdx].sectionIdx[m
+       : -1;[m
+   }[m
+   sentenceIdx(terminalIdx: number): number {[m
+[31m-    return this.validTerminalIdx(terminalIdx)[m
+[32m+[m[32m    return this.isValidTerminalIdx(terminalIdx)[m
+       ? this.terminalList[terminalIdx].sentenceIdx[m
+       : -1;[m
+   }[m
+[31m-  validTerminalIdx(terminalIdx: number) {[m
+[32m+[m[32m  isValidSectionIdx(sectionIdx: number): boolean {[m
+[32m+[m[32m    return ([m
+[32m+[m[32m      this.sectionList !== undefined &&[m
+[32m+[m[32m      this.sectionList !== null &&[m
+[32m+[m[32m      sectionIdx >= 0 &&[m
+[32m+[m[32m      sectionIdx < this.sectionList.length[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m[32m  isValidSentenceIdx(sentenceIdx: number): boolean {[m
+[32m+[m[32m    return ([m
+[32m+[m[32m      this.sentenceList !== undefined &&[m
+[32m+[m[32m      this.sentenceList !== null &&[m
+[32m+[m[32m      sentenceIdx >= 0 &&[m
+[32m+[m[32m      sentenceIdx < this.sentenceList.length[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m[32m  isValidTerminalIdx(terminalIdx: number): boolean {[m
+     return ([m
+[32m+[m[32m      // should consider explicit terminalList bounds checking[m
+       terminalIdx >= this.firstTerminalIdx &&[m
+       terminalIdx <= this.lastTerminalIdx[m
+     );[m
+[1mdiff --git a/reading_fe_app/src/reactcomp_navbar.tsx b/reading_fe_app/src/reactcomp_navbar.tsx[m
+[1mindex 6390e89..57b753c 100644[m
+[1m--- a/reading_fe_app/src/reactcomp_navbar.tsx[m
+[1m+++ b/reading_fe_app/src/reactcomp_navbar.tsx[m
+[36m@@ -14,10 +14,8 @@[m [mimport "./App.css";[m
+ // import mic_notlistening from "./mic1-inactive-xparent.gif";[m
+ // import mic_unavailable from "./mic1-ghosted.gif";[m
+ import { Request } from "./reducers";[m
+[31m-import { useAppDispatch, useAppSelector } from "./hooks";[m
+[31m-import { useEffect, useState, useContext } from "react";[m
+[32m+[m[32mimport { useAppDispatch } from "./hooks";[m
+ import { IHeadingListItem } from "./pageContentType";[m
+[31m-import { IPageContext, PageContext } from "./pageContext";[m
+ [m
+ interface INavPropsType {[m
+   headings: IHeadingListItem[];[m
+[1mdiff --git a/reading_fe_app/src/reactcomp_pagefooter.tsx b/reading_fe_app/src/reactcomp_pagefooter.tsx[m
+[1mindex 446f2e1..7a4f99f 100644[m
+[1m--- a/reading_fe_app/src/reactcomp_pagefooter.tsx[m
+[1m+++ b/reading_fe_app/src/reactcomp_pagefooter.tsx[m
+[36m@@ -1,4 +1,4 @@[m
+[31m-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved[m
+[32m+[m[32m/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved[m
+  *[m
+  * File name: reactcomps_footer.tsx[m
+  *[m
+[36m@@ -10,18 +10,14 @@[m
+  **/[m
+ import React from "react";[m
+ import "./App.css";[m
+[31m-// import mic_listening from "./mic1-xparent.gif";[m
+[31m-// import mic_notlistening from "./mic1-inactive-xparent.gif";[m
+[31m-// import mic_unavailable from "./mic1-ghosted.gif";[m
+[31m-import { useContext } from "react";[m
+ import { useAppDispatch, useAppSelector } from "./hooks";[m
+[32m+[m[32mimport { useContext } from "react";[m
+[32m+[m[32mimport { CPageLists, PageContext } from "./pageContext";[m
+[32m+[m[32m//import { ISettingsContext, SettingsContext } from "./settingsContext";[m
+ import { Request } from "./reducers";[m
+[31m-import { CPageContext } from "./pageContext";[m
+ import { SpeechMonitor } from "./reactcomp_speech";[m
+ import { SpeakButton } from "./reactcomp_speech_speakbutton";[m
+ import { ListenButton, ListeningMonitor } from "./reactcomp_listen";[m
+[31m-import speakIcon from "./button_speak.png";[m
+[31m-import speakGhostedIcon from "./button_speak_ghosted.png";[m
+ import nextwordIcon from "./button_nextword.png";[m
+ import prevwordIcon from "./button_prevword.png";[m
+ import prevsentenceIcon from "./button_prevsentence.png";[m
+[36m@@ -30,35 +26,9 @@[m [mimport nextwordGhostedIcon from "./button_nextword_ghosted.png";[m
+ import prevwordGhostedIcon from "./button_prevword_ghosted.png";[m
+ import prevsentenceGhostedIcon from "./button_prevsentence_ghosted.png";[m
+ import nextsentenceGhostedIcon from "./button_nextsentence_ghosted.png";[m
+[31m-// import mic_unavailable from "./mic1-ghosted.gif";[m
+[32m+[m[32mimport gotoLinkIcon from "./button_link.png";[m
+[32m+[m[32mimport gotoLinkGhostedIcon from "./button_link_ghosted.png";[m
+ [m
+[31m-// is this really necessary if availablility is removed below[m
+[31m-// import SpeechRecognition, {[m
+[31m-//   useSpeechRecognition[m
+[31m-// } from "react-speech-recognition";[m
+[31m-// import {[m
+[31m-//   IPageContent,[m
+[31m-//   IHeadingListItem,[m
+[31m-//   ISectionContent,[m
+[31m-//   ISentenceContent,[m
+[31m-//   ITerminalContent,[m
+[31m-//   ITerminalInfo,[m
+[31m-//   IAcronymTerminalMeta,[m
+[31m-//   IWordTerminalMeta,[m
+[31m-//   TerminalMetaEnumType,[m
+[31m-//   SectionVariantEnumType,[m
+[31m-//   ISectionParagraphVariant[m
+[31m-// } from "./pageContentType";[m
+[31m-import { PageContext } from "./pageContext";[m
+[31m-//import { ListeningMonitor } from "./reactcomp_listen";[m
+[31m-//import { SpeechSynthesizer, ReadItButton } from "./reactcomp_speech";[m
+[31m-//import data from "content";[m
+[31m-//import ReactDOM from 'react-dom';[m
+[31m-//var content = require("./content.json");[m
+[31m-//var content = require("../../src/parsetest20210915.json");[m
+[31m-//import content from "./content/3wordsentences.json";[m
+[31m-//import content from "content/terminals.json";//var contentts = require("./content.ts");[m
+[31m-//const SpeechRecogition interface IPageHeaderPropsType {[m
+ interface IPageFooterPropsType {[m
+   title: string;[m
+ }[m
+[36m@@ -86,14 +56,15 @@[m [mexport const PageFooter = React.memo(() => {[m
+         <div className="footer-grid-nextSentence">[m
+           <NextSentenceButton />[m
+         </div>[m
+[32m+[m[32m        <div className="footer-grid-link">[m
+[32m+[m[32m          <LinkButton />[m
+[32m+[m[32m        </div>[m
+       </div>[m
+       <div className="footer-statusBar">[m
+[31m-        <StatusBar[m
+[31m-          message={`status: Expecting to hear "forteenth" The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog.`}[m
+[31m-        />[m
+[31m-        <SpeechMonitor />[m
+[31m-        <ListeningMonitor />[m
+[32m+[m[32m        <StatusBar />[m
+       </div>[m
+[32m+[m[32m      <SpeechMonitor />[m
+[32m+[m[32m      <ListeningMonitor />[m
+     </footer>[m
+   );[m
+ });[m
+[36m@@ -149,11 +120,13 @@[m [mexport const PreviousWordButton = () => {[m
+ };[m
+ export const NextWordButton = () => {[m
+   let dispatch = useAppDispatch();[m
+[32m+[m[32m  let pageContext: CPageLists = useContext(PageContext)!;[m
+   let icon: string;[m
+   let active: boolean;[m
+   if ([m
+     useAppSelector(store => store.cursor_terminalIdx) ===[m
+[31m-    useAppSelector(store => store.pageContext.terminalList).length - 1[m
+[32m+[m[32m    pageContext.terminalList.length - 1[m
+[32m+[m[32m    //    useAppSelector(store => store.pageContext.terminalList).length - 1[m
+   ) {[m
+     icon = nextwordGhostedIcon;[m
+     active = false;[m
+[36m@@ -177,11 +150,20 @@[m [mexport const NextWordButton = () => {[m
+ };[m
+ export const NextSentenceButton = () => {[m
+   let dispatch = useAppDispatch();[m
+[32m+[m[32m  let pageContext: CPageLists = useContext(PageContext)!;[m
+   let icon: string;[m
+   let active: boolean;[m
+[32m+[m[32m  console.log([m
+[32m+[m[32m    `last sentence Idx: ${pageContext.sentenceList.length} via context`[m
+[32m+[m[32m  );[m
+[32m+[m[32m  console.log([m
+[32m+[m[32m    `last sentence Idx: ${useAppSelector([m
+[32m+[m[32m      store => store.cursor_sentenceIdx[m
+[32m+[m[32m    )} via reducer`[m
+[32m+[m[32m  );[m
+   if ([m
+     useAppSelector(store => store.cursor_sentenceIdx) ===[m
+[31m-    useAppSelector(store => store.pageContext.sentenceList).length - 1[m
+[32m+[m[32m    pageContext.sentenceList.length - 1[m
+   ) {[m
+     icon = nextsentenceGhostedIcon;[m
+     active = false;[m
+[36m@@ -203,9 +185,37 @@[m [mexport const NextSentenceButton = () => {[m
+     </>[m
+   );[m
+ };[m
+[31m-interface StatusBarPropsType {[m
+[31m-  message: string;[m
+[31m-}[m
+[31m-export const StatusBar = (props: StatusBarPropsType) => {[m
+[31m-  return <>{props.message}</>;[m
+[32m+[m[32mexport const LinkButton = () => {[m
+[32m+[m[32m  let dispatch = useAppDispatch();[m
+[32m+[m[32m  let pageContext: CPageLists = useContext(PageContext)!;[m
+[32m+[m[32m  let icon: string;[m
+[32m+[m[32m  let active: boolean;[m
+[32m+[m[32m  let termIdx = useAppSelector(store => store.cursor_terminalIdx);[m
+[32m+[m[32m  active = pageContext.terminalList[termIdx].linkIdx >= 0;[m
+[32m+[m[32m  if (active) {[m
+[32m+[m[32m    icon = gotoLinkIcon;[m
+[32m+[m[32m  } else {[m
+[32m+[m[32m    icon = gotoLinkGhostedIcon;[m
+[32m+[m[32m  }[m
+[32m+[m[32m  const onButtonClick = () => {[m
+[32m+[m[32m    if (active) dispatch(Request.Page_gotoLink());[m
+[32m+[m[32m  };[m
+[32m+[m[32m  return ([m
+[32m+[m[32m    <>[m
+[32m+[m[32m      <img[m
+[32m+[m[32m        className="icon"[m
+[32m+[m[32m        alt="goto link"[m
+[32m+[m[32m        src={icon}[m
+[32m+[m[32m        onClick={() => onButtonClick()}[m
+[32m+[m[32m      />[m
+[32m+[m[32m    </>[m
+[32m+[m[32m  );[m
+[32m+[m[32m};[m
+[32m+[m[32minterface StatusBarPropsType {}[m
+[32m+[m[32mexport const StatusBar = () => {[m
+[32m+[m[32m  return ([m
+[32m+[m[32m    <>[m
+[32m+[m[32m      <div>{useAppSelector(store => store.message)}</div>[m
+[32m+[m[32m    </>[m
+[32m+[m[32m  );[m
+ };[m
+[1mdiff --git a/reading_fe_app/src/reactcomp_pageheader.tsx b/reading_fe_app/src/reactcomp_pageheader.tsx[m
+[1mindex d5e8bad..70587b4 100644[m
+[1m--- a/reading_fe_app/src/reactcomp_pageheader.tsx[m
+[1m+++ b/reading_fe_app/src/reactcomp_pageheader.tsx[m
+[36m@@ -1,4 +1,4 @@[m
+[31m-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved[m
+[32m+[m[32m/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved[m
+  *[m
+  * File name: reactcomps_header.tsx[m
+  *[m
+[36m@@ -38,20 +38,7 @@[m [mimport {[m
+   SectionVariantEnumType,[m
+   ISectionParagraphVariant[m
+ } from "./pageContentType";[m
+[31m-import {[m
+[31m-  IPageContext,[m
+[31m-  PageContext,[m
+[31m-  PageContextInitializer[m
+[31m-} from "./pageContext";[m
+[31m-//import { ListeningMonitor, ListenButton } from "./reactcomp_listen";[m
+[31m-//import { SpeechSynthesizer, ReadItButton } from "./reactcomp_speech";[m
+[31m-//import data from "content";[m
+[31m-//import ReactDOM from 'react-dom';[m
+[31m-//var content = require("./content.json");[m
+[31m-//var content = require("../../src/parsetest20210915.json");[m
+[31m-//import content from "./content/3wordsentences.json";[m
+[31m-//import content from "content/terminals.json";//var contentts = require("./content.ts");[m
+[31m-//const SpeechRecogition interface IPageHeaderPropsType {[m
+[32m+[m
+ interface IPageHeaderPropsType {[m
+   title: string;[m
+ }[m
+[1mdiff --git a/reading_fe_app/src/reactcomp_settings.tsx b/reading_fe_app/src/reactcomp_settings.tsx[m
+[1mindex b0492d3..3587dfa 100644[m
+[1m--- a/reading_fe_app/src/reactcomp_settings.tsx[m
+[1m+++ b/reading_fe_app/src/reactcomp_settings.tsx[m
+[36m@@ -1,4 +1,4 @@[m
+[31m-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved[m
+[32m+[m[32m/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved[m
+  *[m
+  * File name: reactcomps_settings.tsx[m
+  *[m
+[36m@@ -19,7 +19,7 @@[m
+  * Version history:[m
+  *[m
+  **/[m
+[31m-import { useContext, useEffect, useState } from "react";[m
+[32m+[m[32mimport { useContext, useState } from "react";[m
+ import { useAppDispatch } from "./hooks";[m
+ import { Request } from "./reducers";[m
+ import settingsIcon from "./settingicon.png";[m
+[36m@@ -35,11 +35,7 @@[m [mimport {[m
+   IListenSettings,[m
+   ISpeechSettings[m
+ } from "./settingsContext";[m
+[31m-import {[m
+[31m-  ISettings,[m
+[31m-  ISettingsContext,[m
+[31m-  SettingsContext[m
+[31m-} from "./settingsContext";[m
+[32m+[m[32mimport { ISettingsContext, SettingsContext } from "./settingsContext";[m
+ interface ISettingsDialogPropsType {[m
+   isActive: boolean;[m
+   hide: () => void;[m
+[1mdiff --git a/reading_fe_app/src/reactcomp_speech.tsx b/reading_fe_app/src/reactcomp_speech.tsx[m
+[1mindex cb52bdb..3255d84 100644[m
+[1m--- a/reading_fe_app/src/reactcomp_speech.tsx[m
+[1m+++ b/reading_fe_app/src/reactcomp_speech.tsx[m
+[36m@@ -1,4 +1,4 @@[m
+[31m-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved[m
+[32m+[m[32m/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved[m
+  *[m
+  * File name: reactcomps_speech.tsx[m
+  *[m
+[36m@@ -17,11 +17,7 @@[m
+ import { Request } from "./reducers";[m
+ import { useAppDispatch, useAppSelector } from "./hooks";[m
+ import { useEffect, useState, useContext } from "react";[m
+[31m-import { CPageContext, PageContext } from "./pageContext";[m
+[31m-import speakIcon from "./button_speak.png";[m
+[31m-import speakGhostedIcon from "./button_speak_ghosted.png";[m
+[31m-import speakActiveIcon from "./button_speak_activeRed.gif";[m
+[31m-import speakInactiveIcon from "./button_speak.png";[m
+[32m+[m[32mimport { CPageLists, PageContext } from "./pageContext";[m
+ import {[m
+   ISpeechSettings,[m
+   ISettingsContext,[m
+[36m@@ -62,7 +58,9 @@[m [mexport const Synthesizer: CSpeechSynthesizer = new CSpeechSynthesizer();[m
+ [m
+ export const SpeechMonitor = () => {[m
+   const dispatch = useAppDispatch();[m
+[31m-  let pageContext: CPageContext = useContext(PageContext)!;[m
+[32m+[m[32m  let pageContext: CPageLists = useAppSelector(store => store.pageContext);[m
+[32m+[m[32m  // cannot use useContext(PageContext) because context is only scoped within[m
+[32m+[m[32m  // a page[m
+   const newSentence = useAppSelector([m
+     store => store.cursor_newSentenceTransition[m
+   );[m
+[36m@@ -82,7 +80,11 @@[m [mexport const SpeechMonitor = () => {[m
+   useEffect([m
+     () => {[m
+       Synthesizer.volume = settingsContext.settings.speech.volume;[m
+[31m-      if (newSection) {[m
+[32m+[m[32m      if (beginningOfPage) {[m
+[32m+[m[32m        message = `beginning of page`;[m
+[32m+[m[32m        Synthesizer.speak(message);[m
+[32m+[m[32m        dispatch(Request.Cursor_acknowledgeTransition());[m
+[32m+[m[32m      } else if (newSection) {[m
+         console.log(`speaking sectionIdx=${sectionIdx}`);[m
+         let sectionType: string = pageContext.sectionList[sectionIdx].type;[m
+         message = `new ${[m
+[36m@@ -96,10 +98,6 @@[m [mexport const SpeechMonitor = () => {[m
+         console.log(`speaking "${message}"`);[m
+         Synthesizer.speak(message);[m
+         dispatch(Request.Cursor_acknowledgeTransition());[m
+[31m-      } else if (beginningOfPage) {[m
+[31m-        message = `beginning of page`;[m
+[31m-        Synthesizer.speak(message);[m
+[31m-        dispatch(Request.Cursor_acknowledgeTransition());[m
+       } else if (endOfPage) {[m
+         message = `end of page`;[m
+         Synthesizer.speak(message);[m
+[1mdiff --git a/reading_fe_app/src/reactcomp_speech_speakbutton.tsx b/reading_fe_app/src/reactcomp_speech_speakbutton.tsx[m
+[1mindex ea7c9b2..f6d9177 100644[m
+[1m--- a/reading_fe_app/src/reactcomp_speech_speakbutton.tsx[m
+[1m+++ b/reading_fe_app/src/reactcomp_speech_speakbutton.tsx[m
+[36m@@ -1,4 +1,4 @@[m
+[31m-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved[m
+[32m+[m[32m/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved[m
+  *[m
+  * File name: reactcomps_speech_speakbutton.tsx[m
+  *[m
+[36m@@ -15,7 +15,7 @@[m [mimport speakActiveIcon from "./button_speak_activeRed.gif";[m
+ import speakInactiveIcon from "./button_speak.png";[m
+ import { useAppDispatch, useAppSelector } from "./hooks";[m
+ import { useEffect, useState, useContext } from "react";[m
+[31m-import { CPageContext, PageContext } from "./pageContext";[m
+[32m+[m[32mimport { CPageLists, PageContext } from "./pageContext";[m
+ import {[m
+   ISettingsContext,[m
+   RecitationMode,[m
+[36m@@ -30,7 +30,9 @@[m [mexport const SpeakButton = () => {[m
+   const [speakingNow, setSpeakingNow] = useState(false);[m
+   const reciteRequested = useAppSelector(store => store.recite_requested); // from recite_toggle[m
+   const termIdx = useAppSelector(store => store.cursor_terminalIdx);[m
+[31m-  const pageContext: CPageContext = useContext(PageContext)!;[m
+[32m+[m[32m  let pageContext: CPageLists = useAppSelector(store => store.pageContext);[m
+[32m+[m[32m  // cannot use useContext(PageContext) because context is only scoped within[m
+[32m+[m[32m  // a page[m
+   const settingsContext: ISettingsContext = useContext(SettingsContext)!;[m
+   const recitationMode: RecitationMode =[m
+     settingsContext.settings.speech.recitationMode;[m
+[36m@@ -80,11 +82,17 @@[m [mexport const SpeakButton = () => {[m
+   }, [speakingNow, recitationQueue]);[m
+   const somethingToRecite = (): string[] => {[m
+     let messageQueue: string[] = [];[m
+[32m+[m[32m    // const wordToRecite = (termIdx: number): string => {[m
+[32m+[m[32m    //   return pageContext.terminalList[termIdx].altpronunciation !== ""[m
+[32m+[m[32m    //     ? pageContext.terminalList[termIdx].altpronunciation[m
+[32m+[m[32m    //     : pageContext.terminalList[termIdx].content;[m
+[32m+[m[32m    // };[m
+     const wordToRecite = (termIdx: number): string => {[m
+       return pageContext.terminalList[termIdx].altpronunciation !== ""[m
+         ? pageContext.terminalList[termIdx].altpronunciation[m
+         : pageContext.terminalList[termIdx].content;[m
+     };[m
+[32m+[m
+     const sentenceToRecite = ([m
+       sentenceIdx: number,[m
+       lastTermIdxInSentence?: number,[m
+[36m@@ -110,6 +118,13 @@[m [mexport const SpeakButton = () => {[m
+     const sectionToRecite = (sectionIdx: number): string[] => {[m
+       //find sentences in section. unfortunately, the sectionlist only has first and last terminal idxs and not sentences[m
+       let strQ: string[] = [];[m
+[32m+[m[32m      // let firstTermIdx: number =[m
+[32m+[m[32m      //   pageContext.sectionList[sectionIdx].firstTermIdx;[m
+[32m+[m[32m      // let lastTermIdx: number = pageContext.sectionList[sectionIdx].lastTermIdx;[m
+[32m+[m[32m      // let firstSentenceIdx: number =[m
+[32m+[m[32m      //   pageContext.terminalList[firstTermIdx].sentenceIdx;[m
+[32m+[m[32m      // let lastSentenceIdx: number =[m
+[32m+[m[32m      //   pageContext.terminalList[lastTermIdx].sentenceIdx;[m
+       let firstTermIdx: number =[m
+         pageContext.sectionList[sectionIdx].firstTermIdx;[m
+       let lastTermIdx: number = pageContext.sectionList[sectionIdx].lastTermIdx;[m
+[1mdiff --git a/reading_fe_app/src/reactcomps.tsx b/reading_fe_app/src/reactcomps.tsx[m
+[1mdeleted file mode 100644[m
+[1mindex 520f57a..0000000[m
+[1m--- a/reading_fe_app/src/reactcomps.tsx[m
+[1m+++ /dev/null[m
+[36m@@ -1,232 +0,0 @@[m
+[31m-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved[m
+[31m- *[m
+[31m- * File name: reactcomps.tsx[m
+[31m- *[m
+[31m- * Defines React front end functional components.[m
+[31m- *[m
+[31m- * Terminals represent the group of words, punctuations, whitespace,[m
+[31m- * references, etc that can be rendered.[m
+[31m- * "Words" refer to terminals that where the current cursor can be active;[m
+[31m- * that terminals that are visible and recitable as opposed to punctuations,[m
+[31m- * whitespace and other syntactical sugar.[m
+[31m- *[m
+[31m- * Version history:[m
+[31m- *[m
+[31m- **/[m
+[31m-import React from "react";[m
+[31m-import "./App.css";[m
+[31m-import { Request } from "./reducers";[m
+[31m-import { useAppDispatch, useAppSelector, useDialog } from "./hooks";[m
+[31m-import { useEffect, useState, useContext } from "react";[m
+[31m-[m
+[31m-// is this really necessary if availablility is removed below[m
+[31m-import SpeechRecognition from "react-speech-recognition";[m
+[31m-[m
+[31m-import {[m
+[31m-  IPageContent,[m
+[31m-  ISectionContent[m
+[31m-  // ISentenceContent,[m
+[31m-  // ITerminalContent,[m
+[31m-  // ISectionHeadingVariant,[m
+[31m-  // IWordTerminalMeta,[m
+[31m-  // TerminalMetaEnumType,[m
+[31m-  // SectionVariantEnumType,[m
+[31m-  // ISectionParagraphVariant[m
+[31m-} from "./pageContentType";[m
+[31m-import { CPageContext, PageContext } from "./pageContext";[m
+[31m-import {[m
+[31m-  SettingsContext,[m
+[31m-  ISettings,[m
+[31m-  ISettingsContext,[m
+[31m-  SettingsInitializer[m
+[31m-} from "./settingsContext";[m
+[31m-import { NavBar } from "./reactcomp_navbar";[m
+[31m-import { PageHeader } from "./reactcomp_pageheader";[m
+[31m-import { PageFooter } from "./reactcomp_pagefooter";[m
+[31m-import { SettingsDialog } from "./reactcomp_settings";[m
+[31m-//import { TerminalDispatcher } from "./reactcomps_terminals";[m
+[31m-import { SectionDispatcher } from "./reactcomps_sections";[m
+[31m-[m
+[31m-// const SectionType = {[m
+[31m-//   ORDEREDLIST: "ol",[m
+[31m-//   UNORDEREDLIST: "ul",[m
+[31m-//   PARAGRAPH: "none"[m
+[31m-// };[m
+[31m-let distDir: string = "https://weng1102.github.io/reading_app/dist/";[m
+[31m-let urlFileRequested: string;[m
+[31m-urlFileRequested = ".json";[m
+[31m-urlFileRequested = "paragraph.json";[m
+[31m-urlFileRequested = "7wordsentences.json";[m
+[31m-urlFileRequested = "terminals_phonenumbers.json";[m
+[31m-urlFileRequested = "images.json";[m
+[31m-let urlRequested: string = distDir + urlFileRequested;[m
+[31m-export const ReadingApp = () => {[m
+[31m-  const [responseError, setResponseError] = useState<string | null>(null);[m
+[31m-  const [parseError, setParseError] = useState<string | null>(null);[m
+[31m-  const [jsonContent, setJsonContent] = useState<IPageContent | null>(null);[m
+[31m-  const [isLoaded, setIsLoaded] = useState<boolean>(false); // is this necessary if jsonContent is used as a dependency fo useEffect()[m
+[31m-  let dispatch = useAppDispatch();[m
+[31m-  const [_settings, _setSettings] = useState(SettingsInitializer());[m
+[31m-  const settingsContext: ISettingsContext = {[m
+[31m-    settings: _settings,[m
+[31m-    saveSettings: _setSettings[m
+[31m-  };[m
+[31m-  //  SettingsContext = React.createContext(settingsContext);[m
+[31m-[m
+[31m-  // Consider node-fetch instead[m
+[31m-[m
+[31m-  //  let urlRequest: HttpRequest = new Request(url);[m
+[31m-  function fetchRequest(url: string) {[m
+[31m-    fetch(url)[m
+[31m-      .then([m
+[31m-        response => {[m
+[31m-          return response.json();[m
+[31m-        },[m
+[31m-        error => {[m
+[31m-          setResponseError(error);[m
+[31m-        }[m
+[31m-      )[m
+[31m-      .then([m
+[31m-        data => {[m
+[31m-          setJsonContent(data);[m
+[31m-          setIsLoaded(true);[m
+[31m-        },[m
+[31m-        error => {[m
+[31m-          setParseError(error);[m
+[31m-        }[m
+[31m-      ); // should consider capturing parser error[m
+[31m-  }[m
+[31m-  useEffect(() => {[m
+[31m-    fetchRequest(urlRequested);[m
+[31m-  }, [urlRequested]);[m
+[31m-[m
+[31m-  dispatch([m
+[31m-    Request.Recognition_setAvailability([m
+[31m-      SpeechRecognition.browserSupportsSpeechRecognition()[m
+[31m-    )[m
+[31m-  );[m
+[31m-  if (responseError) {[m
+[31m-    console.log([m
+[31m-      `Response Error encountered while loading "${urlFileRequested}": ${responseError}`[m
+[31m-    );[m
+[31m-    return ([m
+[31m-      <div className="loadingAnnouncement">[m
+[31m-        Error encountered while loading "{urlFileRequested}": {responseError}[m
+[31m-      </div>[m
+[31m-    );[m
+[31m-  } else if (parseError) {[m
+[31m-    return ([m
+[31m-      <div className="loadingAnnouncement">[m
+[31m-        Error encountered while parsing "{urlFileRequested}": {parseError}[m
+[31m-      </div>[m
+[31m-    );[m
+[31m-  } else if (jsonContent === null) {[m
+[31m-    console.log(`parserError=${parseError}`);[m
+[31m-    return ([m
+[31m-      <div className="loadingAnnouncement">[m
+[31m-        Warning while loading {urlFileRequested}: no properly formatted content[m
+[31m-        provided[m
+[31m-      </div>[m
+[31m-    );[m
+[31m-  } else if (!isLoaded) {[m
+[31m-    return ([m
+[31m-      <div className="loadingAnnouncement">Loading {jsonContent.title}...</div>[m
+[31m-    );[m
+[31m-  } else {[m
+[31m-    let content: IPageContent = jsonContent! as IPageContent;[m
+[31m-    let pageContext: CPageContext = new CPageContext([m
+[31m-      content.terminalList,[m
+[31m-      content.headingList,[m
+[31m-      content.sectionList,[m
+[31m-      content.sentenceList[m
+[31m-    );[m
+[31m-    // should be retrieved from persistent store[m
+[31m-[m
+[31m-    // return ([m
+[31m-    //   <>[m
+[31m-    //     <PageContext.Provider[m
+[31m-    //       value={PageContextInitializer([m
+[31m-    //         content.terminalList,[m
+[31m-    //         content.headingList,[m
+[31m-    //         content.sectionList,[m
+[31m-    //         content.sentenceList[m
+[31m-    //       )}[m
+[31m-    //     >[m
+[31m-    //       <Page content={content} />[m
+[31m-    //     </PageContext.Provider>[m
+[31m-    //   </>[m
+[31m-    // );[m
+[31m-    // TODO: retrieve settings to initialize[m
+[31m-[m
+[31m-    return ([m
+[31m-      <>[m
+[31m-        <PageContext.Provider value={pageContext}>[m
+[31m-          <SettingsContext.Provider value={settingsContext}>[m
+[31m-            <Page content={content} />[m
+[31m-          </SettingsContext.Provider>[m
+[31m-        </PageContext.Provider>[m
+[31m-      </>[m
+[31m-    );[m
+[31m-  }[m
+[31m-};[m
+[31m-interface IPagePropsType {[m
+[31m-  content: IPageContent;[m
+[31m-}[m
+[31m-export const Page = React.memo((props: IPagePropsType) => {[m
+[31m-  const { isActive, toggle } = useDialog();[m
+[31m-  //give access to page context to reducers[m
+[31m-  let pageContext: CPageContext = useContext(PageContext)!;[m
+[31m-  let dispatch = useAppDispatch();[m
+[31m-  dispatch(Request.Page_setContext(pageContext)); // required for all pageContext changes[m
+[31m-  dispatch(Request.Cursor_gotoFirstSection());[m
+[31m-  return ([m
+[31m-    // create page state in redux[m
+[31m-    <div className="page">[m
+[31m-      <PageHeader title={props.content.title} />[m
+[31m-      <SettingsDialog isActive={isActive} hide={toggle} />[m
+[31m-      <NavBar headings={props.content.headingList} />[m
+[31m-      <Content content={props.content} />[m
+[31m-      <PageFooter />[m
+[31m-    </div>[m
+[31m-  );[m
+[31m-});[m
+[31m-//PageHeader = React.memo(PageHeader);[m
+[31m-[m
+[31m-interface IContentPropsType {[m
+[31m-  content: IPageContent;[m
+[31m-}[m
+[31m-export const Content = React.memo((props: IContentPropsType): any => {[m
+[31m-  console.log(`<Content>`);[m
+[31m-  //let Content = (props: ContentPropsType) => {[m
+[31m-  // Callback when section changes (via navbar)[m
+[31m-  // page>section(chapter|paragraph)+>sentences>sentence>words>word[m
+[31m-  //let pageid = useSelector(store => store.currentWorld.pageid);[m
+[31m-[m
+[31m-  //need a props with number of words on page to size array[m
+[31m-  // should set word to the first wordNodeIdx in the section[m
+[31m-  //  let section = useSelector(store.WordSeqReducer.sectionId);[m
+[31m-  //mapStateToProps()[m
+[31m-  //  const [wordNodes, setWordNodes] = useContext(WordNodes);[m
+[31m-  //  let currentWordSeq = useSelector(store => store.CursorActionReducer.wordNodeIdx);[m
+[31m-  //  console.log(`<Content> currentWordSeq=${currentWordSeq}`);[m
+[31m-[m
+[31m-  //  let currentSectionId = useContext(WordNodes).props(currentWordSeq).sectionId;[m
+[31m-[m
+[31m-  // SAVE THIS FOR FUTURE labelling active section feature[m
+[31m-  const currentSectionIdx: number = useAppSelector([m
+[31m-    store => store.cursor_sectionIdx[m
+[31m-  );[m
+[31m-  return ([m
+[31m-    <main>[m
+[31m-      {props.content.sections.map([m
+[31m-        (section: ISectionContent, keyvalue: number) => ([m
+[31m-          <SectionDispatcher[m
+[31m-            key={keyvalue}[m
+[31m-            active={currentSectionIdx === section.id}[m
+[31m-            section={section}[m
+[31m-          />[m
+[31m-        ) // =>[m
+[31m-      )}[m
+[31m-    </main>[m
+[31m-  ); // return[m
+[31m-});[m
+[1mdiff --git a/reading_fe_app/src/reactcomps_sections_imageEntry.tsx b/reading_fe_app/src/reactcomps_sections_imageEntry.tsx[m
+[1mindex 1db6ad0..535b5ce 100644[m
+[1m--- a/reading_fe_app/src/reactcomps_sections_imageEntry.tsx[m
+[1m+++ b/reading_fe_app/src/reactcomps_sections_imageEntry.tsx[m
+[36m@@ -1,6 +1,6 @@[m
+ /** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved[m
+  *[m
+[31m- * File name: reactcomps_sections.tsx[m
+[32m+[m[32m * File name: reactcomps_sections_imageEntry.tsx[m
+  *[m
+  * Defines React front end functional components.[m
+  *[m
+[36m@@ -12,6 +12,7 @@[m [mimport React from "react";[m
+ import "./App.css";[m
+ import { useAppSelector, useDivRef } from "./hooks";[m
+ import {[m
+[32m+[m[32m  ImageEntryLayoutEnumType,[m
+   ISectionContent,[m
+   ISentenceContent,[m
+   ISectionImageEntryVariant,[m
+[36m@@ -22,36 +23,47 @@[m [mimport {[m
+   ITerminalInfo,[m
+   IImageTerminalMeta[m
+ } from "./pageContentType";[m
+[32m+[m[32mimport { Terminal_Image } from "./reactcomps_terminals_image";[m
+ import { SectionDispatcher, ISectionPropsType } from "./reactcomps_sections";[m
+ [m
+ interface ISectionImageEntryImagesPropsType {[m
+[32m+[m[32m  active: boolean;[m
+   images: ITerminalContent[];[m
+[32m+[m[32m  layout: ImageEntryLayoutEnumType;[m
+ }[m
+[31m-interface ISectionImageEntryImagePropsType {[m
+[31m-  image: ITerminalContent;[m
+[31m-}[m
+[32m+[m[32m// interface ISectionImageEntryImagePropsType {[m
+[32m+[m[32m//   distDir: string;[m
+[32m+[m[32m//   image: ITerminalContent;[m
+[32m+[m[32m// }[m
+ interface ISectionImageEntryCaptionsPropsType {[m
+   active: boolean;[m
+   captions: ISectionContent[];[m
+[31m-}[m
+[31m-interface ISectionImageEntryCaptionPropsType {[m
+[31m-  active: boolean;[m
+[31m-  caption: ISectionContent;[m
+[32m+[m[32m  layout: ImageEntryLayoutEnumType;[m
+ }[m
+ export const Section_imageEntry = React.memo([m
+   (props: ISectionPropsType): any => {[m
+     let imageEntry: ISectionImageEntryVariant = props.section[m
+       .meta as ISectionImageEntryVariant;[m
+     // let images1 = (props.section.meta as ISectionImageEntryVariant).images // not working with jsx!!![m
+[32m+[m
+     let images = imageEntry.images as ITerminalContent[];[m
+     let captions = imageEntry.captions as ISectionContent[];[m
+[32m+[m[32m    let className: string =[m
+[32m+[m[32m      imageEntry.layout.charAt(0).toLowerCase() === "l"[m
+[32m+[m[32m        ? "imageentry-container-" + ImageEntryLayoutEnumType.left.toString()[m
+[32m+[m[32m        : "imageentry-container-" + ImageEntryLayoutEnumType.above.toString();[m
+     return ([m
+       <>[m
+[31m-        <div className="image-entry-horizontal-container">[m
+[31m-          <Section_imageEntry_images images={images} />[m
+[32m+[m[32m        <div className={className}>[m
+[32m+[m[32m          <Section_imageEntry_images[m
+[32m+[m[32m            active={props.active}[m
+[32m+[m[32m            images={images}[m
+[32m+[m[32m            layout={imageEntry.layout}[m
+[32m+[m[32m          />[m
+           <Section_imageEntry_captions[m
+             active={props.active}[m
+             captions={captions}[m
+[32m+[m[32m            layout={imageEntry.layout}[m
+           />[m
+         </div>[m
+       </>[m
+[36m@@ -61,33 +73,47 @@[m [mexport const Section_imageEntry = React.memo([m
+ export const Section_imageEntry_images = React.memo([m
+   (props: ISectionImageEntryImagesPropsType): any => {[m
+     let images: ITerminalContent[] = props.images;[m
+[32m+[m[32m    let className: string = "imageentry-image-";[m
+[32m+[m[32m    className +=[m
+[32m+[m[32m      props.layout === ImageEntryLayoutEnumType.above[m
+[32m+[m[32m        ? ImageEntryLayoutEnumType.above.toString()[m
+[32m+[m[32m        : ImageEntryLayoutEnumType.left.toString();[m
+[32m+[m[32m    images.forEach([m
+[32m+[m[32m      image => ((image.meta as IImageTerminalMeta).className = className)[m
+[32m+[m[32m    );[m
+     return ([m
+       <>[m
+[31m-        <div className="image-entry-images">[m
+[32m+[m[32m        <div className={className}>[m
+           {images.map((image, keyvalue: number) => ([m
+[31m-            <Section_imageEntry_image image={image} />[m
+[32m+[m[32m            <Terminal_Image active={props.active} terminal={image} />[m
+           ))}[m
+         </div>[m
+       </>[m
+     );[m
+   }[m
+ );[m
+[31m-export const Section_imageEntry_image = React.memo([m
+[31m-  (props: ISectionImageEntryImagePropsType): any => {[m
+[31m-    let image: IImageTerminalMeta = props.image.meta as IImageTerminalMeta;[m
+[31m-    return ([m
+[31m-      <>[m
+[31m-        <img src={image.src} alt={image.label} />[m
+[31m-      </>[m
+[31m-    );[m
+[31m-  }[m
+[31m-);[m
+[32m+[m[32m// export const Section_imageEntry_image = React.memo([m
+[32m+[m[32m//   (props: ISectionImageEntryImagePropsType): any => {[m
+[32m+[m[32m//     let image: IImageTerminalMeta = props.image.meta as IImageTerminalMeta;[m
+[32m+[m[32m//     let imgSrc: string = `${props.distDir}/${image.src}`;[m
+[32m+[m[32m//     return ([m
+[32m+[m[32m//       <>[m
+[32m+[m[32m//         <img src={imgSrc} alt={image.label} />[m
+[32m+[m[32m//       </>[m
+[32m+[m[32m//     );[m
+[32m+[m[32m//   }[m
+[32m+[m[32m// );[m
+ export const Section_imageEntry_captions = React.memo([m
+   (props: ISectionImageEntryCaptionsPropsType): any => {[m
+     let captions: ISectionContent[] = props.captions;[m
+[32m+[m[32m    let className: string = "imageentry-captions-";[m
+[32m+[m[32m    className +=[m
+[32m+[m[32m      props.layout === ImageEntryLayoutEnumType.above[m
+[32m+[m[32m        ? ImageEntryLayoutEnumType.above.toString()[m
+[32m+[m[32m        : ImageEntryLayoutEnumType.left.toString();[m
+     return ([m
+       <>[m
+[31m-        <div className="image-entry-captions">[m
+[32m+[m[32m        <div className={className}>[m
+           {captions.map((caption, keyvalue: number) => ([m
+             <SectionDispatcher active={props.active} section={caption} />[m
+           ))}[m
+[1mdiff --git a/reading_fe_app/src/reactcomps_terminals.tsx b/reading_fe_app/src/reactcomps_terminals.tsx[m
+[1mindex 213132f..44269cf 100644[m
+[1m--- a/reading_fe_app/src/reactcomps_terminals.tsx[m
+[1m+++ b/reading_fe_app/src/reactcomps_terminals.tsx[m
+[36m@@ -1,8 +1,8 @@[m
+[31m-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved[m
+[32m+[m[32m/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved[m
+  *[m
+[31m- * File name: reactcomps.tsx[m
+[32m+[m[32m * File name: reactcomps_terminals.tsx[m
+  *[m
+[31m- * Defines React front end functional components.[m
+[32m+[m[32m * Defines React front end functional components for terminals.[m
+  *[m
+  * Terminals represent the group of words, punctuations, whitespace,[m
+  * references, etc that can be rendered.[m
+[36m@@ -30,6 +30,8 @@[m [mimport { Terminal_Date } from "./reactcomps_terminals_dates";[m
+ import { Terminal_Emailaddress } from "./reactcomps_terminals_emailaddress";[m
+ import { Terminal_PhoneNumber } from "./reactcomps_terminals_phonenumber";[m
+ import { Terminal_Image } from "./reactcomps_terminals_image";[m
+[32m+[m[32mimport { Terminal_Link } from "./reactcomps_terminals_link";[m
+[32m+[m
+ export interface ITerminalPropsType {[m
+   active: boolean;[m
+   terminal: ITerminalContent;[m
+[36m@@ -111,6 +113,7 @@[m [mexport const TerminalDispatcher = React.memo([m
+         );[m
+         break;[m
+       case TerminalMetaEnumType.image:[m
+[32m+[m[32m        //active should be false regardless[m
+         return ([m
+           <Terminal_Image[m
+             active={[m
+[36m@@ -121,6 +124,17 @@[m [mexport const TerminalDispatcher = React.memo([m
+           />[m
+         );[m
+         break;[m
+[32m+[m[32m      case TerminalMetaEnumType.link:[m
+[32m+[m[32m        return ([m
+[32m+[m[32m          <Terminal_Link[m
+[32m+[m[32m            active={[m
+[32m+[m[32m              currentTerminalIdx >= props.terminal.firstTermIdx &&[m
+[32m+[m[32m              currentTerminalIdx <= props.terminal.lastTermIdx[m
+[32m+[m[32m            }[m
+[32m+[m[32m            terminal={props.terminal}[m
+[32m+[m[32m          />[m
+[32m+[m[32m        );[m
+[32m+[m[32m        break;[m
+       case TerminalMetaEnumType.numberwithcommas:[m
+         break;[m
+       case TerminalMetaEnumType.phonenumber:[m
+[36m@@ -146,7 +160,7 @@[m [mexport const TerminalDispatcher = React.memo([m
+       case TerminalMetaEnumType.year:[m
+         break;[m
+       default:[m
+[31m-        return <>unknown terminal {props.terminal.content}</>;[m
+[32m+[m[32m        return <>unknown terminal "{props.terminal.content}"</>;[m
+         break;[m
+     }[m
+   }[m
+[1mdiff --git a/reading_fe_app/src/reactcomps_terminals_dates.tsx b/reading_fe_app/src/reactcomps_terminals_dates.tsx[m
+[1mindex 078b7eb..b230520 100644[m
+[1m--- a/reading_fe_app/src/reactcomps_terminals_dates.tsx[m
+[1m+++ b/reading_fe_app/src/reactcomps_terminals_dates.tsx[m
+[36m@@ -1,8 +1,8 @@[m
+[31m-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved[m
+[32m+[m[32m/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved[m
+  *[m
+[31m- * File name: reactcomps.tsx[m
+[32m+[m[32m * File name: reactcomps_dates.tsx[m
+  *[m
+[31m- * Defines React front end functional components.[m
+[32m+[m[32m * Defines React front end functional components for date terminals.[m
+  *[m
+  * Terminals represent the group of words, punctuations, whitespace,[m
+  * references, etc that can be rendered.[m
+[1mdiff --git a/reading_fe_app/src/reactcomps_terminals_image.tsx b/reading_fe_app/src/reactcomps_terminals_image.tsx[m
+[1mindex 3183342..d2a3c15 100644[m
+[1m--- a/reading_fe_app/src/reactcomps_terminals_image.tsx[m
+[1m+++ b/reading_fe_app/src/reactcomps_terminals_image.tsx[m
+[36m@@ -3,27 +3,32 @@[m
+  * File name: reactcomps_terminal_image.tsx[m
+  *[m
+  * Defines React front end functional components.[m
+[31m- * renders US phone numbers[m
+[32m+[m[32m * renders imageClasses[m
+  *[m
+  * Version history:[m
+  *[m
+  **/[m
+[31m-import React from "react";[m
+[32m+[m[32mimport React, { useContext } from "react";[m
+ import { useAppSelector } from "./hooks";[m
+ [m
+ import { ITerminalInfo, IImageTerminalMeta } from "./pageContentType";[m
+ import { TerminalNode, ITerminalPropsType } from "./reactcomps_terminals";[m
+[31m-[m
+[32m+[m[32mimport { ISettingsContext, SettingsContext } from "./settingsContext";[m
+ export const Terminal_Image = React.memo((props: ITerminalPropsType): any => {[m
+   const currentTerminalIdx = useAppSelector(store => store.cursor_terminalIdx); // causes rerendering[m
+[32m+[m[32m  let settingsContext: ISettingsContext = useContext([m
+[32m+[m[32m    SettingsContext[m
+[32m+[m[32m  ) as ISettingsContext;[m
+[32m+[m[32m  let distDir = settingsContext.settings.config.distDir;[m
+   console.log([m
+     `<Terminal_Image active=${props.active} content=${props.terminal.content}/>`[m
+   );[m
+   let imageInfo: IImageTerminalMeta = props.terminal.meta as IImageTerminalMeta;[m
+[31m-  let path: string = `https://weng1102.github.io/reading_app/dist/img/${imageInfo.src}`;[m
+[32m+[m[32m  let path: string = `${distDir}/img/${imageInfo.src}`;[m
+[32m+[m[32m  let imageClasses: string = "imageentry-image " + imageInfo.className;[m
+   return ([m
+     <>[m
+[31m-      <img className="image" src={path} alt={imageInfo.label} />[m
+[32m+[m[32m      <img className={imageClasses} src={path} alt={imageInfo.label} />[m
+     </>[m
+   );[m
+ });[m
+[1mdiff --git a/reading_fe_app/src/reducers.ts b/reading_fe_app/src/reducers.ts[m
+[1mindex fdb125a..7084a93 100644[m
+[1m--- a/reading_fe_app/src/reducers.ts[m
+[1m+++ b/reading_fe_app/src/reducers.ts[m
+[36m@@ -1,23 +1,9 @@[m
+[31m-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved[m
+[32m+[m[32m/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved[m
+  *[m
+[31m- * File name: reducer.ts[m
+[32m+[m[32m * File name: reducers.ts[m
+  *[m
+  * Defines React redux states and transition.[m
+[31m- *[m
+[31m- *[m
+[31m- * Version history:[m
+[31m- *[m
+[31m- **/[m
+[31m-//import React from "react";[m
+[31m-//import { useContext } from "react";[m
+[31m-//import { useAppDispatch } from "./hooks";[m
+[31m-//import { combineReducers } from "redux";[m
+[31m-//import { ITerminalInfoInitializer } from "./pageContentType";[m
+[31m-//import { CPageContext, PageContextInitializer, PageContext } from "./pageContext";[m
+[31m-import { CPageContext } from "./pageContext";[m
+[31m-[m
+[31m-/**[m
+[31m- * This is a reducer - a function that takes a current state value and an[m
+[32m+[m[32m * Reducer - a function that takes a current state value and an[m
+  * action object describing "what happened", and returns a new state value.[m
+  * A reducer's function signature is: (state, action) => newState[m
+  *[m
+[36m@@ -25,45 +11,42 @@[m [mimport { CPageContext } from "./pageContext";[m
+  * The root state value is usually an object.  It's important that you should[m
+  * not mutate the state object, but return a new object if the state changes.[m
+  *[m
+[31m- * You can use any conditional logic you want in a reducer. In this example,[m
+[31m- * we use a switch statement, but it's not required.[m
+[32m+[m[32m * Version history:[m
+  *[m
+[31m- * The following actions must be unique![m
+[31m- */[m
+[31m-//export const SECTION_CHANGED = "section/changed";[m
+[31m-//const SENTENCE_CHANGED = "sentence/changed";[m
+[32m+[m[32m **/[m
+[32m+[m[32mimport { CPageLists } from "./pageContext";[m
+[32m+[m[32mconst IDX_INITIALIZER = -9999; // should be same as baseclasses.ts[m
+ [m
+[31m-// intrapage actions (user initiated)[m
+[31m-const WORD_MATCH = "word/match"; // match word with argument word with current wordNode[m
+[31m-const WORD_VISIT = "word/visit"; // match word with argument word with current wordNode[m
+[32m+[m[32m// word actions[m
+[32m+[m[32mconst WORD_MATCH = "word/match"; // match word with argument with current word[m
+[32m+[m[32m//const WORD_VISIT = "word/visit"; // visit word with argument[m
+ const WORD_NEXT = "word/next"; // next word in sentence[m
+ const WORD_PREVIOUS = "word/previous"; // previous word in sentence[m
+[31m-const WORD_RESET = "word/reset"; // first word in page[m
+[32m+[m[32m//const WORD_RESET = "word/reset"; // first word in page[m
+ const WORD_SELECT = "word/select"; // selected word in sentence[m
+[31m-const WORD_RESELECT = "word/reselect"; // reselected word in sentence (used for synthesis)[m
+ [m
+[31m-const SENTENCE_FIRST = "sentence/first"; // first word in first sentence of current section[m
+[31m-const SENTENCE_NEXT = "sentence/next"; // first word of next sentence[m
+[32m+[m[32m// sentence actions[m
+[32m+[m[32mconst SENTENCE_FIRST = "sentence/first"; // position at first word in sent.[m
+[32m+[m[32mconst SENTENCE_NEXT = "sentence/next"; // position at first word of next sent.[m
+ const SENTENCE_PREVIOUS = "sentence/prev"; // first word of previous sentence[m
+[31m-const SENTENCE_RESET = "sentence/reset"; // first word in section[m
+ [m
+[31m-const SECTION_FIRST = "section/first"; // first word in first section[m
+[31m-const SECTION_NEXT = "section/next";[m
+[31m-const SECTION_PREVIOUS = "section/prev";[m
+[31m-const SECTION_RESET = "section/reset"; // first section in sections[m
+[32m+[m[32m// section actions[m
+[32m+[m[32m// const SECTION_FIRST = "section/first"; // first word in first section[m
+[32m+[m[32m// const SECTION_NEXT = "section/next";[m
+[32m+[m[32m// const SECTION_PREVIOUS = "section/prev";[m
+[32m+[m[32m// const SECTION_RESET = "section/reset"; // first section in sections[m
+ const SECTION_CHANGE = "section/change"; // absolute positioning e.g., navbar[m
+ [m
+[31m-const PAGE_CHANGED = "page/changed";[m
+[32m+[m[32m// page actions[m
+[32m+[m[32mconst PAGE_LOAD = "page/load";[m
+[32m+[m[32mconst PAGE_LOADED = "page/loaded";[m
+ const PAGE_TOP = "page/top";[m
+[31m-const PAGE_RESET = "page/reset";[m
+[32m+[m[32m//const PAGE_RESET = "page/reset";[m
+[32m+[m[32mconst PAGE_LINKTO = "page/link to";[m
+ [m
+ // intrapage administrative actions (non-user initiated)[m
+[31m-//nodeList actions[m
+ const CONTEXT_SET = "context/set";[m
+ [m
+[31m-// const WORDNODEIDX_SET = "wordNodeIdx/set current"; // first word index on page[m
+[31m-[m
+[31m-// speaking actions[m
+ //listening actions[m
+ const LISTENING_AVAILABLE = "listening/available";[m
+ const LISTENING_FLUSH = "listening/flush"; // clear transcript[m
+[36m@@ -72,21 +55,23 @@[m [mconst LISTENING_START = "listening/start";[m
+ const LISTENING_STOP = "listening/stop";[m
+ const LISTENING_TOGGLE = "listening/toggle"; // related to start/stop[m
+ [m
+[32m+[m[32m// speaking actions[m
+ const ANNOUNCE_MESSAGE = "announce/message";[m
+ const ANNOUNCE_ACKNOWLEDGED = "announce/message acknowledged";[m
+ //const ANNOUNCE_SELECTEDCONTENT = "announce/selected content"; // acknowledge completion of speaking[m
+ // const ANNOUNCE_CURRENTSENTENCE = "announce/selected content";  // acknowledge completion of speaking[m
+ const ANNOUNCE_AVAILABILITY = "announce/available";[m
+[31m-const ANNOUNCE_NEWSENTENCE = "announce/new sentence";[m
+[31m-const ANNOUNCE_NEWSECTION = "announce/new section";[m
+[32m+[m[32m// const ANNOUNCE_NEWSENTENCE = "announce/new sentence";[m
+[32m+[m[32m// const ANNOUNCE_NEWSECTION = "announce/new section";[m
+ //const SPEAKING_START = "announce/start";[m
+ //const SPEAKING_STOP = "announce/available";[m
+ [m
+[31m-const WORDS_VISITED_RESET = "wordsvisited/reset";[m
+[31m-const WORDS_VISITED = "wordsvisited/set";[m
+[32m+[m[32m// const WORDS_VISITED_RESET = "wordsvisited/reset";[m
+[32m+[m[32m// const WORDS_VISITED = "wordsvisited/set";[m
+ [m
+ const TRANSITION_ACKNOWLEDGE = "transition/acknowledge";[m
+ [m
+[32m+[m[32m// reciting[m
+ //const RECITING = "reciting"; // state of reciting[m
+ const RECITING = "reciting"; // actual state of reciting[m
+ // const RECITING_BEGIN = "reciting/start"; // actual state of reciting begin[m
+[36m@@ -98,53 +83,9 @@[m [mconst RECITE_STOP = "recite/stop";[m
+ const RECITE_TOGGLE = "recite/toggle"; // request from recite button[m
+ const SETTINGS_TOGGLE = "settings/toggle";[m
+ [m
+[31m-// const PAGE_RESET_VALUE = 0;[m
+[31m-// const SECTION_RESET_VALUE = 0;[m
+[31m-// const SENTENCE_RESET_VALUE = 0;[m
+[31m-// const WORD_RESET_VALUE = 0;[m
+[31m-// const WORDNODEIDX_RESET_VALUE = 0;[m
+[31m-[m
+[31m-// Initial states[m
+[31m-//const initialWordState = ITerminalInfoInitializer();[m
+[31m-// word: "",[m
+[31m-// wordNodeIdx: 0,[m
+[31m-// nextWordNodeIdx: [],[m
+[31m-// prevWordNodeIdx: [],[m
+[31m-// wordPattern: "",[m
+[31m-// wordId: 0,[m
+[31m-// sentenceId: 0,[m
+[31m-// sectionId: 0,[m
+[31m-// pageId: 0,[m
+[31m-// altRecognition: "",[m
+[31m-// visited: false[m
+[31m-[m
+[31m-// content: string; // to word match but is static[m
+[31m-// termIdx: number; //[m
+[31m-// nextTermIdx: number[]; // to move forward[m
+[31m-// prevTermIdx: number[]; // to move backward[m
+[31m-// altpronunciation: string; // inlline[m
+[31m-// altrecognition: string; // to alternatively match[m
+[31m-// recitable: boolean; //[m
+[31m-// audible: boolean;[m
+[31m-// visible: boolean;[m
+[31m-// fillin: boolean;[m
+[31m-// visited: boolean;[m
+[31m-[m
+[31m-//   pageId: PAGE_RESET_VALUE,[m
+[31m-//   sectionId: SECTION_RESET_VALUE, // should be [][m
+[31m-//   sentenceId: SENTENCE_RESET_VALUE,[m
+[31m-//   wordId: WORD_RESET_VALUE,[m
+[31m-//   word: null,[m
+[31m-//   altRecognition: null,[m
+[31m-//   visited: false[m
+[31m-// };[m
+[31m-// const initialNodeListState = {[m
+[31m-//   nodeList: [],[m
+[31m-//   wordNodeIdx: WORDNODEIDX_RESET_VALUE,[m
+[31m-//   firstWordNodeIdx: WORDNODEIDX_RESET_VALUE,[m
+[31m-//   lastWordNodeIdx: WORDNODEIDX_RESET_VALUE[m
+[31m-// };[m
+[31m-[m
+[32m+[m[32m// message/status bar actions[m
+[32m+[m[32mconst MESSAGE_SET = "message/set";[m
+[32m+[m[32mconst MESSAGE_CLEAR = "message/clear";[m
+ // Actions[m
+ const Speech_acknowledged = () => {[m
+   return {[m
+[36m@@ -225,25 +166,21 @@[m [mconst Cursor_gotoFirstWord = () => {[m
+   };[m
+ };[m
+ const Cursor_gotoNextWord = () => {[m
+[31m-  console.log(`nextword`);[m
+   return {[m
+     type: WORD_NEXT[m
+   };[m
+ };[m
+ const Cursor_gotoNextSentence = () => {[m
+[31m-  console.log(`nextsentence`);[m
+   return {[m
+     type: SENTENCE_NEXT[m
+   };[m
+ };[m
+ const Cursor_gotoPreviousWord = () => {[m
+[31m-  console.log(`prevword`);[m
+   return {[m
+     type: WORD_PREVIOUS[m
+   };[m
+ };[m
+ const Cursor_gotoPreviousSentence = () => {[m
+[31m-  console.log(`prevsentence`);[m
+   return {[m
+     type: SENTENCE_PREVIOUS[m
+   };[m
+[36m@@ -265,6 +202,41 @@[m [mconst Cursor_acknowledgeTransition = () => {[m
+     type: TRANSITION_ACKNOWLEDGE[m
+   };[m
+ };[m
+[32m+[m[32mconst Message_set = (message: string) => {[m
+[32m+[m[32m  return {[m
+[32m+[m[32m    type: MESSAGE_SET,[m
+[32m+[m[32m    payload: message[m
+[32m+[m[32m  };[m
+[32m+[m[32m};[m
+[32m+[m[32mconst Message_clear = () => {[m
+[32m+[m[32m  return {[m
+[32m+[m[32m    type: MESSAGE_SET,[m
+[32m+[m[32m    payload: ""[m
+[32m+[m[32m  };[m
+[32m+[m[32m};[m
+[32m+[m[32mconst Page_load = (page: string) => {[m
+[32m+[m[32m  return {[m
+[32m+[m[32m    type: PAGE_LOAD,[m
+[32m+[m[32m    payload: page[m
+[32m+[m[32m  };[m
+[32m+[m[32m};[m
+[32m+[m[32mconst Page_loaded = (loaded: boolean) => {[m
+[32m+[m[32m  return {[m
+[32m+[m[32m    type: PAGE_LOADED,[m
+[32m+[m[32m    payload: loaded[m
+[32m+[m[32m  };[m
+[32m+[m[32m};[m
+[32m+[m[32mconst Page_gotoLink = () => {[m
+[32m+[m[32m  return {[m
+[32m+[m[32m    type: PAGE_LINKTO[m
+[32m+[m[32m  };[m
+[32m+[m[32m};[m
+[32m+[m[32mconst Page_setContext = (context: CPageLists) => {[m
+[32m+[m[32m  return {[m
+[32m+[m[32m    type: CONTEXT_SET,[m
+[32m+[m[32m    payload: context[m
+[32m+[m[32m  };[m
+[32m+[m[32m};[m
+ const Recognition_toggle = () => {[m
+   return {[m
+     type: LISTENING_TOGGLE[m
+[36m@@ -302,12 +274,6 @@[m [mconst Recognition_setAvailability = (speechRecognitionSupported: boolean) => {[m
+ //     type: ANNOUNCE_TRANSITIONACKNOWLEDGED[m
+ // }[m
+ // }[m
+[31m-const Page_setContext = (context: CPageContext) => {[m
+[31m-  return {[m
+[31m-    type: CONTEXT_SET,[m
+[31m-    payload: context[m
+[31m-  };[m
+[31m-};[m
+ const Reciting_start = () => {[m
+   return {[m
+     type: RECITING,[m
+[36m@@ -362,7 +328,13 @@[m [mexport const Request = {[m
+   Cursor_gotoSectionByIdx,[m
+   Cursor_acknowledgeTransition,[m
+ [m
+[32m+[m[32m  Message_set,[m
+[32m+[m[32m  Message_clear,[m
+[32m+[m
+[32m+[m[32m  Page_load,[m
+[32m+[m[32m  Page_loaded,[m
+   Page_setContext,[m
+[32m+[m[32m  Page_gotoLink,[m
+ [m
+   Recognition_toggle,[m
+   Recognition_setAvailability,[m
+[36m@@ -492,11 +464,18 @@[m [minterface IReduxState {[m
+   cursor_newPageTransition: boolean;[m
+   cursor_endOfPageReached: boolean;[m
+ [m
+[31m-  pageContext: CPageContext;[m
+[32m+[m[32m  page_requested: string;[m
+[32m+[m[32m  cursor_terminalIdx_fromLink: number;[m
+[32m+[m[32m  cursor_sectionIdx_fromLink: number;[m
+[32m+[m[32m  page_loaded: boolean;[m
+[32m+[m[32m  page_section: number;[m
+[32m+[m[32m  //page_lists: CPageLists;[m
+[32m+[m[32m  pageContext: CPageLists;[m
+ [m
+   recite_requested: boolean;[m
+   reciting: boolean;[m
+   settings_toggle: boolean;[m
+[32m+[m[32m  message: string;[m
+ }[m
+ const IReduxStateInitialState: IReduxState = {[m
+   announce_available: false,[m
+[36m@@ -518,12 +497,19 @@[m [mconst IReduxStateInitialState: IReduxState = {[m
+   cursor_beginningOfPageReached: true,[m
+   cursor_endOfPageReached: false,[m
+ [m
+[31m-  pageContext: new CPageContext(),[m
+[32m+[m[32m  page_requested: "",[m
+[32m+[m[32m  page_loaded: false,[m
+[32m+[m[32m  page_section: 0,[m
+[32m+[m[32m  cursor_terminalIdx_fromLink: 0,[m
+[32m+[m[32m  cursor_sectionIdx_fromLink: 0,[m
+[32m+[m[32m  //page_lists: new CPageLists(),[m
+[32m+[m[32m  pageContext: new CPageLists(),[m
+ [m
+   recite_requested: false,[m
+   reciting: false,[m
+ [m
+[31m-  settings_toggle: false[m
+[32m+[m[32m  settings_toggle: false,[m
+[32m+[m[32m  message: ""[m
+   //  pageContext: PageContextInitializer()[m
+ };[m
+ export const rootReducer = ([m
+[36m@@ -549,7 +535,7 @@[m [mexport const rootReducer = ([m
+       console.log(`setTerminalState no state transition`);[m
+     } else if (terminalIdxs.length === 1) {[m
+       console.log(`setTerminalState single state transition`);[m
+[31m-      if (state.pageContext.validTerminalIdx(terminalIdxs[0])) {[m
+[32m+[m[32m      if (state.pageContext.isValidTerminalIdx(terminalIdxs[0])) {[m
+         /// set single state[m
+         state.cursor_terminalIdx = terminalIdxs[0];[m
+         [[m
+[36m@@ -593,15 +579,95 @@[m [mexport const rootReducer = ([m
+       state.pageContext.previousSentenceTerminalIdx(state.cursor_terminalIdx)[m
+     ]);[m
+   };[m
+[32m+[m[32m  const proposeLinkedTerminalState = (linkIdx?: number) => {[m
+[32m+[m[32m    if ([m
+[32m+[m[32m      linkIdx !== undefined &&[m
+[32m+[m[32m      linkIdx !== null &&[m
+[32m+[m[32m      linkIdx >= 0 &&[m
+[32m+[m[32m      linkIdx < state.pageContext.linkList.length[m
+[32m+[m[32m    ) {[m
+[32m+[m[32m      state.cursor_sectionIdx_fromLink =[m
+[32m+[m[32m        state.pageContext.linkList[linkIdx].destination.sectionIdx;[m
+[32m+[m[32m      state.cursor_terminalIdx_fromLink =[m
+[32m+[m[32m        state.pageContext.linkList[linkIdx].destination.terminalIdx;[m
+[32m+[m[32m    } else {[m
+[32m+[m[32m      state.cursor_terminalIdx_fromLink = IDX_INITIALIZER;[m
+[32m+[m[32m      state.cursor_sectionIdx_fromLink = IDX_INITIALIZER;[m
+[32m+[m[32m    }[m
+[32m+[m[32m  };[m
+[32m+[m[32m  const setLinkedTerminalState = () => {[m
+[32m+[m[32m    if (state.cursor_terminalIdx_fromLink === state.cursor_terminalIdx) {[m
+[32m+[m[32m      // do nothing[m
+[32m+[m[32m    } else if ([m
+[32m+[m[32m      state.pageContext.isValidSectionIdx(state.cursor_sectionIdx_fromLink)[m
+[32m+[m[32m    ) {[m
+[32m+[m[32m      setTerminalState([[m
+[32m+[m[32m        state.pageContext.sectionList[state.cursor_sectionIdx_fromLink][m
+[32m+[m[32m          .firstTermIdx[m
+[32m+[m[32m      ]);[m
+[32m+[m[32m    } else if ([m
+[32m+[m[32m      state.pageContext.isValidTerminalIdx(state.cursor_terminalIdx_fromLink)[m
+[32m+[m[32m    ) {[m
+[32m+[m[32m      setTerminalState([state.cursor_terminalIdx_fromLink]);[m
+[32m+[m[32m    } else {[m
+[32m+[m[32m      state.cursor_terminalIdx = 0;[m
+[32m+[m[32m    }[m
+[32m+[m[32m    proposeLinkedTerminalState(); //resets proposal[m
+[32m+[m[32m  };[m
+   //  const queueAccouncement(state.announcement)[m
+   switch (action.type) {[m
+[31m-    case CONTEXT_SET:[m
+[31m-      // convert this to object with methods[m
+[31m-      state.pageContext = action.payload as CPageContext; // strictly a read only reference to react context NOT a copy[m
+[32m+[m[32m    case PAGE_LOAD:[m
+[32m+[m[32m      state.page_requested = action.payload as string;[m
+[32m+[m[32m      state.cursor_sectionIdx_fromLink = 0; // needed because linkTo may specify initial sectionIdx within link definition[m
+[32m+[m[32m      state.cursor_terminalIdx_fromLink = 0;[m
+[32m+[m[32m      state.page_loaded = false;[m
+       return state;[m
+[32m+[m[32m    case PAGE_LOADED:[m
+[32m+[m[32m      state.page_loaded = action.payload as boolean;[m
+[32m+[m[32m      return state;[m
+[32m+[m[32m    // case PAGE_SETLISTS:[m
+[32m+[m[32m    //   state.page_lists = action.payload as CPageLists;[m
+[32m+[m[32m    //   return state;[m
+     case PAGE_TOP:[m
+       setTerminalState([state.pageContext.firstTerminalIdx]); // should be first actionable terminal i.e. , no syntactical sugar[m
+       return state;[m
+[32m+[m[32m    case PAGE_LINKTO:[m
+[32m+[m[32m      // get current terminal and retrieve linked page[m
+[32m+[m[32m      let linkIdx =[m
+[32m+[m[32m        state.pageContext.terminalList[state.cursor_terminalIdx].linkIdx;[m
+[32m+[m[32m      proposeLinkedTerminalState(linkIdx);[m
+[32m+[m[32m      if (linkIdx >= 0 && linkIdx < state.pageContext.linkList.length) {[m
+[32m+[m[32m        if (state.pageContext.linkList.length === 0) {[m
+[32m+[m[32m          console.log(`linkList is empty`);[m
+[32m+[m[32m        } else if ([m
+[32m+[m[32m          state.page_requested ===[m
+[32m+[m[32m          state.pageContext.linkList[linkIdx].destination.page[m
+[32m+[m[32m        ) {[m
+[32m+[m[32m          console.log(`linking within explicitly specified page`);[m
+[32m+[m[32m          setLinkedTerminalState();[m
+[32m+[m[32m        } else if ([m
+[32m+[m[32m          state.pageContext.linkList[linkIdx].destination.page.length === 0[m
+[32m+[m[32m        ) {[m
+[32m+[m[32m          console.log(`linking within (current default) page`);[m
+[32m+[m[32m          setLinkedTerminalState();[m
+[32m+[m[32m        } else {[m
+[32m+[m[32m          state.page_requested =[m
+[32m+[m[32m            state.pageContext.linkList[linkIdx].destination.page + ".json";[m
+[32m+[m[32m          // save the proposed linked idxs for use when the above page context[m
+[32m+[m[32m          // is loaded into reducer[m
+[32m+[m[32m          state.page_loaded = false;[m
+[32m+[m[32m        }[m
+[32m+[m[32m      }[m
+[32m+[m[32m      return state;[m
+[32m+[m[32m    case CONTEXT_SET:[m
+[32m+[m[32m      // cast object into class instance with methods[m
+[32m+[m[32m      // strictly a read only reference to react context NOT a copy.[m
+[32m+[m[32m      // alternatively, could access via useContext iff in provider/consumer[m
+[32m+[m[32m      // scope[m
+[32m+[m[32m      state.pageContext = action.payload as CPageLists;[m
+[32m+[m
+[32m+[m[32m      setLinkedTerminalState();[m
+[32m+[m[32m      return state;[m
+     case SECTION_CHANGE:[m
+       let sectionIdx: number = +action.payload;[m
+       if ([m
+[36m@@ -609,11 +675,22 @@[m [mexport const rootReducer = ([m
+         state.pageContext !== undefined &&[m
+         sectionIdx in state.pageContext.sectionList[m
+       ) {[m
+[31m-        state.cursor_sectionIdx = sectionIdx;[m
+[31m-        state.cursor_terminalIdx =[m
+[31m-          state.pageContext.sectionList[sectionIdx].firstTermIdx;[m
+[31m-        state.cursor_sentenceIdx =[m
+[31m-          state.pageContext.terminalList[state.cursor_terminalIdx].sentenceIdx;[m
+[32m+[m[32m        if ([m
+[32m+[m[32m          sectionIdx >= 0 &&[m
+[32m+[m[32m          sectionIdx < state.pageContext.sectionList.length[m
+[32m+[m[32m        ) {[m
+[32m+[m[32m          state.cursor_sectionIdx = sectionIdx;[m
+[32m+[m[32m          state.cursor_terminalIdx =[m
+[32m+[m[32m            state.pageContext.sectionList[sectionIdx].firstTermIdx;[m
+[32m+[m[32m          state.cursor_sentenceIdx =[m
+[32m+[m[32m            state.pageContext.terminalList[[m
+[32m+[m[32m              state.cursor_terminalIdx[m
+[32m+[m[32m            ].sentenceIdx;[m
+[32m+[m[32m        } else {[m
+[32m+[m[32m          // should report out-of-bound condition. How?[m
+[32m+[m[32m          state.cursor_sectionIdx = 0;[m
+[32m+[m[32m          state.cursor_terminalIdx = 0;[m
+[32m+[m[32m        }[m
+       }[m
+       return state;[m
+     case WORD_MATCH:[m
+[36m@@ -682,42 +759,6 @@[m [mexport const rootReducer = ([m
+     case WORD_SELECT:[m
+       setTerminalState([+action.payload]);[m
+       return state;[m
+[31m-    // case WORDS_VISITED_RESET:[m
+[31m-    //   // state.visited[0] = false;[m
+[31m-    //   return state;[m
+[31m-    // case WORDS_VISITED:[m
+[31m-    //   // state.wordsVisited = [...state.wordsVisited];[m
+[31m-    //   // state.wordsVisited[action.payload] = true;[m
+[31m-    //   return state;[m
+[31m-    // case WORD_VISIT:[m
+[31m-    // need a boolean array: visited[0..lastTerminalIdx-1] = { true | false }[m
+[31m-[m
+[31m-    //   console.log(`word visit=${action.payload}`);[m
+[31m-    //   console.log(`state.wordNodeIdx=${state.wordNodeIdx}`);[m
+[31m-    //   //    console.log(`state.nodeList.validWordNodeIdx()=${state.nodeList.validWordNodeIdx(state.wordNodeIdx)}`);[m
+[31m-    //   console.log(`wordNode=${state.nodeList.props(state.wordNodeIdx)}`);[m
+[31m-    //   console.log([m
+[31m-    //     `compare=${state.nodeList.props(state.wordNodeIdx).word ===[m
+[31m-    //       action.payload}`[m
+[31m-    //   );[m
+[31m-    //   console.log(`word=${state.nodeList.props(state.wordNodeIdx).word}`);[m
+[31m-    //   console.log(`payload word=${action.payload}`);[m
+[31m-    //   if ([m
+[31m-    //     state.wordNodeIdx !== undefined &&[m
+[31m-    //     //        && state.nodeList.validWordNodeIdx()[m
+[31m-    //     state.nodeList.props(state.wordNodeIdx).word === action.payload[m
+[31m-    //   ) {[m
+[31m-    //     // should use RegExp with (alt)Recognition string[m
+[31m-    //     console.log(`word visited=${action.payload}`);[m
+[31m-    //     //      state.wordsVisited = [...state.wordsVisited]; // copy to immutable array before updating element below[m
+[31m-    //     //      state.wordsVisited[state.wordNodeIdx] = true;[m
+[31m-    //     ///      console.log(`state.wordVisited=${state.wordsVisited}`);[m
+[31m-    //     state.wordNodeIdx = state.nodeList.props([m
+[31m-    //       state.wordNodeIdx[m
+[31m-    //     ).nextWordNodeIdx[0];[m
+[31m-    //     state = state.nodeList.updateImmutableState(state);[m
+[31m-    //   }[m
+[31m-    // return state;[m
+     case LISTENING_TOGGLE:[m
+       if (state.listen_available) {[m
+         state.listen_active = !state.listen_active;[m
+[36m@@ -774,267 +815,13 @@[m [mexport const rootReducer = ([m
+       if (state.settings_toggle) state.listen_active = false;[m
+       return state;[m
+ [m
+[31m-    default:[m
+[31m-      return state;[m
+[31m-  }[m
+[31m-};[m
+[31m-/*[m
+[31m-const CursorActionReducer = ([m
+[31m-  state: ICursorState = ICursorStateInitializer(),[m
+[31m-  action: any[m
+[31m-) => {[m
+[31m-  const setTerminalState = (terminalIdx: number) => {[m
+[31m-    let priorSentenceIdx: number = state.sentenceIdx;[m
+[31m-    let priorSectionIdx: number = state.sectionIdx;[m
+[31m-    state.terminalIdx = terminalIdx;[m
+[31m-    state.sectionIdx = state.pageContext.terminalList[terminalIdx].sectionIdx;[m
+[31m-    state.sentenceIdx = state.pageContext.terminalList[terminalIdx].sentenceIdx;[m
+[31m-    state.newSentence = state.sentenceIdx !== priorSentenceIdx;[m
+[31m-    ListeningActions.flush = true;[m
+[31m-    state.newSection = state.sectionIdx !== priorSectionIdx;[m
+[31m-  };[m
+[31m-  const setToNextTerminalState = (terminalIdx: number) => {[m
+[31m-    setTerminalState([m
+[31m-      // update sentence, section transitions[m
+[31m-      state.pageContext.terminalList[terminalIdx].nextTermIdx[0][m
+[31m-    );[m
+[31m-  };[m
+[31m-  const setToPrevTerminalState = (terminalIdx: number) => {[m
+[31m-    setTerminalState([m
+[31m-      state.pageContext.terminalList[terminalIdx].prevTermIdx[0][m
+[31m-    );[m
+[31m-  };[m
+[31m-  switch (action.type) {[m
+[31m-    case CONTEXT_SET:[m
+[31m-      state.pageContext = action.payload as IPageContext; // strictly a read only reference to react context NOT a copy[m
+[31m-      return state;[m
+[31m-    case PAGE_FIRST:[m
+[31m-      setTerminalState(0); // should be first actionable terminal i.e. , no syntactical sugar[m
+[31m-      return state;[m
+[31m-    case SECTION_CHANGE:[m
+[31m-      let sectionIdx: number = +action.payload;[m
+[31m-      if ([m
+[31m-        state.pageContext !== null &&[m
+[31m-        state.pageContext !== undefined &&[m
+[31m-        sectionIdx in state.pageContext.sectionList[m
+[31m-      ) {[m
+[31m-        state.sectionIdx = sectionIdx;[m
+[31m-        state.terminalIdx =[m
+[31m-          state.pageContext.sectionList[sectionIdx].firstTermIdx;[m
+[31m-        state.sentenceIdx =[m
+[31m-          state.pageContext.terminalList[state.terminalIdx].sentenceIdx;[m
+[31m-      }[m
+[31m-      return state;[m
+[31m-    case WORD_MATCH:[m
+[31m-      let words: string = action.payload as string;[m
+[31m-      if ([m
+[31m-        words !== undefined &&[m
+[31m-        state.pageContext !== undefined &&[m
+[31m-        state.pageContext !== null[m
+[31m-      ) {[m
+[31m-        console.log(`WORD_MATCH: words=${words}`);[m
+[31m-        for (let word of words.split(" ")) {[m
+[31m-          console.log(`WORD_MATCH: word=${word}`);[m
+[31m-          if ([m
+[31m-            state.pageContext.terminalList[[m
+[31m-              state.terminalIdx[m
+[31m-            ].content.toLowerCase() === word.toLowerCase()[m
+[31m-          ) {[m
+[31m-            // should use RegExp with (alt)Recognition string[m
+[31m-            setToNextTerminalState(state.terminalIdx);[m
+[31m-            // state.terminalIdx =[m
+[31m-            //   nodes.terminalList[state.terminalIdx].nextTermIdx[0]; // does not account for multiple paths i.e., [1..n][m
+[31m-            // state.sectionIdx = nodes.terminalList[state.terminalIdx].sectionIdx;[m
+[31m-            // state.sentenceIdx =[m
+[31m-            //   nodes.terminalList[state.terminalIdx].sentenceIdx;[m
+[31m-          } else if ([m
+[31m-            state.pageContext.terminalList[state.terminalIdx].altrecognition !==[m
+[31m-              null &&[m
+[31m-            state.pageContext.terminalList[state.terminalIdx].altrecognition[m
+[31m-              .length > 0[m
+[31m-          ) {[m
+[31m-            let pattern = new RegExp([m
+[31m-              state.pageContext.terminalList[state.terminalIdx].altrecognition[m
+[31m-            );[m
+[31m-            if (word.toLowerCase().match(pattern) !== null) {[m
+[31m-              setToNextTerminalState(state.terminalIdx);[m
+[31m-            }[m
+[31m-          } else {[m
+[31m-            // no match[m
+[31m-          }[m
+[31m-        }[m
+[31m-      }[m
+[31m-      return state;[m
+[31m-    case WORD_VISIT:[m
+[31m-      // need a boolean array: visited[0..lastTerminalIdx-1] = { true | false }[m
+[31m-[m
+[31m-      //   console.log(`word visit=${action.payload}`);[m
+[31m-      //   console.log(`state.wordNodeIdx=${state.wordNodeIdx}`);[m
+[31m-      //   //    console.log(`state.nodeList.validWordNodeIdx()=${state.nodeList.validWordNodeIdx(state.wordNodeIdx)}`);[m
+[31m-      //   console.log(`wordNode=${state.nodeList.props(state.wordNodeIdx)}`);[m
+[31m-      //   console.log([m
+[31m-      //     `compare=${state.nodeList.props(state.wordNodeIdx).word ===[m
+[31m-      //       action.payload}`[m
+[31m-      //   );[m
+[31m-      //   console.log(`word=${state.nodeList.props(state.wordNodeIdx).word}`);[m
+[31m-      //   console.log(`payload word=${action.payload}`);[m
+[31m-      //   if ([m
+[31m-      //     state.wordNodeIdx !== undefined &&[m
+[31m-      //     //        && state.nodeList.validWordNodeIdx()[m
+[31m-      //     state.nodeList.props(state.wordNodeIdx).word === action.payload[m
+[31m-      //   ) {[m
+[31m-      //     // should use RegExp with (alt)Recognition string[m
+[31m-      //     console.log(`word visited=${action.payload}`);[m
+[31m-      //     //      state.wordsVisited = [...state.wordsVisited]; // copy to immutable array before updating element below[m
+[31m-      //     //      state.wordsVisited[state.wordNodeIdx] = true;[m
+[31m-      //     ///      console.log(`state.wordVisited=${state.wordsVisited}`);[m
+[31m-      //     state.wordNodeIdx = state.nodeList.props([m
+[31m-      //       state.wordNodeIdx[m
+[31m-      //     ).nextWordNodeIdx[0];[m
+[31m-      //     state = state.nodeList.updateImmutableState(state);[m
+[31m-      //   }[m
+[31m-      return state;[m
+[31m-    case WORD_NEXT:[m
+[31m-      setToNextTerminalState(state.terminalIdx);[m
+[31m-      return state;[m
+[31m-    case WORD_PREVIOUS:[m
+[31m-      setToPrevTerminalState(state.terminalIdx);[m
+[31m-      return state;[m
+[31m-    case WORD_SELECT:[m
+[31m-      let selectedTerminalIdx: number = +action.payload;[m
+[31m-      setTerminalState(selectedTerminalIdx);[m
+[31m-      return state;[m
+[31m-    case WORDS_VISITED_RESET:[m
+[31m-      // state.visited[0] = false;[m
+[31m-      return state;[m
+[31m-    case WORDS_VISITED:[m
+[31m-      // state.wordsVisited = [...state.wordsVisited];[m
+[31m-      // state.wordsVisited[action.payload] = true;[m
+[31m-      return state;[m
+[31m-    }[m
+[31m-  }[m
+[31m-};[m
+[31m-*/[m
+[31m-// const WordActionReducer = ([m
+[31m-//   state: any = ITerminalInfoInitializer(),[m
+[31m-//   action: any[m
+[31m-// ) => {[m
+[31m-//   switch (action.type) {[m
+[31m-//     case SECTION_CHANGE:[m
+[31m-//       /// should be based on wordNodeIdx change[m
+[31m-//       state.sectionId = action.payload;[m
+[31m-//       return state;[m
+[31m-//     case WORD_MATCH:[m
+[31m-//       let words: string = action.payload as string;[m
+[31m-//       if (words !== undefined) {[m
+[31m-//         console.log(`WORD_MATCH: words=${words}`);[m
+[31m-//         for (let word of words.split(" ")) {[m
+[31m-//           console.log(`WORD_MATCH: word=${word}`);[m
+[31m-//           if ([m
+[31m-//             state.nodeList.props(state.wordNodeIdx).word.toLowerCase() ===[m
+[31m-//             word.toLowerCase()[m
+[31m-//           ) {[m
+[31m-//             // should use RegExp with (alt)Recognition string[m
+[31m-//             state.wordNodeIdx = state.nodeList.props([m
+[31m-//               state.wordNodeIdx[m
+[31m-//             ).nextWordNodeIdx[0];[m
+[31m-//             state = state.nodeList.updateImmutableState(state);[m
+[31m-//           }[m
+[31m-//         }[m
+[31m-//         /*[m
+[31m-//       if (state.nodeList.props(state.wordNodeIdx).word === action.payload) {  // should use RegExp with (alt)Recognition string[m
+[31m-//         state.wordNodeIdx = state.nodeList[state.wordNodeIdx].nextWordNodeIdx[0];[m
+[31m-//         state = state.nodeList.updateImmutableState(state);[m
+[31m-//       }[m
+[31m-//       */[m
+[31m-//       }[m
+[31m-//       return state;[m
+[31m-//     case WORD_VISIT:[m
+[31m-//       console.log(`word visit=${action.payload}`);[m
+[31m-//       console.log(`state.wordNodeIdx=${state.wordNodeIdx}`);[m
+[31m-//       //    console.log(`state.nodeList.validWordNodeIdx()=${state.nodeList.validWordNodeIdx(state.wordNodeIdx)}`);[m
+[31m-//       console.log(`wordNode=${state.nodeList.props(state.wordNodeIdx)}`);[m
+[31m-//       console.log([m
+[31m-//         `compare=${state.nodeList.props(state.wordNodeIdx).word ===[m
+[31m-//           action.payload}`[m
+[31m-//       );[m
+[31m-//       console.log(`word=${state.nodeList.props(state.wordNodeIdx).word}`);[m
+[31m-//       console.log(`payload word=${action.payload}`);[m
+[31m-//       if ([m
+[31m-//         state.wordNodeIdx !== undefined &&[m
+[31m-//         //        && state.nodeList.validWordNodeIdx()[m
+[31m-//         state.nodeList.props(state.wordNodeIdx).word === action.payload[m
+[31m-//       ) {[m
+[31m-//         // should use RegExp with (alt)Recognition string[m
+[31m-//         console.log(`word visited=${action.payload}`);[m
+[31m-//         //      state.wordsVisited = [...state.wordsVisited]; // copy to immutable array before updating element below[m
+[31m-//         //      state.wordsVisited[state.wordNodeIdx] = true;[m
+[31m-//         ///      console.log(`state.wordVisited=${state.wordsVisited}`);[m
+[31m-//         state.wordNodeIdx = state.nodeList.props([m
+[31m-//           state.wordNodeIdx[m
+[31m-//         ).nextWordNodeIdx[0];[m
+[31m-//         state = state.nodeList.updateImmutableState(state);[m
+[31m-//       }[m
+[31m-//       return state;[m
+[31m-//     case WORD_NEXT:[m
+[31m-//       state.wordNodeIdx = state.nodeList.props([m
+[31m-//         state.wordNodeIdx[m
+[31m-//       ).nextWordNodeIdx[0];[m
+[31m-//       state = state.nodeList.updateImmutableState(state);[m
+[31m-//       return state;[m
+[31m-//     case WORD_PREVIOUS:[m
+[31m-//       state.wordNodeIdx = state.nodeList.props([m
+[31m-//         state.wordNodeIdx[m
+[31m-//       ).prevWordNodeIdx[0];[m
+[31m-//       state = state.nodeList.updateImmutableState(state);[m
+[31m-//       return state;[m
+[31m-//     case WORD_SELECT:[m
+[31m-//       state.wordNodeIdx = action.payload;[m
+[31m-//       state = state.nodeList.updateImmutableState(state);[m
+[31m-//       return state;[m
+[31m-//     case WORDS_VISITED_RESET:[m
+[31m-//       state.visited[0] = false;[m
+[31m-//       return state;[m
+[31m-//     case WORDS_VISITED:[m
+[31m-//       state.wordsVisited = [...state.wordsVisited];[m
+[31m-//       state.wordsVisited[action.payload] = true;[m
+[31m-//       return state;[m
+[31m-//     // case WORDNODEIDX_SET:[m
+[31m-//     //   state.wordNodeIdx = action.payload;[m
+[31m-//     //   return state;[m
+[31m-//     default:[m
+[31m-//       return state;[m
+[31m-//   }[m
+[31m-// };[m
+[31m-/************[m
+[31m-const ListeningReducer = (state: any = InitialListeningState, action: any) => {[m
+[31m-  switch (action.type) {[m
+[31m-    case LISTENING_TOGGLE:[m
+[31m-      if (state.listeningAvailable) {[m
+[31m-        state.listening = !state.listening;[m
+[31m-      }[m
+[31m-      return state;[m
+[31m-    case LISTENING_STOP:[m
+[31m-      state.listening = false;[m
+[31m-      return state;[m
+[31m-    case LISTENING_AVAILABLE:[m
+[31m-      state.listeningAvailable = action.payload;[m
+[31m-      return state;[m
+[31m-    case LISTENING_FLUSH:[m
+[31m-      state.flush = true; // resets transcript[m
+[31m-      return state;[m
+[31m-    case LISTENING_FLUSHED:[m
+[31m-      state.flush = false; // resets transcript[m
+[32m+[m[32m    case MESSAGE_SET:[m
+[32m+[m[32m      state.message = action.payload;[m
+       return state;[m
+     default:[m
+       return state;[m
+   }[m
+ };[m
+[31m-************/[m
+[31m-// export const rootReducer = combineReducers({[m
+[31m-//   CursorActionReducer,[m
+[31m-//   ListeningReducer[m
+[31m-// });[m
+ function patternMatch(content: string, altRecognitionPattern: string): boolean {[m
+   let pattern: RegExp = new RegExp(altRecognitionPattern);[m
+   return pattern.test(content);[m
+[1mdiff --git a/reading_fe_app/src/settingsContext.ts b/reading_fe_app/src/settingsContext.ts[m
+[1mindex eab0a77..5314438 100644[m
+[1m--- a/reading_fe_app/src/settingsContext.ts[m
+[1m+++ b/reading_fe_app/src/settingsContext.ts[m
+[36m@@ -1,6 +1,6 @@[m
+[31m-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved[m
+[32m+[m[32m/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved[m
+  *[m
+[31m- * File name: settingContext.ts[m
+[32m+[m[32m * File name: settingsContext.ts[m
+  *[m
+  * Defines setting values for import and export[m
+  * When the user wants to change the settings, clone the context and[m
+[36m@@ -57,6 +57,7 @@[m [mexport const SettingsInitializer = ([m
+   };[m
+ };[m
+ export interface IConfigSettings {[m
+[32m+[m[32m  homePage: string;[m
+   distDir: string;[m
+   firstName: string;[m
+   lastName: string;[m
+[36m@@ -72,11 +73,13 @@[m [mexport interface ISpeechSettings {[m
+   selectedVoiceIndex: number;[m
+ }[m
+ export function ConfigSettingsInitializer([m
+[32m+[m[32m  homePage: string = "ronlyn",[m
+   distDir: string = "https://weng1102.github.io/reading_app/dist/",[m
+   firstName: string = "Ronlyn",[m
+   lastName: string = "Goo"[m
+ ): IConfigSettings {[m
+   return {[m
+[32m+[m[32m    homePage,[m
+     distDir,[m
+     firstName,[m
+     lastName[m
+[36m@@ -129,172 +132,5 @@[m [mexport function ListenSettingsInitializer([m
+   };[m
+ }[m
+ export const SettingsContext = React.createContext([m
+[31m-  <ISettingsContext | null>null[m
+[32m+[m[32m  null as ISettingsContext | null[m
+ );[m
+[31m-[m
+[31m-//export ISpeechSettings = SpeechSettingsInitializer();[m
+[31m-//export var ListenSettings: IListenSettings = ListenSettingsInitializer();[m
+[31m-// export class CSpeechSettings {[m
+[31m-//   constructor(speech?: CSpeechSettings) {[m
+[31m-//     if (speech === undefined) {[m
+[31m-//       this.recitationMode = RecitationMode.wordOnly;[m
+[31m-//       this.lang = "English";[m
+[31m-//       this.locale = "en-US";[m
+[31m-//       this.gender = "female";[m
+[31m-//       this.pitch = 0;[m
+[31m-//       this.rate = 0;[m
+[31m-//       this.volume = 0.5;[m
+[31m-//       this.selectedVoiceIndex = 0;[m
+[31m-//     } else {[m
+[31m-//       this.recitationMode = speech.recitationMode;[m
+[31m-//       this.lang = speech.lang;[m
+[31m-//       this.locale = speech.locale;[m
+[31m-//       this.gender = speech.gender;[m
+[31m-//       this.pitch = speech.pitch;[m
+[31m-//       this.rate = speech.rate;[m
+[31m-//       this.volume = speech.volume;[m
+[31m-//       this.selectedVoiceIndex = speech.selectedVoiceIndex;[m
+[31m-//     }[m
+[31m-//   }[m
+[31m-//   modified: boolean = false;[m
+[31m-//   recitationMode: RecitationMode;[m
+[31m-//   lang: string;[m
+[31m-//   locale: string;[m
+[31m-//   gender: string;[m
+[31m-//   pitch: number;[m
+[31m-//   rate: number;[m
+[31m-//   voice: SpeechSynthesisVoice = {[m
+[31m-//     default: false,[m
+[31m-//     lang: "",[m
+[31m-//     localService: false,[m
+[31m-//     name: "",[m
+[31m-//     voiceURI: ""[m
+[31m-//   };[m
+[31m-//   volume: number;[m
+[31m-//   selectedVoiceIndex: number;[m
+[31m-//   //  voices:[m
+[31m-//   getVoices() {[m
+[31m-//    SpeechSynthesis.getVoices();[m
+[31m-//SpeechSynthesisVoice[m
+[31m-// }[m
+[31m-//   setRecitationMode1(recitationMode: RecitationMode) {[m
+[31m-//     console.log(`recitationMode=${recitationMode}`);[m
+[31m-//     this.recitationMode = recitationMode;[m
+[31m-//     this.modified = true;[m
+[31m-//   }[m
+[31m-//   setLang(lang: string) {[m
+[31m-//     this.lang = lang;[m
+[31m-//     this.modified = true;[m
+[31m-//   }[m
+[31m-//   setPitch(pitch: number) {[m
+[31m-//     this.pitch = pitch;[m
+[31m-//     this.modified = true;[m
+[31m-//   }[m
+[31m-//   setRate(rate: number) {[m
+[31m-//     this.rate = rate;[m
+[31m-//     this.modified = true;[m
+[31m-//   }[m
+[31m-//   setVoice(voice: SpeechSynthesisVoice) {[m
+[31m-//     this.voice = voice;[m
+[31m-//     this.modified = true;[m
+[31m-//   }[m
+[31m-//[m
+[31m-//   setVolume(volume: number) {[m
+[31m-//     this.volume = volume;[m
+[31m-//     this.modified = true;[m
+[31m-//   }[m
+[31m-//   setSelectedVoiceIndex(index: number) {[m
+[31m-//     this.selectedVoiceIndex = index;[m
+[31m-//     this.modified = true;[m
+[31m-//   }[m
+[31m-// }[m
+[31m-// export class CListenSettings {[m
+[31m-//   constructor(listen?: CListenSettings) {[m
+[31m-//     if (listen === undefined) {[m
+[31m-//       this.stopAtEndOfSentence = true;[m
+[31m-//       this.timeout = 20; // time out upon silence[m
+[31m-//       this.listeningInterval = 20; // msec between listening and matching[m
+[31m-//       this.notificationMode = NotificationMode.voice;[m
+[31m-//       this.sentenceNotification = "new sentence";[m
+[31m-//       this.sectionNotification = "new section";[m
+[31m-//     } else {[m
+[31m-//       this.stopAtEndOfSentence = listen.stopAtEndOfSentence;[m
+[31m-//       this.timeout = listen.timeout; // time out upon silence[m
+[31m-//       this.listeningInterval = listen.listeningInterval; // msec between listening and matching[m
+[31m-//       this.notificationMode = listen.notificationMode;[m
+[31m-//       this.sentenceNotification = listen.sentenceNotification;[m
+[31m-//       this.sectionNotification = listen.sectionNotification;[m
+[31m-//     }[m
+[31m-//   }[m
+[31m-//   stopAtEndOfSentence: boolean = true;[m
+[31m-//   modified: boolean = false;[m
+[31m-//   timeout: number; // time out upon silence[m
+[31m-//   listeningInterval: number; // msec between listening and matching[m
+[31m-//   notificationMode: NotificationMode;[m
+[31m-//   sentenceNotification: string;[m
+[31m-//   sectionNotification: string;[m
+[31m-// setTimeout(timeout: number) {[m
+[31m-//   this.timeout = timeout;[m
+[31m-//   this.modified = true;[m
+[31m-// }[m
+[31m-// setListeningInterval(interval: number) {[m
+[31m-//   this.listeningInterval = interval;[m
+[31m-//   this.modified = true;[m
+[31m-// } // msec between listening and matching[m
+[31m-// setNotificationMode(notificationMode: NotificationMode) {[m
+[31m-//   this.notificationMode = notificationMode;[m
+[31m-//   this.modified = true;[m
+[31m-// }[m
+[31m-// setSentenceNotification(sentenceNotification: string) {[m
+[31m-//   this.sentenceNotification = sentenceNotification;[m
+[31m-//   this.modified = true;[m
+[31m-// }[m
+[31m-// setSectionNotification(sectionNotification: string) {[m
+[31m-//   this.sectionNotification = sectionNotification;[m
+[31m-//   this.modified = true;[m
+[31m-// }[m
+[31m-// }[m
+[31m-// export interface IListenSettings {[m
+[31m-//   stopAtEndOfSentence: boolean;[m
+[31m-//   timeout: number; // time out upon silence[m
+[31m-//   listeningInterval: number; // msec between listening and matching[m
+[31m-//   notificationMode: NotificationMode;[m
+[31m-//   sentenceNotification: string;[m
+[31m-//   sectionNotification: string;[m
+[31m-// }[m
+[31m-//[m
+[31m-// export function ListenSettingsInitializer([m
+[31m-//   timeout: number = 20, // time out upon silence[m
+[31m-//   listeningInterval: number = 20, // msec between listening and matching[m
+[31m-//   notificationType: NotificationType = NotificationType.voice,[m
+[31m-//   sentenceNotification: string = "new sentence",[m
+[31m-//   sectionNotification: string = "new section"[m
+[31m-// ): IListenSettings {[m
+[31m-//   return {[m
+[31m-//     timeout, // time out upon silence[m
+[31m-//     listeningInterval, // msec between listening and matching[m
+[31m-//     notificationType,[m
+[31m-//     sentenceNotification,[m
+[31m-//     sectionNotification[m
+[31m-//   };[m
+[31m-// }[m
+[31m-// export class CSettingsContext {[m
+[31m-//   speech: CSpeechSettings;[m
+[31m-//   listen: CListenSettings;[m
+[31m-//   constructor(speech?: CSpeechSettings, listen?: CListenSettings) {[m
+[31m-//     this.speech = new CSpeechSettings(speech);[m
+[31m-//     this.listen = new CListenSettings(listen);[m
+[31m-//   }[m
+[31m-//   save(newSettings: CSettingsContext) {[m
+[31m-//     this.speech = newSettings.speech;[m
+[31m-//     this.listen = newSettings.listen;[m
+[31m-//   }[m
+[31m-//   get modified() {[m
+[31m-//     return this.speech.modified || this.listen.modified;[m
+[31m-//   }[m
+[31m-// setListenSettings(listenSettings: IListenSettings) {[m
+[31m-//   this.listen = listenSettings;[m
+[31m-// }[m
+[31m-// setSpeechSettings(speechSettings: ISpeechSettings) {[m
+[31m-//   this.speech = speechSettings;[m
+[31m-// }[m
+[1mdiff --git a/src/baseClasses.ts b/src/baseClasses.ts[m
+[1mindex 7bb2f93..5f886f5 100644[m
+[1m--- a/src/baseClasses.ts[m
+[1m+++ b/src/baseClasses.ts[m
+[36m@@ -19,28 +19,32 @@[m [mimport {[m
+   IHeadingListItem,[m
+   ISentenceListItem,[m
+   ISectionListItem,[m
+[31m-  ITerminalListItem[m
+[31m-} from "./pagecontentType";[m
+[32m+[m[32m  ITerminalListItem,[m
+[32m+[m[32m  ILinkListItem[m
+[32m+[m[32m} from "./pageContentType";[m
+ export const TREEVIEW_PREFIX = "+-";[m
+ export const IDX_INITIALIZER = -9999;[m
+ export abstract class BaseClass {[m
+[31m-  logger: Logger;[m
+[31m-  parent: any;[m
+[32m+[m[32m  _logger: Logger;[m
+[32m+[m[32m  _parent: any;[m
+   constructor(parent: any) {[m
+[31m-    if (parent !== undefined || parent !== null) {[m
+[31m-      this.parent = parent;[m
+[32m+[m[32m    if (parent !== undefined && parent !== null) {[m
+[32m+[m[32m      this._parent = parent;[m
+     }[m
+     if ([m
+[31m-      this.parent !== undefined &&[m
+[31m-      this.parent !== null &&[m
+[31m-      this.parent.logger !== undefined[m
+[32m+[m[32m      this._parent !== undefined &&[m
+[32m+[m[32m      this._parent !== null &&[m
+[32m+[m[32m      this._parent._logger !== undefined[m
+     ) {[m
+[31m-      this.logger = parent.logger; // inherit existing logger handle[m
+[32m+[m[32m      this._logger = parent._logger; // inherit existing _logger handle[m
+     } else {[m
+[31m-      this.logger = new Logger(this); // create new logger handle[m
+[32m+[m[32m      this._logger = new Logger(this); // create new logger handle[m
+     }[m
+[31m-    Object.defineProperty(this, "parent", { enumerable: false });[m
+[31m-    Object.defineProperty(this, "logger", { enumerable: false });[m
+[32m+[m[32m    Object.defineProperty(this, "_parent", { enumerable: false });[m
+[32m+[m[32m    Object.defineProperty(this, "_logger", { enumerable: false });[m
+[32m+[m[32m  }[m
+[32m+[m[32m  get logger(): Logger {[m
+[32m+[m[32m    return this._logger;[m
+   }[m
+ }[m
+ class TerminalArray extends Array<ITerminalListItem> {[m
+[36m@@ -89,7 +93,8 @@[m [mclass TerminalArray extends Array<ITerminalListItem> {[m
+     return this.length;[m
+   }[m
+   serialize(): string {[m
+[31m-    let outputStr: string = "[idx ]:  term ARVF  next prev sent sect content\n";[m
+[32m+[m[32m    let outputStr: string =[m
+[32m+[m[32m      "[idx ]:  term ARLVF  next prev sent sect  link content\n";[m
+     for (const [i, element] of this.entries()) {[m
+       outputStr = `${outputStr}[${i[m
+         .toString()[m
+[36m@@ -101,6 +106,9 @@[m [mclass TerminalArray extends Array<ITerminalListItem> {[m
+         .toUpperCase()}${element.recitable[m
+         .toString()[m
+         .substring(0, 1)[m
+[32m+[m[32m        .toUpperCase()}${element.linkable[m
+[32m+[m[32m        .toString()[m
+[32m+[m[32m        .substring(0, 1)[m
+         .toUpperCase()}${element.visible[m
+         .toString()[m
+         .substring(0, 1)[m
+[36m@@ -115,11 +123,14 @@[m [mclass TerminalArray extends Array<ITerminalListItem> {[m
+         element.prevTermIdx.length === 0[m
+           ? "na".padStart(5)[m
+           : element.prevTermIdx[0].toString().padStart(5)[m
+[31m-      } ${element.sentenceIdx[m
+[32m+[m[32m      }${element.sentenceIdx[m
+         .toString()[m
+[31m-        .padStart(4)} ${element.sectionIdx.toString().padStart(4)} ${[m
+[31m-        element.content[m
+[31m-      }\n`;[m
+[32m+[m[32m        .padStart(4)}  ${element.sectionIdx[m
+[32m+[m[32m        .toString()[m
+[32m+[m[32m        .padStart(4)} ${(element.linkIdx < 0[m
+[32m+[m[32m        ? "na"[m
+[32m+[m[32m        : element.linkIdx.toString()[m
+[32m+[m[32m      ).padStart(5)} ${element.content}\n`;[m
+     }[m
+     return outputStr;[m
+   }[m
+[36m@@ -219,7 +230,39 @@[m [mclass SectionArray extends Array<ISectionListItem> {[m
+     return outputStr;[m
+   }[m
+ }[m
+[31m-[m
+[32m+[m[32mclass LinkArray extends Array<ILinkListItem> {[m
+[32m+[m[32m  constructor(...args: any) {[m
+[32m+[m[32m    super(...args);[m
+[32m+[m[32m  }[m
+[32m+[m[32m  push(link: ILinkListItem): number {[m
+[32m+[m[32m    return super.push(link);[m
+[32m+[m[32m  }[m
+[32m+[m[32m  parse(): number {[m
+[32m+[m[32m    return this.length;[m
+[32m+[m[32m  }[m
+[32m+[m[32m  serialize(): string {[m
+[32m+[m[32m    let outputStr: string = "[idx ]  page/url            sect term  valid \n";[m
+[32m+[m[32m    for (const [i, element] of this.entries()) {[m
+[32m+[m[32m      outputStr += `[${i.toString().padStart(4, "0")}]: ${(element.destination[m
+[32m+[m[32m        .page.length === 0[m
+[32m+[m[32m        ? "(current page)"[m
+[32m+[m[32m        : element.destination.page[m
+[32m+[m[32m      ).padEnd(20, " ")}${(element.destination.sectionIdx !== IDX_INITIALIZER[m
+[32m+[m[32m        ? +element.destination.sectionIdx[m
+[32m+[m[32m        : "na"[m
+[32m+[m[32m      )[m
+[32m+[m[32m        .toString()[m
+[32m+[m[32m        .padStart(4, " ")} ${(element.destination.terminalIdx !==[m
+[32m+[m[32m      IDX_INITIALIZER[m
+[32m+[m[32m        ? +element.destination.terminalIdx[m
+[32m+[m[32m        : "na"[m
+[32m+[m[32m      )[m
+[32m+[m[32m        .toString()[m
+[32m+[m[32m        .padStart(4, " ")}  ${element.valid}\n`;[m
+[32m+[m[32m    }[m
+[32m+[m[32m    return outputStr;[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+ export class UserContext {[m
+   /* look at the altPro and altRec that are for personalized entries[m
+      should be readable from an external file that will not require recompile[m
+[36m@@ -254,6 +297,7 @@[m [mexport class UserContext {[m
+   headings: HeadingArray;[m
+   sections: SectionArray;[m
+   sentences: SentenceArray;[m
+[32m+[m[32m  links: LinkArray;[m
+   // need authentication infoblock at some point[m
+   constructor(name: string) {[m
+     //    this._parent = parent;[m
+[36m@@ -262,6 +306,7 @@[m [mexport class UserContext {[m
+     this.headings = new HeadingArray();[m
+     this.sections = new SectionArray();[m
+     this.sentences = new SentenceArray();[m
+[32m+[m[32m    this.links = new LinkArray();[m
+     ////    this._pages = new Array();[m
+   }[m
+   // protected terminalIdx: number = 0;[m
+[1mdiff --git a/src/dataadapter.ts b/src/dataadapter.ts[m
+[1mindex d62d286..56caa92 100644[m
+[1m--- a/src/dataadapter.ts[m
+[1m+++ b/src/dataadapter.ts[m
+[36m@@ -142,7 +142,6 @@[m [mexport const enum MarkdownType {[m
+   FILLIN = "LIST_FILLIN",[m
+   FILLIN_END = "LIST_FILLIN_END",[m
+   PAGE = "PAGE",[m
+[31m-  //  PAGETITLE = "PAGETITLE",[m
+   IMAGEENTRY = "IMAGEENTRY",[m
+   IMAGEENTRY_END = "IMAGEENTRY_END",[m
+   TBD = "TBD" // should always be last[m
+[36m@@ -202,9 +201,10 @@[m [mconst PARAGRAPH_TO_SENTENCES: RegExp = /([\.\?!][\'\"\u2018\u2019\u201c\u201d\)\[m
+ [m
+ //const PARAGRAPH_TO_SENTENCES2: RegExp = /(?<!\w\.\w.)(?<![A-Z][a-z][a-z]\.)([\.\?!][\"\u2018\u2019\u201c\u201d\)\]]*\s*(?<![A-Z][a-z]\.)(?<![A-Z]\.)\s+)/;[m
+ //const PARAGRAPH_PATTERN: RegExp = /^([ "'\(\!]?[A-Za-z0-9\$\@]{1}.*)$/m;[m
+[31m-const PARAGRAPH_PATTERN: RegExp = /^(([\[ "'\(]?|\!\[)[A-Za-z0-9\$\@]{1}.*)$/m;[m
+[31m-// ![ only to support ![image][m
+[31m-// [ only to support [link][m
+[32m+[m[32mconst PARAGRAPH_PATTERN: RegExp = /^((["'\(\[]?|\!\[|\[\()[A-Za-z0-9\$\@]{1}.*)$/m;[m
+[32m+[m[32m// \!\[ added to support ![image][m
+[32m+[m[32m// \[\ added to support leading image[m
+[32m+[m[32m// \[\( only to support [link] where link starts with ( Need to careful what is considered beginning of a paragraph[m
+ const MarkdownPatternDictionary: MarkdownPatternDictionaryType = {[m
+   [MarkdownType.HEADING01]: {[m
+     pattern: /^#\s([^\s].*)$/,[m
+[36m@@ -575,7 +575,7 @@[m [mexport class BasicMarkdownSource extends RawMarkdownSource[m
+       }[m
+     } catch (e) {[m
+       this.logger.error([m
+[31m-        `unexpected error encountered parsing sentences at line ${current.lineNo}`[m
+[32m+[m[32m        `Unexpected error encountered parsing sentences at line ${current.lineNo}`[m
+       );[m
+     }[m
+     resultBuffer.push({[m
+[1mdiff --git a/src/logger.ts b/src/logger.ts[m
+[1mindex 115adee..12d5a19 100644[m
+[1m--- a/src/logger.ts[m
+[1m+++ b/src/logger.ts[m
+[36m@@ -1,11 +1,12 @@[m
+ import { MyDate } from "./utilities";[m
+ export class Logger {[m
+   // logging from within supported objects[m
+[32m+[m[32m  protected _appName: string = "";[m
+   protected _parent: any = undefined;[m
+   protected _terseFormat: boolean = false; // do not show only severity with message[m
+   protected _adornMode: boolean = false; // do not show adorning messages[m
+   protected _verboseMode: boolean = false; // do not show info and adorn messages[m
+[31m-  protected _diagnosticMode: boolean = false; // do not show debug messages[m
+[32m+[m[32m  protected _diagnosticMode: boolean = false; // do not show diagnostic messages[m
+   protected _errorObject!: Error;[m
+   protected _showSeverity: boolean = true;[m
+   protected _showFunctionName: boolean = true;[m
+[36m@@ -15,7 +16,15 @@[m [mexport class Logger {[m
+   protected _fatalCount: number = 0;[m
+   protected _warningCount: number = 0;[m
+   constructor(parent: any | null | undefined) {[m
+[31m-    if (parent !== undefined && parent !== null) this._parent = parent; // required to find proper stack frame[m
+[32m+[m[32m    if (parent !== undefined && parent !== null) {[m
+[32m+[m[32m      this._parent = parent; // required to find proper stack frame[m
+[32m+[m[32m    }[m
+[32m+[m[32m  }[m
+[32m+[m[32m  get appName() {[m
+[32m+[m[32m    return this._appName;[m
+[32m+[m[32m  }[m
+[32m+[m[32m  set appName(name: string) {[m
+[32m+[m[32m    this._appName = name;[m
+   }[m
+   get adornMode() {[m
+     return this._adornMode;[m
+[36m@@ -246,8 +255,8 @@[m [mexport class Logger {[m
+     let frame: string;[m
+     let frameIdx: number;[m
+     let stackFrames: string[] = new Error()?.stack?.split("\n") as string[]; // optional chaining[m
+[31m-    let moduleLocation: string = "<unknown module location>";[m
+[31m-    let modulePath: string;[m
+[32m+[m[32m    let moduleLocation: string = "<unknown>";[m
+[32m+[m[32m    let modulePath: string = "<unknown>";[m
+     let objectNameLocator: string = " at Object.";[m
+ [m
+     if (this._parent === undefined) {[m
+[36m@@ -258,22 +267,28 @@[m [mexport class Logger {[m
+     frameIdx = stackFrames.findIndex(element =>[m
+       element.includes(objectNameLocator)[m
+     );[m
+[31m-    modulePath = stackFrames[frameIdx][m
+[31m-      .split(" ")[m
+[31m-      .slice(-1)[0][m
+[31m-      .slice(0, -1)[m
+[31m-      .split(":")[1];[m
+[31m-    frame =[m
+[31m-      stackFrames[[m
+[31m-        stackFrames.findIndex(element => element.includes(modulePath))[m
+[31m-      ];[m
+[31m-    moduleLocation = frame[m
+[31m-      .split("\\")[m
+[31m-      .slice(-1)[0][m
+[31m-      .slice(0, -1)[m
+[31m-      .split(":")[m
+[31m-      .slice(0, -1)[m
+[31m-      .join(":");[m
+[32m+[m[32m    if ([m
+[32m+[m[32m      frameIdx !== undefined &&[m
+[32m+[m[32m      frameIdx >= 0 &&[m
+[32m+[m[32m      frameIdx < stackFrames.length[m
+[32m+[m[32m    ) {[m
+[32m+[m[32m      modulePath = stackFrames[frameIdx][m
+[32m+[m[32m        .split(" ")[m
+[32m+[m[32m        .slice(-1)[0][m
+[32m+[m[32m        .slice(0, -1)[m
+[32m+[m[32m        .split(":")[1];[m
+[32m+[m[32m      frame =[m
+[32m+[m[32m        stackFrames[[m
+[32m+[m[32m          stackFrames.findIndex(element => element.includes(modulePath))[m
+[32m+[m[32m        ];[m
+[32m+[m[32m      moduleLocation = frame[m
+[32m+[m[32m        .split("\\")[m
+[32m+[m[32m        .slice(-1)[0][m
+[32m+[m[32m        .slice(0, -1)[m
+[32m+[m[32m        .split(":")[m
+[32m+[m[32m        .slice(0, -1)[m
+[32m+[m[32m        .join(":");[m
+[32m+[m[32m    }[m
+     return moduleLocation;[m
+   }[m
+   logEntry([m
+[1mdiff --git a/src/pageContentType.ts b/src/pageContentType.ts[m
+[1mindex 6b3ff5f..902d787 100644[m
+[1m--- a/src/pageContentType.ts[m
+[1m+++ b/src/pageContentType.ts[m
+[36m@@ -1,4 +1,4 @@[m
+[31m-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved[m
+[32m+[m[32m/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved[m
+  *[m
+  * File name: PageContentType.ts[m
+  *[m
+[36m@@ -7,10 +7,7 @@[m
+  * Version history:[m
+  *[m
+  **/[m
+[31m-import { ITerminalNode } from "./parseterminals";[m
+[31m-// import { ISectionNode } from "./parsesections";[m
+[31m-// import { ISentenceNode } from "./parsesentences";[m
+[31m-const IDX_INITIALIZER = -9999;[m
+[32m+[m[32mexport const IDX_INITIALIZER = -9999;[m
+ export enum PageFormatEnumType {[m
+   default = 0[m
+ }[m
+[36m@@ -28,10 +25,10 @@[m [mexport interface IPageContent {[m
+   lastTermIdx: number;[m
+   sections: ISectionContent[];[m
+   terminalList: ITerminalListItem[];[m
+[31m-  headingList: IHeadingListItem[]; // first terminal of each section for Navbar[m
+[31m-  sectionList: ISectionListItem[]; // maps section index to first and last Terminal index[m
+[31m-  sentenceList: ISentenceListItem[]; // maps sentence index to first and last Terminal index[m
+[31m-  //  sentenceList: ITerminalInfo[] // first terminal of each sentence[m
+[32m+[m[32m  headingList: IHeadingListItem[];[m
+[32m+[m[32m  sectionList: ISectionListItem[];[m
+[32m+[m[32m  sentenceList: ISentenceListItem[];[m
+[32m+[m[32m  linkList: ILinkListItem[];[m
+ }[m
+ export function PageContentInitializer(): IPageContent {[m
+   return {[m
+[36m@@ -50,7 +47,8 @@[m [mexport function PageContentInitializer(): IPageContent {[m
+     terminalList: [],[m
+     headingList: [],[m
+     sectionList: [],[m
+[31m-    sentenceList: [][m
+[32m+[m[32m    sentenceList: [],[m
+[32m+[m[32m    linkList: [][m
+   };[m
+ }[m
+ export interface ISectionContent {[m
+[36m@@ -123,6 +121,7 @@[m [mexport function ISectionFillinVariantInitializer(): ISectionFillinVariant {[m
+ }[m
+ export interface ISectionHeadingVariant {[m
+   title: string; // ISentenceContent where audible/recitable can be disabled at run time.[m
+[32m+[m[32m  separator: string;[m
+   recitable: boolean;[m
+   audible: boolean;[m
+   level: number;[m
+[36m@@ -130,6 +129,7 @@[m [mexport interface ISectionHeadingVariant {[m
+ export function ISectionHeadingVariantInitializer(): ISectionHeadingVariant {[m
+   return {[m
+     title: "", // overrides name and description above[m
+[32m+[m[32m    separator: "",[m
+     recitable: false,[m
+     audible: false,[m
+     level: 0[m
+[36m@@ -212,12 +212,24 @@[m [mexport function ISectionFillinBariantInitializer() {}[m
+ export interface ISectionFillinListVariant {}[m
+ export function ISectionFillinListVariantInitializer() {}[m
+ [m
+[32m+[m[32mexport enum ImageEntryLayoutEnumType {[m
+[32m+[m[32m  left = "left", // default, image to the left of caption[m
+[32m+[m[32m  above = "above" // image above caption[m
+[32m+[m[32m}[m
+ export interface ISectionImageEntryVariant {[m
+[32m+[m[32m  title: string;[m
+[32m+[m[32m  layout: ImageEntryLayoutEnumType;[m
+[32m+[m[32m  percent: string;[m
+[32m+[m[32m  separator: string;[m
+   images: ITerminalContent[]; // path to img/filenames[m
+   captions: ISectionContent[];[m
+ }[m
+ export function ISectionImageEntryVariantInitializer() {[m
+   return {[m
+[32m+[m[32m    title: "",[m
+[32m+[m[32m    layout: ImageEntryLayoutEnumType.left,[m
+[32m+[m[32m    percent: "33%",[m
+[32m+[m[32m    separator: "",[m
+     images: [],[m
+     captions: [][m
+   };[m
+[36m@@ -289,9 +301,12 @@[m [mexport interface ITerminalInfo {[m
+   altrecognition: string;[m
+   recitable: boolean;[m
+   audible: boolean;[m
+[32m+[m[32m  linkable: boolean;[m
+   visible: boolean;[m
+   fillin: boolean;[m
+   visited: boolean;[m
+[32m+[m[32m  linkIdx: number;[m
+[32m+[m[32m  hintsIdx: number;[m
+   //cues: string[] includes terminal type word, day, month, year, number, area code,...[m
+ }[m
+ export function ITerminalInfoInitializer([m
+[36m@@ -300,10 +315,12 @@[m [mexport function ITerminalInfoInitializer([m
+   altrecognition: string = "",[m
+   recitable: boolean = true,[m
+   audible: boolean = true,[m
+[32m+[m[32m  linkable: boolean = false,[m
+   visible: boolean = true,[m
+   fillin: boolean = false,[m
+[31m-  visited: boolean = false[m
+[31m-[m
+[32m+[m[32m  visited: boolean = false,[m
+[32m+[m[32m  linkIdx: number = IDX_INITIALIZER,[m
+[32m+[m[32m  hintsIdx: number = IDX_INITIALIZER[m
+   //cues[m
+ ): ITerminalInfo {[m
+   return {[m
+[36m@@ -321,9 +338,12 @@[m [mexport function ITerminalInfoInitializer([m
+         : altrecognition,[m
+     recitable: recitable, // selectable[m
+     audible: audible,[m
+[32m+[m[32m    linkable: linkable,[m
+     visible: visible,[m
+     fillin: fillin,[m
+[31m-    visited: visited[m
+[32m+[m[32m    visited: visited,[m
+[32m+[m[32m    linkIdx: linkIdx,[m
+[32m+[m[32m    hintsIdx: hintsIdx[m
+   };[m
+ }[m
+ export interface IAcronymTerminalMeta {[m
+[36m@@ -379,41 +399,49 @@[m [mexport function IDateTerminalMetaInitializer(): IDateTerminalMeta {[m
+     format: DateFormatEnumType.unknown,[m
+     month: ITerminalInfoInitializer(),[m
+     punctuation1: ITerminalInfoInitializer([m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      false,[m
+[31m-      false,[m
+[31m-      true,[m
+[31m-      false[m
+[32m+[m[32m      undefined, // accept default content[m
+[32m+[m[32m      undefined, // accept default altpro[m
+[32m+[m[32m      undefined, // accept default altreg[m
+[32m+[m[32m      false, // not recitable[m
+[32m+[m[32m      false, // not audible[m
+[32m+[m[32m      undefined, // accept default linkable[m
+[32m+[m[32m      undefined, // accept default visible[m
+[32m+[m[32m      undefined, // accept default fillin[m
+[32m+[m[32m      undefined // accept default visited[m
+     ),[m
+     whitespace1: ITerminalInfoInitializer([m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      false,[m
+[31m-      false,[m
+[31m-      true,[m
+[31m-      false[m
+[32m+[m[32m      undefined, // accept default content[m
+[32m+[m[32m      undefined, // accept default altpro[m
+[32m+[m[32m      undefined, // accept default altreg[m
+[32m+[m[32m      false, // not recitable[m
+[32m+[m[32m      false, // not audible[m
+[32m+[m[32m      undefined, // accept default linkable[m
+[32m+[m[32m      undefined, // accept default visible[m
+[32m+[m[32m      undefined, // accept default fillin[m
+[32m+[m[32m      undefined // accept default visited[m
+     ),[m
+     day: ITerminalInfoInitializer(),[m
+     punctuation2: ITerminalInfoInitializer([m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      false,[m
+[31m-      false,[m
+[31m-      true,[m
+[31m-      false[m
+[32m+[m[32m      undefined, // accept default content[m
+[32m+[m[32m      undefined, // accept default altpro[m
+[32m+[m[32m      undefined, // accept default altreg[m
+[32m+[m[32m      true, // recitable[m
+[32m+[m[32m      true, //audible[m
+[32m+[m[32m      undefined, // accept default linkable[m
+[32m+[m[32m      undefined, // accept default visible[m
+[32m+[m[32m      undefined, // accept default fillin[m
+[32m+[m[32m      undefined // accept default visited[m
+     ),[m
+     whitespace2: ITerminalInfoInitializer([m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      false,[m
+[31m-      false,[m
+[31m-      true,[m
+[31m-      false[m
+[32m+[m[32m      undefined, // accept default content[m
+[32m+[m[32m      undefined, // accept default altpro[m
+[32m+[m[32m      undefined, // accept default altreg[m
+[32m+[m[32m      false, // not recitable[m
+[32m+[m[32m      false, // not audible[m
+[32m+[m[32m      undefined, // accept default linkable[m
+[32m+[m[32m      undefined, // accept default visible[m
+[32m+[m[32m      undefined, // accept default fillin[m
+[32m+[m[32m      undefined // accept default visited[m
+     ),[m
+     year: IYearTerminalMetaInitializer() // e.g., {19,61}, {20,10}, {2000,1}[m
+   };[m
+[36m@@ -424,6 +452,7 @@[m [mexport interface IImageTerminalMeta {[m
+   width: number;[m
+   height: number;[m
+   attributes: string;[m
+[32m+[m[32m  className: string;[m
+   style: string; // most specific style[m
+ }[m
+ export function IImageTerminalMetaInitializer(): IImageTerminalMeta {[m
+[36m@@ -433,25 +462,38 @@[m [mexport function IImageTerminalMetaInitializer(): IImageTerminalMeta {[m
+     width: 0,[m
+     height: 0,[m
+     attributes: "",[m
+[32m+[m[32m    className: "",[m
+     style: "" // most specific style[m
+   };[m
+ }[m
+[32m+[m[32minterface ILinkDestination {[m
+[32m+[m[32m  page: string;[m
+[32m+[m[32m  directory: string; // if omitted, current dist/ directory[m
+[32m+[m[32m  sectionIdx: number;[m
+[32m+[m[32m  terminalIdx: number;[m
+[32m+[m[32m}[m
+[32m+[m[32mfunction ILinkDestinationInitializer() {[m
+[32m+[m[32m  return {[m
+[32m+[m[32m    page: "",[m
+[32m+[m[32m    directory: "",[m
+[32m+[m[32m    sectionIdx: IDX_INITIALIZER,[m
+[32m+[m[32m    terminalIdx: IDX_INITIALIZER[m
+[32m+[m[32m  };[m
+[32m+[m[32m}[m
+ export interface ICurriculumLinkTerminalMeta {[m
+[31m-  src: string;[m
+[31m-  label: string;[m
+[31m-  destinationDir: string; // if omitted, current dist/ directory[m
+[31m-  destinationPage: string; // .json filename[m
+[31m-  destinationTermIdx: number;[m
+[32m+[m[32m  label: ITerminalContent[];[m
+[32m+[m[32m  destination: ILinkDestination;[m
+[32m+[m[32m  className: string;[m
+   style: string; // most specific style[m
+[32m+[m[32m  linkIdx: number;[m
+ }[m
+ export function ICurriculumLinkTerminalMetaInitializer(): ICurriculumLinkTerminalMeta {[m
+   return {[m
+[31m-    src: "",[m
+[31m-    label: "",[m
+[31m-    destinationDir: "",[m
+[31m-    destinationPage: "",[m
+[31m-    destinationTermIdx: 0,[m
+[31m-    style: "" // most specific style[m
+[32m+[m[32m    label: [],[m
+[32m+[m[32m    destination: ILinkDestinationInitializer(),[m
+[32m+[m[32m    className: "",[m
+[32m+[m[32m    style: "", // most specific style[m
+[32m+[m[32m    linkIdx: IDX_INITIALIZER[m
+   };[m
+ }[m
+ export interface IPhoneNumberTerminalMeta {[m
+[36m@@ -469,42 +511,50 @@[m [mexport function IPhoneNumberTerminalMetaInitializer(): IPhoneNumberTerminalMeta[m
+   return {[m
+     countryCode: ITerminalInfoInitializer(),[m
+     openBracket: ITerminalInfoInitializer([m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      false,[m
+[31m-      false,[m
+[31m-      true,[m
+[31m-      false[m
+[32m+[m[32m      undefined, // accept default content[m
+[32m+[m[32m      undefined, // accept default altpro[m
+[32m+[m[32m      undefined, // accept default altreg[m
+[32m+[m[32m      false, // not recitable[m
+[32m+[m[32m      false, // not audible[m
+[32m+[m[32m      undefined, // accept default linkable[m
+[32m+[m[32m      undefined, // accept default visible[m
+[32m+[m[32m      undefined, // accept default fillin[m
+[32m+[m[32m      undefined // accept default visited[m
+     ),[m
+     areaCode: [],[m
+     closeBracket: ITerminalInfoInitializer([m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      false,[m
+[31m-      false,[m
+[31m-      true,[m
+[31m-      false[m
+[32m+[m[32m      undefined, // accept default content[m
+[32m+[m[32m      undefined, // accept default altpro[m
+[32m+[m[32m      undefined, // accept default altreg[m
+[32m+[m[32m      false, // not recitable[m
+[32m+[m[32m      false, // not audible[m
+[32m+[m[32m      undefined, // accept default linkable[m
+[32m+[m[32m      undefined, // accept default visible[m
+[32m+[m[32m      undefined, // accept default fillin[m
+[32m+[m[32m      undefined // accept default visited[m
+     ), // could be "."[m
+     separator1: ITerminalInfoInitializer([m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      false,[m
+[31m-      false,[m
+[31m-      true,[m
+[31m-      false[m
+[32m+[m[32m      undefined, // accept default content[m
+[32m+[m[32m      undefined, // accept default altpro[m
+[32m+[m[32m      undefined, // accept default altreg[m
+[32m+[m[32m      false, // not recitable[m
+[32m+[m[32m      false, // not audible[m
+[32m+[m[32m      undefined, // accept default linkable[m
+[32m+[m[32m      undefined, // accept default visible[m
+[32m+[m[32m      undefined, // accept default fillin[m
+[32m+[m[32m      undefined // accept default visited[m
+     ),[m
+     exchangeCode: [],[m
+     separator2: ITerminalInfoInitializer([m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      undefined,[m
+[31m-      false,[m
+[31m-      false,[m
+[31m-      true,[m
+[31m-      false[m
+[32m+[m[32m      undefined, // accept default content[m
+[32m+[m[32m      undefined, // accept default altpro[m
+[32m+[m[32m      undefined, // accept default altreg[m
+[32m+[m[32m      false, // not recitable[m
+[32m+[m[32m      false, // not audible[m
+[32m+[m[32m      undefined, // accept default linkable[m
+[32m+[m[32m      undefined, // accept default visible[m
+[32m+[m[32m      undefined, // accept default fillin[m
+[32m+[m[32m      undefined // accept default visited[m
+     ), // could be "."[m
+     lineNumber: [][m
+   };[m
+[36m@@ -515,12 +565,14 @@[m [mexport function IPunctuationTerminalMetaInitializer([m
+ ): ITerminalInfo {[m
+   return ITerminalInfoInitializer([m
+     content,[m
+[31m-    undefined,[m
+[31m-    undefined,[m
+[31m-    false,[m
+[31m-    false,[m
+[31m-    true,[m
+[31m-    false[m
+[32m+[m[32m    undefined, // accept default altpro[m
+[32m+[m[32m    undefined, // accept default altreg[m
+[32m+[m[32m    false, // not recitable[m
+[32m+[m[32m    false, // not audible[m
+[32m+[m[32m    undefined, // accept default linkable[m
+[32m+[m[32m    undefined, // accept default visible[m
+[32m+[m[32m    undefined, // accept default fillin[m
+[32m+[m[32m    undefined // accept default visited[m
+   );[m
+ }[m
+ export interface IReferenceTerminalMeta {[m
+[36m@@ -538,12 +590,14 @@[m [mexport function IWhitespaceTerminalMetaInitializer([m
+ ): ITerminalInfo {[m
+   return ITerminalInfoInitializer([m
+     content,[m
+[31m-    undefined,[m
+[31m-    undefined,[m
+[31m-    false,[m
+[31m-    false,[m
+[31m-    true,[m
+[31m-    false[m
+[32m+[m[32m    undefined, // accept default altpro[m
+[32m+[m[32m    undefined, // accept default altreg[m
+[32m+[m[32m    false, // not recitable[m
+[32m+[m[32m    false, // not audible[m
+[32m+[m[32m    undefined, // accept default linkable[m
+[32m+[m[32m    undefined, // accept default visible[m
+[32m+[m[32m    undefined, // accept default fillin[m
+[32m+[m[32m    undefined // accept default visited[m
+   );[m
+ }[m
+ export type IWordTerminalMeta = ITerminalInfo;[m
+[36m@@ -631,8 +685,8 @@[m [mexport interface ISectionListItem extends IRangeItem {[m
+   type: SectionVariantEnumType | string;[m
+ }[m
+ export function ISectionListItemInitializer([m
+[31m-  firstTermIdx: number = -1,[m
+[31m-  lastTermIdx: number = -1,[m
+[32m+[m[32m  firstTermIdx: number = IDX_INITIALIZER,[m
+[32m+[m[32m  lastTermIdx: number = IDX_INITIALIZER,[m
+   type: string = SectionVariantEnumType.tbd[m
+ ): ISectionListItem {[m
+   type = type.toString();[m
+[36m@@ -642,9 +696,26 @@[m [mexport interface ISentenceListItem extends IRangeItem {[m
+   lastPunctuation: string;[m
+ }[m
+ export function ISentenceListItemInitializer([m
+[31m-  firstTermIdx: number = -1,[m
+[31m-  lastTermIdx: number = -1,[m
+[32m+[m[32m  firstTermIdx: number = IDX_INITIALIZER,[m
+[32m+[m[32m  lastTermIdx: number = IDX_INITIALIZER,[m
+   lastPunctuation: string = "."[m
+ ): ISentenceListItem {[m
+   return { firstTermIdx, lastTermIdx, lastPunctuation };[m
+ }[m
+[32m+[m[32mexport interface ILinkListItem {[m
+[32m+[m[32m  label: string;[m
+[32m+[m[32m  destination: ILinkDestination;[m
+[32m+[m[32m  valid: boolean;[m
+[32m+[m[32m}[m
+[32m+[m[32mexport function ILinkListItemInitializer([m
+[32m+[m[32m  label: string = "",[m
+[32m+[m[32m  destination: ILinkDestination = {[m
+[32m+[m[32m    page: "",[m
+[32m+[m[32m    directory: "",[m
+[32m+[m[32m    sectionIdx: IDX_INITIALIZER,[m
+[32m+[m[32m    terminalIdx: IDX_INITIALIZER[m
+[32m+[m[32m  },[m
+[32m+[m[32m  valid = false[m
+[32m+[m[32m): ILinkListItem {[m
+[32m+[m[32m  return { label, destination, valid };[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/parsefiles.ts b/src/parsefiles.ts[m
+[1mindex 7bc6f21..6c80288 100644[m
+[1m--- a/src/parsefiles.ts[m
+[1m+++ b/src/parsefiles.ts[m
+[36m@@ -72,6 +72,7 @@[m [mimport {[m
+   ParseNodeSerializeFormatEnumType[m
+   //  UserContext[m
+ } from "./baseClasses";[m
+[32m+[m[32mimport { PageParseNode } from "./parsepages";[m
+ // import { TerminalNode_MLTAG_EMAILADDRESS } from "./parseterminals_emailaddress";[m
+ // import { TerminalNode_MLTAG_PHONENUMBER } from "./parseterminals_phonenumber";[m
+ //   import {[m
+[36m@@ -196,7 +197,8 @@[m [mexport class FileParseNode extends ParseNode {[m
+   // markdown file can contain one or more pages[m
+   //  dataSource!: IDataSource;[m
+   pageNodes: IPageNode[] = [];[m
+[31m-  constructor(parent) {[m
+[32m+[m[32m  constructor(parent: any) {[m
+[32m+[m[32m    // should be FileParseNode[m
+     super(parent);[m
+   }[m
+   connect(fileName: string) {[m
+[36m@@ -205,7 +207,7 @@[m [mexport class FileParseNode extends ParseNode {[m
+     //    this.dataSource; //[m
+     //    this._markdownDataSource = new RawMarkdownSource(this);[m
+     let result = this.dataSource.connect(fileName);[m
+[31m-    let pageNode = new PageParseNode(this);[m
+[32m+[m[32m    let pageNode = new PageParseNode(); // should be FileParseNode as parent[m
+     //  pageNode.connect(fileName);[m
+     this.dataSource.serialize();[m
+     return result;[m
+[36m@@ -226,78 +228,78 @@[m [mexport class FileParseNode extends ParseNode {[m
+     return "";[m
+   } // any to avoid compilation error, should be removed[m
+ }[m
+[31m-type ISectionNode = ISectionContent & IParseNode;[m
+[31m-export class PageParseNode extends ParseNode implements IPageContent {[m
+[31m-  //  _data: PageContentType = InitialPageContentType;[m
+[31m-  id: number = 0;[m
+[31m-  name: string = "";[m
+[31m-  description: string = "";[m
+[31m-  owner: string = "";[m
+[31m-  pageFormatType = PageFormatEnumType.default;[m
+[31m-  created!: Date;[m
+[31m-  modified!: Date;[m
+[31m-  transformed!: Date;[m
+[31m-  firstTermIdx: number = -1;[m
+[31m-  lastTermIdx: number = -1;[m
+[31m-  sections: ISectionNode[] = []; //needs to be reflected in _data.sections[][m
+[31m-  constructor(parent) {[m
+[31m-    super(parent);[m
+[31m-  }[m
+[31m-  parse() {[m
+[31m-    //    let current: TaggedStringType;[m
+[31m-    try {[m
+[31m-      assert(this.parent !== undefined, `parent is undefined`);[m
+[31m-      assert(this.dataSource !== undefined, `dataSource is undefined`);[m
+[31m-      // assume datasource is a page (sections where depth=0), parse all direct children i.e., depth=0[m
+[31m-      for ([m
+[31m-        let current = this.dataSource.firstRecord();[m
+[31m-        !this.dataSource.EOF();[m
+[31m-        current = this.dataSource.nextRecord()[m
+[31m-      ) {[m
+[31m-        //        assert(current.tagType === "<page>", `expected page` );[m
+[31m-        console.log(`page.parse:current.content ${current.content}`);[m
+[31m-        //          this.sections.push(section);[m
+[31m-        //          section.parse();[m
+[31m-      }[m
+[31m-    } catch (e) {[m
+[31m-      this.logger.error(e.message);[m
+[31m-    } finally {[m
+[31m-      return 0;[m
+[31m-    }[m
+[31m-  }[m
+[31m-  serialize(): string {[m
+[31m-    // replace all this with JSON.stringify(pageNode)[m
+[31m-    // let sectionContent: ISectionContent[] = [];[m
+[31m-    // this._data.description = "hi there!";[m
+[31m-    // this._data.created = new Date("2021-05-24");[m
+[31m-    // let str: string = JSON.stringify(this._data);[m
+[31m-    // console.log(str);[m
+[31m-    // let pageContent: PageContentType = JSON.parse(str);[m
+[31m-    // console.log(`stringified then parsed=${pageContent.description}`);[m
+[31m-    // console.log(`stringified then parsed=${pageContent.created}`);[m
+[31m-    // this._markdownDataSource.serialize();[m
+[31m-    // for (let section of this.sectionNodes) {[m
+[31m-    //   // could embed as Big arrow function below[m
+[31m-    //   //    sectionContent.firstTermIdx(section.serialize()); // where sectionContent = results.sections[m
+[31m-    // }[m
+[31m-    // let result: IPageContent = {[m
+[31m-    //   id: this.id,[m
+[31m-    //   name: this.name,[m
+[31m-    //   description: this.description,[m
+[31m-    //   owner: "",[m
+[31m-    //   pageFormatType: this.pageFormatType,[m
+[31m-    //   created: this.created,[m
+[31m-    //   modified: this.modified === undefined ? this.created : this.modified,[m
+[31m-    //   transformed:[m
+[31m-    //     this.transformed === undefined ? this.created : this.transformed,[m
+[31m-    //   firstTermIdx: this.firstTermIdx,[m
+[31m-    //   lastTermIdx: this.lastTermIdx,[m
+[31m-    //   sections: sectionContent[m
+[31m-    // };[m
+[31m-    return "";[m
+[31m-  }[m
+[31m-  transform(): any {}[m
+[31m-}[m
+[32m+[m[32m// type ISectionNode = ISectionContent & IParseNode;[m
+[32m+[m[32m// export class FileParseNode extends ParseNode implements IPageContent {[m
+[32m+[m[32m//   //  _data: PageContentType = InitialPageContentType;[m
+[32m+[m[32m//   id: number = 0;[m
+[32m+[m[32m//   name: string = "";[m
+[32m+[m[32m//   description: string = "";[m
+[32m+[m[32m//   owner: string = "";[m
+[32m+[m[32m//   pageFormatType = PageFormatEnumType.default;[m
+[32m+[m[32m//   created!: Date;[m
+[32m+[m[32m//   modified!: Date;[m
+[32m+[m[32m//   transformed!: Date;[m
+[32m+[m[32m//   firstTermIdx: number = -1;[m
+[32m+[m[32m//   lastTermIdx: number = -1;[m
+[32m+[m[32m//   sections: ISectionNode[] = []; //needs to be reflected in _data.sections[][m
+[32m+[m[32m//   constructor(parent) {[m
+[32m+[m[32m//     super(parent);[m
+[32m+[m[32m//   }[m
+[32m+[m[32m//   parse() {[m
+[32m+[m[32m//     //    let current: TaggedStringType;[m
+[32m+[m[32m//     try {[m
+[32m+[m[32m//       assert(this._parent !== undefined, `parent is undefined`);[m
+[32m+[m[32m//       assert(this.dataSource !== undefined, `dataSource is undefined`);[m
+[32m+[m[32m//       // assume datasource is a page (sections where depth=0), parse all direct children i.e., depth=0[m
+[32m+[m[32m//       for ([m
+[32m+[m[32m//         let current = this.dataSource.firstRecord();[m
+[32m+[m[32m//         !this.dataSource.EOF();[m
+[32m+[m[32m//         current = this.dataSource.nextRecord()[m
+[32m+[m[32m//       ) {[m
+[32m+[m[32m//         //        assert(current.tagType === "<page>", `expected page` );[m
+[32m+[m[32m//         console.log(`page.parse:current.content ${current.content}`);[m
+[32m+[m[32m//         //          this.sections.push(section);[m
+[32m+[m[32m//         //          section.parse();[m
+[32m+[m[32m//       }[m
+[32m+[m[32m//     } catch (e) {[m
+[32m+[m[32m//       this.logger.error(e.message);[m
+[32m+[m[32m//     } finally {[m
+[32m+[m[32m//       return 0;[m
+[32m+[m[32m//     }[m
+[32m+[m[32m//   }[m
+[32m+[m[32m//   serialize(): string {[m
+[32m+[m[32m//     // replace all this with JSON.stringify(pageNode)[m
+[32m+[m[32m//     // let sectionContent: ISectionContent[] = [];[m
+[32m+[m[32m//     // this._data.description = "hi there!";[m
+[32m+[m[32m//     // this._data.created = new Date("2021-05-24");[m
+[32m+[m[32m//     // let str: string = JSON.stringify(this._data);[m
+[32m+[m[32m//     // console.log(str);[m
+[32m+[m[32m//     // let pageContent: PageContentType = JSON.parse(str);[m
+[32m+[m[32m//     // console.log(`stringified then parsed=${pageContent.description}`);[m
+[32m+[m[32m//     // console.log(`stringified then parsed=${pageContent.created}`);[m
+[32m+[m[32m//     // this._markdownDataSource.serialize();[m
+[32m+[m[32m//     // for (let section of this.sectionNodes) {[m
+[32m+[m[32m//     //   // could embed as Big arrow function below[m
+[32m+[m[32m//     //   //    sectionContent.firstTermIdx(section.serialize()); // where sectionContent = results.sections[m
+[32m+[m[32m//     // }[m
+[32m+[m[32m//     // let result: IPageContent = {[m
+[32m+[m[32m//     //   id: this.id,[m
+[32m+[m[32m//     //   name: this.name,[m
+[32m+[m[32m//     //   description: this.description,[m
+[32m+[m[32m//     //   owner: "",[m
+[32m+[m[32m//     //   pageFormatType: this.pageFormatType,[m
+[32m+[m[32m//     //   created: this.created,[m
+[32m+[m[32m//     //   modified: this.modified === undefined ? this.created : this.modified,[m
+[32m+[m[32m//     //   transformed:[m
+[32m+[m[32m//     //     this.transformed === undefined ? this.created : this.transformed,[m
+[32m+[m[32m//     //   firstTermIdx: this.firstTermIdx,[m
+[32m+[m[32m//     //   lastTermIdx: this.lastTermIdx,[m
+[32m+[m[32m//     //   sections: sectionContent[m
+[32m+[m[32m//     // };[m
+[32m+[m[32m//     return "";[m
+[32m+[m[32m//   }[m
+[32m+[m[32m//   transform(): any {}[m
+[32m+[m[32m// }[m
+ // interface ISectionNode {[m
+ //   id: number;[m
+ //   name: string;[m
+[1mdiff --git a/src/parsepages.ts b/src/parsepages.ts[m
+[1mindex b31e1b5..0b592cc 100644[m
+[1m--- a/src/parsepages.ts[m
+[1m+++ b/src/parsepages.ts[m
+[36m@@ -11,16 +11,18 @@[m [mconst INITIALDATE = "9/21/2015 17:03";[m
+ const InitialDate = new Date(INITIALDATE).toString();[m
+ import { strict as assert } from "assert";[m
+ import { IsError } from "./utilities";[m
+[32m+[m[32mimport { Logger } from "./logger";[m
+ import { MarkdownTagType, TaggedStringType } from "./dataadapter";[m
+ import {[m
+   IHeadingListItem,[m
+[32m+[m[32m  ILinkListItem,[m
+   IPageContent,[m
+[31m-  PageFormatEnumType,[m
+   IRangeItem,[m
+   ISentenceListItem,[m
+   ISectionListItem,[m
+   ITerminalInfo,[m
+[31m-  ITerminalListItem[m
+[32m+[m[32m  ITerminalListItem,[m
+[32m+[m[32m  PageFormatEnumType[m
+ } from "./pageContentType";[m
+ import util from "util";[m
+ import {[m
+[36m@@ -32,6 +34,7 @@[m [mimport {[m
+   ParseNodeSerializeTabular,[m
+   ParseNodeSerializeFormatEnumType[m
+ } from "./baseclasses";[m
+[32m+[m[32mimport { AppNode } from "./parseapp";[m
+ import { ISectionNode } from "./parsesections";[m
+ import { GetSectionNode } from "./parsesectiondispatch";[m
+ export interface PageContentMethods {[m
+[36m@@ -58,7 +61,8 @@[m [mexport class PageParseNode extends ParseNode implements IPageContent {[m
+   headingList: IHeadingListItem[] = [];[m
+   sectionList: ISectionListItem[] = [];[m
+   sentenceList: ISentenceListItem[] = [];[m
+[31m-  constructor(parent?: PageParseNode) {[m
+[32m+[m[32m  linkList: ILinkListItem[] = [];[m
+[32m+[m[32m  constructor(parent?: PageParseNode | AppNode) {[m
+     super(parent);[m
+   }[m
+   parse() {[m
+[36m@@ -101,6 +105,9 @@[m [mexport class PageParseNode extends ParseNode implements IPageContent {[m
+ [m
+       this.userContext.sections.parse();[m
+       this.sectionList = this.userContext.sections;[m
+[32m+[m
+[32m+[m[32m      this.userContext.links.parse();[m
+[32m+[m[32m      this.linkList = this.userContext.links;[m
+       this.modified = new Date(Date.now()).toString();[m
+     } catch (e) {[m
+       if (IsError(e)) {[m
+[1mdiff --git a/src/parsertest01.ts b/src/parsertest01.ts[m
+[1mindex fd7859a..e3011e7 100644[m
+[1m--- a/src/parsertest01.ts[m
+[1m+++ b/src/parsertest01.ts[m
+[36m@@ -1,9 +1,11 @@[m
+ import * as fs from "fs";[m
+ import * as path from "path";[m
+[32m+[m[32mimport assert from "assert";[m
+ //import * as fs from "fs";[m
+ import { ParseNodeSerializeFormatEnumType } from "./baseClasses";[m
+ import { Logger } from "./logger";[m
+ //import { FileParseNode } from "./parsefiles";[m
+[32m+[m[32mimport { AppNode } from "./parseapp";[m
+ import { PageParseNode } from "./parsepages";[m
+ import { IPageContent } from "./pageContentType";[m
+ ///PageParseNode;[m
+[36m@@ -19,38 +21,65 @@[m [mconst inputPath: string = "curriculum/";[m
+ const outputPath: string = "dist/";[m
+ const inputExtension: string = ".md"; // markdown[m
+ const outputExtension: string = ".json";[m
+[31m-[m
+[31m-let logger = new Logger(this);[m
+[31m-///let pageNode = new PageContent(this);[m
+[31m-//let timestamp: string = new MyDate().yyyymmddhhmmss();[m
+[31m-//let userRonlyn = new UserContext("Ronlyn");[m
+[31m-logger.verboseMode = true;[m
+[31m-logger.adornMode = true;[m
+[31m-//logger.diagnosticMode = true;[m
+[31m-//[m
+[32m+[m[32mlet appNode: AppNode = new AppNode();[m
+[32m+[m[32mlet logger: Logger = appNode.logger;[m
+[32m+[m[32mappNode.logger.appName = "parsetest01";[m
+[32m+[m[32mlet inputFileSpecs: string[];[m
+[32m+[m[32mlet switches: string[] = [];[m
+[32m+[m[32mlet args: string[] = process.argv.slice(2);[m
+[32m+[m[32mwhile (args.length > 0 && args[0].length > 0 && args[0][0] === "-") {[m
+[32m+[m[32m  switches.push(args.shift()!);[m
+[32m+[m[32m}[m
+[32m+[m[32mif (switches.includes("--help")) {[m
+[32m+[m[32m  logger.info([m
+[32m+[m[32m    `Usage: node parsetest01.ts [OPTIONS] [FILE(s)]\n` +[m
+[32m+[m[32m      `Parses markdown files into json output for reader\n\n` +[m
+[32m+[m[32m      `Options:\n` +[m
+[32m+[m[32m      `  --dumpjson       display generated json\n` +[m
+[32m+[m[32m      `  --dumplinks      display link list\n` +[m
+[32m+[m[32m      `  --dumpsections   display section list\n` +[m
+[32m+[m[32m      `  --dumpsentences  display sentence list\n` +[m
+[32m+[m[32m      `  --dumpterminals  display terminal list\n` +[m
+[32m+[m[32m      `  --dumptree       display parse tree\n` +[m
+[32m+[m[32m      `  --nooutput       do not generate output json file(s)\n` +[m
+[32m+[m[32m      `  --testreload     reload generated file\n` +[m
+[32m+[m[32m      `  --adorn          adorn output mode\n` +[m
+[32m+[m[32m      `  --diagnostic     diagnostic output mode\n` +[m
+[32m+[m[32m      `  --verbose        verbose output mode\n`,[m
+[32m+[m[32m    false,[m
+[32m+[m[32m    false,[m
+[32m+[m[32m    false,[m
+[32m+[m[32m    false[m
+[32m+[m[32m  );[m
+[32m+[m[32m  process.exit();[m
+[32m+[m[32m}[m
+[32m+[m[32mlogger.adornMode = switches.includes("--adorn");[m
+[32m+[m[32mlogger.diagnosticMode = switches.includes("--diagnostic");[m
+[32m+[m[32mlogger.verboseMode = switches.includes("--verbose");[m
+ logger.info([m
+[31m-  `verbose mode: ${logger.verboseMode ? "ON" : "OFF"}`,[m
+[32m+[m[32m  `adorn mode: ${logger.adornMode ? "ON" : "OFF"}`,[m
+   false,[m
+   false,[m
+   false,[m
+   false[m
+ );[m
+ logger.info([m
+[31m-  `adorn mode: ${logger.adornMode ? "ON" : "OFF"}`,[m
+[32m+[m[32m  `diagnostic mode: ${logger.diagnosticMode ? "ON" : "OFF"}`,[m
+[32m+[m[32m  false,[m
+[32m+[m[32m  false,[m
+[32m+[m[32m  false,[m
+[32m+[m[32m  false[m
+[32m+[m[32m);[m
+[32m+[m[32mlogger.info([m
+[32m+[m[32m  `verbose mode: ${logger.verboseMode ? "ON" : "OFF"}`,[m
+   false,[m
+   false,[m
+   false,[m
+   false[m
+ );[m
+[31m-let inputFileSpecs: string[];[m
+[31m-let switches: string[] = [];[m
+[31m-let args: string[] = process.argv.slice(2);[m
+[31m-while (args.length > 0 && args[0].length > 0 && args[0][0] === "-") {[m
+[31m-  switches.push(args.shift()!);[m
+[31m-}[m
+ inputFileSpecs = args.filter(mdFiles => mdFiles.endsWith(inputExtension));[m
+ for (let inputFileSpec of inputFileSpecs) {[m
+[31m-  let pageNode = new PageParseNode(this);[m
+[32m+[m[32m  let pageNode = new PageParseNode(appNode);[m
+   linesParsed = pageNode.dataSource.connect(inputFileSpec);[m
+   // console.log([m
+   //   pageNode.dataSource.serialize(ParseNodeSerializeFormatEnumType.TABULAR)[m
+[36m@@ -82,7 +111,7 @@[m [mfor (let inputFileSpec of inputFileSpecs) {[m
+   );[m
+   pageNode.filename = `${fileName}${outputExtension}`;[m
+   let outputFileSpec = `${outputPath}${fileName}${outputExtension}`;[m
+[31m-  if (switches.includes("-dumpdatasource")) {[m
+[32m+[m[32m  if (switches.includes("--dumpdatasource")) {[m
+     logger.info([m
+       `dumping datasource for ${path.basename(outputFileSpec)}`,[m
+       false,[m
+[36m@@ -90,14 +119,15 @@[m [mfor (let inputFileSpec of inputFileSpecs) {[m
+       false,[m
+       false[m
+     );[m
+[31m-    logger.info(pageNode.dataSource.serialize(ParseNodeSerializeFormatEnumType.TABULAR),[m
+[32m+[m[32m    logger.info([m
+[32m+[m[32m      pageNode.dataSource.serialize(ParseNodeSerializeFormatEnumType.TABULAR),[m
+       false,[m
+       false,[m
+       false,[m
+       false[m
+[31m-    )[m
+[32m+[m[32m    );[m
+   }[m
+[31m-if (switches.includes("-dumptree")) {[m
+[32m+[m[32m  if (switches.includes("--dumptree")) {[m
+     logger.info([m
+       `dumping tree for ${path.basename(outputFileSpec)}`,[m
+       false,[m
+[36m@@ -105,14 +135,15 @@[m [mif (switches.includes("-dumptree")) {[m
+       false,[m
+       false[m
+     );[m
+[31m-    logger.info(pageNode.serialize(ParseNodeSerializeFormatEnumType.TREEVIEW),[m
+[32m+[m[32m    logger.info([m
+[32m+[m[32m      pageNode.serialize(ParseNodeSerializeFormatEnumType.TREEVIEW),[m
+       false,[m
+       false,[m
+       false,[m
+       false[m
+[31m-    )[m
+[32m+[m[32m    );[m
+   }[m
+[31m-  if (switches.includes("-dumpjson")) {[m
+[32m+[m[32m  if (switches.includes("--dumpjson")) {[m
+     logger.info([m
+       `dumping json for ${path.basename(outputFileSpec)}`,[m
+       false,[m
+[36m@@ -120,14 +151,15 @@[m [mif (switches.includes("-dumptree")) {[m
+       false,[m
+       false[m
+     );[m
+[31m-    logger.info(pageNode.serialize(ParseNodeSerializeFormatEnumType.TABULAR),[m
+[32m+[m[32m    logger.info([m
+[32m+[m[32m      pageNode.serialize(ParseNodeSerializeFormatEnumType.TABULAR),[m
+       false,[m
+       false,[m
+       false,[m
+       false[m
+[31m-    )[m
+[32m+[m[32m    );[m
+   }[m
+[31m-  if (switches.includes("-dumpterminals")) {[m
+[32m+[m[32m  if (switches.includes("--dumpterminals")) {[m
+     logger.info([m
+       `dumping terminal list for ${path.basename(outputFileSpec)}`,[m
+       false,[m
+[36m@@ -135,14 +167,15 @@[m [mif (switches.includes("-dumptree")) {[m
+       false,[m
+       false[m
+     );[m
+[31m-    logger.info(pageNode.userContext.terminals.serialize(),[m
+[32m+[m[32m    logger.info([m
+[32m+[m[32m      pageNode.userContext.terminals.serialize(),[m
+       false,[m
+       false,[m
+       false,[m
+       false[m
+[31m-    )[m
+[32m+[m[32m    );[m
+   }[m
+[31m-  if (switches.includes("-dumpsentences")) {[m
+[32m+[m[32m  if (switches.includes("--dumpsentences")) {[m
+     logger.info([m
+       `dumping sentence list for ${path.basename(outputFileSpec)}`,[m
+       false,[m
+[36m@@ -150,14 +183,31 @@[m [mif (switches.includes("-dumptree")) {[m
+       false,[m
+       false[m
+     );[m
+[31m-    logger.info(pageNode.userContext.sentences.serialize(),[m
+[32m+[m[32m    logger.info([m
+[32m+[m[32m      pageNode.userContext.sentences.serialize(),[m
+[32m+[m[32m      false,[m
+[32m+[m[32m      false,[m
+[32m+[m[32m      false,[m
+[32m+[m[32m      false[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m[32m  if (switches.includes("--dumplinks")) {[m
+[32m+[m[32m    logger.info([m
+[32m+[m[32m      `dumping links for ${path.basename(outputFileSpec)}`,[m
+[32m+[m[32m      false,[m
+[32m+[m[32m      false,[m
+[32m+[m[32m      false,[m
+[32m+[m[32m      false[m
+[32m+[m[32m    );[m
+[32m+[m[32m    logger.info([m
+[32m+[m[32m      pageNode.userContext.links.serialize(),[m
+       false,[m
+       false,[m
+       false,[m
+       false[m
+[31m-    )[m
+[32m+[m[32m    );[m
+   }[m
+[31m-  if (switches.includes("-dumpsections")) {[m
+[32m+[m[32m  if (switches.includes("--dumpsections")) {[m
+     logger.info([m
+       `dumping section list for ${path.basename(outputFileSpec)}`,[m
+       false,[m
+[36m@@ -165,26 +215,32 @@[m [mif (switches.includes("-dumptree")) {[m
+       false,[m
+       false[m
+     );[m
+[31m-    logger.info(pageNode.userContext.sections.serialize(),[m
+[32m+[m[32m    logger.info([m
+[32m+[m[32m      pageNode.userContext.sections.serialize(),[m
+       false,[m
+       false,[m
+       false,[m
+       false[m
+[31m-    )[m
+[32m+[m[32m    );[m
+   }[m
+[31m-  logger.info([m
+[31m-    `generating json file ${path.basename(outputFileSpec)}`,[m
+[31m-    false,[m
+[31m-    false,[m
+[31m-    false,[m
+[31m-    false[m
+[31m-  );[m
+   let json: string = pageNode.serialize(ParseNodeSerializeFormatEnumType.JSON);[m
+[31m-  fs.writeFileSync(outputFileSpec, json);[m
+[31m-  if (switches.includes("-testreload")) {[m
+[31m-    let inputStr: string = fs.readFileSync(outputFileSpec).toString()[m
+[32m+[m[32m  if (!switches.includes("--nooutput")) {[m
+[32m+[m[32m    logger.info([m
+[32m+[m[32m      `generating json file ${path.basename(outputFileSpec)}`,[m
+[32m+[m[32m      false,[m
+[32m+[m[32m      false,[m
+[32m+[m[32m      false,[m
+[32m+[m[32m      false[m
+[32m+[m[32m    );[m
+[32m+[m[32m    fs.writeFileSync(outputFileSpec, json);[m
+[32m+[m[32m  }[m
+[32m+[m[32m  if (switches.includes("--testreload")) {[m
+[32m+[m[32m    let inputStr: string = fs.readFileSync(outputFileSpec).toString();[m
+     let reloaded: IPageContent = JSON.parse(inputStr);[m
+[31m-    if (reloaded !== pageNode) {[m
+[32m+[m[32m    try {[m
+[32m+[m[32m      assert.deepEqual(reloaded, pageNode);[m
+[32m+[m[32m    } catch (e) {[m
+[32m+[m[32m      console.log((<Error>e).message);[m
+       logger.info([m
+         `integrity failed for file ${path.basename(outputFileSpec)}`,[m
+         false,[m
+[1mdiff --git a/src/parsesections_images.ts b/src/parsesections_images.ts[m
+[1mindex 8e89b48..8818f35 100644[m
+[1m--- a/src/parsesections_images.ts[m
+[1m+++ b/src/parsesections_images.ts[m
+[36m@@ -16,13 +16,15 @@[m [mimport {[m
+ } from "./baseclasses";[m
+ import { MarkdownTagType, TaggedStringType } from "./dataadapter";[m
+ import {[m
+[32m+[m[32m  ImageEntryLayoutEnumType,[m
+   ISectionImageEntryVariantInitializer,[m
+   ISectionImageEntryVariant,[m
+   ISectionParagraphVariant,[m
+   ISectionParagraphVariantInitializer,[m
+   ITerminalContent,[m
+   SectionVariantEnumType,[m
+[31m-  TerminalMetaEnumType[m
+[32m+[m[32m  TerminalMetaEnumType,[m
+[32m+[m[32m  IImageTerminalMeta[m
+ } from "./pageContentType";[m
+ import { GetSectionNode } from "./parsesectiondispatch";[m
+ import { ITerminalNode } from "./parseterminals";[m
+[36m@@ -42,23 +44,57 @@[m [mexport class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST[m
+     //this.logger.diagnosticMode = true;[m
+     this.logger.diagnostic(`${this.constructor.name}`);[m
+     try {[m
+[31m-      assert(this.dataSource !== undefined, `dataSource is undefined`);[m
+[32m+[m[32m      assert(this.dataSource !== undefined, `Undefined datasource encountered`);[m
+       let current: TaggedStringType = this.dataSource.currentRecord();[m
+[31m-      assert(current !== undefined, `current record is undefined`);[m
+[32m+[m[32m      assert(current !== undefined, `Undefined record encountered`);[m
+ [m
+       assert([m
+         current.tagType === MarkdownTagType.IMAGEENTRY,[m
+[31m-        `expected ${MarkdownTagType.IMAGEENTRY} at line ${current.lineNo}`[m
+[32m+[m[32m        `Expected "${MarkdownTagType.IMAGEENTRY}" at line ${current.lineNo}`[m
+       );[m
+[32m+[m[32m      let args: string[] = current.content.split(",").map(arg => arg.trim());[m
+[32m+[m[32m      if (args[0] !== undefined) this.meta.title = args[0];[m
+[32m+[m[32m      try {[m
+[32m+[m[32m        if (args[1] !== undefined && args[1].length > 0) {[m
+[32m+[m[32m          let layout = args[1].trim().toLowerCase();[m
+[32m+[m[32m          assert([m
+[32m+[m[32m            layout === ImageEntryLayoutEnumType.left ||[m
+[32m+[m[32m              layout === ImageEntryLayoutEnumType.above,[m
+[32m+[m[32m            `Invalid image entry layout "${layout}" encountered, expected either "${ImageEntryLayoutEnumType.left}" or "${ImageEntryLayoutEnumType.above}" as second argument at line ${current.lineNo}`[m
+[32m+[m[32m          );[m
+[32m+[m[32m          this.meta.layout = layout;[m
+[32m+[m[32m        }[m
+[32m+[m[32m      } catch (e) {[m
+[32m+[m[32m        this.logger.warning((e as Error).message);[m
+[32m+[m[32m      }[m
+[32m+[m[32m      try {[m
+[32m+[m[32m        if (args[2] !== undefined && args[2].length > 0) {[m
+[32m+[m[32m          assert([m
+[32m+[m[32m            args[2].trim().charAt(args[2].trim().length - 1) === "%",[m
+[32m+[m[32m            `Missing percent sign in third argument at line ${current.lineNo}`[m
+[32m+[m[32m          );[m
+[32m+[m[32m          let valueWithoutPercentSign: string = args[2][m
+[32m+[m[32m            .trim()[m
+[32m+[m[32m            .substring(0, args[2].length - 1); // remove % sign too[m
+[32m+[m[32m          assert([m
+[32m+[m[32m            !isNaN(+valueWithoutPercentSign),[m
+[32m+[m[32m            `Expected a numerical value as third argument but encountered  "${valueWithoutPercentSign}" at line ${current.lineNo}`[m
+[32m+[m[32m          );[m
+[32m+[m[32m          this.meta.percent = valueWithoutPercentSign + "%";[m
+[32m+[m[32m        }[m
+[32m+[m[32m      } catch (e) {[m
+[32m+[m[32m        this.logger.warning((e as Error).message);[m
+[32m+[m[32m      }[m
+[32m+[m[32m      if (args[3] !== undefined) this.meta.separator = args[3];[m
+       current = this.dataSource.nextRecord();[m
+       assert([m
+         current.tagType === MarkdownTagType.PARAGRAPH,[m
+[31m-        `encountered ${current.tagType} expected ${MarkdownTagType.PARAGRAPH} at line ${current.lineNo}`[m
+[32m+[m[32m        `Expected "${MarkdownTagType.PARAGRAPH}" but encountered "${current.tagType}" at line ${current.lineNo}`[m
+       );[m
+       current = this.dataSource.nextRecord();[m
+       assert([m
+         current.tagType === MarkdownTagType.SENTENCE,[m
+[31m-        `encountered ${current.tagType} expected ${MarkdownTagType.SENTENCE} at line ${current.lineNo}`[m
+[32m+[m[32m        `Expected "${MarkdownTagType.SENTENCE}" but encountered "${current.tagType}" at line ${current.lineNo}`[m
+       );[m
+       // find list of images[m
+       this.firstTermIdx = this.userContext.terminals.lastIdx + 1;[m
+[36m@@ -66,25 +102,25 @@[m [mexport class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST[m
+       sentence.parse();[m
+       for (const terminal of sentence.terminals) {[m
+         if (terminal.type === TerminalMetaEnumType.image) {[m
+[32m+[m[32m          (<IImageTerminalMeta>terminal.meta).className = "imageentry-image";[m
+           this.meta.images.push(terminal);[m
+         }[m
+       }[m
+       assert([m
+         this.meta.images.length > 0,[m
+[31m-        `expected image declaraction(s) immediately following ${MarkdownTagType.IMAGEENTRY} at line ${current.lineNo}`[m
+[32m+[m[32m        `Expected image declaraction(s) immediately following "${MarkdownTagType.IMAGEENTRY}" at line ${current.lineNo}`[m
+       );[m
+       current = this.dataSource.nextRecord();[m
+       assert([m
+         current.tagType === MarkdownTagType.PARAGRAPH_END,[m
+[31m-        `expected ${MarkdownTagType.PARAGRAPH_END} to ${MarkdownTagType.PARAGRAPH}`[m
+[32m+[m[32m        `Expected "${MarkdownTagType.PARAGRAPH_END}" to "${MarkdownTagType.PARAGRAPH}" but encountered "${current.tagType}"  at line ${current.lineNo}`[m
+       );[m
+       //keep processing sections until imageentry_end[m
+       for ([m
+         current = this.dataSource.nextRecord();[m
+         !this.dataSource.EOF() &&[m
+         current.tagType !== MarkdownTagType.IMAGEENTRY_END;[m
+[31m-        //        current = this.dataSource.nextRecord()[m
+[31m-        current = this.dataSource.currentRecord()[m
+[32m+[m[32m        current = this.dataSource.currentRecord() // update current modified in parse()[m
+       ) {[m
+         let sectionNode: ISectionNode = GetSectionNode(current.tagType, this);[m
+         this.meta.captions.push(sectionNode);[m
+[36m@@ -110,6 +146,7 @@[m [mexport class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST[m
+         this.dataSource.nextRecord(); // move to next grouping[m
+       }[m
+     } catch (e) {[m
+[32m+[m[32m      this.dataSource.nextRecord(); // move to next grouping[m
+       if (IsError(e)) {[m
+         this.logger.error(e.message);[m
+       } else {[m
+[1mdiff --git a/src/parsesentences.ts b/src/parsesentences.ts[m
+[1mindex b755cb4..c72e9f0 100644[m
+[1m--- a/src/parsesentences.ts[m
+[1m+++ b/src/parsesentences.ts[m
+[36m@@ -72,9 +72,9 @@[m [mexport abstract class AbstractSentenceNode extends ParseNode[m
+       case ParseNodeSerializeFormatEnumType.TREEVIEW: {[m
+         label = `sentence: ${this.content}`;[m
+         outputStr = super.serialize(format, label, prefix);[m
+[31m-        for (const [i, sentence] of this.terminals.entries()) {[m
+[31m-          label = `${sentence.type}`;[m
+[31m-          outputStr = `${outputStr}${sentence.serialize([m
+[32m+[m[32m        for (const [i, terminal] of this.terminals.entries()) {[m
+[32m+[m[32m          label = `${terminal.type}`;[m
+[32m+[m[32m          outputStr = `${outputStr}${terminal.serialize([m
+             format,[m
+             undefined,[m
+             prefix + (i < this.terminals.length - 1 ? "| " : "  ")[m
+[36m@@ -214,8 +214,7 @@[m [mexport class SentenceNode extends AbstractSentenceNode[m
+       let token: Token = tokens[0]; // peek[m
+       assert(token !== undefined, `undefined token detected`);[m
+ [m
+[31m-      terminalNode = GetTerminalNode(token, this); // encapsulating the following[m
+[31m-[m
+[32m+[m[32m      terminalNode = GetTerminalNode(token, this);[m
+       if (terminalNode) {[m
+         this.logger.diagnostic([m
+           `Created terminalNode type=${terminalNode.constructor.name} for "${token.content}"`[m
+[1mdiff --git a/src/parseterminaldispatch.ts b/src/parseterminaldispatch.ts[m
+[1mindex 43e28ba..ae96719 100644[m
+[1m--- a/src/parseterminaldispatch.ts[m
+[1m+++ b/src/parseterminaldispatch.ts[m
+[36m@@ -35,6 +35,7 @@[m [mimport {[m
+ } from "./parseterminals_dates";[m
+ import { TerminalNode_MLTAG_PHONENUMBER } from "./parseterminals_phonenumber";[m
+ import { TerminalNode_MLTAG_IMAGE } from "./parseterminals_image";[m
+[32m+[m[32mimport { TerminalNode_MLTAG_LINK } from "./parseterminals_link";[m
+ import { TerminalNode_MLTAG_EMAILADDRESS } from "./parseterminals_emailaddress";[m
+ export function GetTerminalNode([m
+   token: Token,[m
+[36m@@ -76,6 +77,10 @@[m [mexport function GetTerminalNode([m
+           termNode = new TerminalNode_MLTAG_IMAGE(parent);[m
+           break;[m
+         }[m
+[32m+[m[32m        case MarkupLabelType.LINK: {[m
+[32m+[m[32m          termNode = new TerminalNode_MLTAG_LINK(parent);[m
+[32m+[m[32m          break;[m
+[32m+[m[32m        }[m
+         case MarkupLabelType.NUMBER_WITHCOMMAS: {[m
+           termNode = new TerminalNode_MLTAG_NUMBER_WITHCOMMAS(parent);[m
+           break;[m
+[1mdiff --git a/src/parseterminals.ts b/src/parseterminals.ts[m
+[1mindex dcc265f..ce1efab 100644[m
+[1m--- a/src/parseterminals.ts[m
+[1m+++ b/src/parseterminals.ts[m
+[36m@@ -62,7 +62,7 @@[m [mexport abstract class AbstractTerminalNode extends ParseNode[m
+   //  tokenList: TokenListType = [];[m
+   constructor(parent: ISentenceNode) {[m
+     super(parent);[m
+[31m-    this.parent = parent;[m
+[32m+[m[32m    this._parent = parent;[m
+     Object.defineProperty(this, "userContext", { enumerable: false });[m
+     //Object.defineProperty(this, "id", { enumerable: false });[m
+   }[m
+[36m@@ -70,6 +70,7 @@[m [mexport abstract class AbstractTerminalNode extends ParseNode[m
+     let token: Token;[m
+     if (tokenList !== undefined) {[m
+       token = tokenList.shift()!;[m
+[32m+[m[32m      //      token = tokenList[0];[m
+       if (token !== undefined) {[m
+         this.content = token.content; // should be TerminalInfo[m
+       }[m
+[36m@@ -85,6 +86,7 @@[m [mexport abstract class AbstractTerminalNode extends ParseNode[m
+       case "prevTermIdx":[m
+       case "recitable":[m
+       case "audible":[m
+[32m+[m[32m      case "linkable":[m
+       case "visible":[m
+         return undefined;[m
+       default:[m
+[36m@@ -143,6 +145,7 @@[m [mexport abstract class AbstractTerminalNode extends ParseNode[m
+             //            case "prevTermIdx":[m
+             case "recitable":[m
+             case "audible":[m
+[32m+[m[32m            case "linkable":[m
+             case "visible":[m
+               return undefined;[m
+             default:[m
+[1mdiff --git a/src/parseterminals_image.ts b/src/parseterminals_image.ts[m
+[1mindex 2274dc7..a0d8258 100644[m
+[1m--- a/src/parseterminals_image.ts[m
+[1m+++ b/src/parseterminals_image.ts[m
+[36m@@ -45,11 +45,17 @@[m [mexport class TerminalNode_MLTAG_IMAGE extends TerminalNode_MLTAG_[m
+       //      this.logger.diagnosticMode = true;[m
+       let token: Token | undefined;[m
+ [m
+[31m-      assert(tokenList.length >= 10, "invalid number of tokens parsing image");[m
+[31m-      assert(isValidMarkupTag(startTag), `invalid markup tag(s) parsing image`);[m
+[32m+[m[32m      assert([m
+[32m+[m[32m        tokenList.length >= 10,[m
+[32m+[m[32m        "Expected at least 10 tokens parsing image token"[m
+[32m+[m[32m      );[m
+[32m+[m[32m      assert([m
+[32m+[m[32m        isValidMarkupTag(startTag),[m
+[32m+[m[32m        `Expected valid markup tag but ecnountered "${startTag}" parsing image token`[m
+[32m+[m[32m      );[m
+       assert([m
+         startTag.toLowerCase === MarkupLabelType.IMAGE.toLowerCase,[m
+[31m-        `invalid markup tag "${startTag}" parsing image`[m
+[32m+[m[32m        `Expected markup tag ${MarkupLabelType.IMAGE.toLowerCase} but encountered "${startTag}" parsing image token`[m
+       );[m
+       tokenList.shift(); // discard startTag[m
+ [m
+[36m@@ -61,12 +67,12 @@[m [mexport class TerminalNode_MLTAG_IMAGE extends TerminalNode_MLTAG_[m
+       token = tokenList.shift()!;[m
+       assert([m
+         token.content === TokenLiteral.EXCLAMATION,[m
+[31m-        `expected exclamation but encountered "${token.content}" while parsing image`[m
+[32m+[m[32m        `Expected "${TokenLiteral.EXCLAMATION}" but encountered "${token.content}" while parsing image token`[m
+       );[m
+       token = tokenList.shift()!;[m
+       assert([m
+         token.content === TokenLiteral.LBRACKET,[m
+[31m-        `expected left bracket but encountered "${token.content}" while parsing image`[m
+[32m+[m[32m        `Expected "${TokenLiteral.LBRACKET}" but encountered "${token.content}" while parsing image token`[m
+       );[m
+       let label: string = "";[m
+       for ([m
+[36m@@ -78,14 +84,14 @@[m [mexport class TerminalNode_MLTAG_IMAGE extends TerminalNode_MLTAG_[m
+       }[m
+       assert([m
+         token.content === TokenLiteral.RBRACKET,[m
+[31m-        `expected right bracket but encountered "${token.content}" while parsing image`[m
+[32m+[m[32m        `Expected ${TokenLiteral.RBRACKET} but encountered "${token.content}" while parsing image token`[m
+       );[m
+       this.meta.label = label;[m
+       this.content = label;[m
+       token = tokenList.shift()!;[m
+       assert([m
+         token.content === TokenLiteral.LPAREN,[m
+[31m-        `expected left parenthesis but encountered "${token.content}" while parsing image`[m
+[32m+[m[32m        `Expected "${TokenLiteral.LPAREN} but encountered "${token.content}" while parsing image token`[m
+       );[m
+       let src: string = "";[m
+       for ([m
+[36m@@ -97,19 +103,24 @@[m [mexport class TerminalNode_MLTAG_IMAGE extends TerminalNode_MLTAG_[m
+       }[m
+       assert([m
+         token.content === TokenLiteral.RPAREN,[m
+[31m-        `expected right parenthesis but encountered "${token.content}" while parsing image`[m
+[32m+[m[32m        `Expected right parenthesis but encountered "${token.content}" while parsing image`[m
+       );[m
+[31m-      let chunks: string[] = src.split(",");[m
+[31m-      console.log(`image src=${chunks}`);[m
+[31m-      if (chunks[0] !== undefined) this.meta.src = chunks[0];[m
+[31m-      if (chunks[1] !== undefined) this.meta.width = +chunks[1];[m
+[31m-      if (chunks[2] !== undefined) this.meta.height = +chunks[2];[m
+[31m-      if (chunks[3] !== undefined) this.meta.attributes = chunks[3].trim();[m
+[32m+[m[32m      let chunks: string[] = src.split(",").map(chunk => chunk.trim());[m
+[32m+[m[32m      if (chunks[0] !== undefined && chunks[0].length > 0)[m
+[32m+[m[32m        this.meta.src = chunks[0];[m
+[32m+[m[32m      if (chunks[1] !== undefined && chunks[0].length > 0)[m
+[32m+[m[32m        this.meta.width = +chunks[1]; // no units; assumed px[m
+[32m+[m[32m      if (chunks[2] !== undefined && chunks[0].length > 0)[m
+[32m+[m[32m        this.meta.height = +chunks[2]; // no units; assumed px[m
+[32m+[m[32m      if (chunks[3] !== undefined && chunks[0].length > 0)[m
+[32m+[m[32m        this.meta.attributes = chunks[3];[m
+ [m
+       token = tokenList.shift()!;[m
+       assert([m
+         token.content === endMarkupTag(startTag),[m
+[31m-        `expected closing  tag </image> while parsing image`[m
+[32m+[m[32m        `Expected closing tag "${endMarkupTag([m
+[32m+[m[32m          startTag[m
+[32m+[m[32m        )}" while parsing image token`[m
+       );[m
+     } catch (e) {[m
+       if (IsError(e)) {[m
+[1mdiff --git a/src/tokenizer.ts b/src/tokenizer.ts[m
+[1mindex a0ee490..412f16f 100644[m
+[1m--- a/src/tokenizer.ts[m
+[1m+++ b/src/tokenizer.ts[m
+[36m@@ -176,90 +176,92 @@[m [mconst MarkupTokenDictionary: MarkupTokenDictionaryType = {[m
+   [MarkupTokenType.USD]: {[m
+     type: MarkupTokenType.USD,[m
+     label: MarkupLabelType.USD,[m
+[31m-    pattern: /(?<=^|\W)\$(([1-9]\d{0,2}(,\d{3})*)|(([1-9]\d*)?\d))(\.\d\d)?(?=\s|\W|$|[.!?\\-])/g[m
+[32m+[m[32m    pattern: /(?<=^|\W|\[|\()\$(([1-9]\d{0,2}(,\d{3})*)|(([1-9]\d*)?\d))(\.\d\d)?(?=\s|\W|$|[.!?\\-])/g[m
+   },[m
+   [MarkupTokenType.EMAILADDRESS]: {[m
+     type: MarkupTokenType.EMAILADDRESS,[m
+     label: MarkupLabelType.EMAILADDRESS,[m
+[31m-    pattern: /(?<=^|\W)([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})(?=(?=\s|\W|$|[.!?\\-]))/g[m
+[32m+[m[32m    pattern: /(?<=^|\W|\[|\()([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})(?=(?=\s|\W|$|[.!?\\-]))/g[m
+   },[m
+   [MarkupTokenType.PHONENUMBER]: {[m
+     type: MarkupTokenType.PHONENUMBER,[m
+     label: MarkupLabelType.PHONENUMBER,[m
+[31m-    pattern: /(?<=^|\W)\(\d{3}\)\s\d{3}-\d{4}(?=(\W|$))/g[m
+[32m+[m[32m    pattern: /(?<=^|\W|\[|\()\(\d{3}\)\s\d{3}-\d{4}(?=(\W|$))/g[m
+   },[m
+   [MarkupTokenType.TIME]: {[m
+     type: MarkupTokenType.TIME,[m
+     label: MarkupLabelType.TIME,[m
+[31m-    pattern: /(?<=^|\W)([0-9]|[0-1][0-9]|[2][0-3]):([0-5][0-9])(?=(\W|$))/g[m
+[32m+[m[32m    pattern: /(?<=^|\W|\[|\()([0-9]|[0-1][0-9]|[2][0-3]):([0-5][0-9])(?=(\W|$))/g[m
+   },[m
+   [MarkupTokenType.DATE1]: {[m
+     type: MarkupTokenType.DATE1,[m
+     label: MarkupLabelType.DATE1,[m
+[31m-    pattern: /(?<=^|\W)((31(?!\ (Feb(ruary)?|Apr(il)?|June?|(Sep(?=\b|t)t?|Nov)(ember)?)))|((30|29)(?!\ Feb(ruary)?))|(29(?=\ Feb(ruary)?\ (((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))|(0?[1-9])|1\d|2[0-8])\s*(Jan(uary)?|Feb(ruary)?|Ma(r(ch)?|y)|Apr(il)?|Ju((ly?)|(ne?))|Aug(ust)?|Oct(ober)?|(Sep(?=\b|t)t?|Nov|Dec)(ember)?)\ ((1[6-9]|[2-9]\d)\d{2})(?=[\s\.,\?\!]|$)/g //DD MMM YYYY[m
+[32m+[m[32m    pattern: /(?<=^|\W|\[|\()((31(?!\ (Feb(ruary)?|Apr(il)?|June?|(Sep(?=\b|t)t?|Nov)(ember)?)))|((30|29)(?!\ Feb(ruary)?))|(29(?=\ Feb(ruary)?\ (((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))|(0?[1-9])|1\d|2[0-8])\s*(Jan(uary)?|Feb(ruary)?|Ma(r(ch)?|y)|Apr(il)?|Ju((ly?)|(ne?))|Aug(ust)?|Oct(ober)?|(Sep(?=\b|t)t?|Nov|Dec)(ember)?)\ ((1[6-9]|[2-9]\d)\d{2})(?=[\s\.,\?\!]|$)/g //DD MMM YYYY[m
+   },[m
+   [MarkupTokenType.DATE2]: {[m
+     type: MarkupTokenType.DATE2,[m
+     label: MarkupLabelType.DATE2,[m
+[31m-    pattern: /(?<=^|\W)(Jan(.|(uary))?|Feb(.|(ruary))?|Ma(r(.|(ch))?|y)|Apr(.|(il))?|Jul(.|(y))?|Jun(.|(e))?|Aug(.|(ust))?|Oct(.|(ober))?|(Sep(?=\b|t)t?|Nov|Dec)(.|(ember))?)\ ((31(?!\ (Feb(ruary)?|Apr(il)?|June?|(Sep(?=\b|t)t?|Nov)(ember)?)))|((30|29)(?!\ Feb(ruary)?))|(29(?=\ Feb(ruary)?\s*(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))|(0?[1-9])|1\d|2[0-8]),[\s]*((1[6-9]|[2-9]\d)\d{2})(?=(\W|$))/g //MMM* DD,YYYY[m
+[32m+[m[32m    pattern: /(?<=^|\W|\[|\()(Jan(.|(uary))?|Feb(.|(ruary))?|Ma(r(.|(ch))?|y)|Apr(.|(il))?|Jul(.|(y))?|Jun(.|(e))?|Aug(.|(ust))?|Oct(.|(ober))?|(Sep(?=\b|t)t?|Nov|Dec)(.|(ember))?)\ ((31(?!\ (Feb(ruary)?|Apr(il)?|June?|(Sep(?=\b|t)t?|Nov)(ember)?)))|((30|29)(?!\ Feb(ruary)?))|(29(?=\ Feb(ruary)?\s*(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))|(0?[1-9])|1\d|2[0-8]),[\s]*((1[6-9]|[2-9]\d)\d{2})(?=(\W|$))/g //MMM* DD,YYYY[m
+   },[m
+   [MarkupTokenType.DATE3]: {[m
+     type: MarkupTokenType.DATE3,[m
+     label: MarkupLabelType.DATE3,[m
+[31m-    pattern: /(?<=^|\W)((Jan(.|(uary))?|Feb(.|(ruary))?|Ma(r(.|(ch))?|y)|Apr(.|(il))?|Jul(.|(y))?|Jun(.|(e))?|Aug(.|(ust))?|Oct(.|(ober))?|(Sep(?=\b|t)t?|Nov|Dec)(.|(ember))?)\ ((31(?!\ (Feb(ruary)?|Apr(il)?|June?|(Sep(?=\b|t)t?|Nov)(ember)?)))|((30|29)(?!\ Feb(ruary)?))|(29(?=\ Feb(ruary)?\s*(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))|(0?[1-9])|1\d|2[0-8]))(?!,|[1-9])(?=[\s\.,\?\!]|$)/g //MMM* DD\[m
+[32m+[m[32m    pattern: /(?<=^|\W|\[|\()((Jan(.|(uary))?|Feb(.|(ruary))?|Ma(r(.|(ch))?|y)|Apr(.|(il))?|Jul(.|(y))?|Jun(.|(e))?|Aug(.|(ust))?|Oct(.|(ober))?|(Sep(?=\b|t)t?|Nov|Dec)(.|(ember))?)\ ((31(?!\ (Feb(ruary)?|Apr(il)?|June?|(Sep(?=\b|t)t?|Nov)(ember)?)))|((30|29)(?!\ Feb(ruary)?))|(29(?=\ Feb(ruary)?\s*(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))|(0?[1-9])|1\d|2[0-8]))(?!,|[1-9])(?=[\s\.,\?\!]|$)/g //MMM* DD\[m
+   },[m
+   [MarkupTokenType.CONTRACTION_D]: {[m
+     type: MarkupTokenType.CONTRACTION_D,[m
+     label: MarkupLabelType.CONTRACTION,[m
+[31m-    pattern: /(?<=^|\s|^$)([A-Za-z]+)\'d(?=\s|\W|$|[.!?\\-])/g[m
+[32m+[m[32m    pattern: /(?<=^|\s|\[|\(|^$)([A-Za-z]+)\'d(?=\s|\W|$|[.!?\\-])/g[m
+   },[m
+   [MarkupTokenType.CONTRACTION_LL]: {[m
+     type: MarkupTokenType.CONTRACTION_LL,[m
+     label: MarkupLabelType.CONTRACTION,[m
+[31m-    pattern: /(?<=^|\s|^$)([A-Za-z]+)\'ll(?=\s|\W|$|[.!?\\-])/g[m
+[32m+[m[32m    pattern: /(?<=^|\s|\[|\(|^$)([A-Za-z]+)\'ll(?=\s|\W|$|[.!?\\-])/g[m
+   },[m
+   [MarkupTokenType.CONTRACTION_M]: {[m
+     type: MarkupTokenType.CONTRACTION_M,[m
+     label: MarkupLabelType.CONTRACTION,[m
+[31m-    pattern: /(?<=^|\s|^$)I\'m(?=\s|\W|$|[.!?\\-])/g[m
+[32m+[m[32m    pattern: /(?<=^|\s|\[|\(|^$)I\'m(?=\s|\W|$|[.!?\\-])/g[m
+   },[m
+   [MarkupTokenType.CONTRACTION_RE]: {[m
+     type: MarkupTokenType.CONTRACTION_RE,[m
+     label: MarkupLabelType.CONTRACTION,[m
+[31m-    pattern: /(?<=^|\W|^$)(([Yy]ou|[Ww]e|[Tt]hey|[Ww]hat)\'re)(?=\s|\W|$|[.!?\\-])/g[m
+[32m+[m[32m    pattern: /(?<=^|\W|\[|\(|^$)(([Yy]ou|[Ww]e|[Tt]hey|[Ww]hat)\'re)(?=\s|\W|$|[.!?\\-])/g[m
+   },[m
+   [MarkupTokenType.CONTRACTION_NT]: {[m
+     type: MarkupTokenType.CONTRACTION_NT,[m
+     label: MarkupLabelType.CONTRACTION,[m
+[31m-    pattern: /(?<=^|\W|^$)([Ii]s|[Aa]re|[Ww]as|[Ww]ere|[Hh]ave|[Hh]as|[Hh]ad|[Ww]o|[Ww]ould|[Dd]o|[Dd]oes|[Dd]id|[Cc]a|[Cc]ould|[Ss]hould|[Mm]igh|[Mm]ust])n\'t(?=\s|\W|$|[.!?\\-])/g[m
+[32m+[m[32m    pattern: /(?<=^|\W|\[|\(|^$)([Ii]s|[Aa]re|[Ww]as|[Ww]ere|[Hh]ave|[Hh]as|[Hh]ad|[Ww]o|[Ww]ould|[Dd]o|[Dd]oes|[Dd]id|[Cc]a|[Cc]ould|[Ss]hould|[Mm]igh|[Mm]ust])n\'t(?=\s|\W|$|[.!?\\-])/g[m
+   },[m
+   [MarkupTokenType.CONTRACTION_S]: {[m
+     type: MarkupTokenType.CONTRACTION_S,[m
+     label: MarkupLabelType.CONTRACTION,[m
+[31m-    pattern: /(?<=^|\s|^$)([A-Za-z]+)\'s(?=\s|\W|$|[.!?\\-])/g // also includes possessives[m
+[32m+[m[32m    pattern: /(?<=^|\s|\[|\(|^$)([A-Za-z]+)\'s(?=\s|\W|$|[.!?\\-])/g // also includes possessives[m
+   },[m
+   [MarkupTokenType.CONTRACTION_VE]: {[m
+     type: MarkupTokenType.CONTRACTION_VE,[m
+     label: MarkupLabelType.CONTRACTION,[m
+[31m-    pattern: /(?<=^|\s|^$)(I|[Yy]ou|[Ww]e|[Tt]hey|[Ss]hould|[Cc]ould|[Ww]ould|[Mm]ight|[Mm]ust)\'ve(?=\s|\W|$|[.!?\\-])/g[m
+[32m+[m[32m    pattern: /(?<=^|\s|\[|\(|^$)(I|[Yy]ou|[Ww]e|[Tt]hey|[Ss]hould|[Cc]ould|[Ww]ould|[Mm]ight|[Mm]ust)\'ve(?=\s|\W|$|[.!?\\-])/g[m
+   },[m
+   [MarkupTokenType.NUMBER_WITHCOMMAS]: {[m
+     type: MarkupTokenType.NUMBER_WITHCOMMAS,[m
+     label: MarkupLabelType.NUMBER_WITHCOMMAS,[m
+[31m-    pattern: /(?<=^|\s|^$)(\d{0,3},)?(\d{3},)*(\d{1,3},\d{3})(?=\s|\W|$|[.!?\\-])/g[m
+[32m+[m[32m    pattern: /(?<=^|\s|\[|\(|^$)(\d{0,3},)?(\d{3},)*(\d{1,3},\d{3})(?=\s|\W|$|[.!?\\-])/g[m
+     // scan for token that require potential markup tags[m
+   },[m
+   [MarkupTokenType.IMAGE]: {[m
+     type: MarkupTokenType.IMAGE,[m
+     label: MarkupLabelType.IMAGE,[m
+[31m-    pattern: /(?<=^|\W)(!\[)([a-zA-Z0-9 _\-\.!]+\])(\(.+\))/g[m
+[31m-    // scan for token that require potential markup tags[m
+[32m+[m[32m    //    pattern: /(?<=^|\W)(!\[)([a-zA-Z0-9 _\-\.!]+\])(\(.+\))/g[m
+[32m+[m[32m    pattern: /(!\[)([a-zA-Z0-9 _\-\.!]+\])(\([^\(]*\))/g[m
+[32m+[m[32m    // lookbehind must be preceded by beginning of line or any word[m
+   },[m
+   [MarkupTokenType.LINK]: {[m
+     type: MarkupTokenType.LINK,[m
+     label: MarkupLabelType.LINK,[m
+[31m-    pattern: /(?<=^|\W)(?<!\!)\[[a-zA-Z0-9 _\-\.!]+\](\(.+\))/g[m
+[31m-    // scan for token that require potential markup tags[m
+[32m+[m[32m    pattern: /(?<!\!)(\[.+\])(\([^\(]*\))/g[m
+[32m+[m[32m    // (["'\(\[]?|\!\[|\[\()[m
+[32m+[m[32m    // scan for token that require potential markup tags [link name](url)[m
+   }[m
+ };[m
+ export type TokenListType = Array<Token>;[m
+[36m@@ -369,7 +371,8 @@[m [mexport class Tokenizer {[m
+         let key1: any = key as unknown; //ugh[m
+         markupTokenItem = MarkupTokenDictionary[<MarkupTokenType>key1];[m
+         let markupTokenLength: number = markupTokenItem.label.length;[m
+[31m-        tokenList = sentence.match(markupTokenItem.pattern); // with global flag set[m
+[32m+[m[32m        //tokenList = sentence.match(markupTokenItem.pattern); // with global flag set[m
+[32m+[m[32m        tokenList = result.match(markupTokenItem.pattern); // with global flag set[m
+         if (tokenList !== null) {[m
+           let startPos = 0;[m
+           let tokenPos = 0;[m
+[36m@@ -398,11 +401,11 @@[m [mexport class Tokenizer {[m
+             } else {[m
+               // splice in the markup tags[m
+               result =[m
+[31m-                result.slice(0, tokenPos) + // sentence before token[m
+[32m+[m[32m                result.slice(0, tokenPos) + // portion of sentence before token[m
+                 markupTokenItem.label +[m
+                 token +[m
+                 endMarkupTag(markupTokenItem.label) +[m
+[31m-                result.slice(tokenPos + token.length); // sentence after token[m
+[32m+[m[32m                result.slice(tokenPos + token.length); // portion of sentence after token[m
+               startPos =[m
+                 markupTokenLength +[m
+                 tokenPos +[m

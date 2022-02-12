@@ -261,6 +261,7 @@ export enum TerminalMetaEnumType {
   numberwithcommas,
   phonenumber,
   punctuation,
+  symbol,
   tbd,
   time,
   token,
@@ -287,6 +288,7 @@ export type TerminalMetaType =
   | IPhoneNumberTerminalMeta
   | IPunctuationTerminalMeta
   | IReferenceTerminalMeta
+  | ISymbolTerminalMeta
   | ITimeTerminalMeta
   | IWhitespaceTerminalMeta
   | IWordTerminalMeta
@@ -599,6 +601,14 @@ export function IWhitespaceTerminalMetaInitializer(
     undefined, // accept default fillin
     undefined // accept default visited
   );
+}
+export type ISymbolTerminalMeta = ITerminalInfo;
+export function ISymbolTerminalMetaInitializer(
+  content?: string,
+  altPronunciation: string = "",
+  altRecognition: string = ""
+): ITerminalInfo {
+  return ITerminalInfoInitializer(content, altPronunciation, altRecognition);
 }
 export type IWordTerminalMeta = ITerminalInfo;
 export function IWordTerminalMetaInitializer(
