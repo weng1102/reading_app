@@ -86,7 +86,11 @@ export const Section_imageEntry_images = React.memo(
       <>
         <div className={className}>
           {images.map((image, keyvalue: number) => (
-            <Terminal_Image active={props.active} terminal={image} />
+            <Terminal_Image
+              key={keyvalue}
+              active={props.active}
+              terminal={image}
+            />
           ))}
         </div>
       </>
@@ -116,7 +120,11 @@ export const Section_imageEntry_captions = React.memo(
       <>
         <div className={className}>
           {captions.map((caption, keyvalue: number) => (
-            <SectionDispatcher active={props.active} section={caption} />
+            <SectionDispatcher
+              key={keyvalue}
+              active={props.active}
+              section={caption}
+            />
           ))}
         </div>
       </>
