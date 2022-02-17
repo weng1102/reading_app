@@ -33,6 +33,7 @@
  * Version history:
  *
  **/
+//import fetch, { Headers } from "node-fetch";
 import React from "react";
 import "./App.css";
 import { Request } from "./reducers";
@@ -59,8 +60,35 @@ export const Page = React.memo((props: IPagePropsType) => {
   //  !(pageRequested !== undefined && pageRequested !== null && !pageLoaded)
 
   const { isActive, toggle } = useDialog();
+
+  // requestHeaders.append("mode", "no-cors");
+
   const fetchRequest = (page: string) => {
-    fetch(page, { method: "GET", headers: { Accept: "application/json" } })
+    const requestHeaders: HeadersInit = new Headers();
+    requestHeaders.append("Accept", "application/json");
+    requestHeaders.append("Content-Type", "application/json");
+    requestHeaders.append("Access-Control-Allow-Origin", "*");
+    requestHeaders.append(
+      "Access-Control-Allow-Headers",
+      "X-Requested-With, content-type"
+    );
+    requestHeaders.append("mode", "no-cors");
+    requestHeaders.append("Access-Control-Allow-Origin", "*");
+    requestHeaders.append("Access-Control-Allow-Methods", "GET");
+    requestHeaders.append(
+      "Access-Control-Allow-Headers",
+      "X-Requested-With, Origin, Content-Type, Accept"
+    );
+    fetch(page, {
+      method: "GET",
+      headers: {
+        Accept: "application/json"
+      }
+    })
+      // fetch(page, {
+      //   method: "GET",
+      //   headers: requestHeaders
+      // })
       .then(
         response => {
           if (!response.ok)
@@ -75,7 +103,7 @@ export const Page = React.memo((props: IPagePropsType) => {
       .then(
         data => {
           try {
-            setPageContent(data);
+            setPageContent(data as IPageContent);
             message = `Changing page context for "${pageRequested}"`;
             if (pageContent !== undefined && pageContent !== null) {
               let pageContext: CPageLists = new CPageLists(
