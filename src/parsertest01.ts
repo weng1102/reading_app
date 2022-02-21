@@ -30,7 +30,7 @@ let args: string[] = process.argv.slice(2);
 while (args.length > 0 && args[0].length > 0 && args[0][0] === "-") {
   switches.push(args.shift()!);
 }
-if (switches.includes("--help")) {
+if (switches.includes("--help") || switches.includes("-help")) {
   logger.info(
     `Usage: node parsetest01.ts [OPTIONS] [FILE(s)]\n` +
       `Parses markdown files into json output for reader\n\n` +

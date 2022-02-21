@@ -38,7 +38,7 @@ export const ReadingApp = () => {
     )
   );
   //  dispatch(Request.Page_load("links1"));
-  dispatch(Request.Page_load("mystroke"));
+  dispatch(Request.Page_load("mystrategies"));
   //dispatch(Request.Page_load("trailingblanks"));
   return (
     <>
