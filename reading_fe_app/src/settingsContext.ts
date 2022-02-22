@@ -78,7 +78,7 @@ export interface ISpeechSettings {
 export function ConfigSettingsInitializer(
   homePage: string = "ronlyn",
   //distDir: string = "https://weng1102.github.io/reading_app/dist/",
-  distDir: string = "https://weng1102.github.io/reading_app/dist/",
+  distDir: string = "https://weng1102.github.io/reading-companion/",
   //  distDir: string = "https://github.com/weng1102/reading_app/master/dist/",
   firstName: string = "Ronlyn",
   lastName: string = "Goo"
