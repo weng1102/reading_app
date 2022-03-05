@@ -1,4 +1,4 @@
-[//page title]: Testing Date format
+[[page: Date rendering,, Wen, 1/1/2022,Testing, /]]
 
 # Date format: 1 DD MMM YYYY
 

@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
  * File name: parsepages.ts
  *
@@ -10,7 +10,7 @@
 const INITIALDATE = "9/21/2015 17:03";
 const InitialDate = new Date(INITIALDATE).toString();
 import { strict as assert } from "assert";
-import { IsError } from "./utilities";
+import { IsError, IsDefined } from "./utilities";
 import { Logger } from "./logger";
 import { MarkdownTagType, TaggedStringType } from "./dataadapter";
 import {
@@ -22,6 +22,7 @@ import {
   ISectionListItem,
   ITerminalInfo,
   ITerminalListItem,
+  PageContentInitializer,
   PageFormatEnumType
 } from "./pageContentType";
 import util from "util";
@@ -49,7 +50,9 @@ export class PageParseNode extends ParseNode implements IPageContent {
   title: string = "";
   filename: string = "";
   description: string = "";
-  owner: string = "";
+  owner: string = "anonymous";
+  author: string = "anonymous";
+  category: string = "Miscellaneous";
   pageFormatType = PageFormatEnumType.default;
   created: string = InitialDate;
   modified: string = InitialDate;
@@ -78,11 +81,17 @@ export class PageParseNode extends ParseNode implements IPageContent {
         current = this.dataSource.currentRecord()
       ) {
         if (current.tagType === MarkdownTagType.PAGE) {
-          // special case that is NOT a section
           let attributes: string[] = current.content.split(",");
-          if (attributes[0] !== undefined) this.title = attributes[0];
-          if (attributes[1] !== undefined) this.owner = attributes[1];
-          if (attributes[2] !== undefined) this.description = attributes[2];
+          if (IsDefined(attributes[0])) this.title = attributes[0].trim();
+          if (IsDefined(attributes[1])) this.owner = attributes[1].trim();
+          if (IsDefined(attributes[2])) this.author = attributes[2].trim();
+          if (
+            IsDefined(attributes[3]) &&
+            !isNaN(Date.parse(attributes[3].trim()))
+          )
+            this.created = attributes[3].trim();
+          if (IsDefined(attributes[4])) this.category = attributes[4].trim();
+          if (IsDefined(attributes[5])) this.description = attributes[5].trim();
           current = this.dataSource.nextRecord();
         } else {
           let sectionNode: ISectionNode = GetSectionNode(current.tagType, this);
@@ -97,7 +106,7 @@ export class PageParseNode extends ParseNode implements IPageContent {
       this.userContext.terminals.parse();
       this.terminalList = this.userContext.terminals;
 
-      this.userContext.headings.parse(this.terminalList);
+      this.userContext.headings.parse();
       this.headingList = this.userContext.headings;
 
       this.userContext.sentences.parse();

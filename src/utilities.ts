@@ -7,6 +7,7 @@
  * Version history:
  *
  **/
+import * as fs from "fs";
 import DictionaryType from "./dictionary";
 import { PronunciationDictionary, RecognitionDictionary } from "./dictionary";
 "use strict";
@@ -43,6 +44,16 @@ export const IsError = (exception: any): exception is Error => {
     typeof exception.message === "string"
   );
 };
+export const IsDefined = (attribute: string): boolean => {
+  return attribute !== undefined && attribute.length > 0;
+};
+export const FileExists = (path: string): boolean => {
+  try {
+    return fs.existsSync(path);
+  } catch (e) {
+    return false;
+  }
+};
 function WildcardToRegex(pattern: string) {
   // some problems with multiple *
   return "^" + pattern.replace("*", ".*").replace("?", ".") + "$";
@@ -67,14 +78,38 @@ export const SymbolPronunciationMap = new Map([
   ["~", "tilde"],
   ["#", "hashtag"]
 ]);
-export const RecognitionMap = new Map([
-  ["Ronlyn", "^(ron|ro[ns]a{0,1}l[aiye]nd{0,1})$"],
-  ["Ronlyn's", "^(ron|ro[ns]a{0,1}l[aiye]nd{0,1}'s)$"],
-  ["Goo", "^(g[ou])"],
-  ["Wen", "^(wh{0,1}en)$"],
-  ["Wen's", "^(wh{0,1}en's)$"]
-]);
-
+// export const RecognitionMap = new Map([
+//   ["Ronlyn", "^(ron|ro[ns]a{0,1}l[aiye]nd{0,1})$"],
+//   ["Ronlyn's", "^(ron|ro[ns]a{0,1}l[aiye]nd{0,1}'s)$"],
+//   ["Goo", "^(g[ou])"],
+//   ["Wen", "^(wh{0,1}en)$"],
+//   ["Eng", "^(egg|Aang|hang)$"],
+//   ["Wen's", "^(wh{0,1}en's)$"],
+//   ["Goo", "^(g[ou])"],
+//   ["Wen", "^(wh{0,1}en)$"],
+//   ["Wen's", "^(wh{0,1}en's)$"],
+//   ["Aruna", "^([ai]runa)$"],
+//   ["Berna", "^(b[eu]rn[ae]t{0,2})$"],
+//   ["Berna's", "^(b[eu]rn[ae]t{0,2}s)$"],
+//   ["Bett", "^(bet{1,2})$"],
+//   ["Bett's", "^(bet{1,2}s)$"],
+//   ["Gambhir", "^(gamb[ie]e{0,1}r)$"],
+//   ["shao", "^(sh[ae]ll)$"],
+//   ["mai", "^(my)"],
+//   ["cheung", "^(ch[euo]ng)$"],
+//   ["gaw", "^(ga{0,1}o{0,1}l{0,1}w{0,1})$"],
+//   ["negin", "^(n[ei]ge{1,2}ne{0,1})$"],
+//   ["Jaylynne", "^(ja[yi]l[ey]n{1,2}e{0,1})$"],
+//   ["Lynda", "^(l[iy]nda)$"],
+//   ["Melisse", "^(m[ei]lis{1,2}e{0,1})$"],
+//   ["Meilan", "^(m[aei]y{0,1}land{0,1})$"],
+//   ["Popo's", "^(popo'{0,1}s)$"],
+//   ["Auntie", "^([ant{1,2}[iy])$"],
+//   ["Ag", "^([ae]g{1,2})$"],
+//   ["Seaton", "^(sea{0,1}ton)$"],
+//   ["Ave", "^(avenue)$"],
+//   ["St", "^(street)$"]
+// ]);
 export const MonthFromAbbreviationMap = new Map([
   ["jan", "january"],
   ["feb", "february"],

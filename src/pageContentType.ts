@@ -17,6 +17,8 @@ export interface IPageContent {
   filename: string;
   description: string;
   owner: string;
+  author: string;
+  category: string;
   pageFormatType: PageFormatEnumType;
   created: string;
   modified: string;
@@ -37,6 +39,8 @@ export function PageContentInitializer(): IPageContent {
     filename: "",
     description: "",
     owner: "",
+    author: "anonymous",
+    category: "Miscellaneous",
     pageFormatType: PageFormatEnumType.default,
     created: null!,
     modified: null!,
@@ -71,7 +75,8 @@ export type SectionVariantType =
   | ISectionFillinVariant
   | ISectionBlockquoteVariant
   | ISectionFillinListVariant
-  | ISectionImageEntryVariant;
+  | ISectionImageEntryVariant
+  | ISectionButtonGridVariant;
 
 export enum SectionVariantEnumType {
   heading = "heading",
@@ -83,6 +88,7 @@ export enum SectionVariantEnumType {
   fillin = "fillin",
   fillin_list = "fillin_list",
   image_entry = "image_entry",
+  button_grid = "buttongrip",
   blockquote = "blockquote",
   unittest = "unittest",
   empty = "empty",
@@ -119,20 +125,52 @@ export function ISectionFillinVariantInitializer(): ISectionFillinVariant {
     minColumns: 0 // overrides name and description above
   };
 }
-export interface ISectionHeadingVariant {
+export interface ISectionHeadingVariant1 {
   title: string; // ISentenceContent where audible/recitable can be disabled at run time.
+
   separator: string;
   recitable: boolean;
   audible: boolean;
   level: number;
 }
-export function ISectionHeadingVariantInitializer(): ISectionHeadingVariant {
+export interface ISectionHeadingVariant {
+  heading: ISentenceContent;
+  level: number;
+}
+export function ISectionHeadingVariantInitializer1(): ISectionHeadingVariant1 {
   return {
     title: "", // overrides name and description above
     separator: "",
     recitable: false,
     audible: false,
     level: 0
+  };
+}
+export function ISectionHeadingVariantInitializer(): ISectionHeadingVariant {
+  return {
+    heading: {
+      id: IDX_INITIALIZER,
+      content: "",
+      firstTermIdx: IDX_INITIALIZER,
+      lastTermIdx: IDX_INITIALIZER,
+      terminals: [],
+      lastPunctuation: ""
+    }, // overrides name and description above
+    level: 0
+  };
+}
+export interface ISectionButtonGridVariant {
+  description: string;
+  columnCount: number;
+  minColumnWidth: number;
+  buttonText: string[];
+}
+export function ISectionButtonGridVariantInitializer(): ISectionButtonGridVariant {
+  return {
+    description: "",
+    columnCount: 0,
+    minColumnWidth: 50,
+    buttonText: []
   };
 }
 export interface ISectionBlockquoteVariant {
@@ -250,6 +288,16 @@ export interface ISentenceContent {
   terminals: ITerminalContent[];
   lastPunctuation: string;
   //  terminals: ITerminalNode[];
+}
+export function ISentenceContentInitializer(): ISentenceContent {
+  return {
+    id: IDX_INITIALIZER,
+    content: "",
+    firstTermIdx: IDX_INITIALIZER,
+    lastTermIdx: IDX_INITIALIZER,
+    terminals: [],
+    lastPunctuation: ""
+  };
 }
 export enum TerminalMetaEnumType {
   acronym,

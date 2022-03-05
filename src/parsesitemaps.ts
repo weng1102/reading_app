@@ -1,0 +1,177 @@
+/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
+ *
+ * File name: parsesitemaps.ts
+ *
+ * Create sitemap from multiple serialized inputs
+
+ * Version history:
+ *
+ **/
+import * as fs from "fs";
+import * as path from "path";
+//import * as fs from "fs";const INITIALDATE = "9/21/2015 17:03";
+const INITIALDATE = "9/21/2015 17:03";
+const InitialDate = new Date(INITIALDATE).toString();
+import { strict as assert } from "assert";
+import { IsError } from "./utilities";
+import { Logger } from "./logger";
+//import { MarkdownTagType, TaggedStringType } from "./dataadapter";
+import {
+  IPageContent,
+  IRangeItem,
+  ISentenceListItem,
+  ISectionListItem,
+  ITerminalInfo,
+  ITerminalListItem,
+  PageContentInitializer,
+  PageFormatEnumType
+} from "./pageContentType";
+import util from "util";
+import {
+  //  FileNode,
+  BaseClass,
+  IDX_INITIALIZER,
+  ParseNodeSerializeFormatEnumType
+} from "./baseclasses";
+import { AppNode } from "./parseapp";
+
+export interface PageContentMethods {
+  parse(): number; // any to avoid compilation error, should be removed
+  transform(): number;
+}
+//  serialize(): string; // any to avoid compilation error, should be removed
+interface ISiteMapItem {
+  fileName: string;
+  title: string;
+  owner: string;
+  author: string;
+  created: string;
+  category: string;
+  description: string;
+}
+export default class CSiteMap extends BaseClass {
+  constructor(parent: AppNode) {
+    super(parent);
+  }
+  inputPath: string = "dist/";
+  inputExtension: string = ".json";
+  outputPath: string = "curriculum/";
+  outputExtension: string = ".md";
+  siteMap: ISiteMapItem[] = [];
+  categoriesExcluded: string[] = [];
+
+  set exclusionList(exclusionList: string) {
+    // Remvove the first a last characters e.g., [] or () of ""
+    this.categoriesExcluded = exclusionList
+      .substring(1, exclusionList.length - 1)
+      .split(",");
+  }
+  set curriculumDirectory(curriculumDir: string) {
+    this.outputPath = curriculumDir;
+  }
+  set distDirectory(distDir: string) {
+    this.inputPath = distDir;
+  }
+  parse() {
+    let inputFileSpecs = fs
+      .readdirSync(this.inputPath)
+      .filter(jsonFiles => jsonFiles.endsWith(this.inputExtension));
+    for (let jsonFileSpec of inputFileSpecs) {
+      //skip sitemap.json
+      this.logger.info(`reading ${jsonFileSpec}`, false, false, false, false);
+      let jsonStr: string = fs
+        .readFileSync(this.inputPath + jsonFileSpec)
+        .toString();
+      try {
+        let pageData: IPageContent = JSON.parse(jsonStr);
+        this.siteMap.push({
+          fileName: jsonFileSpec.substring(
+            0,
+            jsonFileSpec.indexOf(this.inputExtension)
+          ),
+          title: pageData.title,
+          owner: pageData.owner,
+          author: pageData.author,
+          created: pageData.created,
+          category: pageData.category,
+          description: pageData.description
+        });
+      } catch (e) {
+        this.logger.error(
+          `encountered ${
+            (<Error>e).message
+          } generating sitemap entry for ${jsonFileSpec}`
+        );
+      }
+    }
+    this.siteMap.sort((arg1: ISiteMapItem, arg2: ISiteMapItem): number => {
+      let arg1lc = arg1.category.toLowerCase();
+      let arg2lc = arg2.category.toLowerCase();
+      if (arg1lc < arg2lc) {
+        return -1;
+      } else if (arg1lc > arg2lc) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  }
+  serialize(
+    format?: ParseNodeSerializeFormatEnumType
+    //    label?: string = "",
+    //    prefix?: string = ""
+  ): string {
+    let outputStr: string = "";
+    switch (format) {
+      case ParseNodeSerializeFormatEnumType.TREEVIEW: {
+        this.logger.warning(
+          `Serialization format "${ParseNodeSerializeFormatEnumType.TREEVIEW}" is not supported`
+        );
+        break;
+      }
+      case ParseNodeSerializeFormatEnumType.JSON: {
+        outputStr = JSON.stringify(this.siteMap);
+        break;
+      }
+      case ParseNodeSerializeFormatEnumType.TABULAR: {
+        outputStr = `${"filename".padEnd(20)} ${"title".padEnd(
+          20
+        )} ${"category".padEnd(20)} ${"owner".padEnd(15)} ${"author".padEnd(
+          15
+        )} ${"created".padEnd(15)} ${"description".padEnd(25)}\n`;
+        for (let siteMapRecord of this.siteMap) {
+          outputStr += `${siteMapRecord.fileName
+            .substring(0, siteMapRecord.fileName.indexOf(this.inputExtension))
+            .padEnd(20)} ${siteMapRecord.title.padEnd(
+            20
+          )} ${siteMapRecord.category.padEnd(20)} ${siteMapRecord.owner.padEnd(
+            15
+          )} ${siteMapRecord.author.padEnd(
+            15
+          )}  ${siteMapRecord.created.substring(
+            0,
+            15
+          )} ${siteMapRecord.description.padEnd(25)}\n`;
+        }
+        break;
+      }
+      case ParseNodeSerializeFormatEnumType.MARKDOWN: {
+        outputStr =
+          "[[page: Site Map, (autogenerated), Wen, , Site Map, Site map of all available files /]]\n";
+        let currentCategory: string = "";
+        for (let siteMapRecord of this.siteMap) {
+          if (!this.categoriesExcluded.includes(siteMapRecord.category)) {
+            if (currentCategory !== siteMapRecord.category) {
+              currentCategory = siteMapRecord.category;
+              outputStr += `# ${siteMapRecord.category}\n`;
+            }
+            outputStr += `* [${siteMapRecord.title}](${siteMapRecord.fileName},0,0)\n`;
+          } else {
+          }
+        }
+        break;
+      }
+    }
+    return outputStr;
+  }
+}

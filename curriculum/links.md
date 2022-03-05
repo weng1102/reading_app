@@ -1,3 +1,5 @@
+[[page: Link rendering,, Wen,, Testing, /]]
+
 # embedded links
 
 [I'm at the start](test2) in the beginning

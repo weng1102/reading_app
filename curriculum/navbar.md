@@ -1,4 +1,4 @@
-[//page title]: NavBar
+[[page: navbar rendering,, Wen, 1/1/2022,Testing, /]]
 
 # Who am I
 

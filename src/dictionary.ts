@@ -7,6 +7,7 @@ export const RecognitionDictionary: DictionaryType = {
   ["Goo"]: "^(g[ou])",
   ["Wen"]: "^(wh{0,1}en)$",
   ["wen"]: "^(wh{0,1}en)$",
+  ["Eng"]: "^(egg|aang|hang)$",
   ["Wen's"]: "^(wh{0,1}en's)$",
   ["Aruna"]: "^([ai]runa)$",
   ["Berna"]: "^(b[eu]rn[ae]t{0,2})$",

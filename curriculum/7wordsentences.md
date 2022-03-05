@@ -1,430 +1,418 @@
-[[page: Seven word sentences, Wen Eng /]]
+[[page: Seven-word Sentences, Ronlyn, Wen, 1/1/2022, Sentence Bank, Sentences containing seven words /]]
 
-# Sentence Banks
-
-# first ten
-
-My children and I go to school.
-She said hello to the little girl.
-He has as many children as them.
-He can go and so can she.
-There are only five students here today.
-His name is very hard to spell.
-She said that she needed my help.
-They have two girls and one boy.
-Can you change the way you dress?
-She would like to answer that question.
-
-# second ten
-
-We can all learn from this exercise.
-You can have any thing you want.
-Does your boss need any new workers?
-I asked him to check my work.
-The charity is in need of funding
-Make sure you put your toys away.
-You seem to live a nice life.
-I am great today, how about you?
-It is much harder to do that.
-It is just about the same thing.
-You can use another piece of paper.
-This is what an orange looks like.
-That is how we do things here.
-I will help you with your work.
-Can you get up on the roof?
-How about we go to the movies?
-We like to go out on Saturday.
-He will take us into the caves.
-I don't have the time right now.
-Will you look at this for me?
-You can have one or two cookies.
-I am going to write a letter.
-Do you know which way they went?
-That could have been a bad accident.
-There are a lot of people here.
-She would rather have apples than oranges.
-Today has been a very long day.
-Will you help me find my wallet.
-I am going down to the basement.
-Everyone needs good luck for an interview.
-This is the end of the line.
-What was the name of that person?
-What was the price of that car?
-As time goes by, we get older.
-I spoke to my father this morning.
-There are a few of them left.
-I have lived a very long life.
-You can do this more than once.
-He went to bed late last night.
-That is a large body of water.
-I saw him walking across the street.
-The waves in the ocean are beautiful.
-I will meet you at five p.m.
-Who is the king of the castle?
-What kind of fish did you catch?
-He would like to ride a horse.
-Would you like another piece of pie?
-One hundred days is a long time.
-She is going into town later today.
-They are the last to be served.
-There are five years in high school.
-Can you read me a story tonight?
-There are 26 letters in the alphabet.
-I will meet you around the block.
-There are sixty minutes in an hour.
-A stove produces a lot of heat.
-What speed do you drive your car?
-I like to sail on the ocean.
-I couldn't think of anything to do.
-In case of an emergency, call 911.
-What was the result of the test?
-I have a new pair of shoes.
-She decided to wear a dress today.
-He left me a note this morning.
-She has less money than she thought.
-A circle is a very common shape.
-The road is meant for driving on.
-Is what you are saying a fact?
-I have known them for a while.
-I am going to do an experiment.
-Men and women are equal in Canada!
-You still need to write a report.
-I am going to visit my family.
-I have direct deposit with my bank.
-I am going to visit my uncle.
-How many students are in your class?
-He is the president of the company.
-Some math numbers use a decimal point.
-The glue will stick to the paper.
-Let's go to the movies this weekend!
-I like to be friends with everyone.
-Babies are very tiny compared to adults.
-Please be quiet, the baby is sleeping!
-Can you teach me how to act?
-I can count very high in French.
-Be careful you don't cut your fingers!
-I will include you in the game.
-He had shown me his stamp collection.
-Please cross the road at the lights.
-What is the amount of the bill?
-Some women go through a natural birth.
-I need new wheels for my car.
-The base of the lamp is broken.
-Will you explain that to me again?
-The shape of a ball is round.
-How did you do on the test?
-It's not good to fight with people.
-I like the beat to this song.
-Can you help me solve this problem?
-What factors is your decision based on?
-What type of music do you like?
-That was a wonderful moment we shared.
-There are five members in this club.
-Your legs are stronger than your arms.
-Am I going in the right direction?
-You must learn to use your mind.
-That is a large sum of money.
-You lay the baby on the bed.
-He made a long distance phone call.
-I heard you started a new job.
-We have many cells in our brains.
-What is the cause of this problem?
-Have you ever gone on a train?
-We sat at the table for dinner.
-All of our crops died this year.
-Please go play with your toy soldiers.
-You have a good sense of humour!
-He is the observer for this class.
-He works for a very large company.
-I would love to travel to France.
-How many people are in the office?
-Death is very sad for some people.
-He hopes he will win the contest.
-I need to buy some new tools.
-Take a right at the next corner.
-Most kittens like to play with string.
-There are many bare branches right now.
-I want to learn the Japanese language.
-She will be eight years old tomorrow.
-Our math test required doing some division.
-There is a new shop opening today.
-Some recipes require a lot of sugar.
-My son is huge for his age.
-My husband bought me a rose today.
-Does this have any effect on you?
-You must be silent in the library.
-There will be a big crowd tonight!
-There are seven days in a week.
-You must ring the bell before entering.
-That's a very emotional poem you wrote!
-Do you want to sell your car?
-Your dance requires a lot of movement.
-My uncle owns a couple of factories.
-The entrance is located at the rear.
-Your nose is located on you face.
-What is the suffix of that word?
-What colour of apple do you like?
-That movie had a lot of action.
-What's the chance of it snowing today?
-You have many molecules in your body.
-Have you ever seen the Northern Lights?
-I like the smell of cooked turkey.
-I like the view from this office.
-Where do you get your art supply.
-What position does your baby sleep in?
-What are the terms of the contract?
-I don't like that tone of voice.
-He broke several bones in the fall.
-We need an addition to the house.
-If he asked me, I‘d come.
-My son is older than my daughter.
-Will you go on holiday this summer?
-A fork is used to eat with.
-Mr Jones asked how I was yesterday. (=”How are you today?”)
-It rained all day yesterday, didn't it?
-If I were you, I would go.
-I have written this letter in ink.
-Do you ever go shopping without money?
-The teacher was angry with the pupil.
-Yesterday I sewed my son's trousers.
-If he asks me, I'll stay.
-My father's sister is my aunt.
-I wish I had passed the exam.
-Do you have a bath every day?
-"You are standing on my foot." - "Sorry!"
-I can hear a strange noise now.
-John saw this film two months ago.
-I haven't taken any photographs for years.
-The teacher agreed to come with us.
-I wasn't introduced to her mother.
-John is interested in passing his exam.
-I wish I could speak several languages.
-He wasn't surprised at what he saw.
-I saw your friend two weeks ago.
-You are asked to report at 9 o’clock.
-He has been watching television for hours.
-A single or a double room, sir?
-You will find the answer on page 75.
-I was told to rewrite my letter.
-The boy that ran away was David.
-Football is an interesting and popular game.
-He is very good at translating Latin texts.
-Smoking is a bad habit of yours.
-Our windows will be cleaned this afternoon.
-I don’t know what you mean.
-Please close the windows before you leave.
-Remember to wash your hands before dinner.
-Shall I open the door for you?
-We arrived in the village at night.
-Who came to see you last night?
-Arabic is the native language of Egypt.
-He has a good knowledge of history.
-Will you please lend me this book?
-You should brush your teeth after breakfast.
-May I have another piece of cake?
-Who did he talk to? - His friend.
-All our suggestions have been turned down.
-Can you exchange these dollars for forints?
-There is no excuse for coming late.
-The noise did not let me sleep.
-Waiter, when do I get my breakfast?
-His mother’s brother is his uncle.
-What’s the weather like in Britain?
-You are right, Genova is in Italy.
-He arrived at the station at 4 pm.
-This street is narrower than that one.
-He drank half a glass of milk.
-American children watch television 36 hours a week.
-Look, Mother! Jack has brought you some flowers.
-So far I have had no trouble.
-The scissors are lying on the table.
-Please ring me up when you arrive.
-I am looking forward to seeing you.
-He has been to London four times since 1974.
-I have a new pair of shoes.
-We arrived at the airport in time.
-After eating I often go to sleep.
-My brother's son is my nephew.
-Do you know how to make coffee?
-The lift was again out of order.
-I haven't driven since my accident.
-I have been working very hard lately.
-There was an accident here at midnight.
-He came late because of an accident.
-You had better go home at once.
-I know how to drive a car.
-What does he do for a living?
-He talks as if he knew everything.
-He asked me what games I played.
-The house he lives in needs repairing.
-„I am very unhappy today.” - „Cheer up!”
-I get up at six every morning.
-Henry was sick yesterday and missed his classes.
-My father has more books than you.
-You can buy meat at the butcher’s.
-If I were Peter, I would marry Sue.
-Sheila has a two-month-old baby.
-What is the price of this watch?
-Telling lies is a very bad habit.
-Is this a table? - Yes, it is.
-Where’s Mrs Harrison? - She’s in the kitchen.
-The window’s open and the door’s closed.
-Which books? - Those in front of you.
-I want those boxes. - These blue boxes?
-They’ve got wine and I’ve got water.
-Their hands and feet are not cold.
-But, of course, they have some money.
-Their wallets are not empty like Sue’s.
-There are no lights in the house.
-Come on, Mrs Harrison, open the door!
-Is there a bell? - Yes, of course.
-Is it yours? - No, it isn’t mine.
-Now Mrs Harrison’s walking into the sitting-room.
-In his dream Arthur’s got a car.
-Bruce isn’t driving the car; Arthur is.
-It’s a beautiful day and Arthur’s happy.
-Arthur and Mary are librarians in Middleford.
-He’s coming out of the water now.
-He has some books in his hand.
-They’re sending another box of books tomorrow.
-Mary, come here. - Coming, Mr Steele.
-It is now a quarter past nine.
-He cannot get up in the morning.
-’I must find them,’ he is thinking.
-Oh dear, the bus is not stopping.
-Arthur is looking through the library window.
-He isn’t late today - he’s early.
-This morning he has time for breakfast.
-Now Mrs Harrison’s bringing in the post.
-How much is the fare to Applefield?
-There’s only one girl in this room.
-We're going to her aunt's in London.
-How many stops are there before London?
-I've only got one pair of hands.
-Now Bob is talking to the porter.
-Is that for me? What is it?
-I’m a student. I’m at London University.
-This is Bob. Bob, this is Mary.
-She’s got your bag and your overcoat.
-I sometimes see him in the summer.
-There’s a young man in the car.
-Don’t come anywhere near the car, please!
-Can you hold this torch for me?
-Now, can somebody give me my bag?
-Now it’s eleven o’clock on Sunday morning.
-He has not even had a shave.
-What are you doing with that paper?
-Sheila, what do you want to drink?
-Just a sweet sherry for me, please.
-I’m going to have a tomato juice.
-James, of course, is still in hospital.
-Now Mr Steele has just come in.
-He hasn’t gone into his office yet
-Have you been here since nine o’clock?
-Well, 5 days, that’s nearly a week.
-Come into my office for a minute.
-Well, you haven’t sent me an email.
-Last weekend in Applefield Arthur was broke.
-It was the end of the month.
-We can go home now, can’t we?
-There were a lot of people in.
-Well, it’s a lovely evening, isn’t it?
-We must both work tomorrow, mustn’t we?
-That was very nice of you, Arthur.
-Arthur got up early on Saturday morning.
-He wanted to hear the weather forecast.
-I can row first if you like.
-I’m not too big, am I, Arthur?
-Perhaps it’s time to go back now.
-It’s a bit cloudy too, isn’t it?
-Mary didn’t even say goodnight to Arthur.
-You gave it to me on Monday.
-Did you ever learn about the controls?
-What do you think of that one?
-I must say it looks very nice.
-A bit too much for you, perhaps?
-I can see you’ve got the taste.
-That’s only three thousand, five hundred pounds.
-It goes well. That’s the main thing.
-Charlie, come over here for a minute.
-You want to buy that, do you?
-Why not drive it round the block?
-He needn’t go by train this time.
-He told her about his ‘new’ car.
-Now where did we put the car?
-I’ll sit in front because I’m navigating.
-Well, personally, I think it’s very nice.
-Look, it says Swanage - two miles.
-Arthur’s car was at the police station.
-That’s him over there, the grey one.
-He’s the nicest horse I’ve ever seen.
-I like ’Darling Mary’. (a horse’s name)
-We can see the race better there.
-You haven’t got much farther to go.
-It’s the slowest horse in the race.
-Didcot’s nearer to Applefield than Middleford is.
-I was talking to my friend, actually.
-What did you say about our Fred?
-It was a brief moment of joy.
-Mary was also working in the library.
-You see, I thought I was lucky.
-I have a flat and a house.
-I have a map in my notebook.
-I'm married and I have two children.
-I live in the south of Hungary.
-I want to drink a cold tea.
-I have a niece and a nephew.
-What are you doing in the afternoon?
-When will you come and see us?
-He has two hours to get here.
-Have you ever seen a big plane?
-I have to speak to the receptionist.
-What the hell are you doing here?
-I need to have a hobby.
-I don’t want you to be late.
-I never drink alcohol when I drive.
-It’s very windy now – let’s go sailing!
-This is one of my favourite songs.
-In winter I love having hot baths.
-Do you know what is behind you?
-In my room the carpet is grey.
-When were you last at the chemist's?
-Do you wake up by an alarm-clock?
-I was very happy during the weekend.
-My friend would like to be famous.
-I can't find food in the fridge.
-How often are you in your kitchen?
-Are you a member of the library?
-There isn't a mirror in my room.
-My radio-reading lamp-alarm clock is very modern.
-I haven't been to a big palace.
-There are six pictures on our wall.
-This is a great place in summer.
-We have a sofa opposite the tv.
-I got a stereo for my birthday.
-My cat likes sitting on my table.
-Do you know the new car-racing champion?
-Tell me where the check-in desk is.
-I can't answer you this question fluently.
-Who is that man at the gate?
-Can you hear me in this noise?
-How much did you earn last month?
-They stopped us at the passport control.
-I have to practice this all day.
-Can you smell this smoke or something?
-What do you think of this problem?
-Do you know who her clerk is?
-How much would you like to earn?
-What do you enjoy most in summer?
-Where can I find you in summer?
-What do you want to eat later?
-When did you come home last night?
-My grandfather is over 90 years old.
-It isn’t so good to be popular.
-Have you ever seen a real star?
-The weather is wonderful by the sea.
-
-#Four word Sentences
-
-I am Ronlyn Goo.
-I am a woman
+1. My children and I go to school.
+1. She said hello to the little girl.
+1. He has as many children as them.
+1. He can go and so can she.
+1. There are only five students here today.
+1. His name is very hard to spell.
+1. She said that she needed my help.
+1. They have two girls and one boy.
+1. Can you change the way you dress?
+1. She would like to answer that question.
+1. We can all learn from this exercise.
+1. You can have any thing you want.
+1. Does your boss need any new workers?
+1. I asked him to check my work.
+1. The charity is in need of funding
+1. Make sure you put your toys away.
+1. You seem to live a nice life.
+1. I am great today, how about you?
+1. It is much harder to do that.
+1. It is just about the same thing.
+1. You can use another piece of paper.
+1. This is what an orange looks like.
+1. That is how we do things here.
+1. I will help you with your work.
+1. Can you get up on the roof?
+1. How about we go to the movies?
+1. We like to go out on Saturday.
+1. He will take us into the caves.
+1. I don't have the time right now.
+1. Will you look at this for me?
+1. You can have one or two cookies.
+1. I am going to write a letter.
+1. Do you know which way they went?
+1. That could have been a bad accident.
+1. There are a lot of people here.
+1. She would rather have apples than oranges.
+1. Today has been a very long day.
+1. Will you help me find my wallet.
+1. I am going down to the basement.
+1. Everyone needs good luck for an interview.
+1. This is the end of the line.
+1. What was the name of that person?
+1. What was the price of that car?
+1. As time goes by, we get older.
+1. I spoke to my father this morning.
+1. There are a few of them left.
+1. I have lived a very long life.
+1. You can do this more than once.
+1. He went to bed late last night.
+1. That is a large body of water.
+1. I saw him walking across the street.
+1. The waves in the ocean are beautiful.
+1. I will meet you at five p.m.
+1. Who is the king of the castle?
+1. What kind of fish did you catch?
+1. He would like to ride a horse.
+1. Would you like another piece of pie?
+1. One hundred days is a long time.
+1. She is going into town later today.
+1. They are the last to be served.
+1. There are five years in high school.
+1. Can you read me a story tonight?
+1. There are 26 letters in the alphabet.
+1. I will meet you around the block.
+1. There are sixty minutes in an hour.
+1. A stove produces a lot of heat.
+1. What speed do you drive your car?
+1. I like to sail on the ocean.
+1. I couldn't think of anything to do.
+1. In case of an emergency, call 911.
+1. What was the result of the test?
+1. I have a new pair of shoes.
+1. She decided to wear a dress today.
+1. He left me a note this morning.
+1. She has less money than she thought.
+1. A circle is a very common shape.
+1. The road is meant for driving on.
+1. Is what you are saying a fact?
+1. I have known them for a while.
+1. I am going to do an experiment.
+1. Men and women are equal in Canada!
+1. You still need to write a report.
+1. I am going to visit my family.
+1. I have direct deposit with my bank.
+1. I am going to visit my uncle.
+1. How many students are in your class?
+1. He is the president of the company.
+1. Some math numbers use a decimal point.
+1. The glue will stick to the paper.
+1. Let's go to the movies this weekend!
+1. I like to be friends with everyone.
+1. Babies are very tiny compared to adults.
+1. Please be quiet, the baby is sleeping!
+1. Can you teach me how to act?
+1. I can count very high in French.
+1. Be careful you don't cut your fingers!
+1. I will include you in the game.
+1. He had shown me his stamp collection.
+1. Please cross the road at the lights.
+1. What is the amount of the bill?
+1. Some women go through a natural birth.
+1. I need new wheels for my car.
+1. The base of the lamp is broken.
+1. Will you explain that to me again?
+1. The shape of a ball is round.
+1. How did you do on the test?
+1. It's not good to fight with people.
+1. I like the beat to this song.
+1. Can you help me solve this problem?
+1. What factors is your decision based on?
+1. What type of music do you like?
+1. That was a wonderful moment we shared.
+1. There are five members in this club.
+1. Your legs are stronger than your arms.
+1. Am I going in the right direction?
+1. You must learn to use your mind.
+1. That is a large sum of money.
+1. You lay the baby on the bed.
+1. He made a long distance phone call.
+1. I heard you started a new job.
+1. We have many cells in our brains.
+1. What is the cause of this problem?
+1. Have you ever gone on a train?
+1. We sat at the table for dinner.
+1. All of our crops died this year.
+1. Please go play with your toy soldiers.
+1. You have a good sense of humour!
+1. He is the observer for this class.
+1. He works for a very large company.
+1. I would love to travel to France.
+1. How many people are in the office?
+1. Death is very sad for some people.
+1. He hopes he will win the contest.
+1. I need to buy some new tools.
+1. Take a right at the next corner.
+1. Most kittens like to play with string.
+1. There are many bare branches right now.
+1. I want to learn the Japanese language.
+1. She will be eight years old tomorrow.
+1. Our math test required doing some division.
+1. There is a new shop opening today.
+1. Some recipes require a lot of sugar.
+1. My son is huge for his age.
+1. My husband bought me a rose today.
+1. Does this have any effect on you?
+1. You must be silent in the library.
+1. There will be a big crowd tonight!
+1. There are seven days in a week.
+1. You must ring the bell before entering.
+1. That's a very emotional poem you wrote!
+1. Do you want to sell your car?
+1. Your dance requires a lot of movement.
+1. My uncle owns a couple of factories.
+1. The entrance is located at the rear.
+1. Your nose is located on you face.
+1. What is the suffix of that word?
+1. What colour of apple do you like?
+1. That movie had a lot of action.
+1. What's the chance of it snowing today?
+1. You have many molecules in your body.
+1. Have you ever seen the Northern Lights?
+1. I like the smell of cooked turkey.
+1. I like the view from this office.
+1. Where do you get your art supply.
+1. What position does your baby sleep in?
+1. What are the terms of the contract?
+1. I don't like that tone of voice.
+1. He broke several bones in the fall.
+1. We need an addition to the house.
+1. If he asked me, I‘d come.
+1. My son is older than my daughter.
+1. Will you go on holiday this summer?
+1. A fork is used to eat with.
+1. Mr Jones asked how I was yesterday. (=”How are you today?”)
+1. It rained all day yesterday, didn't it?
+1. If I were you, I would go.
+1. I have written this letter in ink.
+1. Do you ever go shopping without money?
+1. The teacher was angry with the pupil.
+1. Yesterday I sewed my son's trousers.
+1. If he asks me, I'll stay.
+1. My father's sister is my aunt.
+1. I wish I had passed the exam.
+1. Do you have a bath every day?
+1. "You are standing on my foot." - "Sorry!"
+1. I can hear a strange noise now.
+1. John saw this film two months ago.
+1. I haven't taken any photographs for years.
+1. The teacher agreed to come with us.
+1. I wasn't introduced to her mother.
+1. John is interested in passing his exam.
+1. I wish I could speak several languages.
+1. He wasn't surprised at what he saw.
+1. I saw your friend two weeks ago.
+1. You are asked to report at 9 o’clock.
+1. He has been watching television for hours.
+1. A single or a double room, sir?
+1. You will find the answer on page 75.
+1. I was told to rewrite my letter.
+1. The boy that ran away was David.
+1. Football is an interesting and popular game.
+1. He is very good at translating Latin texts.
+1. Smoking is a bad habit of yours.
+1. Our windows will be cleaned this afternoon.
+1. I don’t know what you mean.
+1. Please close the windows before you leave.
+1. Remember to wash your hands before dinner.
+1. Shall I open the door for you?
+1. We arrived in the village at night.
+1. Who came to see you last night?
+1. Arabic is the native language of Egypt.
+1. He has a good knowledge of history.
+1. Will you please lend me this book?
+1. You should brush your teeth after breakfast.
+1. May I have another piece of cake?
+1. Who did he talk to? - His friend.
+1. All our suggestions have been turned down.
+1. Can you exchange these dollars for forints?
+1. There is no excuse for coming late.
+1. The noise did not let me sleep.
+1. Waiter, when do I get my breakfast?
+1. His mother’s brother is his uncle.
+1. What’s the weather like in Britain?
+1. You are right, Genova is in Italy.
+1. He arrived at the station at 4 pm.
+1. This street is narrower than that one.
+1. He drank half a glass of milk.
+1. American children watch television 36 hours a week.
+1. Look, Mother! Jack has brought you some flowers.
+1. So far I have had no trouble.
+1. The scissors are lying on the table.
+1. Please ring me up when you arrive.
+1. I am looking forward to seeing you.
+1. He has been to London four times since 1974.
+1. I have a new pair of shoes.
+1. We arrived at the airport in time.
+1. After eating I often go to sleep.
+1. My brother's son is my nephew.
+1. Do you know how to make coffee?
+1. The lift was again out of order.
+1. I haven't driven since my accident.
+1. I have been working very hard lately.
+1. There was an accident here at midnight.
+1. He came late because of an accident.
+1. You had better go home at once.
+1. I know how to drive a car.
+1. What does he do for a living?
+1. He talks as if he knew everything.
+1. He asked me what games I played.
+1. The house he lives in needs repairing.
+1. „I am very unhappy today.” - „Cheer up!”
+1. I get up at six every morning.
+1. Henry was sick yesterday and missed his classes.
+1. My father has more books than you.
+1. You can buy meat at the butcher’s.
+1. If I were Peter, I would marry Sue.
+1. Sheila has a two-month-old baby.
+1. What is the price of this watch?
+1. Telling lies is a very bad habit.
+1. Is this a table? - Yes, it is.
+1. Where’s Mrs Harrison? - She’s in the kitchen.
+1. The window’s open and the door’s closed.
+1. Which books? - Those in front of you.
+1. I want those boxes. - These blue boxes?
+1. They’ve got wine and I’ve got water.
+1. Their hands and feet are not cold.
+1. But, of course, they have some money.
+1. Their wallets are not empty like Sue’s.
+1. There are no lights in the house.
+1. Come on, Mrs Harrison, open the door!
+1. Is there a bell? - Yes, of course.
+1. Is it yours? - No, it isn’t mine.
+1. Now Mrs Harrison’s walking into the sitting-room.
+1. In his dream Arthur’s got a car.
+1. Bruce isn’t driving the car; Arthur is.
+1. It’s a beautiful day and Arthur’s happy.
+1. Arthur and Mary are librarians in Middleford.
+1. He’s coming out of the water now.
+1. He has some books in his hand.
+1. They’re sending another box of books tomorrow.
+1. Mary, come here. - Coming, Mr Steele.
+1. It is now a quarter past nine.
+1. He cannot get up in the morning.
+1. ’I must find them,’ he is thinking.
+1. Oh dear, the bus is not stopping.
+1. Arthur is looking through the library window.
+1. He isn’t late today - he’s early.
+1. This morning he has time for breakfast.
+1. Now Mrs Harrison’s bringing in the post.
+1. How much is the fare to Applefield?
+1. There’s only one girl in this room.
+1. We're going to her aunt's in London.
+1. How many stops are there before London?
+1. I've only got one pair of hands.
+1. Now Bob is talking to the porter.
+1. Is that for me? What is it?
+1. I’m a student. I’m at London University.
+1. This is Bob. Bob, this is Mary.
+1. She’s got your bag and your overcoat.
+1. I sometimes see him in the summer.
+1. There’s a young man in the car.
+1. Don’t come anywhere near the car, please!
+1. Can you hold this torch for me?
+1. Now, can somebody give me my bag?
+1. Now it’s eleven o’clock on Sunday morning.
+1. He has not even had a shave.
+1. What are you doing with that paper?
+1. Sheila, what do you want to drink?
+1. Just a sweet sherry for me, please.
+1. I’m going to have a tomato juice.
+1. James, of course, is still in hospital.
+1. Now Mr Steele has just come in.
+1. He hasn’t gone into his office yet
+1. Have you been here since nine o’clock?
+1. Well, 5 days, that’s nearly a week.
+1. Come into my office for a minute.
+1. Well, you haven’t sent me an email.
+1. Last weekend in Applefield Arthur was broke.
+1. It was the end of the month.
+1. We can go home now, can’t we?
+1. There were a lot of people in.
+1. Well, it’s a lovely evening, isn’t it?
+1. We must both work tomorrow, mustn’t we?
+1. That was very nice of you, Arthur.
+1. Arthur got up early on Saturday morning.
+1. He wanted to hear the weather forecast.
+1. I can row first if you like.
+1. I’m not too big, am I, Arthur?
+1. Perhaps it’s time to go back now.
+1. It’s a bit cloudy too, isn’t it?
+1. Mary didn’t even say goodnight to Arthur.
+1. You gave it to me on Monday.
+1. Did you ever learn about the controls?
+1. What do you think of that one?
+1. I must say it looks very nice.
+1. A bit too much for you, perhaps?
+1. I can see you’ve got the taste.
+1. That’s only three thousand, five hundred pounds.
+1. It goes well. That’s the main thing.
+1. Charlie, come over here for a minute.
+1. You want to buy that, do you?
+1. Why not drive it round the block?
+1. He needn’t go by train this time.
+1. He told her about his ‘new’ car.
+1. Now where did we put the car?
+1. I’ll sit in front because I’m navigating.
+1. Well, personally, I think it’s very nice.
+1. Look, it says Swanage - two miles.
+1. Arthur’s car was at the police station.
+1. That’s him over there, the grey one.
+1. He’s the nicest horse I’ve ever seen.
+1. I like ’Darling Mary’. (a horse’s name)
+1. We can see the race better there.
+1. You haven’t got much farther to go.
+1. It’s the slowest horse in the race.
+1. Didcot’s nearer to Applefield than Middleford is.
+1. I was talking to my friend, actually.
+1. What did you say about our Fred?
+1. It was a brief moment of joy.
+1. Mary was also working in the library.
+1. You see, I thought I was lucky.
+1. I have a flat and a house.
+1. I have a map in my notebook.
+1. I'm married and I have two children.
+1. I live in the south of Hungary.
+1. I want to drink a cold tea.
+1. I have a niece and a nephew.
+1. What are you doing in the afternoon?
+1. When will you come and see us?
+1. He has two hours to get here.
+1. Have you ever seen a big plane?
+1. I have to speak to the receptionist.
+1. What the hell are you doing here?
+1. I need to have a hobby.
+1. I don’t want you to be late.
+1. I never drink alcohol when I drive.
+1. It’s very windy now – let’s go sailing!
+1. This is one of my favourite songs.
+1. In winter I love having hot baths.
+1. Do you know what is behind you?
+1. In my room the carpet is grey.
+1. When were you last at the chemist's?
+1. Do you wake up by an alarm-clock?
+1. I was very happy during the weekend.
+1. My friend would like to be famous.
+1. I can't find food in the fridge.
+1. How often are you in your kitchen?
+1. Are you a member of the library?
+1. There isn't a mirror in my room.
+1. My radio-reading lamp-alarm clock is very modern.
+1. I haven't been to a big palace.
+1. There are six pictures on our wall.
+1. This is a great place in summer.
+1. We have a sofa opposite the tv.
+1. I got a stereo for my birthday.
+1. My cat likes sitting on my table.
+1. Do you know the new car-racing champion?
+1. Tell me where the check-in desk is.
+1. I can't answer you this question fluently.
+1. Who is that man at the gate?
+1. Can you hear me in this noise?
+1. How much did you earn last month?
+1. They stopped us at the passport control.
+1. I have to practice this all day.
+1. Can you smell this smoke or something?
+1. What do you think of this problem?
+1. Do you know who her clerk is?
+1. How much would you like to earn?
+1. What do you enjoy most in summer?
+1. Where can I find you in summer?
+1. What do you want to eat later?
+1. When did you come home last night?
+1. My grandfather is over 90 years old.
+1. It isn’t so good to be popular.
+1. Have you ever seen a real star?
+1. The weather is wonderful by the sea.

@@ -12,6 +12,8 @@ import React from "react";
 import "./App.css";
 import hamburgerIcon from "./Hamburger_icon.png";
 import settingsIcon from "./settingicon.png";
+import homePageIcon from "./button_homeicon.png";
+import siteMapIcon from "./button_sitemap.png";
 import { SettingsDialog, SettingsButton } from "./reactcomp_settings";
 
 // import mic_listening from "./mic1-xparent.gif";
@@ -39,12 +41,15 @@ import {
   ISectionParagraphVariant
 } from "./pageContentType";
 
+import { ISettingsContext, SettingsContext } from "./settingsContext";
+
 interface IPageHeaderPropsType {
   title: string;
 }
 export const PageHeader = React.memo((props: IPageHeaderPropsType) => {
   const dispatch = useAppDispatch();
   const { isActive, toggle } = useDialog();
+  const homePage = useContext(SettingsContext)!.settings.config.homePage;
   console.log(`<PageHeader>`);
   return (
     <header className="header-grid-container">
@@ -52,7 +57,23 @@ export const PageHeader = React.memo((props: IPageHeaderPropsType) => {
         <img className="icon" alt="hamburger" src={hamburgerIcon} />
       </div>
       <div className="headertitle">{props.title}</div>
-      <div className="header-grid-right">
+      <div className="header-grid-homebutton">
+        <img
+          className="icon"
+          alt="homePage"
+          src={homePageIcon}
+          onClick={() => dispatch(Request.Page_load(`homepage_${homePage}`))}
+        />
+      </div>
+      <div className="header-grid-sitemapbutton">
+        <img
+          className="icon"
+          alt="sitemap"
+          src={siteMapIcon}
+          onClick={() => dispatch(Request.Page_load("sitemap"))}
+        />
+      </div>
+      <div className="header-grid-settingbutton">
         <img
           className="icon"
           alt="settings"

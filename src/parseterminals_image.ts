@@ -8,7 +8,7 @@
  *
  **/
 import { strict as assert } from "assert";
-import { IsError } from "./utilities";
+import { IsError, IsDefined, FileExists } from "./utilities";
 import {
   ParseNodeSerializeFormatEnumType,
   ParseNodeSerializeColumnWidths
@@ -106,14 +106,15 @@ export class TerminalNode_MLTAG_IMAGE extends TerminalNode_MLTAG_
         `Expected right parenthesis but encountered "${token.content}" while parsing image`
       );
       let chunks: string[] = src.split(",").map(chunk => chunk.trim());
-      if (chunks[0] !== undefined && chunks[0].length > 0)
-        this.meta.src = chunks[0];
-      if (chunks[1] !== undefined && chunks[0].length > 0)
-        this.meta.width = +chunks[1]; // no units; assumed px
-      if (chunks[2] !== undefined && chunks[0].length > 0)
-        this.meta.height = +chunks[2]; // no units; assumed px
-      if (chunks[3] !== undefined && chunks[0].length > 0)
-        this.meta.attributes = chunks[3];
+      if (IsDefined(chunks[0])) this.meta.src = chunks[0];
+      if (IsDefined(chunks[1])) this.meta.width = +chunks[1]; // no units; assumed px
+      if (IsDefined(chunks[2])) this.meta.height = +chunks[2]; // no units; assumed px
+      if (IsDefined(chunks[3])) this.meta.attributes = chunks[3];
+      if (!FileExists(`dist\\img\\${this.meta.src}`)) {
+        this.logger.warning(
+          `Image file ${this.meta.src} does not exist (yet?)`
+        );
+      }
 
       token = tokenList.shift()!;
       assert(

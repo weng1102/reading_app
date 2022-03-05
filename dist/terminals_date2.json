@@ -1,28 +1,18 @@
 {
   "id": 0,
-  "title": "",
+  "title": "Date MMM DD YYYY rendering",
   "filename": "terminals_date2.json",
   "description": "",
   "owner": "",
+  "author": "Wen",
+  "category": "Testing",
   "pageFormatType": 0,
-  "created": "Mon Jan 24 2022 15:07:55 GMT-0800 (Pacific Standard Time)",
-  "modified": "Mon Jan 24 2022 15:07:55 GMT-0800 (Pacific Standard Time)",
-  "transformed": "Mon Jan 24 2022 15:07:55 GMT-0800 (Pacific Standard Time)",
+  "created": "1/1/2022",
+  "modified": "Wed Mar 02 2022 10:42:38 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Wed Mar 02 2022 10:42:38 GMT-0800 (Pacific Standard Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
-    {
-      "id": 0,
-      "name": "TBD",
-      "description": "",
-      "firstTermIdx": -9999,
-      "lastTermIdx": -9999,
-      "items": [],
-      "type": "tbd",
-      "meta": {
-        "context": ""
-      }
-    },
     {
       "id": 0,
       "name": "",
@@ -64,7 +54,9 @@
                     "linkable": false,
                     "visible": true,
                     "fillin": false,
-                    "visited": false
+                    "visited": false,
+                    "linkIdx": -9999,
+                    "hintsIdx": -9999
                   },
                   "punctuation1": {
                     "content": "",
@@ -78,7 +70,9 @@
                     "linkable": false,
                     "visible": true,
                     "fillin": false,
-                    "visited": false
+                    "visited": false,
+                    "linkIdx": -9999,
+                    "hintsIdx": -9999
                   },
                   "whitespace1": {
                     "content": " ",
@@ -92,7 +86,9 @@
                     "linkable": false,
                     "visible": true,
                     "fillin": false,
-                    "visited": false
+                    "visited": false,
+                    "linkIdx": -9999,
+                    "hintsIdx": -9999
                   },
                   "day": {
                     "content": "25",
@@ -108,7 +104,9 @@
                     "linkable": false,
                     "visible": true,
                     "fillin": false,
-                    "visited": false
+                    "visited": false,
+                    "linkIdx": -9999,
+                    "hintsIdx": -9999
                   },
                   "punctuation2": {
                     "content": "",
@@ -122,7 +120,9 @@
                     "linkable": false,
                     "visible": true,
                     "fillin": false,
-                    "visited": false
+                    "visited": false,
+                    "linkIdx": -9999,
+                    "hintsIdx": -9999
                   },
                   "whitespace2": {
                     "content": " ",
@@ -136,7 +136,9 @@
                     "linkable": false,
                     "visible": true,
                     "fillin": false,
-                    "visited": false
+                    "visited": false,
+                    "linkIdx": -9999,
+                    "hintsIdx": -9999
                   },
                   "year": {
                     "century": {
@@ -155,7 +157,9 @@
                       "linkable": false,
                       "visible": true,
                       "fillin": false,
-                      "visited": false
+                      "visited": false,
+                      "linkIdx": -9999,
+                      "hintsIdx": -9999
                     },
                     "withinCentury": {
                       "content": "20",
@@ -173,7 +177,9 @@
                       "linkable": false,
                       "visible": true,
                       "fillin": false,
-                      "visited": false
+                      "visited": false,
+                      "linkIdx": -9999,
+                      "hintsIdx": -9999
                     }
                   }
                 }
@@ -184,7 +190,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 12,
+                "type": 13,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -197,7 +203,9 @@
                   "linkable": false,
                   "visible": true,
                   "fillin": false,
-                  "visited": false
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
                 }
               },
               {
@@ -206,7 +214,7 @@
                 "content": "was",
                 "firstTermIdx": 4,
                 "lastTermIdx": 4,
-                "type": 13,
+                "type": 14,
                 "meta": {
                   "content": "was",
                   "termIdx": 4,
@@ -223,7 +231,9 @@
                   "linkable": false,
                   "visible": true,
                   "fillin": false,
-                  "visited": false
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
                 }
               },
               {
@@ -232,7 +242,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 12,
+                "type": 13,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -245,7 +255,9 @@
                   "linkable": false,
                   "visible": true,
                   "fillin": false,
-                  "visited": false
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
                 }
               },
               {
@@ -254,7 +266,7 @@
                 "content": "last",
                 "firstTermIdx": 5,
                 "lastTermIdx": 5,
-                "type": 13,
+                "type": 14,
                 "meta": {
                   "content": "last",
                   "termIdx": 5,
@@ -271,7 +283,9 @@
                   "linkable": false,
                   "visible": true,
                   "fillin": false,
-                  "visited": false
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
                 }
               },
               {
@@ -280,7 +294,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 12,
+                "type": 13,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -293,7 +307,9 @@
                   "linkable": false,
                   "visible": true,
                   "fillin": false,
-                  "visited": false
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
                 }
               },
               {
@@ -302,7 +318,7 @@
                 "content": "Christmas",
                 "firstTermIdx": 6,
                 "lastTermIdx": 6,
-                "type": 13,
+                "type": 14,
                 "meta": {
                   "content": "Christmas",
                   "termIdx": 6,
@@ -319,7 +335,9 @@
                   "linkable": false,
                   "visible": true,
                   "fillin": false,
-                  "visited": false
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
                 }
               },
               {
@@ -341,7 +359,9 @@
                   "linkable": false,
                   "visible": true,
                   "fillin": false,
-                  "visited": false
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
                 }
               }
             ],
@@ -373,7 +393,7 @@
                 "content": "Mommy's",
                 "firstTermIdx": 7,
                 "lastTermIdx": 7,
-                "type": 13,
+                "type": 14,
                 "meta": {
                   "content": "Mommy's",
                   "termIdx": 7,
@@ -390,7 +410,9 @@
                   "linkable": false,
                   "visible": true,
                   "fillin": false,
-                  "visited": false
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
                 }
               },
               {
@@ -399,7 +421,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 12,
+                "type": 13,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -412,7 +434,9 @@
                   "linkable": false,
                   "visible": true,
                   "fillin": false,
-                  "visited": false
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
                 }
               },
               {
@@ -421,7 +445,7 @@
                 "content": "birthday",
                 "firstTermIdx": 8,
                 "lastTermIdx": 8,
-                "type": 13,
+                "type": 14,
                 "meta": {
                   "content": "birthday",
                   "termIdx": 8,
@@ -438,7 +462,9 @@
                   "linkable": false,
                   "visible": true,
                   "fillin": false,
-                  "visited": false
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
                 }
               },
               {
@@ -447,7 +473,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 12,
+                "type": 13,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -460,7 +486,9 @@
                   "linkable": false,
                   "visible": true,
                   "fillin": false,
-                  "visited": false
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
                 }
               },
               {
@@ -469,7 +497,7 @@
                 "content": "is",
                 "firstTermIdx": 9,
                 "lastTermIdx": 9,
-                "type": 13,
+                "type": 14,
                 "meta": {
                   "content": "is",
                   "termIdx": 9,
@@ -486,7 +514,9 @@
                   "linkable": false,
                   "visible": true,
                   "fillin": false,
-                  "visited": false
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
                 }
               },
               {
@@ -495,7 +525,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 12,
+                "type": 13,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -508,7 +538,9 @@
                   "linkable": false,
                   "visible": true,
                   "fillin": false,
-                  "visited": false
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
                 }
               },
               {
@@ -536,7 +568,9 @@
                     "linkable": false,
                     "visible": true,
                     "fillin": false,
-                    "visited": false
+                    "visited": false,
+                    "linkIdx": -9999,
+                    "hintsIdx": -9999
                   },
                   "punctuation1": {
                     "content": "",
@@ -550,7 +584,9 @@
                     "linkable": false,
                     "visible": true,
                     "fillin": false,
-                    "visited": false
+                    "visited": false,
+                    "linkIdx": -9999,
+                    "hintsIdx": -9999
                   },
                   "whitespace1": {
                     "content": " ",
@@ -564,7 +600,9 @@
                     "linkable": false,
                     "visible": true,
                     "fillin": false,
-                    "visited": false
+                    "visited": false,
+                    "linkIdx": -9999,
+                    "hintsIdx": -9999
                   },
                   "day": {
                     "content": "28",
@@ -582,7 +620,9 @@
                     "linkable": false,
                     "visible": true,
                     "fillin": false,
-                    "visited": false
+                    "visited": false,
+                    "linkIdx": -9999,
+                    "hintsIdx": -9999
                   },
                   "punctuation2": {
                     "content": ",",
@@ -596,7 +636,9 @@
                     "linkable": false,
                     "visible": true,
                     "fillin": false,
-                    "visited": false
+                    "visited": false,
+                    "linkIdx": -9999,
+                    "hintsIdx": -9999
                   },
                   "whitespace2": {
                     "content": " ",
@@ -610,7 +652,9 @@
                     "linkable": false,
                     "visible": true,
                     "fillin": false,
-                    "visited": false
+                    "visited": false,
+                    "linkIdx": -9999,
+                    "hintsIdx": -9999
                   },
                   "year": {
                     "century": {
@@ -629,7 +673,9 @@
                       "linkable": false,
                       "visible": true,
                       "fillin": false,
-                      "visited": false
+                      "visited": false,
+                      "linkIdx": -9999,
+                      "hintsIdx": -9999
                     },
                     "withinCentury": {
                       "content": "21",
@@ -645,7 +691,9 @@
                       "linkable": false,
                       "visible": true,
                       "fillin": false,
-                      "visited": false
+                      "visited": false,
+                      "linkIdx": -9999,
+                      "hintsIdx": -9999
                     }
                   }
                 }
@@ -669,7 +717,9 @@
                   "linkable": false,
                   "visible": true,
                   "fillin": false,
-                  "visited": false
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
                 }
               }
             ],
@@ -708,6 +758,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 0,
       "sectionIdx": 0
     },
@@ -728,6 +780,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 0,
       "sectionIdx": 0
     },
@@ -748,6 +802,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 0,
       "sectionIdx": 0
     },
@@ -768,6 +824,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 0,
       "sectionIdx": 0
     },
@@ -788,6 +846,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 0,
       "sectionIdx": 0
     },
@@ -808,6 +868,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 0,
       "sectionIdx": 0
     },
@@ -828,6 +890,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 0,
       "sectionIdx": 0
     },
@@ -848,6 +912,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 1,
       "sectionIdx": 1
     },
@@ -868,6 +934,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 1,
       "sectionIdx": 1
     },
@@ -888,6 +956,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 1,
       "sectionIdx": 1
     },
@@ -908,6 +978,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 1,
       "sectionIdx": 1
     },
@@ -928,6 +1000,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 1,
       "sectionIdx": 1
     },
@@ -948,6 +1022,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 1,
       "sectionIdx": 1
     },
@@ -966,6 +1042,8 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 1,
       "sectionIdx": 1
     }
@@ -994,5 +1072,6 @@
       "lastTermIdx": 13,
       "lastPunctuation": "."
     }
-  ]
+  ],
+  "linkList": []
 }

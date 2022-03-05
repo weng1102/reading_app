@@ -15,6 +15,7 @@ import {
   ISectionContent,
   ISentenceContent,
   ISectionHeadingVariant,
+  ISectionHeadingVariant1,
   SectionVariantEnumType,
   ISectionParagraphVariant,
   ISectionUnorderedListVariant
@@ -131,13 +132,21 @@ const Section_heading = React.memo((props: ISectionPropsType) => {
   const HeadingTag = headingLevels[
     validHeadingLevel
   ] as keyof JSX.IntrinsicElements;
+  const currentSentenceIdx: number = useAppSelector(
+    store => store.cursor_sentenceIdx
+  );
   return (
     <div
       className="section-heading"
       id={sectionIdx.toString()}
       ref={headingRef}
     >
-      <HeadingTag>{meta.title}</HeadingTag>
+      <HeadingTag>
+        <Sentence
+          active={currentSentenceIdx === meta.heading.id}
+          sentence={meta.heading}
+        />
+      </HeadingTag>
     </div>
   );
 });

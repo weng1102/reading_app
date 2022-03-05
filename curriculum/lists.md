@@ -1,3 +1,5 @@
+[[page: list rendering,, Wen, 1/1/2022,Testing, /]]
+
 # unorder list example
 
 - sentence 1. sentence 1 again
@@ -26,13 +28,16 @@ ordered_list:
 8. sentence 6.2 with tabs
 9. sentence 4
 10. sentence 5.1 with spaces
-  5. sentence 5.2.2 with spaces
+11. sentence 5.2.2 with spaces
 
 # mixed list example
 
 1. ordered sentence 1
-  - unordered sentence 1
-  - unordered sentence 2
+
+- unordered sentence 1
+- unordered sentence 2
+
 2. ordered sentence 2
-  - unordered sentence 3
-  - unordered sentence 4
+
+- unordered sentence 3
+- unordered sentence 4

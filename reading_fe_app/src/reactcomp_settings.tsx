@@ -56,6 +56,7 @@ export const SettingsDialog = (props: ISettingsDialogPropsType) => {
   );
   //  const [initial, setInitial] = useState(true);
   const [modified, setModified] = useState(false);
+  const [activeTab, setActiveTab] = useState(1);
   // clone setting context as potential new settings that can be
   // modified and committed to active/actual SettingContext
   // const [newSettings, setNewSettings] = useState(
@@ -97,6 +98,7 @@ export const SettingsDialog = (props: ISettingsDialogPropsType) => {
         speech: speechSettings,
         listen: listenSettings
       });
+      dispatch(Request.Recognition_setMaxRetries(listenSettings.retries));
       setModified(false);
     }
     //    setInitial(true);
@@ -109,7 +111,17 @@ export const SettingsDialog = (props: ISettingsDialogPropsType) => {
     setModified(false);
     // setNewSettings(SettingsCloner(settingsContext));
     props.hide();
+    dispatch(Request.Test_set());
   };
+  const markersInactive: string[] = ["", "", "", "", ""];
+  let tabMarkers: string[] = markersInactive;
+  const clickTab = (tab: number) => {
+    tabMarkers = markersInactive;
+    setActiveTab(tab);
+    console.log(`tab ${tab} selected`);
+    if (tab > 0 && tab < tabMarkers.length) tabMarkers[tab] = "active";
+  };
+
   let OkIcons = modified ? OkIcon : OkIcon_ghosted;
   let dispatch = useAppDispatch();
   // could do deep compare between temp and current contexts
@@ -123,18 +135,26 @@ export const SettingsDialog = (props: ISettingsDialogPropsType) => {
         <div className="settings-container">
           <div className="settings sliding1">
             <div className="settings-header">Settings</div>
+            <TabControlButtons
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+            />
+            <TabControlMarkers activeTab={activeTab} />
             <div className="settings-grid-container">
               <SpeechSettings
                 speechSettings={speechSettings}
                 setSpeechSettings={setSpeechSettings}
+                active={activeTab === 1}
               />
               <ListenSettings
                 listenSettings={listenSettings}
                 setListenSettings={setListenSettings}
+                active={activeTab === 2}
               />
               <ConfigSettings
                 configSettings={configSettings}
                 setConfigSettings={setConfigSettings}
+                active={activeTab === 3}
               />
             </div>
             <div className="settings-footer">
@@ -152,6 +172,55 @@ export const SettingsDialog = (props: ISettingsDialogPropsType) => {
       </>
     );
   }
+};
+interface ITabControlButtonsProps {
+  activeTab: number;
+  setActiveTab: (clickTab: number) => void;
+}
+export const TabControlButtons = (props: ITabControlButtonsProps) => {
+  return (
+    <>
+      <div className="settings-tabControl-grid">
+        <div
+          className="settings-tabControl-tab1"
+          onClick={() => props.setActiveTab(1)}
+        >
+          Speaking
+        </div>
+        <div
+          className="settings-tabControl-tab2"
+          onClick={() => props.setActiveTab(2)}
+        >
+          Listening
+        </div>
+        <div
+          className="settings-tabControl-tab3"
+          onClick={() => props.setActiveTab(3)}
+        >
+          Identifying
+        </div>
+      </div>
+    </>
+  );
+};
+interface TabControlMarkersProps {
+  activeTab: number;
+}
+export const TabControlMarkers = (props: TabControlMarkersProps) => {
+  const markersInactive: string[] = ["", "", "", "", ""];
+  let tabMarkers: string[] = markersInactive;
+  tabMarkers = markersInactive;
+  if (props.activeTab > 0 && props.activeTab < tabMarkers.length)
+    tabMarkers[props.activeTab] = "active";
+  return (
+    <>
+      <div className="settings-tabControl-markers-grid">
+        <div className={`settings-tabControl-marker1 ${tabMarkers[1]}`}></div>
+        <div className={`settings-tabControl-marker2 ${tabMarkers[2]}`}></div>
+        <div className={`settings-tabControl-marker3 ${tabMarkers[3]}`}></div>
+      </div>
+    </>
+  );
 };
 export const PersonalInfoSettings = () => {
   return (

@@ -24,6 +24,7 @@ import { useState } from "react";
 
 export enum RecitationMode {
   wordOnly = "word only",
+  wordNext = "word (then advance)",
   entireSentence = "entire sentence",
   uptoExclusive = "partial up to word (exclusive)",
   uptoInclusive = "partial up to word (inclusive)",
@@ -37,9 +38,6 @@ export interface ISettings {
   config: IConfigSettings;
   speech: ISpeechSettings;
   listen: IListenSettings;
-}
-export interface IConfigSettings {
-  distDir: string;
 }
 export interface ISettingsContext {
   settings: ISettings;
@@ -77,9 +75,7 @@ export interface ISpeechSettings {
 //
 export function ConfigSettingsInitializer(
   homePage: string = "ronlyn",
-  //distDir: string = "https://weng1102.github.io/reading_app/dist/",
   distDir: string = "https://weng1102.github.io/reading-companion/",
-  //  distDir: string = "https://github.com/weng1102/reading_app/master/dist/",
   firstName: string = "Ronlyn",
   lastName: string = "Goo"
 ): IConfigSettings {
@@ -113,6 +109,7 @@ export function SpeechSettingsInitializer(
 }
 export interface IListenSettings {
   stopAtEndOfSentence: boolean;
+  retries: number;
   timeout: number; // time out upon silence
   listeningInterval: number; // msec between listening and matching
   notificationMode: NotificationMode;
@@ -121,14 +118,16 @@ export interface IListenSettings {
 }
 export function ListenSettingsInitializer(
   stopAtEndOfSentence: boolean = true,
+  retries: number = 5,
   timeout: number = 20, // time out upon silence
-  listeningInterval: number = 20, // msec between listening and matching
+  listeningInterval: number = 15, // msec between listening and matching
   notificationMode: NotificationMode = NotificationMode.voice,
   sentenceNotification: string = "new sentence",
   sectionNotification: string = "new section"
 ): IListenSettings {
   return {
     stopAtEndOfSentence,
+    retries,
     timeout,
     listeningInterval,
     notificationMode,

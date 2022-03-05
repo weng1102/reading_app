@@ -1,28 +1,18 @@
 {
   "id": 0,
-  "title": "",
+  "title": "image with text rendering",
   "filename": "section_images.json",
   "description": "",
-  "owner": "",
+  "owner": "anonymous",
+  "author": "Wen",
+  "category": "Testing",
   "pageFormatType": 0,
-  "created": "Mon Jan 24 2022 15:07:55 GMT-0800 (Pacific Standard Time)",
-  "modified": "Mon Jan 24 2022 15:07:55 GMT-0800 (Pacific Standard Time)",
-  "transformed": "Mon Jan 24 2022 15:07:55 GMT-0800 (Pacific Standard Time)",
+  "created": "1/1/2022",
+  "modified": "Wed Mar 02 2022 06:37:05 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Wed Mar 02 2022 06:37:05 GMT-0800 (Pacific Standard Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
-    {
-      "id": 0,
-      "name": "TBD",
-      "description": "",
-      "firstTermIdx": -9999,
-      "lastTermIdx": -9999,
-      "items": [],
-      "type": "tbd",
-      "meta": {
-        "context": ""
-      }
-    },
     {
       "id": 0,
       "name": "",
@@ -39,15 +29,202 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": -9999,
+      "firstTermIdx": 0,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
       "meta": {
-        "title": "single image no captions",
-        "separator": "",
-        "recitable": false,
-        "audible": false,
+        "heading": {
+          "id": 0,
+          "content": "single image no captions",
+          "firstTermIdx": 0,
+          "lastTermIdx": 3,
+          "terminals": [
+            {
+              "id": 0,
+              "termIdx": 0,
+              "content": "single",
+              "firstTermIdx": 0,
+              "lastTermIdx": 0,
+              "type": 14,
+              "meta": {
+                "content": "single",
+                "termIdx": 0,
+                "nextTermIdx": [
+                  1
+                ],
+                "prevTermIdx": [],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": true,
+                "audible": true,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": -9999,
+              "content": " ",
+              "firstTermIdx": -9999,
+              "lastTermIdx": -9999,
+              "type": 13,
+              "meta": {
+                "content": " ",
+                "termIdx": -9999,
+                "nextTermIdx": [],
+                "prevTermIdx": [],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": false,
+                "audible": false,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": 1,
+              "content": "image",
+              "firstTermIdx": 1,
+              "lastTermIdx": 1,
+              "type": 14,
+              "meta": {
+                "content": "image",
+                "termIdx": 1,
+                "nextTermIdx": [
+                  2
+                ],
+                "prevTermIdx": [
+                  0
+                ],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": true,
+                "audible": true,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": -9999,
+              "content": " ",
+              "firstTermIdx": -9999,
+              "lastTermIdx": -9999,
+              "type": 13,
+              "meta": {
+                "content": " ",
+                "termIdx": -9999,
+                "nextTermIdx": [],
+                "prevTermIdx": [],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": false,
+                "audible": false,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": 2,
+              "content": "no",
+              "firstTermIdx": 2,
+              "lastTermIdx": 2,
+              "type": 14,
+              "meta": {
+                "content": "no",
+                "termIdx": 2,
+                "nextTermIdx": [
+                  3
+                ],
+                "prevTermIdx": [
+                  1
+                ],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": true,
+                "audible": true,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": -9999,
+              "content": " ",
+              "firstTermIdx": -9999,
+              "lastTermIdx": -9999,
+              "type": 13,
+              "meta": {
+                "content": " ",
+                "termIdx": -9999,
+                "nextTermIdx": [],
+                "prevTermIdx": [],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": false,
+                "audible": false,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": 3,
+              "content": "captions",
+              "firstTermIdx": 3,
+              "lastTermIdx": 3,
+              "type": 14,
+              "meta": {
+                "content": "captions",
+                "termIdx": 3,
+                "nextTermIdx": [
+                  4
+                ],
+                "prevTermIdx": [
+                  2
+                ],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": true,
+                "audible": true,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            }
+          ],
+          "lastPunctuation": ""
+        },
         "level": 1
       }
     },
@@ -91,128 +268,34 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 0,
-      "lastTermIdx": 3,
+      "firstTermIdx": 4,
+      "lastTermIdx": 7,
       "items": [],
       "type": "paragraph",
       "meta": {
         "sentences": [
           {
-            "id": 0,
+            "id": 1,
             "content": "paragraph after singleton image",
-            "firstTermIdx": 0,
-            "lastTermIdx": 3,
+            "firstTermIdx": 4,
+            "lastTermIdx": 7,
             "terminals": [
               {
                 "id": 0,
-                "termIdx": 0,
+                "termIdx": 4,
                 "content": "paragraph",
-                "firstTermIdx": 0,
-                "lastTermIdx": 0,
-                "type": 13,
+                "firstTermIdx": 4,
+                "lastTermIdx": 4,
+                "type": 14,
                 "meta": {
                   "content": "paragraph",
-                  "termIdx": 0,
+                  "termIdx": 4,
                   "nextTermIdx": [
-                    1
-                  ],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "linkable": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 12,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "linkable": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": 1,
-                "content": "after",
-                "firstTermIdx": 1,
-                "lastTermIdx": 1,
-                "type": 13,
-                "meta": {
-                  "content": "after",
-                  "termIdx": 1,
-                  "nextTermIdx": [
-                    2
+                    5
                   ],
                   "prevTermIdx": [
-                    0
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "linkable": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 12,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "linkable": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": 2,
-                "content": "singleton",
-                "firstTermIdx": 2,
-                "lastTermIdx": 2,
-                "type": 13,
-                "meta": {
-                  "content": "singleton",
-                  "termIdx": 2,
-                  "nextTermIdx": [
                     3
                   ],
-                  "prevTermIdx": [
-                    1
-                  ],
                   "altpronunciation": "",
                   "altrecognition": "",
                   "recitable": true,
@@ -220,7 +303,9 @@
                   "linkable": false,
                   "visible": true,
                   "fillin": false,
-                  "visited": false
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
                 }
               },
               {
@@ -229,7 +314,7 @@
                 "content": " ",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 12,
+                "type": 13,
                 "meta": {
                   "content": " ",
                   "termIdx": -9999,
@@ -242,24 +327,26 @@
                   "linkable": false,
                   "visible": true,
                   "fillin": false,
-                  "visited": false
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
                 }
               },
               {
                 "id": 0,
-                "termIdx": 3,
-                "content": "image",
-                "firstTermIdx": 3,
-                "lastTermIdx": 3,
-                "type": 13,
+                "termIdx": 5,
+                "content": "after",
+                "firstTermIdx": 5,
+                "lastTermIdx": 5,
+                "type": 14,
                 "meta": {
-                  "content": "image",
-                  "termIdx": 3,
+                  "content": "after",
+                  "termIdx": 5,
                   "nextTermIdx": [
-                    4
+                    6
                   ],
                   "prevTermIdx": [
-                    2
+                    4
                   ],
                   "altpronunciation": "",
                   "altrecognition": "",
@@ -268,7 +355,113 @@
                   "linkable": false,
                   "visible": true,
                   "fillin": false,
-                  "visited": false
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 13,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 6,
+                "content": "singleton",
+                "firstTermIdx": 6,
+                "lastTermIdx": 6,
+                "type": 14,
+                "meta": {
+                  "content": "singleton",
+                  "termIdx": 6,
+                  "nextTermIdx": [
+                    7
+                  ],
+                  "prevTermIdx": [
+                    5
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 13,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 7,
+                "content": "image",
+                "firstTermIdx": 7,
+                "lastTermIdx": 7,
+                "type": 14,
+                "meta": {
+                  "content": "image",
+                  "termIdx": 7,
+                  "nextTermIdx": [
+                    8
+                  ],
+                  "prevTermIdx": [
+                    6
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
                 }
               }
             ],
@@ -294,15 +487,256 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": -9999,
+      "firstTermIdx": 8,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
       "meta": {
-        "title": "single image with paragraph caption",
-        "separator": "",
-        "recitable": false,
-        "audible": false,
+        "heading": {
+          "id": 2,
+          "content": "single image with paragraph caption",
+          "firstTermIdx": 8,
+          "lastTermIdx": 12,
+          "terminals": [
+            {
+              "id": 0,
+              "termIdx": 8,
+              "content": "single",
+              "firstTermIdx": 8,
+              "lastTermIdx": 8,
+              "type": 14,
+              "meta": {
+                "content": "single",
+                "termIdx": 8,
+                "nextTermIdx": [
+                  9
+                ],
+                "prevTermIdx": [
+                  7
+                ],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": true,
+                "audible": true,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": -9999,
+              "content": " ",
+              "firstTermIdx": -9999,
+              "lastTermIdx": -9999,
+              "type": 13,
+              "meta": {
+                "content": " ",
+                "termIdx": -9999,
+                "nextTermIdx": [],
+                "prevTermIdx": [],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": false,
+                "audible": false,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": 9,
+              "content": "image",
+              "firstTermIdx": 9,
+              "lastTermIdx": 9,
+              "type": 14,
+              "meta": {
+                "content": "image",
+                "termIdx": 9,
+                "nextTermIdx": [
+                  10
+                ],
+                "prevTermIdx": [
+                  8
+                ],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": true,
+                "audible": true,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": -9999,
+              "content": " ",
+              "firstTermIdx": -9999,
+              "lastTermIdx": -9999,
+              "type": 13,
+              "meta": {
+                "content": " ",
+                "termIdx": -9999,
+                "nextTermIdx": [],
+                "prevTermIdx": [],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": false,
+                "audible": false,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": 10,
+              "content": "with",
+              "firstTermIdx": 10,
+              "lastTermIdx": 10,
+              "type": 14,
+              "meta": {
+                "content": "with",
+                "termIdx": 10,
+                "nextTermIdx": [
+                  11
+                ],
+                "prevTermIdx": [
+                  9
+                ],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": true,
+                "audible": true,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": -9999,
+              "content": " ",
+              "firstTermIdx": -9999,
+              "lastTermIdx": -9999,
+              "type": 13,
+              "meta": {
+                "content": " ",
+                "termIdx": -9999,
+                "nextTermIdx": [],
+                "prevTermIdx": [],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": false,
+                "audible": false,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": 11,
+              "content": "paragraph",
+              "firstTermIdx": 11,
+              "lastTermIdx": 11,
+              "type": 14,
+              "meta": {
+                "content": "paragraph",
+                "termIdx": 11,
+                "nextTermIdx": [
+                  12
+                ],
+                "prevTermIdx": [
+                  10
+                ],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": true,
+                "audible": true,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": -9999,
+              "content": " ",
+              "firstTermIdx": -9999,
+              "lastTermIdx": -9999,
+              "type": 13,
+              "meta": {
+                "content": " ",
+                "termIdx": -9999,
+                "nextTermIdx": [],
+                "prevTermIdx": [],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": false,
+                "audible": false,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": 12,
+              "content": "caption",
+              "firstTermIdx": 12,
+              "lastTermIdx": 12,
+              "type": 14,
+              "meta": {
+                "content": "caption",
+                "termIdx": 12,
+                "nextTermIdx": [
+                  13
+                ],
+                "prevTermIdx": [
+                  11
+                ],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": true,
+                "audible": true,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            }
+          ],
+          "lastPunctuation": ""
+        },
         "level": 1
       }
     },
@@ -334,424 +768,27 @@
       "id": 1,
       "name": "",
       "description": "",
-      "firstTermIdx": 4,
-      "lastTermIdx": 13,
+      "firstTermIdx": 13,
+      "lastTermIdx": 22,
       "items": [],
       "type": "paragraph",
       "meta": {
         "sentences": [
           {
-            "id": 1,
-            "content": "Sentence 1 describes test1.",
-            "firstTermIdx": 4,
-            "lastTermIdx": 8,
+            "id": 3,
+            "content": "Sentence 1 describes test1. ",
+            "firstTermIdx": 13,
+            "lastTermIdx": 17,
             "terminals": [
-              {
-                "id": 0,
-                "termIdx": 4,
-                "content": "Sentence",
-                "firstTermIdx": 4,
-                "lastTermIdx": 4,
-                "type": 13,
-                "meta": {
-                  "content": "Sentence",
-                  "termIdx": 4,
-                  "nextTermIdx": [
-                    5
-                  ],
-                  "prevTermIdx": [
-                    3
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "linkable": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 12,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "linkable": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": 5,
-                "content": "1",
-                "firstTermIdx": 5,
-                "lastTermIdx": 5,
-                "type": 13,
-                "meta": {
-                  "content": "1",
-                  "termIdx": 5,
-                  "nextTermIdx": [
-                    6
-                  ],
-                  "prevTermIdx": [
-                    4
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "linkable": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 12,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "linkable": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": 6,
-                "content": "describes",
-                "firstTermIdx": 6,
-                "lastTermIdx": 6,
-                "type": 13,
-                "meta": {
-                  "content": "describes",
-                  "termIdx": 6,
-                  "nextTermIdx": [
-                    7
-                  ],
-                  "prevTermIdx": [
-                    5
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "linkable": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 12,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "linkable": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": 7,
-                "content": "test",
-                "firstTermIdx": 7,
-                "lastTermIdx": 7,
-                "type": 13,
-                "meta": {
-                  "content": "test",
-                  "termIdx": 7,
-                  "nextTermIdx": [
-                    8
-                  ],
-                  "prevTermIdx": [
-                    6
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "linkable": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": 8,
-                "content": "1",
-                "firstTermIdx": 8,
-                "lastTermIdx": 8,
-                "type": 13,
-                "meta": {
-                  "content": "1",
-                  "termIdx": 8,
-                  "nextTermIdx": [
-                    9
-                  ],
-                  "prevTermIdx": [
-                    7
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "linkable": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": ".",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 8,
-                "meta": {
-                  "content": ".",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "linkable": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              }
-            ],
-            "lastPunctuation": "."
-          },
-          {
-            "id": 2,
-            "content": "Sentence 2 describes test1.",
-            "firstTermIdx": 9,
-            "lastTermIdx": 13,
-            "terminals": [
-              {
-                "id": 0,
-                "termIdx": 9,
-                "content": "Sentence",
-                "firstTermIdx": 9,
-                "lastTermIdx": 9,
-                "type": 13,
-                "meta": {
-                  "content": "Sentence",
-                  "termIdx": 9,
-                  "nextTermIdx": [
-                    10
-                  ],
-                  "prevTermIdx": [
-                    8
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "linkable": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 12,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "linkable": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": 10,
-                "content": "2",
-                "firstTermIdx": 10,
-                "lastTermIdx": 10,
-                "type": 13,
-                "meta": {
-                  "content": "2",
-                  "termIdx": 10,
-                  "nextTermIdx": [
-                    11
-                  ],
-                  "prevTermIdx": [
-                    9
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "linkable": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 12,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "linkable": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": 11,
-                "content": "describes",
-                "firstTermIdx": 11,
-                "lastTermIdx": 11,
-                "type": 13,
-                "meta": {
-                  "content": "describes",
-                  "termIdx": 11,
-                  "nextTermIdx": [
-                    12
-                  ],
-                  "prevTermIdx": [
-                    10
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "linkable": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 12,
-                "meta": {
-                  "content": " ",
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "linkable": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": 12,
-                "content": "test",
-                "firstTermIdx": 12,
-                "lastTermIdx": 12,
-                "type": 13,
-                "meta": {
-                  "content": "test",
-                  "termIdx": 12,
-                  "nextTermIdx": [
-                    13
-                  ],
-                  "prevTermIdx": [
-                    11
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "linkable": false,
-                  "visible": true,
-                  "fillin": false,
-                  "visited": false
-                }
-              },
               {
                 "id": 0,
                 "termIdx": 13,
-                "content": "1",
+                "content": "Sentence",
                 "firstTermIdx": 13,
                 "lastTermIdx": 13,
-                "type": 13,
+                "type": 14,
                 "meta": {
-                  "content": "1",
+                  "content": "Sentence",
                   "termIdx": 13,
                   "nextTermIdx": [
                     14
@@ -766,7 +803,193 @@
                   "linkable": false,
                   "visible": true,
                   "fillin": false,
-                  "visited": false
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 13,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 14,
+                "content": "1",
+                "firstTermIdx": 14,
+                "lastTermIdx": 14,
+                "type": 14,
+                "meta": {
+                  "content": "1",
+                  "termIdx": 14,
+                  "nextTermIdx": [
+                    15
+                  ],
+                  "prevTermIdx": [
+                    13
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 13,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 15,
+                "content": "describes",
+                "firstTermIdx": 15,
+                "lastTermIdx": 15,
+                "type": 14,
+                "meta": {
+                  "content": "describes",
+                  "termIdx": 15,
+                  "nextTermIdx": [
+                    16
+                  ],
+                  "prevTermIdx": [
+                    14
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 13,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 16,
+                "content": "test",
+                "firstTermIdx": 16,
+                "lastTermIdx": 16,
+                "type": 14,
+                "meta": {
+                  "content": "test",
+                  "termIdx": 16,
+                  "nextTermIdx": [
+                    17
+                  ],
+                  "prevTermIdx": [
+                    15
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 17,
+                "content": "1",
+                "firstTermIdx": 17,
+                "lastTermIdx": 17,
+                "type": 14,
+                "meta": {
+                  "content": "1",
+                  "termIdx": 17,
+                  "nextTermIdx": [
+                    18
+                  ],
+                  "prevTermIdx": [
+                    16
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
                 }
               },
               {
@@ -788,7 +1011,278 @@
                   "linkable": false,
                   "visible": true,
                   "fillin": false,
-                  "visited": false
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 13,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              }
+            ],
+            "lastPunctuation": "."
+          },
+          {
+            "id": 4,
+            "content": "Sentence 2 describes test1.",
+            "firstTermIdx": 18,
+            "lastTermIdx": 22,
+            "terminals": [
+              {
+                "id": 0,
+                "termIdx": 18,
+                "content": "Sentence",
+                "firstTermIdx": 18,
+                "lastTermIdx": 18,
+                "type": 14,
+                "meta": {
+                  "content": "Sentence",
+                  "termIdx": 18,
+                  "nextTermIdx": [
+                    19
+                  ],
+                  "prevTermIdx": [
+                    17
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 13,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 19,
+                "content": "2",
+                "firstTermIdx": 19,
+                "lastTermIdx": 19,
+                "type": 14,
+                "meta": {
+                  "content": "2",
+                  "termIdx": 19,
+                  "nextTermIdx": [
+                    20
+                  ],
+                  "prevTermIdx": [
+                    18
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 13,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 20,
+                "content": "describes",
+                "firstTermIdx": 20,
+                "lastTermIdx": 20,
+                "type": 14,
+                "meta": {
+                  "content": "describes",
+                  "termIdx": 20,
+                  "nextTermIdx": [
+                    21
+                  ],
+                  "prevTermIdx": [
+                    19
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": " ",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 13,
+                "meta": {
+                  "content": " ",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 21,
+                "content": "test",
+                "firstTermIdx": 21,
+                "lastTermIdx": 21,
+                "type": 14,
+                "meta": {
+                  "content": "test",
+                  "termIdx": 21,
+                  "nextTermIdx": [
+                    22
+                  ],
+                  "prevTermIdx": [
+                    20
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": 22,
+                "content": "1",
+                "firstTermIdx": 22,
+                "lastTermIdx": 22,
+                "type": 14,
+                "meta": {
+                  "content": "1",
+                  "termIdx": 22,
+                  "nextTermIdx": [
+                    23
+                  ],
+                  "prevTermIdx": [
+                    21
+                  ],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": true,
+                  "audible": true,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": ".",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 8,
+                "meta": {
+                  "content": ".",
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "audible": false,
+                  "linkable": false,
+                  "visible": true,
+                  "fillin": false,
+                  "visited": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999
                 }
               }
             ],
@@ -814,15 +1308,308 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": -9999,
+      "firstTermIdx": 23,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
       "meta": {
-        "title": "single photo with list item captions",
-        "separator": "",
-        "recitable": false,
-        "audible": false,
+        "heading": {
+          "id": 5,
+          "content": "single photo with list item captions",
+          "firstTermIdx": 23,
+          "lastTermIdx": 28,
+          "terminals": [
+            {
+              "id": 0,
+              "termIdx": 23,
+              "content": "single",
+              "firstTermIdx": 23,
+              "lastTermIdx": 23,
+              "type": 14,
+              "meta": {
+                "content": "single",
+                "termIdx": 23,
+                "nextTermIdx": [
+                  24
+                ],
+                "prevTermIdx": [
+                  22
+                ],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": true,
+                "audible": true,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": -9999,
+              "content": " ",
+              "firstTermIdx": -9999,
+              "lastTermIdx": -9999,
+              "type": 13,
+              "meta": {
+                "content": " ",
+                "termIdx": -9999,
+                "nextTermIdx": [],
+                "prevTermIdx": [],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": false,
+                "audible": false,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": 24,
+              "content": "photo",
+              "firstTermIdx": 24,
+              "lastTermIdx": 24,
+              "type": 14,
+              "meta": {
+                "content": "photo",
+                "termIdx": 24,
+                "nextTermIdx": [
+                  25
+                ],
+                "prevTermIdx": [
+                  23
+                ],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": true,
+                "audible": true,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": -9999,
+              "content": " ",
+              "firstTermIdx": -9999,
+              "lastTermIdx": -9999,
+              "type": 13,
+              "meta": {
+                "content": " ",
+                "termIdx": -9999,
+                "nextTermIdx": [],
+                "prevTermIdx": [],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": false,
+                "audible": false,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": 25,
+              "content": "with",
+              "firstTermIdx": 25,
+              "lastTermIdx": 25,
+              "type": 14,
+              "meta": {
+                "content": "with",
+                "termIdx": 25,
+                "nextTermIdx": [
+                  26
+                ],
+                "prevTermIdx": [
+                  24
+                ],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": true,
+                "audible": true,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": -9999,
+              "content": " ",
+              "firstTermIdx": -9999,
+              "lastTermIdx": -9999,
+              "type": 13,
+              "meta": {
+                "content": " ",
+                "termIdx": -9999,
+                "nextTermIdx": [],
+                "prevTermIdx": [],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": false,
+                "audible": false,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": 26,
+              "content": "list",
+              "firstTermIdx": 26,
+              "lastTermIdx": 26,
+              "type": 14,
+              "meta": {
+                "content": "list",
+                "termIdx": 26,
+                "nextTermIdx": [
+                  27
+                ],
+                "prevTermIdx": [
+                  25
+                ],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": true,
+                "audible": true,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": -9999,
+              "content": " ",
+              "firstTermIdx": -9999,
+              "lastTermIdx": -9999,
+              "type": 13,
+              "meta": {
+                "content": " ",
+                "termIdx": -9999,
+                "nextTermIdx": [],
+                "prevTermIdx": [],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": false,
+                "audible": false,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": 27,
+              "content": "item",
+              "firstTermIdx": 27,
+              "lastTermIdx": 27,
+              "type": 14,
+              "meta": {
+                "content": "item",
+                "termIdx": 27,
+                "nextTermIdx": [
+                  28
+                ],
+                "prevTermIdx": [
+                  26
+                ],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": true,
+                "audible": true,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": -9999,
+              "content": " ",
+              "firstTermIdx": -9999,
+              "lastTermIdx": -9999,
+              "type": 13,
+              "meta": {
+                "content": " ",
+                "termIdx": -9999,
+                "nextTermIdx": [],
+                "prevTermIdx": [],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": false,
+                "audible": false,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": 28,
+              "content": "captions",
+              "firstTermIdx": 28,
+              "lastTermIdx": 28,
+              "type": 14,
+              "meta": {
+                "content": "captions",
+                "termIdx": 28,
+                "nextTermIdx": [
+                  29
+                ],
+                "prevTermIdx": [
+                  27
+                ],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": true,
+                "audible": true,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            }
+          ],
+          "lastPunctuation": ""
+        },
         "level": 1
       }
     },
@@ -856,6 +1643,18 @@
       "description": "",
       "firstTermIdx": -9999,
       "lastTermIdx": -9999,
+      "items": [],
+      "type": "empty",
+      "meta": {
+        "count": 1
+      }
+    },
+    {
+      "id": 0,
+      "name": "",
+      "description": "",
+      "firstTermIdx": -9999,
+      "lastTermIdx": -9999,
       "items": [
         {
           "id": 0,
@@ -868,33 +1667,33 @@
               "id": 2,
               "name": "",
               "description": "",
-              "firstTermIdx": 14,
-              "lastTermIdx": 18,
+              "firstTermIdx": 29,
+              "lastTermIdx": 33,
               "items": [],
               "type": "paragraph",
               "meta": {
                 "sentences": [
                   {
-                    "id": 3,
+                    "id": 6,
                     "content": "Caption 1 describes test1.",
-                    "firstTermIdx": 14,
-                    "lastTermIdx": 18,
+                    "firstTermIdx": 29,
+                    "lastTermIdx": 33,
                     "terminals": [
                       {
                         "id": 0,
-                        "termIdx": 14,
+                        "termIdx": 29,
                         "content": "Caption",
-                        "firstTermIdx": 14,
-                        "lastTermIdx": 14,
-                        "type": 13,
+                        "firstTermIdx": 29,
+                        "lastTermIdx": 29,
+                        "type": 14,
                         "meta": {
                           "content": "Caption",
-                          "termIdx": 14,
+                          "termIdx": 29,
                           "nextTermIdx": [
-                            15
+                            30
                           ],
                           "prevTermIdx": [
-                            13
+                            28
                           ],
                           "altpronunciation": "",
                           "altrecognition": "",
@@ -903,7 +1702,9 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
@@ -912,7 +1713,7 @@
                         "content": " ",
                         "firstTermIdx": -9999,
                         "lastTermIdx": -9999,
-                        "type": 12,
+                        "type": 13,
                         "meta": {
                           "content": " ",
                           "termIdx": -9999,
@@ -925,24 +1726,26 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
                         "id": 0,
-                        "termIdx": 15,
+                        "termIdx": 30,
                         "content": "1",
-                        "firstTermIdx": 15,
-                        "lastTermIdx": 15,
-                        "type": 13,
+                        "firstTermIdx": 30,
+                        "lastTermIdx": 30,
+                        "type": 14,
                         "meta": {
                           "content": "1",
-                          "termIdx": 15,
+                          "termIdx": 30,
                           "nextTermIdx": [
-                            16
+                            31
                           ],
                           "prevTermIdx": [
-                            14
+                            29
                           ],
                           "altpronunciation": "",
                           "altrecognition": "",
@@ -951,7 +1754,9 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
@@ -960,7 +1765,7 @@
                         "content": " ",
                         "firstTermIdx": -9999,
                         "lastTermIdx": -9999,
-                        "type": 12,
+                        "type": 13,
                         "meta": {
                           "content": " ",
                           "termIdx": -9999,
@@ -973,24 +1778,26 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
                         "id": 0,
-                        "termIdx": 16,
+                        "termIdx": 31,
                         "content": "describes",
-                        "firstTermIdx": 16,
-                        "lastTermIdx": 16,
-                        "type": 13,
+                        "firstTermIdx": 31,
+                        "lastTermIdx": 31,
+                        "type": 14,
                         "meta": {
                           "content": "describes",
-                          "termIdx": 16,
+                          "termIdx": 31,
                           "nextTermIdx": [
-                            17
+                            32
                           ],
                           "prevTermIdx": [
-                            15
+                            30
                           ],
                           "altpronunciation": "",
                           "altrecognition": "",
@@ -999,7 +1806,9 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
@@ -1008,7 +1817,7 @@
                         "content": " ",
                         "firstTermIdx": -9999,
                         "lastTermIdx": -9999,
-                        "type": 12,
+                        "type": 13,
                         "meta": {
                           "content": " ",
                           "termIdx": -9999,
@@ -1021,24 +1830,26 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
                         "id": 0,
-                        "termIdx": 17,
+                        "termIdx": 32,
                         "content": "test",
-                        "firstTermIdx": 17,
-                        "lastTermIdx": 17,
-                        "type": 13,
+                        "firstTermIdx": 32,
+                        "lastTermIdx": 32,
+                        "type": 14,
                         "meta": {
                           "content": "test",
-                          "termIdx": 17,
+                          "termIdx": 32,
                           "nextTermIdx": [
-                            18
+                            33
                           ],
                           "prevTermIdx": [
-                            16
+                            31
                           ],
                           "altpronunciation": "",
                           "altrecognition": "",
@@ -1047,24 +1858,26 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
                         "id": 0,
-                        "termIdx": 18,
+                        "termIdx": 33,
                         "content": "1",
-                        "firstTermIdx": 18,
-                        "lastTermIdx": 18,
-                        "type": 13,
+                        "firstTermIdx": 33,
+                        "lastTermIdx": 33,
+                        "type": 14,
                         "meta": {
                           "content": "1",
-                          "termIdx": 18,
+                          "termIdx": 33,
                           "nextTermIdx": [
-                            19
+                            34
                           ],
                           "prevTermIdx": [
-                            17
+                            32
                           ],
                           "altpronunciation": "",
                           "altrecognition": "",
@@ -1073,7 +1886,9 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
@@ -1095,7 +1910,9 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       }
                     ],
@@ -1124,33 +1941,33 @@
               "id": 3,
               "name": "",
               "description": "",
-              "firstTermIdx": 19,
-              "lastTermIdx": 23,
+              "firstTermIdx": 34,
+              "lastTermIdx": 38,
               "items": [],
               "type": "paragraph",
               "meta": {
                 "sentences": [
                   {
-                    "id": 4,
+                    "id": 7,
                     "content": "Caption 2 describes test1.",
-                    "firstTermIdx": 19,
-                    "lastTermIdx": 23,
+                    "firstTermIdx": 34,
+                    "lastTermIdx": 38,
                     "terminals": [
                       {
                         "id": 0,
-                        "termIdx": 19,
+                        "termIdx": 34,
                         "content": "Caption",
-                        "firstTermIdx": 19,
-                        "lastTermIdx": 19,
-                        "type": 13,
+                        "firstTermIdx": 34,
+                        "lastTermIdx": 34,
+                        "type": 14,
                         "meta": {
                           "content": "Caption",
-                          "termIdx": 19,
+                          "termIdx": 34,
                           "nextTermIdx": [
-                            20
+                            35
                           ],
                           "prevTermIdx": [
-                            18
+                            33
                           ],
                           "altpronunciation": "",
                           "altrecognition": "",
@@ -1159,7 +1976,9 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
@@ -1168,7 +1987,7 @@
                         "content": " ",
                         "firstTermIdx": -9999,
                         "lastTermIdx": -9999,
-                        "type": 12,
+                        "type": 13,
                         "meta": {
                           "content": " ",
                           "termIdx": -9999,
@@ -1181,24 +2000,26 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
                         "id": 0,
-                        "termIdx": 20,
+                        "termIdx": 35,
                         "content": "2",
-                        "firstTermIdx": 20,
-                        "lastTermIdx": 20,
-                        "type": 13,
+                        "firstTermIdx": 35,
+                        "lastTermIdx": 35,
+                        "type": 14,
                         "meta": {
                           "content": "2",
-                          "termIdx": 20,
+                          "termIdx": 35,
                           "nextTermIdx": [
-                            21
+                            36
                           ],
                           "prevTermIdx": [
-                            19
+                            34
                           ],
                           "altpronunciation": "",
                           "altrecognition": "",
@@ -1207,7 +2028,9 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
@@ -1216,7 +2039,7 @@
                         "content": " ",
                         "firstTermIdx": -9999,
                         "lastTermIdx": -9999,
-                        "type": 12,
+                        "type": 13,
                         "meta": {
                           "content": " ",
                           "termIdx": -9999,
@@ -1229,24 +2052,26 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
                         "id": 0,
-                        "termIdx": 21,
+                        "termIdx": 36,
                         "content": "describes",
-                        "firstTermIdx": 21,
-                        "lastTermIdx": 21,
-                        "type": 13,
+                        "firstTermIdx": 36,
+                        "lastTermIdx": 36,
+                        "type": 14,
                         "meta": {
                           "content": "describes",
-                          "termIdx": 21,
+                          "termIdx": 36,
                           "nextTermIdx": [
-                            22
+                            37
                           ],
                           "prevTermIdx": [
-                            20
+                            35
                           ],
                           "altpronunciation": "",
                           "altrecognition": "",
@@ -1255,7 +2080,9 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
@@ -1264,7 +2091,7 @@
                         "content": " ",
                         "firstTermIdx": -9999,
                         "lastTermIdx": -9999,
-                        "type": 12,
+                        "type": 13,
                         "meta": {
                           "content": " ",
                           "termIdx": -9999,
@@ -1277,24 +2104,26 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
                         "id": 0,
-                        "termIdx": 22,
+                        "termIdx": 37,
                         "content": "test",
-                        "firstTermIdx": 22,
-                        "lastTermIdx": 22,
-                        "type": 13,
+                        "firstTermIdx": 37,
+                        "lastTermIdx": 37,
+                        "type": 14,
                         "meta": {
                           "content": "test",
-                          "termIdx": 22,
+                          "termIdx": 37,
                           "nextTermIdx": [
-                            23
+                            38
                           ],
                           "prevTermIdx": [
-                            21
+                            36
                           ],
                           "altpronunciation": "",
                           "altrecognition": "",
@@ -1303,24 +2132,26 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
                         "id": 0,
-                        "termIdx": 23,
+                        "termIdx": 38,
                         "content": "1",
-                        "firstTermIdx": 23,
-                        "lastTermIdx": 23,
-                        "type": 13,
+                        "firstTermIdx": 38,
+                        "lastTermIdx": 38,
+                        "type": 14,
                         "meta": {
                           "content": "1",
-                          "termIdx": 23,
+                          "termIdx": 38,
                           "nextTermIdx": [
-                            24
+                            39
                           ],
                           "prevTermIdx": [
-                            22
+                            37
                           ],
                           "altpronunciation": "",
                           "altrecognition": "",
@@ -1329,7 +2160,9 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
@@ -1351,7 +2184,9 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       }
                     ],
@@ -1393,15 +2228,460 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": -9999,
+      "firstTermIdx": 39,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
       "meta": {
-        "title": "multiple photos with common (single or multiple) captions",
-        "separator": "",
-        "recitable": false,
-        "audible": false,
+        "heading": {
+          "id": 8,
+          "content": "multiple photos with common (single or multiple) captions",
+          "firstTermIdx": 39,
+          "lastTermIdx": 46,
+          "terminals": [
+            {
+              "id": 0,
+              "termIdx": 39,
+              "content": "multiple",
+              "firstTermIdx": 39,
+              "lastTermIdx": 39,
+              "type": 14,
+              "meta": {
+                "content": "multiple",
+                "termIdx": 39,
+                "nextTermIdx": [
+                  40
+                ],
+                "prevTermIdx": [
+                  38
+                ],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": true,
+                "audible": true,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": -9999,
+              "content": " ",
+              "firstTermIdx": -9999,
+              "lastTermIdx": -9999,
+              "type": 13,
+              "meta": {
+                "content": " ",
+                "termIdx": -9999,
+                "nextTermIdx": [],
+                "prevTermIdx": [],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": false,
+                "audible": false,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": 40,
+              "content": "photos",
+              "firstTermIdx": 40,
+              "lastTermIdx": 40,
+              "type": 14,
+              "meta": {
+                "content": "photos",
+                "termIdx": 40,
+                "nextTermIdx": [
+                  41
+                ],
+                "prevTermIdx": [
+                  39
+                ],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": true,
+                "audible": true,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": -9999,
+              "content": " ",
+              "firstTermIdx": -9999,
+              "lastTermIdx": -9999,
+              "type": 13,
+              "meta": {
+                "content": " ",
+                "termIdx": -9999,
+                "nextTermIdx": [],
+                "prevTermIdx": [],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": false,
+                "audible": false,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": 41,
+              "content": "with",
+              "firstTermIdx": 41,
+              "lastTermIdx": 41,
+              "type": 14,
+              "meta": {
+                "content": "with",
+                "termIdx": 41,
+                "nextTermIdx": [
+                  42
+                ],
+                "prevTermIdx": [
+                  40
+                ],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": true,
+                "audible": true,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": -9999,
+              "content": " ",
+              "firstTermIdx": -9999,
+              "lastTermIdx": -9999,
+              "type": 13,
+              "meta": {
+                "content": " ",
+                "termIdx": -9999,
+                "nextTermIdx": [],
+                "prevTermIdx": [],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": false,
+                "audible": false,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": 42,
+              "content": "common",
+              "firstTermIdx": 42,
+              "lastTermIdx": 42,
+              "type": 14,
+              "meta": {
+                "content": "common",
+                "termIdx": 42,
+                "nextTermIdx": [
+                  43
+                ],
+                "prevTermIdx": [
+                  41
+                ],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": true,
+                "audible": true,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": -9999,
+              "content": " ",
+              "firstTermIdx": -9999,
+              "lastTermIdx": -9999,
+              "type": 13,
+              "meta": {
+                "content": " ",
+                "termIdx": -9999,
+                "nextTermIdx": [],
+                "prevTermIdx": [],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": false,
+                "audible": false,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": -9999,
+              "content": "(",
+              "firstTermIdx": -9999,
+              "lastTermIdx": -9999,
+              "type": 8,
+              "meta": {
+                "content": "(",
+                "termIdx": -9999,
+                "nextTermIdx": [],
+                "prevTermIdx": [],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": false,
+                "audible": false,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": 43,
+              "content": "single",
+              "firstTermIdx": 43,
+              "lastTermIdx": 43,
+              "type": 14,
+              "meta": {
+                "content": "single",
+                "termIdx": 43,
+                "nextTermIdx": [
+                  44
+                ],
+                "prevTermIdx": [
+                  42
+                ],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": true,
+                "audible": true,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": -9999,
+              "content": " ",
+              "firstTermIdx": -9999,
+              "lastTermIdx": -9999,
+              "type": 13,
+              "meta": {
+                "content": " ",
+                "termIdx": -9999,
+                "nextTermIdx": [],
+                "prevTermIdx": [],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": false,
+                "audible": false,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": 44,
+              "content": "or",
+              "firstTermIdx": 44,
+              "lastTermIdx": 44,
+              "type": 14,
+              "meta": {
+                "content": "or",
+                "termIdx": 44,
+                "nextTermIdx": [
+                  45
+                ],
+                "prevTermIdx": [
+                  43
+                ],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": true,
+                "audible": true,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": -9999,
+              "content": " ",
+              "firstTermIdx": -9999,
+              "lastTermIdx": -9999,
+              "type": 13,
+              "meta": {
+                "content": " ",
+                "termIdx": -9999,
+                "nextTermIdx": [],
+                "prevTermIdx": [],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": false,
+                "audible": false,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": 45,
+              "content": "multiple",
+              "firstTermIdx": 45,
+              "lastTermIdx": 45,
+              "type": 14,
+              "meta": {
+                "content": "multiple",
+                "termIdx": 45,
+                "nextTermIdx": [
+                  46
+                ],
+                "prevTermIdx": [
+                  44
+                ],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": true,
+                "audible": true,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": -9999,
+              "content": ")",
+              "firstTermIdx": -9999,
+              "lastTermIdx": -9999,
+              "type": 8,
+              "meta": {
+                "content": ")",
+                "termIdx": -9999,
+                "nextTermIdx": [],
+                "prevTermIdx": [],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": false,
+                "audible": false,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": -9999,
+              "content": " ",
+              "firstTermIdx": -9999,
+              "lastTermIdx": -9999,
+              "type": 13,
+              "meta": {
+                "content": " ",
+                "termIdx": -9999,
+                "nextTermIdx": [],
+                "prevTermIdx": [],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": false,
+                "audible": false,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            },
+            {
+              "id": 0,
+              "termIdx": 46,
+              "content": "captions",
+              "firstTermIdx": 46,
+              "lastTermIdx": 46,
+              "type": 14,
+              "meta": {
+                "content": "captions",
+                "termIdx": 46,
+                "nextTermIdx": [
+                  47
+                ],
+                "prevTermIdx": [
+                  45
+                ],
+                "altpronunciation": "",
+                "altrecognition": "",
+                "recitable": true,
+                "audible": true,
+                "linkable": false,
+                "visible": true,
+                "fillin": false,
+                "visited": false,
+                "linkIdx": -9999,
+                "hintsIdx": -9999
+              }
+            }
+          ],
+          "lastPunctuation": ")"
+        },
         "level": 1
       }
     },
@@ -1435,6 +2715,18 @@
       "description": "",
       "firstTermIdx": -9999,
       "lastTermIdx": -9999,
+      "items": [],
+      "type": "empty",
+      "meta": {
+        "count": 1
+      }
+    },
+    {
+      "id": 0,
+      "name": "",
+      "description": "",
+      "firstTermIdx": -9999,
+      "lastTermIdx": -9999,
       "items": [
         {
           "id": 0,
@@ -1447,33 +2739,33 @@
               "id": 4,
               "name": "",
               "description": "",
-              "firstTermIdx": 24,
-              "lastTermIdx": 28,
+              "firstTermIdx": 47,
+              "lastTermIdx": 51,
               "items": [],
               "type": "paragraph",
               "meta": {
                 "sentences": [
                   {
-                    "id": 5,
+                    "id": 9,
                     "content": "Caption 1 describes test1.",
-                    "firstTermIdx": 24,
-                    "lastTermIdx": 28,
+                    "firstTermIdx": 47,
+                    "lastTermIdx": 51,
                     "terminals": [
                       {
                         "id": 0,
-                        "termIdx": 24,
+                        "termIdx": 47,
                         "content": "Caption",
-                        "firstTermIdx": 24,
-                        "lastTermIdx": 24,
-                        "type": 13,
+                        "firstTermIdx": 47,
+                        "lastTermIdx": 47,
+                        "type": 14,
                         "meta": {
                           "content": "Caption",
-                          "termIdx": 24,
+                          "termIdx": 47,
                           "nextTermIdx": [
-                            25
+                            48
                           ],
                           "prevTermIdx": [
-                            23
+                            46
                           ],
                           "altpronunciation": "",
                           "altrecognition": "",
@@ -1482,7 +2774,9 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
@@ -1491,7 +2785,7 @@
                         "content": " ",
                         "firstTermIdx": -9999,
                         "lastTermIdx": -9999,
-                        "type": 12,
+                        "type": 13,
                         "meta": {
                           "content": " ",
                           "termIdx": -9999,
@@ -1504,24 +2798,26 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
                         "id": 0,
-                        "termIdx": 25,
+                        "termIdx": 48,
                         "content": "1",
-                        "firstTermIdx": 25,
-                        "lastTermIdx": 25,
-                        "type": 13,
+                        "firstTermIdx": 48,
+                        "lastTermIdx": 48,
+                        "type": 14,
                         "meta": {
                           "content": "1",
-                          "termIdx": 25,
+                          "termIdx": 48,
                           "nextTermIdx": [
-                            26
+                            49
                           ],
                           "prevTermIdx": [
-                            24
+                            47
                           ],
                           "altpronunciation": "",
                           "altrecognition": "",
@@ -1530,7 +2826,9 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
@@ -1539,7 +2837,7 @@
                         "content": " ",
                         "firstTermIdx": -9999,
                         "lastTermIdx": -9999,
-                        "type": 12,
+                        "type": 13,
                         "meta": {
                           "content": " ",
                           "termIdx": -9999,
@@ -1552,24 +2850,26 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
                         "id": 0,
-                        "termIdx": 26,
+                        "termIdx": 49,
                         "content": "describes",
-                        "firstTermIdx": 26,
-                        "lastTermIdx": 26,
-                        "type": 13,
+                        "firstTermIdx": 49,
+                        "lastTermIdx": 49,
+                        "type": 14,
                         "meta": {
                           "content": "describes",
-                          "termIdx": 26,
+                          "termIdx": 49,
                           "nextTermIdx": [
-                            27
+                            50
                           ],
                           "prevTermIdx": [
-                            25
+                            48
                           ],
                           "altpronunciation": "",
                           "altrecognition": "",
@@ -1578,7 +2878,9 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
@@ -1587,7 +2889,7 @@
                         "content": " ",
                         "firstTermIdx": -9999,
                         "lastTermIdx": -9999,
-                        "type": 12,
+                        "type": 13,
                         "meta": {
                           "content": " ",
                           "termIdx": -9999,
@@ -1600,24 +2902,26 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
                         "id": 0,
-                        "termIdx": 27,
+                        "termIdx": 50,
                         "content": "test",
-                        "firstTermIdx": 27,
-                        "lastTermIdx": 27,
-                        "type": 13,
+                        "firstTermIdx": 50,
+                        "lastTermIdx": 50,
+                        "type": 14,
                         "meta": {
                           "content": "test",
-                          "termIdx": 27,
+                          "termIdx": 50,
                           "nextTermIdx": [
-                            28
+                            51
                           ],
                           "prevTermIdx": [
-                            26
+                            49
                           ],
                           "altpronunciation": "",
                           "altrecognition": "",
@@ -1626,24 +2930,26 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
                         "id": 0,
-                        "termIdx": 28,
+                        "termIdx": 51,
                         "content": "1",
-                        "firstTermIdx": 28,
-                        "lastTermIdx": 28,
-                        "type": 13,
+                        "firstTermIdx": 51,
+                        "lastTermIdx": 51,
+                        "type": 14,
                         "meta": {
                           "content": "1",
-                          "termIdx": 28,
+                          "termIdx": 51,
                           "nextTermIdx": [
-                            29
+                            52
                           ],
                           "prevTermIdx": [
-                            27
+                            50
                           ],
                           "altpronunciation": "",
                           "altrecognition": "",
@@ -1652,7 +2958,9 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
@@ -1674,7 +2982,9 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       }
                     ],
@@ -1703,33 +3013,33 @@
               "id": 5,
               "name": "",
               "description": "",
-              "firstTermIdx": 29,
-              "lastTermIdx": 33,
+              "firstTermIdx": 52,
+              "lastTermIdx": 56,
               "items": [],
               "type": "paragraph",
               "meta": {
                 "sentences": [
                   {
-                    "id": 6,
+                    "id": 10,
                     "content": "Caption 2 describes test2.",
-                    "firstTermIdx": 29,
-                    "lastTermIdx": 33,
+                    "firstTermIdx": 52,
+                    "lastTermIdx": 56,
                     "terminals": [
                       {
                         "id": 0,
-                        "termIdx": 29,
+                        "termIdx": 52,
                         "content": "Caption",
-                        "firstTermIdx": 29,
-                        "lastTermIdx": 29,
-                        "type": 13,
+                        "firstTermIdx": 52,
+                        "lastTermIdx": 52,
+                        "type": 14,
                         "meta": {
                           "content": "Caption",
-                          "termIdx": 29,
+                          "termIdx": 52,
                           "nextTermIdx": [
-                            30
+                            53
                           ],
                           "prevTermIdx": [
-                            28
+                            51
                           ],
                           "altpronunciation": "",
                           "altrecognition": "",
@@ -1738,7 +3048,9 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
@@ -1747,7 +3059,7 @@
                         "content": " ",
                         "firstTermIdx": -9999,
                         "lastTermIdx": -9999,
-                        "type": 12,
+                        "type": 13,
                         "meta": {
                           "content": " ",
                           "termIdx": -9999,
@@ -1760,24 +3072,26 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
                         "id": 0,
-                        "termIdx": 30,
+                        "termIdx": 53,
                         "content": "2",
-                        "firstTermIdx": 30,
-                        "lastTermIdx": 30,
-                        "type": 13,
+                        "firstTermIdx": 53,
+                        "lastTermIdx": 53,
+                        "type": 14,
                         "meta": {
                           "content": "2",
-                          "termIdx": 30,
+                          "termIdx": 53,
                           "nextTermIdx": [
-                            31
+                            54
                           ],
                           "prevTermIdx": [
-                            29
+                            52
                           ],
                           "altpronunciation": "",
                           "altrecognition": "",
@@ -1786,7 +3100,9 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
@@ -1795,7 +3111,7 @@
                         "content": " ",
                         "firstTermIdx": -9999,
                         "lastTermIdx": -9999,
-                        "type": 12,
+                        "type": 13,
                         "meta": {
                           "content": " ",
                           "termIdx": -9999,
@@ -1808,24 +3124,26 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
                         "id": 0,
-                        "termIdx": 31,
+                        "termIdx": 54,
                         "content": "describes",
-                        "firstTermIdx": 31,
-                        "lastTermIdx": 31,
-                        "type": 13,
+                        "firstTermIdx": 54,
+                        "lastTermIdx": 54,
+                        "type": 14,
                         "meta": {
                           "content": "describes",
-                          "termIdx": 31,
+                          "termIdx": 54,
                           "nextTermIdx": [
-                            32
+                            55
                           ],
                           "prevTermIdx": [
-                            30
+                            53
                           ],
                           "altpronunciation": "",
                           "altrecognition": "",
@@ -1834,7 +3152,9 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
@@ -1843,7 +3163,7 @@
                         "content": " ",
                         "firstTermIdx": -9999,
                         "lastTermIdx": -9999,
-                        "type": 12,
+                        "type": 13,
                         "meta": {
                           "content": " ",
                           "termIdx": -9999,
@@ -1856,24 +3176,26 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
                         "id": 0,
-                        "termIdx": 32,
+                        "termIdx": 55,
                         "content": "test",
-                        "firstTermIdx": 32,
-                        "lastTermIdx": 32,
-                        "type": 13,
+                        "firstTermIdx": 55,
+                        "lastTermIdx": 55,
+                        "type": 14,
                         "meta": {
                           "content": "test",
-                          "termIdx": 32,
+                          "termIdx": 55,
                           "nextTermIdx": [
-                            33
+                            56
                           ],
                           "prevTermIdx": [
-                            31
+                            54
                           ],
                           "altpronunciation": "",
                           "altrecognition": "",
@@ -1882,22 +3204,24 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
                         "id": 0,
-                        "termIdx": 33,
+                        "termIdx": 56,
                         "content": "2",
-                        "firstTermIdx": 33,
-                        "lastTermIdx": 33,
-                        "type": 13,
+                        "firstTermIdx": 56,
+                        "lastTermIdx": 56,
+                        "type": 14,
                         "meta": {
                           "content": "2",
-                          "termIdx": 33,
+                          "termIdx": 56,
                           "nextTermIdx": [],
                           "prevTermIdx": [
-                            32
+                            55
                           ],
                           "altpronunciation": "",
                           "altrecognition": "",
@@ -1906,7 +3230,9 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       },
                       {
@@ -1928,7 +3254,9 @@
                           "linkable": false,
                           "visible": true,
                           "fillin": false,
-                          "visited": false
+                          "visited": false,
+                          "linkIdx": -9999,
+                          "hintsIdx": -9999
                         }
                       }
                     ],
@@ -1969,7 +3297,7 @@
   ],
   "terminalList": [
     {
-      "content": "paragraph",
+      "content": "single",
       "termIdx": 0,
       "nextTermIdx": [
         1
@@ -1983,11 +3311,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 0,
       "sectionIdx": 0
     },
     {
-      "content": "after",
+      "content": "image",
       "termIdx": 1,
       "nextTermIdx": [
         2
@@ -2003,11 +3333,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 0,
       "sectionIdx": 0
     },
     {
-      "content": "singleton",
+      "content": "no",
       "termIdx": 2,
       "nextTermIdx": [
         3
@@ -2023,11 +3355,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 0,
       "sectionIdx": 0
     },
     {
-      "content": "image",
+      "content": "captions",
       "termIdx": 3,
       "nextTermIdx": [
         4
@@ -2043,11 +3377,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 0,
       "sectionIdx": 0
     },
     {
-      "content": "Sentence",
+      "content": "paragraph",
       "termIdx": 4,
       "nextTermIdx": [
         5
@@ -2063,11 +3399,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 1,
-      "sectionIdx": 1
+      "sectionIdx": 0
     },
     {
-      "content": "1",
+      "content": "after",
       "termIdx": 5,
       "nextTermIdx": [
         6
@@ -2083,11 +3421,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 1,
-      "sectionIdx": 1
+      "sectionIdx": 0
     },
     {
-      "content": "describes",
+      "content": "singleton",
       "termIdx": 6,
       "nextTermIdx": [
         7
@@ -2103,11 +3443,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 1,
-      "sectionIdx": 1
+      "sectionIdx": 0
     },
     {
-      "content": "test",
+      "content": "image",
       "termIdx": 7,
       "nextTermIdx": [
         8
@@ -2123,11 +3465,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 1,
-      "sectionIdx": 1
+      "sectionIdx": 0
     },
     {
-      "content": "1",
+      "content": "single",
       "termIdx": 8,
       "nextTermIdx": [
         9
@@ -2143,11 +3487,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 1,
-      "sectionIdx": 1
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 2,
+      "sectionIdx": 0
     },
     {
-      "content": "Sentence",
+      "content": "image",
       "termIdx": 9,
       "nextTermIdx": [
         10
@@ -2163,11 +3509,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 2,
-      "sectionIdx": 1
+      "sectionIdx": 0
     },
     {
-      "content": "2",
+      "content": "with",
       "termIdx": 10,
       "nextTermIdx": [
         11
@@ -2183,11 +3531,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 2,
-      "sectionIdx": 1
+      "sectionIdx": 0
     },
     {
-      "content": "describes",
+      "content": "paragraph",
       "termIdx": 11,
       "nextTermIdx": [
         12
@@ -2203,11 +3553,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 2,
-      "sectionIdx": 1
+      "sectionIdx": 0
     },
     {
-      "content": "test",
+      "content": "caption",
       "termIdx": 12,
       "nextTermIdx": [
         13
@@ -2223,11 +3575,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 2,
-      "sectionIdx": 1
+      "sectionIdx": 0
     },
     {
-      "content": "1",
+      "content": "Sentence",
       "termIdx": 13,
       "nextTermIdx": [
         14
@@ -2243,11 +3597,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 2,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 3,
       "sectionIdx": 1
     },
     {
-      "content": "Caption",
+      "content": "1",
       "termIdx": 14,
       "nextTermIdx": [
         15
@@ -2263,11 +3619,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 3,
-      "sectionIdx": 2
+      "sectionIdx": 1
     },
     {
-      "content": "1",
+      "content": "describes",
       "termIdx": 15,
       "nextTermIdx": [
         16
@@ -2283,11 +3641,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 3,
-      "sectionIdx": 2
+      "sectionIdx": 1
     },
     {
-      "content": "describes",
+      "content": "test",
       "termIdx": 16,
       "nextTermIdx": [
         17
@@ -2303,11 +3663,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 3,
-      "sectionIdx": 2
+      "sectionIdx": 1
     },
     {
-      "content": "test",
+      "content": "1",
       "termIdx": 17,
       "nextTermIdx": [
         18
@@ -2323,11 +3685,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 3,
-      "sectionIdx": 2
+      "sectionIdx": 1
     },
     {
-      "content": "1",
+      "content": "Sentence",
       "termIdx": 18,
       "nextTermIdx": [
         19
@@ -2343,11 +3707,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 3,
-      "sectionIdx": 2
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 4,
+      "sectionIdx": 1
     },
     {
-      "content": "Caption",
+      "content": "2",
       "termIdx": 19,
       "nextTermIdx": [
         20
@@ -2363,11 +3729,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 4,
-      "sectionIdx": 3
+      "sectionIdx": 1
     },
     {
-      "content": "2",
+      "content": "describes",
       "termIdx": 20,
       "nextTermIdx": [
         21
@@ -2383,11 +3751,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 4,
-      "sectionIdx": 3
+      "sectionIdx": 1
     },
     {
-      "content": "describes",
+      "content": "test",
       "termIdx": 21,
       "nextTermIdx": [
         22
@@ -2403,11 +3773,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 4,
-      "sectionIdx": 3
+      "sectionIdx": 1
     },
     {
-      "content": "test",
+      "content": "1",
       "termIdx": 22,
       "nextTermIdx": [
         23
@@ -2423,11 +3795,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 4,
-      "sectionIdx": 3
+      "sectionIdx": 1
     },
     {
-      "content": "1",
+      "content": "single",
       "termIdx": 23,
       "nextTermIdx": [
         24
@@ -2443,11 +3817,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
-      "sentenceIdx": 4,
-      "sectionIdx": 3
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 5,
+      "sectionIdx": 0
     },
     {
-      "content": "Caption",
+      "content": "photo",
       "termIdx": 24,
       "nextTermIdx": [
         25
@@ -2463,11 +3839,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 5,
-      "sectionIdx": 4
+      "sectionIdx": 0
     },
     {
-      "content": "1",
+      "content": "with",
       "termIdx": 25,
       "nextTermIdx": [
         26
@@ -2483,11 +3861,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 5,
-      "sectionIdx": 4
+      "sectionIdx": 0
     },
     {
-      "content": "describes",
+      "content": "list",
       "termIdx": 26,
       "nextTermIdx": [
         27
@@ -2503,11 +3883,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 5,
-      "sectionIdx": 4
+      "sectionIdx": 0
     },
     {
-      "content": "test",
+      "content": "item",
       "termIdx": 27,
       "nextTermIdx": [
         28
@@ -2523,11 +3905,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 5,
-      "sectionIdx": 4
+      "sectionIdx": 0
     },
     {
-      "content": "1",
+      "content": "captions",
       "termIdx": 28,
       "nextTermIdx": [
         29
@@ -2543,8 +3927,10 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 5,
-      "sectionIdx": 4
+      "sectionIdx": 0
     },
     {
       "content": "Caption",
@@ -2563,11 +3949,13 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 6,
-      "sectionIdx": 5
+      "sectionIdx": 2
     },
     {
-      "content": "2",
+      "content": "1",
       "termIdx": 30,
       "nextTermIdx": [
         31
@@ -2583,8 +3971,10 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 6,
-      "sectionIdx": 5
+      "sectionIdx": 2
     },
     {
       "content": "describes",
@@ -2603,8 +3993,10 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 6,
-      "sectionIdx": 5
+      "sectionIdx": 2
     },
     {
       "content": "test",
@@ -2623,13 +4015,17 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 6,
-      "sectionIdx": 5
+      "sectionIdx": 2
     },
     {
-      "content": "2",
+      "content": "1",
       "termIdx": 33,
-      "nextTermIdx": [],
+      "nextTermIdx": [
+        34
+      ],
       "prevTermIdx": [
         32
       ],
@@ -2641,7 +4037,513 @@
       "visible": true,
       "fillin": false,
       "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
       "sentenceIdx": 6,
+      "sectionIdx": 2
+    },
+    {
+      "content": "Caption",
+      "termIdx": 34,
+      "nextTermIdx": [
+        35
+      ],
+      "prevTermIdx": [
+        33
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 7,
+      "sectionIdx": 3
+    },
+    {
+      "content": "2",
+      "termIdx": 35,
+      "nextTermIdx": [
+        36
+      ],
+      "prevTermIdx": [
+        34
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 7,
+      "sectionIdx": 3
+    },
+    {
+      "content": "describes",
+      "termIdx": 36,
+      "nextTermIdx": [
+        37
+      ],
+      "prevTermIdx": [
+        35
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 7,
+      "sectionIdx": 3
+    },
+    {
+      "content": "test",
+      "termIdx": 37,
+      "nextTermIdx": [
+        38
+      ],
+      "prevTermIdx": [
+        36
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 7,
+      "sectionIdx": 3
+    },
+    {
+      "content": "1",
+      "termIdx": 38,
+      "nextTermIdx": [
+        39
+      ],
+      "prevTermIdx": [
+        37
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 7,
+      "sectionIdx": 3
+    },
+    {
+      "content": "multiple",
+      "termIdx": 39,
+      "nextTermIdx": [
+        40
+      ],
+      "prevTermIdx": [
+        38
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 8,
+      "sectionIdx": 0
+    },
+    {
+      "content": "photos",
+      "termIdx": 40,
+      "nextTermIdx": [
+        41
+      ],
+      "prevTermIdx": [
+        39
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 8,
+      "sectionIdx": 0
+    },
+    {
+      "content": "with",
+      "termIdx": 41,
+      "nextTermIdx": [
+        42
+      ],
+      "prevTermIdx": [
+        40
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 8,
+      "sectionIdx": 0
+    },
+    {
+      "content": "common",
+      "termIdx": 42,
+      "nextTermIdx": [
+        43
+      ],
+      "prevTermIdx": [
+        41
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 8,
+      "sectionIdx": 0
+    },
+    {
+      "content": "single",
+      "termIdx": 43,
+      "nextTermIdx": [
+        44
+      ],
+      "prevTermIdx": [
+        42
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 8,
+      "sectionIdx": 0
+    },
+    {
+      "content": "or",
+      "termIdx": 44,
+      "nextTermIdx": [
+        45
+      ],
+      "prevTermIdx": [
+        43
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 8,
+      "sectionIdx": 0
+    },
+    {
+      "content": "multiple",
+      "termIdx": 45,
+      "nextTermIdx": [
+        46
+      ],
+      "prevTermIdx": [
+        44
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 8,
+      "sectionIdx": 0
+    },
+    {
+      "content": "captions",
+      "termIdx": 46,
+      "nextTermIdx": [
+        47
+      ],
+      "prevTermIdx": [
+        45
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 8,
+      "sectionIdx": 0
+    },
+    {
+      "content": "Caption",
+      "termIdx": 47,
+      "nextTermIdx": [
+        48
+      ],
+      "prevTermIdx": [
+        46
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 9,
+      "sectionIdx": 4
+    },
+    {
+      "content": "1",
+      "termIdx": 48,
+      "nextTermIdx": [
+        49
+      ],
+      "prevTermIdx": [
+        47
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 9,
+      "sectionIdx": 4
+    },
+    {
+      "content": "describes",
+      "termIdx": 49,
+      "nextTermIdx": [
+        50
+      ],
+      "prevTermIdx": [
+        48
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 9,
+      "sectionIdx": 4
+    },
+    {
+      "content": "test",
+      "termIdx": 50,
+      "nextTermIdx": [
+        51
+      ],
+      "prevTermIdx": [
+        49
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 9,
+      "sectionIdx": 4
+    },
+    {
+      "content": "1",
+      "termIdx": 51,
+      "nextTermIdx": [
+        52
+      ],
+      "prevTermIdx": [
+        50
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 9,
+      "sectionIdx": 4
+    },
+    {
+      "content": "Caption",
+      "termIdx": 52,
+      "nextTermIdx": [
+        53
+      ],
+      "prevTermIdx": [
+        51
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 10,
+      "sectionIdx": 5
+    },
+    {
+      "content": "2",
+      "termIdx": 53,
+      "nextTermIdx": [
+        54
+      ],
+      "prevTermIdx": [
+        52
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 10,
+      "sectionIdx": 5
+    },
+    {
+      "content": "describes",
+      "termIdx": 54,
+      "nextTermIdx": [
+        55
+      ],
+      "prevTermIdx": [
+        53
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 10,
+      "sectionIdx": 5
+    },
+    {
+      "content": "test",
+      "termIdx": 55,
+      "nextTermIdx": [
+        56
+      ],
+      "prevTermIdx": [
+        54
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 10,
+      "sectionIdx": 5
+    },
+    {
+      "content": "2",
+      "termIdx": 56,
+      "nextTermIdx": [],
+      "prevTermIdx": [
+        55
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "fillin": false,
+      "visited": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "sentenceIdx": 10,
       "sectionIdx": 5
     }
   ],
@@ -2650,56 +4552,56 @@
       "headingLevel": 1,
       "title": "single image no captions",
       "termIdx": 0,
-      "terminalCountPriorToHeading": 0
+      "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 1,
       "title": "single image with paragraph caption",
-      "termIdx": 4,
-      "terminalCountPriorToHeading": 4
+      "termIdx": 8,
+      "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 1,
       "title": "single photo with list item captions",
-      "termIdx": 14,
-      "terminalCountPriorToHeading": 14
+      "termIdx": 23,
+      "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 1,
       "title": "multiple photos with common (single or multiple) captions",
-      "termIdx": 24,
-      "terminalCountPriorToHeading": 24
+      "termIdx": 39,
+      "terminalCountPriorToHeading": -9999
     }
   ],
   "sectionList": [
     {
-      "firstTermIdx": 0,
-      "lastTermIdx": 3,
-      "type": "paragraph"
-    },
-    {
       "firstTermIdx": 4,
-      "lastTermIdx": 13,
+      "lastTermIdx": 7,
       "type": "paragraph"
     },
     {
-      "firstTermIdx": 14,
-      "lastTermIdx": 18,
-      "type": "paragraph"
-    },
-    {
-      "firstTermIdx": 19,
-      "lastTermIdx": 23,
-      "type": "paragraph"
-    },
-    {
-      "firstTermIdx": 24,
-      "lastTermIdx": 28,
+      "firstTermIdx": 13,
+      "lastTermIdx": 22,
       "type": "paragraph"
     },
     {
       "firstTermIdx": 29,
       "lastTermIdx": 33,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 34,
+      "lastTermIdx": 38,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 47,
+      "lastTermIdx": 51,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 52,
+      "lastTermIdx": 56,
       "type": "paragraph"
     }
   ],
@@ -2711,33 +4613,54 @@
     },
     {
       "firstTermIdx": 4,
-      "lastTermIdx": 8,
+      "lastTermIdx": 7,
+      "lastPunctuation": ""
+    },
+    {
+      "firstTermIdx": 8,
+      "lastTermIdx": 12,
+      "lastPunctuation": ""
+    },
+    {
+      "firstTermIdx": 13,
+      "lastTermIdx": 17,
       "lastPunctuation": "."
     },
     {
-      "firstTermIdx": 9,
-      "lastTermIdx": 13,
+      "firstTermIdx": 18,
+      "lastTermIdx": 22,
       "lastPunctuation": "."
     },
     {
-      "firstTermIdx": 14,
-      "lastTermIdx": 18,
-      "lastPunctuation": "."
-    },
-    {
-      "firstTermIdx": 19,
-      "lastTermIdx": 23,
-      "lastPunctuation": "."
-    },
-    {
-      "firstTermIdx": 24,
+      "firstTermIdx": 23,
       "lastTermIdx": 28,
-      "lastPunctuation": "."
+      "lastPunctuation": ""
     },
     {
       "firstTermIdx": 29,
       "lastTermIdx": 33,
       "lastPunctuation": "."
+    },
+    {
+      "firstTermIdx": 34,
+      "lastTermIdx": 38,
+      "lastPunctuation": "."
+    },
+    {
+      "firstTermIdx": 39,
+      "lastTermIdx": 46,
+      "lastPunctuation": ")"
+    },
+    {
+      "firstTermIdx": 47,
+      "lastTermIdx": 51,
+      "lastPunctuation": "."
+    },
+    {
+      "firstTermIdx": 52,
+      "lastTermIdx": 56,
+      "lastPunctuation": "."
     }
-  ]
+  ],
+  "linkList": []
 }

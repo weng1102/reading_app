@@ -1,4 +1,4 @@
-[[page: image entry testing, Wen Eng /]]
+[[page: Image entry rendering v1,, Wen, ,Testing /]]
 [[image-entry: image visualize heading, left]]
 ![visualize it](visualize.png)
 Focus on it.
@@ -34,23 +34,23 @@ Press word to have it spoken.
 - Act out the meaning of the word.
 - This strategy is similar to playing charades.
 - This is particularly useful for verbs and actions.
-  [[/image-entry]]
-  [[image-entry: image say heading, left]]
-  ![say it](say.png)
-  Subvocalize it.
-  Utter the first phoneme.
-  Sound it out.
-  Tap out syllables.
-  [[/image-entry]]
-  [[image-entry: image write heading, left]]
-  ![write it](write.png)
-  Get a sheet of paper.
-  Grab a pencil.
-  Start writing the letters in the word.
-  Utter the phonemes as I write the syllables.
-  [[/image-entry]]
-  [[image-entry: image airspell heading, left]]
-  ![air spell](airspell.png)
-  Trace out the first letters of the word.
-  Utter that phoneme.
-  [[/image-entry]]
+[[/image-entry]]
+[[image-entry: image say heading, left]]
+![say it](say.png)
+Subvocalize it.
+Utter the first phoneme.
+Sound it out.
+Tap out syllables.
+[[/image-entry]]
+[[image-entry: image write heading, left]]
+![write it](write.png)
+Get a sheet of paper.
+Grab a pencil.
+Start writing the letters in the word.
+Utter the phonemes as I write the syllables.
+[[/image-entry]]
+[[image-entry: image airspell heading, left]]
+![air spell](airspell.png)
+Trace out the first letters of the word.
+Utter that phoneme.
+[[/image-entry]]

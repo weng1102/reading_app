@@ -15,6 +15,9 @@ import DictionaryType, {
 import { TokenListType } from "./tokenizer";
 import { Logger } from "./logger";
 import { IDataSource, BasicMarkdownSource } from "./dataadapter";
+
+// Technically, these should be defined somewhere else since in requires
+// PageContentType
 import {
   IHeadingListItem,
   ISentenceListItem,
@@ -144,38 +147,33 @@ class HeadingArray extends Array<IHeadingListItem> {
     // the actual visible, recitable terminal in parse
     return super.push(heading);
   }
-  parse(terminals: ITerminalListItem[]): number {
+  parse(): number {
     // starting from nearest termIdx, traverse and find
     // the actual visible, recitable terminal in parse
-    for (const element of this) {
-      if (element.terminalCountPriorToHeading <= 0) {
-        element.termIdx = 0; // default to beginning of terminals array
-      } else {
-        let idx: number;
-        for (
-          idx = element.terminalCountPriorToHeading;
-          !(terminals[idx].visible && terminals[idx].recitable);
-          idx++
-        );
-        element.termIdx = idx;
-      }
-      //console.log(`HeadingArray prior=${element.terminalCountPriorToHeading} term=${element.termIdx}`);
-    }
+    // for (const element of this) {
+    //   if (element.terminalCountPriorToHeading <= 0) {
+    //     element.termIdx = 0; // default to beginning of terminals array
+    //   } else {
+    //     let idx: number;
+    //     for (
+    //       idx = element.terminalCountPriorToHeading;
+    //       !(terminals[idx].visible && terminals[idx].recitable);
+    //       idx++
+    //     );
+    //     element.termIdx = idx;
+    //   }
+    //   //console.log(`HeadingArray prior=${element.terminalCountPriorToHeading} term=${element.termIdx}`);
+    // }
     return this.length;
   }
   serialize(): string {
-    let outputStr: string = "[hidx]: lvl pcnt  idx title\n";
+    let outputStr: string = "[hidx]: lvl  idx title\n";
     for (const [i, element] of this.entries()) {
       outputStr = `${outputStr}[${i
         .toString()
         .padStart(4, "0")}]: ${element.headingLevel
         .toString()
-        .padStart(
-          3,
-          " "
-        )} ${element.terminalCountPriorToHeading
-        .toString()
-        .padStart(4, " ")} ${element.termIdx.toString().padStart(4, " ")} ${
+        .padStart(3, " ")} ${element.termIdx.toString().padStart(4, " ")} ${
         element.title
       }\n`;
     }
@@ -354,6 +352,7 @@ export class FileNode extends UserNode implements IFileNode {
 }
 export const enum ParseNodeSerializeFormatEnumType {
   JSON = "JSON",
+  MARKDOWN = "MARKDOWN",
   TABULAR = "TABULAR",
   TREEVIEW = "TREEVIEW",
   UNITTEST = "UNITTEST" // similar to JSON but with enumerable definitions or or replaceer()

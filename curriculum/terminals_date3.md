@@ -1,4 +1,5 @@
-[//page title]: Testing Dates email and acronym format
+[[page: Date MMM DD with email and acronym rendering,, Wen, 1/1/2022,Testing, /]]
+Testing Dates email and acronym format
 May 28 and June 30
 Jen was born on May 3, 1969.
 Wen was born on 02 Nov 1961 wow.

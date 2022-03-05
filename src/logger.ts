@@ -132,21 +132,19 @@ export class Logger {
   }
   info(
     message: string,
-    showSeverity: boolean,
-    showFunctionName: boolean,
-    showTimestamp: boolean,
-    showModuleName: boolean
+    showSeverity: boolean = this._showSeverity,
+    showFunctionName: boolean = this._showFunctionName,
+    showTimestamp: boolean = this._showTimestamp,
+    showModuleName: boolean = this._showModuleLocation
   ) {
     console.log(
       this.logEntry(
         "INFO",
         message,
-        showSeverity === undefined ? this._showSeverity : showSeverity,
-        showFunctionName === undefined
-          ? this._showFunctionName
-          : showFunctionName,
-        showTimestamp === undefined ? this._showTimestamp : showTimestamp,
-        showModuleName === undefined ? this._showModuleLocation : showModuleName
+        showSeverity,
+        showFunctionName,
+        showTimestamp,
+        showModuleName
       )
     );
   }

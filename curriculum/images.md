@@ -1,4 +1,4 @@
-[[page: image testing, Wen Eng /]]
+[[page: Image rendering,, Wen,, Testing, /]]
 ![visualize it](visualize.png)
 Focus on it.
 Close my eyes.

@@ -92,7 +92,6 @@ export const SpeakButton = () => {
         ? pageContext.terminalList[termIdx].altpronunciation
         : pageContext.terminalList[termIdx].content;
     };
-
     const sentenceToRecite = (
       sentenceIdx: number,
       lastTermIdxInSentence?: number,
@@ -144,6 +143,7 @@ export const SpeakButton = () => {
     // given all the array accessing, should wrap in try/catch
     switch (recitationMode) {
       case RecitationMode.wordOnly:
+      case RecitationMode.wordNext:
         messageQueue.push(wordToRecite(termIdx));
         break;
       case RecitationMode.entireSentence:
@@ -179,6 +179,7 @@ export const SpeakButton = () => {
     }
     return messageQueue;
   }; //somethingToRecite
+  // if currently listening, stop and restart after reciting
   dispatch(Request.Recognition_stop);
   return (
     <>

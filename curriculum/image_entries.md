@@ -1,4 +1,4 @@
-[[page: image entry testing, Wen Eng /]]
+[[page: Image entry rendering,, Wen,,Testing /]]
 [[image-entry: image vsiualize heading, left]]
 ![visualize it](visualize.png)
 Focus on it.
@@ -30,6 +30,7 @@ Press word to have it spoken.
 [[/image-entry]]
 [[image-entry: image gesture heading, left]]
 ![gesture it](gesture.png)
+
 - Act out the meaning of the word.
 - This strategy is similar to playing charades.
 - This is particularly useful for verbs and actions.

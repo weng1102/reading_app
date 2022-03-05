@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
  * File name: parsesections_heading.ts
  *
@@ -9,16 +9,23 @@
  **/
 import { strict as assert } from "assert";
 import { IsError } from "./utilities";
-import { IDX_INITIALIZER, IParseNode, ParseNodeSerializeFormatEnumType } from "./baseclasses";
+import {
+  IDX_INITIALIZER,
+  IParseNode,
+  ParseNodeSerializeFormatEnumType
+} from "./baseclasses";
 import { MarkdownTagType, TaggedStringType } from "./dataadapter";
 import {
   ISectionContent,
   ISectionHeadingVariant,
+  ISectionHeadingVariant1,
   ISectionHeadingVariantInitializer,
+  ISectionHeadingVariantInitializer1,
   SectionVariantEnumType
 } from "./pageContentType";
 import { IPageNode } from "./parsepages";
 import { SectionParseNode } from "./parsesections";
+import { ISentenceNode, SentenceNode } from "./parsesentences";
 export type ISectionNode = ISectionContent & IParseNode;
 export class SectionParseNode_HEADING extends SectionParseNode
   implements ISectionNode {
@@ -33,6 +40,7 @@ export class SectionParseNode_HEADING extends SectionParseNode
   }
   readonly type = SectionVariantEnumType.heading;
   meta: ISectionHeadingVariant = ISectionHeadingVariantInitializer();
+  //  meta: ISectionHeadingVariant1 = ISectionHeadingVariantInitializer1();
   parse() {
     this.logger.diagnostic(`${this.constructor.name}`);
     try {
@@ -41,14 +49,33 @@ export class SectionParseNode_HEADING extends SectionParseNode
         current.tagType === MarkdownTagType.HEADING,
         `expected ${MarkdownTagType.HEADING} at line ${current.lineNo}`
       );
-      this.meta.title = current.content;
+      this.firstTermIdx = this.userContext.terminals.lastIdx + 1;
+      let sentence: ISentenceNode = new SentenceNode(this);
+      sentence.parse();
+      this.meta.heading = sentence;
+
+      //   !this.dataSource.EOF() &&
+      //   current.tagType !== MarkdownTagType.PARAGRAPH_END;
+      //   current = this.dataSource.nextRecord()
+      // ) {
+      //   assert(
+      //     current.tagType === MarkdownTagType.SENTENCE,
+      //     `encountered ${current.tagType} expected ${MarkdownTagType.SENTENCE} at line ${current.lineNo}`
+      //   );
+      //   let sentence: ISentenceNode = new SentenceNode(this);
+      //   this.meta.sentences.push(sentence);
+      //   sentence.parse();
+      //   current = this.dataSource.currentRecord(); // update current within this scope
+      // } // create sentence node
+      //      this.meta.heading. =
+      // this.meta.title = current.content;
       this.meta.level = current.headingLevel;
-      this.userContext.headings.push( {
+      this.userContext.headings.push({
         headingLevel: current.headingLevel,
         title: current.content,
-        termIdx: IDX_INITIALIZER,
-        terminalCountPriorToHeading: this.userContext.terminals.length
-      })
+        termIdx: this.meta.heading.firstTermIdx,
+        terminalCountPriorToHeading: IDX_INITIALIZER
+      });
       this.dataSource.nextRecord(); // position to next record
     } catch (e) {
       if (IsError(e)) {
@@ -66,9 +93,14 @@ export class SectionParseNode_HEADING extends SectionParseNode
     label?: string,
     prefix?: string
   ): string {
-    label = `heading[id=${this.id}]: ${this.meta.title} (at level ${this.meta.level})`;
-    let outputStr: string = super.serialize(format, label, prefix);
-    //    outputStr = outputStr.slice(0, -1);
+    let sentenceNode: ISentenceNode = <SentenceNode>this.meta.heading;
+    label = `heading id=${sentenceNode.id} (at level ${this.meta.level})`;
+    prefix += "  ";
+    let outputStr: string = `${super.serialize(
+      format,
+      label,
+      prefix
+    )}${sentenceNode.serialize(format, "", prefix + "  ")}`;
     return outputStr;
   }
 }

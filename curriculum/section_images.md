@@ -1,4 +1,4 @@
-[//page title]: photo entry test
+[[page: image with text rendering,, Wen, 1/1/2022,Testing, /]]
 
 # single image no captions
 
@@ -14,11 +14,13 @@ Sentence 1 describes test1. Sentence 2 describes test1.
 # single photo with list item captions
 
 [//image-with-caption]: image="test1.jpg" align="left"
-* Caption 1 describes test1.
-* Caption 2 describes test1.
+
+- Caption 1 describes test1.
+- Caption 2 describes test1.
 
 # multiple photos with common (single or multiple) captions
 
 [//image-with-caption]: image="test1.jpg, test2.jpg" align="left"
-* Caption 1 describes test1.
-* Caption 2 describes test2.
+
+- Caption 1 describes test1.
+- Caption 2 describes test2.

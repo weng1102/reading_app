@@ -1,4 +1,5 @@
-[[page: link 1, Wen Eng /]]
+[[page: Link rendering v2,, Wen,, Testing, /]]
+
 link goes to [link 2, section 0](links2, 0)
 link goes to [link 2, section 1](links2, 1) at the beginning of sentence
 link goes to [link 2, terminal 2](links2,, 2)

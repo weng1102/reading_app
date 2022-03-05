@@ -24,6 +24,7 @@ import {
 interface IConfigSettingsProps {
   configSettings: IConfigSettings;
   setConfigSettings: (configSetting: IConfigSettings) => void;
+  active: boolean;
 }
 export const ConfigSettings = (props: IConfigSettingsProps) => {
   const [distDir, _setDistDir] = useState(props.configSettings.distDir);
@@ -34,27 +35,52 @@ export const ConfigSettings = (props: IConfigSettingsProps) => {
       distDir: distDir
     });
   };
-  const onChangeValue = (event: any) => {
+  const onDistDirChangeValue = (event: any) => {
     setDistDir(event.target.value);
   };
+  const [homePage, _setHomePage] = useState(props.configSettings.homePage);
+  const setHomePage = (homePage: string) => {
+    _setHomePage(homePage);
+    props.setConfigSettings({
+      ...props.configSettings,
+      homePage: homePage
+    });
+  };
+  const onHomePageChangeValue = (event: any) => {
+    setHomePage(event.target.value);
+  };
   let isLocked: boolean = true;
-  return (
-    <>
-      <div className="settings-section-header">Personalization</div>
-      <div className="settings-grid-col2-label-control">
-        <div className="settings-grid-col2-label">Curriculum subpath:</div>
-        <input
-          type="text"
-          className="textbox-control"
-          defaultValue={props.configSettings.distDir}
-          readOnly={isLocked}
-          onChange={onChangeValue}
-        />
-      </div>
-      <div className="settings-grid-section-footer">
-        Location of curriculum content
-      </div>
-      <div>User Info tbd</div>
-    </>
-  );
+  if (props.active) {
+    return (
+      <>
+        <div className="settings-grid-section-header">Personal</div>
+        <div className="settings-grid-col2-label-control">
+          <div className="settings-grid-col2-label">Homepage:</div>
+          <input
+            type="text"
+            className="textbox-control"
+            defaultValue={props.configSettings.homePage}
+            readOnly={isLocked}
+            onChange={onHomePageChangeValue}
+          />
+        </div>
+        <div className="settings-grid-section-footer">Name of homepage</div>
+        <div className="settings-grid-col2-label-control">
+          <div className="settings-grid-col2-label">Curriculum subpath:</div>
+          <input
+            type="text"
+            className="textbox-control"
+            defaultValue={props.configSettings.distDir}
+            readOnly={isLocked}
+            onChange={onDistDirChangeValue}
+          />
+        </div>
+        <div className="settings-grid-section-footer">
+          Location of curriculum content
+        </div>
+      </>
+    );
+  } else {
+    return <></>;
+  }
 };

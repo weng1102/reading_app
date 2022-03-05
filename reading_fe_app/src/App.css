@@ -23,9 +23,9 @@ footer {
 
 main {
   padding: 5px;
-  background-color: linen;
+  background-color: white;
   overflow: auto;
-  font-size: 30px;
+  font-size: 2vw;
 }
 nav {
   background-color: linen;
@@ -38,7 +38,6 @@ nav {
 .navbar-li
  {
    font-weight:bold;
-   font-size:16px;
    text-align: left;
    padding: 10px;
  }
@@ -48,7 +47,7 @@ nav {
 .header-grid-container {
     display: grid;
     font-size: 8px;
-    grid-template-columns: var(--header-height)  auto var(--header-height);
+    grid-template-columns: var(--header-height)  auto var(--header-height) var(--header-height) var(--header-height);
     align-items: center;
     height: 100%;
 }
@@ -57,11 +56,25 @@ nav {
   grid-column-start: 1;
   padding: 15px;
 }
-
-.header-grid-right {
+.header-grid-middle {
+  display: flex;
+  grid-column-start: 2;
   padding: 15px;
+}
+.header-grid-homebutton {
+  padding: 10px;
   display: flex;
   grid-column-start: 3;
+}
+.header-grid-sitemapbutton {
+  padding: 10px;
+  display: flex;
+  grid-column-start: 4;
+}
+.header-grid-settingbutton {
+  padding: 10px;
+  display: flex;
+  grid-column-start: 5;
 }
 .headertitle {
   grid-column-start: 2;
@@ -102,31 +115,52 @@ nav {
 }
 .footer-grid-prevSentence {
   display: flex;
-  grid-column-start: 3;
+  grid-column-start: 5;
   padding:10px
 }
 .footer-grid-prevWord {
   display: flex;
+  grid-column-start: 3;
   padding:10px
 }
 .footer-grid-nextWord {
   display: flex;
+  grid-column-start: 4;
   padding:10px
 }
 .footer-grid-nextSentence {
   display: flex;
+  grid-column-start: 6;
 padding:10px
 }
 .footer-grid-link {
   display: flex;
+  grid-column-start: 7;
 padding:10px
 }
 .footer-statusBar {
-  display: flex;
+  display: block;
   height:100%;
+  padding-right: 10px;
   font-size: 12px;
   overflow: auto;
   align-items: center;
+}
+.footer-statusBar-message-application {
+
+}
+.footer-statusBar-message-listening {
+
+}
+.footer-statusBar-message-state {
+
+}
+.listen-monitor-status {
+  display: block;
+  height:100%;
+  font-size: 10px;
+  overflow: auto;
+
 }
 .icon {
   max-width: 100%;
@@ -141,6 +175,10 @@ span.whitespace {
   white-space: pre-wrap;
 }
 .recitable-word.active {
+  background-color:#FFFF00;
+}
+.recitable-word.active1 {
+  background-color:#FFFF00;
   text-decoration:underline;
   color: blue;
 }
@@ -196,7 +234,7 @@ span.whitespace {
 }
 .settings {
   display: grid;
-  grid-template-rows: var(--header-height) auto var(--footer-height);
+  grid-template-rows: var(--header-height) auto 4px 60vh var(--footer-height);
   vertical-align: top;
   background: white;
   margin: 1.75rem auto;
@@ -208,45 +246,106 @@ span.whitespace {
 .settings-header {
   display: grid;
   background-color: lightgray;
-  grid-row-start: 1;
+  grid-row: 1;
   padding: 10px;
   font-size: 20px;
   user-select: none;
 }
-.settings-grid-container {
+.settings-tabControl-grid {
   display: grid;
+  grid-row: 2;
+  text-align: center;
+  font-size: 18px;
+  grid-template-columns: 3;
+  user-select: none;
+}
+.settings-tabControl-tab1 {
+  padding-bottom: 5px;
+  grid-column: 1;
+}
+.settings-tabControl-tab2 {
+  padding-bottom: 5px;
+  grid-column: 2;
+}
+.settings-tabControl-tab3 {
+  padding-bottom: 5px;
+  grid-column: 3
+}
+.settings-tabControl-markers-grid {
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: 3;
+  vertical-align: top;
+  user-select: none;
+}
+.settings-tabControl-marker1 {
+  grid-column: 1;
+  height: 3px;
+}
+.settings-tabControl-marker2 {
+  grid-column: 2;
+  height: 3px;
+}
+.settings-tabControl-marker3 {
+  grid-column: 3;
+  height: 3px;
+}
+.settings-tabControl-marker1.active {
+  background-color: lightgray;
+}
+.settings-tabControl-marker2.active {
+  background-color: lightgray;
+}
+.settings-tabControl-marker3.active {
+  background-color: lightgray;
+}
+.settings-grid-container {
+  grid-row: 4;
+  vertical-align: top;
   padding: 5px;
+  display: grid;
   grid-template-rows: auto;
+  height: fit-content;
+  overflow: auto;
 }
 .settings-content {
-  display: block;
-  grid-row-start: 2;
+  vertical-align: top;
+  display: inline;
 }
-.settings-section-header { /* Speech and Listening */
+.settings-footer {
+  display: grid;
+  grid-row: 5;
+  background-color: lightgray;
+}
+.settings-section-header {
   border-radius: 0.5px;
   font-size: 18px;
   user-select: none;
+  height: fit-content
 }
 .settings-grid-section-header {
   border-top: 2px solid lightblue;
   border-radius: 0.5px;
   font-size: 16px;
   user-select: none;
-
+  height: fit-content
 }
 .settings-grid-col2-label-control {
   display: grid;
   padding-top: 15px;
   padding-left: 10px;
   grid-template-columns: 1fr 7fr;
+  vertical-align: top;
 }
 .settings-grid-col2-label {
   font-size: 14px;
   grid-column-start: 1;
   user-select: none;
+  vertical-align: top;
 }
 .settings-grid-col2-control {
   grid-column-start: 2;
+  vertical-align: top;
 }
 .settings-grid-section-footer {
   font-size: 14px;
@@ -255,10 +354,15 @@ span.whitespace {
   padding-left: 10px;
   grid-column-start: 1;
   user-select: none;
+  vertical-align: top;
 }
 .stopAtEOS-checkbox-container {
   padding-left: 10px;
-  font-size: 14px
+  font-size: 14px;
+    padding-top: 15px;
+}
+.retries-textbox {
+  width: 50px
 }
 .slider-container {
   grid-template-rows: 1fr 1fr;
@@ -301,15 +405,10 @@ span.whitespace {
   font-size: 16px;
   padding: 2px
 }
-.settings-footer {
-  display: grid;
-  grid-row-start: 3;
-  background-color: lightgray;
-}
 .settings-footer-buttonbar {
 }
 h1 {
-  font-size: 18px;
+
 }
 .settings-grid-section-item-recitation {
   display: block;
@@ -340,11 +439,20 @@ input[type="radio"]{
 .imageentry-container-left {
   display: grid;
   gap: 10px;
-  grid-template-columns: [images] minmax(var(--imageentry-min-image-width), 1fr) [captions] 2fr;
+  grid-template-columns: [images] minmax(var(--imageentry-min-image-width), 1fr) [divider] 2px [captions] 2fr;
 }
 .imageentry-images-left {
   grid-column: images;
   max-width: var(--min-image-width);
+}
+.imageentry-container-left-hdivider {
+  height: 1px;
+  margin-bottom: 5px;
+  background-color: gray;
+}
+.imageentry-images-left-vdivider {
+  grid-column: divider;
+  max-width: 2px;
 }
 .imageentry-captions-left {
   grid-column: captions;
@@ -396,6 +504,10 @@ input[type="radio"]{
   max-height: 300px;
 }
 .link-label {
+  text-decoration: underline ;
+  color: blue;
+}
+.link-label1 {
   text-decoration: underline dotted;
 }
 .textbox-control {

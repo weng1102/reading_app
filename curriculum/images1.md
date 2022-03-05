@@ -1,4 +1,4 @@
-[[page: testing images1, Wen Eng /]]
+[[page: Image rendering v1,, Wen,,Testing /]]
 
 [[image-entry: the end, left]]
 start ![visualize it](visualize.png, 10, 20, last arg) end

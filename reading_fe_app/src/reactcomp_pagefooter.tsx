@@ -44,14 +44,14 @@ export const PageFooter = React.memo(() => {
         <div className="footer-grid-speak">
           <SpeakButton />
         </div>
-        <div className="footer-grid-prevSentence">
-          <PreviousSentenceButton />
-        </div>
         <div className="footer-grid-prevWord">
           <PreviousWordButton />
         </div>
         <div className="footer-grid-nextWord">
           <NextWordButton />
+        </div>
+        <div className="footer-grid-prevSentence">
+          <PreviousSentenceButton />
         </div>
         <div className="footer-grid-nextSentence">
           <NextSentenceButton />
@@ -63,8 +63,6 @@ export const PageFooter = React.memo(() => {
       <div className="footer-statusBar">
         <StatusBar />
       </div>
-      <SpeechMonitor />
-      <ListeningMonitor />
     </footer>
   );
 });
@@ -215,7 +213,16 @@ interface StatusBarPropsType {}
 export const StatusBar = () => {
   return (
     <>
-      <div>{useAppSelector(store => store.statusBar_message)}</div>
+      <div className="footer-statusBar-message-application">
+        {useAppSelector(store => store.message_application)}
+      </div>
+      <div className="footer-statusBar-message-listening">
+        <ListeningMonitor />
+      </div>
+      <div className="footer-statusBar-message-state">
+        {useAppSelector(store => store.message_state)}
+        <SpeechMonitor />
+      </div>
     </>
   );
 };

@@ -24,6 +24,8 @@ import { IPageContent } from "./PageContentType";
 // import * as rl from 'readline-sync';
 export const enum MarkdownTagType {
   BLOCKQUOTE = "BLOCKQUOTE",
+  BUTTONGRID = "BUTTONGRID",
+  BUTTONGRID_END = "BUTTONGRID_END",
   COMMENT = "COMMENT",
   EMPTY = "EMPTY",
   FILLIN = "FILLIN",
@@ -119,6 +121,8 @@ export const enum MarkdownTagType {
 // }
 export const enum MarkdownType {
   BLOCKQUOTE = "BLOCKQUOTE",
+  BUTTONGRID = "BUTTONGRID",
+  BUTTONGRID_END = "BUTTONGRID_END",
   PARAGRAPH = "PARAGRAPH",
   EMPTY = "EMPTY",
   HEADING01 = "HEADING01",
@@ -198,6 +202,9 @@ const PARAGRAPH_TO_SENTENCES: RegExp = /([\.\?!][\'\"\u2018\u2019\u201c\u201d\)\
 // text inside the lookbehind can be matched. (?<!a)b matches "b" NOT preceded
 // by "a". In this case, it tries to match ellipsis (but ignores invisible
 // characters at the end of sentence.
+// Need \s+ trailing pattern to identify MarkdownTagType.SENTENCE otherwise
+// split pattern with cleave embedded "." (i.e., period) found in
+// non-terminating circustances (e.g., file.type)
 
 //const PARAGRAPH_TO_SENTENCES2: RegExp = /(?<!\w\.\w.)(?<![A-Z][a-z][a-z]\.)([\.\?!][\"\u2018\u2019\u201c\u201d\)\]]*\s*(?<![A-Z][a-z]\.)(?<![A-Z]\.)\s+)/;
 //const PARAGRAPH_PATTERN: RegExp = /^([ "'\(\!]?[A-Za-z0-9\$\@]{1}.*)$/m;
@@ -234,6 +241,14 @@ const MarkdownPatternDictionary: MarkdownPatternDictionaryType = {
     // > takes precedecence of other list item
     pattern: /^\>\s([^\s].*)$/,
     tagType: MarkdownTagType.BLOCKQUOTE
+  },
+  [MarkdownType.BUTTONGRID]: {
+    pattern: /^\[\[button-grid:\s(.*)\]\]\s*$/,
+    tagType: MarkdownTagType.BUTTONGRID
+  },
+  [MarkdownType.BUTTONGRID_END]: {
+    pattern: /^\[\[\/button-grid\]\]\s*$/,
+    tagType: MarkdownTagType.BUTTONGRID_END
   },
   [MarkdownType.LISTITEM_UNORDERED01]: {
     pattern: /^[\*\-\+]\s([^\s].*)$/,
@@ -284,7 +299,7 @@ const MarkdownPatternDictionary: MarkdownPatternDictionaryType = {
     tagType: MarkdownTagType.COMMENT
   },
   [MarkdownType.IMAGEENTRY]: {
-    pattern: /^\[\[image-entry:\s(.*)\]\]$/i, // [[image-entry: *]]
+    pattern: /^\[\[image-entry:\s(.*)\]\]\s*$/i, // [[image-entry: *]]
     tagType: MarkdownTagType.IMAGEENTRY
   },
   [MarkdownType.IMAGEENTRY_END]: {
@@ -406,7 +421,7 @@ abstract class MarkdownSource extends BaseClass implements IDataSource {
   ): string {
     if (prefix === undefined) prefix = "";
     if (colWidth0 === undefined) colWidth0 = 5;
-    if (colWidth1 === undefined) colWidth1 = 50;
+    if (colWidth1 === undefined) colWidth1 = 60;
     if (colWidth2 === undefined) colWidth2 = 5;
     if (colWidth3 === undefined) colWidth3 = 5;
     if (colWidth4 === undefined) colWidth4 = 10;
@@ -424,7 +439,11 @@ abstract class MarkdownSource extends BaseClass implements IDataSource {
         ) {
           //      current = this.currentRecord();
           let content =
-            current.content === undefined ? "(undefined)" : current.content;
+            current.content === undefined
+              ? "(undefined)"
+              : current.tagType === MarkdownTagType.SENTENCE
+              ? current.content + "<eos>"
+              : current.content;
           let lineNoStr: string =
             current.lineNo > 0
               ? `[${zeroPad(current.lineNo, colWidth2 - 2)}]` // line no.
@@ -553,7 +572,7 @@ export class BasicMarkdownSource extends RawMarkdownSource
       for (
         let sentenceIdx = 0;
         sentenceIdx < sentences.length;
-        sentenceIdx = sentenceIdx + 2 // [odd] capture group (setnence) followed by [evem] terminator
+        sentenceIdx = sentenceIdx + 2 // [odd] capture group (sentence) followed by [even] terminator
       ) {
         this.logger.diagnostic(
           `sentence[${sentenceIdx}]=${sentences[sentenceIdx] +
@@ -561,11 +580,16 @@ export class BasicMarkdownSource extends RawMarkdownSource
               ? sentences[sentenceIdx + 1]
               : "")}`
         );
+        // KLUDGE: (re)appending the blank character below replaces the one
+        // ignored by the PARAGRAPH_TO_SENTENCES regexp pattern (via \s+
+        // requirement) BUT ONLY APPLIES TO the sentence record object
+        // (i.e., MarkdownTagType.SENTENCE) AND NOT any other record types.
+        // Sometime in the future, take a deep dive into a better fix.
         resultBuffer.push({
           content:
             sentences[sentenceIdx] +
             (sentences[sentenceIdx + 1] !== undefined
-              ? sentences[sentenceIdx + 1]
+              ? sentences[sentenceIdx + 1] + " "
               : ""),
           tagType: MarkdownTagType.SENTENCE,
           depth: current.depth, //+ 1

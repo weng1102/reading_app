@@ -4,6 +4,7 @@ import "./App.css";
 // import mic_notlistening from "./mic1-inactive-xparent.gif";
 // import mic_unavailable from "./mic1-ghosted.gif";
 // import listenGreenActiveIcon from "./button_listen_activeGreen.gif";
+import { StatusBarMessageType } from "./reducers";
 import listenRedActiveIcon from "./button_listen_activeRed.gif";
 import listenIcon from "./button_listen.png";
 import listenGhostedIcon from "./button_listen_ghosted.png";
@@ -19,7 +20,9 @@ import {
   NotificationMode,
   SettingsContext
 } from "./settingsContext";
+
 export const ListeningMonitor = () => {
+  const [wordsPreviouslyHeard, setWordsPreviouslyHeard] = useState("");
   const [deferredDispatchStartTime, setDeferredDispatchStartTime] = useState(0);
   const [silenceCheckpoint, setSilenceCheckpoint] = useState(0);
   const dispatch = useAppDispatch();
@@ -29,16 +32,22 @@ export const ListeningMonitor = () => {
   const endOfPageReached: boolean = useAppSelector(
     store => store.cursor_endOfPageReached
   );
+  // const test: boolean = useAppSelector(store => store.test);
+  const exceededRetries: boolean = useAppSelector(
+    store => store.listen_retriesExceeded
+  );
+  const newSentence: boolean = useAppSelector(
+    store => store.cursor_newSentenceTransition
+  );
   const flushRequested: boolean = useAppSelector(store => store.listen_flush);
-  // const newSentence: boolean = useAppSelector(
-  //   store => store.cursor_newSentenceTransition
-  // );
   let settingsContext: ISettingsContext = useContext(
     SettingsContext
   ) as ISettingsContext;
-  let silenceTimeout: number = settingsContext.settings.listen.timeout;
+  const silenceTimeout: number = settingsContext.settings.listen.timeout;
   let queuingDuration: number =
     settingsContext.settings.listen.listeningInterval;
+  //  const retries: number = useAppSelector(store => store.listen_retries);
+
   const {
     transcript,
     interimTranscript,
@@ -54,31 +63,88 @@ export const ListeningMonitor = () => {
   //     dispatch(Request.Recognition_stop());
   //   }
   // }, [endOfPageReached]);
+  // useEffect(() => {
+  //   console.log(`reactcomp_listen: test 1=${test}`);
+  //   dispatch(Request.Test_set());
+  //   dispatch(Request.Test_reset());
+  // }, [test]);
+  // useEffect(() => {
+  //   console.log(`reactcomp_listen: test 2=${test}`);
+  //   dispatch(Request.Test_reset());
+  // }, [test]);
+  // useEffect(() => {
+  //   console.log(`reactcomp_listen: test 3=${test}`);
+  //   dispatch(Request.Test_reset());
+  // }, [test]);
+  // useEffect(() => {
+  //   console.log(`LISTENING: ${retries} retries`);
+  //   if (
+  //     settingsContext.settings.listen.retries > 0 &&
+  //     retries > settingsContext.settings.listen.retries
+  //   ) {
+  //     // dispatch(Request.Recognition_setMaxRetriesExceeded());
+  //     console.log(`LISTENING: Exceeded ${retries} retries, goto next word`);
+  //   }
+  // }, [retries]);
   useEffect(() => {
+    const maxRetries: number = settingsContext.settings.listen.retries;
+    //    const idx: number = useAppSelector(store => store.cursor_terminalIdx);
+    if (exceededRetries) {
+      console.log(`LISTENING: Exceeded ${maxRetries} retries, next word`);
+      // get current word; say the word
+      // dispatch(Request.Recite_currentWord());
+      // dispatch(Request.Cursor_gotoNextWord());
+    }
+  }, [exceededRetries]);
+  // useEffect(() => {
+  //   if (exceededRetries) {
+  //     console.log("LISTENING: retries exceeded");
+  //     dispatch(Request.Cursor_gotoNextWord());
+  //   }
+  // }, [exceededRetries]);
+  useEffect(() => {
+    if (endOfPageReached) {
+      console.log("LISTENING: stopped listening at end of page");
+      dispatch(Request.Recognition_stop());
+    }
+  }, [listening, endOfPageReached]);
+  // useEffect(() => {
+  //   if (!listeningRequested) {
+  //     dispatch(Request.Recognition_stop());
+  //     console.log("LISTENING: stop listening requested");
+  //   }
+  // }, [listening, listeningRequested]);
+  // useEffect(() => {
+  //   if (!listeningRequested) {
+  //     dispatch(Request.Recognition_stop());
+  //     console.log("LISTENING: stop listening requested");
+  //   }
+  // }, [listening, listeningRequested]);
+  useEffect(() => {
+    // start listening, listen and stop listening
     if (listening) {
-      if (endOfPageReached) {
-        console.log("stopped listening at end of page");
+      if (!listeningRequested) {
         dispatch(Request.Recognition_stop());
-      } else if (!listeningRequested) {
-        dispatch(Request.Recognition_stop());
-        console.log("stop listening requested");
+        console.log("LISTENING: stop listening requested");
       }
     } else if (listeningRequested) {
+      // KLUDGE BECAUSE REDUCER NEEDS INITIAL RETRIES. Subsequent changes
+      // retries managed within setting dialog
       console.log(
-        `start listening with timeout=${silenceTimeout}s and buffering=${queuingDuration}ms`
+        `LISTENING: start listening with timeout=${silenceTimeout}s and buffering time=${queuingDuration}ms`
       );
       if (silenceCheckpoint === 0) {
         setSilenceCheckpoint(Date.now()); // will only works continuuous=false
-        console.log(`set silence checkpoint=${silenceCheckpoint}`);
+        console.log(`LISTENING: set silence checkpoint=${silenceCheckpoint}`);
       }
       if (deferredDispatchStartTime === 0) {
         setDeferredDispatchStartTime(Date.now());
       }
       SpeechRecognition.startListening(); // timeout periodically not continuous: true
     } else {
-      console.log("continue not listening");
+      console.log("LISTENING: continue not listening");
       SpeechRecognition.abortListening(); //just in case
-      console.log(`reset silence checkpoint`);
+      console.log(`LISTENING: reset silence checkpoint`);
       setSilenceCheckpoint(0);
     }
   }, [
@@ -86,15 +152,15 @@ export const ListeningMonitor = () => {
     listeningRequested,
     deferredDispatchStartTime,
     silenceCheckpoint,
-    setSilenceCheckpoint,
-    endOfPageReached
+    setSilenceCheckpoint
   ]);
   useEffect(() => {
+    // listening
     // must have [listening] as dependency to allow effect to periodically
     // trigger based on SpeechRecognition internal trigger.
     let words: string;
     if (finalTranscript !== "") {
-      console.log(`final transcript=${finalTranscript} `);
+      console.log(`LISTENING: final transcript=${finalTranscript} `);
       words = finalTranscript;
       resetTranscript();
     } else {
@@ -103,31 +169,34 @@ export const ListeningMonitor = () => {
     // defer dispatch(CursorActions.matchWord()) to allow speechrecognition to
     // gather additional context. The SpeechRecogition object only triggers
     // (asynchronously) when it detects speech (and when it detects silence
-    // for several seconds). This effect must balance this with the component
-    // updating the current word recited.
-    //    const timeoutLimit = 20;
-    //  const silenceTimeout = 20; // seconds
-    if (words.length === 0) {
+    // for several seconds). This effect must balance this deferment with
+    // the component updating the current word recited.
+    if (words.length === 0 || words === wordsPreviouslyHeard) {
       let timeoutDuration = Math.round((Date.now() - silenceCheckpoint) / 1000);
-      console.log(`timeout in ${silenceTimeout - timeoutDuration}s`);
+      console.log(`LISTENING: timeout in ${silenceTimeout - timeoutDuration}s`);
       if (timeoutDuration > silenceTimeout) {
         dispatch(Request.Recognition_stop());
+        setWordsPreviouslyHeard("");
+      } else if (words === wordsPreviouslyHeard) {
+        console.log(`LISTENING: heard nothing new "${words}"`);
       }
     } else {
+      setWordsPreviouslyHeard(words);
       setSilenceCheckpoint(Date.now());
       const msecBeforeDispatch = queuingDuration; //msec
       let deferredDispatchWaitDuration = Date.now() - deferredDispatchStartTime;
       if (deferredDispatchWaitDuration > msecBeforeDispatch) {
-        console.log(`dispatch timeout after ${deferredDispatchWaitDuration}ms`);
-        dispatch(Request.Cursor_matchWords(words)); // required to update current word on page
+        console.log(
+          `LISTENING: matchWords(${words}]) dispatched timeout after ${deferredDispatchWaitDuration -
+            msecBeforeDispatch}ms remaining`
+        );
+        dispatch(Request.Cursor_matchWords(words));
         setDeferredDispatchStartTime(Date.now());
-        // NOTE: only reset transcript at the end of sentence!!!!!!!
-      } else if (flushRequested) {
-        console.log(`flushing transcript queue`);
-        resetTranscript();
-        dispatch(Request.Recognition_flush(false));
+        // NOTE: only reset transcript at the end of sentence!
       } else {
-        console.log(`deferring dispatch for interimTranscript=${words}`);
+        console.log(
+          `LISTENING: deferring dispatch for interimTranscript=${words}`
+        );
       }
     }
   }, [
@@ -138,20 +207,49 @@ export const ListeningMonitor = () => {
     setSilenceCheckpoint,
     interimTranscript,
     finalTranscript,
-    resetTranscript,
-    dispatch,
-    flushRequested
+    resetTranscript
   ]);
+  useEffect(() => {
+    if (newSentence) {
+      console.log(`LISTENING: new sentence transition`);
+      dispatch(Request.Recognition_flush());
+      // dispatch(
+      //   Request.Message_set(
+      //     "new sentence transition",
+      //     StatusBarMessageType.listening
+      //   )
+      // );
+      // } else {
+      //   dispatch(Request.Message_clear(StatusBarMessageType.listening));
+    }
+  }, [newSentence]);
+  useEffect(() => {
+    if (flushRequested) {
+      console.log(`LISTENING: flushing transcript queue`);
+      resetTranscript();
+      dispatch(Request.Recognition_flushed());
+    } else {
+    }
+  }, [flushRequested]);
+
+  const message_listen: string = useAppSelector(
+    store => store.message_listening
+  );
   if (SpeechRecognition.browserSupportsSpeechRecognition()) {
     // listenButton disallows already
-    return <div>{interimTranscript}</div>;
+    return <div className="footer-statusBar">{message_listen}</div>;
   } else {
-    return <div>Listening monitor cannot recognize speech</div>;
+    return (
+      <div className="footer-statusBar">
+        Listening monitor cannot recognize speech
+      </div>
+    );
   }
 };
 interface IListenSettingsProps {
   listenSettings: IListenSettings;
   setListenSettings: (listeningSettings: IListenSettings) => void;
+  active: boolean;
 }
 export const ListenSettings = (props: IListenSettingsProps) => {
   const [stopAtEOS, _setStopAtEOS] = useState(
@@ -162,6 +260,14 @@ export const ListenSettings = (props: IListenSettingsProps) => {
     props.setListenSettings({
       ...props.listenSettings,
       stopAtEndOfSentence: stopAtEOS
+    });
+  };
+  const [retries, _setRetries] = useState(props.listenSettings.retries);
+  const setRetries = (retries: number) => {
+    _setRetries(retries);
+    props.setListenSettings({
+      ...props.listenSettings,
+      retries: retries
     });
   };
   const [timeout, _setTimeout] = useState(props.listenSettings.timeout);
@@ -192,26 +298,34 @@ export const ListenSettings = (props: IListenSettingsProps) => {
       notificationMode: notification
     });
   };
-  return (
-    <>
-      <div className="settings-section-header">Listen</div>
-      <StopAtEOS stopAtEOS={stopAtEOS} setStopAtEOS={setStopAtEOS} />
-      <Timeout timeout={timeout} setTimeout={setTimeout} />
-      <ListeningInterval
-        listeningInterval={listeningInterval}
-        setListeningInterval={setListeningInterval}
-      />
-      <NotificationModeRadioButton
-        notificationMode={notificationMode}
-        setNotificationMode={setNotificationMode}
-      />
-    </>
-  );
+  if (props.active) {
+    return (
+      <>
+        <div className="settings-grid-section-header">Behavior</div>
+        <Retries retries={retries} setRetries={setRetries} />
+        <StopAtEOS stopAtEOS={stopAtEOS} setStopAtEOS={setStopAtEOS} />
+        <Timeout timeout={timeout} setTimeout={setTimeout} />
+        <ListeningInterval
+          listeningInterval={listeningInterval}
+          setListeningInterval={setListeningInterval}
+        />
+        <NotificationModeRadioButton
+          notificationMode={notificationMode}
+          setNotificationMode={setNotificationMode}
+        />
+      </>
+    );
+  } else {
+    return <></>;
+  }
 };
 export const ListenButton = () => {
-  //
+  let settingsContext: ISettingsContext = useContext(
+    SettingsContext
+  ) as ISettingsContext;
   const listeningAvailable = useAppSelector(store => store.listen_available);
   const listening = useAppSelector(store => store.listen_active);
+  const maxRetries: number = settingsContext.settings.listen.retries;
   console.log(`listenbutton listening=${listening}`);
   console.log(`listenbutton listeningAvailable=${listeningAvailable}`);
   const dispatch = useAppDispatch();
@@ -231,10 +345,38 @@ export const ListenButton = () => {
         }
         onClick={() =>
           listeningAvailable
-            ? dispatch(Request.Recognition_toggle())
+            ? dispatch(Request.Recognition_toggle(maxRetries))
             : undefined
         }
       />
+    </>
+  );
+};
+interface IRetriesProps {
+  retries: number;
+  setRetries: (retries: number) => void;
+}
+const Retries = (props: IRetriesProps) => {
+  const onChangeValue = (event: any) => {
+    console.log(`onchange=${event.target.checked}`);
+    props.setRetries(event.target.value);
+  };
+  return (
+    <>
+      <div className="settings-grid-col2-label-control">
+        <div className="settings-grid-col2-label">Retries:</div>
+        <input
+          type="number"
+          min="5"
+          className="textbox-control retries-textbox"
+          defaultValue={props.retries}
+          onChange={onChangeValue}
+        />
+      </div>
+      <div className="settings-grid-section-footer">
+        Retries specifies the number of retries before continuing to the next
+        word.
+      </div>
     </>
   );
 };
@@ -249,7 +391,6 @@ const StopAtEOS = (props: IStopAtEOSProps) => {
   };
   return (
     <>
-      <div className="settings-grid-section-header">Performance</div>
       <div className="checkbox-container stopAtEOS-checkbox-container">
         <input
           onChange={onChangeValue}

@@ -17,13 +17,14 @@
 import { Request } from "./reducers";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { useEffect, useState, useContext } from "react";
-import { CPageLists, PageContext } from "./pageContext";
+import { CPageLists } from "./pageContext";
 import {
   ISpeechSettings,
   ISettingsContext,
   RecitationMode,
   SettingsContext
 } from "./settingsContext";
+
 class CSpeechSynthesizer {
   constructor() {
     this.paramObj = new SpeechSynthesisUtterance();
@@ -55,76 +56,96 @@ class CSpeechSynthesizer {
   }
 }
 export const Synthesizer: CSpeechSynthesizer = new CSpeechSynthesizer();
-
 export const SpeechMonitor = () => {
   const dispatch = useAppDispatch();
+  let settingsContext: ISettingsContext = useContext(SettingsContext)!;
+  Synthesizer.volume = settingsContext.settings.speech.volume;
   let pageContext: CPageLists = useAppSelector(store => store.pageContext);
   // cannot use useContext(PageContext) because context is only scoped within
   // a page
-  const newSentence = useAppSelector(
-    store => store.cursor_newSentenceTransition
-  );
-  const newSection = useAppSelector(store => store.cursor_newSectionTransition);
-  const sectionIdx = useAppSelector(store => store.cursor_sectionIdx);
-  const beginningOfPage = useAppSelector(
-    store => store.cursor_beginningOfPageReached
-  );
-  const endOfPage = useAppSelector(store => store.cursor_endOfPageReached);
-  const listening = useAppSelector(store => store.listen_active);
-  const settingsContext: ISettingsContext = useContext(SettingsContext)!;
+  // const test: boolean = useAppSelector(store => store.test);
+
   let message: string = "";
   useEffect(() => {
     Synthesizer.voiceList = window.speechSynthesis.getVoices(); // loaded asynchronously
     Synthesizer.paramObj.voice = Synthesizer.voiceList[2]; // US woman
   }, [window.speechSynthesis.onvoiceschanged]);
+
+  const retriesExceeded = useAppSelector(store => store.listen_retriesExceeded);
+  const retries = useAppSelector(store => store.listen_retries);
+  const wordIdx = useAppSelector(store => store.cursor_terminalIdx);
+  const reciteRequested = useAppSelector(store => store.recite_requested);
+  useEffect(() => {
+    if (retriesExceeded) {
+      message = `retries exceeded ${retries}`;
+      let word: string = pageContext.terminalList[wordIdx].content;
+      Synthesizer.speak(word);
+      dispatch(Request.Cursor_gotoNextWord());
+    }
+    // speak word
+  }, [retriesExceeded, reciteRequested]);
+
+  const newSentence = useAppSelector(
+    store => store.cursor_newSentenceTransition
+  );
+  const newSection = useAppSelector(store => store.cursor_newSectionTransition);
+  const sectionIdx = useAppSelector(store => store.cursor_sectionIdx);
+  useEffect(() => {
+    // these announcements are mutually exclusive
+    if (newSection) {
+      let sectionType: string = pageContext.sectionList[sectionIdx].type;
+      message = `new ${sectionType === "undefined" ? "section" : sectionType}`;
+    } else if (newSentence) {
+      message = "new sentence";
+    }
+    Synthesizer.speak(message);
+  }, [newSection, newSentence]);
+
+  const beginningOfPage = useAppSelector(
+    store => store.cursor_beginningOfPageReached
+  );
+  useEffect(() => {
+    if (beginningOfPage) {
+      message = "beginning of page";
+      Synthesizer.speak(message);
+    }
+  }, [beginningOfPage]);
+
+  const endOfPage = useAppSelector(store => store.cursor_endOfPageReached);
+  useEffect(() => {
+    if (endOfPage) {
+      message = "end of page";
+      Synthesizer.speak(message);
+    }
+  }, [endOfPage]);
+
+  const announcement = useAppSelector(store => store.announce_message);
   useEffect(
     () => {
-      Synthesizer.volume = settingsContext.settings.speech.volume;
-      if (beginningOfPage) {
-        message = `beginning of page`;
-        Synthesizer.speak(message);
-        dispatch(Request.Cursor_acknowledgeTransition());
-      } else if (newSection) {
-        console.log(`speaking sectionIdx=${sectionIdx}`);
-        let sectionType: string = pageContext.sectionList[sectionIdx].type;
-        message = `new ${
-          sectionType === "undefined" ? "section" : sectionType
-        }`;
-        console.log(`speaking "${message}"`);
-        Synthesizer.speak(message);
-        dispatch(Request.Cursor_acknowledgeTransition());
-      } else if (newSentence) {
-        message = "new sentence";
-        console.log(`speaking "${message}"`);
-        Synthesizer.speak(message);
-        dispatch(Request.Cursor_acknowledgeTransition());
-      } else if (endOfPage) {
-        message = `end of page`;
-        Synthesizer.speak(message);
-        dispatch(Request.Cursor_acknowledgeTransition());
+      if (announcement !== "") {
+        Synthesizer.speak(announcement);
       } else {
         console.log(`NOT speaking ${message}"`);
       }
     },
-    [sectionIdx, newSentence, beginningOfPage, endOfPage] // to recite just the words
+    [announcement] // to recite just the words
   );
-  useEffect(
-    () => {
-      if (listening) {
-        message = "listening";
-      } else {
-        message = "not listening";
-      }
-      console.log(`speaking "${message}"`);
-      Synthesizer.speak(message);
-    },
-    [listening] // to recite just the words
-  );
+  const listening = useAppSelector(store => store.listen_active);
+  useEffect(() => {
+    if (listening) {
+      message = "listening";
+    } else {
+      message = "not listening";
+    }
+    Synthesizer.speak(message);
+  }, [listening]);
+  if (message.length > 0) message = `SPEECH: ${message}`;
   return <div>{message}</div>;
 };
 interface ISpeechSettingsProps {
   speechSettings: ISpeechSettings;
   setSpeechSettings: (speechSetting: ISpeechSettings) => void;
+  active: boolean;
 }
 export const SpeechSettings = (props: ISpeechSettingsProps) => {
   const [recitationMode, _setRecitationMode] = useState(
@@ -155,17 +176,20 @@ export const SpeechSettings = (props: ISpeechSettingsProps) => {
       volume: volume
     });
   };
-  return (
-    <>
-      <div className="settings-section-header">Speech</div>
-      <RecitationModeRadioButton
-        recitationMode={recitationMode}
-        setRecitationMode={setRecitationMode}
-      />
-      <VoiceSelector voiceIndex={voiceIndex} setVoiceIndex={setVoiceIndex} />
-      <VolumeSlider volume={volume} setVolume={setVolume} />
-    </>
-  );
+  if (props.active) {
+    return (
+      <>
+        <RecitationModeRadioButton
+          recitationMode={recitationMode}
+          setRecitationMode={setRecitationMode}
+        />
+        <VoiceSelector voiceIndex={voiceIndex} setVoiceIndex={setVoiceIndex} />
+        <VolumeSlider volume={volume} setVolume={setVolume} />
+      </>
+    );
+  } else {
+    return <></>;
+  }
 };
 interface IRecitationModeRadioButtonProps {
   recitationMode: RecitationMode;
@@ -193,6 +217,13 @@ export const RecitationModeRadioButton = (
             defaultChecked={props.recitationMode === RecitationMode.wordOnly}
           />
           {RecitationMode.wordOnly}
+          <input
+            type="radio"
+            value={RecitationMode.wordNext}
+            name="recitationMode"
+            defaultChecked={props.recitationMode === RecitationMode.wordNext}
+          />
+          {RecitationMode.wordNext}
         </div>
         <div className="settings-grid-section-item-recitation-control-group">
           <input

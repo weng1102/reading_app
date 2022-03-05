@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
  * File name: parsesections_link.ts
  *
@@ -8,7 +8,7 @@
  *
  **/
 import { strict as assert } from "assert";
-import { IsError } from "./utilities";
+import { IsError, IsDefined } from "./utilities";
 import {
   IDX_INITIALIZER,
   ParseNodeSerializeFormatEnumType,
@@ -135,23 +135,27 @@ export class TerminalNode_MLTAG_LINK extends TerminalNode_MLTAG_
         // the tokenList queue and NOT using for-loop step
       }
       let chunks: string[] = destination.split(",").map(chunk => chunk.trim());
-      if (chunks[0] !== undefined && chunks[0].length > 0) {
+      if (IsDefined(chunks[0])) {
         // defer page validation
         this.meta.destination.page = chunks[0];
       }
-      if (chunks[1] !== undefined && chunks[1].length > 0) {
+      if (IsDefined(chunks[1])) {
         assert(
           Number(chunks[1]) !== NaN,
           `Expected a numeric but encountered "${chunks[1]}" while parsing link destination section index`
         );
-        this.meta.destination.sectionIdx = +chunks[1]; // no units;       )
+        this.meta.destination.sectionIdx = +chunks[1].trim(); // no units;       )
+      } else {
+        this.meta.destination.sectionIdx = 0;
       }
-      if (chunks[2] !== undefined && chunks[2].length > 0) {
+      if (IsDefined(chunks[2])) {
         assert(
-          Number(chunks[2]) !== NaN,
+          Number(chunks[2].trim()) !== NaN,
           `Expected a numeric value but encountered "${chunks[2]}" while parsing link destination terminal index`
         );
-        this.meta.destination.terminalIdx = +chunks[2]; // no units;
+        this.meta.destination.terminalIdx = +chunks[2].trim(); // no units;
+      } else {
+        this.meta.destination.terminalIdx = 0;
       }
       assert(
         token.content === TokenLiteral.RPAREN,

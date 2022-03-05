@@ -1,5 +1,5 @@
 import "./App.css";
-import { ReadingApp } from "./reactcomps_main";
+import { ReadingApp } from "./reactcomp_main";
 function App() {
   //      <ReadingApp />
   return (
