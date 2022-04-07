@@ -1,6 +1,6 @@
 /** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
- * File name: reactcomps_sections_imageEntry.tsx
+ * File name: reactcomp_sections_imageEntry.tsx
  *
  * Defines React front end functional components.
  *
@@ -23,8 +23,8 @@ import {
   ITerminalInfo,
   IImageTerminalMeta
 } from "./pageContentType";
-import { Terminal_Image } from "./reactcomps_terminals_image";
-import { SectionDispatcher, ISectionPropsType } from "./reactcomps_sections";
+import { Terminal_Image } from "./reactcomp_terminals_image";
+import { SectionDispatcher, ISectionPropsType } from "./reactcomp_sections";
 
 interface ISectionImageEntryImagesPropsType {
   active: boolean;

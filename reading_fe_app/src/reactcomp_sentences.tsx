@@ -18,7 +18,7 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 
 import { ISentenceContent, ITerminalContent } from "./pageContentType";
-import { TerminalDispatcher } from "./reactcomps_terminals";
+import { TerminalDispatcher } from "./reactcomp_terminals";
 
 const SectionType = {
   ORDEREDLIST: "ol",

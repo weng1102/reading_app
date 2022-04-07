@@ -12,7 +12,7 @@ import React, { useContext } from "react";
 import { useAppSelector } from "./hooks";
 
 import { ITerminalInfo, IImageTerminalMeta } from "./pageContentType";
-import { TerminalNode, ITerminalPropsType } from "./reactcomps_terminals";
+import { TerminalNode, ITerminalPropsType } from "./reactcomp_terminals";
 import { ISettingsContext, SettingsContext } from "./settingsContext";
 export const Terminal_Image = React.memo((props: ITerminalPropsType): any => {
   const currentTerminalIdx = useAppSelector(store => store.cursor_terminalIdx); // causes rerendering

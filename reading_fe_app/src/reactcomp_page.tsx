@@ -46,7 +46,7 @@ import { NavBar } from "./reactcomp_navbar";
 import { PageHeader } from "./reactcomp_pageheader";
 import { PageFooter } from "./reactcomp_pagefooter";
 import { SettingsDialog } from "./reactcomp_settings";
-import { SectionDispatcher } from "./reactcomps_sections";
+import { SectionDispatcher } from "./reactcomp_sections";
 import { StatusBarMessageType } from "./reducers";
 
 export interface IPagePropsType {

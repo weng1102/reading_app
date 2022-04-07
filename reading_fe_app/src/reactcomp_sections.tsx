@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
  * File name: reactcomps_sections.tsx
  *
@@ -20,9 +20,9 @@ import {
   ISectionParagraphVariant,
   ISectionUnorderedListVariant
 } from "./pageContentType";
-import { Section_imageEntry } from "./reactcomps_sections_imageEntry";
+import { Section_imageEntry } from "./reactcomp_sections_imageEntry";
 //import { Settings } from "./reactcomp_settings";
-import { Sentence } from "./reactcomps_sentences";
+import { Sentence } from "./reactcomp_sentences";
 
 export interface ISectionPropsType {
   active: boolean;

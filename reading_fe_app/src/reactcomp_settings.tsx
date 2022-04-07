@@ -98,7 +98,6 @@ export const SettingsDialog = (props: ISettingsDialogPropsType) => {
         speech: speechSettings,
         listen: listenSettings
       });
-      dispatch(Request.Recognition_setMaxRetries(listenSettings.retries));
       setModified(false);
     }
     //    setInitial(true);

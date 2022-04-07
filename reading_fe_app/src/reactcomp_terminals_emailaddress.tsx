@@ -14,7 +14,7 @@ import { useAppDispatch, useAppSelector, useSpanRef, useDivRef } from "./hooks";
 import { useEffect, useState, useContext, useRef } from "react";
 
 import { ITerminalInfo, IEmailAddressTerminalMeta } from "./pageContentType";
-import { TerminalNode, ITerminalPropsType } from "./reactcomps_terminals";
+import { TerminalNode, ITerminalPropsType } from "./reactcomp_terminals";
 
 export const Terminal_Emailaddress = React.memo(
   (props: ITerminalPropsType): any => {

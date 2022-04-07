@@ -68,7 +68,6 @@ const LISTENING_FLUSHED = "listening/flushed"; // clear transcript
 const LISTENING_START = "listening/start";
 const LISTENING_STOP = "listening/stop";
 const LISTENING_TOGGLE = "listening/toggle"; // related to start/stop
-const LISTENING_SET_RETRIES_MAX = "listening/set retries";
 
 // speaking actions
 const ANNOUNCE_MESSAGE = "announce/message";
@@ -253,12 +252,6 @@ const Message_clear = (
     payload: messageType
   };
 };
-const Recognition_setMaxRetries = (maxRetries: number) => {
-  return {
-    type: LISTENING_SET_RETRIES_MAX,
-    payload: maxRetries
-  };
-};
 const StatusBar_Message_set = (message: string) => {
   return {
     type: MESSAGE_SET,
@@ -414,7 +407,6 @@ export const Request = {
   Recognition_flushed,
   Recognition_start,
   Recognition_stop,
-  Recognition_setMaxRetries,
 
   Settings_toggle,
 
@@ -893,9 +885,9 @@ export const rootReducer = (
       state.listen_flush = false; // resets transcript
       setListeningMessage("transcript flushed");
       return state;
-    case LISTENING_SET_RETRIES_MAX:
-      state.listen_retries_max = action.payload;
-      return state;
+    // case LISTENING_SET_RETRIES_MAX:
+    //   state.listen_retries_max = action.payload;
+    //   return state;
     case ANNOUNCE_MESSAGE:
       state.announce_message = action.payload; // resets transcript
       return state;

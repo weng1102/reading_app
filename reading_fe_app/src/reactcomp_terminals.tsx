@@ -26,11 +26,11 @@ import {
   TerminalMetaEnumType
 } from "./pageContentType";
 
-import { Terminal_Date } from "./reactcomps_terminals_dates";
-import { Terminal_Emailaddress } from "./reactcomps_terminals_emailaddress";
-import { Terminal_PhoneNumber } from "./reactcomps_terminals_phonenumber";
-import { Terminal_Image } from "./reactcomps_terminals_image";
-import { Terminal_Link } from "./reactcomps_terminals_link";
+import { Terminal_Date } from "./reactcomp_terminals_dates";
+import { Terminal_Emailaddress } from "./reactcomp_terminals_emailaddress";
+import { Terminal_PhoneNumber } from "./reactcomp_terminals_phonenumbers";
+import { Terminal_Image } from "./reactcomp_terminals_image";
+import { Terminal_Link } from "./reactcomp_terminals_link";
 
 export interface ITerminalPropsType {
   active: boolean;

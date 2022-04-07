@@ -17,7 +17,7 @@ import React from "react";
 import "./App.css";
 import { useAppSelector } from "./hooks";
 import { DateFormatEnumType, IDateTerminalMeta } from "./pageContentType";
-import { TerminalNode, ITerminalPropsType } from "./reactcomps_terminals";
+import { TerminalNode, ITerminalPropsType } from "./reactcomp_terminals";
 
 export const Terminal_Date = React.memo((props: ITerminalPropsType): any => {
   const currentTerminalIdx = useAppSelector(store => store.cursor_terminalIdx); // cause rerendering
