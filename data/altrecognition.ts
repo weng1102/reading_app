@@ -1,9 +1,10 @@
-export const RecognitionDictionary: {[key: string]: string } = {
+export const RecognitionDictionary: { [key: string]: string } = {
   ["Ronlyn"]: "^(ron|ro[ns]a{0,1}l[aiye]nd{0,1})$",
   ["Ronlyn's"]: "^(ron|ro[ns]a{0,1}l[aiye]nd{0,1}'s)$",
   ["Goo"]: "^(g[ou])",
   ["Wen"]: "^(wh{0,1}en)$",
   ["Wen's"]: "^(wh{0,1}en's)$",
+  ["Eng"]: "^(egg|aang|hang)$",
   ["Aruna"]: "^([ai]runa)$",
   ["Berna"]: "^(b[eu]rn[ae]t{0,2})$",
   ["Berna's"]: "^(b[eu]rn[ae]t{0,2}s)$",
@@ -83,10 +84,9 @@ export const RecognitionDictionary: {[key: string]: string } = {
   ["Hacktech"]: "h[ae]ct[ie][ck]",
   ["Koshi"]: "kosh[iy]",
   ["Soo"]: "[Ss]ue",
-  ["Tin"]: "10",
   ["Alyse"]: "[Aa]lice",
   ["Paige"]: "[Pp]age",
   ["Handicapables"]: "handi-capable",
   ["0"]: "zero",
   ["@"]: "at"
-}
+};

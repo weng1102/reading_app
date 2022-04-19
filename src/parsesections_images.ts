@@ -8,7 +8,7 @@
  *
  **/
 import { strict as assert } from "assert";
-import { IsError } from "./utilities";
+import { IsDefined, IsError } from "./utilities";
 import {
   IDX_INITIALIZER,
   ParseNodeSerializeTabular,
@@ -19,6 +19,7 @@ import {
   ImageEntryLayoutEnumType,
   ISectionImageEntryVariantInitializer,
   ISectionImageEntryVariant,
+  ISectionListItemInitializer,
   ISectionParagraphVariant,
   ISectionParagraphVariantInitializer,
   ITerminalContent,
@@ -53,9 +54,9 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
         `Expected "${MarkdownTagType.IMAGEENTRY}" at line ${current.lineNo}`
       );
       let args: string[] = current.content.split(",").map(arg => arg.trim());
-      if (args[0] !== undefined) this.meta.title = args[0];
+      if (IsDefined(args[0])) this.meta.title = args[0];
       try {
-        if (args[1] !== undefined && args[1].length > 0) {
+        if (IsDefined(args[1])) {
           let layout = args[1].trim().toLowerCase();
           assert(
             layout === ImageEntryLayoutEnumType.left ||
@@ -68,7 +69,7 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
         this.logger.warning((e as Error).message);
       }
       try {
-        if (args[2] !== undefined && args[2].length > 0) {
+        if (IsDefined(args[2])) {
           assert(
             args[2].trim().charAt(args[2].trim().length - 1) === "%",
             `Missing percent sign in third argument at line ${current.lineNo}`
@@ -85,7 +86,7 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
       } catch (e) {
         this.logger.warning((e as Error).message);
       }
-      if (args[3] !== undefined) this.meta.separator = args[3];
+      if (IsDefined(args[3])) this.meta.separator = args[3];
       current = this.dataSource.nextRecord();
       assert(
         current.tagType === MarkdownTagType.PARAGRAPH,
@@ -115,6 +116,21 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
         current.tagType === MarkdownTagType.PARAGRAPH_END,
         `Expected "${MarkdownTagType.PARAGRAPH_END}" to "${MarkdownTagType.PARAGRAPH}" but encountered "${current.tagType}"  at line ${current.lineNo}`
       );
+      // if (current.tagType === MarkdownTagType.PARAGRAPH_END) {
+      //   this.lastTermIdx = this.userContext.terminals.lastIdx;
+      //   this.id =
+      //     this.userContext.sections.push(
+      //       ISectionListItemInitializer(
+      //         this.firstTermIdx,
+      //         this.lastTermIdx,
+      //         this.type.toString()
+      //       )
+      //     ) - 1;
+      //   for (let idx = this.firstTermIdx; idx <= this.lastTermIdx; idx++) {
+      //     this.userContext.terminals[idx].sectionIdx = this.id;
+      //   }
+      //   this.dataSource.nextRecord(); // move to next grouping
+      // }
       //keep processing sections until imageentry_end
       for (
         current = this.dataSource.nextRecord();
@@ -129,6 +145,22 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
         );
         sectionNode.parse();
         //        current = this.dataSource.currentRecord();
+
+        if (current.tagType === MarkdownTagType.PARAGRAPH_END) {
+          //////////
+          // Presumably, PARAGRAPH created sectionList entry already
+          //////////
+
+          // this.lastTermIdx = this.userContext.terminals.lastIdx;
+          // this.id =
+          //   this.userContext.sections.
+          //     )
+          //   ) - 1;
+          // for (let idx = this.firstTermIdx; idx <= this.lastTermIdx; idx++) {
+          //   this.userContext.terminals[idx].sectionIdx = this.id;
+          // }
+          this.dataSource.nextRecord(); // move to next grouping
+        }
       }
       if (current.tagType === MarkdownTagType.IMAGEENTRY_END) {
         this.lastTermIdx = this.userContext.terminals.lastIdx;
@@ -140,9 +172,9 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
         //       this.type.toString()
         //     )
         //   ) - 1;
-        for (let idx = this.firstTermIdx; idx <= this.lastTermIdx; idx++) {
-          this.userContext.terminals[idx].sectionIdx = this.id;
-        }
+        ////        for (let idx = this.firstTermIdx; idx <= this.lastTermIdx; idx++) {
+        ////          this.userContext.terminals[idx].sectionIdx = this.id;
+        ////        }
         this.dataSource.nextRecord(); // move to next grouping
       }
     } catch (e) {

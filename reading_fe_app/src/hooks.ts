@@ -12,8 +12,8 @@ export const useElementRef = () => useRef<HTMLElement | null>(null);
 
 export const useDialog = () => {
   const [isActive, setIsActive] = useState(false);
-  function toggle() {
+  function toggleDialog() {
     setIsActive(!isActive);
   }
-  return { isActive, toggle };
+  return { isActive, toggleDialog };
 };

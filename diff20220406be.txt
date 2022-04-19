@@ -1,0 +1,790 @@
+diff --git a/src/dataadapter.ts b/src/dataadapter.ts
+index 7e36ab2..051075e 100644
+--- a/src/dataadapter.ts
++++ b/src/dataadapter.ts
+@@ -24,6 +24,8 @@ import { IPageContent } from "./PageContentType";
+ // import * as rl from 'readline-sync';
+ export const enum MarkdownTagType {
+   BLOCKQUOTE = "BLOCKQUOTE",
++  BUTTONGRID = "BUTTONGRID",
++  BUTTONGRID_END = "BUTTONGRID_END",
+   COMMENT = "COMMENT",
+   EMPTY = "EMPTY",
+   FILLIN = "FILLIN",
+@@ -119,6 +121,8 @@ export const enum MarkdownTagType {
+ // }
+ export const enum MarkdownType {
+   BLOCKQUOTE = "BLOCKQUOTE",
++  BUTTONGRID = "BUTTONGRID",
++  BUTTONGRID_END = "BUTTONGRID_END",
+   PARAGRAPH = "PARAGRAPH",
+   EMPTY = "EMPTY",
+   HEADING01 = "HEADING01",
+@@ -238,6 +242,14 @@ const MarkdownPatternDictionary: MarkdownPatternDictionaryType = {
+     pattern: /^\>\s([^\s].*)$/,
+     tagType: MarkdownTagType.BLOCKQUOTE
+   },
++  [MarkdownType.BUTTONGRID]: {
++    pattern: /^\[\[button-grid:\s(.*)\]\]\s*$/,
++    tagType: MarkdownTagType.BUTTONGRID
++  },
++  [MarkdownType.BUTTONGRID_END]: {
++    pattern: /^\[\[\/button-grid\]\]\s*$/,
++    tagType: MarkdownTagType.BUTTONGRID_END
++  },
+   [MarkdownType.LISTITEM_UNORDERED01]: {
+     pattern: /^[\*\-\+]\s([^\s].*)$/,
+     tagType: MarkdownTagType.LISTITEM_UNORDERED
+diff --git a/src/dictionary.ts b/src/dictionary.ts
+index d1997b3..d8abf30 100644
+--- a/src/dictionary.ts
++++ b/src/dictionary.ts
+@@ -7,6 +7,7 @@ export const RecognitionDictionary: DictionaryType = {
+   ["Goo"]: "^(g[ou])",
+   ["Wen"]: "^(wh{0,1}en)$",
+   ["wen"]: "^(wh{0,1}en)$",
++  ["Eng"]: "^(egg|aang|hang)$",
+   ["Wen's"]: "^(wh{0,1}en's)$",
+   ["Aruna"]: "^([ai]runa)$",
+   ["Berna"]: "^(b[eu]rn[ae]t{0,2})$",
+diff --git a/src/logger.ts b/src/logger.ts
+index 12d5a19..35f460a 100644
+--- a/src/logger.ts
++++ b/src/logger.ts
+@@ -132,21 +132,19 @@ export class Logger {
+   }
+   info(
+     message: string,
+-    showSeverity: boolean,
+-    showFunctionName: boolean,
+-    showTimestamp: boolean,
+-    showModuleName: boolean
++    showSeverity: boolean = this._showSeverity,
++    showFunctionName: boolean = this._showFunctionName,
++    showTimestamp: boolean = this._showTimestamp,
++    showModuleName: boolean = this._showModuleLocation
+   ) {
+     console.log(
+       this.logEntry(
+         "INFO",
+         message,
+-        showSeverity === undefined ? this._showSeverity : showSeverity,
+-        showFunctionName === undefined
+-          ? this._showFunctionName
+-          : showFunctionName,
+-        showTimestamp === undefined ? this._showTimestamp : showTimestamp,
+-        showModuleName === undefined ? this._showModuleLocation : showModuleName
++        showSeverity,
++        showFunctionName,
++        showTimestamp,
++        showModuleName
+       )
+     );
+   }
+diff --git a/src/pageContentType.ts b/src/pageContentType.ts
+index 5a6dfab..c874225 100644
+--- a/src/pageContentType.ts
++++ b/src/pageContentType.ts
+@@ -75,7 +75,8 @@ export type SectionVariantType =
+   | ISectionFillinVariant
+   | ISectionBlockquoteVariant
+   | ISectionFillinListVariant
+-  | ISectionImageEntryVariant;
++  | ISectionImageEntryVariant
++  | ISectionButtonGridVariant;
+ 
+ export enum SectionVariantEnumType {
+   heading = "heading",
+@@ -87,6 +88,7 @@ export enum SectionVariantEnumType {
+   fillin = "fillin",
+   fillin_list = "fillin_list",
+   image_entry = "image_entry",
++  button_grid = "buttongrip",
+   blockquote = "blockquote",
+   unittest = "unittest",
+   empty = "empty",
+@@ -157,6 +159,20 @@ export function ISectionHeadingVariantInitializer(): ISectionHeadingVariant {
+     level: 0
+   };
+ }
++export interface ISectionButtonGridVariant {
++  description: string;
++  columnCount: number;
++  minColumnWidth: number;
++  buttonText: string[];
++}
++export function ISectionButtonGridVariantInitializer(): ISectionButtonGridVariant {
++  return {
++    description: "",
++    columnCount: 0,
++    minColumnWidth: 50,
++    buttonText: []
++  };
++}
+ export interface ISectionBlockquoteVariant {
+   paragraphs: [];
+   citing: URL | null;
+diff --git a/src/parsertest01.ts b/src/parsertest01.ts
+index 6393b6b..b801d20 100644
+--- a/src/parsertest01.ts
++++ b/src/parsertest01.ts
+@@ -9,26 +9,27 @@ import { AppNode } from "./parseapp";
+ import { PageParseNode } from "./parsepages";
+ import CSiteMap from "./parsesitemaps";
+ import { IPageContent } from "./pageContentType";
+-///PageParseNode;
+ 
+-//const zeroPad = (num, places) => String(num).padStart(places, "0");
++const Usage: string =
++  `Usage: node parsetest01.ts [OPTIONS] [FILE(s)]\n` +
++  `Parses markdown files into json output for reader\n\n` +
++  `Options:\n` +
++  `  --dumpheadings   display headings for navbar` +
++  `  --dumpjson       display generated json\n` +
++  `  --dumplinks      display link list\n` +
++  `  --dumpsections   display section list\n` +
++  `  --dumpsentences  display sentence list\n` +
++  `  --dumpsitemap    display sitemap iff --sitemap\n` +
++  `  --dumpterminals  display terminal list\n` +
++  `  --dumptree       display parse tree\n` +
++  `  --sitemap        creates sitemap json\n` +
++  `  -x=[exclusions]  sitemap exclusions (must follow --sitemap)\n` +
++  `  --nooutput       do not generate output json file(s)\n` +
++  `  --testreload     reload generated file\n` +
++  `  --adorn          adorn output mode\n` +
++  `  --diagnostic     diagnostic output mode\n` +
++  `  --verbose        verbose output mode\n`;
+ 
+-//let fileNode: FileParseNode;
+-//let pageNode: PageParseNode;
+-interface ISiteMapItem {
+-  fileName: string;
+-  title: string;
+-  owner: string;
+-  author: string;
+-  created: string;
+-  category: string;
+-  description: string;
+-}
+-
+-let linesParsed: number;
+-let inputMdFile: string;
+-let outputFile: string;
+-const siteMapName = "sitemap";
+ const curriculumPath: string = "curriculum/";
+ const distPath: string = "dist/";
+ const mdExtension: string = ".md"; // markdown
+@@ -38,62 +39,21 @@ let logger: Logger = appNode.logger;
+ appNode.logger.appName = "parsetest01";
+ let inputFileSpecs: string[];
+ let switches: string[] = [];
+-let commandSwitches: string[] = [];
+ let args: string[] = process.argv.slice(2);
++
+ while (args.length > 0 && args[0].length > 0 && args[0][0] === "-") {
+   switches.push(args.shift()!);
+ }
+ if (switches.includes("--help") || switches.includes("-help")) {
+-  logger.info(
+-    `Usage: node parsetest01.ts [OPTIONS] [FILE(s)]\n` +
+-      `Parses markdown files into json output for reader\n\n` +
+-      `Options:\n` +
+-      `  --dumpheadings   display headings for navbar` +
+-      `  --dumpjson       display generated json\n` +
+-      `  --dumplinks      display link list\n` +
+-      `  --dumpsections   display section list\n` +
+-      `  --dumpsentences  display sentence list\n` +
+-      `  --dumpsitemap    display sitemap iff --sitemap\n` +
+-      `  --dumpterminals  display terminal list\n` +
+-      `  --dumptree       display parse tree\n` +
+-      `  --sitemap        creates sitemap json\n` +
+-      `  -x=[exclusions]  sitemap exclusions (must follow --sitemap)\n` +
+-      `  --nooutput       do not generate output json file(s)\n` +
+-      `  --testreload     reload generated file\n` +
+-      `  --adorn          adorn output mode\n` +
+-      `  --diagnostic     diagnostic output mode\n` +
+-      `  --verbose        verbose output mode\n`,
+-    false,
+-    false,
+-    false,
+-    false
+-  );
++  logger.info(Usage, false, false, false, false);
+   process.exit();
+ }
+ logger.adornMode = switches.includes("--adorn");
+ logger.diagnosticMode = switches.includes("--diagnostic");
+ logger.verboseMode = switches.includes("--verbose");
+-logger.info(
+-  `adorn mode: ${logger.adornMode ? "ON" : "OFF"}`,
+-  false,
+-  false,
+-  false,
+-  false
+-);
+-logger.info(
+-  `diagnostic mode: ${logger.diagnosticMode ? "ON" : "OFF"}`,
+-  false,
+-  false,
+-  false,
+-  false
+-);
+-logger.info(
+-  `verbose mode: ${logger.verboseMode ? "ON" : "OFF"}`,
+-  false,
+-  false,
+-  false,
+-  false
+-);
++logger.info(`adorn mode: ${logger.adornMode ? "ON" : "OFF"}`);
++logger.info(`diagnostic mode: ${logger.diagnosticMode ? "ON" : "OFF"}`);
++logger.info(`verbose mode: ${logger.verboseMode ? "ON" : "OFF"}`);
+ if (switches.includes("--sitemap")) {
+   // Should be refactored into parsesitemap(distPath)
+   let siteMap: CSiteMap = new CSiteMap(appNode);
+@@ -124,205 +84,198 @@ if (switches.includes("--sitemap")) {
+     let mdOutputStr: string = siteMap.serialize(
+       ParseNodeSerializeFormatEnumType.MARKDOWN
+     );
+-    logger.info(
+-      `generating markdown file ${path.basename(outputFileSpec)}`,
+-      false,
+-      false,
+-      false,
+-      false
+-    );
++    logger.info(`generating markdown file ${path.basename(outputFileSpec)}`);
+     fs.writeFileSync(outputFileSpec, mdOutputStr);
+   }
+ } else {
++  // if switches were parsed properly above, only the file parameter remains.
+   inputFileSpecs = args.filter(mdFiles => mdFiles.endsWith(mdExtension));
+-  for (let inputFileSpec of inputFileSpecs) {
+-    let pageNode = new PageParseNode(appNode);
+-    linesParsed = pageNode.dataSource.connect(inputFileSpec);
+-    // console.log(
+-    //   pageNode.dataSource.serialize(ParseNodeSerializeFormatEnumType.TABULAR)
+-    // );
+-    pageNode.parse();
+-    pageNode.transform();
+-    //console.log(`nextWordIdx=${pageNode.userContext.nextTerminalIdx}`);
+-    // logger.info(
+-    //   `${linesParsed} source line(s) parsed into ${pageNode.dataSource.length()} annotated line(s)`,
+-    //   false,
+-    //   false,
+-    //   false,
+-    //   false
+-    // );
+-    // console.log(`tabular view:
+-    //   ${pageNode.serialize(ParseNodeSerializeFormatEnumType.TABULAR, "page", "")}`);
+-    // console.log(`terminal List:`);
+-    // console.log(pageNode.userContext.terminals.serialize());
+-    // console.log(`heading List:`);
+-    // console.log(pageNode.userContext.headings.serialize());
+-    // console.log(`sentence List (of consecutive terminals):`);
+-    // console.log(pageNode.userContext.sentences.serialize());
+-    // console.log(`section List (of consecutive terminals):`);
+-    // console.log(pageNode.userContext.sections.serialize());
+-    // console.log(pageNode.serialize(ParseNodeSerializeFormatEnumType.JSON));
+-    let fileName = inputFileSpec.substring(
+-      inputFileSpec.indexOf("/") + 1,
+-      inputFileSpec.indexOf(".")
++  if (inputFileSpecs.length === 0) {
++    logger.warning(`No files specified`);
++  } else if (inputFileSpecs[0].indexOf("*") > 0) {
++    logger.error(`No files found for pattern ${args}`);
++  } else {
++    logger.info(
++      `Found ${inputFileSpecs.length} markdown source file${
++        inputFileSpecs.length === 1 ? "" : "s"
++      }.`
+     );
+-    pageNode.filename = `${fileName}${jsonExtension}`;
+-    let outputFileSpec = `${distPath}${fileName}${jsonExtension}`;
+-    if (switches.includes("--dumpdatasource")) {
+-      logger.info(
+-        `dumping datasource for ${path.basename(outputFileSpec)}`,
+-        false,
+-        false,
+-        false,
+-        false
+-      );
+-      logger.info(
+-        pageNode.dataSource.serialize(ParseNodeSerializeFormatEnumType.TABULAR),
+-        false,
+-        false,
+-        false,
+-        false
+-      );
+-    }
+-    if (switches.includes("--dumptree")) {
+-      logger.info(
+-        `dumping tree for ${path.basename(outputFileSpec)}`,
+-        false,
+-        false,
+-        false,
+-        false
+-      );
+-      logger.info(
+-        pageNode.serialize(ParseNodeSerializeFormatEnumType.TREEVIEW),
+-        false,
+-        false,
+-        false,
+-        false
+-      );
+-    }
+-    if (switches.includes("--dumpjson")) {
+-      logger.info(
+-        `dumping json for ${path.basename(outputFileSpec)}`,
+-        false,
+-        false,
+-        false,
+-        false
+-      );
+-      logger.info(
+-        pageNode.serialize(ParseNodeSerializeFormatEnumType.TABULAR),
+-        false,
+-        false,
+-        false,
+-        false
+-      );
+-    }
+-    if (switches.includes("--dumpterminals")) {
+-      logger.info(
+-        `dumping terminal list for ${path.basename(outputFileSpec)}`,
+-        false,
+-        false,
+-        false,
+-        false
+-      );
+-      logger.info(
+-        pageNode.userContext.terminals.serialize(),
+-        false,
+-        false,
+-        false,
+-        false
+-      );
+-    }
+-    if (switches.includes("--dumpsentences")) {
+-      logger.info(
+-        `dumping sentence list for ${path.basename(outputFileSpec)}`,
+-        false,
+-        false,
+-        false,
+-        false
+-      );
+-      logger.info(
+-        pageNode.userContext.sentences.serialize(),
+-        false,
+-        false,
+-        false,
+-        false
+-      );
+-    }
+-    if (switches.includes("--dumplinks")) {
+-      logger.info(
+-        `dumping links for ${path.basename(outputFileSpec)}`,
+-        false,
+-        false,
+-        false,
+-        false
+-      );
+-      logger.info(
+-        pageNode.userContext.links.serialize(),
+-        false,
+-        false,
+-        false,
+-        false
+-      );
+-    }
+-    if (switches.includes("--dumpsections")) {
+-      logger.info(
+-        `dumping section list for ${path.basename(outputFileSpec)}`,
+-        false,
+-        false,
+-        false,
+-        false
+-      );
+-      logger.info(
+-        pageNode.userContext.sections.serialize(),
+-        false,
+-        false,
+-        false,
+-        false
+-      );
+-    }
+-    if (switches.includes("--dumpheadings")) {
++    for (let inputFileSpec of inputFileSpecs) {
++      let pageNode = new PageParseNode(appNode);
++      let linesParsed: number;
++      linesParsed = pageNode.dataSource.connect(inputFileSpec);
+       logger.info(
+-        `dumping navbar headings for ${path.basename(outputFileSpec)}`,
+-        false,
+-        false,
+-        false,
+-        false
++        `Markdown source file ${inputFileSpec} contains ${linesParsed} line${
++          linesParsed === 1 ? "" : "s"
++        }.`
+       );
+-      logger.info(
+-        pageNode.userContext.headings.serialize(),
+-        false,
+-        false,
+-        false,
+-        false
++      pageNode.parse();
++      pageNode.transform();
++
++      let fileName = inputFileSpec.substring(
++        inputFileSpec.indexOf("/") + 1,
++        inputFileSpec.indexOf(".")
+       );
+-    }
+-    let json: string = pageNode.serialize(
+-      ParseNodeSerializeFormatEnumType.JSON
+-    );
+-    if (!switches.includes("--nooutput")) {
+-      logger.info(
+-        `generating json file ${path.basename(outputFileSpec)}`,
+-        false,
+-        false,
+-        false,
+-        false
++      pageNode.filename = `${fileName}${jsonExtension}`;
++      let outputFileSpec = `${distPath}${fileName}${jsonExtension}`;
++      if (switches.includes("--dumpdatasource")) {
++        logger.info(
++          `dumping datasource for ${path.basename(outputFileSpec)}`,
++          false,
++          false,
++          false,
++          false
++        );
++        logger.info(
++          pageNode.dataSource.serialize(
++            ParseNodeSerializeFormatEnumType.TABULAR
++          ),
++          false,
++          false,
++          false,
++          false
++        );
++      }
++      if (switches.includes("--dumptree")) {
++        logger.info(
++          `dumping tree for ${path.basename(outputFileSpec)}`,
++          false,
++          false,
++          false,
++          false
++        );
++        logger.info(
++          pageNode.serialize(ParseNodeSerializeFormatEnumType.TREEVIEW),
++          false,
++          false,
++          false,
++          false
++        );
++      }
++      if (switches.includes("--dumpjson")) {
++        logger.info(
++          `dumping json for ${path.basename(outputFileSpec)}`,
++          false,
++          false,
++          false,
++          false
++        );
++        logger.info(
++          pageNode.serialize(ParseNodeSerializeFormatEnumType.TABULAR),
++          false,
++          false,
++          false,
++          false
++        );
++      }
++      if (switches.includes("--dumpterminals")) {
++        logger.info(
++          `dumping terminal list for ${path.basename(outputFileSpec)}`,
++          false,
++          false,
++          false,
++          false
++        );
++        logger.info(
++          pageNode.userContext.terminals.serialize(),
++          false,
++          false,
++          false,
++          false
++        );
++      }
++      if (switches.includes("--dumpsentences")) {
++        logger.info(
++          `dumping sentence list for ${path.basename(outputFileSpec)}`,
++          false,
++          false,
++          false,
++          false
++        );
++        logger.info(
++          pageNode.userContext.sentences.serialize(),
++          false,
++          false,
++          false,
++          false
++        );
++      }
++      if (switches.includes("--dumplinks")) {
++        logger.info(
++          `dumping links for ${path.basename(outputFileSpec)}`,
++          false,
++          false,
++          false,
++          false
++        );
++        logger.info(
++          pageNode.userContext.links.serialize(),
++          false,
++          false,
++          false,
++          false
++        );
++      }
++      if (switches.includes("--dumpsections")) {
++        logger.info(
++          `dumping section list for ${path.basename(outputFileSpec)}`,
++          false,
++          false,
++          false,
++          false
++        );
++        logger.info(
++          pageNode.userContext.sections.serialize(),
++          false,
++          false,
++          false,
++          false
++        );
++      }
++      if (switches.includes("--dumpheadings")) {
++        logger.info(
++          `dumping navbar headings for ${path.basename(outputFileSpec)}`,
++          false,
++          false,
++          false,
++          false
++        );
++        logger.info(
++          pageNode.userContext.headings.serialize(),
++          false,
++          false,
++          false,
++          false
++        );
++      }
++      let json: string = pageNode.serialize(
++        ParseNodeSerializeFormatEnumType.JSON
+       );
+-      fs.writeFileSync(outputFileSpec, json);
+-    }
+-    if (switches.includes("--testreload")) {
+-      let inputStr: string = fs.readFileSync(outputFileSpec).toString();
+-      let reloaded: IPageContent = JSON.parse(inputStr);
+-      try {
+-        assert.deepEqual(reloaded, pageNode);
+-      } catch (e) {
+-        console.log((<Error>e).message);
++      if (!switches.includes("--nooutput")) {
+         logger.info(
+-          `integrity failed for file ${path.basename(outputFileSpec)}`,
++          `generating json file ${path.basename(outputFileSpec)}`,
+           false,
+           false,
+           false,
+           false
+         );
++        fs.writeFileSync(outputFileSpec, json);
++      }
++      if (switches.includes("--testreload")) {
++        let inputStr: string = fs.readFileSync(outputFileSpec).toString();
++        let reloaded: IPageContent = JSON.parse(inputStr);
++        try {
++          assert.deepEqual(reloaded, pageNode);
++        } catch (e) {
++          console.log((<Error>e).message);
++          logger.info(
++            `integrity failed for file ${path.basename(outputFileSpec)}`,
++            false,
++            false,
++            false,
++            false
++          );
++        }
+       }
+     }
+   }
+diff --git a/src/parsesectiondispatch.ts b/src/parsesectiondispatch.ts
+index cd16a30..452b421 100644
+--- a/src/parsesectiondispatch.ts
++++ b/src/parsesectiondispatch.ts
+@@ -1,4 +1,4 @@
+-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
++/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
+  *
+  * File name: parsesectiondispatch.ts
+  *
+diff --git a/src/parsesitemaps.ts b/src/parsesitemaps.ts
+index a7abf3b..2fc2ca8 100644
+--- a/src/parsesitemaps.ts
++++ b/src/parsesitemaps.ts
+@@ -30,16 +30,11 @@ import util from "util";
+ import {
+   //  FileNode,
+   BaseClass,
+-  ParseNode,
+   IDX_INITIALIZER,
+-  IParseNode,
+-  ParseNodeSerializeColumnPad,
+-  ParseNodeSerializeTabular,
+   ParseNodeSerializeFormatEnumType
+ } from "./baseclasses";
+ import { AppNode } from "./parseapp";
+-import { ISectionNode } from "./parsesections";
+-import { GetSectionNode } from "./parsesectiondispatch";
++
+ export interface PageContentMethods {
+   parse(): number; // any to avoid compilation error, should be removed
+   transform(): number;
+@@ -66,7 +61,7 @@ export default class CSiteMap extends BaseClass {
+   categoriesExcluded: string[] = [];
+ 
+   set exclusionList(exclusionList: string) {
+-    //clip the first a last characters e.g., [] or () of ""
++    // Remvove the first a last characters e.g., [] or () of ""
+     this.categoriesExcluded = exclusionList
+       .substring(1, exclusionList.length - 1)
+       .split(",");
+@@ -162,7 +157,7 @@ export default class CSiteMap extends BaseClass {
+       }
+       case ParseNodeSerializeFormatEnumType.MARKDOWN: {
+         outputStr =
+-          "[[page: Site Map, autogenerated, Wen, , Site Map, Site map of all available files /]]\n";
++          "[[page: Site Map, (autogenerated), Wen, , Site Map, Site map of all available files /]]\n";
+         let currentCategory: string = "";
+         for (let siteMapRecord of this.siteMap) {
+           if (!this.categoriesExcluded.includes(siteMapRecord.category)) {
+@@ -170,7 +165,7 @@ export default class CSiteMap extends BaseClass {
+               currentCategory = siteMapRecord.category;
+               outputStr += `# ${siteMapRecord.category}\n`;
+             }
+-            outputStr += `* [${siteMapRecord.title}](${siteMapRecord.fileName})\n`;
++            outputStr += `* [${siteMapRecord.title}](${siteMapRecord.fileName},0,0)\n`;
+           } else {
+           }
+         }
+diff --git a/src/parseterminals_link.ts b/src/parseterminals_link.ts
+index 5c247a3..8d73242 100644
+--- a/src/parseterminals_link.ts
++++ b/src/parseterminals_link.ts
+@@ -1,4 +1,4 @@
+-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
++/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
+  *
+  * File name: parsesections_link.ts
+  *
+@@ -8,7 +8,7 @@
+  *
+  **/
+ import { strict as assert } from "assert";
+-import { IsError } from "./utilities";
++import { IsError, IsDefined } from "./utilities";
+ import {
+   IDX_INITIALIZER,
+   ParseNodeSerializeFormatEnumType,
+@@ -135,23 +135,27 @@ export class TerminalNode_MLTAG_LINK extends TerminalNode_MLTAG_
+         // the tokenList queue and NOT using for-loop step
+       }
+       let chunks: string[] = destination.split(",").map(chunk => chunk.trim());
+-      if (chunks[0] !== undefined && chunks[0].length > 0) {
++      if (IsDefined(chunks[0])) {
+         // defer page validation
+         this.meta.destination.page = chunks[0];
+       }
+-      if (chunks[1] !== undefined && chunks[1].length > 0) {
++      if (IsDefined(chunks[1])) {
+         assert(
+           Number(chunks[1]) !== NaN,
+           `Expected a numeric but encountered "${chunks[1]}" while parsing link destination section index`
+         );
+-        this.meta.destination.sectionIdx = +chunks[1]; // no units;       )
++        this.meta.destination.sectionIdx = +chunks[1].trim(); // no units;       )
++      } else {
++        this.meta.destination.sectionIdx = 0;
+       }
+-      if (chunks[2] !== undefined && chunks[2].length > 0) {
++      if (IsDefined(chunks[2])) {
+         assert(
+-          Number(chunks[2]) !== NaN,
++          Number(chunks[2].trim()) !== NaN,
+           `Expected a numeric value but encountered "${chunks[2]}" while parsing link destination terminal index`
+         );
+-        this.meta.destination.terminalIdx = +chunks[2]; // no units;
++        this.meta.destination.terminalIdx = +chunks[2].trim(); // no units;
++      } else {
++        this.meta.destination.terminalIdx = 0;
+       }
+       assert(
+         token.content === TokenLiteral.RPAREN,
+diff --git a/src/utilities.ts b/src/utilities.ts
+index 30f56e3..1e66297 100644
+--- a/src/utilities.ts
++++ b/src/utilities.ts
+@@ -78,14 +78,38 @@ export const SymbolPronunciationMap = new Map([
+   ["~", "tilde"],
+   ["#", "hashtag"]
+ ]);
+-export const RecognitionMap = new Map([
+-  ["Ronlyn", "^(ron|ro[ns]a{0,1}l[aiye]nd{0,1})$"],
+-  ["Ronlyn's", "^(ron|ro[ns]a{0,1}l[aiye]nd{0,1}'s)$"],
+-  ["Goo", "^(g[ou])"],
+-  ["Wen", "^(wh{0,1}en)$"],
+-  ["Wen's", "^(wh{0,1}en's)$"]
+-]);
+-
++// export const RecognitionMap = new Map([
++//   ["Ronlyn", "^(ron|ro[ns]a{0,1}l[aiye]nd{0,1})$"],
++//   ["Ronlyn's", "^(ron|ro[ns]a{0,1}l[aiye]nd{0,1}'s)$"],
++//   ["Goo", "^(g[ou])"],
++//   ["Wen", "^(wh{0,1}en)$"],
++//   ["Eng", "^(egg|Aang|hang)$"],
++//   ["Wen's", "^(wh{0,1}en's)$"],
++//   ["Goo", "^(g[ou])"],
++//   ["Wen", "^(wh{0,1}en)$"],
++//   ["Wen's", "^(wh{0,1}en's)$"],
++//   ["Aruna", "^([ai]runa)$"],
++//   ["Berna", "^(b[eu]rn[ae]t{0,2})$"],
++//   ["Berna's", "^(b[eu]rn[ae]t{0,2}s)$"],
++//   ["Bett", "^(bet{1,2})$"],
++//   ["Bett's", "^(bet{1,2}s)$"],
++//   ["Gambhir", "^(gamb[ie]e{0,1}r)$"],
++//   ["shao", "^(sh[ae]ll)$"],
++//   ["mai", "^(my)"],
++//   ["cheung", "^(ch[euo]ng)$"],
++//   ["gaw", "^(ga{0,1}o{0,1}l{0,1}w{0,1})$"],
++//   ["negin", "^(n[ei]ge{1,2}ne{0,1})$"],
++//   ["Jaylynne", "^(ja[yi]l[ey]n{1,2}e{0,1})$"],
++//   ["Lynda", "^(l[iy]nda)$"],
++//   ["Melisse", "^(m[ei]lis{1,2}e{0,1})$"],
++//   ["Meilan", "^(m[aei]y{0,1}land{0,1})$"],
++//   ["Popo's", "^(popo'{0,1}s)$"],
++//   ["Auntie", "^([ant{1,2}[iy])$"],
++//   ["Ag", "^([ae]g{1,2})$"],
++//   ["Seaton", "^(sea{0,1}ton)$"],
++//   ["Ave", "^(avenue)$"],
++//   ["St", "^(street)$"]
++// ]);
+ export const MonthFromAbbreviationMap = new Map([
+   ["jan", "january"],
+   ["feb", "february"],

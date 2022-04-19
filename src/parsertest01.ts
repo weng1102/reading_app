@@ -14,8 +14,9 @@ const Usage: string =
   `Usage: node parsetest01.ts [OPTIONS] [FILE(s)]\n` +
   `Parses markdown files into json output for reader\n\n` +
   `Options:\n` +
+  `  --dumpdatasource display parsed markdown` +
   `  --dumpheadings   display headings for navbar` +
-  `  --dumpjson       display generated json\n` +
+  `  --dumpjsondataappdisplay generated json\n` +
   `  --dumplinks      display link list\n` +
   `  --dumpsections   display section list\n` +
   `  --dumpsentences  display sentence list\n` +

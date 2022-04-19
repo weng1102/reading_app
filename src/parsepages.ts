@@ -23,6 +23,7 @@ import {
   ITerminalInfo,
   ITerminalListItem,
   PageContentInitializer,
+  PageContentVersion,
   PageFormatEnumType
 } from "./pageContentType";
 import util from "util";
@@ -53,6 +54,7 @@ export class PageParseNode extends ParseNode implements IPageContent {
   owner: string = "anonymous";
   author: string = "anonymous";
   category: string = "Miscellaneous";
+  version: string = PageContentVersion;
   pageFormatType = PageFormatEnumType.default;
   created: string = InitialDate;
   modified: string = InitialDate;

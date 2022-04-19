@@ -49,6 +49,11 @@ import { SettingsDialog } from "./reactcomp_settings";
 import { SectionDispatcher } from "./reactcomp_sections";
 import { StatusBarMessageType } from "./reducers";
 
+interface IPreviousPageArrayItem {
+  page: string;
+  currentTermIdx: number;
+}
+
 export interface IPagePropsType {
   appName: string;
 }
@@ -58,9 +63,12 @@ export const Page = React.memo((props: IPagePropsType) => {
   const [pageContent, setPageContent] = useState<IPageContent | null>(null);
   const [pageContext, setPageContext] = useState<CPageLists | null>(null);
   const [isPageLoaded, setIsPageLoaded] = useState<boolean>(true);
+  const [previousPages, setPreviousPages] = useState<IPreviousPageArrayItem[]>(
+    []
+  );
   //  !(pageRequested !== undefined && pageRequested !== null && !pageLoaded)
 
-  const { isActive, toggle } = useDialog();
+  const { isActive, toggleDialog } = useDialog();
 
   // requestHeaders.append("mode", "no-cors");
 
@@ -148,40 +156,72 @@ export const Page = React.memo((props: IPagePropsType) => {
     setIsPageLoaded(
       !(pageRequested !== undefined && pageRequested !== null && !pageLoaded)
     );
-    fetchRequest(distDir + pageRequested);
-    dispatch(Request.Message_set(message, StatusBarMessageType.application));
+    fetchRequest(distDir + pageRequested + ".json");
+    //    dispatch(Request.Message_set(message, StatusBarMessageType.application));
     // }
   }, [pageRequested, pageLoaded]);
   useEffect(() => {
     if (!isPageLoaded) {
       dispatch(Request.Page_loaded(true));
       setIsPageLoaded(true);
+      previousPages.push({
+        page: pageRequested,
+        currentTermIdx: 0
+      });
+      setPreviousPages(previousPages);
+      console.log(previousPages);
+      // if requested page is home page then clear stack!
     }
   }, [pageContent, pageContext]);
+  useEffect(() => {
+    // handle previous page event
+  }, []);
+  const pagePopRequested: boolean = useAppSelector(
+    store => store.page_pop_requested
+  );
+  useEffect(() => {
+    if (pageLoaded) {
+      previousPages.pop()!; // pop off curent page
+    }
+    let previousPage: IPreviousPageArrayItem = previousPages.pop()!;
+    if (previousPage !== undefined) {
+      console.log(`pop ${previousPage.page}`);
+      setPreviousPages(previousPages);
+      dispatch(
+        Request.Page_load(previousPage.page, previousPage.currentTermIdx)
+      );
+    } else {
+      console.log(`previous page stack empty`);
+    }
+  }, [pagePopRequested]);
 
   if (pageLoaded) {
-    message = `Loading page "${pageRequested}"`;
+    message = `Loading page "${pageRequested}.json"`;
   } else if (responseError) {
-    message = `Encountered response error while loading "${pageRequested}": ${responseError}`;
+    message = `Encountered response error while loading "${pageRequested}.json": ${responseError}`;
   } else if (parseError) {
     const syntaxError: string =
       "SyntaxError: Unexpected token < in JSON at position 0";
     if (syntaxError.indexOf(parseError) === 0) {
       message = `Encountered incompatible JSON format while loading for "${pageRequested}"`;
     } else {
-      message = `Encountered parsing error while loading "${pageRequested}": ${parseError}`;
+      message = `Encountered parsing error while loading "${pageRequested}.json": ${parseError}`;
     }
   } else {
     message = `Waiting for page to load for "${pageRequested}"`;
   }
   console.log(message);
-  dispatch(Request.Message_set(message));
+  // React is complaining
+  // need to wait until after <StatusBar is rendered OR  use
+  // another means to detect that <StatusBar/> is loaded besides
+  // surrogate pageContext
+
   if (pageContext !== null) {
     return (
       <PageContext.Provider value={pageContext}>
         <div className="page">
           <PageHeader title={pageContent!.title} />
-          <SettingsDialog isActive={isActive} hide={toggle} />
+          <SettingsDialog isActive={isActive} hide={toggleDialog} />
           <NavBar headings={pageContent!.headingList} />
           <Content content={pageContent!} />
           <PageFooter />
@@ -189,7 +229,7 @@ export const Page = React.memo((props: IPagePropsType) => {
       </PageContext.Provider>
     );
   } else {
-    // no statusbar for initial load
+    // no statusbar until pageLoaded
     //  message = `Waiting to load "${pageRequested}"`;
     console.log(message);
     return <div className="loadingAnnouncement">{message}</div>;

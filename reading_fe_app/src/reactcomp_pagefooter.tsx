@@ -16,7 +16,8 @@ import { CPageLists, PageContext } from "./pageContext";
 //import { ISettingsContext, SettingsContext } from "./settingsContext";
 import { Request } from "./reducers";
 import { SpeechMonitor } from "./reactcomp_speech";
-import { SpeakButton } from "./reactcomp_speech_speakbutton";
+import { ReciteButton } from "./reactcomp_speech_recite";
+//import { SpeakButton } from "./reactcomp_speech_speakbutton";
 import { ListenButton, ListeningMonitor } from "./reactcomp_listen";
 import nextwordIcon from "./button_nextword.png";
 import prevwordIcon from "./button_prevword.png";
@@ -42,7 +43,7 @@ export const PageFooter = React.memo(() => {
           <ListenButton />
         </div>
         <div className="footer-grid-speak">
-          <SpeakButton />
+          <ReciteButton />
         </div>
         <div className="footer-grid-prevWord">
           <PreviousWordButton />
@@ -86,6 +87,7 @@ export const PreviousSentenceButton = () => {
         className="icon"
         alt="previous sentence"
         src={icon}
+        title="Go to previous sentence"
         onClick={onButtonClick}
       />
     </>
@@ -111,6 +113,7 @@ export const PreviousWordButton = () => {
         className="icon"
         alt="previous word"
         src={icon}
+        title="Go to previous word"
         onClick={() => onButtonClick()}
       />
     </>
@@ -141,6 +144,7 @@ export const NextWordButton = () => {
         className="icon"
         alt="next word"
         src={icon}
+        title="Go to next word"
         onClick={() => onButtonClick()}
       />
     </>
@@ -178,6 +182,7 @@ export const NextSentenceButton = () => {
         className="icon"
         alt="next sentence"
         src={icon}
+        title="Go to next sentence"
         onClick={() => onButtonClick()}
       />
     </>
@@ -204,6 +209,7 @@ export const LinkButton = () => {
         className="icon"
         alt="goto link"
         src={icon}
+        title="go to hypertext link"
         onClick={() => onButtonClick()}
       />
     </>

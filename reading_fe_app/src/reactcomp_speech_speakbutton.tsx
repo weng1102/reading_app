@@ -77,6 +77,7 @@ export const SpeakButton = () => {
         setRecitationQueue([...recitationQueue]);
         Synthesizer.volume = settingsContext.settings.speech.volume;
         Synthesizer.speak(sentence, setSpeakingNow);
+        if (RecitationMode.wordNext) dispatch(Request.Cursor_gotoNextWord());
       }
     }
   }, [speakingNow, recitationQueue]);
@@ -193,6 +194,7 @@ export const SpeakButton = () => {
             ? speakActiveIcon
             : speakInactiveIcon
         }
+        title="recite word"
         onClick={() => dispatch(Request.Recite_toggle())}
       />
     </>

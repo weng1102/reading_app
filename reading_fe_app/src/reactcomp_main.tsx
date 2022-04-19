@@ -7,11 +7,11 @@
  * Version history:
  *
  **/
-import React from "react";
+// import React from "react";
 import "./App.css";
 import { Request } from "./reducers";
 import { useAppDispatch } from "./hooks";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Page } from "./reactcomp_page";
 import SpeechRecognition from "react-speech-recognition";
 import {

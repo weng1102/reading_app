@@ -15,11 +15,11 @@
  **/
 import { useState } from "react";
 import {
-  IConfigSettings,
-  ISpeechSettings,
-  ISettingsContext,
-  RecitationMode,
-  SettingsContext
+  IConfigSettings
+  // ISpeechSettings,
+  // ISettingsContext,
+  // RecitationMode,
+  // SettingsContext
 } from "./settingsContext";
 interface IConfigSettingsProps {
   configSettings: IConfigSettings;

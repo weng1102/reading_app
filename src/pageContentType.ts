@@ -8,6 +8,7 @@
  *
  **/
 export const IDX_INITIALIZER = -9999;
+export const PageContentVersion = "20220407.1";
 export enum PageFormatEnumType {
   default = 0
 }
@@ -19,6 +20,7 @@ export interface IPageContent {
   owner: string;
   author: string;
   category: string;
+  version: string;
   pageFormatType: PageFormatEnumType;
   created: string;
   modified: string;
@@ -41,6 +43,7 @@ export function PageContentInitializer(): IPageContent {
     owner: "",
     author: "anonymous",
     category: "Miscellaneous",
+    version: PageContentVersion,
     pageFormatType: PageFormatEnumType.default,
     created: null!,
     modified: null!,

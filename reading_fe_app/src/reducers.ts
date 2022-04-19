@@ -54,8 +54,10 @@ const SECTION_CHANGE = "section/change"; // absolute positioning e.g., navbar
 const PAGE_LOAD = "page/load";
 const PAGE_LOADED = "page/loaded";
 const PAGE_TOP = "page/top";
-//const PAGE_RESET = "page/reset";
 const PAGE_LINKTO = "page/link to";
+
+const PAGE_POP = "page/pop";
+const PAGE_POPPED = "page/popped";
 
 // intrapage administrative actions (non-user initiated)
 //const PAGECONTEXT_SET = "pagecontext/set";
@@ -70,6 +72,8 @@ const LISTENING_STOP = "listening/stop";
 const LISTENING_TOGGLE = "listening/toggle"; // related to start/stop
 
 // speaking actions
+const ANNOUNCE_REQUESTED = "announce/request";
+
 const ANNOUNCE_MESSAGE = "announce/message";
 const ANNOUNCE_ACKNOWLEDGED = "announce/message acknowledged";
 //const ANNOUNCE_SELECTEDCONTENT = "announce/selected content"; // acknowledge completion of speaking
@@ -87,7 +91,6 @@ const TRANSITION_ACKNOWLEDGE = "transition/acknowledge";
 
 // reciting
 //const RECITING = "reciting"; // state of reciting
-const RECITING = "reciting"; // actual state of reciting
 // const RECITING_BEGIN = "reciting/start"; // actual state of reciting begin
 // const RECITING_END = "reciting/end"; // actual reciting end (stopped)
 
@@ -96,6 +99,10 @@ const RECITE_START = "recite/start";
 const RECITE_STOP = "recite/stop";
 const RECITE_TOGGLE = "recite/toggle"; // request from recite button
 const RECITE_WORD = "recite/word"; // exclusively for wordNext
+const RECITED_WORD = "recited/word"; // exclusively for wordNext
+
+const RECITING_STARTED = "reciting/started"; // actual state of reciting
+const RECITING_ENDED = "reciting/ended"; // actual state of reciting
 
 const SETTINGS_TOGGLE = "settings/toggle";
 
@@ -287,6 +294,16 @@ const Page_setContext = (context: CPageLists) => {
     payload: context
   };
 };
+const Page_pop = () => {
+  return {
+    type: PAGE_POP
+  };
+};
+const Page_popped = () => {
+  return {
+    type: PAGE_POPPED
+  };
+};
 const Recognition_toggle = (maxRetries: number) => {
   return {
     type: LISTENING_TOGGLE,
@@ -320,15 +337,14 @@ const Recognition_setAvailability = (speechRecognitionSupported: boolean) => {
     payload: speechRecognitionSupported
   };
 };
-// const Speech_transitionsAcknowledged = () => {
-//   return {
-//     type: ANNOUNCE_TRANSITIONACKNOWLEDGED
-// }
-// }
-const Reciting_start = () => {
+const Reciting_started = () => {
   return {
-    type: RECITING,
-    payload: true
+    type: RECITING_STARTED
+  };
+};
+const Reciting_ended = () => {
+  return {
+    type: RECITING_ENDED
   };
 };
 const Recite_currentWord = () => {
@@ -336,18 +352,9 @@ const Recite_currentWord = () => {
     type: RECITE_WORD
   };
 };
-
-const Reciting_stop = () => {
+const Recited_currentWord = () => {
   return {
-    type: RECITING,
-    payload: false
-  };
-};
-const Reciting = (on?: boolean) => {
-  // state of reciting
-  return {
-    type: RECITING,
-    payload: on
+    type: RECITED_WORD
   };
 };
 const Recite_start = () => {
@@ -392,13 +399,15 @@ export const Request = {
   Page_loaded,
   Page_setContext,
   Page_gotoLink,
+  Page_pop,
+  Page_popped,
 
-  Reciting,
-  Reciting_start,
-  Reciting_stop,
+  Reciting_started,
+  Reciting_ended,
   Recite_start,
   Recite_stop,
   Recite_currentWord,
+  Recited_currentWord,
   Recite_toggle, // strictly for button event
 
   Recognition_toggle,
@@ -542,9 +551,10 @@ interface IReduxState {
   page_loaded: boolean;
   page_section: number;
   pageContext: CPageLists;
+  page_pop_requested: boolean;
 
   recite_requested: boolean;
-
+  // recite_word_requested: boolean;
   reciting: boolean;
 
   settings_toggle: boolean;
@@ -559,7 +569,6 @@ interface IReduxState {
 const IReduxStateInitialState: IReduxState = {
   announce_available: false,
   announce_listening: false, // "listening"
-
   announce_message: "",
 
   listen_available: false,
@@ -574,6 +583,7 @@ const IReduxStateInitialState: IReduxState = {
   cursor_sectionIdx: 0,
   cursor_sentenceIdx: 0,
   cursor_terminalIdx: 0,
+
   cursor_newSentenceTransition: false,
   cursor_newSectionTransition: false,
   cursor_newPageTransition: false,
@@ -583,12 +593,14 @@ const IReduxStateInitialState: IReduxState = {
   page_requested: "",
   page_loaded: false,
   page_section: 0,
+  page_pop_requested: false,
   cursor_terminalIdx_proposed: 0,
   cursor_sectionIdx_proposed: 0,
   //page_lists: new CPageLists(),
   pageContext: new CPageLists(),
 
   recite_requested: false,
+  // recite_word_requested: false,
   reciting: false,
 
   settings_toggle: false,
@@ -626,7 +638,9 @@ export const rootReducer = (
     } else if (terminalIdxs.length === 1) {
       state.cursor_endOfPageReached = false;
       resetListeningRetries();
-      console.log(`setTerminalState single state transition`);
+      console.log(
+        `setTerminalState single state transition ${terminalIdxs[0]}`
+      );
       if (state.pageContext.isValidTerminalIdx(terminalIdxs[0])) {
         /// set single state
         state.cursor_terminalIdx = terminalIdxs[0];
@@ -708,8 +722,8 @@ export const rootReducer = (
   };
   switch (action.type) {
     case PAGE_LOAD:
-      state.page_requested = (action.payload.page as string) + ".json";
-      // cannot validate these idxs without proper context that will not
+      state.page_requested = action.payload.page as string;
+      // state.page_requested = (action.payload.page as string) + ".json";      // cannot validate these idxs without proper context that will not
       // be available until the accompanying (payload) page is loaded
       saveProposedCursorState(
         action.payload.sectionIdx,
@@ -740,9 +754,15 @@ export const rootReducer = (
       } else {
         // defer proposed cursor state
         state.page_requested =
-          state.pageContext.linkList[linkIdx].destination.page + ".json";
+          state.pageContext.linkList[linkIdx].destination.page;
         state.page_loaded = false;
       }
+      return state;
+    case PAGE_POP:
+      state.page_pop_requested = true;
+      return state;
+    case PAGE_POPPED:
+      state.page_pop_requested = false;
       return state;
     case CONTEXT_SET:
       // cast object into class instance with methods
@@ -909,23 +929,29 @@ export const rootReducer = (
       state.announce_message = "";
       return state;
 
-    case RECITING:
-      state.reciting = state.reciting = action.payload;
-      return state;
     case RECITE_START:
       state.recite_requested = true;
       return state;
     case RECITE_STOP:
       state.recite_requested = false;
       return state;
+    case RECITING_STARTED:
+      state.reciting = true;
+      return state;
+    case RECITING_ENDED:
+      state.reciting = false;
+      return state;
 
     case RECITE_TOGGLE:
       state.recite_requested = !state.recite_requested;
       return state;
 
-    case RECITE_WORD:
-      state.recite_requested = true;
-      return state;
+    // case RECITE_WORD:
+    //   state.recite_word_requested = true;
+    //   return state;
+    // case RECITED_WORD:
+    //   state.recite_word_requested = false;
+    //   return state;
     case SETTINGS_TOGGLE:
       state.settings_toggle = !state.settings_toggle;
       if (state.settings_toggle) state.listen_active = false;

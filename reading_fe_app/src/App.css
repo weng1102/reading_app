@@ -47,7 +47,7 @@ nav {
 .header-grid-container {
     display: grid;
     font-size: 8px;
-    grid-template-columns: var(--header-height)  auto var(--header-height) var(--header-height) var(--header-height);
+    grid-template-columns: var(--header-height)  auto var(--header-height) var(--header-height) var(--header-height) var(--header-height);
     align-items: center;
     height: 100%;
 }
@@ -61,20 +61,25 @@ nav {
   grid-column-start: 2;
   padding: 15px;
 }
-.header-grid-homebutton {
+.header-grid-prevbutton {
   padding: 10px;
   display: flex;
   grid-column-start: 3;
 }
-.header-grid-sitemapbutton {
+.header-grid-homebutton {
   padding: 10px;
   display: flex;
   grid-column-start: 4;
 }
-.header-grid-settingbutton {
+.header-grid-sitemapbutton {
   padding: 10px;
   display: flex;
   grid-column-start: 5;
+}
+.header-grid-settingbutton {
+  padding: 10px;
+  display: flex;
+  grid-column-start: 6;
 }
 .headertitle {
   grid-column-start: 2;

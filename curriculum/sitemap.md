@@ -11,3 +11,7 @@
 * [Site Map](sitemap,0,0)
 # Strategies to help me speak with aphasia
 * [Strategies](mystrategies,0,0)
+# Testing recite button
+* [Reciting Buttons](workbank,0,0)
+# The Hunting Party
+* [The Hunting Party - Characters](huntingParty_characters,0,0)

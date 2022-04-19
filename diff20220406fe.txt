@@ -1,0 +1,2192 @@
+diff --git a/reading_fe_app/src/App.css b/reading_fe_app/src/App.css
+index 41feca3..e7b32a8 100644
+--- a/reading_fe_app/src/App.css
++++ b/reading_fe_app/src/App.css
+@@ -23,7 +23,7 @@ footer {
+ 
+ main {
+   padding: 5px;
+-  background-color: linen;
++  background-color: white;
+   overflow: auto;
+   font-size: 2vw;
+ }
+@@ -47,7 +47,7 @@ nav {
+ .header-grid-container {
+     display: grid;
+     font-size: 8px;
+-    grid-template-columns: var(--header-height)  auto var(--header-height) var(--header-height);
++    grid-template-columns: var(--header-height)  auto var(--header-height) var(--header-height) var(--header-height);
+     align-items: center;
+     height: 100%;
+ }
+@@ -61,16 +61,21 @@ nav {
+   grid-column-start: 2;
+   padding: 15px;
+ }
+-.header-grid-sitemapbutton {
++.header-grid-homebutton {
+   padding: 10px;
+   display: flex;
+   grid-column-start: 3;
+ }
+-.header-grid-settingbutton {
++.header-grid-sitemapbutton {
+   padding: 10px;
+   display: flex;
+   grid-column-start: 4;
+ }
++.header-grid-settingbutton {
++  padding: 10px;
++  display: flex;
++  grid-column-start: 5;
++}
+ .headertitle {
+   grid-column-start: 2;
+   display: flex;
+@@ -110,32 +115,53 @@ nav {
+ }
+ .footer-grid-prevSentence {
+   display: flex;
+-  grid-column-start: 3;
++  grid-column-start: 5;
+   padding:10px
+ }
+ .footer-grid-prevWord {
+   display: flex;
++  grid-column-start: 3;
+   padding:10px
+ }
+ .footer-grid-nextWord {
+   display: flex;
++  grid-column-start: 4;
+   padding:10px
+ }
+ .footer-grid-nextSentence {
+   display: flex;
++  grid-column-start: 6;
+ padding:10px
+ }
+ .footer-grid-link {
+   display: flex;
++  grid-column-start: 7;
+ padding:10px
+ }
+ .footer-statusBar {
+-  display: flex;
++  display: block;
+   height:100%;
++  padding-right: 10px;
+   font-size: 12px;
+   overflow: auto;
+   align-items: center;
+ }
++.footer-statusBar-message-application {
++
++}
++.footer-statusBar-message-listening {
++
++}
++.footer-statusBar-message-state {
++
++}
++.listen-monitor-status {
++  display: block;
++  height:100%;
++  font-size: 10px;
++  overflow: auto;
++
++}
+ .icon {
+   max-width: 100%;
+   min-height: 100%;
+@@ -149,6 +175,10 @@ span.whitespace {
+   white-space: pre-wrap;
+ }
+ .recitable-word.active {
++  background-color:#FFFF00;
++}
++.recitable-word.active1 {
++  background-color:#FFFF00;
+   text-decoration:underline;
+   color: blue;
+ }
+@@ -204,7 +234,7 @@ span.whitespace {
+ }
+ .settings {
+   display: grid;
+-  grid-template-rows: var(--header-height) auto var(--footer-height);
++  grid-template-rows: var(--header-height) auto 4px 60vh var(--footer-height);
+   vertical-align: top;
+   background: white;
+   margin: 1.75rem auto;
+@@ -216,45 +246,106 @@ span.whitespace {
+ .settings-header {
+   display: grid;
+   background-color: lightgray;
+-  grid-row-start: 1;
++  grid-row: 1;
+   padding: 10px;
+   font-size: 20px;
+   user-select: none;
+ }
+-.settings-grid-container {
++.settings-tabControl-grid {
++  display: grid;
++  grid-row: 2;
++  text-align: center;
++  font-size: 18px;
++  grid-template-columns: 3;
++  user-select: none;
++}
++.settings-tabControl-tab1 {
++  padding-bottom: 5px;
++  grid-column: 1;
++}
++.settings-tabControl-tab2 {
++  padding-bottom: 5px;
++  grid-column: 2;
++}
++.settings-tabControl-tab3 {
++  padding-bottom: 5px;
++  grid-column: 3
++}
++.settings-tabControl-markers-grid {
++  grid-row: 3;
+   display: grid;
++  grid-template-columns: 3;
++  vertical-align: top;
++  user-select: none;
++}
++.settings-tabControl-marker1 {
++  grid-column: 1;
++  height: 3px;
++}
++.settings-tabControl-marker2 {
++  grid-column: 2;
++  height: 3px;
++}
++.settings-tabControl-marker3 {
++  grid-column: 3;
++  height: 3px;
++}
++.settings-tabControl-marker1.active {
++  background-color: lightgray;
++}
++.settings-tabControl-marker2.active {
++  background-color: lightgray;
++}
++.settings-tabControl-marker3.active {
++  background-color: lightgray;
++}
++.settings-grid-container {
++  grid-row: 4;
++  vertical-align: top;
+   padding: 5px;
++  display: grid;
+   grid-template-rows: auto;
++  height: fit-content;
++  overflow: auto;
+ }
+ .settings-content {
+-  display: block;
+-  grid-row-start: 2;
++  vertical-align: top;
++  display: inline;
++}
++.settings-footer {
++  display: grid;
++  grid-row: 5;
++  background-color: lightgray;
+ }
+-.settings-section-header { /* Speech and Listening */
++.settings-section-header {
+   border-radius: 0.5px;
+   font-size: 18px;
+   user-select: none;
++  height: fit-content
+ }
+ .settings-grid-section-header {
+   border-top: 2px solid lightblue;
+   border-radius: 0.5px;
+   font-size: 16px;
+   user-select: none;
+-
++  height: fit-content
+ }
+ .settings-grid-col2-label-control {
+   display: grid;
+   padding-top: 15px;
+   padding-left: 10px;
+   grid-template-columns: 1fr 7fr;
++  vertical-align: top;
+ }
+ .settings-grid-col2-label {
+   font-size: 14px;
+   grid-column-start: 1;
+   user-select: none;
++  vertical-align: top;
+ }
+ .settings-grid-col2-control {
+   grid-column-start: 2;
++  vertical-align: top;
+ }
+ .settings-grid-section-footer {
+   font-size: 14px;
+@@ -263,10 +354,15 @@ span.whitespace {
+   padding-left: 10px;
+   grid-column-start: 1;
+   user-select: none;
++  vertical-align: top;
+ }
+ .stopAtEOS-checkbox-container {
+   padding-left: 10px;
+-  font-size: 14px
++  font-size: 14px;
++    padding-top: 15px;
++}
++.retries-textbox {
++  width: 50px
+ }
+ .slider-container {
+   grid-template-rows: 1fr 1fr;
+@@ -309,11 +405,6 @@ span.whitespace {
+   font-size: 16px;
+   padding: 2px
+ }
+-.settings-footer {
+-  display: grid;
+-  grid-row-start: 3;
+-  background-color: lightgray;
+-}
+ .settings-footer-buttonbar {
+ }
+ h1 {
+@@ -413,6 +504,10 @@ input[type="radio"]{
+   max-height: 300px;
+ }
+ .link-label {
++  text-decoration: underline ;
++  color: blue;
++}
++.link-label1 {
+   text-decoration: underline dotted;
+ }
+ .textbox-control {
+diff --git a/reading_fe_app/src/App.tsx b/reading_fe_app/src/App.tsx
+index a849c16..4a0fad1 100644
+--- a/reading_fe_app/src/App.tsx
++++ b/reading_fe_app/src/App.tsx
+@@ -1,5 +1,5 @@
+ import "./App.css";
+-import { ReadingApp } from "./reactcomps_main";
++import { ReadingApp } from "./reactcomp_main";
+ function App() {
+   //      <ReadingApp />
+   return (
+diff --git a/reading_fe_app/src/button_sitemap.png b/reading_fe_app/src/button_sitemap.png
+index 7dc1087..edf88d3 100644
+Binary files a/reading_fe_app/src/button_sitemap.png and b/reading_fe_app/src/button_sitemap.png differ
+diff --git a/reading_fe_app/src/button_sitemap.psd b/reading_fe_app/src/button_sitemap.psd
+index 323c36a..b21496e 100644
+Binary files a/reading_fe_app/src/button_sitemap.psd and b/reading_fe_app/src/button_sitemap.psd differ
+diff --git a/reading_fe_app/src/pageContentType.ts b/reading_fe_app/src/pageContentType.ts
+index 5a6dfab..c874225 100644
+--- a/reading_fe_app/src/pageContentType.ts
++++ b/reading_fe_app/src/pageContentType.ts
+@@ -75,7 +75,8 @@ export type SectionVariantType =
+   | ISectionFillinVariant
+   | ISectionBlockquoteVariant
+   | ISectionFillinListVariant
+-  | ISectionImageEntryVariant;
++  | ISectionImageEntryVariant
++  | ISectionButtonGridVariant;
+ 
+ export enum SectionVariantEnumType {
+   heading = "heading",
+@@ -87,6 +88,7 @@ export enum SectionVariantEnumType {
+   fillin = "fillin",
+   fillin_list = "fillin_list",
+   image_entry = "image_entry",
++  button_grid = "buttongrip",
+   blockquote = "blockquote",
+   unittest = "unittest",
+   empty = "empty",
+@@ -157,6 +159,20 @@ export function ISectionHeadingVariantInitializer(): ISectionHeadingVariant {
+     level: 0
+   };
+ }
++export interface ISectionButtonGridVariant {
++  description: string;
++  columnCount: number;
++  minColumnWidth: number;
++  buttonText: string[];
++}
++export function ISectionButtonGridVariantInitializer(): ISectionButtonGridVariant {
++  return {
++    description: "",
++    columnCount: 0,
++    minColumnWidth: 50,
++    buttonText: []
++  };
++}
+ export interface ISectionBlockquoteVariant {
+   paragraphs: [];
+   citing: URL | null;
+diff --git a/reading_fe_app/src/reactcomp_config.tsx b/reading_fe_app/src/reactcomp_config.tsx
+index b69103c..a542c6e 100644
+--- a/reading_fe_app/src/reactcomp_config.tsx
++++ b/reading_fe_app/src/reactcomp_config.tsx
+@@ -24,6 +24,7 @@ import {
+ interface IConfigSettingsProps {
+   configSettings: IConfigSettings;
+   setConfigSettings: (configSetting: IConfigSettings) => void;
++  active: boolean;
+ }
+ export const ConfigSettings = (props: IConfigSettingsProps) => {
+   const [distDir, _setDistDir] = useState(props.configSettings.distDir);
+@@ -34,27 +35,52 @@ export const ConfigSettings = (props: IConfigSettingsProps) => {
+       distDir: distDir
+     });
+   };
+-  const onChangeValue = (event: any) => {
++  const onDistDirChangeValue = (event: any) => {
+     setDistDir(event.target.value);
+   };
++  const [homePage, _setHomePage] = useState(props.configSettings.homePage);
++  const setHomePage = (homePage: string) => {
++    _setHomePage(homePage);
++    props.setConfigSettings({
++      ...props.configSettings,
++      homePage: homePage
++    });
++  };
++  const onHomePageChangeValue = (event: any) => {
++    setHomePage(event.target.value);
++  };
+   let isLocked: boolean = true;
+-  return (
+-    <>
+-      <div className="settings-section-header">Personalization</div>
+-      <div className="settings-grid-col2-label-control">
+-        <div className="settings-grid-col2-label">Curriculum subpath:</div>
+-        <input
+-          type="text"
+-          className="textbox-control"
+-          defaultValue={props.configSettings.distDir}
+-          readOnly={isLocked}
+-          onChange={onChangeValue}
+-        />
+-      </div>
+-      <div className="settings-grid-section-footer">
+-        Location of curriculum content
+-      </div>
+-      <div>User Info tbd</div>
+-    </>
+-  );
++  if (props.active) {
++    return (
++      <>
++        <div className="settings-grid-section-header">Personal</div>
++        <div className="settings-grid-col2-label-control">
++          <div className="settings-grid-col2-label">Homepage:</div>
++          <input
++            type="text"
++            className="textbox-control"
++            defaultValue={props.configSettings.homePage}
++            readOnly={isLocked}
++            onChange={onHomePageChangeValue}
++          />
++        </div>
++        <div className="settings-grid-section-footer">Name of homepage</div>
++        <div className="settings-grid-col2-label-control">
++          <div className="settings-grid-col2-label">Curriculum subpath:</div>
++          <input
++            type="text"
++            className="textbox-control"
++            defaultValue={props.configSettings.distDir}
++            readOnly={isLocked}
++            onChange={onDistDirChangeValue}
++          />
++        </div>
++        <div className="settings-grid-section-footer">
++          Location of curriculum content
++        </div>
++      </>
++    );
++  } else {
++    return <></>;
++  }
+ };
+diff --git a/reading_fe_app/src/reactcomp_listen.tsx b/reading_fe_app/src/reactcomp_listen.tsx
+index 649cf40..273ab77 100644
+--- a/reading_fe_app/src/reactcomp_listen.tsx
++++ b/reading_fe_app/src/reactcomp_listen.tsx
+@@ -4,6 +4,7 @@ import "./App.css";
+ // import mic_notlistening from "./mic1-inactive-xparent.gif";
+ // import mic_unavailable from "./mic1-ghosted.gif";
+ // import listenGreenActiveIcon from "./button_listen_activeGreen.gif";
++import { StatusBarMessageType } from "./reducers";
+ import listenRedActiveIcon from "./button_listen_activeRed.gif";
+ import listenIcon from "./button_listen.png";
+ import listenGhostedIcon from "./button_listen_ghosted.png";
+@@ -19,7 +20,9 @@ import {
+   NotificationMode,
+   SettingsContext
+ } from "./settingsContext";
++
+ export const ListeningMonitor = () => {
++  const [wordsPreviouslyHeard, setWordsPreviouslyHeard] = useState("");
+   const [deferredDispatchStartTime, setDeferredDispatchStartTime] = useState(0);
+   const [silenceCheckpoint, setSilenceCheckpoint] = useState(0);
+   const dispatch = useAppDispatch();
+@@ -29,16 +32,22 @@ export const ListeningMonitor = () => {
+   const endOfPageReached: boolean = useAppSelector(
+     store => store.cursor_endOfPageReached
+   );
++  // const test: boolean = useAppSelector(store => store.test);
++  const exceededRetries: boolean = useAppSelector(
++    store => store.listen_retriesExceeded
++  );
++  const newSentence: boolean = useAppSelector(
++    store => store.cursor_newSentenceTransition
++  );
+   const flushRequested: boolean = useAppSelector(store => store.listen_flush);
+-  // const newSentence: boolean = useAppSelector(
+-  //   store => store.cursor_newSentenceTransition
+-  // );
+   let settingsContext: ISettingsContext = useContext(
+     SettingsContext
+   ) as ISettingsContext;
+-  let silenceTimeout: number = settingsContext.settings.listen.timeout;
++  const silenceTimeout: number = settingsContext.settings.listen.timeout;
+   let queuingDuration: number =
+     settingsContext.settings.listen.listeningInterval;
++  //  const retries: number = useAppSelector(store => store.listen_retries);
++
+   const {
+     transcript,
+     interimTranscript,
+@@ -54,31 +63,88 @@ export const ListeningMonitor = () => {
+   //     dispatch(Request.Recognition_stop());
+   //   }
+   // }, [endOfPageReached]);
++  // useEffect(() => {
++  //   console.log(`reactcomp_listen: test 1=${test}`);
++  //   dispatch(Request.Test_set());
++  //   dispatch(Request.Test_reset());
++  // }, [test]);
++  // useEffect(() => {
++  //   console.log(`reactcomp_listen: test 2=${test}`);
++  //   dispatch(Request.Test_reset());
++  // }, [test]);
++  // useEffect(() => {
++  //   console.log(`reactcomp_listen: test 3=${test}`);
++  //   dispatch(Request.Test_reset());
++  // }, [test]);
++  // useEffect(() => {
++  //   console.log(`LISTENING: ${retries} retries`);
++  //   if (
++  //     settingsContext.settings.listen.retries > 0 &&
++  //     retries > settingsContext.settings.listen.retries
++  //   ) {
++  //     // dispatch(Request.Recognition_setMaxRetriesExceeded());
++  //     console.log(`LISTENING: Exceeded ${retries} retries, goto next word`);
++  //   }
++  // }, [retries]);
++  useEffect(() => {
++    const maxRetries: number = settingsContext.settings.listen.retries;
++    //    const idx: number = useAppSelector(store => store.cursor_terminalIdx);
++    if (exceededRetries) {
++      console.log(`LISTENING: Exceeded ${maxRetries} retries, next word`);
++      // get current word; say the word
++      // dispatch(Request.Recite_currentWord());
++      // dispatch(Request.Cursor_gotoNextWord());
++    }
++  }, [exceededRetries]);
++  // useEffect(() => {
++  //   if (exceededRetries) {
++  //     console.log("LISTENING: retries exceeded");
++  //     dispatch(Request.Cursor_gotoNextWord());
++  //   }
++  // }, [exceededRetries]);
++  useEffect(() => {
++    if (endOfPageReached) {
++      console.log("LISTENING: stopped listening at end of page");
++      dispatch(Request.Recognition_stop());
++    }
++  }, [listening, endOfPageReached]);
++  // useEffect(() => {
++  //   if (!listeningRequested) {
++  //     dispatch(Request.Recognition_stop());
++  //     console.log("LISTENING: stop listening requested");
++  //   }
++  // }, [listening, listeningRequested]);
++  // useEffect(() => {
++  //   if (!listeningRequested) {
++  //     dispatch(Request.Recognition_stop());
++  //     console.log("LISTENING: stop listening requested");
++  //   }
++  // }, [listening, listeningRequested]);
+   useEffect(() => {
++    // start listening, listen and stop listening
+     if (listening) {
+-      if (endOfPageReached) {
+-        console.log("stopped listening at end of page");
+-        dispatch(Request.Recognition_stop());
+-      } else if (!listeningRequested) {
++      if (!listeningRequested) {
+         dispatch(Request.Recognition_stop());
+-        console.log("stop listening requested");
++        console.log("LISTENING: stop listening requested");
+       }
+     } else if (listeningRequested) {
++      // KLUDGE BECAUSE REDUCER NEEDS INITIAL RETRIES. Subsequent changes
++      // retries managed within setting dialog
+       console.log(
+-        `start listening with timeout=${silenceTimeout}s and buffering=${queuingDuration}ms`
++        `LISTENING: start listening with timeout=${silenceTimeout}s and buffering time=${queuingDuration}ms`
+       );
+       if (silenceCheckpoint === 0) {
+         setSilenceCheckpoint(Date.now()); // will only works continuuous=false
+-        console.log(`set silence checkpoint=${silenceCheckpoint}`);
++        console.log(`LISTENING: set silence checkpoint=${silenceCheckpoint}`);
+       }
+       if (deferredDispatchStartTime === 0) {
+         setDeferredDispatchStartTime(Date.now());
+       }
+       SpeechRecognition.startListening(); // timeout periodically not continuous: true
+     } else {
+-      console.log("continue not listening");
++      console.log("LISTENING: continue not listening");
+       SpeechRecognition.abortListening(); //just in case
+-      console.log(`reset silence checkpoint`);
++      console.log(`LISTENING: reset silence checkpoint`);
+       setSilenceCheckpoint(0);
+     }
+   }, [
+@@ -86,15 +152,15 @@ export const ListeningMonitor = () => {
+     listeningRequested,
+     deferredDispatchStartTime,
+     silenceCheckpoint,
+-    setSilenceCheckpoint,
+-    endOfPageReached
++    setSilenceCheckpoint
+   ]);
+   useEffect(() => {
++    // listening
+     // must have [listening] as dependency to allow effect to periodically
+     // trigger based on SpeechRecognition internal trigger.
+     let words: string;
+     if (finalTranscript !== "") {
+-      console.log(`final transcript=${finalTranscript} `);
++      console.log(`LISTENING: final transcript=${finalTranscript} `);
+       words = finalTranscript;
+       resetTranscript();
+     } else {
+@@ -103,31 +169,34 @@ export const ListeningMonitor = () => {
+     // defer dispatch(CursorActions.matchWord()) to allow speechrecognition to
+     // gather additional context. The SpeechRecogition object only triggers
+     // (asynchronously) when it detects speech (and when it detects silence
+-    // for several seconds). This effect must balance this with the component
+-    // updating the current word recited.
+-    //    const timeoutLimit = 20;
+-    //  const silenceTimeout = 20; // seconds
+-    if (words.length === 0) {
++    // for several seconds). This effect must balance this deferment with
++    // the component updating the current word recited.
++    if (words.length === 0 || words === wordsPreviouslyHeard) {
+       let timeoutDuration = Math.round((Date.now() - silenceCheckpoint) / 1000);
+-      console.log(`timeout in ${silenceTimeout - timeoutDuration}s`);
++      console.log(`LISTENING: timeout in ${silenceTimeout - timeoutDuration}s`);
+       if (timeoutDuration > silenceTimeout) {
+         dispatch(Request.Recognition_stop());
++        setWordsPreviouslyHeard("");
++      } else if (words === wordsPreviouslyHeard) {
++        console.log(`LISTENING: heard nothing new "${words}"`);
+       }
+     } else {
++      setWordsPreviouslyHeard(words);
+       setSilenceCheckpoint(Date.now());
+       const msecBeforeDispatch = queuingDuration; //msec
+       let deferredDispatchWaitDuration = Date.now() - deferredDispatchStartTime;
+       if (deferredDispatchWaitDuration > msecBeforeDispatch) {
+-        console.log(`dispatch timeout after ${deferredDispatchWaitDuration}ms`);
+-        dispatch(Request.Cursor_matchWords(words)); // required to update current word on page
++        console.log(
++          `LISTENING: matchWords(${words}]) dispatched timeout after ${deferredDispatchWaitDuration -
++            msecBeforeDispatch}ms remaining`
++        );
++        dispatch(Request.Cursor_matchWords(words));
+         setDeferredDispatchStartTime(Date.now());
+-        // NOTE: only reset transcript at the end of sentence!!!!!!!
+-      } else if (flushRequested) {
+-        console.log(`flushing transcript queue`);
+-        resetTranscript();
+-        dispatch(Request.Recognition_flush(false));
++        // NOTE: only reset transcript at the end of sentence!
+       } else {
+-        console.log(`deferring dispatch for interimTranscript=${words}`);
++        console.log(
++          `LISTENING: deferring dispatch for interimTranscript=${words}`
++        );
+       }
+     }
+   }, [
+@@ -138,20 +207,49 @@ export const ListeningMonitor = () => {
+     setSilenceCheckpoint,
+     interimTranscript,
+     finalTranscript,
+-    resetTranscript,
+-    dispatch,
+-    flushRequested
++    resetTranscript
+   ]);
++  useEffect(() => {
++    if (newSentence) {
++      console.log(`LISTENING: new sentence transition`);
++      dispatch(Request.Recognition_flush());
++      // dispatch(
++      //   Request.Message_set(
++      //     "new sentence transition",
++      //     StatusBarMessageType.listening
++      //   )
++      // );
++      // } else {
++      //   dispatch(Request.Message_clear(StatusBarMessageType.listening));
++    }
++  }, [newSentence]);
++  useEffect(() => {
++    if (flushRequested) {
++      console.log(`LISTENING: flushing transcript queue`);
++      resetTranscript();
++      dispatch(Request.Recognition_flushed());
++    } else {
++    }
++  }, [flushRequested]);
++
++  const message_listen: string = useAppSelector(
++    store => store.message_listening
++  );
+   if (SpeechRecognition.browserSupportsSpeechRecognition()) {
+     // listenButton disallows already
+-    return <div>{interimTranscript}</div>;
++    return <div className="footer-statusBar">{message_listen}</div>;
+   } else {
+-    return <div>Listening monitor cannot recognize speech</div>;
++    return (
++      <div className="footer-statusBar">
++        Listening monitor cannot recognize speech
++      </div>
++    );
+   }
+ };
+ interface IListenSettingsProps {
+   listenSettings: IListenSettings;
+   setListenSettings: (listeningSettings: IListenSettings) => void;
++  active: boolean;
+ }
+ export const ListenSettings = (props: IListenSettingsProps) => {
+   const [stopAtEOS, _setStopAtEOS] = useState(
+@@ -164,6 +262,14 @@ export const ListenSettings = (props: IListenSettingsProps) => {
+       stopAtEndOfSentence: stopAtEOS
+     });
+   };
++  const [retries, _setRetries] = useState(props.listenSettings.retries);
++  const setRetries = (retries: number) => {
++    _setRetries(retries);
++    props.setListenSettings({
++      ...props.listenSettings,
++      retries: retries
++    });
++  };
+   const [timeout, _setTimeout] = useState(props.listenSettings.timeout);
+   const setTimeout = (timeout: number) => {
+     _setTimeout(timeout);
+@@ -192,26 +298,34 @@ export const ListenSettings = (props: IListenSettingsProps) => {
+       notificationMode: notification
+     });
+   };
+-  return (
+-    <>
+-      <div className="settings-section-header">Listen</div>
+-      <StopAtEOS stopAtEOS={stopAtEOS} setStopAtEOS={setStopAtEOS} />
+-      <Timeout timeout={timeout} setTimeout={setTimeout} />
+-      <ListeningInterval
+-        listeningInterval={listeningInterval}
+-        setListeningInterval={setListeningInterval}
+-      />
+-      <NotificationModeRadioButton
+-        notificationMode={notificationMode}
+-        setNotificationMode={setNotificationMode}
+-      />
+-    </>
+-  );
++  if (props.active) {
++    return (
++      <>
++        <div className="settings-grid-section-header">Behavior</div>
++        <Retries retries={retries} setRetries={setRetries} />
++        <StopAtEOS stopAtEOS={stopAtEOS} setStopAtEOS={setStopAtEOS} />
++        <Timeout timeout={timeout} setTimeout={setTimeout} />
++        <ListeningInterval
++          listeningInterval={listeningInterval}
++          setListeningInterval={setListeningInterval}
++        />
++        <NotificationModeRadioButton
++          notificationMode={notificationMode}
++          setNotificationMode={setNotificationMode}
++        />
++      </>
++    );
++  } else {
++    return <></>;
++  }
+ };
+ export const ListenButton = () => {
+-  //
++  let settingsContext: ISettingsContext = useContext(
++    SettingsContext
++  ) as ISettingsContext;
+   const listeningAvailable = useAppSelector(store => store.listen_available);
+   const listening = useAppSelector(store => store.listen_active);
++  const maxRetries: number = settingsContext.settings.listen.retries;
+   console.log(`listenbutton listening=${listening}`);
+   console.log(`listenbutton listeningAvailable=${listeningAvailable}`);
+   const dispatch = useAppDispatch();
+@@ -231,13 +345,41 @@ export const ListenButton = () => {
+         }
+         onClick={() =>
+           listeningAvailable
+-            ? dispatch(Request.Recognition_toggle())
++            ? dispatch(Request.Recognition_toggle(maxRetries))
+             : undefined
+         }
+       />
+     </>
+   );
+ };
++interface IRetriesProps {
++  retries: number;
++  setRetries: (retries: number) => void;
++}
++const Retries = (props: IRetriesProps) => {
++  const onChangeValue = (event: any) => {
++    console.log(`onchange=${event.target.checked}`);
++    props.setRetries(event.target.value);
++  };
++  return (
++    <>
++      <div className="settings-grid-col2-label-control">
++        <div className="settings-grid-col2-label">Retries:</div>
++        <input
++          type="number"
++          min="5"
++          className="textbox-control retries-textbox"
++          defaultValue={props.retries}
++          onChange={onChangeValue}
++        />
++      </div>
++      <div className="settings-grid-section-footer">
++        Retries specifies the number of retries before continuing to the next
++        word.
++      </div>
++    </>
++  );
++};
+ interface IStopAtEOSProps {
+   stopAtEOS: boolean;
+   setStopAtEOS: (stopAtEOS: boolean) => void;
+@@ -249,7 +391,6 @@ const StopAtEOS = (props: IStopAtEOSProps) => {
+   };
+   return (
+     <>
+-      <div className="settings-grid-section-header">Performance</div>
+       <div className="checkbox-container stopAtEOS-checkbox-container">
+         <input
+           onChange={onChangeValue}
+diff --git a/reading_fe_app/src/reactcomp_pagefooter.tsx b/reading_fe_app/src/reactcomp_pagefooter.tsx
+index 47f42f5..b837903 100644
+--- a/reading_fe_app/src/reactcomp_pagefooter.tsx
++++ b/reading_fe_app/src/reactcomp_pagefooter.tsx
+@@ -44,15 +44,15 @@ export const PageFooter = React.memo(() => {
+         <div className="footer-grid-speak">
+           <SpeakButton />
+         </div>
+-        <div className="footer-grid-prevSentence">
+-          <PreviousSentenceButton />
+-        </div>
+         <div className="footer-grid-prevWord">
+           <PreviousWordButton />
+         </div>
+         <div className="footer-grid-nextWord">
+           <NextWordButton />
+         </div>
++        <div className="footer-grid-prevSentence">
++          <PreviousSentenceButton />
++        </div>
+         <div className="footer-grid-nextSentence">
+           <NextSentenceButton />
+         </div>
+@@ -63,8 +63,6 @@ export const PageFooter = React.memo(() => {
+       <div className="footer-statusBar">
+         <StatusBar />
+       </div>
+-      <SpeechMonitor />
+-      <ListeningMonitor />
+     </footer>
+   );
+ });
+@@ -215,7 +213,16 @@ interface StatusBarPropsType {}
+ export const StatusBar = () => {
+   return (
+     <>
+-      <div>{useAppSelector(store => store.statusBar_message)}</div>
++      <div className="footer-statusBar-message-application">
++        {useAppSelector(store => store.message_application)}
++      </div>
++      <div className="footer-statusBar-message-listening">
++        <ListeningMonitor />
++      </div>
++      <div className="footer-statusBar-message-state">
++        {useAppSelector(store => store.message_state)}
++        <SpeechMonitor />
++      </div>
+     </>
+   );
+ };
+diff --git a/reading_fe_app/src/reactcomp_pageheader.tsx b/reading_fe_app/src/reactcomp_pageheader.tsx
+index f7435f5..8e053fb 100644
+--- a/reading_fe_app/src/reactcomp_pageheader.tsx
++++ b/reading_fe_app/src/reactcomp_pageheader.tsx
+@@ -12,6 +12,7 @@ import React from "react";
+ import "./App.css";
+ import hamburgerIcon from "./Hamburger_icon.png";
+ import settingsIcon from "./settingicon.png";
++import homePageIcon from "./button_homeicon.png";
+ import siteMapIcon from "./button_sitemap.png";
+ import { SettingsDialog, SettingsButton } from "./reactcomp_settings";
+ 
+@@ -40,12 +41,15 @@ import {
+   ISectionParagraphVariant
+ } from "./pageContentType";
+ 
++import { ISettingsContext, SettingsContext } from "./settingsContext";
++
+ interface IPageHeaderPropsType {
+   title: string;
+ }
+ export const PageHeader = React.memo((props: IPageHeaderPropsType) => {
+   const dispatch = useAppDispatch();
+   const { isActive, toggle } = useDialog();
++  const homePage = useContext(SettingsContext)!.settings.config.homePage;
+   console.log(`<PageHeader>`);
+   return (
+     <header className="header-grid-container">
+@@ -53,6 +57,14 @@ export const PageHeader = React.memo((props: IPageHeaderPropsType) => {
+         <img className="icon" alt="hamburger" src={hamburgerIcon} />
+       </div>
+       <div className="headertitle">{props.title}</div>
++      <div className="header-grid-homebutton">
++        <img
++          className="icon"
++          alt="homePage"
++          src={homePageIcon}
++          onClick={() => dispatch(Request.Page_load(`homepage_${homePage}`))}
++        />
++      </div>
+       <div className="header-grid-sitemapbutton">
+         <img
+           className="icon"
+@@ -60,7 +72,6 @@ export const PageHeader = React.memo((props: IPageHeaderPropsType) => {
+           src={siteMapIcon}
+           onClick={() => dispatch(Request.Page_load("sitemap"))}
+         />
+-        <SettingsDialog isActive={isActive} hide={toggle} />
+       </div>
+       <div className="header-grid-settingbutton">
+         <img
+diff --git a/reading_fe_app/src/reactcomp_settings.tsx b/reading_fe_app/src/reactcomp_settings.tsx
+index 3587dfa..0279d2f 100644
+--- a/reading_fe_app/src/reactcomp_settings.tsx
++++ b/reading_fe_app/src/reactcomp_settings.tsx
+@@ -56,6 +56,7 @@ export const SettingsDialog = (props: ISettingsDialogPropsType) => {
+   );
+   //  const [initial, setInitial] = useState(true);
+   const [modified, setModified] = useState(false);
++  const [activeTab, setActiveTab] = useState(1);
+   // clone setting context as potential new settings that can be
+   // modified and committed to active/actual SettingContext
+   // const [newSettings, setNewSettings] = useState(
+@@ -97,6 +98,7 @@ export const SettingsDialog = (props: ISettingsDialogPropsType) => {
+         speech: speechSettings,
+         listen: listenSettings
+       });
++      dispatch(Request.Recognition_setMaxRetries(listenSettings.retries));
+       setModified(false);
+     }
+     //    setInitial(true);
+@@ -109,7 +111,17 @@ export const SettingsDialog = (props: ISettingsDialogPropsType) => {
+     setModified(false);
+     // setNewSettings(SettingsCloner(settingsContext));
+     props.hide();
++    dispatch(Request.Test_set());
+   };
++  const markersInactive: string[] = ["", "", "", "", ""];
++  let tabMarkers: string[] = markersInactive;
++  const clickTab = (tab: number) => {
++    tabMarkers = markersInactive;
++    setActiveTab(tab);
++    console.log(`tab ${tab} selected`);
++    if (tab > 0 && tab < tabMarkers.length) tabMarkers[tab] = "active";
++  };
++
+   let OkIcons = modified ? OkIcon : OkIcon_ghosted;
+   let dispatch = useAppDispatch();
+   // could do deep compare between temp and current contexts
+@@ -123,18 +135,26 @@ export const SettingsDialog = (props: ISettingsDialogPropsType) => {
+         <div className="settings-container">
+           <div className="settings sliding1">
+             <div className="settings-header">Settings</div>
++            <TabControlButtons
++              activeTab={activeTab}
++              setActiveTab={setActiveTab}
++            />
++            <TabControlMarkers activeTab={activeTab} />
+             <div className="settings-grid-container">
+               <SpeechSettings
+                 speechSettings={speechSettings}
+                 setSpeechSettings={setSpeechSettings}
++                active={activeTab === 1}
+               />
+               <ListenSettings
+                 listenSettings={listenSettings}
+                 setListenSettings={setListenSettings}
++                active={activeTab === 2}
+               />
+               <ConfigSettings
+                 configSettings={configSettings}
+                 setConfigSettings={setConfigSettings}
++                active={activeTab === 3}
+               />
+             </div>
+             <div className="settings-footer">
+@@ -153,6 +173,55 @@ export const SettingsDialog = (props: ISettingsDialogPropsType) => {
+     );
+   }
+ };
++interface ITabControlButtonsProps {
++  activeTab: number;
++  setActiveTab: (clickTab: number) => void;
++}
++export const TabControlButtons = (props: ITabControlButtonsProps) => {
++  return (
++    <>
++      <div className="settings-tabControl-grid">
++        <div
++          className="settings-tabControl-tab1"
++          onClick={() => props.setActiveTab(1)}
++        >
++          Speaking
++        </div>
++        <div
++          className="settings-tabControl-tab2"
++          onClick={() => props.setActiveTab(2)}
++        >
++          Listening
++        </div>
++        <div
++          className="settings-tabControl-tab3"
++          onClick={() => props.setActiveTab(3)}
++        >
++          Identifying
++        </div>
++      </div>
++    </>
++  );
++};
++interface TabControlMarkersProps {
++  activeTab: number;
++}
++export const TabControlMarkers = (props: TabControlMarkersProps) => {
++  const markersInactive: string[] = ["", "", "", "", ""];
++  let tabMarkers: string[] = markersInactive;
++  tabMarkers = markersInactive;
++  if (props.activeTab > 0 && props.activeTab < tabMarkers.length)
++    tabMarkers[props.activeTab] = "active";
++  return (
++    <>
++      <div className="settings-tabControl-markers-grid">
++        <div className={`settings-tabControl-marker1 ${tabMarkers[1]}`}></div>
++        <div className={`settings-tabControl-marker2 ${tabMarkers[2]}`}></div>
++        <div className={`settings-tabControl-marker3 ${tabMarkers[3]}`}></div>
++      </div>
++    </>
++  );
++};
+ export const PersonalInfoSettings = () => {
+   return (
+     <>
+diff --git a/reading_fe_app/src/reactcomp_speech.tsx b/reading_fe_app/src/reactcomp_speech.tsx
+index 3255d84..fb07792 100644
+--- a/reading_fe_app/src/reactcomp_speech.tsx
++++ b/reading_fe_app/src/reactcomp_speech.tsx
+@@ -17,13 +17,14 @@
+ import { Request } from "./reducers";
+ import { useAppDispatch, useAppSelector } from "./hooks";
+ import { useEffect, useState, useContext } from "react";
+-import { CPageLists, PageContext } from "./pageContext";
++import { CPageLists } from "./pageContext";
+ import {
+   ISpeechSettings,
+   ISettingsContext,
+   RecitationMode,
+   SettingsContext
+ } from "./settingsContext";
++
+ class CSpeechSynthesizer {
+   constructor() {
+     this.paramObj = new SpeechSynthesisUtterance();
+@@ -55,76 +56,96 @@ class CSpeechSynthesizer {
+   }
+ }
+ export const Synthesizer: CSpeechSynthesizer = new CSpeechSynthesizer();
+-
+ export const SpeechMonitor = () => {
+   const dispatch = useAppDispatch();
++  let settingsContext: ISettingsContext = useContext(SettingsContext)!;
++  Synthesizer.volume = settingsContext.settings.speech.volume;
+   let pageContext: CPageLists = useAppSelector(store => store.pageContext);
+   // cannot use useContext(PageContext) because context is only scoped within
+   // a page
++  // const test: boolean = useAppSelector(store => store.test);
++
++  let message: string = "";
++  useEffect(() => {
++    Synthesizer.voiceList = window.speechSynthesis.getVoices(); // loaded asynchronously
++    Synthesizer.paramObj.voice = Synthesizer.voiceList[2]; // US woman
++  }, [window.speechSynthesis.onvoiceschanged]);
++
++  const retriesExceeded = useAppSelector(store => store.listen_retriesExceeded);
++  const retries = useAppSelector(store => store.listen_retries);
++  const wordIdx = useAppSelector(store => store.cursor_terminalIdx);
++  const reciteRequested = useAppSelector(store => store.recite_requested);
++  useEffect(() => {
++    if (retriesExceeded) {
++      message = `retries exceeded ${retries}`;
++      let word: string = pageContext.terminalList[wordIdx].content;
++      Synthesizer.speak(word);
++      dispatch(Request.Cursor_gotoNextWord());
++    }
++    // speak word
++  }, [retriesExceeded, reciteRequested]);
++
+   const newSentence = useAppSelector(
+     store => store.cursor_newSentenceTransition
+   );
+   const newSection = useAppSelector(store => store.cursor_newSectionTransition);
+   const sectionIdx = useAppSelector(store => store.cursor_sectionIdx);
++  useEffect(() => {
++    // these announcements are mutually exclusive
++    if (newSection) {
++      let sectionType: string = pageContext.sectionList[sectionIdx].type;
++      message = `new ${sectionType === "undefined" ? "section" : sectionType}`;
++    } else if (newSentence) {
++      message = "new sentence";
++    }
++    Synthesizer.speak(message);
++  }, [newSection, newSentence]);
++
+   const beginningOfPage = useAppSelector(
+     store => store.cursor_beginningOfPageReached
+   );
++  useEffect(() => {
++    if (beginningOfPage) {
++      message = "beginning of page";
++      Synthesizer.speak(message);
++    }
++  }, [beginningOfPage]);
++
+   const endOfPage = useAppSelector(store => store.cursor_endOfPageReached);
+-  const listening = useAppSelector(store => store.listen_active);
+-  const settingsContext: ISettingsContext = useContext(SettingsContext)!;
+-  let message: string = "";
+   useEffect(() => {
+-    Synthesizer.voiceList = window.speechSynthesis.getVoices(); // loaded asynchronously
+-    Synthesizer.paramObj.voice = Synthesizer.voiceList[2]; // US woman
+-  }, [window.speechSynthesis.onvoiceschanged]);
++    if (endOfPage) {
++      message = "end of page";
++      Synthesizer.speak(message);
++    }
++  }, [endOfPage]);
++
++  const announcement = useAppSelector(store => store.announce_message);
+   useEffect(
+     () => {
+-      Synthesizer.volume = settingsContext.settings.speech.volume;
+-      if (beginningOfPage) {
+-        message = `beginning of page`;
+-        Synthesizer.speak(message);
+-        dispatch(Request.Cursor_acknowledgeTransition());
+-      } else if (newSection) {
+-        console.log(`speaking sectionIdx=${sectionIdx}`);
+-        let sectionType: string = pageContext.sectionList[sectionIdx].type;
+-        message = `new ${
+-          sectionType === "undefined" ? "section" : sectionType
+-        }`;
+-        console.log(`speaking "${message}"`);
+-        Synthesizer.speak(message);
+-        dispatch(Request.Cursor_acknowledgeTransition());
+-      } else if (newSentence) {
+-        message = "new sentence";
+-        console.log(`speaking "${message}"`);
+-        Synthesizer.speak(message);
+-        dispatch(Request.Cursor_acknowledgeTransition());
+-      } else if (endOfPage) {
+-        message = `end of page`;
+-        Synthesizer.speak(message);
+-        dispatch(Request.Cursor_acknowledgeTransition());
++      if (announcement !== "") {
++        Synthesizer.speak(announcement);
+       } else {
+         console.log(`NOT speaking ${message}"`);
+       }
+     },
+-    [sectionIdx, newSentence, beginningOfPage, endOfPage] // to recite just the words
+-  );
+-  useEffect(
+-    () => {
+-      if (listening) {
+-        message = "listening";
+-      } else {
+-        message = "not listening";
+-      }
+-      console.log(`speaking "${message}"`);
+-      Synthesizer.speak(message);
+-    },
+-    [listening] // to recite just the words
++    [announcement] // to recite just the words
+   );
++  const listening = useAppSelector(store => store.listen_active);
++  useEffect(() => {
++    if (listening) {
++      message = "listening";
++    } else {
++      message = "not listening";
++    }
++    Synthesizer.speak(message);
++  }, [listening]);
++  if (message.length > 0) message = `SPEECH: ${message}`;
+   return <div>{message}</div>;
+ };
+ interface ISpeechSettingsProps {
+   speechSettings: ISpeechSettings;
+   setSpeechSettings: (speechSetting: ISpeechSettings) => void;
++  active: boolean;
+ }
+ export const SpeechSettings = (props: ISpeechSettingsProps) => {
+   const [recitationMode, _setRecitationMode] = useState(
+@@ -155,17 +176,20 @@ export const SpeechSettings = (props: ISpeechSettingsProps) => {
+       volume: volume
+     });
+   };
+-  return (
+-    <>
+-      <div className="settings-section-header">Speech</div>
+-      <RecitationModeRadioButton
+-        recitationMode={recitationMode}
+-        setRecitationMode={setRecitationMode}
+-      />
+-      <VoiceSelector voiceIndex={voiceIndex} setVoiceIndex={setVoiceIndex} />
+-      <VolumeSlider volume={volume} setVolume={setVolume} />
+-    </>
+-  );
++  if (props.active) {
++    return (
++      <>
++        <RecitationModeRadioButton
++          recitationMode={recitationMode}
++          setRecitationMode={setRecitationMode}
++        />
++        <VoiceSelector voiceIndex={voiceIndex} setVoiceIndex={setVoiceIndex} />
++        <VolumeSlider volume={volume} setVolume={setVolume} />
++      </>
++    );
++  } else {
++    return <></>;
++  }
+ };
+ interface IRecitationModeRadioButtonProps {
+   recitationMode: RecitationMode;
+@@ -193,6 +217,13 @@ export const RecitationModeRadioButton = (
+             defaultChecked={props.recitationMode === RecitationMode.wordOnly}
+           />
+           {RecitationMode.wordOnly}
++          <input
++            type="radio"
++            value={RecitationMode.wordNext}
++            name="recitationMode"
++            defaultChecked={props.recitationMode === RecitationMode.wordNext}
++          />
++          {RecitationMode.wordNext}
+         </div>
+         <div className="settings-grid-section-item-recitation-control-group">
+           <input
+diff --git a/reading_fe_app/src/reactcomp_speech_speakbutton.tsx b/reading_fe_app/src/reactcomp_speech_speakbutton.tsx
+index f6d9177..f5b0516 100644
+--- a/reading_fe_app/src/reactcomp_speech_speakbutton.tsx
++++ b/reading_fe_app/src/reactcomp_speech_speakbutton.tsx
+@@ -92,7 +92,6 @@ export const SpeakButton = () => {
+         ? pageContext.terminalList[termIdx].altpronunciation
+         : pageContext.terminalList[termIdx].content;
+     };
+-
+     const sentenceToRecite = (
+       sentenceIdx: number,
+       lastTermIdxInSentence?: number,
+@@ -144,6 +143,7 @@ export const SpeakButton = () => {
+     // given all the array accessing, should wrap in try/catch
+     switch (recitationMode) {
+       case RecitationMode.wordOnly:
++      case RecitationMode.wordNext:
+         messageQueue.push(wordToRecite(termIdx));
+         break;
+       case RecitationMode.entireSentence:
+@@ -179,6 +179,7 @@ export const SpeakButton = () => {
+     }
+     return messageQueue;
+   }; //somethingToRecite
++  // if currently listening, stop and restart after reciting
+   dispatch(Request.Recognition_stop);
+   return (
+     <>
+diff --git a/reading_fe_app/src/reactcomps_main.tsx b/reading_fe_app/src/reactcomps_main.tsx
+deleted file mode 100644
+index d3b780b..0000000
+--- a/reading_fe_app/src/reactcomps_main.tsx
++++ /dev/null
+@@ -1,50 +0,0 @@
+-/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
+- *
+- * File name: reactcomps_main.tsx
+- *
+- * Defines React front end functional components.
+- *
+- * Terminals represent the group of words, punctuations, whitespace,
+- * references, etc that can be rendered.
+- * "Words" refer to terminals that where the current cursor can be active;
+- * that terminals that are visible and recitable as opposed to punctuations,
+- * whitespace and other syntactical sugar.
+- *
+- * Version history:
+- *
+- **/
+-import React from "react";
+-import "./App.css";
+-import { Request } from "./reducers";
+-import { useAppDispatch } from "./hooks";
+-import { useState } from "react";
+-import { Page } from "./reactcomps_page";
+-import SpeechRecognition from "react-speech-recognition";
+-import {
+-  SettingsContext,
+-  ISettingsContext,
+-  SettingsInitializer
+-} from "./settingsContext";
+-export const ReadingApp = () => {
+-  const [_settings, _setSettings] = useState(SettingsInitializer());
+-  const settingsContext: ISettingsContext = {
+-    settings: _settings,
+-    saveSettings: _setSettings
+-  };
+-  let dispatch = useAppDispatch();
+-  dispatch(
+-    Request.Recognition_setAvailability(
+-      SpeechRecognition.browserSupportsSpeechRecognition()
+-    )
+-  );
+-  //  dispatch(Request.Page_load("links1"));
+-  dispatch(Request.Page_load("sitemap"));
+-  //dispatch(Request.Page_load("trailingblanks"));
+-  return (
+-    <>
+-      <SettingsContext.Provider value={settingsContext}>
+-        <Page appName="Reading App" />
+-      </SettingsContext.Provider>
+-    </>
+-  );
+-};
+diff --git a/reading_fe_app/src/reactcomps_page.tsx b/reading_fe_app/src/reactcomps_page.tsx
+deleted file mode 100644
+index c8d4e2e..0000000
+--- a/reading_fe_app/src/reactcomps_page.tsx
++++ /dev/null
+@@ -1,217 +0,0 @@
+-/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
+- *
+- * File name: reactcomps_page.tsx
+- *
+- * Defines React front end functional components for page and subcomponents.
+- *
+- * Terminals represent the group of words, punctuations, whitespace,
+- * references, etc that can be rendered.
+- * "Words" refer to terminals that where the current cursor can be active;
+- * that terminals that are visible and recitable as opposed to punctuations,
+- * whitespace and other syntactical sugar.
+- *
+- * Sequence of event for page loading:
+- * 1) Dispatch page request
+- *    1a) dispatch(Request.Page_load(pageName)) explicitly provides pageName arg
+- *    1b) dispatch(Request.Page_linkTo) references linkList table in pageContext
+- * 2) Fetch page from repository defined in SettingsContext with several
+- *    possible outcomes: success, response/server/transport error/timeout
+- *    parsing error trying to fill the internal data structure with incoming
+- *    json input stream.
+- * 3) Populate pageContext with fetched/parsed json content.
+- *    With the proper pageContext loaded, the link destination cursor
+- *    locations (i.e, cursor_terminalIdx or sectionidx) can be validated and
+- *    subsequently assigned within the reducer for eventual consumption by
+- *    react component(s).
+- *
+- * Even though reducer state tracks both the pageRequested and pageContext
+- * changes, internal component state variable isPageLoaded tracks when new
+- * load is requested but not yet properly loaded.
+- *
+- * The context and content are not loaded until successful to prevent the
+- * needless rerendering of <Content>
+- * Version history:
+- *
+- **/
+-//import fetch, { Headers } from "node-fetch";
+-import React from "react";
+-import "./App.css";
+-import { Request } from "./reducers";
+-import { useAppDispatch, useAppSelector, useDialog } from "./hooks";
+-import { useEffect, useState, useContext } from "react";
+-import { IPageContent, ISectionContent } from "./pageContentType";
+-import { CPageLists, PageContext } from "./pageContext";
+-import { SettingsContext, ISettingsContext } from "./settingsContext";
+-import { NavBar } from "./reactcomp_navbar";
+-import { PageHeader } from "./reactcomp_pageheader";
+-import { PageFooter } from "./reactcomp_pagefooter";
+-import { SettingsDialog } from "./reactcomp_settings";
+-import { SectionDispatcher } from "./reactcomps_sections";
+-
+-export interface IPagePropsType {
+-  appName: string;
+-}
+-export const Page = React.memo((props: IPagePropsType) => {
+-  const [responseError, setResponseError] = useState<string | null>(null);
+-  const [parseError, setParseError] = useState<string | null>(null);
+-  const [pageContent, setPageContent] = useState<IPageContent | null>(null);
+-  const [pageContext, setPageContext] = useState<CPageLists | null>(null);
+-  const [isPageLoaded, setIsPageLoaded] = useState<boolean>(true);
+-  //  !(pageRequested !== undefined && pageRequested !== null && !pageLoaded)
+-
+-  const { isActive, toggle } = useDialog();
+-
+-  // requestHeaders.append("mode", "no-cors");
+-
+-  const fetchRequest = (page: string) => {
+-    const requestHeaders: HeadersInit = new Headers();
+-    requestHeaders.append("Accept", "application/json");
+-    requestHeaders.append("Content-Type", "application/json");
+-    requestHeaders.append("Access-Control-Allow-Origin", "*");
+-    requestHeaders.append(
+-      "Access-Control-Allow-Headers",
+-      "X-Requested-With, content-type"
+-    );
+-    requestHeaders.append("mode", "no-cors");
+-    requestHeaders.append("Access-Control-Allow-Origin", "*");
+-    requestHeaders.append("Access-Control-Allow-Methods", "GET");
+-    requestHeaders.append(
+-      "Access-Control-Allow-Headers",
+-      "X-Requested-With, Origin, Content-Type, Accept"
+-    );
+-    fetch(page, {
+-      method: "GET",
+-      headers: {
+-        Accept: "application/json"
+-      }
+-    })
+-      // fetch(page, {
+-      //   method: "GET",
+-      //   headers: requestHeaders
+-      // })
+-      .then(
+-        response => {
+-          if (!response.ok)
+-            setResponseError(`HTTP status code ${response.status}`);
+-          // could import lookup for status
+-          return response.json();
+-        },
+-        error => {
+-          setResponseError(error);
+-        }
+-      )
+-      .then(
+-        data => {
+-          try {
+-            setPageContent(data as IPageContent);
+-            message = `Changing page context for "${pageRequested}"`;
+-            if (pageContent !== undefined && pageContent !== null) {
+-              let pageContext: CPageLists = new CPageLists(
+-                pageContent.terminalList,
+-                pageContent.headingList,
+-                pageContent.sectionList,
+-                pageContent.sentenceList,
+-                pageContent.linkList
+-              );
+-              if (pageContext !== null) {
+-                message = `Loaded page context for "${pageRequested}"`;
+-                setPageContext(pageContext);
+-                dispatch(Request.Page_setContext(pageContext));
+-                //                dispatch(Request.Page_loaded(true));
+-              } else {
+-                message = `Loading page context failed for "${pageRequested}"`;
+-              }
+-              dispatch(Request.StatusBar_Message_set(message));
+-              setIsPageLoaded(true);
+-            }
+-          } catch (e) {
+-            let message: string = (e as Error).message;
+-            message = `Encountered unexpected fetching error: ${message}`;
+-            dispatch(Request.StatusBar_Message_set(message));
+-          }
+-        },
+-        error => {
+-          setParseError(error);
+-        }
+-      );
+-  };
+-  let dispatch = useAppDispatch();
+-  const settingsContext: ISettingsContext = useContext(SettingsContext)!;
+-  const distDir: string = settingsContext.settings.config.distDir;
+-  const pageRequested: string = useAppSelector(store => store.page_requested);
+-  const pageLoaded: boolean = useAppSelector(store => store.page_loaded);
+-  let message: string = "";
+-  useEffect(() => {
+-    message = `Requested page ${pageRequested} from ${distDir}`;
+-    console.log(message);
+-    setIsPageLoaded(
+-      !(pageRequested !== undefined && pageRequested !== null && !pageLoaded)
+-    );
+-    fetchRequest(distDir + pageRequested);
+-    dispatch(Request.StatusBar_Message_set(message));
+-    // }
+-  }, [pageRequested, pageLoaded]);
+-  useEffect(() => {
+-    if (!isPageLoaded) {
+-      dispatch(Request.Page_loaded(true));
+-      setIsPageLoaded(true);
+-    }
+-  }, [pageContent, pageContext]);
+-
+-  if (pageLoaded) {
+-    message = `Loading page "${pageRequested}"`;
+-  } else if (responseError) {
+-    message = `Encountered response error while loading "${pageRequested}": ${responseError}`;
+-  } else if (parseError) {
+-    const syntaxError: string =
+-      "SyntaxError: Unexpected token < in JSON at position 0";
+-    if (syntaxError.indexOf(parseError) === 0) {
+-      message = `Encountered incompatible JSON format while loading for "${pageRequested}"`;
+-    } else {
+-      message = `Encountered parsing error while loading "${pageRequested}": ${parseError}`;
+-    }
+-  } else {
+-    message = `Waiting for page to load for "${pageRequested}"`;
+-  }
+-  console.log(message);
+-  dispatch(Request.StatusBar_Message_set(message));
+-  if (pageContext !== null) {
+-    return (
+-      <PageContext.Provider value={pageContext}>
+-        <div className="page">
+-          <PageHeader title={pageContent!.title} />
+-          <SettingsDialog isActive={isActive} hide={toggle} />
+-          <NavBar headings={pageContent!.headingList} />
+-          <Content content={pageContent!} />
+-          <PageFooter />
+-        </div>
+-      </PageContext.Provider>
+-    );
+-  } else {
+-    // no statusbar for initial load
+-    //  message = `Waiting to load "${pageRequested}"`;
+-    console.log(message);
+-    return <div className="loadingAnnouncement">{message}</div>;
+-  }
+-});
+-interface IContentPropsType {
+-  content: IPageContent;
+-}
+-export const Content = React.memo((props: IContentPropsType): any => {
+-  const currentSectionIdx: number = useAppSelector(
+-    store => store.cursor_sectionIdx
+-  );
+-  return (
+-    <main>
+-      {props.content.sections.map(
+-        (section: ISectionContent, keyvalue: number) => (
+-          <SectionDispatcher
+-            key={keyvalue}
+-            active={currentSectionIdx === section.id}
+-            section={section}
+-          />
+-        )
+-      )}
+-    </main>
+-  );
+-});
+diff --git a/reading_fe_app/src/reactcomps_sections_imageEntry.tsx b/reading_fe_app/src/reactcomps_sections_imageEntry.tsx
+index ca71523..5696fe7 100644
+--- a/reading_fe_app/src/reactcomps_sections_imageEntry.tsx
++++ b/reading_fe_app/src/reactcomps_sections_imageEntry.tsx
+@@ -61,7 +61,7 @@ export const Section_imageEntry = React.memo(
+ 
+         <div className={className}>
+           <Section_imageEntry_images
+-            active={props.active}
++            active={false}
+             images={images}
+             layout={imageEntry.layout}
+           />
+diff --git a/reading_fe_app/src/reactcomps_terminals_image.tsx b/reading_fe_app/src/reactcomps_terminals_image.tsx
+index d2a3c15..78b628f 100644
+--- a/reading_fe_app/src/reactcomps_terminals_image.tsx
++++ b/reading_fe_app/src/reactcomps_terminals_image.tsx
+@@ -20,9 +20,6 @@ export const Terminal_Image = React.memo((props: ITerminalPropsType): any => {
+     SettingsContext
+   ) as ISettingsContext;
+   let distDir = settingsContext.settings.config.distDir;
+-  console.log(
+-    `<Terminal_Image active=${props.active} content=${props.terminal.content}/>`
+-  );
+   let imageInfo: IImageTerminalMeta = props.terminal.meta as IImageTerminalMeta;
+   let path: string = `${distDir}/img/${imageInfo.src}`;
+   let imageClasses: string = "imageentry-image " + imageInfo.className;
+diff --git a/reading_fe_app/src/reducers.ts b/reading_fe_app/src/reducers.ts
+index 80d2cb1..3191bb3 100644
+--- a/reading_fe_app/src/reducers.ts
++++ b/reading_fe_app/src/reducers.ts
+@@ -14,7 +14,20 @@
+  * Version history:
+  *
+  **/
++import { useContext } from "react";
+ import { CPageLists } from "./pageContext";
++import { RecitationMode } from "./settingsContext";
++// import {
++//   ISettings,
++//   ISettingsContext,
++//   SettingsContext
++// } from "./settingsContext";
++export enum StatusBarMessageType {
++  application = 0,
++  listening = 1,
++  state = 2,
++  all = 3
++}
+ const IDX_INITIALIZER = -9999; // should be same as baseclasses.ts
+ 
+ // word actions
+@@ -45,6 +58,7 @@ const PAGE_TOP = "page/top";
+ const PAGE_LINKTO = "page/link to";
+ 
+ // intrapage administrative actions (non-user initiated)
++//const PAGECONTEXT_SET = "pagecontext/set";
+ const CONTEXT_SET = "context/set";
+ 
+ //listening actions
+@@ -54,6 +68,7 @@ const LISTENING_FLUSHED = "listening/flushed"; // clear transcript
+ const LISTENING_START = "listening/start";
+ const LISTENING_STOP = "listening/stop";
+ const LISTENING_TOGGLE = "listening/toggle"; // related to start/stop
++const LISTENING_SET_RETRIES_MAX = "listening/set retries";
+ 
+ // speaking actions
+ const ANNOUNCE_MESSAGE = "announce/message";
+@@ -81,12 +96,28 @@ const RECITING = "reciting"; // actual state of reciting
+ const RECITE_START = "recite/start";
+ const RECITE_STOP = "recite/stop";
+ const RECITE_TOGGLE = "recite/toggle"; // request from recite button
++const RECITE_WORD = "recite/word"; // exclusively for wordNext
++
+ const SETTINGS_TOGGLE = "settings/toggle";
+ 
+ // message/status bar actions
+-const STATUSBAR_MESSAGE_SET = "status message/set";
+-const STATUSBAR_MESSAGE_CLEAR = "status message/clear";
++const STATUSBAR_MESSAGE_SET = "statusbar-set";
++const MESSAGE_SET = "status message/set";
++const MESSAGE_CLEAR = "status message/clear";
++
++const TEST_SET = "test/set";
++const TEST_RESET = "test/reset";
+ // Actions
++const Test_set = () => {
++  return {
++    type: TEST_SET
++  };
++};
++const Test_reset = () => {
++  return {
++    type: TEST_RESET
++  };
++};
+ const Speech_acknowledged = () => {
+   return {
+     type: ANNOUNCE_ACKNOWLEDGED
+@@ -202,18 +233,44 @@ const Cursor_acknowledgeTransition = () => {
+     type: TRANSITION_ACKNOWLEDGE
+   };
+ };
+-const StatusBar_Message_set = (message: string) => {
++const Message_set = (
++  message: string,
++  msgType: StatusBarMessageType = StatusBarMessageType.application
++) => {
+   return {
+-    type: STATUSBAR_MESSAGE_SET,
+-    payload: message
++    type: MESSAGE_SET,
++    payload: {
++      message: message,
++      messageType: msgType
++    }
++  };
++};
++const Message_clear = (
++  messageType: StatusBarMessageType = StatusBarMessageType.all
++) => {
++  return {
++    type: MESSAGE_CLEAR,
++    payload: messageType
+   };
+ };
+-const StatusBar_Message_clear = () => {
++const Recognition_setMaxRetries = (maxRetries: number) => {
+   return {
+-    type: STATUSBAR_MESSAGE_SET,
+-    payload: ""
++    type: LISTENING_SET_RETRIES_MAX,
++    payload: maxRetries
+   };
+ };
++const StatusBar_Message_set = (message: string) => {
++  return {
++    type: MESSAGE_SET,
++    payload: message
++  };
++};
++// const StatusBar_Message_clear = () => {
++//   return {
++//     type: STATUSBAR_MESSAGE_SET,
++//     payload: ""
++//   };
++// };
+ const Page_load = (page: string, sectionIdx?: number, terminalIdx?: number) => {
+   return {
+     type: PAGE_LOAD,
+@@ -237,15 +294,15 @@ const Page_setContext = (context: CPageLists) => {
+     payload: context
+   };
+ };
+-const Recognition_toggle = () => {
++const Recognition_toggle = (maxRetries: number) => {
+   return {
+-    type: LISTENING_TOGGLE
++    type: LISTENING_TOGGLE,
++    payload: maxRetries
+   };
+ };
+-const Recognition_flush = (yes: boolean) => {
++const Recognition_flush = () => {
+   return {
+-    type: LISTENING_FLUSH,
+-    payload: yes
++    type: LISTENING_FLUSH
+   };
+ };
+ const Recognition_flushed = () => {
+@@ -253,9 +310,10 @@ const Recognition_flushed = () => {
+     type: LISTENING_FLUSHED
+   };
+ };
+-const Recognition_start = () => {
++const Recognition_start = (maxRetries: number) => {
+   return {
+-    type: LISTENING_START
++    type: LISTENING_START,
++    payload: maxRetries
+   };
+ };
+ const Recognition_stop = () => {
+@@ -280,6 +338,12 @@ const Reciting_start = () => {
+     payload: true
+   };
+ };
++const Recite_currentWord = () => {
++  return {
++    type: RECITE_WORD
++  };
++};
++
+ const Reciting_stop = () => {
+   return {
+     type: RECITING,
+@@ -326,29 +390,32 @@ export const Request = {
+   Cursor_gotoPreviousWord,
+   Cursor_gotoWordByIdx,
+   Cursor_gotoSectionByIdx,
+-  Cursor_acknowledgeTransition,
++  //  Cursor_acknowledgeTransition,
+ 
+-  StatusBar_Message_set,
+-  StatusBar_Message_clear,
++  Message_set,
++  Message_clear,
+ 
+   Page_load,
+   Page_loaded,
+   Page_setContext,
+   Page_gotoLink,
+ 
++  Reciting,
++  Reciting_start,
++  Reciting_stop,
++  Recite_start,
++  Recite_stop,
++  Recite_currentWord,
++  Recite_toggle, // strictly for button event
++
+   Recognition_toggle,
+   Recognition_setAvailability,
+   Recognition_flush,
+   Recognition_flushed,
+   Recognition_start,
+   Recognition_stop,
++  Recognition_setMaxRetries,
+ 
+-  Reciting,
+-  Reciting_start,
+-  Reciting_stop,
+-  Recite_start,
+-  Recite_stop,
+-  Recite_toggle, // strictly for button event
+   Settings_toggle,
+ 
+   Speech_setAvailability,
+@@ -356,7 +423,14 @@ export const Request = {
+   Speech_announceCurrentContent,
+   Speech_announceListeningStart,
+   Speech_announceListeningStop,
+-  Speech_announceMessage
++  Speech_announceMessage,
++
++  // StatusBar_Message_set,
++  // StatusBar_Message_clear,
++  //
++  Test_set,
++  Test_reset
++
+   //  Speech_transitionsAcknowledged
+   // Speech_announceNewSection,
+   // Speech_announceNewSentence
+@@ -447,35 +521,48 @@ const IReduxStateInitialState: IReduxState = {
+ interface IReduxState {
+   announce_available: boolean;
+   announce_listening: boolean; // "listening"
+-
+   announce_message: string;
+ 
+   listen_available: boolean;
+   listen_active: boolean;
+   listen_flush: boolean;
+   listen_silenceStartTime: number;
++  listen_retriesExceeded: boolean;
++  listen_retries: number;
++  listen_retries_max: number;
+ 
+   cursor_sectionIdx: number;
+   cursor_sentenceIdx: number;
+   cursor_terminalIdx: number;
++
++  test: boolean;
+   cursor_newSentenceTransition: boolean;
+   cursor_newSectionTransition: boolean;
+-  cursor_beginningOfPageReached: boolean;
+   cursor_newPageTransition: boolean;
++
++  cursor_beginningOfPageReached: boolean;
+   cursor_endOfPageReached: boolean;
+ 
+-  page_requested: string;
+   cursor_terminalIdx_proposed: number;
+   cursor_sectionIdx_proposed: number;
++
++  page_requested: string;
+   page_loaded: boolean;
+   page_section: number;
+-  //page_lists: CPageLists;
+   pageContext: CPageLists;
+ 
+   recite_requested: boolean;
++
+   reciting: boolean;
++
+   settings_toggle: boolean;
+-  statusBar_message: string;
++
++  statusBar_message1: string;
++  statusBar_message2: string;
++
++  message_application: string;
++  message_listening: string;
++  message_state: string;
+ }
+ const IReduxStateInitialState: IReduxState = {
+   announce_available: false,
+@@ -487,7 +574,11 @@ const IReduxStateInitialState: IReduxState = {
+   listen_active: false,
+   listen_flush: false,
+   listen_silenceStartTime: 0,
++  listen_retries_max: 0,
++  listen_retries: 0,
++  listen_retriesExceeded: false,
+ 
++  test: false,
+   cursor_sectionIdx: 0,
+   cursor_sentenceIdx: 0,
+   cursor_terminalIdx: 0,
+@@ -509,7 +600,12 @@ const IReduxStateInitialState: IReduxState = {
+   reciting: false,
+ 
+   settings_toggle: false,
+-  statusBar_message: ""
++  statusBar_message1: "",
++  statusBar_message2: "",
++
++  message_application: "",
++  message_listening: "",
++  message_state: ""
+   //  pageContext: PageContextInitializer()
+ };
+ export const rootReducer = (
+@@ -531,9 +627,13 @@ export const rootReducer = (
+     return [sectionIdx, sectionIdx !== currentSectionIdx];
+   };
+   const setTerminalState = (terminalIdxs: number[]) => {
+-    if (terminalIdxs.length <= 0) {
+-      console.log(`setTerminalState no state transition`);
++    if (terminalIdxs.length === 0) {
++      state.cursor_endOfPageReached =
++        state.cursor_terminalIdx === state.pageContext.lastTerminalIdx;
++      console.log(`end of page?`);
+     } else if (terminalIdxs.length === 1) {
++      state.cursor_endOfPageReached = false;
++      resetListeningRetries();
+       console.log(`setTerminalState single state transition`);
+       if (state.pageContext.isValidTerminalIdx(terminalIdxs[0])) {
+         /// set single state
+@@ -548,8 +648,6 @@ export const rootReducer = (
+         ] = setSectionState(terminalIdxs[0], state.cursor_sectionIdx);
+         state.cursor_beginningOfPageReached =
+           state.cursor_terminalIdx === state.pageContext.firstTerminalIdx;
+-        state.cursor_endOfPageReached =
+-          state.cursor_terminalIdx === state.pageContext.lastTerminalIdx;
+       } else {
+         console.log(
+           `setTerminalState single state transition encountered invalid terminalIdx=${terminalIdxs[0]}`
+@@ -602,6 +700,20 @@ export const rootReducer = (
+       state.cursor_terminalIdx = 0;
+     }
+   };
++  const incrementListeningRetries = () => {
++    state.listen_retries++;
++    state.listen_retriesExceeded =
++      state.listen_retries_max > 0 &&
++      state.listen_retries > state.listen_retries_max;
++  };
++  const resetListeningRetries = () => {
++    state.listen_retries = 0;
++    state.listen_retriesExceeded = false;
++  };
++  const setListeningMessage = (message: string): string => {
++    state.message_state = `${action.type}: ${message}`;
++    return state.message_state;
++  };
+   switch (action.type) {
+     case PAGE_LOAD:
+       state.page_requested = (action.payload.page as string) + ".json";
+@@ -679,9 +791,16 @@ export const rootReducer = (
+         let expectingAlt: string =
+           state.pageContext.terminalList[state.cursor_terminalIdx]
+             .altrecognition; // should .split(" ")
+-        console.log(
+-          `WORD_MATCH: heard=${wordsHeard} expecting ${expecting} or ${expectingAlt}`
+-        );
++        // setStateMessage(
++        //   `Heard="${wordsHeard}"; Expected "${expecting}" ${
++        //     state.pageContext.terminalList[state.cursor_terminalIdx]
++        //       .altrecognition.length > 0
++        //       ? " or "
++        //       : ""
++        //   } "${expectingAlt}"`
++        // );
++
++        // console.log(state.message_listening);
+         // need to handle altRecognition word list against consecutive words heard
+         //   1) Lookahead in words heard list to allow a peek.
+         //      Requires changing for/of loop (straightforward but messy)
+@@ -689,33 +808,47 @@ export const rootReducer = (
+         //      advancing terminal state, resetting that state when completely
+         //      or state is no longer valid (matching or not matching the entire
+         //      altReg list words heard.)
++        if (wordsHeard.length > 0) incrementListeningRetries();
+         for (let wordHeard of wordsHeard.split(" ")) {
+-          console.log(`WORD_MATCH: word=${wordHeard}`);
+-          if (state.listen_flush) {
+-            // escape to prevent further processing that may match words in
+-            // next sentence
+-            break;
+-          } else if (expecting.toLowerCase() === wordHeard.toLowerCase()) {
++          console.log(`WORD_MATCH: word="${wordHeard}"`);
++          // if (state.listen_flush) {
++          //   resetListeningRetries();
++          //   setListeningMessage(`Flushing transcript`);
++          //   console.log(`listen_flush=${state.listen_flush}`);
++          //   // escape to prevent further processing that may match words in
++          //   // next sentence
++          //   // break;
++          // } else
++          if (expecting.toLowerCase() === wordHeard.toLowerCase()) {
+             setToNextTerminalState();
++            setListeningMessage(`Matched "${expecting.toLowerCase()}"`);
+           } else if (expectingAlt.toLowerCase() === wordHeard.toLowerCase()) {
+             setToNextTerminalState();
++            setListeningMessage(`Matched "${expectingAlt.toLowerCase()}"`);
+           } else if (
+             expectingAlt.length > 0 &&
+             patternMatch(wordHeard.toLowerCase(), expectingAlt)
+           ) {
+             setToNextTerminalState();
++            setListeningMessage(
++              `Matched pattern "${expectingAlt.toLowerCase()}"`
++            );
+           } else {
+             console.log(
+-              `No WORD_MATCH:\nwords heard=${wordsHeard}\nbut looking for ${
+-                state.pageContext.terminalList[state.cursor_terminalIdx].content
+-              }\nor ${
+-                state.pageContext.terminalList[state.cursor_terminalIdx]
+-                  .altrecognition
+-              }`
++              setListeningMessage(
++                `Heard "${wordsHeard}"; Expecting "${expecting}",  "${expectingAlt}". Retries: ${state.listen_retries}.`
++              )
+             );
+-            // no match
+           }
+         }
++        // state.listen_retriesExceeded =
++        //   state.listen_retries_max > 0 &&
++        //   state.listen_retries >= state.listen_retries_max;
++        // if (state.listen_retriesExceeded) {
++        //   let message = `WORD_MATCH: Exceeded retries for "${expecting}"`;
++        //   console.log(message);
++        //   state.statusBar_message2 = message;
++        // }
+       }
+       return state;
+     case WORD_NEXT:
+@@ -736,24 +869,37 @@ export const rootReducer = (
+     case LISTENING_TOGGLE:
+       if (state.listen_available) {
+         state.listen_active = !state.listen_active;
++        if (state.listen_active) {
++          state.listen_retries_max = +action.payload;
++          resetListeningRetries();
++        }
+       }
+       return state;
+     case LISTENING_STOP:
+       state.listen_active = false;
++      state.listen_retriesExceeded = false;
++      setListeningMessage((!state.listen_active).toString());
+       return state;
+     case LISTENING_AVAILABLE:
+       state.listen_available = action.payload;
++      setListeningMessage(state.listen_available.toString());
+       return state;
+     case LISTENING_FLUSH:
+-      state.listen_flush = action.payload; // resets transcript
++      state.listen_flush = true; // resets transcript
++      resetListeningRetries();
++      setListeningMessage("flushing transcript");
+       return state;
+     case LISTENING_FLUSHED:
+       state.listen_flush = false; // resets transcript
++      setListeningMessage("transcript flushed");
++      return state;
++    case LISTENING_SET_RETRIES_MAX:
++      state.listen_retries_max = action.payload;
+       return state;
+     case ANNOUNCE_MESSAGE:
+       state.announce_message = action.payload; // resets transcript
+       return state;
+-    // case ANNOUNCE_NEWSENTENCE:
++    // case ANNOUNCE_ENCE:
+     //   state.announce_message = "new sentence"; // resets transcript
+     //   return state;
+     // case ANNOUNCE_NEWSECTION:
+@@ -768,6 +914,7 @@ export const rootReducer = (
+       state.cursor_newSentenceTransition = false;
+       state.cursor_beginningOfPageReached = false;
+       state.cursor_endOfPageReached = false;
++      state.announce_message = "";
+       return state;
+ 
+     case RECITING:
+@@ -784,15 +931,65 @@ export const rootReducer = (
+       state.recite_requested = !state.recite_requested;
+       return state;
+ 
++    case RECITE_WORD:
++      state.recite_requested = true;
++      return state;
+     case SETTINGS_TOGGLE:
+       state.settings_toggle = !state.settings_toggle;
+       if (state.settings_toggle) state.listen_active = false;
+       return state;
+ 
+     case STATUSBAR_MESSAGE_SET:
+-      state.statusBar_message = action.payload;
++      state.statusBar_message1 = action.payload;
+       return state;
++    case TEST_SET:
++      state.test = true;
++      return state;
++    case TEST_RESET:
++      state.test = false;
++      return state;
++
++    case MESSAGE_SET: {
++      switch (action.payload.messageType as StatusBarMessageType) {
++        case StatusBarMessageType.application:
++          state.message_application = action.payload.message;
++          break;
++        case StatusBarMessageType.state:
++          state.message_state = action.payload.message;
++          break;
++        case StatusBarMessageType.listening:
++          state.message_listening = action.payload.message;
++          break;
++        default:
++      }
++      return state;
++    }
++    case MESSAGE_CLEAR: {
++      let msgType: number =
++        action.payload.messageType === undefined
++          ? StatusBarMessageType.all
++          : action.payload.messageType;
++      switch (msgType) {
++        case StatusBarMessageType.all:
++          state.message_application = "";
++          state.message_listening = "";
++          state.message_state = "";
++          break;
++        case StatusBarMessageType.application:
++          state.message_application = "";
++          break;
++        case StatusBarMessageType.state:
++          state.message_state = "";
++          break;
++        case StatusBarMessageType.listening:
++          state.message_listening = "";
++          break;
++        default:
++      }
++      return state;
++    }
+     default:
++      console.log(`looking for undefined`);
+       return state;
+   }
+ };
+diff --git a/reading_fe_app/src/settingsContext.ts b/reading_fe_app/src/settingsContext.ts
+index 1ded1ff..b2ad642 100644
+--- a/reading_fe_app/src/settingsContext.ts
++++ b/reading_fe_app/src/settingsContext.ts
+@@ -24,6 +24,7 @@ import { useState } from "react";
+ 
+ export enum RecitationMode {
+   wordOnly = "word only",
++  wordNext = "word (then advance)",
+   entireSentence = "entire sentence",
+   uptoExclusive = "partial up to word (exclusive)",
+   uptoInclusive = "partial up to word (inclusive)",
+@@ -38,9 +39,6 @@ export interface ISettings {
+   speech: ISpeechSettings;
+   listen: IListenSettings;
+ }
+-export interface IConfigSettings {
+-  distDir: string;
+-}
+ export interface ISettingsContext {
+   settings: ISettings;
+   saveSettings: (setting: ISettings) => void;
+@@ -77,9 +75,7 @@ export interface ISpeechSettings {
+ //
+ export function ConfigSettingsInitializer(
+   homePage: string = "ronlyn",
+-  //distDir: string = "https://weng1102.github.io/reading_app/dist/",
+   distDir: string = "https://weng1102.github.io/reading-companion/",
+-  //  distDir: string = "https://github.com/weng1102/reading_app/master/dist/",
+   firstName: string = "Ronlyn",
+   lastName: string = "Goo"
+ ): IConfigSettings {
+@@ -113,6 +109,7 @@ export function SpeechSettingsInitializer(
+ }
+ export interface IListenSettings {
+   stopAtEndOfSentence: boolean;
++  retries: number;
+   timeout: number; // time out upon silence
+   listeningInterval: number; // msec between listening and matching
+   notificationMode: NotificationMode;
+@@ -121,14 +118,16 @@ export interface IListenSettings {
+ }
+ export function ListenSettingsInitializer(
+   stopAtEndOfSentence: boolean = true,
++  retries: number = 5,
+   timeout: number = 20, // time out upon silence
+-  listeningInterval: number = 20, // msec between listening and matching
++  listeningInterval: number = 15, // msec between listening and matching
+   notificationMode: NotificationMode = NotificationMode.voice,
+   sentenceNotification: string = "new sentence",
+   sectionNotification: string = "new section"
+ ): IListenSettings {
+   return {
+     stopAtEndOfSentence,
++    retries,
+     timeout,
+     listeningInterval,
+     notificationMode,
+diff --git a/reading_fe_app/src/store.ts b/reading_fe_app/src/store.ts
+index d9db113..d343cf1 100644
+--- a/reading_fe_app/src/store.ts
++++ b/reading_fe_app/src/store.ts
+@@ -6,8 +6,8 @@ import thunk from "redux-thunk";
+ import { createLogger } from "redux-logger";
+ let rlogger = createLogger({ collapsed: true });
+ //logger = loggerOptions.logger, collapsed = true);
+-export const store = createStore(rootReducer, applyMiddleware(rlogger, thunk));
+-
++export const store = createStore(rootReducer, applyMiddleware(thunk, rlogger));
++// apparently, the order of middleware matter wrt rlogger "undefined action" error
+ // export types needed for pre-typed versions of useDispatch and useSelector hooks
+ // and avoids explicitly including (state:RootState) for useSelector AND reminds
+ // us to use the defined AppDispatch below

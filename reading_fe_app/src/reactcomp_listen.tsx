@@ -40,6 +40,9 @@ export const ListeningMonitor = () => {
     store => store.cursor_newSentenceTransition
   );
   const flushRequested: boolean = useAppSelector(store => store.listen_flush);
+  // const wordRecited: boolean = useAppSelector(
+  //   store => store.recite_word_requested
+  // );
   let settingsContext: ISettingsContext = useContext(
     SettingsContext
   ) as ISettingsContext;
@@ -86,22 +89,23 @@ export const ListeningMonitor = () => {
   //     console.log(`LISTENING: Exceeded ${retries} retries, goto next word`);
   //   }
   // }, [retries]);
-  useEffect(() => {
-    const maxRetries: number = settingsContext.settings.listen.retries;
-    //    const idx: number = useAppSelector(store => store.cursor_terminalIdx);
-    if (exceededRetries) {
-      console.log(`LISTENING: Exceeded ${maxRetries} retries, next word`);
-      // get current word; say the word
-      // dispatch(Request.Recite_currentWord());
-      // dispatch(Request.Cursor_gotoNextWord());
-    }
-  }, [exceededRetries]);
+
+  //////////////////////////////
   // useEffect(() => {
+  //   const maxRetries: number = settingsContext.settings.listen.retries;
+  //   //    const idx: number = useAppSelector(store => store.cursor_terminalIdx);
   //   if (exceededRetries) {
-  //     console.log("LISTENING: retries exceeded");
-  //     dispatch(Request.Cursor_gotoNextWord());
+  //     console.log(`LISTENING: Exceeded ${maxRetries} retries, next word`);
+  //     // get current word; say the word
+  //     dispatch(Request.Recite_currentWord());
+  //     //      dispatch(Request.Cursor_gotoNextWord());
   //   }
   // }, [exceededRetries]);
+  // useEffect(() => {
+  //   if (exceededRetries && reciteWordRequested) {
+  //     dispatch(Request.Cursor_gotoNextWord());
+  //   }
+  // }, wordRrecited]);
   useEffect(() => {
     if (endOfPageReached) {
       console.log("LISTENING: stopped listening at end of page");
@@ -343,6 +347,7 @@ export const ListenButton = () => {
               : listenIcon
             : listenGhostedIcon
         }
+        title="start/stop listening"
         onClick={() =>
           listeningAvailable
             ? dispatch(Request.Recognition_toggle(maxRetries))

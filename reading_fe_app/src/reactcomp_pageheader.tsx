@@ -14,6 +14,7 @@ import hamburgerIcon from "./Hamburger_icon.png";
 import settingsIcon from "./settingicon.png";
 import homePageIcon from "./button_homeicon.png";
 import siteMapIcon from "./button_sitemap.png";
+import PrevPageIcon from "./button_back.png";
 import { SettingsDialog, SettingsButton } from "./reactcomp_settings";
 
 // import mic_listening from "./mic1-xparent.gif";
@@ -48,40 +49,81 @@ interface IPageHeaderPropsType {
 }
 export const PageHeader = React.memo((props: IPageHeaderPropsType) => {
   const dispatch = useAppDispatch();
-  const { isActive, toggle } = useDialog();
-  const homePage = useContext(SettingsContext)!.settings.config.homePage;
+  const { isActive, toggleDialog } = useDialog();
   console.log(`<PageHeader>`);
   return (
     <header className="header-grid-container">
       <div className="header-grid-left">
-        <img className="icon" alt="hamburger" src={hamburgerIcon} />
+        <HamburgerButton />
       </div>
       <div className="headertitle">{props.title}</div>
+      <div className="header-grid-prevbutton">
+        <PreviousPageButton />
+      </div>
       <div className="header-grid-homebutton">
-        <img
-          className="icon"
-          alt="homePage"
-          src={homePageIcon}
-          onClick={() => dispatch(Request.Page_load(`homepage_${homePage}`))}
-        />
+        <HomeButton />
       </div>
       <div className="header-grid-sitemapbutton">
-        <img
-          className="icon"
-          alt="sitemap"
-          src={siteMapIcon}
-          onClick={() => dispatch(Request.Page_load("sitemap"))}
-        />
+        <SiteMapButton />
       </div>
       <div className="header-grid-settingbutton">
         <img
           className="icon"
           alt="settings"
           src={settingsIcon}
-          onClick={() => toggle()}
+          title="go to settings"
+          onClick={() => toggleDialog()}
         />
-        <SettingsDialog isActive={isActive} hide={toggle} />
+        <SettingsDialog isActive={isActive} hide={toggleDialog} />
       </div>
     </header>
   );
 });
+const HamburgerButton = () => {
+  return (
+    <img
+      className="icon"
+      alt="hamburger"
+      src={hamburgerIcon}
+      title="hamburger under construction"
+    />
+  );
+};
+const HomeButton = () => {
+  const dispatch = useAppDispatch();
+  const homePage = useContext(SettingsContext)!.settings.config.homePage;
+  return (
+    <img
+      className="icon"
+      alt="homePage"
+      src={homePageIcon}
+      title="go home"
+      onClick={() => dispatch(Request.Page_load(`homepage_${homePage}`))}
+    />
+  );
+};
+const SiteMapButton = () => {
+  const dispatch = useAppDispatch();
+  return (
+    <img
+      className="icon"
+      alt="sitemap"
+      src={siteMapIcon}
+      title="go to sitemap"
+      onClick={() => dispatch(Request.Page_load("sitemap"))}
+    />
+  );
+};
+const PreviousPageButton = () => {
+  const dispatch = useAppDispatch();
+  // need to add conditional  logic to manage empty stack
+  return (
+    <img
+      className="icon"
+      alt="previous page"
+      src={PrevPageIcon}
+      title="go home"
+      onClick={() => dispatch(Request.Page_pop())}
+    />
+  );
+};
