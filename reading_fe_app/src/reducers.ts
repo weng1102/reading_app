@@ -14,9 +14,7 @@
  * Version history:
  *
  **/
-import { useContext } from "react";
 import { CPageLists } from "./pageContext";
-import { RecitationMode } from "./settingsContext";
 // import {
 //   ISettings,
 //   ISettingsContext,
@@ -28,7 +26,7 @@ export enum StatusBarMessageType {
   state = 2,
   all = 3
 }
-const IDX_INITIALIZER = -9999; // should be same as baseclasses.ts
+//const IDX_INITIALIZER = -9999; // should be same as baseclasses.ts
 
 // word actions
 const WORD_MATCH = "word/match"; // match word with argument with current word
@@ -554,7 +552,8 @@ interface IReduxState {
   page_pop_requested: boolean;
 
   recite_requested: boolean;
-  // recite_word_requested: boolean;
+  recite_word_requested: boolean;
+  recite_word_completed: boolean;
   reciting: boolean;
 
   settings_toggle: boolean;
@@ -600,7 +599,8 @@ const IReduxStateInitialState: IReduxState = {
   pageContext: new CPageLists(),
 
   recite_requested: false,
-  // recite_word_requested: false,
+  recite_word_requested: false,
+  recite_word_completed: true,
   reciting: false,
 
   settings_toggle: false,
@@ -664,21 +664,25 @@ export const rootReducer = (
     }
   };
   const setToNextTerminalState = () => {
+    resetListeningRetries();
     setTerminalState(
       state.pageContext.nextTerminalIdx(state.cursor_terminalIdx)
     );
   };
   const setToPrevTerminalState = () => {
+    resetListeningRetries();
     setTerminalState(
       state.pageContext.previousTerminalIdx(state.cursor_terminalIdx)
     );
   };
   const setToNextSentenceTerminalState = () => {
+    resetListeningRetries();
     setTerminalState([
       state.pageContext.nextSentenceTerminalIdx(state.cursor_terminalIdx)
     ]);
   };
   const setToPrevSentenceTerminalState = () => {
+    resetListeningRetries();
     setTerminalState([
       state.pageContext.previousSentenceTerminalIdx(state.cursor_terminalIdx)
     ]);
@@ -798,20 +802,12 @@ export const rootReducer = (
         state.pageContext !== undefined &&
         state.pageContext !== null
       ) {
-        let expecting: string =
-          state.pageContext.terminalList[state.cursor_terminalIdx].content;
-        let expectingAlt: string =
-          state.pageContext.terminalList[state.cursor_terminalIdx]
-            .altrecognition; // should .split(" ")
-        // setStateMessage(
-        //   `Heard="${wordsHeard}"; Expected "${expecting}" ${
-        //     state.pageContext.terminalList[state.cursor_terminalIdx]
-        //       .altrecognition.length > 0
-        //       ? " or "
-        //       : ""
-        //   } "${expectingAlt}"`
-        // );
-
+        let expecting: string = state.pageContext.terminalList[
+          state.cursor_terminalIdx
+        ].content.toLowerCase();
+        let expectingAlt: string = state.pageContext.terminalList[
+          state.cursor_terminalIdx
+        ].altrecognition.toLowerCase(); // should .split(" ")
         // console.log(state.message_listening);
         // need to handle altRecognition word list against consecutive words heard
         //   1) Lookahead in words heard list to allow a peek.
@@ -822,45 +818,26 @@ export const rootReducer = (
         //      altReg list words heard.)
         if (wordsHeard.length > 0) incrementListeningRetries();
         for (let wordHeard of wordsHeard.split(" ")) {
-          console.log(`WORD_MATCH: word="${wordHeard}"`);
-          // if (state.listen_flush) {
-          //   resetListeningRetries();
-          //   setListeningMessage(`Flushing transcript`);
-          //   console.log(`listen_flush=${state.listen_flush}`);
-          //   // escape to prevent further processing that may match words in
-          //   // next sentence
-          //   // break;
-          // } else
-          if (expecting.toLowerCase() === wordHeard.toLowerCase()) {
+          wordHeard = wordHeard.toLowerCase();
+          if (expecting === wordHeard) {
             setToNextTerminalState();
-            setListeningMessage(`Matched "${expecting.toLowerCase()}"`);
-          } else if (expectingAlt.toLowerCase() === wordHeard.toLowerCase()) {
+            setListeningMessage(`Matched "${expecting}"`);
+          } else if (expectingAlt === wordHeard) {
             setToNextTerminalState();
-            setListeningMessage(`Matched "${expectingAlt.toLowerCase()}"`);
+            setListeningMessage(`Matched "${expectingAlt}"`);
           } else if (
             expectingAlt.length > 0 &&
-            patternMatch(wordHeard.toLowerCase(), expectingAlt)
+            patternMatch(wordHeard, expectingAlt)
           ) {
             setToNextTerminalState();
-            setListeningMessage(
-              `Matched pattern "${expectingAlt.toLowerCase()}"`
-            );
+            setListeningMessage(`Matched pattern "${expectingAlt}"`);
           } else {
-            console.log(
-              setListeningMessage(
-                `Heard "${wordsHeard}"; Expecting "${expecting}",  "${expectingAlt}". Retries: ${state.listen_retries}.`
-              )
+            // console.log(
+            setListeningMessage(
+              `Comparing "${wordHeard}"" within ""${wordsHeard}"; Expecting "${expecting}",  "${expectingAlt}". Retries: ${state.listen_retries}.`
             );
           }
         }
-        // state.listen_retriesExceeded =
-        //   state.listen_retries_max > 0 &&
-        //   state.listen_retries >= state.listen_retries_max;
-        // if (state.listen_retriesExceeded) {
-        //   let message = `WORD_MATCH: Exceeded retries for "${expecting}"`;
-        //   console.log(message);
-        //   state.statusBar_message2 = message;
-        // }
       }
       return state;
     case WORD_NEXT:
@@ -945,13 +922,12 @@ export const rootReducer = (
     case RECITE_TOGGLE:
       state.recite_requested = !state.recite_requested;
       return state;
-
-    // case RECITE_WORD:
-    //   state.recite_word_requested = true;
-    //   return state;
-    // case RECITED_WORD:
-    //   state.recite_word_requested = false;
-    //   return state;
+    case RECITE_WORD:
+      state.recite_word_requested = true;
+      return state;
+    case RECITED_WORD:
+      state.recite_word_requested = false;
+      return state;
     case SETTINGS_TOGGLE:
       state.settings_toggle = !state.settings_toggle;
       if (state.settings_toggle) state.listen_active = false;
