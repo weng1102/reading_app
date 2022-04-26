@@ -10,45 +10,23 @@
  **/
 import React from "react";
 import "./App.css";
-import hamburgerIcon from "./Hamburger_icon.png";
-import settingsIcon from "./settingicon.png";
-import homePageIcon from "./button_homeicon.png";
-import siteMapIcon from "./button_sitemap.png";
-import PrevPageIcon from "./button_back.png";
-import { SettingsDialog, SettingsButton } from "./reactcomp_settings";
+import hamburgerIcon from "./img/Hamburger_icon.png";
+import settingsIcon from "./img/settingicon.png";
+import homePageIcon from "./img/button_homeicon.png";
+import siteMapIcon from "./img/button_sitemap.png";
+import PrevPageIcon from "./img/button_back.png";
+import { SettingsDialog } from "./reactcomp_settings";
 
-// import mic_listening from "./mic1-xparent.gif";
-// import mic_notlistening from "./mic1-inactive-xparent.gif";
-// import mic_unavailable from "./mic1-ghosted.gif";
 import { Request } from "./reducers";
-import { useAppDispatch, useAppSelector, useDialog } from "./hooks";
-import { useEffect, useState, useContext } from "react";
+import { useAppDispatch, useDialog } from "./hooks";
+import { useContext } from "react";
 
-// is this really necessary if availablility is removed below
-import SpeechRecognition, {
-  useSpeechRecognition
-} from "react-speech-recognition";
-import {
-  IPageContent,
-  IHeadingListItem,
-  ISectionContent,
-  ISentenceContent,
-  ITerminalContent,
-  ITerminalInfo,
-  IAcronymTerminalMeta,
-  IWordTerminalMeta,
-  TerminalMetaEnumType,
-  SectionVariantEnumType,
-  ISectionParagraphVariant
-} from "./pageContentType";
-
-import { ISettingsContext, SettingsContext } from "./settingsContext";
+import { SettingsContext } from "./settingsContext";
 
 interface IPageHeaderPropsType {
   title: string;
 }
 export const PageHeader = React.memo((props: IPageHeaderPropsType) => {
-  const dispatch = useAppDispatch();
   const { isActive, toggleDialog } = useDialog();
   console.log(`<PageHeader>`);
   return (
