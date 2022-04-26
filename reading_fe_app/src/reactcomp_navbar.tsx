@@ -1,6 +1,6 @@
 /** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
- * File name: reactcomps_navbar.tsx
+ * File name: reactcomp_navbar.tsx
  *
  * Defines React front end functional component for navbar.
  *
