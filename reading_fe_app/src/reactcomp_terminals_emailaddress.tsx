@@ -1,6 +1,6 @@
-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
- * File name: reactcomps_terminal_emailaddress.tsx
+ * File name: reactcomp_terminal_emailaddress.tsx
  *
  * Defines React front end functional components.
  * renders emailaddress
@@ -10,8 +10,7 @@
  **/
 import React from "react";
 // import "./App.css";
-import { useAppDispatch, useAppSelector, useSpanRef, useDivRef } from "./hooks";
-import { useEffect, useState, useContext, useRef } from "react";
+import { useAppSelector } from "./hooks";
 
 import { ITerminalInfo, IEmailAddressTerminalMeta } from "./pageContentType";
 import { TerminalNode, ITerminalPropsType } from "./reactcomp_terminals";
