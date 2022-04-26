@@ -1,6 +1,6 @@
 /** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
- * File name: reactcomps_footer.tsx
+ * File name: reactcomp_footer.tsx
  *
  * Defines React front end functional components.
  *
@@ -19,20 +19,17 @@ import { SpeechMonitor } from "./reactcomp_speech";
 import { ReciteButton } from "./reactcomp_speech_recite";
 //import { SpeakButton } from "./reactcomp_speech_speakbutton";
 import { ListenButton, ListeningMonitor } from "./reactcomp_listen";
-import nextwordIcon from "./button_nextword.png";
-import prevwordIcon from "./button_prevword.png";
-import prevsentenceIcon from "./button_prevsentence.png";
-import nextsentenceIcon from "./button_nextsentence.png";
-import nextwordGhostedIcon from "./button_nextword_ghosted.png";
-import prevwordGhostedIcon from "./button_prevword_ghosted.png";
-import prevsentenceGhostedIcon from "./button_prevsentence_ghosted.png";
-import nextsentenceGhostedIcon from "./button_nextsentence_ghosted.png";
-import gotoLinkIcon from "./button_link.png";
-import gotoLinkGhostedIcon from "./button_link_ghosted.png";
+import nextwordIcon from "./img/button_nextword.png";
+import prevwordIcon from "./img/button_prevword.png";
+import prevsentenceIcon from "./img/button_prevsentence.png";
+import nextsentenceIcon from "./img/button_nextsentence.png";
+import nextwordGhostedIcon from "./img/button_nextword_ghosted.png";
+import prevwordGhostedIcon from "./img/button_prevword_ghosted.png";
+import prevsentenceGhostedIcon from "./img/button_prevsentence_ghosted.png";
+import nextsentenceGhostedIcon from "./img/button_nextsentence_ghosted.png";
+import gotoLinkIcon from "./img/button_link.png";
+import gotoLinkGhostedIcon from "./img/button_link_ghosted.png";
 
-interface IPageFooterPropsType {
-  title: string;
-}
 export const PageFooter = React.memo(() => {
   // retrieve pageContext
   console.log(`<PageFooter>`);
@@ -215,7 +212,6 @@ export const LinkButton = () => {
     </>
   );
 };
-interface StatusBarPropsType {}
 export const StatusBar = () => {
   return (
     <>
