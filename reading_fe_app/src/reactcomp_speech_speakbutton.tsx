@@ -1,6 +1,6 @@
 /** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
- * File name: reactcomps_speech_speakbutton.tsx
+ * File name: reactcomp_speech_speakbutton.tsx
  *
  * Defines React front end speak button functional component.
  *
@@ -10,12 +10,12 @@
  *
  **/
 import { Request } from "./reducers";
-import speakGhostedIcon from "./button_speak_ghosted.png";
-import speakActiveIcon from "./button_speak_activeRed.gif";
-import speakInactiveIcon from "./button_speak.png";
+import speakGhostedIcon from "./img/button_speak_ghosted.png";
+import speakActiveIcon from "./img/button_speak_activeRed.gif";
+import speakInactiveIcon from "./img/button_speak.png";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { useEffect, useState, useContext } from "react";
-import { CPageLists, PageContext } from "./pageContext";
+import { CPageLists } from "./pageContext";
 import {
   ISettingsContext,
   RecitationMode,
