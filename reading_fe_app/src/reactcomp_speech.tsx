@@ -1,6 +1,6 @@
 /** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
- * File name: reactcomps_speech.tsx
+ * File name: reactcomp_speech.tsx
  *
  * Defines React front end functional components.
  *
@@ -14,8 +14,7 @@
  *
  **/
 //import "./App.css";
-import { Request } from "./reducers";
-import { useAppDispatch, useAppSelector } from "./hooks";
+import { useAppSelector } from "./hooks";
 import { useEffect, useState, useContext } from "react";
 import { CPageLists } from "./pageContext";
 import {
@@ -24,9 +23,6 @@ import {
   RecitationMode,
   SettingsContext
 } from "./settingsContext";
-import speakGhostedIcon from "./button_speak_ghosted.png";
-import speakActiveIcon from "./button_speak_activeRed.gif";
-import speakInactiveIcon from "./button_speak.png";
 
 class CSpeechSynthesizer {
   constructor() {
@@ -69,7 +65,6 @@ export const SpeechMonitor = () => {
     false
   );
   const [announce_newSection, setAnnounce_newSection] = useState(false);
-  const [announce_endOfPage, setAnnounce_endOfPage] = useState(false);
   const resetAnnounce_transitions = () => {
     setAnnounce_beginningOfPage(false);
     setAnnounce_newSection(false);
@@ -118,7 +113,13 @@ export const SpeechMonitor = () => {
       Synthesizer.speak(message);
     }
     resetAnnounce_transitions();
-  }, [announce_beginningOfPage, announce_newSection, announce_newSentence]);
+  }, [
+    announce_beginningOfPage,
+    announce_newSection,
+    announce_newSentence,
+    pageContext.sectionList,
+    sectionIdx
+  ]);
   // useEffect(() => {
   //   if (pageLoaded) {
   //     message = "page loaded";
@@ -521,8 +522,7 @@ interface IVoiceSelectorProps {
   setVoiceIndex: (voice: number) => void;
 }
 const VoiceSelector = (props: IVoiceSelectorProps) => {
-  const [selectedOption, setSelectedOption] = useState("");
-  const [voicesAvailable, setVoicesAvailable] = useState(false);
+  const [, setVoicesAvailable] = useState(false);
   useEffect(() => {
     setVoicesAvailable(true); // force rerender of component
   }, [window.speechSynthesis.onvoiceschanged]);
