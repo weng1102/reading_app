@@ -1,6 +1,6 @@
 /** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
- * File name: reactcomps_sections.tsx
+ * File name: reactcomp_sections.tsx
  *
  * Defines React front end functional components.
  *
@@ -15,10 +15,8 @@ import {
   ISectionContent,
   ISentenceContent,
   ISectionHeadingVariant,
-  ISectionHeadingVariant1,
   SectionVariantEnumType,
-  ISectionParagraphVariant,
-  ISectionUnorderedListVariant
+  ISectionParagraphVariant
 } from "./pageContentType";
 import { Section_imageEntry } from "./reactcomp_sections_imageEntry";
 //import { Settings } from "./reactcomp_settings";
