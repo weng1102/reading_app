@@ -27,7 +27,7 @@ interface IConfigSettingsProps {
   active: boolean;
 }
 export const ConfigSettings = (props: IConfigSettingsProps) => {
-  const [distDir, _setDistDir] = useState(props.configSettings.distDir);
+  const [, _setDistDir] = useState(props.configSettings.distDir);
   const setDistDir = (distDir: string) => {
     _setDistDir(distDir);
     props.setConfigSettings({
@@ -38,7 +38,7 @@ export const ConfigSettings = (props: IConfigSettingsProps) => {
   const onDistDirChangeValue = (event: any) => {
     setDistDir(event.target.value);
   };
-  const [homePage, _setHomePage] = useState(props.configSettings.homePage);
+  const [, _setHomePage] = useState(props.configSettings.homePage);
   const setHomePage = (homePage: string) => {
     _setHomePage(homePage);
     props.setConfigSettings({
