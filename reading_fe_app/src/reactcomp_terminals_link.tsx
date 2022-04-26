@@ -8,9 +8,7 @@
  * Version history:
  *
  **/
-import React, { useContext } from "react";
-import { useAppDispatch, useAppSelector } from "./hooks";
-import { Request } from "./reducers";
+import React from "react";
 import {
   ICurriculumLinkTerminalMeta,
   ITerminalContent
@@ -25,7 +23,6 @@ export const Terminal_Link = React.memo((props: ITerminalPropsType): any => {
   let linkInfo: ICurriculumLinkTerminalMeta = props.terminal
     .meta as ICurriculumLinkTerminalMeta;
 
-  let linkClasses: string = "link-label" + linkInfo.className;
   return (
     <>
       <span className="link-label">
