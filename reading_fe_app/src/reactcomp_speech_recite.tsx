@@ -1,6 +1,6 @@
 /** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
- * File name: reactcomps_speech_speakbutton.tsx
+ * File name: reactcomp_speech_speakbutton.tsx
  *
  * Defines React front end speak button functional component.
  *
@@ -10,12 +10,12 @@
  *
  **/
 import { Request } from "./reducers";
-import speakGhostedIcon from "./button_speak_ghosted.png";
-import speakActiveIcon from "./button_speak_activeRed.gif";
-import speakInactiveIcon from "./button_speak.png";
+import speakGhostedIcon from "./img/button_speak_ghosted.png";
+import speakActiveIcon from "./img/button_speak_activeRed.gif";
+import speakInactiveIcon from "./img/button_speak.png";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { useEffect, useState, useContext } from "react";
-import { CPageLists, PageContext } from "./pageContext";
+import { CPageLists } from "./pageContext";
 import {
   ISettingsContext,
   RecitationMode,
@@ -139,31 +139,17 @@ export const ReciteButton = () => {
     }
     return messageQueue;
   };
-
-  const retriesExceeded = useAppSelector(store => store.listen_retriesExceeded);
+  const reciteWordRequested = useAppSelector(
+    store => store.recite_word_requested
+  );
   useEffect(() => {
-    const maxRetries: number = settingsContext.settings.listen.retries;
-    //    const idx: number = useAppSelector(store => store.cursor_terminalIdx);
-    if (retriesExceeded) {
-      console.log(`LISTENING: Exceeded ${maxRetries} retries, next word`);
-      // get current word; say the word
+    if (reciteWordRequested) {
       Synthesizer.volume = settingsContext.settings.speech.volume;
       Synthesizer.speak(wordToRecite(currentTermIdx)); //synchronous
-      dispatch(Request.Cursor_gotoNextWord());
+      dispatch(Request.Recited_currentWord());
     }
-  }, [retriesExceeded]);
+  }, [reciteWordRequested, currentTermIdx]);
 
-  // const reciteWordRequested = useAppSelector(
-  //   store => store.recite_word_requested
-  // );
-  // useEffect(() => {
-  //   if (reciteWordRequested) {
-  //     Synthesizer.volume = settingsContext.settings.speech.volume;
-  //     Synthesizer.speak(wordToRecite(currentTermIdx)); //synchronous
-  //     dispatch(Request.Recited_currentWord());
-  //     dispatch(Request.Cursor_gotoNextWord());
-  //   }
-  // }, [reciteWordRequested]);
   useEffect(() => {
     // if current word changes, then  stop reciting
     if (reciting) {
@@ -176,7 +162,7 @@ export const ReciteButton = () => {
       console.log(`useEffect[reciting]: ${currentTermIdx}`);
       setRecitationQueue(somethingToRecite(currentTermIdx));
     }
-  }, [reciting]);
+  }, [reciting, currentTermIdx]);
   useEffect(() => {
     // need to chop up the message into at least sentences so cancel
     // (reciting=false) request can can be processed especially for longer
@@ -194,7 +180,7 @@ export const ReciteButton = () => {
     } else {
       // not reciting and not requested
     }
-  }, [reciteRequested]);
+  }, [reciteRequested, reciting, currentTermIdx]);
   useEffect(() => {
     // need to chop up the message so cancel request can can be polled
     // especially for longer passages.
@@ -212,7 +198,13 @@ export const ReciteButton = () => {
         }
       }
     }
-  }, [recitingNow, recitationQueue]);
+  }, [
+    recitingNow,
+    reciting,
+    recitationQueue,
+    recitationMode,
+    settingsContext.settings.speech.volume
+  ]);
   // if currently listening, stop and restart after reciting
   dispatch(Request.Recognition_stop);
   return (
