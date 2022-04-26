@@ -47,7 +47,7 @@ import { PageHeader } from "./reactcomp_pageheader";
 import { PageFooter } from "./reactcomp_pagefooter";
 import { SettingsDialog } from "./reactcomp_settings";
 import { SectionDispatcher } from "./reactcomp_sections";
-import { StatusBarMessageType } from "./reducers";
+// import { StatusBarMessageType } from "./reducers";
 
 interface IPreviousPageArrayItem {
   page: string;
@@ -151,15 +151,15 @@ export const Page = React.memo((props: IPagePropsType) => {
   const pageLoaded: boolean = useAppSelector(store => store.page_loaded);
   let message: string = "";
   useEffect(() => {
-    message = `Requested page ${pageRequested} from ${distDir}`;
-    console.log(message);
+    // message = `Requested page ${pageRequested} from ${distDir}`;
+    // console.log(message);
     setIsPageLoaded(
       !(pageRequested !== undefined && pageRequested !== null && !pageLoaded)
     );
     fetchRequest(distDir + pageRequested + ".json");
     //    dispatch(Request.Message_set(message, StatusBarMessageType.application));
     // }
-  }, [pageRequested, pageLoaded]);
+  }, [distDir, pageRequested, pageLoaded]);
   useEffect(() => {
     if (!isPageLoaded) {
       dispatch(Request.Page_loaded(true));
@@ -169,7 +169,7 @@ export const Page = React.memo((props: IPagePropsType) => {
         currentTermIdx: 0
       });
       setPreviousPages(previousPages);
-      console.log(previousPages);
+      console.log(`previousPage Stack ${previousPages}`);
       // if requested page is home page then clear stack!
     }
   }, [pageContent, pageContext]);
@@ -229,9 +229,6 @@ export const Page = React.memo((props: IPagePropsType) => {
       </PageContext.Provider>
     );
   } else {
-    // no statusbar until pageLoaded
-    //  message = `Waiting to load "${pageRequested}"`;
-    console.log(message);
     return <div className="loadingAnnouncement">{message}</div>;
   }
 });
