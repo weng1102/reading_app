@@ -12,7 +12,6 @@
  **/
 import React from "react"; // define glocal var
 //import { ITerminalInfo, ITerminalInfoInitializer, IPageContent } from "../../src/pageContentType";
-import { useState } from "react"; // define global var
 import {
   IHeadingListItem,
   ILinkListItem,
