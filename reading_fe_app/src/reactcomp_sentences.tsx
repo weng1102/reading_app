@@ -1,6 +1,6 @@
-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
- * File name: reactcomps_sentences.tsx
+ * File name: reactcomp_sentences.tsx
  *
  * Defines React front end functional components.
  *
@@ -10,21 +10,10 @@
  **/
 import React from "react";
 import "./App.css";
-import { useAppDispatch, useAppSelector, useSpanRef, useDivRef } from "./hooks";
-
-// is this really necessary if availablility is removed below
-import SpeechRecognition, {
-  useSpeechRecognition
-} from "react-speech-recognition";
 
 import { ISentenceContent, ITerminalContent } from "./pageContentType";
 import { TerminalDispatcher } from "./reactcomp_terminals";
 
-const SectionType = {
-  ORDEREDLIST: "ol",
-  UNORDEREDLIST: "ul",
-  PARAGRAPH: "none"
-};
 export interface ISentencePropsType {
   //  key: number;
   active: boolean;
