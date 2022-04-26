@@ -10,17 +10,11 @@
  **/
 import React from "react";
 import "./App.css";
-import { useAppSelector, useDivRef } from "./hooks";
 import {
   ImageEntryLayoutEnumType,
   ISectionContent,
-  ISentenceContent,
   ISectionImageEntryVariant,
-  SectionVariantEnumType,
-  ISectionParagraphVariant,
-  ISectionUnorderedListVariant,
   ITerminalContent,
-  ITerminalInfo,
   IImageTerminalMeta
 } from "./pageContentType";
 import { Terminal_Image } from "./reactcomp_terminals_image";
