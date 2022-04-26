@@ -1,6 +1,6 @@
 /** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
- * File name: reactcomps_terminals.tsx
+ * File name: reactcomp_terminals.tsx
  *
  * Defines React front end functional components for terminals.
  *
@@ -74,7 +74,6 @@ export const TerminalDispatcher = React.memo(
             terminal={props.terminal}
           />
         );
-        break;
       case TerminalMetaEnumType.word:
       case TerminalMetaEnumType.symbol:
         return (
@@ -85,10 +84,8 @@ export const TerminalDispatcher = React.memo(
             terminal={props.terminal}
           />
         );
-        break;
       case TerminalMetaEnumType.whitespace:
         return <Terminal_Whitespace active={false} terminal={props.terminal} />;
-        break;
       case TerminalMetaEnumType.currency:
         break;
       case TerminalMetaEnumType.date:
@@ -101,7 +98,6 @@ export const TerminalDispatcher = React.memo(
             terminal={props.terminal}
           />
         );
-        break;
       case TerminalMetaEnumType.emailaddress:
         return (
           <Terminal_Emailaddress
@@ -112,7 +108,6 @@ export const TerminalDispatcher = React.memo(
             terminal={props.terminal}
           />
         );
-        break;
       case TerminalMetaEnumType.image:
         //active should be false regardless
         return (
@@ -124,7 +119,6 @@ export const TerminalDispatcher = React.memo(
             terminal={props.terminal}
           />
         );
-        break;
       case TerminalMetaEnumType.link:
         return (
           <Terminal_Link
@@ -135,7 +129,6 @@ export const TerminalDispatcher = React.memo(
             terminal={props.terminal}
           />
         );
-        break;
       case TerminalMetaEnumType.numberwithcommas:
         break;
       case TerminalMetaEnumType.phonenumber:
@@ -148,10 +141,8 @@ export const TerminalDispatcher = React.memo(
             terminal={props.terminal}
           />
         );
-        break;
       case TerminalMetaEnumType.punctuation:
         return <Terminal_Whitespace active={false} terminal={props.terminal} />;
-        break;
       case TerminalMetaEnumType.tbd:
         break;
       case TerminalMetaEnumType.time:
@@ -162,7 +153,6 @@ export const TerminalDispatcher = React.memo(
         break;
       default:
         return <>unknown terminal "{props.terminal.content}"</>;
-        break;
     }
   }
 );
