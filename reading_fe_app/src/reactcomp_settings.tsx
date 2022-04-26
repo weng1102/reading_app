@@ -1,6 +1,6 @@
 /** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
- * File name: reactcomps_settings.tsx
+ * File name: reactcomp_settings.tsx
  *
  * Defines React front end functional components popup settings modal
  * page
@@ -22,11 +22,10 @@
 import { useContext, useState } from "react";
 import { useAppDispatch } from "./hooks";
 import { Request } from "./reducers";
-import settingsIcon from "./settingicon.png";
-import OkIcon from "./button_OK.png";
-import OkIcon_ghosted from "./button_OK_ghosted.png";
-import CancelIcon from "./button_cancel.png";
-//import CancelIcon_ghosted from "./button_cancel_ghosted.png"
+import settingsIcon from "./img/settingicon.png";
+import OkIcon from "./img/button_OK.png";
+import OkIcon_ghosted from "./img/button_OK_ghosted.png";
+import CancelIcon from "./img/button_cancel.png";
 import { ConfigSettings } from "./reactcomp_config";
 import { SpeechSettings } from "./reactcomp_speech";
 import { ListenSettings } from "./reactcomp_listen";
@@ -112,15 +111,6 @@ export const SettingsDialog = (props: ISettingsDialogPropsType) => {
     props.hide();
     dispatch(Request.Test_set());
   };
-  const markersInactive: string[] = ["", "", "", "", ""];
-  let tabMarkers: string[] = markersInactive;
-  const clickTab = (tab: number) => {
-    tabMarkers = markersInactive;
-    setActiveTab(tab);
-    console.log(`tab ${tab} selected`);
-    if (tab > 0 && tab < tabMarkers.length) tabMarkers[tab] = "active";
-  };
-
   let OkIcons = modified ? OkIcon : OkIcon_ghosted;
   let dispatch = useAppDispatch();
   // could do deep compare between temp and current contexts
