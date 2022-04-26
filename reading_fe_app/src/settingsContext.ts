@@ -15,12 +15,6 @@
  *
  **/
 import React from "react";
-import { useState } from "react";
-// import { ISpeechSettings } from "./reactcomp_speech";
-// import //  CListenSettings,
-//  IListenSettings,
-//ListenSettingsInitializer
-// "./reactcomp_listen";
 
 export enum RecitationMode {
   wordOnly = "word only",
