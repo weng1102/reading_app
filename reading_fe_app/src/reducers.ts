@@ -56,6 +56,12 @@ const PAGE_LINKTO = "page/link to";
 
 const PAGE_POP = "page/pop";
 const PAGE_POPPED = "page/popped";
+const PAGE_RESTORE = "page/restore";
+const PAGE_RESTORED = "page/restored";
+const PAGE_HOME = "page/home";
+const PAGE_HOMED = "page/homed";
+const PAGE_HOME_ENABLED = "page/home enabled";
+const PAGE_PREVIOUS_ENABLED = "page/previos enabled";
 
 // intrapage administrative actions (non-user initiated)
 //const PAGECONTEXT_SET = "pagecontext/set";
@@ -302,6 +308,38 @@ const Page_popped = () => {
     type: PAGE_POPPED
   };
 };
+const Page_restore = () => {
+  return {
+    type: PAGE_RESTORE
+  };
+};
+const Page_restored = () => {
+  return {
+    type: PAGE_RESTORED
+  };
+};
+const Page_home = () => {
+  return {
+    type: PAGE_HOME
+  };
+};
+const Page_homed = () => {
+  return {
+    type: PAGE_HOMED
+  };
+};
+const Page_homeEnabled = (yes: boolean) => {
+  return {
+    type: PAGE_HOME_ENABLED,
+    payload: yes
+  };
+};
+const Page_previousEnabled = (yes: boolean) => {
+  return {
+    type: PAGE_PREVIOUS_ENABLED,
+    payload: yes
+  };
+};
 const Recognition_toggle = (maxRetries: number) => {
   return {
     type: LISTENING_TOGGLE,
@@ -399,6 +437,12 @@ export const Request = {
   Page_gotoLink,
   Page_pop,
   Page_popped,
+  Page_restore,
+  Page_restored,
+  Page_home,
+  Page_homed,
+  Page_homeEnabled,
+  Page_previousEnabled,
 
   Reciting_started,
   Reciting_ended,
@@ -550,6 +594,10 @@ interface IReduxState {
   page_section: number;
   pageContext: CPageLists;
   page_pop_requested: boolean;
+  page_restore_requested: boolean;
+  page_home_requested: boolean;
+  page_home_enabled: boolean;
+  page_previous_enabled: boolean;
 
   recite_requested: boolean;
   recite_word_requested: boolean;
@@ -593,6 +641,10 @@ const IReduxStateInitialState: IReduxState = {
   page_loaded: false,
   page_section: 0,
   page_pop_requested: false,
+  page_restore_requested: false,
+  page_home_requested: false,
+  page_home_enabled: false,
+  page_previous_enabled: false,
   cursor_terminalIdx_proposed: 0,
   cursor_sectionIdx_proposed: 0,
   //page_lists: new CPageLists(),
@@ -737,6 +789,7 @@ export const rootReducer = (
       return state;
     case PAGE_LOADED:
       state.page_loaded = action.payload as boolean;
+      state.page_pop_requested = false;
       return state;
     case PAGE_TOP:
       setTerminalState([state.pageContext.firstTerminalIdx]);
@@ -767,6 +820,33 @@ export const rootReducer = (
       return state;
     case PAGE_POPPED:
       state.page_pop_requested = false;
+      return state;
+    case PAGE_RESTORE:
+      state.page_restore_requested = true;
+      return state;
+    case PAGE_RESTORED:
+      state.page_restore_requested = false;
+      return state;
+    case PAGE_HOME:
+      console.log(
+        `page_home: page restored_request=${state.page_restore_requested}`
+      );
+      if (state.page_restore_requested) {
+        state.page_home_requested = false;
+      } else {
+        state.page_home_requested = true;
+      }
+      return state;
+    case PAGE_HOMED:
+      state.page_home_requested = false;
+      state.page_home_enabled = false;
+      state.page_previous_enabled = false;
+      return state;
+    case PAGE_HOME_ENABLED:
+      state.page_home_enabled = action.payload;
+      return state;
+    case PAGE_PREVIOUS_ENABLED:
+      state.page_previous_enabled = action.payload;
       return state;
     case CONTEXT_SET:
       // cast object into class instance with methods

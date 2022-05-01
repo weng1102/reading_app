@@ -26,7 +26,7 @@ import {
 } from "./settingsContext";
 
 export const ListeningMonitor = () => {
-  console.log = function() {}; // disable console logging
+  //console.log = function() {}; // disable console logging
   const [wordsPreviouslyHeard, setWordsPreviouslyHeard] = useState("");
   const dispatch = useAppDispatch();
   const listeningRequested: boolean = useAppSelector(

@@ -130,14 +130,14 @@ export const Page = React.memo((props: IPagePropsType) => {
   let dispatch = useAppDispatch();
   const settingsContext: ISettingsContext = useContext(SettingsContext)!;
   const distDir: string = settingsContext.settings.config.distDir;
-  const pageRequested: string = useAppSelector(store => store.page_requested);
+  const homePage: string = settingsContext.settings.config.homePage;
   const pageLoaded: boolean = useAppSelector(store => store.page_loaded);
   let message: string = "";
   const currentTermIdx: number = useAppSelector(
     store => store.cursor_terminalIdx
   );
   const dumpPreviousPageStack = (message: string) => {
-    return; //disable dumpPreviousPageStack
+    //  return; //disable dumpPreviousPageStack
     let elString: string = "";
     previousPages.forEach(
       el => (elString += `[${el.page}, ${el.currentTermIdx}]`)
@@ -145,13 +145,25 @@ export const Page = React.memo((props: IPagePropsType) => {
     elString = elString.length > 0 ? elString : "(empty)";
     console.log(`${message}: previousPage Stack ${elString} `);
   };
+  const pageRequested: string = useAppSelector(store => store.page_requested);
+  const pageRestoreRequested: boolean = useAppSelector(
+    store => store.page_restore_requested
+  );
   useEffect(() => {
-    // Initiates page load of new page requested but not yet loaded
-    if (!pageLoaded && currentPage.length > 0) {
+    // Initiates page load requested but not yet loaded
+    if (
+      !pageLoaded &&
+      currentPage.length > 0 &&
+      currentPage !== pageRequested
+    ) {
       previousPages.push({
         page: currentPage,
         currentTermIdx: currentIdx
       });
+    }
+    if (previousPages.length > 0) {
+      dispatch(Request.Page_homeEnabled(true));
+      dispatch(Request.Page_previousEnabled(true));
     }
     dumpPreviousPageStack("initial page request");
     setIsPageLoaded(
@@ -159,14 +171,14 @@ export const Page = React.memo((props: IPagePropsType) => {
     );
     ///save currentTermIdx of current page
     fetchRequest(distDir + pageRequested + ".json");
-  }, [distDir, pageRequested, pageLoaded]);
+  }, [distDir, pageRequested, pageLoaded, pageRestoreRequested]);
 
   useEffect(() => {
     // requested page loading complete
     if (!isPageLoaded) {
       dispatch(Request.Page_loaded(true));
       setIsPageLoaded(true);
-      setPreviousPages(previousPages);
+      //      setPreviousPages(previousPages);
       setCurrentPage(pageRequested);
       dumpPreviousPageStack("!isPageLoaded");
 
@@ -181,41 +193,57 @@ export const Page = React.memo((props: IPagePropsType) => {
     if (pageRequested === currentPage) setCurrentIdx(currentTermIdx);
   }, [pageRequested, currentPage, currentTermIdx]);
 
+  const pageHomeRequested: boolean = useAppSelector(
+    store => store.page_home_requested
+  );
+  useEffect(() => {
+    if (pageHomeRequested) {
+      console.log(`home requested`);
+      setPreviousPages([]);
+      setCurrentPage("");
+      setCurrentIdx(0);
+      dispatch(Request.Page_load(`homepage_${homePage}`));
+      dispatch(Request.Page_homed());
+    }
+  }, [pageHomeRequested, homePage]);
+
   const pagePopRequested: boolean = useAppSelector(
     store => store.page_pop_requested
   );
   useEffect(() => {
     // pop requested
-    console.log(`pop requested`);
-
-    if (pageLoaded) {
-      dumpPreviousPageStack("pagePopRequested");
-    }
-    let previousPage: IPreviousPageArrayItem = previousPages.pop()!;
-    if (previousPage !== undefined) {
-      console.log(
-        `******pop to ${previousPage.page}, ${previousPage.currentTermIdx}`
-      );
-      setCurrentPage("");
-      setCurrentIdx(0);
-      dumpPreviousPageStack("pagePopRequested");
-      dispatch(
-        Request.Page_load(previousPage.page, 0, previousPage.currentTermIdx)
-      );
-    } else {
-      console.log(`previous page stack empty`);
+    if (pagePopRequested) {
+      console.log(`pop requested`);
+      let previousPage: IPreviousPageArrayItem = previousPages.pop()!;
+      if (previousPage !== undefined) {
+        console.log(
+          `pop to ${previousPage.page}, ${previousPage.currentTermIdx}`
+        );
+        setCurrentPage("");
+        setCurrentIdx(0);
+        dumpPreviousPageStack("pagePopRequested");
+        dispatch(
+          Request.Page_load(previousPage.page, 0, previousPage.currentTermIdx)
+        );
+      } else {
+        console.log(`previous page stack empty`);
+      }
+      if (previousPages.length === 0) {
+        dispatch(Request.Page_previousEnabled(false));
+        dispatch(Request.Page_homeEnabled(false));
+      }
       dispatch(Request.Page_popped());
     }
   }, [pagePopRequested]);
-  const pageRestoreRequested: boolean = useAppSelector(
-    store => store.page_restore_requested
-  );
+
   useEffect(() => {
     // restore  requested
-    console.log(`restore requested`);
-    if (currentPage.length > 0) {
-      dispatch(Request.Page_load(currentPage, 0, currentIdx));
-      dispatch(Request.Page_restored());
+    if (pageRestoreRequested) {
+      console.log(`restore requested`);
+      if (currentPage.length > 0) {
+        dispatch(Request.Page_load(currentPage, 0, currentIdx));
+        dispatch(Request.Page_restored());
+      }
     }
   }, [pageRestoreRequested]);
 

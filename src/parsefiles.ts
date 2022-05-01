@@ -8,64 +8,13 @@
 // *Content (i.e., PageContent, SectionNode) = group of TerminalNodes
 // TerminalNode = terminalNode = leafNode
 import { strict as assert } from "assert";
-import {
-  // endMarkupTag,
-  // isValidMarkupTag,
-  // Tokenizer,
-  // TokenType,
-  // TokenLabelType,
-  TokenListType
-  // TokenLiteral,
-  // Token,
-  // MarkupLabelType
-} from "./tokenizer";
-//import { MarkdownType, MarkdownTagType } from "./dataadapter";
+import { TokenListType } from "./tokenizer";
 import {
   IPageContent,
   ISectionContent,
-  // ISectionBlockquoteVariant,
-  // ISectionBlockquoteVariantInitializer,
-  // ISectionFillinVariant,
-  // ISectionFillinVariantInitializer,
-  // ISectionHeadingVariant,
-  // ISectionHeadingVariantInitializer,
-  // ISectionOrderedListVariant,
-  // ISectionOrderedListVariantInitializer,
-  // ISectionUnorderedListVariant,
-  // ISectionUnorderedListVariantInitializer,
-  // ISectionParagraphVariant,
-  // ISectionParagraphVariantInitializer,
-  // ISentenceContent,
-  // ITerminalContent,
-  // TerminalMetaType,
-  // TerminalMetaEnumType,
-  // IWordTerminalMeta,
-  // IWordTerminalMetaInitializer,
-  // OrderedListTypeEnumType,
   PageFormatEnumType
-  // SectionVariantEnumType,
-  // SectionVariantType,
-  // UnorderedListMarkerEnumType
 } from "./pageContentType";
-// import DictionaryType, {
-//   PronunciationDictionary,
-//   RecognitionDictionary
-// } from "./dictionary";
-// import { Logger } from "./logger";
-// import {
-//   AcronymMap,
-//   //  BaseClass,
-//   CardinalNumberMap,
-//   MonthFromAbbreviationMap,
-//   OrdinalNumberMap
-// } from "./utilities";
-import {
-  // IDataSource,
-  //  MarkdownSectionTagType,
-  // BasicMarkdownSource,
-  // RawMarkdownSource,
-  TaggedStringType
-} from "./dataadapter";
+import { TaggedStringType } from "./dataadapter";
 import {
   //  BaseClass,
   ParseNode,

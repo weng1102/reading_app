@@ -98,6 +98,7 @@ export const SettingsDialog = (props: ISettingsDialogPropsType) => {
         listen: listenSettings
       });
       setModified(false);
+      dispatch(Request.Page_restore()); // could be in useDialog
     }
     //    setInitial(true);
   };

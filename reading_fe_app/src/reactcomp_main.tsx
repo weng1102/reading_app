@@ -10,7 +10,7 @@
 // import React from "react";
 import "./App.css";
 import { Request } from "./reducers";
-import { useAppDispatch } from "./hooks";
+import { useAppDispatch, useAppSelector } from "./hooks";
 import { useState } from "react";
 import { Page } from "./reactcomp_page";
 import SpeechRecognition from "react-speech-recognition";
@@ -25,16 +25,21 @@ export const ReadingApp = () => {
     settings: _settings,
     saveSettings: _setSettings
   };
+  // const restorePageRequested = useAppSelector(
+  //   store => store.page_restore_requested
+  // );
   let dispatch = useAppDispatch();
   dispatch(
     Request.Recognition_setAvailability(
       SpeechRecognition.browserSupportsSpeechRecognition()
     )
   );
-  const homePage = _settings.config.homePage;
-
-  if (homePage.length === 0) dispatch(Request.Page_load("sitemap"));
-  else dispatch(Request.Page_load(`homepage_${homePage}`));
+  if (_settings.config.homePage.length === 0) {
+    dispatch(Request.Page_load("sitemap"));
+  } else {
+    // } else if (!restorePageRequested) {
+    dispatch(Request.Page_home());
+  }
   return (
     <>
       <SettingsContext.Provider value={settingsContext}>
