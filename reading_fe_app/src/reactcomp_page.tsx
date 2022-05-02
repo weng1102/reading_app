@@ -39,7 +39,11 @@ import "./App.css";
 import { Request } from "./reducers";
 import { useAppDispatch, useAppSelector, useDialog } from "./hooks";
 import { useEffect, useState, useContext } from "react";
-import { IPageContent, ISectionContent } from "./pageContentType";
+import {
+  IPageContent,
+  ISectionContent,
+  PageContentVersion
+} from "./pageContentType";
 import { CPageLists, PageContext } from "./pageContext";
 import { SettingsContext, ISettingsContext } from "./settingsContext";
 import { NavBar } from "./reactcomp_navbar";
@@ -95,26 +99,32 @@ export const Page = React.memo((props: IPagePropsType) => {
             setPageContent(data as IPageContent);
             message = `Changing page context for "${pageRequested}"`;
             if (pageContent !== undefined && pageContent !== null) {
-              let pageContext: CPageLists = new CPageLists(
-                pageContent.terminalList,
-                pageContent.headingList,
-                pageContent.sectionList,
-                pageContent.sentenceList,
-                pageContent.linkList
-              );
-              if (pageContext !== null) {
-                message = `Loaded page context for "${pageRequested}"`;
-                setPageContext(pageContext);
-                dispatch(Request.Page_setContext(pageContext));
-                dumpPreviousPageStack("beforePageLoaded");
-                setIsPageLoaded(true);
-                dumpPreviousPageStack("afterPageLoaded");
-                //                setCurrentPage(pageRequested);
-                //                dispatch(Request.Page_loaded(true));
+              if (data.version !== PageContentVersion) {
+                setParseError(
+                  `version mismatch. Expected ${PageContentVersion} but encountered ${data.version} in content`
+                );
               } else {
-                message = `Loading page context failed for "${pageRequested}"`;
+                let pageContext: CPageLists = new CPageLists(
+                  pageContent.terminalList,
+                  pageContent.headingList,
+                  pageContent.sectionList,
+                  pageContent.sentenceList,
+                  pageContent.linkList
+                );
+                if (pageContext !== null) {
+                  message = `Loaded page context for "${pageRequested}"`;
+                  setPageContext(pageContext);
+                  dispatch(Request.Page_setContext(pageContext));
+                  dumpPreviousPageStack("beforePageLoaded");
+                  setIsPageLoaded(true);
+                  dumpPreviousPageStack("afterPageLoaded");
+                  //                setCurrentPage(pageRequested);
+                  //                dispatch(Request.Page_loaded(true));
+                } else {
+                  message = `Loading page context failed for "${pageRequested}"`;
+                }
+                //              dispatch(Request.StatusBar_Message_set(message));
               }
-              //              dispatch(Request.StatusBar_Message_set(message));
             }
           } catch (e) {
             let message: string = (e as Error).message;
@@ -169,7 +179,7 @@ export const Page = React.memo((props: IPagePropsType) => {
     setIsPageLoaded(
       !(pageRequested !== undefined && pageRequested !== null && !pageLoaded)
     );
-    ///save currentTermIdx of current page
+
     fetchRequest(distDir + pageRequested + ".json");
   }, [distDir, pageRequested, pageLoaded, pageRestoreRequested]);
 
