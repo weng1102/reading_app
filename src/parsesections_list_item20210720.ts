@@ -17,7 +17,7 @@ import {
 import {
   // IDataSource,
   //  MarkdownSectionTagType,
-  MarkdownTagType,
+  MarkdownRecordType,
   // BasicMarkdownSource,
   // RawMarkdownSource,
   TaggedStringType
@@ -80,12 +80,12 @@ export class SectionParseNode_LIST_ITEMS extends SectionParseNode_LIST
     );
     for (
       current = this.dataSource.currentRecord();
-      !this.dataSource.EOF() && current.tagType !== MarkdownTagType.SECTION_END; //&& current.depth === previous.depth; //      current = this.dataSource.nextRecord()
+      !this.dataSource.EOF() && current.tagType !== MarkdownRecordType.SECTION_END; //&& current.depth === previous.depth; //      current = this.dataSource.nextRecord()
 
     ) {
       switch (current.tagType) {
-        case MarkdownTagType.SECTION_ORDERED:
-        case MarkdownTagType.SECTION_UNORDERED: {
+        case MarkdownRecordType.SECTION_ORDERED:
+        case MarkdownRecordType.SECTION_UNORDERED: {
           if (current.depth > depth) {
             // deeper SECTION
             let section = GetSectionNode(current.tagType, this);
@@ -99,12 +99,12 @@ export class SectionParseNode_LIST_ITEMS extends SectionParseNode_LIST
             // encountered the depth of next record decreases
             current = this.dataSource.currentRecord();
             assert(
-              current.tagType === MarkdownTagType.SECTION_END ||
-                current.tagType === MarkdownTagType.LISTITEM_ORDERED ||
-                current.tagType === MarkdownTagType.LISTITEM_UNORDERED,
-              `expected ${MarkdownTagType.SECTION_END}, ${current.tagType ===
-                MarkdownTagType.LISTITEM_ORDERED} or ${current.tagType ===
-                MarkdownTagType.LISTITEM_UNORDERED} but encountered ${
+              current.tagType === MarkdownRecordType.SECTION_END ||
+                current.tagType === MarkdownRecordType.LISTITEM_ORDERED ||
+                current.tagType === MarkdownRecordType.LISTITEM_UNORDERED,
+              `expected ${MarkdownRecordType.SECTION_END}, ${current.tagType ===
+                MarkdownRecordType.LISTITEM_ORDERED} or ${current.tagType ===
+                MarkdownRecordType.LISTITEM_UNORDERED} but encountered ${
                 current.tagType
               } at line ${current.lineNo}`
             );
@@ -123,8 +123,8 @@ export class SectionParseNode_LIST_ITEMS extends SectionParseNode_LIST
           }
           break;
         }
-        case MarkdownTagType.LISTITEM_UNORDERED:
-        case MarkdownTagType.LISTITEM_ORDERED: {
+        case MarkdownRecordType.LISTITEM_UNORDERED:
+        case MarkdownRecordType.LISTITEM_ORDERED: {
           assert(
             current.depth === depth,
             `expected depth=${depth} but encountered depth=${current.depth}} at line ${current.lineNo}`
@@ -133,8 +133,8 @@ export class SectionParseNode_LIST_ITEMS extends SectionParseNode_LIST
           this.items.push(listItem);
           current = this.dataSource.nextRecord();
           assert(
-            current.tagType === MarkdownTagType.PARAGRAPH,
-            `expected ${MarkdownTagType.PARAGRAPH} but encountered ${current.tagType}
+            current.tagType === MarkdownRecordType.PARAGRAPH,
+            `expected ${MarkdownRecordType.PARAGRAPH} but encountered ${current.tagType}
             at line ${current.lineNo}`
           );
           let paragraph = GetSectionNode(current.tagType, this);
@@ -146,8 +146,8 @@ export class SectionParseNode_LIST_ITEMS extends SectionParseNode_LIST
           paragraph.parse();
           current = this.dataSource.currentRecord();
           assert(
-            current.tagType === MarkdownTagType.LISTITEM_END,
-            `expected ${MarkdownTagType.LISTITEM_END} but encountered ${current.tagType}
+            current.tagType === MarkdownRecordType.LISTITEM_END,
+            `expected ${MarkdownRecordType.LISTITEM_END} but encountered ${current.tagType}
            at line ${current.lineNo}`
           );
           current = this.dataSource.nextRecord(); // move passed LISTITEM_END to either LISTITEM or SECTION
@@ -161,7 +161,7 @@ export class SectionParseNode_LIST_ITEMS extends SectionParseNode_LIST
         }
       }
     }
-    if (current.tagType === MarkdownTagType.SECTION_END)
+    if (current.tagType === MarkdownRecordType.SECTION_END)
       this.dataSource.nextRecord();
   }
   parse() {
@@ -176,9 +176,9 @@ export class SectionParseNode_LIST_ITEMS extends SectionParseNode_LIST
     );
     let current = this.dataSource.currentRecord();
     assert(
-      current.tagType === MarkdownTagType.SECTION_ORDERED ||
-        current.tagType === MarkdownTagType.SECTION_UNORDERED,
-      `expected ${MarkdownTagType.SECTION_ORDERED} or ${MarkdownTagType.SECTION_UNORDERED} but encountered ${current.tagType}
+      current.tagType === MarkdownRecordType.SECTION_ORDERED ||
+        current.tagType === MarkdownRecordType.SECTION_UNORDERED,
+      `expected ${MarkdownRecordType.SECTION_ORDERED} or ${MarkdownRecordType.SECTION_UNORDERED} but encountered ${current.tagType}
      at line ${current.lineNo}`
     );
     try {

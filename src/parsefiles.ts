@@ -471,7 +471,7 @@ export class FileParseNode extends ParseNode {
 //   meta: ISectionHeadingVariant = ISectionHeadingVariantInitializer;
 //   parse() {
 //     let current: TaggedStringType = this.parent._markdownDataSource.currentRecord();
-//     if (current.tagType === MarkdownTagType.HEADING) {
+//     if (current.tagType === MarkdownRecordType.HEADING) {
 //       this.meta.title = current.content;
 //       this.meta.level = current.headingLevel;
 //       this.meta.type = SectionVariantEnumType.heading;
@@ -492,15 +492,15 @@ export class FileParseNode extends ParseNode {
 //   meta: ISectionBlockquoteVariant = ISectionBlockquoteVariantInitializer;
 //   parse() {
 //     let current: TaggedStringType = this.parent.dataSource.currentRecord();
-//     if (current.tagType === MarkdownTagType.BLOCKQUOTE) {
+//     if (current.tagType === MarkdownRecordType.BLOCKQUOTE) {
 //       if (
 //         this.parent.dataSource.nextRecord().tagType ===
-//         MarkdownTagType.PARAGRAPH
+//         MarkdownRecordType.PARAGRAPH
 //       ) {
 //         for (
 //           current = this.parent.dataSource.nextRecord();
 //           !this.parent.dataSource.EOF() &&
-//           current.tagType === MarkdownTagType.SENTENCE;
+//           current.tagType === MarkdownRecordType.SENTENCE;
 //           current = this.parent.dataSource.nextRecord()
 //         ) {
 //           let sentence = new SentenceNode(this);
@@ -508,7 +508,7 @@ export class FileParseNode extends ParseNode {
 //           this.meta.sentences.push(sentence);
 //           current = this.parent.dataSource.nextRecord();
 //         }
-//         if (current.tagType !== MarkdownTagType.PARAGRAPH_END) {
+//         if (current.tagType !== MarkdownRecordType.PARAGRAPH_END) {
 //           `expected PARAGRAPH parsing BLOCKQUOTE after line ${current.lineNo}`;
 //         }
 //       }

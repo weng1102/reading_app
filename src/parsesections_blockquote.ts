@@ -10,7 +10,7 @@
 import { strict as assert } from "assert";
 import { IsError } from "./utilities";
 import { ParseNodeSerializeFormatEnumType } from "./baseclasses";
-import { MarkdownTagType, TaggedStringType } from "./dataadapter";
+import { MarkdownRecordType, TaggedStringType } from "./dataadapter";
 import {
   ISectionBlockquoteVariant,
   ISectionBlockquoteVariantInitializer,
@@ -39,17 +39,17 @@ export class SectionParseNode_BLOCKQUOTE extends SectionParseNode_LIST
         `current record is undefined at buffer index ${this.dataSource.currentIdx()}`
       );
       assert(
-        current.tagType === MarkdownTagType.BLOCKQUOTE,
-        `expected ${MarkdownTagType.BLOCKQUOTE}  at line ${current.lineNo}`
+        current.tagType === MarkdownRecordType.BLOCKQUOTE,
+        `expected ${MarkdownRecordType.BLOCKQUOTE}  at line ${current.lineNo}`
       );
       for (
         current = this.dataSource.nextRecord();
         !this.dataSource.EOF() &&
-        current.tagType !== MarkdownTagType.SECTION_END; // end of blockquote
+        current.tagType !== MarkdownRecordType.SECTION_END; // end of blockquote
       ) {
         assert(
-          current.tagType === MarkdownTagType.PARAGRAPH,
-          `expected ${MarkdownTagType.PARAGRAPH} at line ${current.lineNo}`
+          current.tagType === MarkdownRecordType.PARAGRAPH,
+          `expected ${MarkdownRecordType.PARAGRAPH} at line ${current.lineNo}`
         );
         let paragraph: ISectionNode = new SectionParseNode_PARAGRAPH(this);
         paragraph.parse();
@@ -57,8 +57,8 @@ export class SectionParseNode_BLOCKQUOTE extends SectionParseNode_LIST
         current = this.dataSource.currentRecord()
       }
       assert(
-        current.tagType === MarkdownTagType.SECTION_END,
-        `expected ${MarkdownTagType.SECTION_END} to ${MarkdownTagType.BLOCKQUOTE}`
+        current.tagType === MarkdownRecordType.SECTION_END,
+        `expected ${MarkdownRecordType.SECTION_END} to ${MarkdownRecordType.BLOCKQUOTE}`
       );
       current = this.dataSource.nextRecord(); // move passed SECTION_END
 

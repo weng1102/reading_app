@@ -14,7 +14,7 @@ import {
   IParseNode,
   ParseNodeSerializeFormatEnumType
 } from "./baseclasses";
-import { MarkdownTagType, TaggedStringType } from "./dataadapter";
+import { MarkdownRecordType, TaggedStringType } from "./dataadapter";
 import {
   ISectionContent,
   ISectionHeadingVariant,
@@ -46,8 +46,8 @@ export class SectionParseNode_HEADING extends SectionParseNode
     try {
       let current: TaggedStringType = this.dataSource.currentRecord();
       assert(
-        current.tagType === MarkdownTagType.HEADING,
-        `expected ${MarkdownTagType.HEADING} at line ${current.lineNo}`
+        current.tagType === MarkdownRecordType.HEADING,
+        `expected ${MarkdownRecordType.HEADING} at line ${current.lineNo}`
       );
       this.firstTermIdx = this.userContext.terminals.lastIdx + 1;
       let sentence: ISentenceNode = new SentenceNode(this);
@@ -55,12 +55,12 @@ export class SectionParseNode_HEADING extends SectionParseNode
       this.meta.heading = sentence;
 
       //   !this.dataSource.EOF() &&
-      //   current.tagType !== MarkdownTagType.PARAGRAPH_END;
+      //   current.tagType !== MarkdownRecordType.PARAGRAPH_END;
       //   current = this.dataSource.nextRecord()
       // ) {
       //   assert(
-      //     current.tagType === MarkdownTagType.SENTENCE,
-      //     `encountered ${current.tagType} expected ${MarkdownTagType.SENTENCE} at line ${current.lineNo}`
+      //     current.tagType === MarkdownRecordType.SENTENCE,
+      //     `encountered ${current.tagType} expected ${MarkdownRecordType.SENTENCE} at line ${current.lineNo}`
       //   );
       //   let sentence: ISentenceNode = new SentenceNode(this);
       //   this.meta.sentences.push(sentence);

@@ -14,7 +14,7 @@ import {
   ParseNodeSerializeTabular,
   ParseNodeSerializeFormatEnumType
 } from "./baseclasses";
-import { MarkdownTagType, TaggedStringType } from "./dataadapter";
+import { MarkdownRecordType, TaggedStringType } from "./dataadapter";
 import {
   ImageEntryLayoutEnumType,
   ISectionImageEntryVariantInitializer,
@@ -50,8 +50,8 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
       assert(current !== undefined, `Undefined record encountered`);
 
       assert(
-        current.tagType === MarkdownTagType.IMAGEENTRY,
-        `Expected "${MarkdownTagType.IMAGEENTRY}" at line ${current.lineNo}`
+        current.tagType === MarkdownRecordType.IMAGEENTRY,
+        `Expected "${MarkdownRecordType.IMAGEENTRY}" at line ${current.lineNo}`
       );
       let args: string[] = current.content.split(",").map(arg => arg.trim());
       if (IsDefined(args[0])) this.meta.title = args[0];
@@ -89,13 +89,13 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
       if (IsDefined(args[3])) this.meta.separator = args[3];
       current = this.dataSource.nextRecord();
       assert(
-        current.tagType === MarkdownTagType.PARAGRAPH,
-        `Expected "${MarkdownTagType.PARAGRAPH}" but encountered "${current.tagType}" at line ${current.lineNo}`
+        current.tagType === MarkdownRecordType.PARAGRAPH,
+        `Expected "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.tagType}" at line ${current.lineNo}`
       );
       current = this.dataSource.nextRecord();
       assert(
-        current.tagType === MarkdownTagType.SENTENCE,
-        `Expected "${MarkdownTagType.SENTENCE}" but encountered "${current.tagType}" at line ${current.lineNo}`
+        current.tagType === MarkdownRecordType.SENTENCE,
+        `Expected "${MarkdownRecordType.SENTENCE}" but encountered "${current.tagType}" at line ${current.lineNo}`
       );
       // find list of images
       this.firstTermIdx = this.userContext.terminals.lastIdx + 1;
@@ -109,14 +109,14 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
       }
       assert(
         this.meta.images.length > 0,
-        `Expected image declaraction(s) immediately following "${MarkdownTagType.IMAGEENTRY}" at line ${current.lineNo}`
+        `Expected image declaraction(s) immediately following "${MarkdownRecordType.IMAGEENTRY}" at line ${current.lineNo}`
       );
       current = this.dataSource.nextRecord();
       assert(
-        current.tagType === MarkdownTagType.PARAGRAPH_END,
-        `Expected "${MarkdownTagType.PARAGRAPH_END}" to "${MarkdownTagType.PARAGRAPH}" but encountered "${current.tagType}"  at line ${current.lineNo}`
+        current.tagType === MarkdownRecordType.PARAGRAPH_END,
+        `Expected "${MarkdownRecordType.PARAGRAPH_END}" to "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.tagType}"  at line ${current.lineNo}`
       );
-      // if (current.tagType === MarkdownTagType.PARAGRAPH_END) {
+      // if (current.tagType === MarkdownRecordType.PARAGRAPH_END) {
       //   this.lastTermIdx = this.userContext.terminals.lastIdx;
       //   this.id =
       //     this.userContext.sections.push(
@@ -135,7 +135,7 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
       for (
         current = this.dataSource.nextRecord();
         !this.dataSource.EOF() &&
-        current.tagType !== MarkdownTagType.IMAGEENTRY_END;
+        current.tagType !== MarkdownRecordType.IMAGEENTRY_END;
         current = this.dataSource.currentRecord() // update current modified in parse()
       ) {
         let sectionNode: ISectionNode = GetSectionNode(current.tagType, this);
@@ -146,7 +146,7 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
         sectionNode.parse();
         //        current = this.dataSource.currentRecord();
 
-        if (current.tagType === MarkdownTagType.PARAGRAPH_END) {
+        if (current.tagType === MarkdownRecordType.PARAGRAPH_END) {
           //////////
           // Presumably, PARAGRAPH created sectionList entry already
           //////////
@@ -162,7 +162,7 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
           this.dataSource.nextRecord(); // move to next grouping
         }
       }
-      if (current.tagType === MarkdownTagType.IMAGEENTRY_END) {
+      if (current.tagType === MarkdownRecordType.IMAGEENTRY_END) {
         this.lastTermIdx = this.userContext.terminals.lastIdx;
         // this.id =
         //   this.userContext.sections.push(

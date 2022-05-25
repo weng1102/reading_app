@@ -15,7 +15,7 @@ const InitialDate = new Date(INITIALDATE).toString();
 import { strict as assert } from "assert";
 import { IsError } from "./utilities";
 import { Logger } from "./logger";
-//import { MarkdownTagType, TaggedStringType } from "./dataadapter";
+//import { MarkdownRecordType, TaggedStringType } from "./dataadapter";
 import {
   IPageContent,
   IRangeItem,

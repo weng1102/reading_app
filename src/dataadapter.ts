@@ -22,7 +22,7 @@ import {
 //import { Logger } from "./logger";
 import { IPageContent } from "./PageContentType";
 // import * as rl from 'readline-sync';
-export const enum MarkdownTagType {
+export const enum MarkdownRecordType {
   BLOCKQUOTE = "BLOCKQUOTE",
   BUTTONGRID = "BUTTONGRID",
   BUTTONGRID_END = "BUTTONGRID_END",
@@ -81,21 +81,21 @@ export const enum MarkdownTagType {
 // // interface SectionTag {
 // //   tagType: tags
 // // }
-// export const MarkdownTagType = {
+// export const MarkdownRecordType = {
 //   ...MarkdownSectionTagType,
 //   ...MarkdownItemTagType,
 //   ...MarkdownTbdTagType,
 //   ...MarkdownEndTagType,
 //   ...MarkdownLastTagType
 // };
-// export type MarkdownTagType =
+// export type MarkdownRecordType =
 //   | MarkdownSectionTagType
 //   | MarkdownItemTagType
 //   | MarkdownTbdTagType
 //   | MarkdownEndTagType
 //   | MarkdownLastTagType;
 
-// export const enum MarkdownTagType {
+// export const enum MarkdownRecordType {
 //   PARAGRAPH = "PARAGRAPH",
 //   PARAGRAPH_END = "PARAGRAPH_END",
 //   EMPTY = "EMPTY",
@@ -160,7 +160,7 @@ export const enum MarkdownType {
 
 export interface TaggedStringType {
   content: string;
-  tagType: MarkdownTagType;
+  tagType: MarkdownRecordType;
   depth: number;
   headingLevel: number;
   lineNo: number;
@@ -169,7 +169,7 @@ export interface TaggedStringType {
 //   groups: RegExpMatchArray;
 //   tag: string;
 // }
-//type MarkdownClassDictionaryType = Record<MarkdownType, MarkdownTagType>;
+//type MarkdownClassDictionaryType = Record<MarkdownType, MarkdownRecordType>;
 /* Each pattern will define one explicit capture group () to
    be returned. Hence. the pattern cannot use the global flag g
    because final output will only include the first group encountered:
@@ -177,7 +177,7 @@ export interface TaggedStringType {
 */
 interface MarkdownPatternItemType {
   pattern: RegExp;
-  tagType: MarkdownTagType;
+  tagType: MarkdownRecordType;
   //  sectionType: MarkDownSectionTagType
 }
 type MarkdownPatternDictionaryType = Record<
@@ -202,7 +202,7 @@ const PARAGRAPH_TO_SENTENCES: RegExp = /([\.\?!][\'\"\u2018\u2019\u201c\u201d\)\
 // text inside the lookbehind can be matched. (?<!a)b matches "b" NOT preceded
 // by "a". In this case, it tries to match ellipsis (but ignores invisible
 // characters at the end of sentence.
-// Need \s+ trailing pattern to identify MarkdownTagType.SENTENCE otherwise
+// Need \s+ trailing pattern to identify MarkdownRecordType.SENTENCE otherwise
 // split pattern with cleave embedded "." (i.e., period) found in
 // non-terminating circustances (e.g., file.type)
 
@@ -215,122 +215,122 @@ const PARAGRAPH_PATTERN: RegExp = /^((["'\(\[]?|\!\[|\[\()[A-Za-z0-9\$\@]{1}.*)$
 const MarkdownPatternDictionary: MarkdownPatternDictionaryType = {
   [MarkdownType.HEADING01]: {
     pattern: /^#\s([^\s].*)$/,
-    tagType: MarkdownTagType.HEADING
+    tagType: MarkdownRecordType.HEADING
   },
   [MarkdownType.HEADING02]: {
     pattern: /^##\s([^\s].*)$/,
-    tagType: MarkdownTagType.HEADING
+    tagType: MarkdownRecordType.HEADING
   },
   [MarkdownType.HEADING03]: {
     pattern: /^###\s([^\s].*)$/,
-    tagType: MarkdownTagType.HEADING
+    tagType: MarkdownRecordType.HEADING
   },
   [MarkdownType.HEADING04]: {
     pattern: /^####\s([^\s].*)$/,
-    tagType: MarkdownTagType.HEADING
+    tagType: MarkdownRecordType.HEADING
   },
   [MarkdownType.HEADING05]: {
     pattern: /^#####\s([^\s].*)$/,
-    tagType: MarkdownTagType.HEADING
+    tagType: MarkdownRecordType.HEADING
   },
   [MarkdownType.HEADING06]: {
     pattern: /^######\s([^\s].*)$/,
-    tagType: MarkdownTagType.HEADING
+    tagType: MarkdownRecordType.HEADING
   },
   [MarkdownType.BLOCKQUOTE]: {
     // > takes precedecence of other list item
     pattern: /^\>\s([^\s].*)$/,
-    tagType: MarkdownTagType.BLOCKQUOTE
+    tagType: MarkdownRecordType.BLOCKQUOTE
   },
   [MarkdownType.BUTTONGRID]: {
     pattern: /^\[\[button-grid:\s(.*)\]\]\s*$/,
-    tagType: MarkdownTagType.BUTTONGRID
+    tagType: MarkdownRecordType.BUTTONGRID
   },
   [MarkdownType.BUTTONGRID_END]: {
     pattern: /^\[\[\/button-grid\]\]\s*$/,
-    tagType: MarkdownTagType.BUTTONGRID_END
+    tagType: MarkdownRecordType.BUTTONGRID_END
   },
   [MarkdownType.LISTITEM_UNORDERED01]: {
     pattern: /^[\*\-\+]\s([^\s].*)$/,
-    tagType: MarkdownTagType.LISTITEM_UNORDERED
+    tagType: MarkdownRecordType.LISTITEM_UNORDERED
   },
   [MarkdownType.LISTITEM_UNORDERED02]: {
     pattern: /^\s{2}[\*\-\+]\s([^\s].*)$/,
-    tagType: MarkdownTagType.LISTITEM_UNORDERED
+    tagType: MarkdownRecordType.LISTITEM_UNORDERED
   },
   [MarkdownType.LISTITEM_UNORDERED03]: {
     pattern: /^\s{4}[\*\-\+]\s([^\s].*)$/,
-    tagType: MarkdownTagType.LISTITEM_UNORDERED
+    tagType: MarkdownRecordType.LISTITEM_UNORDERED
   },
   [MarkdownType.LISTITEM_UNORDERED04]: {
     pattern: /^\s{6}[\*\-\+]\s([^\s].*)$/,
-    tagType: MarkdownTagType.LISTITEM_UNORDERED
+    tagType: MarkdownRecordType.LISTITEM_UNORDERED
   },
   [MarkdownType.LISTITEM_ORDERED01]: {
     pattern: /^[0-9]+\.\s([^\s].*)$/,
-    tagType: MarkdownTagType.LISTITEM_ORDERED
+    tagType: MarkdownRecordType.LISTITEM_ORDERED
   },
   [MarkdownType.LISTITEM_ORDERED02]: {
     pattern: /^\s{2}[0-9]+\.\s([^\s].*)$/,
-    tagType: MarkdownTagType.LISTITEM_ORDERED
+    tagType: MarkdownRecordType.LISTITEM_ORDERED
   },
   [MarkdownType.LISTITEM_ORDERED03]: {
     pattern: /^\s{4}[0-9]+\.\s([^\s].*)$/,
-    tagType: MarkdownTagType.LISTITEM_ORDERED
+    tagType: MarkdownRecordType.LISTITEM_ORDERED
   },
   [MarkdownType.LISTITEM_ORDERED04]: {
     pattern: /^\s{6}[0-9]+\.\s([^\s].*)$/,
-    tagType: MarkdownTagType.LISTITEM_ORDERED
+    tagType: MarkdownRecordType.LISTITEM_ORDERED
   },
   [MarkdownType.PARAGRAPH]: {
     pattern: PARAGRAPH_PATTERN,
-    tagType: MarkdownTagType.PARAGRAPH
+    tagType: MarkdownRecordType.PARAGRAPH
   },
   [MarkdownType.COMMENT1]: {
     pattern: /^\[\/\/\]:\s(.*)$/,
-    tagType: MarkdownTagType.COMMENT
+    tagType: MarkdownRecordType.COMMENT
   },
   [MarkdownType.COMMENT2]: {
     pattern: /^\[\]:\s(.*)$/,
-    tagType: MarkdownTagType.COMMENT
+    tagType: MarkdownRecordType.COMMENT
   },
   [MarkdownType.COMMENT3]: {
     pattern: /^\[comment]:\s(.*)$/,
-    tagType: MarkdownTagType.COMMENT
+    tagType: MarkdownRecordType.COMMENT
   },
   [MarkdownType.IMAGEENTRY]: {
     pattern: /^\[\[image-entry:\s(.*)\]\]\s*$/i, // [[image-entry: *]]
-    tagType: MarkdownTagType.IMAGEENTRY
+    tagType: MarkdownRecordType.IMAGEENTRY
   },
   [MarkdownType.IMAGEENTRY_END]: {
     pattern: /^\[\[\/image-entry\]\]$/i, // [[/image-entry]]
-    tagType: MarkdownTagType.IMAGEENTRY_END
+    tagType: MarkdownRecordType.IMAGEENTRY_END
   },
   [MarkdownType.PAGE]: {
     pattern: /^\[\[page:\s(.*)\/\]\]$/i, // [[page: */]] should contain title and other info
-    tagType: MarkdownTagType.PAGE
+    tagType: MarkdownRecordType.PAGE
   },
   // [MarkdownType.PAGETITLE]: {
   //   pattern: /\[\[page-title:\s(.*)\/\]\]$/i, // [[page-title: */]]
-  //   tagType: MarkdownTagType.PAGETITLE
+  //   tagType: MarkdownRecordType.PAGETITLE
   // },
   [MarkdownType.FILLIN]: {
     pattern: /\[\[fill-in:\s(.*)\]\]$/,
-    tagType: MarkdownTagType.FILLIN
+    tagType: MarkdownRecordType.FILLIN
   },
   [MarkdownType.FILLIN_END]: {
     pattern: /\[\/\/fill-in\]$/,
-    tagType: MarkdownTagType.FILLIN_END
+    tagType: MarkdownRecordType.FILLIN_END
   },
   [MarkdownType.PASSTHRUTAG]: {
     pattern: /^\[\/\/([A-Za-z\-]*)\]:\s([^\s].*)$/,
-    tagType: MarkdownTagType.PASSTHRUTAG
+    tagType: MarkdownRecordType.PASSTHRUTAG
   },
   [MarkdownType.EMPTY]: {
     pattern: /^\s*$/,
-    tagType: MarkdownTagType.EMPTY
+    tagType: MarkdownRecordType.EMPTY
   },
-  [MarkdownType.TBD]: { pattern: /(.*)$/, tagType: MarkdownTagType.TBD }
+  [MarkdownType.TBD]: { pattern: /(.*)$/, tagType: MarkdownRecordType.TBD }
 };
 
 export interface IDataSource {
@@ -441,7 +441,7 @@ abstract class MarkdownSource extends BaseClass implements IDataSource {
           let content =
             current.content === undefined
               ? "(undefined)"
-              : current.tagType === MarkdownTagType.SENTENCE
+              : current.tagType === MarkdownRecordType.SENTENCE
               ? current.content + "<eos>"
               : current.content;
           let lineNoStr: string =
@@ -513,7 +513,7 @@ export class RawMarkdownSource extends MarkdownSource implements IDataSource {
     if (currentIdx < inputBuffer.length) {
       let result: TaggedStringType = {
         content: "",
-        tagType: MarkdownTagType.TBD,
+        tagType: MarkdownRecordType.TBD,
         depth: depth,
         headingLevel: 0,
         lineNo: currentIdx + 1
@@ -525,11 +525,11 @@ export class RawMarkdownSource extends MarkdownSource implements IDataSource {
         )
       ) {
         result.content = inputBuffer[currentIdx];
-        result.tagType = MarkdownTagType.EMPTY;
+        result.tagType = MarkdownRecordType.EMPTY;
       } else {
         match = inputBuffer[currentIdx].match(/^(.*)$/)!;
         result.content = match[1];
-        result.tagType = MarkdownTagType.TBD;
+        result.tagType = MarkdownRecordType.TBD;
       }
       this.buffer.push(result);
       this.parse(depth, inputBuffer, currentIdx + 1, resultBuffer);
@@ -553,7 +553,7 @@ export class BasicMarkdownSource extends RawMarkdownSource
     // if (current.content === undefined) {
     //   resultBuffer.push({
     //     content: "",
-    //     tagType: MarkdownTagType.EMPTY,
+    //     tagType: MarkdownRecordType.EMPTY,
     //     depth: depth,
     //     headingLevel: 0,
     //     lineNo: current.lineNo
@@ -563,7 +563,7 @@ export class BasicMarkdownSource extends RawMarkdownSource
     let sentences = current.content.split(PARAGRAPH_TO_SENTENCES);
     resultBuffer.push({
       content: "[PARAGRAPH]",
-      tagType: MarkdownTagType.PARAGRAPH,
+      tagType: MarkdownRecordType.PARAGRAPH,
       depth: current.depth, //+ 1
       headingLevel: 0,
       lineNo: current.lineNo
@@ -583,7 +583,7 @@ export class BasicMarkdownSource extends RawMarkdownSource
         // KLUDGE: (re)appending the blank character below replaces the one
         // ignored by the PARAGRAPH_TO_SENTENCES regexp pattern (via \s+
         // requirement) BUT ONLY APPLIES TO the sentence record object
-        // (i.e., MarkdownTagType.SENTENCE) AND NOT any other record types.
+        // (i.e., MarkdownRecordType.SENTENCE) AND NOT any other record types.
         // Sometime in the future, take a deep dive into a better fix.
         resultBuffer.push({
           content:
@@ -591,7 +591,7 @@ export class BasicMarkdownSource extends RawMarkdownSource
             (sentences[sentenceIdx + 1] !== undefined
               ? sentences[sentenceIdx + 1] + " "
               : ""),
-          tagType: MarkdownTagType.SENTENCE,
+          tagType: MarkdownRecordType.SENTENCE,
           depth: current.depth, //+ 1
           headingLevel: 0,
           lineNo: current.lineNo
@@ -604,7 +604,7 @@ export class BasicMarkdownSource extends RawMarkdownSource
     }
     resultBuffer.push({
       content: "[PARAGRAPH END]",
-      tagType: MarkdownTagType.PARAGRAPH_END,
+      tagType: MarkdownRecordType.PARAGRAPH_END,
       depth: depth, //+ 1
       headingLevel: 0,
       lineNo: current.lineNo
@@ -626,11 +626,11 @@ export class BasicMarkdownSource extends RawMarkdownSource
       content: matches.length > 0 ? matches[1] : "",
       tagType: MarkdownPatternDictionary[mdTag].tagType,
       depth:
-        MarkdownPatternDictionary[mdTag].tagType !== MarkdownTagType.HEADING
+        MarkdownPatternDictionary[mdTag].tagType !== MarkdownRecordType.HEADING
           ? depth
           : 0,
       headingLevel:
-        MarkdownPatternDictionary[mdTag].tagType === MarkdownTagType.HEADING
+        MarkdownPatternDictionary[mdTag].tagType === MarkdownRecordType.HEADING
           ? depth
           : 0,
       lineNo: 0
@@ -661,9 +661,9 @@ export class BasicMarkdownSource extends RawMarkdownSource
         resultBuffer.push({
           content: `[SECTION START AT DEPTH ${depth + 1}]`,
           tagType:
-            current.tagType === MarkdownTagType.LISTITEM_ORDERED
-              ? MarkdownTagType.SECTION_ORDERED
-              : MarkdownTagType.SECTION_UNORDERED,
+            current.tagType === MarkdownRecordType.LISTITEM_ORDERED
+              ? MarkdownRecordType.SECTION_ORDERED
+              : MarkdownRecordType.SECTION_UNORDERED,
           depth: depth + 1,
           headingLevel: 0,
           lineNo: current.lineNo
@@ -673,33 +673,33 @@ export class BasicMarkdownSource extends RawMarkdownSource
         // parse this record. OR could distribute idx++
         resultBuffer.push({
           content: `[SECTION END AT DEPTH ${depth + 1}]`,
-          tagType: MarkdownTagType.SECTION_END,
+          tagType: MarkdownRecordType.SECTION_END,
           depth: depth + 1,
           headingLevel: 0,
           lineNo: current.lineNo
         });
       } else {
         switch (current.tagType) {
-          case MarkdownTagType.PAGE: {
+          case MarkdownRecordType.PAGE: {
             resultBuffer.push(current);
             break;
           }
-          case MarkdownTagType.EMPTY: {
+          case MarkdownRecordType.EMPTY: {
             this.buffer.push(current); //EMPTY
             break;
           }
-          case MarkdownTagType.HEADING: {
+          case MarkdownRecordType.HEADING: {
             resultBuffer.push(current);
             break;
           }
-          case MarkdownTagType.LISTITEM_ORDERED:
-          case MarkdownTagType.LISTITEM_UNORDERED: {
+          case MarkdownRecordType.LISTITEM_ORDERED:
+          case MarkdownRecordType.LISTITEM_UNORDERED: {
             resultBuffer.push({
               content: `[LIST ITEM START AT DEPTH ${depth}]`,
               tagType: current.tagType,
-              // current.tagType === MarkdownTagType.LISTITEM_ORDERED
-              //   ? MarkdownTagType.SECTION_ORDERED
-              //   : MarkdownTagType.SECTION_UNORDERED,
+              // current.tagType === MarkdownRecordType.LISTITEM_ORDERED
+              //   ? MarkdownRecordType.SECTION_ORDERED
+              //   : MarkdownRecordType.SECTION_UNORDERED,
               depth: depth,
               headingLevel: 0,
               lineNo: current.lineNo
@@ -707,20 +707,20 @@ export class BasicMarkdownSource extends RawMarkdownSource
             this.parseParagraph(current.depth, current, this.buffer);
             resultBuffer.push({
               content: `[LIST ITEM END AT DEPTH ${depth}]`,
-              tagType: MarkdownTagType.LISTITEM_END,
-              // current.tagType === MarkdownTagType.LISTITEM_ORDERED
-              //   ? MarkdownTagType.LISTITEM_ORDERED
-              //   : MarkdownTagType.LISTITEM_UNORDERED,
+              tagType: MarkdownRecordType.LISTITEM_END,
+              // current.tagType === MarkdownRecordType.LISTITEM_ORDERED
+              //   ? MarkdownRecordType.LISTITEM_ORDERED
+              //   : MarkdownRecordType.LISTITEM_UNORDERED,
               depth: depth,
               headingLevel: 0,
               lineNo: current.lineNo
             });
             break;
           }
-          case MarkdownTagType.BLOCKQUOTE: {
+          case MarkdownRecordType.BLOCKQUOTE: {
             resultBuffer.push({
               content: `[BLOCKQUOTE START ${depth}]`,
-              tagType: MarkdownTagType.BLOCKQUOTE,
+              tagType: MarkdownRecordType.BLOCKQUOTE,
               depth: current.depth,
               headingLevel: current.headingLevel,
               lineNo: current.lineNo
@@ -728,21 +728,21 @@ export class BasicMarkdownSource extends RawMarkdownSource
             this.parseParagraph(current.depth, current, this.buffer);
             resultBuffer.push({
               content: `[BLOCKQUOTE END ${depth}]`,
-              tagType: MarkdownTagType.SECTION_END,
+              tagType: MarkdownRecordType.SECTION_END,
               depth: current.depth,
               headingLevel: current.headingLevel,
               lineNo: current.lineNo
             });
             break;
           }
-          case MarkdownTagType.PARAGRAPH: {
+          case MarkdownRecordType.PARAGRAPH: {
             this.parseParagraph(current.depth, current, this.buffer);
             break;
           }
-          case MarkdownTagType.IMAGEENTRY: {
+          case MarkdownRecordType.IMAGEENTRY: {
             resultBuffer.push({
               content: current.content,
-              tagType: MarkdownTagType.IMAGEENTRY,
+              tagType: MarkdownRecordType.IMAGEENTRY,
               depth: current.depth,
               headingLevel: current.headingLevel,
               lineNo: current.lineNo

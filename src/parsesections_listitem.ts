@@ -9,7 +9,7 @@
  **/
 import { strict as assert } from "assert";
 import { IsError } from "./utilities";
-import { MarkdownTagType, TaggedStringType } from "./dataadapter";
+import { MarkdownRecordType, TaggedStringType } from "./dataadapter";
 import {
   ISectionListitemVariant,
   ISectionListitemVariantInitializer,
@@ -35,21 +35,21 @@ abstract class SectionParseNode_SECTION extends SectionParseNode_LIST
       let current: TaggedStringType = this.dataSource.currentRecord();
       assert(current !== undefined, `current record is undefined`);
       assert(
-        current.tagType === MarkdownTagType.SECTION_ORDERED ||
-          current.tagType === MarkdownTagType.SECTION_UNORDERED,
-        `expected ${MarkdownTagType.SECTION_ORDERED} or ${MarkdownTagType.SECTION_UNORDERED} at line ${current.lineNo}`
+        current.tagType === MarkdownRecordType.SECTION_ORDERED ||
+          current.tagType === MarkdownRecordType.SECTION_UNORDERED,
+        `expected ${MarkdownRecordType.SECTION_ORDERED} or ${MarkdownRecordType.SECTION_UNORDERED} at line ${current.lineNo}`
       );
       this.meta.depth = current.depth;
       current = this.dataSource.nextRecord();
       for (
         current = this.dataSource.currentRecord();
         !this.dataSource.EOF() &&
-        current.tagType !== MarkdownTagType.SECTION_END; //&& current.depth === previous.depth; //      current = this.dataSource.nextRecord()
+        current.tagType !== MarkdownRecordType.SECTION_END; //&& current.depth === previous.depth; //      current = this.dataSource.nextRecord()
 
       ) {
         switch (current.tagType) {
-          case MarkdownTagType.SECTION_ORDERED:
-          case MarkdownTagType.SECTION_UNORDERED: {
+          case MarkdownRecordType.SECTION_ORDERED:
+          case MarkdownRecordType.SECTION_UNORDERED: {
             let subsection = GetSectionNode(current.tagType, this);
             this.items.push(subsection);
             this.logger.diagnostic(
@@ -58,8 +58,8 @@ abstract class SectionParseNode_SECTION extends SectionParseNode_LIST
             subsection.parse();
             break;
           }
-          case MarkdownTagType.LISTITEM_ORDERED:
-          case MarkdownTagType.LISTITEM_UNORDERED: {
+          case MarkdownRecordType.LISTITEM_ORDERED:
+          case MarkdownRecordType.LISTITEM_UNORDERED: {
             let listItem = GetSectionNode(current.tagType, this);
             this.items.push(listItem);
             this.logger.diagnostic(
@@ -75,10 +75,10 @@ abstract class SectionParseNode_SECTION extends SectionParseNode_LIST
         current = this.dataSource.currentRecord(); // update current within this scope
       }
       assert(
-        current.tagType === MarkdownTagType.SECTION_END,
-        `expected ${MarkdownTagType.SECTION_END} at line ${current.lineNo}`
+        current.tagType === MarkdownRecordType.SECTION_END,
+        `expected ${MarkdownRecordType.SECTION_END} at line ${current.lineNo}`
       );
-      if (current.tagType === MarkdownTagType.SECTION_END)
+      if (current.tagType === MarkdownRecordType.SECTION_END)
         this.dataSource.nextRecord();
     } catch (e) {
       if (IsError(e)) {
@@ -123,25 +123,25 @@ abstract class SectionParseNode_LISTITEM extends SectionParseNode_LIST
       let current: TaggedStringType = this.dataSource.currentRecord();
       assert(current !== undefined, `current record is undefined`);
       assert(
-        current.tagType === MarkdownTagType.LISTITEM_ORDERED ||
-          current.tagType === MarkdownTagType.LISTITEM_UNORDERED,
-        `expected ${MarkdownTagType.LISTITEM_ORDERED} or ${MarkdownTagType.LISTITEM_UNORDERED} at line ${current.lineNo}`
+        current.tagType === MarkdownRecordType.LISTITEM_ORDERED ||
+          current.tagType === MarkdownRecordType.LISTITEM_UNORDERED,
+        `expected ${MarkdownRecordType.LISTITEM_ORDERED} or ${MarkdownRecordType.LISTITEM_UNORDERED} at line ${current.lineNo}`
       );
       for (
         current = this.dataSource.nextRecord();
         !this.dataSource.EOF() &&
-        current.tagType !== MarkdownTagType.LISTITEM_END; //      current = this.dataSource.nextRecord()
+        current.tagType !== MarkdownRecordType.LISTITEM_END; //      current = this.dataSource.nextRecord()
 
       ) {
         assert(
-          current.tagType === MarkdownTagType.SECTION_ORDERED ||
-            current.tagType === MarkdownTagType.SECTION_UNORDERED ||
-            current.tagType === MarkdownTagType.PARAGRAPH ||
-            `expected ${MarkdownTagType.PARAGRAPH},  ${MarkdownTagType.SECTION_ORDERED} or ${MarkdownTagType.SECTION_UNORDERED} but encountered ${current.tagType}`
+          current.tagType === MarkdownRecordType.SECTION_ORDERED ||
+            current.tagType === MarkdownRecordType.SECTION_UNORDERED ||
+            current.tagType === MarkdownRecordType.PARAGRAPH ||
+            `expected ${MarkdownRecordType.PARAGRAPH},  ${MarkdownRecordType.SECTION_ORDERED} or ${MarkdownRecordType.SECTION_UNORDERED} but encountered ${current.tagType}`
         );
 
         switch (current.tagType) {
-          case MarkdownTagType.PARAGRAPH: {
+          case MarkdownRecordType.PARAGRAPH: {
             let paragraph: ISectionNode = GetSectionNode(current.tagType, this);
             this.items.push(paragraph);
             this.logger.diagnostic(
@@ -150,8 +150,8 @@ abstract class SectionParseNode_LISTITEM extends SectionParseNode_LIST
             paragraph.parse();
             break;
           }
-          case MarkdownTagType.SECTION_ORDERED:
-          case MarkdownTagType.SECTION_UNORDERED: {
+          case MarkdownRecordType.SECTION_ORDERED:
+          case MarkdownRecordType.SECTION_UNORDERED: {
             let section: ISectionNode = GetSectionNode(current.tagType, this);
             this.items.push(section);
             this.logger.diagnostic(
@@ -166,7 +166,7 @@ abstract class SectionParseNode_LISTITEM extends SectionParseNode_LIST
         }
         current = this.dataSource.currentRecord(); // update current within this scope
       }
-      if (current.tagType === MarkdownTagType.LISTITEM_END) {
+      if (current.tagType === MarkdownRecordType.LISTITEM_END) {
         this.dataSource.nextRecord(); // move passed LISTITEM_END
       }
     } catch (e) {

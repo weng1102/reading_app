@@ -18,7 +18,7 @@ import {
   ParseNode,
   ParseNodeSerializeFormatEnumType
 } from "./baseclasses";
-import { MarkdownTagType, TaggedStringType } from "./dataadapter";
+import { MarkdownRecordType, TaggedStringType } from "./dataadapter";
 import {
   ISectionContent,
   ISectionEmptyVariant,
@@ -168,13 +168,13 @@ export class SectionParseNode_EMPTY extends SectionParseNode_LIST
     try {
       let current: TaggedStringType = this.dataSource.currentRecord();
       assert(
-        current.tagType === MarkdownTagType.EMPTY,
-        `expected ${MarkdownTagType.EMPTY} at line ${current.lineNo}`
+        current.tagType === MarkdownRecordType.EMPTY,
+        `expected ${MarkdownRecordType.EMPTY} at line ${current.lineNo}`
       );
       //    console.log(`current.lineNo=${current.lineNo}`);
       for (
         current = this.dataSource.currentRecord();
-        !this.dataSource.EOF() && current.tagType === MarkdownTagType.EMPTY;
+        !this.dataSource.EOF() && current.tagType === MarkdownRecordType.EMPTY;
         current = this.dataSource.nextRecord()
       ) {
         this.meta.count++;

@@ -12,7 +12,7 @@ const InitialDate = new Date(INITIALDATE).toString();
 import { strict as assert } from "assert";
 import { IsError, IsDefined } from "./utilities";
 import { Logger } from "./logger";
-import { MarkdownTagType, TaggedStringType } from "./dataadapter";
+import { MarkdownRecordType, TaggedStringType } from "./dataadapter";
 import {
   IHeadingListItem,
   ILinkListItem,
@@ -82,7 +82,7 @@ export class PageParseNode extends ParseNode implements IPageContent {
         //        current = this.dataSource.nextRecord()
         current = this.dataSource.currentRecord()
       ) {
-        if (current.tagType === MarkdownTagType.PAGE) {
+        if (current.tagType === MarkdownRecordType.PAGE) {
           let attributes: string[] = current.content.split(",");
           if (IsDefined(attributes[0])) this.title = attributes[0].trim();
           if (IsDefined(attributes[1])) this.owner = attributes[1].trim();

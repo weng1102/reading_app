@@ -7,8 +7,8 @@
  * Version history:
  *
  **/
-import { MarkdownTagType } from "./dataadapter";
-//import { MarkdownTagType, MarkdownSectionTagType } from "./dataadapter";
+import { MarkdownRecordType } from "./dataadapter";
+//import { MarkdownRecordType, MarkdownSectionTagType } from "./dataadapter";
 import { IPageNode } from "./parsepages";
 import {
   ISectionNode,
@@ -29,77 +29,77 @@ import { SectionParseNode_BLOCKQUOTE } from "./parsesections_blockquote";
 import { SectionParseNode_HEADING } from "./parsesections_heading";
 
 export function GetSectionNode(
-  tagType: MarkdownTagType,
+  tagType: MarkdownRecordType,
   parent: ISectionNode | IPageNode
 ): ISectionNode {
   let sectionNode: ISectionNode;
   //  console.log(`dispatch: ${tagType}`);
   switch (tagType) {
-    case MarkdownTagType.HEADING: {
+    case MarkdownRecordType.HEADING: {
       // console.log(
       //   `dispatch: ${tagType} ${tagType === MarkdownSectionTagType.HEADING}`
       // );
       sectionNode = new SectionParseNode_HEADING(parent);
       break;
     }
-    case MarkdownTagType.PARAGRAPH: {
+    case MarkdownRecordType.PARAGRAPH: {
       // console.log(
-      //   `dispatch: ${tagType} ${tagType === MarkdownTagType.PARAGRAPH}`
+      //   `dispatch: ${tagType} ${tagType === MarkdownRecordType.PARAGRAPH}`
       // );
       sectionNode = new SectionParseNode_PARAGRAPH(parent);
       break;
     }
-    case MarkdownTagType.SECTION_ORDERED: {
+    case MarkdownRecordType.SECTION_ORDERED: {
       // console.log(
       //   `dispatch: ${tagType} ${tagType ===
-      //     MarkdownTagType.SECTION_ORDERED}`
+      //     MarkdownRecordType.SECTION_ORDERED}`
       // );
       sectionNode = new SectionParseNode_SECTION_ORDERED(parent);
       break;
     }
-    case MarkdownTagType.SECTION_UNORDERED: {
+    case MarkdownRecordType.SECTION_UNORDERED: {
       // console.log(
       //   `dispatch: ${tagType} ${tagType ===
-      //     MarkdownTagType.SECTION_UNORDERED}`
+      //     MarkdownRecordType.SECTION_UNORDERED}`
       // );
       sectionNode = new SectionParseNode_SECTION_UNORDERED(parent);
       break;
     }
-    case MarkdownTagType.LISTITEM_ORDERED: {
+    case MarkdownRecordType.LISTITEM_ORDERED: {
       // console.log(
       //   `dispatch: ${tagType} ${tagType ===
-      //     MarkdownTagType.SECTION_ORDERED}`
+      //     MarkdownRecordType.SECTION_ORDERED}`
       // );
       sectionNode = new SectionParseNode_LISTITEM_ORDERED(parent);
       break;
     }
-    case MarkdownTagType.LISTITEM_UNORDERED: {
+    case MarkdownRecordType.LISTITEM_UNORDERED: {
       // console.log(
       //   `dispatch: ${tagType} ${tagType ===
-      //     MarkdownTagType.SECTION_UNORDERED}`
+      //     MarkdownRecordType.SECTION_UNORDERED}`
       // );
       sectionNode = new SectionParseNode_LISTITEM_UNORDERED(parent);
       break;
     }
-    case MarkdownTagType.FILLIN: {
+    case MarkdownRecordType.FILLIN: {
       // console.log(
-      //   `dispatch: ${tagType} ${tagType === MarkdownTagType.FILLIN}`
+      //   `dispatch: ${tagType} ${tagType === MarkdownRecordType.FILLIN}`
       // );
       sectionNode = new SectionParseNode_FILLIN(parent);
       break;
     }
-    case MarkdownTagType.IMAGEENTRY: {
+    case MarkdownRecordType.IMAGEENTRY: {
       // console.log(
-      //   `dispatch: ${tagType} ${tagType === MarkdownTagType.PHOTOENTRY}`
+      //   `dispatch: ${tagType} ${tagType === MarkdownRecordType.PHOTOENTRY}`
       // );
       sectionNode = new SectionParseNode_IMAGEENTRY(parent);
       break;
     }
-    case MarkdownTagType.BLOCKQUOTE: {
+    case MarkdownRecordType.BLOCKQUOTE: {
       sectionNode = new SectionParseNode_BLOCKQUOTE(parent);
       break;
     }
-    case MarkdownTagType.EMPTY: {
+    case MarkdownRecordType.EMPTY: {
       sectionNode = new SectionParseNode_EMPTY(parent);
       break;
     }
