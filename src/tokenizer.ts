@@ -93,11 +93,13 @@ export const enum MarkupTokenType { // labels used for markup in interim output
   LINK,
   NUMBER_WITHCOMMAS
 }
-// used as markup labels for intermediate serialization between tokenizing and parsing
+// used as markup labels for intermediate serialization between tokenizing and
+// parsing. Markdown labels (e.g., strong, em fillin) require explicit close
+// tags because markdown close tags are already embedded within markdown
+// inputs
 export const enum MarkupLabelType {
   CONTRACTION = "<contraction>",
   USD = "<usd>",
-  //  DATE = "<date>",
   DATE1 = "<date1>",
   DATE2 = "<date2>",
   DATE3 = "<date3>",
@@ -107,10 +109,31 @@ export const enum MarkupLabelType {
   NUMBER_WITHCOMMAS = "<numberwcommas>",
   PHONENUMBER = "<telephone number>",
   TIME = "<time>",
-  TOKEN = "<explicittoken>" // <token>
-  //  FILLIN = "<fillin>",
-  //  UNHANDLED = "<UNHANDLED>" // no explicit token type
+  TOKEN = "<explicittoken>", // <token>
+
+  // for markdowns
+  FILLIN = "<fillin>",
+  CUELIST = "<cuelist>",
+  CUELIST_CLOSE = "</cuelist>",
+
+  // passthru markdowns
+  STRONG = "<strong>",
+  EM = "<em>",
+  STRONG_CLOSE = "</strong>",
+  EM_CLOSE = "</em>"
+  // PASSTHRU = "<passthru>"
+  //  STRONG_EM_OPEN = "<em><strong>",
+  //  STRONG_EM_CLOSE = "</em></strong>"
 }
+// export const enum MarkdownMarkupLabelType {
+//   EM_OPEN = "<em>",
+//   EM_CLOSE = "</em>",
+//   FILLIN_OPEN = "<fillin>",
+//   FILLIN_CLOSE = "</fillin>",
+//   STRONG_OPEN = "<strong>",
+//   STRONG_CLOSE = "</strong>",
+// }
+
 interface TokenItemType {
   type: TokenType;
   label: TokenLabelType;
@@ -196,26 +219,31 @@ const MarkupTokenDictionary: MarkupTokenDictionaryType = {
     type: MarkupTokenType.USD,
     label: MarkupLabelType.USD,
     pattern: /(?<=^|\W|\[|\()\$(([1-9]\d{0,2}(,\d{3})*)|(([1-9]\d*)?\d))(\.\d\d)?(?=\s|\W|$|[.!?\\-])/g
+    // with 1st capturing group: (?<=^|\W|\[|\()(\$([1-9]\d{0,2}(,\d{3})*)|(([1-9]\d*)?\d)(\.\d\d)?)(?=\s|\W|$|[.!?\\-])
   },
   [MarkupTokenType.EMAILADDRESS]: {
     type: MarkupTokenType.EMAILADDRESS,
     label: MarkupLabelType.EMAILADDRESS,
     pattern: /(?<=^|\W|\[|\()([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})(?=(?=\s|\W|$|[.!?\\-]))/g
+    //  with 1st capturing group (?<=^|\W|\[|\()([a-zA-Z0-9_\-\.]+@[a-zA-Z0-9_\-\.]+\.[a-zA-Z]{2,5})(?=(?=\s|\W|$|[.!?\\-]))
   },
   [MarkupTokenType.PHONENUMBER]: {
     type: MarkupTokenType.PHONENUMBER,
     label: MarkupLabelType.PHONENUMBER,
     pattern: /(?<=^|\W|\[|\()\(\d{3}\)\s\d{3}-\d{4}(?=(\W|$))/g
+    //  with 1st capturing group SAME AS ABOVE
   },
   [MarkupTokenType.TIME]: {
     type: MarkupTokenType.TIME,
     label: MarkupLabelType.TIME,
     pattern: /(?<=^|\W|\[|\()([0-9]|[0-1][0-9]|[2][0-3]):([0-5][0-9])(?=(\W|$))/g
+    // with 1st capturing group ((0?[1-9]|1[0-2]):([0-5]\d)\s?((?:A|P)\.?M\.?))
   },
   [MarkupTokenType.DATE1]: {
     type: MarkupTokenType.DATE1,
     label: MarkupLabelType.DATE1,
     pattern: /(?<=^|\W|\[|\()((31(?!\ (Feb(ruary)?|Apr(il)?|June?|(Sep(?=\b|t)t?|Nov)(ember)?)))|((30|29)(?!\ Feb(ruary)?))|(29(?=\ Feb(ruary)?\ (((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))|(0?[1-9])|1\d|2[0-8])\s*(Jan(uary)?|Feb(ruary)?|Ma(r(ch)?|y)|Apr(il)?|Ju((ly?)|(ne?))|Aug(ust)?|Oct(ober)?|(Sep(?=\b|t)t?|Nov|Dec)(ember)?)\ ((1[6-9]|[2-9]\d)\d{2})(?=[\s\.,\?\!]|$)/g //DD MMM YYYY
+    // with 1st capturing group: (?<=^|\W|\[|\()(((31(?!\ (Feb(ruary)?|Apr(il)?|June?|(Sep(?=\b|t)t?|Nov)(ember)?)))|((30|29)(?!\ Feb(ruary)?))|(29(?=\ Feb(ruary)?\ (((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))|(0?[1-9])|1\d|2[0-8])\s*(Jan(uary)?|Feb(ruary)?|Ma(r(ch)?|y)|Apr(il)?|Ju((ly?)|(ne?))|Aug(ust)?|Oct(ober)?|(Sep(?=\b|t)t?|Nov|Dec)(ember)?)\ ((1[6-9]|[2-9]\d)\d{2}))(?=[\s\.,\?\!]|$)
   },
   [MarkupTokenType.DATE2]: {
     type: MarkupTokenType.DATE2,
@@ -283,6 +311,87 @@ const MarkupTokenDictionary: MarkupTokenDictionaryType = {
     // scan for token that require potential markup tags [link name](url)
   }
 };
+export const enum MarkdownIndexType {
+  // defines order of markdown replacement e.g., FILLIN processed first.
+  FILLIN = 0,
+  CUELIST,
+  EM,
+  STRONG
+}
+export const enum MarkdownTokenType {
+  CUELIST,
+  FILLIN,
+  EM,
+  STRONG
+  // STRONG_EM_OPEN,
+  // STRONG_EM_CLOSE
+}
+interface MarkdownTokenItemType {
+  type: MarkdownTokenType;
+  //  markdown: MarkdownLabelType;
+  label: MarkupLabelType;
+  pattern: RegExp;
+}
+const enum MarkdownLabelType {
+  EM = "**",
+  FILLIN_OPEN = "[_",
+  FILLIN_CLOSE = "_]",
+  STRONG = "*",
+  STRONG_EM = "***", // cannot handle this combined tag. See below
+  CUELIST_OPEN = "=(",
+  CUELIST_CLOSE = ")"
+}
+type MarkdownTokenDictionaryType = Record<
+  MarkdownIndexType,
+  MarkdownTokenItemType
+>;
+const MarkdownTokenDictionary: MarkdownTokenDictionaryType = {
+  [MarkdownIndexType.FILLIN]: {
+    type: MarkdownTokenType.FILLIN,
+    label: MarkupLabelType.FILLIN,
+    pattern: /(?<=\s|^|[\.,!'"])\[_((\w+)(=\(([\w\s,]+){0,1}\))*)_\](?=$|\s|[\.,!"\?])/g
+    // pattern: /(?<=\s|^|[\.,!'"])\[_((\w+)(=\((\w+|\s|,)*\)){0,1})_\](?=$|\s|[\.,!"\?])/g
+    // pattern: /(?<=\s|^|[\.,!'"])\[_((\w|[\s"'\/\-\(\)\@\.,\:;\$\<\>%!])+)_\](?=$|\s|[\.,!"\?])/g
+    //    markdown: MarkdownLabelType.FILLIN_OPEN
+  },
+  [MarkdownIndexType.CUELIST]: {
+    type: MarkdownTokenType.CUELIST,
+    label: MarkupLabelType.CUELIST,
+    pattern: /(?<=\w)=\(((\w+|\s|,)*)\)(?=$|\s|<\/|\*|_]|[\.,!"\?])/g
+    // pattern: /(?<=\s|^|[\.,!'"])\[_((\w|[\s"'\/\-\(\)\@\.,\:;\$\<\>%!])+)_\](?=$|\s|[\.,!"\?])/g
+    //    markdown: MarkdownLabelType.FILLIN_OPEN
+  },
+  [MarkdownIndexType.EM]: {
+    type: MarkdownTokenType.EM,
+    label: MarkupLabelType.EM,
+    pattern: /(?<=\s|^|[\.,!'"])\*\*((\w|[\s"'\/\-\(\)\_\@\.,\:;\$\<\>])+)\*\*(?=$|\s|[\.,!"\?])/g
+    //    markdown: MarkdownLabelType.EM
+  },
+  [MarkdownIndexType.STRONG]: {
+    type: MarkdownTokenType.STRONG,
+    label: MarkupLabelType.STRONG,
+    pattern: /(?<=\s|^|[\.,!'"])\*((\w|[\s"'\/\-\(\)\_\@\.,\:;\$\<\>])+)\*(?=$|\s|[\.,!"\?])/g
+    //    markdown: MarkdownLabelType.STRONG
+  }
+  ///////////////////////////////////////////////////////////////////////////
+  // Combined ***:
+  // CANNOT define what is the closing tag for *** because it may not be ***
+  // but could be \*(.*)\*\* and vice versa.
+  ///////////////////////////////////////////////////////////////////////////
+
+  // [MarkdownTokenType.STRONG_EM_OPEN]: {
+  //   type: MarkdownTokenType.STRONG_EM_OPEN,
+  //   label: MarkupLabelType.STRONG_EM_OPEN,
+  //   pattern: /(?<=\s|^|[\.,!'"])\*\*\*((\w|[\s"'\/\-\(\)\_\@\.,\:;\$\<\>])+))/g
+  //   //    markdown: MarkdownLabelType.STRONG
+  // },
+  // [MarkdownTokenType.STRONG_EM_CLOSE]: {
+  //   type: MarkdownTokenType.STRONG_EM_CLOSE,
+  //   label: MarkupLabelType.STRONG_EM_CLOSE,
+  //   pattern: /(?<=\s|^|[\.,!'"])\*\*\*((\w|[\s"'\/\-\(\)\_\@\.,\:;\$\<\>])+)\*(?=$|\s|[\.,!"\?])/g
+  //   //    markdown: MarkdownLabelType.STRONG
+  // }
+};
 export type TokenListType = Array<Token>;
 
 // Tokens that do not follow standard tokenizing where markups must be inserted
@@ -303,9 +412,9 @@ export class Tokenizer {
     let currentPos: number = 0;
     //  this.logger.diagnosticMode = true;
     try {
-      // Goal: Tokenize while preserving whitespace. Compare original string with array
-      // of non-whitespace tokens, tokensOnly and extract and insert whitespace between
-      // non-whitespace tokens.
+      // Goal: Tokenize while preserving whitespace. Compare original string
+      // with array of non-whitespace tokens, tokensOnly and extract and
+      // insert whitespace between non-whitespace tokens.
       tokenOnlyList = sentence.match(this.tokenizingPattern); // token list without whitespace
       if (tokenOnlyList === null) {
         return [];
@@ -379,65 +488,14 @@ export class Tokenizer {
   reset() {
     // reentrant object should not require reset of state
   }
-  insertMarkupTags(sentence: string): string {
+  addMarkupTags(sentence: string): string {
     let result: string = sentence;
     /// this.logger.diagnosticMode = true;
     try {
-      result = sentence;
-      let markupTokenItem: MarkupTokenItemType;
-      let tokenList: RegExpMatchArray | null;
-      for (let key in MarkupTokenDictionary) {
-        let key1: any = key as unknown; //ugh
-        markupTokenItem = MarkupTokenDictionary[<MarkupTokenType>key1];
-        let markupTokenLength: number = markupTokenItem.label.length;
-        //tokenList = sentence.match(markupTokenItem.pattern); // with global flag set
-        tokenList = result.match(markupTokenItem.pattern); // with global flag set
-        if (tokenList !== null) {
-          let startPos = 0;
-          let tokenPos = 0;
-          tokenList.forEach((token: string) => {
-            tokenPos = result.indexOf(token, startPos);
-            // console.log(
-            //   `tokenizer: is token=${token} in ${result} after ${startPos}: ${
-            //     tokenPos < 0 ? "no" : "yes"
-            //   }`
-            // );
-            if (tokenPos < 0) {
-              // Found in tokenlist by match(regexp) but not found by indexOf
-              this.logger.error(
-                `{${token}} not found in string after position=${startPos}`
-              );
-              // should throw exception
-            } else if (
-              tokenPos >= markupTokenLength &&
-              result
-                .substr(tokenPos - markupTokenLength, markupTokenLength)
-                .toLowerCase() === markupTokenItem.label.toLowerCase()
-            ) {
-              this.logger.warning(
-                `{${token}} already tagged as ${markupTokenItem.label}.`
-              );
-            } else {
-              // splice in the markup tags
-              result =
-                result.slice(0, tokenPos) + // portion of sentence before token
-                markupTokenItem.label +
-                token +
-                endMarkupTag(markupTokenItem.label) +
-                result.slice(tokenPos + token.length); // portion of sentence after token
-              startPos =
-                markupTokenLength +
-                tokenPos +
-                token.length +
-                endMarkupTag(markupTokenItem.label).length +
-                1;
-            }
-          }); //tokenList.forEach()
-        } //(tokenList !== null)
-        else {
-          //          console.log("no matches on "+appSpecificTag.label);
-        }
-      } // for-in
+      console.log(`source sentence: ${sentence}`);
+      result = this.insertMarkupTags(sentence);
+      result = this.replaceMarkdownTags(result);
+      console.log(`marked up sentence: ${result}`);
     } catch (e) {
       if (IsError(e)) {
         this.logger.error(
@@ -449,6 +507,91 @@ export class Tokenizer {
     } finally {
       return result;
     }
+  }
+  insertMarkupTags(sentence: string): string {
+    let result: string = sentence;
+    let markupTokenItem: MarkupTokenItemType;
+    let tokenList: RegExpMatchArray | null;
+    for (let key in MarkupTokenDictionary) {
+      let key1: any = key as unknown; //ugh
+      markupTokenItem = MarkupTokenDictionary[<MarkupTokenType>key1];
+      let markupTokenLength: number = markupTokenItem.label.length;
+      //tokenList = sentence.match(markupTokenItem.pattern); // with global flag set
+      tokenList = result.match(markupTokenItem.pattern); // with global flag set
+      //Consider using pattern.exec
+      if (tokenList !== null) {
+        let startPos = 0;
+        let tokenPos = 0;
+        tokenList.forEach((token: string) => {
+          // indexOf works iff token found via pattern can be definitively
+          // found within the substring. Counterexample, the pattern ()?<=\w)\*
+          // only matches the strong closing tag markdown symbol but the
+          // indexof("*") will match any * in the string. If this becomes an issue, this string.match() should be replaced with regex.exec().
+          tokenPos = result.indexOf(token, startPos);
+          if (tokenPos < 0) {
+            // Found in tokenlist by match(regexp) but not found by indexOf
+            this.logger.error(
+              `{${token}} not found in string after position=${startPos}`
+            );
+            // should throw exception
+          } else if (
+            tokenPos >= markupTokenLength &&
+            result
+              .substr(tokenPos - markupTokenLength, markupTokenLength)
+              .toLowerCase() === markupTokenItem.label.toLowerCase()
+          ) {
+            this.logger.warning(
+              `{${token}} already tagged as ${markupTokenItem.label}.`
+            );
+          } //if (markupTokenItem.markdown.length === 0) {
+          // splice in the markup tags
+          else {
+            result =
+              result.slice(0, tokenPos) + // portion of sentence before token
+              markupTokenItem.label +
+              token +
+              endMarkupTag(markupTokenItem.label) +
+              result.slice(tokenPos + token.length); // portion of sentence after token
+            startPos =
+              markupTokenLength +
+              tokenPos +
+              token.length +
+              endMarkupTag(markupTokenItem.label).length +
+              1;
+          }
+        });
+      } else {
+        //          console.log("no matches on "+appSpecificTag.label);
+      }
+    }
+    return result;
+  }
+  replaceMarkdownTags(sentence: string): string {
+    // differs from addMarkupTags because the existing open and
+    // closing markdown tags are being replaced together whereas the above
+    // insertMarkupTags() method recognizes patterns within non-delimited
+    // prose e.g., contractions and ADDS tags before the parsing begins
+
+    // This algorithm ignors *** combined, juncstapositioned markdown tags
+    // e.g., ***
+    let markdownTokenItem: MarkdownTokenItemType;
+    let matchedToken: RegExpExecArray | null;
+    for (let key in MarkdownTokenDictionary) {
+      let key1: any = key as unknown; //ugh
+      markdownTokenItem = MarkdownTokenDictionary[<MarkdownTokenType>key1];
+      while (
+        (matchedToken = markdownTokenItem.pattern.exec(sentence)) !== null
+      ) {
+        // substitution code being careful of lastIndex
+        sentence =
+          sentence.substr(0, matchedToken.index) +
+          markdownTokenItem.label +
+          matchedToken[1] +
+          endMarkupTag(markdownTokenItem.label) +
+          sentence.substr(matchedToken.index + matchedToken[0].length);
+      }
+    }
+    return sentence;
   }
   serialize(tokenList: TokenListType) {
     var tokenString = "";

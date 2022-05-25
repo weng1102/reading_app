@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
  * File name: parseterminals.ts
  *
@@ -22,6 +22,7 @@ import {
 import {
   endMarkupTag,
   isValidMarkupTag,
+  MarkupLabelType,
   TokenLiteral,
   TokenListType,
   Token
@@ -36,6 +37,8 @@ import {
   IWordTerminalMetaInitializer,
   ICurrencyTerminalMeta,
   ICurrencyTerminalMetaInitializer,
+  IPassthruTagTerminalMeta,
+  IPassthruTagTerminalMetaTerminalMetaInitializer,
   IPunctuationTerminalMeta,
   IPunctuationTerminalMetaInitializer,
   ITerminalListItemInitializer,
@@ -58,6 +61,7 @@ export abstract class AbstractTerminalNode extends ParseNode
   id: number = 0;
   termIdx: number = IDX_INITIALIZER;
   content: string = "";
+  cueList: string = "";
   firstTermIdx: number = IDX_INITIALIZER;
   lastTermIdx: number = IDX_INITIALIZER;
   type!: TerminalMetaEnumType;
@@ -76,6 +80,23 @@ export abstract class AbstractTerminalNode extends ParseNode
       //      token = tokenList[0];
       if (token !== undefined) {
         this.content = token.content; // should be TerminalInfo
+        //look for <cuelist>. Take a peek at next characters
+        if (
+          tokenList.length > 2 &&
+          tokenList[0].content === MarkupLabelType.CUELIST //peek
+        ) {
+          tokenList.shift()!; // discard <cuelist>
+          token = tokenList.shift()!;
+          let cueList: string = "";
+          for (
+            ;
+            token.content !== MarkupLabelType.CUELIST_CLOSE;
+            token = tokenList.shift()!
+          ) {
+            cueList = `${cueList}${token.content}`;
+          }
+          this.cueList = cueList;
+        }
       }
     }
     return tokenList.length;
@@ -120,6 +141,17 @@ export abstract class AbstractTerminalNode extends ParseNode
           this.constructor.name +
           ParseNodeSerializeColumnPad(1, this.constructor.name);
         outputStr = `${super.serialize(format, label, prefix)}`;
+
+        if (this.cueList.length > 0) {
+          label = `{${this.cueList}}`;
+          prefix = prefix + "  ";
+          label =
+            label +
+            ParseNodeSerializeColumnPad(0, prefix + label) +
+            this.constructor.name +
+            ":CUELIST";
+          outputStr = `${outputStr}${super.serialize(format, label, prefix)}`;
+        }
         break;
       }
       case ParseNodeSerializeFormatEnumType.TABULAR: {
@@ -185,12 +217,18 @@ export class TerminalNode_WORD extends AbstractTerminalNode
     //     this.content = token.content; // should be TerminalInfo
     super.parse(tokenList);
     this.meta.content = this.content;
+    if (this.cueList.length > 0) {
+      this.meta.cues = this.cueList.split(",");
+    }
     this.termIdx = this.userContext.terminals.push(
       ITerminalListItemInitializer(this.meta)
     );
     this.meta.termIdx = this.termIdx;
     this.firstTermIdx = this.termIdx;
     this.lastTermIdx = this.termIdx;
+    if (this.cueList.length > 0) {
+      this.meta.cues = this.cueList.split(",");
+    }
     return tokenList.length;
   }
 
@@ -229,7 +267,15 @@ export class TerminalNode_SYMBOL extends AbstractTerminalNode
     this.lastTermIdx = this.termIdx;
     return tokenList.length;
   }
-
+  serialize(
+    format?: ParseNodeSerializeFormatEnumType,
+    label?: string,
+    prefix?: string
+  ): string {
+    let outputStr = super.serialize(format, label, prefix);
+    console.log(`hello`);
+    return outputStr;
+  }
   transform() {
     return 0;
   }
@@ -338,6 +384,33 @@ export class TerminalNode_WHITESPACE extends AbstractTerminalNode
     return tokenList.length;
   }
 }
+export class TerminalNode_PASSTHRUTAG extends AbstractTerminalNode
+  implements ITerminalNode {
+  constructor(parent: ISentenceNode) {
+    super(parent);
+  }
+  type = TerminalMetaEnumType.passthruTag;
+  meta = IPassthruTagTerminalMetaTerminalMetaInitializer();
+  parse(tokenList: TokenListType): number {
+    let markupTag: string = tokenList[0].content;
+    assert(
+      isValidMarkupTag(markupTag),
+      `not a valid markup tag ${markupTag} for ${this.constructor.name} parsing`
+    );
+    this.meta.tag = `{${markupTag}}`;
+    tokenList.shift()!;
+    return 0;
+  }
+  serialize(
+    format: ParseNodeSerializeFormatEnumType,
+    label?: string,
+    prefix?: string
+  ): string {
+    label = this.meta.tag;
+    return super.serialize(format, label, prefix);
+    // }
+  }
+}
 export abstract class TerminalNode_MLTAG_ extends AbstractTerminalNode
   implements ITerminalNode {
   //  markupLabel: string;
@@ -381,6 +454,7 @@ export abstract class TerminalNode_MLTAG_ extends AbstractTerminalNode
     }
   }
 }
+
 export class TerminalNode_MLTAG_TIME extends TerminalNode_MLTAG_
   implements ITerminalNode {
   constructor(parent: ISentenceNode) {

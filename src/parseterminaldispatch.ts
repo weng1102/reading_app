@@ -26,8 +26,10 @@ import {
   TerminalNode_MLTAG_TIME,
   TerminalNode_MLTAG_TOKEN,
   TerminalNode_MLTAG_USD,
-  TerminalNode_WHITESPACE
+  TerminalNode_WHITESPACE,
+  TerminalNode_PASSTHRUTAG
 } from "./parseterminals";
+import { TerminalNode_MLTAG_FILLIN } from "./parseterminals_fillin";
 import { TerminalNode_ACRONYM } from "./parseterminals_acronym";
 import {
   TerminalNode_MLTAG_DATE1,
@@ -70,6 +72,18 @@ export function GetTerminalNode(
           termNode = new TerminalNode_MLTAG_DATE3(parent);
           break;
         }
+        case MarkupLabelType.FILLIN: {
+          termNode = new TerminalNode_MLTAG_FILLIN(parent);
+          break;
+        }
+        case MarkupLabelType.EM: {
+          termNode = new TerminalNode_PASSTHRUTAG(parent);
+          break;
+        }
+        case MarkupLabelType.STRONG: {
+          termNode = new TerminalNode_PASSTHRUTAG(parent);
+          break;
+        }
         case MarkupLabelType.CONTRACTION: {
           termNode = new TerminalNode_MLTAG_CONTRACTION(parent);
           break;
@@ -102,6 +116,25 @@ export function GetTerminalNode(
       }
       break;
     }
+    case TokenType.MLTAG_END: {
+      switch (token.content.toLowerCase()) {
+        case MarkupLabelType.EM_CLOSE: {
+          termNode = new TerminalNode_PASSTHRUTAG(parent);
+          break;
+        }
+        case MarkupLabelType.STRONG_CLOSE: {
+          termNode = new TerminalNode_PASSTHRUTAG(parent);
+          break;
+        }
+        case MarkupLabelType.CUELIST_CLOSE: {
+          termNode = new TerminalNode_PASSTHRUTAG(parent);
+          break;
+        }
+        default:
+          console.log(`what?`);
+      }
+      break;
+    }
     case TokenType.WORD: {
       if (
         token.content === token.content.toUpperCase() &&
@@ -121,14 +154,14 @@ export function GetTerminalNode(
       termNode = new TerminalNode_PUNCTUATION(parent);
       break;
     }
-    case TokenType.MLTAG: {
-      termNode = new TerminalNode_MLTAG(parent);
-      break;
-    }
-    case TokenType.MLTAG_END: {
-      termNode = new TerminalNode_MLTAG_END(parent);
-      break;
-    }
+    // case TokenType.MLTAG: {
+    //   termNode = new TerminalNode_MLTAG(parent);
+    //   break;
+    // }
+    // case TokenType.MLTAG_END: {
+    //   termNode = new TerminalNode_MLTAG_END(parent);
+    //   break;
+    // }
     case TokenType.MLTAG_SELFCLOSING: {
       termNode = new TerminalNode_MLTAG_SELFCLOSING(parent);
       break;

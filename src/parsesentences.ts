@@ -160,9 +160,7 @@ export class SentenceNode extends AbstractSentenceNode
       this.logger.diagnostic(
         `${this.constructor.name} parsing "${this.content}"`
       );
-      let markedUpSentence: string = this.tokenizer.insertMarkupTags(
-        this.content
-      );
+      let markedUpSentence: string = this.tokenizer.addMarkupTags(this.content);
       let tokenList: TokenListType = this.tokenizer.tokenize(markedUpSentence);
       this.firstTermIdx = this.userContext.terminals.lastIdx + 1; //nextIdx
       this.parseTokens(tokenList);
@@ -193,7 +191,6 @@ export class SentenceNode extends AbstractSentenceNode
   }
   parseTokens(tokens: TokenListType) {
     // end of sentence. Look for trailing punctuation
-    let idx: number;
     let found: boolean = false;
     if (tokens.length === 0) {
       //find last punctuation mark from the end of terminals

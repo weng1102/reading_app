@@ -76,6 +76,7 @@ export class TerminalNode_MLTAG_EMAILADDRESS extends TerminalNode_MLTAG_
                 part,
                 SymbolPronunciationMap.get(part),
                 undefined,
+                undefined,
                 true,
                 true,
                 true
@@ -99,6 +100,7 @@ export class TerminalNode_MLTAG_EMAILADDRESS extends TerminalNode_MLTAG_
         token.content,
         SymbolPronunciationMap.get(token.content),
         undefined,
+        undefined,
         true,
         true,
         true
@@ -118,6 +120,7 @@ export class TerminalNode_MLTAG_EMAILADDRESS extends TerminalNode_MLTAG_
               ITerminalInfoInitializer(
                 part,
                 SymbolPronunciationMap.get(part),
+                undefined,
                 undefined,
                 true,
                 true,
