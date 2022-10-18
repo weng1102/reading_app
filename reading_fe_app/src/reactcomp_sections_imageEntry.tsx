@@ -44,11 +44,13 @@ export const Section_imageEntry = React.memo(
     let captions = imageEntry.captions as ISectionContent[];
     let className: string =
       imageEntry.layout.charAt(0).toLowerCase() === "l"
-        ? "imageentry-container-" + ImageEntryLayoutEnumType.left.toString()
-        : "imageentry-container-" + ImageEntryLayoutEnumType.above.toString();
-    let vdividerClassName = className + "-vdivider";
-    let hdividerClassName = className + "-hdivider";
+        ? `imageentry-container-${ImageEntryLayoutEnumType.left.toString()}`
+        : `imageentry-container-${ImageEntryLayoutEnumType.above.toString()}`;
+    let vdividerClassName = `${className}-vdivider`;
+    let hdividerClassName = `${className}-hdivider width=${imageEntry.percent}`;
     console.log(`imageEntry.percent ${imageEntry.percent}`);
+    // set width by changing --imageentry-min-image-width
+    // document.documentElement.style.setProperty()
     return (
       <>
         <div className={hdividerClassName}></div>
