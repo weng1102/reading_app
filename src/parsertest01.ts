@@ -14,8 +14,9 @@ const Usage: string =
   `Usage: node parsetest01.ts [OPTIONS] [FILE(s)]\n` +
   `Parses markdown files into json output for reader\n\n` +
   `Options:\n` +
-  `  --dumpdatasource display parsed markdown` +
-  `  --dumpheadings   display headings for navbar` +
+  `  --dumpdatasource display parsed markdown\n` +
+  `  --dumpheadings   display headings for navbar\n` +
+  `  --dumpfillins    display fillins\n` +
   `  --dumpjsondataappdisplay generated json\n` +
   `  --dumplinks      display link list\n` +
   `  --dumpsections   display section list\n` +
@@ -249,6 +250,23 @@ if (switches.includes("--sitemap")) {
           false
         );
       }
+      if (switches.includes("--dumpfillins")) {
+        logger.info(
+          `dumping fillins for ${path.basename(outputFileSpec)}`,
+          false,
+          false,
+          false,
+          false
+        );
+        logger.info(
+          pageNode.userContext.fillins.serialize(),
+          false,
+          false,
+          false,
+          false
+        );
+      }
+
       let json: string = pageNode.serialize(
         ParseNodeSerializeFormatEnumType.JSON
       );
