@@ -25,7 +25,7 @@ export const ReadingApp = () => {
     settings: _settings,
     saveSettings: _setSettings
   };
-  // const restorePageRequested = useAppSelector(
+  // const restoreRequested = useAppSelector(
   //   store => store.page_restore_requested
   // );
   let dispatch = useAppDispatch();
@@ -37,7 +37,7 @@ export const ReadingApp = () => {
   if (_settings.config.homePage.length === 0) {
     dispatch(Request.Page_load("sitemap"));
   } else {
-    // } else if (!restorePageRequested) {
+    // } else if (!restoreRequested) {
     dispatch(Request.Page_home());
   }
   return (
