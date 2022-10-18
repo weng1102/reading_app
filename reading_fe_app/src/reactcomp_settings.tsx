@@ -110,7 +110,7 @@ export const SettingsDialog = (props: ISettingsDialogPropsType) => {
     setModified(false);
     // setNewSettings(SettingsCloner(settingsContext));
     props.hide();
-    dispatch(Request.Test_set());
+    //    dispatch(Request.Test_set());
   };
   let OkIcons = modified ? OkIcon : OkIcon_ghosted;
   let dispatch = useAppDispatch();
