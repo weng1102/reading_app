@@ -15,6 +15,7 @@
  *
  **/
 import { CPageLists } from "./pageContext";
+const IDX_INITIALIZER = -9999;
 // import {
 //   ISettings,
 //   ISettingsContext,
@@ -28,14 +29,12 @@ export enum StatusBarMessageType {
 }
 //const IDX_INITIALIZER = -9999; // should be same as baseclasses.ts
 
-// word actions
-const WORD_MATCH = "word/match"; // match word with argument with current word
-//const WORD_VISIT = "word/visit"; // visit word with argument
+const WORD_VISIT = "word/visit"; // visit word with argument
 const WORD_NEXT = "word/next"; // next word in sentence
 const WORD_PREVIOUS = "word/previous"; // previous word in sentence
 //const WORD_RESET = "word/reset"; // first word in page
 const WORD_SELECT = "word/select"; // selected word in sentence
-
+const WORD_SETCURRENTFILLIN = "word/set current fillin";
 // sentence actions
 const SENTENCE_FIRST = "sentence/first"; // position at first word in sent.
 const SENTENCE_NEXT = "sentence/next"; // position at first word of next sent.
@@ -61,7 +60,7 @@ const PAGE_RESTORED = "page/restored";
 const PAGE_HOME = "page/home";
 const PAGE_HOMED = "page/homed";
 const PAGE_HOME_ENABLED = "page/home enabled";
-const PAGE_PREVIOUS_ENABLED = "page/previos enabled";
+const PAGE_PREVIOUS_ENABLED = "page/previous enabled";
 
 // intrapage administrative actions (non-user initiated)
 //const PAGECONTEXT_SET = "pagecontext/set";
@@ -69,9 +68,12 @@ const CONTEXT_SET = "context/set";
 
 //listening actions
 const LISTENING_AVAILABLE = "listening/available";
-const LISTENING_FLUSH = "listening/flush"; // clear transcript
-const LISTENING_FLUSHED = "listening/flushed"; // clear transcript
+// const LISTENING_FLUSH = "listening/flush"; // clear transcript
+// const LISTENING_FLUSHED = "listening/flushed"; // clear transcript
+const LISTENING_MATCH = "listening/match"; // match word with argument with //
 const LISTENING_START = "listening/start";
+// const LISTENING_RETRY = "listening/retry";
+// const LISTENING_RETRY_RESET = "listening/retry reset";
 const LISTENING_STOP = "listening/stop";
 const LISTENING_TOGGLE = "listening/toggle"; // related to start/stop
 
@@ -117,6 +119,8 @@ const MESSAGE_CLEAR = "status message/clear";
 
 const TEST_SET = "test/set";
 const TEST_RESET = "test/reset";
+
+const FILLIN_RESETSECTION = "fillin/reset section";
 // Actions
 const Test_set = () => {
   return {
@@ -194,21 +198,16 @@ const Cursor_gotoFirstSection = () => {
     payload: 0
   };
 };
-const Cursor_matchWords = (words: string) => {
-  return {
-    type: WORD_MATCH,
-    payload: words
-  };
-};
 const Cursor_gotoFirstWord = () => {
   // first word of sentence
   return {
     type: SENTENCE_FIRST
   };
 };
-const Cursor_gotoNextWord = () => {
+const Cursor_gotoNextWord = (message?: string) => {
   return {
-    type: WORD_NEXT
+    type: WORD_NEXT,
+    payload: message
   };
 };
 const Cursor_gotoNextSentence = () => {
@@ -243,6 +242,18 @@ const Cursor_acknowledgeTransition = () => {
     type: TRANSITION_ACKNOWLEDGE
   };
 };
+const Fillin_setCurrent = (terminalIdx: number) => {
+  return {
+    type: WORD_SETCURRENTFILLIN,
+    payload: terminalIdx
+  };
+};
+const Fillin_resetSection = (sectionIdx: number) => {
+  return {
+    type: FILLIN_RESETSECTION,
+    payload: sectionIdx
+  };
+};
 const Message_set = (
   message: string,
   msgType: StatusBarMessageType = StatusBarMessageType.application
@@ -269,12 +280,6 @@ const StatusBar_Message_set = (message: string) => {
     payload: message
   };
 };
-// const StatusBar_Message_clear = () => {
-//   return {
-//     type: STATUSBAR_MESSAGE_SET,
-//     payload: ""
-//   };
-// };
 const Page_load = (page: string, sectionIdx?: number, terminalIdx?: number) => {
   return {
     type: PAGE_LOAD,
@@ -346,16 +351,34 @@ const Recognition_toggle = (maxRetries: number) => {
     payload: maxRetries
   };
 };
-const Recognition_flush = () => {
+// const Recognition_flush = () => {
+//   return {
+//     type: LISTENING_FLUSH
+//   };
+// };
+// const Recognition_flushed = () => {
+//   return {
+//     type: LISTENING_FLUSHED
+//   };
+// };
+const Recognition_match = (message: string) => {
   return {
-    type: LISTENING_FLUSH
+    type: LISTENING_MATCH,
+    payload: message
   };
 };
-const Recognition_flushed = () => {
-  return {
-    type: LISTENING_FLUSHED
-  };
-};
+// const Recognition_retry = (message: string) => {
+//   return {
+//     type: LISTENING_RETRY,
+//     payload: message
+//   };
+// };
+// const Recognition_reset_retry = (message: string) => {
+//   return {
+//     type: LISTENING_RETRY_RESET,
+//     payload: message
+//   };
+// };
 const Recognition_start = (maxRetries: number) => {
   return {
     type: LISTENING_START,
@@ -416,7 +439,6 @@ const Settings_toggle = () => {
   };
 };
 export const Request = {
-  Cursor_matchWords,
   Cursor_gotoFirstSection, // first word in page
   Cursor_gotoFirstSentence, // first word in section
   Cursor_gotoFirstWord, // first word in sentence
@@ -427,6 +449,9 @@ export const Request = {
   Cursor_gotoWordByIdx,
   Cursor_gotoSectionByIdx,
   //  Cursor_acknowledgeTransition,
+
+  Fillin_setCurrent,
+  Fillin_resetSection,
 
   Message_set,
   Message_clear,
@@ -454,8 +479,11 @@ export const Request = {
 
   Recognition_toggle,
   Recognition_setAvailability,
-  Recognition_flush,
-  Recognition_flushed,
+  // Recognition_flush,
+  // Recognition_flushed,
+  Recognition_match,
+  // Recognition_retry,
+  // Recognition_reset_retry,
   Recognition_start,
   Recognition_stop,
 
@@ -478,89 +506,6 @@ export const Request = {
   // Speech_announceNewSection,
   // Speech_announceNewSentence
 };
-//   listening_available: boolean;
-//   listening_active: boolean;
-//   listening_flush: boolean;
-//   listening_silenceStartTime: number;
-//
-//   announce_available: boolean;
-//   announce_listening: boolean; // "listening"
-//   announce_newSentence: boolean; //"e.g., "new sentence"
-//   announce_newSection: boolean; //"e.g., "new sentence"
-//
-//   cursor_sectionIdx: number;
-//   cursor_sentenceIdx: number;
-//   cursor_terminalIdx: number;
-//   cursor_newSentence: boolean;
-//   cursor_newSection: boolean;
-//   cursor_newPage: boolean;
-//
-//   pageContext: IPageContext; // context stored outside of redux but accesses within reducer
-// }
-
-/*
-interface IAnnounceReduxState {
-  available: boolean,
-  listening: boolean, // "listening"
-  newSentence: boolean, //"e.g., "new sentence"
-  newSection: boolean, //"e.g., "new sentence"
-}
-function AnnounceReduxInitializer(): IAnnounceReduxState {
-  return {
-    available: false, // "listening"
-    listening: false, // "listening"
-    newSentence: false, //"e.g., "new sentence"
-    newSection: false //"e.g., "new sentence"
-  }
-}
-interface IListeningReduxState {
-  available: boolean;
-  listening: boolean;
-  flush: boolean;
-  silenceStartTime: number;
-}
-function ListeningReduxInitializer(): IListeningReduxState {
-  return {
-    available: false,
-    listening: false,
-    flush: false,
-    silenceStartTime: 0
-  }
-};
-//export const InitialWordsVisitedState = false;
-
-// Reducers - maps new state based on current state and action object (defined above)
-export interface ICursorReduxState {
-  sectionIdx: number;
-  sentenceIdx: number;
-  terminalIdx: number;
-  newSentence: boolean;
-  newSection: boolean;
-  newPage: boolean;
-}
-function CursorReduxInitializer() {
-  return {
-    sectionIdx: -1, // innermost
-    sentenceIdx: -1,
-    terminalIdx: -1,
-    newSentence: false,
-    newSection: false,
-    newPage: false,
-  };
-}
-interface IReduxState {
-  announce: IAnnounceReduxState;
-  cursor: ICursorReduxState;
-  listening: IListeningReduxState;
-  pageContext: IPageContext
-}
-const IReduxStateInitialState: IReduxState = {
-  announce: AnnounceReduxInitializer(),
-  cursor: CursorReduxInitializer(),
-  listening: ListeningReduxInitializer(),
-  pageContext: PageContextInitializer()
-}
-*/
 interface IReduxState {
   announce_available: boolean;
   announce_listening: boolean; // "listening"
@@ -568,11 +513,11 @@ interface IReduxState {
 
   listen_available: boolean;
   listen_active: boolean;
-  listen_flush: boolean;
+  // listen_flush: boolean;
   listen_silenceStartTime: number;
-  listen_retriesExceeded: boolean;
-  listen_retries: number;
-  listen_retries_max: number;
+  // listen_retriesExceeded: boolean;
+  // listen_retries: number;
+  // listen_retries_max: number;
 
   cursor_sectionIdx: number;
   cursor_sentenceIdx: number;
@@ -588,6 +533,10 @@ interface IReduxState {
 
   cursor_terminalIdx_proposed: number;
   cursor_sectionIdx_proposed: number;
+
+  fillin_currentTerminalIdx: number;
+  fillin_showTerminalIdx: number;
+  fillin_resetSectionIdx: number;
 
   page_requested: string;
   page_loaded: boolean;
@@ -620,11 +569,11 @@ const IReduxStateInitialState: IReduxState = {
 
   listen_available: false,
   listen_active: false,
-  listen_flush: false,
+  // listen_flush: false,
   listen_silenceStartTime: 0,
-  listen_retries_max: 0,
-  listen_retries: 0,
-  listen_retriesExceeded: false,
+  // listen_retries_max: 0,
+  // listen_retries: 0,
+  // listen_retriesExceeded: false,
 
   test: false,
   cursor_sectionIdx: 0,
@@ -636,6 +585,10 @@ const IReduxStateInitialState: IReduxState = {
   cursor_newPageTransition: false,
   cursor_beginningOfPageReached: true,
   cursor_endOfPageReached: false,
+
+  fillin_currentTerminalIdx: IDX_INITIALIZER,
+  fillin_showTerminalIdx: IDX_INITIALIZER,
+  fillin_resetSectionIdx: IDX_INITIALIZER,
 
   page_requested: "",
   page_loaded: false,
@@ -689,9 +642,9 @@ export const rootReducer = (
       console.log(`end of page?`);
     } else if (terminalIdxs.length === 1) {
       state.cursor_endOfPageReached = false;
-      resetListeningRetries();
+      // resetListeningRetries();
       console.log(
-        `setTerminalState single state transition ${terminalIdxs[0]}`
+        `setTerminalState single state transition from prevTermIdx=${state.cursor_terminalIdx} to nextTermIdx= ${terminalIdxs[0]}`
       );
       if (state.pageContext.isValidTerminalIdx(terminalIdxs[0])) {
         /// set single state
@@ -716,25 +669,29 @@ export const rootReducer = (
     }
   };
   const setToNextTerminalState = () => {
-    resetListeningRetries();
+    // resetListeningRetries();
+    if (state.fillin_currentTerminalIdx === state.cursor_terminalIdx) {
+      state.fillin_showTerminalIdx = state.fillin_currentTerminalIdx;
+      //    state.fillin_currentTerminalIdx = IDX_INITIALIZER;
+    }
     setTerminalState(
       state.pageContext.nextTerminalIdx(state.cursor_terminalIdx)
     );
   };
   const setToPrevTerminalState = () => {
-    resetListeningRetries();
+    // resetListeningRetries();
     setTerminalState(
       state.pageContext.previousTerminalIdx(state.cursor_terminalIdx)
     );
   };
   const setToNextSentenceTerminalState = () => {
-    resetListeningRetries();
+    // resetListeningRetries();
     setTerminalState([
       state.pageContext.nextSentenceTerminalIdx(state.cursor_terminalIdx)
     ]);
   };
   const setToPrevSentenceTerminalState = () => {
-    resetListeningRetries();
+    // resetListeningRetries();
     setTerminalState([
       state.pageContext.previousSentenceTerminalIdx(state.cursor_terminalIdx)
     ]);
@@ -762,18 +719,13 @@ export const rootReducer = (
       state.cursor_terminalIdx = 0;
     }
   };
-  const incrementListeningRetries = () => {
-    state.listen_retries++;
-    state.listen_retriesExceeded =
-      state.listen_retries_max > 0 &&
-      state.listen_retries > state.listen_retries_max;
-  };
-  const resetListeningRetries = () => {
-    state.listen_retries = 0;
-    state.listen_retriesExceeded = false;
-  };
+  // const resetListeningRetries = () => {
+  //   state.listen_retries = 0;
+  //   state.listen_retriesExceeded = false;
+  // };
   const setListeningMessage = (message: string): string => {
     state.message_state = `${action.type}: ${message}`;
+    console.log(`Listening: ${state.message_state}`);
     return state.message_state;
   };
   switch (action.type) {
@@ -828,9 +780,6 @@ export const rootReducer = (
       state.page_restore_requested = false;
       return state;
     case PAGE_HOME:
-      console.log(
-        `page_home: page restored_request=${state.page_restore_requested}`
-      );
       if (state.page_restore_requested) {
         state.page_home_requested = false;
       } else {
@@ -875,56 +824,20 @@ export const rootReducer = (
         state.cursor_terminalIdx = 0;
       }
       return state;
-    case WORD_MATCH:
-      let wordsHeard: string = action.payload as string;
-      if (
-        wordsHeard !== undefined &&
-        state.pageContext !== undefined &&
-        state.pageContext !== null
-      ) {
-        let expecting: string = state.pageContext.terminalList[
-          state.cursor_terminalIdx
-        ].content.toLowerCase();
-        let expectingAlt: string = state.pageContext.terminalList[
-          state.cursor_terminalIdx
-        ].altrecognition.toLowerCase(); // should .split(" ")
-        // console.log(state.message_listening);
-        // need to handle altRecognition word list against consecutive words heard
-        //   1) Lookahead in words heard list to allow a peek.
-        //      Requires changing for/of loop (straightforward but messy)
-        //   2) create internal state that reflects interim condition without
-        //      advancing terminal state, resetting that state when completely
-        //      or state is no longer valid (matching or not matching the entire
-        //      altReg list words heard.)
-        if (wordsHeard.length > 0) incrementListeningRetries();
-        for (let wordHeard of wordsHeard.split(" ")) {
-          wordHeard = wordHeard.toLowerCase();
-          if (expecting === wordHeard) {
-            setToNextTerminalState();
-            setListeningMessage(`Matched "${expecting}"`);
-          } else if (expectingAlt === wordHeard) {
-            setToNextTerminalState();
-            setListeningMessage(`Matched "${expectingAlt}"`);
-          } else if (
-            expectingAlt.length > 0 &&
-            patternMatch(wordHeard, expectingAlt)
-          ) {
-            setToNextTerminalState();
-            setListeningMessage(`Matched pattern "${expectingAlt}"`);
-          } else {
-            // console.log(
-            setListeningMessage(
-              `Comparing "${wordHeard}"" within ""${wordsHeard}"; Expecting "${expecting}",  "${expectingAlt}". Retries: ${state.listen_retries}.`
-            );
-          }
-        }
-      }
+    case LISTENING_MATCH:
+      // resetListeningRetries();
+      setListeningMessage(action.payload);
+      setToNextTerminalState();
       return state;
     case WORD_NEXT:
+      setListeningMessage(action.payload);
       setToNextTerminalState();
       return state;
     case WORD_PREVIOUS:
       setToPrevTerminalState();
+      return state;
+    case WORD_SETCURRENTFILLIN:
+      state.fillin_currentTerminalIdx = +action.payload;
       return state;
     case SENTENCE_NEXT:
       setToNextSentenceTerminalState();
@@ -938,42 +851,46 @@ export const rootReducer = (
     case LISTENING_TOGGLE:
       if (state.listen_available) {
         state.listen_active = !state.listen_active;
-        if (state.listen_active) {
-          state.listen_retries_max = +action.payload;
-          resetListeningRetries();
-        }
+        // if (state.listen_active) {
+        //   state.listen_retries_max = +action.payload;
+        //   resetListeningRetries();
+        // }
       }
       return state;
     case LISTENING_STOP:
       state.listen_active = false;
-      state.listen_retriesExceeded = false;
+      // state.listen_retries = 0;
+      // state.listen_retriesExceeded = false;
       setListeningMessage((!state.listen_active).toString());
       return state;
     case LISTENING_AVAILABLE:
       state.listen_available = action.payload;
       setListeningMessage(state.listen_available.toString());
       return state;
-    case LISTENING_FLUSH:
-      state.listen_flush = true; // resets transcript
-      resetListeningRetries();
-      setListeningMessage("flushing transcript");
-      return state;
-    case LISTENING_FLUSHED:
-      state.listen_flush = false; // resets transcript
-      setListeningMessage("transcript flushed");
-      return state;
-    // case LISTENING_SET_RETRIES_MAX:
-    //   state.listen_retries_max = action.payload;
+    // case LISTENING_FLUSH:
+    //   state.listen_flush = true; // resets transcript
+    //   resetListeningRetries();
+    //   setListeningMessage("flushing transcript");
+    //   return state;
+    // case LISTENING_FLUSHED:
+    //   state.listen_flush = false; // resets transcript
+    //   setListeningMessage("transcript flushed");
+    //   return state;
+    // case LISTENING_RETRY:
+    //   state.listen_retries++;
+    //   state.listen_retriesExceeded =
+    //     state.listen_retries_max > 0 &&
+    //     state.listen_retries > state.listen_retries_max;
+    //   setListeningMessage(action.payload);
+    //   return state;
+    // case LISTENING_RETRY_RESET:
+    //   state.listen_retries = 0;
+    //   state.listen_retriesExceeded = false;
+    //   setListeningMessage(action.payload);
     //   return state;
     case ANNOUNCE_MESSAGE:
       state.announce_message = action.payload; // resets transcript
       return state;
-    // case ANNOUNCE_ENCE:
-    //   state.announce_message = "new sentence"; // resets transcript
-    //   return state;
-    // case ANNOUNCE_NEWSECTION:
-    //   state.announce_message = "new section"; // resets transcript
-    //   return state;
     case ANNOUNCE_ACKNOWLEDGED:
       state.announce_message = ""; // resets transcript
       return state;
@@ -985,7 +902,6 @@ export const rootReducer = (
       state.cursor_endOfPageReached = false;
       state.announce_message = "";
       return state;
-
     case RECITE_START:
       state.recite_requested = true;
       return state;
@@ -1038,6 +954,11 @@ export const rootReducer = (
       }
       return state;
     }
+    case FILLIN_RESETSECTION: {
+      state.fillin_resetSectionIdx = action.payload;
+      state.fillin_showTerminalIdx = IDX_INITIALIZER;
+      return state;
+    }
     case MESSAGE_CLEAR: {
       let msgType: number =
         action.payload.messageType === undefined
@@ -1067,7 +988,3 @@ export const rootReducer = (
       return state;
   }
 };
-function patternMatch(content: string, altRecognitionPattern: string): boolean {
-  let pattern: RegExp = new RegExp(altRecognitionPattern);
-  return pattern.test(content);
-}
