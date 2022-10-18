@@ -16,7 +16,7 @@
 import React from "react";
 import { Request } from "./reducers";
 import { useAppDispatch, useAppSelector, useSpanRef } from "./hooks";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 
 // is this really necessary if availablility is removed below
 import {
@@ -25,12 +25,14 @@ import {
   IAcronymTerminalMeta,
   TerminalMetaEnumType
 } from "./pageContentType";
+import { TerminalFillinContext } from "./fillinContext";
 
 import { Terminal_Date } from "./reactcomp_terminals_dates";
 import { Terminal_Emailaddress } from "./reactcomp_terminals_emailaddress";
 import { Terminal_PhoneNumber } from "./reactcomp_terminals_phonenumbers";
 import { Terminal_Image } from "./reactcomp_terminals_image";
 import { Terminal_Link } from "./reactcomp_terminals_link";
+import { Terminal_Fillin } from "./reactcomp_terminals_fillin";
 
 export interface ITerminalPropsType {
   active: boolean;
@@ -47,19 +49,20 @@ export const TerminalDispatcher = React.memo(
     );
     //*********
     //RERENDERING ISSUE
-    // useSelector(currentTerminalIdx) that changes EVERYTIME word advances thus triggers
-    // rerendering of TerminalDispatcher but NOT actual screen update. Could keep an active/inactive array for all words
-    // on page in state but array are immutable and thus even a single element change requires a copy of entire array
-    // cause rerendering of all sentences
+    // useSelector(currentTerminalIdx) that changes EVERYTIME word advances
+    // thus rerenders of TerminalDispatcher but NOT actual screen update. Could
+    // keep an active/inactive array for all words on page in state but array
+    // are immutable and thus even a single element change requires a copy of
+    // entire array cause rerendering of all sentences
     // console.log(
     //   `<TerminalDispatcher content=${props.terminal.content} />` // props.active=${props.active} props.terminal=${props.terminal} />`
     // );
     // for all terminals made of multiple TerminalInfo blocks, active must identify the specific terminalList
-    // So even if the the component renders the entire compound terminal, active can only be set for a single
-    // terminal
+    // So even if the component renders the entire compound terminal, active
+    // can only be set for a single terminal within compound one.
     //
-    //
-    // Explore using props.children in dispatcher to tranparently dispatch without triggering rerender via useSelector
+    // Explore using props.children in dispatcher to tranparently dispatch
+    // without triggering rerender via useSelector
     //
     // *********
     switch (props.terminal.type) {
@@ -101,6 +104,16 @@ export const TerminalDispatcher = React.memo(
       case TerminalMetaEnumType.emailaddress:
         return (
           <Terminal_Emailaddress
+            active={
+              currentTerminalIdx >= props.terminal.firstTermIdx &&
+              currentTerminalIdx <= props.terminal.lastTermIdx
+            }
+            terminal={props.terminal}
+          />
+        );
+      case TerminalMetaEnumType.fillin:
+        return (
+          <Terminal_Fillin
             active={
               currentTerminalIdx >= props.terminal.firstTermIdx &&
               currentTerminalIdx <= props.terminal.lastTermIdx
@@ -152,14 +165,14 @@ export const TerminalDispatcher = React.memo(
       case TerminalMetaEnumType.year:
         break;
       default:
-        return <>unknown terminal "{props.terminal.content}"</>;
+        return <>unknown terminal "{props.terminal.content}!"</>;
     }
   }
 );
 export const Terminal_Acronym = React.memo((props: ITerminalPropsType): any => {
   //  console.log(`<Terminal_acronym> active=${props.active}`);
-  // Rather not trigger dispatch via useSelector but necessary for all multiple terminal words
-  // Rerenders only when acronym is active theough
+  // Rather not trigger dispatch via useSelector but necessary for all multiple
+  // terminal words. Rerenders only when acronym is active theough
   const currentTerminalIdx = useAppSelector(store => store.cursor_terminalIdx); // cause rerendering
   let acronym: IAcronymTerminalMeta = props.terminal
     .meta as IAcronymTerminalMeta;
@@ -210,6 +223,9 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
   let dispatch = useAppDispatch();
   //  const termRef = useSpanRef();
   const terminalRef = useSpanRef();
+  const { terminalFillin, setTerminalFillin } = useContext(
+    TerminalFillinContext
+  );
   useEffect(() => {
     //    console.log(`<TerminalNode> useEffect() active, expecting scrollToView()`);
     /* Consider multiple scrollIntoView modes:
@@ -233,11 +249,41 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
       }
     }
   }, [props.active]);
+  // useEffect(() => {
+  //   console.log(
+  //     `showTerminalIdx=${showTerminalIdx}, offsetIdx=${terminalFillin.offsetIdx}, ${props.terminalInfo.termIdx}`
+  //   );
+  //   let relativeIdx = showTerminalIdx - terminalFillin.offsetIdx;
+  //   if (relativeIdx >= 0 && relativeIdx < terminalFillin.visible.length) {
+  //     terminalFillin.visible[relativeIdx] = true;
+  //     setTerminalFillin(terminalFillin);
+  //     console.log(`showing terminalFillin.visible[${relativeIdx}]=true`);
+  //   }
+  // }, [showTerminalIdx]);
+  let hidden: string = "";
   // refactor the following
+  if (
+    terminalFillin.visible.length > 0 &&
+    terminalFillin.visible.length - 1 <=
+      props.terminalInfo.termIdx - terminalFillin.offsetIdx
+  ) {
+    hidden = !terminalFillin.visible[
+      props.terminalInfo.termIdx - terminalFillin.offsetIdx
+    ]
+      ? ` fillin-prompts-terminal-hidden `
+      : "";
+  }
   if (props.terminalInfo.recitable) {
     let attribute: string = `${
       props.terminalInfo.recitable ? "recitable-word" : ""
-    } ${props.active ? "active" : ""}`;
+    } ${props.active ? "active" : ""} ${hidden}`;
+    if (
+      props.active &&
+      props.terminalInfo.fillin.responseIdx >= 0 &&
+      props.terminalInfo.fillin.sectionIdx >= 0
+    ) {
+      dispatch(Request.Fillin_setCurrent(props.terminalInfo.termIdx));
+    }
     return (
       <span
         className={`${props.class} ${attribute}`}
