@@ -41,19 +41,19 @@ export class SectionParseNode_PARAGRAPH extends SectionParseNode_LIST
       let current: TaggedStringType = this.dataSource.currentRecord();
       assert(current !== undefined, `current record is undefined`);
       assert(
-        current.tagType === MarkdownRecordType.PARAGRAPH,
+        current.recordType === MarkdownRecordType.PARAGRAPH,
         `expected ${MarkdownRecordType.PARAGRAPH} at line ${current.lineNo}`
       );
       this.firstTermIdx = this.userContext.terminals.lastIdx + 1;
       for (
         current = this.dataSource.nextRecord();
         !this.dataSource.EOF() &&
-        current.tagType !== MarkdownRecordType.PARAGRAPH_END;
+        current.recordType !== MarkdownRecordType.PARAGRAPH_END;
         current = this.dataSource.nextRecord()
       ) {
         assert(
-          current.tagType === MarkdownRecordType.SENTENCE,
-          `encountered ${current.tagType} expected ${MarkdownRecordType.SENTENCE} at line ${current.lineNo}`
+          current.recordType === MarkdownRecordType.SENTENCE,
+          `encountered ${current.recordType} expected ${MarkdownRecordType.SENTENCE} at line ${current.lineNo}`
         );
         let sentence: ISentenceNode = new SentenceNode(this);
         this.meta.sentences.push(sentence);
@@ -61,10 +61,10 @@ export class SectionParseNode_PARAGRAPH extends SectionParseNode_LIST
         current = this.dataSource.currentRecord(); // update current within this scope
       }
       assert(
-        current.tagType === MarkdownRecordType.PARAGRAPH_END,
+        current.recordType === MarkdownRecordType.PARAGRAPH_END,
         `expected ${MarkdownRecordType.PARAGRAPH_END} to ${MarkdownRecordType.PARAGRAPH}`
       );
-      if (current.tagType === MarkdownRecordType.PARAGRAPH_END) {
+      if (current.recordType === MarkdownRecordType.PARAGRAPH_END) {
         this.lastTermIdx = this.userContext.terminals.lastIdx;
         this.id =
           this.userContext.sections.push(

@@ -106,7 +106,7 @@ export class TerminalNode_MLTAG_IMAGE extends TerminalNode_MLTAG_
         `Expected right parenthesis but encountered "${token.content}" while parsing image`
       );
       let chunks: string[] = src.split(",").map(chunk => chunk.trim());
-      if (IsDefined(chunks[0])) this.meta.src = chunks[0];
+      if (IsDefined(chunks[0])) this.meta.src = chunks[0].trim();
       if (IsDefined(chunks[1])) this.meta.width = +chunks[1]; // no units; assumed px
       if (IsDefined(chunks[2])) this.meta.height = +chunks[2]; // no units; assumed px
       if (IsDefined(chunks[3])) this.meta.attributes = chunks[3];

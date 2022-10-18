@@ -51,7 +51,7 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
       assert(current !== undefined, `Undefined record encountered`);
 
       assert(
-        current.tagType === MarkdownRecordType.BUTTONGRID,
+        current.recordType === MarkdownRecordType.BUTTONGRID,
         `Expected "${MarkdownRecordType.BUTTONGRID}" at line ${current.lineNo}`
       );
       let args: string[] = current.content.split(",").map(arg => arg.trim());
@@ -72,13 +72,13 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
       }
       current = this.dataSource.nextRecord();
       assert(
-        current.tagType === MarkdownRecordType.PARAGRAPH,
-        `Expected "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.tagType}" at line ${current.lineNo}`
+        current.recordType === MarkdownRecordType.PARAGRAPH,
+        `Expected "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.recordType}" at line ${current.lineNo}`
       );
       current = this.dataSource.nextRecord();
       assert(
-        current.tagType === MarkdownRecordType.SENTENCE,
-        `Expected "${MarkdownRecordType.SENTENCE}" but encountered "${current.tagType}" at line ${current.lineNo}`
+        current.recordType === MarkdownRecordType.SENTENCE,
+        `Expected "${MarkdownRecordType.SENTENCE}" but encountered "${current.recordType}" at line ${current.lineNo}`
       );
       // find list of images
       this.firstTermIdx = this.userContext.terminals.lastIdx + 1;
@@ -96,25 +96,28 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
       );
       current = this.dataSource.nextRecord();
       assert(
-        current.tagType === MarkdownRecordType.PARAGRAPH_END,
-        `Expected "${MarkdownRecordType.PARAGRAPH_END}" to "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.tagType}"  at line ${current.lineNo}`
+        current.recordType === MarkdownRecordType.PARAGRAPH_END,
+        `Expected "${MarkdownRecordType.PARAGRAPH_END}" to "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.recordType}"  at line ${current.lineNo}`
       );
       //keep processing sections until imageentry_end
       for (
         current = this.dataSource.nextRecord();
         !this.dataSource.EOF() &&
-        current.tagType !== MarkdownRecordType.IMAGEENTRY_END;
+        current.recordType !== MarkdownRecordType.IMAGEENTRY_END;
         current = this.dataSource.currentRecord() // update current modified in parse()
       ) {
-        let sectionNode: ISectionNode = GetSectionNode(current.tagType, this);
+        let sectionNode: ISectionNode = GetSectionNode(
+          current.recordType,
+          this
+        );
         this.meta.buttonText.push("hi there");
         this.logger.diagnostic(
-          `pushed section=${current.tagType} ${sectionNode.constructor.name} ${current.content}`
+          `pushed section=${current.recordType} ${sectionNode.constructor.name} ${current.content}`
         );
         sectionNode.parse();
         //        current = this.dataSource.currentRecord();
       }
-      if (current.tagType === MarkdownRecordType.IMAGEENTRY_END) {
+      if (current.recordType === MarkdownRecordType.IMAGEENTRY_END) {
         this.lastTermIdx = this.userContext.terminals.lastIdx;
         // this.id =
         //   this.userContext.sections.push(

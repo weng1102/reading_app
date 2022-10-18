@@ -25,6 +25,7 @@ import {
 import {
   TerminalMetaEnumType,
   ITerminalInfo,
+  IWordTerminalMeta,
   ITerminalInfoInitializer,
   IFillinTerminalMeta,
   IFillinTerminalMetaInitializer
@@ -62,7 +63,8 @@ export class TerminalNode_MLTAG_FILLIN extends TerminalNode_MLTAG_
       // is identified instead of using multiple consecutive single-token
       // fillins.
       // Use ITerminalContent so that multiple token types can be parsed e.g.,
-      // WORD, DATE
+      // WORD, DATE, PHONENUMBER.
+      let termIdx: number;
       for (
         token = tokenList[0];
         token !== undefined &&
@@ -72,16 +74,46 @@ export class TerminalNode_MLTAG_FILLIN extends TerminalNode_MLTAG_
       ) {
         assert(token !== undefined, `undefined token detected`);
         let terminalNode: ITerminalNode = GetTerminalNode(token, this._parent);
+        // SHOULD report whether terminal type is supported then unwind/move
+        // to next valid terminal.
         if (terminalNode) {
           this.logger.diagnostic(
             `Created terminalNode type=${terminalNode.constructor.name} for "${token.content}"`
           );
-          terminalNode.parse(tokenList); // responsible for advancing tokenlist
-          // assumed added in parse() above
-          this.meta.terminals.push(terminalNode);
+          terminalNode.parse(tokenList);
+          // even though the actual fill-in can be compound, the fillin list
+          // need only contain the complete content for unparsed/unrecitable
+          // response table display AMD calculating reference count when
+          // grouping duplicates
+          termIdx = this.meta.terminals.push(terminalNode);
           this.content += terminalNode.content;
-          //  this.userContext.terminals[terminalNode.termIdx].linkable = true;
-          this.content = terminalNode.content;
+          // [
+          //   this.meta.sectionIdx,
+          //   this.meta.responseIdx
+          // ] = this.userContext.fillins.addResponse(this.content);
+          let responseIdx: number;
+          let fillinSectionIdx: number;
+          [
+            fillinSectionIdx,
+            responseIdx
+          ] = this.userContext.fillins.addResponse(this.content);
+          (<ITerminalInfo>terminalNode.meta).fillin.responseIdx = responseIdx;
+          this.meta.sectionFillinIdx = fillinSectionIdx;
+          this.userContext.terminals[
+            terminalNode.termIdx
+          ].fillin.responseIdx = responseIdx;
+          this.userContext.terminals[
+            terminalNode.termIdx
+          ].fillin.sectionIdx = fillinSectionIdx;
+          // console.log(
+          //   `Terminal_fillin: termIdx=${terminalNode.termIdx},  sectionIdx=${
+          //     this.userContext.terminals[terminalNode.termIdx].fillin.sectionIdx
+          //   }, responseIdx=${
+          //     this.userContext.terminals[terminalNode.termIdx].fillin
+          //       .responseIdx
+          //   }`
+          // );
+          // if recitable then push into prompts
         }
       }
       assert(
@@ -90,6 +122,18 @@ export class TerminalNode_MLTAG_FILLIN extends TerminalNode_MLTAG_
           MarkupLabelType.FILLIN
         )}" parsing fillin`
       );
+      if (this.meta.terminals.length > 0) {
+        // loop through terminals and push recitable fillins into
+        // prompts and set promptIdx = push() and update responseIdx
+        this.firstTermIdx = this.meta.terminals[0].firstTermIdx;
+        this.lastTermIdx = this.meta.terminals[
+          this.meta.terminals.length - 1
+        ].lastTermIdx;
+        // lastTerminalIdx - firstTerminalIdx as visible offset
+        // for (const [key, terminal] of Object(this.meta.terminals)) {
+        //   if (terminal.recitable) // prompts.push(terminalIdx, responseIdx)
+        // }
+      }
       token = tokenList.shift()!; // discard </fillin> endtag
     } catch (e) {
       if (IsError(e)) {
@@ -114,7 +158,7 @@ export class TerminalNode_MLTAG_FILLIN extends TerminalNode_MLTAG_
     //    let outputStr1: string = "";
     switch (format) {
       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
-        label = `<fillin>`;
+        label = `fillin: section:${this.meta.sectionFillinIdx}`;
         outputStr = super.serialize(format, label, prefix);
         for (const [i, terminal] of this.meta.terminals.entries()) {
           label = `${terminal.type}`;

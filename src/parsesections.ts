@@ -51,7 +51,7 @@ export abstract class SectionParseNode extends ParseNode
     let current: TaggedStringType;
     current = this.dataSource.currentRecord();
     this.logger.diagnostic(
-      `parsing ${current.content} of type ${current.tagType} at ${current.lineNo}`
+      `parsing ${current.content} of type ${current.recordType} at ${current.lineNo}`
     );
     this.dataSource.nextRecord();
     return 0;
@@ -139,15 +139,6 @@ export abstract class SectionParseNode_LIST extends SectionParseNode
     super(parent);
   }
 }
-export class SectionParseNode_FILLIN extends SectionParseNode_LIST
-  implements ISectionNode {
-  constructor(parent: IPageNode | ISectionNode) {
-    super(parent);
-    //  console.log("creating ordered fillin section");
-  }
-  readonly type = SectionVariantEnumType.fillin;
-  meta: ISectionFillinVariant = ISectionFillinVariantInitializer();
-}
 export class SectionParseNode_PHOTOENTRY extends SectionParseNode_LIST
   implements ISectionNode {
   constructor(parent: IPageNode | ISectionNode) {
@@ -168,13 +159,14 @@ export class SectionParseNode_EMPTY extends SectionParseNode_LIST
     try {
       let current: TaggedStringType = this.dataSource.currentRecord();
       assert(
-        current.tagType === MarkdownRecordType.EMPTY,
+        current.recordType === MarkdownRecordType.EMPTY,
         `expected ${MarkdownRecordType.EMPTY} at line ${current.lineNo}`
       );
       //    console.log(`current.lineNo=${current.lineNo}`);
       for (
         current = this.dataSource.currentRecord();
-        !this.dataSource.EOF() && current.tagType === MarkdownRecordType.EMPTY;
+        !this.dataSource.EOF() &&
+        current.recordType === MarkdownRecordType.EMPTY;
         current = this.dataSource.nextRecord()
       ) {
         this.meta.count++;

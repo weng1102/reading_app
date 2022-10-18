@@ -39,29 +39,29 @@ export class SectionParseNode_BLOCKQUOTE extends SectionParseNode_LIST
         `current record is undefined at buffer index ${this.dataSource.currentIdx()}`
       );
       assert(
-        current.tagType === MarkdownRecordType.BLOCKQUOTE,
+        current.recordType === MarkdownRecordType.BLOCKQUOTE,
         `expected ${MarkdownRecordType.BLOCKQUOTE}  at line ${current.lineNo}`
       );
       for (
         current = this.dataSource.nextRecord();
         !this.dataSource.EOF() &&
-        current.tagType !== MarkdownRecordType.SECTION_END; // end of blockquote
+        current.recordType !== MarkdownRecordType.SECTION_END; // end of blockquote
+
       ) {
         assert(
-          current.tagType === MarkdownRecordType.PARAGRAPH,
+          current.recordType === MarkdownRecordType.PARAGRAPH,
           `expected ${MarkdownRecordType.PARAGRAPH} at line ${current.lineNo}`
         );
         let paragraph: ISectionNode = new SectionParseNode_PARAGRAPH(this);
         paragraph.parse();
         this.items.push(paragraph);
-        current = this.dataSource.currentRecord()
+        current = this.dataSource.currentRecord();
       }
       assert(
-        current.tagType === MarkdownRecordType.SECTION_END,
+        current.recordType === MarkdownRecordType.SECTION_END,
         `expected ${MarkdownRecordType.SECTION_END} to ${MarkdownRecordType.BLOCKQUOTE}`
       );
       current = this.dataSource.nextRecord(); // move passed SECTION_END
-
     } catch (e) {
       // forward record to next SECTION_END
       if (IsError(e)) {

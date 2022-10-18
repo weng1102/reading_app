@@ -13,9 +13,9 @@ import { IPageNode } from "./parsepages";
 import {
   ISectionNode,
   SectionParseNode_EMPTY,
-  SectionParseNode_FILLIN,
   SectionParseNode_TBD
 } from "./parsesections";
+import { SectionParseNode_FILLIN } from "./parsesections_fillin";
 import { SectionParseNode_IMAGEENTRY } from "./parsesections_images";
 import { SectionParseNode_PARAGRAPH } from "./parsesections_paragraph";
 import {
@@ -82,6 +82,13 @@ export function GetSectionNode(
       break;
     }
     case MarkdownRecordType.FILLIN: {
+      // console.log(
+      //   `dispatch: ${tagType} ${tagType === MarkdownRecordType.FILLIN}`
+      // );
+      sectionNode = new SectionParseNode_FILLIN(parent);
+      break;
+    }
+    case MarkdownRecordType.FILLIN_END: {
       // console.log(
       //   `dispatch: ${tagType} ${tagType === MarkdownRecordType.FILLIN}`
       // );

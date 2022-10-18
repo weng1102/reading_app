@@ -1,6 +1,6 @@
-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
- * File name: parsesections_acronym.ts
+ * File name: parseterminals_acronym.ts
  *
  * Create terminal acronym objects from serialized input.
  *
