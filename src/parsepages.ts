@@ -14,6 +14,7 @@ import { IsError, IsDefined } from "./utilities";
 import { Logger } from "./logger";
 import { MarkdownRecordType, TaggedStringType } from "./dataadapter";
 import {
+  ISectionFillinItem,
   IHeadingListItem,
   ILinkListItem,
   IPageContent,
@@ -67,6 +68,7 @@ export class PageParseNode extends ParseNode implements IPageContent {
   sectionList: ISectionListItem[] = [];
   sentenceList: ISentenceListItem[] = [];
   linkList: ILinkListItem[] = [];
+  fillinList: ISectionFillinItem[] = [];
   constructor(parent?: PageParseNode | AppNode) {
     super(parent);
   }
@@ -82,7 +84,7 @@ export class PageParseNode extends ParseNode implements IPageContent {
         //        current = this.dataSource.nextRecord()
         current = this.dataSource.currentRecord()
       ) {
-        if (current.tagType === MarkdownRecordType.PAGE) {
+        if (current.recordType === MarkdownRecordType.PAGE) {
           let attributes: string[] = current.content.split(",");
           if (IsDefined(attributes[0])) this.title = attributes[0].trim();
           if (IsDefined(attributes[1])) this.owner = attributes[1].trim();
@@ -96,10 +98,13 @@ export class PageParseNode extends ParseNode implements IPageContent {
           if (IsDefined(attributes[5])) this.description = attributes[5].trim();
           current = this.dataSource.nextRecord();
         } else {
-          let sectionNode: ISectionNode = GetSectionNode(current.tagType, this);
+          let sectionNode: ISectionNode = GetSectionNode(
+            current.recordType,
+            this
+          );
           this.sections.push(sectionNode);
           this.logger.diagnostic(
-            `pushed section=${current.tagType} ${sectionNode.constructor.name} ${current.content}`
+            `pushed section=${current.recordType} ${sectionNode.constructor.name} ${current.content}`
           );
           sectionNode.parse();
         }
@@ -119,6 +124,10 @@ export class PageParseNode extends ParseNode implements IPageContent {
 
       this.userContext.links.parse();
       this.linkList = this.userContext.links;
+
+      this.userContext.fillins.parse();
+      this.fillinList = this.userContext.fillins;
+
       this.modified = new Date(Date.now()).toString();
     } catch (e) {
       if (IsError(e)) {
