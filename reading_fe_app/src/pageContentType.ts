@@ -8,7 +8,7 @@
  *
  **/
 export const IDX_INITIALIZER = -9999;
-export const PageContentVersion = "20220407.1";
+export const PageContentVersion = "20221017.1";
 export enum PageFormatEnumType {
   default = 0
 }
@@ -33,6 +33,7 @@ export interface IPageContent {
   sectionList: ISectionListItem[];
   sentenceList: ISentenceListItem[];
   linkList: ILinkListItem[];
+  fillinList: ISectionFillinItem[];
 }
 export function PageContentInitializer(): IPageContent {
   return {
@@ -55,7 +56,8 @@ export function PageContentInitializer(): IPageContent {
     headingList: [],
     sectionList: [],
     sentenceList: [],
-    linkList: []
+    linkList: [],
+    fillinList: []
   };
 }
 export interface ISectionContent {
@@ -77,9 +79,9 @@ export type SectionVariantType =
   | ISectionParagraphVariant
   | ISectionFillinVariant
   | ISectionBlockquoteVariant
-  | ISectionFillinListVariant
   | ISectionImageEntryVariant
-  | ISectionButtonGridVariant;
+  | ISectionButtonGridVariant
+  | ISectionTbdVariant;
 
 export enum SectionVariantEnumType {
   heading = "heading",
@@ -91,7 +93,7 @@ export enum SectionVariantEnumType {
   fillin = "fillin",
   fillin_list = "fillin_list",
   image_entry = "image_entry",
-  button_grid = "buttongrip",
+  button_grid = "buttongrid",
   blockquote = "blockquote",
   unittest = "unittest",
   empty = "empty",
@@ -120,35 +122,27 @@ export enum UnorderedListMarkerEnumType { // standard HTML
   none,
   other
 }
-export interface ISectionFillinVariant {
-  minColumns: number; // minimum number of columns for fillin table
-}
-export function ISectionFillinVariantInitializer(): ISectionFillinVariant {
-  return {
-    minColumns: 0 // overrides name and description above
-  };
-}
-export interface ISectionHeadingVariant1 {
-  title: string; // ISentenceContent where audible/recitable can be disabled at run time.
-
-  separator: string;
-  recitable: boolean;
-  audible: boolean;
-  level: number;
-}
+// export interface ISectionHeadingVariant1 {
+//   title: string; // ISentenceContent where audible/recitable can be disabled at run time.
+//
+//   separator: string;
+//   recitable: boolean;
+//   audible: boolean;
+//   level: number;
+// }
 export interface ISectionHeadingVariant {
   heading: ISentenceContent;
   level: number;
 }
-export function ISectionHeadingVariantInitializer1(): ISectionHeadingVariant1 {
-  return {
-    title: "", // overrides name and description above
-    separator: "",
-    recitable: false,
-    audible: false,
-    level: 0
-  };
-}
+// export function ISectionHeadingVariantInitializer1(): ISectionHeadingVariant1 {
+//   return {
+//     title: "", // overrides name and description above
+//     separator: "",
+//     recitable: false,
+//     audible: false,
+//     level: 0
+//   };
+// }
 export function ISectionHeadingVariantInitializer(): ISectionHeadingVariant {
   return {
     heading: {
@@ -247,12 +241,47 @@ export function ISectionParagraphVariantInitializer(): ISectionParagraphVariant 
     style: "" // overrides css but not user profile
   };
 }
-export interface ISectionFillinVariant {}
-export function ISectionFillinBariantInitializer() {}
-
-export interface ISectionFillinListVariant {}
-export function ISectionFillinListVariantInitializer() {}
-
+export enum SectionFillinFormatType {
+  list = "list",
+  grid = "grid"
+}
+export interface ISectionFillinVariant {
+  sectionFillinIdx: number; // reference state structure in pageList.fillinList
+  title: string; // title of entire fillin section
+  label: string; // label for response list/grid
+  format: SectionFillinFormatType; // list, grid
+  allowUserFormatting: boolean;
+  gridColumns: number; // 0 means no response table
+  groupDuplicates: boolean; // identical words groouped as single response entry
+  showCategoryHint: boolean; // shows (noun) beside hidden word
+  includeCategory: boolean; // shows (noun) in response list/grid
+  sortOrder: boolean; // sort alphabetically
+  allowReset: boolean; // reset button
+  showReferenceCount: boolean;
+  prompts: ISectionContent[];
+}
+export function ISectionFillinVariantInitializer(
+  sectionFillinIdx: number = IDX_INITIALIZER,
+  title: string = "",
+  label = "Responses:",
+  format = SectionFillinFormatType.list
+): ISectionFillinVariant {
+  return {
+    sectionFillinIdx: sectionFillinIdx,
+    title: title,
+    label: label,
+    format: format,
+    allowUserFormatting: false,
+    gridColumns: 0,
+    groupDuplicates: true,
+    showCategoryHint: false,
+    includeCategory: false,
+    sortOrder: true,
+    allowReset: false,
+    showReferenceCount: false,
+    prompts: []
+  };
+}
 export enum ImageEntryLayoutEnumType {
   left = "left", // default, image to the left of caption
   above = "above" // image above caption
@@ -265,7 +294,7 @@ export interface ISectionImageEntryVariant {
   images: ITerminalContent[]; // path to img/filenames
   captions: ISectionContent[];
 }
-export function ISectionImageEntryVariantInitializer() {
+export function ISectionImageEntryVariantInitializer(): ISectionImageEntryVariant {
   return {
     title: "",
     layout: ImageEntryLayoutEnumType.left,
@@ -278,7 +307,7 @@ export function ISectionImageEntryVariantInitializer() {
 export interface ISectionTbdVariant {
   context: string; // message in a bottle
 }
-export function ISectionTbdVariantInitializer() {
+export function ISectionTbdVariantInitializer(): ISectionTbdVariant {
   return {
     context: ""
   };
@@ -307,9 +336,11 @@ export enum TerminalMetaEnumType {
   currency,
   date,
   emailaddress,
+  fillin,
   image,
   link,
   numberwithcommas,
+  passthruTag,
   phonenumber,
   punctuation,
   symbol,
@@ -326,6 +357,7 @@ export interface ITerminalContent {
   firstTermIdx: number;
   lastTermIdx: number;
   content: string; // not necessary
+  cueList: string;
   type: TerminalMetaEnumType;
   meta: TerminalMetaType;
 }
@@ -336,6 +368,8 @@ export type TerminalMetaType =
   | IEmailAddressTerminalMeta
   | IImageTerminalMeta
   | ICurriculumLinkTerminalMeta
+  | IFillinTerminalMeta
+  | IPassthruTagTerminalMeta
   | IPhoneNumberTerminalMeta
   | IPunctuationTerminalMeta
   | IReferenceTerminalMeta
@@ -345,39 +379,54 @@ export type TerminalMetaType =
   | IWordTerminalMeta
   | IYearTerminalMeta;
 
+interface IFillinResponse {
+  sectionIdx: number;
+  responseIdx: number;
+}
 export interface ITerminalInfo {
   content: string;
   termIdx: number;
   nextTermIdx: number[];
   prevTermIdx: number[];
+  cues: string[];
   altpronunciation: string;
   altrecognition: string;
   recitable: boolean;
   audible: boolean;
   linkable: boolean;
   visible: boolean;
-  fillin: boolean;
   visited: boolean;
   linkIdx: number;
   hintsIdx: number;
+  fillin: IFillinResponse;
+  bold: boolean;
+  italics: boolean;
+  markupTag: boolean;
   //cues: string[] includes terminal type word, day, month, year, number, area code,...
 }
 export function ITerminalInfoInitializer(
   content: string = "",
   altpronunciation: string = "",
   altrecognition: string = "",
+  cues: string[] = [],
   recitable: boolean = true,
   audible: boolean = true,
   linkable: boolean = false,
   visible: boolean = true,
-  fillin: boolean = false,
   visited: boolean = false,
   linkIdx: number = IDX_INITIALIZER,
-  hintsIdx: number = IDX_INITIALIZER
-  //cues
+  hintsIdx: number = IDX_INITIALIZER,
+  fillin: IFillinResponse = {
+    sectionIdx: IDX_INITIALIZER,
+    responseIdx: IDX_INITIALIZER
+  },
+  bold = false,
+  italics = false,
+  markupTag = false
 ): ITerminalInfo {
   return {
     content: (content === undefined ? "" : content)!,
+    cues: cues,
     termIdx: IDX_INITIALIZER,
     nextTermIdx: [],
     prevTermIdx: [],
@@ -393,10 +442,13 @@ export function ITerminalInfoInitializer(
     audible: audible,
     linkable: linkable,
     visible: visible,
-    fillin: fillin,
     visited: visited,
     linkIdx: linkIdx,
-    hintsIdx: hintsIdx
+    hintsIdx: hintsIdx,
+    fillin: fillin,
+    bold: bold,
+    italics: italics,
+    markupTag: markupTag
   };
 }
 export interface IAcronymTerminalMeta {
@@ -455,6 +507,7 @@ export function IDateTerminalMetaInitializer(): IDateTerminalMeta {
       undefined, // accept default content
       undefined, // accept default altpro
       undefined, // accept default altreg
+      undefined, // accept default cues
       false, // not recitable
       false, // not audible
       undefined, // accept default linkable
@@ -466,6 +519,7 @@ export function IDateTerminalMetaInitializer(): IDateTerminalMeta {
       undefined, // accept default content
       undefined, // accept default altpro
       undefined, // accept default altreg
+      undefined, // accept default cues
       false, // not recitable
       false, // not audible
       undefined, // accept default linkable
@@ -478,6 +532,7 @@ export function IDateTerminalMetaInitializer(): IDateTerminalMeta {
       undefined, // accept default content
       undefined, // accept default altpro
       undefined, // accept default altreg
+      undefined, // accept default cues
       true, // recitable
       true, //audible
       undefined, // accept default linkable
@@ -489,6 +544,7 @@ export function IDateTerminalMetaInitializer(): IDateTerminalMeta {
       undefined, // accept default content
       undefined, // accept default altpro
       undefined, // accept default altreg
+      undefined, // accept default cues
       false, // not recitable
       false, // not audible
       undefined, // accept default linkable
@@ -497,6 +553,30 @@ export function IDateTerminalMetaInitializer(): IDateTerminalMeta {
       undefined // accept default visited
     ),
     year: IYearTerminalMetaInitializer() // e.g., {19,61}, {20,10}, {2000,1}
+  };
+}
+export interface IFillinTerminalMeta {
+  terminals: ITerminalContent[];
+  sectionFillinIdx: number;
+  //  responseIdx: number;
+}
+export function IFillinTerminalMetaInitializer(
+  terminals: ITerminalContent[] = [],
+  sectionFillinIdx = IDX_INITIALIZER
+  //  responseIdx = IDX_INITIALIZER
+): IFillinTerminalMeta {
+  return {
+    terminals,
+    sectionFillinIdx
+    //    responseIdx
+  };
+}
+export interface IPassthruTagTerminalMeta {
+  tag: string;
+}
+export function IPassthruTagTerminalMetaTerminalMetaInitializer(): IPassthruTagTerminalMeta {
+  return {
+    tag: ""
   };
 }
 export interface IImageTerminalMeta {
@@ -567,6 +647,7 @@ export function IPhoneNumberTerminalMetaInitializer(): IPhoneNumberTerminalMeta 
       undefined, // accept default content
       undefined, // accept default altpro
       undefined, // accept default altreg
+      undefined, // accept default cues
       false, // not recitable
       false, // not audible
       undefined, // accept default linkable
@@ -579,6 +660,7 @@ export function IPhoneNumberTerminalMetaInitializer(): IPhoneNumberTerminalMeta 
       undefined, // accept default content
       undefined, // accept default altpro
       undefined, // accept default altreg
+      undefined, // accept default cues
       false, // not recitable
       false, // not audible
       undefined, // accept default linkable
@@ -590,6 +672,7 @@ export function IPhoneNumberTerminalMetaInitializer(): IPhoneNumberTerminalMeta 
       undefined, // accept default content
       undefined, // accept default altpro
       undefined, // accept default altreg
+      undefined, // accept default cues
       false, // not recitable
       false, // not audible
       undefined, // accept default linkable
@@ -602,6 +685,7 @@ export function IPhoneNumberTerminalMetaInitializer(): IPhoneNumberTerminalMeta 
       undefined, // accept default content
       undefined, // accept default altpro
       undefined, // accept default altreg
+      undefined, // accept default cues
       false, // not recitable
       false, // not audible
       undefined, // accept default linkable
@@ -620,6 +704,7 @@ export function IPunctuationTerminalMetaInitializer(
     content,
     undefined, // accept default altpro
     undefined, // accept default altreg
+    undefined, // accept default cues
     false, // not recitable
     false, // not audible
     undefined, // accept default linkable
@@ -645,6 +730,7 @@ export function IWhitespaceTerminalMetaInitializer(
     content,
     undefined, // accept default altpro
     undefined, // accept default altreg
+    undefined, // accept default cues
     false, // not recitable
     false, // not audible
     undefined, // accept default linkable
@@ -772,11 +858,99 @@ export function ILinkListItemInitializer(
   label: string = "",
   destination: ILinkDestination = {
     page: "",
-    directory: "",
     sectionIdx: IDX_INITIALIZER,
+    directory: "",
     terminalIdx: IDX_INITIALIZER
   },
   valid = false
 ): ILinkListItem {
   return { label, destination, valid };
 }
+// export interface IFillinItem {
+//   content: string; // for display in response list
+//   referenceCount: number;
+// }
+export interface IFillinResponseItem {
+  content: string; // for display in response list
+  insertOrder: number;
+  referenceCount: number;
+}
+export function IFillinResponseItemInitializer(
+  content: string,
+  insertOrder: number,
+  referenceCount: number
+): IFillinResponseItem {
+  return {
+    content: content,
+    insertOrder: insertOrder,
+    referenceCount: referenceCount
+  };
+}
+export type IFillinResponses = IFillinResponseItem[];
+export function IFillinResponsesInitializer(): IFillinResponses {
+  return [];
+}
+export interface IFillinPromptItem {
+  // list of all terminalInfos in prompt
+  visible: boolean;
+  responseIdx: number; // index into section response context
+}
+export interface ISectionFillinItem {
+  idx: number;
+  format: SectionFillinFormatType;
+  allowUserFormatting: boolean;
+  groupDuplicates: boolean;
+  sortOrder: boolean; // sort alphabetically
+  gridColumns: number;
+  allowReset: boolean;
+  showReferenceCount: boolean;
+  responses: IFillinResponseItem[]; // readonly
+  //  prompts: IFillinPromptItem[]; // list of all terminalInfos in prompt
+  loaded: boolean;
+  modified: boolean; // supports reset
+}
+export function ISectionFillinItemInitializer(
+  idx: number = IDX_INITIALIZER,
+  format: SectionFillinFormatType = SectionFillinFormatType.grid,
+  allowUserFormatting: boolean = true,
+  groupDuplicates: boolean = true,
+  sortOrder: boolean = true, // sort alphabetically
+  gridColumns: number = 0,
+  allowReset: boolean = true,
+  showReferenceCount: boolean = false,
+  responses: IFillinResponseItem[] = [],
+  //  prompts: IFillinPromptItem[] = [],
+  loaded: boolean = false,
+  modified: boolean = false
+): ISectionFillinItem {
+  return {
+    idx,
+    format,
+    allowUserFormatting,
+    groupDuplicates,
+    sortOrder,
+    gridColumns,
+    allowReset,
+    showReferenceCount,
+    responses,
+    //    prompts,
+    loaded,
+    modified
+  };
+}
+// export interface ISectionFillinList {
+//   groupDuplicates: boolean;
+//   sortOrder: boolean; // sort alphabetically
+//   fillinList: IFillinItem[];
+// }
+// export function ISectionFillinListInitializer(
+//   groupDuplicates: boolean = true,
+//   sortOrder: boolean = true, // sort alphabetically
+//   fillinList: IFillinItem[] = []
+// ): ISectionFillinList {
+//   return {
+//     groupDuplicates,
+//     sortOrder,
+//     fillinList
+//   };
+// }
