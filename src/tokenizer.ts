@@ -357,7 +357,7 @@ const MarkdownTokenDictionary: MarkdownTokenDictionaryType = {
   [MarkdownIndexType.CUELIST]: {
     type: MarkdownTokenType.CUELIST,
     label: MarkupLabelType.CUELIST,
-    pattern: /(?<=\w)=\(((\w+|\s|,)*)\)(?=$|\s|<\/|\*|_]|[\.,!"\?])/g
+    pattern: /(?<=\w)=\(((\w+|\s|,|POS:|DEF:)*)\)(?=$|\s|<\/|\*|_]|[\.,!"\?])/g
     // pattern: /(?<=\s|^|[\.,!'"])\[_((\w|[\s"'\/\-\(\)\@\.,\:;\$\<\>%!])+)_\](?=$|\s|[\.,!"\?])/g
     //    markdown: MarkdownLabelType.FILLIN_OPEN
   },
