@@ -516,8 +516,13 @@ input[type="radio"]{
 .link-label1 {
   text-decoration: underline dotted;
 }
-.fillin-title {
-  font-weight:bold;
+.fillin-prompts-label {
+  font-style:italic;
+}
+.fillin-responses-label {
+  font-style:italic;
+}
+.fillin-responses-item {
 }
 .fillin-prompts-terminal {
   display: inline-block; /* Be careful of unintended side effects  */
