@@ -21,7 +21,8 @@ import {
   ISectionFillinItem,
   ISectionFillinVariant,
   ISectionFillinItemInitializer,
-  SectionFillinFormatType
+  SectionFillinLayoutType,
+  SectionFillinSortOrder
 } from "./pageContentType";
 import { useContext, useState } from "react";
 import { useAppDispatch, useAppSelector } from "./hooks";
@@ -67,6 +68,17 @@ export const Section_fillin = React.memo((props: ISectionPropsType): any => {
     </SectionFillinContext.Provider>
   );
 });
+const Heading = React.memo((props: ISectionPropsType): any => {
+  console.log(`<Heading />`);
+  let fillin: ISectionFillinVariant = props.section
+    .meta as ISectionFillinVariant;
+  return (
+    <>
+      <div className="fillin-prompts-label">{fillin.promptsLabel}</div>
+      <div className="fillin-responses-label">{fillin.responsesLabel}</div>
+    </>
+  );
+});
 const Responses = React.memo((props: ISectionPropsType): any => {
   console.log(`<Responses />`);
   // Strictly manages the modfiable raw (unformatted) response copied
@@ -110,16 +122,7 @@ const Responses = React.memo((props: ISectionPropsType): any => {
   );
   const sectionFillin: ISectionFillinItem = sectionContext.sectionFillin;
   const sectionFillinIdx: number = sectionFillin.idx;
-  const responseFormat: string = sectionFillin.format;
-  const groupDups: string = sectionFillin.groupDuplicates
-    ? "group duplicates"
-    : "";
-  const sorted: string = sectionFillin.sortOrder ? "sorted" : "";
-  if (sectionFillin.loaded) {
-    console.log(
-      `Section_fillin>: fillin title:${fillin.title}, loaded: ${sectionContext.sectionFillin.loaded} content: ${sectionContext.sectionFillin.responses[0].content}`
-    );
-  }
+
   useEffect(() => {
     console.log(`<Responses /> useEffect(showTerminalIdx=${showTerminalIdx})`);
     // decrements reference count when fillin_showTerminalidx state changes
@@ -167,16 +170,13 @@ const Responses = React.memo((props: ISectionPropsType): any => {
     sectionContext.sectionFillin.loaded &&
     sectionFillinIdx >= 0 &&
     sectionFillinIdx < pageLists.fillinList.length &&
-    pageLists !== null
+    pageLists !== null &&
+    sectionContext.sectionFillin.layout !== SectionFillinLayoutType.none
   ) {
-    let columnCount: string = sectionContext.sectionFillin.gridColumns.toString();
-
-    let attributeString: string = `responses attributes: ${responseFormat} ${groupDups} ${sorted}`;
     return (
       <>
         <div className="fillin"></div>
-        <div className="fillin-title">{fillin.title}</div>
-        <div className="fillin-responses-attributes">{attributeString}</div>
+        <div className="fillin-responses-label">{fillin.responsesLabel}</div>
         <div className="fillin-responses-grid-container">
           <ResponseItems responses={responses} />
           <div className="fillin-responses-grid-controls">
@@ -200,15 +200,9 @@ interface IResponseItemsPropsType {
 const ResponseItems = (props: IResponseItemsPropsType): any => {
   console.log(`<ResponseItems />`);
   const sectionContext = useContext(SectionFillinContext);
-  // let sectionFillinIdx: number = sectionContext.sectionFillin.idx;
-  // let format: string = sectionContext.sectionFillin.format;
-  // let groupDups: string = sectionContext.sectionFillin.groupDuplicates
-  //   ? "group duplicates"
-  //   : "";
-  // let sorted: string = sectionContext.sectionFillin.sortOrder ? "sorted" : "";
   let responses: IFillinResponseItem[] = cloneDeep(props.responses);
   let uniqueResponses: IFillinResponseItem[] = [];
-  if (sectionContext.sectionFillin.groupDuplicates) {
+  if (sectionContext.sectionFillin.unique) {
     responses.filter(item => {
       let duplicateIdx = uniqueResponses.findIndex(
         response => response.content === item.content
@@ -218,7 +212,7 @@ const ResponseItems = (props: IResponseItemsPropsType): any => {
         uniqueResponses.push(
           IFillinResponseItemInitializer(
             item.content,
-            item.insertOrder,
+            item.category,
             item.referenceCount
           )
         );
@@ -227,10 +221,34 @@ const ResponseItems = (props: IResponseItemsPropsType): any => {
       }
     });
   }
-  if (sectionContext.sectionFillin.format === SectionFillinFormatType.grid) {
+  if (
+    sectionContext.sectionFillin.sortOrder ===
+    SectionFillinSortOrder.alphabetical
+  ) {
+    uniqueResponses = uniqueResponses.sort((a, b) =>
+      a.content > b.content ? 1 : -1
+    );
+  } else if (
+    sectionContext.sectionFillin.sortOrder === SectionFillinSortOrder.random
+  ) {
+    const shuffle = (array: IFillinResponseItem[]) => {
+      const newArray: IFillinResponseItem[] = [...array];
+      newArray.reverse().forEach((item, index) => {
+        const j = Math.floor(Math.random() * (index + 1));
+        [newArray[index], newArray[j]] = [newArray[j], newArray[index]];
+      });
+      return newArray;
+    };
+    uniqueResponses = shuffle(uniqueResponses);
+  }
+  if (sectionContext.sectionFillin.layout === SectionFillinLayoutType.grid) {
     return <ResponseItemsGrid responses={uniqueResponses} />;
-  } else {
+  } else if (
+    sectionContext.sectionFillin.layout === SectionFillinLayoutType.list
+  ) {
     return <ResponsesList responses={uniqueResponses} />;
+  } else {
+    return <></>;
   }
 };
 const ResponseItemsGrid = (props: IResponseItemsPropsType): any => {
@@ -256,9 +274,6 @@ const ResponsesList = (props: IResponseItemsPropsType): any => {
   );
 };
 const ResponsesListItems = (props: IResponseItemsPropsType): any => {
-  const sectionContext = useContext(SectionFillinContext);
-  const referenceCount: boolean =
-    sectionContext.sectionFillin.showReferenceCount;
   console.log(`<ResponsesListItems />`);
   return props.responses.map(
     (response: IFillinResponseItem, keyvalue: number) => (
@@ -280,10 +295,6 @@ const ResponsesGridItems = (props: IResponseItemsPropsType): any => {
   console.log(`<ResponsesGridItems />`);
   const sectionContext = useContext(SectionFillinContext);
   let responses: IFillinResponses = props.responses;
-  const visibleReferenceCount: string = sectionContext.sectionFillin
-    .showReferenceCount
-    ? "visible"
-    : "hidden";
   return responses.map((response: IFillinResponseItem, keyvalue: number) => (
     <div
       className={
@@ -307,23 +318,31 @@ const ResponseContent = (props: IResponsePropsType) => {
 };
 const ResponseReferenceCount = (props: IResponsePropsType) => {
   console.log(`<ResponseReferenceCount />`);
-  return <span>({props.response.referenceCount})</span>;
+  const sectionContext = useContext(SectionFillinContext);
+  console.log(`showRefCnt=${sectionContext.sectionFillin.showReferenceCount}`);
+  if (
+    !sectionContext.sectionFillin.showReferenceCount ||
+    props.response.referenceCount <= 1
+  ) {
+    return <span></span>;
+  } else {
+    return <span>({props.response.referenceCount})</span>;
+  }
 };
 const Prompts = React.memo((props: ISectionPropsType): any => {
   console.log(`<Prompts />`);
-  let dispatch = useAppDispatch();
+  // let dispatch = useAppDispatch();
   let fillin: ISectionFillinVariant = props.section
     .meta as ISectionFillinVariant;
-  const pageLists: CPageLists = useContext(PageContext)!;
-  let sectionContext = useContext(SectionFillinContext);
-  let sectionFillinIdx: number = fillin.sectionFillinIdx;
-  if (fillin.gridColumns > 0) {
-  }
   let prompts = fillin.prompts;
-  let className: string = "fillin-prompts";
+  let className: string = "fillin-prompts-item";
   return (
     <>
-      <div className={className}>
+      <div className="fillin-prompts-label">{fillin.promptsLabel}</div>
+      <div
+        className="fillin-prompts-item"
+        style={{ columns: `${fillin.promptColumns}` }}
+      >
         {prompts.map((prompt, keyvalue: number) => (
           <SectionDispatcher
             key={keyvalue}
