@@ -241,44 +241,54 @@ export function ISectionParagraphVariantInitializer(): ISectionParagraphVariant 
     style: "" // overrides css but not user profile
   };
 }
-export enum SectionFillinFormatType {
+export enum SectionFillinLayoutType {
   list = "list",
-  grid = "grid"
+  grid = "grid",
+  none = "none"
+}
+export enum SectionFillinSortOrder {
+  insert = "insert",
+  alphabetical = "alphabetical",
+  random = "random"
 }
 export interface ISectionFillinVariant {
   sectionFillinIdx: number; // reference state structure in pageList.fillinList
-  title: string; // title of entire fillin section
-  label: string; // label for response list/grid
-  format: SectionFillinFormatType; // list, grid
-  allowUserFormatting: boolean;
+  promptsLabel: string;
+  responsesLabel: string;
+  layout: SectionFillinLayoutType; // list, grid, random
   gridColumns: number; // 0 means no response table
-  groupDuplicates: boolean; // identical words groouped as single response entry
-  showCategoryHint: boolean; // shows (noun) beside hidden word
-  includeCategory: boolean; // shows (noun) in response list/grid
-  sortOrder: boolean; // sort alphabetically
-  allowReset: boolean; // reset button
+  sortOrder: SectionFillinSortOrder;
+  unique: boolean; // identical words groouped as single response entry
   showReferenceCount: boolean;
+  groupByCategory: boolean; // group in response  (e.g., noun)
+  allowReset: boolean; // reset button
+  showResponseHints: boolean; // shows (noun) beside hidden word
+  showPromptHints: boolean; // shows (noun) beside hidden word
+  allowUserFormatting: boolean;
+  promptColumns: number;
   prompts: ISectionContent[];
 }
 export function ISectionFillinVariantInitializer(
   sectionFillinIdx: number = IDX_INITIALIZER,
-  title: string = "",
-  label = "Responses:",
-  format = SectionFillinFormatType.list
+  promptsLabel: string = "",
+  responsesLabel: string = "",
+  layout = SectionFillinLayoutType.grid
 ): ISectionFillinVariant {
   return {
     sectionFillinIdx: sectionFillinIdx,
-    title: title,
-    label: label,
-    format: format,
-    allowUserFormatting: false,
+    promptsLabel: promptsLabel,
+    responsesLabel: responsesLabel,
+    layout: layout,
     gridColumns: 0,
-    groupDuplicates: true,
-    showCategoryHint: false,
-    includeCategory: false,
-    sortOrder: true,
+    sortOrder: SectionFillinSortOrder.insert,
+    allowUserFormatting: true,
+    unique: true,
+    showResponseHints: false,
+    showPromptHints: false,
+    groupByCategory: false,
+    showReferenceCount: true,
     allowReset: false,
-    showReferenceCount: false,
+    promptColumns: 1,
     prompts: []
   };
 }
@@ -351,6 +361,18 @@ export enum TerminalMetaEnumType {
   word,
   year
 }
+enum ParOfSpeechEnumType {
+  "noun",
+  "verb",
+  "pronoun",
+  "preposition",
+  "adverb",
+  "advective",
+  "interjection",
+  "article",
+  "conjunction",
+  "numeral"
+}
 export interface ITerminalContent {
   id: number;
   termIdx: number;
@@ -358,6 +380,7 @@ export interface ITerminalContent {
   lastTermIdx: number;
   content: string; // not necessary
   cueList: string;
+  // partOfSpeech:
   type: TerminalMetaEnumType;
   meta: TerminalMetaType;
 }
@@ -445,7 +468,7 @@ export function ITerminalInfoInitializer(
     visited: visited,
     linkIdx: linkIdx,
     hintsIdx: hintsIdx,
-    fillin: fillin,
+    fillin: fillin, // sectionFillin specific
     bold: bold,
     italics: italics,
     markupTag: markupTag
@@ -568,7 +591,7 @@ export function IFillinTerminalMetaInitializer(
   return {
     terminals,
     sectionFillinIdx
-    //    responseIdx
+    // responseIdx
   };
 }
 export interface IPassthruTagTerminalMeta {
@@ -858,8 +881,8 @@ export function ILinkListItemInitializer(
   label: string = "",
   destination: ILinkDestination = {
     page: "",
-    sectionIdx: IDX_INITIALIZER,
     directory: "",
+    sectionIdx: IDX_INITIALIZER,
     terminalIdx: IDX_INITIALIZER
   },
   valid = false
@@ -872,17 +895,17 @@ export function ILinkListItemInitializer(
 // }
 export interface IFillinResponseItem {
   content: string; // for display in response list
-  insertOrder: number;
+  category: string;
   referenceCount: number;
 }
 export function IFillinResponseItemInitializer(
   content: string,
-  insertOrder: number,
+  category: string,
   referenceCount: number
 ): IFillinResponseItem {
   return {
     content: content,
-    insertOrder: insertOrder,
+    category: category,
     referenceCount: referenceCount
   };
 }
@@ -891,33 +914,37 @@ export function IFillinResponsesInitializer(): IFillinResponses {
   return [];
 }
 export interface IFillinPromptItem {
-  // list of all terminalInfos in prompt
   visible: boolean;
   responseIdx: number; // index into section response context
 }
 export interface ISectionFillinItem {
   idx: number;
-  format: SectionFillinFormatType;
-  allowUserFormatting: boolean;
-  groupDuplicates: boolean;
-  sortOrder: boolean; // sort alphabetically
+  layout: SectionFillinLayoutType;
   gridColumns: number;
-  allowReset: boolean;
+  sortOrder: SectionFillinSortOrder; // sort alphabetically
+  unique: boolean;
   showReferenceCount: boolean;
-  responses: IFillinResponseItem[]; // readonly
-  //  prompts: IFillinPromptItem[]; // list of all terminalInfos in prompt
+  groupByCategory: boolean;
+  allowReset: boolean; // reset button
+  showHints: boolean;
+  allowUserFormatting: boolean;
+  promptColumns: number;
+  responses: IFillinResponseItem[]; // index into section response context
   loaded: boolean;
   modified: boolean; // supports reset
 }
 export function ISectionFillinItemInitializer(
   idx: number = IDX_INITIALIZER,
-  format: SectionFillinFormatType = SectionFillinFormatType.grid,
-  allowUserFormatting: boolean = true,
-  groupDuplicates: boolean = true,
-  sortOrder: boolean = true, // sort alphabetically
-  gridColumns: number = 0,
-  allowReset: boolean = true,
+  layout: SectionFillinLayoutType = SectionFillinLayoutType.grid,
+  gridColumns: number = 3,
+  sortOrder: SectionFillinSortOrder = SectionFillinSortOrder.insert,
+  unique: boolean = true,
   showReferenceCount: boolean = false,
+  groupByCategory: boolean = false,
+  allowReset: boolean = true, // reset button
+  showHints: boolean = false,
+  allowUserFormatting: boolean = true,
+  promptColumns: number = 1,
   responses: IFillinResponseItem[] = [],
   //  prompts: IFillinPromptItem[] = [],
   loaded: boolean = false,
@@ -925,15 +952,17 @@ export function ISectionFillinItemInitializer(
 ): ISectionFillinItem {
   return {
     idx,
-    format,
-    allowUserFormatting,
-    groupDuplicates,
-    sortOrder,
+    layout,
     gridColumns,
-    allowReset,
+    sortOrder,
+    unique,
     showReferenceCount,
+    groupByCategory,
+    allowReset,
+    showHints,
+    allowUserFormatting,
+    promptColumns,
     responses,
-    //    prompts,
     loaded,
     modified
   };
@@ -954,3 +983,13 @@ export function ISectionFillinItemInitializer(
 //     fillinList
 //   };
 // }
+export const sortOrderToLabel = (sortOrder: SectionFillinSortOrder): string => {
+  switch (sortOrder) {
+    case SectionFillinSortOrder.alphabetical:
+      return "alphabetical order";
+    case SectionFillinSortOrder.random:
+      return "random order";
+    default:
+      return "insert order (default)";
+  }
+};
