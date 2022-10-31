@@ -17,7 +17,8 @@ import {
   ILinkListItem,
   ISentenceListItem,
   ISectionListItem,
-  ITerminalListItem
+  ITerminalListItem,
+  ISectionFillinItem
 } from "./pageContentType";
 
 // export interface IPageContext1 {
@@ -36,20 +37,23 @@ export interface IPageLists {
   sectionList: ISectionListItem[];
   sentenceList: ISentenceListItem[];
   linkList: ILinkListItem[];
+  fillinList: ISectionFillinItem[];
 }
 export function PageListsInitializer(
   terminalList: ITerminalListItem[] = [],
   headingList: IHeadingListItem[] = [],
   sectionList: ISectionListItem[] = [],
   sentenceList: ISentenceListItem[] = [],
-  linkList: ILinkListItem[] = []
+  linkList: ILinkListItem[] = [],
+  fillinList: ISectionFillinItem[] = []
 ): IPageLists {
   return {
     terminalList: terminalList,
     headingList: headingList,
     sectionList: sectionList,
     sentenceList: sentenceList,
-    linkList: linkList
+    linkList: linkList,
+    fillinList: fillinList
   };
 }
 // export const PageContext = React.createContext(null as IPageContext | null);
@@ -75,19 +79,22 @@ export class CPageLists {
     headingList: IHeadingListItem[] = [],
     sectionList: ISectionListItem[] = [],
     sentenceList: ISentenceListItem[] = [],
-    linkList: ILinkListItem[] = []
+    linkList: ILinkListItem[] = [],
+    fillinList: ISectionFillinItem[] = []
   ) {
     this.terminalList = terminalList;
     this.headingList = headingList;
     this.sectionList = sectionList;
     this.sentenceList = sentenceList;
     this.linkList = linkList;
+    this.fillinList = fillinList;
   }
   terminalList: ITerminalListItem[];
   headingList: IHeadingListItem[];
   sectionList: ISectionListItem[];
   sentenceList: ISentenceListItem[];
   linkList: ILinkListItem[];
+  fillinList: ISectionFillinItem[];
 
   get firstTerminalIdx(): number {
     return 0;
