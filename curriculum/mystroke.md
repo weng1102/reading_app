@@ -1,4 +1,4 @@
-[[page: My Stroke Story, Ronlyn, Wen, 1/1/2022, Personal, The story of my life before and after stroke /]]
+[[page: My Stroke Story, Ronlyn, Wen, 6/26/2022, Personal, The story of my life before and after stroke /]]
 # Who Am I
 [[image-entry: Who Am I, left, 20%]]
 ![Who Am I](rmg.png) 
@@ -38,15 +38,15 @@
 ![David and Robert](DavidRobert2004.jpg)
 * We have two children, David and Robert.
 * David is 27 years old. 
-* Robert is 25 years old.
+* Robert is 26 years old.
 [[/image-entry]]
 [[image-entry: personal, left, 20%]]
 ![David graduation](david grad-IMG_2918.jpg)
-* David went to Stanford. He earned bachelor and master degrees in computer science. Then, he founded a technology company called Bunker Hill Health in Palo Alto.
+* David went to Stanford. He earned bachelor and master degrees in computer science. He taught at Stanford. Then, he founded a technology company called Bunker Hill Health in Palo Alto.
 [[/image-entry]]
 [[image-entry: personal, left, 20%]]
 ![Robert caltech Graduation](caltech grad-IMG_4130b.jpg),
-* Robert went to Caltech. He majored in computer science and history. He works for a machine learning startup in San Francisco.
+* Robert went to Caltech. He majored in computer science and history. He worked for a machine learning startup in San Francisco. He is starting his own company soon.
 [[/image-entry]]
 # What happened to me
 [[image-entry: I had a stroke, left, 20%]]
@@ -63,36 +63,45 @@
 # What is my occupation now
 [[image-entry: SPARC, left, 20%]]
 ![SPARC logo](sparc.png)
-I attend SPARC at San Jose State twice a week. 
-* On Wednesdays, we discuss news as a group. 
-* On Fridays, we have group discussions and choir.
+I have attended SPARC at San Jose State University in San Jose, California.
 [[/image-entry]]
 [[image-entry: ATP, left, 20%]]
 ![ATP](csueb-logo.jpg)
-I also attend ATP at Cal State East Bay. 
-* On Mondays, We discuss National Parks like Yosemite and cooking. 
-* On Wednesdays, I sing. Tuesdays and Thursdays, we exercise together. On Fridays, I sing in the choir. 
+I have also attended ATP at Cal State East Bay in Hayward, California.
 [[/image-entry]]
 [[image-entry: ARC, left, 20%]]
 ![ARC logo](arc.png)
-I attend Aphasia Recovery Connection and Lingraphica coffee talk, travel, I Love the Beatles and Aphasia Running Club.
+I have attended Aphasia Recovery Connection and Lingraphica.
 [[/image-entry]]
 [[image-entry: Brooklyn College, left, 20%]]
 ![Brooklyn College logo](Brooklyn_College_logo.png)
-I attend speech therapy at Brooklyn College. Mondays are individual sessions. Wednesdays, we sing.
+I have attended speech therapy at Brooklyn College in New York.
 [[/image-entry]]
 [[image-entry: srp, left, 20%]]
 ![Speech recovery pathways logo](srp.jpg)
-In Speech Recovery Pathways, we have a group discussion called "Let's Talk." We also read the book Water for Elephants. 
+I have attended Speech Recovery Pathways in Southern California virtually. 
 [[/image-entry]]
 [[image-entry: voha, left, 20%]]
 ![voices of hope for aphasia](voha-logo.jpg)
-I attend Voices of Hope for Aphasia. We partipated in book club, art, writing, chat and exercise groups.
+I attended Voices of Hope for Aphasia in St. Petersburg, Florida virtually. 
 [[/image-entry]]
 [[image-entry: nova, left, 20%]]
 ![nova southeastern logo](NSUFlorida-logo.jpg)
-I attend Nova Southeastern and discuss stories with others.
+I have attended Nova Southeastern in Fort Lauderdale, Florida virtually.
 [[/image-entry]]
+[[image-entry: The Aphasia Network, left, 10%]]
+![The Aphasia Network](TheAphasiaNetwork.jpg)
+I have attended The Aphasia Network in Portland, Oregon virtually.
+[[/image-entry]]
+[[image-entry: Buzzworthy, left, 20%]]
+![Buzzworthy](buzzworthy1.png)
+I have attended Buzzworthy from The Aphasia Network virtually.
+[[/image-entry]]
+[[image-entry: Paul Posillo, left, 20%]]
+![Paul Posillo](paulposillo.png)
+I have worked with Paul Posillo from Rhode Island virtually.
+[[/image-entry]]
+I have attended Thursday Education and Training based in Boston, Massachusetts.
 # What else about me
 [[image-entry: Walking, left, 20%]]
 ![walking in the park](walkypoo1.jpg)
@@ -105,37 +114,35 @@ I attend Nova Southeastern and discuss stories with others.
 [[/image-entry]]
 [[image-entry: hobbies, left, 20%]]
 ![reading](audible.jpg)
-I read (listen to) books using audible. 
+I read (by listening to) books using audible. 
 * Where the Crawdads Sing
 * The Nightingale
-* Water for Elephants.
+* Water for Elephants
+* A Man Called Ove
+* The Hunting Party
+* Becoming.
 [[/image-entry]]
 [[image-entry: painting, left, 20%]]
-![vegetables](veggies2.jpg)
-* I enjoy painting in watercolors. 
-* I started with plants.
+![bike bouquet](bikebouquet.jpg)
+* I enjoy painting in watercolors and acrylics. 
+* I started with plants and flowers.
 [[/image-entry]]
 [[image-entry: baking, left, 20%]]
 ![reading](ronlynDesserts.jpg)
 * I bake desserts.
 [[/image-entry]]
 [[image-entry: hobbies, left, 20%]]
-![gardening](gardening1.jpg)
+![gardening](mygarden.jpg)
 * I am gardening.
-* I like growing plants from seeds.
+* I like growing plants from seedllngs.
+* My favorite vegetables and fruit to grow are tomatoes, strawberries and eggplants.
 [[/image-entry]]
 [[image-entry: hobbies, left, 20%]]
 ![Golden State Warriors](gsw.jpg)
-* I like the Golden State Warriors, especially Steph Curry.
-[[/image-entry]]
-[[image-entry: hobbies, left, 20%]]
-![San Francisco 49ers](49ers.jpg)
-* I like the San Francisco 49ers.
-* I especially like Bosa, Kittle and Samuel.
+* I like the Golden State Warriors, especially Steph Curry. They are champions.
 [[/image-entry]]
 [[image-entry: travel, left, 20%]]
 ![travel](SD-IMG_20200112_134533.jpg), ![travel](HI-IMG_20200224_093655.jpg), ![travel](PXL_20210729_201926517.jpg)
 * Since my stroke, I travelled to Hawaii and up and down the west coast. I have been to Seattle, Portland, Eugene, San Francisco, Santa Barbara, Los Angeles, and San Diego. 
 [[/image-entry]]
-I have a weekly chat with Sherry, Theresa, Janet, Doreen, Cindy and Angie.
 I am trying my hardest to get better!!!

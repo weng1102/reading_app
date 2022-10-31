@@ -1,0 +1,1 @@
+Man=(noun, male person) [_walking=(noun, to amble)_] 
