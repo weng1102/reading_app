@@ -23,7 +23,9 @@ import {
   ISentenceListItem,
   ISectionListItem,
   ITerminalListItem,
-  ILinkListItem
+  ILinkListItem,
+  ISectionFillinItem,
+  ISectionFillinItemInitializer
 } from "./pageContentType";
 export const TREEVIEW_PREFIX = "+-";
 export const IDX_INITIALIZER = -9999;
@@ -92,12 +94,14 @@ class TerminalArray extends Array<ITerminalListItem> {
           PronunciationDictionary[terminal.content] !== undefined
             ? PronunciationDictionary[terminal.content]
             : "";
+      // if (terminal.responseIdx !== IDX_INITIALIZER)
+      //   this.responseIdx =
     });
     return this.length;
   }
   serialize(): string {
     let outputStr: string =
-      "[idx ]:  term ARLVF  next prev sent sect  link content\n";
+      "[idx ]:  term ARLV  next prev sent  sect link   fillins content\n";
     for (const [i, element] of this.entries()) {
       outputStr = `${outputStr}[${i
         .toString()
@@ -115,9 +119,6 @@ class TerminalArray extends Array<ITerminalListItem> {
         .toUpperCase()}${element.visible
         .toString()
         .substring(0, 1)
-        .toUpperCase()}${element.fillin
-        .toString()
-        .substring(0, 1)
         .toUpperCase()} ${
         element.nextTermIdx.length === 0
           ? "na".padStart(5)
@@ -128,12 +129,92 @@ class TerminalArray extends Array<ITerminalListItem> {
           : element.prevTermIdx[0].toString().padStart(5)
       }${element.sentenceIdx
         .toString()
-        .padStart(4)}  ${element.sectionIdx
+        .padStart(5)} ${element.sectionIdx
         .toString()
-        .padStart(4)} ${(element.linkIdx < 0
-        ? "na"
+        .padStart(5)} ${(element.linkIdx < 0
+        ? "na".padStart(4)
         : element.linkIdx.toString()
-      ).padStart(5)} ${element.content}\n`;
+      ).padStart(4)} ${(element.fillin.sectionIdx < 0
+        ? "na".padStart(4)
+        : element.fillin.sectionIdx.toString()
+      ).padStart(4)} ${(element.fillin.responseIdx < 0
+        ? "na".padStart(4)
+        : element.fillin.responseIdx.toString()
+      ).padStart(4)} ${element.content}\n`;
+    }
+    return outputStr;
+  }
+}
+class FillinArray extends Array<ISectionFillinItem> {
+  constructor(...args: any) {
+    super(...args);
+  }
+  parse(): number {
+    // if sortOrder, then sort by .content
+    // let el: ISectionFillinList;
+    // this.sort();
+    // this.length = 0;
+    // for (el of unsorted.sort()) {
+    //   this.push(el);
+    // }
+    return this.length;
+  }
+  push(sectionList: ISectionFillinItem): number {
+    // needs to store the nearest termIdx so that parse can later find
+    // the actual visible, recitable terminal in parse
+    let length = super.push(sectionList);
+    this[length - 1].idx = length - 1;
+    return length;
+  }
+  addResponse(item: string): [number, number] {
+    let fillinListIdx: number;
+    let fillinIdx: number;
+    if (this.length === 0) this.push(ISectionFillinItemInitializer());
+    fillinListIdx = this.length - 1;
+    // // this is not perfect if responses are themselves duplicates e.g.,
+    // // single (repeating digits or letters. i.e., acronymms
+    // let duplicateIdx = this[fillinListIdx].responses.findIndex(
+    //   element => element.content === item
+    // );
+    // if (this[fillinListIdx].groupDuplicates && duplicateIdx >= 0) {
+    //   this[fillinListIdx].responses[duplicateIdx].referenceCount++;
+    //   fillinIdx = duplicateIdx;
+    // } else {
+    fillinIdx =
+      this[fillinListIdx].responses.push({
+        content: item,
+        insertOrder: -1,
+        referenceCount: 1
+      }) - 1;
+    this[fillinListIdx].responses[fillinIdx].insertOrder = fillinIdx;
+    // }
+    return [fillinListIdx, fillinIdx];
+  }
+  serialize(): string {
+    let outputStr: string = `[idx ]: ${"".padEnd(17)} refCount order\n`;
+    for (const [i, element] of this.entries()) {
+      outputStr = `${outputStr}[${i
+        .toString()
+        .padStart(4, "0")}]: idx: ${element.idx.toString()}, ${
+        element.groupDuplicates ? "group duplicates," : ""
+      }attributes: ${element.allowUserFormatting ? "allow formatting," : ""}${
+        element.groupDuplicates ? "group duplicates," : ""
+      }${element.sortOrder ? "sorted," : ""}${
+        element.allowReset ? "allow user reset," : ""
+      }gridColumns=${element.gridColumns}${
+        element.showReferenceCount ? "show ReferenceCount," : ""
+      }\n`;
+      for (const [j, response] of element.responses
+        //        .sort((a, b) => (a.content > b.content ? 1 : -1))
+        .entries()) {
+        outputStr = `${outputStr}+-[${j
+          .toString()
+          .padStart(2, "0")}]: ${response.content.padEnd(
+          25
+        )}${response.referenceCount.toString()} ${response.insertOrder
+          .toString()
+          .padStart(2, "0")}\n`;
+      }
     }
     return outputStr;
   }
@@ -296,6 +377,7 @@ export class UserContext {
   sections: SectionArray;
   sentences: SentenceArray;
   links: LinkArray;
+  fillins: FillinArray;
   // need authentication infoblock at some point
   constructor(name: string) {
     //    this._parent = parent;
@@ -305,6 +387,7 @@ export class UserContext {
     this.sections = new SectionArray();
     this.sentences = new SentenceArray();
     this.links = new LinkArray();
+    this.fillins = new FillinArray();
     ////    this._pages = new Array();
   }
   // protected terminalIdx: number = 0;
@@ -480,3 +563,6 @@ export abstract class ParseNode extends BaseClass implements IParseNode {
     return this.userContext.terminals.length;
   }
 }
+// const compareString = (a: string, b: string): number => {
+//   return a > b ? 1 : -1;
+// };

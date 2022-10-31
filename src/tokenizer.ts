@@ -492,10 +492,8 @@ export class Tokenizer {
     let result: string = sentence;
     /// this.logger.diagnosticMode = true;
     try {
-      console.log(`source sentence: ${sentence}`);
       result = this.insertMarkupTags(sentence);
       result = this.replaceMarkdownTags(result);
-      console.log(`marked up sentence: ${result}`);
     } catch (e) {
       if (IsError(e)) {
         this.logger.error(

@@ -1,0 +1,2080 @@
+diff --git a/src/baseClasses.ts b/src/baseClasses.ts
+index c272f95..28465c2 100644
+--- a/src/baseClasses.ts
++++ b/src/baseClasses.ts
+@@ -23,7 +23,9 @@ import {
+   ISentenceListItem,
+   ISectionListItem,
+   ITerminalListItem,
+-  ILinkListItem
++  ILinkListItem,
++  ISectionFillinItem,
++  ISectionFillinItemInitializer
+ } from "./pageContentType";
+ export const TREEVIEW_PREFIX = "+-";
+ export const IDX_INITIALIZER = -9999;
+@@ -92,12 +94,14 @@ class TerminalArray extends Array<ITerminalListItem> {
+           PronunciationDictionary[terminal.content] !== undefined
+             ? PronunciationDictionary[terminal.content]
+             : "";
++      // if (terminal.responseIdx !== IDX_INITIALIZER)
++      //   this.responseIdx =
+     });
+     return this.length;
+   }
+   serialize(): string {
+     let outputStr: string =
+-      "[idx ]:  term ARLVF  next prev sent sect  link content\n";
++      "[idx ]:  term ARLV  next prev sent  sect link   fillins content\n";
+     for (const [i, element] of this.entries()) {
+       outputStr = `${outputStr}[${i
+         .toString()
+@@ -115,9 +119,6 @@ class TerminalArray extends Array<ITerminalListItem> {
+         .toUpperCase()}${element.visible
+         .toString()
+         .substring(0, 1)
+-        .toUpperCase()}${element.fillin
+-        .toString()
+-        .substring(0, 1)
+         .toUpperCase()} ${
+         element.nextTermIdx.length === 0
+           ? "na".padStart(5)
+@@ -128,12 +129,92 @@ class TerminalArray extends Array<ITerminalListItem> {
+           : element.prevTermIdx[0].toString().padStart(5)
+       }${element.sentenceIdx
+         .toString()
+-        .padStart(4)}  ${element.sectionIdx
++        .padStart(5)} ${element.sectionIdx
+         .toString()
+-        .padStart(4)} ${(element.linkIdx < 0
+-        ? "na"
++        .padStart(5)} ${(element.linkIdx < 0
++        ? "na".padStart(4)
+         : element.linkIdx.toString()
+-      ).padStart(5)} ${element.content}\n`;
++      ).padStart(4)} ${(element.fillin.sectionIdx < 0
++        ? "na".padStart(4)
++        : element.fillin.sectionIdx.toString()
++      ).padStart(4)} ${(element.fillin.responseIdx < 0
++        ? "na".padStart(4)
++        : element.fillin.responseIdx.toString()
++      ).padStart(4)} ${element.content}\n`;
++    }
++    return outputStr;
++  }
++}
++class FillinArray extends Array<ISectionFillinItem> {
++  constructor(...args: any) {
++    super(...args);
++  }
++  parse(): number {
++    // if sortOrder, then sort by .content
++    // let el: ISectionFillinList;
++    // this.sort();
++    // this.length = 0;
++    // for (el of unsorted.sort()) {
++    //   this.push(el);
++    // }
++    return this.length;
++  }
++  push(sectionList: ISectionFillinItem): number {
++    // needs to store the nearest termIdx so that parse can later find
++    // the actual visible, recitable terminal in parse
++    let length = super.push(sectionList);
++    this[length - 1].idx = length - 1;
++    return length;
++  }
++  addResponse(item: string): [number, number] {
++    let fillinListIdx: number;
++    let fillinIdx: number;
++    if (this.length === 0) this.push(ISectionFillinItemInitializer());
++    fillinListIdx = this.length - 1;
++    // // this is not perfect if responses are themselves duplicates e.g.,
++    // // single (repeating digits or letters. i.e., acronymms
++    // let duplicateIdx = this[fillinListIdx].responses.findIndex(
++    //   element => element.content === item
++    // );
++    // if (this[fillinListIdx].groupDuplicates && duplicateIdx >= 0) {
++    //   this[fillinListIdx].responses[duplicateIdx].referenceCount++;
++    //   fillinIdx = duplicateIdx;
++    // } else {
++    fillinIdx =
++      this[fillinListIdx].responses.push({
++        content: item,
++        insertOrder: -1,
++        referenceCount: 1
++      }) - 1;
++    this[fillinListIdx].responses[fillinIdx].insertOrder = fillinIdx;
++    // }
++    return [fillinListIdx, fillinIdx];
++  }
++  serialize(): string {
++    let outputStr: string = `[idx ]: ${"".padEnd(17)} refCount order\n`;
++    for (const [i, element] of this.entries()) {
++      outputStr = `${outputStr}[${i
++        .toString()
++        .padStart(4, "0")}]: idx: ${element.idx.toString()}, ${
++        element.groupDuplicates ? "group duplicates," : ""
++      }attributes: ${element.allowUserFormatting ? "allow formatting," : ""}${
++        element.groupDuplicates ? "group duplicates," : ""
++      }${element.sortOrder ? "sorted," : ""}${
++        element.allowReset ? "allow user reset," : ""
++      }gridColumns=${element.gridColumns}${
++        element.showReferenceCount ? "show ReferenceCount," : ""
++      }\n`;
++      for (const [j, response] of element.responses
++        //        .sort((a, b) => (a.content > b.content ? 1 : -1))
++        .entries()) {
++        outputStr = `${outputStr}+-[${j
++          .toString()
++          .padStart(2, "0")}]: ${response.content.padEnd(
++          25
++        )}${response.referenceCount.toString()} ${response.insertOrder
++          .toString()
++          .padStart(2, "0")}\n`;
++      }
+     }
+     return outputStr;
+   }
+@@ -296,6 +377,7 @@ export class UserContext {
+   sections: SectionArray;
+   sentences: SentenceArray;
+   links: LinkArray;
++  fillins: FillinArray;
+   // need authentication infoblock at some point
+   constructor(name: string) {
+     //    this._parent = parent;
+@@ -305,6 +387,7 @@ export class UserContext {
+     this.sections = new SectionArray();
+     this.sentences = new SentenceArray();
+     this.links = new LinkArray();
++    this.fillins = new FillinArray();
+     ////    this._pages = new Array();
+   }
+   // protected terminalIdx: number = 0;
+@@ -480,3 +563,6 @@ export abstract class ParseNode extends BaseClass implements IParseNode {
+     return this.userContext.terminals.length;
+   }
+ }
++// const compareString = (a: string, b: string): number => {
++//   return a > b ? 1 : -1;
++// };
+diff --git a/src/dataadapter.ts b/src/dataadapter.ts
+index 016891c..202baec 100644
+--- a/src/dataadapter.ts
++++ b/src/dataadapter.ts
+@@ -1,4 +1,4 @@
+-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
++/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
+  *
+  * File name: dataadapter.ts
+  *
+@@ -22,14 +22,16 @@ import {
+ //import { Logger } from "./logger";
+ import { IPageContent } from "./PageContentType";
+ // import * as rl from 'readline-sync';
++// MarkdownRecordType generalizes record type actually encountered as
++// MarkdownRecordTagType in the markdown files. E.g., HEADING vs HEADING01
+ export const enum MarkdownRecordType {
+   BLOCKQUOTE = "BLOCKQUOTE",
+   BUTTONGRID = "BUTTONGRID",
+   BUTTONGRID_END = "BUTTONGRID_END",
+   COMMENT = "COMMENT",
+   EMPTY = "EMPTY",
+-  FILLIN = "FILLIN",
+-  FILLIN_END = "FILLIN_END",
++  FILLIN = "FILLIN_SECTION",
++  FILLIN_END = "FILLIN_SECTION_END",
+   HEADING = "HEADING",
+   LISTITEM_END = "LISTITEM_END",
+   LISTITEM_ORDERED = "LISTITEM_ORDERED",
+@@ -94,32 +96,7 @@ export const enum MarkdownRecordType {
+ //   | MarkdownTbdTagType
+ //   | MarkdownEndTagType
+ //   | MarkdownLastTagType;
+-
+-// export const enum MarkdownRecordType {
+-//   PARAGRAPH = "PARAGRAPH",
+-//   PARAGRAPH_END = "PARAGRAPH_END",
+-//   EMPTY = "EMPTY",
+-//   HEADING = "HEADING",
+-//   SECTION_ORDERED = "SECTION_ORDERED",
+-//   SECTION_UNORDERED = "SECTION_UNORDERED",
+-//   SECTION_FILLIN = "SECTION_FILLIN",
+-//   SECTION_PHOTOENTRY = "SECTION_PHOTOENTRY_START",
+-//   SECTION_PHOTOENTRY_END = "SECTION_PHOTOENTRY_END",
+-//   SECTION_END = "SECTION_END",
+-//   LISTITEM_UNORDERED = "LISTITEM_UNORDERED",
+-//   LISTITEM_ORDERED = "LISTITEM_ORDERED",
+-//   COMMENT = "COMMENT",
+-//   BLOCKQUOTE = "BLOCKQUOTE",
+-//   PASSTHRUTAG = "PASSTHRUTAG",
+-//   IMAGEENTRY = "IMAGEENTRY",
+-//   IMAGEENTRY_END = "IMAGEENTRY_END",
+-//   FILLIN = "FILLIN",
+-//   FILLIN_END = "FILLIN_END",
+-//   PAGE = "PAGE",
+-//   SENTENCE = "SENTENCE",
+-//   UNKNOWN = "UNKNOWN" // should always be last
+-// }
+-export const enum MarkdownType {
++export const enum MarkdownRecordTagType {
+   BLOCKQUOTE = "BLOCKQUOTE",
+   BUTTONGRID = "BUTTONGRID",
+   BUTTONGRID_END = "BUTTONGRID_END",
+@@ -143,8 +120,8 @@ export const enum MarkdownType {
+   COMMENT2 = "COMMENT2",
+   COMMENT3 = "COMMENT3",
+   PASSTHRUTAG = "PASSTHRUTAG",
+-  FILLIN = "LIST_FILLIN",
+-  FILLIN_END = "LIST_FILLIN_END",
++  FILLIN = "FILLIN_SECTION",
++  FILLIN_END = "FILLIN_SECTION_END",
+   PAGE = "PAGE",
+   IMAGEENTRY = "IMAGEENTRY",
+   IMAGEENTRY_END = "IMAGEENTRY_END",
+@@ -160,7 +137,7 @@ export const enum MarkdownType {
+ 
+ export interface TaggedStringType {
+   content: string;
+-  tagType: MarkdownRecordType;
++  recordType: MarkdownRecordType;
+   depth: number;
+   headingLevel: number;
+   lineNo: number;
+@@ -169,7 +146,7 @@ export interface TaggedStringType {
+ //   groups: RegExpMatchArray;
+ //   tag: string;
+ // }
+-//type MarkdownClassDictionaryType = Record<MarkdownType, MarkdownRecordType>;
++//type MarkdownClassDictionaryType = Record<MarkdownRecordTagType, MarkdownRecordType>;
+ /* Each pattern will define one explicit capture group () to
+    be returned. Hence. the pattern cannot use the global flag g
+    because final output will only include the first group encountered:
+@@ -177,11 +154,11 @@ export interface TaggedStringType {
+ */
+ interface MarkdownPatternItemType {
+   pattern: RegExp;
+-  tagType: MarkdownRecordType;
++  recordType: MarkdownRecordType;
+   //  sectionType: MarkDownSectionTagType
+ }
+ type MarkdownPatternDictionaryType = Record<
+-  MarkdownType,
++  MarkdownRecordTagType,
+   MarkdownPatternItemType
+ >;
+ ///const PARAGRAPH_PATTERN: RegExp = /["']?[A-Z][^.?!]+((?![.?!]['"]?\s["']?[A-Z][^.?!]).)+[.?!'"]+/g;
+@@ -213,124 +190,127 @@ const PARAGRAPH_PATTERN: RegExp = /^((["'\(\[]?|\!\[|\[\()[A-Za-z0-9\$\@]{1}.*)$
+ // \[\ added to support leading image
+ // \[\( only to support [link] where link starts with ( Need to careful what is considered beginning of a paragraph
+ const MarkdownPatternDictionary: MarkdownPatternDictionaryType = {
+-  [MarkdownType.HEADING01]: {
++  [MarkdownRecordTagType.HEADING01]: {
+     pattern: /^#\s([^\s].*)$/,
+-    tagType: MarkdownRecordType.HEADING
++    recordType: MarkdownRecordType.HEADING
+   },
+-  [MarkdownType.HEADING02]: {
++  [MarkdownRecordTagType.HEADING02]: {
+     pattern: /^##\s([^\s].*)$/,
+-    tagType: MarkdownRecordType.HEADING
++    recordType: MarkdownRecordType.HEADING
+   },
+-  [MarkdownType.HEADING03]: {
++  [MarkdownRecordTagType.HEADING03]: {
+     pattern: /^###\s([^\s].*)$/,
+-    tagType: MarkdownRecordType.HEADING
++    recordType: MarkdownRecordType.HEADING
+   },
+-  [MarkdownType.HEADING04]: {
++  [MarkdownRecordTagType.HEADING04]: {
+     pattern: /^####\s([^\s].*)$/,
+-    tagType: MarkdownRecordType.HEADING
++    recordType: MarkdownRecordType.HEADING
+   },
+-  [MarkdownType.HEADING05]: {
++  [MarkdownRecordTagType.HEADING05]: {
+     pattern: /^#####\s([^\s].*)$/,
+-    tagType: MarkdownRecordType.HEADING
++    recordType: MarkdownRecordType.HEADING
+   },
+-  [MarkdownType.HEADING06]: {
++  [MarkdownRecordTagType.HEADING06]: {
+     pattern: /^######\s([^\s].*)$/,
+-    tagType: MarkdownRecordType.HEADING
++    recordType: MarkdownRecordType.HEADING
+   },
+-  [MarkdownType.BLOCKQUOTE]: {
++  [MarkdownRecordTagType.BLOCKQUOTE]: {
+     // > takes precedecence of other list item
+     pattern: /^\>\s([^\s].*)$/,
+-    tagType: MarkdownRecordType.BLOCKQUOTE
++    recordType: MarkdownRecordType.BLOCKQUOTE
+   },
+-  [MarkdownType.BUTTONGRID]: {
++  [MarkdownRecordTagType.BUTTONGRID]: {
+     pattern: /^\[\[button-grid:\s(.*)\]\]\s*$/,
+-    tagType: MarkdownRecordType.BUTTONGRID
++    recordType: MarkdownRecordType.BUTTONGRID
+   },
+-  [MarkdownType.BUTTONGRID_END]: {
++  [MarkdownRecordTagType.BUTTONGRID_END]: {
+     pattern: /^\[\[\/button-grid\]\]\s*$/,
+-    tagType: MarkdownRecordType.BUTTONGRID_END
++    recordType: MarkdownRecordType.BUTTONGRID_END
+   },
+-  [MarkdownType.LISTITEM_UNORDERED01]: {
++  [MarkdownRecordTagType.LISTITEM_UNORDERED01]: {
+     pattern: /^[\*\-\+]\s([^\s].*)$/,
+-    tagType: MarkdownRecordType.LISTITEM_UNORDERED
++    recordType: MarkdownRecordType.LISTITEM_UNORDERED
+   },
+-  [MarkdownType.LISTITEM_UNORDERED02]: {
++  [MarkdownRecordTagType.LISTITEM_UNORDERED02]: {
+     pattern: /^\s{2}[\*\-\+]\s([^\s].*)$/,
+-    tagType: MarkdownRecordType.LISTITEM_UNORDERED
++    recordType: MarkdownRecordType.LISTITEM_UNORDERED
+   },
+-  [MarkdownType.LISTITEM_UNORDERED03]: {
++  [MarkdownRecordTagType.LISTITEM_UNORDERED03]: {
+     pattern: /^\s{4}[\*\-\+]\s([^\s].*)$/,
+-    tagType: MarkdownRecordType.LISTITEM_UNORDERED
++    recordType: MarkdownRecordType.LISTITEM_UNORDERED
+   },
+-  [MarkdownType.LISTITEM_UNORDERED04]: {
++  [MarkdownRecordTagType.LISTITEM_UNORDERED04]: {
+     pattern: /^\s{6}[\*\-\+]\s([^\s].*)$/,
+-    tagType: MarkdownRecordType.LISTITEM_UNORDERED
++    recordType: MarkdownRecordType.LISTITEM_UNORDERED
+   },
+-  [MarkdownType.LISTITEM_ORDERED01]: {
++  [MarkdownRecordTagType.LISTITEM_ORDERED01]: {
+     pattern: /^[0-9]+\.\s([^\s].*)$/,
+-    tagType: MarkdownRecordType.LISTITEM_ORDERED
++    recordType: MarkdownRecordType.LISTITEM_ORDERED
+   },
+-  [MarkdownType.LISTITEM_ORDERED02]: {
++  [MarkdownRecordTagType.LISTITEM_ORDERED02]: {
+     pattern: /^\s{2}[0-9]+\.\s([^\s].*)$/,
+-    tagType: MarkdownRecordType.LISTITEM_ORDERED
++    recordType: MarkdownRecordType.LISTITEM_ORDERED
+   },
+-  [MarkdownType.LISTITEM_ORDERED03]: {
++  [MarkdownRecordTagType.LISTITEM_ORDERED03]: {
+     pattern: /^\s{4}[0-9]+\.\s([^\s].*)$/,
+-    tagType: MarkdownRecordType.LISTITEM_ORDERED
++    recordType: MarkdownRecordType.LISTITEM_ORDERED
+   },
+-  [MarkdownType.LISTITEM_ORDERED04]: {
++  [MarkdownRecordTagType.LISTITEM_ORDERED04]: {
+     pattern: /^\s{6}[0-9]+\.\s([^\s].*)$/,
+-    tagType: MarkdownRecordType.LISTITEM_ORDERED
++    recordType: MarkdownRecordType.LISTITEM_ORDERED
+   },
+-  [MarkdownType.PARAGRAPH]: {
++  [MarkdownRecordTagType.PARAGRAPH]: {
+     pattern: PARAGRAPH_PATTERN,
+-    tagType: MarkdownRecordType.PARAGRAPH
++    recordType: MarkdownRecordType.PARAGRAPH
+   },
+-  [MarkdownType.COMMENT1]: {
++  [MarkdownRecordTagType.COMMENT1]: {
+     pattern: /^\[\/\/\]:\s(.*)$/,
+-    tagType: MarkdownRecordType.COMMENT
++    recordType: MarkdownRecordType.COMMENT
+   },
+-  [MarkdownType.COMMENT2]: {
++  [MarkdownRecordTagType.COMMENT2]: {
+     pattern: /^\[\]:\s(.*)$/,
+-    tagType: MarkdownRecordType.COMMENT
++    recordType: MarkdownRecordType.COMMENT
+   },
+-  [MarkdownType.COMMENT3]: {
++  [MarkdownRecordTagType.COMMENT3]: {
+     pattern: /^\[comment]:\s(.*)$/,
+-    tagType: MarkdownRecordType.COMMENT
++    recordType: MarkdownRecordType.COMMENT
+   },
+-  [MarkdownType.IMAGEENTRY]: {
++  [MarkdownRecordTagType.IMAGEENTRY]: {
+     pattern: /^\[\[image-entry:\s(.*)\]\]\s*$/i, // [[image-entry: *]]
+-    tagType: MarkdownRecordType.IMAGEENTRY
++    recordType: MarkdownRecordType.IMAGEENTRY
+   },
+-  [MarkdownType.IMAGEENTRY_END]: {
++  [MarkdownRecordTagType.IMAGEENTRY_END]: {
+     pattern: /^\[\[\/image-entry\]\]$/i, // [[/image-entry]]
+-    tagType: MarkdownRecordType.IMAGEENTRY_END
++    recordType: MarkdownRecordType.IMAGEENTRY_END
+   },
+-  [MarkdownType.PAGE]: {
++  [MarkdownRecordTagType.PAGE]: {
+     pattern: /^\[\[page:\s(.*)\/\]\]$/i, // [[page: */]] should contain title and other info
+-    tagType: MarkdownRecordType.PAGE
++    recordType: MarkdownRecordType.PAGE
+   },
+-  // [MarkdownType.PAGETITLE]: {
++  // [MarkdownRecordTagType.PAGETITLE]: {
+   //   pattern: /\[\[page-title:\s(.*)\/\]\]$/i, // [[page-title: */]]
+-  //   tagType: MarkdownRecordType.PAGETITLE
++  //   recordType: MarkdownRecordType.PAGETITLE
+   // },
+-  [MarkdownType.FILLIN]: {
+-    pattern: /\[\[fill-in:\s(.*)\]\]$/,
+-    tagType: MarkdownRecordType.FILLIN
++  [MarkdownRecordTagType.FILLIN]: {
++    pattern: /^\[\[fill-{0,1}in:\s(.*)\]\]$/,
++    recordType: MarkdownRecordType.FILLIN
+   },
+-  [MarkdownType.FILLIN_END]: {
+-    pattern: /\[\/\/fill-in\]$/,
+-    tagType: MarkdownRecordType.FILLIN_END
++  [MarkdownRecordTagType.FILLIN_END]: {
++    pattern: /^\[\[\/fill-{0,1}in\]\]$/,
++    recordType: MarkdownRecordType.FILLIN_END
+   },
+-  [MarkdownType.PASSTHRUTAG]: {
+-    pattern: /^\[\/\/([A-Za-z\-]*)\]:\s([^\s].*)$/,
+-    tagType: MarkdownRecordType.PASSTHRUTAG
++  [MarkdownRecordTagType.PASSTHRUTAG]: {
++    pattern: /^\[\[\/([A-Za-z\-]*)\]:\s([^\s].*)$/,
++    recordType: MarkdownRecordType.PASSTHRUTAG
+   },
+-  [MarkdownType.EMPTY]: {
++  [MarkdownRecordTagType.EMPTY]: {
+     pattern: /^\s*$/,
+-    tagType: MarkdownRecordType.EMPTY
++    recordType: MarkdownRecordType.EMPTY
+   },
+-  [MarkdownType.TBD]: { pattern: /(.*)$/, tagType: MarkdownRecordType.TBD }
++  [MarkdownRecordTagType.TBD]: {
++    pattern: /(.*)$/,
++    recordType: MarkdownRecordType.TBD
++  }
+ };
+ 
+ export interface IDataSource {
+@@ -441,7 +421,7 @@ abstract class MarkdownSource extends BaseClass implements IDataSource {
+           let content =
+             current.content === undefined
+               ? "(undefined)"
+-              : current.tagType === MarkdownRecordType.SENTENCE
++              : current.recordType === MarkdownRecordType.SENTENCE
+               ? current.content + "<eos>"
+               : current.content;
+           let lineNoStr: string =
+@@ -458,7 +438,7 @@ abstract class MarkdownSource extends BaseClass implements IDataSource {
+               colWidth1
+             )}${content.length > 0 ? " " : ""}${lineNoStr} ${
+               current.depth > 0 ? numToStr(current.depth) : "-"
+-            } ${current.tagType} ${lvl}\n`;
++            } ${current.recordType} ${lvl}\n`;
+           lineNo++;
+         }
+         break;
+@@ -513,23 +493,23 @@ export class RawMarkdownSource extends MarkdownSource implements IDataSource {
+     if (currentIdx < inputBuffer.length) {
+       let result: TaggedStringType = {
+         content: "",
+-        tagType: MarkdownRecordType.TBD,
++        recordType: MarkdownRecordType.TBD,
+         depth: depth,
+         headingLevel: 0,
+         lineNo: currentIdx + 1
+       };
+       let match: RegExpMatchArray = [];
+       if (
+-        MarkdownPatternDictionary[MarkdownType.EMPTY].pattern.test(
++        MarkdownPatternDictionary[MarkdownRecordTagType.EMPTY].pattern.test(
+           inputBuffer[currentIdx]
+         )
+       ) {
+         result.content = inputBuffer[currentIdx];
+-        result.tagType = MarkdownRecordType.EMPTY;
++        result.recordType = MarkdownRecordType.EMPTY;
+       } else {
+         match = inputBuffer[currentIdx].match(/^(.*)$/)!;
+         result.content = match[1];
+-        result.tagType = MarkdownRecordType.TBD;
++        result.recordType = MarkdownRecordType.TBD;
+       }
+       this.buffer.push(result);
+       this.parse(depth, inputBuffer, currentIdx + 1, resultBuffer);
+@@ -553,7 +533,7 @@ export class BasicMarkdownSource extends RawMarkdownSource
+     // if (current.content === undefined) {
+     //   resultBuffer.push({
+     //     content: "",
+-    //     tagType: MarkdownRecordType.EMPTY,
++    //     recordType: MarkdownRecordType.EMPTY,
+     //     depth: depth,
+     //     headingLevel: 0,
+     //     lineNo: current.lineNo
+@@ -563,7 +543,7 @@ export class BasicMarkdownSource extends RawMarkdownSource
+     let sentences = current.content.split(PARAGRAPH_TO_SENTENCES);
+     resultBuffer.push({
+       content: "[PARAGRAPH]",
+-      tagType: MarkdownRecordType.PARAGRAPH,
++      recordType: MarkdownRecordType.PARAGRAPH,
+       depth: current.depth, //+ 1
+       headingLevel: 0,
+       lineNo: current.lineNo
+@@ -591,7 +571,7 @@ export class BasicMarkdownSource extends RawMarkdownSource
+             (sentences[sentenceIdx + 1] !== undefined
+               ? sentences[sentenceIdx + 1] + " "
+               : ""),
+-          tagType: MarkdownRecordType.SENTENCE,
++          recordType: MarkdownRecordType.SENTENCE,
+           depth: current.depth, //+ 1
+           headingLevel: 0,
+           lineNo: current.lineNo
+@@ -604,14 +584,14 @@ export class BasicMarkdownSource extends RawMarkdownSource
+     }
+     resultBuffer.push({
+       content: "[PARAGRAPH END]",
+-      tagType: MarkdownRecordType.PARAGRAPH_END,
++      recordType: MarkdownRecordType.PARAGRAPH_END,
+       depth: depth, //+ 1
+       headingLevel: 0,
+       lineNo: current.lineNo
+     });
+   }
+   private lookup(mdString: string): TaggedStringType {
+-    let mdTag: MarkdownType = MarkdownType.TBD;
++    let mdTag: MarkdownRecordTagType = MarkdownRecordTagType.TBD;
+     let depth: number = 0;
+     let matches: RegExpMatchArray = [];
+     for (mdTag in MarkdownPatternDictionary) {
+@@ -624,13 +604,15 @@ export class BasicMarkdownSource extends RawMarkdownSource
+     }
+     return {
+       content: matches.length > 0 ? matches[1] : "",
+-      tagType: MarkdownPatternDictionary[mdTag].tagType,
++      recordType: MarkdownPatternDictionary[mdTag].recordType,
+       depth:
+-        MarkdownPatternDictionary[mdTag].tagType !== MarkdownRecordType.HEADING
++        MarkdownPatternDictionary[mdTag].recordType !==
++        MarkdownRecordType.HEADING
+           ? depth
+           : 0,
+       headingLevel:
+-        MarkdownPatternDictionary[mdTag].tagType === MarkdownRecordType.HEADING
++        MarkdownPatternDictionary[mdTag].recordType ===
++        MarkdownRecordType.HEADING
+           ? depth
+           : 0,
+       lineNo: 0
+@@ -651,7 +633,7 @@ export class BasicMarkdownSource extends RawMarkdownSource
+       //this.logger.diagnosticMode = true;
+       current.lineNo = idx + 1;
+       this.logger.diagnostic(
+-        `markdown looking up: "${inputBuffer[idx]}" as ${current.tagType} at line ${current.lineNo}`
++        `markdown looking up: "${inputBuffer[idx]}" as ${current.recordType} at line ${current.lineNo}`
+       );
+       if (current.depth < depth) {
+         // just pop call stack and allow completion of (current.depth > depth)
+@@ -660,8 +642,8 @@ export class BasicMarkdownSource extends RawMarkdownSource
+       } else if (current.depth > depth) {
+         resultBuffer.push({
+           content: `[SECTION START AT DEPTH ${depth + 1}]`,
+-          tagType:
+-            current.tagType === MarkdownRecordType.LISTITEM_ORDERED
++          recordType:
++            current.recordType === MarkdownRecordType.LISTITEM_ORDERED
+               ? MarkdownRecordType.SECTION_ORDERED
+               : MarkdownRecordType.SECTION_UNORDERED,
+           depth: depth + 1,
+@@ -673,13 +655,13 @@ export class BasicMarkdownSource extends RawMarkdownSource
+         // parse this record. OR could distribute idx++
+         resultBuffer.push({
+           content: `[SECTION END AT DEPTH ${depth + 1}]`,
+-          tagType: MarkdownRecordType.SECTION_END,
++          recordType: MarkdownRecordType.SECTION_END,
+           depth: depth + 1,
+           headingLevel: 0,
+           lineNo: current.lineNo
+         });
+       } else {
+-        switch (current.tagType) {
++        switch (current.recordType) {
+           case MarkdownRecordType.PAGE: {
+             resultBuffer.push(current);
+             break;
+@@ -696,8 +678,8 @@ export class BasicMarkdownSource extends RawMarkdownSource
+           case MarkdownRecordType.LISTITEM_UNORDERED: {
+             resultBuffer.push({
+               content: `[LIST ITEM START AT DEPTH ${depth}]`,
+-              tagType: current.tagType,
+-              // current.tagType === MarkdownRecordType.LISTITEM_ORDERED
++              recordType: current.recordType,
++              // current.recordType === MarkdownRecordType.LISTITEM_ORDERED
+               //   ? MarkdownRecordType.SECTION_ORDERED
+               //   : MarkdownRecordType.SECTION_UNORDERED,
+               depth: depth,
+@@ -707,8 +689,8 @@ export class BasicMarkdownSource extends RawMarkdownSource
+             this.parseParagraph(current.depth, current, this.buffer);
+             resultBuffer.push({
+               content: `[LIST ITEM END AT DEPTH ${depth}]`,
+-              tagType: MarkdownRecordType.LISTITEM_END,
+-              // current.tagType === MarkdownRecordType.LISTITEM_ORDERED
++              recordType: MarkdownRecordType.LISTITEM_END,
++              // current.recordType === MarkdownRecordType.LISTITEM_ORDERED
+               //   ? MarkdownRecordType.LISTITEM_ORDERED
+               //   : MarkdownRecordType.LISTITEM_UNORDERED,
+               depth: depth,
+@@ -720,7 +702,7 @@ export class BasicMarkdownSource extends RawMarkdownSource
+           case MarkdownRecordType.BLOCKQUOTE: {
+             resultBuffer.push({
+               content: `[BLOCKQUOTE START ${depth}]`,
+-              tagType: MarkdownRecordType.BLOCKQUOTE,
++              recordType: MarkdownRecordType.BLOCKQUOTE,
+               depth: current.depth,
+               headingLevel: current.headingLevel,
+               lineNo: current.lineNo
+@@ -728,7 +710,7 @@ export class BasicMarkdownSource extends RawMarkdownSource
+             this.parseParagraph(current.depth, current, this.buffer);
+             resultBuffer.push({
+               content: `[BLOCKQUOTE END ${depth}]`,
+-              tagType: MarkdownRecordType.SECTION_END,
++              recordType: MarkdownRecordType.SECTION_END,
+               depth: current.depth,
+               headingLevel: current.headingLevel,
+               lineNo: current.lineNo
+@@ -742,7 +724,7 @@ export class BasicMarkdownSource extends RawMarkdownSource
+           case MarkdownRecordType.IMAGEENTRY: {
+             resultBuffer.push({
+               content: current.content,
+-              tagType: MarkdownRecordType.IMAGEENTRY,
++              recordType: MarkdownRecordType.IMAGEENTRY,
+               depth: current.depth,
+               headingLevel: current.headingLevel,
+               lineNo: current.lineNo
+diff --git a/src/pageContentType.ts b/src/pageContentType.ts
+index 34800a6..1c5738c 100644
+--- a/src/pageContentType.ts
++++ b/src/pageContentType.ts
+@@ -33,6 +33,7 @@ export interface IPageContent {
+   sectionList: ISectionListItem[];
+   sentenceList: ISentenceListItem[];
+   linkList: ILinkListItem[];
++  fillinList: ISectionFillinItem[];
+ }
+ export function PageContentInitializer(): IPageContent {
+   return {
+@@ -55,7 +56,8 @@ export function PageContentInitializer(): IPageContent {
+     headingList: [],
+     sectionList: [],
+     sentenceList: [],
+-    linkList: []
++    linkList: [],
++    fillinList: []
+   };
+ }
+ export interface ISectionContent {
+@@ -120,35 +122,27 @@ export enum UnorderedListMarkerEnumType { // standard HTML
+   none,
+   other
+ }
+-// export interface ISectionFillinVariant {
+-//   minColumns: number; // minimum number of columns for fillin table
+-// }
+-// export function ISectionFillinVariantInitializer(): ISectionFillinVariant {
+-//   return {
+-//     minColumns: 0 // overrides name and description above
+-//   };
++// export interface ISectionHeadingVariant1 {
++//   title: string; // ISentenceContent where audible/recitable can be disabled at run time.
++//
++//   separator: string;
++//   recitable: boolean;
++//   audible: boolean;
++//   level: number;
+ // }
+-export interface ISectionHeadingVariant1 {
+-  title: string; // ISentenceContent where audible/recitable can be disabled at run time.
+-
+-  separator: string;
+-  recitable: boolean;
+-  audible: boolean;
+-  level: number;
+-}
+ export interface ISectionHeadingVariant {
+   heading: ISentenceContent;
+   level: number;
+ }
+-export function ISectionHeadingVariantInitializer1(): ISectionHeadingVariant1 {
+-  return {
+-    title: "", // overrides name and description above
+-    separator: "",
+-    recitable: false,
+-    audible: false,
+-    level: 0
+-  };
+-}
++// export function ISectionHeadingVariantInitializer1(): ISectionHeadingVariant1 {
++//   return {
++//     title: "", // overrides name and description above
++//     separator: "",
++//     recitable: false,
++//     audible: false,
++//     level: 0
++//   };
++// }
+ export function ISectionHeadingVariantInitializer(): ISectionHeadingVariant {
+   return {
+     heading: {
+@@ -247,31 +241,47 @@ export function ISectionParagraphVariantInitializer(): ISectionParagraphVariant
+     style: "" // overrides css but not user profile
+   };
+ }
++export enum SectionFillinFormatType {
++  list = "list",
++  grid = "grid"
++}
+ export interface ISectionFillinVariant {
+-  title: string;
+-  responseTableLabel: string;
+-  responseTableColumns: number; // 0 means no response table
+-  showCategory: boolean; // shows (noun) beside hidden word
+-  responseTableCategoryIncluded: boolean; // shows (noun) in response table
++  sectionFillinIdx: number; // reference state structure in pageList.fillinList
++  title: string; // title of entire fillin section
++  label: string; // label for response list/grid
++  format: SectionFillinFormatType; // list, grid
++  allowUserFormatting: boolean;
++  groupDuplicates: boolean; // identical words groouped as single response entry
++  showCategoryHint: boolean; // shows (noun) beside hidden word
++  includeCategory: boolean; // shows (noun) in response list/grid
++  gridColumns: number; // 0 means no response table
+   sortOrder: boolean; // sort alphabetically
++  showReferenceCount: boolean;
+   allowReset: boolean; // reset button
+-  groupDuplicates: true; // identical words groouped as single response entry
+-  fillinWords: { [key: number]: ITerminalInfo };
+-}
+-export function ISectionFillinVariantInitializer(): ISectionFillinVariant {
++  prompts: ISectionContent[];
++}
++export function ISectionFillinVariantInitializer(
++  sectionFillinIdx: number = IDX_INITIALIZER,
++  title: string = "",
++  label = "Responses:",
++  format = SectionFillinFormatType.list
++): ISectionFillinVariant {
+   return {
+-    title: "",
+-    responseTableLabel: "Responses:",
+-    responseTableColumns: 0,
+-    showCategory: false,
+-    responseTableCategoryIncluded: false,
++    sectionFillinIdx: sectionFillinIdx,
++    title: title,
++    label: label,
++    format: format,
++    allowUserFormatting: true,
++    groupDuplicates: true,
++    showCategoryHint: false,
++    includeCategory: false,
++    gridColumns: 0,
+     sortOrder: true,
++    showReferenceCount: true,
+     allowReset: false,
+-    groupDuplicates: true,
+-    fillinWords: []
++    prompts: []
+   };
+ }
+-
+ export enum ImageEntryLayoutEnumType {
+   left = "left", // default, image to the left of caption
+   above = "above" // image above caption
+@@ -369,6 +379,10 @@ export type TerminalMetaType =
+   | IWordTerminalMeta
+   | IYearTerminalMeta;
+ 
++interface IFillinResponse {
++  sectionIdx: number;
++  responseIdx: number;
++}
+ export interface ITerminalInfo {
+   content: string;
+   termIdx: number;
+@@ -381,10 +395,10 @@ export interface ITerminalInfo {
+   audible: boolean;
+   linkable: boolean;
+   visible: boolean;
+-  fillin: boolean;
+   visited: boolean;
+   linkIdx: number;
+   hintsIdx: number;
++  fillin: IFillinResponse; // index into responseContext.referenceCount
+   bold: boolean;
+   italics: boolean;
+   markupTag: boolean;
+@@ -399,10 +413,13 @@ export function ITerminalInfoInitializer(
+   audible: boolean = true,
+   linkable: boolean = false,
+   visible: boolean = true,
+-  fillin: boolean = false,
+   visited: boolean = false,
+   linkIdx: number = IDX_INITIALIZER,
+   hintsIdx: number = IDX_INITIALIZER,
++  fillin: IFillinResponse = {
++    sectionIdx: IDX_INITIALIZER,
++    responseIdx: IDX_INITIALIZER
++  },
+   bold = false,
+   italics = false,
+   markupTag = false
+@@ -425,10 +442,10 @@ export function ITerminalInfoInitializer(
+     audible: audible,
+     linkable: linkable,
+     visible: visible,
+-    fillin: fillin,
+     visited: visited,
+     linkIdx: linkIdx,
+     hintsIdx: hintsIdx,
++    fillin: fillin, // sectionFillin specific
+     bold: bold,
+     italics: italics,
+     markupTag: markupTag
+@@ -540,15 +557,18 @@ export function IDateTerminalMetaInitializer(): IDateTerminalMeta {
+ }
+ export interface IFillinTerminalMeta {
+   terminals: ITerminalContent[];
+-  fillinIdx: number;
++  sectionFillinIdx: number;
++  //  responseIdx: number;
+ }
+ export function IFillinTerminalMetaInitializer(
+   terminals: ITerminalContent[] = [],
+-  fillinIdx = IDX_INITIALIZER
++  sectionFillinIdx = IDX_INITIALIZER
++  //  responseIdx = IDX_INITIALIZER
+ ): IFillinTerminalMeta {
+   return {
+     terminals,
+-    fillinIdx
++    sectionFillinIdx
++    //  responseIdx
+   };
+ }
+ export interface IPassthruTagTerminalMeta {
+@@ -846,3 +866,90 @@ export function ILinkListItemInitializer(
+ ): ILinkListItem {
+   return { label, destination, valid };
+ }
++// export interface IFillinItem {
++//   content: string; // for display in response list
++//   referenceCount: number;
++// }
++export interface IFillinResponseItem {
++  content: string; // for display in response list
++  insertOrder: number;
++  referenceCount: number;
++}
++export function IFillinResponseItemInitializer(
++  content: string,
++  insertOrder: number,
++  referenceCount: number
++): IFillinResponseItem {
++  return {
++    content: content,
++    insertOrder: insertOrder,
++    referenceCount: referenceCount
++  };
++}
++export type IFillinResponses = IFillinResponseItem[];
++export function IFillinResponsesInitializer(): IFillinResponses[] {
++  return [];
++}
++export interface IFillinPromptItem {
++  visible: boolean;
++  responseIdx: number; // update response iff all visible
++}
++export interface ISectionFillinItem {
++  idx: number;
++  format: SectionFillinFormatType;
++  allowUserFormatting: boolean;
++  groupDuplicates: boolean;
++  sortOrder: boolean; // sort alphabetically
++  gridColumns: number;
++  allowReset: boolean; // reset button
++  showReferenceCount: boolean;
++  responses: IFillinResponseItem[]; // index into section response context
++  //  prompts: IFillinPromptItem[]; // list of all terminalInfos in prompt
++  loaded: boolean;
++  modified: boolean; // supports reset
++}
++export function ISectionFillinItemInitializer(
++  idx: number = IDX_INITIALIZER,
++  format: SectionFillinFormatType = SectionFillinFormatType.grid,
++  allowUserFormatting: boolean = true,
++  groupDuplicates: boolean = true,
++  sortOrder: boolean = true, // sort alphabetically
++  gridColumns: number = 0,
++  allowReset: boolean = true, // reset button
++  showReferenceCount: boolean = false,
++  responses: IFillinResponseItem[] = [],
++  //  prompts: IFillinPromptItem[] = [],
++  loaded: boolean = false,
++  modified: boolean = false
++): ISectionFillinItem {
++  return {
++    idx,
++    format,
++    allowUserFormatting,
++    groupDuplicates,
++    sortOrder,
++    gridColumns,
++    allowReset,
++    showReferenceCount,
++    responses,
++    //    prompts,
++    loaded,
++    modified
++  };
++}
++// export interface ISectionFillinList {
++//   groupDuplicates: boolean;
++//   sortOrder: boolean; // sort alphabetically
++//   fillinList: IFillinItem[];
++// }
++// export function ISectionFillinListInitializer(
++//   groupDuplicates: boolean = true,
++//   sortOrder: boolean = true, // sort alphabetically
++//   fillinList: IFillinItem[] = []
++// ): ISectionFillinList {
++//   return {
++//     groupDuplicates,
++//     sortOrder,
++//     fillinList
++//   };
++// }
+diff --git a/src/parsepages.ts b/src/parsepages.ts
+index 3a1ae6c..fe31c15 100644
+--- a/src/parsepages.ts
++++ b/src/parsepages.ts
+@@ -14,6 +14,7 @@ import { IsError, IsDefined } from "./utilities";
+ import { Logger } from "./logger";
+ import { MarkdownRecordType, TaggedStringType } from "./dataadapter";
+ import {
++  ISectionFillinItem,
+   IHeadingListItem,
+   ILinkListItem,
+   IPageContent,
+@@ -67,6 +68,7 @@ export class PageParseNode extends ParseNode implements IPageContent {
+   sectionList: ISectionListItem[] = [];
+   sentenceList: ISentenceListItem[] = [];
+   linkList: ILinkListItem[] = [];
++  fillinList: ISectionFillinItem[] = [];
+   constructor(parent?: PageParseNode | AppNode) {
+     super(parent);
+   }
+@@ -82,7 +84,7 @@ export class PageParseNode extends ParseNode implements IPageContent {
+         //        current = this.dataSource.nextRecord()
+         current = this.dataSource.currentRecord()
+       ) {
+-        if (current.tagType === MarkdownRecordType.PAGE) {
++        if (current.recordType === MarkdownRecordType.PAGE) {
+           let attributes: string[] = current.content.split(",");
+           if (IsDefined(attributes[0])) this.title = attributes[0].trim();
+           if (IsDefined(attributes[1])) this.owner = attributes[1].trim();
+@@ -96,10 +98,13 @@ export class PageParseNode extends ParseNode implements IPageContent {
+           if (IsDefined(attributes[5])) this.description = attributes[5].trim();
+           current = this.dataSource.nextRecord();
+         } else {
+-          let sectionNode: ISectionNode = GetSectionNode(current.tagType, this);
++          let sectionNode: ISectionNode = GetSectionNode(
++            current.recordType,
++            this
++          );
+           this.sections.push(sectionNode);
+           this.logger.diagnostic(
+-            `pushed section=${current.tagType} ${sectionNode.constructor.name} ${current.content}`
++            `pushed section=${current.recordType} ${sectionNode.constructor.name} ${current.content}`
+           );
+           sectionNode.parse();
+         }
+@@ -119,6 +124,10 @@ export class PageParseNode extends ParseNode implements IPageContent {
+ 
+       this.userContext.links.parse();
+       this.linkList = this.userContext.links;
++
++      this.userContext.fillins.parse();
++      this.fillinList = this.userContext.fillins;
++
+       this.modified = new Date(Date.now()).toString();
+     } catch (e) {
+       if (IsError(e)) {
+diff --git a/src/parsertest01.ts b/src/parsertest01.ts
+index 0390791..cab2300 100644
+--- a/src/parsertest01.ts
++++ b/src/parsertest01.ts
+@@ -14,8 +14,9 @@ const Usage: string =
+   `Usage: node parsetest01.ts [OPTIONS] [FILE(s)]\n` +
+   `Parses markdown files into json output for reader\n\n` +
+   `Options:\n` +
+-  `  --dumpdatasource display parsed markdown` +
+-  `  --dumpheadings   display headings for navbar` +
++  `  --dumpdatasource display parsed markdown\n` +
++  `  --dumpheadings   display headings for navbar\n` +
++  `  --dumpfillins    display fillins\n` +
+   `  --dumpjsondataappdisplay generated json\n` +
+   `  --dumplinks      display link list\n` +
+   `  --dumpsections   display section list\n` +
+@@ -249,6 +250,23 @@ if (switches.includes("--sitemap")) {
+           false
+         );
+       }
++      if (switches.includes("--dumpfillins")) {
++        logger.info(
++          `dumping fillins for ${path.basename(outputFileSpec)}`,
++          false,
++          false,
++          false,
++          false
++        );
++        logger.info(
++          pageNode.userContext.fillins.serialize(),
++          false,
++          false,
++          false,
++          false
++        );
++      }
++
+       let json: string = pageNode.serialize(
+         ParseNodeSerializeFormatEnumType.JSON
+       );
+diff --git a/src/parsesectiondispatch.ts b/src/parsesectiondispatch.ts
+index c6c538e..7e4651d 100644
+--- a/src/parsesectiondispatch.ts
++++ b/src/parsesectiondispatch.ts
+@@ -13,9 +13,9 @@ import { IPageNode } from "./parsepages";
+ import {
+   ISectionNode,
+   SectionParseNode_EMPTY,
+-  SectionParseNode_FILLIN,
+   SectionParseNode_TBD
+ } from "./parsesections";
++import { SectionParseNode_FILLIN } from "./parsesections_fillin";
+ import { SectionParseNode_IMAGEENTRY } from "./parsesections_images";
+ import { SectionParseNode_PARAGRAPH } from "./parsesections_paragraph";
+ import {
+@@ -88,6 +88,13 @@ export function GetSectionNode(
+       sectionNode = new SectionParseNode_FILLIN(parent);
+       break;
+     }
++    case MarkdownRecordType.FILLIN_END: {
++      // console.log(
++      //   `dispatch: ${tagType} ${tagType === MarkdownRecordType.FILLIN}`
++      // );
++      sectionNode = new SectionParseNode_FILLIN(parent);
++      break;
++    }
+     case MarkdownRecordType.IMAGEENTRY: {
+       // console.log(
+       //   `dispatch: ${tagType} ${tagType === MarkdownRecordType.PHOTOENTRY}`
+diff --git a/src/parsesections.ts b/src/parsesections.ts
+index ea47b69..ee50377 100644
+--- a/src/parsesections.ts
++++ b/src/parsesections.ts
+@@ -51,7 +51,7 @@ export abstract class SectionParseNode extends ParseNode
+     let current: TaggedStringType;
+     current = this.dataSource.currentRecord();
+     this.logger.diagnostic(
+-      `parsing ${current.content} of type ${current.tagType} at ${current.lineNo}`
++      `parsing ${current.content} of type ${current.recordType} at ${current.lineNo}`
+     );
+     this.dataSource.nextRecord();
+     return 0;
+@@ -139,15 +139,6 @@ export abstract class SectionParseNode_LIST extends SectionParseNode
+     super(parent);
+   }
+ }
+-export class SectionParseNode_FILLIN extends SectionParseNode_LIST
+-  implements ISectionNode {
+-  constructor(parent: IPageNode | ISectionNode) {
+-    super(parent);
+-    //  console.log("creating ordered fillin section");
+-  }
+-  readonly type = SectionVariantEnumType.fillin;
+-  meta: ISectionFillinVariant = ISectionFillinVariantInitializer();
+-}
+ export class SectionParseNode_PHOTOENTRY extends SectionParseNode_LIST
+   implements ISectionNode {
+   constructor(parent: IPageNode | ISectionNode) {
+@@ -168,13 +159,14 @@ export class SectionParseNode_EMPTY extends SectionParseNode_LIST
+     try {
+       let current: TaggedStringType = this.dataSource.currentRecord();
+       assert(
+-        current.tagType === MarkdownRecordType.EMPTY,
++        current.recordType === MarkdownRecordType.EMPTY,
+         `expected ${MarkdownRecordType.EMPTY} at line ${current.lineNo}`
+       );
+       //    console.log(`current.lineNo=${current.lineNo}`);
+       for (
+         current = this.dataSource.currentRecord();
+-        !this.dataSource.EOF() && current.tagType === MarkdownRecordType.EMPTY;
++        !this.dataSource.EOF() &&
++        current.recordType === MarkdownRecordType.EMPTY;
+         current = this.dataSource.nextRecord()
+       ) {
+         this.meta.count++;
+diff --git a/src/parsesections_blockquote.ts b/src/parsesections_blockquote.ts
+index a659398..fe06759 100644
+--- a/src/parsesections_blockquote.ts
++++ b/src/parsesections_blockquote.ts
+@@ -39,29 +39,29 @@ export class SectionParseNode_BLOCKQUOTE extends SectionParseNode_LIST
+         `current record is undefined at buffer index ${this.dataSource.currentIdx()}`
+       );
+       assert(
+-        current.tagType === MarkdownRecordType.BLOCKQUOTE,
++        current.recordType === MarkdownRecordType.BLOCKQUOTE,
+         `expected ${MarkdownRecordType.BLOCKQUOTE}  at line ${current.lineNo}`
+       );
+       for (
+         current = this.dataSource.nextRecord();
+         !this.dataSource.EOF() &&
+-        current.tagType !== MarkdownRecordType.SECTION_END; // end of blockquote
++        current.recordType !== MarkdownRecordType.SECTION_END; // end of blockquote
++
+       ) {
+         assert(
+-          current.tagType === MarkdownRecordType.PARAGRAPH,
++          current.recordType === MarkdownRecordType.PARAGRAPH,
+           `expected ${MarkdownRecordType.PARAGRAPH} at line ${current.lineNo}`
+         );
+         let paragraph: ISectionNode = new SectionParseNode_PARAGRAPH(this);
+         paragraph.parse();
+         this.items.push(paragraph);
+-        current = this.dataSource.currentRecord()
++        current = this.dataSource.currentRecord();
+       }
+       assert(
+-        current.tagType === MarkdownRecordType.SECTION_END,
++        current.recordType === MarkdownRecordType.SECTION_END,
+         `expected ${MarkdownRecordType.SECTION_END} to ${MarkdownRecordType.BLOCKQUOTE}`
+       );
+       current = this.dataSource.nextRecord(); // move passed SECTION_END
+-
+     } catch (e) {
+       // forward record to next SECTION_END
+       if (IsError(e)) {
+diff --git a/src/parsesections_buttongrid.ts b/src/parsesections_buttongrid.ts
+index 428428b..e824128 100644
+--- a/src/parsesections_buttongrid.ts
++++ b/src/parsesections_buttongrid.ts
+@@ -51,7 +51,7 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
+       assert(current !== undefined, `Undefined record encountered`);
+ 
+       assert(
+-        current.tagType === MarkdownRecordType.BUTTONGRID,
++        current.recordType === MarkdownRecordType.BUTTONGRID,
+         `Expected "${MarkdownRecordType.BUTTONGRID}" at line ${current.lineNo}`
+       );
+       let args: string[] = current.content.split(",").map(arg => arg.trim());
+@@ -72,13 +72,13 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
+       }
+       current = this.dataSource.nextRecord();
+       assert(
+-        current.tagType === MarkdownRecordType.PARAGRAPH,
+-        `Expected "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.tagType}" at line ${current.lineNo}`
++        current.recordType === MarkdownRecordType.PARAGRAPH,
++        `Expected "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.recordType}" at line ${current.lineNo}`
+       );
+       current = this.dataSource.nextRecord();
+       assert(
+-        current.tagType === MarkdownRecordType.SENTENCE,
+-        `Expected "${MarkdownRecordType.SENTENCE}" but encountered "${current.tagType}" at line ${current.lineNo}`
++        current.recordType === MarkdownRecordType.SENTENCE,
++        `Expected "${MarkdownRecordType.SENTENCE}" but encountered "${current.recordType}" at line ${current.lineNo}`
+       );
+       // find list of images
+       this.firstTermIdx = this.userContext.terminals.lastIdx + 1;
+@@ -96,25 +96,28 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
+       );
+       current = this.dataSource.nextRecord();
+       assert(
+-        current.tagType === MarkdownRecordType.PARAGRAPH_END,
+-        `Expected "${MarkdownRecordType.PARAGRAPH_END}" to "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.tagType}"  at line ${current.lineNo}`
++        current.recordType === MarkdownRecordType.PARAGRAPH_END,
++        `Expected "${MarkdownRecordType.PARAGRAPH_END}" to "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.recordType}"  at line ${current.lineNo}`
+       );
+       //keep processing sections until imageentry_end
+       for (
+         current = this.dataSource.nextRecord();
+         !this.dataSource.EOF() &&
+-        current.tagType !== MarkdownRecordType.IMAGEENTRY_END;
++        current.recordType !== MarkdownRecordType.IMAGEENTRY_END;
+         current = this.dataSource.currentRecord() // update current modified in parse()
+       ) {
+-        let sectionNode: ISectionNode = GetSectionNode(current.tagType, this);
++        let sectionNode: ISectionNode = GetSectionNode(
++          current.recordType,
++          this
++        );
+         this.meta.buttonText.push("hi there");
+         this.logger.diagnostic(
+-          `pushed section=${current.tagType} ${sectionNode.constructor.name} ${current.content}`
++          `pushed section=${current.recordType} ${sectionNode.constructor.name} ${current.content}`
+         );
+         sectionNode.parse();
+         //        current = this.dataSource.currentRecord();
+       }
+-      if (current.tagType === MarkdownRecordType.IMAGEENTRY_END) {
++      if (current.recordType === MarkdownRecordType.IMAGEENTRY_END) {
+         this.lastTermIdx = this.userContext.terminals.lastIdx;
+         // this.id =
+         //   this.userContext.sections.push(
+diff --git a/src/parsesections_fillin.ts b/src/parsesections_fillin.ts
+index e132953..2429bac 100644
+--- a/src/parsesections_fillin.ts
++++ b/src/parsesections_fillin.ts
+@@ -1,31 +1,40 @@
+-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
++/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
+  *
+- * File name: parsesections_images.ts
++ * File name: parsesections_fillin.ts
+  *
+- * Create section image entry objects from serialized input.
++ * Create section fillin objects from serialized input. Allows grouping of
++ * fillin response table at top of each section of fillins
+  *
+  * Version history:
+  *
+  **/
+ import { strict as assert } from "assert";
+-import { IsDefined, IsError } from "./utilities";
++import {
++  IsDefined,
++  IsError,
++  SetArgBoolean,
++  SetArgWholeNumber
++} from "./utilities";
+ import {
+   IDX_INITIALIZER,
+   ParseNodeSerializeTabular,
+   ParseNodeSerializeFormatEnumType
+ } from "./baseclasses";
+-import { MarkdownTagType, TaggedStringType } from "./dataadapter";
+ import {
+-  ImageEntryLayoutEnumType,
+-  ISectionImageEntryVariantInitializer,
+-  ISectionImageEntryVariant,
+-  ISectionListItemInitializer,
+-  ISectionParagraphVariant,
+-  ISectionParagraphVariantInitializer,
++  MarkdownRecordType,
++  MarkdownRecordTagType,
++  TaggedStringType
++} from "./dataadapter";
++import {
++  ISectionFillinVariant,
++  ISectionFillinVariantInitializer,
++  ISectionFillinItemInitializer,
+   ITerminalContent,
++  ITerminalInfoInitializer,
++  IFillinTerminalMeta,
+   SectionVariantEnumType,
+-  TerminalMetaEnumType,
+-  IImageTerminalMeta
++  SectionFillinFormatType,
++  TerminalMetaEnumType
+ } from "./pageContentType";
+ import { GetSectionNode } from "./parsesectiondispatch";
+ import { ITerminalNode } from "./parseterminals";
+@@ -33,14 +42,14 @@ import { IPageNode } from "./parsepages";
+ import { ISectionNode } from "./parsesections";
+ import { SectionParseNode_LIST } from "./parsesections";
+ import { ISentenceNode, SentenceNode } from "./parsesentences";
+-export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
++export class SectionParseNode_FILLIN extends SectionParseNode_LIST
+   implements ISectionNode {
+   constructor(parent: IPageNode | ISectionNode) {
+     super(parent);
+     //  console.log("creating paragraph section");
+   }
+-  type = SectionVariantEnumType.image_entry;
+-  meta: ISectionImageEntryVariant = ISectionImageEntryVariantInitializer();
++  type = SectionVariantEnumType.fillin;
++  meta: ISectionFillinVariant = ISectionFillinVariantInitializer();
+   parse() {
+     //this.logger.diagnosticMode = true;
+     this.logger.diagnostic(`${this.constructor.name}`);
+@@ -50,133 +59,116 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
+       assert(current !== undefined, `Undefined record encountered`);
+ 
+       assert(
+-        current.tagType === MarkdownTagType.IMAGEENTRY,
+-        `Expected "${MarkdownTagType.IMAGEENTRY}" at line ${current.lineNo}`
++        current.recordType === MarkdownRecordType.FILLIN,
++        `Expected "${MarkdownRecordTagType.FILLIN}" at line ${current.lineNo}`
+       );
+-      let args: string[] = current.content.split(",").map(arg => arg.trim());
+-      if (IsDefined(args[0])) this.meta.title = args[0];
++      // See sectionFillinVariant
+       try {
+-        if (IsDefined(args[1])) {
+-          let layout = args[1].trim().toLowerCase();
+-          assert(
+-            layout === ImageEntryLayoutEnumType.left ||
+-              layout === ImageEntryLayoutEnumType.above,
+-            `Invalid image entry layout "${layout}" encountered, expected either "${ImageEntryLayoutEnumType.left}" or "${ImageEntryLayoutEnumType.above}" as second argument at line ${current.lineNo}`
+-          );
+-          this.meta.layout = layout;
++        let args: string[] = current.content.split(",").map(arg => arg.trim());
++        if (IsDefined(args[0])) this.meta.title = args[0].trim();
++        if (IsDefined(args[1])) this.meta.label = args[1].trim();
++        if (IsDefined(args[2]) && args[2] in SectionFillinFormatType) {
++          this.meta.format = args[2] as SectionFillinFormatType;
+         }
+-      } catch (e) {
+-        this.logger.warning((e as Error).message);
+-      }
+-      try {
+-        if (IsDefined(args[2])) {
+-          assert(
+-            args[2].trim().charAt(args[2].trim().length - 1) === "%",
+-            `Missing percent sign in third argument at line ${current.lineNo}`
++        this.meta.allowUserFormatting = SetArgBoolean(
++          args[3],
++          this.meta.allowUserFormatting
++        );
++        this.meta.sortOrder = SetArgBoolean(args[4], this.meta.sortOrder);
++        this.meta.groupDuplicates = SetArgBoolean(
++          args[5],
++          this.meta.groupDuplicates
++        );
++        this.meta.gridColumns = SetArgWholeNumber(
++          args[6],
++          this.meta.gridColumns
++        );
++        this.meta.showCategoryHint = SetArgBoolean(
++          args[7],
++          this.meta.showCategoryHint
++        );
++        this.meta.includeCategory = SetArgBoolean(
++          args[8],
++          this.meta.includeCategory
++        );
++        this.meta.allowReset = SetArgBoolean(args[9], this.meta.allowReset);
++        this.meta.showReferenceCount = SetArgBoolean(
++          args[10],
++          this.meta.showReferenceCount
++        );
++
++        this.meta.sectionFillinIdx =
++          this.userContext.fillins.push(
++            ISectionFillinItemInitializer(
++              IDX_INITIALIZER,
++              this.meta.format,
++              this.meta.allowUserFormatting,
++              this.meta.groupDuplicates,
++              this.meta.sortOrder,
++              this.meta.gridColumns,
++              this.meta.allowReset,
++              this.meta.showReferenceCount
++            )
++          ) - 1;
++        for (
++          current = this.dataSource.nextRecord();
++          !this.dataSource.EOF() &&
++          current.recordType !== MarkdownRecordType.FILLIN_END;
++          current = this.dataSource.currentRecord()
++        ) {
++          let sectionNode: ISectionNode = GetSectionNode(
++            current.recordType,
++            this
+           );
+-          let valueWithoutPercentSign: string = args[2]
+-            .trim()
+-            .substring(0, args[2].length - 1); // remove % sign too
+-          assert(
+-            !isNaN(+valueWithoutPercentSign),
+-            `Expected a numerical value as third argument but encountered  "${valueWithoutPercentSign}" at line ${current.lineNo}`
++          this.meta.prompts.push(sectionNode);
++          this.logger.diagnostic(
++            `pushed section=${current.recordType} ${sectionNode.constructor.name} ${current.content}`
+           );
+-          this.meta.percent = valueWithoutPercentSign + "%";
+-        }
+-      } catch (e) {
+-        this.logger.warning((e as Error).message);
+-      }
+-      if (IsDefined(args[3])) this.meta.separator = args[3];
+-      current = this.dataSource.nextRecord();
+-      assert(
+-        current.tagType === MarkdownTagType.PARAGRAPH,
+-        `Expected "${MarkdownTagType.PARAGRAPH}" but encountered "${current.tagType}" at line ${current.lineNo}`
+-      );
+-      current = this.dataSource.nextRecord();
+-      assert(
+-        current.tagType === MarkdownTagType.SENTENCE,
+-        `Expected "${MarkdownTagType.SENTENCE}" but encountered "${current.tagType}" at line ${current.lineNo}`
+-      );
+-      // find list of images
+-      this.firstTermIdx = this.userContext.terminals.lastIdx + 1;
+-      let sentence: ISentenceNode = new SentenceNode(this);
+-      sentence.parse();
+-      for (const terminal of sentence.terminals) {
+-        if (terminal.type === TerminalMetaEnumType.image) {
+-          (<IImageTerminalMeta>terminal.meta).className = "imageentry-image";
+-          this.meta.images.push(terminal);
+-        }
+-      }
+-      assert(
+-        this.meta.images.length > 0,
+-        `Expected image declaraction(s) immediately following "${MarkdownTagType.IMAGEENTRY}" at line ${current.lineNo}`
+-      );
+-      current = this.dataSource.nextRecord();
+-      assert(
+-        current.tagType === MarkdownTagType.PARAGRAPH_END,
+-        `Expected "${MarkdownTagType.PARAGRAPH_END}" to "${MarkdownTagType.PARAGRAPH}" but encountered "${current.tagType}"  at line ${current.lineNo}`
+-      );
+-      // if (current.tagType === MarkdownTagType.PARAGRAPH_END) {
+-      //   this.lastTermIdx = this.userContext.terminals.lastIdx;
+-      //   this.id =
+-      //     this.userContext.sections.push(
+-      //       ISectionListItemInitializer(
+-      //         this.firstTermIdx,
+-      //         this.lastTermIdx,
+-      //         this.type.toString()
+-      //       )
+-      //     ) - 1;
+-      //   for (let idx = this.firstTermIdx; idx <= this.lastTermIdx; idx++) {
+-      //     this.userContext.terminals[idx].sectionIdx = this.id;
+-      //   }
+-      //   this.dataSource.nextRecord(); // move to next grouping
+-      // }
+-      //keep processing sections until imageentry_end
+-      for (
+-        current = this.dataSource.nextRecord();
+-        !this.dataSource.EOF() &&
+-        current.tagType !== MarkdownTagType.IMAGEENTRY_END;
+-        current = this.dataSource.currentRecord() // update current modified in parse()
+-      ) {
+-        let sectionNode: ISectionNode = GetSectionNode(current.tagType, this);
+-        this.meta.captions.push(sectionNode);
+-        this.logger.diagnostic(
+-          `pushed section=${current.tagType} ${sectionNode.constructor.name} ${current.content}`
+-        );
+-        sectionNode.parse();
+-        //        current = this.dataSource.currentRecord();
++          sectionNode.parse();
++          //        current = this.dataSource.currentRecord();
+ 
+-        if (current.tagType === MarkdownTagType.PARAGRAPH_END) {
+-          //////////
+-          // Presumably, PARAGRAPH created sectionList entry already
+-          //////////
++          if (current.recordType === MarkdownRecordType.PARAGRAPH_END) {
++            //////////
++            // Presumably, PARAGRAPH created sectionList entry already
++            //////////
++            // this.lastTermIdx = this.userContext.terminals.lastIdx;
++            // this.id =
++            //   this.userContext.sections.
++            //     )
++            //   ) - 1;
++            // for (let idx = this.firstTermIdx; idx <= this.lastTermIdx; idx++) {
++            //   this.userContext.terminals[idx].sectionIdx = this.id;
++            // }
++            this.dataSource.nextRecord(); // move to next grouping
++          }
++        }
++        if (current.recordType === MarkdownRecordType.FILLIN_END) {
++          this.lastTermIdx = this.userContext.terminals.lastIdx;
++          // added when addItem was called in parse_terminal_fillin
++          ////    this.meta.sectionFillinIdx = this.userContext.fillins.length - 1;
++          //     ISectionFillinItemInitializer(this.meta.groupDuplicates, true, [])
++          //   ) - 1;
+ 
+-          // this.lastTermIdx = this.userContext.terminals.lastIdx;
+           // this.id =
+-          //   this.userContext.sections.
++          //   this.userContext.sections.push(
++          //     ISectionImageEntryInitializer(
++          //       this.firstTermIdx,
++          //       this.lastTermIdx,
++          //       this.type.toString()
+           //     )
+           //   ) - 1;
+-          // for (let idx = this.firstTermIdx; idx <= this.lastTermIdx; idx++) {
+-          //   this.userContext.terminals[idx].sectionIdx = this.id;
+-          // }
++          ////        for (let idx = this.firstTermIdx; idx <= this.lastTermIdx; idx++) {
++          ////          this.userContext.terminals[idx].sectionIdx = this.id;
++          ////        }
+           this.dataSource.nextRecord(); // move to next grouping
+         }
++        ///////////////////
++        // get sectionFillinIdx AND the fillinTermIdx within the sectionFillin
++      } catch (e) {
++        this.logger.warning((e as Error).message);
+       }
+-      if (current.tagType === MarkdownTagType.IMAGEENTRY_END) {
+-        this.lastTermIdx = this.userContext.terminals.lastIdx;
+-        // this.id =
+-        //   this.userContext.sections.push(
+-        //     ISectionImageEntryInitializer(
+-        //       this.firstTermIdx,
+-        //       this.lastTermIdx,
+-        //       this.type.toString()
+-        //     )
+-        //   ) - 1;
+-        ////        for (let idx = this.firstTermIdx; idx <= this.lastTermIdx; idx++) {
+-        ////          this.userContext.terminals[idx].sectionIdx = this.id;
+-        ////        }
+-        this.dataSource.nextRecord(); // move to next grouping
+-      }
++      this.dataSource.nextRecord(); // move to next grouping
++      // }
+     } catch (e) {
+       this.dataSource.nextRecord(); // move to next grouping
+       if (IsError(e)) {
+@@ -195,36 +187,30 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
+     let outputStr: string = "";
+     switch (format) {
+       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
+-        label += `: title="${this.meta.title}", layout=${this.meta.layout}, width=${this.meta.percent}`;
+-        outputStr = `${super.serialize(format, label, prefix)}`;
+-        outputStr = `${outputStr}${super.serialize(
+-          format,
+-          "images:",
+-          prefix + "| "
+-        )}`;
+-        for (const [i, image] of this.meta.images.entries()) {
+-          let imageNode: IImageTerminalMeta = image.meta as IImageTerminalMeta;
+-          outputStr = `${outputStr}${super.serialize(
+-            format,
+-            imageNode.src,
+-            prefix + "| " + (i < this.meta.images.length - 1 ? "| " : "  ")
+-          )}`;
+-        }
+-        for (const [i, section] of this.meta.captions.entries()) {
+-          let sectionNode: ISectionNode = section as ISectionNode;
++        outputStr = `${super.serialize(format, label, prefix)}: "${
++          this.meta.title
++        }", "${this.meta.label}", sectionFillinIdx=${
++          this.meta.sectionFillinIdx
++        }, format=${this.meta.format}, sort=${this.meta.sortOrder}, groupDups=${
++          this.meta.groupDuplicates
++        }, showHints=${this.meta.showCategoryHint}, gridColumns=${
++          this.meta.gridColumns
++        }, allowReset=${this.meta.allowReset}`;
++        // if (
++        //   this.meta.sectionFillinIdx >= 0 &&
++        //   this.userContext.fillins[this.meta.sectionFillinIdx] !== undefined
++        // ) {
++        //   let fillinList: IFillinItem[] = this.userContext.fillins[
++        //     this.meta.sectionFillinIdx
++        //   ].fillinList;
++        for (const [i, prompt] of this.meta.prompts.entries()) {
++          let sectionNode: ISectionNode = prompt as ISectionNode;
+           outputStr = `${outputStr}${sectionNode.serialize(
+             format,
+-            `captions: (${section.type})`,
+-            prefix + (i < this.meta.captions.length - 1 ? "| " : "  ")
++            `prompts: (${prompt.type})`,
++            prefix + "| " + (i < this.meta.prompts.length - 1 ? "| " : "  ")
+           )}`;
+         }
+-        //     format,
+-        //     label,
+-        //     //            prefix + " ".padEnd(2)
+-        //     prefix + (i < this.meta.sentences.length - 1 ? "| " : "  ")
+-        //   )}`;
+-        // }
+-        //        outputStr = outputStr.slice(0, -1);
+         break;
+       }
+       case ParseNodeSerializeFormatEnumType.TABULAR: {
+diff --git a/src/parsesections_heading.ts b/src/parsesections_heading.ts
+index 9a963e9..88bae40 100644
+--- a/src/parsesections_heading.ts
++++ b/src/parsesections_heading.ts
+@@ -18,9 +18,9 @@ import { MarkdownRecordType, TaggedStringType } from "./dataadapter";
+ import {
+   ISectionContent,
+   ISectionHeadingVariant,
+-  ISectionHeadingVariant1,
++  //ISectionHeadingVariant1,
+   ISectionHeadingVariantInitializer,
+-  ISectionHeadingVariantInitializer1,
++  //ISectionHeadingVariantInitializer1,
+   SectionVariantEnumType
+ } from "./pageContentType";
+ import { IPageNode } from "./parsepages";
+@@ -46,7 +46,7 @@ export class SectionParseNode_HEADING extends SectionParseNode
+     try {
+       let current: TaggedStringType = this.dataSource.currentRecord();
+       assert(
+-        current.tagType === MarkdownRecordType.HEADING,
++        current.recordType === MarkdownRecordType.HEADING,
+         `expected ${MarkdownRecordType.HEADING} at line ${current.lineNo}`
+       );
+       this.firstTermIdx = this.userContext.terminals.lastIdx + 1;
+@@ -55,12 +55,12 @@ export class SectionParseNode_HEADING extends SectionParseNode
+       this.meta.heading = sentence;
+ 
+       //   !this.dataSource.EOF() &&
+-      //   current.tagType !== MarkdownRecordType.PARAGRAPH_END;
++      //   current.recordType !== MarkdownRecordType.PARAGRAPH_END;
+       //   current = this.dataSource.nextRecord()
+       // ) {
+       //   assert(
+-      //     current.tagType === MarkdownRecordType.SENTENCE,
+-      //     `encountered ${current.tagType} expected ${MarkdownRecordType.SENTENCE} at line ${current.lineNo}`
++      //     current.recordType === MarkdownRecordType.SENTENCE,
++      //     `encountered ${current.recordType} expected ${MarkdownRecordType.SENTENCE} at line ${current.lineNo}`
+       //   );
+       //   let sentence: ISentenceNode = new SentenceNode(this);
+       //   this.meta.sentences.push(sentence);
+diff --git a/src/parsesections_images.ts b/src/parsesections_images.ts
+index d0d1cec..ceadd2e 100644
+--- a/src/parsesections_images.ts
++++ b/src/parsesections_images.ts
+@@ -19,16 +19,16 @@ import {
+   ImageEntryLayoutEnumType,
+   ISectionImageEntryVariantInitializer,
+   ISectionImageEntryVariant,
+-  ISectionListItemInitializer,
+-  ISectionParagraphVariant,
+-  ISectionParagraphVariantInitializer,
+-  ITerminalContent,
++  // ISectionListItemInitializer,
++  // ISectionParagraphVariant,
++  // ISectionParagraphVariantInitializer,
++  // ITerminalContent,
+   SectionVariantEnumType,
+   TerminalMetaEnumType,
+   IImageTerminalMeta
+ } from "./pageContentType";
+ import { GetSectionNode } from "./parsesectiondispatch";
+-import { ITerminalNode } from "./parseterminals";
++// import { ITerminalNode } from "./parseterminals";
+ import { IPageNode } from "./parsepages";
+ import { ISectionNode } from "./parsesections";
+ import { SectionParseNode_LIST } from "./parsesections";
+@@ -50,11 +50,11 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
+       assert(current !== undefined, `Undefined record encountered`);
+ 
+       assert(
+-        current.tagType === MarkdownRecordType.IMAGEENTRY,
++        current.recordType === MarkdownRecordType.IMAGEENTRY,
+         `Expected "${MarkdownRecordType.IMAGEENTRY}" at line ${current.lineNo}`
+       );
+       let args: string[] = current.content.split(",").map(arg => arg.trim());
+-      if (IsDefined(args[0])) this.meta.title = args[0];
++      if (IsDefined(args[0])) this.meta.title = args[0].trim();
+       try {
+         if (IsDefined(args[1])) {
+           let layout = args[1].trim().toLowerCase();
+@@ -89,13 +89,13 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
+       if (IsDefined(args[3])) this.meta.separator = args[3];
+       current = this.dataSource.nextRecord();
+       assert(
+-        current.tagType === MarkdownRecordType.PARAGRAPH,
+-        `Expected "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.tagType}" at line ${current.lineNo}`
++        current.recordType === MarkdownRecordType.PARAGRAPH,
++        `Expected "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.recordType}" at line ${current.lineNo}`
+       );
+       current = this.dataSource.nextRecord();
+       assert(
+-        current.tagType === MarkdownRecordType.SENTENCE,
+-        `Expected "${MarkdownRecordType.SENTENCE}" but encountered "${current.tagType}" at line ${current.lineNo}`
++        current.recordType === MarkdownRecordType.SENTENCE,
++        `Expected "${MarkdownRecordType.SENTENCE}" but encountered "${current.recordType}" at line ${current.lineNo}`
+       );
+       // find list of images
+       this.firstTermIdx = this.userContext.terminals.lastIdx + 1;
+@@ -113,10 +113,10 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
+       );
+       current = this.dataSource.nextRecord();
+       assert(
+-        current.tagType === MarkdownRecordType.PARAGRAPH_END,
+-        `Expected "${MarkdownRecordType.PARAGRAPH_END}" to "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.tagType}"  at line ${current.lineNo}`
++        current.recordType === MarkdownRecordType.PARAGRAPH_END,
++        `Expected "${MarkdownRecordType.PARAGRAPH_END}" to "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.recordType}"  at line ${current.lineNo}`
+       );
+-      // if (current.tagType === MarkdownRecordType.PARAGRAPH_END) {
++      // if (current.recordType === MarkdownRecordType.PARAGRAPH_END) {
+       //   this.lastTermIdx = this.userContext.terminals.lastIdx;
+       //   this.id =
+       //     this.userContext.sections.push(
+@@ -135,18 +135,21 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
+       for (
+         current = this.dataSource.nextRecord();
+         !this.dataSource.EOF() &&
+-        current.tagType !== MarkdownRecordType.IMAGEENTRY_END;
++        current.recordType !== MarkdownRecordType.IMAGEENTRY_END;
+         current = this.dataSource.currentRecord() // update current modified in parse()
+       ) {
+-        let sectionNode: ISectionNode = GetSectionNode(current.tagType, this);
++        let sectionNode: ISectionNode = GetSectionNode(
++          current.recordType,
++          this
++        );
+         this.meta.captions.push(sectionNode);
+         this.logger.diagnostic(
+-          `pushed section=${current.tagType} ${sectionNode.constructor.name} ${current.content}`
++          `pushed section=${current.recordType} ${sectionNode.constructor.name} ${current.content}`
+         );
+         sectionNode.parse();
+         //        current = this.dataSource.currentRecord();
+ 
+-        if (current.tagType === MarkdownRecordType.PARAGRAPH_END) {
++        if (current.recordType === MarkdownRecordType.PARAGRAPH_END) {
+           //////////
+           // Presumably, PARAGRAPH created sectionList entry already
+           //////////
+@@ -162,7 +165,7 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
+           this.dataSource.nextRecord(); // move to next grouping
+         }
+       }
+-      if (current.tagType === MarkdownRecordType.IMAGEENTRY_END) {
++      if (current.recordType === MarkdownRecordType.IMAGEENTRY_END) {
+         this.lastTermIdx = this.userContext.terminals.lastIdx;
+         // this.id =
+         //   this.userContext.sections.push(
+diff --git a/src/parsesections_listitem.ts b/src/parsesections_listitem.ts
+index c2a2ac9..f64052c 100644
+--- a/src/parsesections_listitem.ts
++++ b/src/parsesections_listitem.ts
+@@ -35,8 +35,8 @@ abstract class SectionParseNode_SECTION extends SectionParseNode_LIST
+       let current: TaggedStringType = this.dataSource.currentRecord();
+       assert(current !== undefined, `current record is undefined`);
+       assert(
+-        current.tagType === MarkdownRecordType.SECTION_ORDERED ||
+-          current.tagType === MarkdownRecordType.SECTION_UNORDERED,
++        current.recordType === MarkdownRecordType.SECTION_ORDERED ||
++          current.recordType === MarkdownRecordType.SECTION_UNORDERED,
+         `expected ${MarkdownRecordType.SECTION_ORDERED} or ${MarkdownRecordType.SECTION_UNORDERED} at line ${current.lineNo}`
+       );
+       this.meta.depth = current.depth;
+@@ -44,13 +44,13 @@ abstract class SectionParseNode_SECTION extends SectionParseNode_LIST
+       for (
+         current = this.dataSource.currentRecord();
+         !this.dataSource.EOF() &&
+-        current.tagType !== MarkdownRecordType.SECTION_END; //&& current.depth === previous.depth; //      current = this.dataSource.nextRecord()
++        current.recordType !== MarkdownRecordType.SECTION_END; //&& current.depth === previous.depth; //      current = this.dataSource.nextRecord()
+ 
+       ) {
+-        switch (current.tagType) {
++        switch (current.recordType) {
+           case MarkdownRecordType.SECTION_ORDERED:
+           case MarkdownRecordType.SECTION_UNORDERED: {
+-            let subsection = GetSectionNode(current.tagType, this);
++            let subsection = GetSectionNode(current.recordType, this);
+             this.items.push(subsection);
+             this.logger.diagnostic(
+               `pushed list section ${current.content} at ${current.lineNo}`
+@@ -60,7 +60,7 @@ abstract class SectionParseNode_SECTION extends SectionParseNode_LIST
+           }
+           case MarkdownRecordType.LISTITEM_ORDERED:
+           case MarkdownRecordType.LISTITEM_UNORDERED: {
+-            let listItem = GetSectionNode(current.tagType, this);
++            let listItem = GetSectionNode(current.recordType, this);
+             this.items.push(listItem);
+             this.logger.diagnostic(
+               `pushed list item ${current.content} at ${current.lineNo}`
+@@ -69,16 +69,16 @@ abstract class SectionParseNode_SECTION extends SectionParseNode_LIST
+             break;
+           }
+           default: {
+-            assert(`unexpected markdown tag ${current.tagType} encountered`);
++            assert(`unexpected markdown tag ${current.recordType} encountered`);
+           }
+         }
+         current = this.dataSource.currentRecord(); // update current within this scope
+       }
+       assert(
+-        current.tagType === MarkdownRecordType.SECTION_END,
++        current.recordType === MarkdownRecordType.SECTION_END,
+         `expected ${MarkdownRecordType.SECTION_END} at line ${current.lineNo}`
+       );
+-      if (current.tagType === MarkdownRecordType.SECTION_END)
++      if (current.recordType === MarkdownRecordType.SECTION_END)
+         this.dataSource.nextRecord();
+     } catch (e) {
+       if (IsError(e)) {
+@@ -123,26 +123,29 @@ abstract class SectionParseNode_LISTITEM extends SectionParseNode_LIST
+       let current: TaggedStringType = this.dataSource.currentRecord();
+       assert(current !== undefined, `current record is undefined`);
+       assert(
+-        current.tagType === MarkdownRecordType.LISTITEM_ORDERED ||
+-          current.tagType === MarkdownRecordType.LISTITEM_UNORDERED,
++        current.recordType === MarkdownRecordType.LISTITEM_ORDERED ||
++          current.recordType === MarkdownRecordType.LISTITEM_UNORDERED,
+         `expected ${MarkdownRecordType.LISTITEM_ORDERED} or ${MarkdownRecordType.LISTITEM_UNORDERED} at line ${current.lineNo}`
+       );
+       for (
+         current = this.dataSource.nextRecord();
+         !this.dataSource.EOF() &&
+-        current.tagType !== MarkdownRecordType.LISTITEM_END; //      current = this.dataSource.nextRecord()
++        current.recordType !== MarkdownRecordType.LISTITEM_END; //      current = this.dataSource.nextRecord()
+ 
+       ) {
+         assert(
+-          current.tagType === MarkdownRecordType.SECTION_ORDERED ||
+-            current.tagType === MarkdownRecordType.SECTION_UNORDERED ||
+-            current.tagType === MarkdownRecordType.PARAGRAPH ||
+-            `expected ${MarkdownRecordType.PARAGRAPH},  ${MarkdownRecordType.SECTION_ORDERED} or ${MarkdownRecordType.SECTION_UNORDERED} but encountered ${current.tagType}`
++          current.recordType === MarkdownRecordType.SECTION_ORDERED ||
++            current.recordType === MarkdownRecordType.SECTION_UNORDERED ||
++            current.recordType === MarkdownRecordType.PARAGRAPH ||
++            `expected ${MarkdownRecordType.PARAGRAPH},  ${MarkdownRecordType.SECTION_ORDERED} or ${MarkdownRecordType.SECTION_UNORDERED} but encountered ${current.recordType}`
+         );
+ 
+-        switch (current.tagType) {
++        switch (current.recordType) {
+           case MarkdownRecordType.PARAGRAPH: {
+-            let paragraph: ISectionNode = GetSectionNode(current.tagType, this);
++            let paragraph: ISectionNode = GetSectionNode(
++              current.recordType,
++              this
++            );
+             this.items.push(paragraph);
+             this.logger.diagnostic(
+               `pushed paragraph ${current.content} at ${current.lineNo}`
+@@ -152,7 +155,10 @@ abstract class SectionParseNode_LISTITEM extends SectionParseNode_LIST
+           }
+           case MarkdownRecordType.SECTION_ORDERED:
+           case MarkdownRecordType.SECTION_UNORDERED: {
+-            let section: ISectionNode = GetSectionNode(current.tagType, this);
++            let section: ISectionNode = GetSectionNode(
++              current.recordType,
++              this
++            );
+             this.items.push(section);
+             this.logger.diagnostic(
+               `pushed list subsection ${current.content} at ${current.lineNo}`
+@@ -161,12 +167,12 @@ abstract class SectionParseNode_LISTITEM extends SectionParseNode_LIST
+             break;
+           }
+           default: {
+-            assert(`unexpected markdown tag ${current.tagType} encountered`);
++            assert(`unexpected markdown tag ${current.recordType} encountered`);
+           }
+         }
+         current = this.dataSource.currentRecord(); // update current within this scope
+       }
+-      if (current.tagType === MarkdownRecordType.LISTITEM_END) {
++      if (current.recordType === MarkdownRecordType.LISTITEM_END) {
+         this.dataSource.nextRecord(); // move passed LISTITEM_END
+       }
+     } catch (e) {
+diff --git a/src/parsesections_paragraph.ts b/src/parsesections_paragraph.ts
+index 8071fd2..ca82c96 100644
+--- a/src/parsesections_paragraph.ts
++++ b/src/parsesections_paragraph.ts
+@@ -41,19 +41,19 @@ export class SectionParseNode_PARAGRAPH extends SectionParseNode_LIST
+       let current: TaggedStringType = this.dataSource.currentRecord();
+       assert(current !== undefined, `current record is undefined`);
+       assert(
+-        current.tagType === MarkdownRecordType.PARAGRAPH,
++        current.recordType === MarkdownRecordType.PARAGRAPH,
+         `expected ${MarkdownRecordType.PARAGRAPH} at line ${current.lineNo}`
+       );
+       this.firstTermIdx = this.userContext.terminals.lastIdx + 1;
+       for (
+         current = this.dataSource.nextRecord();
+         !this.dataSource.EOF() &&
+-        current.tagType !== MarkdownRecordType.PARAGRAPH_END;
++        current.recordType !== MarkdownRecordType.PARAGRAPH_END;
+         current = this.dataSource.nextRecord()
+       ) {
+         assert(
+-          current.tagType === MarkdownRecordType.SENTENCE,
+-          `encountered ${current.tagType} expected ${MarkdownRecordType.SENTENCE} at line ${current.lineNo}`
++          current.recordType === MarkdownRecordType.SENTENCE,
++          `encountered ${current.recordType} expected ${MarkdownRecordType.SENTENCE} at line ${current.lineNo}`
+         );
+         let sentence: ISentenceNode = new SentenceNode(this);
+         this.meta.sentences.push(sentence);
+@@ -61,10 +61,10 @@ export class SectionParseNode_PARAGRAPH extends SectionParseNode_LIST
+         current = this.dataSource.currentRecord(); // update current within this scope
+       }
+       assert(
+-        current.tagType === MarkdownRecordType.PARAGRAPH_END,
++        current.recordType === MarkdownRecordType.PARAGRAPH_END,
+         `expected ${MarkdownRecordType.PARAGRAPH_END} to ${MarkdownRecordType.PARAGRAPH}`
+       );
+-      if (current.tagType === MarkdownRecordType.PARAGRAPH_END) {
++      if (current.recordType === MarkdownRecordType.PARAGRAPH_END) {
+         this.lastTermIdx = this.userContext.terminals.lastIdx;
+         this.id =
+           this.userContext.sections.push(
+diff --git a/src/parseterminals_acronym.ts b/src/parseterminals_acronym.ts
+index e23bc54..ff67459 100644
+--- a/src/parseterminals_acronym.ts
++++ b/src/parseterminals_acronym.ts
+@@ -1,6 +1,6 @@
+-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
++/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
+  *
+- * File name: parsesections_acronym.ts
++ * File name: parseterminals_acronym.ts
+  *
+  * Create terminal acronym objects from serialized input.
+  *
+diff --git a/src/parseterminals_fillin.ts b/src/parseterminals_fillin.ts
+index 822883a..460e645 100644
+--- a/src/parseterminals_fillin.ts
++++ b/src/parseterminals_fillin.ts
+@@ -25,6 +25,7 @@ import {
+ import {
+   TerminalMetaEnumType,
+   ITerminalInfo,
++  IWordTerminalMeta,
+   ITerminalInfoInitializer,
+   IFillinTerminalMeta,
+   IFillinTerminalMetaInitializer
+@@ -62,7 +63,8 @@ export class TerminalNode_MLTAG_FILLIN extends TerminalNode_MLTAG_
+       // is identified instead of using multiple consecutive single-token
+       // fillins.
+       // Use ITerminalContent so that multiple token types can be parsed e.g.,
+-      // WORD, DATE
++      // WORD, DATE, PHONENUMBER.
++      let termIdx: number;
+       for (
+         token = tokenList[0];
+         token !== undefined &&
+@@ -72,16 +74,46 @@ export class TerminalNode_MLTAG_FILLIN extends TerminalNode_MLTAG_
+       ) {
+         assert(token !== undefined, `undefined token detected`);
+         let terminalNode: ITerminalNode = GetTerminalNode(token, this._parent);
++        // SHOULD report whether terminal type is supported then unwind/move
++        // to next valid terminal.
+         if (terminalNode) {
+           this.logger.diagnostic(
+             `Created terminalNode type=${terminalNode.constructor.name} for "${token.content}"`
+           );
+-          terminalNode.parse(tokenList); // responsible for advancing tokenlist
+-          // assumed added in parse() above
+-          this.meta.terminals.push(terminalNode);
++          terminalNode.parse(tokenList);
++          // even though the actual fill-in can be compound, the fillin list
++          // need only contain the complete content for unparsed/unrecitable
++          // response table display AMD calculating reference count when
++          // grouping duplicates
++          termIdx = this.meta.terminals.push(terminalNode);
+           this.content += terminalNode.content;
+-          //  this.userContext.terminals[terminalNode.termIdx].linkable = true;
+-          this.content = terminalNode.content;
++          // [
++          //   this.meta.sectionIdx,
++          //   this.meta.responseIdx
++          // ] = this.userContext.fillins.addResponse(this.content);
++          let responseIdx: number;
++          let fillinSectionIdx: number;
++          [
++            fillinSectionIdx,
++            responseIdx
++          ] = this.userContext.fillins.addResponse(this.content);
++          (<ITerminalInfo>terminalNode.meta).fillin.responseIdx = responseIdx;
++          this.meta.sectionFillinIdx = fillinSectionIdx;
++          this.userContext.terminals[
++            terminalNode.termIdx
++          ].fillin.responseIdx = responseIdx;
++          this.userContext.terminals[
++            terminalNode.termIdx
++          ].fillin.sectionIdx = fillinSectionIdx;
++          // console.log(
++          //   `Terminal_fillin: termIdx=${terminalNode.termIdx},  sectionIdx=${
++          //     this.userContext.terminals[terminalNode.termIdx].fillin.sectionIdx
++          //   }, responseIdx=${
++          //     this.userContext.terminals[terminalNode.termIdx].fillin
++          //       .responseIdx
++          //   }`
++          // );
++          // if recitable then push into prompts
+         }
+       }
+       assert(
+@@ -90,6 +122,18 @@ export class TerminalNode_MLTAG_FILLIN extends TerminalNode_MLTAG_
+           MarkupLabelType.FILLIN
+         )}" parsing fillin`
+       );
++      if (this.meta.terminals.length > 0) {
++        // loop through terminals and push recitable fillins into
++        // prompts and set promptIdx = push() and update responseIdx
++        this.firstTermIdx = this.meta.terminals[0].firstTermIdx;
++        this.lastTermIdx = this.meta.terminals[
++          this.meta.terminals.length - 1
++        ].lastTermIdx;
++        // lastTerminalIdx - firstTerminalIdx as visible offset
++        // for (const [key, terminal] of Object(this.meta.terminals)) {
++        //   if (terminal.recitable) // prompts.push(terminalIdx, responseIdx)
++        // }
++      }
+       token = tokenList.shift()!; // discard </fillin> endtag
+     } catch (e) {
+       if (IsError(e)) {
+@@ -114,7 +158,7 @@ export class TerminalNode_MLTAG_FILLIN extends TerminalNode_MLTAG_
+     //    let outputStr1: string = "";
+     switch (format) {
+       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
+-        label = `<fillin>`;
++        label = `fillin: section:${this.meta.sectionFillinIdx}`;
+         outputStr = super.serialize(format, label, prefix);
+         for (const [i, terminal] of this.meta.terminals.entries()) {
+           label = `${terminal.type}`;
+diff --git a/src/parseterminals_image.ts b/src/parseterminals_image.ts
+index 45f2c84..5bf6014 100644
+--- a/src/parseterminals_image.ts
++++ b/src/parseterminals_image.ts
+@@ -106,7 +106,7 @@ export class TerminalNode_MLTAG_IMAGE extends TerminalNode_MLTAG_
+         `Expected right parenthesis but encountered "${token.content}" while parsing image`
+       );
+       let chunks: string[] = src.split(",").map(chunk => chunk.trim());
+-      if (IsDefined(chunks[0])) this.meta.src = chunks[0];
++      if (IsDefined(chunks[0])) this.meta.src = chunks[0].trim();
+       if (IsDefined(chunks[1])) this.meta.width = +chunks[1]; // no units; assumed px
+       if (IsDefined(chunks[2])) this.meta.height = +chunks[2]; // no units; assumed px
+       if (IsDefined(chunks[3])) this.meta.attributes = chunks[3];
+diff --git a/src/tokenizer.ts b/src/tokenizer.ts
+index 3b7c1ab..e8a6f3f 100644
+--- a/src/tokenizer.ts
++++ b/src/tokenizer.ts
+@@ -492,10 +492,8 @@ export class Tokenizer {
+     let result: string = sentence;
+     /// this.logger.diagnosticMode = true;
+     try {
+-      console.log(`source sentence: ${sentence}`);
+       result = this.insertMarkupTags(sentence);
+       result = this.replaceMarkdownTags(result);
+-      console.log(`marked up sentence: ${result}`);
+     } catch (e) {
+       if (IsError(e)) {
+         this.logger.error(
+diff --git a/src/utilities.ts b/src/utilities.ts
+index 1e66297..fab21ae 100644
+--- a/src/utilities.ts
++++ b/src/utilities.ts
+@@ -54,6 +54,22 @@ export const FileExists = (path: string): boolean => {
+     return false;
+   }
+ };
++export const SetArgBoolean = (arg: string, defaultValue: boolean) => {
++  const acceptedTrues = ["true", "t", "yes", "y"];
++  let result: boolean = defaultValue;
++  if (IsDefined(arg)) {
++    result = acceptedTrues.includes(arg.toLowerCase()) ? true : false;
++  }
++  return result;
++};
++export const SetArgWholeNumber = (arg: string, defaultValue: number) => {
++  let result: number = defaultValue;
++  if (IsDefined(arg)) {
++    result = /^\d+$/.test(arg) ? +arg : defaultValue;
++  }
++  return result;
++};
++
+ function WildcardToRegex(pattern: string) {
+   // some problems with multiple *
+   return "^" + pattern.replace("*", ".*").replace("?", ".") + "$";

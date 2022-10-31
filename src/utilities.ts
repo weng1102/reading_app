@@ -54,6 +54,22 @@ export const FileExists = (path: string): boolean => {
     return false;
   }
 };
+export const SetArgBoolean = (arg: string, defaultValue: boolean) => {
+  const acceptedTrues = ["true", "t", "yes", "y"];
+  let result: boolean = defaultValue;
+  if (IsDefined(arg)) {
+    result = acceptedTrues.includes(arg.toLowerCase()) ? true : false;
+  }
+  return result;
+};
+export const SetArgWholeNumber = (arg: string, defaultValue: number) => {
+  let result: number = defaultValue;
+  if (IsDefined(arg)) {
+    result = /^\d+$/.test(arg) ? +arg : defaultValue;
+  }
+  return result;
+};
+
 function WildcardToRegex(pattern: string) {
   // some problems with multiple *
   return "^" + pattern.replace("*", ".*").replace("?", ".") + "$";

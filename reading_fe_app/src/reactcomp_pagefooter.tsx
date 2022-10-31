@@ -189,9 +189,11 @@ export const LinkButton = () => {
   let dispatch = useAppDispatch();
   let pageContext: CPageLists = useContext(PageContext)!;
   let icon: string;
-  let active: boolean;
+  let active: boolean = false;
   let termIdx = useAppSelector(store => store.cursor_terminalIdx);
-  active = pageContext.terminalList[termIdx].linkIdx >= 0;
+  if (termIdx >= 0 && termIdx < pageContext.terminalList.length) {
+    active = pageContext.terminalList[termIdx].linkIdx >= 0;
+  }
   if (active) {
     icon = gotoLinkIcon;
   } else {
