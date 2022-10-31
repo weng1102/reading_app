@@ -33,7 +33,9 @@ import {
   ITerminalInfoInitializer,
   IFillinTerminalMeta,
   SectionVariantEnumType,
-  SectionFillinFormatType,
+  SectionFillinLayoutType,
+  SectionFillinSortOrder,
+  sortOrderToLabel,
   TerminalMetaEnumType
 } from "./pageContentType";
 import { GetSectionNode } from "./parsesectiondispatch";
@@ -63,51 +65,85 @@ export class SectionParseNode_FILLIN extends SectionParseNode_LIST
         `Expected "${MarkdownRecordTagType.FILLIN}" at line ${current.lineNo}`
       );
       // See sectionFillinVariant
+      /*
+      [0]  response title
+      [1]  response label such as instructions
+      [2]  layout { grid | bulleted list | csv }
+      [3]  grid column as number (only with layout=grid)
+      [4]  sort order { a[lphabetical] | i[nsertOrder] (default) | r[andom] }
+      [5]  unique only: boolean, remove duplicate responses and refCount++
+      [6]  showReferenceCount: boolean, shows in responses iff <> 1
+      [7]  groupByCategory: boolean, groups responses by category e.g., verbs
+      [8]  allowReset: boolean, allows user to reset responses already spoken
+      [9]  showResponseHints: boolean, show hints within responses
+      [10] showPromptHints: boolean,show hints within prompts
+      [11] allowFormatting: boolean, allow user to change format
+      [12] number of columns when displaying prompts
+      */
       try {
         let args: string[] = current.content.split(",").map(arg => arg.trim());
-        if (IsDefined(args[0])) this.meta.title = args[0].trim();
-        if (IsDefined(args[1])) this.meta.label = args[1].trim();
-        if (IsDefined(args[2]) && args[2] in SectionFillinFormatType) {
-          this.meta.format = args[2] as SectionFillinFormatType;
+        if (IsDefined(args[0])) this.meta.responsesLabel = args[0].trim();
+        if (IsDefined(args[1])) this.meta.promptsLabel = args[1].trim();
+        if (IsDefined(args[2]) && args[2] in SectionFillinLayoutType) {
+          this.meta.layout = args[2] as SectionFillinLayoutType;
         }
-        this.meta.allowUserFormatting = SetArgBoolean(
-          args[3],
-          this.meta.allowUserFormatting
-        );
-        this.meta.sortOrder = SetArgBoolean(args[4], this.meta.sortOrder);
-        this.meta.groupDuplicates = SetArgBoolean(
-          args[5],
-          this.meta.groupDuplicates
-        );
         this.meta.gridColumns = SetArgWholeNumber(
-          args[6],
+          args[3],
           this.meta.gridColumns
         );
-        this.meta.showCategoryHint = SetArgBoolean(
-          args[7],
-          this.meta.showCategoryHint
-        );
-        this.meta.includeCategory = SetArgBoolean(
-          args[8],
-          this.meta.includeCategory
-        );
-        this.meta.allowReset = SetArgBoolean(args[9], this.meta.allowReset);
+        let sortOrder: string = args[4].trim();
+        switch (sortOrder[0]) {
+          case SectionFillinSortOrder.alphabetical.toString()[0]:
+            this.meta.sortOrder = SectionFillinSortOrder.alphabetical;
+            break;
+          case SectionFillinSortOrder.random.toString()[0]:
+            this.meta.sortOrder = SectionFillinSortOrder.random;
+            break;
+          default:
+            this.meta.sortOrder = SectionFillinSortOrder.insert;
+            break;
+        }
+        this.meta.unique = SetArgBoolean(args[5], this.meta.unique);
         this.meta.showReferenceCount = SetArgBoolean(
-          args[10],
+          args[6],
           this.meta.showReferenceCount
+        );
+        this.meta.groupByCategory = SetArgBoolean(
+          args[7],
+          this.meta.groupByCategory
+        );
+        this.meta.allowReset = SetArgBoolean(args[8], this.meta.allowReset);
+        this.meta.showResponseHints = SetArgBoolean(
+          args[9],
+          this.meta.showResponseHints
+        );
+        this.meta.showPromptHints = SetArgBoolean(
+          args[10],
+          this.meta.showPromptHints
+        );
+        this.meta.allowUserFormatting = SetArgBoolean(
+          args[11],
+          this.meta.allowUserFormatting
+        );
+        this.meta.promptColumns = SetArgWholeNumber(
+          args[12],
+          this.meta.promptColumns
         );
 
         this.meta.sectionFillinIdx =
           this.userContext.fillins.push(
             ISectionFillinItemInitializer(
               IDX_INITIALIZER,
-              this.meta.format,
-              this.meta.allowUserFormatting,
-              this.meta.groupDuplicates,
-              this.meta.sortOrder,
+              this.meta.layout,
               this.meta.gridColumns,
+              this.meta.sortOrder,
+              this.meta.unique,
+              this.meta.showReferenceCount,
+              this.meta.groupByCategory,
+              this.meta.showResponseHints,
               this.meta.allowReset,
-              this.meta.showReferenceCount
+              this.meta.allowUserFormatting,
+              this.meta.promptColumns
             )
           ) - 1;
         for (
@@ -187,15 +223,23 @@ export class SectionParseNode_FILLIN extends SectionParseNode_LIST
     let outputStr: string = "";
     switch (format) {
       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
-        outputStr = `${super.serialize(format, label, prefix)}: "${
-          this.meta.title
-        }", "${this.meta.label}", sectionFillinIdx=${
+        outputStr = `${super.serialize(format, label, prefix)}: response:"${
+          this.meta.responsesLabel
+        }", prompt:"${this.meta.promptsLabel}",  sectionFillinIdx=${
           this.meta.sectionFillinIdx
-        }, format=${this.meta.format}, sort=${this.meta.sortOrder}, groupDups=${
-          this.meta.groupDuplicates
-        }, showHints=${this.meta.showCategoryHint}, gridColumns=${
-          this.meta.gridColumns
-        }, allowReset=${this.meta.allowReset}`;
+        }, ${this.meta.layout}, ${sortOrderToLabel(
+          this.meta.sortOrder
+        )}, gridColumns=${this.meta.gridColumns}, ${
+          this.meta.unique ? "unique" : ""
+        },${this.meta.showReferenceCount ? "showReferenceCount" : ""}, ${
+          this.meta.showResponseHints ? "showResponseHints" : ""
+        }, ${this.meta.groupByCategory ? "groupByCategory" : ""}, ${
+          this.meta.showResponseHints ? "showResponseHints" : ""
+        }, ${this.meta.showPromptHints ? "showPromptHints" : ""}, ${
+          this.meta.allowReset ? "allowReset" : ""
+        }, ${
+          this.meta.allowUserFormatting ? "allowUserFormatting" : ""
+        }, promptColumns=${this.meta.promptColumns}`;
         // if (
         //   this.meta.sectionFillinIdx >= 0 &&
         //   this.userContext.fillins[this.meta.sectionFillinIdx] !== undefined

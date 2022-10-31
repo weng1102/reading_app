@@ -25,7 +25,9 @@ import {
   ITerminalListItem,
   ILinkListItem,
   ISectionFillinItem,
-  ISectionFillinItemInitializer
+  ISectionFillinItemInitializer,
+  SectionFillinSortOrder,
+  sortOrderToLabel
 } from "./pageContentType";
 export const TREEVIEW_PREFIX = "+-";
 export const IDX_INITIALIZER = -9999;
@@ -150,13 +152,7 @@ class FillinArray extends Array<ISectionFillinItem> {
     super(...args);
   }
   parse(): number {
-    // if sortOrder, then sort by .content
-    // let el: ISectionFillinList;
-    // this.sort();
-    // this.length = 0;
-    // for (el of unsorted.sort()) {
-    //   this.push(el);
-    // }
+    // category i.e., part of speech) lookup.
     return this.length;
   }
   push(sectionList: ISectionFillinItem): number {
@@ -171,23 +167,12 @@ class FillinArray extends Array<ISectionFillinItem> {
     let fillinIdx: number;
     if (this.length === 0) this.push(ISectionFillinItemInitializer());
     fillinListIdx = this.length - 1;
-    // // this is not perfect if responses are themselves duplicates e.g.,
-    // // single (repeating digits or letters. i.e., acronymms
-    // let duplicateIdx = this[fillinListIdx].responses.findIndex(
-    //   element => element.content === item
-    // );
-    // if (this[fillinListIdx].groupDuplicates && duplicateIdx >= 0) {
-    //   this[fillinListIdx].responses[duplicateIdx].referenceCount++;
-    //   fillinIdx = duplicateIdx;
-    // } else {
     fillinIdx =
       this[fillinListIdx].responses.push({
         content: item,
-        insertOrder: -1,
+        category: "",
         referenceCount: 1
       }) - 1;
-    this[fillinListIdx].responses[fillinIdx].insertOrder = fillinIdx;
-    // }
     return [fillinListIdx, fillinIdx];
   }
   serialize(): string {
@@ -195,15 +180,17 @@ class FillinArray extends Array<ISectionFillinItem> {
     for (const [i, element] of this.entries()) {
       outputStr = `${outputStr}[${i
         .toString()
-        .padStart(4, "0")}]: idx: ${element.idx.toString()}, ${
-        element.groupDuplicates ? "group duplicates," : ""
-      }attributes: ${element.allowUserFormatting ? "allow formatting," : ""}${
-        element.groupDuplicates ? "group duplicates," : ""
-      }${element.sortOrder ? "sorted," : ""}${
-        element.allowReset ? "allow user reset," : ""
-      }gridColumns=${element.gridColumns}${
-        element.showReferenceCount ? "show ReferenceCount," : ""
-      }\n`;
+        .padStart(4, "0")}]: idx: ${element.idx.toString()},  ${
+        element.layout
+      }, ${sortOrderToLabel(element.sortOrder)}, gridColumns=${
+        element.gridColumns
+      }, ${element.unique ? "unique" : ""}, ${
+        element.showReferenceCount ? "showReferenceCount" : ""
+      }, ${element.groupByCategory ? "groupByCategory" : ""}, ${
+        element.allowReset ? "allowReset" : ""
+      }, ${element.showHints ? "showHints" : ""}, ${
+        element.allowUserFormatting ? "allowUserFormatting" : ""
+      }, promptColumns=${element.promptColumns}\n`;
       for (const [j, response] of element.responses
         //        .sort((a, b) => (a.content > b.content ? 1 : -1))
         .entries()) {
@@ -211,14 +198,29 @@ class FillinArray extends Array<ISectionFillinItem> {
           .toString()
           .padStart(2, "0")}]: ${response.content.padEnd(
           25
-        )}${response.referenceCount.toString()} ${response.insertOrder
-          .toString()
-          .padStart(2, "0")}\n`;
+        )}${response.referenceCount.toString()}\n`;
       }
     }
     return outputStr;
   }
 }
+/*
+element.title
+}", "${element.description}", sectionFillinIdx=${
+element.sectionFillinIdx
+}, ${element.layout}, ${sortOrderToLabel(
+element.sortOrder
+)}, gridColumns=${element.gridColumns}, ${
+element.unique ? "unique" : ""
+},${element.showReferenceCount ? "showReferenceCount" : ""}, ${
+element.showResponseHints ? "showResponseHints" : ""
+},${element.groupByCategory ? "groupByCategory" : ""}, ${
+element.showResponseHints ? "showResponseHints" : ""
+}, ${element.showPromptHints ? "showPromptHints" : ""},  ${element.allowReset ? "allowReset" : ""}, ${
+element.allowUserFormatting ? "allowUserFormatting" : ""
+}`;
+*/
+
 class HeadingArray extends Array<IHeadingListItem> {
   constructor(...args: any) {
     super(...args);
