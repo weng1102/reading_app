@@ -185,10 +185,12 @@ const PARAGRAPH_TO_SENTENCES: RegExp = /([\.\?!][\'\"\u2018\u2019\u201c\u201d\)\
 
 //const PARAGRAPH_TO_SENTENCES2: RegExp = /(?<!\w\.\w.)(?<![A-Z][a-z][a-z]\.)([\.\?!][\"\u2018\u2019\u201c\u201d\)\]]*\s*(?<![A-Z][a-z]\.)(?<![A-Z]\.)\s+)/;
 //const PARAGRAPH_PATTERN: RegExp = /^([ "'\(\!]?[A-Za-z0-9\$\@]{1}.*)$/m;
-const PARAGRAPH_PATTERN: RegExp = /^((["'\(\[]?|\!\[|\[\()[A-Za-z0-9\$\@]{1}.*)$/m;
+//const PARAGRAPH_PATTERN: RegExp = /^((["'\(\[]?|\!\[|\[\()[A-Za-z0-9\$\@]{1}.*)$/m;
+const PARAGRAPH_PATTERN: RegExp = /^((["'\(\[]?|\!\[|\[\(|\[_)[A-Za-z0-9\$\@]{1}.*)$/m;
 // \!\[ added to support ![image]
 // \[\ added to support leading image
 // \[\( only to support [link] where link starts with ( Need to careful what is considered beginning of a paragraph
+// \[_ added  to support leading fillins [_
 const MarkdownPatternDictionary: MarkdownPatternDictionaryType = {
   [MarkdownRecordTagType.HEADING01]: {
     pattern: /^#\s([^\s].*)$/,
