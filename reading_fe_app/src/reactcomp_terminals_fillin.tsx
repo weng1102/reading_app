@@ -21,11 +21,15 @@ import { TerminalDispatcher } from "./reactcomp_terminals";
 import { ITerminalPropsType } from "./reactcomp_terminals";
 export const Terminal_Fillin = React.memo((props: ITerminalPropsType): any => {
   const sectionFillinContext = useContext(SectionFillinContext);
+  let visibleResetFill: boolean = false;
+  if (sectionFillinContext.sectionFillin.showPrompts) {
+    visibleResetFill = true;
+  }
   const [terminalFillin, setTerminalFillin] = useState<ITerminalFillinItem>({
     offsetIdx: props.terminal.firstTermIdx,
     visible: Array(
       props.terminal.lastTermIdx - props.terminal.firstTermIdx + 1
-    ).fill(false)
+    ).fill(visibleResetFill)
   });
   let fillinInfo: IFillinTerminalMeta = props.terminal
     .meta as IFillinTerminalMeta;
@@ -62,7 +66,7 @@ export const Terminal_Fillin = React.memo((props: ITerminalPropsType): any => {
         ...terminalFillin,
         visible: Array(
           props.terminal.lastTermIdx - props.terminal.firstTermIdx + 1
-        ).fill(false)
+        ).fill(visibleResetFill)
       });
     }
   }, [resetSectionFillinIdx]);

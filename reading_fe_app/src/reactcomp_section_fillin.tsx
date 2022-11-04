@@ -17,7 +17,6 @@ import {
   IFillinResponseItem,
   IFillinResponses,
   IFillinResponseItemInitializer,
-  IFillinResponsesInitializer,
   ISectionFillinItem,
   ISectionFillinVariant,
   ISectionFillinItemInitializer,
