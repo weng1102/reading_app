@@ -17,7 +17,7 @@ import {
   ITerminalContent,
   IImageTerminalMeta
 } from "./pageContentType";
-import { Terminal_Image } from "./reactcomp_terminals_image";
+import { TerminalImage } from "./reactcomp_terminals_image";
 import { SectionDispatcher, ISectionPropsType } from "./reactcomp_sections";
 
 interface ISectionImageEntryImagesPropsType {
@@ -34,45 +34,43 @@ interface ISectionImageEntryCaptionsPropsType {
   captions: ISectionContent[];
   layout: ImageEntryLayoutEnumType;
 }
-export const Section_imageEntry = React.memo(
-  (props: ISectionPropsType): any => {
-    let imageEntry: ISectionImageEntryVariant = props.section
-      .meta as ISectionImageEntryVariant;
-    // let images1 = (props.section.meta as ISectionImageEntryVariant).images // not working with jsx!!!
+export const SectionImageEntry = React.memo((props: ISectionPropsType): any => {
+  let imageEntry: ISectionImageEntryVariant = props.section
+    .meta as ISectionImageEntryVariant;
+  // let images1 = (props.section.meta as ISectionImageEntryVariant).images // not working with jsx!!!
 
-    let images = imageEntry.images as ITerminalContent[];
-    let captions = imageEntry.captions as ISectionContent[];
-    let className: string =
-      imageEntry.layout.charAt(0).toLowerCase() === "l"
-        ? `imageentry-container-${ImageEntryLayoutEnumType.left.toString()}`
-        : `imageentry-container-${ImageEntryLayoutEnumType.above.toString()}`;
-    let vdividerClassName = `${className}-vdivider`;
-    let hdividerClassName = `${className}-hdivider width=${imageEntry.percent}`;
-    console.log(`imageEntry.percent ${imageEntry.percent}`);
-    // set width by changing --imageentry-min-image-width
-    // document.documentElement.style.setProperty()
-    return (
-      <>
-        <div className={hdividerClassName}></div>
+  let images = imageEntry.images as ITerminalContent[];
+  let captions = imageEntry.captions as ISectionContent[];
+  let className: string =
+    imageEntry.layout.charAt(0).toLowerCase() === "l"
+      ? `imageentry-container-${ImageEntryLayoutEnumType.left.toString()}`
+      : `imageentry-container-${ImageEntryLayoutEnumType.above.toString()}`;
+  let vdividerClassName = `${className}-vdivider`;
+  let hdividerClassName = `${className}-hdivider width=${imageEntry.percent}`;
+  console.log(`imageEntry.percent ${imageEntry.percent}`);
+  // set width by changing --imageentry-min-image-width
+  // document.documentElement.style.setProperty()
+  return (
+    <>
+      <div className={hdividerClassName}></div>
 
-        <div className={className}>
-          <Section_imageEntry_images
-            active={false}
-            images={images}
-            layout={imageEntry.layout}
-          />
-          <div className={vdividerClassName}></div>
-          <Section_imageEntry_captions
-            active={props.active}
-            captions={captions}
-            layout={imageEntry.layout}
-          />
-        </div>
-      </>
-    );
-  }
-);
-export const Section_imageEntry_images = React.memo(
+      <div className={className}>
+        <SectionImageEntryImages
+          active={false}
+          images={images}
+          layout={imageEntry.layout}
+        />
+        <div className={vdividerClassName}></div>
+        <SectionImageEntryCaptions
+          active={props.active}
+          captions={captions}
+          layout={imageEntry.layout}
+        />
+      </div>
+    </>
+  );
+});
+export const SectionImageEntryImages = React.memo(
   (props: ISectionImageEntryImagesPropsType): any => {
     let images: ITerminalContent[] = props.images;
     let className: string = "imageentry-image-";
@@ -87,7 +85,7 @@ export const Section_imageEntry_images = React.memo(
       <>
         <div className={className}>
           {images.map((image, keyvalue: number) => (
-            <Terminal_Image
+            <TerminalImage
               key={keyvalue}
               active={props.active}
               terminal={image}
@@ -98,7 +96,7 @@ export const Section_imageEntry_images = React.memo(
     );
   }
 );
-// export const Section_imageEntry_image = React.memo(
+// export const SectionImageEntry_image = React.memo(
 //   (props: ISectionImageEntryImagePropsType): any => {
 //     let image: IImageTerminalMeta = props.image.meta as IImageTerminalMeta;
 //     let imgSrc: string = `${props.distDir}/${image.src}`;
@@ -109,7 +107,7 @@ export const Section_imageEntry_images = React.memo(
 //     );
 //   }
 // );
-export const Section_imageEntry_captions = React.memo(
+export const SectionImageEntryCaptions = React.memo(
   (props: ISectionImageEntryCaptionsPropsType): any => {
     let captions: ISectionContent[] = props.captions;
     let className: string = "imageentry-captions-";

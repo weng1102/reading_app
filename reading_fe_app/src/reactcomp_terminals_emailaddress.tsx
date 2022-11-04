@@ -1,6 +1,6 @@
 /** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
- * File name: reactcomp_terminal_emailaddress.tsx
+ * File name: reactcomp_Terminal_Emailaddress.tsx
  *
  * Defines React front end functional components.
  * renders emailaddress
@@ -15,13 +15,13 @@ import { useAppSelector } from "./hooks";
 import { ITerminalInfo, IEmailAddressTerminalMeta } from "./pageContentType";
 import { TerminalNode, ITerminalPropsType } from "./reactcomp_terminals";
 
-export const Terminal_Emailaddress = React.memo(
+export const TerminalEmailaddress = React.memo(
   (props: ITerminalPropsType): any => {
     const currentTerminalIdx = useAppSelector(
       store => store.cursor_terminalIdx
     ); // causes rerendering
     console.log(
-      `<Terminal_Emailaddress active=${props.active} content=${props.terminal.content}/>`
+      `<TerminalEmailaddress active=${props.active} content=${props.terminal.content}/>`
     );
     let emailInfo: IEmailAddressTerminalMeta = props.terminal
       .meta as IEmailAddressTerminalMeta;

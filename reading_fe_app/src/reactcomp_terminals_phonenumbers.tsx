@@ -14,13 +14,13 @@ import { useAppSelector } from "./hooks";
 import { ITerminalInfo, IPhoneNumberTerminalMeta } from "./pageContentType";
 import { TerminalNode, ITerminalPropsType } from "./reactcomp_terminals";
 
-export const Terminal_PhoneNumber = React.memo(
+export const TerminalPhoneNumber = React.memo(
   (props: ITerminalPropsType): any => {
     const currentTerminalIdx = useAppSelector(
       store => store.cursor_terminalIdx
     ); // causes rerendering
     console.log(
-      `<Terminal_PhoneNumber active=${props.active} content=${props.terminal.content}/>`
+      `<TerminalPhoneNumber active=${props.active} content=${props.terminal.content}/>`
     );
     let phoneInfo: IPhoneNumberTerminalMeta = props.terminal
       .meta as IPhoneNumberTerminalMeta;

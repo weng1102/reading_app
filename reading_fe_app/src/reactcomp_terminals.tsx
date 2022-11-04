@@ -27,12 +27,12 @@ import {
 } from "./pageContentType";
 import { TerminalFillinContext } from "./fillinContext";
 
-import { Terminal_Date } from "./reactcomp_terminals_dates";
-import { Terminal_Emailaddress } from "./reactcomp_terminals_emailaddress";
-import { Terminal_PhoneNumber } from "./reactcomp_terminals_phonenumbers";
-import { Terminal_Image } from "./reactcomp_terminals_image";
-import { Terminal_Link } from "./reactcomp_terminals_link";
-import { Terminal_Fillin } from "./reactcomp_terminals_fillin";
+import { TerminalDate } from "./reactcomp_terminals_dates";
+import { TerminalEmailaddress } from "./reactcomp_terminals_emailaddress";
+import { TerminalPhoneNumber } from "./reactcomp_terminals_phonenumbers";
+import { TerminalImage } from "./reactcomp_terminals_image";
+import { TerminalLink } from "./reactcomp_terminals_link";
+import { TerminalFillin } from "./reactcomp_terminals_fillin";
 
 export interface ITerminalPropsType {
   active: boolean;
@@ -68,7 +68,7 @@ export const TerminalDispatcher = React.memo(
     switch (props.terminal.type) {
       case TerminalMetaEnumType.acronym:
         return (
-          <Terminal_Acronym
+          <TerminalAcronym
             active={
               props.active &&
               currentTerminalIdx >= props.terminal.firstTermIdx &&
@@ -80,7 +80,7 @@ export const TerminalDispatcher = React.memo(
       case TerminalMetaEnumType.word:
       case TerminalMetaEnumType.symbol:
         return (
-          <Terminal_Word
+          <TerminalWord
             active={
               props.active && currentTerminalIdx === props.terminal.firstTermIdx
             }
@@ -88,12 +88,12 @@ export const TerminalDispatcher = React.memo(
           />
         );
       case TerminalMetaEnumType.whitespace:
-        return <Terminal_Whitespace active={false} terminal={props.terminal} />;
+        return <TerminalWhitespace active={false} terminal={props.terminal} />;
       case TerminalMetaEnumType.currency:
         break;
       case TerminalMetaEnumType.date:
         return (
-          <Terminal_Date
+          <TerminalDate
             active={
               currentTerminalIdx >= props.terminal.firstTermIdx &&
               currentTerminalIdx <= props.terminal.lastTermIdx
@@ -103,7 +103,7 @@ export const TerminalDispatcher = React.memo(
         );
       case TerminalMetaEnumType.emailaddress:
         return (
-          <Terminal_Emailaddress
+          <TerminalEmailaddress
             active={
               currentTerminalIdx >= props.terminal.firstTermIdx &&
               currentTerminalIdx <= props.terminal.lastTermIdx
@@ -113,7 +113,7 @@ export const TerminalDispatcher = React.memo(
         );
       case TerminalMetaEnumType.fillin:
         return (
-          <Terminal_Fillin
+          <TerminalFillin
             active={
               currentTerminalIdx >= props.terminal.firstTermIdx &&
               currentTerminalIdx <= props.terminal.lastTermIdx
@@ -124,7 +124,7 @@ export const TerminalDispatcher = React.memo(
       case TerminalMetaEnumType.image:
         //active should be false regardless
         return (
-          <Terminal_Image
+          <TerminalImage
             active={
               currentTerminalIdx >= props.terminal.firstTermIdx &&
               currentTerminalIdx <= props.terminal.lastTermIdx
@@ -134,7 +134,7 @@ export const TerminalDispatcher = React.memo(
         );
       case TerminalMetaEnumType.link:
         return (
-          <Terminal_Link
+          <TerminalLink
             active={
               currentTerminalIdx >= props.terminal.firstTermIdx &&
               currentTerminalIdx <= props.terminal.lastTermIdx
@@ -146,7 +146,7 @@ export const TerminalDispatcher = React.memo(
         break;
       case TerminalMetaEnumType.phonenumber:
         return (
-          <Terminal_PhoneNumber
+          <TerminalPhoneNumber
             active={
               currentTerminalIdx >= props.terminal.firstTermIdx &&
               currentTerminalIdx <= props.terminal.lastTermIdx
@@ -155,7 +155,7 @@ export const TerminalDispatcher = React.memo(
           />
         );
       case TerminalMetaEnumType.punctuation:
-        return <Terminal_Whitespace active={false} terminal={props.terminal} />;
+        return <TerminalWhitespace active={false} terminal={props.terminal} />;
       case TerminalMetaEnumType.tbd:
         break;
       case TerminalMetaEnumType.time:
@@ -169,7 +169,7 @@ export const TerminalDispatcher = React.memo(
     }
   }
 );
-export const Terminal_Acronym = React.memo((props: ITerminalPropsType): any => {
+export const TerminalAcronym = React.memo((props: ITerminalPropsType): any => {
   //  console.log(`<Terminal_acronym> active=${props.active}`);
   // Rather not trigger dispatch via useSelector but necessary for all multiple
   // terminal words. Rerenders only when acronym is active theough
@@ -190,19 +190,19 @@ export const Terminal_Acronym = React.memo((props: ITerminalPropsType): any => {
     </>
   ); // return
 });
-export const Terminal_Word = React.memo((props: ITerminalPropsType): any => {
+export const TerminalWord = React.memo((props: ITerminalPropsType): any => {
   // console.log(
-  //   `<Terminal_word active=${props.active} content=${props.terminal.content}/>`
+  //   `<TerminalWord active=${props.active} content=${props.terminal.content}/>`
   // );
   let wordInfo = props.terminal.meta as ITerminalInfo;
   return (
     <TerminalNode class="word" active={props.active} terminalInfo={wordInfo} />
   );
 });
-export const Terminal_Whitespace = React.memo(
+export const TerminalWhitespace = React.memo(
   (props: ITerminalPropsType): any => {
     // console.log(
-    //   `<Terminal_whitespace props.active=${props.active} props.terminal=${props.terminal} content="${props.terminal.content}"/>`
+    //   `<TerminalWhitespace props.active=${props.active} props.terminal=${props.terminal} content="${props.terminal.content}"/>`
     // );
     let terminalInfo = props.terminal.meta as ITerminalInfo;
     return (

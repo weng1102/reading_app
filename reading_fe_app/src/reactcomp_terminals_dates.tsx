@@ -19,10 +19,10 @@ import { useAppSelector } from "./hooks";
 import { DateFormatEnumType, IDateTerminalMeta } from "./pageContentType";
 import { TerminalNode, ITerminalPropsType } from "./reactcomp_terminals";
 
-export const Terminal_Date = React.memo((props: ITerminalPropsType): any => {
+export const TerminalDate = React.memo((props: ITerminalPropsType): any => {
   const currentTerminalIdx = useAppSelector(store => store.cursor_terminalIdx); // cause rerendering
   console.log(
-    `<Terminal_date active=${props.active} content=${props.terminal.content}/>`
+    `<TerminalDate active=${props.active} content=${props.terminal.content}/>`
   );
   let dateInfo = props.terminal.meta as IDateTerminalMeta;
   switch (dateInfo.format) {

@@ -18,7 +18,7 @@ import {
   SectionVariantEnumType,
   ISectionParagraphVariant
 } from "./pageContentType";
-import { Section_imageEntry } from "./reactcomp_sections_imageEntry";
+import { SectionImageEntry } from "./reactcomp_sections_imageEntry";
 import { Section_fillin } from "./reactcomp_section_fillin";
 import { Sentence } from "./reactcomp_sentences";
 
@@ -30,13 +30,11 @@ export const SectionDispatcher = React.memo((props: ISectionPropsType) => {
   // console.log(`<SectionDispatcher type=${props.section.type}`);
   switch (props.section.type) {
     case SectionVariantEnumType.empty:
-      return <Section_empty active={false} section={props.section} />;
+      return <SectionEmpty active={false} section={props.section} />;
     case SectionVariantEnumType.paragraph:
-      return (
-        <Section_paragraph active={props.active} section={props.section} />
-      );
+      return <SectionParagraph active={props.active} section={props.section} />;
     case SectionVariantEnumType.heading:
-      return <Section_heading active={props.active} section={props.section} />;
+      return <SectionHeading active={props.active} section={props.section} />;
     case SectionVariantEnumType.tbd:
       return (
         <div className="section-tbd">
@@ -52,13 +50,13 @@ export const SectionDispatcher = React.memo((props: ISectionPropsType) => {
     case SectionVariantEnumType.ordered_list:
     case SectionVariantEnumType.listitem:
       // need to group because component will recursively render zero or more of each
-      return <Section_Lists active={props.active} section={props.section} />;
+      return <SectionLists active={props.active} section={props.section} />;
     case SectionVariantEnumType.fillin:
       return <Section_fillin active={props.active} section={props.section} />;
     //      return <div>section fillin response</div>;
     case SectionVariantEnumType.image_entry:
       return (
-        <Section_imageEntry active={props.active} section={props.section} />
+        <SectionImageEntry active={props.active} section={props.section} />
       );
     case SectionVariantEnumType.blockquote:
     case SectionVariantEnumType.unittest:
@@ -70,9 +68,9 @@ export const SectionDispatcher = React.memo((props: ISectionPropsType) => {
       );
   } //switch
 });
-export const Section_empty = (props: ISectionPropsType) => {
+export const SectionEmpty = (props: ISectionPropsType) => {
   let br = ""; // or <p> or empty based on configuration
-  // console.log(`<Section_Empty>`);
+  // console.log(`<SectionEmpty>`);
   return <>{br}</>;
 };
 interface ISectionListPropsType {
@@ -80,7 +78,7 @@ interface ISectionListPropsType {
   active: boolean;
   section: ISectionContent;
 }
-export const Section_Lists = (props: ISectionListPropsType) => {
+export const SectionLists = (props: ISectionListPropsType) => {
   let children = props.section.items.map((subsection, key) => (
     <SectionDispatcher key={key} active={props.active} section={subsection} />
   ));
@@ -98,8 +96,8 @@ export const Section_Lists = (props: ISectionListPropsType) => {
     return <div>section list formatting problem type={props.section.type}</div>;
   }
 };
-export const Section_paragraph = React.memo((props: ISectionPropsType): any => {
-  // console.log(`<Section_Paragraph active=${props.active}>`);
+export const SectionParagraph = React.memo((props: ISectionPropsType): any => {
+  // console.log(`<SectionParagraph active=${props.active}>`);
   const currentSentenceIdx: number = useAppSelector(
     store => store.cursor_sentenceIdx
   );
@@ -121,7 +119,7 @@ export const Section_paragraph = React.memo((props: ISectionPropsType): any => {
     </>
   );
 });
-const Section_heading = React.memo((props: ISectionPropsType) => {
+const SectionHeading = React.memo((props: ISectionPropsType) => {
   const headingRef = useDivRef();
   const sectionIdx = props.section.id;
   let meta = props.section.meta as ISectionHeadingVariant;

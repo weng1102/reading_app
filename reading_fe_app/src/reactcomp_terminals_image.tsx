@@ -13,7 +13,7 @@ import React, { useContext } from "react";
 import { IImageTerminalMeta } from "./pageContentType";
 import { ITerminalPropsType } from "./reactcomp_terminals";
 import { ISettingsContext, SettingsContext } from "./settingsContext";
-export const Terminal_Image = React.memo((props: ITerminalPropsType): any => {
+export const TerminalImage = React.memo((props: ITerminalPropsType): any => {
   let settingsContext: ISettingsContext = useContext(
     SettingsContext
   ) as ISettingsContext;

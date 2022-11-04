@@ -29,7 +29,6 @@ export enum StatusBarMessageType {
 }
 //const IDX_INITIALIZER = -9999; // should be same as baseclasses.ts
 
-const WORD_VISIT = "word/visit"; // visit word with argument
 const WORD_NEXT = "word/next"; // next word in sentence
 const WORD_PREVIOUS = "word/previous"; // previous word in sentence
 //const WORD_RESET = "word/reset"; // first word in page
@@ -78,8 +77,6 @@ const LISTENING_STOP = "listening/stop";
 const LISTENING_TOGGLE = "listening/toggle"; // related to start/stop
 
 // speaking actions
-const ANNOUNCE_REQUESTED = "announce/request";
-
 const ANNOUNCE_MESSAGE = "announce/message";
 const ANNOUNCE_ACKNOWLEDGED = "announce/message acknowledged";
 //const ANNOUNCE_SELECTEDCONTENT = "announce/selected content"; // acknowledge completion of speaking
@@ -237,11 +234,6 @@ const Cursor_gotoSectionByIdx = (sectionIdx: number) => {
     payload: sectionIdx
   };
 };
-const Cursor_acknowledgeTransition = () => {
-  return {
-    type: TRANSITION_ACKNOWLEDGE
-  };
-};
 const Fillin_setCurrent = (terminalIdx: number) => {
   return {
     type: WORD_SETCURRENTFILLIN,
@@ -272,12 +264,6 @@ const Message_clear = (
   return {
     type: MESSAGE_CLEAR,
     payload: messageType
-  };
-};
-const StatusBar_Message_set = (message: string) => {
-  return {
-    type: MESSAGE_SET,
-    payload: message
   };
 };
 const Page_load = (page: string, sectionIdx?: number, terminalIdx?: number) => {
