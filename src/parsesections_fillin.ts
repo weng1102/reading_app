@@ -79,6 +79,8 @@ export class SectionParseNode_FILLIN extends SectionParseNode_LIST
       [10] showPromptHints: boolean,show hints within prompts
       [11] allowFormatting: boolean, allow user to change format
       [12] number of columns when displaying prompts
+      [13] showPrompts: boolean, show prompt initially filled in)
+
       */
       try {
         let args: string[] = current.content.split(",").map(arg => arg.trim());
@@ -129,7 +131,7 @@ export class SectionParseNode_FILLIN extends SectionParseNode_LIST
           args[12],
           this.meta.promptColumns
         );
-
+        this.meta.showPrompts = SetArgBoolean(args[13], this.meta.showPrompts);
         this.meta.sectionFillinIdx =
           this.userContext.fillins.push(
             ISectionFillinItemInitializer(
@@ -140,10 +142,11 @@ export class SectionParseNode_FILLIN extends SectionParseNode_LIST
               this.meta.unique,
               this.meta.showReferenceCount,
               this.meta.groupByCategory,
-              this.meta.showResponseHints,
               this.meta.allowReset,
+              this.meta.showResponseHints,
               this.meta.allowUserFormatting,
-              this.meta.promptColumns
+              this.meta.promptColumns,
+              this.meta.showPrompts
             )
           ) - 1;
         for (
@@ -223,7 +226,7 @@ export class SectionParseNode_FILLIN extends SectionParseNode_LIST
     let outputStr: string = "";
     switch (format) {
       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
-        outputStr = `${super.serialize(format, label, prefix)}: response:"${
+        outputStr = `${super.serialize(format, label, prefix)}:response:"${
           this.meta.responsesLabel
         }", prompt:"${this.meta.promptsLabel}",  sectionFillinIdx=${
           this.meta.sectionFillinIdx
@@ -239,7 +242,9 @@ export class SectionParseNode_FILLIN extends SectionParseNode_LIST
           this.meta.allowReset ? "allowReset" : ""
         }, ${
           this.meta.allowUserFormatting ? "allowUserFormatting" : ""
-        }, promptColumns=${this.meta.promptColumns}`;
+        }, promptColumns=${this.meta.promptColumns}, ${
+          this.meta.showPrompts ? "showPrompts" : ""
+        }`;
         // if (
         //   this.meta.sectionFillinIdx >= 0 &&
         //   this.userContext.fillins[this.meta.sectionFillinIdx] !== undefined

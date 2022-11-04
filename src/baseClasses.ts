@@ -190,7 +190,9 @@ class FillinArray extends Array<ISectionFillinItem> {
         element.allowReset ? "allowReset" : ""
       }, ${element.showHints ? "showHints" : ""}, ${
         element.allowUserFormatting ? "allowUserFormatting" : ""
-      }, promptColumns=${element.promptColumns}\n`;
+      }, promptColumns=${element.promptColumns}, ${
+        element.showPrompts ? "showPrompts" : ""
+      }\n`;
       for (const [j, response] of element.responses
         //        .sort((a, b) => (a.content > b.content ? 1 : -1))
         .entries()) {

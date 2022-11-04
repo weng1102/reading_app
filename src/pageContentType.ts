@@ -264,6 +264,7 @@ export interface ISectionFillinVariant {
   allowReset: boolean; // reset button
   showResponseHints: boolean; // shows (noun) beside hidden word
   showPromptHints: boolean; // shows (noun) beside hidden word
+  showPrompts: boolean; // show prompts initially (easy mode)
   allowUserFormatting: boolean;
   promptColumns: number;
   prompts: ISectionContent[];
@@ -287,6 +288,7 @@ export function ISectionFillinVariantInitializer(
     showPromptHints: false,
     groupByCategory: false,
     showReferenceCount: true,
+    showPrompts: false,
     allowReset: false,
     promptColumns: 1,
     prompts: []
@@ -916,6 +918,7 @@ export interface ISectionFillinItem {
   showHints: boolean;
   allowUserFormatting: boolean;
   promptColumns: number;
+  showPrompts: boolean;
   responses: IFillinResponseItem[]; // index into section response context
   loaded: boolean;
   modified: boolean; // supports reset
@@ -932,6 +935,7 @@ export function ISectionFillinItemInitializer(
   showHints: boolean = false,
   allowUserFormatting: boolean = true,
   promptColumns: number = 1,
+  showPrompts: boolean = false,
   responses: IFillinResponseItem[] = [],
   //  prompts: IFillinPromptItem[] = [],
   loaded: boolean = false,
@@ -949,6 +953,7 @@ export function ISectionFillinItemInitializer(
     showHints,
     allowUserFormatting,
     promptColumns,
+    showPrompts,
     responses,
     loaded,
     modified
