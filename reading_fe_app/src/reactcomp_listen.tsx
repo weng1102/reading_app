@@ -15,7 +15,14 @@ import listenIcon from "./img/button_listen.png";
 import listenGhostedIcon from "./img/button_listen_ghosted.png";
 import { Request } from "./reducers";
 import { useAppDispatch, useAppSelector } from "./hooks";
-import { useEffect, useRef, useState, useContext } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useContext
+} from "react";
 import SpeechRecognition, {
   useSpeechRecognition
 } from "react-speech-recognition";
@@ -54,22 +61,25 @@ export const ListeningMonitor = () => {
     continuous: boolean;
     language: string;
   }
-  const ContinuousListeningInEnglish: IRecognitionArguments = {
-    continuous: true,
-    language: "en-US"
-  };
+  const ContinuousListeningInEnglish: IRecognitionArguments = useMemo(
+    () => ({
+      continuous: true,
+      language: "en-US"
+    }),
+    []
+  );
   const [silenceTimerId, setSilenceTimerId] = useState<
     ReturnType<typeof setTimeout>
   >();
   // useRef to retrieve the current value of state variable when the function
   // is invoked and not when it is scheduled
   const silenceTimerIdRef = useRef(silenceTimerId);
-  const startSilenceTimer = (): ReturnType<typeof setTimeout> => {
+  const startSilenceTimer1 = (): ReturnType<typeof setTimeout> => {
     if (silenceTimerId !== undefined) {
       clearTimeout(silenceTimerId);
       // console.log(`clearing previous silence timer for id=${silenceTimerId}`);
     }
-    let retval = setTimeout(() => {
+    let timerId = setTimeout(() => {
       console.log(`SILENCE TIMEOUT TRIGGERED`);
       // in this case same as stopListening() since not speech processing
       // and Recognition_stop would eventually terminate listening
@@ -77,9 +87,42 @@ export const ListeningMonitor = () => {
       dispatch(Request.Recognition_stop());
     }, silenceTimeout * 1000);
     // console.log(`Starting silence timer for id=${retval}`);
-    setSilenceTimerId(retval);
-    return retval;
+    setSilenceTimerId(timerId);
+    return timerId;
   };
+  const startSilenceTimer = useCallback((): ReturnType<typeof setTimeout> => {
+    if (silenceTimerId !== undefined) {
+      clearTimeout(silenceTimerId);
+      // console.log(`clearing previous silence timer for id=${silenceTimerId}`);
+    }
+    let timerId = setTimeout(() => {
+      console.log(`SILENCE TIMEOUT TRIGGERED`);
+      // in this case same as stopListening() since not speech processing
+      // and Recognition_stop would eventually terminate listening
+      SpeechRecognition.abortListening();
+      dispatch(Request.Recognition_stop());
+    }, silenceTimeout * 1000);
+    // console.log(`Starting silence timer for id=${retval}`);
+    setSilenceTimerId(timerId);
+    return timerId;
+  }, [dispatch, silenceTimerId, silenceTimeout]);
+  //
+  // const startSilenceTimer = (): ReturnType<typeof setTimeout> => {
+  //   if (silenceTimerId !== undefined) {
+  //     clearTimeout(silenceTimerId);
+  //     // console.log(`clearing previous silence timer for id=${silenceTimerId}`);
+  //   }
+  //   let retval = setTimeout(() => {
+  //     console.log(`SILENCE TIMEOUT TRIGGERED`);
+  //     // in this case same as stopListening() since not speech processing
+  //     // and Recognition_stop would eventually terminate listening
+  //     SpeechRecognition.abortListening();
+  //     dispatch(Request.Recognition_stop());
+  //   }, silenceTimeout * 1000);
+  //   // console.log(`Starting silence timer for id=${retval}`);
+  //   setSilenceTimerId(retval);
+  //   return retval;
+  // };
   const clearSilenceTimer = () => {
     if (silenceTimerIdRef.current !== undefined) {
       // console.log(`clearing silence timer id=${silenceTimerIdRef.current}`);
@@ -101,7 +144,7 @@ export const ListeningMonitor = () => {
       console.log(`restart listening because browser eventually times out`);
       SpeechRecognition.startListening(ContinuousListeningInEnglish);
     }
-  }, [listening, listeningRequested]);
+  }, [listening, listeningRequested, ContinuousListeningInEnglish]);
   useEffect(() => {
     if (!listeningRequested) {
       dispatch(Request.Recognition_stop());
@@ -112,13 +155,13 @@ export const ListeningMonitor = () => {
       // timeout periodically not
       SpeechRecognition.startListening(ContinuousListeningInEnglish);
 
-      console.log(`LISTENING: start listening with timeout=${silenceTimeout}s`);
+      // console.log(`LISTENING: start listening with timeout=${silenceTimeout}s`);
       startSilenceTimer();
       console.log(
         `initial setSilenceTimer for id=${silenceTimerIdRef.current}`
       );
     }
-  }, [listeningRequested]);
+  }, [listeningRequested, ContinuousListeningInEnglish, dispatch]);
   const expectedTerminalIdx: number = useAppSelector(
     store => store.cursor_terminalIdx
   );
@@ -229,7 +272,15 @@ export const ListeningMonitor = () => {
     interimTranscript,
     finalTranscript,
     resetTranscript,
-    expectedTerminalIdx
+    expectedTerminalIdx,
+    ContinuousListeningInEnglish,
+    dispatch,
+    pageContext.terminalList,
+    wordPosition,
+    wordPositionPreviously,
+    wordRetries,
+    wordsHeardPreviously,
+    startSilenceTimer
   ]);
   // const retriesExceeded = useAppSelector(store => store.listen_retriesExceeded);
   const reciteWordRequested = useAppSelector(
@@ -249,7 +300,7 @@ export const ListeningMonitor = () => {
         setWordRetries(0);
       }
     }
-  }, [wordRetries, reciteWordRequested]);
+  }, [wordRetries, reciteWordRequested, maxRetries, resetTranscript, dispatch]);
   // const flushRequested: boolean = useAppSelector(store => store.listen_flush);
   // useEffect(() => {
   //   if (flushRequested) {
@@ -273,7 +324,7 @@ export const ListeningMonitor = () => {
       resetListeningState();
       resetTranscript();
     }
-  }, [newSentence]);
+  }, [newSentence, resetTranscript]);
   const message_listen: string = useAppSelector(
     store => store.message_listening
   );
@@ -285,7 +336,7 @@ export const ListeningMonitor = () => {
       console.log("LISTENING: stopped listening at end of page");
       dispatch(Request.Recognition_stop());
     }
-  }, [listening, endOfPageReached]);
+  }, [listening, endOfPageReached, dispatch, resetTranscript]);
 
   if (SpeechRecognition.browserSupportsSpeechRecognition()) {
     // listenButton disallows listening already but just in case

@@ -248,7 +248,7 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
         });
       }
     }
-  }, [props.active]);
+  }, [props.active, terminalRef]);
   // useEffect(() => {
   //   console.log(
   //     `showTerminalIdx=${showTerminalIdx}, offsetIdx=${terminalFillin.offsetIdx}, ${props.terminalInfo.termIdx}`

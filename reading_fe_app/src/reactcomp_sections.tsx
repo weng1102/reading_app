@@ -19,7 +19,7 @@ import {
   ISectionParagraphVariant
 } from "./pageContentType";
 import { SectionImageEntry } from "./reactcomp_sections_imageEntry";
-import { Section_fillin } from "./reactcomp_section_fillin";
+import { SectionFillin } from "./reactcomp_section_fillin";
 import { Sentence } from "./reactcomp_sentences";
 
 export interface ISectionPropsType {
@@ -52,7 +52,7 @@ export const SectionDispatcher = React.memo((props: ISectionPropsType) => {
       // need to group because component will recursively render zero or more of each
       return <SectionLists active={props.active} section={props.section} />;
     case SectionVariantEnumType.fillin:
-      return <Section_fillin active={props.active} section={props.section} />;
+      return <SectionFillin active={props.active} section={props.section} />;
     //      return <div>section fillin response</div>;
     case SectionVariantEnumType.image_entry:
       return (

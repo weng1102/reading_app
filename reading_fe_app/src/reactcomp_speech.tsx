@@ -81,7 +81,7 @@ export const SpeechMonitor = () => {
   useEffect(() => {
     Synthesizer.voiceList = window.speechSynthesis.getVoices(); // loaded asynchronously
     Synthesizer.paramObj.voice = Synthesizer.voiceList[2]; // US woman
-  }, [window.speechSynthesis.onvoiceschanged]);
+  }, []);
 
   // const pageLoaded: boolean = useAppSelector(store => store.page_loaded);
 
@@ -103,7 +103,8 @@ export const SpeechMonitor = () => {
   useEffect(() => {
     let message: string = "";
     if (announce_beginningOfPage) {
-      Synthesizer.speak("beginning of page");
+      message = "beginning of page";
+      Synthesizer.speak(message);
     } else if (announce_newSection) {
       let sectionType: string = pageContext.sectionList[sectionIdx].type;
       message = `new ${sectionType === "undefined" ? "section" : sectionType}`;
@@ -120,60 +121,11 @@ export const SpeechMonitor = () => {
     pageContext.sectionList,
     sectionIdx
   ]);
-  // useEffect(() => {
-  //   if (pageLoaded) {
-  //     message = "page loaded";
-  //     Synthesizer.speak(message);
-  //   }
-  // }, [pageLoaded]);
-
-  // useEffect(() => {
-  //   // React guarantees that state changed within a single
-  //   // reducer state are pusblished together.
-  //   console.log(`useEffect(): ${beginningOfPage}`);
-  //   let message: string = "";
-  //   if (beginningOfPage) {
-  //     message = "beginning of page";
-  //     console.log(`useEffect: ${message}`);
-  //     Synthesizer.speak(message);
-  //   }
-  // }, [beginningOfPage]);
-
-  // useEffect(() => {
-  //   // React guarantees that state changed within a single
-  //   // reducer state are pusblished together.
-  //   console.log(
-  //     `useEffect(): ${beginningOfPage}, ${newSection}, ${newSentence}`
-  //   );
-  //   let message: string = "";
-  //   if (beginningOfPage) {
-  //     message = "beginning of page";
-  //   } else if (newSection) {
-  //     let sectionType: string = pageContext.sectionList[sectionIdx].type;
-  //     message = `new ${sectionType === "undefined" ? "section" : sectionType}`;
-  //   } else if (newSentence) {
-  //     message = "new sentence";
-  //   }
-  //   console.log(`useEffect: ${message}`);
-  //   Synthesizer.speak(message);
-  // }, [beginningOfPage, newSentence, newSection]);
-  //
-  // // useEffect(() => {
-  //   // these announcements are mutually exclusive
-  //   if (newSection) {
-  //     let sectionType: string = pageContext.sectionList[sectionIdx].type;
-  //     message = `new ${sectionType === "undefined" ? "section" : sectionType}`;
-  //   } else if (newSentence) {
-  //     message = "new sentence";
-  //   }
-  //   Synthesizer.speak(message);
-  // }, [newSection, newSentence]);
 
   const endOfPage = useAppSelector(store => store.cursor_endOfPageReached);
   useEffect(() => {
     if (endOfPage) {
-      message = "end of page";
-      Synthesizer.speak(message);
+      Synthesizer.speak("end of page");
     }
   }, [endOfPage]);
 
@@ -186,204 +138,19 @@ export const SpeechMonitor = () => {
         console.log(`NOT speaking ${message}"`);
       }
     },
-    [announcement] // to recite just the words
+    [announcement, message] // to recite just the words
   );
   const listening = useAppSelector(store => store.listen_active);
   useEffect(() => {
     if (listening) {
-      message = "listening";
+      Synthesizer.speak("listening");
     } else {
-      message = "not listening";
+      Synthesizer.speak("not listening");
     }
-    Synthesizer.speak(message);
   }, [listening]);
   if (message.length > 0) message = `SPEECH: ${message}`;
   return <div>{message}</div>;
 };
-// export const ReciteButton1 = () => {
-//   //  let dispatch = useAppDispatch();
-//   const setSpeakingCurrently = (toggle: boolean) => {
-//     if (toggle) dispatch(Request.Reciting_started());
-//     else dispatch(Request.Reciting_ended());
-//   };
-//   const [recitationQueue, setRecitationQueue] = useState([""]);
-//   const [reciting, setReciting] = useState(false);
-//   //  const [speakingCurrently, setSpeakingCurrently] = useState(false);
-//
-//   const settingsContext: ISettingsContext = useContext(SettingsContext)!;
-//   const recitationMode: RecitationMode =
-//     settingsContext.settings.speech.recitationMode;
-//
-//   let dispatch = useAppDispatch();
-//   const reciteRequested = useAppSelector(store => store.recite_requested); //
-//   const speakingCurrently = useAppSelector(store => store.reciting); //
-//   const termIdx = useAppSelector(store => store.cursor_terminalIdx);
-//   let pageContext: CPageLists = useAppSelector(store => store.pageContext);
-//   useEffect(() => {
-//     // stop speaking when termIdx changes
-//     if (reciting) {
-//       setReciting(false);
-//     }
-//   }, [termIdx]);
-//   useEffect(() => {
-//     if (reciting) {
-//       setRecitationQueue(somethingToRecite());
-//     }
-//   }, [reciting]);
-//   useEffect(() => {
-//     // need to chop up the message into at least sentences so cancel
-//     // (reciting=false) request can can be processed especially for longer
-//     // passages.
-//
-//     // Only two of the four possible states are relevant:
-//     // state change from requested to reciting and vice versa.
-//     if (reciteRequested && !reciting) {
-//       setRecitationQueue(somethingToRecite());
-//       setReciting(true);
-//     } else if (!reciteRequested && reciting) {
-//       setReciting(false);
-//       setRecitationQueue([]);
-//     } else {
-//       // not reciting and not requested
-//     }
-//   }, [reciteRequested]);
-//
-//   const speakingCurrently1: boolean = useAppSelector(store => store.reciting); //
-//   useEffect(() => {
-//     // need to chop up the message so cancel request can can be polled
-//     // especially for longer passages.
-//     // pop recitationQueue
-//     if (!reciting || recitationQueue.length === 0) {
-//       dispatch(Request.Recite_stop());
-//     } else {
-//       if (!speakingCurrently1) {
-//         let sentence: string = recitationQueue.shift() as string;
-//         setRecitationQueue([...recitationQueue]);
-//         Synthesizer.volume = settingsContext.settings.speech.volume;
-//         Synthesizer.speak(sentence, setSpeakingCurrently);
-//         // if (RecitationMode.wordNext) dispatch(Request.Cursor_gotoNextWord());
-//       }
-//     }
-//   }, [speakingCurrently, recitationQueue]);
-//   const somethingToRecite = (): string[] => {
-//     let messageQueue: string[] = [];
-//     // const wordToRecite = (termIdx: number): string => {
-//     //   return pageContext.terminalList[termIdx].altpronunciation !== ""
-//     //     ? pageContext.terminalList[termIdx].altpronunciation
-//     //     : pageContext.terminalList[termIdx].content;
-//     // };
-//     const wordToRecite = (termIdx: number): string => {
-//       return pageContext.terminalList[termIdx].altpronunciation !== ""
-//         ? pageContext.terminalList[termIdx].altpronunciation
-//         : pageContext.terminalList[termIdx].content;
-//     };
-//     const sentenceToRecite = (
-//       sentenceIdx: number,
-//       lastTermIdxInSentence?: number,
-//       lastPunctuation?: string
-//     ): string => {
-//       let firstTermIdx: number =
-//         pageContext.sentenceList[sentenceIdx].firstTermIdx;
-//       let lastTermIdx: number;
-//       if (lastTermIdxInSentence === undefined) {
-//         lastTermIdx = pageContext.sentenceList[sentenceIdx].lastTermIdx;
-//         lastPunctuation = pageContext.sentenceList[sentenceIdx].lastPunctuation;
-//       } else {
-//         lastTermIdx = lastTermIdxInSentence;
-//       }
-//       let str: string = "";
-//       for (let idx = firstTermIdx; idx <= lastTermIdx; idx++) {
-//         str = str + " " + wordToRecite(idx);
-//       }
-//       //add punctuation for inflection
-//       str = str + (lastPunctuation === undefined ? "" : lastPunctuation);
-//       return str;
-//     };
-//     const sectionToRecite = (sectionIdx: number): string[] => {
-//       //find sentences in section. unfortunately, the sectionlist only has first and last terminal idxs and not sentences
-//       let strQ: string[] = [];
-//       // let firstTermIdx: number =
-//       //   pageContext.sectionList[sectionIdx].firstTermIdx;
-//       // let lastTermIdx: number = pageContext.sectionList[sectionIdx].lastTermIdx;
-//       // let firstSentenceIdx: number =
-//       //   pageContext.terminalList[firstTermIdx].sentenceIdx;
-//       // let lastSentenceIdx: number =
-//       //   pageContext.terminalList[lastTermIdx].sentenceIdx;
-//       let firstTermIdx: number =
-//         pageContext.sectionList[sectionIdx].firstTermIdx;
-//       let lastTermIdx: number = pageContext.sectionList[sectionIdx].lastTermIdx;
-//       let firstSentenceIdx: number =
-//         pageContext.terminalList[firstTermIdx].sentenceIdx;
-//       let lastSentenceIdx: number =
-//         pageContext.terminalList[lastTermIdx].sentenceIdx;
-//       for (
-//         let sentenceIdx = firstSentenceIdx;
-//         sentenceIdx <= lastSentenceIdx;
-//         sentenceIdx++
-//       ) {
-//         strQ.push(sentenceToRecite(sentenceIdx));
-//       }
-//       return strQ;
-//     };
-//     // given all the array accessing, should wrap in try/catch
-//     switch (recitationMode) {
-//       case RecitationMode.wordOnly:
-//       case RecitationMode.wordNext:
-//         messageQueue.push(wordToRecite(termIdx));
-//         break;
-//       case RecitationMode.entireSentence:
-//         messageQueue.push(
-//           sentenceToRecite(pageContext.terminalList[termIdx].sentenceIdx)
-//         );
-//         break;
-//       case RecitationMode.uptoExclusive:
-//         messageQueue.push(
-//           sentenceToRecite(
-//             pageContext.terminalList[termIdx].sentenceIdx,
-//             termIdx - 1, // excluding current terminal
-//             "?" // not end of sentence
-//           )
-//         );
-//         break;
-//       case RecitationMode.uptoInclusive:
-//         messageQueue.push(
-//           sentenceToRecite(
-//             pageContext.terminalList[termIdx].sentenceIdx,
-//             termIdx, // including current terminal
-//             "?" // not end of sentence
-//           )
-//         );
-//         break;
-//       case RecitationMode.section:
-//         messageQueue = [
-//           ...messageQueue,
-//           ...sectionToRecite(pageContext.terminalList[termIdx].sectionIdx)
-//         ];
-//         break;
-//       default:
-//     }
-//     return messageQueue;
-//   }; //somethingToRecite
-//   // if currently listening, stop and restart after reciting
-//   dispatch(Request.Recognition_stop);
-//   return (
-//     <>
-//       <img
-//         className="icon"
-//         alt="speak"
-//         src={
-//           window.speechSynthesis === null
-//             ? speakGhostedIcon
-//             : reciting
-//             ? speakActiveIcon
-//             : speakInactiveIcon
-//         }
-//         onClick={() => dispatch(Request.Recite_toggle())}
-//       />
-//     </>
-//   );
-// };
-
 // Speech Settings
 interface ISpeechSettingsProps {
   speechSettings: ISpeechSettings;
@@ -525,7 +292,7 @@ const VoiceSelector = (props: IVoiceSelectorProps) => {
   const [, setVoicesAvailable] = useState(false);
   useEffect(() => {
     setVoicesAvailable(true); // force rerender of component
-  }, [window.speechSynthesis.onvoiceschanged]);
+  }, []);
   //  let voices: SpeechSynthesisVoice[] = Synthesizer.voices;
   const onChangeValue = (event: any) => {
     console.log(`onchange=${event.target.value}`);

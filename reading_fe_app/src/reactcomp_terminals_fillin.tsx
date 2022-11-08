@@ -12,18 +12,17 @@ import React, { useContext, useEffect, useState } from "react";
 import { IFillinTerminalMeta, ITerminalContent } from "./pageContentType";
 import { SectionFillinContext } from "./fillinContext";
 import { useAppSelector } from "./hooks";
-import {
-  ITerminalFillinItem,
-  TerminalFillinContext,
-  cloneTerminalFillin
-} from "./fillinContext";
+import { ITerminalFillinItem, TerminalFillinContext } from "./fillinContext";
 import { TerminalDispatcher } from "./reactcomp_terminals";
 import { ITerminalPropsType } from "./reactcomp_terminals";
+
 export const TerminalFillin = React.memo((props: ITerminalPropsType): any => {
   const sectionFillinContext = useContext(SectionFillinContext);
-  let visibleResetFill: boolean = false;
+  let visibleResetFill: boolean;
   if (sectionFillinContext.sectionFillin.showPrompts) {
     visibleResetFill = true;
+  } else {
+    visibleResetFill = false;
   }
   const [terminalFillin, setTerminalFillin] = useState<ITerminalFillinItem>({
     offsetIdx: props.terminal.firstTermIdx,
@@ -52,7 +51,7 @@ export const TerminalFillin = React.memo((props: ITerminalPropsType): any => {
         visible: { ...terminalFillin.visible, [relativeIdx]: true }
       });
     }
-  }, [showTerminalIdx]);
+  }, [showTerminalIdx, terminalFillin]);
   useEffect(() => {
     if (
       sectionFillinContext.sectionFillin.loaded &&
@@ -69,7 +68,16 @@ export const TerminalFillin = React.memo((props: ITerminalPropsType): any => {
         ).fill(visibleResetFill)
       });
     }
-  }, [resetSectionFillinIdx]);
+  }, [
+    resetSectionFillinIdx,
+    terminalFillin,
+    fillinInfo.sectionFillinIdx,
+    props.terminal.firstTermIdx,
+    props.terminal.lastTermIdx,
+    sectionFillinContext.sectionFillin.loaded,
+    sectionFillinContext.sectionFillin.modified,
+    visibleResetFill
+  ]);
 
   let attributes = `fillin-prompts-terminal `;
   return (

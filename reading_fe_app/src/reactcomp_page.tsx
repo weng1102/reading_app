@@ -167,15 +167,15 @@ export const Page = React.memo((props: IPagePropsType) => {
   );
   let dispatch = useAppDispatch();
   let message: string = "";
-  const dumpPreviousPageStack = (message: string) => {
-    //  return; //disable dumpPreviousPageStack
-    let elString: string = "";
-    previousPages.forEach(
-      el => (elString += `[${el.page}, ${el.currentTermIdx}]`)
-    );
-    elString = elString.length > 0 ? elString : "(empty)";
-    console.log(`${message}: previousPage Stack ${elString} `);
-  };
+  // const dumpPreviousPageStack = (message: string) => {
+  //   //  return; //disable dumpPreviousPageStack
+  //   let elString: string = "";
+  //   previousPages.forEach(
+  //     el => (elString += `[${el.page}, ${el.currentTermIdx}]`)
+  //   );
+  //   elString = elString.length > 0 ? elString : "(empty)";
+  //   console.log(`${message}: previousPage Stack ${elString} `);
+  // };
   useEffect(() => {
     // Initiates page load requested but not yet loaded
     if (
@@ -201,7 +201,15 @@ export const Page = React.memo((props: IPagePropsType) => {
     //   setPageContext(null);
     //   fetchRequest(distDir + pageRequested + ".json");
     // }
-  }, [pageRequested, pageLoaded, pageRestoreRequested, currentPage]);
+  }, [
+    pageRequested,
+    pageLoaded,
+    pageRestoreRequested,
+    currentPage,
+    currentIdx,
+    dispatch,
+    previousPages
+  ]);
 
   useEffect(() => {
     // requested page loading complete
@@ -217,7 +225,7 @@ export const Page = React.memo((props: IPagePropsType) => {
       // save previous page requested after page loaded for push later
       setCurrentPage(pageRequested);
     }
-  }, [canRender]);
+  }, [canRender, dispatch, pageRequested]);
 
   useEffect(() => {
     if (pageRequested === currentPage) setCurrentIdx(currentTermIdx);
@@ -233,7 +241,7 @@ export const Page = React.memo((props: IPagePropsType) => {
       dispatch(Request.Page_homeEnabled(false));
       dispatch(Request.Page_homed());
     }
-  }, [pageHomeRequested, homePage]);
+  }, [pageHomeRequested, homePage, dispatch]);
 
   useEffect(() => {
     // pop requested
@@ -260,7 +268,7 @@ export const Page = React.memo((props: IPagePropsType) => {
       }
       dispatch(Request.Page_popped());
     }
-  }, [pagePopRequested]);
+  }, [pagePopRequested, dispatch, homePage, previousPages]);
 
   useEffect(() => {
     // restore  requested
@@ -271,7 +279,7 @@ export const Page = React.memo((props: IPagePropsType) => {
         dispatch(Request.Page_restored());
       }
     }
-  }, [pageRestoreRequested]);
+  }, [pageRestoreRequested, dispatch, currentPage, currentIdx]);
 
   //////////
   // pageHomeRequested pagePopRequested pageRestoreRequested should be

@@ -363,7 +363,7 @@ export enum TerminalMetaEnumType {
   word,
   year
 }
-enum ParOfSpeechEnumType {
+enum PartOfSpeechEnumType {
   "noun",
   "verb",
   "pronoun",

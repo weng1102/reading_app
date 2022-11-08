@@ -31,8 +31,8 @@ import { SectionFillinContext, cloneDeep } from "./fillinContext";
 import resetButton from "./img/button_reset1.png";
 import resetButtonGhosted from "./img/button_reset_ghosted.png";
 
-export const Section_fillin = React.memo((props: ISectionPropsType): any => {
-  console.log(`<Section_fillin />`);
+export const SectionFillin = React.memo((props: ISectionPropsType): any => {
+  console.log(`<SectionFillin />`);
   // copy of initial author's settings
   let fillin: ISectionFillinVariant = props.section
     .meta as ISectionFillinVariant;
@@ -140,7 +140,7 @@ const Responses = React.memo((props: ISectionPropsType): any => {
       ) {
         const resTemp: IFillinResponses = cloneDeep(responses);
         resTemp[responseIdx].referenceCount =
-          responses[responseIdx].referenceCount - 1;
+          resTemp[responseIdx].referenceCount - 1;
         setResponses(resTemp);
         let clone: ISectionFillinItem = cloneDeep(sectionContext.sectionFillin);
         clone.modified = true;
@@ -151,7 +151,13 @@ const Responses = React.memo((props: ISectionPropsType): any => {
         );
       }
     }
-  }, [showTerminalIdx]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    showTerminalIdx,
+    pageLists.terminalList,
+    sectionContext.sectionFillin.modified,
+    fillin.sectionFillinIdx
+  ]);
   useEffect(() => {
     console.log(
       `<Responses /> useEffect(resetSectionFillinIdx=${resetSectionFillinIdx})`
@@ -163,7 +169,7 @@ const Responses = React.memo((props: ISectionPropsType): any => {
       setResponses(cloneDeep(sectionContext.sectionFillin.responses));
       dispatch(Request.Fillin_resetSection(-1));
     }
-  }, [resetSectionFillinIdx]);
+  }, [resetSectionFillinIdx, dispatch, sectionContext, sectionFillinIdx]);
 
   if (
     sectionContext.sectionFillin.loaded &&
@@ -292,14 +298,14 @@ const ResponsesListItems = (props: IResponseItemsPropsType): any => {
 };
 const ResponsesGridItems = (props: IResponseItemsPropsType): any => {
   console.log(`<ResponsesGridItems />`);
-  const sectionContext = useContext(SectionFillinContext);
+  //  const sectionContext = useContext(SectionFillinContext);
   let responses: IFillinResponses = props.responses;
   return responses.map((response: IFillinResponseItem, keyvalue: number) => (
     <div
       className={
         response.referenceCount === 0
           ? "fillin-responses-grid-item-omitted"
-          : "fillin-responses-grid-item" + " fillin-responses-grid-item"
+          : "fillin-responses-grid-item fillin-responses-grid-item"
       }
     >
       <ResponseContent response={response} />
