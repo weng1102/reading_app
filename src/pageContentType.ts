@@ -363,6 +363,18 @@ export enum TerminalMetaEnumType {
   word,
   year
 }
+enum PartOfSpeechEnumType {
+  "noun",
+  "verb",
+  "pronoun",
+  "preposition",
+  "adverb",
+  "advective",
+  "interjection",
+  "article",
+  "conjunction",
+  "numeral"
+}
 export interface ITerminalContent {
   id: number;
   termIdx: number;
