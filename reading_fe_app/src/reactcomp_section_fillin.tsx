@@ -155,7 +155,7 @@ const Responses = React.memo((props: ISectionPropsType): any => {
   }, [
     showTerminalIdx,
     pageLists.terminalList,
-    sectionContext.sectionFillin.modified,
+    // sectionContext.sectionFillin.modified,
     fillin.sectionFillinIdx
   ]);
   useEffect(() => {
