@@ -231,7 +231,7 @@ const ResponseItems = (props: IResponseItemsPropsType): any => {
     SectionFillinSortOrder.alphabetical
   ) {
     uniqueResponses = uniqueResponses.sort((a, b) =>
-      a.content > b.content ? 1 : -1
+      a.content.toLowerCase() > b.content.toLowerCase() ? 1 : -1
     );
   } else if (
     sectionContext.sectionFillin.sortOrder === SectionFillinSortOrder.random
