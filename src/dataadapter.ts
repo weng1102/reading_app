@@ -326,6 +326,7 @@ export interface IDataSource {
   ): number;
   currentIdx(): number;
   currentRecord(): TaggedStringType;
+  fileName: string;
   firstRecord(): TaggedStringType;
   length(): number;
   nextRecord(): TaggedStringType;
@@ -347,6 +348,7 @@ abstract class MarkdownSource extends BaseClass implements IDataSource {
   protected buffer: TaggedStringType[] = [];
   protected pageContent!: IPageContent;
   protected bufferIdx: number = -1;
+  fileName: string = "";
   constructor(parent: any) {
     super(parent);
     //Object.defineProperty(this, "dataSource", { enumerable: false });
@@ -460,6 +462,7 @@ export class RawMarkdownSource extends MarkdownSource implements IDataSource {
     super(parent);
   }
   connect(fileName: string): number {
+    this.fileName = fileName;
     let inputBuffer: string[];
     //    this.logger.diagnosticMode = true;
     this.logger.diagnostic(`input file: ${fileName}`);

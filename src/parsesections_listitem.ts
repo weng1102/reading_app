@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
  * File name: parsesections_list_items.ts
  *
@@ -78,8 +78,9 @@ abstract class SectionParseNode_SECTION extends SectionParseNode_LIST
         current.recordType === MarkdownRecordType.SECTION_END,
         `expected ${MarkdownRecordType.SECTION_END} at line ${current.lineNo}`
       );
-      if (current.recordType === MarkdownRecordType.SECTION_END)
+      if (current.recordType === MarkdownRecordType.SECTION_END) {
         this.dataSource.nextRecord();
+      }
     } catch (e) {
       if (IsError(e)) {
         this.logger.error(e.message);

@@ -397,7 +397,7 @@ export class TerminalNode_PASSTHRUTAG extends AbstractTerminalNode
       isValidMarkupTag(markupTag),
       `not a valid markup tag ${markupTag} for ${this.constructor.name} parsing`
     );
-    this.meta.tag = `{${markupTag}}`;
+    this.meta.tag = `${markupTag}`;
     tokenList.shift()!;
     return 0;
   }
@@ -406,7 +406,7 @@ export class TerminalNode_PASSTHRUTAG extends AbstractTerminalNode
     label?: string,
     prefix?: string
   ): string {
-    label = this.meta.tag;
+    label = `{${this.meta.tag}}`;
     return super.serialize(format, label, prefix);
     // }
   }

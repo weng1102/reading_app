@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
  * File name: parsesections.ts
  *
@@ -23,7 +23,6 @@ import {
   ISectionContent,
   ISectionEmptyVariant,
   ISectionEmptyVariantInitializer,
-  ISectionFillinVariant,
   ISectionFillinVariantInitializer,
   SectionVariantEnumType,
   SectionVariantType,

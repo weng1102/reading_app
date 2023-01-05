@@ -16,16 +16,7 @@ import { strict as assert } from "assert";
 import { IsError } from "./utilities";
 import { Logger } from "./logger";
 //import { MarkdownRecordType, TaggedStringType } from "./dataadapter";
-import {
-  IPageContent,
-  IRangeItem,
-  ISentenceListItem,
-  ISectionListItem,
-  ITerminalInfo,
-  ITerminalListItem,
-  PageContentInitializer,
-  PageFormatEnumType
-} from "./pageContentType";
+import { IPageContent } from "./pageContentType";
 import util from "util";
 import {
   //  FileNode,

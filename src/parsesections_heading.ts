@@ -18,9 +18,7 @@ import { MarkdownRecordType, TaggedStringType } from "./dataadapter";
 import {
   ISectionContent,
   ISectionHeadingVariant,
-  //ISectionHeadingVariant1,
   ISectionHeadingVariantInitializer,
-  //ISectionHeadingVariantInitializer1,
   SectionVariantEnumType
 } from "./pageContentType";
 import { IPageNode } from "./parsepages";
@@ -53,22 +51,6 @@ export class SectionParseNode_HEADING extends SectionParseNode
       let sentence: ISentenceNode = new SentenceNode(this);
       sentence.parse();
       this.meta.heading = sentence;
-
-      //   !this.dataSource.EOF() &&
-      //   current.recordType !== MarkdownRecordType.PARAGRAPH_END;
-      //   current = this.dataSource.nextRecord()
-      // ) {
-      //   assert(
-      //     current.recordType === MarkdownRecordType.SENTENCE,
-      //     `encountered ${current.recordType} expected ${MarkdownRecordType.SENTENCE} at line ${current.lineNo}`
-      //   );
-      //   let sentence: ISentenceNode = new SentenceNode(this);
-      //   this.meta.sentences.push(sentence);
-      //   sentence.parse();
-      //   current = this.dataSource.currentRecord(); // update current within this scope
-      // } // create sentence node
-      //      this.meta.heading. =
-      // this.meta.title = current.content;
       this.meta.level = current.headingLevel;
       this.userContext.headings.push({
         headingLevel: current.headingLevel,

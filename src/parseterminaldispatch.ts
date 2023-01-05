@@ -131,7 +131,7 @@ export function GetTerminalNode(
           break;
         }
         default:
-          console.log(`what?`);
+          console.log(`invalid MLTAG_END ${token.content.toLowerCase()}`);
       }
       break;
     }
