@@ -77,11 +77,22 @@ export class SectionParseNode_PARAGRAPH extends SectionParseNode_LIST
         for (let idx = this.firstTermIdx; idx <= this.lastTermIdx; idx++) {
           this.userContext.terminals[idx].sectionIdx = this.id;
         }
-        this.dataSource.nextRecord(); // move to next grouping
+        this.dataSource.nextRecord(); // skip PARAGRAPH_END
       }
     } catch (e) {
       if (IsError(e)) {
         this.logger.error(e.message);
+        for (
+          let current = this.dataSource.nextRecord();
+          !this.dataSource.EOF() &&
+          current.recordType !== MarkdownRecordType.PARAGRAPH_END;
+          current = this.dataSource.nextRecord()
+        ) {
+          this.logger.diagnostic(
+            `looking for ${MarkdownRecordType.PARAGRAPH_END} at ${current.lineNo}`
+          );
+        }
+        this.dataSource.nextRecord(); // skip PARAGRAPH_END
       } else {
         throw e;
       }
