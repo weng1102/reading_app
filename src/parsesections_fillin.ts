@@ -10,10 +10,15 @@
  **/
 import { strict as assert } from "assert";
 import {
+  IsValidBooleanString,
   IsDefined,
   IsError,
-  SetArgBoolean,
-  SetArgWholeNumber
+  IsValidWholeNumberString,
+  ValidateArgBoolean,
+  ValidateArgWholeNumber,
+  ValidateArgString,
+  ValidateArg,
+  ValidationArgMsg
 } from "./utilities";
 import {
   IDX_INITIALIZER,
@@ -29,21 +34,15 @@ import {
   ISectionFillinVariant,
   ISectionFillinVariantInitializer,
   ISectionFillinItemInitializer,
-  ITerminalContent,
-  ITerminalInfoInitializer,
-  IFillinTerminalMeta,
   SectionVariantEnumType,
   SectionFillinLayoutType,
   SectionFillinSortOrder,
-  sortOrderToLabel,
-  TerminalMetaEnumType
+  sortOrderToLabel
 } from "./pageContentType";
 import { GetSectionNode } from "./parsesectiondispatch";
-import { ITerminalNode } from "./parseterminals";
 import { IPageNode } from "./parsepages";
 import { ISectionNode } from "./parsesections";
 import { SectionParseNode_LIST } from "./parsesections";
-import { ISentenceNode, SentenceNode } from "./parsesentences";
 export class SectionParseNode_FILLIN extends SectionParseNode_LIST
   implements ISectionNode {
   constructor(parent: IPageNode | ISectionNode) {
@@ -53,6 +52,181 @@ export class SectionParseNode_FILLIN extends SectionParseNode_LIST
   type = SectionVariantEnumType.fillin;
   meta: ISectionFillinVariant = ISectionFillinVariantInitializer();
   parse() {
+    const validateArgs = (argString: string, lineNo: number) => {
+      /*
+        [0]  responses label
+        [1]  prompts label such as instructions
+        [2]  layout { grid | bulleted list | csv }
+        [3]  grid column as number (only with layout=grid)
+        [4]  sort order { a[lphabetical] | i[nsertOrder] (default) | r[andom] [c[sv]]}
+        [5]  unique only: boolean, remove duplicate responses and refCount++
+        [6]  showReferenceCount: boolean, shows in responses iff <> 1
+        [7]  groupByCategory: boolean, groups responses by category e.g., verbs
+        [8]  allowReset: boolean, allows user to reset responses already spoken
+        [9]  showResponseHints: boolean, show hints within responses
+        [10] showPromptHints: boolean,show hints within prompts
+        [11] allowFormatting: boolean, allow user to change format
+        [12] number of columns when displaying prompts
+        [13] showPrompts: boolean, show prompt initially filled in)
+        */
+      let args: string[] = argString.split(",").map(arg => arg.trim());
+      let argNum = 0;
+      // consider try/catch
+      this.meta.responsesLabel = ValidateArg(
+        args[argNum].length > 0,
+        "responses label",
+        args[argNum],
+        this.meta.responsesLabel,
+        argNum,
+        lineNo,
+        this.logger
+      ) as string;
+
+      argNum++;
+      this.meta.promptsLabel = ValidateArg(
+        args[argNum].length > 0,
+        "prompts label",
+        args[argNum],
+        this.meta.promptsLabel,
+        argNum,
+        lineNo,
+        this.logger
+      ) as string;
+
+      argNum++;
+      this.meta.layout = ValidateArg(
+        args[argNum] in SectionFillinLayoutType,
+        "layout",
+        args[argNum],
+        this.meta.layout,
+        argNum,
+        lineNo,
+        this.logger
+      ) as SectionFillinLayoutType;
+
+      argNum++;
+      this.meta.gridColumns = ValidateArg(
+        IsValidWholeNumberString(args[argNum]),
+        "grid columns",
+        args[argNum],
+        this.meta.gridColumns,
+        argNum,
+        lineNo,
+        this.logger
+      ) as number;
+
+      argNum++;
+      this.meta.sortOrder = ValidateArg(
+        args[argNum] in SectionFillinSortOrder,
+        "sort order",
+        args[argNum],
+        this.meta.sortOrder,
+        argNum,
+        lineNo,
+        this.logger
+      ) as SectionFillinSortOrder;
+
+      argNum++;
+      this.meta.unique = ValidateArg(
+        IsValidBooleanString(args[argNum]),
+        "unique",
+        args[argNum],
+        this.meta.unique,
+        argNum,
+        lineNo,
+        this.logger
+      ) as boolean;
+
+      argNum++;
+      this.meta.showReferenceCount = ValidateArg(
+        IsValidBooleanString(args[argNum]),
+        "show reference count",
+        args[argNum],
+        this.meta.showReferenceCount,
+        argNum,
+        lineNo,
+        this.logger
+      ) as boolean;
+
+      argNum++;
+      this.meta.groupByCategory = ValidateArg(
+        IsValidBooleanString(args[argNum]),
+        "group by category",
+        args[argNum],
+        this.meta.groupByCategory,
+        argNum,
+        lineNo,
+        this.logger
+      ) as boolean;
+
+      argNum++;
+      this.meta.allowReset = ValidateArg(
+        IsValidBooleanString(args[argNum]),
+        "allow reset",
+        args[argNum],
+        this.meta.allowReset,
+        argNum,
+        lineNo,
+        this.logger
+      ) as boolean;
+
+      argNum++;
+      this.meta.showResponseHints = ValidateArg(
+        IsValidBooleanString(args[argNum]),
+        "show response hints",
+        args[argNum],
+        this.meta.showResponseHints,
+        argNum,
+        lineNo,
+        this.logger
+      ) as boolean;
+
+      argNum++;
+      this.meta.showPromptHints = ValidateArg(
+        IsValidBooleanString(args[argNum]),
+        "show prompt hints",
+        args[argNum],
+        this.meta.showPromptHints,
+        argNum,
+        lineNo,
+        this.logger
+      ) as boolean;
+
+      argNum++;
+      this.meta.allowUserFormatting = ValidateArg(
+        IsValidBooleanString(args[argNum]),
+        "allow user formatting",
+        args[argNum],
+        this.meta.allowUserFormatting,
+        argNum,
+        lineNo,
+        this.logger
+      ) as boolean;
+
+      argNum++;
+      this.meta.promptColumns = ValidateArg(
+        IsValidWholeNumberString(args[argNum]),
+        "prompt columns",
+        args[argNum],
+        this.meta.promptColumns,
+        argNum,
+        lineNo,
+        this.logger
+      ) as number;
+
+      argNum++;
+      this.meta.showPrompts = ValidateArg(
+        IsValidBooleanString(args[argNum]),
+        "show prompts",
+        args[argNum],
+        this.meta.showPrompts,
+        argNum,
+        lineNo,
+        this.logger
+      ) as boolean;
+
+      this.logger.diagnostic(`Validated ${argNum} parameters`);
+    };
     //this.logger.diagnosticMode = true;
     this.logger.diagnostic(`${this.constructor.name}`);
     try {
@@ -64,160 +238,71 @@ export class SectionParseNode_FILLIN extends SectionParseNode_LIST
         current.recordType === MarkdownRecordType.FILLIN,
         `Expected "${MarkdownRecordTagType.FILLIN}" at line ${current.lineNo}`
       );
-      // See sectionFillinVariant
-      /*
-      [0]  response title
-      [1]  response label such as instructions
-      [2]  layout { grid | bulleted list | csv }
-      [3]  grid column as number (only with layout=grid)
-      [4]  sort order { a[lphabetical] | i[nsertOrder] (default) | r[andom] }
-      [5]  unique only: boolean, remove duplicate responses and refCount++
-      [6]  showReferenceCount: boolean, shows in responses iff <> 1
-      [7]  groupByCategory: boolean, groups responses by category e.g., verbs
-      [8]  allowReset: boolean, allows user to reset responses already spoken
-      [9]  showResponseHints: boolean, show hints within responses
-      [10] showPromptHints: boolean,show hints within prompts
-      [11] allowFormatting: boolean, allow user to change format
-      [12] number of columns when displaying prompts
-      [13] showPrompts: boolean, show prompt initially filled in)
-
-      */
-      try {
-        let args: string[] = current.content.split(",").map(arg => arg.trim());
-        if (IsDefined(args[0])) this.meta.responsesLabel = args[0].trim();
-        if (IsDefined(args[1])) this.meta.promptsLabel = args[1].trim();
-        if (IsDefined(args[2]) && args[2] in SectionFillinLayoutType) {
-          this.meta.layout = args[2] as SectionFillinLayoutType;
-        }
-        this.meta.gridColumns = SetArgWholeNumber(
-          args[3],
-          this.meta.gridColumns
+      validateArgs(current.content, current.lineNo);
+      this.meta.sectionFillinIdx =
+        this.userContext.fillins.push(
+          ISectionFillinItemInitializer(
+            IDX_INITIALIZER,
+            this.meta.layout,
+            this.meta.gridColumns,
+            this.meta.sortOrder,
+            this.meta.unique,
+            this.meta.showReferenceCount,
+            this.meta.groupByCategory,
+            this.meta.allowReset,
+            this.meta.showResponseHints,
+            this.meta.allowUserFormatting,
+            this.meta.promptColumns,
+            this.meta.showPrompts
+          )
+        ) - 1;
+      for (
+        current = this.dataSource.nextRecord();
+        !this.dataSource.EOF() &&
+        current.recordType !== MarkdownRecordType.FILLIN_END;
+        current = this.dataSource.currentRecord() // update based on parse()
+      ) {
+        let sectionNode: ISectionNode = GetSectionNode(
+          current.recordType,
+          this
         );
-        let sortOrder: string = args[4].trim();
-        switch (sortOrder[0]) {
-          case SectionFillinSortOrder.alphabetical.toString()[0]:
-            this.meta.sortOrder = SectionFillinSortOrder.alphabetical;
-            break;
-          case SectionFillinSortOrder.random.toString()[0]:
-            this.meta.sortOrder = SectionFillinSortOrder.random;
-            break;
-          default:
-            this.meta.sortOrder = SectionFillinSortOrder.insert;
-            break;
-        }
-        this.meta.unique = SetArgBoolean(args[5], this.meta.unique);
-        this.meta.showReferenceCount = SetArgBoolean(
-          args[6],
-          this.meta.showReferenceCount
+        this.meta.prompts.push(sectionNode);
+        this.logger.diagnostic(
+          `pushed section=${current.recordType} ${sectionNode.constructor.name} ${current.content}`
         );
-        this.meta.groupByCategory = SetArgBoolean(
-          args[7],
-          this.meta.groupByCategory
-        );
-        this.meta.allowReset = SetArgBoolean(args[8], this.meta.allowReset);
-        this.meta.showResponseHints = SetArgBoolean(
-          args[9],
-          this.meta.showResponseHints
-        );
-        this.meta.showPromptHints = SetArgBoolean(
-          args[10],
-          this.meta.showPromptHints
-        );
-        this.meta.allowUserFormatting = SetArgBoolean(
-          args[11],
-          this.meta.allowUserFormatting
-        );
-        this.meta.promptColumns = SetArgWholeNumber(
-          args[12],
-          this.meta.promptColumns
-        );
-        this.meta.showPrompts = SetArgBoolean(args[13], this.meta.showPrompts);
-        this.meta.sectionFillinIdx =
-          this.userContext.fillins.push(
-            ISectionFillinItemInitializer(
-              IDX_INITIALIZER,
-              this.meta.layout,
-              this.meta.gridColumns,
-              this.meta.sortOrder,
-              this.meta.unique,
-              this.meta.showReferenceCount,
-              this.meta.groupByCategory,
-              this.meta.allowReset,
-              this.meta.showResponseHints,
-              this.meta.allowUserFormatting,
-              this.meta.promptColumns,
-              this.meta.showPrompts
-            )
-          ) - 1;
-        for (
-          current = this.dataSource.nextRecord();
-          !this.dataSource.EOF() &&
-          current.recordType !== MarkdownRecordType.FILLIN_END;
-          current = this.dataSource.currentRecord()
-        ) {
-          let sectionNode: ISectionNode = GetSectionNode(
-            current.recordType,
-            this
-          );
-          this.meta.prompts.push(sectionNode);
-          this.logger.diagnostic(
-            `pushed section=${current.recordType} ${sectionNode.constructor.name} ${current.content}`
-          );
-          sectionNode.parse();
-          //        current = this.dataSource.currentRecord();
-
-          if (current.recordType === MarkdownRecordType.PARAGRAPH_END) {
-            //////////
-            // Presumably, PARAGRAPH created sectionList entry already
-            //////////
-            // this.lastTermIdx = this.userContext.terminals.lastIdx;
-            // this.id =
-            //   this.userContext.sections.
-            //     )
-            //   ) - 1;
-            // for (let idx = this.firstTermIdx; idx <= this.lastTermIdx; idx++) {
-            //   this.userContext.terminals[idx].sectionIdx = this.id;
-            // }
-            this.dataSource.nextRecord(); // move to next grouping
-          }
-        }
-        if (current.recordType === MarkdownRecordType.FILLIN_END) {
-          this.lastTermIdx = this.userContext.terminals.lastIdx;
-          // added when addItem was called in parse_terminal_fillin
-          ////    this.meta.sectionFillinIdx = this.userContext.fillins.length - 1;
-          //     ISectionFillinItemInitializer(this.meta.groupDuplicates, true, [])
-          //   ) - 1;
-
-          // this.id =
-          //   this.userContext.sections.push(
-          //     ISectionImageEntryInitializer(
-          //       this.firstTermIdx,
-          //       this.lastTermIdx,
-          //       this.type.toString()
-          //     )
-          //   ) - 1;
-          ////        for (let idx = this.firstTermIdx; idx <= this.lastTermIdx; idx++) {
-          ////          this.userContext.terminals[idx].sectionIdx = this.id;
-          ////        }
-          this.dataSource.nextRecord(); // move to next grouping
-        }
-        ///////////////////
-        // get sectionFillinIdx AND the fillinTermIdx within the sectionFillin
-      } catch (e) {
-        this.logger.warning((e as Error).message);
+        sectionNode.parse();
       }
-      this.dataSource.nextRecord(); // move to next grouping
-      // }
+      assert(
+        current.recordType === MarkdownRecordType.FILLIN_END,
+        `expected "${MarkdownRecordTagType.FILLIN_END}" at line ${current.lineNo}`
+      );
+      if (current.recordType === MarkdownRecordType.FILLIN_END) {
+        this.lastTermIdx = this.userContext.terminals.lastIdx;
+        this.dataSource.nextRecord(); // move to next grouping
+      }
     } catch (e) {
-      this.dataSource.nextRecord(); // move to next grouping
+      // should advance current record passed next FILLIN_END to continue
+      // parsing in lieu of this error
       if (IsError(e)) {
         this.logger.error(e.message);
+        for (
+          let current = this.dataSource.nextRecord();
+          !this.dataSource.EOF() &&
+          current.recordType !== MarkdownRecordType.FILLIN_END;
+          current = this.dataSource.nextRecord()
+        ) {
+          this.logger.diagnostic(
+            `looking for ${MarkdownRecordType.FILLIN_END} at ${current.lineNo}`
+          );
+        }
+        this.dataSource.nextRecord(); // skip FILLIN_END
       } else {
         throw e;
       }
     }
     return 0;
   }
+
   serialize(
     format?: ParseNodeSerializeFormatEnumType,
     label?: string,
