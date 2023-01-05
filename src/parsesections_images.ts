@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
  *
  * File name: parsesections_images.ts
  *
@@ -8,7 +8,19 @@
  *
  **/
 import { strict as assert } from "assert";
-import { IsDefined, IsError } from "./utilities";
+import {
+  IsDefined,
+  IsError,
+  IsValidBooleanString,
+  IsValidWholeNumberString,
+  IsValidWholeNumberPercentString,
+  ValidateArgBoolean,
+  ValidateArgWholeNumber,
+  ValidateArgString,
+  ValidateArg,
+  IsValidString,
+  ValidationArgMsg
+} from "./utilities";
 import {
   IDX_INITIALIZER,
   ParseNodeSerializeTabular,
@@ -19,10 +31,6 @@ import {
   ImageEntryLayoutEnumType,
   ISectionImageEntryVariantInitializer,
   ISectionImageEntryVariant,
-  // ISectionListItemInitializer,
-  // ISectionParagraphVariant,
-  // ISectionParagraphVariantInitializer,
-  // ITerminalContent,
   SectionVariantEnumType,
   TerminalMetaEnumType,
   IImageTerminalMeta
@@ -42,6 +50,56 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
   type = SectionVariantEnumType.image_entry;
   meta: ISectionImageEntryVariant = ISectionImageEntryVariantInitializer();
   parse() {
+    const validateArgs = (argString: string, lineNo: number) => {
+      /*
+        [0]  response title
+        [1]  layout orientation: image on left, image above
+        [2]  percent portion of page for image
+        [3]  separator format at top of image section (TBD)
+        */
+      let args: string[] = argString.split(",").map(arg => arg.trim());
+      let argNum = 0;
+      // consider try/catch
+      this.meta.title = ValidateArg(
+        IsValidString(args[argNum]),
+        "title",
+        args[argNum],
+        this.meta.title,
+        argNum,
+        lineNo,
+        this.logger
+      ) as string;
+      argNum++;
+      this.meta.layout = ValidateArg(
+        IsDefined(args[argNum]) && args[argNum] in ImageEntryLayoutEnumType,
+        "layout",
+        args[argNum],
+        this.meta.layout,
+        argNum,
+        lineNo,
+        this.logger
+      ) as ImageEntryLayoutEnumType;
+      argNum++;
+      this.meta.percent = ValidateArg(
+        IsValidWholeNumberPercentString(args[argNum]),
+        "image layout percent",
+        args[argNum],
+        this.meta.percent,
+        argNum,
+        lineNo,
+        this.logger
+      ) as string;
+      argNum++;
+      this.meta.separator = ValidateArg(
+        IsValidString(args[argNum]),
+        "separator",
+        args[argNum],
+        this.meta.separator,
+        argNum,
+        lineNo,
+        this.logger
+      ) as string;
+    };
     //this.logger.diagnosticMode = true;
     this.logger.diagnostic(`${this.constructor.name}`);
     try {
@@ -53,49 +111,19 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
         current.recordType === MarkdownRecordType.IMAGEENTRY,
         `Expected "${MarkdownRecordType.IMAGEENTRY}" at line ${current.lineNo}`
       );
-      let args: string[] = current.content.split(",").map(arg => arg.trim());
-      if (IsDefined(args[0])) this.meta.title = args[0].trim();
-      try {
-        if (IsDefined(args[1])) {
-          let layout = args[1].trim().toLowerCase();
-          assert(
-            layout === ImageEntryLayoutEnumType.left ||
-              layout === ImageEntryLayoutEnumType.above,
-            `Invalid image entry layout "${layout}" encountered, expected either "${ImageEntryLayoutEnumType.left}" or "${ImageEntryLayoutEnumType.above}" as second argument at line ${current.lineNo}`
-          );
-          this.meta.layout = layout;
-        }
-      } catch (e) {
-        this.logger.warning((e as Error).message);
-      }
-      try {
-        if (IsDefined(args[2])) {
-          assert(
-            args[2].trim().charAt(args[2].trim().length - 1) === "%",
-            `Missing percent sign in third argument at line ${current.lineNo}`
-          );
-          let valueWithoutPercentSign: string = args[2]
-            .trim()
-            .substring(0, args[2].length - 1); // remove % sign too
-          assert(
-            !isNaN(+valueWithoutPercentSign),
-            `Expected a numerical value as third argument but encountered  "${valueWithoutPercentSign}" at line ${current.lineNo}`
-          );
-          this.meta.percent = valueWithoutPercentSign + "%";
-        }
-      } catch (e) {
-        this.logger.warning((e as Error).message);
-      }
-      if (IsDefined(args[3])) this.meta.separator = args[3];
+      validateArgs(current.content, current.lineNo);
+
       current = this.dataSource.nextRecord();
       assert(
         current.recordType === MarkdownRecordType.PARAGRAPH,
-        `Expected "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.recordType}" at line ${current.lineNo}`
+        `expected "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.recordType}" at line ${current.lineNo}`
       );
+      this.logger.diagnostic("Validated parameters");
+
       current = this.dataSource.nextRecord();
       assert(
         current.recordType === MarkdownRecordType.SENTENCE,
-        `Expected "${MarkdownRecordType.SENTENCE}" but encountered "${current.recordType}" at line ${current.lineNo}`
+        `expected "${MarkdownRecordType.SENTENCE}" but encountered "${current.recordType}" at line ${current.lineNo}`
       );
       // find list of images
       this.firstTermIdx = this.userContext.terminals.lastIdx + 1;
@@ -109,29 +137,13 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
       }
       assert(
         this.meta.images.length > 0,
-        `Expected image declaraction(s) immediately following "${MarkdownRecordType.IMAGEENTRY}" at line ${current.lineNo}`
+        `expected image declaration(s) immediately following "${MarkdownRecordType.IMAGEENTRY}" at line ${current.lineNo}`
       );
       current = this.dataSource.nextRecord();
       assert(
         current.recordType === MarkdownRecordType.PARAGRAPH_END,
-        `Expected "${MarkdownRecordType.PARAGRAPH_END}" to "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.recordType}"  at line ${current.lineNo}`
+        `expected "${MarkdownRecordType.PARAGRAPH_END}" to "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.recordType}"  at line ${current.lineNo}`
       );
-      // if (current.recordType === MarkdownRecordType.PARAGRAPH_END) {
-      //   this.lastTermIdx = this.userContext.terminals.lastIdx;
-      //   this.id =
-      //     this.userContext.sections.push(
-      //       ISectionListItemInitializer(
-      //         this.firstTermIdx,
-      //         this.lastTermIdx,
-      //         this.type.toString()
-      //       )
-      //     ) - 1;
-      //   for (let idx = this.firstTermIdx; idx <= this.lastTermIdx; idx++) {
-      //     this.userContext.terminals[idx].sectionIdx = this.id;
-      //   }
-      //   this.dataSource.nextRecord(); // move to next grouping
-      // }
-      //keep processing sections until imageentry_end
       for (
         current = this.dataSource.nextRecord();
         !this.dataSource.EOF() &&
@@ -146,44 +158,35 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
         this.logger.diagnostic(
           `pushed section=${current.recordType} ${sectionNode.constructor.name} ${current.content}`
         );
-        sectionNode.parse();
-        //        current = this.dataSource.currentRecord();
-
-        if (current.recordType === MarkdownRecordType.PARAGRAPH_END) {
-          //////////
-          // Presumably, PARAGRAPH created sectionList entry already
-          //////////
-
-          // this.lastTermIdx = this.userContext.terminals.lastIdx;
-          // this.id =
-          //   this.userContext.sections.
-          //     )
-          //   ) - 1;
-          // for (let idx = this.firstTermIdx; idx <= this.lastTermIdx; idx++) {
-          //   this.userContext.terminals[idx].sectionIdx = this.id;
-          // }
-          this.dataSource.nextRecord(); // move to next grouping
+        if (current.recordType === MarkdownRecordType.EMPTY) {
+          this.logger.diagnostic(
+            `encountered EMPTY section=${current.recordType} ${sectionNode.constructor.name} ${current.content} @ ${current.lineNo}`
+          );
         }
+        sectionNode.parse();
       }
+      assert(
+        current.recordType === MarkdownRecordType.IMAGEENTRY_END,
+        `expected "${MarkdownRecordType.IMAGEENTRY_END}" at line ${current.lineNo}`
+      );
       if (current.recordType === MarkdownRecordType.IMAGEENTRY_END) {
         this.lastTermIdx = this.userContext.terminals.lastIdx;
-        // this.id =
-        //   this.userContext.sections.push(
-        //     ISectionImageEntryInitializer(
-        //       this.firstTermIdx,
-        //       this.lastTermIdx,
-        //       this.type.toString()
-        //     )
-        //   ) - 1;
-        ////        for (let idx = this.firstTermIdx; idx <= this.lastTermIdx; idx++) {
-        ////          this.userContext.terminals[idx].sectionIdx = this.id;
-        ////        }
-        this.dataSource.nextRecord(); // move to next grouping
+        this.dataSource.nextRecord(); // skip IMAGEENTRY_END
       }
     } catch (e) {
-      this.dataSource.nextRecord(); // move to next grouping
       if (IsError(e)) {
         this.logger.error(e.message);
+        for (
+          let current = this.dataSource.nextRecord();
+          !this.dataSource.EOF() &&
+          current.recordType !== MarkdownRecordType.IMAGEENTRY_END;
+          current = this.dataSource.nextRecord()
+        ) {
+          this.logger.diagnostic(
+            `looking for ${MarkdownRecordType.IMAGEENTRY_END} at ${current.lineNo}`
+          );
+        }
+        this.dataSource.nextRecord(); // skip IMAGEENTRY_END
       } else {
         throw e;
       }
