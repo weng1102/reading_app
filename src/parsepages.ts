@@ -10,7 +10,16 @@
 const INITIALDATE = "9/21/2015 17:03";
 const InitialDate = new Date(INITIALDATE).toString();
 import { strict as assert } from "assert";
-import { IsError, IsDefined } from "./utilities";
+import {
+  IsError,
+  IsDefined,
+  IsValidBooleanString,
+  IsValidString,
+  ValidateArgString,
+  ValidateArg,
+  ValidateArgBoolean,
+  ValidationArgMsg
+} from "./utilities";
 import { Logger } from "./logger";
 import { MarkdownRecordType, TaggedStringType } from "./dataadapter";
 import {
@@ -73,29 +82,94 @@ export class PageParseNode extends ParseNode implements IPageContent {
     super(parent);
   }
   parse() {
-    //this.logger.diagnosticMode = true;
+    let current: TaggedStringType;
+    const validateArgs = (argString: string, lineNo: number) => {
+      /*
+      [0]  response title
+      [1]  page owner (consumer)
+      [2]  page author (producer)
+      [3]  date created
+      [4]  category
+      [5]  description
+      */
+      let args: string[] = argString.split(",").map(arg => arg.trim());
+      let argNum: number = 0;
+      this.title = ValidateArg(
+        IsValidString(args[argNum]),
+        "title",
+        args[argNum],
+        this.title,
+        argNum,
+        lineNo,
+        this.logger
+      ) as string;
+      argNum++;
+      this.owner = ValidateArg(
+        IsValidString(args[argNum]),
+        "owner",
+        args[argNum],
+        this.owner,
+        argNum,
+        lineNo,
+        this.logger
+      ) as string;
+      argNum++;
+      this.author = ValidateArg(
+        IsValidString(args[argNum]),
+        "author",
+        args[argNum],
+        this.author,
+        argNum,
+        lineNo,
+        this.logger
+      ) as string;
+
+      argNum++;
+      this.created = ValidateArg(
+        !isNaN(Date.parse(args[argNum])),
+        "created",
+        args[argNum],
+        this.created,
+        argNum,
+        lineNo,
+        this.logger
+      ) as string;
+      argNum++;
+      this.category = ValidateArg(
+        IsValidString(args[argNum]),
+        "category",
+        args[argNum],
+        this.category,
+        argNum,
+        lineNo,
+        this.logger
+      ) as string;
+      argNum++;
+      this.description = ValidateArg(
+        IsValidString(args[argNum]),
+        "description",
+        args[argNum],
+        this.description,
+        argNum,
+        lineNo,
+        this.logger
+      ) as string;
+      this.logger.diagnostic(`Validated ${argNum} parameters`);
+    };
+
     this.logger.diagnostic(`${this.constructor.name}`);
     this.created = new Date(Date.now()).toString();
     try {
       assert(this.dataSource !== undefined, `dataSource is undefined`);
+      this.logger.diagnostic(`Parsing ${this.dataSource.fileName}`);
       for (
-        let current: TaggedStringType = this.dataSource.firstRecord();
+        current = this.dataSource.firstRecord();
         !this.dataSource.EOF();
         //        current = this.dataSource.nextRecord()
         current = this.dataSource.currentRecord()
       ) {
         if (current.recordType === MarkdownRecordType.PAGE) {
-          let attributes: string[] = current.content.split(",");
-          if (IsDefined(attributes[0])) this.title = attributes[0].trim();
-          if (IsDefined(attributes[1])) this.owner = attributes[1].trim();
-          if (IsDefined(attributes[2])) this.author = attributes[2].trim();
-          if (
-            IsDefined(attributes[3]) &&
-            !isNaN(Date.parse(attributes[3].trim()))
-          )
-            this.created = attributes[3].trim();
-          if (IsDefined(attributes[4])) this.category = attributes[4].trim();
-          if (IsDefined(attributes[5])) this.description = attributes[5].trim();
+          validateArgs(current.content, current.lineNo);
           current = this.dataSource.nextRecord();
         } else {
           let sectionNode: ISectionNode = GetSectionNode(
