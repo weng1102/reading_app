@@ -8,6 +8,7 @@
  *
  **/
 import * as fs from "fs";
+import { Logger } from "./logger";
 import DictionaryType from "./dictionary";
 import { PronunciationDictionary, RecognitionDictionary } from "./dictionary";
 "use strict";
@@ -45,7 +46,7 @@ export const IsError = (exception: any): exception is Error => {
   );
 };
 export const IsDefined = (attribute: string): boolean => {
-  return attribute !== undefined && attribute.length > 0;
+  return attribute !== undefined && attribute !== null;
 };
 export const FileExists = (path: string): boolean => {
   try {
@@ -54,20 +55,205 @@ export const FileExists = (path: string): boolean => {
     return false;
   }
 };
-export const SetArgBoolean = (arg: string, defaultValue: boolean) => {
-  const acceptedTrues = ["true", "t", "yes", "y"];
-  let result: boolean = defaultValue;
-  if (IsDefined(arg)) {
-    result = acceptedTrues.includes(arg.toLowerCase()) ? true : false;
-  }
-  return result;
+const WholeNumberPattern = new RegExp(
+  /^[+-]?(?:[0-9]{1,3}(?:,[0-9]{3})*|[0-9]+)(?:[.][0-9]+)?$/
+);
+const WholeNumberPercentPattern = new RegExp(/^(100|[1-9]?\d{1})%$/);
+const validTrueStrings = ["true", "t", "yes", "y"];
+const validFalseStrings = ["false", "f", "no", "n"];
+const validBooleanStrings = [...validTrueStrings, ...validFalseStrings];
+
+export const IsValidPercentString = (arg: string): boolean => {
+  return IsDefined(arg) && WholeNumberPattern.test(arg);
 };
-export const SetArgWholeNumber = (arg: string, defaultValue: number) => {
-  let result: number = defaultValue;
-  if (IsDefined(arg)) {
-    result = /^\d+$/.test(arg) ? +arg : defaultValue;
+export const IsValidWholeNumberString = (arg: string): boolean => {
+  return IsDefined(arg) && WholeNumberPattern.test(arg);
+};
+export const IsValidWholeNumberPercentString = (arg: string): boolean => {
+  return IsDefined(arg) && WholeNumberPercentPattern.test(arg);
+};
+export const IsValidBooleanString = (arg: string): boolean => {
+  return IsDefined(arg) && validBooleanStrings.includes(arg.toLowerCase());
+};
+export const IsValidString = (arg: string): boolean => {
+  return IsDefined(arg) && arg.length > 0;
+};
+export const ValidateBooleanArg = (
+  validatedCondition: boolean,
+  argName: string,
+  arg: string,
+  defaultArgValue: string,
+  argNumber: number,
+  lineNo: number
+): [string, string] => {
+  // returns: [validated value string, validation announcement, validation
+  // error]
+  let retValue: string = "";
+  let warningMsg: string = "";
+  if (IsDefined(arg) && validatedCondition) {
+    retValue = arg;
+  } else {
+    retValue = defaultArgValue;
+    warningMsg = `Parameter ${argNumber} "${argName}" is missing at line  ${lineNo}. Using default value "${defaultArgValue}"`;
   }
-  return result;
+  return [retValue, warningMsg];
+};
+export const ValidationArgMsg = (
+  argName: string,
+  argNumber: number,
+  lineNo: number
+) => {
+  return `Validating parameter ${argNumber} "${argName}" at line ${lineNo}`;
+};
+export const ValidateArg = (
+  // uses type of defaultArgValue to infer return type
+  validatedCondition: boolean,
+  argName: string,
+  arg: string,
+  defaultArgValue: any,
+  argNumber: number,
+  lineNo: number,
+  logger: Logger
+): string | number | boolean => {
+  let warningMsg: string = "";
+  let retValue: string | number | boolean;
+  let returnType: string = typeof defaultArgValue;
+  // console.log(`*******************************`);
+  // console.log(`argType=${typeof defaultArgValue}`);
+  // const nameOf = (f: any) => f.toString().replace(/[ |\(\)=>]/g, "");
+  // const nameOf1 = (f: any) => f.toString();
+  // console.log(`argName=${nameOf(() => defaultArgValue)}`);
+  // console.log(`argName1=${nameOf1(() => defaultArgValu)}`);
+  //
+  // console.log(`*******************************`);
+  logger.diagnostic(ValidationArgMsg(argName, argNumber, lineNo));
+  if (!IsDefined(arg)) {
+    retValue = defaultArgValue;
+    warningMsg = `Parameter ${argNumber} "${argName}" is missing at line ${lineNo}. Using default value "${defaultArgValue}"`;
+  } else {
+    switch (returnType) {
+      case "number": {
+        [retValue, warningMsg] = ValidateArgWholeNumber(
+          validatedCondition,
+          argName,
+          arg,
+          defaultArgValue,
+          argNumber,
+          lineNo
+        );
+        break;
+      }
+      case "boolean": {
+        [retValue, warningMsg] = ValidateArgBoolean(
+          validatedCondition,
+          argName,
+          arg,
+          defaultArgValue,
+          argNumber,
+          lineNo
+        );
+        break;
+      }
+      case "string":
+      default: {
+        [retValue, warningMsg] = ValidateArgString(
+          validatedCondition,
+          argName,
+          arg,
+          defaultArgValue,
+          argNumber,
+          lineNo
+        );
+        break;
+      }
+    }
+  }
+  if (warningMsg) logger.warning(warningMsg);
+  return retValue;
+};
+// export const ValidateArgString1 = (
+//   validatedCondition: boolean,
+//   argName: string,
+//   arg: string,
+//   defaultArgValue: string,
+//   argNumber: number,
+//   lineNo: number,
+//   logger: Logger
+// ): string => {
+//   let retval, warningMsg: string;
+//   logger.diagnostic(ValidationArgMsg(argName, argNumber, lineNo));
+//   [retval, warningMsg] = ValidateArgString(
+//     validatedCondition,
+//     argName,
+//     arg,
+//     defaultArgValue,
+//     argNumber,
+//     lineNo
+//   );
+//
+//   return retval;
+// };
+export const ValidateArgString = (
+  validatedCondition: boolean,
+  argName: string,
+  arg: string,
+  defaultArgValue: string,
+  argNumber: number,
+  lineNo: number
+): [string, string] => {
+  let retValue: string = "";
+  let warningMsg: string = "";
+  if (validatedCondition) {
+    retValue = arg;
+  } else {
+    retValue = defaultArgValue;
+    warningMsg = `Parameter ${argNumber} "${argName}" is invalid at line ${lineNo}. Using default value "${defaultArgValue}"`;
+  }
+  return [retValue, warningMsg];
+};
+// const ValidateArgStringPercent = (
+//   validatedCondition: boolean,
+//   argName: string,
+//   arg: string,
+//   defaultArgValue: string,
+//   argNumber: number,
+//   lineNo: number
+// ): [string, string] => {
+//   return ["", ""];
+// };
+export const ValidateArgBoolean = (
+  validatedCondition: boolean,
+  argName: string,
+  arg: string,
+  defaultArgValue: boolean,
+  argNumber: number,
+  lineNo: number
+): [boolean, string] => {
+  let retValue: boolean = defaultArgValue;
+  let warningMsg: string = "";
+  if (validatedCondition) {
+    retValue = validTrueStrings.includes(arg) ? true : false;
+  } else {
+    warningMsg = `Parameter ${argNumber} "${argName}" is invalid at line ${lineNo}. Using default value "${defaultArgValue}"`;
+  }
+  return [retValue, warningMsg];
+};
+export const ValidateArgWholeNumber = (
+  validatedCondition: boolean,
+  argName: string,
+  arg: string,
+  defaultArgValue: number,
+  argNumber: number,
+  lineNo: number
+): [number, string] => {
+  let retValue: number = defaultArgValue;
+  let warningMsg: string = "";
+  if (validatedCondition) {
+    retValue = +arg;
+  } else {
+    warningMsg = `Parameter ${argNumber} "${argName}" is invalid at line ${lineNo}. Using default value "${defaultArgValue}"`;
+  }
+  return [retValue, warningMsg];
 };
 
 function WildcardToRegex(pattern: string) {
