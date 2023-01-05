@@ -244,6 +244,7 @@ export function ISectionParagraphVariantInitializer(): ISectionParagraphVariant 
 export enum SectionFillinLayoutType {
   list = "list",
   grid = "grid",
+  csv = "csv",
   none = "none"
 }
 export enum SectionFillinSortOrder {
@@ -272,7 +273,7 @@ export interface ISectionFillinVariant {
 export function ISectionFillinVariantInitializer(
   sectionFillinIdx: number = IDX_INITIALIZER,
   promptsLabel: string = "",
-  responsesLabel = "",
+  responsesLabel: string = "",
   layout = SectionFillinLayoutType.grid
 ): ISectionFillinVariant {
   return {
@@ -374,6 +375,11 @@ enum PartOfSpeechEnumType {
   "article",
   "conjunction",
   "numeral"
+}
+export interface ITerminalCues {
+  partOfSpeech: PartOfSpeechEnumType;
+  definition: string;
+  image: string;
 }
 export interface ITerminalContent {
   id: number;
@@ -609,6 +615,7 @@ export interface IImageTerminalMeta {
   width: number;
   height: number;
   attributes: string;
+  link: ILinkDestination;
   className: string;
   style: string; // most specific style
 }
@@ -619,6 +626,7 @@ export function IImageTerminalMetaInitializer(): IImageTerminalMeta {
     width: 0,
     height: 0,
     attributes: "",
+    link: ILinkDestinationInitializer(),
     className: "",
     style: "" // most specific style
   };
