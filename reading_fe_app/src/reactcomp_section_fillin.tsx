@@ -32,7 +32,7 @@ import resetButton from "./img/button_reset1.png";
 import resetButtonGhosted from "./img/button_reset_ghosted.png";
 
 export const SectionFillin = React.memo((props: ISectionPropsType): any => {
-  console.log(`<SectionFillin />`);
+  //console.log(`<SectionFillin />`);
   // copy of initial author's settings
   let fillin: ISectionFillinVariant = props.section
     .meta as ISectionFillinVariant;
@@ -68,7 +68,7 @@ export const SectionFillin = React.memo((props: ISectionPropsType): any => {
   );
 });
 const Heading = React.memo((props: ISectionPropsType): any => {
-  console.log(`<Heading />`);
+  //console.log(`<Heading />`);
   let fillin: ISectionFillinVariant = props.section
     .meta as ISectionFillinVariant;
   return (
@@ -79,7 +79,7 @@ const Heading = React.memo((props: ISectionPropsType): any => {
   );
 });
 const Responses = React.memo((props: ISectionPropsType): any => {
-  console.log(`<Responses />`);
+  //console.log(`<Responses />`);
   // Strictly manages the modfiable raw (unformatted) response copied
   // from the pageList.fillinList to the sectionContext that
   // maps the fillin_showTerminalIdx reducer state back using
@@ -123,7 +123,7 @@ const Responses = React.memo((props: ISectionPropsType): any => {
   const sectionFillinIdx: number = sectionFillin.idx;
 
   useEffect(() => {
-    console.log(`<Responses /> useEffect(showTerminalIdx=${showTerminalIdx})`);
+    //console.log(`<Responses /> useEffect(showTerminalIdx=${showTerminalIdx})`);
     // decrements reference count when fillin_showTerminalidx state changes
     if (
       showTerminalIdx >= 0 &&
@@ -146,9 +146,9 @@ const Responses = React.memo((props: ISectionPropsType): any => {
         clone.modified = true;
         sectionContext.setSectionFillin(clone);
       } else {
-        console.log(
-          `encountered inconsistent idxs fillinSectionIdx=${fillinSectionIdx} responseIdx=${responseIdx}`
-        );
+        // console.log(
+        //   `encountered inconsistent idxs fillinSectionIdx=${fillinSectionIdx} fillin.sectionFillinIdx=${fillin.sectionFillinIdx}`
+        // );
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -159,9 +159,9 @@ const Responses = React.memo((props: ISectionPropsType): any => {
     fillin.sectionFillinIdx
   ]);
   useEffect(() => {
-    console.log(
-      `<Responses /> useEffect(resetSectionFillinIdx=${resetSectionFillinIdx})`
-    );
+    // console.log(
+    //   `<Responses /> useEffect(resetSectionFillinIdx=${resetSectionFillinIdx})`
+    // );
     if (resetSectionFillinIdx === sectionFillinIdx) {
       let clone: ISectionFillinItem = cloneDeep(sectionContext.sectionFillin);
       clone.modified = false;
@@ -196,14 +196,14 @@ const Responses = React.memo((props: ISectionPropsType): any => {
 });
 interface IResponseControlsPropsType {}
 const ResponseControls = (props: IResponseControlsPropsType): any => {
-  console.log(`<ResponseControls />`);
+  //console.log(`<ResponseControls />`);
   return <ResetButton />;
 };
 interface IResponseItemsPropsType {
   responses: IFillinResponses;
 }
 const ResponseItems = (props: IResponseItemsPropsType): any => {
-  console.log(`<ResponseItems />`);
+  //console.log(`<ResponseItems />`);
   const sectionContext = useContext(SectionFillinContext);
   let responses: IFillinResponseItem[] = cloneDeep(props.responses);
   let uniqueResponses: IFillinResponseItem[] = [];
@@ -213,7 +213,7 @@ const ResponseItems = (props: IResponseItemsPropsType): any => {
         response => response.content === item.content
       );
       if (duplicateIdx < 0) {
-        console.log(`dup not found idx=${duplicateIdx}`);
+        //console.log(`dup not found idx=${duplicateIdx}`);
         uniqueResponses.push(
           IFillinResponseItemInitializer(
             item.content,
@@ -257,7 +257,7 @@ const ResponseItems = (props: IResponseItemsPropsType): any => {
   }
 };
 const ResponseItemsGrid = (props: IResponseItemsPropsType): any => {
-  console.log(`<ResponseItemsGrid />`);
+  //console.log(`<ResponseItemsGrid />`);
   const sectionContext = useContext(SectionFillinContext);
   const columnCount: string = sectionContext.sectionFillin.gridColumns.toString();
   return (
@@ -270,7 +270,7 @@ const ResponseItemsGrid = (props: IResponseItemsPropsType): any => {
   );
 };
 const ResponsesList = (props: IResponseItemsPropsType): any => {
-  console.log(`<ResponsesList />`);
+  //console.log(`<ResponsesList />`);
 
   return (
     <ul>
@@ -279,7 +279,7 @@ const ResponsesList = (props: IResponseItemsPropsType): any => {
   );
 };
 const ResponsesListItems = (props: IResponseItemsPropsType): any => {
-  console.log(`<ResponsesListItems />`);
+  //console.log(`<ResponsesListItems />`);
   return props.responses.map(
     (response: IFillinResponseItem, keyvalue: number) => (
       <li key={keyvalue}>
@@ -297,11 +297,12 @@ const ResponsesListItems = (props: IResponseItemsPropsType): any => {
   );
 };
 const ResponsesGridItems = (props: IResponseItemsPropsType): any => {
-  console.log(`<ResponsesGridItems />`);
+  //console.log(`<ResponsesGridItems />`);
   //  const sectionContext = useContext(SectionFillinContext);
   let responses: IFillinResponses = props.responses;
   return responses.map((response: IFillinResponseItem, keyvalue: number) => (
     <div
+      key={keyvalue}
       className={
         response.referenceCount === 0
           ? "fillin-responses-grid-item-omitted"
@@ -318,13 +319,13 @@ interface IResponsePropsType {
   response: IFillinResponseItem;
 }
 const ResponseContent = (props: IResponsePropsType) => {
-  console.log(`<ResponseContent />`);
+  //console.log(`<ResponseContent />`);
   return <span>{props.response.content}</span>;
 };
 const ResponseReferenceCount = (props: IResponsePropsType) => {
-  console.log(`<ResponseReferenceCount />`);
+  //console.log(`<ResponseReferenceCount />`);
   const sectionContext = useContext(SectionFillinContext);
-  console.log(`showRefCnt=${sectionContext.sectionFillin.showReferenceCount}`);
+  //console.log(`showRefCnt=${sectionContext.sectionFillin.showReferenceCount}`);
   if (
     !sectionContext.sectionFillin.showReferenceCount ||
     props.response.referenceCount <= 1
@@ -335,17 +336,16 @@ const ResponseReferenceCount = (props: IResponsePropsType) => {
   }
 };
 const Prompts = React.memo((props: ISectionPropsType): any => {
-  console.log(`<Prompts />`);
+  //console.log(`<Prompts />`);
   // let dispatch = useAppDispatch();
   let fillin: ISectionFillinVariant = props.section
     .meta as ISectionFillinVariant;
   let prompts = fillin.prompts;
-  let className: string = "fillin-prompts-item";
   return (
     <>
       <div className="fillin-prompts-label">{fillin.promptsLabel}</div>
       <div
-        className="fillin-prompts-item"
+        className="fillin-prompts-items"
         style={{ columns: `${fillin.promptColumns}` }}
       >
         {prompts.map((prompt, keyvalue: number) => (
@@ -363,7 +363,7 @@ interface IResetButtonPropsType {
   sectionFillinIdx: number;
 }
 export const ResetButton = () => {
-  console.log(`<ResetButton />`);
+  //console.log(`<ResetButton />`);
   const sectionContext = useContext(SectionFillinContext);
   const sectionFillinIdx: number = sectionContext.sectionFillin.idx;
   const modified: boolean = sectionContext.sectionFillin.modified;
@@ -373,17 +373,18 @@ export const ResetButton = () => {
   const onButtonClick = () => {
     if (sectionContext.sectionFillin.modified && allowReset) {
       dispatch(Request.Fillin_resetSection(sectionFillinIdx));
-      console.log(`dispatch fillin_resetSection`);
+      //console.log(`dispatch fillin_resetSection`);
     }
   };
   let resetButtonState: string =
     sectionContext.sectionFillin.modified && allowReset
       ? resetButton
       : resetButtonGhosted;
+  //    <div style={{ aspectRatio: "1/1" }}>
   return (
-    <div style={{ width: "30px", height: "30px" }}>
+    <div style={{ aspectRatio: "1/1" }}>
       <img
-        className="icon"
+        className="reseticon"
         alt="reset"
         src={resetButtonState}
         title="reset response prompts"
@@ -402,7 +403,7 @@ const enum SectionFillinTogglesType {
   showReferenceCount
 }
 export const ToggleButton = (props: IToggleButtonPropsType) => {
-  console.log(`<ToggleButton />`);
+  //console.log(`<ToggleButton />`);
   let buttonIcon: string;
   switch (props.toggleType) {
     case SectionFillinTogglesType.sortOrder:
