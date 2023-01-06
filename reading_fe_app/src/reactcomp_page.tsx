@@ -40,6 +40,7 @@ import { Request } from "./reducers";
 import { useAppDispatch, useAppSelector, useDialog } from "./hooks";
 import { useEffect, useState, useContext } from "react";
 import {
+  IDX_INITIALIZER,
   IPageContent,
   ISectionContent,
   PageContentVersion
@@ -183,12 +184,19 @@ export const Page = React.memo((props: IPagePropsType) => {
       currentPage.length > 0
       //&& currentPage !== pageRequested // not a reload
     ) {
+      //update currentIdx of top page before pushing this page
+      if (previousPages.length > 0)
+        previousPages[previousPages.length - 1].currentTermIdx = currentIdx;
+
       previousPages.push({
         page: currentPage,
-        currentTermIdx: currentIdx
+        currentTermIdx: IDX_INITIALIZER
       });
     }
-    if (previousPages.length > 0) {
+    if (previousPages.length === 1) {
+      dispatch(Request.Page_homeEnabled(false)); // unghost icon
+      dispatch(Request.Page_previousEnabled(false)); // unghost icon
+    } else if (previousPages.length > 0) {
       dispatch(Request.Page_homeEnabled(true)); // unghost icon
       dispatch(Request.Page_previousEnabled(true)); // unghost icon
     }
@@ -246,9 +254,21 @@ export const Page = React.memo((props: IPagePropsType) => {
   useEffect(() => {
     // pop requested
     if (pagePopRequested) {
-      console.log(`pop requested`);
-      previousPages.pop()!;
+      // console.log(`pop requested`);
+      // console.log(`previouspage stack in pagePopRequested 0`);
+      // previousPages.forEach(page => {
+      //   console.log(`${page.page} ${page.currentTermIdx}`);
+      // });
+      previousPages.pop()!; // toss current page of top of stack
+      // console.log(`previouspage stack in pagePopRequested 1`);
+      // previousPages.forEach(page => {
+      //   console.log(`${page.page} ${page.currentTermIdx}`);
+      // });
       let previousPage: IPreviousPageArrayItem = previousPages.pop()!;
+      // console.log(`previouspage stack in pagePopRequested 2`);
+      // previousPages.forEach(page => {
+      //   console.log(`${page.page} ${page.currentTermIdx}`);
+      // });
       if (previousPage !== undefined) {
         console.log(
           `pop to ${previousPage.page}, ${previousPage.currentTermIdx}`
@@ -323,13 +343,18 @@ export const Page = React.memo((props: IPagePropsType) => {
     message = `Waiting for page to load for "${pageRequested}..."`;
   }
   console.log(message);
+  // console.log(`previouspage stack in reactcomp_page`);
+  // previousPages.forEach(page => {
+  //   console.log(`${page.page} ${page.currentTermIdx}`);
+  // });
+  console.log(`currentpage ${currentPage}`);
   // React is complaining
   // need to wait until after <StatusBar is rendered OR  use
   // another means to detect that <StatusBar/> is loaded besides
   // surrogate pageContext
   if (pageContext !== null) {
     /////// should be pageRenderable
-    console.log(`rendering page1`);
+    console.log(`rendering ${pageRequested} after context loaded`);
     return (
       <PageContext.Provider value={pageContext}>
         <div className="page">
@@ -342,7 +367,7 @@ export const Page = React.memo((props: IPagePropsType) => {
       </PageContext.Provider>
     );
   } else {
-    console.log(`rendering page2`);
+    console.log(`waiting for  ${pageRequested} context to be loaded`);
     return <div className="loadingAnnouncement">{message}</div>;
   }
 });
