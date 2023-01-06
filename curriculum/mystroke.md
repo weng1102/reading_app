@@ -7,7 +7,7 @@
 - I was born in 1962 in San Francisco.
 - I grew up in Pacifica. My dad and mom raised me and my two younger sisters, Jaylynne and Stacy.
 [[/image-entry]]
-[[image-entry: Who Am I, left, 20%]]
+[[image-entry: Who Am I, , 20%]]
 ![ucb](ucb.png)
 - I studied Chemical Engineering at UC Berkeley.
 - I met Wen Eng, a fellow chemical engineering major. 

@@ -1,11 +1,6 @@
 [[page: Five-word Sentences, Ronlyn, Wen, 1/1/2022, Sentence Bank, Sentences containing five words/]]
 
 # My sentences
-
-1. 1. Recite sentence up to selected word
-1. Show last spoken word
-1. Five word sentences
-1. Sentences about me
 1. My name is Ronlyn Goo.
 1. I have short black hair.
 1. I have round brown eyes.

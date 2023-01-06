@@ -1,8 +1,5 @@
+[[page: abc def,Ronlyn, Wen,, Fillins,/]]
 # filin
-
-[[fillin: fillin heading, fillin response heading, 4]]
-A [_walking  [/object]_] is walking the market.
-The walking is walking [_the market [/object]_].
-He is walking the [_walking_].
+[[fillin: , bbb bbb, listee,4, alphabetical, true, true, true, true, true, true, true]]
 The man is [_walking_] to the [_market_].
 [[/fillin]]

@@ -2,13 +2,13 @@
 
 # Common nouns about my life
 
-[[fillin: Use the following responses in the prompts below, In the kitchen, grid,4, true, true, true, true, true, true, true, 2]]
+[[fillin: Use the following responses in the prompts below, In the kitchen, grid,4, insert, true, true, true, true, true, true, true, 2, false]]
 I wash pots and pans in the [_sink_].
 I put dirty dishes in the [_dishwasher_].
 I cook on the [_stove_].
 I bake in the [_oven_].
 I keep cold items in the [_refrigerator_].
-I warm up leftovers in the [_microwave [_oven_].
+I warm up leftovers in the [_microwave_] [_oven_].
 I bake lemon [_squares_].
 I bake banana nut [_bread_].
 I bake banana and blueberry [_muffins_].
@@ -23,7 +23,7 @@ We drive in a [_car_].
 # Objective nouns
 [[fillin: Use the following responses in the prompts below, , grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
 He opens the [_door_].
-Cyndi plays board [_games_].
+Cindy plays board [_games_].
 David cheers for the Golden [_State_] [_Warriors_].
 Robert carries an [_iPhone_].
 Wen shops for [_groceries_].

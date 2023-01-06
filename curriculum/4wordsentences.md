@@ -201,7 +201,7 @@
 1. This is a book.
 1. What color is it?
 1. It's black and white.
-1. He's in the bathroon.
+1. He's in the bathroom.
 1. What's that? - This here?
 1. Where is it, then?
 1. Where? It isn't here.
@@ -323,7 +323,7 @@
 1. Where shall I park?
 1. I mustn't park here.
 1. It's Sunday, you idiot!
-1. Yes, he's the favourite.
+1. Yes, he's the favorite.
 1. Aren't the jockeys tiny?
 1. Of course he is.
 1. Arthur likes Darling Mary.
@@ -363,7 +363,7 @@
 1. This weather is horrible.
 1. I want beautiful weather.
 1. My car is expensive.
-1. Who's your favourite actor?
+1. Who's your favorite actor?
 1. The baker makes bread.
 1. I'm thin but strong.
 1. What does it cost?

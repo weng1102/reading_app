@@ -1,6 +1,6 @@
-[[page: Verbs,, Wen,, Fillins, /]]
+[[page: Subject/Verb conjugation,Ronlyn, Wen,, Fillins,/]]
 
-# Verbs
+# Subject/Verb conjugation
 
 Helping verbs extend the meaning, emphasis or tense of the main verbs within a sentence. Helping verbs fall into a couple of categories: auxiliary verbs and modal ones. Auxiliary verbs can express tense (i.e., past, present, future) or can indicate emphasis. For now, the auxiliary verb to be is the most common auxiliary verb conjugate be:
 - present simple
@@ -11,11 +11,11 @@ Helping verbs extend the meaning, emphasis or tense of the main verbs within a s
 - future continuous: will be
 The perfect form of be will be included later: have, had, will have.
 
-In the future, other types of verbs and conjugates will be included. Common auxiliary verbs have mulitple forms:
+In the future, other types of verbs and conjugates will be included. Common auxiliary verbs have multiple forms:
 - To be:(past simple); been (past participle)
 - To have: has, have (present); had (past)
 - To do: do, does (present); did (past)
-Although helping verbs be, do and have can standalone, they can be combined with nonfinite (infinitive or participle) main verbs to form verb phrases. Unlike auxiliary verbs, modal verbs do not change form when used in a verb phrase. They help verbs convey obligation (e.g., should), possiblity (e.g., could) or necessity (e.g., will). they include: can, could, may, might, will, would, shall, should, must, ought.
+Although helping verbs be, do and have can standalone, they can be combined with nonfinite (infinitive or participle) main verbs to form verb phrases. Unlike auxiliary verbs, modal verbs do not change form when used in a verb phrase. They help verbs convey obligation (e.g., should), possibility (e.g., could) or necessity (e.g., will). they include: can, could, may, might, will, would, shall, should, must, ought.
 
 ## Verb: Go
 

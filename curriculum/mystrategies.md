@@ -1,5 +1,5 @@
 [[page: My , Wen Eng /]]
-[[page: Strategies, Ronlyn, Wen, Personal, Strategies to help me speak with aphasia/]]
+[[page: Strategies, Ronlyn, Wen, , Personal, Strategies to help me speak with aphasia/]]
 
 I have eight strategies to help me speak as I recover from aphasia.
 # Focus on it.
@@ -65,7 +65,7 @@ This strategy is similar to playing pictionary.
 [[/image-entry]]
 # Describe it.
 [[image-entry: Describe it, left, 20%]]
-![Describe it](describe.png)
+![Describe it](multimodal2.jpg)
 * Looks like...
 * Feels like...
 * Smells like...

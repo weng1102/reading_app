@@ -1,8 +1,22 @@
-[[page: Practicing Verbs,, Wen,, Fillins, /]]
+[[page: Practicing Verbs,Ronlyn, Wen,, Fillins, /]]
 
 # Practice Verbs
 The following exercises allow you to fill in the prompts given the corresponding response lists in increasingly more difficult ordering until no response list is shown.
 ## Things in Nature
+### Responses already filled in
+[[fillin: , Read the following prompts:, grid,5, insert, true, true, true, true, true, true, true, 2, true]]
+The dog is [_barking_].
+The flower is [_blooming_].
+The cat is [_purring_].
+The lion is [_roaring_].
+The sun is [_shining_].
+The bird is [_flying_].
+The rain is [_falling_].
+The wind is [_blowing_].
+The plant is [_growing_].
+The fire is [_burning_].
+[[/fillin]]
+
 ### Inorder responses
 [[fillin: Use the following responses in the prompts below, Fillin the following blanks:, grid,5, insert, true, true, true, true, true, true, true, 2]]
 The dog is [_barking_].

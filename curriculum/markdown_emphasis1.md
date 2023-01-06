@@ -1,3 +1,4 @@
+[[page: Markdown emphasis parsing/rendering, Ronlyn, Wen, 6/26/2022, Testing, Emphasis /]]
 # emphasis
 
 The **quick** brown fox jumped over the lazy dog.
