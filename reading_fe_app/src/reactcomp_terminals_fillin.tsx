@@ -32,20 +32,20 @@ export const TerminalFillin = React.memo((props: ITerminalPropsType): any => {
   });
   let fillinInfo: IFillinTerminalMeta = props.terminal
     .meta as IFillinTerminalMeta;
-  console.log(
-    `<TerminalFillin active=${props.active} content=${props.terminal.content}/>`
-  );
+  // console.log(
+  //   `<TerminalFillin active=${props.active} content=${props.terminal.content}/>`
+  // );
   const showTerminalIdx = useAppSelector(store => store.fillin_showTerminalIdx);
   let resetSectionFillinIdx = useAppSelector(
     store => store.fillin_resetSectionIdx
   );
   useEffect(() => {
-    console.log(`TerminalFillin: showTerminalFillinIdx=${showTerminalIdx}`);
+    // console.log(`TerminalFillin: showTerminalFillinIdx=${showTerminalIdx}`);
     let relativeIdx = showTerminalIdx - terminalFillin.offsetIdx;
     if (relativeIdx >= 0 && relativeIdx < terminalFillin.visible.length) {
-      console.log(
-        `TerminalFillin: showTerminalFillinIdx found ${showTerminalIdx}`
-      );
+      // console.log(
+      //   `TerminalFillin: showTerminalFillinIdx found ${showTerminalIdx}`
+      // );
       setTerminalFillin({
         ...terminalFillin,
         visible: { ...terminalFillin.visible, [relativeIdx]: true }
@@ -58,9 +58,9 @@ export const TerminalFillin = React.memo((props: ITerminalPropsType): any => {
       sectionFillinContext.sectionFillin.modified &&
       resetSectionFillinIdx === fillinInfo.sectionFillinIdx
     ) {
-      console.log(
-        `TerminalFillin: reset sectionFillinIdx=${resetSectionFillinIdx}`
-      );
+      // console.log(
+      //   `TerminalFillin: reset sectionFillinIdx=${resetSectionFillinIdx}`
+      // );
       setTerminalFillin({
         ...terminalFillin,
         visible: Array(

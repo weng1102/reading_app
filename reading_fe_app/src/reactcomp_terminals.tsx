@@ -14,6 +14,7 @@
  *
  **/
 import React from "react";
+import CSS from "csstype";
 import { Request } from "./reducers";
 import { useAppDispatch, useAppSelector, useSpanRef } from "./hooks";
 import { useContext, useEffect } from "react";
@@ -23,6 +24,7 @@ import {
   ITerminalContent,
   ITerminalInfo,
   IAcronymTerminalMeta,
+  IPassthruTagTerminalMeta,
   TerminalMetaEnumType
 } from "./pageContentType";
 import { TerminalFillinContext } from "./fillinContext";
@@ -164,6 +166,9 @@ export const TerminalDispatcher = React.memo(
         break;
       case TerminalMetaEnumType.year:
         break;
+      case TerminalMetaEnumType.passthruTag:
+        return <TerminalPassthru active={false} terminal={props.terminal} />;
+        break;
       default:
         return <>unknown terminal "{props.terminal.content}!"</>;
     }
@@ -189,6 +194,12 @@ export const TerminalAcronym = React.memo((props: ITerminalPropsType): any => {
       ))}
     </>
   ); // return
+});
+export const TerminalPassthru = React.memo((props: ITerminalPropsType): any => {
+  let passthruInfo: IPassthruTagTerminalMeta = props.terminal
+    .meta as IPassthruTagTerminalMeta;
+  console.log(`unimplemented passthru=${passthruInfo.tag}`);
+  return <></>;
 });
 export const TerminalWord = React.memo((props: ITerminalPropsType): any => {
   // console.log(

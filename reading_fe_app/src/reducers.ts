@@ -60,6 +60,7 @@ const PAGE_HOME = "page/home";
 const PAGE_HOMED = "page/homed";
 const PAGE_HOME_ENABLED = "page/home enabled";
 const PAGE_PREVIOUS_ENABLED = "page/previous enabled";
+const PAGE_SITEMAP_ENABLED = "page/sitemap enabled";
 
 // intrapage administrative actions (non-user initiated)
 //const PAGECONTEXT_SET = "pagecontext/set";
@@ -331,6 +332,12 @@ const Page_previousEnabled = (yes: boolean) => {
     payload: yes
   };
 };
+const Page_sitemapEnabled = (yes: boolean) => {
+  return {
+    type: PAGE_SITEMAP_ENABLED,
+    payload: yes
+  };
+};
 const Recognition_toggle = (maxRetries: number) => {
   return {
     type: LISTENING_TOGGLE,
@@ -454,7 +461,7 @@ export const Request = {
   Page_homed,
   Page_homeEnabled,
   Page_previousEnabled,
-
+  Page_sitemapEnabled,
   Reciting_started,
   Reciting_ended,
   Recite_start,
@@ -533,6 +540,7 @@ interface IReduxState {
   page_home_requested: boolean;
   page_home_enabled: boolean;
   page_previous_enabled: boolean;
+  page_sitemapEnabled: boolean;
 
   recite_requested: boolean;
   recite_word_requested: boolean;
@@ -584,6 +592,7 @@ const IReduxStateInitialState: IReduxState = {
   page_home_requested: false,
   page_home_enabled: false,
   page_previous_enabled: false,
+  page_sitemapEnabled: false,
   cursor_terminalIdx_proposed: 0,
   cursor_sectionIdx_proposed: 0,
   //page_lists: new CPageLists(),
@@ -781,6 +790,9 @@ export const rootReducer = (
       state.page_home_enabled = action.payload;
       return state;
     case PAGE_PREVIOUS_ENABLED:
+      state.page_previous_enabled = action.payload;
+      return state;
+    case PAGE_SITEMAP_ENABLED:
       state.page_previous_enabled = action.payload;
       return state;
     case CONTEXT_SET:

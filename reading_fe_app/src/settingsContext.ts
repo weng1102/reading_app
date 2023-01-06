@@ -53,6 +53,7 @@ export interface IConfigSettings {
   distDir: string;
   firstName: string;
   lastName: string;
+  showSitemap: boolean;
 }
 export interface ISpeechSettings {
   recitationMode: RecitationMode;
@@ -71,13 +72,15 @@ export function ConfigSettingsInitializer(
   homePage: string = "ronlyn",
   distDir: string = "https://weng1102.github.io/reading-companion/",
   firstName: string = "Ronlyn",
-  lastName: string = "Goo"
+  lastName: string = "Goo",
+  showSitemap: boolean = false
 ): IConfigSettings {
   return {
     homePage,
     distDir,
     firstName,
-    lastName
+    lastName,
+    showSitemap
   };
 }
 export function SpeechSettingsInitializer(

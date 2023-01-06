@@ -17,9 +17,9 @@ import { TerminalDispatcher } from "./reactcomp_terminals";
 import { ITerminalPropsType } from "./reactcomp_terminals";
 export const TerminalLink = React.memo((props: ITerminalPropsType): any => {
   // const currentTerminalIdx = useAppSelector(store => store.cursor_terminalIdx); // causes rerendering
-  console.log(
-    `<TerminalLink active=${props.active} content=${props.terminal.content}/>`
-  );
+  // console.log(
+  //   `<TerminalLink active=${props.active} content=${props.terminal.content}/>`
+  // );
   let linkInfo: ICurriculumLinkTerminalMeta = props.terminal
     .meta as ICurriculumLinkTerminalMeta;
 

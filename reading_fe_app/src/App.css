@@ -6,6 +6,14 @@
   --imageentry-min-image-height: 300px;
   --fillin-responses-grid-itemlist-columnCount: 3;
 }
+p {
+display: block;
+margin-block-start: 0.25em;
+margin-top: 0em;
+margin-bottom: 0em;
+margin-left: 0;
+margin-right: 0;
+}
 .page {
   display: grid;
   grid-template-columns: minmax(var(--nav-width), 1fr) 4fr;
@@ -21,12 +29,11 @@ footer {
   background: #ccc;
   grid-column: 1 / span 2; /* spans 2 grid-template columns setup in .page */
 }
-
 main {
   padding: 5px;
   background-color: white;
   overflow: auto;
-  font-size: 2vw;
+  font-size: 1.5vw;
 }
 nav {
   background-color: linen;
@@ -52,7 +59,7 @@ nav {
     align-items: center;
     height: 100%;
 }
-.header-grid-left {
+.header-grid-hamburger {
   display: flex;
   grid-column-start: 1;
   padding: 15px;
@@ -62,23 +69,22 @@ nav {
   grid-column-start: 2;
   padding: 15px;
 }
-.header-grid-prevbutton {
-  padding: 10px;
+.header-grid-sitemapbutton {
+  padding: 12px;
   display: flex;
   grid-column-start: 3;
-}
-.header-grid-homebutton {
+}.header-grid-prevbutton {
   padding: 10px;
   display: flex;
   grid-column-start: 4;
 }
-.header-grid-sitemapbutton {
+.header-grid-homebutton {
   padding: 10px;
   display: flex;
   grid-column-start: 5;
 }
 .header-grid-settingbutton {
-  padding: 10px;
+  padding: 15px;
   display: flex;
   grid-column-start: 6;
 }
@@ -137,12 +143,12 @@ nav {
 .footer-grid-nextSentence {
   display: flex;
   grid-column-start: 6;
-padding:10px
+  padding:10px
 }
 .footer-grid-link {
   display: flex;
   grid-column-start: 7;
-padding:10px
+  padding:10px
 }
 .footer-statusBar {
   display: block;
@@ -173,6 +179,10 @@ padding:10px
   min-height: 100%;
   min-width: 100%;
   max-height: 100%;
+}
+.reseticon {
+  padding-right: 5px;
+  width: 30px;
 }
 div.loadingAnnouncement {
   padding-left: 1em;
@@ -365,7 +375,7 @@ span.whitespace {
 .stopAtEOS-checkbox-container {
   padding-left: 10px;
   font-size: 14px;
-    padding-top: 15px;
+  padding-top: 15px;
 }
 .retries-textbox {
   width: 50px
@@ -414,7 +424,26 @@ span.whitespace {
 .settings-footer-buttonbar {
 }
 h1 {
-
+  border-top: solid;
+  border-image: linear-gradient(to right, #ccc 47%, transparent 50%) 100% 1;
+  border-top-width: 4px;
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+h2 {
+  border-top: solid;
+  border-image: linear-gradient(to right, #ccc 37%, transparent 40%) 100% 1;
+  border-top-width: 2px;
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+h3 {
+  border-top: solid;
+  border-image: linear-gradient(to right, #ccc 27%, transparent 30%) 100% 1;
+  border-top-width: 1px;
+  margin-top: 0.1em;
+  margin-bottom: 0em;
+  font-size:
 }
 .settings-grid-section-item-recitation {
   display: block;
@@ -442,22 +471,17 @@ input[type="radio"]{
 * {
   box-sizing: border-box;
 }
-.imageentry-container-left {
-  display: grid;
-  gap: 10px;
-  grid-template-columns: [images] minmax(var(--imageentry-min-image-width), 1fr) [divider] 2px [captions] 2fr;
-}
 .imageentry-images-left {
   grid-column: images;
-  max-width: var(--min-image-width);
+  max-width: var(--imageentry-min-image-width);
 }
 .imageentry-container-left-hdivider {
   height: 1px;
   margin-bottom: 5px;
-  background-color: gray;
 }
-.imageentry-images-left-vdivider {
+.imageentry-container-left-vdivider {
   grid-column: divider;
+
   max-width: 2px;
 }
 .imageentry-captions-left {
@@ -541,31 +565,29 @@ input[type="radio"]{
 }
 .fillin-responses-grid-container {
   display: grid;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  grid-template-columns: auto 40px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  grid-template-columns: auto 25px;
 }
 .fillin-responses-grid-controls {
     display: flex;
-    max-width: 100%;
-    padding:5px
+    padding:2px
 }
 .fillin-responses-grid-itemlist {
   display: grid;
   margin:0 0 0 0px;
   grid-gap: 0 0 0 0;
-  background-color: white;
+  background-color: 	gainsboro;
   grid-template-columns: repeat(var(--fillin-responses-grid-itemlist-columnCount), auto);
-  outline: 1px solid lightgray;
+  outline: 1px solid gainsboro;
 }
 .fillin-responses-grid-itemlist > div {
-  margin:0 1px 1px 0;
-  outline: 1px solid lightgray;
+  margin:0 0px 0px 0;
+  outline: 1px solid white;
   padding: 5px;
-  vertical-align: middle;
-}
-.fillin-responses-grid-items {
 
+}
+.fillin-responses-grid-item {
 }
 .fillin-responses-grid-item-style-none {
 

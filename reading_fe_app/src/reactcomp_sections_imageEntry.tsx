@@ -46,15 +46,17 @@ export const SectionImageEntry = React.memo((props: ISectionPropsType): any => {
       ? `imageentry-container-${ImageEntryLayoutEnumType.left.toString()}`
       : `imageentry-container-${ImageEntryLayoutEnumType.above.toString()}`;
   let vdividerClassName = `${className}-vdivider`;
-  let hdividerClassName = `${className}-hdivider width=${imageEntry.percent}`;
-  console.log(`imageEntry.percent ${imageEntry.percent}`);
-  // set width by changing --imageentry-min-image-width
-  // document.documentElement.style.setProperty()
+  let hdividerClassName = `${className}-hdivider`;
+  const leftStyle = {
+    display: "grid",
+    gridTemplateColumns:
+      "[images] " + imageEntry.percent + " [divider] 10px [captions] auto"
+  };
   return (
     <>
       <div className={hdividerClassName}></div>
 
-      <div className={className}>
+      <div className={className} style={leftStyle}>
         <SectionImageEntryImages
           active={false}
           images={images}

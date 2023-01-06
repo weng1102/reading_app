@@ -244,6 +244,7 @@ export function ISectionParagraphVariantInitializer(): ISectionParagraphVariant 
 export enum SectionFillinLayoutType {
   list = "list",
   grid = "grid",
+  csv = "csv",
   none = "none"
 }
 export enum SectionFillinSortOrder {
@@ -288,8 +289,8 @@ export function ISectionFillinVariantInitializer(
     showPromptHints: false,
     groupByCategory: false,
     showReferenceCount: true,
-    allowReset: false,
     showPrompts: false,
+    allowReset: false,
     promptColumns: 1,
     prompts: []
   };
@@ -375,6 +376,11 @@ enum PartOfSpeechEnumType {
   "conjunction",
   "numeral"
 }
+export interface ITerminalCues {
+  partOfSpeech: PartOfSpeechEnumType;
+  definition: string;
+  image: string;
+}
 export interface ITerminalContent {
   id: number;
   termIdx: number;
@@ -382,7 +388,6 @@ export interface ITerminalContent {
   lastTermIdx: number;
   content: string; // not necessary
   cueList: string;
-  // partOfSpeech:
   type: TerminalMetaEnumType;
   meta: TerminalMetaType;
 }
@@ -610,6 +615,7 @@ export interface IImageTerminalMeta {
   width: number;
   height: number;
   attributes: string;
+  link: ILinkDestination;
   className: string;
   style: string; // most specific style
 }
@@ -620,6 +626,7 @@ export function IImageTerminalMetaInitializer(): IImageTerminalMeta {
     width: 0,
     height: 0,
     attributes: "",
+    link: ILinkDestinationInitializer(),
     className: "",
     style: "" // most specific style
   };
