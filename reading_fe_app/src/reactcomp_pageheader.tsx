@@ -14,7 +14,7 @@ import hamburgerIcon from "./img/Hamburger_icon.png";
 import settingsIcon from "./img/settingicon.png";
 import homePageIcon from "./img/button_homeicon.png";
 import homePageGhostedIcon from "./img/button_home_ghosted.png";
-import siteMapIcon from "./img/button_sitemap.png";
+import siteMapIcon from "./img/button_sitemap1.png";
 import previousPageIcon from "./img/button_back.png";
 import previousPageGhostedIcon from "./img/button_back_ghosted.png";
 import { SettingsDialog } from "./reactcomp_settings";
@@ -33,18 +33,18 @@ export const PageHeader = React.memo((props: IPageHeaderPropsType) => {
   console.log(`<PageHeader>`);
   return (
     <header className="header-grid-container">
-      <div className="header-grid-left">
+      <div className="header-grid-hamburger">
         <HamburgerButton />
       </div>
       <div className="headertitle">{props.title}</div>
+      <div className="header-grid-sitemapbutton">
+        <SiteMapButton />
+      </div>
       <div className="header-grid-prevbutton">
         <PreviousPageButton />
       </div>
       <div className="header-grid-homebutton">
         <HomeButton />
-      </div>
-      <div className="header-grid-sitemapbutton">
-        <SiteMapButton />
       </div>
       <div className="header-grid-settingbutton">
         <img
@@ -96,15 +96,22 @@ const HomeButton = () => {
 };
 const SiteMapButton = () => {
   const dispatch = useAppDispatch();
-  return (
-    <img
-      className="icon"
-      alt="sitemap"
-      src={siteMapIcon}
-      title="go to sitemap"
-      onClick={() => dispatch(Request.Page_load("sitemap"))}
-    />
-  );
+  const showSitemap: boolean = useContext(SettingsContext)!.settings.config
+    .showSitemap;
+  // retrieve setting context to check if showSitemap is enabled otherwise
+  if (showSitemap) {
+    return (
+      <img
+        className="icon"
+        alt="sitemap"
+        src={siteMapIcon}
+        title="go to sitemap"
+        onClick={() => dispatch(Request.Page_load("sitemap"))}
+      />
+    );
+  } else {
+    return <></>;
+  }
 };
 const PreviousPageButton = () => {
   const dispatch = useAppDispatch();

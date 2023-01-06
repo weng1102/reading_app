@@ -49,6 +49,19 @@ export const ConfigSettings = (props: IConfigSettingsProps) => {
   const onHomePageChangeValue = (event: any) => {
     setHomePage(event.target.value);
   };
+  const [, _setShowSitemap] = useState(props.configSettings.showSitemap);
+  const setShowSitemap = (showSitemap: boolean) => {
+    _setShowSitemap(showSitemap);
+    props.setConfigSettings({
+      ...props.configSettings,
+      showSitemap: showSitemap
+    });
+  };
+  const onShowSitemapChangeValue = (event: any) => {
+    console.log(`showsitemap=${event.target.checked}`);
+    setShowSitemap(event.target.checked);
+  };
+
   let isLocked: boolean = true;
   if (props.active) {
     return (
@@ -65,6 +78,7 @@ export const ConfigSettings = (props: IConfigSettingsProps) => {
           />
         </div>
         <div className="settings-grid-section-footer">Name of homepage</div>
+
         <div className="settings-grid-col2-label-control">
           <div className="settings-grid-col2-label">Curriculum subpath:</div>
           <input
@@ -77,6 +91,20 @@ export const ConfigSettings = (props: IConfigSettingsProps) => {
         </div>
         <div className="settings-grid-section-footer">
           Location of curriculum content
+        </div>
+
+        <div className="checkbox-container stopAtEOS-checkbox-container">
+          <input
+            onChange={onShowSitemapChangeValue}
+            className="checkbox-control"
+            type="checkbox"
+            checked={props.configSettings.showSitemap}
+          />
+          <label>Show sitemap icon</label>
+        </div>
+
+        <div className="settings-grid-section-footer">
+          Displays sitemap icon on page header
         </div>
       </>
     );
