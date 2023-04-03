@@ -6,7 +6,7 @@ import * as fs from "fs";
 const AppInfo = require(path.resolve("./appinfo.json")); // should use module.paths and find-me.js
 import { Logger, BaseClass, MyDate, UserContext } from "./utilities";
 // import * as rl from 'readline-sync';
-const enum MarkdownTagType {
+const enum MarkdownRecordType {
   PARAGRAPH = "PARAGRAPH",
   EMPTY = "EMPTY",
   HEADING = "HEADING",
@@ -65,14 +65,14 @@ const enum MarkdownType {
 export interface MarkdownWithTagType {
   content: string;
   //  tag: MarkdownType;
-  tagType: MarkdownTagType;
+  tagType: MarkdownRecordType;
   depth: number;
 }
 interface RegExpMatchArrayWithTagType {
   groups: RegExpMatchArray;
   tag: string;
 }
-//type MarkdownClassDictionaryType = Record<MarkdownType, MarkdownTagType>;
+//type MarkdownClassDictionaryType = Record<MarkdownType, MarkdownRecordType>;
 /* Each pattern will define one explicit capture group () to
    be returned. Hence. the pattern cannot use the global flag g
    because final output will only include the first group encountered:
@@ -80,7 +80,7 @@ interface RegExpMatchArrayWithTagType {
 */
 interface MarkdownPatternItemType {
   pattern: RegExp;
-  tagType: MarkdownTagType;
+  tagType: MarkdownRecordType;
 }
 type MarkdownPatternDictionaryType = Record<
   MarkdownType,
@@ -93,106 +93,106 @@ const PARAGRAPH_PATTERN: RegExp = /^(["']?[A-Za-z\$\@]{1}.*)$/m;
 const MarkdownPatternDictionary: MarkdownPatternDictionaryType = {
   [MarkdownType.PARAGRAPH]: {
     pattern: PARAGRAPH_PATTERN,
-    tagType: MarkdownTagType.PARAGRAPH
+    tagType: MarkdownRecordType.PARAGRAPH
   },
-  [MarkdownType.EMPTY]: { pattern: /^\s*$/, tagType: MarkdownTagType.EMPTY },
+  [MarkdownType.EMPTY]: { pattern: /^\s*$/, tagType: MarkdownRecordType.EMPTY },
   [MarkdownType.HEADING01]: {
     pattern: /^#\s([^\s].*)$/,
-    tagType: MarkdownTagType.HEADING
+    tagType: MarkdownRecordType.HEADING
   },
   [MarkdownType.HEADING02]: {
     pattern: /^##\s([^\s].*)$/,
-    tagType: MarkdownTagType.HEADING
+    tagType: MarkdownRecordType.HEADING
   },
   [MarkdownType.HEADING03]: {
     pattern: /^###\s([^\s].*)$/,
-    tagType: MarkdownTagType.HEADING
+    tagType: MarkdownRecordType.HEADING
   },
   [MarkdownType.HEADING04]: {
     pattern: /^####\s([^\s].*)$/,
-    tagType: MarkdownTagType.HEADING
+    tagType: MarkdownRecordType.HEADING
   },
   [MarkdownType.HEADING05]: {
     pattern: /^#####\s([^\s].*)$/,
-    tagType: MarkdownTagType.HEADING
+    tagType: MarkdownRecordType.HEADING
   },
   [MarkdownType.HEADING06]: {
     pattern: /^######\s([^\s].*)$/,
-    tagType: MarkdownTagType.HEADING
+    tagType: MarkdownRecordType.HEADING
   },
   [MarkdownType.LIST_UNORDERED01]: {
     pattern: /^[\*\-\+]\s([^\s].*)$/,
-    tagType: MarkdownTagType.LIST_UNORDERED
+    tagType: MarkdownRecordType.LIST_UNORDERED
   },
   [MarkdownType.LIST_UNORDERED02]: {
     pattern: /^\s{2}[\*\-\+]\s([^\s].*)$/,
-    tagType: MarkdownTagType.LIST_UNORDERED
+    tagType: MarkdownRecordType.LIST_UNORDERED
   },
   [MarkdownType.LIST_UNORDERED03]: {
     pattern: /^\s{4}[\*\-\+]\s([^\s].*)$/,
-    tagType: MarkdownTagType.LIST_UNORDERED
+    tagType: MarkdownRecordType.LIST_UNORDERED
   },
   [MarkdownType.LIST_UNORDERED04]: {
     pattern: /^\s{6}[\*\-\+]\s([^\s].*)$/,
-    tagType: MarkdownTagType.LIST_UNORDERED
+    tagType: MarkdownRecordType.LIST_UNORDERED
   },
   [MarkdownType.LIST_ORDERED01]: {
     pattern: /^[0-9]+\.\s([^\s].*)$/,
-    tagType: MarkdownTagType.LIST_ORDERED
+    tagType: MarkdownRecordType.LIST_ORDERED
   },
   [MarkdownType.LIST_ORDERED02]: {
     pattern: /^\s{2}[0-9]+\.\s([^\s].*)$/,
-    tagType: MarkdownTagType.LIST_ORDERED
+    tagType: MarkdownRecordType.LIST_ORDERED
   },
   [MarkdownType.LIST_ORDERED03]: {
     pattern: /^\s{4}[0-9]+\.\s([^\s].*)$/,
-    tagType: MarkdownTagType.LIST_ORDERED
+    tagType: MarkdownRecordType.LIST_ORDERED
   },
   [MarkdownType.LIST_ORDERED04]: {
     pattern: /^\s{6}[0-9]+\.\s([^\s].*)$/,
-    tagType: MarkdownTagType.LIST_ORDERED
+    tagType: MarkdownRecordType.LIST_ORDERED
   },
   [MarkdownType.BLOCKQUOTE]: {
     pattern: /^\>\s([^\s].*)$/,
-    tagType: MarkdownTagType.BLOCKQUOTE
+    tagType: MarkdownRecordType.BLOCKQUOTE
   },
   [MarkdownType.COMMENT1]: {
     pattern: /^\[\/\/\]:\s(.*)$/,
-    tagType: MarkdownTagType.COMMENT
+    tagType: MarkdownRecordType.COMMENT
   },
   [MarkdownType.COMMENT2]: {
     pattern: /^\[\]:\s(.*)$/,
-    tagType: MarkdownTagType.COMMENT
+    tagType: MarkdownRecordType.COMMENT
   },
   [MarkdownType.COMMENT3]: {
     pattern: /^\[comment]:\s(.*)$/,
-    tagType: MarkdownTagType.COMMENT
+    tagType: MarkdownRecordType.COMMENT
   },
   [MarkdownType.PHOTOENTRY]: {
     pattern: /\[\/\/photo-entry\]:\s(image=.*)$/i,
-    tagType: MarkdownTagType.PHOTOENTRY
+    tagType: MarkdownRecordType.PHOTOENTRY
   },
   [MarkdownType.PHOTOENTRY_END]: {
     pattern: /\[\/\/photo-entry-end\]$/i,
-    tagType: MarkdownTagType.PHOTOENTRY_END
+    tagType: MarkdownRecordType.PHOTOENTRY_END
   },
   [MarkdownType.PAGE]: {
     pattern: /\[\/\/page\]:\s(.*)$/i,
-    tagType: MarkdownTagType.PAGE
+    tagType: MarkdownRecordType.PAGE
   },
   [MarkdownType.FILLIN]: {
     pattern: /\[\/\/fill-in\]:(.*)$/,
-    tagType: MarkdownTagType.FILLIN
+    tagType: MarkdownRecordType.FILLIN
   },
   [MarkdownType.FILLIN_END]: {
     pattern: /\[\/\/fill-in-end\]$/,
-    tagType: MarkdownTagType.FILLIN_END
+    tagType: MarkdownRecordType.FILLIN_END
   },
   [MarkdownType.PASSTHRUTAG]: {
     pattern: /^\[\/\/([A-Za-z\-]*)\]:\s([^\s].*)$/,
-    tagType: MarkdownTagType.PASSTHRUTAG
+    tagType: MarkdownRecordType.PASSTHRUTAG
   },
-  [MarkdownType.UNKNOWN]: { pattern: /(.*)$/, tagType: MarkdownTagType.UNKNOWN }
+  [MarkdownType.UNKNOWN]: { pattern: /(.*)$/, tagType: MarkdownRecordType.UNKNOWN }
 };
 
 export interface IMarkdownSource {
@@ -244,7 +244,7 @@ export class RawMarkdownSource extends MarkdownSource
       .split("\n");
     let previous: MarkdownWithTagType = {
       content: "",
-      tagType: MarkdownTagType.UNKNOWN,
+      tagType: MarkdownRecordType.UNKNOWN,
       depth: 0
     };
     for (let record of inputBuffer) {
@@ -254,17 +254,17 @@ export class RawMarkdownSource extends MarkdownSource
       );
       // check for section transition
       if (
-        current.tagType === MarkdownTagType.HEADING ||
-        previous.tagType === MarkdownTagType.HEADING
+        current.tagType === MarkdownRecordType.HEADING ||
+        previous.tagType === MarkdownRecordType.HEADING
       ) {
         // could use headings to define section but for now translates into <h1>...
         // heading transitions would occur when the next heading at the same level
         // is encountered: ""# a heading" then ""# another heading"
       } else if (
-        (previous.tagType === MarkdownTagType.LIST_ORDERED ||
-          previous.tagType === MarkdownTagType.LIST_UNORDERED ||
-          current.tagType === MarkdownTagType.LIST_ORDERED ||
-          current.tagType === MarkdownTagType.LIST_UNORDERED) &&
+        (previous.tagType === MarkdownRecordType.LIST_ORDERED ||
+          previous.tagType === MarkdownRecordType.LIST_UNORDERED ||
+          current.tagType === MarkdownRecordType.LIST_ORDERED ||
+          current.tagType === MarkdownRecordType.LIST_UNORDERED) &&
         current.depth !== previous.depth
       ) {
         this.insertListSection(previous, current);
@@ -272,7 +272,7 @@ export class RawMarkdownSource extends MarkdownSource
       this.buffer.push(current);
       previous = current;
       if (
-        this.buffer[this.buffer.length - 1].tagType === MarkdownTagType.UNKNOWN
+        this.buffer[this.buffer.length - 1].tagType === MarkdownRecordType.UNKNOWN
       ) {
         this.logger.warning(
           `line ${this.buffer.length} could not be parsed: ${record}`
@@ -331,7 +331,7 @@ export class BasicMarkdownSource extends RawMarkdownSource
         depth = Number.isNaN((depth = parseInt(mdTag.slice(-2)))) ? 0 : depth;
         /*
         if (
-          MarkdownPatternDictionary[mdTag].tagType === MarkdownTagType.COMMENT
+          MarkdownPatternDictionary[mdTag].tagType === MarkdownRecordType.COMMENT
         ) {
           console.log(`comments[0]=${matches[0]}`);
           console.log(`comment[1]=${matches[1]}`);
@@ -381,9 +381,9 @@ export class BasicMarkdownSource extends RawMarkdownSource
         this.buffer.push({
           content: "",
           tagType:
-            current.tagType === MarkdownTagType.LIST_ORDERED
-              ? MarkdownTagType.SECTION_ORDERED
-              : MarkdownTagType.SECTION_UNORDERED,
+            current.tagType === MarkdownRecordType.LIST_ORDERED
+              ? MarkdownRecordType.SECTION_ORDERED
+              : MarkdownRecordType.SECTION_UNORDERED,
           depth: depth
         });
       }
@@ -391,7 +391,7 @@ export class BasicMarkdownSource extends RawMarkdownSource
       for (let depth = previous.depth; depth > current.depth; depth--) {
         this.buffer.push({
           content: "",
-          tagType: MarkdownTagType.SECTION_END,
+          tagType: MarkdownRecordType.SECTION_END,
           depth: depth
         });
       }

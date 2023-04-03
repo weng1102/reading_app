@@ -35,19 +35,20 @@ I can improve word finding given specific context and possible responses.
 I can practice my word finding every day.
 ### Goal
 Practicing this will improve my word finding for nouns, verbs and other parts of speech.
-
-- [My Foods](nouns1,0,0)
 - [Common Nouns](nouns1,0,0)
 - [Subject/Verb conjugation](commonverbs_fillin,0,0)
 - [Practicing Verbs](verbs2,0,0)
 - [Prepositions](preposition1,0,0)
 
 These exercises allow me to fill in sentences progressively. 
+- [Foods](sentcompletion_food, 0,0)
 - [Social Speech](sentcompletion_socialspeech, 0,0)
 - [Things To Wear](sentcompletion_thingstowear, 0,0)
 - [Household Tasks](sentcompletion_householdtasks, 0,0)
 - [Friends and Family](sentcompletion_friendsandfamily, 0,0)
-
+- [Holidays and Recreation](sentcompletion_holidaysrec, 0,0)
+- [Yard work](sentcompletion_yardwork, 0,0)
+- [State Capitals](sentcompletion_uscities,0,0)
 # Flashcard Fillins
 ## Verb Flashcards
 [[image-entry: Verb Flashcards fillin, left, 20%]]

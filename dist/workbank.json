@@ -3,14 +3,14 @@
   "title": "Reciting Buttons",
   "filename": "workbank.json",
   "description": "",
-  "owner": "",
+  "owner": "anonymous",
   "author": "Wen",
   "category": "Testing recite button",
-  "version": "20220407.1",
+  "version": "20230329.1",
   "pageFormatType": 0,
   "created": "1/1/2022",
-  "modified": "Sun Apr 10 2022 23:07:53 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Sun Apr 10 2022 23:07:53 GMT-0700 (Pacific Daylight Time)",
+  "modified": "Wed Mar 29 2023 12:47:12 GMT-0700 (Pacific Daylight Time)",
+  "transformed": "Wed Mar 29 2023 12:47:12 GMT-0700 (Pacific Daylight Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -46,11 +46,13 @@
                 "id": 0,
                 "termIdx": 0,
                 "content": "The",
+                "cueList": "",
                 "firstTermIdx": 0,
                 "lastTermIdx": 0,
-                "type": 14,
+                "type": 17,
                 "meta": {
                   "content": "The",
+                  "cues": [],
                   "termIdx": 0,
                   "nextTermIdx": [
                     1
@@ -62,10 +64,17 @@
                   "audible": true,
                   "linkable": false,
                   "visible": true,
-                  "fillin": false,
                   "visited": false,
+                  "numberAsNumerals": false,
                   "linkIdx": -9999,
-                  "hintsIdx": -9999
+                  "hintsIdx": -9999,
+                  "fillin": {
+                    "sectionIdx": -9999,
+                    "responseIdx": -9999
+                  },
+                  "bold": false,
+                  "italics": false,
+                  "markupTag": false
                 }
               }
             ],
@@ -95,11 +104,13 @@
                 "id": 0,
                 "termIdx": 1,
                 "content": "quick",
+                "cueList": "",
                 "firstTermIdx": 1,
                 "lastTermIdx": 1,
-                "type": 14,
+                "type": 17,
                 "meta": {
                   "content": "quick",
+                  "cues": [],
                   "termIdx": 1,
                   "nextTermIdx": [
                     2
@@ -113,10 +124,17 @@
                   "audible": true,
                   "linkable": false,
                   "visible": true,
-                  "fillin": false,
                   "visited": false,
+                  "numberAsNumerals": false,
                   "linkIdx": -9999,
-                  "hintsIdx": -9999
+                  "hintsIdx": -9999,
+                  "fillin": {
+                    "sectionIdx": -9999,
+                    "responseIdx": -9999
+                  },
+                  "bold": false,
+                  "italics": false,
+                  "markupTag": false
                 }
               }
             ],
@@ -146,11 +164,13 @@
                 "id": 0,
                 "termIdx": 2,
                 "content": "brown",
+                "cueList": "",
                 "firstTermIdx": 2,
                 "lastTermIdx": 2,
-                "type": 14,
+                "type": 17,
                 "meta": {
                   "content": "brown",
+                  "cues": [],
                   "termIdx": 2,
                   "nextTermIdx": [
                     3
@@ -164,10 +184,17 @@
                   "audible": true,
                   "linkable": false,
                   "visible": true,
-                  "fillin": false,
                   "visited": false,
+                  "numberAsNumerals": false,
                   "linkIdx": -9999,
-                  "hintsIdx": -9999
+                  "hintsIdx": -9999,
+                  "fillin": {
+                    "sectionIdx": -9999,
+                    "responseIdx": -9999
+                  },
+                  "bold": false,
+                  "italics": false,
+                  "markupTag": false
                 }
               }
             ],
@@ -197,11 +224,13 @@
                 "id": 0,
                 "termIdx": 3,
                 "content": "fox",
+                "cueList": "",
                 "firstTermIdx": 3,
                 "lastTermIdx": 3,
-                "type": 14,
+                "type": 17,
                 "meta": {
                   "content": "fox",
+                  "cues": [],
                   "termIdx": 3,
                   "nextTermIdx": [],
                   "prevTermIdx": [
@@ -213,10 +242,17 @@
                   "audible": true,
                   "linkable": false,
                   "visible": true,
-                  "fillin": false,
                   "visited": false,
+                  "numberAsNumerals": false,
                   "linkIdx": -9999,
-                  "hintsIdx": -9999
+                  "hintsIdx": -9999,
+                  "fillin": {
+                    "sectionIdx": -9999,
+                    "responseIdx": -9999
+                  },
+                  "bold": false,
+                  "italics": false,
+                  "markupTag": false
                 }
               }
             ],
@@ -254,6 +290,7 @@
   "terminalList": [
     {
       "content": "The",
+      "cues": [],
       "termIdx": 0,
       "nextTermIdx": [
         1
@@ -265,15 +302,23 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "fillin": false,
       "visited": false,
+      "numberAsNumerals": false,
       "linkIdx": -9999,
       "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
       "sentenceIdx": 0,
       "sectionIdx": 0
     },
     {
       "content": "quick",
+      "cues": [],
       "termIdx": 1,
       "nextTermIdx": [
         2
@@ -287,15 +332,23 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "fillin": false,
       "visited": false,
+      "numberAsNumerals": false,
       "linkIdx": -9999,
       "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
       "sentenceIdx": 1,
       "sectionIdx": 1
     },
     {
       "content": "brown",
+      "cues": [],
       "termIdx": 2,
       "nextTermIdx": [
         3
@@ -309,15 +362,23 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "fillin": false,
       "visited": false,
+      "numberAsNumerals": false,
       "linkIdx": -9999,
       "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
       "sentenceIdx": 2,
       "sectionIdx": 2
     },
     {
       "content": "fox",
+      "cues": [],
       "termIdx": 3,
       "nextTermIdx": [],
       "prevTermIdx": [
@@ -329,10 +390,17 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "fillin": false,
       "visited": false,
+      "numberAsNumerals": false,
       "linkIdx": -9999,
       "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
       "sentenceIdx": 3,
       "sectionIdx": 3
     }
@@ -382,5 +450,6 @@
       "lastPunctuation": ""
     }
   ],
-  "linkList": []
+  "linkList": [],
+  "fillinList": []
 }

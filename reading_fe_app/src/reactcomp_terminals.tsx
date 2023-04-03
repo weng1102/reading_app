@@ -24,11 +24,12 @@ import {
   ITerminalContent,
   ITerminalInfo,
   IAcronymTerminalMeta,
+  INumeralsTerminalMeta,
   IPassthruTagTerminalMeta,
   TerminalMetaEnumType
 } from "./pageContentType";
 import { TerminalFillinContext } from "./fillinContext";
-
+import { SectionFillinContext } from "./fillinContext";
 import { TerminalDate } from "./reactcomp_terminals_dates";
 import { TerminalEmailaddress } from "./reactcomp_terminals_emailaddress";
 import { TerminalPhoneNumber } from "./reactcomp_terminals_phonenumbers";
@@ -80,6 +81,7 @@ export const TerminalDispatcher = React.memo(
           />
         );
       case TerminalMetaEnumType.word:
+      case TerminalMetaEnumType.numberwithcommas:
       case TerminalMetaEnumType.symbol:
         return (
           <TerminalWord
@@ -144,7 +146,16 @@ export const TerminalDispatcher = React.memo(
             terminal={props.terminal}
           />
         );
-      case TerminalMetaEnumType.numberwithcommas:
+      case TerminalMetaEnumType.numerals:
+        return (
+          <TerminalNumerals
+            active={
+              currentTerminalIdx >= props.terminal.firstTermIdx &&
+              currentTerminalIdx <= props.terminal.lastTermIdx
+            }
+            terminal={props.terminal}
+          />
+        );
         break;
       case TerminalMetaEnumType.phonenumber:
         return (
@@ -195,6 +206,24 @@ export const TerminalAcronym = React.memo((props: ITerminalPropsType): any => {
     </>
   ); // return
 });
+export const TerminalNumerals = React.memo((props: ITerminalPropsType): any => {
+  const currentTerminalIdx = useAppSelector(store => store.cursor_terminalIdx); // cause rerendering
+  let number: INumeralsTerminalMeta = props.terminal
+    .meta as INumeralsTerminalMeta;
+  console.log(`numerals.length=${number.numerals.length}`);
+  return (
+    <>
+      {number.numerals.map((numeral: ITerminalInfo, keyvalue: number) => (
+        <TerminalNode
+          key={keyvalue}
+          class="numeral"
+          active={props.active && currentTerminalIdx === numeral.termIdx}
+          terminalInfo={numeral}
+        />
+      ))}
+    </>
+  ); // return
+});
 export const TerminalPassthru = React.memo((props: ITerminalPropsType): any => {
   let passthruInfo: IPassthruTagTerminalMeta = props.terminal
     .meta as IPassthruTagTerminalMeta;
@@ -237,6 +266,8 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
   const { terminalFillin, setTerminalFillin } = useContext(
     TerminalFillinContext
   );
+  //const [attribute, setAttribute] = useState(false)
+  const { sectionFillin, setSectionFillin } = useContext(SectionFillinContext);
   useEffect(() => {
     //    console.log(`<TerminalNode> useEffect() active, expecting scrollToView()`);
     /* Consider multiple scrollIntoView modes:
@@ -261,6 +292,15 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
     }
   }, [props.active, terminalRef]);
   // useEffect(() => {
+  //   // will only trigger with false when going from show to not
+  //   // showResponsesInPrompts
+  //   if (!sectionFillin.currentHelpSetting.showResponsesInPrompts) {
+  //     console.log(
+  //       `reactcomp_terminals::showResponsesInPrompts=${sectionFillin.currentHelpSetting.showResponsesInPrompts}`
+  //     );
+  //   }
+  // }, [sectionFillin.currentHelpSetting.showResponsesInPrompts]);
+  // useEffect(() => {
   //   console.log(
   //     `showTerminalIdx=${showTerminalIdx}, offsetIdx=${terminalFillin.offsetIdx}, ${props.terminalInfo.termIdx}`
   //   );
@@ -272,17 +312,18 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
   //   }
   // }, [showTerminalIdx]);
   let hidden: string = "";
+
   // refactor the following
   if (
     terminalFillin.visible.length > 0 &&
     terminalFillin.visible.length - 1 <=
       props.terminalInfo.termIdx - terminalFillin.offsetIdx
   ) {
-    hidden = !terminalFillin.visible[
-      props.terminalInfo.termIdx - terminalFillin.offsetIdx
-    ]
-      ? ` fillin-prompts-terminal-hidden `
-      : "";
+    let showResponseInPrompt: boolean =
+      terminalFillin.visible[
+        props.terminalInfo.termIdx - terminalFillin.offsetIdx
+      ] || sectionFillin.currentHelpSetting.showResponsesInPrompts;
+    hidden = !showResponseInPrompt ? ` fillin-prompts-terminal-hidden ` : "";
   }
   if (props.terminalInfo.recitable) {
     let attribute: string = `${

@@ -244,6 +244,11 @@ deep-diff@^0.3.5:
   resolved "https://registry.yarnpkg.com/deep-diff/-/deep-diff-0.3.8.tgz#c01de63efb0eec9798801d40c7e0dae25b582c84"
   integrity sha1-wB3mPvsO7JeYgB1Ax+Da4ltYLIQ=
 
+detect-indent@~6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/detect-indent/-/detect-indent-6.0.0.tgz#0abd0f549f69fc6659a254fe96786186b6f528fd"
+  integrity sha512-oSyFlqaTHCItVRGK5RmrmjB+CmaMOW7IaNA/kdxqhoa6d17j/5ce9O9eWXmV/KEdRwqpQA+Vqe8a8Bsybu4YnA==
+
 diff-sequences@^27.0.6:
   version "27.0.6"
   resolved "https://registry.yarnpkg.com/diff-sequences/-/diff-sequences-27.0.6.tgz#3305cb2e55a033924054695cc66019fd7f8e5723"
@@ -253,6 +258,20 @@ diff@^4.0.1:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/diff/-/diff-4.0.2.tgz#60f3aecb89d5fae520c11aa19efc2bb982aade7d"
   integrity sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==
+
+docopt@~0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/docopt/-/docopt-0.6.2.tgz#b28e9e2220da5ec49f7ea5bb24a47787405eeb11"
+  integrity sha512-NqTbaYeE4gA/wU1hdKFdU+AFahpDOpgGLzHP42k6H6DKExJd0A55KEVWYhL9FEmHmgeLvEU2vuKXDuU+4yToOw==
+
+dot-json@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/dot-json/-/dot-json-1.2.2.tgz#7d35abece4aa22aa75a761388953f98495401bcc"
+  integrity sha512-AKL+GsO4wSEU4LU+fAk/PqN4nQ6PB1vT3HpMiZous9xCzK5S0kh4DzfUY0EfU67jsIXLlu0ty71659N9Nmg+Tw==
+  dependencies:
+    detect-indent "~6.0.0"
+    docopt "~0.6.2"
+    underscore-keypath "~0.0.22"
 
 fetch-blob@^3.1.2:
   version "3.1.2"
@@ -310,6 +329,16 @@ jest-get-type@^27.0.6:
   version "27.0.6"
   resolved "https://registry.yarnpkg.com/jest-get-type/-/jest-get-type-27.0.6.tgz#0eb5c7f755854279ce9b68a9f1a4122f69047cfe"
   integrity sha512-XTkK5exIeUbbveehcSR8w0bhH+c0yloW/Wpl+9vZrjzztCPWrxhHwkIFpZzCt71oRBsgxmuUfxEqOYoZI2macg==
+
+lodash.clonedeep@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
+  integrity sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==
+
+lodash@^4.17.21:
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
 make-error@^1.1.1:
   version "1.3.6"
@@ -406,6 +435,26 @@ typescript@^4.4.2:
   version "4.4.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.4.3.tgz#bdc5407caa2b109efd4f82fe130656f977a29324"
   integrity sha512-4xfscpisVgqqDfPaJo5vkd+Qd/ItkoagnHpufr+i2QCHBsNYp+G7UAoyFl8aPtx879u38wPV65rZ8qbGZijalA==
+
+underscore-keypath@~0.0.22:
+  version "0.0.22"
+  resolved "https://registry.yarnpkg.com/underscore-keypath/-/underscore-keypath-0.0.22.tgz#48a528392bb6efc424be1caa56da4b5faccf264d"
+  integrity sha512-fU7aYj1J2LQd+jqdQ67AlCOZKK3Pl+VErS8fGYcgZG75XB9/bY+RLM+F2xEcKHhHNtLvqqFyXAoZQlLYfec3Xg==
+  dependencies:
+    underscore "*"
+
+underscore@*:
+  version "1.13.6"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.13.6.tgz#04786a1f589dc6c09f761fc5f45b89e935136441"
+  integrity sha512-+A5Sja4HP1M08MaXya7p5LvjuM7K6q/2EaC0+iovj/wOcMsTzMvDFbasi/oSapiwOlt252IqsKqPjCl7huKS0A==
+
+user-agents@^1.0.1295:
+  version "1.0.1295"
+  resolved "https://registry.yarnpkg.com/user-agents/-/user-agents-1.0.1295.tgz#24cb53e431847470dbe29d3c857d061bcb1b52a3"
+  integrity sha512-9Rgw4X4FeHZ1d11X9zASRgLYlPKeBINZNRsitoL/RwNEXuNTnDiImMfqa5/+OoGBNRJ1kqxmH3bJL8Fu4m0VIg==
+  dependencies:
+    dot-json "^1.2.2"
+    lodash.clonedeep "^4.5.0"
 
 web-streams-polyfill@^3.0.3:
   version "3.1.1"

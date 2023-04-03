@@ -1,0 +1,564 @@
+{
+  "id": 0,
+  "title": "Fillin rendering v3",
+  "filename": "fillin_entries5.json",
+  "description": "",
+  "owner": "anonymous",
+  "author": "Wen",
+  "category": "Fillins",
+  "version": "20230329.1",
+  "pageFormatType": 0,
+  "created": "Wed Mar 29 2023 12:47:08 GMT-0700 (Pacific Daylight Time)",
+  "modified": "Wed Mar 29 2023 12:47:08 GMT-0700 (Pacific Daylight Time)",
+  "transformed": "Wed Mar 29 2023 12:47:08 GMT-0700 (Pacific Daylight Time)",
+  "firstTermIdx": -9999,
+  "lastTermIdx": -9999,
+  "sections": [
+    {
+      "id": 0,
+      "name": "",
+      "description": "",
+      "firstTermIdx": -9999,
+      "lastTermIdx": 10,
+      "items": [],
+      "type": "fillin",
+      "meta": {
+        "sectionFillinIdx": 0,
+        "helpPresetLevel": -1,
+        "authorHelpSetting": {
+          "description": "no description",
+          "responsesLabel": "alphabetical",
+          "promptsLabel": "true",
+          "layout": "grid",
+          "sortOrder": "insert",
+          "gridColumns": 6,
+          "showResponseHints": false,
+          "showPromptHints": false,
+          "groupByCategory": true,
+          "showResponsesInPrompts": false,
+          "unique": true,
+          "showReferenceCount": true,
+          "helpfulness": 314
+        },
+        "allowReset": false,
+        "promptColumns": 1,
+        "showHelpPresets": false,
+        "prompts": [
+          {
+            "id": 0,
+            "name": "",
+            "description": "",
+            "firstTermIdx": 0,
+            "lastTermIdx": 0,
+            "items": [],
+            "type": "paragraph",
+            "meta": {
+              "sentences": [
+                {
+                  "id": 0,
+                  "content": "[_valentines's_]",
+                  "firstTermIdx": 0,
+                  "lastTermIdx": 0,
+                  "terminals": [
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": "valentines's",
+                      "cueList": "",
+                      "firstTermIdx": 0,
+                      "lastTermIdx": 0,
+                      "type": 4,
+                      "meta": {
+                        "terminals": [
+                          {
+                            "id": 0,
+                            "termIdx": 0,
+                            "content": "valentines's",
+                            "cueList": "",
+                            "firstTermIdx": 0,
+                            "lastTermIdx": 0,
+                            "type": 17,
+                            "meta": {
+                              "content": "valentines's",
+                              "cues": [],
+                              "termIdx": 0,
+                              "nextTermIdx": [
+                                1
+                              ],
+                              "prevTermIdx": [],
+                              "altpronunciation": "",
+                              "altrecognition": "",
+                              "recitable": true,
+                              "audible": true,
+                              "linkable": false,
+                              "visible": true,
+                              "visited": false,
+                              "numberAsNumerals": false,
+                              "linkIdx": -9999,
+                              "hintsIdx": -9999,
+                              "fillin": {
+                                "sectionIdx": 0,
+                                "responseIdx": 0
+                              },
+                              "bold": false,
+                              "italics": false,
+                              "markupTag": false
+                            }
+                          }
+                        ],
+                        "sectionFillinIdx": 0
+                      }
+                    }
+                  ],
+                  "lastPunctuation": ""
+                }
+              ],
+              "style": ""
+            }
+          },
+          {
+            "id": 1,
+            "name": "",
+            "description": "",
+            "firstTermIdx": 1,
+            "lastTermIdx": 10,
+            "items": [],
+            "type": "paragraph",
+            "meta": {
+              "sentences": [
+                {
+                  "id": 1,
+                  "content": "[_(408) 267-6076_]",
+                  "firstTermIdx": 1,
+                  "lastTermIdx": 10,
+                  "terminals": [],
+                  "lastPunctuation": ""
+                }
+              ],
+              "style": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 0,
+      "name": "",
+      "description": "",
+      "firstTermIdx": -9999,
+      "lastTermIdx": -9999,
+      "items": [],
+      "type": "empty",
+      "meta": {
+        "count": 1
+      }
+    }
+  ],
+  "terminalList": [
+    {
+      "content": "valentines's",
+      "cues": [],
+      "termIdx": 0,
+      "nextTermIdx": [
+        1
+      ],
+      "prevTermIdx": [],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": 0,
+        "responseIdx": 0
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 0,
+      "sectionIdx": 0
+    },
+    {
+      "content": "4",
+      "cues": [],
+      "termIdx": 1,
+      "nextTermIdx": [
+        2
+      ],
+      "prevTermIdx": [
+        0
+      ],
+      "altpronunciation": "",
+      "altrecognition": "^(four|for|fore)$",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": true,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "0",
+      "cues": [],
+      "termIdx": 2,
+      "nextTermIdx": [
+        3
+      ],
+      "prevTermIdx": [
+        1
+      ],
+      "altpronunciation": "",
+      "altrecognition": "^(zero|oh)$",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": true,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "8",
+      "cues": [],
+      "termIdx": 3,
+      "nextTermIdx": [
+        4
+      ],
+      "prevTermIdx": [
+        2
+      ],
+      "altpronunciation": "",
+      "altrecognition": "^(eight|ate)$",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": true,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "2",
+      "cues": [],
+      "termIdx": 4,
+      "nextTermIdx": [
+        5
+      ],
+      "prevTermIdx": [
+        3
+      ],
+      "altpronunciation": "",
+      "altrecognition": "^(two|to|too)$",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": true,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "6",
+      "cues": [],
+      "termIdx": 5,
+      "nextTermIdx": [
+        6
+      ],
+      "prevTermIdx": [
+        4
+      ],
+      "altpronunciation": "",
+      "altrecognition": "^(six|sex)$",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": true,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "7",
+      "cues": [],
+      "termIdx": 6,
+      "nextTermIdx": [
+        7
+      ],
+      "prevTermIdx": [
+        5
+      ],
+      "altpronunciation": "",
+      "altrecognition": "seven",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": true,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "6",
+      "cues": [],
+      "termIdx": 7,
+      "nextTermIdx": [
+        8
+      ],
+      "prevTermIdx": [
+        6
+      ],
+      "altpronunciation": "",
+      "altrecognition": "^(six|sex)$",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": true,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "0",
+      "cues": [],
+      "termIdx": 8,
+      "nextTermIdx": [
+        9
+      ],
+      "prevTermIdx": [
+        7
+      ],
+      "altpronunciation": "",
+      "altrecognition": "^(zero|oh)$",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": true,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "7",
+      "cues": [],
+      "termIdx": 9,
+      "nextTermIdx": [
+        10
+      ],
+      "prevTermIdx": [
+        8
+      ],
+      "altpronunciation": "",
+      "altrecognition": "seven",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": true,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "6",
+      "cues": [],
+      "termIdx": 10,
+      "nextTermIdx": [],
+      "prevTermIdx": [
+        9
+      ],
+      "altpronunciation": "",
+      "altrecognition": "^(six|sex)$",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": true,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    }
+  ],
+  "headingList": [],
+  "sectionList": [
+    {
+      "firstTermIdx": 0,
+      "lastTermIdx": 0,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 1,
+      "lastTermIdx": 10,
+      "type": "paragraph"
+    }
+  ],
+  "sentenceList": [
+    {
+      "firstTermIdx": 0,
+      "lastTermIdx": 0,
+      "lastPunctuation": ""
+    },
+    {
+      "firstTermIdx": 1,
+      "lastTermIdx": 10,
+      "lastPunctuation": ""
+    }
+  ],
+  "linkList": [],
+  "fillinList": [
+    {
+      "idx": 0,
+      "showHelpPresets": false,
+      "helpPresetLevel": -1,
+      "authorHelpSetting": {
+        "description": "no description",
+        "responsesLabel": "alphabetical",
+        "promptsLabel": "true",
+        "layout": "grid",
+        "sortOrder": "insert",
+        "gridColumns": 6,
+        "showResponseHints": false,
+        "showPromptHints": false,
+        "groupByCategory": true,
+        "showResponsesInPrompts": false,
+        "unique": true,
+        "showReferenceCount": true,
+        "helpfulness": 314
+      },
+      "currentHelpSetting": {
+        "description": "no description",
+        "responsesLabel": "alphabetical",
+        "promptsLabel": "true",
+        "layout": "grid",
+        "sortOrder": "insert",
+        "gridColumns": 6,
+        "showResponseHints": false,
+        "showPromptHints": false,
+        "groupByCategory": true,
+        "showResponsesInPrompts": false,
+        "unique": true,
+        "showReferenceCount": true,
+        "helpfulness": 314
+      },
+      "allowReset": false,
+      "promptColumns": 1,
+      "responses": [
+        {
+          "content": "valentines's",
+          "category": "",
+          "referenceCount": 1
+        },
+        {
+          "content": "(408) 267-6076",
+          "category": "",
+          "referenceCount": 1
+        }
+      ],
+      "loaded": false,
+      "modified": false
+    }
+  ]
+}

@@ -23,21 +23,26 @@ import {
 import {
   IDX_INITIALIZER,
   ParseNodeSerializeTabular,
-  ParseNodeSerializeFormatEnumType
+  ParseNodeSerializeFormatEnumType,
+  helpfulnessLevel
 } from "./baseclasses";
 import {
   MarkdownRecordType,
   MarkdownRecordTagType,
   TaggedStringType
 } from "./dataadapter";
+import { SortOrderToLabel } from "./baseClasses";
 import {
+  SectionFillinHelpPresetInfo,
+  SectionFillinHelpPresetMap,
+  SectionFillinHelpPresetLevel,
+  SectionFillinHelpPresetName,
   ISectionFillinVariant,
   ISectionFillinVariantInitializer,
   ISectionFillinItemInitializer,
   SectionVariantEnumType,
   SectionFillinLayoutType,
-  SectionFillinSortOrder,
-  sortOrderToLabel
+  SectionFillinSortOrder
 } from "./pageContentType";
 import { GetSectionNode } from "./parsesectiondispatch";
 import { IPageNode } from "./parsepages";
@@ -54,154 +59,76 @@ export class SectionParseNode_FILLIN extends SectionParseNode_LIST
   parse() {
     const validateArgs = (argString: string, lineNo: number) => {
       /*
-        [0]  responses label
-        [1]  prompts label such as instructions
-        [2]  layout { grid | bulleted list | csv }
-        [3]  grid column as number (only with layout=grid)
-        [4]  sort order { a[lphabetical] | i[nsertOrder] (default) | r[andom] [c[sv]]}
-        [5]  unique only: boolean, remove duplicate responses and refCount++
-        [6]  showReferenceCount: boolean, shows in responses iff <> 1
-        [7]  groupByCategory: boolean, groups responses by category e.g., verbs
-        [8]  allowReset: boolean, allows user to reset responses already spoken
-        [9]  showResponseHints: boolean, show hints within responses
-        [10] showPromptHints: boolean,show hints within prompts
-        [11] allowFormatting: boolean, allow user to change format
-        [12] number of columns when displaying prompts
-        [13] showPrompts: boolean, show prompt initially filled in)
+        [0]  preset index in application config help levels from
+             FillinHelpPresetLevel. FillinHelpPresetLevel.override allows
+             author to specify custom ISectionFillinHelpSetting in fillin
+             header.
+        [1]  show help presets with initial setting defined above.
+
+        The next set of parameters are related to formatting help settings
+        [2]  prompts columns
+        [3]  allowReset
+
+        The next set of parameters are author definition of help setting
+        [4]  responses label
+        [5]  prompts label such as instructions
+        [6]  layout { grid | bulleted list | csv }
+             trailing must include extraneous answers e.g., yes vs no.
+        [7]  response grid columns as number (only with layout=grid)
+        [8]  sort order { a[lphabetical] | i[nsertOrder] (default) | r[andom] }
+        [9] unique only: boolean, remove duplicate responses and refCount++
+        [10] showReferenceCount: boolean, shows in responses iff <> 1
+        [11] groupByCategory: boolean, groups responses by category e.g., verbs
+        [12]  showResponseHints: boolean, show hints within responses
+        [13] showPromptHints: boolean, show hints within prompts
+        [14] showResponsesInPrompts: boolean, show responwses initially filled
+             in)
         */
       let args: string[] = argString.split(",").map(arg => arg.trim());
       let argNum = 0;
       // consider try/catch
-      this.meta.responsesLabel = ValidateArg(
-        args[argNum].length > 0,
-        "responses label",
-        args[argNum],
-        this.meta.responsesLabel,
+      let argLevel: SectionFillinHelpPresetLevel;
+      if (args[argNum] in SectionFillinHelpPresetName) {
+        argLevel =
+          SectionFillinHelpPresetMap[<SectionFillinHelpPresetName>args[argNum]];
+      } else if (args[argNum] in SectionFillinHelpPresetLevel) {
+        argLevel = +args[argNum] as SectionFillinHelpPresetLevel;
+      } else {
+        argLevel = this.meta.helpPresetLevel;
+      }
+      this.meta.helpPresetLevel = ValidateArg(
+        argLevel in SectionFillinHelpPresetLevel,
+        // +args[argNum] >= SectionFillinHelpPresetLevel.least &&
+        //   +args[argNum] <= SectionFillinHelpPresetLevel.most,
+        "preset level",
+        argLevel.toString(),
+        this.meta.helpPresetLevel,
         argNum,
         lineNo,
         this.logger
-      ) as string;
+      ) as SectionFillinHelpPresetLevel;
 
       argNum++;
-      this.meta.promptsLabel = ValidateArg(
-        args[argNum].length > 0,
-        "prompts label",
-        args[argNum],
-        this.meta.promptsLabel,
-        argNum,
-        lineNo,
-        this.logger
-      ) as string;
-
-      argNum++;
-      this.meta.layout = ValidateArg(
-        args[argNum] in SectionFillinLayoutType,
-        "layout",
-        args[argNum],
-        this.meta.layout,
-        argNum,
-        lineNo,
-        this.logger
-      ) as SectionFillinLayoutType;
-
-      argNum++;
-      this.meta.gridColumns = ValidateArg(
-        IsValidWholeNumberString(args[argNum]),
-        "grid columns",
-        args[argNum],
-        this.meta.gridColumns,
-        argNum,
-        lineNo,
-        this.logger
-      ) as number;
-
-      argNum++;
-      this.meta.sortOrder = ValidateArg(
-        args[argNum] in SectionFillinSortOrder,
-        "sort order",
-        args[argNum],
-        this.meta.sortOrder,
-        argNum,
-        lineNo,
-        this.logger
-      ) as SectionFillinSortOrder;
-
-      argNum++;
-      this.meta.unique = ValidateArg(
+      this.meta.showHelpPresets = ValidateArg(
         IsValidBooleanString(args[argNum]),
-        "unique",
+        "show help presets",
         args[argNum],
-        this.meta.unique,
+        this.meta.showHelpPresets,
         argNum,
         lineNo,
         this.logger
       ) as boolean;
 
-      argNum++;
-      this.meta.showReferenceCount = ValidateArg(
-        IsValidBooleanString(args[argNum]),
-        "show reference count",
-        args[argNum],
-        this.meta.showReferenceCount,
-        argNum,
-        lineNo,
-        this.logger
-      ) as boolean;
-
-      argNum++;
-      this.meta.groupByCategory = ValidateArg(
-        IsValidBooleanString(args[argNum]),
-        "group by category",
-        args[argNum],
-        this.meta.groupByCategory,
-        argNum,
-        lineNo,
-        this.logger
-      ) as boolean;
-
-      argNum++;
-      this.meta.allowReset = ValidateArg(
-        IsValidBooleanString(args[argNum]),
-        "allow reset",
-        args[argNum],
-        this.meta.allowReset,
-        argNum,
-        lineNo,
-        this.logger
-      ) as boolean;
-
-      argNum++;
-      this.meta.showResponseHints = ValidateArg(
-        IsValidBooleanString(args[argNum]),
-        "show response hints",
-        args[argNum],
-        this.meta.showResponseHints,
-        argNum,
-        lineNo,
-        this.logger
-      ) as boolean;
-
-      argNum++;
-      this.meta.showPromptHints = ValidateArg(
-        IsValidBooleanString(args[argNum]),
-        "show prompt hints",
-        args[argNum],
-        this.meta.showPromptHints,
-        argNum,
-        lineNo,
-        this.logger
-      ) as boolean;
-
-      argNum++;
-      this.meta.allowUserFormatting = ValidateArg(
-        IsValidBooleanString(args[argNum]),
-        "allow user formatting",
-        args[argNum],
-        this.meta.allowUserFormatting,
-        argNum,
-        lineNo,
-        this.logger
-      ) as boolean;
+      // argNum++;
+      // this.meta.gridColumns = ValidateArg(
+      //   IsValidWholeNumberString(args[argNum]),
+      //   "grid columns",
+      //   args[argNum],
+      //   this.meta.gridColumns,
+      //   argNum,
+      //   lineNo,
+      //   this.logger
+      // ) as number;
 
       argNum++;
       this.meta.promptColumns = ValidateArg(
@@ -215,19 +142,155 @@ export class SectionParseNode_FILLIN extends SectionParseNode_LIST
       ) as number;
 
       argNum++;
-      this.meta.showPrompts = ValidateArg(
+      this.meta.allowReset = ValidateArg(
         IsValidBooleanString(args[argNum]),
-        "show prompts",
+        "allow reset",
         args[argNum],
-        this.meta.showPrompts,
+        this.meta.allowReset,
+        argNum,
+        lineNo,
+        this.logger
+      ) as boolean;
+
+      argNum++;
+      this.meta.authorHelpSetting.responsesLabel = ValidateArg(
+        args[argNum].length > 0,
+        "responses label",
+        args[argNum],
+        this.meta.authorHelpSetting.responsesLabel,
+        argNum,
+        lineNo,
+        this.logger
+      ) as string;
+
+      argNum++;
+      this.meta.authorHelpSetting.promptsLabel = ValidateArg(
+        args[argNum].length > 0,
+        "prompts label",
+        args[argNum],
+        this.meta.authorHelpSetting.promptsLabel,
+        argNum,
+        lineNo,
+        this.logger
+      ) as string;
+
+      argNum++;
+      this.meta.authorHelpSetting.layout = ValidateArg(
+        args[argNum] in SectionFillinLayoutType,
+        "layout",
+        args[argNum],
+        this.meta.authorHelpSetting.layout,
+        argNum,
+        lineNo,
+        this.logger
+      ) as SectionFillinLayoutType;
+
+      argNum++;
+      this.meta.authorHelpSetting.gridColumns = ValidateArg(
+        IsValidWholeNumberString(args[argNum]),
+        "grid columns",
+        args[argNum],
+        this.meta.authorHelpSetting.gridColumns,
+        argNum,
+        lineNo,
+        this.logger
+      ) as number;
+
+      argNum++;
+      this.meta.authorHelpSetting.sortOrder = ValidateArg(
+        args[argNum] in SectionFillinSortOrder,
+        "sort order",
+        args[argNum],
+        this.meta.authorHelpSetting.sortOrder,
+        argNum,
+        lineNo,
+        this.logger
+      ) as SectionFillinSortOrder;
+
+      argNum++;
+      this.meta.authorHelpSetting.unique = ValidateArg(
+        IsValidBooleanString(args[argNum]),
+        "unique",
+        args[argNum],
+        this.meta.authorHelpSetting.unique,
+        argNum,
+        lineNo,
+        this.logger
+      ) as boolean;
+
+      argNum++;
+      this.meta.authorHelpSetting.showReferenceCount = ValidateArg(
+        IsValidBooleanString(args[argNum]),
+        "show reference count",
+        args[argNum],
+        this.meta.authorHelpSetting.showReferenceCount,
+        argNum,
+        lineNo,
+        this.logger
+      ) as boolean;
+
+      argNum++;
+      this.meta.authorHelpSetting.groupByCategory = ValidateArg(
+        IsValidBooleanString(args[argNum]),
+        "group by category",
+        args[argNum],
+        this.meta.authorHelpSetting.groupByCategory,
+        argNum,
+        lineNo,
+        this.logger
+      ) as boolean;
+
+      // argNum++;
+      // this.meta.allowReset = ValidateArg(
+      //   IsValidBooleanString(args[argNum]),
+      //   "allow reset",
+      //   args[argNum],
+      //   this.meta.allowReset,
+      //   argNum,
+      //   lineNo,
+      //   this.logger
+      // ) as boolean;
+
+      argNum++;
+      this.meta.authorHelpSetting.showResponseHints = ValidateArg(
+        IsValidBooleanString(args[argNum]),
+        "show response hints",
+        args[argNum],
+        this.meta.authorHelpSetting.showResponseHints,
+        argNum,
+        lineNo,
+        this.logger
+      ) as boolean;
+
+      argNum++;
+      this.meta.authorHelpSetting.showPromptHints = ValidateArg(
+        IsValidBooleanString(args[argNum]),
+        "show prompt hints",
+        args[argNum],
+        this.meta.authorHelpSetting.showPromptHints,
+        argNum,
+        lineNo,
+        this.logger
+      ) as boolean;
+
+      argNum++;
+      this.meta.authorHelpSetting.showResponsesInPrompts = ValidateArg(
+        IsValidBooleanString(args[argNum]),
+        "show responses in prompts",
+        args[argNum],
+        this.meta.authorHelpSetting.showResponsesInPrompts,
         argNum,
         lineNo,
         this.logger
       ) as boolean;
 
       this.logger.diagnostic(`Validated ${argNum} parameters`);
+
+      argNum++;
+      this.meta.authorHelpSetting.helpfulness = helpfulnessLevel(
+        this.meta.authorHelpSetting
+      );
     };
-    //this.logger.diagnosticMode = true;
     this.logger.diagnostic(`${this.constructor.name}`);
     try {
       assert(this.dataSource !== undefined, `Undefined datasource encountered`);
@@ -236,24 +299,20 @@ export class SectionParseNode_FILLIN extends SectionParseNode_LIST
 
       assert(
         current.recordType === MarkdownRecordType.FILLIN,
-        `Expected "${MarkdownRecordTagType.FILLIN}" at line ${current.lineNo}`
+        `expected "${MarkdownRecordTagType.FILLIN}" at line ${current.lineNo}`
       );
       validateArgs(current.content, current.lineNo);
       this.meta.sectionFillinIdx =
         this.userContext.fillins.push(
           ISectionFillinItemInitializer(
             IDX_INITIALIZER,
-            this.meta.layout,
-            this.meta.gridColumns,
-            this.meta.sortOrder,
-            this.meta.unique,
-            this.meta.showReferenceCount,
-            this.meta.groupByCategory,
+            this.meta.showHelpPresets,
+            this.meta.helpPresetLevel,
+            this.meta.authorHelpSetting,
+            this.meta.authorHelpSetting,
             this.meta.allowReset,
-            this.meta.showResponseHints,
-            this.meta.allowUserFormatting,
-            this.meta.promptColumns,
-            this.meta.showPrompts
+            this.meta.promptColumns
+            // this.meta.showPrompts
           )
         ) - 1;
       for (
@@ -311,25 +370,39 @@ export class SectionParseNode_FILLIN extends SectionParseNode_LIST
     let outputStr: string = "";
     switch (format) {
       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
-        outputStr = `${super.serialize(format, label, prefix)}:response:"${
-          this.meta.responsesLabel
-        }", prompt:"${this.meta.promptsLabel}",  sectionFillinIdx=${
-          this.meta.sectionFillinIdx
-        }, ${this.meta.layout}, ${sortOrderToLabel(
-          this.meta.sortOrder
-        )}, gridColumns=${this.meta.gridColumns}, ${
-          this.meta.unique ? "unique" : ""
-        },${this.meta.showReferenceCount ? "showReferenceCount" : ""}, ${
-          this.meta.showResponseHints ? "showResponseHints" : ""
-        }, ${this.meta.groupByCategory ? "groupByCategory" : ""}, ${
-          this.meta.showResponseHints ? "showResponseHints" : ""
-        }, ${this.meta.showPromptHints ? "showPromptHints" : ""}, ${
-          this.meta.allowReset ? "allowReset" : ""
-        }, ${
-          this.meta.allowUserFormatting ? "allowUserFormatting" : ""
+        outputStr = `${super.serialize(
+          format,
+          label,
+          prefix
+        )}: authorHelpPreset=${this.meta.helpPresetLevel}, ${
+          this.meta.showHelpPresets ? "showHelpPresets" : ""
         }, promptColumns=${this.meta.promptColumns}, ${
-          this.meta.showPrompts ? "showPrompts" : ""
-        }`;
+          this.meta.allowReset ? "allowReset" : ""
+        }, response:"${this.meta.authorHelpSetting.responsesLabel}", prompt:"${
+          this.meta.authorHelpSetting.promptsLabel
+        }", ${this.meta.authorHelpSetting.layout}, gridColumns=${
+          this.meta.authorHelpSetting.gridColumns
+        }, ${SortOrderToLabel(this.meta.authorHelpSetting.sortOrder)}, ${
+          this.meta.authorHelpSetting.unique ? "unique" : ""
+        },${
+          this.meta.authorHelpSetting.showReferenceCount
+            ? "showReferenceCount"
+            : ""
+        }, ${
+          this.meta.authorHelpSetting.groupByCategory ? "groupByCategory" : ""
+        }, ${
+          this.meta.authorHelpSetting.showResponseHints
+            ? "showResponseHints"
+            : ""
+        }, ${
+          this.meta.authorHelpSetting.showPromptHints ? "showPromptHints" : ""
+        },  promptColumns=${this.meta.promptColumns}, ${
+          this.meta.authorHelpSetting.showPromptHints ? "showPromptHints" : ""
+        }, priority=${this.meta.authorHelpSetting.helpfulness}, ${
+          this.meta.authorHelpSetting.showResponsesInPrompts
+            ? "showResponsesInPrompts"
+            : ""
+        }, sectionFillinIdx=${this.meta.sectionFillinIdx}, `;
         // if (
         //   this.meta.sectionFillinIdx >= 0 &&
         //   this.userContext.fillins[this.meta.sectionFillinIdx] !== undefined

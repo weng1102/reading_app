@@ -8,7 +8,7 @@
  *
  **/
 export const IDX_INITIALIZER = -9999;
-export const PageContentVersion = "20221017.1";
+export const PageContentVersion = "20230329.1";
 export enum PageFormatEnumType {
   default = 0
 }
@@ -242,32 +242,184 @@ export function ISectionParagraphVariantInitializer(): ISectionParagraphVariant 
   };
 }
 export enum SectionFillinLayoutType {
-  list = "list",
   grid = "grid",
+  list = "list",
   csv = "csv",
-  none = "none"
+  hidden = "hidden"
+}
+export enum SectionFillinPositionType {
+  above = "above",
+  left = "left",
+  right = "right",
+  below = "below"
 }
 export enum SectionFillinSortOrder {
   insert = "insert",
   alphabetical = "alphabetical",
   random = "random"
 }
+export enum SectionFillinHelpPresetName {
+  // indexes ISectionFillinHelpPresets below
+  override = "override",
+  hidden = "hidden",
+  gridRandom = "gridRandom",
+  gridAlpha = "gridAlpha",
+  gridInOrder = "gridInOrder",
+  inline = "inline"
+}
+export enum SectionFillinHelpPresetLevel {
+  override = -1,
+  hidden,
+  gridRandom,
+  gridAlpha,
+  gridInOrder,
+  inline
+}
+export const SectionFillinHelpPresetMap = {
+  [SectionFillinHelpPresetName.override]: SectionFillinHelpPresetLevel.override,
+  [SectionFillinHelpPresetName.hidden]: SectionFillinHelpPresetLevel.hidden,
+  [SectionFillinHelpPresetName.gridRandom]:
+    SectionFillinHelpPresetLevel.gridRandom,
+  [SectionFillinHelpPresetName.gridAlpha]:
+    SectionFillinHelpPresetLevel.gridAlpha,
+  [SectionFillinHelpPresetName.gridInOrder]:
+    SectionFillinHelpPresetLevel.gridInOrder,
+  [SectionFillinHelpPresetName.inline]: SectionFillinHelpPresetLevel.inline
+};
+interface IHelpLevelSetting {
+  level: SectionFillinHelpPresetLevel;
+  helpSetting: ISectionFillinHelpSetting;
+}
+type SectionFillinHelpPresetInfoType = Record<
+  SectionFillinHelpPresetLevel,
+  IHelpLevelSetting
+>;
+export const SectionFillinHelpPresetInfo = {
+  [SectionFillinHelpPresetLevel.override]: ISectionFillinHelpSettingInitializer(),
+  [SectionFillinHelpPresetLevel.hidden]: {
+    // default
+    description: "Responses not displayed",
+    showResponsesInPrompts: false,
+    layout: SectionFillinLayoutType.hidden,
+    responsesLabel: "",
+    promptsLabel: "Recite the following prompts and fill in the blanks:",
+    // igonore parameters below
+    sortOrder: SectionFillinSortOrder.insert,
+    gridColumns: 6,
+    groupByCategory: false,
+    showResponseHints: false,
+    showPromptHints: false,
+    unique: true,
+    showReferenceCount: true,
+    helpfulness: 0
+  },
+  [SectionFillinHelpPresetLevel.gridRandom]: {
+    description: "Responses displayed as grid in random order",
+    responsesLabel: "Responses displayed as grid randomly:",
+    promptsLabel: "Recite the following prompts and fill in the blanks:",
+    layout: SectionFillinLayoutType.grid,
+    sortOrder: SectionFillinSortOrder.random,
+    gridColumns: 6,
+    // igonore parameters below
+    showResponsesInPrompts: false,
+    groupByCategory: false,
+    showResponseHints: false,
+    showPromptHints: false,
+    unique: true,
+    showReferenceCount: true,
+    helpfulness: 0
+  },
+  [SectionFillinHelpPresetLevel.gridAlpha]: {
+    description: "Responses displayed as grid in alphabetical order",
+    responsesLabel: "Responses displayed as grid alphabetically:",
+    promptsLabel: "Recite the following prompts and fill in the blanks:",
+    layout: SectionFillinLayoutType.grid,
+    gridColumns: 6,
+    sortOrder: SectionFillinSortOrder.alphabetical,
+    showResponsesInPrompts: false,
+    groupByCategory: false,
+    showResponseHints: false,
+    showPromptHints: false,
+    unique: true,
+    showReferenceCount: true,
+    helpfulness: 0
+  },
+  [SectionFillinHelpPresetLevel.gridInOrder]: {
+    description: "Responses displayed as grid in order",
+    responsesLabel: "Responses displayed as grid in order:",
+    promptsLabel: "Recite the following prompts and fill in the blanks:",
+    layout: SectionFillinLayoutType.grid,
+    gridColumns: 6,
+    sortOrder: SectionFillinSortOrder.insert,
+    showResponsesInPrompts: false,
+    groupByCategory: false,
+    showResponseHints: false,
+    showPromptHints: false,
+    unique: true,
+    showReferenceCount: true,
+    helpfulness: 0
+  },
+  [SectionFillinHelpPresetLevel.inline]: {
+    description: "Responses displayed inline",
+    showResponsesInPrompts: true,
+    responsesLabel: "Responses already filled in:",
+    promptsLabel:
+      "Recite the following prompts including the underlined words:",
+    layout: SectionFillinLayoutType.hidden,
+    gridColumns: 0,
+    sortOrder: SectionFillinSortOrder.insert,
+    groupByCategory: false,
+    showResponseHints: false,
+    showPromptHints: false,
+    unique: true,
+    showReferenceCount: true,
+    helpfulness: 0
+  }
+};
+export interface ISectionFillinHelpSetting {
+  description: string;
+  responsesLabel: string;
+  promptsLabel: string;
+  layout: SectionFillinLayoutType;
+  sortOrder: SectionFillinSortOrder;
+  gridColumns: number;
+  showResponsesInPrompts: boolean;
+  groupByCategory: boolean;
+  showResponseHints: boolean; //same as groupCategory?
+  showPromptHints: boolean;
+  unique: boolean; // identical words grouped as single response entry
+  showReferenceCount: boolean;
+  helpfulness: number; // most hints to least hints
+}
+export function ISectionFillinHelpSettingInitializer(
+  description: string = "",
+  promptsLabel: string = "",
+  responsesLabel: string = "",
+  layout = SectionFillinLayoutType.grid
+): ISectionFillinHelpSetting {
+  return {
+    description: description,
+    responsesLabel: responsesLabel,
+    promptsLabel: promptsLabel,
+    layout: layout,
+    sortOrder: SectionFillinSortOrder.insert,
+    gridColumns: 6,
+    showResponseHints: false,
+    showPromptHints: false,
+    groupByCategory: false,
+    showResponsesInPrompts: false,
+    unique: true, // identical words grouped as single response entry
+    showReferenceCount: true,
+    helpfulness: -1
+  };
+}
 export interface ISectionFillinVariant {
   sectionFillinIdx: number; // reference state structure in pageList.fillinList
-  promptsLabel: string;
-  responsesLabel: string;
-  layout: SectionFillinLayoutType; // list, grid, random
-  gridColumns: number; // 0 means no response table
-  sortOrder: SectionFillinSortOrder;
-  unique: boolean; // identical words groouped as single response entry
-  showReferenceCount: boolean;
-  groupByCategory: boolean; // group in response  (e.g., noun)
-  allowReset: boolean; // reset button
-  showResponseHints: boolean; // shows (noun) beside hidden word
-  showPromptHints: boolean; // shows (noun) beside hidden word
-  showPrompts: boolean; // show prompts initially (easy mode)
-  allowUserFormatting: boolean;
+  helpPresetLevel: SectionFillinHelpPresetLevel;
+  authorHelpSetting: ISectionFillinHelpSetting;
+  allowReset: boolean;
   promptColumns: number;
+  showHelpPresets: boolean;
   prompts: ISectionContent[];
 }
 export function ISectionFillinVariantInitializer(
@@ -278,22 +430,102 @@ export function ISectionFillinVariantInitializer(
 ): ISectionFillinVariant {
   return {
     sectionFillinIdx: sectionFillinIdx,
-    promptsLabel: promptsLabel,
-    responsesLabel: responsesLabel,
-    layout: layout,
-    gridColumns: 0,
-    sortOrder: SectionFillinSortOrder.insert,
-    allowUserFormatting: true,
-    unique: true,
-    showResponseHints: false,
-    showPromptHints: false,
-    groupByCategory: false,
-    showReferenceCount: true,
-    showPrompts: false,
+    helpPresetLevel: SectionFillinHelpPresetLevel.override,
+    authorHelpSetting: ISectionFillinHelpSettingInitializer(
+      "no description",
+      promptsLabel,
+      responsesLabel,
+      layout
+    ),
     allowReset: false,
     promptColumns: 1,
+    showHelpPresets: false,
     prompts: []
   };
+}
+export type ISectionFillinHelpPresets = ISectionFillinHelpSetting[];
+export function ISectionFillinHelpPresetsInitializer(): ISectionFillinHelpPresets {
+  return [
+    {
+      // default
+      description: "no responses displayed",
+      showResponsesInPrompts: false,
+      layout: SectionFillinLayoutType.hidden,
+      responsesLabel: "",
+      promptsLabel: "Fillin the following blanks:",
+      // igonore parameters below
+      sortOrder: SectionFillinSortOrder.insert,
+      gridColumns: 6,
+      groupByCategory: false,
+      showResponseHints: false,
+      showPromptHints: false,
+      unique: true,
+      showReferenceCount: true,
+      helpfulness: 0
+    },
+    {
+      description: "responses displayed as grid in random order",
+      responsesLabel: "",
+      promptsLabel: "",
+      layout: SectionFillinLayoutType.grid,
+      sortOrder: SectionFillinSortOrder.insert,
+      gridColumns: 6,
+      // igonore parameters below
+      showResponsesInPrompts: false,
+      groupByCategory: false,
+      showResponseHints: false,
+      showPromptHints: false,
+      unique: true,
+      showReferenceCount: true,
+      helpfulness: 0
+    },
+    {
+      description: "responses displayed as grid in alphabetical order",
+      responsesLabel: "",
+      promptsLabel: "",
+      layout: SectionFillinLayoutType.grid,
+      gridColumns: 6,
+      sortOrder: SectionFillinSortOrder.insert,
+      showResponsesInPrompts: false,
+      groupByCategory: false,
+      showResponseHints: false,
+      showPromptHints: false,
+      unique: true,
+      showReferenceCount: true,
+      helpfulness: 0
+    },
+    {
+      description: "responses displayed as grid in order",
+      responsesLabel: "",
+      promptsLabel: "",
+      layout: SectionFillinLayoutType.grid,
+      gridColumns: 6,
+      sortOrder: SectionFillinSortOrder.insert,
+      showResponsesInPrompts: false,
+      groupByCategory: false,
+      showResponseHints: false,
+      showPromptHints: false,
+      unique: true,
+      showReferenceCount: true,
+      helpfulness: 0
+    },
+    {
+      description: "responses displayed inline",
+      showResponsesInPrompts: true,
+      responsesLabel: "Responses (already filled in):",
+      promptsLabel:
+        "Recite the following prompts including the underlined words:",
+      layout: SectionFillinLayoutType.hidden,
+      gridColumns: 0,
+      sortOrder: SectionFillinSortOrder.insert,
+      groupByCategory: false,
+      showResponseHints: false,
+      showPromptHints: false,
+      unique: true,
+      showReferenceCount: true,
+      helpfulness: 0
+    }
+  ];
 }
 export enum ImageEntryLayoutEnumType {
   left = "left", // default, image to the left of caption
@@ -353,6 +585,7 @@ export enum TerminalMetaEnumType {
   image,
   link,
   numberwithcommas,
+  numerals,
   passthruTag,
   phonenumber,
   punctuation,
@@ -399,6 +632,7 @@ export type TerminalMetaType =
   | IImageTerminalMeta
   | ICurriculumLinkTerminalMeta
   | IFillinTerminalMeta
+  | INumeralsTerminalMeta
   | IPassthruTagTerminalMeta
   | IPhoneNumberTerminalMeta
   | IPunctuationTerminalMeta
@@ -426,6 +660,7 @@ export interface ITerminalInfo {
   linkable: boolean;
   visible: boolean;
   visited: boolean;
+  numberAsNumerals: boolean;
   linkIdx: number;
   hintsIdx: number;
   fillin: IFillinResponse;
@@ -444,6 +679,7 @@ export function ITerminalInfoInitializer(
   linkable: boolean = false,
   visible: boolean = true,
   visited: boolean = false,
+  numberAsNumerals: boolean = false,
   linkIdx: number = IDX_INITIALIZER,
   hintsIdx: number = IDX_INITIALIZER,
   fillin: IFillinResponse = {
@@ -473,6 +709,7 @@ export function ITerminalInfoInitializer(
     linkable: linkable,
     visible: visible,
     visited: visited,
+    numberAsNumerals: numberAsNumerals,
     linkIdx: linkIdx,
     hintsIdx: hintsIdx,
     fillin: fillin, // sectionFillin specific
@@ -601,6 +838,9 @@ export function IFillinTerminalMetaInitializer(
     // responseIdx
   };
 }
+export interface INumeralsTerminalMeta {
+  numerals: ITerminalInfo[];
+}
 export interface IPassthruTagTerminalMeta {
   tag: string;
 }
@@ -659,6 +899,11 @@ export function ICurriculumLinkTerminalMetaInitializer(): ICurriculumLinkTermina
     className: "",
     style: "", // most specific style
     linkIdx: IDX_INITIALIZER
+  };
+}
+export function INumeralsTerminalMetaInitializer(): INumeralsTerminalMeta {
+  return {
+    numerals: []
   };
 }
 export interface IPhoneNumberTerminalMeta {
@@ -928,34 +1173,24 @@ export interface IFillinPromptItem {
 }
 export interface ISectionFillinItem {
   idx: number;
-  layout: SectionFillinLayoutType;
-  gridColumns: number;
-  sortOrder: SectionFillinSortOrder; // sort alphabetically
-  unique: boolean;
-  showReferenceCount: boolean;
-  groupByCategory: boolean;
-  allowReset: boolean; // reset button
-  showHints: boolean;
-  allowUserFormatting: boolean;
+  showHelpPresets: boolean;
+  helpPresetLevel: SectionFillinHelpPresetLevel;
+  authorHelpSetting: ISectionFillinHelpSetting;
+  currentHelpSetting: ISectionFillinHelpSetting;
+  allowReset: boolean;
   promptColumns: number;
-  showPrompts: boolean;
   responses: IFillinResponseItem[]; // index into section response context
   loaded: boolean;
   modified: boolean; // supports reset
 }
 export function ISectionFillinItemInitializer(
   idx: number = IDX_INITIALIZER,
-  layout: SectionFillinLayoutType = SectionFillinLayoutType.grid,
-  gridColumns: number = 3,
-  sortOrder: SectionFillinSortOrder = SectionFillinSortOrder.insert,
-  unique: boolean = true,
-  showReferenceCount: boolean = false,
-  groupByCategory: boolean = false,
-  allowReset: boolean = true, // reset button
-  showHints: boolean = false,
-  allowUserFormatting: boolean = true,
+  showHelpPresets: boolean = false,
+  helpPresetLevel: SectionFillinHelpPresetLevel = SectionFillinHelpPresetLevel.override,
+  authorHelpSetting: ISectionFillinHelpSetting = ISectionFillinHelpSettingInitializer(),
+  currentHelpSetting: ISectionFillinHelpSetting = ISectionFillinHelpSettingInitializer(),
+  allowReset: boolean = true,
   promptColumns: number = 1,
-  showPrompts: boolean = false,
   responses: IFillinResponseItem[] = [],
   //  prompts: IFillinPromptItem[] = [],
   loaded: boolean = false,
@@ -963,17 +1198,12 @@ export function ISectionFillinItemInitializer(
 ): ISectionFillinItem {
   return {
     idx,
-    layout,
-    gridColumns,
-    sortOrder,
-    unique,
-    showReferenceCount,
-    groupByCategory,
+    showHelpPresets,
+    helpPresetLevel,
+    authorHelpSetting,
+    currentHelpSetting,
     allowReset,
-    showHints,
-    allowUserFormatting,
     promptColumns,
-    showPrompts,
     responses,
     loaded,
     modified
@@ -995,13 +1225,13 @@ export function ISectionFillinItemInitializer(
 //     fillinList
 //   };
 // }
-export const sortOrderToLabel = (sortOrder: SectionFillinSortOrder): string => {
-  switch (sortOrder) {
-    case SectionFillinSortOrder.alphabetical:
-      return "alphabetical order";
-    case SectionFillinSortOrder.random:
-      return "random order";
-    default:
-      return "insert order (default)";
-  }
-};
+// export const sortOrderToLabel = (sortOrder: SectionFillinSortOrder): string => {
+//   switch (sortOrder) {
+//     case SectionFillinSortOrder.alphabetical:
+//       return "alphabetical order";
+//     case SectionFillinSortOrder.random:
+//       return "random order";
+//     default:
+//       return "insert order (default)";
+//   }
+// };

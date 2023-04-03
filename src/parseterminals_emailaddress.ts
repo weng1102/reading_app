@@ -70,7 +70,7 @@ export class TerminalNode_MLTAG_EMAILADDRESS extends TerminalNode_MLTAG_
       ) {
         let parts: string[] = token.content.split(emailSeparators); // look for _ + - as separators. If other valid characters are desired, the regex in the tokenizer
         parts.forEach(part => {
-          let idx: number =
+          let usernameIdx: number =
             this.meta.userName.push(
               ITerminalInfoInitializer(
                 part,
@@ -82,8 +82,10 @@ export class TerminalNode_MLTAG_EMAILADDRESS extends TerminalNode_MLTAG_
                 true
               )
             ) - 1;
-          this.meta.userName[idx].termIdx = this.userContext.terminals.push(
-            ITerminalListItemInitializer(this.meta.userName[idx])
+          this.meta.userName[
+            usernameIdx
+          ].termIdx = this.userContext.terminals.push(
+            ITerminalListItemInitializer(this.meta.userName[usernameIdx])
           );
           this.content = this.content + part;
         });
@@ -105,7 +107,7 @@ export class TerminalNode_MLTAG_EMAILADDRESS extends TerminalNode_MLTAG_
         true,
         true
       );
-      this.termIdx = this.userContext.terminals.push(
+      this.meta.separator.termIdx = this.userContext.terminals.push(
         ITerminalListItemInitializer(this.meta.separator)
       );
       //      this.userContext.terminals.push(this.meta.userName);
@@ -115,7 +117,7 @@ export class TerminalNode_MLTAG_EMAILADDRESS extends TerminalNode_MLTAG_
       for (; token.content !== endTag; token = tokenList.shift()!) {
         let parts: string[] = token.content.split(emailSeparators);
         parts.forEach(part => {
-          let idx: number =
+          let domainIdx: number =
             this.meta.domainName.push(
               ITerminalInfoInitializer(
                 part,
@@ -127,8 +129,10 @@ export class TerminalNode_MLTAG_EMAILADDRESS extends TerminalNode_MLTAG_
                 true
               )
             ) - 1;
-          this.meta.domainName[idx].termIdx = this.userContext.terminals.push(
-            ITerminalListItemInitializer(this.meta.domainName[idx])
+          this.meta.domainName[
+            domainIdx
+          ].termIdx = this.userContext.terminals.push(
+            ITerminalListItemInitializer(this.meta.domainName[domainIdx])
           );
           this.content = this.content + part;
         });

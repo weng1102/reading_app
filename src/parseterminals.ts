@@ -29,6 +29,8 @@ import {
 } from "./tokenizer";
 import {
   ITerminalContent,
+  ITerminalInfo,
+  ITerminalInfoInitializer,
   TerminalMetaType,
   TerminalMetaEnumType,
   ISymbolTerminalMeta,
@@ -37,6 +39,8 @@ import {
   IWordTerminalMetaInitializer,
   ICurrencyTerminalMeta,
   ICurrencyTerminalMetaInitializer,
+  INumeralsTerminalMeta,
+  INumeralsTerminalMetaInitializer,
   IPassthruTagTerminalMeta,
   IPassthruTagTerminalMetaTerminalMetaInitializer,
   IPunctuationTerminalMeta,
@@ -295,6 +299,9 @@ export class TerminalNode_NUMBER extends AbstractTerminalNode
     //     this.content = token.content; // should be TerminalInfo
     super.parse(tokenList);
     this.meta.content = this.content;
+    this.meta.altrecognition = this.content
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     this.termIdx = this.userContext.terminals.push(
       ITerminalListItemInitializer(this.meta)
     );
@@ -461,6 +468,65 @@ export class TerminalNode_MLTAG_TIME extends TerminalNode_MLTAG_
     super(parent);
   }
 }
+export class TerminalNode_MLTAG_NUMERALS extends TerminalNode_MLTAG_
+  implements ITerminalNode {
+  constructor(parent: ISentenceNode) {
+    super(parent);
+  }
+  type = TerminalMetaEnumType.numerals;
+  meta: INumeralsTerminalMeta = INumeralsTerminalMetaInitializer();
+  parse(tokenList: TokenListType): number {
+    let token: Token | undefined;
+    let startTag: string = tokenList[0].content;
+    //      this.logger.diagnosticMode = true;
+    assert(tokenList.length >= 3, "invalid number of tokens parsing numerals");
+    assert(
+      isValidMarkupTag(startTag),
+      `invalid markup tag(s) parsing numerals`
+    );
+    tokenList.shift(); // discard startTag
+    token = tokenList.shift()!; // discard startTag
+    if (token.content.match(/^[0-9]+$/)) {
+      this.content = token.content;
+      token.content.split("").forEach(numeral => {
+        let idx =
+          this.meta.numerals.push(
+            ITerminalInfoInitializer(
+              numeral,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              true
+            )
+          ) - 1;
+        this.meta.numerals[idx].termIdx = this.userContext.terminals.push(
+          ITerminalListItemInitializer(this.meta.numerals[idx])
+        );
+        // let termIdx = this.userContext.terminals.push(
+        //   ITerminalListItemInitializer()
+        // );
+        // numeralTermInfo.termIdx = termIdx;
+        // this.meta.numerals.push(numeralTermInfo);
+      });
+    } else {
+      assert(false, "invalid numerals");
+    }
+    this.firstTermIdx = this.meta.numerals[0].termIdx;
+    this.lastTermIdx = this.meta.numerals[
+      this.meta.numerals.length - 1
+    ].termIdx;
+    tokenList.shift(); // discard endTag
+    return tokenList.length;
+  }
+  transform() {
+    return 0;
+  }
+}
 export class TerminalNode_MLTAG_CONTRACTION extends TerminalNode_MLTAG_
   implements ITerminalNode {
   constructor(parent: ISentenceNode) {
@@ -520,28 +586,30 @@ export class TerminalNode_MLTAG_NUMBER_WITHCOMMAS extends TerminalNode_MLTAG_
     this.firstTermIdx = this.termIdx;
     this.lastTermIdx = this.termIdx;
     return tokenList.length;
-
-    return tokenList.length;
   }
-  serialize(format: ParseNodeSerializeFormatEnumType, label?: string): string {
-    switch (format) {
-      case ParseNodeSerializeFormatEnumType.TABULAR: {
-        label =
-          label === undefined
-            ? ParseNodeSerializeTabular(
-                this.constructor.name,
-                this.content,
-                this.meta.altpronunciation,
-                this.meta.termIdx.toString()
-              )
-            : label;
-        break;
-      }
-      default:
-        break;
-    }
-    return super.serialize(format, label);
-  }
+  // serialize(format: ParseNodeSerializeFormatEnumType, label?: string): string {
+  //   switch (format) {
+  //     case ParseNodeSerializeFormatEnumType.TREEVIEW: {
+  //       console.log(`serialize numberswithcomma=${this.content}`);
+  //       break;
+  //     }
+  //     case ParseNodeSerializeFormatEnumType.TABULAR: {
+  //       label =
+  //         label === undefined
+  //           ? ParseNodeSerializeTabular(
+  //               this.constructor.name,
+  //               this.content,
+  //               this.meta.altpronunciation,
+  //               this.meta.termIdx.toString()
+  //             )
+  //           : label;
+  //       break;
+  //     }
+  //     default:
+  //       break;
+  //   }
+  //   return super.serialize(format, label);
+  // }
 }
 export class TerminalNode_MLTAG_TOKEN extends TerminalNode_MLTAG_
   implements ITerminalNode {

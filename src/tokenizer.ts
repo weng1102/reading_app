@@ -64,6 +64,7 @@ export const enum TokenLabelType { // must correspond to TokenType
   MLTAG = "MLTAG",
   MLTAG_END = "MLTAG_END",
   NUMBER = "NUMBER",
+  NUMERALS = "NUMERALS",
   PUNCTUATION = "PUNCTUATION", // unhandled lexical punctuation
   WHITESPACE = "WHITESPACE",
   MLTAG_SELFCLOSING = "MLTAG_SELFCLOSING",
@@ -92,6 +93,7 @@ export const enum MarkupTokenType { // labels used for markup in interim output
   IMAGE,
   LINK,
   NUMBER_WITHCOMMAS
+  // NUMERALS
 }
 // used as markup labels for intermediate serialization between tokenizing and
 // parsing. Markdown labels (e.g., strong, em fillin) require explicit close
@@ -107,6 +109,7 @@ export const enum MarkupLabelType {
   IMAGE = "<image>",
   LINK = "<link>",
   NUMBER_WITHCOMMAS = "<numberwcommas>",
+  NUMERALS = "<numerals>",
   PHONENUMBER = "<telephone number>",
   TIME = "<time>",
   TOKEN = "<explicittoken>", // <token>
@@ -230,7 +233,7 @@ const MarkupTokenDictionary: MarkupTokenDictionaryType = {
   [MarkupTokenType.PHONENUMBER]: {
     type: MarkupTokenType.PHONENUMBER,
     label: MarkupLabelType.PHONENUMBER,
-    pattern: /(?<=^|\W|\[|\()\(\d{3}\)\s\d{3}-\d{4}(?=(\W|$))/g
+    pattern: /(?<=^|\W|\[_|\(\_)\((\d{3}\)\s\d{3}-\d{4})(?=\_]|\W|$)/g
     //  with 1st capturing group SAME AS ABOVE
   },
   [MarkupTokenType.TIME]: {
@@ -242,7 +245,7 @@ const MarkupTokenDictionary: MarkupTokenDictionaryType = {
   [MarkupTokenType.DATE1]: {
     type: MarkupTokenType.DATE1,
     label: MarkupLabelType.DATE1,
-    pattern: /(?<=^|\W|\[|\()((31(?!\ (Feb(ruary)?|Apr(il)?|June?|(Sep(?=\b|t)t?|Nov)(ember)?)))|((30|29)(?!\ Feb(ruary)?))|(29(?=\ Feb(ruary)?\ (((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))|(0?[1-9])|1\d|2[0-8])\s*(Jan(uary)?|Feb(ruary)?|Ma(r(ch)?|y)|Apr(il)?|Ju((ly?)|(ne?))|Aug(ust)?|Oct(ober)?|(Sep(?=\b|t)t?|Nov|Dec)(ember)?)\ ((1[6-9]|[2-9]\d)\d{2})(?=[\s\.,\?\!]|$)/g //DD MMM YYYY
+    pattern: /(?<=^|\W|\[|\(|_)()((31(?!\ (Feb(ruary)?|Apr(il)?|June?|(Sep(?=\b|t)t?|Nov)(ember))?))|((30|29)(?!\ Feb(ruary)?))|(29(?=\ Feb(ruary)?\ (((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))|(0?[1-9])|1\d|2[0-8])\s*(Jan(\.|(uary))?|Feb(\.|(ruary))?|Ma(r(\.|(ch))?|y)|Apr(\.|(il))?|Jun(\.|(e))?|Jul(\.|(y))?|Aug(\.|(ust))?|Oct(ober)?|(Sep(?=\b|t)t?|Nov|Dec)(\.|(ember))?)\ ((1[6-9]|[2-9]\d)\d{2})(?=[\s\.,\?\!)_]|$)/g //DD MMM YYYY
     // with 1st capturing group: (?<=^|\W|\[|\()(((31(?!\ (Feb(ruary)?|Apr(il)?|June?|(Sep(?=\b|t)t?|Nov)(ember)?)))|((30|29)(?!\ Feb(ruary)?))|(29(?=\ Feb(ruary)?\ (((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))|(0?[1-9])|1\d|2[0-8])\s*(Jan(uary)?|Feb(ruary)?|Ma(r(ch)?|y)|Apr(il)?|Ju((ly?)|(ne?))|Aug(ust)?|Oct(ober)?|(Sep(?=\b|t)t?|Nov|Dec)(ember)?)\ ((1[6-9]|[2-9]\d)\d{2}))(?=[\s\.,\?\!]|$)
   },
   [MarkupTokenType.DATE2]: {
@@ -283,13 +286,19 @@ const MarkupTokenDictionary: MarkupTokenDictionaryType = {
   [MarkupTokenType.CONTRACTION_S]: {
     type: MarkupTokenType.CONTRACTION_S,
     label: MarkupLabelType.CONTRACTION,
-    pattern: /(?<=^|\s|\[|\(|^$)([A-Za-z]+)\'s(?=\s|\W|$|[.!?\\-])/g // also includes possessives
+    pattern: /(?<=^|\s|\[|\[_|\(|^$)([A-Za-z]+\'s)(?=\s|\W|$|[.!?\-_\]])/g // also includes possessives
   },
   [MarkupTokenType.CONTRACTION_VE]: {
     type: MarkupTokenType.CONTRACTION_VE,
     label: MarkupLabelType.CONTRACTION,
     pattern: /(?<=^|\s|\[|\(|^$)(I|[Yy]ou|[Ww]e|[Tt]hey|[Ss]hould|[Cc]ould|[Ww]ould|[Mm]ight|[Mm]ust)\'ve(?=\s|\W|$|[.!?\\-])/g
   },
+  // [MarkupTokenType.NUMERALS]: {
+  //   type: MarkupTokenType.NUMERALS,
+  //   label: MarkupLabelType.NUMERALS,
+  //   pattern: /(?<=^|\s|\[|\(|^$)(#(\d+)#)(?=\s|\W|$|[.!?\\-])/g
+  //   // scan for token that require potential markup tags
+  // },
   [MarkupTokenType.NUMBER_WITHCOMMAS]: {
     type: MarkupTokenType.NUMBER_WITHCOMMAS,
     label: MarkupLabelType.NUMBER_WITHCOMMAS,
@@ -316,12 +325,14 @@ export const enum MarkdownIndexType {
   FILLIN = 0,
   CUELIST,
   EM,
+  NUMERALS,
   STRONG
 }
 export const enum MarkdownTokenType {
   CUELIST,
   FILLIN,
   EM,
+  NUMERALS,
   STRONG
   // STRONG_EM_OPEN,
   // STRONG_EM_CLOSE
@@ -349,7 +360,13 @@ const MarkdownTokenDictionary: MarkdownTokenDictionaryType = {
   [MarkdownIndexType.FILLIN]: {
     type: MarkdownTokenType.FILLIN,
     label: MarkupLabelType.FILLIN,
-    pattern: /(?<=\s|^|[\.,!'"])\[_((\w+)(=\(([\w\s,]+){0,1}\))*)_\](?=$|\s|[\.,!"\?])/g
+    pattern: /(?<=\s|^|[\.,!'"])\[_((\<\w+( \w+)*\>){0,1}(\w|\s|[',:\-\(\)@_\.#\$])*((<(\/\w+( \w+)*\>)){0,1}))_](?=$|\s|[\.,!"\?])/g
+    //       /(?<=\s|^|[\.,!'"])\[_(((\<(\w+)\>){0,1}((\w|\s|[',:\-\(\)@_\.#\$])+))(\<(\/\w+)\>){0,1})_\](?=$|\s|[\.,!"\?])/g
+
+    // expanded \w+ with just about anything pattern.+ because special parse types are too complex
+    // patterns are too complex.
+    //1/13/2023
+    // pattern: /(?<=\s|^|[\.,!'"])\[_((\w+)(=\(([\w\s,]+){0,1}\))*)_\](?=$|\s|[\.,!"\?])/g
     // pattern: /(?<=\s|^|[\.,!'"])\[_((\w+)(=\((\w+|\s|,)*\)){0,1})_\](?=$|\s|[\.,!"\?])/g
     // pattern: /(?<=\s|^|[\.,!'"])\[_((\w|[\s"'\/\-\(\)\@\.,\:;\$\<\>%!])+)_\](?=$|\s|[\.,!"\?])/g
     //    markdown: MarkdownLabelType.FILLIN_OPEN
@@ -360,6 +377,12 @@ const MarkdownTokenDictionary: MarkdownTokenDictionaryType = {
     pattern: /(?<=\w)=\(((\w+|\s|,|POS:|DEF:)*)\)(?=$|\s|<\/|\*|_]|[\.,!"\?])/g
     // pattern: /(?<=\s|^|[\.,!'"])\[_((\w|[\s"'\/\-\(\)\@\.,\:;\$\<\>%!])+)_\](?=$|\s|[\.,!"\?])/g
     //    markdown: MarkdownLabelType.FILLIN_OPEN
+  },
+  [MarkdownIndexType.NUMERALS]: {
+    type: MarkdownTokenType.NUMERALS,
+    label: MarkupLabelType.NUMERALS,
+    pattern: /(?<=^|\s|\[|\(|^$)#(\d+)#(?=\s|\W|$|[.!?\\-])/g
+    // scan for token that require potential markup tags
   },
   [MarkdownIndexType.EM]: {
     type: MarkdownTokenType.EM,
@@ -493,7 +516,9 @@ export class Tokenizer {
     /// this.logger.diagnosticMode = true;
     try {
       result = this.insertMarkupTags(sentence);
+      // console.log(`insertMarkupTags=${result}`);
       result = this.replaceMarkdownTags(result);
+      // console.log(`replaceMarkdownTags=${result}`);
     } catch (e) {
       if (IsError(e)) {
         this.logger.error(
@@ -574,12 +599,19 @@ export class Tokenizer {
     // e.g., ***
     let markdownTokenItem: MarkdownTokenItemType;
     let matchedToken: RegExpExecArray | null;
+    // console.log(`insidereplaceMarkdown:sentence1 ${sentence}`);
     for (let key in MarkdownTokenDictionary) {
       let key1: any = key as unknown; //ugh
       markdownTokenItem = MarkdownTokenDictionary[<MarkdownTokenType>key1];
       while (
+        // multiple occurrences
         (matchedToken = markdownTokenItem.pattern.exec(sentence)) !== null
       ) {
+        // console.log(
+        //   `insidereplaceMarkdown:matchedToken.index ${matchedToken.index}`
+        // );
+        // console.log(`insidereplaceMarkdown:matchedToken[0] ${matchedToken[0]}`);
+        // console.log(`insidereplaceMarkdown:matchedToken[1] ${matchedToken[1]}`);
         // substitution code being careful of lastIndex
         sentence =
           sentence.substr(0, matchedToken.index) +
@@ -589,6 +621,7 @@ export class Tokenizer {
           sentence.substr(matchedToken.index + matchedToken[0].length);
       }
     }
+    // console.log(`insidereplaceMarkdown:sentence2 ${sentence}`);
     return sentence;
   }
   serialize(tokenList: TokenListType) {

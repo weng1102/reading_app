@@ -29,7 +29,7 @@ export const ISectionFillinContextInitializer = {
 };
 export function cloneDeep<ISectionFillinItem>(
   toBeCloned: ISectionFillinItem,
-  modified: boolean = true
+  modified: boolean = true // only applies to visible[]
 ): ISectionFillinItem {
   let clone = JSON.parse(JSON.stringify(toBeCloned));
   try {
@@ -82,12 +82,30 @@ export interface ITerminalFillinItem {
   offsetIdx: number;
   visible: boolean[];
 }
-export const ITerminalFillinInitializer: ITerminalFillinItem = {
-  offsetIdx: IDX_INITIALIZER,
-  visible: []
-};
+export function ITerminalFillinItemInitializer(
+  offsetIdx: number = IDX_INITIALIZER,
+  visible: boolean[] = []
+): ITerminalFillinItem {
+  return {
+    offsetIdx: offsetIdx,
+    visible: visible
+  };
+}
+// export function ITerminalFillinItemInitializer1(
+//   offsetIdx: number = IDX_INITIALIZER,
+//   visibleCount: number = 0
+// ): ITerminalFillinItem {
+//   let visible: boolean[];
+//   visible.fill(visibleCount)
+//   return {
+//     offsetIdx: offsetIdx,
+//     visible: visible
+//   };
+// }
+//
+// )
 export const ITerminalFillinContextInitializer = {
-  terminalFillin: ITerminalFillinInitializer,
+  terminalFillin: ITerminalFillinItemInitializer(),
   setTerminalFillin: (fillins: ITerminalFillinItem) => {}
 };
 export const cloneTerminalFillin = (

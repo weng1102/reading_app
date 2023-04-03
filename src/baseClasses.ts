@@ -24,10 +24,11 @@ import {
   ISectionListItem,
   ITerminalListItem,
   ILinkListItem,
+  ISectionFillinHelpSetting,
   ISectionFillinItem,
   ISectionFillinItemInitializer,
   SectionFillinSortOrder,
-  sortOrderToLabel
+  SectionFillinLayoutType
 } from "./pageContentType";
 export const TREEVIEW_PREFIX = "+-";
 export const IDX_INITIALIZER = -9999;
@@ -86,25 +87,36 @@ class TerminalArray extends Array<ITerminalListItem> {
   }
   parse(): number {
     this.forEach(terminal => {
-      if (terminal.altrecognition.length === 0)
+      if (terminal.altrecognition.length === 0) {
         terminal.altrecognition =
           RecognitionDictionary[terminal.content] !== undefined
             ? RecognitionDictionary[terminal.content]
             : "";
+      }
       if (terminal.altpronunciation.length === 0)
         terminal.altpronunciation =
           PronunciationDictionary[terminal.content] !== undefined
             ? PronunciationDictionary[terminal.content]
             : "";
-      // if (terminal.responseIdx !== IDX_INITIALIZER)
-      //   this.responseIdx =
     });
     return this.length;
   }
   serialize(): string {
+    let altrecog,
+      altpro: string = "";
     let outputStr: string =
-      "[idx ]:  term ARLV  next prev sent  sect link   fillins content\n";
+      "[idx ]:  term ARLVN  next prev sent  sect link   fillins content\n";
     for (const [i, element] of this.entries()) {
+      if (element.altrecognition.length > 0) {
+        altrecog = `(rec: ${element.altrecognition})`;
+      } else {
+        altrecog = "";
+      }
+      if (element.altpronunciation.length > 0) {
+        altpro = `(pro: ${element.altpronunciation})`;
+      } else {
+        altpro = "";
+      }
       outputStr = `${outputStr}[${i
         .toString()
         .padStart(4, "0")}]: ${element.termIdx
@@ -119,6 +131,9 @@ class TerminalArray extends Array<ITerminalListItem> {
         .toString()
         .substring(0, 1)
         .toUpperCase()}${element.visible
+        .toString()
+        .substring(0, 1)
+        .toUpperCase()}${element.numberAsNumerals
         .toString()
         .substring(0, 1)
         .toUpperCase()} ${
@@ -142,7 +157,7 @@ class TerminalArray extends Array<ITerminalListItem> {
       ).padStart(4)} ${(element.fillin.responseIdx < 0
         ? "na".padStart(4)
         : element.fillin.responseIdx.toString()
-      ).padStart(4)} ${element.content}\n`;
+      ).padStart(4)} ${element.content} ${altrecog} ${altpro}\n`;
     }
     return outputStr;
   }
@@ -180,18 +195,24 @@ class FillinArray extends Array<ISectionFillinItem> {
     for (const [i, element] of this.entries()) {
       outputStr = `${outputStr}[${i
         .toString()
-        .padStart(4, "0")}]: idx: ${element.idx.toString()},  ${
-        element.layout
-      }, ${sortOrderToLabel(element.sortOrder)}, gridColumns=${
-        element.gridColumns
-      }, ${element.unique ? "unique" : ""}, ${
-        element.showReferenceCount ? "showReferenceCount" : ""
-      }, ${element.groupByCategory ? "groupByCategory" : ""}, ${
-        element.allowReset ? "allowReset" : ""
-      }, ${element.showHints ? "showHints" : ""}, ${
-        element.allowUserFormatting ? "allowUserFormatting" : ""
-      }, promptColumns=${element.promptColumns}, ${
-        element.showPrompts ? "showPrompts" : ""
+        .padStart(4, "0")}]: idx: ${element.idx.toString()}, ${
+        element.showHelpPresets ? "showHelpPresets" : ""
+      } helpPresetLevel=${element.helpPresetLevel} ${
+        element.authorHelpSetting.layout
+      }, ${SortOrderToLabel(
+        element.authorHelpSetting.sortOrder
+      )}, gridColumns=${element.authorHelpSetting.gridColumns}, ${
+        element.authorHelpSetting.unique ? "unique" : ""
+      }, ${
+        element.authorHelpSetting.showReferenceCount ? "showReferenceCount" : ""
+      }, ${
+        element.authorHelpSetting.groupByCategory ? "groupByCategory" : ""
+      }, ${element.allowReset ? "allowReset" : ""}, ${
+        element.authorHelpSetting.showResponseHints ? "showResponseHints" : ""
+      },  ${
+        element.authorHelpSetting.showResponsesInPrompts
+          ? "showResponsesInPrompts"
+          : ""
       }\n`;
       for (const [j, response] of element.responses
         //        .sort((a, b) => (a.content > b.content ? 1 : -1))
@@ -570,3 +591,54 @@ export abstract class ParseNode extends BaseClass implements IParseNode {
 // const compareString = (a: string, b: string): number => {
 //   return a > b ? 1 : -1;
 // };
+export const SortOrderToLabel = (sortOrder: SectionFillinSortOrder): string => {
+  switch (sortOrder) {
+    case SectionFillinSortOrder.alphabetical:
+      return "alphabetical order";
+    case SectionFillinSortOrder.random:
+      return "random order";
+    default:
+      return "insert order (default)";
+  }
+};
+export function helpfulnessLevel(group: ISectionFillinHelpSetting): number {
+  let helpfulness: number = 0;
+  if (group.showResponsesInPrompts) helpfulness += 1000;
+  if (group.layout !== SectionFillinLayoutType.hidden) {
+    if (group.showPromptHints) {
+      helpfulness += 500;
+    }
+    switch (group.sortOrder) {
+      case SectionFillinSortOrder.alphabetical:
+        helpfulness += 200;
+        break;
+      case SectionFillinSortOrder.insert:
+        helpfulness += 300;
+        break;
+      case SectionFillinSortOrder.random:
+        helpfulness += 100;
+        break;
+      default:
+    }
+    switch (group.groupByCategory) {
+      case true:
+        helpfulness += 10;
+        break;
+      case false:
+        break;
+      default:
+    }
+    switch (group.layout) {
+      case SectionFillinLayoutType.grid:
+        helpfulness += 4;
+        break;
+      case SectionFillinLayoutType.list:
+        helpfulness += 3;
+        break;
+      case SectionFillinLayoutType.csv:
+        helpfulness += 2;
+        break;
+    }
+  }
+  return helpfulness;
+}

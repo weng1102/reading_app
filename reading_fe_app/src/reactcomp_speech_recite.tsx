@@ -212,6 +212,15 @@ export const ReciteButton = () => {
     somethingToRecite // - useCallback()
   ]);
   useEffect(() => {
+    Synthesizer.volume = settingsContext.settings.speech.volume;
+    Synthesizer.selectedVoiceIndex =
+      settingsContext.settings.speech.selectedVoiceIndex;
+  }, [
+    settingsContext.settings.speech.selectedVoiceIndex,
+    settingsContext.settings.speech.volume
+  ]);
+
+  useEffect(() => {
     // need to chop up the message so cancel request can can be polled
     // especially for longer passages.
     // pop recitationQueue
@@ -221,7 +230,6 @@ export const ReciteButton = () => {
       if (!recitingNow) {
         let sentence: string = recitationQueue.shift() as string;
         setRecitationQueue([...recitationQueue]);
-        Synthesizer.volume = settingsContext.settings.speech.volume;
         Synthesizer.speak(sentence, setRecitingNow);
         if (recitationMode === RecitationMode.wordNext) {
           dispatch(Request.Cursor_gotoNextWord());

@@ -38,19 +38,19 @@ export enum MarkdownEndTagType {
 export enum MarkdownLastTagType {
   UNKNOWN = "UNKNOWN" // should always be last
 }
-export const MarkdownTagType = {
+export const MarkdownRecordType = {
   ...MarkdownSectionTagType,
   ...MarkdownItemTagType,
   ...MarkdownTbdTagType,
   ...MarkdownEndTagType,
   ...MarkdownLastTagType
 };
-// type MarkdownTagType =
+// type MarkdownRecordType =
 //   | MarkdownParsedTagType
 //   | MarkdownTbdTagType
 //   | MarkdownNonparsedType
 //   | MarkdownLastTagType;
-// export const enum MarkdownTagType {
+// export const enum MarkdownRecordType {
 //   PARAGRAPH = "PARAGRAPH",
 //   PARAGRAPH_END = "PARAGRAPH_END",
 //   EMPTY = "EMPTY",
@@ -113,7 +113,7 @@ const enum MarkDownSectionTagType {
 
 export interface TaggedStringType {
   content: string;
-  tagType: MarkdownTagType;
+  tagType: MarkdownRecordType;
   depth: number;
   headingLevel: number;
   lineNo: number;
@@ -122,7 +122,7 @@ export interface TaggedStringType {
 //   groups: RegExpMatchArray;
 //   tag: string;
 // }
-//type MarkdownClassDictionaryType = Record<MarkdownType, MarkdownTagType>;
+//type MarkdownClassDictionaryType = Record<MarkdownType, MarkdownRecordType>;
 /* Each pattern will define one explicit capture group () to
    be returned. Hence. the pattern cannot use the global flag g
    because final output will only include the first group encountered:
@@ -130,7 +130,7 @@ export interface TaggedStringType {
 */
 interface MarkdownPatternItemType {
   pattern: RegExp;
-  tagType: MarkdownTagType;
+  tagType: MarkdownRecordType;
   //  sectionType: MarkDownSectionTagType
 }
 type MarkdownPatternDictionaryType = Record<
@@ -154,106 +154,106 @@ const PARAGRAPH_PATTERN: RegExp = /^(["']?[A-Za-z\$\@]{1}.*)$/m;
 const MarkdownPatternDictionary: MarkdownPatternDictionaryType = {
   [MarkdownType.PARAGRAPH]: {
     pattern: PARAGRAPH_PATTERN,
-    tagType: MarkdownTagType.PARAGRAPH
+    tagType: MarkdownRecordType.PARAGRAPH
   },
-  [MarkdownType.EMPTY]: { pattern: /^\s*$/, tagType: MarkdownTagType.EMPTY },
+  [MarkdownType.EMPTY]: { pattern: /^\s*$/, tagType: MarkdownRecordType.EMPTY },
   [MarkdownType.HEADING01]: {
     pattern: /^#\s([^\s].*)$/,
-    tagType: MarkdownTagType.HEADING
+    tagType: MarkdownRecordType.HEADING
   },
   [MarkdownType.HEADING02]: {
     pattern: /^##\s([^\s].*)$/,
-    tagType: MarkdownTagType.HEADING
+    tagType: MarkdownRecordType.HEADING
   },
   [MarkdownType.HEADING03]: {
     pattern: /^###\s([^\s].*)$/,
-    tagType: MarkdownTagType.HEADING
+    tagType: MarkdownRecordType.HEADING
   },
   [MarkdownType.HEADING04]: {
     pattern: /^####\s([^\s].*)$/,
-    tagType: MarkdownTagType.HEADING
+    tagType: MarkdownRecordType.HEADING
   },
   [MarkdownType.HEADING05]: {
     pattern: /^#####\s([^\s].*)$/,
-    tagType: MarkdownTagType.HEADING
+    tagType: MarkdownRecordType.HEADING
   },
   [MarkdownType.HEADING06]: {
     pattern: /^######\s([^\s].*)$/,
-    tagType: MarkdownTagType.HEADING
+    tagType: MarkdownRecordType.HEADING
   },
   [MarkdownType.LISTITEM_UNORDERED01]: {
     pattern: /^[\*\-\+]\s([^\s].*)$/,
-    tagType: MarkdownTagType.LISTITEM_UNORDERED
+    tagType: MarkdownRecordType.LISTITEM_UNORDERED
   },
   [MarkdownType.LISTITEM_UNORDERED02]: {
     pattern: /^\s{2}[\*\-\+]\s([^\s].*)$/,
-    tagType: MarkdownTagType.LISTITEM_UNORDERED
+    tagType: MarkdownRecordType.LISTITEM_UNORDERED
   },
   [MarkdownType.LISTITEM_UNORDERED03]: {
     pattern: /^\s{4}[\*\-\+]\s([^\s].*)$/,
-    tagType: MarkdownTagType.LISTITEM_UNORDERED
+    tagType: MarkdownRecordType.LISTITEM_UNORDERED
   },
   [MarkdownType.LISTITEM_UNORDERED04]: {
     pattern: /^\s{6}[\*\-\+]\s([^\s].*)$/,
-    tagType: MarkdownTagType.LISTITEM_UNORDERED
+    tagType: MarkdownRecordType.LISTITEM_UNORDERED
   },
   [MarkdownType.LISTITEM_ORDERED01]: {
     pattern: /^[0-9]+\.\s([^\s].*)$/,
-    tagType: MarkdownTagType.LISTITEM_ORDERED
+    tagType: MarkdownRecordType.LISTITEM_ORDERED
   },
   [MarkdownType.LISTITEM_ORDERED02]: {
     pattern: /^\s{2}[0-9]+\.\s([^\s].*)$/,
-    tagType: MarkdownTagType.LISTITEM_ORDERED
+    tagType: MarkdownRecordType.LISTITEM_ORDERED
   },
   [MarkdownType.LISTITEM_ORDERED03]: {
     pattern: /^\s{4}[0-9]+\.\s([^\s].*)$/,
-    tagType: MarkdownTagType.LISTITEM_ORDERED
+    tagType: MarkdownRecordType.LISTITEM_ORDERED
   },
   [MarkdownType.LISTITEM_ORDERED04]: {
     pattern: /^\s{6}[0-9]+\.\s([^\s].*)$/,
-    tagType: MarkdownTagType.LISTITEM_ORDERED
+    tagType: MarkdownRecordType.LISTITEM_ORDERED
   },
   [MarkdownType.BLOCKQUOTE]: {
     pattern: /^\>\s([^\s].*)$/,
-    tagType: MarkdownTagType.BLOCKQUOTE
+    tagType: MarkdownRecordType.BLOCKQUOTE
   },
   [MarkdownType.COMMENT1]: {
     pattern: /^\[\/\/\]:\s(.*)$/,
-    tagType: MarkdownTagType.COMMENT
+    tagType: MarkdownRecordType.COMMENT
   },
   [MarkdownType.COMMENT2]: {
     pattern: /^\[\]:\s(.*)$/,
-    tagType: MarkdownTagType.COMMENT
+    tagType: MarkdownRecordType.COMMENT
   },
   [MarkdownType.COMMENT3]: {
     pattern: /^\[comment]:\s(.*)$/,
-    tagType: MarkdownTagType.COMMENT
+    tagType: MarkdownRecordType.COMMENT
   },
   [MarkdownType.PHOTOENTRY]: {
     pattern: /\[\/\/photo-entry\]:\s(image=.*)$/i,
-    tagType: MarkdownTagType.PHOTOENTRY
+    tagType: MarkdownRecordType.PHOTOENTRY
   },
   [MarkdownType.PHOTOENTRY_END]: {
     pattern: /\[\/\/photo-entry-end\]$/i,
-    tagType: MarkdownTagType.PHOTOENTRY_END
+    tagType: MarkdownRecordType.PHOTOENTRY_END
   },
   [MarkdownType.PAGE]: {
     pattern: /\[\/\/page\]:\s(.*)$/i,
-    tagType: MarkdownTagType.PAGE
+    tagType: MarkdownRecordType.PAGE
   },
   [MarkdownType.FILLIN]: {
     pattern: /\[\/\/fill-in\]:(.*)$/,
-    tagType: MarkdownTagType.FILLIN
+    tagType: MarkdownRecordType.FILLIN
   },
   [MarkdownType.FILLIN_END]: {
     pattern: /\[\/\/fill-in-end\]$/,
-    tagType: MarkdownTagType.FILLIN_END
+    tagType: MarkdownRecordType.FILLIN_END
   },
   [MarkdownType.PASSTHRUTAG]: {
     pattern: /^\[\/\/([A-Za-z\-]*)\]:\s([^\s].*)$/,
-    tagType: MarkdownTagType.PASSTHRUTAG
+    tagType: MarkdownRecordType.PASSTHRUTAG
   },
-  [MarkdownType.UNKNOWN]: { pattern: /(.*)$/, tagType: MarkdownTagType.UNKNOWN }
+  [MarkdownType.UNKNOWN]: { pattern: /(.*)$/, tagType: MarkdownRecordType.UNKNOWN }
 };
 
 export interface IDataSource {
@@ -372,7 +372,7 @@ export class RawMarkdownSource extends MarkdownSource implements IDataSource {
     if (currentIdx < inputBuffer.length) {
       let result: TaggedStringType = {
         content: "",
-        tagType: MarkdownTagType.UNKNOWN,
+        tagType: MarkdownRecordType.UNKNOWN,
         depth: depth,
         headingLevel: 0,
         lineNo: currentIdx + 1
@@ -384,11 +384,11 @@ export class RawMarkdownSource extends MarkdownSource implements IDataSource {
         )
       ) {
         result.content = inputBuffer[currentIdx];
-        result.tagType = MarkdownTagType.EMPTY;
+        result.tagType = MarkdownRecordType.EMPTY;
       } else {
         match = inputBuffer[currentIdx].match(/^(.*)$/)!;
         result.content = match[1];
-        result.tagType = MarkdownTagType.UNKNOWN;
+        result.tagType = MarkdownRecordType.UNKNOWN;
       }
       this.buffer.push(result);
       this.parse(depth, inputBuffer, currentIdx + 1, resultBuffer);
@@ -410,7 +410,7 @@ export class BasicMarkdownSource extends RawMarkdownSource
     // if (current.content === undefined) {
     //   resultBuffer.push({
     //     content: "",
-    //     tagType: MarkdownTagType.EMPTY,
+    //     tagType: MarkdownRecordType.EMPTY,
     //     depth: depth,
     //     headingLevel: 0,
     //     lineNo: current.lineNo
@@ -420,7 +420,7 @@ export class BasicMarkdownSource extends RawMarkdownSource
     let sentences = current.content.split(PARAGRAPH_TO_SENTENCES1);
     resultBuffer.push({
       content: "[PARAGRAPH]",
-      tagType: MarkdownTagType.PARAGRAPH,
+      tagType: MarkdownRecordType.PARAGRAPH,
       depth: current.depth, //+ 1
       headingLevel: 0,
       lineNo: 0
@@ -437,7 +437,7 @@ export class BasicMarkdownSource extends RawMarkdownSource
             (sentences[sentenceIdx + 1] !== undefined
               ? sentences[sentenceIdx + 1]
               : ""),
-          tagType: MarkdownTagType.SENTENCE,
+          tagType: MarkdownRecordType.SENTENCE,
           depth: current.depth, //+ 1
           headingLevel: 0,
           lineNo: current.lineNo
@@ -448,7 +448,7 @@ export class BasicMarkdownSource extends RawMarkdownSource
     }
     resultBuffer.push({
       content: "[PARAGRAPH END]",
-      tagType: MarkdownTagType.PARAGRAPH_END,
+      tagType: MarkdownRecordType.PARAGRAPH_END,
       depth: depth, //+ 1
       headingLevel: 0,
       lineNo: 0
@@ -472,11 +472,11 @@ export class BasicMarkdownSource extends RawMarkdownSource
       content: matches.length > 0 ? matches[1] : "",
       tagType: MarkdownPatternDictionary[mdTag].tagType,
       depth:
-        MarkdownPatternDictionary[mdTag].tagType !== MarkdownTagType.HEADING
+        MarkdownPatternDictionary[mdTag].tagType !== MarkdownRecordType.HEADING
           ? currentDepth
           : 0,
       headingLevel:
-        MarkdownPatternDictionary[mdTag].tagType === MarkdownTagType.HEADING
+        MarkdownPatternDictionary[mdTag].tagType === MarkdownRecordType.HEADING
           ? currentDepth
           : 0,
       lineNo: 0
@@ -496,18 +496,18 @@ export class BasicMarkdownSource extends RawMarkdownSource
   //     `***PARSE: ${current.content} ${current.tagType} ${current.depth}`
   //   );
   //   switch (current.tagType) {
-  //     case MarkdownTagType.EMPTY: {
+  //     case MarkdownRecordType.EMPTY: {
   //       this.buffer.push(current); //EMPTY
   //     }
-  //     case MarkdownTagType.HEADING: {
+  //     case MarkdownRecordType.HEADING: {
   //       console.log(`   heading ${current.content}`);
   //       // ignore changes in currentDepth for now until headings e.g. <h1> are
   //       // treated as section headers
   //       resultBuffer.push(current);
   //       break;
   //     }
-  //     case MarkdownTagType.LISTITEM_ORDERED:
-  //     case MarkdownTagType.LISTITEM_UNORDERED: {
+  //     case MarkdownRecordType.LISTITEM_ORDERED:
+  //     case MarkdownRecordType.LISTITEM_UNORDERED: {
   //       //        const InitialListDepth = 0;
   //       console.log(`   list item ${current.content}`);
   //       currentInputIdx = this.parseList(
@@ -519,12 +519,12 @@ export class BasicMarkdownSource extends RawMarkdownSource
   //       );
   //       break;
   //     }
-  //     case MarkdownTagType.BLOCKQUOTE: {
+  //     case MarkdownRecordType.BLOCKQUOTE: {
   //       console.log(`   block quote ${current.content}`);
   //       this.parseParagraph(current.depth, current, this.buffer);
   //       break;
   //     }
-  //     case MarkdownTagType.PARAGRAPH: {
+  //     case MarkdownRecordType.PARAGRAPH: {
   //       console.log(`   paragraph ${current.content}`);
   //       this.parseParagraph(current.depth, current, this.buffer);
   //       break;
@@ -558,9 +558,9 @@ export class BasicMarkdownSource extends RawMarkdownSource
         resultBuffer.push({
           content: `[SECTION START AT DEPTH ${depth + 1}]`,
           tagType:
-            current.tagType === MarkdownTagType.LISTITEM_ORDERED
-              ? MarkdownTagType.SECTION_ORDERED
-              : MarkdownTagType.SECTION_UNORDERED,
+            current.tagType === MarkdownRecordType.LISTITEM_ORDERED
+              ? MarkdownRecordType.SECTION_ORDERED
+              : MarkdownRecordType.SECTION_UNORDERED,
           depth: depth + 1,
           headingLevel: 0,
           lineNo: 0
@@ -570,29 +570,29 @@ export class BasicMarkdownSource extends RawMarkdownSource
         // parse this record. OR could distribute idx++
         resultBuffer.push({
           content: `[SECTION END AT DEPTH ${depth + 1}]`,
-          tagType: MarkdownTagType.SECTION_END,
+          tagType: MarkdownRecordType.SECTION_END,
           depth: depth + 1,
           headingLevel: 0,
           lineNo: 0
         });
       } else {
         switch (current.tagType) {
-          case MarkdownTagType.EMPTY: {
+          case MarkdownRecordType.EMPTY: {
             this.buffer.push(current); //EMPTY
             break;
           }
-          case MarkdownTagType.HEADING: {
+          case MarkdownRecordType.HEADING: {
             resultBuffer.push(current);
             break;
           }
-          case MarkdownTagType.LISTITEM_ORDERED:
-          case MarkdownTagType.LISTITEM_UNORDERED: {
+          case MarkdownRecordType.LISTITEM_ORDERED:
+          case MarkdownRecordType.LISTITEM_UNORDERED: {
             resultBuffer.push({
               content: `[LIST ITEM START AT DEPTH ${depth}]`,
               tagType: current.tagType,
-              // current.tagType === MarkdownTagType.LISTITEM_ORDERED
-              //   ? MarkdownTagType.SECTION_ORDERED
-              //   : MarkdownTagType.SECTION_UNORDERED,
+              // current.tagType === MarkdownRecordType.LISTITEM_ORDERED
+              //   ? MarkdownRecordType.SECTION_ORDERED
+              //   : MarkdownRecordType.SECTION_UNORDERED,
               depth: depth,
               headingLevel: 0,
               lineNo: 0
@@ -600,10 +600,10 @@ export class BasicMarkdownSource extends RawMarkdownSource
             this.parseParagraph(current.depth, current, this.buffer);
             resultBuffer.push({
               content: `[LIST ITEM END AT DEPTH ${depth}]`,
-              tagType: MarkdownTagType.LISTITEM_END,
-              // current.tagType === MarkdownTagType.LISTITEM_ORDERED
-              //   ? MarkdownTagType.LISTITEM_ORDERED
-              //   : MarkdownTagType.LISTITEM_UNORDERED,
+              tagType: MarkdownRecordType.LISTITEM_END,
+              // current.tagType === MarkdownRecordType.LISTITEM_ORDERED
+              //   ? MarkdownRecordType.LISTITEM_ORDERED
+              //   : MarkdownRecordType.LISTITEM_UNORDERED,
               depth: depth,
               headingLevel: 0,
               lineNo: 0
@@ -611,11 +611,11 @@ export class BasicMarkdownSource extends RawMarkdownSource
 
             break;
           }
-          case MarkdownTagType.BLOCKQUOTE: {
+          case MarkdownRecordType.BLOCKQUOTE: {
             this.parseParagraph(current.depth, current, this.buffer);
             break;
           }
-          case MarkdownTagType.PARAGRAPH: {
+          case MarkdownRecordType.PARAGRAPH: {
             this.parseParagraph(current.depth, current, this.buffer);
             break;
           }

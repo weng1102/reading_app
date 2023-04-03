@@ -61,6 +61,8 @@ const PAGE_HOMED = "page/homed";
 const PAGE_HOME_ENABLED = "page/home enabled";
 const PAGE_PREVIOUS_ENABLED = "page/previous enabled";
 const PAGE_SITEMAP_ENABLED = "page/sitemap enabled";
+const PAGE_FONTDOWN_ENABLED = "page/font down enabled";
+const PAGE_SPACINGDOWN_ENABLED = "page/spacing down enabled";
 
 // intrapage administrative actions (non-user initiated)
 //const PAGECONTEXT_SET = "pagecontext/set";
@@ -71,6 +73,7 @@ const LISTENING_AVAILABLE = "listening/available";
 // const LISTENING_FLUSH = "listening/flush"; // clear transcript
 // const LISTENING_FLUSHED = "listening/flushed"; // clear transcript
 const LISTENING_MATCH = "listening/match"; // match word with argument with //
+const LISTENING_MESSAGE = "listent/message";
 const LISTENING_START = "listening/start";
 // const LISTENING_RETRY = "listening/retry";
 // const LISTENING_RETRY_RESET = "listening/retry reset";
@@ -338,6 +341,18 @@ const Page_sitemapEnabled = (yes: boolean) => {
     payload: yes
   };
 };
+const Page_fontDownEnabled = (yes: boolean) => {
+  return {
+    type: PAGE_FONTDOWN_ENABLED,
+    payload: yes
+  };
+};
+const Page_spacingDownEnabled = (yes: boolean) => {
+  return {
+    type: PAGE_SPACINGDOWN_ENABLED,
+    payload: yes
+  };
+};
 const Recognition_toggle = (maxRetries: number) => {
   return {
     type: LISTENING_TOGGLE,
@@ -357,6 +372,12 @@ const Recognition_toggle = (maxRetries: number) => {
 const Recognition_match = (message: string) => {
   return {
     type: LISTENING_MATCH,
+    payload: message
+  };
+};
+const Recognition_message = (message: string) => {
+  return {
+    type: LISTENING_MESSAGE,
     payload: message
   };
 };
@@ -449,6 +470,8 @@ export const Request = {
   Message_set,
   Message_clear,
 
+  Page_fontDownEnabled,
+  Page_spacingDownEnabled,
   Page_load,
   Page_loaded,
   Page_setContext,
@@ -475,6 +498,7 @@ export const Request = {
   // Recognition_flush,
   // Recognition_flushed,
   Recognition_match,
+  Recognition_message,
   // Recognition_retry,
   // Recognition_reset_retry,
   Recognition_start,
@@ -539,6 +563,9 @@ interface IReduxState {
   page_restore_requested: boolean;
   page_home_requested: boolean;
   page_home_enabled: boolean;
+  page_fontDown_enabled: boolean;
+  page_spacingDown_enabled: boolean;
+
   page_previous_enabled: boolean;
   page_sitemapEnabled: boolean;
 
@@ -591,6 +618,8 @@ const IReduxStateInitialState: IReduxState = {
   page_restore_requested: false,
   page_home_requested: false,
   page_home_enabled: false,
+  page_fontDown_enabled: true,
+  page_spacingDown_enabled: false,
   page_previous_enabled: false,
   page_sitemapEnabled: false,
   cursor_terminalIdx_proposed: 0,
@@ -792,6 +821,12 @@ export const rootReducer = (
     case PAGE_PREVIOUS_ENABLED:
       state.page_previous_enabled = action.payload;
       return state;
+    case PAGE_SPACINGDOWN_ENABLED:
+      state.page_spacingDown_enabled = action.payload;
+      return state;
+    case PAGE_FONTDOWN_ENABLED:
+      state.page_fontDown_enabled = action.payload;
+      return state;
     case PAGE_SITEMAP_ENABLED:
       state.page_previous_enabled = action.payload;
       return state;
@@ -826,6 +861,9 @@ export const rootReducer = (
       // resetListeningRetries();
       setListeningMessage(action.payload);
       setToNextTerminalState();
+      return state;
+    case LISTENING_MESSAGE:
+      setListeningMessage(action.payload);
       return state;
     case WORD_NEXT:
       setListeningMessage(action.payload);

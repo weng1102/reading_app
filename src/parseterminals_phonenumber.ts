@@ -78,7 +78,21 @@ export class TerminalNode_MLTAG_PHONENUMBER extends TerminalNode_MLTAG_
         `invalid prefix length "${token.content}" parsing phone number`
       );
       [...token.content].forEach(digit => {
-        let idx = this.meta.areaCode.push(ITerminalInfoInitializer(digit)) - 1;
+        let idx =
+          this.meta.areaCode.push(
+            ITerminalInfoInitializer(
+              digit,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              true
+            )
+          ) - 1;
         this.meta.areaCode[idx].termIdx = this.userContext.terminals.push(
           ITerminalListItemInitializer(this.meta.areaCode[idx])
         );
@@ -105,7 +119,20 @@ export class TerminalNode_MLTAG_PHONENUMBER extends TerminalNode_MLTAG_
       token = tokenList.shift()!;
       [...token.content].forEach(digit => {
         let idx =
-          this.meta.exchangeCode.push(ITerminalInfoInitializer(digit)) - 1;
+          this.meta.exchangeCode.push(
+            ITerminalInfoInitializer(
+              digit,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              true
+            )
+          ) - 1;
         this.meta.exchangeCode[idx].termIdx = this.userContext.terminals.push(
           ITerminalListItemInitializer(this.meta.exchangeCode[idx])
         );
@@ -124,7 +151,20 @@ export class TerminalNode_MLTAG_PHONENUMBER extends TerminalNode_MLTAG_
       token = tokenList.shift()!;
       [...token.content].forEach(digit => {
         let idx =
-          this.meta.lineNumber.push(ITerminalInfoInitializer(digit)) - 1;
+          this.meta.lineNumber.push(
+            ITerminalInfoInitializer(
+              digit,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              true
+            )
+          ) - 1;
         this.meta.lineNumber[idx].termIdx = this.userContext.terminals.push(
           ITerminalListItemInitializer(this.meta.lineNumber[idx])
         );

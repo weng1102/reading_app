@@ -48,28 +48,28 @@ export class TerminalNode_ACRONYM extends AbstractTerminalNode
         token.content === token.content.toUpperCase(),
         "expected all upper case letters parsing acronym"
       );
-      let expansionCsv = AcronymMap.get(token.content);
-      assert(expansionCsv !== undefined, `expected an acronym but none found`);
+      let symbol: string = token.content;
+      assert(symbol !== undefined, `expected a symbol but none found`);
       this.content = token.content;
-      let expansionList = expansionCsv.split(",");
-      let letter = [...token.content];
-      for (let pos = 0; pos < letter.length; pos++) {
-        let idx =
-          this.meta.letters.push(
-            ITerminalInfoInitializer(
-              letter[pos],
-              expansionList[pos], //altpronunication
-              expansionList[pos] //altrecognition
-            )
-          ) - 1;
-        this.meta.letters[idx].termIdx = this.userContext.terminals.push(
-          ITerminalListItemInitializer(this.meta.letters[idx])
-        );
-        this.firstTermIdx = this.meta.letters[0].termIdx;
-        this.lastTermIdx = this.meta.letters[
-          this.meta.letters.length - 1
-        ].termIdx;
-      }
+      // let expansionList = expansionCsv.split(",");
+      // let letter = [...token.content];
+      // for (let pos = 0; pos < letter.length; pos++) {
+      //   let idx =
+      //     this.meta.letters.push(
+      //       ITerminalInfoInitializer(
+      //         letter[pos],
+      //         expansionList[pos], //altpronunication
+      //         expansionList[pos] //altrecognition
+      //       )
+      //     ) - 1;
+      //   this.meta.letters[idx].termIdx = this.userContext.terminals.push(
+      //     ITerminalListItemInitializer(this.meta.letters[idx])
+      //   );
+      //   this.firstTermIdx = this.meta.letters[0].termIdx;
+      //   this.lastTermIdx = this.meta.letters[
+      //     this.meta.letters.length - 1
+      //   ].termIdx;
+      // }
     } catch (e) {
       if (IsError(e)) {
         this.logger.error(e.message);
@@ -97,15 +97,13 @@ export class TerminalNode_ACRONYM extends AbstractTerminalNode
         //        prefix = " ".padEnd(colWidth0 !== undefined ? colWidth0 : 2) + prefix;
         outputStr = super.serialize(format, this.content, prefix);
         prefix = prefix + "| ";
-        this.meta.letters.forEach(letter => {
-          outputStr =
-            outputStr +
-            super.serialize(
-              format,
-              `{${letter.content}}  ${letter.altrecognition}`,
-              prefix
-            );
-        });
+        outputStr =
+          outputStr +
+          super.serialize(
+            format,
+            `{${this.content}}  ${this.meta.altrecognition}`,
+            prefix
+          );
         break;
       }
       case ParseNodeSerializeFormatEnumType.TABULAR: {
@@ -119,18 +117,11 @@ export class TerminalNode_ACRONYM extends AbstractTerminalNode
           ) +
           `${this.constructor.name}`.padEnd(ParseNodeSerializeColumnWidths[1]);
         //        colWidth0 += 2;
-        this.meta.letters.forEach(letter => {
-          let termIdx: string =
-            letter.termIdx !== 0 ? `termIdx=${letter.termIdx}` : "";
-          outputStr =
-            outputStr +
-            `\n${ParseNodeSerializeTabular(
-              "letter",
-              letter.content,
-              letter.altpronunciation,
-              termIdx
-            )}`;
-        });
+        let termIdx: string =
+          this.meta.termIdx !== 0 ? `termIdx=${this.meta.termIdx}` : "";
+        (outputStr = outputStr + this.meta.content),
+          this.meta.altpronunciation,
+          termIdx;
         outputStr = `${outputStr}\n`;
         break;
       }

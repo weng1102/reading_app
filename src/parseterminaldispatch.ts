@@ -21,6 +21,7 @@ import {
   TerminalNode_MLTAG_CONTRACTION,
   TerminalNode_MLTAG_END,
   TerminalNode_MLTAG_SELFCLOSING,
+  TerminalNode_MLTAG_NUMERALS,
   TerminalNode_MLTAG_NUMBER_WITHCOMMAS,
   TerminalNode_TBD,
   TerminalNode_MLTAG_TIME,
@@ -94,6 +95,10 @@ export function GetTerminalNode(
         }
         case MarkupLabelType.LINK: {
           termNode = new TerminalNode_MLTAG_LINK(parent);
+          break;
+        }
+        case MarkupLabelType.NUMERALS: {
+          termNode = new TerminalNode_MLTAG_NUMERALS(parent);
           break;
         }
         case MarkupLabelType.NUMBER_WITHCOMMAS: {

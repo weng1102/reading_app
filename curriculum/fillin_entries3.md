@@ -1,6 +1,6 @@
 [[page: Fillin rendering v3,, Wen,, Fillins, /]]
 
-[[fillin: fillin response heading 1, fillin response description 1, grid, 4, alphabetical, true, false, true, true, true, true, true, true]]
+[[fillin: responses in the prompts below, Fillin the following blanks:, grid,6, insert, true, true, true, true, true, true, true, 1]]
 A=(POS:article) [_man=(POS:noun, a male person)_] is walking=(POS:verb, DEF:to amble) to the market=(POS:noun, DEF:place to shop).
 The walk is [_slow_].
 He is walking the [_dog=(POS:noun)_].

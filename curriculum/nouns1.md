@@ -1,8 +1,7 @@
 [[page: Nouns,, Wen,, Fillins, /]]
 
 # Common nouns about my life
-
-[[fillin: Use the following responses in the prompts below, In the kitchen, grid,4, insert, true, true, true, true, true, true, true, 2, false]]
+[[fillin: inline, true, 2, true, Responses already filled in, In the kitchen:, grid, 6, insert, true, true, true, true, true, false]]
 I wash pots and pans in the [_sink_].
 I put dirty dishes in the [_dishwasher_].
 I cook on the [_stove_].
@@ -13,15 +12,14 @@ I bake lemon [_squares_].
 I bake banana nut [_bread_].
 I bake banana and blueberry [_muffins_].
 [[/fillin]]
-
-[[fillin: Use the following responses in the prompts below, To go outside, grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: inline, true, 2, true, Responses already filled in, To go outside:, grid, 6, insert, true, true, true, true, true, false]]
 I open the [_door_].
 We drive in a [_car_].
 [[/fillin]]
 
 # Subjective nouns
 # Objective nouns
-[[fillin: Use the following responses in the prompts below, , grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: inline, true, 2, true, Use the following responses in the prompts below, , grid, 6, alphabetical, true, true, true, true, true, false]]
 He opens the [_door_].
 Cindy plays board [_games_].
 David cheers for the Golden [_State_] [_Warriors_].
@@ -37,7 +35,7 @@ Jay comes for a [_visit_].
 # Pronouns
 ## Personal pronouns (subjective aka nominative)
 These pronouns are used to form the subject of a sentence or as a predicate noun (aka predicate nominative) when following a form of be verb (e.g., is, was) and it renames or describes the subject of the sentence. Subjective pronouns include: I, you, he, she, it, we, they.
-[[fillin: Use the following responses in the prompts below, , grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: inline, true, 2, true, Use the following responses in the prompts below, , grid, 6, alphabetical, true, true, true, true, true, false]]
 [_I_] bake lemon squares.
 [_We_] walk together.
 [_They_] are our neighbors.
@@ -46,7 +44,7 @@ These pronouns are used to form the subject of a sentence or as a predicate noun
 [_You_] help me practice walking.
 [[/fillin]]
 
-[[fillin: Use the following responses in the prompts below, , grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: inline, true, 2, true, Use the following responses in the prompts below, , grid, 6, alphabetical, true, true, true, true, true, false]]
 [_I_] want to be by myself.
 [_You_] prepare my dinner.
 [_They_] are my parents.

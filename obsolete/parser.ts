@@ -18,7 +18,7 @@ import {
   Token,
   MarkupLabelType
 } from "./tokenizer";
-//import { MarkdownType, MarkdownTagType } from "./dataadapter";
+//import { MarkdownType, MarkdownRecordType } from "./dataadapter";
 import {
   IPageContent,
   ISectionContent,
@@ -512,7 +512,7 @@ class SectionParseNode_HEADING extends SectionParseNode
   meta: ISectionHeadingVariant = ISectionHeadingVariantInitializer;
   parse() {
     let current: TaggedStringType = this.parent._markdownDataSource.currentRecord();
-    if (current.tagType === MarkdownTagType.HEADING) {
+    if (current.tagType === MarkdownRecordType.HEADING) {
       this.meta.title = current.content;
       this.meta.level = current.headingLevel;
       this.meta.type = SectionVariantEnumType.heading;
@@ -533,15 +533,15 @@ class SectionParseNode_BLOCKQUOTE extends SectionParseNode_LIST
   meta: ISectionBlockquoteVariant = ISectionBlockquoteVariantInitializer;
   parse() {
     let current: TaggedStringType = this.parent.dataSource.currentRecord();
-    if (current.tagType === MarkdownTagType.BLOCKQUOTE) {
+    if (current.tagType === MarkdownRecordType.BLOCKQUOTE) {
       if (
         this.parent.dataSource.nextRecord().tagType ===
-        MarkdownTagType.PARAGRAPH
+        MarkdownRecordType.PARAGRAPH
       ) {
         for (
           current = this.parent.dataSource.nextRecord();
           !this.parent.dataSource.EOF() &&
-          current.tagType === MarkdownTagType.SENTENCE;
+          current.tagType === MarkdownRecordType.SENTENCE;
           current = this.parent.dataSource.nextRecord()
         ) {
           let sentence = new SentenceNode(this);
@@ -549,7 +549,7 @@ class SectionParseNode_BLOCKQUOTE extends SectionParseNode_LIST
           this.meta.sentences.push(sentence);
           current = this.parent.dataSource.nextRecord();
         }
-        if (current.tagType !== MarkdownTagType.PARAGRAPH_END) {
+        if (current.tagType !== MarkdownRecordType.PARAGRAPH_END) {
           `expected PARAGRAPH parsing BLOCKQUOTE after line ${current.lineNo}`;
         }
       }

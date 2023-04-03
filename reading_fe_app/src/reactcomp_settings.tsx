@@ -187,7 +187,7 @@ export const TabControlButtons = (props: ITabControlButtonsProps) => {
           className="settings-tabControl-tab3"
           onClick={() => props.setActiveTab(3)}
         >
-          Identifying
+          Configuring
         </div>
       </div>
     </>

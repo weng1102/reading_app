@@ -14,7 +14,7 @@
 - I am 60 years old.
 - I have a Bachelor's degree in Chemical Engineering from UC Berkeley.
 - I also have an MBA degree from Stanford.
-- I live at 20680 Seaton Ave.
+- I live at #20680# Seaton Ave.
 - My current occupation is stroke recovery.
 - My cell phone number is (408) 206-5963.
 - In case of emergency, please call Wen at (408) 267-6076.

@@ -52,9 +52,7 @@ export const SectionDispatcher = React.memo((props: ISectionPropsType) => {
       // need to group because component will recursively render zero or more of each
       return <SectionLists active={props.active} section={props.section} />;
     case SectionVariantEnumType.fillin:
-      //      console.log(`SECTION SECTIONFILL EMITTING ${props.section.type}`);
       return <SectionFillin active={props.active} section={props.section} />;
-    //      return <div>section fillin response</div>;
     case SectionVariantEnumType.image_entry:
       return (
         <SectionImageEntry active={props.active} section={props.section} />

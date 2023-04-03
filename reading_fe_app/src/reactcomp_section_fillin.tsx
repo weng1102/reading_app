@@ -1,9 +1,14 @@
-/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2023 Wen Eng - All Rights Reserved
  *
  * File name: reactcomp_section_fillin.tsx
  *
  * Defines React front end functional components to support fillins feature.
  *
+ * - static presentation data is stored in props
+ * - presentation formatting data stored in local state
+ *    e.g., show/hide reset, show/hide help control
+ * - dynamic presentation data is stored in context e.g., responses in
+ *   prompts visible
  *
  *
  * Version history:
@@ -12,17 +17,22 @@
 import React from "react";
 import { Request } from "./reducers";
 import { useEffect } from "react";
-import "./App.css";
+//import "./App.css";
 import {
   IFillinResponseItem,
   IFillinResponses,
   IFillinResponseItemInitializer,
+  //ISectionFillinHelpSettingInitializer,
   ISectionFillinItem,
   ISectionFillinVariant,
   ISectionFillinItemInitializer,
+  SectionFillinHelpPresetInfo,
+  SectionFillinHelpPresetLevel,
+  //SectionFillinHelpPresetName,
   SectionFillinLayoutType,
   SectionFillinSortOrder
 } from "./pageContentType";
+import helpButton from "./img/button_help.png";
 import { useContext, useState } from "react";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { CPageLists, PageContext } from "./pageContext";
@@ -30,11 +40,10 @@ import { SectionDispatcher, ISectionPropsType } from "./reactcomp_sections";
 import { SectionFillinContext, cloneDeep } from "./fillinContext";
 import resetButton from "./img/button_reset1.png";
 import resetButtonGhosted from "./img/button_reset_ghosted.png";
-
 export const SectionFillin = React.memo((props: ISectionPropsType): any => {
-  //console.log(`<SectionFillin />`);
   // copy of initial author's settings
-  let fillin: ISectionFillinVariant = props.section
+  const fillinContext = useContext(SectionFillinContext);
+  let fillinContent: ISectionFillinVariant = props.section
     .meta as ISectionFillinVariant;
   // state to support section fillins that can be changed versus the
   // pageLists.fillinList that is used to initialize the state and
@@ -43,61 +52,82 @@ export const SectionFillin = React.memo((props: ISectionPropsType): any => {
   const [sectionFillin, setSectionFillin] = useState(
     ISectionFillinItemInitializer()
   );
+  const [resetRequested, setResetRequested] = useState(
+    fillinContext.sectionFillin.allowReset
+  );
   const pageLists: CPageLists = useContext(PageContext)!;
+  useEffect(() => {
+    if (fillinContext.sectionFillin.allowReset && resetRequested) {
+      setResetRequested(false);
+    }
+  }, [resetRequested]);
   if (
     !sectionFillin.loaded &&
     sectionFillin.responses.length === 0 &&
-    fillin.sectionFillinIdx >= 0 &&
-    fillin.sectionFillinIdx <= pageLists.fillinList.length
+    fillinContent.sectionFillinIdx >= 0 &&
+    fillinContent.sectionFillinIdx <= pageLists.fillinList.length
   ) {
-    // initialize state with deep copy to protect integrity of fillinlist
+    // Initialize state with deep copy to protect integrity of fillinlist
     // within pageLists. Check integrity by comparing the
     // fillin.sectionFillinIdx with the that from the fillinList[idx].idx
     let clone: ISectionFillinItem = cloneDeep(
-      pageLists.fillinList[fillin.sectionFillinIdx]
+      pageLists.fillinList[fillinContent.sectionFillinIdx]
     );
+    if (
+      !(clone.helpPresetLevel in SectionFillinHelpPresetLevel) ||
+      clone.helpPresetLevel === SectionFillinHelpPresetLevel.override
+    ) {
+      clone.currentHelpSetting = { ...clone.authorHelpSetting };
+    } else {
+      clone.currentHelpSetting =
+        SectionFillinHelpPresetInfo[clone.helpPresetLevel];
+    }
     clone.loaded = true;
     clone.modified = false;
     setSectionFillin(clone);
   }
   return (
     <SectionFillinContext.Provider value={{ sectionFillin, setSectionFillin }}>
+      <SectionHeading active={props.active} section={props.section} />
       <Responses active={props.active} section={props.section} />
       <Prompts active={props.active} section={props.section} />
     </SectionFillinContext.Provider>
   );
 });
-const Heading = React.memo((props: ISectionPropsType): any => {
-  //console.log(`<Heading />`);
-  let fillin: ISectionFillinVariant = props.section
-    .meta as ISectionFillinVariant;
+export const SectionHeading = (props: ISectionPropsType) => {
+  const fillinIdx = useContext(SectionFillinContext).sectionFillin.idx;
+  // Manages layout of section heading including hiding, ghosting
+  // controls e.g., buttons, sliders. Reset button
   return (
     <>
-      <div className="fillin-prompts-label">{fillin.promptsLabel}</div>
-      <div className="fillin-responses-label">{fillin.responsesLabel}</div>
+      <div className="fillin-section-container">
+        <div className="fillin-heading-grid-control">
+          <ResetButton active={props.active} section={props.section} />
+          <HelpSettings />
+        </div>
+      </div>
     </>
   );
-});
+};
 const Responses = React.memo((props: ISectionPropsType): any => {
-  //console.log(`<Responses />`);
   // Strictly manages the modfiable raw (unformatted) response copied
-  // from the pageList.fillinList to the sectionContext that
+  // from the pageList.fillinList to the fillinContext that
   // maps the fillin_showTerminalIdx reducer state back using
   // terminalList[fillin_terminalIdx].fillin.{sectionIdx | responseIdx}
   // when decrementing and resetting the individual values asynchronously.
   // Hence, the order of the raw response list cannot be altered.
   // Decrementing and user resetting will be managed by callbacks/useEffect()
   // within this component asynchronously.
-  let fillin: ISectionFillinVariant = props.section
+  let fillinContent: ISectionFillinVariant = props.section
     .meta as ISectionFillinVariant;
   let pageLists: CPageLists = useContext(PageContext)!;
-  const sectionContext = useContext(SectionFillinContext);
+  const fillinContext = useContext(SectionFillinContext);
   const showTerminalIdx = useAppSelector(store => store.fillin_showTerminalIdx);
   let resetSectionFillinIdx = useAppSelector(
     store => store.fillin_resetSectionIdx
   );
   let dispatch = useAppDispatch();
-  // Every time the section changes (props.section) or sectionContext
+  // Every time the section changes (props.section) or fillinContext
   // deep-copy context holds user modifiable attributes groupDuplicates,
   //  etc. Should these attributes get reset when context changes?,
   // responses only. Need a means to reset just the formatting attributes
@@ -109,17 +139,17 @@ const Responses = React.memo((props: ISectionPropsType): any => {
   // Keep raw responses in order so that fillin_showTerminalIdx references the
   // correct response. Allow the ResponseItems component to
   // remove duplicates and sort changes based on attributes
-  if (!sectionContext.sectionFillin.loaded) {
+  if (!fillinContext.sectionFillin.loaded) {
     let clone: ISectionFillinItem = cloneDeep(
-      sectionContext.sectionFillin,
+      fillinContext.sectionFillin,
       false
     );
-    sectionContext.setSectionFillin(cloneDeep(clone));
+    fillinContext.setSectionFillin(cloneDeep(clone));
   }
   const [responses, setResponses] = useState(
-    cloneDeep(sectionContext.sectionFillin.responses)
+    cloneDeep(fillinContext.sectionFillin.responses)
   );
-  const sectionFillin: ISectionFillinItem = sectionContext.sectionFillin;
+  const sectionFillin: ISectionFillinItem = fillinContext.sectionFillin;
   const sectionFillinIdx: number = sectionFillin.idx;
 
   useEffect(() => {
@@ -134,7 +164,7 @@ const Responses = React.memo((props: ISectionPropsType): any => {
       const responseIdx =
         pageLists.terminalList[showTerminalIdx].fillin.responseIdx;
       if (
-        fillinSectionIdx === fillin.sectionFillinIdx &&
+        fillinSectionIdx === fillinContent.sectionFillinIdx &&
         responseIdx >= 0 &&
         responseIdx < responses.length
       ) {
@@ -142,51 +172,69 @@ const Responses = React.memo((props: ISectionPropsType): any => {
         resTemp[responseIdx].referenceCount =
           resTemp[responseIdx].referenceCount - 1;
         setResponses(resTemp);
-        let clone: ISectionFillinItem = cloneDeep(sectionContext.sectionFillin);
+        let clone: ISectionFillinItem = cloneDeep(fillinContext.sectionFillin);
         clone.modified = true;
-        sectionContext.setSectionFillin(clone);
+        fillinContext.setSectionFillin(clone);
       } else {
-        // console.log(
-        //   `encountered inconsistent idxs fillinSectionIdx=${fillinSectionIdx} fillin.sectionFillinIdx=${fillin.sectionFillinIdx}`
-        // );
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     showTerminalIdx,
     pageLists.terminalList,
-    // sectionContext.sectionFillin.modified,
-    fillin.sectionFillinIdx
+    // fillinContext.sectionFillin.modified,
+    fillinContent.sectionFillinIdx
   ]);
   useEffect(() => {
-    // console.log(
-    //   `<Responses /> useEffect(resetSectionFillinIdx=${resetSectionFillinIdx})`
-    // );
     if (resetSectionFillinIdx === sectionFillinIdx) {
-      let clone: ISectionFillinItem = cloneDeep(sectionContext.sectionFillin);
+      let clone: ISectionFillinItem = cloneDeep(fillinContext.sectionFillin);
       clone.modified = false;
-      sectionContext.setSectionFillin(clone);
-      setResponses(cloneDeep(sectionContext.sectionFillin.responses));
+      fillinContext.setSectionFillin(clone);
+      setResponses(cloneDeep(fillinContext.sectionFillin.responses));
       dispatch(Request.Fillin_resetSection(-1));
     }
-  }, [resetSectionFillinIdx, dispatch, sectionContext, sectionFillinIdx]);
-
+  }, [resetSectionFillinIdx, dispatch, fillinContext, sectionFillinIdx]);
+  // useEffect(() => {
+  //   //    const [responsesInPrompts, setResponsesInPrompts] = useState(false);
+  //   if (
+  //     fillinContext.sectionFillin.helpPresetLevel ===
+  //     SectionFillinHelpPresetLevel.inline
+  //   ) {
+  //     setResponsesInPrompts(true);
+  //   } else if (responsesInPrompts) {
+  //     setResponsesInPrompts(false);
+  //     // refresh
+  //     // trigger refresh of all terminal fillins without modifying visible.
+  //   }
+  // }, [sectionFillin.helpPresetLevel]);
+  // useEffect(() => {
+  //   // will only trigger with false when going from show to not
+  //   // showResponsesInPrompts
+  //   if (!sectionFillin.currentHelpSetting.showResponsesInPrompts) {
+  //     console.log(
+  //       `reactcomp_section_fillin::showResponsesInPrompts=${sectionFillin.currentHelpSetting.showResponsesInPrompts}`
+  //     );
+  //     console.log(`reset the showResponsesInPrompts from true to false`);
+  //   }
+  // }, [sectionFillin.currentHelpSetting.showResponsesInPrompts]);
   if (
-    sectionContext.sectionFillin.loaded &&
+    fillinContext.sectionFillin.loaded &&
     sectionFillinIdx >= 0 &&
     sectionFillinIdx < pageLists.fillinList.length &&
     pageLists !== null &&
-    sectionContext.sectionFillin.layout !== SectionFillinLayoutType.none
+    fillinContext.sectionFillin.currentHelpSetting.layout !==
+      SectionFillinLayoutType.hidden
   ) {
+    let responsesLabel: string;
+    responsesLabel =
+      fillinContext.sectionFillin.currentHelpSetting.responsesLabel;
+
     return (
       <>
         <div className="fillin"></div>
-        <div className="fillin-responses-label">{fillin.responsesLabel}</div>
+        <div className="fillin-responses-label">{responsesLabel}</div>
         <div className="fillin-responses-grid-container">
           <ResponseItems responses={responses} />
-          <div className="fillin-responses-grid-controls">
-            <ResponseControls />
-          </div>
         </div>
       </>
     );
@@ -194,26 +242,20 @@ const Responses = React.memo((props: ISectionPropsType): any => {
     return <></>;
   }
 });
-interface IResponseControlsPropsType {}
-const ResponseControls = (props: IResponseControlsPropsType): any => {
-  //console.log(`<ResponseControls />`);
-  return <ResetButton />;
-};
 interface IResponseItemsPropsType {
   responses: IFillinResponses;
 }
 const ResponseItems = (props: IResponseItemsPropsType): any => {
-  //console.log(`<ResponseItems />`);
-  const sectionContext = useContext(SectionFillinContext);
+  const fillinContext = useContext(SectionFillinContext);
   let responses: IFillinResponseItem[] = cloneDeep(props.responses);
+  let modified: boolean = fillinContext.sectionFillin.modified;
   let uniqueResponses: IFillinResponseItem[] = [];
-  if (sectionContext.sectionFillin.unique) {
+  if (fillinContext.sectionFillin.currentHelpSetting.unique) {
     responses.filter(item => {
       let duplicateIdx = uniqueResponses.findIndex(
         response => response.content === item.content
       );
       if (duplicateIdx < 0) {
-        //console.log(`dup not found idx=${duplicateIdx}`);
         uniqueResponses.push(
           IFillinResponseItemInitializer(
             item.content,
@@ -227,14 +269,15 @@ const ResponseItems = (props: IResponseItemsPropsType): any => {
     });
   }
   if (
-    sectionContext.sectionFillin.sortOrder ===
+    fillinContext.sectionFillin.currentHelpSetting.sortOrder ===
     SectionFillinSortOrder.alphabetical
   ) {
     uniqueResponses = uniqueResponses.sort((a, b) =>
       a.content.toLowerCase() > b.content.toLowerCase() ? 1 : -1
     );
   } else if (
-    sectionContext.sectionFillin.sortOrder === SectionFillinSortOrder.random
+    fillinContext.sectionFillin.currentHelpSetting.sortOrder ===
+    SectionFillinSortOrder.random
   ) {
     const shuffle = (array: IFillinResponseItem[]) => {
       const newArray: IFillinResponseItem[] = [...array];
@@ -246,10 +289,14 @@ const ResponseItems = (props: IResponseItemsPropsType): any => {
     };
     uniqueResponses = shuffle(uniqueResponses);
   }
-  if (sectionContext.sectionFillin.layout === SectionFillinLayoutType.grid) {
+  if (
+    fillinContext.sectionFillin.currentHelpSetting.layout ===
+    SectionFillinLayoutType.grid
+  ) {
     return <ResponseItemsGrid responses={uniqueResponses} />;
   } else if (
-    sectionContext.sectionFillin.layout === SectionFillinLayoutType.list
+    fillinContext.sectionFillin.currentHelpSetting.layout ===
+    SectionFillinLayoutType.list
   ) {
     return <ResponsesList responses={uniqueResponses} />;
   } else {
@@ -258,8 +305,8 @@ const ResponseItems = (props: IResponseItemsPropsType): any => {
 };
 const ResponseItemsGrid = (props: IResponseItemsPropsType): any => {
   //console.log(`<ResponseItemsGrid />`);
-  const sectionContext = useContext(SectionFillinContext);
-  const columnCount: string = sectionContext.sectionFillin.gridColumns.toString();
+  const fillinContext = useContext(SectionFillinContext);
+  const columnCount: string = fillinContext.sectionFillin.currentHelpSetting.gridColumns.toString();
   return (
     <div
       className="fillin-responses-grid-itemlist"
@@ -279,7 +326,6 @@ const ResponsesList = (props: IResponseItemsPropsType): any => {
   );
 };
 const ResponsesListItems = (props: IResponseItemsPropsType): any => {
-  //console.log(`<ResponsesListItems />`);
   return props.responses.map(
     (response: IFillinResponseItem, keyvalue: number) => (
       <li key={keyvalue}>
@@ -297,8 +343,6 @@ const ResponsesListItems = (props: IResponseItemsPropsType): any => {
   );
 };
 const ResponsesGridItems = (props: IResponseItemsPropsType): any => {
-  //console.log(`<ResponsesGridItems />`);
-  //  const sectionContext = useContext(SectionFillinContext);
   let responses: IFillinResponses = props.responses;
   return responses.map((response: IFillinResponseItem, keyvalue: number) => (
     <div
@@ -319,15 +363,12 @@ interface IResponsePropsType {
   response: IFillinResponseItem;
 }
 const ResponseContent = (props: IResponsePropsType) => {
-  //console.log(`<ResponseContent />`);
   return <span>{props.response.content}</span>;
 };
 const ResponseReferenceCount = (props: IResponsePropsType) => {
-  //console.log(`<ResponseReferenceCount />`);
-  const sectionContext = useContext(SectionFillinContext);
-  //console.log(`showRefCnt=${sectionContext.sectionFillin.showReferenceCount}`);
+  const fillinContext = useContext(SectionFillinContext);
   if (
-    !sectionContext.sectionFillin.showReferenceCount ||
+    !fillinContext.sectionFillin.currentHelpSetting.showReferenceCount ||
     props.response.referenceCount <= 1
   ) {
     return <span></span>;
@@ -336,19 +377,19 @@ const ResponseReferenceCount = (props: IResponsePropsType) => {
   }
 };
 const Prompts = React.memo((props: ISectionPropsType): any => {
-  //console.log(`<Prompts />`);
-  // let dispatch = useAppDispatch();
-  let fillin: ISectionFillinVariant = props.section
+  const fillinContext = useContext(SectionFillinContext);
+  let fillinContent: ISectionFillinVariant = props.section
     .meta as ISectionFillinVariant;
-  let prompts = fillin.prompts;
+  let promptsLabel: string =
+    fillinContext.sectionFillin.currentHelpSetting.promptsLabel;
   return (
     <>
-      <div className="fillin-prompts-label">{fillin.promptsLabel}</div>
+      <div className="fillin-prompts-label">{promptsLabel}</div>
       <div
         className="fillin-prompts-items"
-        style={{ columns: `${fillin.promptColumns}` }}
+        style={{ columns: `${fillinContext.sectionFillin.promptColumns}` }}
       >
-        {prompts.map((prompt, keyvalue: number) => (
+        {fillinContent.prompts.map((prompt, keyvalue: number) => (
           <SectionDispatcher
             key={keyvalue}
             active={props.active}
@@ -359,32 +400,27 @@ const Prompts = React.memo((props: ISectionPropsType): any => {
     </>
   );
 });
-interface IResetButtonPropsType {
-  sectionFillinIdx: number;
-}
-export const ResetButton = () => {
+export const ResetButton = (props: ISectionPropsType) => {
   //console.log(`<ResetButton />`);
-  const sectionContext = useContext(SectionFillinContext);
-  const sectionFillinIdx: number = sectionContext.sectionFillin.idx;
-  const modified: boolean = sectionContext.sectionFillin.modified;
-  const allowReset: boolean = sectionContext.sectionFillin.allowReset;
+  const fillinContext = useContext(SectionFillinContext);
+  const sectionFillinIdx: number = fillinContext.sectionFillin.idx;
+  const allowReset: boolean = fillinContext.sectionFillin.allowReset;
   let dispatch = useAppDispatch();
 
   const onButtonClick = () => {
-    if (sectionContext.sectionFillin.modified && allowReset) {
+    if (fillinContext.sectionFillin.modified && allowReset) {
       dispatch(Request.Fillin_resetSection(sectionFillinIdx));
-      //console.log(`dispatch fillin_resetSection`);
     }
   };
   let resetButtonState: string =
-    sectionContext.sectionFillin.modified && allowReset
+    fillinContext.sectionFillin.modified && allowReset
       ? resetButton
       : resetButtonGhosted;
   //    <div style={{ aspectRatio: "1/1" }}>
   return (
     <div style={{ aspectRatio: "1/1" }}>
       <img
-        className="reseticon"
+        className="resetIcon"
         alt="reset"
         src={resetButtonState}
         title="reset response prompts"
@@ -393,26 +429,85 @@ export const ResetButton = () => {
     </div>
   );
 };
-interface IToggleButtonPropsType {
-  sectionFillinIdx: number;
-  toggleType: SectionFillinTogglesType;
-}
-const enum SectionFillinTogglesType {
-  sortOrder = 0,
-  groupDuplicates,
-  showReferenceCount
-}
-export const ToggleButton = (props: IToggleButtonPropsType) => {
-  //console.log(`<ToggleButton />`);
-  let buttonIcon: string;
-  switch (props.toggleType) {
-    case SectionFillinTogglesType.sortOrder:
-      buttonIcon = "abc";
-      break;
-    case SectionFillinTogglesType.groupDuplicates:
-      break;
-    case SectionFillinTogglesType.showReferenceCount:
-      break;
-    default:
+export const HelpSettings = () => {
+  // control manages presentation
+  let fillinContext = useContext(SectionFillinContext);
+  const [showHelp, setShowHelp] = useState(
+    fillinContext.sectionFillin.showHelpPresets
+  );
+  const onChangeValue = (event: any) => {
+    let tick: number = +event.target.value;
+    if (
+      tick in SectionFillinHelpPresetLevel &&
+      fillinContext.sectionFillin.helpPresetLevel !== tick
+    ) {
+      let clone: ISectionFillinItem = cloneDeep(
+        fillinContext.sectionFillin,
+        fillinContext.sectionFillin.modified
+      );
+      clone.helpPresetLevel = tick;
+      clone.currentHelpSetting =
+        SectionFillinHelpPresetInfo[tick as SectionFillinHelpPresetLevel];
+      fillinContext.setSectionFillin(clone);
+    } else {
+      console.log(`oops`);
+    }
+  };
+  const onButtonClick = () => {
+    setShowHelp(!showHelp);
+  };
+  if (!fillinContext.sectionFillin.showHelpPresets) {
+    return <></>;
+  } else if (
+    fillinContext.sectionFillin.helpPresetLevel ===
+      SectionFillinHelpPresetLevel.override ||
+    !showHelp
+  ) {
+    return (
+      <>
+        <div className="help-settings-slider-grid-show-icon">
+          <img
+            className="helpIcon"
+            alt="help"
+            src={helpButton}
+            title="help control"
+            onClick={() => onButtonClick()}
+          />
+        </div>
+      </>
+    );
+  } else {
+    let tickCount: number =
+      Object.keys(SectionFillinHelpPresetLevel).length / 2 - 2;
+    return (
+      <>
+        <div className="help-settings-slider-grid-control">
+          <div className="help-settings-slider-grid-help-button">
+            <img
+              className="helpIcon"
+              alt="help"
+              src={helpButton}
+              title="help control"
+              onClick={() => onButtonClick()}
+            />
+          </div>
+          <div className="help-settings-grid-slider-left-label">less help</div>
+          <input
+            onChange={onChangeValue}
+            className="help-settings-slider-control"
+            defaultValue={fillinContext.sectionFillin.helpPresetLevel}
+            type="range"
+            min="0"
+            max={tickCount}
+            step="1"
+            width="100%"
+          />
+          <div className="help-settings-slider-grid-right-label">more help</div>
+          <div className="help-settings-slider-grid-description">
+            ({fillinContext.sectionFillin.currentHelpSetting.description})
+          </div>
+        </div>
+      </>
+    );
   }
 };

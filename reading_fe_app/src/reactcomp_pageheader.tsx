@@ -11,6 +11,12 @@
 import React from "react";
 import "./App.css";
 import hamburgerIcon from "./img/Hamburger_icon.png";
+import fontUpIcon from "./img/button_fontadj_up1.png";
+import fontDownIcon from "./img/button_fontadj_down1.png";
+import fontDownGhostedIcon from "./img/button_fontadj_down1_ghosted.png";
+import spacingUpIcon from "./img/button_spacingadj_wider.png";
+import spacingDownIcon from "./img/button_spacingadj_narrower.png";
+import spacingDownGhostedIcon from "./img/button_spacingadj_narrower_ghosted.png";
 import settingsIcon from "./img/settingicon.png";
 import homePageIcon from "./img/button_homeicon.png";
 import homePageGhostedIcon from "./img/button_home_ghosted.png";
@@ -45,6 +51,12 @@ export const PageHeader = React.memo((props: IPageHeaderPropsType) => {
       </div>
       <div className="header-grid-homebutton">
         <HomeButton />
+      </div>
+      <div className="header-grid-spacingbutton">
+        <SpacingAdjustButton />
+      </div>
+      <div className="header-grid-fontbutton">
+        <FontAdjustButton />
       </div>
       <div className="header-grid-settingbutton">
         <img
@@ -134,6 +146,161 @@ const PreviousPageButton = () => {
       alt="previous page"
       src={icon}
       title="go to previous page"
+      onClick={onButtonClick}
+    />
+  );
+};
+const SpacingAdjustButton = () => {
+  return (
+    <>
+      <div className="header-grid-spacingbutton">
+        <div className="header-grid-spacingupbutton">
+          <SpacingAdjustUpButton />
+        </div>
+        <div className="header-grid-spacingdownbutton">
+          <SpacingAdjustDownButton />
+        </div>
+      </div>
+    </>
+  );
+};
+const SpacingAdjustUpButton = () => {
+  const dispatch = useAppDispatch();
+  const spacingDownEnabled: boolean = useAppSelector(
+    store => store.page_spacingDown_enabled
+  );
+  const onButtonClick = () => {
+    dispatch(
+      Request.Page_spacingDownEnabled(changeSpacingSize(spacingQuantum))
+    );
+  };
+  return (
+    <img
+      className="icon"
+      alt="spacing adjust up"
+      title="adjust spacing up"
+      src={spacingUpIcon}
+      onClick={onButtonClick}
+    />
+  );
+};
+const SpacingAdjustDownButton = () => {
+  const dispatch = useAppDispatch();
+  const spacingDownEnabled: boolean = useAppSelector(
+    store => store.page_spacingDown_enabled
+  );
+  const onButtonClick = () => {
+    dispatch(
+      Request.Page_spacingDownEnabled(changeSpacingSize(-spacingQuantum))
+    );
+    //    if (previousPageEnabled) dispatch(Request.Page_pop());
+  };
+  let spacingIcon: string = spacingDownIcon;
+  if (spacingDownEnabled) {
+    spacingIcon = spacingDownIcon;
+  } else {
+    spacingIcon = spacingDownGhostedIcon;
+  }
+  return (
+    <img
+      className="icon"
+      alt="spacing adjust down"
+      title="adjust spacing down"
+      src={spacingIcon}
+      onClick={onButtonClick}
+    />
+  );
+};
+const FontAdjustButton = () => {
+  return (
+    <>
+      <div className="header-grid-fontbutton">
+        <div className="header-grid-fontupbutton">
+          <FontAdjustUpButton />
+        </div>
+        <div className="header-grid-fontdownbutton">
+          <FontAdjustDownButton />
+        </div>
+      </div>
+    </>
+  );
+};
+const changeFontSize = (quantum: number): boolean => {
+  let adjusted: boolean = false;
+  const main = document.querySelector("main");
+  let style = getComputedStyle(main!);
+  if (main !== null && style !== null) {
+    // increment and round to next whole number pixel
+    let fontSize: number = parseFloat(style.fontSize.split("px")[0]);
+    if (fontSize + quantum >= 10) {
+      main.style.fontSize = `${fontSize + quantum}px`;
+      adjusted = true;
+    } else {
+    }
+    // assumes px unit
+  }
+  return adjusted;
+};
+let spacingQuantum: number = 0.2; //px
+const changeSpacingSize = (quantum: number): boolean => {
+  let adjusted: boolean = false;
+  const main = document.querySelector("main");
+  let style = getComputedStyle(main!);
+  if (main !== null && style !== null) {
+    // spacing should be relative to font size
+    let spacingSize: number = parseFloat(style.lineHeight); // returns px
+    let fontSize: number = parseFloat(style.fontSize);
+    console.log(`line-height=${spacingSize}`);
+    if (spacingSize / fontSize + quantum >= 1.5) {
+      // should store initial line-height defined in css main.line-height
+      // defined as 150%
+      console.log(`new line-height=${spacingSize / fontSize + quantum}`);
+      main.style.lineHeight = `${spacingSize / fontSize + quantum}em`;
+      adjusted = true;
+    } else {
+      adjusted = false;
+    }
+    // assumes px unit
+  }
+  return adjusted;
+};
+const fontQuantum: number = 2;
+const FontAdjustUpButton = () => {
+  const dispatch = useAppDispatch();
+  const onButtonClick = () => {
+    dispatch(Request.Page_fontDownEnabled(changeFontSize(fontQuantum)));
+  };
+  return (
+    <img
+      className="icon"
+      alt="font adjust up"
+      title="adjust font up"
+      src={fontUpIcon}
+      onClick={onButtonClick}
+    />
+  );
+};
+const FontAdjustDownButton = () => {
+  const dispatch = useAppDispatch();
+  const fontDownEnabled: boolean = useAppSelector(
+    store => store.page_fontDown_enabled
+  );
+  let fontIcon: string = fontDownIcon;
+  if (fontDownEnabled) {
+    fontIcon = fontDownIcon;
+  } else {
+    fontIcon = fontDownGhostedIcon;
+  }
+  const onButtonClick = () => {
+    if (fontDownEnabled)
+      dispatch(Request.Page_fontDownEnabled(changeFontSize(-fontQuantum)));
+  };
+  return (
+    <img
+      className="icon"
+      alt="font adjust down"
+      title="adjust font down"
+      src={fontIcon}
       onClick={onButtonClick}
     />
   );

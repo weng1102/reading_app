@@ -1,0 +1,4320 @@
+{
+  "id": 0,
+  "title": "Cues within Fillin parsing/rendering",
+  "filename": "cues_fillin.json",
+  "description": "Cues within Fillin",
+  "owner": "anonymous",
+  "author": "Wen",
+  "category": "Testing",
+  "version": "20230329.1",
+  "pageFormatType": 0,
+  "created": "Wed Mar 29 2023 12:47:08 GMT-0700 (Pacific Daylight Time)",
+  "modified": "Wed Mar 29 2023 12:47:08 GMT-0700 (Pacific Daylight Time)",
+  "transformed": "Wed Mar 29 2023 12:47:08 GMT-0700 (Pacific Daylight Time)",
+  "firstTermIdx": -9999,
+  "lastTermIdx": -9999,
+  "sections": [
+    {
+      "id": 0,
+      "name": "",
+      "description": "",
+      "firstTermIdx": -9999,
+      "lastTermIdx": 43,
+      "items": [],
+      "type": "fillin",
+      "meta": {
+        "sectionFillinIdx": 0,
+        "helpPresetLevel": -1,
+        "authorHelpSetting": {
+          "description": "no description",
+          "responsesLabel": "",
+          "promptsLabel": "4",
+          "layout": "grid",
+          "sortOrder": "insert",
+          "gridColumns": 6,
+          "showResponseHints": false,
+          "showPromptHints": false,
+          "groupByCategory": false,
+          "showResponsesInPrompts": false,
+          "unique": true,
+          "showReferenceCount": true,
+          "helpfulness": 304
+        },
+        "allowReset": false,
+        "promptColumns": 1,
+        "showHelpPresets": false,
+        "prompts": [
+          {
+            "id": 0,
+            "name": "",
+            "description": "",
+            "firstTermIdx": 0,
+            "lastTermIdx": 5,
+            "items": [],
+            "type": "paragraph",
+            "meta": {
+              "sentences": [
+                {
+                  "id": 0,
+                  "content": "A=(article) [_walking=(noun, to amble)_] is walking the market=(noun, place to shop).",
+                  "firstTermIdx": 0,
+                  "lastTermIdx": 5,
+                  "terminals": [
+                    {
+                      "id": 0,
+                      "termIdx": 0,
+                      "content": "A",
+                      "cueList": "article",
+                      "firstTermIdx": 0,
+                      "lastTermIdx": 0,
+                      "type": 17,
+                      "meta": {
+                        "content": "A",
+                        "cues": [
+                          "article"
+                        ],
+                        "termIdx": 0,
+                        "nextTermIdx": [
+                          1
+                        ],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " [",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " [",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": "_",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 11,
+                      "meta": {
+                        "content": "_",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 1,
+                      "content": "walking",
+                      "cueList": "noun, to amble",
+                      "firstTermIdx": 1,
+                      "lastTermIdx": 1,
+                      "type": 17,
+                      "meta": {
+                        "content": "walking",
+                        "cues": [
+                          "noun",
+                          " to amble"
+                        ],
+                        "termIdx": 1,
+                        "nextTermIdx": [
+                          2
+                        ],
+                        "prevTermIdx": [
+                          0
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": "_",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 11,
+                      "meta": {
+                        "content": "_",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": "] ",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": "] ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 2,
+                      "content": "is",
+                      "cueList": "",
+                      "firstTermIdx": 2,
+                      "lastTermIdx": 2,
+                      "type": 17,
+                      "meta": {
+                        "content": "is",
+                        "cues": [],
+                        "termIdx": 2,
+                        "nextTermIdx": [
+                          3
+                        ],
+                        "prevTermIdx": [
+                          1
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " ",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 3,
+                      "content": "walking",
+                      "cueList": "",
+                      "firstTermIdx": 3,
+                      "lastTermIdx": 3,
+                      "type": 17,
+                      "meta": {
+                        "content": "walking",
+                        "cues": [],
+                        "termIdx": 3,
+                        "nextTermIdx": [
+                          4
+                        ],
+                        "prevTermIdx": [
+                          2
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " ",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 4,
+                      "content": "the",
+                      "cueList": "",
+                      "firstTermIdx": 4,
+                      "lastTermIdx": 4,
+                      "type": 17,
+                      "meta": {
+                        "content": "the",
+                        "cues": [],
+                        "termIdx": 4,
+                        "nextTermIdx": [
+                          5
+                        ],
+                        "prevTermIdx": [
+                          3
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " ",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 5,
+                      "content": "market",
+                      "cueList": "noun, place to shop",
+                      "firstTermIdx": 5,
+                      "lastTermIdx": 5,
+                      "type": 17,
+                      "meta": {
+                        "content": "market",
+                        "cues": [
+                          "noun",
+                          " place to shop"
+                        ],
+                        "termIdx": 5,
+                        "nextTermIdx": [
+                          6
+                        ],
+                        "prevTermIdx": [
+                          4
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": ".",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 11,
+                      "meta": {
+                        "content": ".",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    }
+                  ],
+                  "lastPunctuation": "."
+                }
+              ],
+              "style": ""
+            }
+          },
+          {
+            "id": 1,
+            "name": "",
+            "description": "",
+            "firstTermIdx": 6,
+            "lastTermIdx": 12,
+            "items": [],
+            "type": "paragraph",
+            "meta": {
+              "sentences": [
+                {
+                  "id": 1,
+                  "content": "The walking is walking to the [_market_].",
+                  "firstTermIdx": 6,
+                  "lastTermIdx": 12,
+                  "terminals": [
+                    {
+                      "id": 0,
+                      "termIdx": 6,
+                      "content": "The",
+                      "cueList": "",
+                      "firstTermIdx": 6,
+                      "lastTermIdx": 6,
+                      "type": 17,
+                      "meta": {
+                        "content": "The",
+                        "cues": [],
+                        "termIdx": 6,
+                        "nextTermIdx": [
+                          7
+                        ],
+                        "prevTermIdx": [
+                          5
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " ",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 7,
+                      "content": "walking",
+                      "cueList": "",
+                      "firstTermIdx": 7,
+                      "lastTermIdx": 7,
+                      "type": 17,
+                      "meta": {
+                        "content": "walking",
+                        "cues": [],
+                        "termIdx": 7,
+                        "nextTermIdx": [
+                          8
+                        ],
+                        "prevTermIdx": [
+                          6
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " ",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 8,
+                      "content": "is",
+                      "cueList": "",
+                      "firstTermIdx": 8,
+                      "lastTermIdx": 8,
+                      "type": 17,
+                      "meta": {
+                        "content": "is",
+                        "cues": [],
+                        "termIdx": 8,
+                        "nextTermIdx": [
+                          9
+                        ],
+                        "prevTermIdx": [
+                          7
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " ",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 9,
+                      "content": "walking",
+                      "cueList": "",
+                      "firstTermIdx": 9,
+                      "lastTermIdx": 9,
+                      "type": 17,
+                      "meta": {
+                        "content": "walking",
+                        "cues": [],
+                        "termIdx": 9,
+                        "nextTermIdx": [
+                          10
+                        ],
+                        "prevTermIdx": [
+                          8
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " ",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 10,
+                      "content": "to",
+                      "cueList": "",
+                      "firstTermIdx": 10,
+                      "lastTermIdx": 10,
+                      "type": 17,
+                      "meta": {
+                        "content": "to",
+                        "cues": [],
+                        "termIdx": 10,
+                        "nextTermIdx": [
+                          11
+                        ],
+                        "prevTermIdx": [
+                          9
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " ",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 11,
+                      "content": "the",
+                      "cueList": "",
+                      "firstTermIdx": 11,
+                      "lastTermIdx": 11,
+                      "type": 17,
+                      "meta": {
+                        "content": "the",
+                        "cues": [],
+                        "termIdx": 11,
+                        "nextTermIdx": [
+                          12
+                        ],
+                        "prevTermIdx": [
+                          10
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " ",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": "market",
+                      "cueList": "",
+                      "firstTermIdx": 12,
+                      "lastTermIdx": 12,
+                      "type": 4,
+                      "meta": {
+                        "terminals": [
+                          {
+                            "id": 0,
+                            "termIdx": 12,
+                            "content": "market",
+                            "cueList": "",
+                            "firstTermIdx": 12,
+                            "lastTermIdx": 12,
+                            "type": 17,
+                            "meta": {
+                              "content": "market",
+                              "cues": [],
+                              "termIdx": 12,
+                              "nextTermIdx": [
+                                13
+                              ],
+                              "prevTermIdx": [
+                                11
+                              ],
+                              "altpronunciation": "",
+                              "altrecognition": "",
+                              "recitable": true,
+                              "audible": true,
+                              "linkable": false,
+                              "visible": true,
+                              "visited": false,
+                              "numberAsNumerals": false,
+                              "linkIdx": -9999,
+                              "hintsIdx": -9999,
+                              "fillin": {
+                                "sectionIdx": 0,
+                                "responseIdx": 0
+                              },
+                              "bold": false,
+                              "italics": false,
+                              "markupTag": false
+                            }
+                          }
+                        ],
+                        "sectionFillinIdx": 0
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": ".",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 11,
+                      "meta": {
+                        "content": ".",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    }
+                  ],
+                  "lastPunctuation": "."
+                }
+              ],
+              "style": ""
+            }
+          },
+          {
+            "id": 2,
+            "name": "",
+            "description": "",
+            "firstTermIdx": 13,
+            "lastTermIdx": 17,
+            "items": [],
+            "type": "paragraph",
+            "meta": {
+              "sentences": [
+                {
+                  "id": 2,
+                  "content": "He is walking the [_walking=(verb1)_].",
+                  "firstTermIdx": 13,
+                  "lastTermIdx": 17,
+                  "terminals": [
+                    {
+                      "id": 0,
+                      "termIdx": 13,
+                      "content": "He",
+                      "cueList": "",
+                      "firstTermIdx": 13,
+                      "lastTermIdx": 13,
+                      "type": 17,
+                      "meta": {
+                        "content": "He",
+                        "cues": [],
+                        "termIdx": 13,
+                        "nextTermIdx": [
+                          14
+                        ],
+                        "prevTermIdx": [
+                          12
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " ",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 14,
+                      "content": "is",
+                      "cueList": "",
+                      "firstTermIdx": 14,
+                      "lastTermIdx": 14,
+                      "type": 17,
+                      "meta": {
+                        "content": "is",
+                        "cues": [],
+                        "termIdx": 14,
+                        "nextTermIdx": [
+                          15
+                        ],
+                        "prevTermIdx": [
+                          13
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " ",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 15,
+                      "content": "walking",
+                      "cueList": "",
+                      "firstTermIdx": 15,
+                      "lastTermIdx": 15,
+                      "type": 17,
+                      "meta": {
+                        "content": "walking",
+                        "cues": [],
+                        "termIdx": 15,
+                        "nextTermIdx": [
+                          16
+                        ],
+                        "prevTermIdx": [
+                          14
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " ",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 16,
+                      "content": "the",
+                      "cueList": "",
+                      "firstTermIdx": 16,
+                      "lastTermIdx": 16,
+                      "type": 17,
+                      "meta": {
+                        "content": "the",
+                        "cues": [],
+                        "termIdx": 16,
+                        "nextTermIdx": [
+                          17
+                        ],
+                        "prevTermIdx": [
+                          15
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " [",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " [",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": "_",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 11,
+                      "meta": {
+                        "content": "_",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 17,
+                      "content": "walking",
+                      "cueList": "verb1",
+                      "firstTermIdx": 17,
+                      "lastTermIdx": 17,
+                      "type": 17,
+                      "meta": {
+                        "content": "walking",
+                        "cues": [
+                          "verb1"
+                        ],
+                        "termIdx": 17,
+                        "nextTermIdx": [
+                          18
+                        ],
+                        "prevTermIdx": [
+                          16
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": "_",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 11,
+                      "meta": {
+                        "content": "_",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": "]",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": "]",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": ".",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 11,
+                      "meta": {
+                        "content": ".",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    }
+                  ],
+                  "lastPunctuation": "."
+                }
+              ],
+              "style": ""
+            }
+          },
+          {
+            "id": 3,
+            "name": "",
+            "description": "",
+            "firstTermIdx": 18,
+            "lastTermIdx": 24,
+            "items": [],
+            "type": "paragraph",
+            "meta": {
+              "sentences": [
+                {
+                  "id": 3,
+                  "content": "The man is [_walking=(verb, cue, whatever)_] to the [_market_].",
+                  "firstTermIdx": 18,
+                  "lastTermIdx": 24,
+                  "terminals": [
+                    {
+                      "id": 0,
+                      "termIdx": 18,
+                      "content": "The",
+                      "cueList": "",
+                      "firstTermIdx": 18,
+                      "lastTermIdx": 18,
+                      "type": 17,
+                      "meta": {
+                        "content": "The",
+                        "cues": [],
+                        "termIdx": 18,
+                        "nextTermIdx": [
+                          19
+                        ],
+                        "prevTermIdx": [
+                          17
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " ",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 19,
+                      "content": "man",
+                      "cueList": "",
+                      "firstTermIdx": 19,
+                      "lastTermIdx": 19,
+                      "type": 17,
+                      "meta": {
+                        "content": "man",
+                        "cues": [],
+                        "termIdx": 19,
+                        "nextTermIdx": [
+                          20
+                        ],
+                        "prevTermIdx": [
+                          18
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " ",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 20,
+                      "content": "is",
+                      "cueList": "",
+                      "firstTermIdx": 20,
+                      "lastTermIdx": 20,
+                      "type": 17,
+                      "meta": {
+                        "content": "is",
+                        "cues": [],
+                        "termIdx": 20,
+                        "nextTermIdx": [
+                          21
+                        ],
+                        "prevTermIdx": [
+                          19
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " [",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " [",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": "_",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 11,
+                      "meta": {
+                        "content": "_",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 21,
+                      "content": "walking",
+                      "cueList": "verb, cue, whatever",
+                      "firstTermIdx": 21,
+                      "lastTermIdx": 21,
+                      "type": 17,
+                      "meta": {
+                        "content": "walking",
+                        "cues": [
+                          "verb",
+                          " cue",
+                          " whatever"
+                        ],
+                        "termIdx": 21,
+                        "nextTermIdx": [
+                          22
+                        ],
+                        "prevTermIdx": [
+                          20
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": "_",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 11,
+                      "meta": {
+                        "content": "_",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": "] ",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": "] ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 22,
+                      "content": "to",
+                      "cueList": "",
+                      "firstTermIdx": 22,
+                      "lastTermIdx": 22,
+                      "type": 17,
+                      "meta": {
+                        "content": "to",
+                        "cues": [],
+                        "termIdx": 22,
+                        "nextTermIdx": [
+                          23
+                        ],
+                        "prevTermIdx": [
+                          21
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " ",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 23,
+                      "content": "the",
+                      "cueList": "",
+                      "firstTermIdx": 23,
+                      "lastTermIdx": 23,
+                      "type": 17,
+                      "meta": {
+                        "content": "the",
+                        "cues": [],
+                        "termIdx": 23,
+                        "nextTermIdx": [
+                          24
+                        ],
+                        "prevTermIdx": [
+                          22
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " ",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": "market",
+                      "cueList": "",
+                      "firstTermIdx": 24,
+                      "lastTermIdx": 24,
+                      "type": 4,
+                      "meta": {
+                        "terminals": [
+                          {
+                            "id": 0,
+                            "termIdx": 24,
+                            "content": "market",
+                            "cueList": "",
+                            "firstTermIdx": 24,
+                            "lastTermIdx": 24,
+                            "type": 17,
+                            "meta": {
+                              "content": "market",
+                              "cues": [],
+                              "termIdx": 24,
+                              "nextTermIdx": [
+                                25
+                              ],
+                              "prevTermIdx": [
+                                23
+                              ],
+                              "altpronunciation": "",
+                              "altrecognition": "",
+                              "recitable": true,
+                              "audible": true,
+                              "linkable": false,
+                              "visible": true,
+                              "visited": false,
+                              "numberAsNumerals": false,
+                              "linkIdx": -9999,
+                              "hintsIdx": -9999,
+                              "fillin": {
+                                "sectionIdx": 0,
+                                "responseIdx": 1
+                              },
+                              "bold": false,
+                              "italics": false,
+                              "markupTag": false
+                            }
+                          }
+                        ],
+                        "sectionFillinIdx": 0
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": ".",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 11,
+                      "meta": {
+                        "content": ".",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    }
+                  ],
+                  "lastPunctuation": "."
+                }
+              ],
+              "style": ""
+            }
+          },
+          {
+            "id": 4,
+            "name": "",
+            "description": "",
+            "firstTermIdx": 25,
+            "lastTermIdx": 29,
+            "items": [],
+            "type": "paragraph",
+            "meta": {
+              "sentences": [
+                {
+                  "id": 4,
+                  "content": "The quick=(adjective) brown fox=(noun) jumped=(verb).",
+                  "firstTermIdx": 25,
+                  "lastTermIdx": 29,
+                  "terminals": [
+                    {
+                      "id": 0,
+                      "termIdx": 25,
+                      "content": "The",
+                      "cueList": "",
+                      "firstTermIdx": 25,
+                      "lastTermIdx": 25,
+                      "type": 17,
+                      "meta": {
+                        "content": "The",
+                        "cues": [],
+                        "termIdx": 25,
+                        "nextTermIdx": [
+                          26
+                        ],
+                        "prevTermIdx": [
+                          24
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " ",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 26,
+                      "content": "quick",
+                      "cueList": "adjective",
+                      "firstTermIdx": 26,
+                      "lastTermIdx": 26,
+                      "type": 17,
+                      "meta": {
+                        "content": "quick",
+                        "cues": [
+                          "adjective"
+                        ],
+                        "termIdx": 26,
+                        "nextTermIdx": [
+                          27
+                        ],
+                        "prevTermIdx": [
+                          25
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " ",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 27,
+                      "content": "brown",
+                      "cueList": "",
+                      "firstTermIdx": 27,
+                      "lastTermIdx": 27,
+                      "type": 17,
+                      "meta": {
+                        "content": "brown",
+                        "cues": [],
+                        "termIdx": 27,
+                        "nextTermIdx": [
+                          28
+                        ],
+                        "prevTermIdx": [
+                          26
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " ",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 28,
+                      "content": "fox",
+                      "cueList": "noun",
+                      "firstTermIdx": 28,
+                      "lastTermIdx": 28,
+                      "type": 17,
+                      "meta": {
+                        "content": "fox",
+                        "cues": [
+                          "noun"
+                        ],
+                        "termIdx": 28,
+                        "nextTermIdx": [
+                          29
+                        ],
+                        "prevTermIdx": [
+                          27
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " ",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 29,
+                      "content": "jumped",
+                      "cueList": "verb",
+                      "firstTermIdx": 29,
+                      "lastTermIdx": 29,
+                      "type": 17,
+                      "meta": {
+                        "content": "jumped",
+                        "cues": [
+                          "verb"
+                        ],
+                        "termIdx": 29,
+                        "nextTermIdx": [
+                          30
+                        ],
+                        "prevTermIdx": [
+                          28
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": ".",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 11,
+                      "meta": {
+                        "content": ".",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    }
+                  ],
+                  "lastPunctuation": "."
+                }
+              ],
+              "style": ""
+            }
+          },
+          {
+            "id": 5,
+            "name": "",
+            "description": "",
+            "firstTermIdx": 30,
+            "lastTermIdx": 43,
+            "items": [],
+            "type": "paragraph",
+            "meta": {
+              "sentences": [
+                {
+                  "id": 5,
+                  "content": "The phone number is [_(408) 267-6076_] to the [_market_].",
+                  "firstTermIdx": 30,
+                  "lastTermIdx": 43,
+                  "terminals": [
+                    {
+                      "id": 0,
+                      "termIdx": 30,
+                      "content": "The",
+                      "cueList": "",
+                      "firstTermIdx": 30,
+                      "lastTermIdx": 30,
+                      "type": 17,
+                      "meta": {
+                        "content": "The",
+                        "cues": [],
+                        "termIdx": 30,
+                        "nextTermIdx": [
+                          31
+                        ],
+                        "prevTermIdx": [
+                          29
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " ",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 31,
+                      "content": "phone",
+                      "cueList": "",
+                      "firstTermIdx": 31,
+                      "lastTermIdx": 31,
+                      "type": 17,
+                      "meta": {
+                        "content": "phone",
+                        "cues": [],
+                        "termIdx": 31,
+                        "nextTermIdx": [
+                          32
+                        ],
+                        "prevTermIdx": [
+                          30
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " ",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 32,
+                      "content": "number",
+                      "cueList": "",
+                      "firstTermIdx": 32,
+                      "lastTermIdx": 32,
+                      "type": 17,
+                      "meta": {
+                        "content": "number",
+                        "cues": [],
+                        "termIdx": 32,
+                        "nextTermIdx": [
+                          33
+                        ],
+                        "prevTermIdx": [
+                          31
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " ",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 33,
+                      "content": "is",
+                      "cueList": "",
+                      "firstTermIdx": 33,
+                      "lastTermIdx": 33,
+                      "type": 17,
+                      "meta": {
+                        "content": "is",
+                        "cues": [],
+                        "termIdx": 33,
+                        "nextTermIdx": [
+                          34
+                        ],
+                        "prevTermIdx": [
+                          32
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " ",
+                      "cueList": "",
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": " ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "audible": false,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    }
+                  ],
+                  "lastPunctuation": ""
+                }
+              ],
+              "style": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 0,
+      "name": "",
+      "description": "",
+      "firstTermIdx": -9999,
+      "lastTermIdx": -9999,
+      "items": [],
+      "type": "empty",
+      "meta": {
+        "count": 1
+      }
+    }
+  ],
+  "terminalList": [
+    {
+      "content": "A",
+      "cues": [
+        "article"
+      ],
+      "termIdx": 0,
+      "nextTermIdx": [
+        1
+      ],
+      "prevTermIdx": [],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 0,
+      "sectionIdx": 0
+    },
+    {
+      "content": "walking",
+      "cues": [
+        "noun",
+        " to amble"
+      ],
+      "termIdx": 1,
+      "nextTermIdx": [
+        2
+      ],
+      "prevTermIdx": [
+        0
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 0,
+      "sectionIdx": 0
+    },
+    {
+      "content": "is",
+      "cues": [],
+      "termIdx": 2,
+      "nextTermIdx": [
+        3
+      ],
+      "prevTermIdx": [
+        1
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 0,
+      "sectionIdx": 0
+    },
+    {
+      "content": "walking",
+      "cues": [],
+      "termIdx": 3,
+      "nextTermIdx": [
+        4
+      ],
+      "prevTermIdx": [
+        2
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 0,
+      "sectionIdx": 0
+    },
+    {
+      "content": "the",
+      "cues": [],
+      "termIdx": 4,
+      "nextTermIdx": [
+        5
+      ],
+      "prevTermIdx": [
+        3
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 0,
+      "sectionIdx": 0
+    },
+    {
+      "content": "market",
+      "cues": [
+        "noun",
+        " place to shop"
+      ],
+      "termIdx": 5,
+      "nextTermIdx": [
+        6
+      ],
+      "prevTermIdx": [
+        4
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 0,
+      "sectionIdx": 0
+    },
+    {
+      "content": "The",
+      "cues": [],
+      "termIdx": 6,
+      "nextTermIdx": [
+        7
+      ],
+      "prevTermIdx": [
+        5
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "walking",
+      "cues": [],
+      "termIdx": 7,
+      "nextTermIdx": [
+        8
+      ],
+      "prevTermIdx": [
+        6
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "is",
+      "cues": [],
+      "termIdx": 8,
+      "nextTermIdx": [
+        9
+      ],
+      "prevTermIdx": [
+        7
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "walking",
+      "cues": [],
+      "termIdx": 9,
+      "nextTermIdx": [
+        10
+      ],
+      "prevTermIdx": [
+        8
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "to",
+      "cues": [],
+      "termIdx": 10,
+      "nextTermIdx": [
+        11
+      ],
+      "prevTermIdx": [
+        9
+      ],
+      "altpronunciation": "",
+      "altrecognition": "to{1,2}",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "the",
+      "cues": [],
+      "termIdx": 11,
+      "nextTermIdx": [
+        12
+      ],
+      "prevTermIdx": [
+        10
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "market",
+      "cues": [],
+      "termIdx": 12,
+      "nextTermIdx": [
+        13
+      ],
+      "prevTermIdx": [
+        11
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": 0,
+        "responseIdx": 0
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 1,
+      "sectionIdx": 1
+    },
+    {
+      "content": "He",
+      "cues": [],
+      "termIdx": 13,
+      "nextTermIdx": [
+        14
+      ],
+      "prevTermIdx": [
+        12
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 2,
+      "sectionIdx": 2
+    },
+    {
+      "content": "is",
+      "cues": [],
+      "termIdx": 14,
+      "nextTermIdx": [
+        15
+      ],
+      "prevTermIdx": [
+        13
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 2,
+      "sectionIdx": 2
+    },
+    {
+      "content": "walking",
+      "cues": [],
+      "termIdx": 15,
+      "nextTermIdx": [
+        16
+      ],
+      "prevTermIdx": [
+        14
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 2,
+      "sectionIdx": 2
+    },
+    {
+      "content": "the",
+      "cues": [],
+      "termIdx": 16,
+      "nextTermIdx": [
+        17
+      ],
+      "prevTermIdx": [
+        15
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 2,
+      "sectionIdx": 2
+    },
+    {
+      "content": "walking",
+      "cues": [
+        "verb1"
+      ],
+      "termIdx": 17,
+      "nextTermIdx": [
+        18
+      ],
+      "prevTermIdx": [
+        16
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 2,
+      "sectionIdx": 2
+    },
+    {
+      "content": "The",
+      "cues": [],
+      "termIdx": 18,
+      "nextTermIdx": [
+        19
+      ],
+      "prevTermIdx": [
+        17
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 3,
+      "sectionIdx": 3
+    },
+    {
+      "content": "man",
+      "cues": [],
+      "termIdx": 19,
+      "nextTermIdx": [
+        20
+      ],
+      "prevTermIdx": [
+        18
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 3,
+      "sectionIdx": 3
+    },
+    {
+      "content": "is",
+      "cues": [],
+      "termIdx": 20,
+      "nextTermIdx": [
+        21
+      ],
+      "prevTermIdx": [
+        19
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 3,
+      "sectionIdx": 3
+    },
+    {
+      "content": "walking",
+      "cues": [
+        "verb",
+        " cue",
+        " whatever"
+      ],
+      "termIdx": 21,
+      "nextTermIdx": [
+        22
+      ],
+      "prevTermIdx": [
+        20
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 3,
+      "sectionIdx": 3
+    },
+    {
+      "content": "to",
+      "cues": [],
+      "termIdx": 22,
+      "nextTermIdx": [
+        23
+      ],
+      "prevTermIdx": [
+        21
+      ],
+      "altpronunciation": "",
+      "altrecognition": "to{1,2}",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 3,
+      "sectionIdx": 3
+    },
+    {
+      "content": "the",
+      "cues": [],
+      "termIdx": 23,
+      "nextTermIdx": [
+        24
+      ],
+      "prevTermIdx": [
+        22
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 3,
+      "sectionIdx": 3
+    },
+    {
+      "content": "market",
+      "cues": [],
+      "termIdx": 24,
+      "nextTermIdx": [
+        25
+      ],
+      "prevTermIdx": [
+        23
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": 0,
+        "responseIdx": 1
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 3,
+      "sectionIdx": 3
+    },
+    {
+      "content": "The",
+      "cues": [],
+      "termIdx": 25,
+      "nextTermIdx": [
+        26
+      ],
+      "prevTermIdx": [
+        24
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 4,
+      "sectionIdx": 4
+    },
+    {
+      "content": "quick",
+      "cues": [
+        "adjective"
+      ],
+      "termIdx": 26,
+      "nextTermIdx": [
+        27
+      ],
+      "prevTermIdx": [
+        25
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 4,
+      "sectionIdx": 4
+    },
+    {
+      "content": "brown",
+      "cues": [],
+      "termIdx": 27,
+      "nextTermIdx": [
+        28
+      ],
+      "prevTermIdx": [
+        26
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 4,
+      "sectionIdx": 4
+    },
+    {
+      "content": "fox",
+      "cues": [
+        "noun"
+      ],
+      "termIdx": 28,
+      "nextTermIdx": [
+        29
+      ],
+      "prevTermIdx": [
+        27
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 4,
+      "sectionIdx": 4
+    },
+    {
+      "content": "jumped",
+      "cues": [
+        "verb"
+      ],
+      "termIdx": 29,
+      "nextTermIdx": [
+        30
+      ],
+      "prevTermIdx": [
+        28
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 4,
+      "sectionIdx": 4
+    },
+    {
+      "content": "The",
+      "cues": [],
+      "termIdx": 30,
+      "nextTermIdx": [
+        31
+      ],
+      "prevTermIdx": [
+        29
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 5,
+      "sectionIdx": 5
+    },
+    {
+      "content": "phone",
+      "cues": [],
+      "termIdx": 31,
+      "nextTermIdx": [
+        32
+      ],
+      "prevTermIdx": [
+        30
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 5,
+      "sectionIdx": 5
+    },
+    {
+      "content": "number",
+      "cues": [],
+      "termIdx": 32,
+      "nextTermIdx": [
+        33
+      ],
+      "prevTermIdx": [
+        31
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 5,
+      "sectionIdx": 5
+    },
+    {
+      "content": "is",
+      "cues": [],
+      "termIdx": 33,
+      "nextTermIdx": [
+        34
+      ],
+      "prevTermIdx": [
+        32
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 5,
+      "sectionIdx": 5
+    },
+    {
+      "content": "4",
+      "cues": [],
+      "termIdx": 34,
+      "nextTermIdx": [
+        35
+      ],
+      "prevTermIdx": [
+        33
+      ],
+      "altpronunciation": "",
+      "altrecognition": "^(four|for|fore)$",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": true,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 5,
+      "sectionIdx": 5
+    },
+    {
+      "content": "0",
+      "cues": [],
+      "termIdx": 35,
+      "nextTermIdx": [
+        36
+      ],
+      "prevTermIdx": [
+        34
+      ],
+      "altpronunciation": "",
+      "altrecognition": "^(zero|oh)$",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": true,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 5,
+      "sectionIdx": 5
+    },
+    {
+      "content": "8",
+      "cues": [],
+      "termIdx": 36,
+      "nextTermIdx": [
+        37
+      ],
+      "prevTermIdx": [
+        35
+      ],
+      "altpronunciation": "",
+      "altrecognition": "^(eight|ate)$",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": true,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 5,
+      "sectionIdx": 5
+    },
+    {
+      "content": "2",
+      "cues": [],
+      "termIdx": 37,
+      "nextTermIdx": [
+        38
+      ],
+      "prevTermIdx": [
+        36
+      ],
+      "altpronunciation": "",
+      "altrecognition": "^(two|to|too)$",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": true,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 5,
+      "sectionIdx": 5
+    },
+    {
+      "content": "6",
+      "cues": [],
+      "termIdx": 38,
+      "nextTermIdx": [
+        39
+      ],
+      "prevTermIdx": [
+        37
+      ],
+      "altpronunciation": "",
+      "altrecognition": "^(six|sex)$",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": true,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 5,
+      "sectionIdx": 5
+    },
+    {
+      "content": "7",
+      "cues": [],
+      "termIdx": 39,
+      "nextTermIdx": [
+        40
+      ],
+      "prevTermIdx": [
+        38
+      ],
+      "altpronunciation": "",
+      "altrecognition": "seven",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": true,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 5,
+      "sectionIdx": 5
+    },
+    {
+      "content": "6",
+      "cues": [],
+      "termIdx": 40,
+      "nextTermIdx": [
+        41
+      ],
+      "prevTermIdx": [
+        39
+      ],
+      "altpronunciation": "",
+      "altrecognition": "^(six|sex)$",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": true,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 5,
+      "sectionIdx": 5
+    },
+    {
+      "content": "0",
+      "cues": [],
+      "termIdx": 41,
+      "nextTermIdx": [
+        42
+      ],
+      "prevTermIdx": [
+        40
+      ],
+      "altpronunciation": "",
+      "altrecognition": "^(zero|oh)$",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": true,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 5,
+      "sectionIdx": 5
+    },
+    {
+      "content": "7",
+      "cues": [],
+      "termIdx": 42,
+      "nextTermIdx": [
+        43
+      ],
+      "prevTermIdx": [
+        41
+      ],
+      "altpronunciation": "",
+      "altrecognition": "seven",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": true,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 5,
+      "sectionIdx": 5
+    },
+    {
+      "content": "6",
+      "cues": [],
+      "termIdx": 43,
+      "nextTermIdx": [],
+      "prevTermIdx": [
+        42
+      ],
+      "altpronunciation": "",
+      "altrecognition": "^(six|sex)$",
+      "recitable": true,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": true,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 5,
+      "sectionIdx": 5
+    }
+  ],
+  "headingList": [],
+  "sectionList": [
+    {
+      "firstTermIdx": 0,
+      "lastTermIdx": 5,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 6,
+      "lastTermIdx": 12,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 13,
+      "lastTermIdx": 17,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 18,
+      "lastTermIdx": 24,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 25,
+      "lastTermIdx": 29,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 30,
+      "lastTermIdx": 43,
+      "type": "paragraph"
+    }
+  ],
+  "sentenceList": [
+    {
+      "firstTermIdx": 0,
+      "lastTermIdx": 5,
+      "lastPunctuation": "."
+    },
+    {
+      "firstTermIdx": 6,
+      "lastTermIdx": 12,
+      "lastPunctuation": "."
+    },
+    {
+      "firstTermIdx": 13,
+      "lastTermIdx": 17,
+      "lastPunctuation": "."
+    },
+    {
+      "firstTermIdx": 18,
+      "lastTermIdx": 24,
+      "lastPunctuation": "."
+    },
+    {
+      "firstTermIdx": 25,
+      "lastTermIdx": 29,
+      "lastPunctuation": "."
+    },
+    {
+      "firstTermIdx": 30,
+      "lastTermIdx": 43,
+      "lastPunctuation": ""
+    }
+  ],
+  "linkList": [],
+  "fillinList": [
+    {
+      "idx": 0,
+      "showHelpPresets": false,
+      "helpPresetLevel": -1,
+      "authorHelpSetting": {
+        "description": "no description",
+        "responsesLabel": "",
+        "promptsLabel": "4",
+        "layout": "grid",
+        "sortOrder": "insert",
+        "gridColumns": 6,
+        "showResponseHints": false,
+        "showPromptHints": false,
+        "groupByCategory": false,
+        "showResponsesInPrompts": false,
+        "unique": true,
+        "showReferenceCount": true,
+        "helpfulness": 304
+      },
+      "currentHelpSetting": {
+        "description": "no description",
+        "responsesLabel": "",
+        "promptsLabel": "4",
+        "layout": "grid",
+        "sortOrder": "insert",
+        "gridColumns": 6,
+        "showResponseHints": false,
+        "showPromptHints": false,
+        "groupByCategory": false,
+        "showResponsesInPrompts": false,
+        "unique": true,
+        "showReferenceCount": true,
+        "helpfulness": 304
+      },
+      "allowReset": false,
+      "promptColumns": 1,
+      "responses": [
+        {
+          "content": "market",
+          "category": "",
+          "referenceCount": 1
+        },
+        {
+          "content": "market",
+          "category": "",
+          "referenceCount": 1
+        },
+        {
+          "content": "(408) 267-6076",
+          "category": "",
+          "referenceCount": 1
+        }
+      ],
+      "loaded": false,
+      "modified": false
+    }
+  ]
+}

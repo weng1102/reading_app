@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2023 Wen Eng - All Rights Reserved
  *
  * File name: reactcomp_speech.tsx
  *
@@ -17,6 +17,10 @@
 import { useAppSelector } from "./hooks";
 import { useEffect, useState, useContext } from "react";
 import { CPageLists } from "./pageContext";
+import UserAgent from "user-agents";
+import UAParser from "ua-parser-js";
+import { parse } from "useragent";
+//import { parse } from "useragent";
 import {
   ISpeechSettings,
   ISettingsContext,
@@ -27,16 +31,43 @@ import {
 class CSpeechSynthesizer {
   constructor() {
     this.paramObj = new SpeechSynthesisUtterance();
+    // const userAgent = new UserAgent();
+    const parser = new UAParser();
+    // console.log(parser.getResult());
+    // parser.setUA(navigator.userAgent);
+    // let os: string = parser.getOS();
+    // console.log(`os=${os}`);
+    let os: string = parser.getOS().name!;
+    console.log(`os=${os}`);
+    // console.log(`os=${parse(userAgent.toSt.os}`);
+    // console.log(`userAgent.data.platform=${userAgent.data.platform}`);
+    // console.log(
+    //   `userAgent=${parser.setUA(navigator.userAgent).getResult().os}`
+    // );
+    // console.log(`userAgent=${navigator.userAgent}`);
+    if (os.indexOf("Mac") === 0) {
+      this.selectedVoiceIndex = 33; // samantha
+      // window.speechSynthesis
+      //   .getVoices()
+      //   .map((voice: SpeechSynthesisVoice, key: any) => {
+      //     console.log(`voice[${key}]=${voice}`);
+      //   });
+      // console.log(`mac voices`);
+    } else {
+      this.selectedVoiceIndex = 2; // zira
+      // console.log(`win voices`);
+    }
   }
   paramObj: SpeechSynthesisUtterance;
   voiceList: SpeechSynthesisVoice[] = [];
-  selectedVoiceIndex: number = 2;
+  selectedVoiceIndex: number;
+  // who is this decault voice? differs from windows to osx
   get voices(): SpeechSynthesisVoice[] {
     return this.voiceList;
   }
   setVoice(voice: string, selectedIndex: number) {
-    console.log(`voice=${voice}`);
     //    this.paramObj.voice = this.voiceList[voice];
+    this.selectedVoiceIndex = selectedIndex;
   }
   set volume(vol: number) {
     this.paramObj.volume = vol;
@@ -78,10 +109,11 @@ export const SpeechMonitor = () => {
   // const test: boolean = useAppSelector(store => store.test);
 
   let message: string = "";
-  useEffect(() => {
-    Synthesizer.voiceList = window.speechSynthesis.getVoices(); // loaded asynchronously
-    Synthesizer.paramObj.voice = Synthesizer.voiceList[2]; // US woman
-  }, []);
+  // useEffect(() => {
+  //   Synthesizer.voiceList = window.speechSynthesis.getVoices(); // loaded asynchronously
+  //   // console.log(Synthesizer.voiceList);
+  //   Synthesizer.paramObj.voice = Synthesizer.voiceList[this.selectedVoiceIndex]; // US woman
+  // }, []);
 
   // const pageLoaded: boolean = useAppSelector(store => store.page_loaded);
 
@@ -295,10 +327,19 @@ const VoiceSelector = (props: IVoiceSelectorProps) => {
   }, []);
   //  let voices: SpeechSynthesisVoice[] = Synthesizer.voices;
   const onChangeValue = (event: any) => {
-    console.log(`onchange=${event.target.value}`);
+    // console.log(`VoiceSelector: props.voiceIdx=${props.voiceIndex}`);
     Synthesizer.setVoice(event.target.value, event.target.selectedIndex);
     props.setVoiceIndex(event.target.selectedIndex);
   };
+  const testVoice = (event: any) => {
+    Synthesizer.speak("You have selected my voice");
+  };
+  // console.log(`VoiceSelector: props.voiceIdx=${props.voiceIndex}`);
+  // let voiceList: SpeechSynthesisVoice[] = window.speechSynthesis.getVoices();
+  // console.log(`VoiceSelector: =${window.speechSynthesis.getVoices()}`);
+  // let voiceIndex: number = props.voiceIndex;
+  // let voiceName: string = voiceList[props.voiceIndex].name;
+  // console.log(`voiceName=${voiceName}`);
   return (
     <>
       <div className="settings-grid-section-header">Voice Selection</div>
@@ -306,17 +347,23 @@ const VoiceSelector = (props: IVoiceSelectorProps) => {
         <div className="settings-grid-col2-label">Voice:</div>
         <select
           className="ddlb-voiceselect settings-grid-col2-control"
-          defaultValue={props.voiceIndex}
           onChange={onChangeValue}
         >
           {window.speechSynthesis
             .getVoices()
             .map((voice: SpeechSynthesisVoice, key: any) => (
-              <option id={key} key={voice.voiceURI}>
+              <option
+                id={key}
+                key={voice.voiceURI}
+                selected={props.voiceIndex === key}
+              >
                 {voice.name}
               </option>
             ))}
         </select>
+        <button onClick={testVoice} value="Test voice">
+          Test
+        </button>
       </div>
     </>
   );

@@ -37,7 +37,8 @@ import { ITerminalNode, TerminalNode_MLTAG_ } from "./parseterminals";
 import {
   CardinalNumberMap,
   MonthFromAbbreviationMap,
-  OrdinalNumberMap
+  OrdinalNumberPronunciationMap,
+  OrdinalNumberRecognitionMap
 } from "./utilities";
 
 export class TerminalNode_MLTAG_DATE extends TerminalNode_MLTAG_
@@ -54,8 +55,9 @@ export class TerminalNode_MLTAG_DATE extends TerminalNode_MLTAG_
     assert(token !== undefined, `token undefined ${postfix}`);
     assert(token.type === TokenType.NUMBER, `expected number ${postfix}`);
     day.content = token.content;
-    if (OrdinalNumberMap.has(token.content)) {
-      day.altpronunciation = OrdinalNumberMap.get(token.content)!;
+    if (OrdinalNumberPronunciationMap.has(token.content)) {
+      day.altpronunciation = OrdinalNumberPronunciationMap.get(token.content)!;
+      day.altrecognition = OrdinalNumberRecognitionMap.get(token.content)!;
     }
     return day;
   }
@@ -82,17 +84,31 @@ export class TerminalNode_MLTAG_DATE extends TerminalNode_MLTAG_
     assert(token.length === 4, `expected four numerals ${postfix}`);
     year.century.content = token.content.substring(0, 2);
     year.withinCentury.content = token.content.substring(2, 4);
-    if (year.century.content.substr(1, 1) === "0") {
-      // special case: first decade of millennia (and perhaps first century
-      // for simplicity) should be pronounced one thousand (1001),
+    if (
+      year.century.content.substr(0, 1) !== "0" &&
+      year.century.content.substr(1, 1) === "0"
+    ) {
+      // still need to manage special case:
+      // first decade of millennia (and perhaps first century
+      // for simplicity e.g. 100AD) should be pronounced one thousand (1001),
       // thousand two (2002) vs. ten or twenty respectively
       year.century.altpronunciation = `(${CardinalNumberMap.get(
+        year.century.content.slice(0, 1)
+      )} thousand)`;
+      year.century.altrecognition = `(${CardinalNumberMap.get(
         year.century.content.slice(0, 1)
       )} thousand)`;
       year.withinCentury.altpronunciation = `(${CardinalNumberMap.get(
         year.withinCentury.content
       )})`;
     }
+    year.century.altrecognition = `(${CardinalNumberMap.get(
+      year.century.content.slice(0, 1)
+    )} thousand)`;
+    year.withinCentury.altrecognition = `(${CardinalNumberMap.get(
+      year.withinCentury.content
+    )}|[0-9][0-9]${year.withinCentury.content})`;
+
     return year;
   }
   parseWhitespace(token: Token): ITerminalInfo {
@@ -159,8 +175,22 @@ export class TerminalNode_MLTAG_DATE1 extends TerminalNode_MLTAG_DATE
       );
       // this.meta.month.termIdx = this.userContext.nextTerminalIdx;
       this.content = this.content + token.content;
-
       token = tokenList.shift()!;
+      //    optional period
+      if (
+        token !== undefined &&
+        token.type === TokenType.PUNCTUATION &&
+        token.content === TokenLiteral.DOT &&
+        this.meta.month.content.length === 3 // will erroneously match "May."
+      ) {
+        this.meta.punctuation1.content = token.content;
+        // this.meta.punctuation1.visible = true;
+        // this.meta.punctuation1.audible = false;
+        // this.meta.punctuation1.recitable = false;
+        // this.termIdx = this.userContext.terminals.push(ITerminalListItemInitializer(this.meta.punctuation1));
+        this.content = this.content + token.content;
+        token = tokenList.shift()!;
+      }
       this.meta.whitespace2 = this.parseWhitespace(token);
       // this.meta.whitespace2.termIdx = this.userContext.terminals.push(ITerminalListItemInitializer(this.meta.whitespace2));
       this.content = this.content + token.content;
@@ -215,6 +245,11 @@ export class TerminalNode_MLTAG_DATE1 extends TerminalNode_MLTAG_DATE
           super.serialize(
             format,
             `[${this.meta.month.termIdx}]:{${this.meta.month.content}} ${this.meta.month.altpronunciation}`,
+            prefix
+          ) +
+          super.serialize(
+            format,
+            `{${this.meta.punctuation1.content}}`,
             prefix
           ) +
           super.serialize(
@@ -383,6 +418,7 @@ export class TerminalNode_MLTAG_DATE2 extends TerminalNode_MLTAG_DATE
       this.content = this.content + token.content;
 
       // optional punctuation for abbreviated month
+
       token = tokenList.shift()!;
       if (
         token !== undefined &&

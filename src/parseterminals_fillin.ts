@@ -73,6 +73,9 @@ export class TerminalNode_MLTAG_FILLIN extends TerminalNode_MLTAG_
         token = tokenList[0] //  peek
       ) {
         assert(token !== undefined, `undefined token detected`);
+        //      console.log(`parseterminal_fillin: ${token.content}`);
+        //consolidate all of fillin and determine validity get TerminalNode
+        // console.log(`parseterminal_fillin: ${token.content}`);
         let terminalNode: ITerminalNode = GetTerminalNode(token, this._parent);
         // SHOULD report whether terminal type is supported then unwind/move
         // to next valid terminal.

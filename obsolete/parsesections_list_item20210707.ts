@@ -8,7 +8,7 @@ import {
 import {
   // IDataSource,
   MarkdownSectionTagType,
-  MarkdownTagType,
+  MarkdownRecordType,
   // BasicMarkdownSource,
   // RawMarkdownSource,
   TaggedStringType,
@@ -81,11 +81,11 @@ export class SectionParseNode_LIST_ITEMS extends SectionParseNode_LIST
       let current: TaggedStringType = this.dataSource.currentRecord();
       assert(current !== undefined, `current record is undefined`);
       assert(
-        current.tagType === MarkdownTagType.SECTION_ORDERED ||
-          current.tagType === MarkdownTagType.SECTION_UNORDERED,
-        `expected ${MarkdownTagType.SECTION_ORDERED} or ${MarkdownTagType.SECTION_UNORDERED} at line ${current.lineNo}`
+        current.tagType === MarkdownRecordType.SECTION_ORDERED ||
+          current.tagType === MarkdownRecordType.SECTION_UNORDERED,
+        `expected ${MarkdownRecordType.SECTION_ORDERED} or ${MarkdownRecordType.SECTION_UNORDERED} at line ${current.lineNo}`
       );
-      // if (current.tagType === MarkdownTagType.SECTION_UNORDERED) {
+      // if (current.tagType === MarkdownRecordType.SECTION_UNORDERED) {
       //   this.meta.listType = ListTypeEnumType.bulleted;
       // } else {
       //   this.meta.listType = ListTypeEnumType.numerical;
@@ -103,8 +103,8 @@ export class SectionParseNode_LIST_ITEMS extends SectionParseNode_LIST
       );
       current = this.dataSource.previousRecord();
       assert(
-        current.tagType === MarkdownTagType.SECTION_END,
-        `expected ${MarkdownTagType.SECTION_END} but encountered ${current.tagType}
+        current.tagType === MarkdownRecordType.SECTION_END,
+        `expected ${MarkdownRecordType.SECTION_END} but encountered ${current.tagType}
        at line ${current.lineNo}`
       );
       current = this.dataSource.nextRecord();
@@ -202,36 +202,36 @@ export class SectionParseNode_LIST_ORDERED extends SectionParseNode_LIST
       let current: TaggedStringType = this.dataSource.currentRecord();
       assert(current !== undefined, `current record is undefined`);
       assert(
-        current.tagType === MarkdownTagType.SECTION_UNORDERED,
-        `expected ${MarkdownTagType.SECTION_UNORDERED} at line ${current.lineNo}`
+        current.tagType === MarkdownRecordType.SECTION_UNORDERED,
+        `expected ${MarkdownRecordType.SECTION_UNORDERED} at line ${current.lineNo}`
       );
       // for each record expect either listItem or deeper subsection (i.e., ordered or unordered)
       // or corresponding section end, otherwise error.
       let previous: TaggedStringType = current;
       current = this.dataSource.nextRecord();
       assert(
-        current.tagType === MarkdownTagType.LISTITEM_UNORDERED ||
-          (current.tagType === MarkdownTagType.SECTION_UNORDERED &&
+        current.tagType === MarkdownRecordType.LISTITEM_UNORDERED ||
+          (current.tagType === MarkdownRecordType.SECTION_UNORDERED &&
             current.depth === previous.depth + 1) ||
-          (current.tagType === MarkdownTagType.SECTION_ORDERED &&
+          (current.tagType === MarkdownRecordType.SECTION_ORDERED &&
             current.depth === previous.depth + 1) ||
-          (current.tagType === MarkdownTagType.SECTION_END &&
+          (current.tagType === MarkdownRecordType.SECTION_END &&
             current.depth === previous.depth),
         `unexpected ${current.tagType} at line ${current.lineNo}`
       );
       for (
         ;
         !this.dataSource.EOF() &&
-        current.tagType !== MarkdownTagType.SECTION_END;
+        current.tagType !== MarkdownRecordType.SECTION_END;
         current = this.dataSource.nextRecord()
       ) {
         this.logger.diagnostic(`switch(): ${current.tagType}`);
         switch (current.tagType) {
-          case MarkdownTagType.LISTITEM_UNORDERED: {
+          case MarkdownRecordType.LISTITEM_UNORDERED: {
             current = this.dataSource.nextRecord();
             assert(
-              current.tagType === MarkdownTagType.PARAGRAPH,
-              `expected ${MarkdownTagType.PARAGRAPH} but encountered ${current.tagType}
+              current.tagType === MarkdownRecordType.PARAGRAPH,
+              `expected ${MarkdownRecordType.PARAGRAPH} but encountered ${current.tagType}
              at line ${current.lineNo}`
             );
             let paragraph = new SectionParseNode_PARAGRAPH(this);
@@ -239,13 +239,13 @@ export class SectionParseNode_LIST_ORDERED extends SectionParseNode_LIST
             this.meta.items.push(paragraph);
             current = this.dataSource.nextRecord();
             assert(
-              current.tagType === MarkdownTagType.LISTITEM_END,
-              `expected ${MarkdownTagType.LISTITEM_END} but encountered ${current.tagType}
+              current.tagType === MarkdownRecordType.LISTITEM_END,
+              `expected ${MarkdownRecordType.LISTITEM_END} but encountered ${current.tagType}
              at line ${current.lineNo}`
             );
             break;
           }
-          case MarkdownTagType.SECTION_ORDERED: {
+          case MarkdownRecordType.SECTION_ORDERED: {
             assert(
               current.depth === previous.depth + 1,
               `expected depth of ${previous.depth + 1} encountered depth of ${
@@ -257,13 +257,13 @@ export class SectionParseNode_LIST_ORDERED extends SectionParseNode_LIST
             this.meta.items.push(section);
             current = this.dataSource.nextRecord();
             // assert(
-            //   current.tagType === MarkdownTagType.SECTION_END,
-            //   `expected ${MarkdownTagType.LISTITEM_END} but encountered ${current.tagType}
+            //   current.tagType === MarkdownRecordType.SECTION_END,
+            //   `expected ${MarkdownRecordType.LISTITEM_END} but encountered ${current.tagType}
             //    at line ${current.lineNo}`
             // );
             break;
           }
-          case MarkdownTagType.SECTION_UNORDERED: {
+          case MarkdownRecordType.SECTION_UNORDERED: {
             assert(
               current.depth === previous.depth + 1,
               `expected depth of ${previous.depth + 1} encountered depth of ${
@@ -278,15 +278,15 @@ export class SectionParseNode_LIST_ORDERED extends SectionParseNode_LIST
           }
           default:
             assert(
-              //            current.tagType === MarkdownTagType.SECTION_END,
-              `expected ${MarkdownTagType.SECTION_END} but encountered ${current.tagType}
+              //            current.tagType === MarkdownRecordType.SECTION_END,
+              `expected ${MarkdownRecordType.SECTION_END} but encountered ${current.tagType}
            at line ${current.lineNo}`
             );
             break;
         }
         assert(
-          current.tagType === MarkdownTagType.SECTION_END,
-          `expected ${MarkdownTagType.SECTION_END} but encountered ${current.tagType}
+          current.tagType === MarkdownRecordType.SECTION_END,
+          `expected ${MarkdownRecordType.SECTION_END} but encountered ${current.tagType}
          at line ${current.lineNo}`
         );
         current = this.dataSource.nextRecord();
@@ -362,8 +362,8 @@ export class SectionParseNode_LIST_UNORDERED extends SectionParseNode_LIST
       let current: TaggedStringType = this.dataSource.currentRecord();
       assert(current !== undefined, `current record is undefined`);
       assert(
-        current.tagType === MarkdownTagType.SECTION_UNORDERED,
-        `expected ${MarkdownTagType.SECTION_UNORDERED} at line ${current.lineNo}`
+        current.tagType === MarkdownRecordType.SECTION_UNORDERED,
+        `expected ${MarkdownRecordType.SECTION_UNORDERED} at line ${current.lineNo}`
       );
       this.logger.diagnostic(
         `${this.constructor.name} at depth=${this.meta.depth}`
@@ -373,28 +373,28 @@ export class SectionParseNode_LIST_UNORDERED extends SectionParseNode_LIST
       let previous: TaggedStringType = current;
       current = this.dataSource.nextRecord();
       assert(
-        current.tagType === MarkdownTagType.LISTITEM_UNORDERED ||
-          (current.tagType === MarkdownTagType.SECTION_UNORDERED &&
+        current.tagType === MarkdownRecordType.LISTITEM_UNORDERED ||
+          (current.tagType === MarkdownRecordType.SECTION_UNORDERED &&
             current.depth === previous.depth + 1) ||
-          (current.tagType === MarkdownTagType.SECTION_ORDERED &&
+          (current.tagType === MarkdownRecordType.SECTION_ORDERED &&
             current.depth === previous.depth + 1) ||
-          (current.tagType === MarkdownTagType.SECTION_END &&
+          (current.tagType === MarkdownRecordType.SECTION_END &&
             current.depth === previous.depth),
         `unexpected ${current.tagType} at line ${current.lineNo}`
       );
       for (
         ;
         !this.dataSource.EOF() &&
-        current.tagType !== MarkdownTagType.SECTION_END; //&& current.depth === previous.depth;
+        current.tagType !== MarkdownRecordType.SECTION_END; //&& current.depth === previous.depth;
         current = this.dataSource.nextRecord()
       ) {
         this.logger.diagnostic(`switch(): ${current.tagType}`);
         switch (current.tagType) {
-          case MarkdownTagType.LISTITEM_UNORDERED: {
+          case MarkdownRecordType.LISTITEM_UNORDERED: {
             current = this.dataSource.nextRecord();
             assert(
-              current.tagType === MarkdownTagType.PARAGRAPH,
-              `expected ${MarkdownTagType.PARAGRAPH} but encountered ${current.tagType}
+              current.tagType === MarkdownRecordType.PARAGRAPH,
+              `expected ${MarkdownRecordType.PARAGRAPH} but encountered ${current.tagType}
              at line ${current.lineNo}`
             );
             let paragraph = new SectionParseNode_PARAGRAPH(this);
@@ -403,15 +403,15 @@ export class SectionParseNode_LIST_UNORDERED extends SectionParseNode_LIST
             current = this.dataSource.nextRecord();
             this.logger.diagnostic(`after paragraph: ${current.tagType}`);
             assert(
-              current.tagType === MarkdownTagType.LISTITEM_END,
-              `expected ${MarkdownTagType.LISTITEM_END} but encountered ${current.tagType}
+              current.tagType === MarkdownRecordType.LISTITEM_END,
+              `expected ${MarkdownRecordType.LISTITEM_END} but encountered ${current.tagType}
              at line ${current.lineNo}`
             );
             //  current = this.dataSource.nextRecord();
             //  this.logger.diagnostic(`after listItem: ${current.tagType}`);
             break;
           }
-          case MarkdownTagType.SECTION_ORDERED: {
+          case MarkdownRecordType.SECTION_ORDERED: {
             assert(
               current.depth === previous.depth + 1,
               `expected depth of ${previous.depth + 1} encountered depth of ${
@@ -423,13 +423,13 @@ export class SectionParseNode_LIST_UNORDERED extends SectionParseNode_LIST
             this.items.push(section);
             current = this.dataSource.nextRecord();
             // assert(
-            //   current.tagType === MarkdownTagType.SECTION_END,
-            //   `expected ${MarkdownTagType.LISTITEM_END} but encountered ${current.tagType}
+            //   current.tagType === MarkdownRecordType.SECTION_END,
+            //   `expected ${MarkdownRecordType.LISTITEM_END} but encountered ${current.tagType}
             //    at line ${current.lineNo}`
             // );
             break;
           }
-          case MarkdownTagType.SECTION_UNORDERED: {
+          case MarkdownRecordType.SECTION_UNORDERED: {
             assert(
               current.depth === previous.depth + 1,
               `expected depth of ${previous.depth + 1} encountered depth of ${
@@ -444,8 +444,8 @@ export class SectionParseNode_LIST_UNORDERED extends SectionParseNode_LIST
           }
           default:
             assert(
-              //            current.tagType === MarkdownTagType.SECTION_END,
-              `expected ${MarkdownTagType.SECTION_END} but encountered ${current.tagType}
+              //            current.tagType === MarkdownRecordType.SECTION_END,
+              `expected ${MarkdownRecordType.SECTION_END} but encountered ${current.tagType}
            at line ${current.lineNo}`
             );
             break;
@@ -463,8 +463,8 @@ export class SectionParseNode_LIST_UNORDERED extends SectionParseNode_LIST
       );
       current = this.dataSource.previousRecord();
       assert(
-        current.tagType === MarkdownTagType.SECTION_END,
-        `expected ${MarkdownTagType.SECTION_END} but encountered ${current.tagType}
+        current.tagType === MarkdownRecordType.SECTION_END,
+        `expected ${MarkdownRecordType.SECTION_END} but encountered ${current.tagType}
        at line ${current.lineNo}`
       );
       current = this.dataSource.nextRecord();

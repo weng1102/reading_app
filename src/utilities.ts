@@ -326,7 +326,7 @@ export const MonthFromAbbreviationMap = new Map([
   ["nov", "november"],
   ["dec", "december"]
 ]);
-export const OrdinalNumberMap = new Map([
+export const OrdinalNumberPronunciationMap = new Map([
   // could be coded as switch on ones digit except the teens
   ["1", "1st"],
   ["2", "2nd"],
@@ -359,6 +359,40 @@ export const OrdinalNumberMap = new Map([
   ["29", "29th"],
   ["30", "30th"],
   ["31", "31st"]
+]);
+export const OrdinalNumberRecognitionMap = new Map([
+  // could be coded as switch on ones digit except the teens
+  ["1", "^(1st|first)$"],
+  ["2", "^(2nd|second)$"],
+  ["3", "^(3rd|third)$"],
+  ["4", "^(4th,fourth)$"],
+  ["5", "^(5th|fifth)$"],
+  ["6", "^(6th|sixth)$"],
+  ["7", "^(7th|seventh)$"],
+  ["8", "^(8th|eighth)$"],
+  ["9", "^(9th|ninth)$"],
+  ["10", "^(10th|tenth)$"],
+  ["11", "^(11th|eleventh)$"],
+  ["12", "12th"],
+  ["13", "13th"],
+  ["14", "14th"],
+  ["15", "15th"],
+  ["16", "16th"],
+  ["17", "17th"],
+  ["18", "18th"],
+  ["19", "19th"],
+  ["20", "20th"],
+  ["21", "^(21st|twenty-first)$"],
+  ["22", "22nd"],
+  ["23", "23rd"],
+  ["24", "24th"],
+  ["25", "25th"],
+  ["26", "26th"],
+  ["27", "27th"],
+  ["28", "28th"],
+  ["29", "29th"],
+  ["30", "30th"],
+  ["31", "^(31st|thirthy-first)$"]
 ]);
 export const CardinalNumberMap = new Map([
   ["0", "zero"],

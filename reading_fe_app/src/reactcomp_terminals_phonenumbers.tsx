@@ -1,6 +1,6 @@
-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2023 Wen Eng - All Rights Reserved
  *
- * File name: reactcomps_terminal_emailaddress.tsx
+ * File name: reactcomps_terminal_phonenumbers.tsx
  *
  * Defines React front end functional components.
  * renders US phone numbers

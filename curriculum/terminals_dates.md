@@ -11,8 +11,10 @@ New year's Day is 1 January 2022.
 # Date format 2: MMM DDD, YYYY
 
 Mommy's birthday is on Oct. 28, 2021.
+Mommy's birthdate is Oct. 28, 1962.
 New year's Day is Jan. 1, 2022.
 New year's Day is January 1, 2022.
+I remember September 11, 2001.
 
 # Date format 3: MMM DD
 
@@ -20,8 +22,9 @@ Mommy's birthday is on October 28 which is a Thursday this year.
 New year's Day is Jan. 10.
 New year's Day is January 1.
 New year's Day is January 2.
-New year's Day is January 09.
+New year's Day is January 9.
 New year's Day is January 10.
 New year's Day is January 10.
+New year's Day is January 21.
 New year's Day is Jan. 12 in middle of sentence.
 New year's Day is January 11 in middle of sentence.

@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2023 Wen Eng - All Rights Reserved
  *
  * File name: settingsContext.ts
  *
@@ -15,7 +15,15 @@
  *
  **/
 import React from "react";
-
+import { Synthesizer } from "./reactcomp_speech";
+import {
+  ISectionFillinHelpSetting,
+  ISectionFillinHelpPresets,
+  ISectionFillinHelpSettingInitializer,
+  ISectionFillinHelpPresetsInitializer,
+  SectionFillinLayoutType,
+  SectionFillinSortOrder
+} from "./pageContentType";
 export enum RecitationMode {
   wordOnly = "word only",
   wordNext = "word (then advance)",
@@ -42,6 +50,7 @@ export const SettingsInitializer = (
   speech: ISpeechSettings = SpeechSettingsInitializer(),
   listen: IListenSettings = ListenSettingsInitializer()
 ): ISettings => {
+  // console.log(`retrieve voice and index`);
   return {
     config,
     speech,
@@ -54,6 +63,7 @@ export interface IConfigSettings {
   firstName: string;
   lastName: string;
   showSitemap: boolean;
+  fillinHelpPresets: ISectionFillinHelpPresets;
 }
 export interface ISpeechSettings {
   recitationMode: RecitationMode;
@@ -73,14 +83,16 @@ export function ConfigSettingsInitializer(
   distDir: string = "https://weng1102.github.io/reading-companion/",
   firstName: string = "Ronlyn",
   lastName: string = "Goo",
-  showSitemap: boolean = false
+  showSitemap: boolean = false,
+  fillinHelpPresets: ISectionFillinHelpPresets = ISectionFillinHelpPresetsInitializer()
 ): IConfigSettings {
   return {
     homePage,
     distDir,
     firstName,
     lastName,
-    showSitemap
+    showSitemap,
+    fillinHelpPresets
   };
 }
 export function SpeechSettingsInitializer(
@@ -91,7 +103,8 @@ export function SpeechSettingsInitializer(
   pitch: number = 0,
   rate: number = 0,
   volume: number = 0.5,
-  selectedVoiceIndex: number = 0
+  selectedVoiceIndex: number = Synthesizer.selectedVoiceIndex, // ms female voice
+  os: string = "windows"
 ): ISpeechSettings {
   return {
     recitationMode,
