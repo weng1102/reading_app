@@ -433,7 +433,8 @@ export const HelpSettings = () => {
   // control manages presentation
   let fillinContext = useContext(SectionFillinContext);
   const [showHelp, setShowHelp] = useState(
-    fillinContext.sectionFillin.showHelpPresets
+    false
+    //    fillinContext.sectionFillin.showHelpPresets
   );
   const onChangeValue = (event: any) => {
     let tick: number = +event.target.value;
