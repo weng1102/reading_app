@@ -432,30 +432,58 @@ export const ResetButton = (props: ISectionPropsType) => {
 export const HelpSettings = () => {
   // control manages presentation
   let fillinContext = useContext(SectionFillinContext);
+  const [presetLevel, setPresetLevel] = useState(
+    fillinContext.sectionFillin.helpPresetLevel
+  );
   const [showHelp, setShowHelp] = useState(
     false
     //    fillinContext.sectionFillin.showHelpPresets
   );
-  const onChangeValue = (event: any) => {
+  useEffect(() => {
+    console.log(`presetLevel changed to ${presetLevel}`);
+    let clone: ISectionFillinItem = cloneDeep(
+      fillinContext.sectionFillin,
+      fillinContext.sectionFillin.modified
+    );
+    clone.helpPresetLevel = presetLevel;
+    clone.currentHelpSetting =
+      SectionFillinHelpPresetInfo[presetLevel as SectionFillinHelpPresetLevel];
+    fillinContext.setSectionFillin(clone);
+  }, [presetLevel]);
+  const onChangeHelpSliderValue = (event: any) => {
     let tick: number = +event.target.value;
     if (
       tick in SectionFillinHelpPresetLevel &&
       fillinContext.sectionFillin.helpPresetLevel !== tick
     ) {
-      let clone: ISectionFillinItem = cloneDeep(
-        fillinContext.sectionFillin,
-        fillinContext.sectionFillin.modified
-      );
-      clone.helpPresetLevel = tick;
-      clone.currentHelpSetting =
-        SectionFillinHelpPresetInfo[tick as SectionFillinHelpPresetLevel];
-      fillinContext.setSectionFillin(clone);
+      setPresetLevel(tick);
     } else {
       console.log(`oops`);
     }
   };
-  const onButtonClick = () => {
+  const onShowHelpButtonClick = () => {
     setShowHelp(!showHelp);
+  };
+  const onLessHelp = () => {
+    let tick: number = presetLevel - 1;
+    if (
+      tick >= 0 &&
+      tick in SectionFillinHelpPresetLevel &&
+      fillinContext.sectionFillin.helpPresetLevel !== tick
+    ) {
+      setPresetLevel(tick);
+      console.log(`less help`);
+    }
+  };
+  const onMoreHelp = () => {
+    let tick: number = presetLevel + 1;
+    if (
+      tick in SectionFillinHelpPresetLevel &&
+      fillinContext.sectionFillin.helpPresetLevel !== tick
+    ) {
+      setPresetLevel(tick);
+      console.log(`more help`);
+    }
   };
   if (!fillinContext.sectionFillin.showHelpPresets) {
     return <></>;
@@ -472,7 +500,7 @@ export const HelpSettings = () => {
             alt="help"
             src={helpButton}
             title="help control"
-            onClick={() => onButtonClick()}
+            onClick={() => onShowHelpButtonClick()}
           />
         </div>
       </>
@@ -488,22 +516,32 @@ export const HelpSettings = () => {
               className="helpIcon"
               alt="help"
               src={helpButton}
-              title="help control"
-              onClick={() => onButtonClick()}
+              title="help button"
+              onClick={() => onShowHelpButtonClick()}
             />
           </div>
-          <div className="help-settings-grid-slider-left-label">less help</div>
+          <div
+            className="help-settings-grid-slider-left-label"
+            onClick={() => onLessHelp()}
+          >
+            less help
+          </div>
           <input
-            onChange={onChangeValue}
+            onChange={onChangeHelpSliderValue}
             className="help-settings-slider-control"
-            defaultValue={fillinContext.sectionFillin.helpPresetLevel}
+            value={fillinContext.sectionFillin.helpPresetLevel}
             type="range"
             min="0"
             max={tickCount}
             step="1"
             width="100%"
           />
-          <div className="help-settings-slider-grid-right-label">more help</div>
+          <div
+            className="help-settings-slider-grid-right-label"
+            onClick={() => onMoreHelp()}
+          >
+            more help
+          </div>
           <div className="help-settings-slider-grid-description">
             ({fillinContext.sectionFillin.currentHelpSetting.description})
           </div>
