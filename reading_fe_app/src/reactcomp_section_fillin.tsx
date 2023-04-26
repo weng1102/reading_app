@@ -497,9 +497,9 @@ export const HelpSettings = () => {
         <div className="help-settings-slider-grid-show-icon">
           <img
             className="helpIcon"
-            alt="help"
+            alt="toggle help"
             src={helpButton}
-            title="help control"
+            title="help button"
             onClick={() => onShowHelpButtonClick()}
           />
         </div>
@@ -514,9 +514,9 @@ export const HelpSettings = () => {
           <div className="help-settings-slider-grid-help-button">
             <img
               className="helpIcon"
-              alt="help"
+              alt="toggle help"
               src={helpButton}
-              title="help button"
+              title="show/hide button"
               onClick={() => onShowHelpButtonClick()}
             />
           </div>
@@ -534,7 +534,6 @@ export const HelpSettings = () => {
             min="0"
             max={tickCount}
             step="1"
-            width="100%"
           />
           <div
             className="help-settings-slider-grid-right-label"
