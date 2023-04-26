@@ -27,10 +27,12 @@ import {
 export enum RecitationMode {
   wordOnly = "word only",
   wordNext = "word (then advance)",
-  entireSentence = "entire sentence",
   uptoExclusive = "partial up to word (exclusive)",
   uptoInclusive = "partial up to word (inclusive)",
-  section = "section, paragraph, etc."
+  entireSentence = "entire sentence",
+  entireSentenceNext = "entire sentence (then advance)",
+  section = "section, paragraph, etc.",
+  sectionNext = "section, paragraph, etc. (then advance)"
 }
 export enum NotificationMode {
   sound = "sound",
@@ -101,7 +103,7 @@ export function SpeechSettingsInitializer(
   locale: string = "en-US",
   gender: string = "female",
   pitch: number = 0,
-  rate: number = 0,
+  rate: number = 1,
   volume: number = 0.5,
   selectedVoiceIndex: number = Synthesizer.selectedVoiceIndex, // ms female voice
   os: string = "windows"
