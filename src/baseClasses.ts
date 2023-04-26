@@ -87,15 +87,17 @@ class TerminalArray extends Array<ITerminalListItem> {
   }
   parse(): number {
     this.forEach(terminal => {
-      if (terminal.altrecognition.length === 0) {
-        terminal.altrecognition =
-          RecognitionDictionary[terminal.content] !== undefined
-            ? RecognitionDictionary[terminal.content]
-            : "";
-      }
+      //      if (terminal.altrecognition.length === 0) {
+      terminal.altrecognition =
+        RecognitionDictionary[terminal.content.toLowerCase()] !== undefined
+          ? RecognitionDictionary[terminal.content.toLowerCase()]
+          : "";
+      // } else {
+      //   console.log(`altrecog[${terminal.content}]=${terminal.altrecognition}`);
+      // }
       if (terminal.altpronunciation.length === 0)
         terminal.altpronunciation =
-          PronunciationDictionary[terminal.content] !== undefined
+          PronunciationDictionary[terminal.content.toLowerCase()] !== undefined
             ? PronunciationDictionary[terminal.content]
             : "";
     });
