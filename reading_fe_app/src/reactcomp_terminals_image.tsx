@@ -1,9 +1,9 @@
-/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2023 Wen Eng - All Rights Reserved
  *
  * File name: reactcomps_terminal_image.tsx
  *
  * Defines React front end functional components.
- * renders imageClasses
+ * renders imageClasses including ImageEntryImages
  *
  * Version history:
  *
@@ -11,19 +11,21 @@
 import React, { useContext } from "react";
 
 import { IImageTerminalMeta } from "./pageContentType";
-import { ITerminalPropsType } from "./reactcomp_terminals";
+import { ITerminalPropsType, TerminalImage } from "./reactcomp_terminals";
 import { ISettingsContext, SettingsContext } from "./settingsContext";
-export const TerminalImage = React.memo((props: ITerminalPropsType): any => {
-  let settingsContext: ISettingsContext = useContext(
-    SettingsContext
-  ) as ISettingsContext;
-  let distDir = settingsContext.settings.config.distDir;
-  let imageInfo: IImageTerminalMeta = props.terminal.meta as IImageTerminalMeta;
-  let path: string = `${distDir}/img/${imageInfo.src}`;
-  let imageClasses: string = "imageentry-image " + imageInfo.className;
-  return (
-    <>
-      <img className={imageClasses} src={path} alt={imageInfo.label} />
-    </>
-  );
-});
+
+export const TerminalImageEntry = React.memo(
+  (props: ITerminalPropsType): any => {
+    // FUTURE:image link to internal curriculum page link. Need to
+    // emit <a href with path/link to destination.
+    let imageInfo: IImageTerminalMeta = props.terminal
+      .meta as IImageTerminalMeta;
+    return (
+      <TerminalImage
+        active={props.active}
+        class={imageInfo.className}
+        imageInfo={imageInfo}
+      />
+    );
+  }
+);

@@ -24,6 +24,7 @@ import {
   ITerminalContent,
   ITerminalInfo,
   IAcronymTerminalMeta,
+  IImageTerminalMeta,
   INumeralsTerminalMeta,
   IPassthruTagTerminalMeta,
   TerminalMetaEnumType
@@ -33,9 +34,10 @@ import { SectionFillinContext } from "./fillinContext";
 import { TerminalDate } from "./reactcomp_terminals_dates";
 import { TerminalEmailaddress } from "./reactcomp_terminals_emailaddress";
 import { TerminalPhoneNumber } from "./reactcomp_terminals_phonenumbers";
-import { TerminalImage } from "./reactcomp_terminals_image";
+import { TerminalImageEntry } from "./reactcomp_terminals_image";
 import { TerminalLink } from "./reactcomp_terminals_link";
 import { TerminalFillin } from "./reactcomp_terminals_fillin";
+import { ISettingsContext, SettingsContext } from "./settingsContext";
 
 export interface ITerminalPropsType {
   active: boolean;
@@ -128,7 +130,7 @@ export const TerminalDispatcher = React.memo(
       case TerminalMetaEnumType.image:
         //active should be false regardless
         return (
-          <TerminalImage
+          <TerminalImageEntry
             active={
               currentTerminalIdx >= props.terminal.firstTermIdx &&
               currentTerminalIdx <= props.terminal.lastTermIdx
@@ -355,3 +357,27 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
     return <span>{props.terminalInfo.content}</span>;
   }
 });
+export interface ITerminalImagePropsType {
+  class: string;
+  active: boolean;
+  imageInfo: IImageTerminalMeta;
+}
+export const TerminalImage = React.memo(
+  (props: ITerminalImagePropsType): any => {
+    let settingsContext: ISettingsContext = useContext(
+      SettingsContext
+    ) as ISettingsContext;
+    let distDir = settingsContext.settings.config.distDir;
+    let path: string = `${distDir}/img/${props.imageInfo.src}`;
+    // imageInfo contains width/height that should not be used.
+    return (
+      <>
+        <img
+          className={props.imageInfo.className}
+          src={path}
+          alt={props.imageInfo.label}
+        />
+      </>
+    );
+  }
+);
