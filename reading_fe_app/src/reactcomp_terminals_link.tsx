@@ -37,4 +37,3 @@ export const TerminalLink = React.memo((props: ITerminalPropsType): any => {
     </>
   );
 });
-<></>;
