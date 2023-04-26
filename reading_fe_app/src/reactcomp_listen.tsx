@@ -68,11 +68,13 @@ export const ListeningMonitor = () => {
   const silenceTimeout: number = settingsContext.settings.listen.timeout;
   interface IRecognitionArguments {
     continuous: boolean;
+    interimResults: boolean;
     language: string;
   }
   const ContinuousListeningInEnglish: IRecognitionArguments = useMemo(
     () => ({
       continuous: true,
+      interimResults: true,
       language: "en-US"
     }),
     []
@@ -151,6 +153,9 @@ export const ListeningMonitor = () => {
   useEffect(() => {
     if (!listening && listeningRequested) {
       console.log(`restart listening because browser eventually times out`);
+      console.log(
+        `ContinuousListeningInEnglish=${ContinuousListeningInEnglish.interimResults},${ContinuousListeningInEnglish.continuous}`
+      );
       SpeechRecognition.startListening(ContinuousListeningInEnglish);
     }
   }, [listening, listeningRequested, ContinuousListeningInEnglish]);
@@ -187,11 +192,16 @@ export const ListeningMonitor = () => {
     if (!listening) {
       // console.log(`LISTENING: No longer listening...`);
       if (listeningRequested) {
+        console.log(`listening requested"`);
         // speech recognition timed out
         // console.log(`NO LONGER LISTENING...BUT LISTENING RESTARTED`);
+
         SpeechRecognition.startListening(ContinuousListeningInEnglish); // timeout periodically not
+      } else {
+        console.log(`listening not requested"`);
       }
     } else {
+      console.log(`still listening"`);
     }
     if (listening) {
       //
@@ -202,7 +212,7 @@ export const ListeningMonitor = () => {
         finalTranscriptEncountered = true;
         wordsHeard = finalTranscript;
         resetTranscript();
-        console.log(`final=${wordsHeard}`);
+        console.log(`**********final=${wordsHeard}`);
       } else {
         wordsHeard = interimTranscript;
         console.log(`interim=${interimTranscript}`);
@@ -218,8 +228,10 @@ export const ListeningMonitor = () => {
         // - a number (408) is 4, 0, 8 and not "four hundred eight"
         // - an address number, phone numbers, ssn, driver license number
         wordsHeardList = Array.from(wordsHeard);
+        console.log(`LISTENING: detecting number`);
       } else {
         wordsHeardList = wordsHeard.split(" ");
+        console.log(`LISTENING: detecting not number`);
       }
       console.log(`LISTENING: Tokenizing into list="${wordsHeardList}"`);
       //
@@ -227,8 +239,8 @@ export const ListeningMonitor = () => {
       //
       if (wordsHeard.length === 0) {
         // Heard nothing at all
-        resetListeningState();
-        console.log(`LISTENING: Detecting nothing: resetting everything`);
+        //resetListeningState();
+        console.log(`LISTENING: Detecting nothing: resetting state`);
         // } else if (wordsPreviouslyHeard === wordsHeard) {
         //   console.log(`detecting only previous words`);
         wordMatchingRequested = false;
@@ -236,28 +248,28 @@ export const ListeningMonitor = () => {
         wordsHeardPreviously.includes(wordsHeard) &&
         wordPosition === wordPositionPreviously
       ) {
+        wordMatchingRequested = false;
         //   // Heard nothing new
         //   // same word i.e., same word within same words heard list
         //   // the interim transcript still not completely processed
         console.log(
           `LISTENING: Detecting nothing else new only previously heard words: wordPosition=${wordPosition} wordPositionPreviously=${wordPositionPreviously} wordsHeard=""${wordsHeard}" wordsHeardList=""${wordsHeardList}" wordsHeardList.length=${wordsHeardList.length} wordsHeardPreviously=${wordsHeardPreviously}`
         );
-        wordMatchingRequested = false;
       } else if (
         wordsHeard === wordsHeardPreviously &&
         // wordPosition === wordPositionPreviously &&
         wordPosition === wordsHeardList.length - 1
       ) {
+        wordMatchingRequested = false;
         // Heard nothing new: previous and current are the same and word
         // position is pointing at the last word in the list
         // setWordPositionPreviously(-1);
         // setWordPosition(-1);
         // setWordsHeardPreviously("");
-        wordMatchingRequested = false;
         console.log(
           `LISTENING: Detecting nothing new: resetting everything except retries wordPosition=${wordPosition} wordPositionPreviously=${wordPositionPreviously} wordsHeard=""${wordsHeard}" wordsHeardList=""${wordsHeardList}" wordsHeardList.length=${wordsHeardList.length} wordsHeardPreviously=${wordsHeardPreviously}`
         );
-      } else if (wordPosition >= wordsHeardList.length) {
+      } else if (wordPosition > wordsHeardList.length) {
         wordMatchingRequested = false;
         console.log(
           `LISTENING: Detecting wordPosition=${wordPosition} exceeds wordsHeardList.length=${wordsHeardList.length} wordsHeardList=${wordsHeardList}`
@@ -275,6 +287,7 @@ export const ListeningMonitor = () => {
       // WORD MATCHING
       //
       if (wordMatchingRequested) {
+        console.log(`LISTENING: matching 1`);
         let matchMessage: string;
         startSilenceTimer();
         let expecting: string = pageContext.terminalList[
@@ -346,12 +359,13 @@ export const ListeningMonitor = () => {
         }
       }
       if (finalTranscriptEncountered) {
+        console.log(`LISTENING: finalTransceriptEncountered`);
         resetListeningState();
       }
       console.log(`END LISTENING: *****************"`);
     }
     return () => {
-      // console.log(`LISTENING: Clearing timer`);
+      console.log(`LISTENING: Clearing timer`);
       clearTimeout(silenceTimerIdRef.current!);
     };
   }, [
