@@ -4,7 +4,7 @@
 ## My Stroke Story
 [[image-entry: My stroke story, left, 20%]]
 ![My stroke story](mystrokestory.jpg)
-[My Stroke Story](mystroke,0,0). I use this to introduce myself since my aphasia. I describe who I was and who I am since my severe hemorrhagic stroke in 2015. The speech recognition feature allows me to practice by myself.
+[My Stroke Story](mystroke,0,0). [My (VC) Stroke Story](mystrokevc,0,0). I use this to introduce myself since my aphasia. I describe who I was and who I am since my severe hemorrhagic stroke in 2015. The speech recognition feature allows me to practice by myself.
 [[/image-entry]]
 ### Rationale
 I use this when I introduce myself to others. I will be able to introduce myself better as I practice more. 
@@ -47,6 +47,8 @@ These exercises allow me to fill in sentences progressively.
 - [Household Tasks](sentcompletion_householdtasks, 0,0)
 - [Friends and Family](sentcompletion_friendsandfamily, 0,0)
 - [Holidays and Recreation](sentcompletion_holidaysrec, 0,0)
+- [Occupations as subjects](sentcompletion_occupations,0,0)
+- [Occupations as objects](sentcompletion_occupations1,0,0)
 - [Yard work](sentcompletion_yardwork, 0,0)
 - [State Capitals](sentcompletion_uscities,0,0)
 # Flashcard Fillins

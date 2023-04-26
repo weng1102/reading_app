@@ -3,9 +3,6 @@
 * [skipping word recognition](debugskipping,0,0)
 # Dictionary
 * [Phonemes](phonemes,0,0)
-# emphasis
-* [Markdown Emphasis](emphasis,0,0)
-* [Markdown Emphasis](fillin,0,0)
 # Fillins
 * [Subject/Verb conjugation](commonverbs_fillin,0,0)
 * [Foods](eating_fillin,0,0)
@@ -23,21 +20,20 @@
 # Home Page
 * [Ronlyn's Home Page](homepage_ronlyn,0,0)
 * [Ronlyn's Home Page](homepage_ronlyn_saved,0,0)
+# Image Section
+* [Image Section test](imagesection,0,0)
 # Lists
 * [list rendering](lists,0,0)
 # Markdowns
 * [Markdown Passthru](markdown_passthru,0,0)
 # Miscellaneous
-* [](fillin1,0,0)
 * [](fillin2,0,0)
 * [Link rendering v3](links2,0,0)
-* [](markdown1,0,0)
-* [](markdowns,0,0)
 * [](README,0,0)
-* [](unittest_sentences01,0,0)
 # Personal
 * [Strategies](mystrategies,0,0)
 * [My Stroke Story](mystroke,0,0)
+* [My Stroke Story](mystrokevc,0,0)
 # Sentence Bank
 * [Ten-word Sentences](10wordsentences,0,0)
 * [Three-word Sentences](3wordsentences,0,0)
@@ -56,9 +52,9 @@
 * [Around The House](sentcompletion_aroundthehouse,0,0)
 * [Food items](sentcompletion_food,0,0)
 * [Friends and family](sentcompletion_friendsandfamily,0,0)
-* [General](sentcompletion_general,0,0)
 * [General 1](sentcompletion_general1,0,0)
-* [General](sentcompletion_general3,0,0)
+* [General](sentcompletion_general2,0,0)
+* [General4](sentcompletion_general3,0,0)
 * [Holidays and Recreation](sentcompletion_holidaysrec,0,0)
 * [Household Tasks](sentcompletion_householdtasks,0,0)
 * [Kitchen tasks](sentcompletion_kitchen,0,0)
@@ -71,8 +67,10 @@
 * [Shopping](sentcompletion_shopping,0,0)
 * [Social speech](sentcompletion_socialspeech,0,0)
 * [Social speech (w/ help slider)](sentcompletion_socialspeech1,0,0)
+* [Social speech](sentcompletion_socialspeech3,0,0)
 * [State Capitals](sentcompletion_statecapitals,0,0)
 * [PAGETITLE](sentcompletion_template,0,0)
+* [Holidays and Recreation](sentcompletion_testformats,0,0)
 * [Things To Wear](sentcompletion_thingstowear,0,0)
 * [Movie/Book Titles](sentcompletion_titles,0,0)
 * [State Capitals](sentcompletion_uscities,0,0)
@@ -80,6 +78,8 @@
 * [Yardwork](sentcompletion_yardwork,0,0)
 # Site Map
 * [Site Map](sitemap,0,0)
+# Speech recognition
+* [Speech recognition homophone test](homophones,0,0)
 # Testing
 * [Blockquote rendering](blockquote,0,0)
 * [Cues parsing/rendering](cues1,0,0)
@@ -125,3 +125,4 @@
 # Verbs with images
 * [Verbs with images](testimagesections,0,0)
 * [Verbs with images](verbsimages,0,0)
+* [Verbs with images](verbsimagestest,0,0)

@@ -3,11 +3,11 @@
 # Completing sentences progressively
 The following exercises allow me to fill in the prompts given the corresponding response lists in increasingly more difficult ordering until no response list is shown.
 ## Yardwork
-[[fillin: inline, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: inline, false, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. Mow the [_lawn_].
 1. Trim the [_hedges_].
 1. Plant the [_seeds_].
-1. Transplant [seedlings_].
+1. Transplant [_seedlings_].
 1. Rake the [_leaves_].
 1. Harvest fruit off the [_tree_].
 1. Chop fire [_wood_].
