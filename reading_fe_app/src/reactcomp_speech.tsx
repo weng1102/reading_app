@@ -45,17 +45,18 @@ class CSpeechSynthesizer {
     //   `userAgent=${parser.setUA(navigator.userAgent).getResult().os}`
     // );
     // console.log(`userAgent=${navigator.userAgent}`);
+
+    //// list available voices
+    // window.speechSynthesis
+    //   .getVoices()
+    //   .map((voice: SpeechSynthesisVoice, key: any) => {
+    //     console.log(`voice[${key}]=${voice.name}`);
+    //   });
     if (os.indexOf("Mac") === 0) {
-      this.selectedVoiceIndex = 33; // samantha
-      // window.speechSynthesis
-      //   .getVoices()
-      //   .map((voice: SpeechSynthesisVoice, key: any) => {
-      //     console.log(`voice[${key}]=${voice}`);
-      //   });
-      // console.log(`mac voices`);
+      // find samantha as default voice
+      this.selectedVoiceIndex = 0; // samantha
     } else {
-      this.selectedVoiceIndex = 2; // zira
-      // console.log(`win voices`);
+      this.selectedVoiceIndex = 2; // zira on windows
     }
   }
   paramObj: SpeechSynthesisUtterance;
@@ -65,9 +66,20 @@ class CSpeechSynthesizer {
   get voices(): SpeechSynthesisVoice[] {
     return this.voiceList;
   }
-  setVoice(voice: string, selectedIndex: number) {
-    //    this.paramObj.voice = this.voiceList[voice];
-    this.selectedVoiceIndex = selectedIndex;
+  set voiceIndex(voiceIndex: number) {
+    this.selectedVoiceIndex = voiceIndex;
+  }
+  setVoice(voice: string) {
+    // translate voice.name into selectedVoiceIndex
+    // window.speechSynthesis
+    //   .getVoices()
+    //   .map((voice: SpeechSynthesisVoice, key: any) => {
+    //     console.log(`voice[${key}]=${voice.name}`);
+    //   });
+    //this.selectedVoiceIndex = selectedIndex;
+  }
+  set rate(rate: number) {
+    this.paramObj.rate = rate;
   }
   set volume(vol: number) {
     this.paramObj.volume = vol;
@@ -103,6 +115,7 @@ export const SpeechMonitor = () => {
   };
   let settingsContext: ISettingsContext = useContext(SettingsContext)!;
   Synthesizer.volume = settingsContext.settings.speech.volume;
+  Synthesizer.rate = settingsContext.settings.speech.rate;
   let pageContext: CPageLists = useAppSelector(store => store.pageContext);
   // cannot use useContext(PageContext) because context is only scoped within
   // a page
@@ -210,6 +223,14 @@ export const SpeechSettings = (props: ISpeechSettingsProps) => {
       selectedVoiceIndex: voiceIndex
     });
   };
+  const [rate, _setRate] = useState(props.speechSettings.rate);
+  const setRate = (rate: number) => {
+    _setRate(rate);
+    props.setSpeechSettings({
+      ...props.speechSettings,
+      rate: rate
+    });
+  };
   const [volume, _setVolume] = useState(props.speechSettings.volume);
   const setVolume = (volume: number) => {
     _setVolume(volume);
@@ -225,13 +246,71 @@ export const SpeechSettings = (props: ISpeechSettingsProps) => {
           recitationMode={recitationMode}
           setRecitationMode={setRecitationMode}
         />
-        <VoiceSelector voiceIndex={voiceIndex} setVoiceIndex={setVoiceIndex} />
-        <VolumeSlider volume={volume} setVolume={setVolume} />
+        <VoiceCharacteristics
+          voiceIndex={voiceIndex}
+          setVoiceIndex={setVoiceIndex}
+          volume={volume}
+          setVolume={setVolume}
+          rate={rate}
+          setRate={setRate}
+        />
       </>
     );
   } else {
     return <></>;
   }
+};
+interface IVoiceCharacteristicsPropsType {
+  voiceIndex: number;
+  setVoiceIndex: (voiceIndex: number) => void;
+  volume: number;
+  setVolume: (volume: number) => void;
+  rate: number;
+  setRate: (rate: number) => void;
+}
+const VoiceCharacteristics = (props: IVoiceCharacteristicsPropsType) => {
+  console.log(`voiceIdx=${props.voiceIndex}`);
+  return (
+    <>
+      <div className="settings-grid-section-header">Voice Characteristics</div>
+      <VoiceSelector
+        voiceIndex={props.voiceIndex}
+        setVoiceIndex={props.setVoiceIndex}
+      />
+      <VolumeSlider volume={props.volume} setVolume={props.setVolume} />
+      <RateSlider rate={props.rate} setRate={props.setRate} />
+      <VoiceTestButton
+        voiceIndex={props.voiceIndex}
+        setVoiceIndex={props.setVoiceIndex}
+        volume={props.volume}
+        setVolume={props.setVolume}
+        rate={props.rate}
+        setRate={props.setRate}
+      />
+    </>
+  );
+};
+const VoiceTestButton = (props: IVoiceCharacteristicsPropsType) => {
+  const testVoice = (event: any) => {
+    let voice: string = window.speechSynthesis.getVoices()[props.voiceIndex]
+      .name;
+    console.log(`voice name=${voice}`);
+    // create new synthezier object using temporary settings
+    let temp: CSpeechSynthesizer = new CSpeechSynthesizer();
+    temp.volume = props.volume;
+    temp.rate = props.rate;
+    temp.voiceIndex = props.voiceIndex;
+    temp.speak(`You have selected ${voice}`);
+  };
+  return (
+    <>
+      <div className="settings-grid-section-item">
+        <button onClick={testVoice} value="Test voice">
+          Test Settings
+        </button>
+      </div>
+    </>
+  );
 };
 interface IRecitationModeRadioButtonProps {
   recitationMode: RecitationMode;
@@ -270,16 +349,6 @@ export const RecitationModeRadioButton = (
         <div className="settings-grid-section-item-recitation-control-group">
           <input
             type="radio"
-            id="2"
-            value={RecitationMode.entireSentence}
-            name="recitationMode"
-            defaultChecked={
-              props.recitationMode === RecitationMode.entireSentence
-            }
-          />
-          {RecitationMode.entireSentence}
-          <input
-            type="radio"
             value={RecitationMode.uptoExclusive}
             name="recitationMode"
             defaultChecked={
@@ -300,18 +369,67 @@ export const RecitationModeRadioButton = (
         <div className="settings-grid-section-item-recitation-control-group">
           <input
             type="radio"
-            value={RecitationMode.section}
+            id="2"
+            value={RecitationMode.entireSentence}
             name="recitationMode"
-            defaultChecked={props.recitationMode === RecitationMode.section}
+            defaultChecked={
+              props.recitationMode === RecitationMode.entireSentence
+            }
           />
-          {RecitationMode.section}
+          {RecitationMode.entireSentence}
+          <input
+            disabled
+            type="radio"
+            id="2"
+            value={RecitationMode.entireSentenceNext}
+            name="recitationMode"
+            defaultChecked={
+              props.recitationMode === RecitationMode.entireSentenceNext
+            }
+          />
+          {RecitationMode.entireSentenceNext} TO BE IMPLEMENTED
+          <div className="settings-grid-section-item-recitation-control-group">
+            <input
+              type="radio"
+              value={RecitationMode.section}
+              name="recitationMode"
+              defaultChecked={props.recitationMode === RecitationMode.section}
+            />
+            {RecitationMode.section}
+            <input
+              disabled
+              type="radio"
+              value={RecitationMode.sectionNext}
+              name="recitationMode"
+              defaultChecked={props.recitationMode === RecitationMode.section}
+            />
+            {RecitationMode.sectionNext} TO BE IMPLEMENTED
+          </div>
         </div>
-      </div>
-      <div className="settings-grid-section-footer">
-        Recitation mode determines how prose are recited when speak button is
-        activated. The "partial" (sentence) options determine whether the
-        current word is included or excluded in the recitation of the current
-        sentence.
+        <div className="settings-grid-section-footer">
+          Recitation mode determines how prose are recited when speak button is
+          activated. The "partial" (sentence) options determine whether the
+          current word is included or excluded in the recitation of the current
+          sentence.
+        </div>
+        <div className="checkbox-container cursor-advance-checkbox-container">
+          <input
+            onChange={onChangeValue}
+            className="checkbox-control"
+            type="checkbox"
+            //          checked={props.stopAtEOS}
+          />
+          <label>
+            PLACEHOLDER Advance cursor to the first word of the next sentence
+          </label>
+        </div>
+        <div className="settings-grid-section-footer">
+          Moves cursor to the first word of the next sentence (including first
+          sentence of the next section or paragraph) when recitation node is
+          either "entire sentence" or "section/paragraph" after reciting
+          recitation is complete. This is meant to facilitate flow of
+          recitation.
+        </div>
       </div>
     </>
   );
@@ -328,21 +446,11 @@ const VoiceSelector = (props: IVoiceSelectorProps) => {
   //  let voices: SpeechSynthesisVoice[] = Synthesizer.voices;
   const onChangeValue = (event: any) => {
     // console.log(`VoiceSelector: props.voiceIdx=${props.voiceIndex}`);
-    Synthesizer.setVoice(event.target.value, event.target.selectedIndex);
+    // Synthesizer.setVoice(event.target.value, event.target.selectedIndex);
     props.setVoiceIndex(event.target.selectedIndex);
   };
-  const testVoice = (event: any) => {
-    Synthesizer.speak("You have selected my voice");
-  };
-  // console.log(`VoiceSelector: props.voiceIdx=${props.voiceIndex}`);
-  // let voiceList: SpeechSynthesisVoice[] = window.speechSynthesis.getVoices();
-  // console.log(`VoiceSelector: =${window.speechSynthesis.getVoices()}`);
-  // let voiceIndex: number = props.voiceIndex;
-  // let voiceName: string = voiceList[props.voiceIndex].name;
-  // console.log(`voiceName=${voiceName}`);
   return (
     <>
-      <div className="settings-grid-section-header">Voice Selection</div>
       <div className="settings-grid-col2-label-control">
         <div className="settings-grid-col2-label">Voice:</div>
         <select
@@ -361,9 +469,6 @@ const VoiceSelector = (props: IVoiceSelectorProps) => {
               </option>
             ))}
         </select>
-        <button onClick={testVoice} value="Test voice">
-          Test
-        </button>
       </div>
     </>
   );
@@ -416,11 +521,43 @@ export const VolumeSlider = (props: IVolumeSliderProps) => {
     </>
   );
 };
-export const RateSlider = () => {
+interface IRateSliderProps {
+  rate: number;
+  setRate: (volume: number) => void;
+}
+export const RateSlider = (props: IRateSliderProps) => {
+  const onChangeValue = (event: any) => {
+    console.log(`onchange=${event.target.value}`);
+    props.setRate(+event.target.value);
+  };
   return (
     <>
-      <div className="settings-subheader">Rate</div>
-      rate slider
+      <div className="settings-grid-col2-label-control">
+        <div className="settings-grid-col2-label">Rate:</div>
+        <div className="settings-grid-col2-control">
+          <div className="slider-container rate-slider-container">
+            <div className="slider-container-label-control"></div>
+            <div className="slider-container-control">
+              <input
+                onChange={onChangeValue}
+                className="slider-control"
+                defaultValue={props.rate}
+                type="range"
+                min="0"
+                max="2"
+                step=".25"
+              />
+            </div>
+            <div className="slider-container-label">
+              <div className="ticklist" id="steplist">
+                <span>very slow</span>
+                <span>normal</span>
+                <span>very fast</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
