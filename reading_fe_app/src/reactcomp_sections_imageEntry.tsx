@@ -3,6 +3,10 @@
  * File name: reactcomp_sections_imageEntry.tsx
  *
  * Defines React front end functional components.
+ * "ClassName" props are used to access css styles while "style" props
+ * are used to override class-defined css attribute.
+ * That is, overriding css attributes (e.g., "size" defined within the
+ * markdown source programmatically.
  *
  *
  * Version history:
@@ -11,83 +15,65 @@
 import React from "react";
 import "./App.css";
 import {
-  ImageEntryLayoutEnumType,
+  ImageEntryOrientationEnumType,
   ISectionContent,
   ISectionImageEntryVariant,
   ITerminalContent,
   IImageTerminalMeta
 } from "./pageContentType";
-import { TerminalImage } from "./reactcomp_terminals_image";
+import { TerminalImageEntry } from "./reactcomp_terminals_image";
 import { SectionDispatcher, ISectionPropsType } from "./reactcomp_sections";
 
-interface ISectionImageEntryImagesPropsType {
+interface ISectionImageEntryImagesPropsType1 {
   active: boolean;
+  className: string;
   images: ITerminalContent[];
-  layout: ImageEntryLayoutEnumType;
 }
-// interface ISectionImageEntryImagePropsType {
-//   distDir: string;
-//   image: ITerminalContent;
-// }
 interface ISectionImageEntryCaptionsPropsType {
   active: boolean;
+  className: string;
   captions: ISectionContent[];
-  layout: ImageEntryLayoutEnumType;
 }
 export const SectionImageEntry = React.memo((props: ISectionPropsType): any => {
   let imageEntry: ISectionImageEntryVariant = props.section
     .meta as ISectionImageEntryVariant;
-  // let images1 = (props.section.meta as ISectionImageEntryVariant).images // not working with jsx!!!
-
-  let images = imageEntry.images as ITerminalContent[];
-  let captions = imageEntry.captions as ISectionContent[];
-  let className: string =
-    imageEntry.layout.charAt(0).toLowerCase() === "l"
-      ? `imageentry-container-${ImageEntryLayoutEnumType.left.toString()}`
-      : `imageentry-container-${ImageEntryLayoutEnumType.above.toString()}`;
-  let vdividerClassName = `${className}-vdivider`;
-  let hdividerClassName = `${className}-hdivider`;
-  const leftStyle = {
-    display: "grid",
-    gridTemplateColumns:
-      "[images] " + imageEntry.percent + " [divider] 10px [captions] auto"
+  let orientation: string = imageEntry.orientation.toString();
+  let className: string = `imageentry-container-${orientation}`;
+  let dividerClassName: string = `${className}-divider`;
+  console.log(`imageEntry.percent=${imageEntry.percent}`);
+  let style = {};
+  let vh = imageEntry.percent.replace("%", "vh");
+  style = {
+    ["--imageentry-container-left-image-width" as any]: imageEntry.percent,
+    ["--imageentry-min-image-height" as any]: vh
   };
   return (
     <>
-      <div className={hdividerClassName}></div>
-
-      <div className={className} style={leftStyle}>
+      <div className={dividerClassName}></div>
+      <div className={className} style={style}>
         <SectionImageEntryImages
           active={false}
-          images={images}
-          layout={imageEntry.layout}
+          className={`imageentry-images-${orientation}`}
+          images={imageEntry.images}
         />
-        <div className={vdividerClassName}></div>
+        <div className={dividerClassName}></div>
         <SectionImageEntryCaptions
           active={props.active}
-          captions={captions}
-          layout={imageEntry.layout}
+          className={`imageentry-captions-${orientation}`}
+          captions={imageEntry.captions}
         />
       </div>
     </>
   );
 });
 export const SectionImageEntryImages = React.memo(
-  (props: ISectionImageEntryImagesPropsType): any => {
+  (props: ISectionImageEntryImagesPropsType1): any => {
     let images: ITerminalContent[] = props.images;
-    let className: string = "imageentry-image-";
-    className +=
-      props.layout === ImageEntryLayoutEnumType.above
-        ? ImageEntryLayoutEnumType.above.toString()
-        : ImageEntryLayoutEnumType.left.toString();
-    images.forEach(
-      image => ((image.meta as IImageTerminalMeta).className = className)
-    );
     return (
       <>
-        <div className={className}>
+        <div className={props.className}>
           {images.map((image, keyvalue: number) => (
-            <TerminalImage
+            <TerminalImageEntry
               key={keyvalue}
               active={props.active}
               terminal={image}
@@ -98,29 +84,12 @@ export const SectionImageEntryImages = React.memo(
     );
   }
 );
-// export const SectionImageEntry_image = React.memo(
-//   (props: ISectionImageEntryImagePropsType): any => {
-//     let image: IImageTerminalMeta = props.image.meta as IImageTerminalMeta;
-//     let imgSrc: string = `${props.distDir}/${image.src}`;
-//     return (
-//       <>
-//         <img src={imgSrc} alt={image.label} />
-//       </>
-//     );
-//   }
-// );
 export const SectionImageEntryCaptions = React.memo(
   (props: ISectionImageEntryCaptionsPropsType): any => {
-    let captions: ISectionContent[] = props.captions;
-    let className: string = "imageentry-captions-";
-    className +=
-      props.layout === ImageEntryLayoutEnumType.above
-        ? ImageEntryLayoutEnumType.above.toString()
-        : ImageEntryLayoutEnumType.left.toString();
     return (
       <>
-        <div className={className}>
-          {captions.map((caption, keyvalue: number) => (
+        <div className={props.className}>
+          {props.captions.map((caption, keyvalue: number) => (
             <SectionDispatcher
               key={keyvalue}
               active={props.active}
