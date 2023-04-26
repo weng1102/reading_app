@@ -8,7 +8,7 @@
  *
  **/
 export const IDX_INITIALIZER = -9999;
-export const PageContentVersion = "20230329.1";
+export const PageContentVersion = "20230423.1";
 export enum PageFormatEnumType {
   default = 0
 }
@@ -527,13 +527,13 @@ export function ISectionFillinHelpPresetsInitializer(): ISectionFillinHelpPreset
     }
   ];
 }
-export enum ImageEntryLayoutEnumType {
+export enum ImageEntryOrientationEnumType {
   left = "left", // default, image to the left of caption
   above = "above" // image above caption
 }
 export interface ISectionImageEntryVariant {
   title: string;
-  layout: ImageEntryLayoutEnumType;
+  orientation: ImageEntryOrientationEnumType;
   percent: string;
   separator: string;
   images: ITerminalContent[]; // path to img/filenames
@@ -542,7 +542,7 @@ export interface ISectionImageEntryVariant {
 export function ISectionImageEntryVariantInitializer(): ISectionImageEntryVariant {
   return {
     title: "",
-    layout: ImageEntryLayoutEnumType.left,
+    orientation: ImageEntryOrientationEnumType.left,
     percent: "33%",
     separator: "",
     images: [],

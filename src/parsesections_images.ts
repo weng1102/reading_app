@@ -28,7 +28,7 @@ import {
 } from "./baseclasses";
 import { MarkdownRecordType, TaggedStringType } from "./dataadapter";
 import {
-  ImageEntryLayoutEnumType,
+  ImageEntryOrientationEnumType,
   ISectionImageEntryVariantInitializer,
   ISectionImageEntryVariant,
   SectionVariantEnumType,
@@ -53,7 +53,7 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
     const validateArgs = (argString: string, lineNo: number) => {
       /*
         [0]  response title
-        [1]  layout orientation: image on left, image above
+        [1]  orientation: image on left, image above
         [2]  percent portion of page for image
         [3]  separator format at top of image section (TBD)
         */
@@ -70,19 +70,20 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
         this.logger
       ) as string;
       argNum++;
-      this.meta.layout = ValidateArg(
-        IsDefined(args[argNum]) && args[argNum] in ImageEntryLayoutEnumType,
-        "layout",
+      this.meta.orientation = ValidateArg(
+        IsDefined(args[argNum]) &&
+          args[argNum] in ImageEntryOrientationEnumType,
+        "orientation",
         args[argNum],
-        this.meta.layout,
+        this.meta.orientation,
         argNum,
         lineNo,
         this.logger
-      ) as ImageEntryLayoutEnumType;
+      ) as ImageEntryOrientationEnumType;
       argNum++;
       this.meta.percent = ValidateArg(
         IsValidWholeNumberPercentString(args[argNum]),
-        "image layout percent",
+        "image orientation percent",
         args[argNum],
         this.meta.percent,
         argNum,
@@ -201,7 +202,7 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
     let outputStr: string = "";
     switch (format) {
       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
-        label += `: title="${this.meta.title}", layout=${this.meta.layout}, width=${this.meta.percent}`;
+        label += `: title="${this.meta.title}", orientation=${this.meta.orientation}, width=${this.meta.percent}`;
         outputStr = `${super.serialize(format, label, prefix)}`;
         outputStr = `${outputStr}${super.serialize(
           format,
