@@ -138,14 +138,20 @@ export abstract class SectionParseNode_LIST extends SectionParseNode
     super(parent);
   }
 }
-export class SectionParseNode_PHOTOENTRY extends SectionParseNode_LIST
+export abstract class SectionParseNode_GRID extends SectionParseNode
   implements ISectionNode {
   constructor(parent: IPageNode | ISectionNode) {
     super(parent);
   }
-  readonly type = SectionVariantEnumType.image_entry;
-  meta = ISectionFillinVariantInitializer();
 }
+// export class SectionParseNode_PHOTOENTRY extends SectionParseNode_LIST
+//   implements ISectionNode {
+//   constructor(parent: IPageNode | ISectionNode) {
+//     super(parent);
+//   }
+//   readonly type = SectionVariantEnumType.image_entry;
+//   meta = ISectionFillinVariantInitializer();
+// }
 export class SectionParseNode_EMPTY extends SectionParseNode_LIST
   implements ISectionNode {
   constructor(parent: IPageNode | ISectionNode) {

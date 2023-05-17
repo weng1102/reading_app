@@ -21,7 +21,7 @@ Although helping verbs be, do and have can standalone, they can be combined with
 
 ### Go (present simple tense)
 
-[[fillin: Use the following responses in the prompts below, The following conjugations express actions that do not change., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_go_] out.
 He [_goes_] out.
 She [_goes_] out.
@@ -32,7 +32,7 @@ They [_go_] out.
 
 ### Go (present continuous tense)
 
-[[fillin: Use the following responses in the prompts below, The following conjugations express actions that do not change., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_am_] [_going_] out.
 He [_is_] [_going_] out.
 She [_is_] [_going_] out.
@@ -43,8 +43,7 @@ They [_are_] [_going_] out.
 
 ### Go (past simple tense)
 
-[[fillin: Use the following responses in the prompts below, These conjugations express actions that just happened., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
-
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_went_] out.
 He [_went_] out.
 She [_went_] out.
@@ -55,7 +54,7 @@ They [_went_] out.
 
 ### Go (past continuous tense)
 
-[[fillin: Use the following responses in the prompts below, These conjugations express actions that happened for some time., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 
 I [_was_] [_going_] out.
 He [_was_] [_going_] out.
@@ -66,8 +65,7 @@ They [_were_] [_going_] out.
 [[/fillin]]
 
 ### Go (future simple tense)
-
-[[fillin: Use the following responses in the prompts below, These conjugations express imminent actions., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_will_] [_go_] out.
 He [_will_] [_go_] out.
 She [_will_] [_go_] out.
@@ -77,8 +75,7 @@ They [_will_] [_go_] out.
 [[/fillin]]
 
 ### Go (future continuous tense)
-
-[[fillin: Use the following responses in the prompts below, These conjugations express actions that will be happening eventually., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_will_] [_be_] [_going_] out.
 He [_will_] [_be_] [_going_] out.
 She [_will_] [_be_] [_going_] out.
@@ -90,8 +87,7 @@ They [_will [_be_] [_going_] out.
 ## Verb: Read
 
 ### Read (present simple tense)
-[[fillin: Use the following responses in the prompts below, These conjugations express actions that do not change., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
-
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_read_] a book.
 He [_reads_] a book.
 She [_reads_] a book.
@@ -102,7 +98,7 @@ They [_read_] a book.
 
 Read (present continuous tense)
 These conjugations express actions that are currently happening but will soon finish.
-[[fillin: Use the following responses in the prompts below, These conjugations express actions that just happened., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_am_] [_reading_] a book.
 He [_is_] [_reading_] a book.
 She [_is_] [_reading_] a book.
@@ -112,7 +108,7 @@ They [_are_] [_reading_] a book.
 [[/fillin]]
 
 ### Read (past simple tense)
-[[fillin: Use the following responses in the prompts below, These conjugations express actions that just happened., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_read_] a book.
 He [_read_] a book.
 She [_read_] a book.
@@ -122,7 +118,7 @@ They [_read_] a book.
 [[/fillin]]
 
 ### Read (past continuous tense)
-[[fillin: Use the following responses in the prompts below, These conjugations express actions that happened for some time., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_was_] [_reading_] a book.
 He [_was_] [_reading_] a book.
 She [_was_] [_reading_] a book.
@@ -132,8 +128,7 @@ They [_were_] [_reading_] a book.
 [[/fillin]]
 
 ### Read (future simple tense)
-[[fillin: Use the following responses in the prompts below, These conjugations express imminent actions., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
-I will read a book.
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 He [_will_] [_read_] a book.
 She [_will_] [_read_] a book.
 You [_will_] [_read_] a book.
@@ -142,7 +137,7 @@ They [_will_] [_read_] a book.
 [[/fillin]]
 
 ### Read (future continuous tense)
-[[fillin: Use the following responses in the prompts below, These conjugations express actions that will be happening eventually., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_will_] [_be_] [_reading_] a book.
 He [_will_] [_be_] [_reading_] a book.
 She [_will_] [_be_] [_reading_] a book.
@@ -152,7 +147,7 @@ They [_will_] [_be_] [_reading_] a book.
 [[/fillin]]
 
 ## Verb: Sit
-[[fillin: Use the following responses in the prompts below, These conjugations express actions that do not change., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 Sit (present simple tense)
 I [_sit_] on a sofa.
 He [_sits_] on a sofa.
@@ -163,7 +158,7 @@ They [_sit_] on a sofa.
 [[/fillin]]
 
 ### Sit (present continuous tense)
-[[fillin: Use the following responses in the prompts below, These conjugations express actions that are currently happening but will soon finish., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_am_] [_sitting_] on a sofa.
 He [_is_] [_sitting_] on a sofa.
 She [_is_] [_sitting_] on a sofa.
@@ -173,7 +168,7 @@ They [_are_] [_sitting_] on a sofa.
 [[/fillin]]
 
 ### Sit (past simple tense)
-[[fillin: Use the following responses in the prompts below, These conjugations express actions that just happened., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_sat_] on a sofa.
 He [_sat_] on a sofa.
 She [_sat_] on a sofa.
@@ -183,7 +178,7 @@ They [_sat_] on a sofa.
 [[/fillin]]
 
 ### Sit (past continuous tense)
-[[fillin: Use the following responses in the prompts below, These conjugations express actions that happened for some time., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_was_] [_sitting_] on a sofa.
 He [_was_] [_sitting_] on a sofa.
 She [_was_] [_sitting_] on a sofa.
@@ -193,7 +188,7 @@ They [_were_] [_sitting_] sit.
 [[/fillin]]
 
 ### Sit (future simple tense)
-[[fillin: Use the following responses in the prompts below, These conjugations express imminent actions., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_will_] [_sit_] on a sofa.
 He [_will_] [_sit_] on a sofa.
 She [_will_] [_sit_] on a sofa.
@@ -203,7 +198,7 @@ They [_will_] [_sit_] on a sofa.
 [[/fillin]]
 
 ### Sit (future continuous tense)
-[[fillin: Use the following responses in the prompts below, These conjugations express actions that will be happening eventually., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_will_] [_be_] [_sitting_] on a sofa.
 He [_will_] [_be_] [_sitting_] on a sofa.
 She [_will_] [_be_] [_sitting_] on a sofa.
@@ -213,7 +208,7 @@ They [_will_] [_be_] [_sitting_] on a sofa.
 [[/fillin]]
 
 ## Verb: Sleep
-[[fillin: Use the following responses in the prompts below, These conjugations express actions that do not change., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 ### Sleep (present simple tense)
 I [_sleep_] in a bed.
 He [_sleeps_] in a bed.
@@ -224,7 +219,7 @@ They [_sleep_] in a bed.
 [[/fillin]]
 
 ### Sleep (present continuous tense)
-[[fillin: Use the following responses in the prompts below, These conjugations express actions that are currently happening but will soon finish., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_am_] [_sleeping_] in a bed.
 He [_is_] [_sleeping_] in a bed.
 She [_is_] [_sleeping_] in a bed.
@@ -234,7 +229,7 @@ They [_are_] [_sleeping_] in a bed.
 [[/fillin]]
 
 ### Sleep (past simple tense)
-[[fillin: Use the following responses in the prompts below, These conjugations express actions that just happened., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_slept_] in a bed.
 He [_slept_] in a bed.
 She [_slept_] in a bed.
@@ -245,7 +240,7 @@ They [_slept_] in a bed.
 
 ## Verb: Talk
 ### Talk (present simple tense)
-[[fillin: Use the following responses in the prompts below, These conjugations express actions that do not change., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_talk_] with them.
 He [_talks_] with them.
 She [_talks_] with them.
@@ -255,7 +250,7 @@ They [_talk_] with them.
 [[/fillin]]
 
 ###Talk (present continuous tense)
-[[fillin: Use the following responses in the prompts below, These conjugations express actions that are currently happening but will soon finish., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_am_] [_talking_] with them.
 He [_is_] [_talking_] with them.
 She [_is_] [_talking_] with them.
@@ -265,7 +260,7 @@ They [_are_] [_talking_] with them.
 [[/fillin]]
 
 ### Talk (past simple tense)
-[[fillin: Use the following responses in the prompts below, These conjugations express actions that just happened., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_talked_] with them.
 He [_talked_] with them.
 She [_talked_] with them.
@@ -275,7 +270,7 @@ They [_talked_] with them.
 [[/fillin]]
 
 ### Talk (past continuous tense)
-[[fillin: Use the following responses in the prompts below, These conjugations express actions that happened for some time., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_was_] [_talking_] with them.
 He [_was_] [_talking_] with them.
 She [_was_] [_talking_] with them.
@@ -285,7 +280,7 @@ They [_were_] [_talking_] with them.
 [[/fillin]]
 
 ### Talk (future simple tense)
-[[fillin: Use the following responses in the prompts below, These conjugations express imminent actions., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_will_] [_talk_] with them.
 He [_will_] [_talk_] with them.
 She [_will_] [_talk_] with them.
@@ -295,7 +290,7 @@ They [_will_] [_talk_] with them.
 [[/fillin]]
 
 ### Talk (future continuous tense)
-[[fillin: Use the following responses in the prompts below, These conjugations express actions that will be happening eventually., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_will_] [_be_] [_talking_] with them.
 He [_will_] [_be_] [_talking_] with them.
 She [_will_] [_be_] [_talking_] with them.
@@ -306,7 +301,7 @@ They [_will_] [_be_] [_talking_] with them.
 
 ## Verb: Walk
 ### Walk (present simple tense)
-[[fillin: Use the following responses in the prompts below, These conjugations express actions that do not change., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_walk_] back home.
 He [_walks_] back home.
 She [_walks_] back home.
@@ -316,7 +311,7 @@ They [_walk_] back home.
 [[/fillin]]
 
 ### Walk (present continuous tense)
-[[fillin: Use the following responses in the prompts below, These conjugations express actions that are currently happening but will soon finish., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_am_] [_walking_] back home.
 He [_is_] [_walking_] back home.
 She [_is_] [_walking_] back home.
@@ -326,7 +321,7 @@ They [_are_] [_walking_] back home.
 [[/fillin]]
 
 ### Walk (past simple tense)
-[[fillin: Use the following responses in the prompts below, These conjugations express actions that just happened., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_walked_] back home.
 He [_walked_] back home.
 She [_walked_] back home.
@@ -336,7 +331,7 @@ They [_walked_] back home.
 [[/fillin]]
 
 ### Walk (past continuous tense)
-[[fillin: Use the following responses in the prompts below, These conjugations express actions that happened for some time., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_was_] [_walking_] back home.
 He [_was_] [_walking_] back home.
 She [_was_] [_walking_] back home.
@@ -346,7 +341,7 @@ They [_were_] [_walking_] back home.
 [[/fillin]]
 
 ### Walk (future simple tense)
-[[fillin: Use the following responses in the prompts below, These conjugations express imminent actions., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_will_] [_walk_] back home.
 He [_will_] [_walk_] back home.
 She [_will_] [_walk_] back home.
@@ -356,7 +351,7 @@ They [_will_] [_walk_] back home.
 [[/fillin]]
 
 ### Walk (future continuous tense)
-[[fillin: Use the following responses in the prompts below, These conjugations express actions that will be happening eventually., grid,4, alphabetical, true, true, true, true, true, true, true, 2]]
+[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 I [_will_] [_be_] [_walking_] back home.
 He [_will_] [_be_] [_walking_] back home.
 She [_will_] [_be_] [_walking_] back home.

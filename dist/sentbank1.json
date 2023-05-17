@@ -6,11 +6,11 @@
   "owner": "Ronlyn",
   "author": "Wen",
   "category": "Sentence Completion",
-  "version": "20230329.1",
+  "version": "20230423.1",
   "pageFormatType": 0,
-  "created": "Wed Mar 29 2023 12:47:09 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Wed Mar 29 2023 12:47:09 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Wed Mar 29 2023 12:47:09 GMT-0700 (Pacific Daylight Time)",
+  "created": "Wed May 17 2023 08:53:22 GMT-0700 (Pacific Daylight Time)",
+  "modified": "Wed May 17 2023 08:53:22 GMT-0700 (Pacific Daylight Time)",
+  "transformed": "Wed May 17 2023 08:53:22 GMT-0700 (Pacific Daylight Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -557,13 +557,24 @@
                   "destination": {
                     "page": "3wordsentences",
                     "directory": "",
-                    "sectionIdx": 0,
-                    "terminalIdx": 0
+                    "linkIdxType": "page",
+                    "headingIdx": -9999,
+                    "sectionIdx": -9999,
+                    "terminalIdx": -9999
                   },
                   "className": "",
                   "style": "",
-                  "linkIdx": 0
+                  "linkIdx": -9999
                 }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": "</link>",
+                "cueList": "",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 13
               }
             ],
             "lastPunctuation": ""
@@ -779,13 +790,24 @@
                   "destination": {
                     "page": "4wordsentences",
                     "directory": "",
-                    "sectionIdx": 0,
-                    "terminalIdx": 0
+                    "linkIdxType": "page",
+                    "headingIdx": -9999,
+                    "sectionIdx": -9999,
+                    "terminalIdx": -9999
                   },
                   "className": "",
                   "style": "",
-                  "linkIdx": 1
+                  "linkIdx": -9999
                 }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": "</link>",
+                "cueList": "",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 13
               }
             ],
             "lastPunctuation": ""
@@ -1001,13 +1023,24 @@
                   "destination": {
                     "page": "5wordsentences",
                     "directory": "",
-                    "sectionIdx": 0,
-                    "terminalIdx": 0
+                    "linkIdxType": "page",
+                    "headingIdx": -9999,
+                    "sectionIdx": -9999,
+                    "terminalIdx": -9999
                   },
                   "className": "",
                   "style": "",
-                  "linkIdx": 2
+                  "linkIdx": -9999
                 }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": "</link>",
+                "cueList": "",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 13
               }
             ],
             "lastPunctuation": ""
@@ -1223,13 +1256,24 @@
                   "destination": {
                     "page": "6wordsentences",
                     "directory": "",
-                    "sectionIdx": 0,
-                    "terminalIdx": 0
+                    "linkIdxType": "page",
+                    "headingIdx": -9999,
+                    "sectionIdx": -9999,
+                    "terminalIdx": -9999
                   },
                   "className": "",
                   "style": "",
-                  "linkIdx": 3
+                  "linkIdx": -9999
                 }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": "</link>",
+                "cueList": "",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 13
               }
             ],
             "lastPunctuation": ""
@@ -1445,13 +1489,24 @@
                   "destination": {
                     "page": "7wordsentences",
                     "directory": "",
-                    "sectionIdx": 0,
-                    "terminalIdx": 0
+                    "linkIdxType": "page",
+                    "headingIdx": -9999,
+                    "sectionIdx": -9999,
+                    "terminalIdx": -9999
                   },
                   "className": "",
                   "style": "",
-                  "linkIdx": 4
+                  "linkIdx": -9999
                 }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": "</link>",
+                "cueList": "",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 13
               }
             ],
             "lastPunctuation": ""
@@ -1667,13 +1722,24 @@
                   "destination": {
                     "page": "10wordsentences",
                     "directory": "",
-                    "sectionIdx": 0,
-                    "terminalIdx": 0
+                    "linkIdxType": "page",
+                    "headingIdx": -9999,
+                    "sectionIdx": -9999,
+                    "terminalIdx": -9999
                   },
                   "className": "",
                   "style": "",
-                  "linkIdx": 5
+                  "linkIdx": -9999
                 }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": "</link>",
+                "cueList": "",
+                "firstTermIdx": -9999,
+                "lastTermIdx": -9999,
+                "type": 13
               }
             ],
             "lastPunctuation": ""
@@ -48706,7 +48772,7 @@
         4
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "3",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -48796,7 +48862,7 @@
         7
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "(4|fou{0,1}r)",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -48886,7 +48952,7 @@
         10
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "5",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -48976,7 +49042,7 @@
         13
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "(6|sex)",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -49066,7 +49132,7 @@
         16
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "7",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -49156,7 +49222,7 @@
         19
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "(10|tin)",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -49426,7 +49492,7 @@
         28
       ],
       "altpronunciation": "",
-      "altrecognition": "^(ron|ro[ns]a{0,1}l[aiye]nd{0,1})$",
+      "altrecognition": "",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -49456,7 +49522,7 @@
         29
       ],
       "altpronunciation": "",
-      "altrecognition": "^(g[ou])",
+      "altrecognition": "",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -49546,7 +49612,7 @@
         32
       ],
       "altpronunciation": "",
-      "altrecognition": "60",
+      "altrecognition": "",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -50295,8 +50361,8 @@
       "prevTermIdx": [
         57
       ],
-      "altpronunciation": "2 0 6 8 0",
-      "altrecognition": "20,680",
+      "altpronunciation": "",
+      "altrecognition": "",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -50326,7 +50392,7 @@
         58
       ],
       "altpronunciation": "",
-      "altrecognition": "^(sea{0,1}ton)$",
+      "altrecognition": "",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -50356,7 +50422,7 @@
         59
       ],
       "altpronunciation": "",
-      "altrecognition": "^(avenue)$",
+      "altrecognition": "",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -50596,7 +50662,7 @@
         67
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "sell",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -51616,7 +51682,7 @@
         101
       ],
       "altpronunciation": "",
-      "altrecognition": "to{1,2}",
+      "altrecognition": "(too|2|two)",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -51856,7 +51922,7 @@
         109
       ],
       "altpronunciation": "",
-      "altrecognition": "2,015",
+      "altrecognition": "",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -53146,7 +53212,7 @@
         152
       ],
       "altpronunciation": "",
-      "altrecognition": "1",
+      "altrecognition": "(1|won)",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -53386,7 +53452,7 @@
         160
       ],
       "altpronunciation": "",
-      "altrecognition": "to{1,2}",
+      "altrecognition": "(too|2|two)",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -54466,7 +54532,7 @@
         196
       ],
       "altpronunciation": "",
-      "altrecognition": "30",
+      "altrecognition": "",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -54586,7 +54652,7 @@
         200
       ],
       "altpronunciation": "",
-      "altrecognition": "2",
+      "altrecognition": "(2|to{1,2})",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -54826,7 +54892,7 @@
         208
       ],
       "altpronunciation": "",
-      "altrecognition": "28",
+      "altrecognition": "",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -55816,7 +55882,7 @@
         241
       ],
       "altpronunciation": "",
-      "altrecognition": "2,019",
+      "altrecognition": "",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -56626,7 +56692,7 @@
         268
       ],
       "altpronunciation": "",
-      "altrecognition": "26",
+      "altrecognition": "",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -57166,7 +57232,7 @@
         286
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "(4|fou{0,1}r|fore)",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -57556,7 +57622,7 @@
         299
       ],
       "altpronunciation": "",
-      "altrecognition": "to{1,2}",
+      "altrecognition": "(too|2|two)",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -57765,8 +57831,8 @@
       "prevTermIdx": [
         306
       ],
-      "altpronunciation": "Jayleen",
-      "altrecognition": "^(ja[yi]l[ey]n{1,2}e{0,1})$",
+      "altpronunciation": "",
+      "altrecognition": "",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -58276,7 +58342,7 @@
         323
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "(to|2|two)",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -58336,7 +58402,7 @@
         325
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "sun",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -58425,7 +58491,7 @@
       "prevTermIdx": [
         328
       ],
-      "altpronunciation": "Kayden",
+      "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
       "audible": true,
@@ -58486,7 +58552,7 @@
         330
       ],
       "altpronunciation": "",
-      "altrecognition": "^([ai]runa)$",
+      "altrecognition": "",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -58515,8 +58581,8 @@
       "prevTermIdx": [
         331
       ],
-      "altpronunciation": "gambeer",
-      "altrecognition": "^(gamb[ie]e{0,1}r)$",
+      "altpronunciation": "",
+      "altrecognition": "",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -58665,8 +58731,8 @@
       "prevTermIdx": [
         336
       ],
-      "altpronunciation": "burrna",
-      "altrecognition": "^(b[eu]rn[ae]t{0,2})$",
+      "altpronunciation": "",
+      "altrecognition": "",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -58816,7 +58882,7 @@
         341
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "(to|2|two)",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -59356,7 +59422,7 @@
         359
       ],
       "altpronunciation": "",
-      "altrecognition": "to{1,2}",
+      "altrecognition": "(too|2|two)",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -60736,7 +60802,7 @@
         405
       ],
       "altpronunciation": "",
-      "altrecognition": "to{1,2}",
+      "altrecognition": "(too|2|two)",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -61156,7 +61222,7 @@
         419
       ],
       "altpronunciation": "",
-      "altrecognition": "to{1,2}",
+      "altrecognition": "(too|2|two)",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -64246,7 +64312,7 @@
         522
       ],
       "altpronunciation": "",
-      "altrecognition": "to{1,2}",
+      "altrecognition": "(too|2|two)",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -64396,7 +64462,7 @@
         527
       ],
       "altpronunciation": "",
-      "altrecognition": "to{1,2}",
+      "altrecognition": "(too|2|two)",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -64576,7 +64642,7 @@
         533
       ],
       "altpronunciation": "",
-      "altrecognition": "to{1,2}",
+      "altrecognition": "(too|2|two)",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -64756,7 +64822,7 @@
         539
       ],
       "altpronunciation": "",
-      "altrecognition": "to{1,2}",
+      "altrecognition": "(too|2|two)",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -64906,7 +64972,7 @@
         544
       ],
       "altpronunciation": "",
-      "altrecognition": "to{1,2}",
+      "altrecognition": "(too|2|two)",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -65146,7 +65212,7 @@
         552
       ],
       "altpronunciation": "",
-      "altrecognition": "to{1,2}",
+      "altrecognition": "(too|2|two)",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -65446,7 +65512,7 @@
         562
       ],
       "altpronunciation": "",
-      "altrecognition": "to{1,2}",
+      "altrecognition": "(too|2|two)",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -66076,7 +66142,7 @@
         583
       ],
       "altpronunciation": "",
-      "altrecognition": "to{1,2}",
+      "altrecognition": "(too|2|two)",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -68851,64 +68917,76 @@
   ],
   "linkList": [
     {
-      "label": "Three-word sentences",
+      "label": "",
       "destination": {
-        "page": "3wordsentences",
+        "page": "",
         "directory": "",
-        "sectionIdx": 0,
-        "terminalIdx": 0
+        "linkIdxType": "page",
+        "headingIdx": -9999,
+        "sectionIdx": -9999,
+        "terminalIdx": -9999
       },
-      "valid": true
+      "valid": false
     },
     {
-      "label": "Four-word sentences",
+      "label": "",
       "destination": {
-        "page": "4wordsentences",
+        "page": "",
         "directory": "",
-        "sectionIdx": 0,
-        "terminalIdx": 0
+        "linkIdxType": "page",
+        "headingIdx": -9999,
+        "sectionIdx": -9999,
+        "terminalIdx": -9999
       },
-      "valid": true
+      "valid": false
     },
     {
-      "label": "Five-word sentences",
+      "label": "",
       "destination": {
-        "page": "5wordsentences",
+        "page": "",
         "directory": "",
-        "sectionIdx": 0,
-        "terminalIdx": 0
+        "linkIdxType": "page",
+        "headingIdx": -9999,
+        "sectionIdx": -9999,
+        "terminalIdx": -9999
       },
-      "valid": true
+      "valid": false
     },
     {
-      "label": "Six-word sentences",
+      "label": "",
       "destination": {
-        "page": "6wordsentences",
+        "page": "",
         "directory": "",
-        "sectionIdx": 0,
-        "terminalIdx": 0
+        "linkIdxType": "page",
+        "headingIdx": -9999,
+        "sectionIdx": -9999,
+        "terminalIdx": -9999
       },
-      "valid": true
+      "valid": false
     },
     {
-      "label": "Seven-word sentences",
+      "label": "",
       "destination": {
-        "page": "7wordsentences",
+        "page": "",
         "directory": "",
-        "sectionIdx": 0,
-        "terminalIdx": 0
+        "linkIdxType": "page",
+        "headingIdx": -9999,
+        "sectionIdx": -9999,
+        "terminalIdx": -9999
       },
-      "valid": true
+      "valid": false
     },
     {
-      "label": "Ten-word sentences",
+      "label": "",
       "destination": {
-        "page": "10wordsentences",
+        "page": "",
         "directory": "",
-        "sectionIdx": 0,
-        "terminalIdx": 0
+        "linkIdxType": "page",
+        "headingIdx": -9999,
+        "sectionIdx": -9999,
+        "terminalIdx": -9999
       },
-      "valid": true
+      "valid": false
     }
   ],
   "fillinList": []

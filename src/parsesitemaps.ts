@@ -156,7 +156,7 @@ export default class CSiteMap extends BaseClass {
               currentCategory = siteMapRecord.category;
               outputStr += `# ${siteMapRecord.category}\n`;
             }
-            outputStr += `* [${siteMapRecord.title}](${siteMapRecord.fileName},0,0)\n`;
+            outputStr += `* [${siteMapRecord.title}](${siteMapRecord.fileName},page)\n`;
           } else {
           }
         }

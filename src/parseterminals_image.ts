@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2023 Wen Eng - All Rights Reserved
  *
  * File name: parsesections_image.ts
  *
@@ -24,7 +24,9 @@ import {
 import {
   TerminalMetaEnumType,
   IImageTerminalMeta,
-  IImageTerminalMetaInitializer
+  IImageTerminalMetaInitializer,
+  ILinkListItemInitializer,
+  LinkIdxDestinationType
   // ITerminalInfoInitializer,
   // ITerminalListItemInitializer
 } from "./pageContentType";
@@ -105,17 +107,76 @@ export class TerminalNode_MLTAG_IMAGE extends TerminalNode_MLTAG_
         token.content === TokenLiteral.RPAREN,
         `Expected right parenthesis but encountered "${token.content}" while parsing image`
       );
-      let chunks: string[] = src.split(",").map(chunk => chunk.trim());
+      let chunks: string[] = src.split(",");
+      // let chunks: string[] = src.split(",").map(chunk => chunk.trim());
       if (IsDefined(chunks[0])) this.meta.src = chunks[0].trim();
-      if (IsDefined(chunks[1])) this.meta.width = +chunks[1]; // no units; assumed px
-      if (IsDefined(chunks[2])) this.meta.height = +chunks[2]; // no units; assumed px
-      if (IsDefined(chunks[3])) this.meta.attributes = chunks[3];
       if (!FileExists(`dist\\img\\${this.meta.src}`)) {
         this.logger.warning(
           `Image file ${this.meta.src} does not exist (yet?)`
         );
       }
 
+      if (IsDefined(chunks[1])) this.meta.width = +chunks[1]; // no units; assumed px
+      assert(
+        Number(chunks[1]) !== NaN,
+        `Expected a numeric width but encountered "${chunks[1]}" while parsing image link`
+      );
+      if (IsDefined(chunks[2])) this.meta.height = +chunks[2]; // no units; assumed px
+      assert(
+        Number(chunks[2]) !== NaN,
+        `Expected a numeric height but encountered "${chunks[2]}" while parsing image link`
+      );
+      if (IsDefined(chunks[3])) this.meta.attributes = chunks[3];
+      // optional link may be included. Need to explicitly specify a
+      // valid linkIdxType.
+      //
+      if (IsDefined(chunks[4])) this.meta.destination.page = chunks[4];
+      if (IsDefined(chunks[5]) && chunks[5] in LinkIdxDestinationType) {
+        this.meta.destination.linkIdxType = chunks[5] as LinkIdxDestinationType;
+        console.log(
+          `image link found for ${this.meta.label} src= ${this.meta.src}`
+        );
+        let directory: string = `dist\\`;
+
+        if (IsDefined(chunks[6]) && Number(chunks[6]) !== NaN) {
+          let idx: number = +chunks[6];
+          if (
+            this.meta.destination.linkIdxType === LinkIdxDestinationType.page
+          ) {
+            // do nothing
+          } else if (
+            this.meta.destination.linkIdxType === LinkIdxDestinationType.heading
+          ) {
+            // idx is a headingIdx
+            this.meta.destination.headingIdx = idx;
+          } else if (
+            this.meta.destination.linkIdxType === LinkIdxDestinationType.section
+          ) {
+            this.meta.destination.sectionIdx = idx;
+          } else if (
+            this.meta.destination.linkIdxType ===
+            LinkIdxDestinationType.terminal
+          ) {
+            this.meta.destination.terminalIdx = idx;
+          } else {
+          }
+        }
+        this.meta.linkIdx =
+          this.userContext.links.push(
+            ILinkListItemInitializer(
+              this.meta.label,
+              {
+                page: this.meta.destination.page,
+                directory: directory,
+                linkIdxType: this.meta.destination.linkIdxType,
+                headingIdx: this.meta.destination.headingIdx,
+                sectionIdx: this.meta.destination.sectionIdx,
+                terminalIdx: this.meta.destination.terminalIdx
+              },
+              false // set after linklist parse validates the link info
+            )
+          ) - 1;
+      }
       token = tokenList.shift()!;
       assert(
         token.content === endMarkupTag(startTag),

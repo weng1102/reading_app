@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2023 Wen Eng - All Rights Reserved
  *
  * File name: parsesections_link.ts
  *
@@ -28,7 +28,8 @@ import {
   ICurriculumLinkTerminalMetaInitializer,
   ILinkListItem,
   ILinkListItemInitializer,
-  ITerminalInfo
+  ITerminalInfo,
+  LinkIdxDestinationType
   // ITerminalInfoInitializer,
   // ITerminalListItemInitializer
 } from "./pageContentType";
@@ -56,7 +57,7 @@ export class TerminalNode_MLTAG_LINK extends TerminalNode_MLTAG_
       );
       assert(
         isValidMarkupTag(startTag),
-        `Expected valid markup tag but ecnountered "${startTag}" parsing image token`
+        `Expected valid markup tag but encountered "${startTag}" parsing image token`
       );
       assert(
         startTag.toLowerCase === MarkupLabelType.LINK.toLowerCase,
@@ -131,32 +132,79 @@ export class TerminalNode_MLTAG_LINK extends TerminalNode_MLTAG_
         token = tokenList.shift()!
       ) {
         destination += token.content;
-        // to be consistent, destination should have a parse that at least advances
-        // the tokenList queue and NOT using for-loop step
+        // to be consistent, destination should have a parse that at least
+        // advances the tokenList queue and NOT using for-loop step
       }
       let chunks: string[] = destination.split(",").map(chunk => chunk.trim());
-      if (IsDefined(chunks[0])) {
-        // defer page validation
-        this.meta.destination.page = chunks[0];
-      }
-      if (IsDefined(chunks[1])) {
-        assert(
-          Number(chunks[1]) !== NaN,
-          `Expected a numeric but encountered "${chunks[1]}" while parsing link destination section index`
-        );
-        this.meta.destination.sectionIdx = +chunks[1].trim(); // no units;       )
+      this.meta.destination.page = chunks[0];
+      if (IsDefined(chunks[1]) && chunks[1] in LinkIdxDestinationType) {
+        this.meta.destination.linkIdxType = chunks[1] as LinkIdxDestinationType;
       } else {
-        this.meta.destination.sectionIdx = 0;
-      }
-      if (IsDefined(chunks[2])) {
         assert(
-          Number(chunks[2].trim()) !== NaN,
-          `Expected a numeric value but encountered "${chunks[2]}" while parsing link destination terminal index`
+          IsDefined(chunks[1]) && chunks[1] in LinkIdxDestinationType,
+          `Expected link type but encountered "${chunks[1]}" while parsing link destination type`
         );
-        this.meta.destination.terminalIdx = +chunks[2].trim(); // no units;
-      } else {
-        this.meta.destination.terminalIdx = 0;
       }
+      if (IsDefined(chunks[2]) && Number(chunks[2]) !== NaN) {
+        let idx: number = +chunks[2];
+        if (this.meta.destination.linkIdxType === LinkIdxDestinationType.page) {
+          // do nothing
+        } else if (
+          this.meta.destination.linkIdxType === LinkIdxDestinationType.heading
+        ) {
+          // idx is a headingIdx
+          this.meta.destination.headingIdx = idx;
+        } else if (
+          this.meta.destination.linkIdxType === LinkIdxDestinationType.section
+        ) {
+          this.meta.destination.sectionIdx = idx;
+        } else if (
+          this.meta.destination.linkIdxType === LinkIdxDestinationType.terminal
+        ) {
+          this.meta.destination.terminalIdx = idx;
+        } else {
+        }
+      } else {
+        assert(
+          Number(chunks[2]) !== NaN,
+          `Expected a numeric but encountered "${chunks[2]}" while parsing link destination index`
+        );
+      }
+      let directory: string = `dist\\`;
+      this.userContext.links[linkIdx] = ILinkListItemInitializer(
+        label,
+        {
+          page: this.meta.destination.page,
+          directory: directory,
+          linkIdxType: this.meta.destination.linkIdxType,
+          headingIdx: this.meta.destination.headingIdx,
+          sectionIdx: this.meta.destination.sectionIdx,
+          terminalIdx: this.meta.destination.terminalIdx
+        },
+        false
+      );
+      // defer page validation. What about linking within current page?
+      //   this.meta.destination.page = chunks[0];
+      // }
+      // if (IsDefined(chunks[1])) {
+      //   assert(
+      //     Number(chunks[1]) !== NaN,
+      //     `Expected a numeric but encountered "${chunks[1]}" while parsing link destination section index`
+      //   );
+      //   this.meta.destination.idx = +chunks[1].trim(); // no units;       )
+      // } else {
+      //   this.meta.destination.sectionIdx = 0;
+      // }
+      // if (IsDefined(chunks[2])) {
+      //   assert(
+      //     Number(chunks[2].trim()) !== NaN,
+      //     `Expected a numeric value but encountered "${chunks[2]}" while parsing link destination terminal index`
+      //   );
+      //   this.meta.destination.terminalIdx = +chunks[2].trim(); // no units;
+      // } else {
+      //   this.meta.destination.terminalIdx = 0;
+      // }
+      //      token = tokenList.shift()!;
       assert(
         token.content === TokenLiteral.RPAREN,
         `Expected right parenthesis but encountered "${token.content}" while parsing image`
@@ -171,8 +219,7 @@ export class TerminalNode_MLTAG_LINK extends TerminalNode_MLTAG_
       this.meta.linkIdx = linkIdx;
       this.userContext.links[linkIdx] = ILinkListItemInitializer(
         label,
-        this.meta.destination,
-        true
+        this.meta.destination
       );
     } catch (e) {
       if (linkIdx === this.userContext.links.length - 1)
@@ -209,27 +256,35 @@ export class TerminalNode_MLTAG_LINK extends TerminalNode_MLTAG_
             prefix + (i < this.meta.label.length - 1 ? "| " : "  ")
           )}`;
         }
+
         label = `destination:`;
         outputStr += super.serialize(format, label, prefix);
+
         prefix = prefix + "| ";
-        let destination = `page: ${
+        let destination = `${this.meta.destination.linkIdxType.toString()}: ${
           this.meta.destination.page.length > 0
             ? this.meta.destination.page
             : "(current)"
         }`;
         outputStr += super.serialize(format, destination, prefix);
-        let destinationSectionIdx = `section: ${
-          this.meta.destination.sectionIdx !== IDX_INITIALIZER
-            ? this.meta.destination.sectionIdx
-            : "na"
-        }`;
-        outputStr += super.serialize(format, destinationSectionIdx, prefix);
-        let destinationTerminalIdx = `terminal: ${
-          this.meta.destination.terminalIdx !== IDX_INITIALIZER
-            ? this.meta.destination.terminalIdx
-            : "na"
-        }`;
-        outputStr += super.serialize(format, destinationTerminalIdx, prefix);
+        let destinationIdx: string = "";
+        let destinationType: string = this.meta.destination.linkIdxType.toString();
+        if (this.meta.destination.linkIdxType === LinkIdxDestinationType.page)
+          destinationIdx = `headingIdx: ${
+            this.meta.destination.headingIdx !== IDX_INITIALIZER
+              ? this.meta.destination.headingIdx
+              : "na"
+          } sectionIdx: ${
+            this.meta.destination.sectionIdx !== IDX_INITIALIZER
+              ? this.meta.destination.sectionIdx
+              : "na"
+          } terminalIdx: ${
+            this.meta.destination.terminalIdx !== IDX_INITIALIZER
+              ? this.meta.destination.terminalIdx
+              : "na"
+          }`;
+        outputStr += super.serialize(format, destinationIdx, prefix);
+
         let linkIdx = `linkIdx: ${this.meta.linkIdx}`;
         outputStr += super.serialize(format, linkIdx, prefix);
         break;

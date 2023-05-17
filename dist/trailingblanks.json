@@ -6,11 +6,11 @@
   "owner": "anonymous",
   "author": "Wen",
   "category": "Testing",
-  "version": "20230329.1",
+  "version": "20230423.1",
   "pageFormatType": 0,
   "created": "1/1/2022",
-  "modified": "Wed Mar 29 2023 12:47:11 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Wed Mar 29 2023 12:47:11 GMT-0700 (Pacific Daylight Time)",
+  "modified": "Wed May 17 2023 08:53:24 GMT-0700 (Pacific Daylight Time)",
+  "transformed": "Wed May 17 2023 08:53:24 GMT-0700 (Pacific Daylight Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -3833,7 +3833,7 @@
         0
       ],
       "altpronunciation": "",
-      "altrecognition": "0",
+      "altrecognition": "^(zero|oh)$",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -3983,7 +3983,7 @@
         5
       ],
       "altpronunciation": "",
-      "altrecognition": "1",
+      "altrecognition": "^(one|won)$",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -4133,7 +4133,7 @@
         10
       ],
       "altpronunciation": "",
-      "altrecognition": "2",
+      "altrecognition": "^(two|to|too)$",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -4283,7 +4283,7 @@
         15
       ],
       "altpronunciation": "",
-      "altrecognition": "3",
+      "altrecognition": "three",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -4433,7 +4433,7 @@
         20
       ],
       "altpronunciation": "",
-      "altrecognition": "4",
+      "altrecognition": "^(four|for|fore)$",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -4553,7 +4553,7 @@
         24
       ],
       "altpronunciation": "",
-      "altrecognition": "1",
+      "altrecognition": "^(one|won)$",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -4673,7 +4673,7 @@
         28
       ],
       "altpronunciation": "",
-      "altrecognition": "2",
+      "altrecognition": "^(two|to|too)$",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -4793,7 +4793,7 @@
         32
       ],
       "altpronunciation": "",
-      "altrecognition": "3",
+      "altrecognition": "three",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -4913,7 +4913,7 @@
         36
       ],
       "altpronunciation": "",
-      "altrecognition": "4",
+      "altrecognition": "^(four|for|fore)$",
       "recitable": true,
       "audible": true,
       "linkable": false,

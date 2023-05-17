@@ -16,7 +16,6 @@ import {
 } from "./baseclasses";
 import { MarkdownRecordType, TaggedStringType } from "./dataadapter";
 import {
-  ImageEntryLayoutEnumType,
   ISectionImageEntryVariantInitializer,
   ISectionImageEntryVariant,
   ISectionParagraphVariant,
@@ -32,9 +31,9 @@ import { GetSectionNode } from "./parsesectiondispatch";
 import { ITerminalNode } from "./parseterminals";
 import { IPageNode } from "./parsepages";
 import { ISectionNode } from "./parsesections";
-import { SectionParseNode_LIST } from "./parsesections";
+import { SectionParseNode_GRID } from "./parsesections";
 import { ISentenceNode, SentenceNode } from "./parsesentences";
-export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
+export class SectionParseNode_BUTTONGRID extends SectionParseNode_GRID
   implements ISectionNode {
   constructor(parent: IPageNode | ISectionNode) {
     super(parent);
@@ -80,18 +79,18 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
         current.recordType === MarkdownRecordType.SENTENCE,
         `Expected "${MarkdownRecordType.SENTENCE}" but encountered "${current.recordType}" at line ${current.lineNo}`
       );
-      // find list of images
+      // find list of buttonText
       this.firstTermIdx = this.userContext.terminals.lastIdx + 1;
       let sentence: ISentenceNode = new SentenceNode(this);
       sentence.parse();
       for (const terminal of sentence.terminals) {
         if (terminal.type === TerminalMetaEnumType.image) {
           (<IImageTerminalMeta>terminal.meta).className = "imageentry-image";
-          this.meta.images.push(terminal);
+          this.meta.buttonText.push(terminal.content);
         }
       }
       assert(
-        this.meta.images.length > 0,
+        this.meta.buttonText.length > 0,
         `Expected image declaraction(s) immediately following "${MarkdownRecordType.IMAGEENTRY}" at line ${current.lineNo}`
       );
       current = this.dataSource.nextRecord();
@@ -151,29 +150,29 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
     let outputStr: string = "";
     switch (format) {
       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
-        label += `: title="${this.meta.title}", layout=${this.meta.layout}, width=${this.meta.percent}`;
+        label += `: title="${this.meta.title}", width=${this.meta.buttonWidth}`;
         outputStr = `${super.serialize(format, label, prefix)}`;
         outputStr = `${outputStr}${super.serialize(
           format,
-          "images:",
+          "buttonText:",
           prefix + "| "
         )}`;
-        for (const [i, image] of this.meta.images.entries()) {
-          let imageNode: IImageTerminalMeta = image.meta as IImageTerminalMeta;
+        for (const [i, button] of this.meta.buttonText.entries()) {
+          //          let imageNode: IImageTerminalMeta = button.meta as IImageTerminalMeta;
           outputStr = `${outputStr}${super.serialize(
             format,
-            imageNode.src,
-            prefix + "| " + (i < this.meta.images.length - 1 ? "| " : "  ")
+            // imageNode.src,
+            prefix + "| " + (i < this.meta.buttonText.length - 1 ? "| " : "  ")
           )}`;
         }
-        for (const [i, section] of this.meta.captions.entries()) {
-          let sectionNode: ISectionNode = section as ISectionNode;
-          outputStr = `${outputStr}${sectionNode.serialize(
-            format,
-            `captions: (${section.type})`,
-            prefix + (i < this.meta.captions.length - 1 ? "| " : "  ")
-          )}`;
-        }
+        // for (const [i, section] of this.meta.captions.entries()) {
+        //   let sectionNode: ISectionNode = section as ISectionNode;
+        //   outputStr = `${outputStr}${sectionNode.serialize(
+        //     format,
+        //     `captions: (${section.type})`,
+        //     prefix + (i < this.meta.captions.length - 1 ? "| " : "  ")
+        //   )}`;
+        // }
         //     format,
         //     label,
         //     //            prefix + " ".padEnd(2)

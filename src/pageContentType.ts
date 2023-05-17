@@ -157,6 +157,8 @@ export function ISectionHeadingVariantInitializer(): ISectionHeadingVariant {
   };
 }
 export interface ISectionButtonGridVariant {
+  title: string;
+  buttonWidth: number;
   description: string;
   columnCount: number;
   minColumnWidth: number;
@@ -164,6 +166,8 @@ export interface ISectionButtonGridVariant {
 }
 export function ISectionButtonGridVariantInitializer(): ISectionButtonGridVariant {
   return {
+    title: "",
+    buttonWidth: 0,
     description: "",
     columnCount: 0,
     minColumnWidth: 50,
@@ -849,13 +853,15 @@ export function IPassthruTagTerminalMetaTerminalMetaInitializer(): IPassthruTagT
     tag: ""
   };
 }
+
 export interface IImageTerminalMeta {
   src: string;
   label: string;
   width: number;
   height: number;
   attributes: string;
-  link: ILinkDestination;
+  destination: ILinkDestination;
+  linkIdx: number;
   className: string;
   style: string; // most specific style
 }
@@ -866,14 +872,23 @@ export function IImageTerminalMetaInitializer(): IImageTerminalMeta {
     width: 0,
     height: 0,
     attributes: "",
-    link: ILinkDestinationInitializer(),
+    destination: ILinkDestinationInitializer(),
+    linkIdx: IDX_INITIALIZER,
     className: "",
     style: "" // most specific style
   };
 }
+export enum LinkIdxDestinationType {
+  page = "page",
+  heading = "heading",
+  section = "section",
+  terminal = "terminal"
+}
 interface ILinkDestination {
   page: string;
   directory: string; // if omitted, current dist/ directory
+  linkIdxType: LinkIdxDestinationType;
+  headingIdx: number;
   sectionIdx: number;
   terminalIdx: number;
 }
@@ -881,6 +896,8 @@ function ILinkDestinationInitializer() {
   return {
     page: "",
     directory: "",
+    linkIdxType: LinkIdxDestinationType.page,
+    headingIdx: IDX_INITIALIZER,
     sectionIdx: IDX_INITIALIZER,
     terminalIdx: IDX_INITIALIZER
   };
@@ -898,7 +915,7 @@ export function ICurriculumLinkTerminalMetaInitializer(): ICurriculumLinkTermina
     destination: ILinkDestinationInitializer(),
     className: "",
     style: "", // most specific style
-    linkIdx: IDX_INITIALIZER
+    linkIdx: IDX_INITIALIZER // linkList idx
   };
 }
 export function INumeralsTerminalMetaInitializer(): INumeralsTerminalMeta {
@@ -1133,12 +1150,7 @@ export interface ILinkListItem {
 }
 export function ILinkListItemInitializer(
   label: string = "",
-  destination: ILinkDestination = {
-    page: "",
-    directory: "",
-    sectionIdx: IDX_INITIALIZER,
-    terminalIdx: IDX_INITIALIZER
-  },
+  destination: ILinkDestination = ILinkDestinationInitializer(),
   valid = false
 ): ILinkListItem {
   return { label, destination, valid };

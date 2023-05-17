@@ -6,11 +6,11 @@
   "owner": "anonymous",
   "author": "Wen",
   "category": "Sentence Completion (trailing word)",
-  "version": "20230329.1",
+  "version": "20230423.1",
   "pageFormatType": 0,
-  "created": "Wed Mar 29 2023 12:47:10 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Wed Mar 29 2023 12:47:10 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Wed Mar 29 2023 12:47:10 GMT-0700 (Pacific Daylight Time)",
+  "created": "Wed May 17 2023 08:53:24 GMT-0700 (Pacific Daylight Time)",
+  "modified": "Wed May 17 2023 08:53:24 GMT-0700 (Pacific Daylight Time)",
+  "transformed": "Wed May 17 2023 08:53:24 GMT-0700 (Pacific Daylight Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -2151,7 +2151,7 @@
         },
         "allowReset": true,
         "promptColumns": 2,
-        "showHelpPresets": true,
+        "showHelpPresets": false,
         "prompts": [
           {
             "id": 0,
@@ -2965,7 +2965,7 @@
                       "sentences": [
                         {
                           "id": 6,
-                          "content": "Transplant [seedlings_].",
+                          "content": "Transplant [_seedlings_].",
                           "firstTermIdx": 39,
                           "lastTermIdx": 40,
                           "terminals": [
@@ -3009,13 +3009,13 @@
                             {
                               "id": 0,
                               "termIdx": -9999,
-                              "content": " [",
+                              "content": " ",
                               "cueList": "",
                               "firstTermIdx": -9999,
                               "lastTermIdx": -9999,
                               "type": 16,
                               "meta": {
-                                "content": " [",
+                                "content": " ",
                                 "cues": [],
                                 "termIdx": -9999,
                                 "nextTermIdx": [],
@@ -3041,105 +3041,53 @@
                             },
                             {
                               "id": 0,
-                              "termIdx": 40,
+                              "termIdx": -9999,
                               "content": "seedlings",
                               "cueList": "",
                               "firstTermIdx": 40,
                               "lastTermIdx": 40,
-                              "type": 17,
+                              "type": 4,
                               "meta": {
-                                "content": "seedlings",
-                                "cues": [],
-                                "termIdx": 40,
-                                "nextTermIdx": [
-                                  41
+                                "terminals": [
+                                  {
+                                    "id": 0,
+                                    "termIdx": 40,
+                                    "content": "seedlings",
+                                    "cueList": "",
+                                    "firstTermIdx": 40,
+                                    "lastTermIdx": 40,
+                                    "type": 17,
+                                    "meta": {
+                                      "content": "seedlings",
+                                      "cues": [],
+                                      "termIdx": 40,
+                                      "nextTermIdx": [
+                                        41
+                                      ],
+                                      "prevTermIdx": [
+                                        39
+                                      ],
+                                      "altpronunciation": "",
+                                      "altrecognition": "",
+                                      "recitable": true,
+                                      "audible": true,
+                                      "linkable": false,
+                                      "visible": true,
+                                      "visited": false,
+                                      "numberAsNumerals": false,
+                                      "linkIdx": -9999,
+                                      "hintsIdx": -9999,
+                                      "fillin": {
+                                        "sectionIdx": 0,
+                                        "responseIdx": 3
+                                      },
+                                      "bold": false,
+                                      "italics": false,
+                                      "markupTag": false
+                                    }
+                                  }
                                 ],
-                                "prevTermIdx": [
-                                  39
-                                ],
-                                "altpronunciation": "",
-                                "altrecognition": "",
-                                "recitable": true,
-                                "audible": true,
-                                "linkable": false,
-                                "visible": true,
-                                "visited": false,
-                                "numberAsNumerals": false,
-                                "linkIdx": -9999,
-                                "hintsIdx": -9999,
-                                "fillin": {
-                                  "sectionIdx": -9999,
-                                  "responseIdx": -9999
-                                },
-                                "bold": false,
-                                "italics": false,
-                                "markupTag": false
-                              }
-                            },
-                            {
-                              "id": 0,
-                              "termIdx": -9999,
-                              "content": "_",
-                              "cueList": "",
-                              "firstTermIdx": -9999,
-                              "lastTermIdx": -9999,
-                              "type": 11,
-                              "meta": {
-                                "content": "_",
-                                "cues": [],
-                                "termIdx": -9999,
-                                "nextTermIdx": [],
-                                "prevTermIdx": [],
-                                "altpronunciation": "",
-                                "altrecognition": "",
-                                "recitable": false,
-                                "audible": false,
-                                "linkable": false,
-                                "visible": true,
-                                "visited": false,
-                                "numberAsNumerals": false,
-                                "linkIdx": -9999,
-                                "hintsIdx": -9999,
-                                "fillin": {
-                                  "sectionIdx": -9999,
-                                  "responseIdx": -9999
-                                },
-                                "bold": false,
-                                "italics": false,
-                                "markupTag": false
-                              }
-                            },
-                            {
-                              "id": 0,
-                              "termIdx": -9999,
-                              "content": "]",
-                              "cueList": "",
-                              "firstTermIdx": -9999,
-                              "lastTermIdx": -9999,
-                              "type": 16,
-                              "meta": {
-                                "content": "]",
-                                "cues": [],
-                                "termIdx": -9999,
-                                "nextTermIdx": [],
-                                "prevTermIdx": [],
-                                "altpronunciation": "",
-                                "altrecognition": "",
-                                "recitable": false,
-                                "audible": false,
-                                "linkable": false,
-                                "visible": true,
-                                "visited": false,
-                                "numberAsNumerals": false,
-                                "linkIdx": -9999,
-                                "hintsIdx": -9999,
-                                "fillin": {
-                                  "sectionIdx": -9999,
-                                  "responseIdx": -9999
-                                },
-                                "bold": false,
-                                "italics": false,
-                                "markupTag": false
+                                "sectionFillinIdx": 0
                               }
                             },
                             {
@@ -3393,7 +3341,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 3
+                                        "responseIdx": 4
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -3795,7 +3743,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 4
+                                        "responseIdx": 5
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -4057,7 +4005,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 5
+                                        "responseIdx": 6
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -4319,7 +4267,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 6
+                                        "responseIdx": 7
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -4651,7 +4599,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 7
+                                        "responseIdx": 8
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -5053,7 +5001,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 8
+                                        "responseIdx": 9
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -5315,7 +5263,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 9
+                                        "responseIdx": 10
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -5577,7 +5525,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 10
+                                        "responseIdx": 11
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -5839,7 +5787,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 11
+                                        "responseIdx": 12
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -6101,7 +6049,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 12
+                                        "responseIdx": 13
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -6363,7 +6311,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 13
+                                        "responseIdx": 14
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -6695,7 +6643,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 14
+                                        "responseIdx": 15
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -7097,7 +7045,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 15
+                                        "responseIdx": 16
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -7359,7 +7307,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 16
+                                        "responseIdx": 17
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -7759,7 +7707,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 17
+                                        "responseIdx": 18
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -8080,7 +8028,7 @@
         7
       ],
       "altpronunciation": "",
-      "altrecognition": "to{1,2}",
+      "altrecognition": "(too|2|two)",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -9050,8 +8998,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": -9999,
-        "responseIdx": -9999
+        "sectionIdx": 0,
+        "responseIdx": 3
       },
       "bold": false,
       "italics": false,
@@ -9141,7 +9089,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 3
+        "responseIdx": 4
       },
       "bold": false,
       "italics": false,
@@ -9291,7 +9239,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 4
+        "responseIdx": 5
       },
       "bold": false,
       "italics": false,
@@ -9370,7 +9318,7 @@
         50
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "would",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -9381,7 +9329,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 5
+        "responseIdx": 6
       },
       "bold": false,
       "italics": false,
@@ -9471,7 +9419,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 6
+        "responseIdx": 7
       },
       "bold": false,
       "italics": false,
@@ -9591,7 +9539,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 7
+        "responseIdx": 8
       },
       "bold": false,
       "italics": false,
@@ -9741,7 +9689,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 8
+        "responseIdx": 9
       },
       "bold": false,
       "italics": false,
@@ -9831,7 +9779,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 9
+        "responseIdx": 10
       },
       "bold": false,
       "italics": false,
@@ -9921,7 +9869,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 10
+        "responseIdx": 11
       },
       "bold": false,
       "italics": false,
@@ -10011,7 +9959,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 11
+        "responseIdx": 12
       },
       "bold": false,
       "italics": false,
@@ -10101,7 +10049,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 12
+        "responseIdx": 13
       },
       "bold": false,
       "italics": false,
@@ -10191,7 +10139,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 13
+        "responseIdx": 14
       },
       "bold": false,
       "italics": false,
@@ -10311,7 +10259,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 14
+        "responseIdx": 15
       },
       "bold": false,
       "italics": false,
@@ -10461,7 +10409,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 15
+        "responseIdx": 16
       },
       "bold": false,
       "italics": false,
@@ -10551,7 +10499,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 16
+        "responseIdx": 17
       },
       "bold": false,
       "italics": false,
@@ -10699,7 +10647,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 17
+        "responseIdx": 18
       },
       "bold": false,
       "italics": false,
@@ -10940,7 +10888,7 @@
   "fillinList": [
     {
       "idx": 0,
-      "showHelpPresets": true,
+      "showHelpPresets": false,
       "helpPresetLevel": 4,
       "authorHelpSetting": {
         "description": "no description",
@@ -10987,6 +10935,11 @@
         },
         {
           "content": "seeds",
+          "category": "",
+          "referenceCount": 1
+        },
+        {
+          "content": "seedlings",
           "category": "",
           "referenceCount": 1
         },

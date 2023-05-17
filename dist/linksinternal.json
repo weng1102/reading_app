@@ -6,11 +6,11 @@
   "owner": "anonymous",
   "author": "Wen",
   "category": "Testing",
-  "version": "20230329.1",
+  "version": "20230423.1",
   "pageFormatType": 0,
   "created": "1/1/2022",
-  "modified": "Wed Mar 29 2023 12:47:08 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Wed Mar 29 2023 12:47:08 GMT-0700 (Pacific Daylight Time)",
+  "modified": "Wed May 17 2023 08:53:21 GMT-0700 (Pacific Daylight Time)",
+  "transformed": "Wed May 17 2023 08:53:21 GMT-0700 (Pacific Daylight Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -315,13 +315,24 @@
                           "destination": {
                             "page": "",
                             "directory": "",
-                            "sectionIdx": 3,
-                            "terminalIdx": 0
+                            "linkIdxType": "page",
+                            "headingIdx": -9999,
+                            "sectionIdx": -9999,
+                            "terminalIdx": -9999
                           },
                           "className": "",
                           "style": "",
-                          "linkIdx": 0
+                          "linkIdx": -9999
                         }
+                      },
+                      {
+                        "id": 0,
+                        "termIdx": -9999,
+                        "content": "</link>",
+                        "cueList": "",
+                        "firstTermIdx": -9999,
+                        "lastTermIdx": -9999,
+                        "type": 13
                       }
                     ],
                     "lastPunctuation": ""
@@ -622,13 +633,24 @@
                           "destination": {
                             "page": "",
                             "directory": "",
-                            "sectionIdx": 2,
-                            "terminalIdx": 0
+                            "linkIdxType": "page",
+                            "headingIdx": -9999,
+                            "sectionIdx": -9999,
+                            "terminalIdx": -9999
                           },
                           "className": "",
                           "style": "",
-                          "linkIdx": 1
+                          "linkIdx": -9999
                         }
+                      },
+                      {
+                        "id": 0,
+                        "termIdx": -9999,
+                        "content": "</link>",
+                        "cueList": "",
+                        "firstTermIdx": -9999,
+                        "lastTermIdx": -9999,
+                        "type": 13
                       }
                     ],
                     "lastPunctuation": ""
@@ -929,13 +951,24 @@
                           "destination": {
                             "page": "",
                             "directory": "",
-                            "sectionIdx": 0,
-                            "terminalIdx": 0
+                            "linkIdxType": "page",
+                            "headingIdx": -9999,
+                            "sectionIdx": -9999,
+                            "terminalIdx": -9999
                           },
                           "className": "",
                           "style": "",
-                          "linkIdx": 2
+                          "linkIdx": -9999
                         }
+                      },
+                      {
+                        "id": 0,
+                        "termIdx": -9999,
+                        "content": "</link>",
+                        "cueList": "",
+                        "firstTermIdx": -9999,
+                        "lastTermIdx": -9999,
+                        "type": 13
                       }
                     ],
                     "lastPunctuation": ""
@@ -1234,13 +1267,24 @@
                           "destination": {
                             "page": "",
                             "directory": "",
-                            "sectionIdx": 1,
-                            "terminalIdx": 0
+                            "linkIdxType": "page",
+                            "headingIdx": -9999,
+                            "sectionIdx": -9999,
+                            "terminalIdx": -9999
                           },
                           "className": "",
                           "style": "",
-                          "linkIdx": 3
+                          "linkIdx": -9999
                         }
+                      },
+                      {
+                        "id": 0,
+                        "termIdx": -9999,
+                        "content": "</link>",
+                        "cueList": "",
+                        "firstTermIdx": -9999,
+                        "lastTermIdx": -9999,
+                        "type": 13
                       }
                     ],
                     "lastPunctuation": ""
@@ -1318,7 +1362,7 @@
         0
       ],
       "altpronunciation": "",
-      "altrecognition": "to{1,2}",
+      "altrecognition": "(too|2|two)",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -1378,7 +1422,7 @@
         2
       ],
       "altpronunciation": "",
-      "altrecognition": "4",
+      "altrecognition": "^(four|for|fore)$",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -1438,7 +1482,7 @@
         4
       ],
       "altpronunciation": "",
-      "altrecognition": "to{1,2}",
+      "altrecognition": "(too|2|two)",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -1498,7 +1542,7 @@
         6
       ],
       "altpronunciation": "",
-      "altrecognition": "3",
+      "altrecognition": "three",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -1558,7 +1602,7 @@
         8
       ],
       "altpronunciation": "",
-      "altrecognition": "to{1,2}",
+      "altrecognition": "(too|2|two)",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -1618,7 +1662,7 @@
         10
       ],
       "altpronunciation": "",
-      "altrecognition": "1",
+      "altrecognition": "^(one|won)$",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -1678,7 +1722,7 @@
         12
       ],
       "altpronunciation": "",
-      "altrecognition": "to{1,2}",
+      "altrecognition": "(too|2|two)",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -1736,7 +1780,7 @@
         14
       ],
       "altpronunciation": "",
-      "altrecognition": "2",
+      "altrecognition": "^(two|to|too)$",
       "recitable": true,
       "audible": true,
       "linkable": false,
@@ -1803,44 +1847,52 @@
   ],
   "linkList": [
     {
-      "label": "sentence 4",
+      "label": "",
       "destination": {
         "page": "",
         "directory": "",
-        "sectionIdx": 3,
-        "terminalIdx": 0
+        "linkIdxType": "page",
+        "headingIdx": -9999,
+        "sectionIdx": -9999,
+        "terminalIdx": -9999
       },
-      "valid": true
+      "valid": false
     },
     {
-      "label": "sentence 3",
+      "label": "",
       "destination": {
         "page": "",
         "directory": "",
-        "sectionIdx": 2,
-        "terminalIdx": 0
+        "linkIdxType": "page",
+        "headingIdx": -9999,
+        "sectionIdx": -9999,
+        "terminalIdx": -9999
       },
-      "valid": true
+      "valid": false
     },
     {
-      "label": "sentence 1",
+      "label": "",
       "destination": {
         "page": "",
         "directory": "",
-        "sectionIdx": 0,
-        "terminalIdx": 0
+        "linkIdxType": "page",
+        "headingIdx": -9999,
+        "sectionIdx": -9999,
+        "terminalIdx": -9999
       },
-      "valid": true
+      "valid": false
     },
     {
-      "label": "sentence 2",
+      "label": "",
       "destination": {
         "page": "",
         "directory": "",
-        "sectionIdx": 1,
-        "terminalIdx": 0
+        "linkIdxType": "page",
+        "headingIdx": -9999,
+        "sectionIdx": -9999,
+        "terminalIdx": -9999
       },
-      "valid": true
+      "valid": false
     }
   ],
   "fillinList": []

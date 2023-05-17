@@ -8,6 +8,8 @@
  * Version history:
  *
  **/
+import * as fs from "fs";
+import { FileExists } from "./utilities";
 import DictionaryType, {
   PronunciationDictionary,
   RecognitionDictionary
@@ -26,10 +28,13 @@ import {
   ILinkListItem,
   ISectionFillinHelpSetting,
   ISectionFillinItem,
+  LinkIdxDestinationType,
   ISectionFillinItemInitializer,
   SectionFillinSortOrder,
   SectionFillinLayoutType
 } from "./pageContentType";
+import { IPageContent } from "./pageContentType";
+import { IsDefined } from "./utilities";
 export const TREEVIEW_PREFIX = "+-";
 export const IDX_INITIALIZER = -9999;
 export abstract class BaseClass {
@@ -343,29 +348,164 @@ class LinkArray extends Array<ILinkListItem> {
   push(link: ILinkListItem): number {
     return super.push(link);
   }
-  parse(): number {
+  parse(
+    headingListLength: number,
+    sectionListLength: number,
+    terminalListLength: number
+  ): number {
+    // If both section and terminal indices are specified, terminal idx
+    // takes precedence over section idx.
+    // Validate links and sectionIdx and terminalIdx before setting
+    // valid flag
+    for (const [i, element] of this.entries()) {
+      let intrapageLink: boolean =
+        !IsDefined(element.destination.page) ||
+        element.destination.page.length === 0;
+      element.valid = false;
+      if (intrapageLink) {
+        if (
+          element.destination.linkIdxType === LinkIdxDestinationType.heading
+        ) {
+          element.valid =
+            element.destination.headingIdx >= 0 &&
+            element.destination.headingIdx < headingListLength;
+        } else if (
+          element.destination.linkIdxType === LinkIdxDestinationType.section
+        ) {
+          element.valid =
+            element.destination.sectionIdx >= 0 &&
+            element.destination.sectionIdx < sectionListLength;
+        } else if (
+          element.destination.linkIdxType === LinkIdxDestinationType.terminal
+        ) {
+          element.valid =
+            element.destination.terminalIdx >= 0 &&
+            element.destination.terminalIdx < terminalListLength;
+        } else {
+        }
+      } else {
+        let pageFile: string = `dist\\${element.destination.page.trim()}.json`;
+        if (FileExists(pageFile)) {
+          // and not already the currently open
+          // load json and check section and terminal lists
+          if (element.destination.linkIdxType === LinkIdxDestinationType.page) {
+            // don't need to check link id, go to top of page
+            element.valid = true;
+            // element.destination.headingIdx = 0;
+            // element.destination.sectionIdx = 0;
+            // element.destination.terminalIdx = 0;
+          } else {
+            let pageContent: IPageContent;
+            let inputStr: string = fs.readFileSync(pageFile).toString();
+            // should find all pageFile references within linkList. Difficult
+            // algorithm. Need to sort LinkList by destination pages OR just
+            // be inefficient and open the file(s) again.
+            pageContent = JSON.parse(inputStr);
+            //            let linkList: ILinkListItem[] = pageContent.linkList;
+            if (
+              element.destination.linkIdxType ===
+              LinkIdxDestinationType.terminal
+            ) {
+              element.valid =
+                element.destination.terminalIdx >= 0 &&
+                element.destination.terminalIdx <
+                  pageContent.terminalList.length;
+              if (element.valid) {
+                element.destination.sectionIdx =
+                  pageContent.terminalList[
+                    element.destination.terminalIdx
+                  ].sectionIdx;
+              }
+            } else if (
+              element.destination.linkIdxType === LinkIdxDestinationType.section
+            ) {
+              element.valid =
+                element.destination.sectionIdx >= 0 &&
+                element.destination.sectionIdx <
+                  pageContent.sectionList.length &&
+                pageContent.sectionList[element.destination.sectionIdx]
+                  .firstTermIdx >= 0 &&
+                pageContent.sectionList[element.destination.sectionIdx]
+                  .lastTermIdx < pageContent.terminalList.length;
+              if (element.valid) {
+                element.destination.terminalIdx =
+                  pageContent.sectionList[
+                    element.destination.sectionIdx
+                  ].firstTermIdx;
+              }
+              // } else if (
+              //   element.destination.linkIdxType === LinkIdxDestinationType.heading
+              // ) {
+              //   element.valid =
+              //     element.destination.terminalIdx >= 0 &&
+              //     element.destination.terminalIdx <
+              //       pageContent.terminalList.length;
+              //   if (element.valid) {
+              //     element.destination.sectionIdx =
+              //       pageContent.terminalList[
+              //         element.destination.terminalIdx
+              //       ].sectionIdx;
+              //   }
+            } else if (
+              element.destination.linkIdxType === LinkIdxDestinationType.heading
+            ) {
+              element.valid =
+                element.destination.headingIdx >= 0 &&
+                element.destination.headingIdx <
+                  pageContent.headingList.length &&
+                pageContent.headingList[element.destination.headingIdx]
+                  .termIdx >= 0 &&
+                pageContent.headingList[element.destination.headingIdx]
+                  .termIdx < pageContent.terminalList.length;
+              if (element.valid) {
+                element.destination.terminalIdx =
+                  pageContent.headingList[
+                    element.destination.headingIdx
+                  ].termIdx;
+                element.destination.sectionIdx =
+                  pageContent.terminalList[
+                    element.destination.terminalIdx
+                  ].sectionIdx;
+              }
+            } else {
+            }
+          }
+        }
+      }
+    }
     return this.length;
   }
   serialize(): string {
-    let outputStr: string = "[idx ]  page/url            sect term  valid \n";
+    let outputStr: string =
+      "[idx ]  " +
+      "page/url".padEnd(40, " ") +
+      "type       head sect term valid \n";
     for (const [i, element] of this.entries()) {
-      outputStr += `[${i.toString().padStart(4, "0")}]: ${(element.destination
-        .page.length === 0
-        ? "(current page)"
-        : element.destination.page
-      ).padEnd(20, " ")}${(element.destination.sectionIdx !== IDX_INITIALIZER
-        ? +element.destination.sectionIdx
+      outputStr += `[${i.toString().padStart(4, "0")}]: ${
+        IsDefined(element.destination.page) &&
+        element.destination.page.length > 0
+          ? element.destination.page.padEnd(40, " ")
+          : "(current page)".padEnd(40, " ")
+      }${element.destination.linkIdxType.toString().padEnd(9, " ")}  ${(element
+        .destination.headingIdx !== IDX_INITIALIZER
+        ? element.destination.headingIdx
         : "na"
       )
         .toString()
-        .padStart(4, " ")} ${(element.destination.terminalIdx !==
-      IDX_INITIALIZER
-        ? +element.destination.terminalIdx
+        .padEnd(4, " ")} ${(element.destination.sectionIdx !== IDX_INITIALIZER
+        ? element.destination.sectionIdx
         : "na"
       )
         .toString()
-        .padStart(4, " ")}  ${element.valid}\n`;
+        .padEnd(4, " ")} ${(element.destination.terminalIdx !== IDX_INITIALIZER
+        ? element.destination.terminalIdx
+        : "na"
+      )
+        .toString()
+        .padEnd(4, " ")} ${element.valid}\n`;
     }
+    outputStr +=
+      "Note: The preceding head, sect, term refer are idxs in their respective (non-url) target page when validated.";
     return outputStr;
   }
 }

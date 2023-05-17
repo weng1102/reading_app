@@ -6,11 +6,11 @@
   "owner": "anonymous",
   "author": "Wen",
   "category": "Testing",
-  "version": "20230329.1",
+  "version": "20230423.1",
   "pageFormatType": 0,
-  "created": "Wed Mar 29 2023 12:47:08 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Wed Mar 29 2023 12:47:08 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Wed Mar 29 2023 12:47:08 GMT-0700 (Pacific Daylight Time)",
+  "created": "Wed May 17 2023 08:53:21 GMT-0700 (Pacific Daylight Time)",
+  "modified": "Wed May 17 2023 08:53:21 GMT-0700 (Pacific Daylight Time)",
+  "transformed": "Wed May 17 2023 08:53:21 GMT-0700 (Pacific Daylight Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -36,7 +36,7 @@
       "type": "image_entry",
       "meta": {
         "title": "the end",
-        "layout": "left",
+        "orientation": "left",
         "percent": "33%",
         "separator": "",
         "images": [
@@ -53,13 +53,16 @@
               "label": "visualize it",
               "width": 10,
               "height": 20,
-              "attributes": "last arg",
-              "link": {
+              "attributes": " last arg",
+              "destination": {
                 "page": "",
                 "directory": "",
+                "linkIdxType": "page",
+                "headingIdx": -9999,
                 "sectionIdx": -9999,
                 "terminalIdx": -9999
               },
+              "linkIdx": -9999,
               "className": "imageentry-image",
               "style": ""
             }
