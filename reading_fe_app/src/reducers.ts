@@ -15,6 +15,7 @@
  *
  **/
 import { CPageLists } from "./pageContext";
+import { LinkIdxDestinationType } from "./pageContentType";
 const IDX_INITIALIZER = -9999;
 // import {
 //   ISettings,
@@ -193,6 +194,7 @@ const Speech_announceCurrentContent = () => {
   };
 };
 const Cursor_gotoFirstSection = () => {
+  // NOT USED
   // set   cursor_terminalIdx: number = 0
   return {
     type: WORD_SELECT,
@@ -233,6 +235,7 @@ const Cursor_gotoWordByIdx = (terminalIdx: number) => {
   };
 };
 const Cursor_gotoSectionByIdx = (sectionIdx: number) => {
+  // NOT USED
   return {
     type: SECTION_CHANGE,
     payload: sectionIdx
@@ -270,10 +273,21 @@ const Message_clear = (
     payload: messageType
   };
 };
-const Page_load = (page: string, sectionIdx?: number, terminalIdx?: number) => {
+const Page_load = (
+  page: string,
+  headingIdx?: number,
+  sectionIdx?: number,
+  terminalIdx?: number
+) => {
   return {
     type: PAGE_LOAD,
-    payload: { page: page, sectionIdx: sectionIdx, terminalIdx: terminalIdx }
+    payload: {
+      page: page,
+      linkType: LinkIdxDestinationType,
+      headingIdx: headingIdx,
+      sectionIdx: sectionIdx,
+      terminalIdx: terminalIdx
+    }
   };
 };
 const Page_loaded = (loaded: boolean) => {
@@ -282,9 +296,10 @@ const Page_loaded = (loaded: boolean) => {
     payload: loaded
   };
 };
-const Page_gotoLink = () => {
+const Page_gotoLink = (linkIdx: number = IDX_INITIALIZER) => {
   return {
-    type: PAGE_LINKTO
+    type: PAGE_LINKTO,
+    payload: linkIdx
   };
 };
 const Page_setContext = (context: CPageLists) => {
@@ -569,6 +584,14 @@ interface IReduxState {
   page_previous_enabled: boolean;
   page_sitemapEnabled: boolean;
 
+  // page link info sent to page requested where it is validatable ( message
+  // in a bottle)
+  link_page: string; // should be same as page_requested
+  link_type: LinkIdxDestinationType;
+  link_headingIdx: number;
+  link_sectionIdx: number;
+  link_terminalIdx: number;
+
   recite_requested: boolean;
   recite_word_requested: boolean;
   recite_word_completed: boolean;
@@ -611,6 +634,11 @@ const IReduxStateInitialState: IReduxState = {
   fillin_showTerminalIdx: IDX_INITIALIZER,
   fillin_resetSectionIdx: IDX_INITIALIZER,
 
+  link_page: "",
+  link_type: LinkIdxDestinationType.page,
+  link_headingIdx: IDX_INITIALIZER,
+  link_sectionIdx: IDX_INITIALIZER,
+  link_terminalIdx: IDX_INITIALIZER,
   page_requested: "",
   page_loaded: false,
   page_section: 0,
@@ -622,8 +650,10 @@ const IReduxStateInitialState: IReduxState = {
   page_spacingDown_enabled: false,
   page_previous_enabled: false,
   page_sitemapEnabled: false,
+
   cursor_terminalIdx_proposed: 0,
   cursor_sectionIdx_proposed: 0,
+
   //page_lists: new CPageLists(),
   pageContext: new CPageLists(),
 
@@ -720,28 +750,83 @@ export const rootReducer = (
       state.pageContext.previousSentenceTerminalIdx(state.cursor_terminalIdx)
     ]);
   };
-  const saveProposedCursorState = (sectionIdx: number, terminalIdx: number) => {
-    state.cursor_terminalIdx_proposed = terminalIdx;
-    state.cursor_sectionIdx_proposed = sectionIdx; //
-    // }
+  // The destination page requested (including its initial state: cursor
+  // position) is received within the current page context. When the page
+  // is loaded, this initial state (defined within the link definition of
+  // the sourcec page) will no longer be available. Thus, the initial state
+  // is saved so that it can be set upon successful loading of the destination
+  // page context after which the saved requested initial page state will be
+  // valid or at least validatable. The page is saved for internal validation
+  // before setting the requested cursor state.
+  const savePageLinkInitialState = (
+    page: string,
+    linkType: LinkIdxDestinationType,
+    headingIdx: number,
+    sectionIdx: number,
+    terminalIdx: number
+  ) => {
+    state.link_page = page;
+    state.link_type = linkType;
+    state.link_headingIdx = headingIdx;
+    state.link_terminalIdx = terminalIdx;
+    state.link_sectionIdx = sectionIdx;
   };
-  const setProposedCursorState = () => {
-    if (state.cursor_terminalIdx_proposed === state.cursor_terminalIdx) {
-      // accept default
-    } else if (
-      state.pageContext.isValidTerminalIdx(state.cursor_terminalIdx_proposed)
-    ) {
-      setTerminalState([state.cursor_terminalIdx_proposed]);
-    } else if (
-      state.pageContext.isValidSectionIdx(state.cursor_sectionIdx_proposed)
-    ) {
-      setTerminalState([
-        state.pageContext.sectionList[state.cursor_sectionIdx_proposed]
-          .firstTermIdx
-      ]);
-    } else {
-      state.cursor_terminalIdx = 0;
+
+  const setPageLinkInitialState = () => {
+    if (state.link_page === state.page_requested) {
+      switch (state.link_type) {
+        case LinkIdxDestinationType.page: {
+          setTerminalState([0]);
+          break;
+        }
+        case LinkIdxDestinationType.heading: {
+          if (
+            state.link_headingIdx >= 0 &&
+            state.link_headingIdx < state.pageContext.headingList.length
+          ) {
+            setTerminalState([
+              state.pageContext.headingList[state.link_headingIdx].termIdx
+            ]);
+          }
+          break;
+        }
+        case LinkIdxDestinationType.section: {
+          if (
+            state.link_sectionIdx >= 0 &&
+            state.link_sectionIdx < state.pageContext.sectionList.length
+          ) {
+            setTerminalState([
+              state.pageContext.sectionList[state.link_sectionIdx].firstTermIdx
+            ]);
+          }
+          break;
+        }
+        case LinkIdxDestinationType.terminal: {
+          if (
+            state.link_terminalIdx >= 0 &&
+            state.link_terminalIdx < state.pageContext.terminalList.length
+          ) {
+            setTerminalState([state.link_terminalIdx]);
+          }
+          break;
+        }
+        default: {
+          setTerminalState([0]);
+          break;
+        }
+      }
     }
+    // if (state.link_terminalIdx === state.cursor_terminalIdx) {
+    //   // accept default
+    // } else if (state.pageContext.isValidTerminalIdx(state.link_terminalIdx)) {
+    //   setTerminalState([state.link_terminalIdx]);
+    // } else if (state.pageContext.isValidSectionIdx(state.link_sectionIdx)) {
+    //   setTerminalState([
+    //     state.pageContext.sectionList[state.link_sectionIdx].firstTermIdx
+    //   ]);
+    // } else {
+    //   state.cursor_terminalIdx = 0;
+    // }
   };
   // const resetListeningRetries = () => {
   //   state.listen_retries = 0;
@@ -757,7 +842,10 @@ export const rootReducer = (
       state.page_requested = action.payload.page as string;
       // state.page_requested = (action.payload.page as string) + ".json";      // cannot validate these idxs without proper context that will not
       // be available until the accompanying (payload) page is loaded
-      saveProposedCursorState(
+      savePageLinkInitialState(
+        action.payload.page,
+        action.payload.linkType,
+        action.payload.headingIdx,
         action.payload.sectionIdx,
         action.payload.terminalIdx
       );
@@ -771,19 +859,35 @@ export const rootReducer = (
       setTerminalState([state.pageContext.firstTerminalIdx]);
       return state;
     case PAGE_LINKTO:
-      let linkIdx: number =
-        state.pageContext.terminalList[state.cursor_terminalIdx].linkIdx;
-      saveProposedCursorState(
-        state.pageContext.linkList[linkIdx].destination.sectionIdx,
-        state.pageContext.linkList[linkIdx].destination.terminalIdx
-      );
+      // if payload contains a valid link idx (from an image)
+      let linkIdx: number;
+      if (
+        action.payload !== IDX_INITIALIZER &&
+        !isNaN(action.payload) &&
+        +action.payload >= 0 &&
+        +action.payload < state.pageContext.linkList.length
+      ) {
+        linkIdx = +action.payload;
+      } else {
+        linkIdx =
+          state.pageContext.terminalList[state.cursor_terminalIdx].linkIdx;
+      }
+      if (linkIdx > 0 && linkIdx < state.pageContext.linkList.length) {
+        savePageLinkInitialState(
+          state.pageContext.linkList[linkIdx].destination.page,
+          state.pageContext.linkList[linkIdx].destination.linkIdxType,
+          state.pageContext.linkList[linkIdx].destination.headingIdx,
+          state.pageContext.linkList[linkIdx].destination.sectionIdx,
+          state.pageContext.linkList[linkIdx].destination.terminalIdx
+        );
+      }
       if (
         // requested page is already current
         state.page_requested ===
           state.pageContext.linkList[linkIdx].destination.page ||
         state.pageContext.linkList[linkIdx].destination.page.length === 0
       ) {
-        setProposedCursorState();
+        setPageLinkInitialState();
       } else {
         // defer proposed cursor state
         state.page_requested =
@@ -836,7 +940,7 @@ export const rootReducer = (
       // alternatively, could access via useContext iff in provider/consumer
       // scope
       state.pageContext = action.payload as CPageLists;
-      setProposedCursorState();
+      setPageLinkInitialState();
       return state;
     case SECTION_CHANGE:
       let sectionIdx: number = +action.payload;

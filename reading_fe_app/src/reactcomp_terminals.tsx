@@ -52,24 +52,6 @@ export const TerminalDispatcher = React.memo(
     const currentTerminalIdx = useAppSelector(
       store => store.cursor_terminalIdx
     );
-    //*********
-    //RERENDERING ISSUE
-    // useSelector(currentTerminalIdx) that changes EVERYTIME word advances
-    // thus rerenders of TerminalDispatcher but NOT actual screen update. Could
-    // keep an active/inactive array for all words on page in state but array
-    // are immutable and thus even a single element change requires a copy of
-    // entire array cause rerendering of all sentences
-    // console.log(
-    //   `<TerminalDispatcher content=${props.terminal.content} />` // props.active=${props.active} props.terminal=${props.terminal} />`
-    // );
-    // for all terminals made of multiple TerminalInfo blocks, active must identify the specific terminalList
-    // So even if the component renders the entire compound terminal, active
-    // can only be set for a single terminal within compound one.
-    //
-    // Explore using props.children in dispatcher to tranparently dispatch
-    // without triggering rerender via useSelector
-    //
-    // *********
     switch (props.terminal.type) {
       case TerminalMetaEnumType.acronym:
         return (
@@ -293,28 +275,7 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
       }
     }
   }, [props.active, terminalRef]);
-  // useEffect(() => {
-  //   // will only trigger with false when going from show to not
-  //   // showResponsesInPrompts
-  //   if (!sectionFillin.currentHelpSetting.showResponsesInPrompts) {
-  //     console.log(
-  //       `reactcomp_terminals::showResponsesInPrompts=${sectionFillin.currentHelpSetting.showResponsesInPrompts}`
-  //     );
-  //   }
-  // }, [sectionFillin.currentHelpSetting.showResponsesInPrompts]);
-  // useEffect(() => {
-  //   console.log(
-  //     `showTerminalIdx=${showTerminalIdx}, offsetIdx=${terminalFillin.offsetIdx}, ${props.terminalInfo.termIdx}`
-  //   );
-  //   let relativeIdx = showTerminalIdx - terminalFillin.offsetIdx;
-  //   if (relativeIdx >= 0 && relativeIdx < terminalFillin.visible.length) {
-  //     terminalFillin.visible[relativeIdx] = true;
-  //     setTerminalFillin(terminalFillin);
-  //     console.log(`showing terminalFillin.visible[${relativeIdx}]=true`);
-  //   }
-  // }, [showTerminalIdx]);
   let hidden: string = "";
-
   // refactor the following
   if (
     terminalFillin.visible.length > 0 &&
@@ -364,20 +325,52 @@ export interface ITerminalImagePropsType {
 }
 export const TerminalImage = React.memo(
   (props: ITerminalImagePropsType): any => {
+    const dispatch = useAppDispatch();
     let settingsContext: ISettingsContext = useContext(
       SettingsContext
     ) as ISettingsContext;
     let distDir = settingsContext.settings.config.distDir;
     let path: string = `${distDir}/img/${props.imageInfo.src}`;
+    console.log(`path=${path}`);
+    let overlayImgSrc = `${distDir}/img/link_overlay.png`;
+    console.log(`overlay=${overlayImgSrc}`);
+    let overlayClass = `imageentry-image-link ${props.imageInfo.className}`;
+    console.log(`overlayClass=${overlayClass}`);
+    ///    let classNameWithOverlay = `${props.imageInfo.className} `;
     // imageInfo contains width/height that should not be used.
-    return (
-      <>
-        <img
-          className={props.imageInfo.className}
-          src={path}
-          alt={props.imageInfo.label}
-        />
-      </>
+    console.log(
+      `${props.imageInfo.src} image linkIdx=${props.imageInfo.linkIdx}`
     );
+    if (props.imageInfo.linkIdx < 0) {
+      return (
+        <>
+          <img
+            className={props.imageInfo.className}
+            src={path}
+            alt={props.imageInfo.label}
+          />
+        </>
+      );
+    } else {
+      return (
+        <div className="image-link-overlay-container">
+          <img
+            className={props.imageInfo.className}
+            src={path}
+            alt={props.imageInfo.label}
+            onClick={() =>
+              dispatch(Request.Page_gotoLink(props.imageInfo.linkIdx))
+            }
+          />
+          <img
+            src={overlayImgSrc}
+            className="image-link-overlay"
+            onClick={() =>
+              dispatch(Request.Page_gotoLink(props.imageInfo.linkIdx))
+            }
+          />
+        </div>
+      );
+    }
   }
 );

@@ -11,8 +11,8 @@ p {
 display: block;
 margin-block-start: 0.25em;
 margin-top: 0em;
-margin-bottom: 0em;
-margin-left: 0;
+margin-bottom: 0.5em;
+margin-left: 0.3em;
 margin-right: 0;
 }
 ul {
@@ -222,7 +222,7 @@ span.whitespace {
   white-space: pre-wrap;
 }
 .recitable-word.active {
-  background-color:#FFFF00;
+  background-color:#FFFF0075;
 }
 .recitable-word.active1 {
   background-color:#FFFF00;
@@ -550,7 +550,7 @@ h2 {
   border-image: linear-gradient(to right, #ccc 37%, transparent 40%) 100% 1;
   border-top-width: 2px;
   margin-top: 0.1em;
-  margin-bottom: 0.1em;
+  margin-bottom: 0.2em;
 }
 h3 {
   border-top: solid;
@@ -611,11 +611,6 @@ input[type="radio"]{
   display: inline-grid;
   gap: 10px;
 }
-.imageentry-container-above-saved {
-  display: grid;
-  gap: 10px;
-  grid-template-rows: [images] minmax(var(--imageentry-min-image-height), 1fr) [captions] auto;
-}
 .imageentry-images-above > img {
   max-height: var(--imageentry-min-image-height);
 }
@@ -640,33 +635,30 @@ input[type="radio"]{
   box-shadow: 5px 5px 10px gray;
   background-color: white;
 }
+.imageentry-image-link {
+  box-shadow: black;
+}
 .imageentry-image-above {
   min-height: var(--imageentry-min-image-height);
   max-height: var(--imageentry-min-image-height);
 }
-.image-entry-horizontal-container {
-  display: grid;
-  gap: 10px; /* kludge that includes horizontal margins and padding and box-shadow */
-  grid-template-columns: [image] minmax(200px, 1fr) [captions] 2fr;
+.image-link-overlay-container {
+  display: inline;
+  position: relative;
 }
-.image-entry-vertical-container {
-  display: grid;
-  gap: 10px;
-  grid-template-rows: [image] minmax(300px, 1fr) [captions] auto;
+.image-link-overlay-container > img {
+object-fit: contain;
+width: 100%;
 }
-.image-entry-image {
-  margin: 0px 10px 10px 0px;
-  border-radius: 5px;
-  box-shadow: 5px 5px 10px gray;
-  background-color: white;
+.image-link-overlay {
+  position: absolute;
+  max-width: 15%;
+  right:10px;
+  bottom: 10px;
+  opacity: 0.4;
 }
-.image-entry-image-left-right {
-  width: 100%;
-  max-width: 500px;
-}
-.image-entry-image-top-bottom {
-  min-height: 300px;
-  max-height: 300px;
+.image-link-overlay > img {
+  width: 10%;
 }
 .link-label {
   text-decoration: underline;
@@ -725,7 +717,6 @@ input[type="radio"]{
 .fillin-responses-grid-item-omitted {
   text-decoration-line: line-through;
 }
-
 .textbox-control {
   height: auto;
   font-family: monospace;
