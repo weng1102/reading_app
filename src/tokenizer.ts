@@ -360,7 +360,7 @@ const MarkdownTokenDictionary: MarkdownTokenDictionaryType = {
   [MarkdownIndexType.FILLIN]: {
     type: MarkdownTokenType.FILLIN,
     label: MarkupLabelType.FILLIN,
-    pattern: /(?<=\s|^|[\.,!'"])\[_((\<\w+( \w+)*\>){0,1}(\w|\s|[',:\-\(\)@_\.#\$])*((<(\/\w+( \w+)*\>)){0,1}))_](?=$|\s|[\.,!"\?])/g
+    pattern: /(?<=\s|^|[\.,!'"])\[_((\<\w+( \w+)*\>){0,1}(\w|\s|\w=\([^)]*\)|[',:\-\(\)@_\.#\$])*((<(\/\w+( \w+)*\>)){0,1}))_](?=$|\s|[\.,!"\?])/g
     //       /(?<=\s|^|[\.,!'"])\[_(((\<(\w+)\>){0,1}((\w|\s|[',:\-\(\)@_\.#\$])+))(\<(\/\w+)\>){0,1})_\](?=$|\s|[\.,!"\?])/g
 
     // expanded \w+ with just about anything pattern.+ because special parse types are too complex
@@ -374,7 +374,7 @@ const MarkdownTokenDictionary: MarkdownTokenDictionaryType = {
   [MarkdownIndexType.CUELIST]: {
     type: MarkdownTokenType.CUELIST,
     label: MarkupLabelType.CUELIST,
-    pattern: /(?<=\w)=\(((\w+|\s|,|POS:|DEF:)*)\)(?=$|\s|<\/|\*|_]|[\.,!"\?])/g
+    pattern: /(?<=\w)=\(((\w+|\s|-|\.|,|POS:|DEF:)*)\)(?=$|\s|<\/|\*|_]|[\.,!"\?])/g
     // pattern: /(?<=\s|^|[\.,!'"])\[_((\w|[\s"'\/\-\(\)\@\.,\:;\$\<\>%!])+)_\](?=$|\s|[\.,!"\?])/g
     //    markdown: MarkdownLabelType.FILLIN_OPEN
   },
