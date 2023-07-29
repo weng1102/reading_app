@@ -3,7 +3,7 @@
 # Completing sentences progressively
 The following exercises allow me to fill in the prompts given the corresponding response lists in increasingly more difficult ordering until no response list is shown.
 ## Social Speech
-[[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: gridInOrder, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 7, insert, true, true, true, true, true, false]]
 1. How are you this [_morning_]?
 1. I'm pleased to make your [_acquaintance_].
 1. How do you [_do_]?

@@ -143,7 +143,7 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
       current = this.dataSource.nextRecord();
       assert(
         current.recordType === MarkdownRecordType.PARAGRAPH_END,
-        `expected "${MarkdownRecordType.PARAGRAPH_END}" to "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.recordType}"  at line ${current.lineNo}`
+        `expected "${MarkdownRecordType.PARAGRAPH_END}" to "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.recordType}" at line ${current.lineNo}`
       );
       for (
         current = this.dataSource.nextRecord();
@@ -211,11 +211,21 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
         )}`;
         for (const [i, image] of this.meta.images.entries()) {
           let imageNode: IImageTerminalMeta = image.meta as IImageTerminalMeta;
+          let hasDimensions = imageNode.width > 0 && imageNode.height > 0;
+          let dimensions: string =
+            ", WxH:" +
+            (imageNode.width > 0 ? imageNode.width.toString() : "") +
+            "x" +
+            (imageNode.height > 0 ? imageNode.height.toString() : "") +
+            "px";
           outputStr = `${outputStr}${super.serialize(
             format,
-            imageNode.src,
+            imageNode.label +
+              " (src: " +
+              imageNode.src +
+              (hasDimensions ? dimensions : ""),
             prefix + "| " + (i < this.meta.images.length - 1 ? "| " : "  ")
-          )}`;
+          )})`;
         }
         for (const [i, section] of this.meta.captions.entries()) {
           let sectionNode: ISectionNode = section as ISectionNode;

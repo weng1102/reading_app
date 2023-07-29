@@ -17,10 +17,10 @@
 import React from "react";
 import { Synthesizer } from "./reactcomp_speech";
 import {
-  ISectionFillinHelpSetting,
-  ISectionFillinHelpPresets,
-  ISectionFillinHelpSettingInitializer,
-  ISectionFillinHelpPresetsInitializer,
+  ISectionFillinSetting,
+  ISectionFillinPresets,
+  ISectionFillinSettingInitializer,
+  ISectionFillinPresetsInitializer,
   SectionFillinLayoutType,
   SectionFillinSortOrder
 } from "./pageContentType";
@@ -65,7 +65,7 @@ export interface IConfigSettings {
   firstName: string;
   lastName: string;
   showSitemap: boolean;
-  fillinHelpPresets: ISectionFillinHelpPresets;
+  fillinPresets: ISectionFillinPresets;
 }
 export interface ISpeechSettings {
   recitationMode: RecitationMode;
@@ -86,7 +86,7 @@ export function ConfigSettingsInitializer(
   firstName: string = "Ronlyn",
   lastName: string = "Goo",
   showSitemap: boolean = false,
-  fillinHelpPresets: ISectionFillinHelpPresets = ISectionFillinHelpPresetsInitializer()
+  fillinPresets: ISectionFillinPresets = ISectionFillinPresetsInitializer()
 ): IConfigSettings {
   return {
     homePage,
@@ -94,7 +94,7 @@ export function ConfigSettingsInitializer(
     firstName,
     lastName,
     showSitemap,
-    fillinHelpPresets
+    fillinPresets
   };
 }
 export function SpeechSettingsInitializer(
@@ -127,6 +127,7 @@ export interface IListenSettings {
   notificationMode: NotificationMode;
   sentenceNotification: string;
   sectionNotification: string;
+  excludeHeadings: boolean;
 }
 export function ListenSettingsInitializer(
   stopAtEndOfSentence: boolean = true,
@@ -135,7 +136,8 @@ export function ListenSettingsInitializer(
   listeningInterval: number = 15, // msec between listening and matching
   notificationMode: NotificationMode = NotificationMode.voice,
   sentenceNotification: string = "new sentence",
-  sectionNotification: string = "new section"
+  sectionNotification: string = "new section",
+  excludeHeadings: boolean = true
 ): IListenSettings {
   return {
     stopAtEndOfSentence,
@@ -144,7 +146,8 @@ export function ListenSettingsInitializer(
     listeningInterval,
     notificationMode,
     sentenceNotification,
-    sectionNotification
+    sectionNotification,
+    excludeHeadings
   };
 }
 export const SettingsContext = React.createContext(

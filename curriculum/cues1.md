@@ -1,9 +1,5 @@
 [[page: Cues parsing/rendering, Ronlyn, Wen, 6/26/2022, Testing, Cues /]]
 # fillin
-
-A=(articel) [_walking=(noun, to amble)_] is walking the market=(noun, place to shop).
-The walking is walking to the [_market_].
-He is walking the [_walking=(verb1)_].
-The man is [_walking=(verb, cue, whatever)_] to the [_market_].
-The quick=(adjective) brown fox=(noun) jumped=(verb).
-The phone number is [_(408) 267-6076_] to the [_market_].
+[[fillin: gridInOrder, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+The phone number is (408) 267-6076.
+[[/fillin]]

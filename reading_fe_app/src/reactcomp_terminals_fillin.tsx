@@ -12,7 +12,7 @@ import React, { useContext, useEffect, useState } from "react";
 import {
   IFillinTerminalMeta,
   ITerminalContent,
-  SectionFillinHelpPresetLevel
+  SectionFillinResponsesProgressionEnum
 } from "./pageContentType";
 import { SectionFillinContext } from "./fillinContext";
 import { useAppSelector } from "./hooks";
@@ -28,8 +28,7 @@ import { ITerminalPropsType } from "./reactcomp_terminals";
 export const TerminalFillin = React.memo((props: ITerminalPropsType): any => {
   const sectionFillinContext = useContext(SectionFillinContext);
   const [previousPreset, setPreviousReset] = useState(
-    sectionFillinContext.sectionFillin.helpPresetLevel ===
-      SectionFillinHelpPresetLevel.inline
+    sectionFillinContext.sectionFillin.currentSetting.progressionOrder
   );
   const visibleResetFill: boolean = false;
   const visibleSetFill: boolean = true;
@@ -111,8 +110,7 @@ export const TerminalFillin = React.memo((props: ITerminalPropsType): any => {
     props.terminal.lastTermIdx,
     sectionFillinContext.sectionFillin.loaded,
     sectionFillinContext.sectionFillin.modified,
-    sectionFillinContext.sectionFillin.currentHelpSetting
-      .showResponsesInPrompts,
+    sectionFillinContext.sectionFillin.currentSetting.showResponsesInPrompts,
     visibleResetFill
   ]);
   // useEffect(() => {
@@ -135,18 +133,19 @@ export const TerminalFillin = React.memo((props: ITerminalPropsType): any => {
   //   }
   // }, [sectionFillinContext.sectionFillin.helpPresetLevel]);
 
-  let attributes = `fillin-prompts-terminal `;
   return (
     <TerminalFillinContext.Provider
       value={{ terminalFillin, setTerminalFillin }}
     >
-      <span className={attributes}>
+      <span className={props.terminalCssSubclass}>
         {fillinContent.terminals.map(
           (terminal: ITerminalContent, keyvalue: number) => (
             <TerminalDispatcher
               key={keyvalue}
               active={props.active}
               terminal={terminal}
+              terminalCssSubclass={""}
+              tagged={props.tagged}
             />
           )
         )}

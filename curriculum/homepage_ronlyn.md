@@ -76,6 +76,11 @@ I can practice reading sentences of different lengths.
 - [Ten-word Sentences](10wordsentences,page)
 [[/image-entry]]
 
+# Photo Journals
+I can review my recent experiences and practice recounting my current events by looking at photos and captions.
+- [May 2023](journal202305,page)
+- [April 2023](journal202304,page)
+
 # About my reading companion
 [About my reading companion](aboutcompanion,page)
 - [Case for action](aboutcompanion,heading, 1)

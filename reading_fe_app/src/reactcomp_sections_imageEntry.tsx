@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2023 Wen Eng - All Rights Reserved
  *
  * File name: reactcomp_sections_imageEntry.tsx
  *
@@ -24,7 +24,7 @@ import {
 import { TerminalImageEntry } from "./reactcomp_terminals_image";
 import { SectionDispatcher, ISectionPropsType } from "./reactcomp_sections";
 
-interface ISectionImageEntryImagesPropsType1 {
+interface ISectionImageEntryImagesPropsType {
   active: boolean;
   className: string;
   images: ITerminalContent[];
@@ -40,7 +40,7 @@ export const SectionImageEntry = React.memo((props: ISectionPropsType): any => {
   let orientation: string = imageEntry.orientation.toString();
   let className: string = `imageentry-container-${orientation}`;
   let dividerClassName: string = `${className}-divider`;
-  console.log(`imageEntry.percent=${imageEntry.percent}`);
+  // console.log(`imageEntry.percent=${imageEntry.percent}`);
   let style = {};
   let vh = imageEntry.percent.replace("%", "vh");
   style = {
@@ -67,7 +67,7 @@ export const SectionImageEntry = React.memo((props: ISectionPropsType): any => {
   );
 });
 export const SectionImageEntryImages = React.memo(
-  (props: ISectionImageEntryImagesPropsType1): any => {
+  (props: ISectionImageEntryImagesPropsType): any => {
     let images: ITerminalContent[] = props.images;
     return (
       <>
@@ -77,6 +77,8 @@ export const SectionImageEntryImages = React.memo(
               key={keyvalue}
               active={props.active}
               terminal={image}
+              terminalCssSubclass={""}
+              tagged={false}
             />
           ))}
         </div>

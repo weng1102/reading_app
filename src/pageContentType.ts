@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2023 Wen Eng - All Rights Reserved
  *
  * File name: PageContentType.ts
  *
@@ -8,7 +8,7 @@
  *
  **/
 export const IDX_INITIALIZER = -9999;
-export const PageContentVersion = "20230423.1";
+export const PageContentVersion = "20230706.1";
 export enum PageFormatEnumType {
   default = 0
 }
@@ -262,7 +262,14 @@ export enum SectionFillinSortOrder {
   alphabetical = "alphabetical",
   random = "random"
 }
-export enum SectionFillinHelpPresetName {
+export enum SectionFillinResponsesProgressionEnum {
+  hidden = "hidden",
+  random = "randomly",
+  alphabetical = "alphabetically",
+  inorder = "in order",
+  inline = "inline"
+}
+export enum SectionFillinPresetName {
   // indexes ISectionFillinHelpPresets below
   override = "override",
   hidden = "hidden",
@@ -271,7 +278,7 @@ export enum SectionFillinHelpPresetName {
   gridInOrder = "gridInOrder",
   inline = "inline"
 }
-export enum SectionFillinHelpPresetLevel {
+export enum SectionFillinPresetLevel {
   override = -1,
   hidden,
   gridRandom,
@@ -279,28 +286,25 @@ export enum SectionFillinHelpPresetLevel {
   gridInOrder,
   inline
 }
-export const SectionFillinHelpPresetMap = {
-  [SectionFillinHelpPresetName.override]: SectionFillinHelpPresetLevel.override,
-  [SectionFillinHelpPresetName.hidden]: SectionFillinHelpPresetLevel.hidden,
-  [SectionFillinHelpPresetName.gridRandom]:
-    SectionFillinHelpPresetLevel.gridRandom,
-  [SectionFillinHelpPresetName.gridAlpha]:
-    SectionFillinHelpPresetLevel.gridAlpha,
-  [SectionFillinHelpPresetName.gridInOrder]:
-    SectionFillinHelpPresetLevel.gridInOrder,
-  [SectionFillinHelpPresetName.inline]: SectionFillinHelpPresetLevel.inline
+export const SectionFillinPresetMap = {
+  [SectionFillinPresetName.override]: SectionFillinPresetLevel.override,
+  [SectionFillinPresetName.hidden]: SectionFillinPresetLevel.hidden,
+  [SectionFillinPresetName.gridRandom]: SectionFillinPresetLevel.gridRandom,
+  [SectionFillinPresetName.gridAlpha]: SectionFillinPresetLevel.gridAlpha,
+  [SectionFillinPresetName.gridInOrder]: SectionFillinPresetLevel.gridInOrder,
+  [SectionFillinPresetName.inline]: SectionFillinPresetLevel.inline
 };
-interface IHelpLevelSetting {
-  level: SectionFillinHelpPresetLevel;
-  helpSetting: ISectionFillinHelpSetting;
+interface IPresetLevelSetting {
+  level: SectionFillinPresetLevel;
+  setting: ISectionFillinSetting;
 }
-type SectionFillinHelpPresetInfoType = Record<
-  SectionFillinHelpPresetLevel,
-  IHelpLevelSetting
+type SectionFillinPresetInfoType = Record<
+  SectionFillinPresetLevel,
+  IPresetLevelSetting
 >;
-export const SectionFillinHelpPresetInfo = {
-  [SectionFillinHelpPresetLevel.override]: ISectionFillinHelpSettingInitializer(),
-  [SectionFillinHelpPresetLevel.hidden]: {
+export const SectionFillinPresetInfo = {
+  [SectionFillinPresetLevel.override]: ISectionFillinSettingInitializer(),
+  [SectionFillinPresetLevel.hidden]: {
     // default
     description: "Responses not displayed",
     showResponsesInPrompts: false,
@@ -308,62 +312,70 @@ export const SectionFillinHelpPresetInfo = {
     responsesLabel: "",
     promptsLabel: "Recite the following prompts and fill in the blanks:",
     // igonore parameters below
-    sortOrder: SectionFillinSortOrder.insert,
+    progressionOrder: SectionFillinResponsesProgressionEnum.inorder,
     gridColumns: 6,
-    groupByCategory: false,
-    showResponseHints: false,
-    showPromptHints: false,
+    groupByTags: false,
+    showResponseTags: false,
+    showPromptTags: false,
     unique: true,
+    showAlternatives: false,
+    responsesLayout: SectionFillinPositionType.above,
     showReferenceCount: true,
     helpfulness: 0
   },
-  [SectionFillinHelpPresetLevel.gridRandom]: {
+  [SectionFillinPresetLevel.gridRandom]: {
     description: "Responses displayed as grid in random order",
     responsesLabel: "Responses displayed as grid randomly:",
     promptsLabel: "Recite the following prompts and fill in the blanks:",
     layout: SectionFillinLayoutType.grid,
-    sortOrder: SectionFillinSortOrder.random,
+    progressionOrder: SectionFillinResponsesProgressionEnum.random,
     gridColumns: 6,
     // igonore parameters below
     showResponsesInPrompts: false,
-    groupByCategory: false,
-    showResponseHints: false,
-    showPromptHints: false,
+    groupByTags: false,
+    showResponseTags: false,
+    showPromptTags: false,
     unique: true,
+    showAlternatives: false,
+    responsesLayout: SectionFillinPositionType.above,
     showReferenceCount: true,
     helpfulness: 0
   },
-  [SectionFillinHelpPresetLevel.gridAlpha]: {
+  [SectionFillinPresetLevel.gridAlpha]: {
     description: "Responses displayed as grid in alphabetical order",
     responsesLabel: "Responses displayed as grid alphabetically:",
     promptsLabel: "Recite the following prompts and fill in the blanks:",
     layout: SectionFillinLayoutType.grid,
     gridColumns: 6,
-    sortOrder: SectionFillinSortOrder.alphabetical,
+    progressionOrder: SectionFillinResponsesProgressionEnum.alphabetical,
     showResponsesInPrompts: false,
-    groupByCategory: false,
-    showResponseHints: false,
-    showPromptHints: false,
+    groupByTags: false,
+    showResponseTags: false,
+    showPromptTags: false,
     unique: true,
+    showAlternatives: false,
+    responsesLayout: SectionFillinPositionType.above,
     showReferenceCount: true,
     helpfulness: 0
   },
-  [SectionFillinHelpPresetLevel.gridInOrder]: {
+  [SectionFillinPresetLevel.gridInOrder]: {
     description: "Responses displayed as grid in order",
     responsesLabel: "Responses displayed as grid in order:",
     promptsLabel: "Recite the following prompts and fill in the blanks:",
     layout: SectionFillinLayoutType.grid,
     gridColumns: 6,
-    sortOrder: SectionFillinSortOrder.insert,
+    progressionOrder: SectionFillinResponsesProgressionEnum.inorder,
     showResponsesInPrompts: false,
-    groupByCategory: false,
-    showResponseHints: false,
-    showPromptHints: false,
+    groupByTags: false,
+    showResponseTags: false,
+    showPromptTags: false,
     unique: true,
+    showAlternatives: false,
+    responsesLayout: SectionFillinPositionType.above,
     showReferenceCount: true,
     helpfulness: 0
   },
-  [SectionFillinHelpPresetLevel.inline]: {
+  [SectionFillinPresetLevel.inline]: {
     description: "Responses displayed inline",
     showResponsesInPrompts: true,
     responsesLabel: "Responses already filled in:",
@@ -371,47 +383,55 @@ export const SectionFillinHelpPresetInfo = {
       "Recite the following prompts including the underlined words:",
     layout: SectionFillinLayoutType.hidden,
     gridColumns: 0,
-    sortOrder: SectionFillinSortOrder.insert,
-    groupByCategory: false,
-    showResponseHints: false,
-    showPromptHints: false,
+    progressionOrder: SectionFillinResponsesProgressionEnum.inorder,
+    groupByTags: false,
+    showResponseTags: false,
+    showPromptTags: false,
     unique: true,
+    showAlternatives: false,
+    responsesLayout: SectionFillinPositionType.above,
     showReferenceCount: true,
     helpfulness: 0
   }
 };
-export interface ISectionFillinHelpSetting {
+export interface ISectionFillinSetting {
   description: string;
   responsesLabel: string;
   promptsLabel: string;
   layout: SectionFillinLayoutType;
-  sortOrder: SectionFillinSortOrder;
+  showProgression: boolean;
+  progressionOrder: SectionFillinResponsesProgressionEnum;
   gridColumns: number;
   showResponsesInPrompts: boolean;
-  groupByCategory: boolean;
-  showResponseHints: boolean; //same as groupCategory?
-  showPromptHints: boolean;
+  responsesLayout: SectionFillinPositionType;
+  showAlternatives: boolean;
+  groupByTags: boolean;
+  showResponseTags: boolean; //same as groupCategory?
+  showPromptTags: boolean;
   unique: boolean; // identical words grouped as single response entry
   showReferenceCount: boolean;
   helpfulness: number; // most hints to least hints
 }
-export function ISectionFillinHelpSettingInitializer(
+export function ISectionFillinSettingInitializer(
   description: string = "",
   promptsLabel: string = "",
   responsesLabel: string = "",
   layout = SectionFillinLayoutType.grid
-): ISectionFillinHelpSetting {
+): ISectionFillinSetting {
   return {
     description: description,
     responsesLabel: responsesLabel,
     promptsLabel: promptsLabel,
     layout: layout,
-    sortOrder: SectionFillinSortOrder.insert,
+    showProgression: true,
+    progressionOrder: SectionFillinResponsesProgressionEnum.inorder,
     gridColumns: 6,
-    showResponseHints: false,
-    showPromptHints: false,
-    groupByCategory: false,
+    showResponseTags: false,
+    showPromptTags: false,
+    groupByTags: false,
     showResponsesInPrompts: false,
+    responsesLayout: SectionFillinPositionType.above,
+    showAlternatives: false,
     unique: true, // identical words grouped as single response entry
     showReferenceCount: true,
     helpfulness: -1
@@ -419,11 +439,11 @@ export function ISectionFillinHelpSettingInitializer(
 }
 export interface ISectionFillinVariant {
   sectionFillinIdx: number; // reference state structure in pageList.fillinList
-  helpPresetLevel: SectionFillinHelpPresetLevel;
-  authorHelpSetting: ISectionFillinHelpSetting;
+  presetLevel: SectionFillinPresetLevel;
+  authorSetting: ISectionFillinSetting;
   allowReset: boolean;
   promptColumns: number;
-  showHelpPresets: boolean;
+  showPresets: boolean;
   prompts: ISectionContent[];
 }
 export function ISectionFillinVariantInitializer(
@@ -434,8 +454,8 @@ export function ISectionFillinVariantInitializer(
 ): ISectionFillinVariant {
   return {
     sectionFillinIdx: sectionFillinIdx,
-    helpPresetLevel: SectionFillinHelpPresetLevel.override,
-    authorHelpSetting: ISectionFillinHelpSettingInitializer(
+    presetLevel: SectionFillinPresetLevel.override,
+    authorSetting: ISectionFillinSettingInitializer(
       "no description",
       promptsLabel,
       responsesLabel,
@@ -443,12 +463,12 @@ export function ISectionFillinVariantInitializer(
     ),
     allowReset: false,
     promptColumns: 1,
-    showHelpPresets: false,
+    showPresets: false,
     prompts: []
   };
 }
-export type ISectionFillinHelpPresets = ISectionFillinHelpSetting[];
-export function ISectionFillinHelpPresetsInitializer(): ISectionFillinHelpPresets {
+export type ISectionFillinPresets = ISectionFillinSetting[];
+export function ISectionFillinPresetsInitializer(): ISectionFillinPresets {
   return [
     {
       // default
@@ -458,11 +478,14 @@ export function ISectionFillinHelpPresetsInitializer(): ISectionFillinHelpPreset
       responsesLabel: "",
       promptsLabel: "Fillin the following blanks:",
       // igonore parameters below
-      sortOrder: SectionFillinSortOrder.insert,
+      showProgression: true,
+      progressionOrder: SectionFillinResponsesProgressionEnum.inorder,
       gridColumns: 6,
-      groupByCategory: false,
-      showResponseHints: false,
-      showPromptHints: false,
+      showResponseTags: false,
+      showPromptTags: false,
+      groupByTags: false,
+      responsesLayout: SectionFillinPositionType.above,
+      showAlternatives: false,
       unique: true,
       showReferenceCount: true,
       helpfulness: 0
@@ -472,13 +495,16 @@ export function ISectionFillinHelpPresetsInitializer(): ISectionFillinHelpPreset
       responsesLabel: "",
       promptsLabel: "",
       layout: SectionFillinLayoutType.grid,
-      sortOrder: SectionFillinSortOrder.insert,
+      showProgression: true,
+      progressionOrder: SectionFillinResponsesProgressionEnum.inorder,
       gridColumns: 6,
       // igonore parameters below
       showResponsesInPrompts: false,
-      groupByCategory: false,
-      showResponseHints: false,
-      showPromptHints: false,
+      groupByTags: false,
+      responsesLayout: SectionFillinPositionType.above,
+      showAlternatives: false,
+      showResponseTags: false,
+      showPromptTags: false,
       unique: true,
       showReferenceCount: true,
       helpfulness: 0
@@ -489,11 +515,14 @@ export function ISectionFillinHelpPresetsInitializer(): ISectionFillinHelpPreset
       promptsLabel: "",
       layout: SectionFillinLayoutType.grid,
       gridColumns: 6,
-      sortOrder: SectionFillinSortOrder.insert,
+      showProgression: true,
+      progressionOrder: SectionFillinResponsesProgressionEnum.inorder,
       showResponsesInPrompts: false,
-      groupByCategory: false,
-      showResponseHints: false,
-      showPromptHints: false,
+      groupByTags: false,
+      responsesLayout: SectionFillinPositionType.above,
+      showAlternatives: false,
+      showResponseTags: false,
+      showPromptTags: false,
       unique: true,
       showReferenceCount: true,
       helpfulness: 0
@@ -504,11 +533,14 @@ export function ISectionFillinHelpPresetsInitializer(): ISectionFillinHelpPreset
       promptsLabel: "",
       layout: SectionFillinLayoutType.grid,
       gridColumns: 6,
-      sortOrder: SectionFillinSortOrder.insert,
+      showProgression: true,
+      progressionOrder: SectionFillinResponsesProgressionEnum.inorder,
       showResponsesInPrompts: false,
-      groupByCategory: false,
-      showResponseHints: false,
-      showPromptHints: false,
+      groupByTags: false,
+      responsesLayout: SectionFillinPositionType.above,
+      showAlternatives: false,
+      showResponseTags: false,
+      showPromptTags: false,
       unique: true,
       showReferenceCount: true,
       helpfulness: 0
@@ -521,10 +553,13 @@ export function ISectionFillinHelpPresetsInitializer(): ISectionFillinHelpPreset
         "Recite the following prompts including the underlined words:",
       layout: SectionFillinLayoutType.hidden,
       gridColumns: 0,
-      sortOrder: SectionFillinSortOrder.insert,
-      groupByCategory: false,
-      showResponseHints: false,
-      showPromptHints: false,
+      showProgression: true,
+      progressionOrder: SectionFillinResponsesProgressionEnum.inorder,
+      groupByTags: false,
+      responsesLayout: SectionFillinPositionType.above,
+      showAlternatives: false,
+      showResponseTags: false,
+      showPromptTags: false,
       unique: true,
       showReferenceCount: true,
       helpfulness: 0
@@ -601,22 +636,125 @@ export enum TerminalMetaEnumType {
   word,
   year
 }
-enum PartOfSpeechEnumType {
-  "noun",
-  "verb",
-  "pronoun",
-  "preposition",
-  "adverb",
-  "advective",
-  "interjection",
-  "article",
-  "conjunction",
-  "numeral"
+export enum PartOfSpeechEnumType { // ordered by frequency
+  noun = "noun",
+  verb = "verb",
+  adjective = "adjective",
+  adverb = "adverb",
+  preposition = "preposition",
+  pronoun = "pronoun",
+  conjunction = "conjunction",
+  article = "article",
+  interjection = "interjection",
+  numeral = "numeral",
+  untagged = "untagged"
+}
+interface PartOfSpeechItemType {
+  name: PartOfSpeechEnumType;
+  pattern: RegExp;
+  abbreviation: string;
+  description: string;
+}
+export type PartOfSpeechDictionaryType = Record<
+  PartOfSpeechEnumType,
+  PartOfSpeechItemType
+>;
+export const PartOfSpeechDictionary = {
+  [PartOfSpeechEnumType.noun]: {
+    name: PartOfSpeechEnumType.noun,
+    abbreviation: "n.",
+    description: "identifies a person, a class of people, places or things",
+    pattern: /(^[Nn].*)/
+  },
+  [PartOfSpeechEnumType.verb]: {
+    name: "verb",
+    abbreviation: "v.",
+    description: "conveys action, occurence, state of being",
+    pattern: /(^[Vv].*)/
+    // distinction between linking (copular) and helping (auxliary) verbs?
+  },
+  [PartOfSpeechEnumType.pronoun]: {
+    name: "pronoun",
+    abbreviation: "pron.",
+    description: "substitutes for a noun",
+    pattern: /([Pp]ro.*)/
+  },
+  [PartOfSpeechEnumType.preposition]: {
+    name: "prep.",
+    abbreviation: "prep.",
+    description: "relates objects spatially or temporally",
+    pattern: /([Pp]re.*)/
+  },
+  [PartOfSpeechEnumType.adverb]: {
+    name: "adverb",
+    abbreviation: "adv.",
+    description: "modifies adjective, verb or another adverb",
+    pattern: /([Aa]dv.*)/
+  },
+  [PartOfSpeechEnumType.adjective]: {
+    name: "adjective",
+    abbreviation: "adj.",
+    description: "modifies noun or pronoun",
+    pattern: /([Aa]dj.*)/
+  },
+  [PartOfSpeechEnumType.interjection]: {
+    name: "interjection",
+    abbreviation: "interj.",
+    description: "expresses feeling or emotion",
+    pattern: /([Ii].*)/
+  },
+  [PartOfSpeechEnumType.article]: {
+    name: "article",
+    abbreviation: "art.",
+    description: "describes (in)definiteness or limits quantity of noun(s)",
+    pattern: /([Aa]r.*)/
+  },
+  [PartOfSpeechEnumType.conjunction]: {
+    name: "conjunction",
+    abbreviation: "conj.",
+    description: "conjunction",
+    pattern: /([Cc].*)/
+  },
+  [PartOfSpeechEnumType.numeral]: {
+    name: "numeral/number",
+    abbreviation: "num.",
+    description: "numeral",
+    pattern: /([Nn]u.*)/
+  },
+  [PartOfSpeechEnumType.untagged]: {
+    name: "untagged",
+    abbreviation: "untagged",
+    description: "to be tagged",
+    pattern: /^$/
+  }
+};
+export enum VnestEnumType { // ordered by frequency
+  who = "who",
+  what = "what",
+  where = "where",
+  when = "when",
+  why = "why",
+  how = "how",
+  untagged = "untagged"
 }
 export interface ITerminalCues {
   partOfSpeech: PartOfSpeechEnumType;
   definition: string;
   image: string;
+  alternatives: string[];
+}
+export function ITerminalCuesInitializer(
+  partOfSpeech: PartOfSpeechEnumType = PartOfSpeechEnumType.untagged,
+  definition: string = "",
+  image: string = "",
+  alternatives: string[] = []
+): ITerminalCues {
+  return {
+    partOfSpeech,
+    definition,
+    image,
+    alternatives
+  };
 }
 export interface ITerminalContent {
   id: number;
@@ -625,6 +763,7 @@ export interface ITerminalContent {
   lastTermIdx: number;
   content: string; // not necessary
   cueList: string;
+  cues: ITerminalCues;
   type: TerminalMetaEnumType;
   meta: TerminalMetaType;
 }
@@ -651,6 +790,12 @@ interface IFillinResponse {
   sectionIdx: number;
   responseIdx: number;
 }
+function IFillinResponseInitializer(): IFillinResponse {
+  return {
+    sectionIdx: IDX_INITIALIZER,
+    responseIdx: IDX_INITIALIZER
+  };
+}
 export interface ITerminalInfo {
   content: string;
   termIdx: number;
@@ -660,6 +805,7 @@ export interface ITerminalInfo {
   altpronunciation: string;
   altrecognition: string;
   recitable: boolean;
+  heading: boolean;
   audible: boolean;
   linkable: boolean;
   visible: boolean;
@@ -679,6 +825,7 @@ export function ITerminalInfoInitializer(
   altrecognition: string = "",
   cues: string[] = [],
   recitable: boolean = true,
+  heading: boolean = false,
   audible: boolean = true,
   linkable: boolean = false,
   visible: boolean = true,
@@ -686,10 +833,7 @@ export function ITerminalInfoInitializer(
   numberAsNumerals: boolean = false,
   linkIdx: number = IDX_INITIALIZER,
   hintsIdx: number = IDX_INITIALIZER,
-  fillin: IFillinResponse = {
-    sectionIdx: IDX_INITIALIZER,
-    responseIdx: IDX_INITIALIZER
-  },
+  fillin: IFillinResponse = IFillinResponseInitializer(),
   bold = false,
   italics = false,
   markupTag = false
@@ -709,6 +853,7 @@ export function ITerminalInfoInitializer(
         ? ""
         : altrecognition,
     recitable: recitable, // selectable
+    heading: heading,
     audible: audible,
     linkable: linkable,
     visible: visible,
@@ -853,7 +998,6 @@ export function IPassthruTagTerminalMetaTerminalMetaInitializer(): IPassthruTagT
     tag: ""
   };
 }
-
 export interface IImageTerminalMeta {
   src: string;
   label: string;
@@ -1118,7 +1262,7 @@ export interface IRangeItem {
 // export function ISectionListItemInitializer(
 //   firstTermIdx: number = -1,
 //   lastTermIdx: number = -1
-//   //  type: SectionVariantEnumType | string = SectionVariantEnumType.tbd
+//   //  type: SectionVariantEnumType | string = SectionVariantEnumType.untagged
 // ): ISectionListItem {
 //   return { firstTermIdx, lastTermIdx };
 // }
@@ -1161,17 +1305,17 @@ export function ILinkListItemInitializer(
 // }
 export interface IFillinResponseItem {
   content: string; // for display in response list
-  category: string;
+  tag: string;
   referenceCount: number;
 }
 export function IFillinResponseItemInitializer(
   content: string,
-  category: string,
+  tag: string,
   referenceCount: number
 ): IFillinResponseItem {
   return {
     content: content,
-    category: category,
+    tag: tag,
     referenceCount: referenceCount
   };
 }
@@ -1185,24 +1329,28 @@ export interface IFillinPromptItem {
 }
 export interface ISectionFillinItem {
   idx: number;
-  showHelpPresets: boolean;
-  helpPresetLevel: SectionFillinHelpPresetLevel;
-  authorHelpSetting: ISectionFillinHelpSetting;
-  currentHelpSetting: ISectionFillinHelpSetting;
+  showPresets: boolean;
+  presetLevel: SectionFillinPresetLevel;
+  authorSetting: ISectionFillinSetting;
+  currentSetting: ISectionFillinSetting;
   allowReset: boolean;
   promptColumns: number;
+  alternatives: string[];
+  tags: string[];
   responses: IFillinResponseItem[]; // index into section response context
   loaded: boolean;
   modified: boolean; // supports reset
 }
 export function ISectionFillinItemInitializer(
   idx: number = IDX_INITIALIZER,
-  showHelpPresets: boolean = false,
-  helpPresetLevel: SectionFillinHelpPresetLevel = SectionFillinHelpPresetLevel.override,
-  authorHelpSetting: ISectionFillinHelpSetting = ISectionFillinHelpSettingInitializer(),
-  currentHelpSetting: ISectionFillinHelpSetting = ISectionFillinHelpSettingInitializer(),
+  showPresets: boolean = false,
+  presetLevel: SectionFillinPresetLevel = SectionFillinPresetLevel.override,
+  authorSetting: ISectionFillinSetting = ISectionFillinSettingInitializer(),
+  currentSetting: ISectionFillinSetting = ISectionFillinSettingInitializer(),
   allowReset: boolean = true,
   promptColumns: number = 1,
+  alternatives: string[] = [],
+  tags: string[] = [],
   responses: IFillinResponseItem[] = [],
   //  prompts: IFillinPromptItem[] = [],
   loaded: boolean = false,
@@ -1210,12 +1358,14 @@ export function ISectionFillinItemInitializer(
 ): ISectionFillinItem {
   return {
     idx,
-    showHelpPresets,
-    helpPresetLevel,
-    authorHelpSetting,
-    currentHelpSetting,
+    showPresets,
+    presetLevel,
+    authorSetting,
+    currentSetting,
     allowReset,
     promptColumns,
+    alternatives,
+    tags,
     responses,
     loaded,
     modified

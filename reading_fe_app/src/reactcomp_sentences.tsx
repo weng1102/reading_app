@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2023 Wen Eng - All Rights Reserved
  *
  * File name: reactcomp_sentences.tsx
  *
@@ -18,6 +18,7 @@ export interface ISentencePropsType {
   //  key: number;
   active: boolean;
   sentence: ISentenceContent;
+  recitable: boolean;
 }
 export const Sentence = React.memo((props: ISentencePropsType) => {
   // const currentTerminalIdx: number = useAppSelector(
@@ -35,6 +36,8 @@ export const Sentence = React.memo((props: ISentencePropsType) => {
               key={keyvalue}
               active={props.active}
               terminal={terminal}
+              terminalCssSubclass={""}
+              tagged={false}
             />
           )
         )}

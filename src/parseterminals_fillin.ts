@@ -96,10 +96,14 @@ export class TerminalNode_MLTAG_FILLIN extends TerminalNode_MLTAG_
           // ] = this.userContext.fillins.addResponse(this.content);
           let responseIdx: number;
           let fillinSectionIdx: number;
+          // let meta: IFillinTerminalMeta = terminalNode.meta;
           [
             fillinSectionIdx,
             responseIdx
-          ] = this.userContext.fillins.addResponse(this.content);
+          ] = this.userContext.fillins.addResponse(
+            this.content,
+            terminalNode.cues.partOfSpeech
+          );
           (<ITerminalInfo>terminalNode.meta).fillin.responseIdx = responseIdx;
           this.meta.sectionFillinIdx = fillinSectionIdx;
           this.userContext.terminals[

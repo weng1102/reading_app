@@ -26,11 +26,12 @@ import {
   ISectionListItem,
   ITerminalListItem,
   ILinkListItem,
-  ISectionFillinHelpSetting,
+  ISectionFillinSetting,
   ISectionFillinItem,
   LinkIdxDestinationType,
   ISectionFillinItemInitializer,
-  SectionFillinSortOrder,
+  PartOfSpeechEnumType,
+  SectionFillinResponsesProgressionEnum,
   SectionFillinLayoutType
 } from "./pageContentType";
 import { IPageContent } from "./pageContentType";
@@ -112,7 +113,7 @@ class TerminalArray extends Array<ITerminalListItem> {
     let altrecog,
       altpro: string = "";
     let outputStr: string =
-      "[idx ]:  term ARLVN  next prev sent  sect link   fillins content\n";
+      "[idx ]:  term ARLVNBI  next prev sent  sect link   fillins content\n";
     for (const [i, element] of this.entries()) {
       if (element.altrecognition.length > 0) {
         altrecog = `(rec: ${element.altrecognition})`;
@@ -141,6 +142,12 @@ class TerminalArray extends Array<ITerminalListItem> {
         .toString()
         .substring(0, 1)
         .toUpperCase()}${element.numberAsNumerals
+        .toString()
+        .substring(0, 1)
+        .toUpperCase()}${element.bold
+        .toString()
+        .substring(0, 1)
+        .toUpperCase()}${element.italics
         .toString()
         .substring(0, 1)
         .toUpperCase()} ${
@@ -174,7 +181,16 @@ class FillinArray extends Array<ISectionFillinItem> {
     super(...args);
   }
   parse(): number {
-    // category i.e., part of speech) lookup.
+    // reorder tag into enum order
+    const posOrder: string[] = Object.values(PartOfSpeechEnumType);
+    let orderedTags: string[];
+    for (const fillin of this) {
+      orderedTags = fillin.tags.sort(
+        (a: string, b: string) =>
+          posOrder.indexOf(a as string) - posOrder.indexOf(b as string)
+      );
+      fillin.tags = orderedTags;
+    }
     return this.length;
   }
   push(sectionList: ISectionFillinItem): number {
@@ -184,7 +200,7 @@ class FillinArray extends Array<ISectionFillinItem> {
     this[length - 1].idx = length - 1;
     return length;
   }
-  addResponse(item: string): [number, number] {
+  addResponse(item: string, tag: string = ""): [number, number] {
     let fillinListIdx: number;
     let fillinIdx: number;
     if (this.length === 0) this.push(ISectionFillinItemInitializer());
@@ -192,9 +208,32 @@ class FillinArray extends Array<ISectionFillinItem> {
     fillinIdx =
       this[fillinListIdx].responses.push({
         content: item,
-        category: "",
+        tag: tag,
         referenceCount: 1
       }) - 1;
+
+    let duplicateIdx = this[fillinListIdx].tags.findIndex(
+      tagItem => tag === tagItem
+    );
+    // console.log(`duplicateIdx=${duplicateIdx}`);
+    if (duplicateIdx < 0) {
+      this[fillinListIdx].tags.push(tag);
+    }
+    /*
+responses.filter(item => {
+  let duplicateIdx = uniqueResponses.findIndex(
+    response => response.content === item.content
+  );
+  if (duplicateIdx < 0) {
+    uniqueResponses.push(
+      IFillinResponseItemInitializer(
+        item.content,
+        item.tag,
+        item.referenceCount
+      )
+    );
+*/
+
     return [fillinListIdx, fillinIdx];
   }
   serialize(): string {
@@ -203,21 +242,21 @@ class FillinArray extends Array<ISectionFillinItem> {
       outputStr = `${outputStr}[${i
         .toString()
         .padStart(4, "0")}]: idx: ${element.idx.toString()}, ${
-        element.showHelpPresets ? "showHelpPresets" : ""
-      } helpPresetLevel=${element.helpPresetLevel} ${
-        element.authorHelpSetting.layout
-      }, ${SortOrderToLabel(
-        element.authorHelpSetting.sortOrder
-      )}, gridColumns=${element.authorHelpSetting.gridColumns}, ${
-        element.authorHelpSetting.unique ? "unique" : ""
+        element.showPresets ? "showHelpPresets" : ""
+      }, helpPresetLevel=${element.presetLevel}, ${
+        element.authorSetting.layout
+      }, progressionOrder=${element.authorSetting.progressionOrder.toString()}, gridColumns=${
+        element.authorSetting.gridColumns
+      }, ${element.authorSetting.unique ? "unique" : ""}, ${
+        element.authorSetting.showReferenceCount ? "showReferenceCount" : ""
+      }, ${element.authorSetting.groupByTags ? "groupByTags" : ""}, ${
+        element.allowReset ? "allowReset" : ""
+      }, responsesLayout=${element.authorSetting.responsesLayout}, ${
+        element.authorSetting.showAlternatives ? "showAlternatives" : ""
       }, ${
-        element.authorHelpSetting.showReferenceCount ? "showReferenceCount" : ""
-      }, ${
-        element.authorHelpSetting.groupByCategory ? "groupByCategory" : ""
-      }, ${element.allowReset ? "allowReset" : ""}, ${
-        element.authorHelpSetting.showResponseHints ? "showResponseHints" : ""
+        element.authorSetting.showResponseTags ? "showResponseTags" : ""
       },  ${
-        element.authorHelpSetting.showResponsesInPrompts
+        element.authorSetting.showResponsesInPrompts
           ? "showResponsesInPrompts"
           : ""
       }\n`;
@@ -228,7 +267,22 @@ class FillinArray extends Array<ISectionFillinItem> {
           .toString()
           .padStart(2, "0")}]: ${response.content.padEnd(
           25
-        )}${response.referenceCount.toString()}\n`;
+        )}${response.tag.padEnd(10)}${response.referenceCount.toString()}\n`;
+      }
+      if (element.tags.length > 0) {
+        outputStr = `${outputStr}  tags:`;
+        for (const tag of element.tags) {
+          //        .sort((a, b) => (a.content > b.content ? 1 : -1))
+          outputStr = `${outputStr} ${tag},`;
+        }
+        outputStr = `${outputStr.substring(0, outputStr.length - 1)}\n`;
+      }
+      if (element.alternatives.length > 0) {
+        outputStr = `outputStr\n   alternatives:`;
+        for (const alternative of element.alternatives) {
+          //        .sort((a, b) => (a.content > b.content ? 1 : -1))
+          outputStr = `${outputStr}, ${alternative}`;
+        }
       }
     }
     return outputStr;
@@ -243,10 +297,10 @@ element.sortOrder
 )}, gridColumns=${element.gridColumns}, ${
 element.unique ? "unique" : ""
 },${element.showReferenceCount ? "showReferenceCount" : ""}, ${
-element.showResponseHints ? "showResponseHints" : ""
-},${element.groupByCategory ? "groupByCategory" : ""}, ${
-element.showResponseHints ? "showResponseHints" : ""
-}, ${element.showPromptHints ? "showPromptHints" : ""},  ${element.allowReset ? "allowReset" : ""}, ${
+element.showResponseTags ? "showResponseTags" : ""
+},${element.groupByTags ? "groupByTags" : ""}, ${
+element.showResponseTags ? "showResponseTags" : ""
+}, ${element.showPromptTags ? "showPromptTags" : ""},  ${element.allowReset ? "allowReset" : ""}, ${
 element.allowUserFormatting ? "allowUserFormatting" : ""
 }`;
 */
@@ -733,36 +787,36 @@ export abstract class ParseNode extends BaseClass implements IParseNode {
 // const compareString = (a: string, b: string): number => {
 //   return a > b ? 1 : -1;
 // };
-export const SortOrderToLabel = (sortOrder: SectionFillinSortOrder): string => {
-  switch (sortOrder) {
-    case SectionFillinSortOrder.alphabetical:
-      return "alphabetical order";
-    case SectionFillinSortOrder.random:
-      return "random order";
-    default:
-      return "insert order (default)";
-  }
-};
-export function helpfulnessLevel(group: ISectionFillinHelpSetting): number {
+// export const SortOrderToLabel = (sortOrder: SectionFillinSortOrder): string => {
+//   switch (sortOrder) {
+//     case SectionFillinSortOrder.alphabetical:
+//       return SectionFillinSortOrder.toString(); //"alphabetical order";
+//     case SectionFillinSortOrder.random:
+//       return "random order";
+//     default:
+//       return "insert order (default)";
+//   }
+// };
+export function helpfulnessLevel(group: ISectionFillinSetting): number {
   let helpfulness: number = 0;
   if (group.showResponsesInPrompts) helpfulness += 1000;
   if (group.layout !== SectionFillinLayoutType.hidden) {
-    if (group.showPromptHints) {
+    if (group.showPromptTags) {
       helpfulness += 500;
     }
-    switch (group.sortOrder) {
-      case SectionFillinSortOrder.alphabetical:
+    switch (group.progressionOrder) {
+      case SectionFillinResponsesProgressionEnum.alphabetical:
         helpfulness += 200;
         break;
-      case SectionFillinSortOrder.insert:
+      case SectionFillinResponsesProgressionEnum.inorder:
         helpfulness += 300;
         break;
-      case SectionFillinSortOrder.random:
+      case SectionFillinResponsesProgressionEnum.random:
         helpfulness += 100;
         break;
       default:
     }
-    switch (group.groupByCategory) {
+    switch (group.groupByTags) {
       case true:
         helpfulness += 10;
         break;

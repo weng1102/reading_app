@@ -5,11 +5,11 @@
 ![Primary user](rmg.png) 
 The model lost much of her fluency to a deep brain hemorrhagic stroke that resulted in moderately severe aphasia. Although the stroke did not directly affect her Broca area, she presents with utterances of a few words and limited vocabulary that characterizes non-fluent (expressive) aphasia. Compounding this, she also has a working memory deficit.
 
-Her primary goal is to recover as much conversational speech as possible. Fortunately, her loss of verbal skills did not include basic oral reading skills. To work toward regaining her voice in complete sentences, she can leverage her remaining oral reading skills to repeatedly practice as she builds her ability and confidence to speak again. Essential to this, improved word finding can strengthen her flow of thought, her working memory issues notwithstanding.
+Her primary goal is to recover as much conversational speech as possible. Fortunately, her loss of verbal skills did not include basic oral reading skills. To work toward regaining her voice in complete sentences, she can leverage her remaining oral reading skills to repeatedly practice as she builds her ability and confidence to speak again. Essential to this, improved word finding and sentence completion can strengthen her flow of thought, her working memory issues notwithstanding.
 [[/image-entry]]
 
 ## Requirements: (What is needed?)
-The model will be presented with curated and formatted multimodal content to encourage and facilitate reading. The model will have her speech recognized and tracked as she reads to ensure accuracy and instill confidence. The model will have the content recited on demand to provide oral modeling. The model will practice “filling in the blank” within context to practice word finding. 
+The model will be presented with curated and formatted multimodal content to encourage and facilitate reading. The model will have her speech recognized and tracked as she reads to ensure accuracy and instill confidence. The model will have the content recited on demand to provide oral modeling. The model will practice “filling in the blank” within context to practice word finding as well as multiple "filling in" key grammatical elements within a sentence to practice sentence construction. 
 
 The model will use the reading companion from her primary touchscreen-based electronic platforms. The content will be accessible across all instances of the reading companion app to minimize pushing content.
 
@@ -51,7 +51,6 @@ Word tracking and recognition feedback by an app seems more amenable to the mode
 As the model worked with her speech language pathologists, additional requirements were incorporated into the app based on their recommendations to support more advanced word finding and sentence completion activities.
 
 ## Features (How does it meet the needs?)
-
 The reading companion is a web application (app) originally developed for the model user. It presents multimodal personalized content with customizable format to be read aloud, highlights the current word to be recited and corrects mispronunciations without a human companion through any web browser that supports ReactJS and SpeechRecognition and SpeechSynthesis Web APIs. Note that iOS web browsers (via webview) support only a subset: SpeechRecognition APIs are not supported at this time.
 
 ### Curation/Authoring
@@ -65,22 +64,14 @@ First and foremost, the reading companion reads along with the user by listening
 
 To balance the therapeutic challenge with ongoing self doubt and resultant frustration, the app assumes the word recognition responsibility and affords the reader a (configurable) number of retries before the "stuck" word is recited and the next word is highlighted. 
 
-Recognizes and properly interprets components of dates, years, numbers, phone numbers, email addresses, acronyms, symbols.
+The app recognizes and properly interprets components that the user finds difficult to speak  including numbers, dates, years, phone numbers, email addresses, acronyms, symbols, etc.
 
 ### Speech Synthesis
+The reading companion app can recite the text content to provide oral modeling on demand. The app can speak in various voices, both male and female, at different rates and volume. The companion can recite just the current word, the partial sentence up to current word inclusively or exclusively. The latter allows the user a “running start” at uttering the current word. In addition, the app can recite entire sentences, paragraphs. While reciting sentences or paragraphs, it can advance the next word to the beginning of the next sentence or paragraph, respectively.
 
-The companion can also synthesize the text to the user in different ways by reciting the:
-* current word 
-* current word and advancing to the next word
-* current sentence upto the current word
-* entire sentence
-* entire section.
+Different voices can be selected for reciting depending upon the voices provided by the underlying platform. The recitation volume can be adjusted within the app as well as through the platform. Most importantly, the rate of recitation can be sped up or slowed down.
 
-In any of these modes, the current word can either stay unchanged or advance to the next unrecited word. 
+## Word finding and sentence construction (fill in the blanks)
+Word finding (fill in the blanks)
+The companion supports word finding by allowing concealed words within content. To help with the finding process, cueing hierarchy provides progressively more help with the concealed word.
 
-* Voice
-* volume
-* Rate
-
-## Word finding (fill in the blanks)
-Progressively help using cueing hierarchy

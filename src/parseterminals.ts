@@ -45,9 +45,13 @@ import {
   IPassthruTagTerminalMetaTerminalMetaInitializer,
   IPunctuationTerminalMeta,
   IPunctuationTerminalMetaInitializer,
+  ITerminalCues,
+  ITerminalCuesInitializer,
   ITerminalListItemInitializer,
   IWhitespaceTerminalMeta,
-  IWhitespaceTerminalMetaInitializer
+  IWhitespaceTerminalMetaInitializer,
+  PartOfSpeechEnumType,
+  PartOfSpeechDictionary
 } from "./pageContentType";
 import { ISentenceNode } from "./parsesentences";
 export interface ITerminalParseNode {
@@ -66,6 +70,7 @@ export abstract class AbstractTerminalNode extends ParseNode
   termIdx: number = IDX_INITIALIZER;
   content: string = "";
   cueList: string = "";
+  cues: ITerminalCues = ITerminalCuesInitializer();
   firstTermIdx: number = IDX_INITIALIZER;
   lastTermIdx: number = IDX_INITIALIZER;
   type!: TerminalMetaEnumType;
@@ -93,13 +98,51 @@ export abstract class AbstractTerminalNode extends ParseNode
           token = tokenList.shift()!;
           let cueList: string = "";
           for (
-            ;
+            let i: number = 0;
             token.content !== MarkupLabelType.CUELIST_CLOSE;
             token = tokenList.shift()!
           ) {
             cueList = `${cueList}${token.content}`;
           }
           this.cueList = cueList;
+          let cues: string[] = cueList.split(",");
+          this.cues.partOfSpeech = PartOfSpeechEnumType.untagged;
+          if (
+            cues.length >= 1 &&
+            cues[0].length > 0 &&
+            cues[0] in PartOfSpeechEnumType
+          ) {
+            this.cues.partOfSpeech = cues[0] as PartOfSpeechEnumType;
+          } else {
+            let key: keyof typeof PartOfSpeechDictionary;
+            this.cues.partOfSpeech = PartOfSpeechEnumType.untagged;
+            for (key in PartOfSpeechDictionary) {
+              const pattern: RegExp = PartOfSpeechDictionary[key].pattern;
+              if (cues[0].match(pattern)) {
+                this.cues.partOfSpeech = key;
+                break;
+              }
+            }
+          }
+          if (this.cues.partOfSpeech === PartOfSpeechEnumType.untagged) {
+            this.logger.warning(
+              `"invalid cuelist argument 1 "${cues[0]}" specified"`
+            );
+          }
+
+          if (cues.length >= 2 && cues[1].length > 0)
+            this.cues.definition = cues[1].trim();
+
+          if (cues.length >= 3 && cues[2].length > 0)
+            this.cues.image = cues[2].trim();
+
+          for (
+            let alternativesIdx = 3;
+            alternativesIdx < cues.length;
+            alternativesIdx++
+          ) {
+            this.cues.alternatives.push(cues[alternativesIdx].trim());
+          }
         }
       }
     }
@@ -147,14 +190,39 @@ export abstract class AbstractTerminalNode extends ParseNode
         outputStr = `${super.serialize(format, label, prefix)}`;
 
         if (this.cueList.length > 0) {
-          label = `{${this.cueList}}`;
-          prefix = prefix + "  ";
-          label =
-            label +
-            ParseNodeSerializeColumnPad(0, prefix + label) +
-            this.constructor.name +
-            ":CUELIST";
-          outputStr = `${outputStr}${super.serialize(format, label, prefix)}`;
+          label = `${this.cues.partOfSpeech}`;
+          if (label.length > 0) {
+            prefix = prefix + "  ";
+            label =
+              label +
+              ParseNodeSerializeColumnPad(0, prefix + label) +
+              `${this.constructor.name}: part of speech`;
+            outputStr = `${outputStr}${super.serialize(format, label, prefix)}`;
+          }
+          label = `${this.cues.definition}`;
+          if (label.length > 0) {
+            label =
+              label +
+              ParseNodeSerializeColumnPad(0, prefix + label) +
+              `${this.constructor.name}: definition`;
+            outputStr = `${outputStr}${super.serialize(format, label, prefix)}`;
+          }
+          label = `${this.cues.image}`;
+          if (label.length > 0) {
+            label =
+              label +
+              ParseNodeSerializeColumnPad(0, prefix + label) +
+              `${this.constructor.name}: image`;
+            outputStr = `${outputStr}${super.serialize(format, label, prefix)}`;
+          }
+          label = `${this.cues.alternatives.join()}`;
+          if (label.length > 0) {
+            label =
+              label +
+              ParseNodeSerializeColumnPad(0, prefix + label) +
+              `${this.constructor.name}: alternative(s)`;
+            outputStr = `${outputStr}${super.serialize(format, label, prefix)}`;
+          }
         }
         break;
       }

@@ -123,6 +123,8 @@ const TEST_SET = "test/set";
 const TEST_RESET = "test/reset";
 
 const FILLIN_RESETSECTION = "fillin/reset section";
+// const FILLIN_TOGGLETAGSSECTION = "fillin/toggle tags section";
+// const FILLIN_SELECTLAYOUTSECTION = "fillin/select layout section";
 // Actions
 const Test_set = () => {
   return {
@@ -253,6 +255,18 @@ const Fillin_resetSection = (sectionIdx: number) => {
     payload: sectionIdx
   };
 };
+// const Fillin_toggleTagsSection = (sectionIdx: number) => {
+//   return {
+//     type: FILLIN_TOGGLETAGSSECTION,
+//     payload: sectionIdx
+//   };
+// };
+// const Fillin_selectLayoutSection = (sectionIdx: number) => {
+//   return {
+//     type: FILLIN_SELECTLAYOUTSECTION,
+//     payload: sectionIdx
+//   };
+// };
 const Message_set = (
   message: string,
   msgType: StatusBarMessageType = StatusBarMessageType.application
@@ -481,6 +495,8 @@ export const Request = {
 
   Fillin_setCurrent,
   Fillin_resetSection,
+  // Fillin_toggleTagsSection,
+  // Fillin_selectLayoutSection,
 
   Message_set,
   Message_clear,
@@ -569,6 +585,8 @@ interface IReduxState {
   fillin_currentTerminalIdx: number;
   fillin_showTerminalIdx: number;
   fillin_resetSectionIdx: number;
+  // fillin_toggleShowTagsSectionIdx: number;
+  // fillin_selectLayoutSectionIdx: number;
 
   page_requested: string;
   page_loaded: boolean;
@@ -633,6 +651,8 @@ const IReduxStateInitialState: IReduxState = {
   fillin_currentTerminalIdx: IDX_INITIALIZER,
   fillin_showTerminalIdx: IDX_INITIALIZER,
   fillin_resetSectionIdx: IDX_INITIALIZER,
+  // fillin_toggleShowTagsSectionIdx: IDX_INITIALIZER,
+  // fillin_selectLayoutSectionIdx: IDX_INITIALIZER,
 
   link_page: "",
   link_type: LinkIdxDestinationType.page,
@@ -1099,6 +1119,14 @@ export const rootReducer = (
       state.fillin_showTerminalIdx = IDX_INITIALIZER;
       return state;
     }
+    // case FILLIN_TOGGLETAGSSECTION: {
+    //   state.fillin_toggleShowTagsSectionIdx = action.payload;
+    //   return state;
+    // }
+    // case FILLIN_SELECTLAYOUTSECTION: {
+    //   state.fillin_selectLayoutSectionIdx = action.payload;
+    //   return state;
+    // }
     case MESSAGE_CLEAR: {
       let msgType: number =
         action.payload.messageType === undefined

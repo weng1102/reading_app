@@ -59,7 +59,7 @@
 [[/image-entry]]
 [[image-entry: David, left, 10%]]
 ![bhh logo](bhh.jpg)
-* He and a fellow classmate founded a machine-learning health tech company in 2019.
+* He and a fellow classmate founded a machine-learning health tech company.
 [[/image-entry]]
 [[image-entry: Robert, left, 10%]]
 ![Caltech logo](caltech logo.jpg)
@@ -87,7 +87,7 @@
 - I had to learn to walk again.
 [[/image-entry]]
 [[image-entry: My Activities, above, 10%]]
-![ATP](csueb-logo.jpg),![SPARC logo](sparc.png),![Skills plus](skillsplus.jpg),![ARC logo](arc.png),![Brooklyn College logo](Brooklyn_College_logo.png),![Speech recovery pathways logo](srp.jpg),![voices of hope for aphasia](voha-logo.jpg),![nova southeastern logo](NSUFlorida-logo.jpg),![catholic charities](cclogo.jpg),![The Aphasia Network](TheAphasiaNetwork.jpg)
+![ATP](csueb-logo.jpg),![SPARC logo](sparc.png),![Skills plus](skillsplus.jpg),![ARC logo](arc.png),![Brooklyn College logo](Brooklyn_College_logo.png),![Speech recovery pathways logo](srp.jpg),![voices of hope for aphasia](voha-logo.jpg),![nova southeastern logo](NSUFlorida-logo.jpg),![catholic charities](cclogo.jpg),![The Aphasia Network](TheAphasiaNetwork.jpg),![International Aphasia Movement](iam.jpg)
 * I attend many programs in person like:
   * ATP at Cal State East Bay in Hayward
   * SPARC at San Jose State University in San Jose
@@ -95,7 +95,7 @@
   * Handicapables at churches around the county.
 * I also attend many programs virtually like:
   * Aphasia Recovery Connection and Lingraphica
-  * speech therapy at Brooklyn College
+  * Speech therapy at Brooklyn College
   * Speech Recovery Pathways in Southern California
   * Voices of Hope for Aphasia in Florida 
   * Nova Southeastern in Florida
@@ -115,12 +115,12 @@
 * It is fun to ride and exercise.
 [[/image-entry]]
 [[image-entry: hobbies, above, 15%]]
-![Where The Crawdads Sing](wherethecrawdadssing.jpg),![The Nightingale](nightingale.jpg),![water for elephants](waterforelephants.jpg),![A Man Called Ove](mancalledove.jpg),![The Hunting Party](huntingparty.jpg),![Becoming](becoming.jpg),![The Light We Carry](lightwecarry.jpg),![The Jailhouse Lawyer](jailhouselawyer.jpg)
+![Where The Crawdads Sing](wherethecrawdadssing.jpg),![The Nightingale](nightingale.jpg),![water for elephants](waterforelephants.jpg),![A Man Called Ove](mancalledove.jpg),![The Hunting Party](huntingparty.jpg),![Becoming](becoming.jpg),![The Light We Carry](lightwecarry.jpg),![The Jailhouse Lawyer](jailhouselawyer.jpg),![Churchills Secretary](churchillsec.jpg),![The Alchemist](alchemist.jpg),![The Maid](maid.jpg),![The Midnight Library](midnightllibrary.jpg)
 * I read (by listening to) books using Audible.
 [[/image-entry]]
 [[image-entry: painting, above, 20%]]
 ![flower split](splitflowers.jpg),![flowers](flowers5.jpg),![veggies](veggies.jpg), ![parrot](parrot.jpg),![mountains](mountains.jpg),![landscape](landscape.jpg),![grapes](grapes.jpg)
-* I enjoy painting in watercolors and acrylics.
+* I enjoy painting in watercolors, acrylics and gouache.
 * I am focused on painting plants, flowers and landscapes.
 [[/image-entry]]
 [[image-entry: baking, above, 15%]]

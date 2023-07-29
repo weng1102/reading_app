@@ -1,6 +1,6 @@
 [[page: Image entry rendering,, Wen,,Testing /]]
 [[image-entry: image vsiualize heading, left]]
-![visualize it](visualize.png)
+![visualize it](visualize.png, 10, 10)
 Focus on it.
 Close my eyes.
 Inhale slowly.

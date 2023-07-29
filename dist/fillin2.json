@@ -6,11 +6,11 @@
   "owner": "anonymous",
   "author": "anonymous",
   "category": "Miscellaneous",
-  "version": "20230423.1",
+  "version": "20230706.1",
   "pageFormatType": 0,
-  "created": "Wed May 17 2023 08:53:20 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Wed May 17 2023 08:53:20 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Wed May 17 2023 08:53:20 GMT-0700 (Pacific Daylight Time)",
+  "created": "Sat Jul 29 2023 08:13:24 GMT-0700 (Pacific Daylight Time)",
+  "modified": "Sat Jul 29 2023 08:13:24 GMT-0700 (Pacific Daylight Time)",
+  "transformed": "Sat Jul 29 2023 08:13:24 GMT-0700 (Pacific Daylight Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -35,6 +35,12 @@
                 "termIdx": 0,
                 "content": "Man",
                 "cueList": "noun, male person",
+                "cues": {
+                  "partOfSpeech": "noun",
+                  "definition": "male person",
+                  "image": "",
+                  "alternatives": []
+                },
                 "firstTermIdx": 0,
                 "lastTermIdx": 0,
                 "type": 17,
@@ -52,6 +58,7 @@
                   "altpronunciation": "",
                   "altrecognition": "",
                   "recitable": true,
+                  "heading": false,
                   "audible": true,
                   "linkable": false,
                   "visible": true,
@@ -71,13 +78,19 @@
               {
                 "id": 0,
                 "termIdx": -9999,
-                "content": " [",
+                "content": " ",
                 "cueList": "",
+                "cues": {
+                  "partOfSpeech": "untagged",
+                  "definition": "",
+                  "image": "",
+                  "alternatives": []
+                },
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
                 "type": 16,
                 "meta": {
-                  "content": " [",
+                  "content": " ",
                   "cues": [],
                   "termIdx": -9999,
                   "nextTermIdx": [],
@@ -85,7 +98,8 @@
                   "altpronunciation": "",
                   "altrecognition": "",
                   "recitable": false,
-                  "audible": false,
+                  "heading": false,
+                  "audible": true,
                   "linkable": false,
                   "visible": true,
                   "visited": false,
@@ -104,117 +118,84 @@
               {
                 "id": 0,
                 "termIdx": -9999,
-                "content": "_",
-                "cueList": "",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 11,
-                "meta": {
-                  "content": "_",
-                  "cues": [],
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "linkable": false,
-                  "visible": true,
-                  "visited": false,
-                  "numberAsNumerals": false,
-                  "linkIdx": -9999,
-                  "hintsIdx": -9999,
-                  "fillin": {
-                    "sectionIdx": -9999,
-                    "responseIdx": -9999
-                  },
-                  "bold": false,
-                  "italics": false,
-                  "markupTag": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": 1,
                 "content": "walking",
-                "cueList": "noun, to amble",
+                "cueList": "",
+                "cues": {
+                  "partOfSpeech": "untagged",
+                  "definition": "",
+                  "image": "",
+                  "alternatives": []
+                },
                 "firstTermIdx": 1,
                 "lastTermIdx": 1,
-                "type": 17,
+                "type": 4,
                 "meta": {
-                  "content": "walking",
-                  "cues": [
-                    "noun",
-                    " to amble"
+                  "terminals": [
+                    {
+                      "id": 0,
+                      "termIdx": 1,
+                      "content": "walking",
+                      "cueList": "noun, to amble",
+                      "cues": {
+                        "partOfSpeech": "noun",
+                        "definition": "to amble",
+                        "image": "",
+                        "alternatives": []
+                      },
+                      "firstTermIdx": 1,
+                      "lastTermIdx": 1,
+                      "type": 17,
+                      "meta": {
+                        "content": "walking",
+                        "cues": [
+                          "noun",
+                          " to amble"
+                        ],
+                        "termIdx": 1,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [
+                          0
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "heading": false,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": 0,
+                          "responseIdx": 0
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    }
                   ],
-                  "termIdx": 1,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [
-                    0
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "audible": true,
-                  "linkable": false,
-                  "visible": true,
-                  "visited": false,
-                  "numberAsNumerals": false,
-                  "linkIdx": -9999,
-                  "hintsIdx": -9999,
-                  "fillin": {
-                    "sectionIdx": -9999,
-                    "responseIdx": -9999
-                  },
-                  "bold": false,
-                  "italics": false,
-                  "markupTag": false
+                  "sectionFillinIdx": 0
                 }
               },
               {
                 "id": 0,
                 "termIdx": -9999,
-                "content": "_",
+                "content": " ",
                 "cueList": "",
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 11,
-                "meta": {
-                  "content": "_",
-                  "cues": [],
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "audible": false,
-                  "linkable": false,
-                  "visible": true,
-                  "visited": false,
-                  "numberAsNumerals": false,
-                  "linkIdx": -9999,
-                  "hintsIdx": -9999,
-                  "fillin": {
-                    "sectionIdx": -9999,
-                    "responseIdx": -9999
-                  },
-                  "bold": false,
-                  "italics": false,
-                  "markupTag": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": "] ",
-                "cueList": "",
+                "cues": {
+                  "partOfSpeech": "untagged",
+                  "definition": "",
+                  "image": "",
+                  "alternatives": []
+                },
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
                 "type": 16,
                 "meta": {
-                  "content": "] ",
+                  "content": " ",
                   "cues": [],
                   "termIdx": -9999,
                   "nextTermIdx": [],
@@ -222,7 +203,8 @@
                   "altpronunciation": "",
                   "altrecognition": "",
                   "recitable": false,
-                  "audible": false,
+                  "heading": false,
+                  "audible": true,
                   "linkable": false,
                   "visible": true,
                   "visited": false,
@@ -239,7 +221,7 @@
                 }
               }
             ],
-            "lastPunctuation": "_"
+            "lastPunctuation": ""
           }
         ],
         "style": ""
@@ -261,6 +243,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
+      "heading": false,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -292,6 +275,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
+      "heading": false,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -300,8 +284,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": -9999,
-        "responseIdx": -9999
+        "sectionIdx": 0,
+        "responseIdx": 0
       },
       "bold": false,
       "italics": false,
@@ -322,9 +306,66 @@
     {
       "firstTermIdx": 0,
       "lastTermIdx": 1,
-      "lastPunctuation": "_"
+      "lastPunctuation": ""
     }
   ],
   "linkList": [],
-  "fillinList": []
+  "fillinList": [
+    {
+      "idx": 0,
+      "showPresets": false,
+      "presetLevel": -1,
+      "authorSetting": {
+        "description": "",
+        "responsesLabel": "",
+        "promptsLabel": "",
+        "layout": "grid",
+        "showProgression": true,
+        "progressionOrder": "in order",
+        "gridColumns": 6,
+        "showResponseTags": false,
+        "showPromptTags": false,
+        "groupByTags": false,
+        "showResponsesInPrompts": false,
+        "responsesLayout": "above",
+        "showAlternatives": false,
+        "unique": true,
+        "showReferenceCount": true,
+        "helpfulness": -1
+      },
+      "currentSetting": {
+        "description": "",
+        "responsesLabel": "",
+        "promptsLabel": "",
+        "layout": "grid",
+        "showProgression": true,
+        "progressionOrder": "in order",
+        "gridColumns": 6,
+        "showResponseTags": false,
+        "showPromptTags": false,
+        "groupByTags": false,
+        "showResponsesInPrompts": false,
+        "responsesLayout": "above",
+        "showAlternatives": false,
+        "unique": true,
+        "showReferenceCount": true,
+        "helpfulness": -1
+      },
+      "allowReset": true,
+      "promptColumns": 1,
+      "alternatives": [],
+      "tags": [
+        "noun"
+      ],
+      "responses": [
+        {
+          "content": "walking",
+          "tag": "noun",
+          "referenceCount": 1
+        }
+      ],
+      "loaded": false,
+      "modified": false
+    }
+  ]
 }

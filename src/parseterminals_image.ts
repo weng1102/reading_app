@@ -19,6 +19,7 @@ import {
   TokenListType,
   TokenLiteral,
   Token,
+  TokenType,
   MarkupLabelType
 } from "./tokenizer";
 import {
@@ -116,7 +117,7 @@ export class TerminalNode_MLTAG_IMAGE extends TerminalNode_MLTAG_
         );
       }
 
-      if (IsDefined(chunks[1])) this.meta.width = +chunks[1]; // no units; assumed px
+      if (IsDefined(chunks[1])) this.meta.width = +chunks[1]; // no units;
       assert(
         Number(chunks[1]) !== NaN,
         `Expected a numeric width but encountered "${chunks[1]}" while parsing image link`
@@ -216,9 +217,17 @@ export class TerminalNode_MLTAG_IMAGE extends TerminalNode_MLTAG_
           super.serialize(format, `{${this.meta.src}}`, prefix);
 
         if (this.meta.width > 0)
-          outputStr += super.serialize(format, `{${this.meta.width}}`, prefix);
+          outputStr += super.serialize(
+            format,
+            `{${this.meta.width}}px x `,
+            prefix
+          );
         if (this.meta.height > 0)
-          outputStr += super.serialize(format, `{${this.meta.height}}`, prefix);
+          outputStr += super.serialize(
+            format,
+            `{${this.meta.height}px}`,
+            prefix
+          );
         if (this.meta.attributes.length > 0)
           outputStr += super.serialize(
             format,

@@ -39,16 +39,16 @@ export function cloneDeep<ISectionFillinItem>(
   }
   return clone;
 }
-export const cloneSectionFillin1 = (
-  sectionFillin: ISectionFillinItem
-): ISectionFillinItem => {
-  return {
-    ...sectionFillin,
-    loaded: true,
-    modified: false,
-    responses: [...sectionFillin.responses]
-  };
-};
+// export const cloneSectionFillin1 = (
+//   sectionFillin: ISectionFillinItem
+// ): ISectionFillinItem => {
+//   return {
+//     ...sectionFillin,
+//     loaded: true,
+//     modified: false,
+//     responses: [...sectionFillin.responses]
+//   };
+// };
 //
 // export function ISectionFillinContextInitializer(
 //   fillins: ISectionFillinItem = ISectionFillinItemInitializer()

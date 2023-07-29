@@ -111,6 +111,7 @@ export const SectionParagraph = React.memo((props: ISectionPropsType): any => {
               key={keyvalue}
               active={currentSentenceIdx === sentence.id}
               sentence={sentence}
+              recitable={true}
             />
           )
         )}
@@ -141,6 +142,7 @@ const SectionHeading = React.memo((props: ISectionPropsType) => {
         <Sentence
           active={currentSentenceIdx === meta.heading.id}
           sentence={meta.heading}
+          recitable={false}
         />
       </HeadingTag>
     </div>

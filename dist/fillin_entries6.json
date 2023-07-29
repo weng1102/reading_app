@@ -6,11 +6,11 @@
   "owner": "anonymous",
   "author": "Wen",
   "category": "Fillins",
-  "version": "20230423.1",
+  "version": "20230706.1",
   "pageFormatType": 0,
-  "created": "Wed May 17 2023 08:53:21 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Wed May 17 2023 08:53:21 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Wed May 17 2023 08:53:21 GMT-0700 (Pacific Daylight Time)",
+  "created": "Sat Jul 29 2023 08:13:25 GMT-0700 (Pacific Daylight Time)",
+  "modified": "Sat Jul 29 2023 08:13:25 GMT-0700 (Pacific Daylight Time)",
+  "transformed": "Sat Jul 29 2023 08:13:25 GMT-0700 (Pacific Daylight Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -59,6 +59,12 @@
                 "termIdx": -9999,
                 "content": "4082676076",
                 "cueList": "",
+                "cues": {
+                  "partOfSpeech": "untagged",
+                  "definition": "",
+                  "image": "",
+                  "alternatives": []
+                },
                 "firstTermIdx": 0,
                 "lastTermIdx": 0,
                 "type": 4,
@@ -69,6 +75,12 @@
                       "termIdx": 0,
                       "content": "4082676076",
                       "cueList": "",
+                      "cues": {
+                        "partOfSpeech": "untagged",
+                        "definition": "",
+                        "image": "",
+                        "alternatives": []
+                      },
                       "firstTermIdx": 0,
                       "lastTermIdx": 0,
                       "type": 17,
@@ -81,6 +93,7 @@
                         "altpronunciation": "",
                         "altrecognition": "4,082,676,076",
                         "recitable": true,
+                        "heading": false,
                         "audible": true,
                         "linkable": false,
                         "visible": true,
@@ -106,6 +119,12 @@
                 "termIdx": -9999,
                 "content": ".",
                 "cueList": "",
+                "cues": {
+                  "partOfSpeech": "untagged",
+                  "definition": "",
+                  "image": "",
+                  "alternatives": []
+                },
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
                 "type": 11,
@@ -118,7 +137,8 @@
                   "altpronunciation": "",
                   "altrecognition": "",
                   "recitable": false,
-                  "audible": false,
+                  "heading": false,
+                  "audible": true,
                   "linkable": false,
                   "visible": true,
                   "visited": false,
@@ -151,25 +171,28 @@
       "type": "fillin",
       "meta": {
         "sectionFillinIdx": -9999,
-        "helpPresetLevel": -1,
-        "authorHelpSetting": {
+        "presetLevel": -1,
+        "authorSetting": {
           "description": "no description",
           "responsesLabel": "",
           "promptsLabel": "",
           "layout": "grid",
-          "sortOrder": "insert",
+          "showProgression": true,
+          "progressionOrder": "in order",
           "gridColumns": 6,
-          "showResponseHints": false,
-          "showPromptHints": false,
-          "groupByCategory": false,
+          "showResponseTags": false,
+          "showPromptTags": false,
+          "groupByTags": false,
           "showResponsesInPrompts": false,
+          "responsesLayout": "above",
+          "showAlternatives": false,
           "unique": true,
           "showReferenceCount": true,
           "helpfulness": -1
         },
         "allowReset": false,
         "promptColumns": 1,
-        "showHelpPresets": false,
+        "showPresets": false,
         "prompts": []
       }
     }
@@ -184,6 +207,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
+      "heading": false,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -221,44 +245,54 @@
   "fillinList": [
     {
       "idx": 0,
-      "showHelpPresets": false,
-      "helpPresetLevel": -1,
-      "authorHelpSetting": {
+      "showPresets": false,
+      "presetLevel": -1,
+      "authorSetting": {
         "description": "",
         "responsesLabel": "",
         "promptsLabel": "",
         "layout": "grid",
-        "sortOrder": "insert",
+        "showProgression": true,
+        "progressionOrder": "in order",
         "gridColumns": 6,
-        "showResponseHints": false,
-        "showPromptHints": false,
-        "groupByCategory": false,
+        "showResponseTags": false,
+        "showPromptTags": false,
+        "groupByTags": false,
         "showResponsesInPrompts": false,
+        "responsesLayout": "above",
+        "showAlternatives": false,
         "unique": true,
         "showReferenceCount": true,
         "helpfulness": -1
       },
-      "currentHelpSetting": {
+      "currentSetting": {
         "description": "",
         "responsesLabel": "",
         "promptsLabel": "",
         "layout": "grid",
-        "sortOrder": "insert",
+        "showProgression": true,
+        "progressionOrder": "in order",
         "gridColumns": 6,
-        "showResponseHints": false,
-        "showPromptHints": false,
-        "groupByCategory": false,
+        "showResponseTags": false,
+        "showPromptTags": false,
+        "groupByTags": false,
         "showResponsesInPrompts": false,
+        "responsesLayout": "above",
+        "showAlternatives": false,
         "unique": true,
         "showReferenceCount": true,
         "helpfulness": -1
       },
       "allowReset": true,
       "promptColumns": 1,
+      "alternatives": [],
+      "tags": [
+        "untagged"
+      ],
       "responses": [
         {
           "content": "4082676076",
-          "category": "",
+          "tag": "untagged",
           "referenceCount": 1
         }
       ],

@@ -161,6 +161,7 @@ export class SentenceNode extends AbstractSentenceNode
         `${this.constructor.name} parsing "${this.content}"`
       );
       let markedUpSentence: string = this.tokenizer.addMarkupTags(this.content);
+      // console.log(`markedupSentence=${markedUpSentence}`);
       let tokenList: TokenListType = this.tokenizer.tokenize(markedUpSentence);
       this.firstTermIdx = this.userContext.terminals.lastIdx + 1; //nextIdx
       this.parseTokens(tokenList);
