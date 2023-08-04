@@ -1,7 +1,7 @@
-.App {
+:root {
   --header-height: 50px;  /* consider expanding real estate to allow basic format changes (.e.g., font) */
   --footer-height: 50px;
-  --nav-width: 150px;
+  --nav-width: 300px;
   --imageentry-min-image-width: 200px;
   --imageentry-min-image-height: 20vh;
   --fillin-responses-grid-itemlist-columnCount: 3;
@@ -23,8 +23,8 @@ li:not(:last-child) {
 }
 .page {
   display: grid;
-  grid-template-columns: minmax(var(--nav-width), 1fr) 4fr;
-  grid-template-rows: var(--header-height) auto var(--footer-height);
+  grid-template-columns: [navbar] var(--nav-width) [content] 4fr;
+  grid-template-rows: [header] var(--header-height) auto [footer] var(--footer-height);
   grid-gap: 0;
   margin: 0;
   height: 100vh;
@@ -37,6 +37,7 @@ footer {
   grid-column: 1 / span 2; /* spans 2 grid-template columns setup in .page */
 }
 main {
+  grid-column: content;
   padding: 5px;
   background-color: white;
   overflow: auto;
@@ -44,9 +45,10 @@ main {
   font-size: 1.5vw;
 }
 nav {
-  background-color: lightyellow;
-  font-size: 1vw;
-  overflow: auto
+  grid-column: navbar;
+  background-color: #ddd;
+  font-size: 1.5vw;
+  overflow: auto;
 }
 .navbar-li:hover {
   background: yellow;
@@ -57,6 +59,37 @@ nav {
    text-align: left;
    padding: 10px;
  }
+.navbar-current {
+  background-color: lightyellow;
+}
+ .navbar-h1
+  {
+    font-weight:bold;
+    text-align: left;
+    padding: 5px;
+    border-top: 5px solid white;
+  }
+  .navbar-h2
+   {
+     text-align: left;
+     padding: 5px;
+     padding-left: 15px;
+     border-top: 3px solid white;
+   }
+   .navbar-h3
+    {
+      text-align: left;
+      padding: 5px;
+      padding-left: 25px;
+      border-top: 1px solid white;
+    }
+    .navbar-h4
+     {
+       text-align: left;
+       padding: 5px;
+       padding-left: 35px;
+       border-top: 1px solid white;
+     }
  .navbar-li:nth-child(even) {
   background: #ccc;
 }
@@ -767,7 +800,7 @@ width: 100%;
   min-width: 20px;
   text-decoration: none;
   text-align: center;
-  border-bottom: 0.15vw dashed black;
+  border-bottom: 0.10vw solid black;
   padding-left: 10px;
   padding-right: 10px;
 }
