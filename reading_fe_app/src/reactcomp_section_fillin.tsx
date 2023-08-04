@@ -370,7 +370,11 @@ const ResponsesSelectGrid = (props: IResponseSelectPropsType): any => {
               className="fillin-responses-grid-itemlist"
               style={{ gridTemplateColumns: `repeat(${columnCount}, 1fr)` }}
             >
-              <div className="fillin-responses-grid-tag">{tag}:</div>
+              {!(
+                fillinContext.sectionFillin.tags.length === 1 &&
+                fillinContext.sectionFillin.tags[0] ===
+                  PartOfSpeechEnumType.untagged
+              ) && <div className="fillin-responses-grid-tag">{tag}:</div>}
               <ResponsesSelectGridItems
                 responses={props.responses.filter(
                   response => response.tag === tag
@@ -441,15 +445,27 @@ const ResponsesSelectCsvItems = (props: IResponseSelectPropsType): any => {
     fillinContext.sectionFillin.currentSetting.showResponseTags &&
     fillinContext.sectionFillin.currentSetting.groupByTags
   ) {
+    // {fillinContext.sectionFillin.tags.length > 0 &&
+    //   fillinContext.sectionFillin.tags[0] !==
+    //     PartOfSpeechEnumType.untagged && (
+    //
+    //     )}
+    //
     return (
       <>
         {fillinContext.sectionFillin.tags.map(
           (tag: string, keyValue: number) => (
             <>
               <div className="fillin-responses-csv-itemlist" key={keyValue}>
-                <span className="fillin-responses-csv-tag">
-                  {tag}:<span> </span>
-                </span>
+                {!(
+                  fillinContext.sectionFillin.tags.length === 1 &&
+                  fillinContext.sectionFillin.tags[0] ===
+                    PartOfSpeechEnumType.untagged
+                ) && (
+                  <span className="fillin-responses-csv-tag">
+                    {tag}:<span> </span>
+                  </span>
+                )}
                 {props.responses
                   .filter(response => response.tag === tag)
                   .map((response: IFillinResponseItem, tagOrdinal: number) => (
@@ -462,7 +478,7 @@ const ResponsesSelectCsvItems = (props: IResponseSelectPropsType): any => {
                         }
                         key={`${keyValue}_${tagOrdinal}`}
                       >
-                        {response.content}
+                        <ResponsesItem response={response} />
                       </span>
                       {tagOrdinal <
                         props.responses.filter(response => response.tag === tag)
