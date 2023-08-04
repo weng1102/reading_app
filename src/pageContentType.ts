@@ -638,6 +638,7 @@ export enum TerminalMetaEnumType {
 }
 export enum PartOfSpeechEnumType { // ordered by frequency
   noun = "noun",
+  helpingVerb = "helping verb",
   verb = "verb",
   adjective = "adjective",
   adverb = "adverb",
@@ -678,6 +679,12 @@ export const PartOfSpeechDictionary = {
     abbreviation: "pron.",
     description: "substitutes for a noun",
     pattern: /([Pp]ro.*)/
+  },
+  [PartOfSpeechEnumType.helpingVerb]: {
+    name: "helping verb",
+    abbreviation: "hv.",
+    description: "verb that helps main verb",
+    pattern: /([Hh]elp.*)/
   },
   [PartOfSpeechEnumType.preposition]: {
     name: "prep.",
@@ -1249,7 +1256,8 @@ export function ITerminalListItemInitializer(
 export interface IHeadingListItem {
   headingLevel: number;
   title: string;
-  termIdx: number; // either first word of section title OR first word in section body
+  firstTermIdx: number; // either first word of section title OR first word in section body
+  lastTermIdx: number;
   terminalCountPriorToHeading: number; // number of terminals immediately preceding this section heading
 }
 export interface IRangeItem {
