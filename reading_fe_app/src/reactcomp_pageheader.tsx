@@ -24,12 +24,10 @@ import siteMapIcon from "./img/button_sitemap1.png";
 import previousPageIcon from "./img/button_back.png";
 import previousPageGhostedIcon from "./img/button_back_ghosted.png";
 import { SettingsDialog } from "./reactcomp_settings";
-
 import { Request } from "./reducers";
 import { useAppDispatch, useDialog, useAppSelector } from "./hooks";
 import { useContext } from "react";
-
-import { SettingsContext } from "./settingsContext";
+import { ISettingsContext, SettingsContext } from "./settingsContext";
 
 interface IPageHeaderPropsType {
   title: string;
@@ -72,12 +70,19 @@ export const PageHeader = React.memo((props: IPageHeaderPropsType) => {
   );
 });
 const HamburgerButton = () => {
+  const dispatch = useAppDispatch();
+  const onButtonClick = () => {
+    dispatch(Request.Navbar_toggle());
+  };
+  const toggle: boolean = useAppSelector(store => store.navbar_toggle);
+  let title: string = toggle ? "hide navbar" : "show navbar";
   return (
     <img
       className="icon"
       alt="hamburger"
       src={hamburgerIcon}
-      title="hamburger under construction"
+      title={title}
+      onClick={() => onButtonClick()}
     />
   );
 };

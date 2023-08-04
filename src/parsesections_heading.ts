@@ -47,17 +47,28 @@ export class SectionParseNode_HEADING extends SectionParseNode
         current.recordType === MarkdownRecordType.HEADING,
         `expected ${MarkdownRecordType.HEADING} at line ${current.lineNo}`
       );
-      this.firstTermIdx = this.userContext.terminals.lastIdx + 1;
+      let firstTermIdx: number = this.userContext.terminals.lastIdx + 1;
       let sentence: ISentenceNode = new SentenceNode(this);
       sentence.parse();
+
+      // should be last index in the section not just the title.
+      // HeadingArray.parse will make adjustment
+      let lastTermIdx = this.userContext.terminals.lastIdx;
+
       this.meta.heading = sentence;
       this.meta.level = current.headingLevel;
+      this.meta.heading.firstTermIdx = firstTermIdx;
+
       this.userContext.headings.push({
         headingLevel: current.headingLevel,
         title: current.content,
-        termIdx: this.meta.heading.firstTermIdx,
+        firstTermIdx: firstTermIdx,
+        lastTermIdx: lastTermIdx,
         terminalCountPriorToHeading: IDX_INITIALIZER
       });
+      for (let idx = firstTermIdx; idx <= lastTermIdx; idx++) {
+        this.userContext.terminals[idx].heading = true;
+      }
       this.dataSource.nextRecord(); // position to next record
     } catch (e) {
       if (IsError(e)) {

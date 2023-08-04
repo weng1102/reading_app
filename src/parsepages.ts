@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2023 Wen Eng - All Rights Reserved
  *
  * File name: parsepages.ts
  *
@@ -187,7 +187,9 @@ export class PageParseNode extends ParseNode implements IPageContent {
       this.userContext.terminals.parse();
       this.terminalList = this.userContext.terminals;
 
-      this.userContext.headings.parse();
+      this.userContext.headings.parse(
+        this.terminalList[this.terminalList.length - 1].termIdx
+      );
       this.headingList = this.userContext.headings;
 
       this.userContext.sentences.parse();

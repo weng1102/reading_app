@@ -64,6 +64,7 @@ const PAGE_PREVIOUS_ENABLED = "page/previous enabled";
 const PAGE_SITEMAP_ENABLED = "page/sitemap enabled";
 const PAGE_FONTDOWN_ENABLED = "page/font down enabled";
 const PAGE_SPACINGDOWN_ENABLED = "page/spacing down enabled";
+const NAVBAR_TOGGLE = "navbar/toggle";
 
 // intrapage administrative actions (non-user initiated)
 //const PAGECONTEXT_SET = "pagecontext/set";
@@ -481,6 +482,12 @@ const Settings_toggle = () => {
     type: SETTINGS_TOGGLE
   };
 };
+const Navbar_toggle = () => {
+  return {
+    type: NAVBAR_TOGGLE
+  };
+};
+
 export const Request = {
   Cursor_gotoFirstSection, // first word in page
   Cursor_gotoFirstSentence, // first word in section
@@ -500,6 +507,8 @@ export const Request = {
 
   Message_set,
   Message_clear,
+
+  Navbar_toggle,
 
   Page_fontDownEnabled,
   Page_spacingDownEnabled,
@@ -610,6 +619,8 @@ interface IReduxState {
   link_sectionIdx: number;
   link_terminalIdx: number;
 
+  navbar_toggle: boolean;
+
   recite_requested: boolean;
   recite_word_requested: boolean;
   recite_word_completed: boolean;
@@ -688,8 +699,9 @@ const IReduxStateInitialState: IReduxState = {
 
   message_application: "",
   message_listening: "",
-  message_state: ""
+  message_state: "",
   //  pageContext: PageContextInitializer()
+  navbar_toggle: true
 };
 export const rootReducer = (
   state: IReduxState = IReduxStateInitialState,
@@ -805,7 +817,7 @@ export const rootReducer = (
             state.link_headingIdx < state.pageContext.headingList.length
           ) {
             setTerminalState([
-              state.pageContext.headingList[state.link_headingIdx].termIdx
+              state.pageContext.headingList[state.link_headingIdx].firstTermIdx
             ]);
           }
           break;
@@ -1149,6 +1161,10 @@ export const rootReducer = (
           break;
         default:
       }
+      return state;
+    }
+    case NAVBAR_TOGGLE: {
+      state.navbar_toggle = !state.navbar_toggle;
       return state;
     }
     default:

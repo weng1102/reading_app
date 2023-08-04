@@ -65,6 +65,7 @@ export interface IConfigSettings {
   firstName: string;
   lastName: string;
   showSitemap: boolean;
+  navbarWidth: string;
   fillinPresets: ISectionFillinPresets;
 }
 export interface ISpeechSettings {
@@ -86,6 +87,7 @@ export function ConfigSettingsInitializer(
   firstName: string = "Ronlyn",
   lastName: string = "Goo",
   showSitemap: boolean = false,
+  navbarWidth: string = "300px",
   fillinPresets: ISectionFillinPresets = ISectionFillinPresetsInitializer()
 ): IConfigSettings {
   return {
@@ -94,6 +96,7 @@ export function ConfigSettingsInitializer(
     firstName,
     lastName,
     showSitemap,
+    navbarWidth,
     fillinPresets
   };
 }

@@ -409,7 +409,6 @@ export interface ITerminalNodePropsType {
 }
 export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
   let dispatch = useAppDispatch();
-  //  const termRef = useSpanRef();
   const terminalRef = useSpanRef();
   const { terminalFillin, setTerminalFillin } = useContext(
     TerminalFillinContext
