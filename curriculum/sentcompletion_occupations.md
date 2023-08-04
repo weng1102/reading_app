@@ -10,7 +10,7 @@ The following exercises allow me to fill in the prompts given the corresponding 
 * A [_photographer_] is a person who takes pictures with a camera for a living.
 * A [_biologist_] is a person who studies animal and plant life.
 * A [_florist_] is a person who arranges flowers in vases.
-* A [_mechanic_] is a person who makes repairs on a car.
+* A [_mechanic_] is a person who repairs cars.
 * An [_author_] is a person who writes books.
 * A [_mason_] is a person who builds things with brick or stone.
 * A [_disc_] [_jockey_] is a person who announces music played on the radio.

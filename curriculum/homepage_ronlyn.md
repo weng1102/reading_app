@@ -1,5 +1,4 @@
 [[page: Ronlyn's Home Page, Ronlyn, Wen, 11/9/2022, Home Page,  /]]
-
 # Personal
 ## My Stroke Story
 [[image-entry: My stroke story, left, 20%]]

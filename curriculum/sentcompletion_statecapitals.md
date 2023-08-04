@@ -3,7 +3,7 @@
 # Completing sentences progressively
 The following exercises allow me to fill in the prompts given the corresponding response lists in increasingly more difficult ordering until no response list is shown.
 ## State Capitals
-### Responses (already filled in)
+### Responses
 [[fillin: false, , Recite the following prompts including the underlined words:, grid,8, insert, true, true, true, true, true, true, true, 2, true]]
 1. Montgomery is the capital of [_Alabama_].
 1. Juneau is the capital of [_Alaska_].
@@ -56,21 +56,4 @@ The following exercises allow me to fill in the prompts given the corresponding 
 1. Madison is the capital of [_Wisconsin_].
 1. Cheyenne is the capital of [_Wyoming_].
 [[/fillin]]
-
-### Responses (in order)
-[[fillin: Use the following responses in the prompts below, Fillin the following blanks:, grid,6, insert, true, true, true, true, true, true, true, 2]]
-[[/fillin]]
-
-### Responses (in alphabetical order)
-[[fillin: Use the following responses in the prompts below, Fillin the following blanks:, grid,6, alphabetical, true, true, true, true, true, true, true, 2]]
-[[/fillin]]
-
-### Responses (in random order)
-[[fillin: Use the following responses in the prompts below, Fillin the following blanks:, grid,6, random, true, true, true, true, true, true, true, 2]]
-[[/fillin]]
-
-### Responses (not shown)
-[[fillin: , Fillin the following blanks:, none, , insert, true, true, true, true, true, true, true, 2]]
-[[/fillin]]
-
 

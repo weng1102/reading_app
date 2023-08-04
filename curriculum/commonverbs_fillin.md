@@ -22,340 +22,340 @@ Although helping verbs be, do and have can standalone, they can be combined with
 ### Go (present simple tense)
 
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_go_] out.
-He [_goes_] out.
-She [_goes_] out.
-You [_go_] out.
-We [_go_] out.
-They [_go_] out.
+I [_go=(verb)_] out.
+He [_goes=(verb)_] out.
+She [_goes=(verb)_] out.
+You [_go=(verb)_] out.
+We [_go=(verb)_] out.
+They [_go=(verb)_] out.
 [[/fillin]]
 
 ### Go (present continuous tense)
 
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_am_] [_going_] out.
-He [_is_] [_going_] out.
-She [_is_] [_going_] out.
-You [_are_] [_going_] out.
-We [_are_] [_going_] out.
-They [_are_] [_going_] out.
+I [_am=(helping verb)_] [_going=(verb)_] out.
+He [_is=(helping verb)_] [_going=(verb)_] out.
+She [_is=(helping verb)_] [_going=(verb)_] out.
+You [_are=(helping verb)_] [_going=(verb)_] out.
+We [_are=(helping verb)_] [_going=(verb)_] out.
+They [_are=(helping verb)_] [_going=(verb)_] out.
 [[/fillin]]
 
 ### Go (past simple tense)
 
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_went_] out.
-He [_went_] out.
-She [_went_] out.
-You [_went_] out.
-We [_went_] out.
-They [_went_] out.
+I [_went=(verb)_] out.
+He [_went=(verb)_] out.
+She [_went=(verb)_] out.
+You [_went=(verb)_] out.
+We [_went=(verb)_] out.
+They [_went=(verb)_] out.
 [[/fillin]]
 
 ### Go (past continuous tense)
 
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 
-I [_was_] [_going_] out.
-He [_was_] [_going_] out.
-She [_was_] [_going_] out.
-You [_were_] [_going_] out.
-We [_were_] [_going_] out.
-They [_were_] [_going_] out.
+I [_was=(helping verb)_] [_going=(verb)_] out.
+He [_was=(helping verb)_] [_going=(verb)_] out.
+She [_was=(helping verb)_] [_going=(verb)_] out.
+You [_were=(helping verb)_] [_going=(verb)_] out.
+We [_were=(helping verb)_] [_going=(verb)_] out.
+They [_were=(helping verb)_] [_going=(verb)_] out.
 [[/fillin]]
 
 ### Go (future simple tense)
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_will_] [_go_] out.
-He [_will_] [_go_] out.
-She [_will_] [_go_] out.
-You [_will_] [_go_] out.
-We [_will_] [_go_] out.
-They [_will_] [_go_] out.
+I [_will=(helping verb)_] [_go=(verb)_] out.
+He [_will=(helping verb)_] [_go=(verb)_] out.
+She [_will=(helping verb)_] [_go=(verb)_] out.
+You [_will=(helping verb)_] [_go=(verb)_] out.
+We [_will=(helping verb)_] [_go=(verb)_] out.
+They [_will=(helping verb)_] [_go=(verb)_] out.
 [[/fillin]]
 
 ### Go (future continuous tense)
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_will_] [_be_] [_going_] out.
-He [_will_] [_be_] [_going_] out.
-She [_will_] [_be_] [_going_] out.
-You [_will_] [_be_] [_going_] out.
-We [_will_] [_be_] [_going_] out.
-They [_will [_be_] [_going_] out.
+I [_will=(helping verb)_] [_be_] [_going=(verb)_] out.
+He [_will=(helping verb)_] [_be_] [_going=(verb)_] out.
+She [_will=(helping verb)_] [_be_] [_going=(verb)_] out.
+You [_will=(helping verb)_] [_be_] [_going=(verb)_] out.
+We [_will=(helping verb)_] [_be_] [_going=(verb)_] out.
+They [_will [_be_] [_going=(verb)_] out.
 [[/fillin]]
 
 ## Verb: Read
 
 ### Read (present simple tense)
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_read_] a book.
-He [_reads_] a book.
-She [_reads_] a book.
-You [_read_] a book.
-We [_read_] a book.
-They [_read_] a book.
+I [_read=(verb)_] a book.
+He [_reads=(verb)_] a book.
+She [_reads=(verb)_] a book.
+You [_read=(verb)_] a book.
+We [_read=(verb)_] a book.
+They [_read=(verb)_] a book.
 [[/fillin]]
 
 Read (present continuous tense)
 These conjugations express actions that are currently happening but will soon finish.
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_am_] [_reading_] a book.
-He [_is_] [_reading_] a book.
-She [_is_] [_reading_] a book.
-You [_are_] [_reading_] a book.
-We [_are_] [_reading_] a book.
-They [_are_] [_reading_] a book.
+I [_am=(helping verb)_] [_reading=(verb)_] a book.
+He [_is=(helping verb)_] [_reading=(verb)_] a book.
+She [_is=(helping verb)_] [_reading=(verb)_] a book.
+You [_are=(helping verb)_] [_reading=(verb)_] a book.
+We [_are=(helping verb)_] [_reading=(verb)_] a book.
+They [_are=(helping verb)_] [_reading=(verb)_] a book.
 [[/fillin]]
 
 ### Read (past simple tense)
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_read_] a book.
-He [_read_] a book.
-She [_read_] a book.
-You [_read_] a book.
-We [_read_] a book.
-They [_read_] a book.
+I [_read=(verb)_] a book.
+He [_read=(verb)_] a book.
+She [_read=(verb)_] a book.
+You [_read=(verb)_] a book.
+We [_read=(verb)_] a book.
+They [_read=(verb)_] a book.
 [[/fillin]]
 
 ### Read (past continuous tense)
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_was_] [_reading_] a book.
-He [_was_] [_reading_] a book.
-She [_was_] [_reading_] a book.
-You [_were_] [_reading_] a book.
-We [_were_] [_reading_] a book.
-They [_were_] [_reading_] a book.
+I [_was=(helping verb)_] [_reading=(verb)_] a book.
+He [_was=(helping verb)_] [_reading=(verb)_] a book.
+She [_was=(helping verb)_] [_reading=(verb)_] a book.
+You [_were=(helping verb)_] [_reading=(verb)_] a book.
+We [_were=(helping verb)_] [_reading=(verb)_] a book.
+They [_were=(helping verb)_] [_reading=(verb)_] a book.
 [[/fillin]]
 
 ### Read (future simple tense)
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-He [_will_] [_read_] a book.
-She [_will_] [_read_] a book.
-You [_will_] [_read_] a book.
-We [_will_] [_read_] a book.
-They [_will_] [_read_] a book.
+He [_will=(helping verb)_] [_read=(verb)_] a book.
+She [_will=(helping verb)_] [_read=(verb)_] a book.
+You [_will=(helping verb)_] [_read=(verb)_] a book.
+We [_will=(helping verb)_] [_read=(verb)_] a book.
+They [_will=(helping verb)_] [_read=(verb)_] a book.
 [[/fillin]]
 
 ### Read (future continuous tense)
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_will_] [_be_] [_reading_] a book.
-He [_will_] [_be_] [_reading_] a book.
-She [_will_] [_be_] [_reading_] a book.
-You [_will_] [_be_] [_reading_] a book.
-We [_will_] [_be_] [_reading_] a book.
-They [_will_] [_be_] [_reading_] a book.
+I [_will=(helping verb)_] [_be_] [_reading=(verb)_] a book.
+He [_will=(helping verb)_] [_be_] [_reading=(verb)_] a book.
+She [_will=(helping verb)_] [_be_] [_reading=(verb)_] a book.
+You [_will=(helping verb)_] [_be_] [_reading=(verb)_] a book.
+We [_will=(helping verb)_] [_be_] [_reading=(verb)_] a book.
+They [_will=(helping verb)_] [_be_] [_reading=(verb)_] a book.
 [[/fillin]]
 
 ## Verb: Sit
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 Sit (present simple tense)
-I [_sit_] on a sofa.
-He [_sits_] on a sofa.
-She [_sits_] on a sofa.
-You [_sit_] on a sofa.
-We [_sit_] on a sofa.
-They [_sit_] on a sofa.
+I [_sit=(verb)_] on a sofa.
+He [_sits=(verb)_] on a sofa.
+She [_sits=(verb)_] on a sofa.
+You [_sit=(verb)_] on a sofa.
+We [_sit=(verb)_] on a sofa.
+They [_sit=(verb)_] on a sofa.
 [[/fillin]]
 
 ### Sit (present continuous tense)
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_am_] [_sitting_] on a sofa.
-He [_is_] [_sitting_] on a sofa.
-She [_is_] [_sitting_] on a sofa.
-You [_are_] [_sitting_] on a sofa.
-We [_are_] [_sitting_] on a sofa.
-They [_are_] [_sitting_] on a sofa.
+I [_am=(helping verb)_] [_sitting=(verb)_] on a sofa.
+He [_is=(helping verb)_] [_sitting=(verb)_] on a sofa.
+She [_is=(helping verb)_] [_sitting=(verb)_] on a sofa.
+You [_are=(helping verb)_] [_sitting=(verb)_] on a sofa.
+We [_are=(helping verb)_] [_sitting=(verb)_] on a sofa.
+They [_are=(helping verb)_] [_sitting=(verb)_] on a sofa.
 [[/fillin]]
 
 ### Sit (past simple tense)
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_sat_] on a sofa.
-He [_sat_] on a sofa.
-She [_sat_] on a sofa.
-You [_sat_] on a sofa.
-We [_sat_] on a sofa.
-They [_sat_] on a sofa.
+I [_sat=(verb)_] on a sofa.
+He [_sat=(verb)_] on a sofa.
+She [_sat=(verb)_] on a sofa.
+You [_sat=(verb)_] on a sofa.
+We [_sat=(verb)_] on a sofa.
+They [_sat=(verb)_] on a sofa.
 [[/fillin]]
 
 ### Sit (past continuous tense)
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_was_] [_sitting_] on a sofa.
-He [_was_] [_sitting_] on a sofa.
-She [_was_] [_sitting_] on a sofa.
-You [_were_] [_sitting_] on a sofa.
-We [_were_] [_sitting_] on a sofa.
-They [_were_] [_sitting_] sit.
+I [_was=(helping verb)_] [_sitting=(verb)_] on a sofa.
+He [_was=(helping verb)_] [_sitting=(verb)_] on a sofa.
+She [_was=(helping verb)_] [_sitting=(verb)_] on a sofa.
+You [_were=(helping verb)_] [_sitting=(verb)_] on a sofa.
+We [_were=(helping verb)_] [_sitting=(verb)_] on a sofa.
+They [_were=(helping verb)_] [_sitting=(verb)_] sit.
 [[/fillin]]
 
 ### Sit (future simple tense)
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_will_] [_sit_] on a sofa.
-He [_will_] [_sit_] on a sofa.
-She [_will_] [_sit_] on a sofa.
-You [_will_] [_sit_] on a sofa.
-We [_will_] [_sit_] on a sofa.
-They [_will_] [_sit_] on a sofa.
+I [_will=(helping verb)_] [_sit=(verb)_] on a sofa.
+He [_will=(helping verb)_] [_sit=(verb)_] on a sofa.
+She [_will=(helping verb)_] [_sit=(verb)_] on a sofa.
+You [_will=(helping verb)_] [_sit=(verb)_] on a sofa.
+We [_will=(helping verb)_] [_sit=(verb)_] on a sofa.
+They [_will=(helping verb)_] [_sit=(verb)_] on a sofa.
 [[/fillin]]
 
 ### Sit (future continuous tense)
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_will_] [_be_] [_sitting_] on a sofa.
-He [_will_] [_be_] [_sitting_] on a sofa.
-She [_will_] [_be_] [_sitting_] on a sofa.
-You [_will_] [_be_] [_sitting_] on a sofa.
-We [_will_] [_be_] [_sitting_] on a sofa.
-They [_will_] [_be_] [_sitting_] on a sofa.
+I [_will=(helping verb)_] [_be_] [_sitting=(verb)_] on a sofa.
+He [_will=(helping verb)_] [_be_] [_sitting=(verb)_] on a sofa.
+She [_will=(helping verb)_] [_be_] [_sitting=(verb)_] on a sofa.
+You [_will=(helping verb)_] [_be_] [_sitting=(verb)_] on a sofa.
+We [_will=(helping verb)_] [_be_] [_sitting=(verb)_] on a sofa.
+They [_will=(helping verb)_] [_be_] [_sitting=(verb)_] on a sofa.
 [[/fillin]]
 
 ## Verb: Sleep
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 ### Sleep (present simple tense)
-I [_sleep_] in a bed.
-He [_sleeps_] in a bed.
-She [_sleeps_] in a bed.
-You [_sleep_] in a bed.
-We [_sleep_] in a bed.
-They [_sleep_] in a bed.
+I [_sleep=(verb)_] in a bed.
+He [_sleeps=(verb)_] in a bed.
+She [_sleeps=(verb)_] in a bed.
+You [_sleep=(verb)_] in a bed.
+We [_sleep=(verb)_] in a bed.
+They [_sleep=(verb)_] in a bed.
 [[/fillin]]
 
 ### Sleep (present continuous tense)
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_am_] [_sleeping_] in a bed.
-He [_is_] [_sleeping_] in a bed.
-She [_is_] [_sleeping_] in a bed.
-You [_are_] [_sleeping_] in a bed.
-We [_are_] [_sleeping_] in a bed.
-They [_are_] [_sleeping_] in a bed.
+I [_am=(helping verb)_] [_sleeping=(verb)_] in a bed.
+He [_is=(helping verb)_] [_sleeping=(verb)_] in a bed.
+She [_is=(helping verb)_] [_sleeping=(verb)_] in a bed.
+You [_are=(helping verb)_] [_sleeping=(verb)_] in a bed.
+We [_are=(helping verb)_] [_sleeping=(verb)_] in a bed.
+They [_are=(helping verb)_] [_sleeping=(verb)_] in a bed.
 [[/fillin]]
 
 ### Sleep (past simple tense)
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_slept_] in a bed.
-He [_slept_] in a bed.
-She [_slept_] in a bed.
-You [_slept_] in a bed.
-We [_slept_] in a bed.
-They [_slept_] in a bed.
+I [_slept=(verb)_] in a bed.
+He [_slept=(verb)_] in a bed.
+She [_slept=(verb)_] in a bed.
+You [_slept=(verb)_] in a bed.
+We [_slept=(verb)_] in a bed.
+They [_slept=(verb)_] in a bed.
 [[/fillin]]
 
 ## Verb: Talk
 ### Talk (present simple tense)
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_talk_] with them.
-He [_talks_] with them.
-She [_talks_] with them.
-You [_talk_] with them.
-We [_talk_] with them.
-They [_talk_] with them.
+I [_talk=(verb)_] with them.
+He [_talks=(verb)_] with them.
+She [_talks=(verb)_] with them.
+You [_talk=(verb)_] with them.
+We [_talk=(verb)_] with them.
+They [_talk=(verb)_] with them.
 [[/fillin]]
 
 ###Talk (present continuous tense)
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_am_] [_talking_] with them.
-He [_is_] [_talking_] with them.
-She [_is_] [_talking_] with them.
-You [_are_] [_talking_] with them.
-We [_are_] [_talking_] with them.
-They [_are_] [_talking_] with them.
+I [_am=(helping verb)_] [_talking=(verb)_] with them.
+He [_is=(helping verb)_] [_talking=(verb)_] with them.
+She [_is=(helping verb)_] [_talking=(verb)_] with them.
+You [_are=(helping verb)_] [_talking=(verb)_] with them.
+We [_are=(helping verb)_] [_talking=(verb)_] with them.
+They [_are=(helping verb)_] [_talking=(verb)_] with them.
 [[/fillin]]
 
 ### Talk (past simple tense)
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_talked_] with them.
-He [_talked_] with them.
-She [_talked_] with them.
-You [_talked_] with them.
-We [_talked_] with them.
-They [_talked_] with them.
+I [_talked=(verb)_] with them.
+He [_talked=(verb)_] with them.
+She [_talked=(verb)_] with them.
+You [_talked=(verb)_] with them.
+We [_talked=(verb)_] with them.
+They [_talked=(verb)_] with them.
 [[/fillin]]
 
 ### Talk (past continuous tense)
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_was_] [_talking_] with them.
-He [_was_] [_talking_] with them.
-She [_was_] [_talking_] with them.
-You [_were_] [_talking_] with them.
-We [_were_] [_talking_] with them.
-They [_were_] [_talking_] with them.
+I [_was=(helping verb)_] [_talking=(verb)_] with them.
+He [_was=(helping verb)_] [_talking=(verb)_] with them.
+She [_was=(helping verb)_] [_talking=(verb)_] with them.
+You [_were=(helping verb)_] [_talking=(verb)_] with them.
+We [_were=(helping verb)_] [_talking=(verb)_] with them.
+They [_were=(helping verb)_] [_talking=(verb)_] with them.
 [[/fillin]]
 
 ### Talk (future simple tense)
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_will_] [_talk_] with them.
-He [_will_] [_talk_] with them.
-She [_will_] [_talk_] with them.
-You [_will_] [_talk_] with them.
-We [_will_] [_talk_] with them.
-They [_will_] [_talk_] with them.
+I [_will=(helping verb)_] [_talk=(verb)_] with them.
+He [_will=(helping verb)_] [_talk=(verb)_] with them.
+She [_will=(helping verb)_] [_talk=(verb)_] with them.
+You [_will=(helping verb)_] [_talk=(verb)_] with them.
+We [_will=(helping verb)_] [_talk=(verb)_] with them.
+They [_will=(helping verb)_] [_talk=(verb)_] with them.
 [[/fillin]]
 
 ### Talk (future continuous tense)
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_will_] [_be_] [_talking_] with them.
-He [_will_] [_be_] [_talking_] with them.
-She [_will_] [_be_] [_talking_] with them.
-You [_will_] [_be_] [_talking_] with them.
-We [_will_] [_be_] [_talking_] with them.
-They [_will_] [_be_] [_talking_] with them.
+I [_will=(helping verb)_] [_be_] [_talking=(verb)_] with them.
+He [_will=(helping verb)_] [_be_] [_talking=(verb)_] with them.
+She [_will=(helping verb)_] [_be_] [_talking=(verb)_] with them.
+You [_will=(helping verb)_] [_be_] [_talking=(verb)_] with them.
+We [_will=(helping verb)_] [_be_] [_talking=(verb)_] with them.
+They [_will=(helping verb)_] [_be_] [_talking=(verb)_] with them.
 [[/fillin]]
 
 ## Verb: Walk
 ### Walk (present simple tense)
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_walk_] back home.
-He [_walks_] back home.
-She [_walks_] back home.
-You [_walk_] back home.
-We [_walk_] back home.
-They [_walk_] back home.
+I [_walk=(verb)_] back home.
+He [_walks=(verb)_] back home.
+She [_walks=(verb)_] back home.
+You [_walk=(verb)_] back home.
+We [_walk=(verb)_] back home.
+They [_walk=(verb)_] back home.
 [[/fillin]]
 
 ### Walk (present continuous tense)
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_am_] [_walking_] back home.
-He [_is_] [_walking_] back home.
-She [_is_] [_walking_] back home.
-You [_are_] [_walking_] back home.
-We [_are_] [_walking_] back home.
-They [_are_] [_walking_] back home.
+I [_am=(helping verb)_] [_walking=(verb)_] back home.
+He [_is=(helping verb)_] [_walking=(verb)_] back home.
+She [_is=(helping verb)_] [_walking=(verb)_] back home.
+You [_are=(helping verb)_] [_walking=(verb)_] back home.
+We [_are=(helping verb)_] [_walking=(verb)_] back home.
+They [_are=(helping verb)_] [_walking=(verb)_] back home.
 [[/fillin]]
 
 ### Walk (past simple tense)
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_walked_] back home.
-He [_walked_] back home.
-She [_walked_] back home.
-You [_walked_] back home.
-We [_walked_] back home.
-They [_walked_] back home.
+I [_walked=(verb)_] back home.
+He [_walked=(verb)_] back home.
+She [_walked=(verb)_] back home.
+You [_walked=(verb)_] back home.
+We [_walked=(verb)_] back home.
+They [_walked=(verb)_] back home.
 [[/fillin]]
 
 ### Walk (past continuous tense)
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_was_] [_walking_] back home.
-He [_was_] [_walking_] back home.
-She [_was_] [_walking_] back home.
-You [_were_] [_walking_] back home.
-We [_were_] [_walking_] back home.
-They [_were_] [_walking_] back home.
+I [_was=(helping verb)_] [_walking=(verb)_] back home.
+He [_was=(helping verb)_] [_walking=(verb)_] back home.
+She [_was=(helping verb)_] [_walking=(verb)_] back home.
+You [_were=(helping verb)_] [_walking=(verb)_] back home.
+We [_were=(helping verb)_] [_walking=(verb)_] back home.
+They [_were=(helping verb)_] [_walking=(verb)_] back home.
 [[/fillin]]
 
 ### Walk (future simple tense)
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_will_] [_walk_] back home.
-He [_will_] [_walk_] back home.
-She [_will_] [_walk_] back home.
-You [_will_] [_walk_] back home.
-We [_will_] [_walk_] back home.
-They [_will_] [_walk_] back home.
+I [_will=(helping verb)_] [_walk=(verb)_] back home.
+He [_will=(helping verb)_] [_walk=(verb)_] back home.
+She [_will=(helping verb)_] [_walk=(verb)_] back home.
+You [_will=(helping verb)_] [_walk=(verb)_] back home.
+We [_will=(helping verb)_] [_walk=(verb)_] back home.
+They [_will=(helping verb)_] [_walk=(verb)_] back home.
 [[/fillin]]
 
 ### Walk (future continuous tense)
 [[fillin: gridAlpha, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-I [_will_] [_be_] [_walking_] back home.
-He [_will_] [_be_] [_walking_] back home.
-She [_will_] [_be_] [_walking_] back home.
-You [_will_] [_be_] [_walking_] back home.
-We [_will_] [_be_] [_walking_] back home.
-They [_will_] [_be_] [_walking_] back home.
+I [_will=(helping verb)_] [_be_] [_walking=(verb)_] back home.
+He [_will=(helping verb)_] [_be_] [_walking=(verb)_] back home.
+She [_will=(helping verb)_] [_be_] [_walking=(verb)_] back home.
+You [_will=(helping verb)_] [_be_] [_walking=(verb)_] back home.
+We [_will=(helping verb)_] [_be_] [_walking=(verb)_] back home.
+They [_will=(helping verb)_] [_be_] [_walking=(verb)_] back home.
 [[/fillin]]
