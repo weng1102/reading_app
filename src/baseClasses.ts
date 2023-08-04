@@ -113,7 +113,8 @@ class TerminalArray extends Array<ITerminalListItem> {
     let altrecog,
       altpro: string = "";
     let outputStr: string =
-      "[idx ]:  term ARLVNBI  next prev sent  sect link   fillins content\n";
+      "Audible,Recitable,Linkable,Visible,Numbers as numerals,Bold,Italics,Heading\n" +
+      "[idx ]:  term ARLVNBIH  next prev sent  sect link   fillins content\n";
     for (const [i, element] of this.entries()) {
       if (element.altrecognition.length > 0) {
         altrecog = `(rec: ${element.altrecognition})`;
@@ -148,6 +149,9 @@ class TerminalArray extends Array<ITerminalListItem> {
         .toString()
         .substring(0, 1)
         .toUpperCase()}${element.italics
+        .toString()
+        .substring(0, 1)
+        .toUpperCase()}${element.heading
         .toString()
         .substring(0, 1)
         .toUpperCase()} ${
@@ -237,7 +241,9 @@ responses.filter(item => {
     return [fillinListIdx, fillinIdx];
   }
   serialize(): string {
-    let outputStr: string = `[idx ]: ${"".padEnd(17)} refCount order\n`;
+    let outputStr: string = `[idx ]: ${"".padEnd(
+      17
+    )} tag          refCount order\n`;
     for (const [i, element] of this.entries()) {
       outputStr = `${outputStr}[${i
         .toString()
@@ -259,7 +265,7 @@ responses.filter(item => {
         element.authorSetting.showResponsesInPrompts
           ? "showResponsesInPrompts"
           : ""
-      }\n`;
+      }\n[idx ]: ${"fillin".padEnd(24)} tag          refCount order\n`;
       for (const [j, response] of element.responses
         //        .sort((a, b) => (a.content > b.content ? 1 : -1))
         .entries()) {
@@ -267,7 +273,7 @@ responses.filter(item => {
           .toString()
           .padStart(2, "0")}]: ${response.content.padEnd(
           25
-        )}${response.tag.padEnd(10)}${response.referenceCount.toString()}\n`;
+        )}${response.tag.padEnd(13)}${response.referenceCount.toString()}\n`;
       }
       if (element.tags.length > 0) {
         outputStr = `${outputStr}  tags:`;
@@ -314,7 +320,7 @@ class HeadingArray extends Array<IHeadingListItem> {
     // the actual visible, recitable terminal in parse
     return super.push(heading);
   }
-  parse(): number {
+  parse(lastTerminalIdx: number): number {
     // starting from nearest termIdx, traverse and find
     // the actual visible, recitable terminal in parse
     // for (const element of this) {
@@ -331,16 +337,33 @@ class HeadingArray extends Array<IHeadingListItem> {
     //   }
     //   //console.log(`HeadingArray prior=${element.terminalCountPriorToHeading} term=${element.termIdx}`);
     // }
+
+    // should be last index in the section not just the title.
+    // HeadingArray.parse will make adjustment
+    try {
+      for (let index: number = 0; index < this.length; index++) {
+        if (index < this.length - 1) {
+          this[index].lastTermIdx = this[index + 1].firstTermIdx - 1;
+        } else {
+          // get last terminalList idx as lastTermIdx
+          this[index].lastTermIdx = lastTerminalIdx;
+        }
+      }
+    } catch (e) {
+      console.log(e);
+    }
     return this.length;
   }
   serialize(): string {
-    let outputStr: string = "[hidx]: lvl  idx title\n";
+    let outputStr: string = "[hidx]: lvl   1st last title\n";
     for (const [i, element] of this.entries()) {
       outputStr = `${outputStr}[${i
         .toString()
         .padStart(4, "0")}]: ${element.headingLevel
         .toString()
-        .padStart(3, " ")} ${element.termIdx.toString().padStart(4, " ")} ${
+        .padStart(4, " ")} ${element.firstTermIdx
+        .toString()
+        .padStart(4, " ")} ${element.lastTermIdx.toString().padStart(4, " ")} ${
         element.title
       }\n`;
     }
@@ -508,14 +531,14 @@ class LinkArray extends Array<ILinkListItem> {
                 element.destination.headingIdx <
                   pageContent.headingList.length &&
                 pageContent.headingList[element.destination.headingIdx]
-                  .termIdx >= 0 &&
+                  .firstTermIdx >= 0 &&
                 pageContent.headingList[element.destination.headingIdx]
-                  .termIdx < pageContent.terminalList.length;
+                  .firstTermIdx < pageContent.terminalList.length;
               if (element.valid) {
                 element.destination.terminalIdx =
                   pageContent.headingList[
                     element.destination.headingIdx
-                  ].termIdx;
+                  ].firstTermIdx;
                 element.destination.sectionIdx =
                   pageContent.terminalList[
                     element.destination.terminalIdx
