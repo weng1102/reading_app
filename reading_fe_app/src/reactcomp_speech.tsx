@@ -456,15 +456,14 @@ const VoiceSelector = (props: IVoiceSelectorProps) => {
         <select
           className="ddlb-voiceselect settings-grid-col2-control"
           onChange={onChangeValue}
+          defaultValue={
+            window.speechSynthesis.getVoices()[props.voiceIndex].name
+          }
         >
           {window.speechSynthesis
             .getVoices()
             .map((voice: SpeechSynthesisVoice, key: any) => (
-              <option
-                id={key}
-                key={voice.voiceURI}
-                selected={props.voiceIndex === key}
-              >
+              <option id={key} key={voice.voiceURI}>
                 {voice.name}
               </option>
             ))}
