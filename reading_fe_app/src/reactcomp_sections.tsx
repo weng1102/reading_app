@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2023 Wen Eng - All Rights Reserved
  *
  * File name: reactcomp_sections.tsx
  *
@@ -104,18 +104,16 @@ export const SectionParagraph = React.memo((props: ISectionPropsType): any => {
     .meta as ISectionParagraphVariant;
   return (
     <>
-      <p>
-        {paragraph.sentences.map(
-          (sentence: ISentenceContent, keyvalue: number) => (
-            <Sentence
-              key={keyvalue}
-              active={currentSentenceIdx === sentence.id}
-              sentence={sentence}
-              recitable={true}
-            />
-          )
-        )}
-      </p>
+      {paragraph.sentences.map(
+        (sentence: ISentenceContent, keyvalue: number) => (
+          <Sentence
+            key={keyvalue}
+            active={currentSentenceIdx === sentence.id}
+            sentence={sentence}
+            recitable={true}
+          />
+        )
+      )}
     </>
   );
 });
