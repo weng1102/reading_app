@@ -65,7 +65,9 @@ export interface IConfigSettings {
   firstName: string;
   lastName: string;
   showSitemap: boolean;
-  navbarWidth: string;
+  navbarWidth: number;
+  fontSizeAdjustment: number; // in px
+  lineSpacingAdjustment: number; // in px
   fillinPresets: ISectionFillinPresets;
 }
 export interface ISpeechSettings {
@@ -87,7 +89,9 @@ export function ConfigSettingsInitializer(
   firstName: string = "Ronlyn",
   lastName: string = "Goo",
   showSitemap: boolean = false,
-  navbarWidth: string = "300px",
+  navbarWidth: number = 300,
+  fontSizeAdjustment: number = 0,
+  lineSpacingAdjustment: number = 0,
   fillinPresets: ISectionFillinPresets = ISectionFillinPresetsInitializer()
 ): IConfigSettings {
   return {
@@ -97,6 +101,8 @@ export function ConfigSettingsInitializer(
     lastName,
     showSitemap,
     navbarWidth,
+    fontSizeAdjustment,
+    lineSpacingAdjustment,
     fillinPresets
   };
 }
