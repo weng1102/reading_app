@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2023 Wen Eng - All Rights Reserved
  *
  * File name: reactcomp_header.tsx
  *
@@ -11,6 +11,7 @@
 import React from "react";
 import "./App.css";
 import hamburgerIcon from "./img/Hamburger_icon.png";
+import hamburgerOpenIcon from "./img/Hamburger_icon_open.png";
 import fontUpIcon from "./img/button_fontadj_up1.png";
 import fontDownIcon from "./img/button_fontadj_down1.png";
 import fontDownGhostedIcon from "./img/button_fontadj_down1_ghosted.png";
@@ -27,10 +28,11 @@ import { SettingsDialog } from "./reactcomp_settings";
 import { Request } from "./reducers";
 import { useAppDispatch, useDialog, useAppSelector } from "./hooks";
 import { useContext } from "react";
+// import { useSession } from "./sessionProvider";
 import { ISettingsContext, SettingsContext } from "./settingsContext";
 
 interface IPageHeaderPropsType {
-  title: string;
+  title: string | null;
 }
 export const PageHeader = React.memo((props: IPageHeaderPropsType) => {
   const { isActive, toggleDialog } = useDialog();
@@ -40,7 +42,7 @@ export const PageHeader = React.memo((props: IPageHeaderPropsType) => {
       <div className="header-grid-hamburger">
         <HamburgerButton />
       </div>
-      <div className="headertitle">{props.title}</div>
+      <div className="header-grid-title">{props.title}</div>
       <div className="header-grid-sitemapbutton">
         <SiteMapButton />
       </div>
@@ -50,11 +52,17 @@ export const PageHeader = React.memo((props: IPageHeaderPropsType) => {
       <div className="header-grid-homebutton">
         <HomeButton />
       </div>
-      <div className="header-grid-spacingbutton">
-        <SpacingAdjustButton />
+      <div className="header-grid-spacingdownbutton">
+        <SpacingAdjustDownButton />
       </div>
-      <div className="header-grid-fontbutton">
-        <FontAdjustButton />
+      <div className="header-grid-spacingupbutton">
+        <SpacingAdjustUpButton />
+      </div>
+      <div className="header-grid-fontdownbutton">
+        <FontAdjustDownButton />
+      </div>
+      <div className="header-grid-fontupbutton">
+        <FontAdjustUpButton />
       </div>
       <div className="header-grid-settingbutton">
         <img
@@ -75,12 +83,21 @@ const HamburgerButton = () => {
     dispatch(Request.Navbar_toggle());
   };
   const toggle: boolean = useAppSelector(store => store.navbar_toggle);
-  let title: string = toggle ? "hide navbar" : "show navbar";
+  let title: string;
+  let iconState: string;
+  if (toggle) {
+    title = "hide navbar";
+    iconState = hamburgerIcon;
+  } else {
+    title = "show navbar";
+    iconState = hamburgerOpenIcon;
+  }
+
   return (
     <img
       className="icon"
       alt="hamburger"
-      src={hamburgerIcon}
+      src={iconState}
       title={title}
       onClick={() => onButtonClick()}
     />
@@ -99,7 +116,9 @@ const HomeButton = () => {
     icon = homePageGhostedIcon;
   }
   const onButtonClick = () => {
-    if (homePageEnabled) dispatch(Request.Page_home());
+    if (homePageEnabled) {
+      dispatch(Request.Page_home());
+    }
   };
   return (
     <img
@@ -131,6 +150,7 @@ const SiteMapButton = () => {
   }
 };
 const PreviousPageButton = () => {
+  // const { dispatch, state } = useSession();
   const dispatch = useAppDispatch();
   // need to add conditional  logic to manage empty stack
   let icon: string;
@@ -143,7 +163,9 @@ const PreviousPageButton = () => {
     icon = previousPageGhostedIcon;
   }
   const onButtonClick = () => {
-    if (previousPageEnabled) dispatch(Request.Page_pop());
+    if (previousPageEnabled) {
+      dispatch(Request.Page_pop());
+    }
   };
   return (
     <img
@@ -155,20 +177,6 @@ const PreviousPageButton = () => {
     />
   );
 };
-const SpacingAdjustButton = () => {
-  return (
-    <>
-      <div className="header-grid-spacingbutton">
-        <div className="header-grid-spacingupbutton">
-          <SpacingAdjustUpButton />
-        </div>
-        <div className="header-grid-spacingdownbutton">
-          <SpacingAdjustDownButton />
-        </div>
-      </div>
-    </>
-  );
-};
 const SpacingAdjustUpButton = () => {
   const dispatch = useAppDispatch();
   const spacingDownEnabled: boolean = useAppSelector(
@@ -176,7 +184,7 @@ const SpacingAdjustUpButton = () => {
   );
   const onButtonClick = () => {
     dispatch(
-      Request.Page_spacingDownEnabled(changeSpacingSize(spacingQuantum))
+      Request.Page_textSpacingDownEnabled(changeSpacingSize(spacingQuantum))
     );
   };
   return (
@@ -196,9 +204,8 @@ const SpacingAdjustDownButton = () => {
   );
   const onButtonClick = () => {
     dispatch(
-      Request.Page_spacingDownEnabled(changeSpacingSize(-spacingQuantum))
+      Request.Page_textSpacingDownEnabled(changeSpacingSize(-spacingQuantum))
     );
-    //    if (previousPageEnabled) dispatch(Request.Page_pop());
   };
   let spacingIcon: string = spacingDownIcon;
   if (spacingDownEnabled) {
@@ -214,20 +221,6 @@ const SpacingAdjustDownButton = () => {
       src={spacingIcon}
       onClick={onButtonClick}
     />
-  );
-};
-const FontAdjustButton = () => {
-  return (
-    <>
-      <div className="header-grid-fontbutton">
-        <div className="header-grid-fontupbutton">
-          <FontAdjustUpButton />
-        </div>
-        <div className="header-grid-fontdownbutton">
-          <FontAdjustDownButton />
-        </div>
-      </div>
-    </>
   );
 };
 const changeFontSize = (quantum: number): boolean => {
