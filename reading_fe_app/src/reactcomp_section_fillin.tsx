@@ -302,9 +302,12 @@ const ResponsesSelect = (props: IResponseItemsPropsType): any => {
         selectedResponses[duplicateIdx].referenceCount += item.referenceCount;
       }
     });
+  } else {
+    selectedResponses = responses;
   }
+
   // unique, sorted responses, sorted by responses tags then responses
-  // inline call filter.sort.sort
+  // inline call filter.sort
   if (
     fillinContext.sectionFillin.currentSetting.progressionOrder ===
     SectionFillinResponsesProgressionEnum.alphabetical
@@ -478,7 +481,10 @@ const ResponsesSelectCsvItems = (props: IResponseSelectPropsType): any => {
                         }
                         key={`${keyValue}_${tagOrdinal}`}
                       >
-                        <ResponsesItem response={response} />
+                        <ResponsesItem
+                          response={response}
+                          key={`${keyValue}_${tagOrdinal}`}
+                        />
                       </span>
                       {tagOrdinal <
                         props.responses.filter(response => response.tag === tag)

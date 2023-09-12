@@ -29,7 +29,9 @@ import prevsentenceGhostedIcon from "./img/button_prevsentence_ghosted.png";
 import nextsentenceGhostedIcon from "./img/button_nextsentence_ghosted.png";
 import gotoLinkIcon from "./img/button_link.png";
 import gotoLinkGhostedIcon from "./img/button_link_ghosted.png";
-
+interface IPageFooterPropsType {
+  message: string;
+}
 export const PageFooter = React.memo(() => {
   // retrieve pageContext
   console.log(`<PageFooter>`);
@@ -121,9 +123,10 @@ export const NextWordButton = () => {
   let pageContext: CPageLists = useContext(PageContext)!;
   let icon: string;
   let active: boolean;
+  let terminalIdx = useAppSelector(store => store.cursor_terminalIdx);
   if (
-    useAppSelector(store => store.cursor_terminalIdx) ===
-    pageContext.terminalList.length - 1
+    pageContext === null ||
+    terminalIdx === pageContext.terminalList.length - 1
     //    useAppSelector(store => store.pageContext.terminalList).length - 1
   ) {
     icon = nextwordGhostedIcon;
@@ -152,17 +155,18 @@ export const NextSentenceButton = () => {
   let pageContext: CPageLists = useContext(PageContext)!;
   let icon: string;
   let active: boolean;
-  console.log(
-    `last sentence Idx: ${pageContext.sentenceList.length} via context`
-  );
+  // console.log(
+  //   `last sentence Idx: ${pageContext.sentenceList.length} via context`
+  // );
   console.log(
     `last sentence Idx: ${useAppSelector(
       store => store.cursor_sentenceIdx
     )} via reducer`
   );
+  let sentenceIdx = useAppSelector(store => store.cursor_sentenceIdx);
   if (
-    useAppSelector(store => store.cursor_sentenceIdx) ===
-    pageContext.sentenceList.length - 1
+    pageContext === null ||
+    sentenceIdx === pageContext.sentenceList.length - 1
   ) {
     icon = nextsentenceGhostedIcon;
     active = false;
@@ -191,7 +195,11 @@ export const LinkButton = () => {
   let icon: string;
   let active: boolean = false;
   let termIdx = useAppSelector(store => store.cursor_terminalIdx);
-  if (termIdx >= 0 && termIdx < pageContext.terminalList.length) {
+  if (
+    pageContext !== null &&
+    termIdx >= 0 &&
+    termIdx < pageContext.terminalList.length
+  ) {
     active = pageContext.terminalList[termIdx].linkIdx >= 0;
   }
   if (active) {
@@ -200,7 +208,12 @@ export const LinkButton = () => {
     icon = gotoLinkGhostedIcon;
   }
   const onButtonClick = () => {
-    if (active) dispatch(Request.Page_gotoLink());
+    if (active) {
+      dispatch(Request.Page_gotoLink());
+      // must provide page and id because pageList.linkList is outside the
+      // scope of sessionContext. Should provide new page, new currentIdx and
+      // current idx to update soon-to-be previousPage OR session.pagePush could
+    }
   };
   return (
     <>
@@ -218,7 +231,7 @@ export const StatusBar = () => {
   return (
     <>
       <div className="footer-statusBar-message-application">
-        {useAppSelector(store => store.message_application)}
+        {`${useAppSelector(store => store.message_application)}`}
       </div>
       <div className="footer-statusBar-message-listening">
         <ListeningMonitor />
