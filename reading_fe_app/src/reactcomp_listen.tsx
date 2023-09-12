@@ -36,8 +36,23 @@ import {
   NotificationMode,
   SettingsContext
 } from "./settingsContext";
+// import { SpeechRecognition as SpeechRec } from "dom-speech-recognition";
 
 export const ListeningMonitor = () => {
+  // let recognition = SpeechRecognition.getRecognition().;
+  // recognition.
+  // if ("webkitSpeechRecognition" in window) {
+  //   recognition = new webkitSpeechRecognition();
+  //   SpeechRecognition;
+  //   recognition.maxAlternatives = 10;
+  //   console.log("webkitSpeechRecognition available");
+  //   recognition.setSpeechRecognition();
+  //   recognition.maxAlternatives = 2;
+  // } else if ("SpeechRecognition" in window) {
+  //   console.log("webkitSpeechRecognition available");
+  // } else {
+  //   console.log("(webkit)SpeechRecognition not available");
+  // }
   //  console.log = function() {}; // disable console logging
   const [wordsHeardPreviously, setWordsHeardPreviously] = useState(
     "" as string
@@ -184,6 +199,7 @@ export const ListeningMonitor = () => {
   const expectedTerminalIdx: number = useAppSelector(
     store => store.cursor_terminalIdx
   );
+  let terminalList = pageContext === null ? null : pageContext.terminalList;
   useEffect(() => {
     let wordsHeard: string;
     let wordsHeardList: string[];
@@ -328,16 +344,13 @@ export const ListeningMonitor = () => {
             setWordPosition(wordPos);
             setWordRetries(0);
             // console.log(`reset wordRetries2`);
-            matchMessage = `Matching alternative with "${expectingAlt}, ${wordRetries} word retries`;
+            matchMessage = `Matching alternative "${expectingAlt}, ${wordRetries} word retries`;
             console.log(
               `LISTENING: ${matchMessage} wordPos=${wordPos} wordPosPrev=${wordPositionPreviously}`
             );
             dispatch(Request.Recognition_match(matchMessage));
             break;
-          } else if (
-            expectingAlt.length > 0 &&
-            patternMatch(wordHeard, expectingAlt)
-          ) {
+          } else if (patternMatch(wordHeard, expectingAlt)) {
             setWordPosition(wordPos);
             setWordRetries(0);
             // console.log(`reset wordRetries3`);
@@ -378,7 +391,7 @@ export const ListeningMonitor = () => {
     expectedTerminalIdx,
     ContinuousListeningInEnglish,
     dispatch,
-    pageContext.terminalList,
+    terminalList,
     wordPosition,
     wordPositionPreviously,
     wordRetries,
@@ -756,6 +769,10 @@ export const NotificationModeRadioButton = (
   );
 };
 function patternMatch(content: string, altRecognitionPattern: string): boolean {
-  let pattern: RegExp = new RegExp(altRecognitionPattern);
-  return pattern.test(content);
+  if (altRecognitionPattern.length > 0) {
+    let pattern: RegExp = new RegExp(altRecognitionPattern);
+    return pattern.test(content);
+  } else {
+    return false;
+  }
 }
