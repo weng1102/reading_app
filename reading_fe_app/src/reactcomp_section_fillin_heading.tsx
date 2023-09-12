@@ -47,8 +47,10 @@ import ResponsesLayoutCsvButton from "./img/button_responsesCsv.png";
 import ResponsesCategoryShowButton from "./img/button_categorize_show.png";
 import ResponsesCategoryHideButton from "./img/button_categorize_hide.png";
 import ResponsesCategoryDisabledButton from "./img/button_categorize_ghosted.png";
+import ResponsesShowRefCntButton from "./img/button_responsesrefcnt_show.png";
+import ResponsesHideRefCntButton from "./img/button_responsesrefcnt_hide.png";
+import ResponsesRefCntDisabledButton from "./img/button_responsesRefcnt_ghosted.png";
 import SectionHelpButton from "./img/button_help.png";
-
 export const SectionHeading = (props: ISectionPropsType) => {
   const fillinIdx = useContext(SectionFillinContext).sectionFillin.idx;
   // Manages layout of section heading including hiding, ghosting
@@ -75,6 +77,10 @@ export const SectionHeading = (props: ISectionPropsType) => {
           <div className="fillin-settings-grid-category-button">
             <ResponsesCategoryButton />
           </div>
+          <div className="fillin-settings-refcount-button">
+            <ResponsesRefCountButton />
+          </div>
+
           <div className="fillin-settings-grid-help-button">
             <HelpButton />
           </div>
@@ -424,6 +430,47 @@ export const ResponsesCategoryButton = () => {
           alt="categorize"
           src={responsesCategoryButtonState}
           title={responsesCategoryTitle}
+          onClick={() => onButtonClick()}
+        />
+      </div>
+    );
+  }
+};
+export const ResponsesRefCountButton = () => {
+  const fillinContext = useContext(SectionFillinContext);
+  let buttonIconState: string = "";
+  let buttonAltState: string = "";
+  const onButtonClick = () => {
+    console.log(`responseRefCountButton state`);
+    let clone: ISectionFillinItem = cloneDeep(fillinContext.sectionFillin);
+    clone.modified = fillinContext.sectionFillin.modified;
+    clone.currentSetting.unique = !clone.currentSetting.unique;
+    fillinContext.setSectionFillin(clone);
+  };
+  const showProgression: boolean =
+    fillinContext.sectionFillin.currentSetting.showProgression;
+  if (
+    fillinContext.sectionFillin.currentSetting.progressionOrder ===
+    SectionFillinResponsesProgressionEnum.hidden
+  ) {
+    buttonIconState = ResponsesRefCntDisabledButton;
+  } else if (fillinContext.sectionFillin.currentSetting.unique) {
+    buttonIconState = ResponsesHideRefCntButton;
+    buttonAltState = "hide reference count";
+  } else {
+    buttonIconState = ResponsesShowRefCntButton;
+    buttonAltState = "show reference count";
+  }
+  if (!showProgression) {
+    return <></>;
+  } else {
+    return (
+      <div style={{ aspectRatio: "1/1" }}>
+        <img
+          className="refCountIcon"
+          alt={buttonAltState}
+          src={buttonIconState}
+          title={buttonAltState}
           onClick={() => onButtonClick()}
         />
       </div>
