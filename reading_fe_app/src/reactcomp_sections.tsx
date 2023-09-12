@@ -104,16 +104,18 @@ export const SectionParagraph = React.memo((props: ISectionPropsType): any => {
     .meta as ISectionParagraphVariant;
   return (
     <>
-      {paragraph.sentences.map(
-        (sentence: ISentenceContent, keyvalue: number) => (
-          <Sentence
-            key={keyvalue}
-            active={currentSentenceIdx === sentence.id}
-            sentence={sentence}
-            recitable={true}
-          />
-        )
-      )}
+      <div className="p">
+        {paragraph.sentences.map(
+          (sentence: ISentenceContent, keyvalue: number) => (
+            <Sentence
+              key={keyvalue}
+              active={currentSentenceIdx === sentence.id}
+              sentence={sentence}
+              recitable={true}
+            />
+          )
+        )}
+      </div>
     </>
   );
 });

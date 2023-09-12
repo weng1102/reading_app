@@ -53,12 +53,23 @@ nav {
 .navbar-li:hover {
   background: yellow;
 }
-.navbar-li
- {
-   font-weight:bold;
-   text-align: left;
-   padding: 10px;
- }
+  .navbar-li-home {
+    display:grid;
+    align-items: center;
+    grid-template-columns: [navicon] 10% 5px [navtitle] auto;
+    background-color: lightblue;
+    padding: 5px;
+  }
+  .navbar-li-home-title {
+      grid-column-start: navtitle;
+      font-weight:bold;
+  }
+  .navbar-li-home-icon {
+    display: grid;
+    grid-column-start: navicon;
+    object-fit:cover;
+    width: 100%;
+  }
 .navbar-current {
   background-color: lightyellow;
 }
@@ -96,70 +107,75 @@ nav {
 .header-grid-container {
     display: grid;
     font-size: 8px;
-    grid-template-columns: var(--header-height)  auto var(--header-height) var(--header-height) var(--header-height) calc(var(--header-height)/2) calc(var(--header-height)/2) var(--header-height);
+    /* assumes square icons, using height as surrogate for width */
+    grid-template-columns: [hamburgerButton] var(--header-height)
+    [pageTitle] auto
+    [sitemapButton] var(--header-height)
+    [previousButton] var(--header-height)
+    [homeButton] var(--header-height)
+    [spacingAdjustDownButton] var(--header-height)
+    [spacingAdjustUpButton] var(--header-height)
+    [fontAdjustDownButton] var(--header-height)
+    [fontAdjustUpButton] var(--header-height)
+    [settingButton] var(--header-height);
     align-items: center;
     height: 100%;
 }
-
 .header-grid-hamburger {
+  grid-column-start: hamburgerButton;
   display: flex;
-  grid-column-start: 1;
   padding: 15px;
 }
-.header-grid-middle {
-  display: flex;
-  grid-column-start: 2;
-  padding: 15px;
-}
-.header-grid-sitemapbutton {
-  padding: 12px;
-  display: flex;
-  grid-column-start: 3;
-}.header-grid-prevbutton {
-  padding: 10px;
-  display: flex;
-  grid-column-start: 4;
-}
-.header-grid-homebutton {
-  padding: 10px;
-  display: flex;
-  grid-column-start: 5;
-}
-.header-grid-fontbutton {
-  display: grid;
-  padding: 2px;
-  grid-template-rows: auto;
-  grid-column-start: 6;
-}
-.header-grid-fontbutton {
-  display: grid;
-  padding: 2px;
-  grid-template-rows: auto;
-  grid-column-start: 7;
-}
-.header-grid-fontupbutton {
-    grid-row-start: 1;
-}
-.header-grid-fontdownbutton {
-    padding-bottom: 2px;
-    grid-row-start: 2;
-}
-.header-grid-spacingupbutton {
-    grid-row-start: 1;
-}
-.header-grid-spacingdownbutton {
-    padding-bottom: 2px;
-    grid-row-start: 2;
-}
-.header-grid-settingbutton {
-  padding: 15px;
-  display: flex;
-  grid-column-start: 8;
-}
-.headertitle {
-  grid-column-start: 2;
+.header-grid-title {
+  grid-column-start: pageTitle;
   display: flex;
   font-size: 24px;
+}
+.header-grid-sitemapbutton {
+  grid-column-start: sitemapButton;
+  display: flex;
+  padding: 12px;
+}
+.header-grid-prevbutton {
+  grid-column-start: previousButton;
+  display: flex;
+  padding: 10px;
+}
+.header-grid-homebutton {
+  grid-column-start: homeButton;
+  display: flex;
+  padding: 10px;
+}
+/* .header-grid-fontbutton {
+  display: grid;
+  padding: 2px;
+  grid-template-rows: auto;
+  grid-column-start: fontAdjustButton;
+} */
+.header-grid-spacingupbutton {
+  grid-column-start: spacingAdjustUpButton;
+  display: flex;
+  padding: 5px;
+}
+.header-grid-spacingdownbutton {
+  grid-column-start: spacingAdjustDownButton;
+  display: flex;
+  padding: 5px;
+}
+.header-grid-fontupbutton {
+  grid-column-start: fontAdjustUpButton;
+  display: flex;
+  padding: 12px;
+}
+.header-grid-fontdownbutton {
+  grid-column-start: fontAdjustDownButton;
+  display: flex;
+  padding: 1px;
+}
+.header-grid-settingbutton {
+  grid-column-start: settingButton;
+  display: flex;
+  padding: 12px;
 }
 .controlBar-container {
   display: grid;
@@ -471,7 +487,7 @@ span.whitespace {
   padding-left: 5px;
   padding-top: 4px;
   grid-template-columns: [resetButton] 40px [taggingButton] 40px [progressionButton] 40px [progressionControl] 200px
-  [layoutButton] 40px [categoryButton] 40px [helpButton] auto;
+  [layoutButton] 40px [categoryButton] 40px [refcountButton] 40px [helpButton] auto;
   background-color: Gainsboro;
   border-radius: 15px;
 }
@@ -519,6 +535,13 @@ span.whitespace {
   align-items: center;
   padding-left: 3px;
 }
+.fillin-settings-grid-refcount-button {
+  grid-column-start: refcountButton;
+  grid-column-end: refcountButton;
+  display: flex;
+  align-items: center;
+  padding-left: 3px;
+}
 .fillin-settings-grid-help-button {
   grid-column-start: helpButton;
   grid-column-end: helpButton;
@@ -553,6 +576,10 @@ span.whitespace {
   width: 30px;
 }
 .categoryIcon {
+  padding-top: 5px;
+  width: 30px;
+}
+.refCountIcon {
   padding-top: 5px;
   width: 30px;
 }
