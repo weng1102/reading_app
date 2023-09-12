@@ -25,9 +25,6 @@ export const ReadingApp = () => {
     settings: _settings,
     saveSettings: _setSettings
   };
-  // const restoreRequested = useAppSelector(
-  //   store => store.page_restore_requested
-  // );
   let dispatch = useAppDispatch();
   dispatch(
     Request.Recognition_setAvailability(
