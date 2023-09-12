@@ -15,7 +15,11 @@
  *
  **/
 import { CPageLists } from "./pageContext";
-import { LinkIdxDestinationType } from "./pageContentType";
+import {
+  IPageRequestItem,
+  LinkIdxDestinationType,
+  PageRequestItemInitializer
+} from "./pageContentType";
 const IDX_INITIALIZER = -9999;
 // import {
 //   ISettings,
@@ -59,11 +63,12 @@ const PAGE_RESTORE = "page/restore";
 const PAGE_RESTORED = "page/restored";
 const PAGE_HOME = "page/home";
 const PAGE_HOMED = "page/homed";
-const PAGE_HOME_ENABLED = "page/home enabled";
-const PAGE_PREVIOUS_ENABLED = "page/previous enabled";
-const PAGE_SITEMAP_ENABLED = "page/sitemap enabled";
-const PAGE_FONTDOWN_ENABLED = "page/font down enabled";
-const PAGE_SPACINGDOWN_ENABLED = "page/spacing down enabled";
+const PAGE_HOME_ENABLED = "page/home icon enabled";
+const PAGE_PREVIOUS_ENABLED = "page/previous icon enabled";
+const PAGE_SITEMAP_ENABLED = "page/sitemap icon enabled";
+const PAGE_FONTDOWN_ENABLED = "page/font down icon enabled";
+const PAGE_SPACINGUP_ENABLED = "page/text spacing up icon enabled";
+const PAGE_SPACINGDOWN_ENABLED = "page/text spacing down icon enabled";
 const NAVBAR_TOGGLE = "navbar/toggle";
 
 // intrapage administrative actions (non-user initiated)
@@ -290,6 +295,7 @@ const Message_clear = (
 };
 const Page_load = (
   page: string,
+  linkType?: LinkIdxDestinationType,
   headingIdx?: number,
   sectionIdx?: number,
   terminalIdx?: number
@@ -377,7 +383,7 @@ const Page_fontDownEnabled = (yes: boolean) => {
     payload: yes
   };
 };
-const Page_spacingDownEnabled = (yes: boolean) => {
+const Page_textSpacingDownEnabled = (yes: boolean) => {
   return {
     type: PAGE_SPACINGDOWN_ENABLED,
     payload: yes
@@ -511,7 +517,10 @@ export const Request = {
   Navbar_toggle,
 
   Page_fontDownEnabled,
-  Page_spacingDownEnabled,
+  Page_textSpacingDownEnabled,
+
+  Page_sitemapEnabled,
+
   Page_load,
   Page_loaded,
   Page_setContext,
@@ -524,7 +533,6 @@ export const Request = {
   Page_homed,
   Page_homeEnabled,
   Page_previousEnabled,
-  Page_sitemapEnabled,
   Reciting_started,
   Reciting_ended,
   Recite_start,
@@ -551,14 +559,11 @@ export const Request = {
   Speech_announceCurrentContent,
   Speech_announceListeningStart,
   Speech_announceListeningStop,
-  Speech_announceMessage,
+  Speech_announceMessage
 
   // StatusBar_Message_set,
   // StatusBar_Message_clear,
   //
-  Test_set,
-  Test_reset
-
   //  Speech_transitionsAcknowledged
   // Speech_announceNewSection,
   // Speech_announceNewSentence
@@ -580,7 +585,6 @@ interface IReduxState {
   cursor_sentenceIdx: number;
   cursor_terminalIdx: number;
 
-  test: boolean;
   cursor_newSentenceTransition: boolean;
   cursor_newSectionTransition: boolean;
   cursor_newPageTransition: boolean;
@@ -597,19 +601,19 @@ interface IReduxState {
   // fillin_toggleShowTagsSectionIdx: number;
   // fillin_selectLayoutSectionIdx: number;
 
-  page_requested: string;
+  page_requested: IPageRequestItem;
   page_loaded: boolean;
   page_section: number;
   pageContext: CPageLists;
   page_pop_requested: boolean;
   page_restore_requested: boolean;
   page_home_requested: boolean;
+
   page_home_enabled: boolean;
   page_fontDown_enabled: boolean;
   page_spacingDown_enabled: boolean;
-
   page_previous_enabled: boolean;
-  page_sitemapEnabled: boolean;
+  page_sitemap_enabled: boolean;
 
   // page link info sent to page requested where it is validatable ( message
   // in a bottle)
@@ -648,7 +652,6 @@ const IReduxStateInitialState: IReduxState = {
   // listen_retries: 0,
   // listen_retriesExceeded: false,
 
-  test: false,
   cursor_sectionIdx: 0,
   cursor_sentenceIdx: 0,
   cursor_terminalIdx: 0,
@@ -670,17 +673,19 @@ const IReduxStateInitialState: IReduxState = {
   link_headingIdx: IDX_INITIALIZER,
   link_sectionIdx: IDX_INITIALIZER,
   link_terminalIdx: IDX_INITIALIZER,
-  page_requested: "",
+
+  page_requested: PageRequestItemInitializer(),
   page_loaded: false,
   page_section: 0,
   page_pop_requested: false,
   page_restore_requested: false,
   page_home_requested: false,
+
   page_home_enabled: false,
   page_fontDown_enabled: true,
   page_spacingDown_enabled: false,
   page_previous_enabled: false,
-  page_sitemapEnabled: false,
+  page_sitemap_enabled: false,
 
   cursor_terminalIdx_proposed: 0,
   cursor_sectionIdx_proposed: 0,
@@ -790,76 +795,76 @@ export const rootReducer = (
   // page context after which the saved requested initial page state will be
   // valid or at least validatable. The page is saved for internal validation
   // before setting the requested cursor state.
-  const savePageLinkInitialState = (
-    page: string,
-    linkType: LinkIdxDestinationType,
-    headingIdx: number,
-    sectionIdx: number,
-    terminalIdx: number
-  ) => {
-    state.link_page = page;
-    state.link_type = linkType;
-    state.link_headingIdx = headingIdx;
-    state.link_terminalIdx = terminalIdx;
-    state.link_sectionIdx = sectionIdx;
-  };
+  // const savePageLinkInitialState = (
+  //   page: string,
+  //   linkType: LinkIdxDestinationType,
+  //   headingIdx: number,
+  //   sectionIdx: number,
+  //   terminalIdx: number
+  // ) => {
+  //   state.link_page = page;
+  //   state.link_type = linkType;
+  //   state.link_headingIdx = headingIdx;
+  //   state.link_terminalIdx = terminalIdx;
+  //   state.link_sectionIdx = sectionIdx;
+  // };
 
-  const setPageLinkInitialState = () => {
-    if (state.link_page === state.page_requested) {
-      switch (state.link_type) {
-        case LinkIdxDestinationType.page: {
-          setTerminalState([0]);
-          break;
-        }
-        case LinkIdxDestinationType.heading: {
-          if (
-            state.link_headingIdx >= 0 &&
-            state.link_headingIdx < state.pageContext.headingList.length
-          ) {
-            setTerminalState([
-              state.pageContext.headingList[state.link_headingIdx].firstTermIdx
-            ]);
-          }
-          break;
-        }
-        case LinkIdxDestinationType.section: {
-          if (
-            state.link_sectionIdx >= 0 &&
-            state.link_sectionIdx < state.pageContext.sectionList.length
-          ) {
-            setTerminalState([
-              state.pageContext.sectionList[state.link_sectionIdx].firstTermIdx
-            ]);
-          }
-          break;
-        }
-        case LinkIdxDestinationType.terminal: {
-          if (
-            state.link_terminalIdx >= 0 &&
-            state.link_terminalIdx < state.pageContext.terminalList.length
-          ) {
-            setTerminalState([state.link_terminalIdx]);
-          }
-          break;
-        }
-        default: {
-          setTerminalState([0]);
-          break;
-        }
-      }
-    }
-    // if (state.link_terminalIdx === state.cursor_terminalIdx) {
-    //   // accept default
-    // } else if (state.pageContext.isValidTerminalIdx(state.link_terminalIdx)) {
-    //   setTerminalState([state.link_terminalIdx]);
-    // } else if (state.pageContext.isValidSectionIdx(state.link_sectionIdx)) {
-    //   setTerminalState([
-    //     state.pageContext.sectionList[state.link_sectionIdx].firstTermIdx
-    //   ]);
-    // } else {
-    //   state.cursor_terminalIdx = 0;
-    // }
-  };
+  // const setPageLinkInitialState = () => {
+  //   if (state.link_page === state.page_requested.page) {
+  //     switch (state.link_type) {
+  //       case LinkIdxDestinationType.page: {
+  //         setTerminalState([0]);
+  //         break;
+  //       }
+  //       case LinkIdxDestinationType.heading: {
+  //         if (
+  //           state.link_headingIdx >= 0 &&
+  //           state.link_headingIdx < state.pageContext.headingList.length
+  //         ) {
+  //           setTerminalState([
+  //             state.pageContext.headingList[state.link_headingIdx].firstTermIdx
+  //           ]);
+  //         }
+  //         break;
+  //       }
+  //       case LinkIdxDestinationType.section: {
+  //         if (
+  //           state.link_sectionIdx >= 0 &&
+  //           state.link_sectionIdx < state.pageContext.sectionList.length
+  //         ) {
+  //           setTerminalState([
+  //             state.pageContext.sectionList[state.link_sectionIdx].firstTermIdx
+  //           ]);
+  //         }
+  //         break;
+  //       }
+  //       case LinkIdxDestinationType.terminal: {
+  //         if (
+  //           state.link_terminalIdx >= 0 &&
+  //           state.link_terminalIdx < state.pageContext.terminalList.length
+  //         ) {
+  //           setTerminalState([state.link_terminalIdx]);
+  //         }
+  //         break;
+  //       }
+  //       default: {
+  //         setTerminalState([0]);
+  //         break;
+  //       }
+  //     }
+  //   }
+  //   // if (state.link_terminalIdx === state.cursor_terminalIdx) {
+  //   //   // accept default
+  //   // } else if (state.pageContext.isValidTerminalIdx(state.link_terminalIdx)) {
+  //   //   setTerminalState([state.link_terminalIdx]);
+  //   // } else if (state.pageContext.isValidSectionIdx(state.link_sectionIdx)) {
+  //   //   setTerminalState([
+  //   //     state.pageContext.sectionList[state.link_sectionIdx].firstTermIdx
+  //   //   ]);
+  //   // } else {
+  //   //   state.cursor_terminalIdx = 0;
+  //   // }
+  // };
   // const resetListeningRetries = () => {
   //   state.listen_retries = 0;
   //   state.listen_retriesExceeded = false;
@@ -871,21 +876,26 @@ export const rootReducer = (
   };
   switch (action.type) {
     case PAGE_LOAD:
-      state.page_requested = action.payload.page as string;
+      state.page_requested = {
+        ...state.page_requested,
+        page: action.payload.page as string
+      };
       // state.page_requested = (action.payload.page as string) + ".json";      // cannot validate these idxs without proper context that will not
       // be available until the accompanying (payload) page is loaded
-      savePageLinkInitialState(
-        action.payload.page,
-        action.payload.linkType,
-        action.payload.headingIdx,
-        action.payload.sectionIdx,
-        action.payload.terminalIdx
-      );
+      // savePageLinkInitialState(
+      //   action.payload.page,
+      //   action.payload.linkType,
+      //   action.payload.headingIdx,
+      //   action.payload.sectionIdx,
+      //   action.payload.terminalIdx
+      // );
       state.page_loaded = false;
       return state;
     case PAGE_LOADED:
       state.page_loaded = action.payload as boolean;
-      state.page_pop_requested = false;
+      // state.page_requested = { ...state.page_requested, page: "" };
+      // state.page_pop_requested = false;
+      // state.page_home_requested = false;
       return state;
     case PAGE_TOP:
       setTerminalState([state.pageContext.firstTerminalIdx]);
@@ -904,28 +914,32 @@ export const rootReducer = (
         linkIdx =
           state.pageContext.terminalList[state.cursor_terminalIdx].linkIdx;
       }
-      if (linkIdx > 0 && linkIdx < state.pageContext.linkList.length) {
-        savePageLinkInitialState(
-          state.pageContext.linkList[linkIdx].destination.page,
-          state.pageContext.linkList[linkIdx].destination.linkIdxType,
-          state.pageContext.linkList[linkIdx].destination.headingIdx,
-          state.pageContext.linkList[linkIdx].destination.sectionIdx,
+      // if (linkIdx > 0 && linkIdx < state.pageContext.linkList.length) {
+      //   savePageLinkInitialState(
+      //     state.pageContext.linkList[linkIdx].destination.page,
+      //     state.pageContext.linkList[linkIdx].destination.linkIdxType,
+      //     state.pageContext.linkList[linkIdx].destination.headingIdx,
+      //     state.pageContext.linkList[linkIdx].destination.sectionIdx,
+      //     state.pageContext.linkList[linkIdx].destination.terminalIdx
+      //   );
+      // }
+      // if (
+      //   // requested page is already current
+      //   state.page_requested.page ===
+      //     state.pageContext.linkList[linkIdx].destination.page ||
+      //   state.pageContext.linkList[linkIdx].destination.page.length === 0
+      // ) {
+      //   setPageLinkInitialState();
+      // } else {
+      //   // defer proposed cursor state
+      state.page_requested = state.page_requested = {
+        ...state.page_requested,
+        page: state.pageContext.linkList[linkIdx].destination.page,
+        currentTermIdx:
           state.pageContext.linkList[linkIdx].destination.terminalIdx
-        );
-      }
-      if (
-        // requested page is already current
-        state.page_requested ===
-          state.pageContext.linkList[linkIdx].destination.page ||
-        state.pageContext.linkList[linkIdx].destination.page.length === 0
-      ) {
-        setPageLinkInitialState();
-      } else {
-        // defer proposed cursor state
-        state.page_requested =
-          state.pageContext.linkList[linkIdx].destination.page;
-        state.page_loaded = false;
-      }
+      };
+      state.page_loaded = false;
+      // }
       return state;
     case PAGE_POP:
       state.page_pop_requested = true;
@@ -972,7 +986,7 @@ export const rootReducer = (
       // alternatively, could access via useContext iff in provider/consumer
       // scope
       state.pageContext = action.payload as CPageLists;
-      setPageLinkInitialState();
+      // setPageLinkInitialState();
       return state;
     case SECTION_CHANGE:
       let sectionIdx: number = +action.payload;
@@ -1104,13 +1118,6 @@ export const rootReducer = (
     case STATUSBAR_MESSAGE_SET:
       state.statusBar_message1 = action.payload;
       return state;
-    case TEST_SET:
-      state.test = true;
-      return state;
-    case TEST_RESET:
-      state.test = false;
-      return state;
-
     case MESSAGE_SET: {
       switch (action.payload.messageType as StatusBarMessageType) {
         case StatusBarMessageType.application:

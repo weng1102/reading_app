@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2023 Wen Eng - All Rights Reserved
  *
  * File name: reactcomp_page.tsx
  *
@@ -13,7 +13,11 @@
  * Sequence of event for page loading:
  * 1) Dispatch page request
  *    1a) dispatch(Request.Page_load(pageName)) explicitly provides pageName arg
- *    1b) dispatch(Request.Page_linkTo) references linkList table in pageContext
+ *    1b) dispatch(Request.Page_gotoLink) references linkList table in
+ *    pageContext.
+ *    1c) dispatch(Request.Page_pop()) references page stack of previous pages.
+ *    1d) dispatch(Request.Page_home()) references home page within settings
+ *    context.
  * 2) Fetch page from repository defined in SettingsContext with several
  *    possible outcomes: success, response/server/transport error/timeout
  *    parsing error trying to fill the internal data structure with incoming
@@ -25,15 +29,26 @@
  *    react component(s).
  *
  * Even though reducer state tracks both the Requested and pageContext
- * changes, internal component state variable canRender tracks when new
- * load is requested but not yet properly loaded.
+ * changes, internal component state variable requestedPage, isPageFetched and
+ *  loadedPage track when new load is requested, fetched and loaded.
  *
- * The context and content are not loaded until successful to prevent the
- * needless rerendering of <Content>
+ * Request states:
+ *  1) Determine userRequestedPage based on change to reducer states:
+ *    a) pageHomeRequested, or
+ *    b) pagePopRequested, or
+ *    c) userPageRequested
+ *
+ *  2) Set requestedPage to be fteched based on change to pageHomeRequested,
+ *     pagePopRequested, or userRequestedPage
+ *
+ *  3) fetch context and content
+ *
+ * The content is not rendered until the context and content are fetched
+ * and parsed successfully to prevent needless rerendering of <Content>
+ *
  * Version history:
  *
  **/
-//import fetch, { Headers } from "node-fetch";
 import React from "react";
 import "./App.css";
 import { Request } from "./reducers";
@@ -42,8 +57,11 @@ import { useEffect, useState, useContext } from "react";
 import {
   IDX_INITIALIZER,
   IPageContent,
+  IPageRequestItem,
   ISectionContent,
-  PageContentVersion
+  // LinkIdxDestinationType,
+  PageContentVersion,
+  PageRequestItemInitializer
 } from "./pageContentType";
 import { CPageLists, PageContext } from "./pageContext";
 import { SettingsContext, ISettingsContext } from "./settingsContext";
@@ -52,32 +70,35 @@ import { PageHeader } from "./reactcomp_pageheader";
 import { PageFooter } from "./reactcomp_pagefooter";
 import { SettingsDialog } from "./reactcomp_settings";
 import { SectionDispatcher } from "./reactcomp_sections";
-// import { FillinSectionContexts, IFillinSectionContexts } from "./fillinContexts";
 
-// import { StatusBarMessageType } from "./reducers";
-
-interface IPreviousPageArrayItem {
-  page: string;
-  currentTermIdx: number;
-}
 export interface IPagePropsType {
   appName: string;
 }
 export const Page = React.memo((props: IPagePropsType) => {
-  const [responseError, setResponseError] = useState<string | null>(null);
-  const [parseError, setParseError] = useState<string | null>(null);
-  const [pageContent, setPageContent] = useState<IPageContent | null>(null);
-  const [pageContext, setPageContext] = useState<CPageLists | null>(null);
-  const [canRender, setCanRender] = useState<boolean>(true);
-  const [previousPages, setPreviousPages] = useState<IPreviousPageArrayItem[]>(
-    []
+  const [userRequestedPage, setUserRequestedPage] = useState<IPageRequestItem>(
+    PageRequestItemInitializer()
   );
-  // Strictly current saves page state between page request and successful page
-  // load so this current page can be pushed onto PreviousPages stack iff next page loads successfully.
-  const [currentPage, setCurrentPage] = useState<string>("");
-  const [currentIdx, setCurrentIdx] = useState<number>(0);
+  const [requestedPage, setRequestedPage] = useState<IPageRequestItem>(
+    PageRequestItemInitializer()
+  );
+  const [previouslyLoadedPage, setPreviouslyLoadedPage] = useState<
+    IPageRequestItem
+  >(PageRequestItemInitializer());
+  const [loadedPage, setLoadedPage] = useState<IPageRequestItem>(
+    PageRequestItemInitializer()
+  );
+  const [responseError, setResponseError] = useState<string>("");
+  const [parseError, setParseError] = useState<string>("");
+  const [pageContext, setPageContext] = useState<CPageLists | null>(null);
+  const [pageContent, setPageContent] = useState<IPageContent | null>(null);
+  const [isPageFetched, setIsPageFetched] = useState<boolean>(false);
+  const [pageMessage, setPageMessage] = useState<string>("");
+  const [previousPages, setPreviousPages] = useState<IPageRequestItem[]>([]);
   const { isActive, toggleDialog } = useDialog();
+
+  console.log = () => {};
   const fetchRequest = (page: string) => {
+    setIsPageFetched(false);
     fetch(page, {
       method: "GET",
       headers: {
@@ -87,7 +108,7 @@ export const Page = React.memo((props: IPagePropsType) => {
       .then(
         response => {
           if (!response.ok)
-            setResponseError(`HTTP status code ${response.status}`);
+            setResponseError(`HTTP status code ${response.status} for ${page}`);
           // could import lookup for status
           return response.json();
         },
@@ -100,12 +121,13 @@ export const Page = React.memo((props: IPagePropsType) => {
           try {
             if (data.version !== PageContentVersion) {
               setParseError(
-                `version mismatch. Expected ${PageContentVersion} but encountered ${data.version} in content`
+                `Mismatching application and json formats. Expected ${PageContentVersion} but encountered ${data.version} in content`
               );
             } else {
               let content: IPageContent = data as IPageContent;
-              message = `Changing page context for "${pageRequested}"`;
-              setPageContext(null);
+              message = `Parsing json for "${requestedPage.page}"`;
+              dispatch(Request.Message_set(message));
+              // setPageContext(null);
               let pageLists: CPageLists = new CPageLists(
                 content.terminalList,
                 content.headingList,
@@ -114,48 +136,50 @@ export const Page = React.memo((props: IPagePropsType) => {
                 content.linkList,
                 content.fillinList
               );
-              message = `Loaded page context for "${pageRequested}"`;
-              // console.log(`settingSectionFillin`);
-              // // loop through fillinList
-              // FillinSectionContexts = new IFillinSectionContexts[content.fillinList.length]
-              // for (const fillin of content.fillinList) {
-              //   ISectionFillinItem\
-              //
-              // }
-
-              console.log(`settingPageContent`);
-              setPageContent(content);
-              console.log(`setPageContent`);
-              console.log(`settingPageContext`);
               setPageContext(pageLists);
-              console.log(`setPageContext`);
+              setPageContent(content);
+              dispatch(Request.Message_set(message));
               dispatch(Request.Page_setContext(pageLists));
-              // dumpPreviousPageStack("beforePageLoaded");
-              setCanRender(true);
-              // dumpPreviousPageStack("afterPageLoaded");
-              //                setCurrentPage(pageRequested);
-              //                dispatch(Request.Page_loaded(true));
-              message = `Loading page context failed for "${pageRequested}"`;
-            } // version check
+              setIsPageFetched(true);
+            }
           } catch (e) {
             let message: string = (e as Error).message;
-            message = `Encountered unexpected fetching error: ${message}`;
+            message = `Encountered unexpected loading error: ${message}`;
             dispatch(Request.Message_set(message));
           }
         },
         error => {
           // some other parseError
-          if (parseError === null) setParseError(error);
+          if (parseError.length > 0) setParseError(error);
         }
       );
   };
+  const dumpPageRequestItemsAsCsv = (pageStack: IPageRequestItem[]): string => {
+    let list: string = "";
+    if (pageStack.length > 0) {
+      pageStack.forEach((page, i) => {
+        list += `[${i}]:(${page.page},${page.currentTermIdx}),`;
+      });
+      list = list.slice(0, list.length - 1) + "(top}";
+    } else {
+      list = "(empty)";
+    }
+    return list;
+  };
+  const dispatch = useAppDispatch();
+
+  let message: string = "";
   const settingsContext: ISettingsContext = useContext(SettingsContext)!;
   const distDir: string = settingsContext.settings.config.distDir;
   const homePage: string = `homepage_${settingsContext.settings.config.homePage}`;
   const pageLoaded: boolean = useAppSelector(store => store.page_loaded);
-  const pageRequested: string = useAppSelector(store => store.page_requested);
-  const pageRestoreRequested: boolean = useAppSelector(
-    store => store.page_restore_requested
+
+  // triggers to render
+  const userPageRequested: IPageRequestItem = useAppSelector(
+    store => store.page_requested
+  );
+  const pagePopRequested: boolean = useAppSelector(
+    store => store.page_pop_requested
   );
   const pageHomeRequested: boolean = useAppSelector(
     store => store.page_home_requested
@@ -163,232 +187,199 @@ export const Page = React.memo((props: IPagePropsType) => {
   const currentTermIdx: number = useAppSelector(
     store => store.cursor_terminalIdx
   );
-  const pagePopRequested: boolean = useAppSelector(
-    store => store.page_pop_requested
-  );
-  let dispatch = useAppDispatch();
-  let message: string = "";
-  // const dumpPreviousPageStack = (message: string) => {
-  //   //  return; //disable dumpPreviousPageStack
-  //   let elString: string = "";
-  //   previousPages.forEach(
-  //     el => (elString += `[${el.page}, ${el.currentTermIdx}]`)
-  //   );
-  //   elString = elString.length > 0 ? elString : "(empty)";
-  //   console.log(`${message}: previousPage Stack ${elString} `);
-  // };
+  const reducerPageContext = useAppSelector(store => store.pageContext);
+
   useEffect(() => {
-    // Initiates page load requested but not yet loaded
+    setPageMessage(parseError);
+  }, [parseError]);
+  useEffect(() => {
+    setPageMessage(responseError);
+  }, [responseError]);
+
+  // Set userRequestedPage based on userPageRequested
+  useEffect(() => {
     if (
-      !pageLoaded &&
-      currentPage.length > 0
-      //&& currentPage !== pageRequested // not a reload
+      userPageRequested.page.length > 0 &&
+      userPageRequested.page !== userRequestedPage.page &&
+      userPageRequested.page !== requestedPage.page &&
+      userPageRequested.page !== loadedPage.page
     ) {
-      //update currentIdx of top page before pushing this page
-      if (previousPages.length > 0)
-        previousPages[previousPages.length - 1].currentTermIdx = currentIdx;
-
-      previousPages.push({
-        page: currentPage,
-        currentTermIdx: IDX_INITIALIZER
-      });
+      // userPageRequested cannot be same as the immediately previous
+      // userRequestedPage especially when immediately preceded by
+      // pageHomeRequested or pagePopRequested requests.
+      setUserRequestedPage(userPageRequested);
     }
-    if (previousPages.length === 1) {
-      dispatch(Request.Page_homeEnabled(false)); // unghost icon
-      dispatch(Request.Page_previousEnabled(false)); // unghost icon
-    } else if (previousPages.length > 0) {
-      dispatch(Request.Page_homeEnabled(true)); // unghost icon
-      dispatch(Request.Page_previousEnabled(true)); // unghost icon
-    }
-    // dumpPreviousPageStack("initial page request");
-    setCanRender(
-      !(pageRequested !== undefined && pageRequested !== null && !pageLoaded)
-    );
+  }, [userPageRequested]);
 
-    // if (pageRequested.length > 0) {
-    //   setPageContext(null);
-    //   fetchRequest(distDir + pageRequested + ".json");
-    // }
-  }, [
-    pageRequested,
-    pageLoaded,
-    pageRestoreRequested,
-    currentPage,
-    currentIdx,
-    dispatch,
-    previousPages
-  ]);
-
+  // Before page is fetched, determine requested page based on user event
   useEffect(() => {
-    // requested page loading complete
-    if (!canRender) {
-      dispatch(Request.Page_loaded(true));
-      //      setCanRender(true);
-      //      setPreviousPages(previousPages);
-      setCurrentPage(pageRequested);
-      // dumpPreviousPageStack("!canRender");
-
-      // if requested page is home page then clear stack!
-    } else {
-      // save previous page requested after page loaded for push later
-      setCurrentPage(pageRequested);
-    }
-  }, [canRender, dispatch, pageRequested]);
-
-  useEffect(() => {
-    if (pageRequested === currentPage) setCurrentIdx(currentTermIdx);
-  }, [pageRequested, currentPage, currentTermIdx]);
-
-  useEffect(() => {
+    // Sets requestedPage given changes to pagePopRequested, pageHomeRequested,
+    // userRequestedPage
     if (pageHomeRequested) {
-      console.log(`home requested`);
-      setPreviousPages([]);
-      setCurrentPage("");
-      setCurrentIdx(0);
-      dispatch(Request.Page_load(homePage));
-      dispatch(Request.Page_homeEnabled(false));
-      dispatch(Request.Page_homed());
-    }
-  }, [pageHomeRequested, homePage, dispatch]);
-
-  useEffect(() => {
-    // pop requested
-    if (pagePopRequested) {
-      // console.log(`pop requested`);
-      // console.log(`previouspage stack in pagePopRequested 0`);
-      // previousPages.forEach(page => {
-      //   console.log(`${page.page} ${page.currentTermIdx}`);
-      // });
-      previousPages.pop()!; // toss current page of top of stack
-      // console.log(`previouspage stack in pagePopRequested 1`);
-      // previousPages.forEach(page => {
-      //   console.log(`${page.page} ${page.currentTermIdx}`);
-      // });
-      let previousPage: IPreviousPageArrayItem = previousPages.pop()!;
-      // console.log(`previouspage stack in pagePopRequested 2`);
-      // previousPages.forEach(page => {
-      //   console.log(`${page.page} ${page.currentTermIdx}`);
-      // });
-      if (previousPage !== undefined) {
-        console.log(
-          `pop to ${previousPage.page}, ${previousPage.currentTermIdx}`
-        );
-        setCurrentPage("");
-        setCurrentIdx(0);
-        // dumpPreviousPageStack("pagePopRequested");
-        dispatch(
-          Request.Page_load(previousPage.page, 0, previousPage.currentTermIdx)
-        );
+      setRequestedPage(PageRequestItemInitializer(homePage));
+      dispatch(Request.Page_loaded(false));
+      if (loadedPage.page !== homePage) {
+        message = "**Requesting Home page";
       } else {
-        console.log(`previous page stack empty`);
+        message = "Home page already loaded";
       }
-      if (previousPages.length === 0 || previousPage.page === homePage) {
-        dispatch(Request.Page_previousEnabled(false));
-        dispatch(Request.Page_homeEnabled(false));
+    } else if (pagePopRequested) {
+      if (previousPages.length > 0) {
+        setRequestedPage(previousPages.slice(-1)[0]);
+        dispatch(Request.Page_loaded(false));
+        message = `Requesting pop to "${previousPages.slice(-1)[0].page}"`;
+      } else {
+        message = `Warning: No previous page to which to pop`;
       }
-      dispatch(Request.Page_popped());
+    } else {
+      // user page requested
+      if (
+        userRequestedPage.page.length > 0 &&
+        userRequestedPage.page !== loadedPage.page
+      ) {
+        message = `**Requesting page "${userRequestedPage.page}"`;
+        setRequestedPage(userRequestedPage);
+        dispatch(Request.Page_loaded(false));
+      } else if (userRequestedPage.page.length === 0) {
+        // userRequestPage is set to "" explicitly and purposely ignored
+        // to prevent retriggering when pop and home page requests are
+        // reset to false.
+      } else if (userRequestedPage.page === loadedPage.page) {
+        message = `Warning: Attempting to reload loaded page ${userRequestedPage.page}`;
+      } else {
+        message = `Warning: Unexpected request state where requested page =""${requestedPage}"`;
+      }
     }
-  }, [pagePopRequested, dispatch, homePage, previousPages]);
+    setPageMessage(message);
+    console.log(message);
+  }, [userRequestedPage, pagePopRequested, pageHomeRequested]);
+
+  // After requestPage change, Fetch page
+  useEffect(() => {
+    if (!pageLoaded && requestedPage.page.length > 0) {
+      setPageMessage(`Fetching ${requestedPage.page}`);
+      console.log(`**Fetching "${requestedPage.page}"`);
+      let page: string = distDir + requestedPage.page + ".json";
+      fetchRequest(page);
+    }
+  }, [requestedPage]);
+
+  // After page is fetched but before page is loaded, parse and loaded
+  // content and context
+  useEffect(() => {
+    // After fetch and pageContext load into reducer, mark page loaded
+    if (isPageFetched && reducerPageContext === pageContext) {
+      if (loadedPage.page.length > 0) {
+        setPreviouslyLoadedPage({
+          page: loadedPage.page,
+          currentTermIdx: currentTermIdx
+        });
+      }
+      setLoadedPage(requestedPage);
+      dispatch(Request.Page_loaded(true));
+      setPageMessage(`Page data loaded and parsed successfully`);
+    } else {
+      setPageMessage(`Reducer page context not set yet`);
+    }
+  }, [isPageFetched, reducerPageContext, pageContext]);
+
+  // After page is loaded update previousPages stack
+  useEffect(() => {
+    if (pageLoaded) {
+      if (requestedPage.currentTermIdx < 0) {
+        dispatch(Request.Cursor_gotoWordByIdx(0)); // default to first terminal
+      } else {
+        dispatch(Request.Cursor_gotoWordByIdx(requestedPage.currentTermIdx));
+      }
+      let pageStack: IPageRequestItem[] = [];
+      if (pagePopRequested) {
+        dispatch(Request.Page_popped());
+        pageStack = [...previousPages];
+        console.log(
+          `pageLoaded before pop ${dumpPageRequestItemsAsCsv(pageStack)}`
+        );
+        if (previousPages.length > 0) {
+          pageStack = [...previousPages].slice(0, -1);
+        }
+        console.log(
+          `pageLoaded after pop ${dumpPageRequestItemsAsCsv(pageStack)}`
+        );
+      } else if (pageHomeRequested) {
+        dispatch(Request.Page_homed());
+        pageStack = [];
+      } else if (
+        loadedPage.page.length > 0 &&
+        previouslyLoadedPage.page.length > 0 &&
+        loadedPage.page !== previouslyLoadedPage.page
+      ) {
+        console.log(
+          `pageLoaded before push ${dumpPageRequestItemsAsCsv(pageStack)}`
+        );
+        pageStack = [...previousPages, previouslyLoadedPage];
+        setUserRequestedPage(PageRequestItemInitializer());
+      } else {
+        console.log(`unknown  ${dumpPageRequestItemsAsCsv(pageStack)}`);
+        pageStack = [];
+      }
+      if (pageStack.length === 0) {
+        dispatch(Request.Page_previousEnabled(false)); // ghost button
+        dispatch(Request.Page_homeEnabled(false)); // ghost button
+      } else {
+        dispatch(Request.Page_previousEnabled(true));
+        dispatch(Request.Page_homeEnabled(true));
+      }
+      setPreviousPages(pageStack);
+    }
+  }, [pageLoaded]);
 
   useEffect(() => {
-    // restore  requested
-    if (pageRestoreRequested) {
-      console.log(`restore requested`);
-      if (currentPage.length > 0) {
-        dispatch(Request.Page_load(currentPage, 0, currentIdx));
-        dispatch(Request.Page_restored());
-      }
-    }
-  }, [pageRestoreRequested, dispatch, currentPage, currentIdx]);
-
-  //////////
-  // pageHomeRequested pagePopRequested pageRestoreRequested should be
-  // translated into page_requested and
-  // should all be processes in render code and not useEffect() to avoid
-  // undesirable/unpredictable side effects
-  //////////
-
-  // Translate possible actions into page load
-  //iff canRender === false
-
-  //PAGE REQUESTS
-  //PAGE LOAD
-  //   if (pageRequested === currentPage) {
-  //     console.log(`no direct page requested`);
-  //     dispatch(Request.Page_loaded(true)); // cancel loading
-  // } else {  //PAGE LOAD
-  //     console.log(`page load requested ${pageRequested}`);
-  // }
-
-  if (!pageLoaded) {
-    // page requested already
-    message = `Loaded page "${pageRequested}.json"`;
-    if (pageRequested.length === 0) {
-    } else if (pageRequested !== currentPage) {
-      message = `loading new page "${pageRequested} over current ${currentPage}"`;
-
-      fetchRequest(distDir + pageRequested + ".json");
-      setCurrentPage(pageRequested); // should be in useEffect() pageloaded
+    if (previousPages.length === 0) {
+      console.log(`previousPages is empty`);
     } else {
-      message = `loading new page "${pageRequested} over current ${currentPage}"`;
+      console.log(`${dumpPageRequestItemsAsCsv(previousPages)}`);
     }
-    // dumpPreviousPageStack("pageLoaded");
-  } else if (parseError) {
-    message = parseError;
-  } else if (responseError) {
-    message = `Encountered response error while loading "${pageRequested}.json": ${responseError}`;
-  } else if (pageRequested.length === 0) {
-    message = `Waiting...unknown page requested`;
-  } else {
-    message = `Waiting for page to load for "${pageRequested}..."`;
-  }
-  console.log(message);
-  // console.log(`previouspage stack in reactcomp_page`);
-  // previousPages.forEach(page => {
-  //   console.log(`${page.page} ${page.currentTermIdx}`);
-  // });
-  console.log(`currentpage ${currentPage}`);
-  // React is complaining
-  // need to wait until after <StatusBar is rendered OR  use
-  // another means to detect that <StatusBar/> is loaded besides
-  // surrogate pageContext
-  if (pageContext !== null) {
-    /////// should be pageRenderable
-    console.log(`rendering ${pageRequested} after context loaded`);
-    return (
-      <PageContext.Provider value={pageContext}>
-        <div className="page">
-          <PageHeader title={pageContent!.title} />
-          <SettingsDialog isActive={isActive} hide={toggleDialog} />
-          <NavBar headings={pageContent!.headingList} />
-          <Content content={pageContent!} />
-          <PageFooter />
-        </div>
-      </PageContext.Provider>
-    );
-  } else {
-    console.log(`waiting for  ${pageRequested} context to be loaded`);
-    return <div className="loadingAnnouncement">{message}</div>;
-  }
+  }, [previousPages]);
+
+  console.log(pageMessage);
+  dispatch(Request.Message_set(pageMessage));
+  return (
+    <PageContext.Provider value={pageContext}>
+      <div className="page">
+        <PageHeader title={pageContent === null ? "" : pageContent!.title} />
+        <SettingsDialog isActive={isActive} hide={toggleDialog} />
+        <NavBar
+          headings={pageContent === null ? [] : pageContent!.headingList}
+        />
+        <Content content={pageContent!} />
+        <PageFooter />
+      </div>
+    </PageContext.Provider>
+  );
 });
 interface IContentPropsType {
   content: IPageContent;
 }
 export const Content = React.memo((props: IContentPropsType): any => {
+  //  const userAppSelector = useAppDispatch();
   const currentSectionIdx: number = useAppSelector(
     store => store.cursor_sectionIdx
   );
-  return (
-    <main>
-      {props.content.sections.map(
-        (section: ISectionContent, keyvalue: number) => (
-          <SectionDispatcher
-            key={keyvalue}
-            active={currentSectionIdx === section.id}
-            section={section}
-          />
-        )
-      )}
-    </main>
-  );
+  const message: string = useAppSelector(store => store.message_application);
+  if (props.content === null) {
+    return <div>{message}</div>;
+  } else {
+    return (
+      <main>
+        {props.content.sections.map(
+          (section: ISectionContent, keyvalue: number) => (
+            <SectionDispatcher
+              key={keyvalue}
+              active={currentSectionIdx === section.id}
+              section={section}
+            />
+          )
+        )}
+      </main>
+    );
+  }
 });

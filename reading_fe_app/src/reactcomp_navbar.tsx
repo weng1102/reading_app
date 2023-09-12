@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2023 Wen Eng - All Rights Reserved
  *
  * File name: reactcomp_navbar.tsx
  *
@@ -18,7 +18,7 @@ import { Request } from "./reducers";
 import { useAppDispatch, useAppSelector, useSpanRef } from "./hooks";
 import { IHeadingListItem } from "./pageContentType";
 import { ISettingsContext, SettingsContext } from "./settingsContext";
-
+import homePageIcon from "./img/button_homeicon.png";
 interface INavPropsType {
   headings: IHeadingListItem[];
 }
@@ -60,10 +60,34 @@ export const NavBar = React.memo((props: INavPropsType) => {
 
   document.documentElement.style.setProperty(
     "--nav-width",
-    toggleNavBar ? settingsContext.settings.config.navbarWidth : "0"
+    toggleNavBar
+      ? `${settingsContext.settings.config.navbarWidth.toString()}px`
+      : "0px"
+  );
+  // don't include home nav entry for home page.
+  const homePageEnabled: boolean = useAppSelector(
+    store => store.page_home_enabled
   );
   return (
     <nav>
+      {homePageEnabled && (
+        <div
+          className="navbar-li-home"
+          onClick={() => {
+            dispatch(Request.Page_home());
+          }}
+        >
+          <div className="navbar-li-home-icon">
+            <img
+              className="icon"
+              alt="homePage"
+              src={homePageIcon}
+              title="go home"
+            />
+          </div>
+          <div className=" navbar-li-home-title">Home</div>
+        </div>
+      )}
       {props.headings.map((heading: IHeadingListItem, keyvalue: any) => (
         <div
           className={`navbar-h${heading.headingLevel.toString()} ${
