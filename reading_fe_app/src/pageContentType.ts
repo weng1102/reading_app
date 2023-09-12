@@ -432,8 +432,8 @@ export function ISectionFillinSettingInitializer(
     showResponsesInPrompts: false,
     responsesLayout: SectionFillinPositionType.above,
     showAlternatives: false,
-    unique: true, // identical words grouped as single response entry
-    showReferenceCount: true,
+    unique: false, // identical words grouped as single response entry
+    showReferenceCount: false,
     helpfulness: -1
   };
 }
@@ -1379,6 +1379,17 @@ export function ISectionFillinItemInitializer(
     modified
   };
 }
+export interface IPageRequestItem {
+  page: string;
+  currentTermIdx: number;
+}
+export function PageRequestItemInitializer(
+  page: string = "",
+  currentIdx: number = 0
+): IPageRequestItem {
+  return { page: page, currentTermIdx: currentIdx };
+}
+
 // export interface ISectionFillinList {
 //   groupDuplicates: boolean;
 //   sortOrder: boolean; // sort alphabetically
