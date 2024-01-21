@@ -1,17 +1,54 @@
-/** Copyright (C) 2020 - 2023 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2024 Wen Eng - All Rights Reserved
  *
  * File name: reactcomp_listen.tsx
  *
  * Defines React front end functional components for listening.
  *
- * The speak transcription adds words to the end of word queue as speak
- * recognition pops words from the beginning of the word queue.
- * more words are detected the words are appended to the end of
- * the queue as the
+ * Because SpeechRecognition (with continuous listening) returns successive
+ * interim refinements of what it hears based on additional semantic context,
+ * the interim transcripts can contain reduncant words that may have already
+ * been recognized and acknowledged by the app. Continuous listening mode
+ * allows more responsive word position updates than waiting for the final
+ * transcripts to be delivered.
+ *
+ * E.g., given the clause "The quick brown fox jumped", the interimTranscript
+ * may contain some or all of the text depending upon the reading speed of the
+ * user, possibly returning "the", "the quick", "the quick brown fox" in
+ * successive asynchronous invocations before the final transcript.
+ *
+ * To eliminate the possibility of rematching subsequently words in interim
+ * transcripts in the text string such as "I mean I am mean", the Speech
+ * regonition can be reset, which causes a pause OR the logic can left truncate
+ * the portion of the interim transcript that has already been recognized and
+ * processed until the final transcript or reset transcript is detected.
+ *
+ * The actual recognition logic consists of hearing, detecting, matching.
+ * Hearing: SpeechRecognition returns either interim or final transcript string
+ * of words heard.
+ * Detecting: Determines words and numbers to be matched where the previously
+ * matched words have been truncated to prevent inadvertent "echoing" within
+ * the current interim transcript. In the typical case, the entire set of
+ * previously matched words from the beginning of the clause can be truncated
+ * from the words heard in the subsequent interim transcript updates to prevent
+ * mismatching where a single word or phrase is recognized multiple times.
+ *
+ * However, if the entire sentence is not recognized before the listening
+ * timeout (i.e., finalTranscript), user manually stops listening (i.e.,
+ * toggles listening button) or silence timeout triggers, or user changes
+ * word cursor, the words previously heard must be  discarded.
+ *
+ *
+ * While listening is active, the user can still change the word cursor via
+ * next/prev (word|sentence|section) events or wordSelect event. Retries
+ * exceeded triggers a next word event. With next word, the wordPosition can
+ * be advanced. For sentence or section, the resettranscript is required.
+ * How does logic manage such a disruptive state change that triggers change
+ * in expectedTerminalIdx but should reset transcript
  *
  * Version history:
  *
  **/
+import React from "react";
 import "./App.css";
 import { CPageLists, PageContext } from "./pageContext";
 import listenRedActiveIcon from "./img/button_listen_activeRed.gif";
@@ -38,37 +75,99 @@ import {
 } from "./settingsContext";
 // import { SpeechRecognition as SpeechRec } from "dom-speech-recognition";
 
-export const ListeningMonitor = () => {
-  // let recognition = SpeechRecognition.getRecognition().;
-  // recognition.
-  // if ("webkitSpeechRecognition" in window) {
-  //   recognition = new webkitSpeechRecognition();
-  //   SpeechRecognition;
-  //   recognition.maxAlternatives = 10;
-  //   console.log("webkitSpeechRecognition available");
-  //   recognition.setSpeechRecognition();
-  //   recognition.maxAlternatives = 2;
-  // } else if ("SpeechRecognition" in window) {
-  //   console.log("webkitSpeechRecognition available");
-  // } else {
-  //   console.log("(webkit)SpeechRecognition not available");
-  // }
-  //  console.log = function() {}; // disable console logging
-  const [wordsHeardPreviously, setWordsHeardPreviously] = useState(
-    "" as string
+export const ListeningMonitor = React.memo(() => {
+  // console.log = () => {};
+  console.log(`ListeningMonitor`);
+  // When matching words within transcript (aka wordsUttered), if the current
+  // wordUttered is not matched, the logic searches forward looking
+  // for a correct word to match. ALL words not matching will be ignored in
+  // future transcripts to prevent inadvertent and/or out-of-order matching
+  // until either the final transcript is delivered, silence timer triggers, or
+  // new sentence is encountered.
+  //
+  // Since subsequent interim transcripts will typically append to the previous
+  // one, left truncating the overlap of previous one from the new transcript
+  // eliminates those words from being scanned again. However, a few special
+  // cases need to be noted:
+  // 1) if some or all of the overlap is invalidated due to speech recognition
+  // refining words in the current transcript based on further user utterances.
+  // Initially, since the overlap will be applied as all or nothing, either
+  // the entire previousTranscript overlaps (in which case it will be truncated
+  // from the current transcript) or not at all (in which case the current
+  // transcript is processed in its entirety.) A future optimization may be
+  // added when deemed necessary, to shorten the overlap before applying by
+  // scanning the previous transcript (forward) and finding the subset
+  // of words that do overlap.
+  // 2) a previously properly matched word from the transcript it changed to
+  // an incorrect one by speech recognition. This will invalidate the overlap
+  // and produce possible phantom matches of previously scanned and invalidated
+  // words in the previous transcript. Even using shortening the overlap as
+  // described above will not remedy it depending upon what overlap followed
+  // the word that went from correct to incorrect. Compound words are sometimes
+  // a source for this e.g., "something" to "some thing" or "bluegreen" to
+  // "blue green", and vice versa.
+  // 3) if the last word/fragment of the transcript in the previous invocation
+  // was not matched that should be (optionally) right truncated. Pros: this
+  // allows partially recognized words in the previous invocation to be fully
+  // recognized instead of interfered with by left truncation based on
+  // its incomplete recognition. e.g., truncation of previous transcript
+  // "...sara" would cause "...saratoga" from being recognized. Cons: This
+  // logic is more complex (than doing nothing).
+
+  // wordsUttered (transcript) and corresponding offset of last matched word
+  // within the uwordsUttered during the previous invocation.
+  // Note that the offset is ONLY applicble to the corresponding
+  // wordsMatchedPreviously until overlap to the current wordsUttered can be
+  // established.
+  //
+  // Purpose:
+  // 1) Determines whether (interim) transcript has changed since the last
+  // invocation since other dependencies can trigger invocation,
+  // 2) how much of the leading words of the current transcript can be
+  // truncated because those words  were already matched during the previous
+  // invocation.
+
+  //
+  const [
+    optimizeUsingPreviousTranscript,
+    setOptimizeUsingPreviousTranscript
+  ] = useState(true as boolean);
+
+  // previousTranscript holds the previous interim transcript
+  // until the final transcript is scanned, at which time the value is cleared.
+  const [previousTranscript, setPreviousTranscript] = useState("" as string);
+
+  // Offset into the last matched word within the previousTranscript. Allows
+  // overlap and truncation logic to eliminate overlap upto and including
+  // the most recently matched word. If the last word of the previous
+  // transcript was matched  then off returns length of previous transcript;
+  //otherwise it returns the offset to the last character of the matched
+  // word within the transcript.
+  const [
+    previousTranscriptMatchEndOffset,
+    setPreviousTranscriptMatchEndOffset
+  ] = useState(-1 as number);
+
+  // To define non-sequential word position change: when previously matched
+  // terminalIdx is more than 1 off from current terminal idx.
+  const [previousMatchedTerminalIdx, setPreviousMatchedTerminalIdx] = useState(
+    -1 as number
   );
-  const [wordPosition, setWordPosition] = useState(-1 as number);
-  const [wordPositionPreviously, setWordPositionPreviously] = useState(
+
+  // To detect change of expectedTerminalIdx across invocations by setting
+  // it to the current expected terminal idx before exiting listening useEffect() and comparing it with the expectedTerminalIdx to define
+  // isDetectingNewWordToMatch.
+  const [currentExpectedTerminalIdx, setCurrentExpectedTerminalIdx] = useState(
     -1 as number
   );
   const [wordRetries, setWordRetries] = useState(0 as number);
-  const resetListeningState = () => {
-    setWordPositionPreviously(-1);
-    setWordPosition(-1);
-    setWordsHeardPreviously("");
-    setWordRetries(0 as number);
-    console.log(`reset wordRetries resetListeningState`);
-  };
+  const {
+    transcript,
+    interimTranscript,
+    finalTranscript,
+    resetTranscript,
+    listening
+  } = useSpeechRecognition();
   const dispatch = useAppDispatch();
 
   const listeningRequested: boolean = useAppSelector(
@@ -86,325 +185,643 @@ export const ListeningMonitor = () => {
     interimResults: boolean;
     language: string;
   }
-  const ContinuousListeningInEnglish: IRecognitionArguments = useMemo(
-    () => ({
-      continuous: true,
-      interimResults: true,
-      language: "en-US"
-    }),
-    []
-  );
-  const [silenceTimerId, setSilenceTimerId] = useState<
-    ReturnType<typeof setTimeout>
-  >();
-  // useRef to retrieve the current value of state variable when the function
-  // is invoked and not when it is scheduled
-  const silenceTimerIdRef = useRef(silenceTimerId);
-  // const startSilenceTimer1 = (): ReturnType<typeof setTimeout> => {
-  //   if (silenceTimerId !== undefined) {
-  //     clearTimeout(silenceTimerId);
-  //     // console.log(`clearing previous silence timer for id=${silenceTimerId}`);
-  //   }
-  //   let timerId = setTimeout(() => {
-  //     console.log(`SILENCE TIMEOUT TRIGGERED`);
-  //     // in this case same as stopListening() since not speech processing
-  //     // and Recognition_stop would eventually terminate listening
-  //     SpeechRecognition.abortListening();
-  //     dispatch(Request.Recognition_stop());
-  //   }, silenceTimeout * 1000);
-  //   // console.log(`Starting silence timer for id=${retval}`);
-  //   setSilenceTimerId(timerId);
-  //   return timerId;
-  // };
-  const startSilenceTimer = useCallback((): ReturnType<typeof setTimeout> => {
-    if (silenceTimerId !== undefined) {
-      clearTimeout(silenceTimerId);
-      // console.log(`clearing previous silence timer for id=${silenceTimerId}`);
-    }
-    let timerId = setTimeout(() => {
+  const ContinuousListeningInEnglish: IRecognitionArguments = {
+    continuous: true,
+    interimResults: true,
+    language: "en-US"
+  };
+  const silenceTimerIdRef = useRef<number | null>(null);
+  const startSilenceTimer = useCallback(() => {
+    clearSilenceTimer();
+    silenceTimerIdRef.current = window.setTimeout(() => {
       console.log(`SILENCE TIMEOUT TRIGGERED`);
-      // in this case same as stopListening() since not speech processing
-      // and Recognition_stop would eventually terminate listening
+      resetTranscript();
       SpeechRecognition.abortListening();
       dispatch(Request.Recognition_stop());
     }, silenceTimeout * 1000);
     // console.log(`Starting silence timer for id=${retval}`);
-    setSilenceTimerId(timerId);
-    return timerId;
-  }, [dispatch, silenceTimerId, silenceTimeout, setSilenceTimerId]);
-  //
-  // const startSilenceTimer = (): ReturnType<typeof setTimeout> => {
-  //   if (silenceTimerId !== undefined) {
-  //     clearTimeout(silenceTimerId);
-  //     // console.log(`clearing previous silence timer for id=${silenceTimerId}`);
-  //   }
-  //   let retval = setTimeout(() => {
-  //     console.log(`SILENCE TIMEOUT TRIGGERED`);
-  //     // in this case same as stopListening() since not speech processing
-  //     // and Recognition_stop would eventually terminate listening
-  //     SpeechRecognition.abortListening();
-  //     dispatch(Request.Recognition_stop());
-  //   }, silenceTimeout * 1000);
-  //   // console.log(`Starting silence timer for id=${retval}`);
-  //   setSilenceTimerId(retval);
-  //   return retval;
-  // };
+    // console.log(`LISTENING: Setting silence timer`);
+  }, [dispatch, silenceTimeout, resetTranscript]);
   const clearSilenceTimer = () => {
-    if (silenceTimerIdRef.current !== undefined) {
-      // console.log(`clearing silence timer id=${silenceTimerIdRef.current}`);
-      clearTimeout(silenceTimerIdRef.current);
+    if (silenceTimerIdRef.current !== null) {
+      // console.log(
+      //   `clearSilenceTimer: Timer cleared id=${silenceTimerIdRef.current}`
+      // );
+      window.clearTimeout(silenceTimerIdRef.current);
+      silenceTimerIdRef.current = null;
+    } else {
+      // console.log(`clearSilenceTimer: No timer to clear`);
     }
   };
-  const {
-    transcript,
-    interimTranscript,
-    finalTranscript,
-    resetTranscript,
-    listening
-  } = useSpeechRecognition();
   ////////////////////////////////////
   // Start and stop listening manually
   ////////////////////////////////////
   useEffect(() => {
+    // console.log(
+    //   `start/stop: ${listening}, ${listeningRequested},, "${transcript}", "${interimTranscript}", "${finalTranscript}", ${wordRetries}`
+    // );
+
     if (!listening && listeningRequested) {
       console.log(`restart listening because browser eventually times out`);
       console.log(
         `ContinuousListeningInEnglish=${ContinuousListeningInEnglish.interimResults},${ContinuousListeningInEnglish.continuous}`
       );
+      // resetTranscript();
       SpeechRecognition.startListening(ContinuousListeningInEnglish);
     }
   }, [listening, listeningRequested, ContinuousListeningInEnglish]);
   useEffect(() => {
     if (!listeningRequested) {
       dispatch(Request.Recognition_stop());
+      //      resetTranscript();
       SpeechRecognition.abortListening();
       clearSilenceTimer();
       console.log("LISTENING: stop listening requested");
     } else {
-      // timeout periodically not
       SpeechRecognition.startListening(ContinuousListeningInEnglish);
-
-      // console.log(`LISTENING: start listening with timeout=${silenceTimeout}s`);
       startSilenceTimer();
-      console.log(
-        `initial setSilenceTimer for id=${silenceTimerIdRef.current}`
-      );
+      // console.log(
+      //   `initial setSilenceTimer for id=${silenceTimerIdRef.current}`
+      // );
     }
-  }, [
-    //startSilenceTimer,
-    listeningRequested,
-    ContinuousListeningInEnglish,
-    dispatch
-  ]);
+  }, [startSilenceTimer, listeningRequested, ContinuousListeningInEnglish]);
+  const newSentence: boolean = useAppSelector(
+    store => store.cursor_newSentenceTransition
+  );
+  useEffect(() => {
+    if (newSentence) {
+      console.log(`LISTENING: new sentence transition`);
+      setWordRetries(0);
+      setPreviousTranscript("");
+      setPreviousTranscriptMatchEndOffset(0);
+      resetTranscript();
+    }
+    //      dispatch(Request.Recognition_flush());
+  }, [newSentence]);
+  // NEED useEffect() HERE TO MANAGE POSITIONAL CHANGES TO expectedTerminalIdx
+  // NEXT/PREV {WORD | SENTENCE| SECTION } OR WORD SELECT
   const expectedTerminalIdx: number = useAppSelector(
     store => store.cursor_terminalIdx
   );
-  let terminalList = pageContext === null ? null : pageContext.terminalList;
   useEffect(() => {
-    let wordsHeard: string;
-    let wordsHeardList: string[];
-    let wordMatchingRequested: boolean = false;
-    let finalTranscriptEncountered: boolean = false;
-    if (!listening) {
-      // console.log(`LISTENING: No longer listening...`);
-      if (listeningRequested) {
-        console.log(`listening requested"`);
-        // speech recognition timed out
-        // console.log(`NO LONGER LISTENING...BUT LISTENING RESTARTED`);
+    console.log(`previousMatchedTerminalIdx=${previousMatchedTerminalIdx} changed
+    expectedTerminalIdx=${expectedTerminalIdx}`);
+  }, [previousMatchedTerminalIdx]);
+  useEffect(() => {
+    console.log(`expectedTerminalIdx=${expectedTerminalIdx} changed
+      previousMatchedTerminalIdx=${previousMatchedTerminalIdx}`);
+  }, [expectedTerminalIdx]);
 
-        SpeechRecognition.startListening(ContinuousListeningInEnglish); // timeout periodically not
+  useEffect(() => {
+    if (expectedTerminalIdx - previousMatchedTerminalIdx !== 1) {
+      console.log(`Clearing transcripts because non-sequential word position detected:
+       expectedTerminalIdx=${expectedTerminalIdx},
+       previousMatchedTerminalIdx=${previousMatchedTerminalIdx}`);
+      setWordRetries(0);
+      setPreviousTranscript("");
+      setPreviousTranscriptMatchEndOffset(0);
+      setPreviousMatchedTerminalIdx(-1);
+      resetTranscript();
+    } else if (previousMatchedTerminalIdx === expectedTerminalIdx) {
+      console.log(`sequential word position detected:
+       expectedTerminalIdx (=${expectedTerminalIdx}) equals
+       previousMatchedTerminalIdx`);
+    }
+  }, [expectedTerminalIdx]);
+
+  const terminalList = pageContext === null ? null : pageContext.terminalList;
+  ////////////////////////
+  // DETECTING WORDS HEARD
+  ////////////////////////
+  useEffect(() => {
+    // New transcript available
+    // Match required
+    // Matched found
+    console.log(
+      `listening=${listening},
+      interimTranscript="${interimTranscript}",
+      finalTranscript="${finalTranscript}",
+      previousTranscript="${previousTranscript}",
+      previousTranscriptMatchEndOffset=${previousTranscriptMatchEndOffset},
+      expectedTerminalIdx=${expectedTerminalIdx},
+      newSentence=${newSentence}`
+    );
+    //
+    let matchMessage: string = "";
+    let isListening: boolean;
+    let isDetectingNewTranscript: boolean;
+    let isDetectingNewWordToMatch: boolean;
+    // must have more transcript separated with blank
+    let isScanningWords: boolean;
+    let isFinalTranscript: boolean = false;
+    let transcript: string = "";
+    let transcriptEndOffset: number = 0;
+    //
+    // If transcript changes or words matched during interim change, the words
+    // detected for matching is updated, triggering the word match useEffect()
+    // const sliceLeadingList = (list: string[], leadingSublist: string[]) => {
+    //   // Truncates all of leading sublist from start of list, otherwise not.
+    //   let pos: number;
+    //   let consecutiveMatch: boolean = list.length > leadingSublist.length;
+    //   for (pos = 0; pos < leadingSublist.length && consecutiveMatch; pos++) {
+    //     consecutiveMatch = leadingSublist[pos] === list[pos];
+    //   }
+    //   if (consecutiveMatch) return list.slice(leadingSublist.length);
+    //   else return list;
+    // };
+    // mutable version of state variable
+    // let transcriptContext: ITranscriptContext = transcriptContextState;
+    // console.log(
+    //   `transcript context: context=${transcriptContext.previousTranscript}, previouslyRecognized=${transcriptContext.previouslyRecognized}`
+    // );
+    isListening = listening && pageContext.terminalList !== null;
+    // LISTENING: determines the following states (initially false)
+    // Final transcript is the accumulation of previous interim transcripts.
+    // e.g., "The", "The quick", "The quick brown",
+    // interim transcript should be concatenated to the final transcript
+    isDetectingNewTranscript = false;
+    isFinalTranscript = false;
+    if (isListening) {
+      // if (finalTranscript.length > 0) {
+      //   transcript = finalTranscript.toLowerCase();
+      //   isDetectingNewTranscript = previousTranscript !== transcript;
+      //   isFinalTranscript = true;
+      //   console.log(`LISTENING: transcript(final)="${transcript}"`);
+      // } else if (interimTranscript.length > 0) {
+      //   transcript = interimTranscript.toLowerCase();
+      //   isDetectingNewTranscript = previousTranscript !== transcript;
+      //   console.log(`LISTENING: transcript="${transcript}"`);
+      //   // } else if (previousTranscript.length > 0) {
+      //   //   // previousTranscript changed from previous invocation since interim transcript changed
+      //   //   transcript = previousTranscript;
+      //   //   isRestoringPreviousTranscript = true;
+      // } else if (previousTranscriptMatchEndOffset < previousTranscript.length) {
+      //   // still have scanning let from previous transcript
+      //   transcript = previousTranscript;
+      // } else {
+      //   transcript = "";
+      //   console.log(`no transcript detected`);
+      // }
+      // concatentate final transcript (if any) with interim transcript
+      if (finalTranscript.length > 0) {
+        transcript = finalTranscript;
+        if (interimTranscript.length > 0) {
+          transcript = transcript + " " + interimTranscript;
+        } else {
+          // do nothing more to transcript
+        }
       } else {
-        console.log(`listening not requested"`);
+        transcript = interimTranscript;
+      }
+      transcript = transcript.toLowerCase();
+
+      // transcript = finalTranscript.toLowerCase() +
+      //   (finalTranscript.length > 0 && interimTranscript.length > 0
+      //     ? " "
+      //     : "") +
+      //   interimTranscript.toLowerCase();
+      isDetectingNewTranscript = previousTranscript !== transcript;
+      console.log(
+        `LISTENING: transcript="${transcript}", isDetectingNewTranscript=${isDetectingNewTranscript}`
+      );
+    } else {
+    }
+
+    if (isListening && isDetectingNewTranscript)
+      console.log(
+        `LISTENING: detecting new transcript: previous="${previousTranscript}", transcript="${transcript}"`
+      );
+
+    isDetectingNewWordToMatch =
+      isListening && currentExpectedTerminalIdx !== expectedTerminalIdx;
+
+    if (isDetectingNewWordToMatch)
+      console.log(
+        `currentTerminalIdx=${currentExpectedTerminalIdx} !== expectedTerminalIdx=${expectedTerminalIdx}`
+      );
+
+    if (isDetectingNewWordToMatch) {
+      console.log(
+        `LISTENING: detecting new expected terminal Idx: previous="${previousMatchedTerminalIdx}", current="${expectedTerminalIdx}"`
+      );
+    } else {
+      console.log(`expectedTerminalIdx is unchanged=${expectedTerminalIdx}`);
+    }
+
+    let transcriptToBeScanned: string = "";
+    transcriptEndOffset = 0;
+
+    if (
+      isListening &&
+      (isDetectingNewTranscript || isDetectingNewWordToMatch)
+    ) {
+      startSilenceTimer();
+      isScanningWords = false;
+      // Primarily determines the truncated previousTranscript to use
+      // to compare against expected words to partially eliminate redetection
+      // of previously scanned words.
+      //
+      // If previous transcript overlaps (i.e., is subset of) current, what is
+      // the next character after overlap? nothing (previous=current),
+      // character, or numeral (as opposed to just the first digit of a
+      // number).
+      //
+      // Case 1 (default): No optimizing using previous transcript OR no
+      // overlap between previous and current transcript. Ignore
+      // previous transcript/match offset and use transcript only.
+      //
+      // Case 2: optimizing using previous transcript when previous transcript
+      // overlaps the beginning of current transcript.
+      //
+      // Case 2a: If previousMatchEndOffset is valid (i.e., references an
+      // offset within the overlap and therefore in the current transcript),
+      // then truncate the current transcript based on that match offset. Any
+      // overlapping words remaining after the matched words care candidates
+      //
+      // Case 2b: If the previousMatchedOffset value is not valid (i.e.,
+      // not between 0 and transcript.length - 1), then previous transcript
+      // contained no matches, implying that the entire previous transcript
+      // overlap should be truncated from current transcript.
+
+      transcriptToBeScanned = transcript;
+      transcriptEndOffset = 0;
+
+      console.log(
+        `before optimize :
+        isDetectingNewTranscript=${isDetectingNewTranscript},
+        isDetectingNewWordToMatch=${isDetectingNewWordToMatch}`
+      );
+      if (optimizeUsingPreviousTranscript) {
+        let previousTranscriptOverlap: string = "";
+        let isTranscriptOverlap: boolean = false; // with previousTranscript
+        let isTranscriptOverlapNext: boolean = false;
+        // following are overlap states valid when isTranscriptOverlapNext
+        let isTranscriptOverlapNextWord: boolean = false; // typical case
+        let isTranscriptOverlapNextNumeral = false;
+        let isTranscriptOverlapNextPartialWord = false;
+        let isTranscriptOverlapFirstWord: boolean = false;
+        // let moreOverlapOffset: number = 0;
+        let transcriptOverlapOffset: number = 0;
+        // refers to last character included in overlap and first character excluded from overlap
+
+        // Determine overlap to be ignored (truncated) from beginning of
+        // current transcript using previousTranscript (no overlap default=0)
+        if (
+          previousTranscriptMatchEndOffset > 0 &&
+          previousTranscriptMatchEndOffset < previousTranscript.length
+        ) {
+          // previousTranscriptMatchEndOffset is valid and all words before
+          // the endOffset (exclusively) should be ignored
+          previousTranscriptOverlap = previousTranscript.substring(
+            0,
+            previousTranscriptMatchEndOffset
+          );
+        } else {
+          // previousTranscriptMatchEndOffset is not valid and implies that
+          // no words in previousTranscript matched and therefore should
+          // be ignored unless previousTranscript is null
+          previousTranscriptOverlap = previousTranscript;
+        }
+
+        isTranscriptOverlap =
+          transcript.indexOf(previousTranscriptOverlap) === 0;
+        // Adjust overlap for separators and special cases
+        // Determine if overlap is followed by separators e.g., blank(s) or
+        // more. Look ahead to determine how to apply overlap to current
+        // transcript using isTranscriptOverlapNext* states
+        if (!isTranscriptOverlap) {
+          // no overlap detected
+          transcriptOverlapOffset = 0;
+        } else if (transcript.length === previousTranscriptMatchEndOffset) {
+          // given identical
+          console.log(`LISTENING: No new transcript detected`);
+          isDetectingNewTranscript = false;
+          transcriptOverlapOffset = previousTranscriptMatchEndOffset;
+          console.log(`LISTENING: No overlap detected`);
+        } else if (previousTranscriptMatchEndOffset === 0) {
+          // previousTranscript did not match expected
+          isTranscriptOverlapFirstWord = true;
+          console.log(`LISTENING: First word detected`);
+          transcriptOverlapOffset = 0;
+        } else if (transcript.length > previousTranscriptOverlap.length) {
+          // Current transcript is a superset of previous: overlap and more
+          // but could be continuation of consecutive numerals. In this case,
+          // special splitting is warranted during subsequent scanning.
+          // use previousTranscript.length vs previousTranscriptMatchedOffset
+
+          // position overlapOffset to next valid word in transcript.
+          // Eliminate separator especially ahead of next
+          // numberAsNumerals (in between numberAsNumerals) to avoid
+          // blanks "4,0, ,8" when scanning for "8"
+
+          // This logic assumes that the transcript is lowercase and
+          // does not contain multiple consecutive blanks as separators.
+          let nextChar: string = transcript.charAt(
+            previousTranscriptOverlap.length
+          );
+          console.log(
+            `next char="${nextChar}" at offset=${previousTranscriptOverlap.length}`
+          );
+          if (nextChar === " ") {
+            // overlapping on word boundry
+            isTranscriptOverlapNext = true;
+            isTranscriptOverlapNextWord = true;
+            transcriptOverlapOffset = previousTranscriptOverlap.length + 1;
+          } else if (nextChar.match(/^[a-z]$/)) {
+            // most likely speechRecognition finishing a partial word
+            isTranscriptOverlapNextPartialWord = true;
+            isTranscriptOverlapNext = true;
+            transcriptOverlapOffset = previousTranscriptMatchEndOffset;
+          } else if (
+            nextChar.match(/^-?\d$/) &&
+            pageContext.terminalList[expectedTerminalIdx].numberAsNumerals
+          ) {
+            isTranscriptOverlapNext = true;
+            isTranscriptOverlapNextNumeral = true;
+            transcriptOverlapOffset = previousTranscriptMatchEndOffset;
+          } else {
+            // PROCESS OTHER SPECIAL CHARACTERS HERE
+            console.log(
+              `LISTENING: TranscriptOverlapAndMore but unhandled next character="${
+                transcript[previousTranscript.length]
+              }" was encountered.`
+            );
+          }
+        } else {
+          console.log(`unhandled case for overlap`);
+        }
+        console.log(
+          `Optimize using previous transcript state:
+          isDetectingNewTranscript=${isDetectingNewTranscript},
+          isDetectingNewWordToMatch=${isDetectingNewWordToMatch},
+          previousTranscript="${previousTranscript}",
+          previousTranscriptMatchEndOffset=${previousTranscriptMatchEndOffset},
+          isTranscriptOverlap=${isTranscriptOverlap},
+          isTranscriptOverlapNext=${isTranscriptOverlapNext},
+          isTranscriptOverlapNextPartialWord=${isTranscriptOverlapNextPartialWord},
+          isTranscriptOverlapFirstWord=${isTranscriptOverlapFirstWord},
+          isTranscriptOverlapNextNumeral=${isTranscriptOverlapNextNumeral}`
+        );
+        // if (isTranscriptOverlapNext) {
+        //   // determine overlap to exclude
+        //   if (isTranscriptOverlapFirstWord) {
+        //     // beginning of sentence
+        //     overlapOffset = 0;
+        //   } else if (isTranscriptOverlapNextPartialWord) {
+        //     // go back to previous match to scan whole word
+        //     overlapOffset = previousTranscriptMatchEndOffset;
+        //   } else if (isTranscriptOverlapNextNumeral) {
+        //     // no separator, no increment
+        //     overlapOffset = previousTranscript.length;
+        //   } else if (isTranscriptOverlapNextWord) {
+        //     // skip blank
+        //     overlapOffset = previousTranscriptOverlap.length + 1;
+        //   } else {
+        //     // skip blank by default but other corner cases exist?
+        //     overlapOffset = previousTranscriptOverlap.length + 1;
+        //   }
+        console.log(
+          `previousTranscriptOverlap="${previousTranscriptOverlap}" has transcriptOverlapOffset=${transcriptOverlapOffset} into transcript="${transcript}"`
+        );
+
+        // transcriptToBeScanned based on optimizations
+        if (transcriptOverlapOffset < transcript.length) {
+          // truncate overlap
+          transcriptToBeScanned = transcript.substring(transcriptOverlapOffset);
+          transcriptEndOffset = transcriptOverlapOffset;
+          console.log(
+            `transcriptToBeScanned="${transcriptToBeScanned}", transcriptEndOffset=${transcriptEndOffset}`
+          );
+          console.log(
+            `LISTENING: isTranscriptOverlap=${isTranscriptOverlap},
+              isDetectingNewTranscript=${isDetectingNewTranscript},
+              isTranscriptOverlap=${isTranscriptOverlap},
+              isTranscriptOverlapNext=${isTranscriptOverlapNext},
+              isTranscriptOverlapNextNumeral=${isTranscriptOverlapNextNumeral},
+              previousTranscript= "${previousTranscript}",
+              previousTranscriptMatchEndOffset=${previousTranscriptMatchEndOffset},
+              transcript.length=${transcript.length},
+              isScanningWords=${isScanningWords}`
+          );
+        } else if (
+          isTranscriptOverlap &&
+          previousTranscriptMatchEndOffset >= transcript.length
+        ) {
+          // matched the entire previous transcript that overlaps with current
+          // transcript.
+          transcriptToBeScanned = "";
+        } else {
+          console.log(`isTranscriptOverlapNext=false`);
+          transcriptToBeScanned = transcript;
+          transcriptEndOffset = 0;
+        }
+      } else {
+        // !optimize: accept initial values
+      }
+      console.log(
+        `LISTENING: scanning transcriptToBeScanned="${transcriptToBeScanned}",
+         transcript="${transcript}"`
+      );
+      isScanningWords =
+        isListening &&
+        (isDetectingNewTranscript || isDetectingNewWordToMatch) &&
+        transcriptToBeScanned.length > 0;
+
+      // SCANNING WORDS
+      if (isScanningWords) {
+        try {
+          console.log(
+            `scanning transcript="${transcriptToBeScanned}", transcriptEndOffset=${transcriptEndOffset}, expectedTerminalIdx=${expectedTerminalIdx},
+            retries=${wordRetries}`
+          );
+          let scanArray: string[];
+          let scanIdx: number;
+          // let lastWordLength: number = 0;
+          // let wordsScannedAlready: string; // will be setPreviousTranscript
+          let wordMatched: boolean;
+          let expecting: string = pageContext.terminalList[
+            expectedTerminalIdx
+          ].content.toLowerCase();
+          let expectingAlt: string = pageContext.terminalList[
+            expectedTerminalIdx
+          ].altrecognition.toLowerCase();
+          let isExpectingNumberAsNumerals: boolean =
+            pageContext.terminalList[expectedTerminalIdx].numberAsNumerals;
+
+          //        if (isScanningWords) {
+          scanArray = transcriptToBeScanned.split(" ");
+          console.log(`scanArray=${scanArray}`);
+          let firstWordInTranscript: boolean;
+          let matchEndOffset: number = 0; // first character excluded
+          // let retries: number = wordRetries;
+          for (
+            scanIdx = 0, wordMatched = false;
+            scanIdx < scanArray.length && !wordMatched;
+            scanIdx++
+          ) {
+            // matchEndOffset tracks the latest matched word while the
+            // transcriptEndOffset tracks that and the missed ones
+            // tracks the end offset of missed words
+            firstWordInTranscript = scanIdx === 0;
+            console.log(
+              `LISTENING:top of loop: expectedTermIdx=${expectedTerminalIdx}, expecting="${expecting}",  isExpectingNumberAsNumerals=${isExpectingNumberAsNumerals}, scanArray.length=${scanArray[scanIdx].length}`
+            );
+            console.log(`scanArray(before)="${scanArray}"`);
+
+            // If the expected value is a numberAsNumerals, then expand the
+            // the number so that it's component numerals can be scanned.
+            // Hopefully, the first element matches.
+            if (
+              isExpectingNumberAsNumerals &&
+              scanArray[scanIdx].length > 1 &&
+              scanArray[scanIdx].match(/^-?\d+$/)
+            ) {
+              // Replace number with the current numeral to be matched.
+              // E.g., For "408" replace with "4" when transcriptOffset = 0,
+              // "0" when transcriptOffset = 1
+
+              let numeralArray: string[] = scanArray[scanIdx].split("");
+              console.log(
+                `LISTENING: numerals processing inserting
+                numeralArray="${numeralArray}" into ${scanArray}`
+              );
+              scanArray.splice(scanIdx, 1, ...numeralArray);
+              console.log(`resulting in scanArray="${scanArray}"`);
+            } else {
+              // console.log(`LISTENING: invalid isExpectingNumberAsNumerals`);
+            }
+            console.log(
+              `LISTENING: scanArray="${scanArray}", scanArray[${scanIdx}]="${
+                scanArray[scanIdx]
+              }", expecting="${expecting}", expectingAlt="${expectingAlt}",  match=${scanArray[
+                scanIdx
+              ] === expecting ||
+                scanArray[scanIdx] === expectingAlt ||
+                patternMatch(scanArray[scanIdx], expectingAlt)}`
+            );
+            let wordUttered: string = scanArray[scanIdx];
+            if (wordUttered === expecting) {
+              wordMatched = true;
+              console.log(`MATCHED1`);
+              matchMessage = `Matched "${wordUttered}" ${
+                wordRetries > 0 ? " after " + wordRetries + " word retries" : ""
+              }`;
+            } else if (wordUttered === expectingAlt) {
+              wordMatched = true;
+              console.log(`MATCHED2`);
+              matchMessage = `Matched "${wordUttered}" with alternative(s) "${expectingAlt}" ${
+                wordRetries > 0 ? " after " + wordRetries + " word retries" : ""
+              }`;
+            } else if (patternMatch(wordUttered, expectingAlt)) {
+              wordMatched = true;
+              console.log(`MATCHED3`);
+              matchMessage = `Matched "${wordUttered}" with pattern "${expectingAlt}" ${
+                wordRetries > 0 ? " after " + wordRetries + " word retries" : ""
+              }`;
+            } else {
+              console.log(`NOT MATCHED`);
+              matchMessage = `Heard "${wordUttered}" but expecting "${expecting}" or "${expectingAlt}" within "${transcript}"${
+                wordRetries > 0 ? " after " + wordRetries + " word retries" : ""
+              }`;
+            }
+            console.log(
+              `transcriptEndOffset=${transcriptEndOffset} + scanArray[scanIdx].length=${scanArray[scanIdx].length}`
+            );
+            transcriptEndOffset += scanArray[scanIdx].length;
+            if (!firstWordInTranscript && !isExpectingNumberAsNumerals) {
+              // account for separator
+              transcriptEndOffset++;
+              console.log(`transcriptEndOffset++=${transcriptEndOffset}`);
+            }
+            if (wordMatched) {
+              matchEndOffset = transcriptEndOffset;
+            } else {
+              setWordRetries(wordRetries + 1);
+            }
+            dispatch(Request.Recognition_message(matchMessage));
+            console.log(`LISTENING: ${matchMessage}`);
+          } // loop
+
+          // If last word is not a match, it might be a partial
+          // match whose fragment will be wrongly truncated from the next
+          // transcript by its inclusion into the future previousTranscript.
+          // If last word is not a match, it might be a partial
+          // match whose fragment will be wrongly truncated from the next
+          // transcript by its inclusion into the future previousTranscript.
+          // otherwise, add word length
+          // let lastIdx: number = scanArray.length - 1;
+          // if (!wordMatched && scanIdx >= lastIdx) {
+          //   if (isExpectingNumberAsNumerals) endOffset--;
+          //   endOffset -= scanArray[lastIdx].length;
+          //   console.log(
+          //     `last scanArray element "${
+          //       scanArray[lastIdx]
+          //     }" was not a match, future previous transcript="${transcript.substring(
+          //       0,
+          //       endOffset
+          //     )}" with endOffset=${endOffset}`
+          //   );
+          // }
+
+          // let newPreviousTranscript: string = transcript.substring(
+          //   0,
+          //   endOffsetPreviousTranscript
+          // );
+          // console.log(
+          //   `LISTENING: previousTranscript="${previousTranscript}", transcript="${transcript}", endOffsetPreviousTranscript=${endOffsetPreviousTranscript}, newPreviousTranscript="${newPreviousTranscript}"`
+          // );
+          if (wordMatched) {
+            setPreviousTranscript(transcript);
+            setPreviousTranscriptMatchEndOffset(matchEndOffset);
+            setPreviousMatchedTerminalIdx(expectedTerminalIdx);
+            setWordRetries(0);
+            dispatch(Request.Recognition_match(matchMessage));
+            // left unchanged setPreviousTranscriptMatchEndOffset();
+          } else {
+            if (currentExpectedTerminalIdx !== expectedTerminalIdx)
+              setCurrentExpectedTerminalIdx(expectedTerminalIdx);
+            // if (isDetectingNewTranscript && retries > 0) {
+            //   setWordRetries(retries);
+            // } else {
+            //   // set previous transcript
+            // }
+          }
+        } catch (e) {
+          console.log(`LISTENING: FATAL EXCEPTION: ${e}`);
+          matchMessage = `Fatal: ${e}`;
+        } finally {
+        }
+      } else {
+        console.log(`no scanning`);
       }
     } else {
-      console.log(`still listening"`);
+      matchMessage = `No new words to scan`;
     }
-    if (listening) {
-      //
-      // HEARING
-      //
-      console.log(`LISTENING: *********************"`);
-      if (finalTranscript !== "") {
-        finalTranscriptEncountered = true;
-        wordsHeard = finalTranscript;
-        resetTranscript();
-        console.log(`**********final=${wordsHeard}`);
-      } else {
-        wordsHeard = interimTranscript;
-        console.log(`interim=${interimTranscript}`);
-      }
-      console.log(`LISTENING: Hearing "${wordsHeard}"`);
-      //
-      // TOKENIZING
-      //
-      let numberAsNumerals: boolean =
-        pageContext.terminalList[expectedTerminalIdx].numberAsNumerals;
-      if (numberAsNumerals && wordsHeard.match(/^[0-9]+$/)) {
-        // need alternative split parse algorithm for list of numerals as:
-        // - a number (408) is 4, 0, 8 and not "four hundred eight"
-        // - an address number, phone numbers, ssn, driver license number
-        wordsHeardList = Array.from(wordsHeard);
-        console.log(`LISTENING: detecting number`);
-      } else {
-        wordsHeardList = wordsHeard.split(" ");
-        console.log(`LISTENING: detecting not number`);
-      }
-      console.log(`LISTENING: Tokenizing into list="${wordsHeardList}"`);
-      //
-      // DETECTING whether recognition is necessary: silence, redundancy
-      //
-      if (wordsHeard.length === 0) {
-        // Heard nothing at all
-        //resetListeningState();
-        console.log(`LISTENING: Detecting nothing: resetting state`);
-        // } else if (wordsPreviouslyHeard === wordsHeard) {
-        //   console.log(`detecting only previous words`);
-        wordMatchingRequested = false;
-      } else if (
-        wordsHeardPreviously.includes(wordsHeard) &&
-        wordPosition === wordPositionPreviously
-      ) {
-        wordMatchingRequested = false;
-        //   // Heard nothing new
-        //   // same word i.e., same word within same words heard list
-        //   // the interim transcript still not completely processed
-        console.log(
-          `LISTENING: Detecting nothing else new only previously heard words: wordPosition=${wordPosition} wordPositionPreviously=${wordPositionPreviously} wordsHeard=""${wordsHeard}" wordsHeardList=""${wordsHeardList}" wordsHeardList.length=${wordsHeardList.length} wordsHeardPreviously=${wordsHeardPreviously}`
-        );
-      } else if (
-        wordsHeard === wordsHeardPreviously &&
-        // wordPosition === wordPositionPreviously &&
-        wordPosition === wordsHeardList.length - 1
-      ) {
-        wordMatchingRequested = false;
-        // Heard nothing new: previous and current are the same and word
-        // position is pointing at the last word in the list
-        // setWordPositionPreviously(-1);
-        // setWordPosition(-1);
-        // setWordsHeardPreviously("");
-        console.log(
-          `LISTENING: Detecting nothing new: resetting everything except retries wordPosition=${wordPosition} wordPositionPreviously=${wordPositionPreviously} wordsHeard=""${wordsHeard}" wordsHeardList=""${wordsHeardList}" wordsHeardList.length=${wordsHeardList.length} wordsHeardPreviously=${wordsHeardPreviously}`
-        );
-      } else if (wordPosition > wordsHeardList.length) {
-        wordMatchingRequested = false;
-        console.log(
-          `LISTENING: Detecting wordPosition=${wordPosition} exceeds wordsHeardList.length=${wordsHeardList.length} wordsHeardList=${wordsHeardList}`
-        );
-      } else {
-        // heard a new word
-        wordMatchingRequested = true;
-        console.log(`LISTENING: Detecting new words="${wordsHeard}"`);
-        setWordsHeardPreviously(wordsHeard);
-        setWordPositionPreviously(-1);
-        setWordPosition(-1);
-        // setWordPosition(-1); // are these new words????
-      }
-      //
-      // WORD MATCHING
-      //
-      if (wordMatchingRequested) {
-        console.log(`LISTENING: matching 1`);
-        let matchMessage: string;
-        startSilenceTimer();
-        let expecting: string = pageContext.terminalList[
-          expectedTerminalIdx
-        ].content.toLowerCase();
-        let expectingAlt: string = pageContext.terminalList[
-          expectedTerminalIdx
-        ].altrecognition.toLowerCase();
-        console.log(
-          `LISTENING: Matching words="${wordsHeard}" at wordPos=${wordPosition}, wordPosPrev=${wordPositionPreviously} expecting="${expecting}" expectingAlt="${expectingAlt}"`
-        );
-        let wordPos: number;
-        let wordHeard: string;
-        setWordPositionPreviously(wordPosition);
-        console.log(
-          `LISTENING: Matching prior to loop wordPosition=${wordPosition} wordPositionPreviously=${wordPositionPreviously} wordsHeard=""${wordsHeard}" wordsHeardList=""${wordsHeardList}" wordsHeardList.length=${wordsHeardList.length} wordsHeardPreviously=${wordsHeardPreviously}`
-        );
-        for (
-          wordPos = wordPosition + 1;
-          wordPos < wordsHeardList.length;
-          wordPos++
-        ) {
-          console.log(
-            `LISTENING: Matching loop wordPos=${wordPos}  wordPosPrev=${wordPositionPreviously} wordRetries=${wordRetries}`
-          );
-          wordHeard = wordsHeardList[wordPos].toLowerCase();
-          if (expecting === wordHeard) {
-            setWordPosition(wordPos);
-            setWordRetries(0);
-            //            console.log(`reset wordRetries1`);
-            matchMessage = `Matching "${expecting}" with "${wordHeard}", ${wordRetries} word retries`;
-            console.log(
-              `LISTENING: ${matchMessage} wordPos=${wordPos} wordPosPrev=${wordPositionPreviously}`
-            );
-            dispatch(Request.Recognition_match(matchMessage));
-            break;
-          } else if (expectingAlt === wordHeard) {
-            setWordPosition(wordPos);
-            setWordRetries(0);
-            // console.log(`reset wordRetries2`);
-            matchMessage = `Matching alternative "${expectingAlt}, ${wordRetries} word retries`;
-            console.log(
-              `LISTENING: ${matchMessage} wordPos=${wordPos} wordPosPrev=${wordPositionPreviously}`
-            );
-            dispatch(Request.Recognition_match(matchMessage));
-            break;
-          } else if (patternMatch(wordHeard, expectingAlt)) {
-            setWordPosition(wordPos);
-            setWordRetries(0);
-            // console.log(`reset wordRetries3`);
-            matchMessage = `Matching pattern with "${expectingAlt}", ${wordRetries} word retries`;
-            console.log(
-              `LISTENING: ${matchMessage} wordPos=${wordPos}  wordPosPrev=${wordPositionPreviously}`
-            );
-            dispatch(Request.Recognition_match(matchMessage));
-            break;
-          } else {
-            setWordRetries(wordRetries + 1);
-            matchMessage = `Matching retry "${expecting}" or  "${expectingAlt}" but hearing word "${wordHeard}" within clause "${wordsHeard}", ${wordRetries} word retries`;
-            console.log(
-              `LISTENING: ${matchMessage} wordPos=${wordPos}  wordPosPrev=${wordPositionPreviously}`
-            );
-            dispatch(Request.Recognition_message(matchMessage));
-          }
-          // console.log(`${matchMessage}`);
-        }
-      }
-      if (finalTranscriptEncountered) {
-        console.log(`LISTENING: finalTransceriptEncountered`);
-        resetListeningState();
-      }
-      console.log(`END LISTENING: *****************"`);
-    }
-    return () => {
-      console.log(`LISTENING: Clearing timer`);
-      clearTimeout(silenceTimerIdRef.current!);
-    };
   }, [
-    listening, // will be false when user manually aborts speech
-    listeningRequested, // required to stop SpeechRecognition from listening
-    transcript,
+    listening,
     interimTranscript,
     finalTranscript,
-    resetTranscript,
-    expectedTerminalIdx,
-    ContinuousListeningInEnglish,
-    dispatch,
     terminalList,
-    wordPosition,
-    wordPositionPreviously,
-    wordRetries,
-    wordsHeardPreviously,
-    startSilenceTimer
+    expectedTerminalIdx,
+    previousMatchedTerminalIdx,
+    newSentence
+    //  ContinuousListeningInEnglish,
+    // resetTranscript,
+    // wordRetries,
+    // setWordRetries,
+    // dispatch
+    // startSilenceTimer,
+    // previousTranscript
+    //    setPreviousTranscript
   ]);
-  // const retriesExceeded = useAppSelector(store => store.listen_retriesExceeded);
   const reciteWordRequested = useAppSelector(
     store => store.recite_word_requested
   );
   useEffect(() => {
     // console.log(`LISTENING: retries`);
-    if (wordRetries > maxRetries) {
+    if (wordRetries > maxRetries + 1) {
+      // extra retry based on finalTranscript triggering without any further
+      // utterance
       // console.log(`LISTENING: retries exceeded; reset transcript`);
       if (!reciteWordRequested) {
         // console.log(`LISTENING: retries exceeded; recite not requested`);
@@ -414,34 +831,13 @@ export const ListeningMonitor = () => {
         // console.log(`LISTENING: retries exceeded; goto next word`);
         dispatch(Request.Cursor_gotoNextWord("retries exceeded"));
         setWordRetries(0);
-        console.log(`reset wordRetries4`);
+        console.log(`reset wordRetries`);
       }
     }
-  }, [wordRetries, reciteWordRequested, maxRetries, resetTranscript, dispatch]);
-  // const flushRequested: boolean = useAppSelector(store => store.listen_flush);
-  // useEffect(() => {
-  //   if (flushRequested) {
-  //     console.log(`LISTENING: flushing transcript queue`);
-  //     resetTranscript();
-  //     dispatch(Request.Recognition_flushed());
-  //   } else {
-  //   }
-  // }, [flushRequested]);
-
+  }, [wordRetries, reciteWordRequested]);
   ///////////////////////
   // Transition callbacks
   ///////////////////////
-  const newSentence: boolean = useAppSelector(
-    store => store.cursor_newSentenceTransition
-  );
-  useEffect(() => {
-    if (newSentence) {
-      console.log(`LISTENING: new sentence transition`);
-      //      dispatch(Request.Recognition_flush());
-      resetListeningState();
-      resetTranscript();
-    }
-  }, [newSentence, resetTranscript]);
   const message_listen: string = useAppSelector(
     store => store.message_listening
   );
@@ -466,7 +862,7 @@ export const ListeningMonitor = () => {
       </div>
     );
   }
-};
+});
 interface IListenSettingsProps {
   listenSettings: IListenSettings;
   setListenSettings: (listeningSettings: IListenSettings) => void;
