@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2023 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2024 Wen Eng - All Rights Reserved
  *
  * File name: PageContentType.ts
  *
@@ -8,7 +8,7 @@
  *
  **/
 export const IDX_INITIALIZER = -9999;
-export const PageContentVersion = "20230706.1";
+export const PageContentVersion = "20231102.1";
 export enum PageFormatEnumType {
   default = 0
 }
@@ -20,6 +20,8 @@ export interface IPageContent {
   owner: string;
   author: string;
   category: string;
+  showTags: boolean;
+  columnCount: number;
   version: string;
   pageFormatType: PageFormatEnumType;
   created: string;
@@ -44,6 +46,8 @@ export function PageContentInitializer(): IPageContent {
     owner: "",
     author: "anonymous",
     category: "Miscellaneous",
+    showTags: false,
+    columnCount: 0,
     version: PageContentVersion,
     pageFormatType: PageFormatEnumType.default,
     created: null!,
@@ -66,6 +70,8 @@ export interface ISectionContent {
   description: string;
   firstTermIdx: number;
   lastTermIdx: number;
+  showTags: boolean;
+  columnCount: number;
   items: ISectionContent[];
   type: SectionVariantEnumType; // included in meta making initializer simplier
   meta: SectionVariantType;
@@ -78,6 +84,7 @@ export type SectionVariantType =
   | ISectionOrderedListVariant
   | ISectionParagraphVariant
   | ISectionFillinVariant
+  | ISectionGroupFillinVariant
   | ISectionBlockquoteVariant
   | ISectionImageEntryVariant
   | ISectionButtonGridVariant
@@ -91,7 +98,7 @@ export enum SectionVariantEnumType {
   ordered_list = "ordered_list",
   paragraph = "paragraph",
   fillin = "fillin",
-  fillin_list = "fillin_list",
+  group_fillin = "groupfillin",
   image_entry = "image_entry",
   button_grid = "buttongrid",
   blockquote = "blockquote",
@@ -245,6 +252,24 @@ export function ISectionParagraphVariantInitializer(): ISectionParagraphVariant 
     style: "" // overrides css but not user profile
   };
 }
+// key = valid response; distractor = invalid key/alternatives
+//
+// pickList(OfSingleKeys): Each prompt has a corresponding key/valid responsekey.
+// Responses from multiple prompts are combined into a single pick list.
+// Alternatives are ignored.
+//
+// multipleChoice: Each prompt has a corresponding key/valid response along
+// with one or more incorrect distractors/alternatives. Alternatives are
+// invallid.
+//
+// familyFeud aka multipleChoiceMultipleKeys: Each prompt has multiple
+// corresponding keys/valid responses defined as the fillin responses and
+// alternatives. Alternatives are valid.
+export enum SectionFillinType {
+  pickList = "pickList",
+  multipleChoice = "multipleChoice",
+  familyFeud = "familyFeud"
+}
 export enum SectionFillinLayoutType {
   grid = "grid",
   list = "list",
@@ -276,7 +301,8 @@ export enum SectionFillinPresetName {
   gridRandom = "gridRandom",
   gridAlpha = "gridAlpha",
   gridInOrder = "gridInOrder",
-  inline = "inline"
+  inline = "inline",
+  multipleChoice = "multipleChoice"
 }
 export enum SectionFillinPresetLevel {
   override = -1,
@@ -284,6 +310,7 @@ export enum SectionFillinPresetLevel {
   gridRandom,
   gridAlpha,
   gridInOrder,
+  multipleChoice,
   inline
 }
 export const SectionFillinPresetMap = {
@@ -292,18 +319,20 @@ export const SectionFillinPresetMap = {
   [SectionFillinPresetName.gridRandom]: SectionFillinPresetLevel.gridRandom,
   [SectionFillinPresetName.gridAlpha]: SectionFillinPresetLevel.gridAlpha,
   [SectionFillinPresetName.gridInOrder]: SectionFillinPresetLevel.gridInOrder,
+  [SectionFillinPresetName.multipleChoice]:
+    SectionFillinPresetLevel.multipleChoice,
   [SectionFillinPresetName.inline]: SectionFillinPresetLevel.inline
 };
 interface IPresetLevelSetting {
   level: SectionFillinPresetLevel;
-  setting: ISectionFillinSetting;
+  setting: ISectionFillinSettings;
 }
 type SectionFillinPresetInfoType = Record<
   SectionFillinPresetLevel,
   IPresetLevelSetting
 >;
 export const SectionFillinPresetInfo = {
-  [SectionFillinPresetLevel.override]: ISectionFillinSettingInitializer(),
+  [SectionFillinPresetLevel.override]: ISectionFillinSettingsInitializer(),
   [SectionFillinPresetLevel.hidden]: {
     // default
     description: "Responses not displayed",
@@ -394,7 +423,7 @@ export const SectionFillinPresetInfo = {
     helpfulness: 0
   }
 };
-export interface ISectionFillinSetting {
+export interface ISectionFillinSettings {
   description: string;
   responsesLabel: string;
   promptsLabel: string;
@@ -412,12 +441,12 @@ export interface ISectionFillinSetting {
   showReferenceCount: boolean;
   helpfulness: number; // most hints to least hints
 }
-export function ISectionFillinSettingInitializer(
+export function ISectionFillinSettingsInitializer(
   description: string = "",
   promptsLabel: string = "",
   responsesLabel: string = "",
   layout = SectionFillinLayoutType.grid
-): ISectionFillinSetting {
+): ISectionFillinSettings {
   return {
     description: description,
     responsesLabel: responsesLabel,
@@ -437,14 +466,37 @@ export function ISectionFillinSettingInitializer(
     helpfulness: -1
   };
 }
+export interface ISectionGroupFillinVariant {
+  promptsPerSubsection: number;
+  subsectionLabel: string;
+  randomize: boolean;
+  prompts: ISectionContent[];
+}
+export function ISectionGroupFillinVariantInitializer(
+  promptsPerSubsection: number = 0,
+  subsectionLabel: string = "",
+  randomize: boolean = false,
+  prompts: ISectionContent[] = []
+): ISectionGroupFillinVariant {
+  return {
+    promptsPerSubsection: promptsPerSubsection,
+    subsectionLabel: subsectionLabel,
+    randomize: randomize,
+    prompts: prompts
+  };
+}
 export interface ISectionFillinVariant {
   sectionFillinIdx: number; // reference state structure in pageList.fillinList
   presetLevel: SectionFillinPresetLevel;
-  authorSetting: ISectionFillinSetting;
+  authorSetting: ISectionFillinSettings;
   allowReset: boolean;
+  maxPromptsPerSection: number;
   promptColumns: number;
   showPresets: boolean;
   prompts: ISectionContent[];
+  subsectionOrdinal: number;
+  subsectionInterval: number;
+  subsectionLabel: string;
 }
 export function ISectionFillinVariantInitializer(
   sectionFillinIdx: number = IDX_INITIALIZER,
@@ -455,19 +507,23 @@ export function ISectionFillinVariantInitializer(
   return {
     sectionFillinIdx: sectionFillinIdx,
     presetLevel: SectionFillinPresetLevel.override,
-    authorSetting: ISectionFillinSettingInitializer(
+    authorSetting: ISectionFillinSettingsInitializer(
       "no description",
       promptsLabel,
       responsesLabel,
       layout
     ),
     allowReset: false,
+    maxPromptsPerSection: 0,
     promptColumns: 1,
     showPresets: false,
-    prompts: []
+    prompts: [],
+    subsectionOrdinal: -1,
+    subsectionInterval: 0,
+    subsectionLabel: ""
   };
 }
-export type ISectionFillinPresets = ISectionFillinSetting[];
+export type ISectionFillinPresets = ISectionFillinSettings[];
 export function ISectionFillinPresetsInitializer(): ISectionFillinPresets {
   return [
     {
@@ -648,6 +704,8 @@ export enum PartOfSpeechEnumType { // ordered by frequency
   article = "article",
   interjection = "interjection",
   numeral = "numeral",
+  subject = "subject",
+  object = "object",
   untagged = "untagged"
 }
 interface PartOfSpeechItemType {
@@ -727,6 +785,18 @@ export const PartOfSpeechDictionary = {
     abbreviation: "num.",
     description: "numeral",
     pattern: /([Nn]u.*)/
+  },
+  [PartOfSpeechEnumType.subject]: {
+    name: "subject",
+    abbreviation: "subj.",
+    description: "describes subject of sentence",
+    pattern: /([Ss]u.*)/
+  },
+  [PartOfSpeechEnumType.object]: {
+    name: "object",
+    abbreviation: "obj.",
+    description: "describes object of setnence",
+    pattern: /([Oo]b.*)/
   },
   [PartOfSpeechEnumType.untagged]: {
     name: "untagged",
@@ -1314,16 +1384,19 @@ export function ILinkListItemInitializer(
 export interface IFillinResponseItem {
   content: string; // for display in response list
   tag: string;
+  alternatives: string[];
   referenceCount: number;
 }
 export function IFillinResponseItemInitializer(
   content: string,
   tag: string,
+  alternatives: string[],
   referenceCount: number
 ): IFillinResponseItem {
   return {
     content: content,
     tag: tag,
+    alternatives: alternatives,
     referenceCount: referenceCount
   };
 }
@@ -1339,8 +1412,8 @@ export interface ISectionFillinItem {
   idx: number;
   showPresets: boolean;
   presetLevel: SectionFillinPresetLevel;
-  authorSetting: ISectionFillinSetting;
-  currentSetting: ISectionFillinSetting;
+  authorSetting: ISectionFillinSettings;
+  currentSetting: ISectionFillinSettings;
   allowReset: boolean;
   promptColumns: number;
   alternatives: string[];
@@ -1353,8 +1426,8 @@ export function ISectionFillinItemInitializer(
   idx: number = IDX_INITIALIZER,
   showPresets: boolean = false,
   presetLevel: SectionFillinPresetLevel = SectionFillinPresetLevel.override,
-  authorSetting: ISectionFillinSetting = ISectionFillinSettingInitializer(),
-  currentSetting: ISectionFillinSetting = ISectionFillinSettingInitializer(),
+  authorSetting: ISectionFillinSettings = ISectionFillinSettingsInitializer(),
+  currentSetting: ISectionFillinSettings = ISectionFillinSettingsInitializer(),
   allowReset: boolean = true,
   promptColumns: number = 1,
   alternatives: string[] = [],
@@ -1378,6 +1451,12 @@ export function ISectionFillinItemInitializer(
     loaded,
     modified
   };
+}
+export enum PageRequestItemType {
+  unknown = 0,
+  home = 1,
+  pop = 2,
+  link = 3
 }
 export interface IPageRequestItem {
   page: string;
