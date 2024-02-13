@@ -88,7 +88,7 @@ export class SectionParseNode_HEADING extends SectionParseNode
   ): string {
     let sentenceNode: ISentenceNode = <SentenceNode>this.meta.heading;
     label = `heading id=${sentenceNode.id} (at level ${this.meta.level})`;
-    prefix += "  ";
+    // prefix += "  ";
     let outputStr: string = `${super.serialize(
       format,
       label,
