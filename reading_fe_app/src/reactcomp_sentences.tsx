@@ -25,7 +25,7 @@ export const Sentence = React.memo((props: ISentencePropsType) => {
   //   store => store.cursor_terminalIdx
   // );
   // console.log(
-  //   `<Sentence1 sentenceIdx=${props.sentence.id} active=${props.active}>`
+  //   `<Sentence sentenceIdx=${props.sentence.id} active=${props.active} content=${props.sentence.content}>`
   // );
   return (
     <>
