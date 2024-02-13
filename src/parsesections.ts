@@ -39,6 +39,8 @@ export abstract class SectionParseNode extends ParseNode
   description: string = "";
   firstTermIdx: number = IDX_INITIALIZER;
   lastTermIdx: number = IDX_INITIALIZER;
+  showTags: boolean = false;
+  columnCount: number = 0;
   items: ISectionNode[] = [];
   type!: SectionVariantEnumType; // initialized in subclass
   meta!: SectionVariantType; // initialized in subclass

@@ -26,7 +26,7 @@ import {
   ISectionListItem,
   ITerminalListItem,
   ILinkListItem,
-  ISectionFillinSetting,
+  ISectionFillinSettings,
   ISectionFillinItem,
   LinkIdxDestinationType,
   ISectionFillinItemInitializer,
@@ -204,7 +204,11 @@ class FillinArray extends Array<ISectionFillinItem> {
     this[length - 1].idx = length - 1;
     return length;
   }
-  addResponse(item: string, tag: string = ""): [number, number] {
+  addResponse(
+    item: string,
+    tag: string = "",
+    alternatives: string[]
+  ): [number, number] {
     let fillinListIdx: number;
     let fillinIdx: number;
     if (this.length === 0) this.push(ISectionFillinItemInitializer());
@@ -213,6 +217,7 @@ class FillinArray extends Array<ISectionFillinItem> {
       this[fillinListIdx].responses.push({
         content: item,
         tag: tag,
+        alternatives: alternatives,
         referenceCount: 1
       }) - 1;
 
@@ -265,7 +270,7 @@ responses.filter(item => {
         element.authorSetting.showResponsesInPrompts
           ? "showResponsesInPrompts"
           : ""
-      }\n[idx ]: ${"fillin".padEnd(24)} tag          refCount order\n`;
+      }\n[idx ]: ${"fillin".padEnd(24)} tag          refCount alternatives\n`;
       for (const [j, response] of element.responses
         //        .sort((a, b) => (a.content > b.content ? 1 : -1))
         .entries()) {
@@ -273,7 +278,18 @@ responses.filter(item => {
           .toString()
           .padStart(2, "0")}]: ${response.content.padEnd(
           25
-        )}${response.tag.padEnd(13)}${response.referenceCount.toString()}\n`;
+        )}${response.tag.padEnd(13)}${response.referenceCount
+          .toString()
+          .padEnd(9)}`;
+        if (response.alternatives.length === 0) {
+          outputStr = `${outputStr}(none)`;
+        } else {
+          for (const alternative of response.alternatives) {
+            //        .sort((a, b) => (a.content > b.content ? 1 : -1))
+            outputStr = `${outputStr.padEnd(9)}${alternative} `;
+          }
+        }
+        outputStr = `${outputStr}\n`;
       }
       if (element.tags.length > 0) {
         outputStr = `${outputStr}  tags:`;
@@ -281,14 +297,7 @@ responses.filter(item => {
           //        .sort((a, b) => (a.content > b.content ? 1 : -1))
           outputStr = `${outputStr} ${tag},`;
         }
-        outputStr = `${outputStr.substring(0, outputStr.length - 1)}\n`;
-      }
-      if (element.alternatives.length > 0) {
-        outputStr = `outputStr\n   alternatives:`;
-        for (const alternative of element.alternatives) {
-          //        .sort((a, b) => (a.content > b.content ? 1 : -1))
-          outputStr = `${outputStr}, ${alternative}`;
-        }
+        outputStr = `${outputStr.substring(0, outputStr.length - 1)}`;
       }
     }
     return outputStr;
@@ -820,7 +829,7 @@ export abstract class ParseNode extends BaseClass implements IParseNode {
 //       return "insert order (default)";
 //   }
 // };
-export function helpfulnessLevel(group: ISectionFillinSetting): number {
+export function helpfulnessLevel(group: ISectionFillinSettings): number {
   let helpfulness: number = 0;
   if (group.showResponsesInPrompts) helpfulness += 1000;
   if (group.layout !== SectionFillinLayoutType.hidden) {

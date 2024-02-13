@@ -57,37 +57,52 @@ export class SectionParseNode_FILLIN extends SectionParseNode_LIST
   }
   type = SectionVariantEnumType.fillin;
   meta: ISectionFillinVariant = ISectionFillinVariantInitializer();
+  subsectionOrdinal: number = 0;
+  subsectionInterval: number = 0;
+  subsectionLabel: string = "";
+  parseSubsection(
+    subsectionOrdinal: number = 0,
+    subsectionInterval: number = 0,
+    subsectionLabel: string = ""
+  ): number {
+    // sets instance variables then calls parse() below
+    this.meta.subsectionOrdinal = subsectionOrdinal;
+    this.meta.subsectionInterval = subsectionInterval;
+    this.meta.subsectionLabel = subsectionLabel;
+    console.log(`parseSubsection(${subsectionOrdinal},${subsectionInterval})`);
+    return this.parse();
+  }
   parse() {
     const validateArgs = (argString: string, lineNo: number) => {
       /*
-        [0]  preset index in application config help levels from
-             FillinHelpPresetLevel. FillinHelpPresetLevel.override allows
-             author to specify custom ISectionFillinHelpSetting in fillin
-             header.
-        [1]  show help presets with initial setting defined above.
+      This set of parameters are related to formatting section size
+      [0]  preset index in application config help levels from
+           FillinHelpPresetLevel. FillinHelpPresetLevel.override allows
+           author to specify custom ISectionFillinHelpSetting in fillin
+           header.
+      [1]  show help preset
+      This set of parameters are related to formatting help settings
+      [2]  prompts columns
+      [3]  allow reset of responses
 
-        The next set of parameters are related to formatting help settings
-        [2]  prompts columns
-        [3]  allowReset
-
-        The next set of parameters are author definition of help setting
-        [4]  responses label
-        [5]  prompts label such as instructions
-        [6]  layout { grid | bulleted list | csv }
-             trailing must include extraneous answers e.g., yes vs no.
-        [7]  response grid columns as number (only with layout=grid)
-        [8]  sort order { a[lphabetical] | i[nsertOrder] (default) | r[andom] }
-        [9] unique only: boolean, remove duplicate responses and refCount++
-        [10] showReferenceCount: boolean, shows in responses iff <> 1
-        [11] groupByTags: boolean, groups responses by category e.g., verbs
-        [12]  showResponseTags: boolean, show hints within responses
-        [13] showPromptTags: boolean, show hints within prompts
-        [14] showResponsesInPrompts: boolean, show responwses initially filled
-             in)
+      This set of parameters are author definition of help setting
+      [4]  responses label
+      [5]  prompts label such as instructions
+      [6]  layout { grid | bulleted list | csv }
+           trailing must include extraneous answers e.g., yes vs no.
+      [7]  response grid columns as number (only with layout=grid)
+      [8]  sort order { a[lphabetical] | i[nsertOrder] (default) | r[andom] }
+      [9]  unique only: boolean, remove duplicate responses and refCount++
+      [10] showReferenceCount: boolean, shows in responses iff <> 1
+      [11] groupByTags: boolean, groups responses by category e.g., verbs
+      [12]  showResponseTags: boolean, show hints within responses
+      [13] showPromptTags: boolean, show hints within prompts
+      [14] showResponsesInPrompts: boolean, show responwses initially filled
+           in)
         */
       let args: string[] = argString.split(",").map(arg => arg.trim());
+
       let argNum = 0;
-      // consider try/catch
       let argLevel: SectionFillinPresetLevel;
       if (args[argNum] in SectionFillinPresetName) {
         argLevel =
@@ -120,17 +135,6 @@ export class SectionParseNode_FILLIN extends SectionParseNode_LIST
         this.logger
       ) as boolean;
 
-      // argNum++;
-      // this.meta.gridColumns = ValidateArg(
-      //   IsValidWholeNumberString(args[argNum]),
-      //   "grid columns",
-      //   args[argNum],
-      //   this.meta.gridColumns,
-      //   argNum,
-      //   lineNo,
-      //   this.logger
-      // ) as number;
-
       argNum++;
       this.meta.promptColumns = ValidateArg(
         IsValidWholeNumberString(args[argNum]),
@@ -141,6 +145,18 @@ export class SectionParseNode_FILLIN extends SectionParseNode_LIST
         lineNo,
         this.logger
       ) as number;
+
+      // consider try/catch
+      // argNum++;
+      // this.meta.gridColumns = ValidateArg(
+      //   IsValidWholeNumberString(args[argNum]),
+      //   "grid columns",
+      //   args[argNum],
+      //   this.meta.gridColumns,
+      //   argNum,
+      //   lineNo,
+      //   this.logger
+      // ) as number;
 
       argNum++;
       this.meta.allowReset = ValidateArg(
@@ -155,7 +171,7 @@ export class SectionParseNode_FILLIN extends SectionParseNode_LIST
 
       argNum++;
       this.meta.authorSetting.responsesLabel = ValidateArg(
-        args[argNum].length > 0,
+        args[argNum].length >= 0,
         "responses label",
         args[argNum],
         this.meta.authorSetting.responsesLabel,
@@ -166,7 +182,7 @@ export class SectionParseNode_FILLIN extends SectionParseNode_LIST
 
       argNum++;
       this.meta.authorSetting.promptsLabel = ValidateArg(
-        args[argNum].length > 0,
+        args[argNum].length >= 0,
         "prompts label",
         args[argNum],
         this.meta.authorSetting.promptsLabel,
@@ -294,10 +310,15 @@ export class SectionParseNode_FILLIN extends SectionParseNode_LIST
     };
     this.logger.diagnostic(`${this.constructor.name}`);
     try {
+      assert(
+        this.subsectionInterval !== undefined,
+        `Undefined datasource encountered`
+      );
       assert(this.dataSource !== undefined, `Undefined datasource encountered`);
       let current: TaggedStringType = this.dataSource.currentRecord();
       assert(current !== undefined, `Undefined record encountered`);
 
+      // if subsection specified then ignore assertion
       assert(
         current.recordType === MarkdownRecordType.FILLIN,
         `expected "${MarkdownRecordTagType.FILLIN}" at line ${current.lineNo}`
@@ -316,20 +337,39 @@ export class SectionParseNode_FILLIN extends SectionParseNode_LIST
             // this.meta.showPrompts
           )
         ) - 1;
+
+      // The following calculation assumes that section fillins are ALWAYS
+      // contained within a single record. That is, the dataSource maps
+      // directly with the subsection interval.
+      // const subsectionOffsetIdx: number =
+      //   this.subsectionInterval * (this.subsectionOrdinal - 1) +
+      //   this.dataSource.currentIdx();
+      // const subsectionEndIdx: number =
+      //   this.subsectionInterval > 0
+      //     ? subsectionOffsetIdx + this.subsectionInterval
+      //     : Number.MAX_VALUE;
+      // console.log(`currentIdx=${this.dataSource.currentIdx()}`);
+      // console.log(`subsectionOffsetIdx=${subsectionOffsetIdx}`);
+      // console.log(`subsectionEndIdx=${subsectionEndIdx}`);
+      // let subsectionIdx: number;
       for (
         current = this.dataSource.nextRecord();
+        // subsectionIdx = this.dataSource.currentIdx();
         !this.dataSource.EOF() &&
         current.recordType !== MarkdownRecordType.FILLIN_END;
-        current = this.dataSource.currentRecord() // update based on parse()
+        current = this.dataSource.currentRecord() //, subsectionIdx++ // update based on parse()
       ) {
-        let sectionNode: ISectionNode = GetSectionNode(
+        // console.log(`subsectionIdx=${subsectionIdx}: ${current.content}`);
+        let sectionNode: SectionParseNode_FILLIN = GetSectionNode(
           current.recordType,
           this
-        );
-        this.meta.prompts.push(sectionNode);
+        ) as SectionParseNode_FILLIN;
+        let sectionIdx: number = this.meta.prompts.push(sectionNode);
+        sectionNode.meta.subsectionOrdinal = sectionIdx;
         this.logger.diagnostic(
           `pushed section=${current.recordType} ${sectionNode.constructor.name} ${current.content}`
         );
+        // console.log(`sectionMode.type=${sectionNode.type}`);
         sectionNode.parse();
       }
       assert(
@@ -371,17 +411,15 @@ export class SectionParseNode_FILLIN extends SectionParseNode_LIST
     let outputStr: string = "";
     switch (format) {
       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
-        outputStr = `${super.serialize(
-          format,
-          label,
-          prefix
-        )}: authorHelpPreset=${this.meta.presetLevel}, ${
+        outputStr = `${super.serialize(format, label, prefix)}: promptColumns=${
+          this.meta.promptColumns
+        }, authorHelpPreset=${this.meta.presetLevel}, ${
           this.meta.showPresets ? "showHelpPresets" : ""
         }, promptColumns=${this.meta.promptColumns}, ${
           this.meta.allowReset ? "allowReset" : ""
-        }, response:"${this.meta.authorSetting.responsesLabel}", prompt:"${
+        }, response:"${this.meta.authorSetting.responsesLabel}", prompt: ${
           this.meta.authorSetting.promptsLabel
-        }", ${this.meta.authorSetting.layout}, gridColumns=${
+        }, ${this.meta.authorSetting.layout}, gridColumns=${
           this.meta.authorSetting.gridColumns
         }, ${this.meta.authorSetting.progressionOrder.toString()}, ${
           this.meta.authorSetting.unique ? "unique" : ""
@@ -397,7 +435,9 @@ export class SectionParseNode_FILLIN extends SectionParseNode_LIST
           this.meta.authorSetting.showResponsesInPrompts
             ? "showResponsesInPrompts"
             : ""
-        }, sectionFillinIdx=${this.meta.sectionFillinIdx}, `;
+        }, sectionFillinIdx=${this.meta.sectionFillinIdx}, subsectionOrdinal=${
+          this.meta.subsectionOrdinal
+        }`;
         // if (
         //   this.meta.sectionFillinIdx >= 0 &&
         //   this.userContext.fillins[this.meta.sectionFillinIdx] !== undefined
@@ -409,8 +449,8 @@ export class SectionParseNode_FILLIN extends SectionParseNode_LIST
           let sectionNode: ISectionNode = prompt as ISectionNode;
           outputStr = `${outputStr}${sectionNode.serialize(
             format,
-            `prompts: (${prompt.type})`,
-            prefix + "| " + (i < this.meta.prompts.length - 1 ? "| " : "  ")
+            `${prompt.type} (of prompts)`,
+            prefix + (i < this.meta.prompts.length - 1 ? "| " : "  ")
           )}`;
         }
         break;

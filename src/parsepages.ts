@@ -69,6 +69,8 @@ export class PageParseNode extends ParseNode implements IPageContent {
   created: string = InitialDate;
   modified: string = InitialDate;
   transformed: string = InitialDate;
+  showTags: boolean = false;
+  columnCount: number = 0;
   firstTermIdx: number = IDX_INITIALIZER;
   lastTermIdx: number = IDX_INITIALIZER;
   sections: ISectionNode[] = []; //needs to be reflected in _data.sections[]
@@ -154,6 +156,16 @@ export class PageParseNode extends ParseNode implements IPageContent {
         lineNo,
         this.logger
       ) as string;
+      argNum++;
+      this.showTags = ValidateArg(
+        IsValidBooleanString(args[argNum]),
+        "show tags",
+        args[argNum],
+        this.showTags,
+        argNum,
+        lineNo,
+        this.logger
+      ) as boolean;
       this.logger.diagnostic(`Validated ${argNum} parameters`);
     };
 

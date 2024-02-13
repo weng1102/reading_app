@@ -30,6 +30,8 @@ export const enum MarkdownRecordType {
   BUTTONGRID_END = "BUTTONGRID_END",
   COMMENT = "COMMENT",
   EMPTY = "EMPTY",
+  GROUPFILLIN = "GROUPFILLIN_SECTION",
+  GROUPFILLIN_END = "GROUPFILLIN_SECTION_END",
   FILLIN = "FILLIN_SECTION",
   FILLIN_END = "FILLIN_SECTION_END",
   HEADING = "HEADING",
@@ -120,6 +122,8 @@ export const enum MarkdownRecordTagType {
   COMMENT2 = "COMMENT2",
   COMMENT3 = "COMMENT3",
   PASSTHRUTAG = "PASSTHRUTAG",
+  GROUPFILLIN = "GROUPFILLIN_SECTION",
+  GROUPFILLIN_END = "GROUPFILLIN_SECTION_END",
   FILLIN = "FILLIN_SECTION",
   FILLIN_END = "FILLIN_SECTION_END",
   PAGE = "PAGE",
@@ -294,6 +298,14 @@ const MarkdownPatternDictionary: MarkdownPatternDictionaryType = {
   //   pattern: /\[\[page-title:\s(.*)\/\]\]$/i, // [[page-title: */]]
   //   recordType: MarkdownRecordType.PAGETITLE
   // },
+  [MarkdownRecordTagType.GROUPFILLIN]: {
+    pattern: /^\[\[groupfill-{0,1}in:\s(.*)\]\]\s*$/,
+    recordType: MarkdownRecordType.GROUPFILLIN
+  },
+  [MarkdownRecordTagType.GROUPFILLIN_END]: {
+    pattern: /^\[\[\/groupfill-{0,1}in\]\]$/,
+    recordType: MarkdownRecordType.GROUPFILLIN_END
+  },
   [MarkdownRecordTagType.FILLIN]: {
     pattern: /^\[\[fill-{0,1}in:\s(.*)\]\]\s*$/,
     recordType: MarkdownRecordType.FILLIN
@@ -326,6 +338,7 @@ export interface IDataSource {
     resultBuffer: TaggedStringType[]
   ): number;
   currentIdx(): number;
+  setCurrentIdx(idx: number): void;
   currentRecord(): TaggedStringType;
   fileName: string;
   firstRecord(): TaggedStringType;
@@ -369,6 +382,9 @@ abstract class MarkdownSource extends BaseClass implements IDataSource {
   ): number;
   currentIdx() {
     return this.bufferIdx;
+  }
+  setCurrentIdx(idx: number) {
+    if (idx > 0 && idx < this.buffer.length) this.bufferIdx;
   }
   currentRecord(): TaggedStringType {
     // could throw TypeError upon access attempt

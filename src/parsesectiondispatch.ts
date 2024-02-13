@@ -16,6 +16,7 @@ import {
   SectionParseNode_TBD
 } from "./parsesections";
 import { SectionParseNode_FILLIN } from "./parsesections_fillin";
+import { SectionParseNode_GROUPFILLIN } from "./parsesections_groupfillin";
 import { SectionParseNode_IMAGEENTRY } from "./parsesections_images";
 import { SectionParseNode_PARAGRAPH } from "./parsesections_paragraph";
 import {
@@ -79,6 +80,13 @@ export function GetSectionNode(
       //     MarkdownRecordType.SECTION_UNORDERED}`
       // );
       sectionNode = new SectionParseNode_LISTITEM_UNORDERED(parent);
+      break;
+    }
+    case MarkdownRecordType.GROUPFILLIN: {
+      // console.log(
+      //   `dispatch: ${tagType} ${tagType === MarkdownRecordType.FILLIN}`
+      // );
+      sectionNode = new SectionParseNode_GROUPFILLIN(parent);
       break;
     }
     case MarkdownRecordType.FILLIN: {
