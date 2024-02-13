@@ -26,6 +26,7 @@ export const enum TokenLiteral { // literals used as comparators
   DASH = "-", // for phone numbers
   DOUBLEQUOTE = '""',
   DOT = ".", // for decimals, doman names
+  EQUALSIGN = "=",
   EXCLAMATION = "!", // for image
   FORWARDSLASH = "/",
   LPAREN = "(", // for phone numbers
@@ -40,7 +41,6 @@ export const enum TokenLiteral { // literals used as comparators
   PLUSSIGN = "+",
   LESSTHANSIGN = "<",
   GREATERTHANSIGN = ">",
-  EQUALSIGN = "=",
   AMPERSAND = "&",
   NUMBERSIGN = "#",
   DEGREE = "\u00B0",
@@ -168,12 +168,13 @@ const TokenDictionary: TokenDictionaryType = {
   [TokenType.SYMBOL]: {
     type: TokenType.SYMBOL,
     label: TokenLabelType.SYMBOL,
-    pattern: /([@#%&\+])/
+    pattern: /([@#%&\+\=x])/
+    // pattern: /([@#%&]|((?<=\d| \s)\+(?=\s|\d|$)))|((?<=\s|\d)\=(?=\s|\d))/
   },
   [TokenType.PUNCTUATION]: {
     type: TokenType.PUNCTUATION,
     label: TokenLabelType.PUNCTUATION,
-    pattern: /([,.\/$\^\*;:{}=\-_'~()\"\?\.!])/
+    pattern: /([,.\/$\^\*;:{}\-_'~()\"\?\.!])/
   },
   [TokenType.MLTAG]: {
     type: TokenType.MLTAG,
@@ -188,7 +189,7 @@ const TokenDictionary: TokenDictionaryType = {
   [TokenType.WHITESPACE]: {
     type: TokenType.WHITESPACE,
     label: TokenLabelType.WHITESPACE,
-    pattern: /(<[\w\s="/.':;\-\/\?]+>)/
+    pattern: /(<[\w\s"/.':;\-\/\?]+>)/
   },
   [TokenType.MLTAG_SELFCLOSING]: {
     type: TokenType.MLTAG_SELFCLOSING,
@@ -360,7 +361,11 @@ const MarkdownTokenDictionary: MarkdownTokenDictionaryType = {
   [MarkdownIndexType.FILLIN]: {
     type: MarkdownTokenType.FILLIN,
     label: MarkupLabelType.FILLIN,
-    pattern: /(?<=\s|^|[\.,!'"])\[_((\<\w+( \w+)*\>){0,1}(\w|\s|\w=\([^)]*\)|[',:\-\(\)@_\.#\$])*((<(\/\w+( \w+)*\>)){0,1}))_](?=$|\s|[\.,!"\?])/g
+    pattern: /(?<=\s|^|[\.,!'"])\[_(\w+(=\(\w*(,{0,1}\s*[\w\.\-\_\/\@\%\&]*)*\)){0,1})_\](?=$|\s|[\.,!"\?])/g
+
+    // (?<=\s|^|[\.,!'"])\[_(\w+(=\(\w*(,\s*\w*)*\)){0,1})_\](?=$|\s|[\.,!"\?])
+    // /(?<=\s|^|[\.,!'"])\[_((\<\w+( \w+)*\>){0,1}(\w|\s|\w=\([^)]*\)|[',:\-\(\)@_\.#\$])*((<(\/\w+( \w+)*\>)){0,1}))_](?=$|\s|[\.,!"\?])/g
+
     //       /(?<=\s|^|[\.,!'"])\[_(((\<(\w+)\>){0,1}((\w|\s|[',:\-\(\)@_\.#\$])+))(\<(\/\w+)\>){0,1})_\](?=$|\s|[\.,!"\?])/g
 
     // expanded \w+ with just about anything pattern.+ because special parse types are too complex
@@ -374,7 +379,11 @@ const MarkdownTokenDictionary: MarkdownTokenDictionaryType = {
   [MarkdownIndexType.CUELIST]: {
     type: MarkdownTokenType.CUELIST,
     label: MarkupLabelType.CUELIST,
-    pattern: /(?<=\w)=\(((\w+|\s|-|\.|,|POS:|DEF:)*)\)(?=$|\s|<\/|\*|_]|[\.,!"\?])/g
+    pattern: /(?<=\w)=\((\w+(,{0,1}\s*([\w\s*\.\>\!\,\-\_\/\@\%\&]*))*)\)(?=$|\.|\s|<\/|\*|_)/g
+
+    // /(?<=\w)=\((\w+)(,{0,1}\s{0,1}(POS:, DEF:,IMG:ALT){0,1}(\w+))*\)/g
+
+    //    (\w+)(,{0,1}\s{0,1}(POS:, DEF:,IMG: ALT){0,1}(\w+))*
     // pattern: /(?<=\s|^|[\.,!'"])\[_((\w|[\s"'\/\-\(\)\@\.,\:;\$\<\>%!])+)_\](?=$|\s|[\.,!"\?])/g
     //    markdown: MarkdownLabelType.FILLIN_OPEN
   },
