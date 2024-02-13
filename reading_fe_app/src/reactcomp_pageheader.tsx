@@ -24,6 +24,7 @@ import homePageGhostedIcon from "./img/button_home_ghosted.png";
 import siteMapIcon from "./img/button_sitemap1.png";
 import previousPageIcon from "./img/button_back.png";
 import previousPageGhostedIcon from "./img/button_back_ghosted.png";
+import reciteModeGhostedIcon from "./img/button_speak_ghosted.png";
 import { SettingsDialog } from "./reactcomp_settings";
 import { Request } from "./reducers";
 import { useAppDispatch, useDialog, useAppSelector } from "./hooks";
@@ -63,6 +64,9 @@ export const PageHeader = React.memo((props: IPageHeaderPropsType) => {
       </div>
       <div className="header-grid-fontupbutton">
         <FontAdjustUpButton />
+      </div>
+      <div className="header-grid-recitemodebutton">
+        <ReciteModeButton />
       </div>
       <div className="header-grid-settingbutton">
         <img
@@ -299,6 +303,31 @@ const FontAdjustDownButton = () => {
       alt="font adjust down"
       title="adjust font down"
       src={fontIcon}
+      onClick={onButtonClick}
+    />
+  );
+};
+const ReciteModeButton = () => {
+  const dispatch = useAppDispatch();
+  const fontDownEnabled: boolean = useAppSelector(
+    store => store.page_fontDown_enabled
+  );
+  let reciteModeIcon: string = reciteModeGhostedIcon;
+  if (fontDownEnabled) {
+    reciteModeIcon = reciteModeIcon;
+  } else {
+    reciteModeIcon = reciteModeIcon;
+  }
+  const onButtonClick = () => {
+    // if (fontDownEnabled)
+    //   dispatch(Request.Page_fontDownEnabled(changeFontSize(-fontQuantum)));
+  };
+  return (
+    <img
+      className="icon"
+      alt="recite mode"
+      title="recite mode"
+      src={reciteModeIcon}
       onClick={onButtonClick}
     />
   );
