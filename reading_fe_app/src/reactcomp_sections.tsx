@@ -20,6 +20,7 @@ import {
 } from "./pageContentType";
 import { SectionImageEntry } from "./reactcomp_sections_imageEntry";
 import { SectionFillin } from "./reactcomp_section_fillin";
+import { SectionGroupFillin } from "./reactcomp_section_groupfillin";
 import { Sentence } from "./reactcomp_sentences";
 
 export interface ISectionPropsType {
@@ -51,6 +52,11 @@ export const SectionDispatcher = React.memo((props: ISectionPropsType) => {
     case SectionVariantEnumType.listitem:
       // need to group because component will recursively render zero or more of each
       return <SectionLists active={props.active} section={props.section} />;
+    case SectionVariantEnumType.group_fillin:
+      console.log(`groupfillin`);
+      return (
+        <SectionGroupFillin active={props.active} section={props.section} />
+      );
     case SectionVariantEnumType.fillin:
       return <SectionFillin active={props.active} section={props.section} />;
     case SectionVariantEnumType.image_entry:
