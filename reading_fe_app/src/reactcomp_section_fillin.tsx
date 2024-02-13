@@ -24,7 +24,7 @@ import {
   IFillinResponseItemInitializer,
   //ISectionFillinHelpSettingInitializer,
   ISectionFillinItem,
-  ISectionFillinSetting,
+  ISectionFillinSettings,
   ISectionFillinVariant,
   ISectionFillinItemInitializer,
   PartOfSpeechEnumType,
@@ -46,7 +46,7 @@ import { useContext, useState } from "react";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { CPageLists, PageContext } from "./pageContext";
 import { SectionDispatcher, ISectionPropsType } from "./reactcomp_sections";
-import { SectionHeading } from "./reactcomp_section_fillin_heading";
+import { SectionControls } from "./reactcomp_section_fillin_heading";
 import { SectionFillinContext, cloneDeep } from "./fillinContext";
 import resetButton from "./img/button_reset1.png";
 import resetButtonGhosted from "./img/button_reset_ghosted.png";
@@ -116,16 +116,9 @@ export const SectionFillin = React.memo((props: ISectionPropsType): any => {
     clone.modified = false;
     setSectionFillin(clone);
   }
-
-  // useEffect(() => {
-  //   console.log(
-  //     `####fillinContext.sectionFillin.showTags=${fillinContext.sectionFillin.showTags} for sectionIdx=`
-  //   );
-  // }, [fillinContext.sectionFillin]);
-
   return (
     <SectionFillinContext.Provider value={{ sectionFillin, setSectionFillin }}>
-      <SectionHeading active={props.active} section={props.section} />
+      <SectionControls active={props.active} section={props.section} />
       <Responses active={props.active} section={props.section} />
       <Prompts active={props.active} section={props.section} />
     </SectionFillinContext.Provider>
@@ -214,7 +207,12 @@ const Responses = React.memo((props: ISectionPropsType): any => {
       fillinContext.setSectionFillin(clone);
       setResponses(cloneDeep(fillinContext.sectionFillin.responses));
     }
-  }, [resetSectionFillinIdx, dispatch, fillinContext.sectionFillin.idx]);
+  }, [
+    resetSectionFillinIdx,
+    dispatch,
+    fillinContext,
+    fillinContext.sectionFillin.idx
+  ]);
   if (
     fillinContext.sectionFillin.loaded &&
     sectionFillinIdx >= 0 &&
@@ -295,6 +293,7 @@ const ResponsesSelect = (props: IResponseItemsPropsType): any => {
           IFillinResponseItemInitializer(
             item.content,
             item.tag,
+            item.alternatives,
             item.referenceCount
           )
         );
