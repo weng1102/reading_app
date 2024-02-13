@@ -18,7 +18,7 @@ import { Request } from "./reducers";
 import { useEffect } from "react";
 import {
   ISectionFillinItem,
-  ISectionFillinSetting,
+  ISectionFillinSettings,
   PartOfSpeechEnumType,
   SectionFillinLayoutType,
   SectionFillinResponsesProgressionEnum,
@@ -51,7 +51,7 @@ import ResponsesShowRefCntButton from "./img/button_responsesrefcnt_show.png";
 import ResponsesHideRefCntButton from "./img/button_responsesrefcnt_hide.png";
 import ResponsesRefCntDisabledButton from "./img/button_responsesRefcnt_ghosted.png";
 import SectionHelpButton from "./img/button_help.png";
-export const SectionHeading = (props: ISectionPropsType) => {
+export const SectionControls = (props: ISectionPropsType) => {
   const fillinIdx = useContext(SectionFillinContext).sectionFillin.idx;
   // Manages layout of section heading including hiding, ghosting
   // controls e.g., buttons, sliders. Reset button
@@ -256,7 +256,7 @@ export const ProgressionSlider = () => {
       SectionFillinResponsesProgressionEnum
     )[progressionOrdinal];
     fillinContext.setSectionFillin(clone);
-  }, [progressionOrdinal]);
+  }, [progressionOrdinal, fillinContext.setSectionFillin]);
 
   // useEffect(() => {
   //   // console.log(`presetLevel changed to ${presetLevel}`);
@@ -343,7 +343,7 @@ export const ProgressionSlider = () => {
 };
 export const ResponsesLayoutButton = () => {
   const fillinContext = useContext(SectionFillinContext);
-  let currentSetting: ISectionFillinSetting =
+  let currentSetting: ISectionFillinSettings =
     fillinContext.sectionFillin.currentSetting;
   const showProgression: boolean = currentSetting.showProgression;
   const toggleLayout = () => {
@@ -401,7 +401,7 @@ export const ResponsesCategoryButton = () => {
   };
   let responsesCategoryButtonState: string;
   let responsesCategoryTitle: string = "";
-  let currentSetting: ISectionFillinSetting =
+  let currentSetting: ISectionFillinSettings =
     fillinContext.sectionFillin.currentSetting;
   if (
     currentSetting.progressionOrder ===
