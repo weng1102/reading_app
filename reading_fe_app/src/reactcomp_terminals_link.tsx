@@ -26,6 +26,7 @@ export const TerminalLink = React.memo((props: ITerminalPropsType): any => {
   let terminalTag: string = "link";
   let terminalBlockSubclass: string = `${terminalBlockClass}-${terminalTag}`;
   let terminalCssSubclass: string = "fillin-prompts-terminal";
+  let explicitLinkTag: boolean = false;
   return (
     <>
       <div className={terminalBlockClass}>
@@ -42,7 +43,7 @@ export const TerminalLink = React.memo((props: ITerminalPropsType): any => {
             )
           )}
         </div>
-        {terminalTag.length > 0 && (
+        {terminalTag.length > 0 && explicitLinkTag && (
           <div className="terminal-block-tag">{terminalTag}</div>
         )}
       </div>
