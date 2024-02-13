@@ -23,6 +23,7 @@ import {
   ITerminalContent,
   ITerminalInfo,
   IAcronymTerminalMeta,
+  ICurrencyTerminalMeta,
   IImageTerminalMeta,
   INumeralsTerminalMeta,
   IPassthruTagTerminalMeta,
@@ -39,6 +40,7 @@ import { TerminalImageEntry } from "./reactcomp_terminals_image";
 import { TerminalLink } from "./reactcomp_terminals_link";
 import { TerminalFillin } from "./reactcomp_terminals_fillin";
 import { ISettingsContext, SettingsContext } from "./settingsContext";
+import { PageContext } from "./pageContext";
 
 export interface ITerminalPropsType {
   active: boolean;
@@ -115,7 +117,17 @@ export const TerminalDispatcher = React.memo(
           />
         );
       case TerminalMetaEnumType.currency:
-        break;
+        return (
+          <TerminalCurrency
+            active={
+              currentTerminalIdx >= props.terminal.firstTermIdx &&
+              currentTerminalIdx <= props.terminal.lastTermIdx
+            }
+            terminal={props.terminal}
+            terminalCssSubclass={""}
+            tagged={false}
+          />
+        );
       case TerminalMetaEnumType.date:
         return (
           <TerminalDate
@@ -271,6 +283,20 @@ export const TerminalNumerals = React.memo((props: ITerminalPropsType): any => {
     </>
   ); // return
 });
+export const TerminalCurrency = React.memo((props: ITerminalPropsType): any => {
+  let termInfo: ICurrencyTerminalMeta = props.terminal
+    .meta as ICurrencyTerminalMeta;
+  console.log(
+    `amount=${termInfo.amount.content} currency=${termInfo.currency.content}`
+  );
+  return (
+    <TerminalNode
+      active={props.active}
+      class="currency"
+      terminalInfo={termInfo.amount}
+    />
+  );
+});
 export const TerminalPassthru = React.memo((props: ITerminalPropsType): any => {
   let passthruInfo: IPassthruTagTerminalMeta = props.terminal
     .meta as IPassthruTagTerminalMeta;
@@ -282,34 +308,46 @@ export const TerminalWord = React.memo((props: ITerminalPropsType): any => {
   //   `<TerminalWord active=${props.active} content=${props.terminal.content}/>`
   // );
   let wordInfo = props.terminal.meta as ITerminalInfo;
+  const pageContext = useContext(PageContext);
   const fillinContext = useContext(SectionFillinContext);
-  let showTags: boolean =
-    fillinContext.sectionFillin.currentSetting.showPromptTags;
-  let terminalTaggedAlready: boolean = props.tagged;
-  let partOfSpeechCueValid: boolean =
+  let tag: string = "";
+  // show tag priority
+  // 1) valid tag
+  // 2) show tags inherited
+  // 3) explicit fillin tag
+  // 4) page tag
+  if (
     props.terminal.cues !== undefined &&
     props.terminal.cues.partOfSpeech !== undefined &&
-    props.terminal.cues.partOfSpeech !== PartOfSpeechEnumType.untagged;
-  let showTerminalTag: boolean = true;
+    props.terminal.cues.partOfSpeech !== PartOfSpeechEnumType.untagged
+  ) {
+    // valid tag
+    if (props.tagged) {
+      // show tag based on inherited
+      tag = props.terminal.cues.partOfSpeech;
+    } else if (fillinContext !== null && fillinContext.sectionFillin.idx >= 0) {
+      if (fillinContext.sectionFillin.currentSetting.showPromptTags) {
+        tag = props.terminal.cues.partOfSpeech;
+      } else {
+        // if !showPromptTag is explicit overrides page tag
+      }
+      // show tag based on  fillin
+    } else if (
+      pageContext !== null &&
+      pageContext.showTags !== null &&
+      pageContext.showTags
+    ) {
+      // show tag based on page
+      console.log(`page tag=true`);
+      tag = props.terminal.cues.partOfSpeech;
+    } else {
+      // do not show tag
+    }
+  } else {
+  }
   let defaultTag: string = `word`;
   let terminalStyle: string = `terminal-block-word`;
   // console.log(`<TerminalWord> ${props.terminal.content}`);
-  let tag: string = "";
-  if (!showTerminalTag) {
-    tag = "";
-  } else {
-    if (terminalTaggedAlready) {
-      // console.log(`${props.terminal.content} terminalTaggedAlready`);
-      //      tag = "";
-    } else {
-      // cues
-      if (showTags && partOfSpeechCueValid) {
-        tag = props.terminal.cues.partOfSpeech;
-      } else {
-        tag = "";
-      }
-    }
-  }
   if (tag.length > 0) {
     return (
       <>
@@ -511,7 +549,7 @@ export const TerminalImage = React.memo(
     ) as ISettingsContext;
     let distDir = settingsContext.settings.config.distDir;
     let path: string = `${distDir}/img/${props.imageInfo.src}`;
-    let overlayImgSrc = `${distDir}/img/link_overlay.png`;
+    let overlayImgSrc = `${distDir}/img/link_overlay_white.png`;
     let overlayClass = `imageentry-image-link ${props.imageInfo.className}`;
     let hasDimensions = props.imageInfo.width > 0 && props.imageInfo.height > 0;
     let hasLink = props.imageInfo.linkIdx >= 0;
@@ -522,7 +560,12 @@ export const TerminalImage = React.memo(
     } else {
       classNameString = props.imageInfo.className;
     }
+    console.log(` src=${props.imageInfo.src}`);
+
     if (hasLink) {
+      console.log(
+        `hasLink width=${props.imageInfo.width},height=${props.imageInfo.height}`
+      );
       return (
         <div className="image-link-overlay-container">
           <img
@@ -543,6 +586,9 @@ export const TerminalImage = React.memo(
         </div>
       );
     } else if (hasDimensions) {
+      console.log(
+        `hasDim width=${props.imageInfo.width},height=${props.imageInfo.height}`
+      );
       return (
         <>
           <img
@@ -555,6 +601,9 @@ export const TerminalImage = React.memo(
         </>
       );
     } else {
+      console.log(
+        `neither width=${props.imageInfo.width},height=${props.imageInfo.height}`
+      );
       return (
         <>
           <img
