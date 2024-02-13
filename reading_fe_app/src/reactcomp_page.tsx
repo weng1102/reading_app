@@ -27,24 +27,26 @@
  *    locations (i.e, cursor_terminalIdx or sectionidx) can be validated and
  *    subsequently assigned within the reducer for eventual consumption by
  *    react component(s).
+ * 4) Load the previousPage stack and reset internal state for next request.
  *
  * Even though reducer state tracks both the Requested and pageContext
  * changes, internal component state variable requestedPage, isPageFetched and
  *  loadedPage track when new load is requested, fetched and loaded.
  *
  * Request states:
- *  1) Determine userRequestedPage based on change to reducer states:
- *    a) pageHomeRequested, or
- *    b) pagePopRequested, or
- *    c) userPageRequested
+ *  1) Determine pageRequested based on change to reducer states:
+ *    a) pageRequested_home, or
+ *    b) pageRequested_pop, or
+ *    c) pageRequested_link
  *
- *  2) Set requestedPage to be fteched based on change to pageHomeRequested,
- *     pagePopRequested, or userRequestedPage
+ *  2) Set requestedPage to be fetched
  *
- *  3) fetch context and content
+ *  3) load context and content that triggers render
+ *     The content is not rendered until the context and content are fetched
+ *     and parsed successfully to prevent needless rerendering of <Content>
  *
- * The content is not rendered until the context and content are fetched
- * and parsed successfully to prevent needless rerendering of <Content>
+ *  4) Update page stack
+ *
  *
  * Version history:
  *
@@ -53,14 +55,14 @@ import React from "react";
 import "./App.css";
 import { Request } from "./reducers";
 import { useAppDispatch, useAppSelector, useDialog } from "./hooks";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useCallback } from "react";
 import {
-  IDX_INITIALIZER,
   IPageContent,
   IPageRequestItem,
   ISectionContent,
   // LinkIdxDestinationType,
   PageContentVersion,
+  PageRequestItemType,
   PageRequestItemInitializer
 } from "./pageContentType";
 import { CPageLists, PageContext } from "./pageContext";
@@ -75,85 +77,48 @@ export interface IPagePropsType {
   appName: string;
 }
 export const Page = React.memo((props: IPagePropsType) => {
-  const [userRequestedPage, setUserRequestedPage] = useState<IPageRequestItem>(
+  const [pageRequested, setPageRequested] = useState<IPageRequestItem>(
     PageRequestItemInitializer()
   );
-  const [requestedPage, setRequestedPage] = useState<IPageRequestItem>(
-    PageRequestItemInitializer()
-  );
+  // const [pageFetchRequested, setPageFetchRequested] = useState<string>("");
   const [previouslyLoadedPage, setPreviouslyLoadedPage] = useState<
     IPageRequestItem
   >(PageRequestItemInitializer());
-  const [loadedPage, setLoadedPage] = useState<IPageRequestItem>(
+  const [pageLoaded, setPageLoaded] = useState<IPageRequestItem>(
     PageRequestItemInitializer()
   );
-  const [responseError, setResponseError] = useState<string>("");
-  const [parseError, setParseError] = useState<string>("");
+  // required for updating state after content/context loaded based on request
+  const [pageRequestType, setPageRequestType] = useState<number>(
+    PageRequestItemType.unknown
+  );
+  //////////////////////
+  // page content state
   const [pageContext, setPageContext] = useState<CPageLists | null>(null);
   const [pageContent, setPageContent] = useState<IPageContent | null>(null);
-  const [isPageFetched, setIsPageFetched] = useState<boolean>(false);
-  const [pageMessage, setPageMessage] = useState<string>("");
+  const [responseError, setResponseError] = useState<string>("");
+  const [parseError, setParseError] = useState<string>("");
   const [previousPages, setPreviousPages] = useState<IPageRequestItem[]>([]);
-  const { isActive, toggleDialog } = useDialog();
 
-  console.log = () => {};
-  const fetchRequest = (page: string) => {
-    setIsPageFetched(false);
-    fetch(page, {
-      method: "GET",
-      headers: {
-        Accept: "application/json"
-      }
-    })
-      .then(
-        response => {
-          if (!response.ok)
-            setResponseError(`HTTP status code ${response.status} for ${page}`);
-          // could import lookup for status
-          return response.json();
-        },
-        error => {
-          setResponseError(error);
-        }
-      )
-      .then(
-        data => {
-          try {
-            if (data.version !== PageContentVersion) {
-              setParseError(
-                `Mismatching application and json formats. Expected ${PageContentVersion} but encountered ${data.version} in content`
-              );
-            } else {
-              let content: IPageContent = data as IPageContent;
-              message = `Parsing json for "${requestedPage.page}"`;
-              dispatch(Request.Message_set(message));
-              // setPageContext(null);
-              let pageLists: CPageLists = new CPageLists(
-                content.terminalList,
-                content.headingList,
-                content.sectionList,
-                content.sentenceList,
-                content.linkList,
-                content.fillinList
-              );
-              setPageContext(pageLists);
-              setPageContent(content);
-              dispatch(Request.Message_set(message));
-              dispatch(Request.Page_setContext(pageLists));
-              setIsPageFetched(true);
-            }
-          } catch (e) {
-            let message: string = (e as Error).message;
-            message = `Encountered unexpected loading error: ${message}`;
-            dispatch(Request.Message_set(message));
-          }
-        },
-        error => {
-          // some other parseError
-          if (parseError.length > 0) setParseError(error);
-        }
-      );
-  };
+  // const [isPageInitialized, setIsPageInitialized] = useState<boolean>(false);
+
+  // mutually exclusive page states
+  //  const [isPageRequested, setIsPageRequested] = useState<boolean>(false);
+  const [isPageContentFetched, setIsPageContentFetched] = useState<boolean>(
+    false
+  );
+  const [isPageRequestInProgress, setIsPageRequestInProgress] = useState<
+    boolean
+  >(false);
+  const [pageMessage, setPageMessage] = useState<string>("");
+  const { isActive, toggleDialog } = useDialog();
+  const dispatch = useAppDispatch();
+
+  const settingsContext: ISettingsContext = useContext(SettingsContext)!;
+  const distDir: string = settingsContext.settings.config.distDir;
+  const homePagePath: string = `homepage_${settingsContext.settings.config.homePage}`;
+  //  const isPageLoaded: boolean = useAppSelector(store => store.page_loaded);
+  //  console.log = () => {};
+
   const dumpPageRequestItemsAsCsv = (pageStack: IPageRequestItem[]): string => {
     let list: string = "";
     if (pageStack.length > 0) {
@@ -166,171 +131,301 @@ export const Page = React.memo((props: IPagePropsType) => {
     }
     return list;
   };
-  const dispatch = useAppDispatch();
 
-  let message: string = "";
-  const settingsContext: ISettingsContext = useContext(SettingsContext)!;
-  const distDir: string = settingsContext.settings.config.distDir;
-  const homePage: string = `homepage_${settingsContext.settings.config.homePage}`;
-  const pageLoaded: boolean = useAppSelector(store => store.page_loaded);
+  const fetchPageRequested = useCallback(() => {
+    let page: string = distDir + pageRequested.page + ".json";
+    let message: string = `Page fetch requested for ${page}`;
+    dispatch(Request.Message_set(message));
+    fetch(page, {
+      method: "GET",
+      // mode: "cors",
+      headers: {
+        Accept: "application/json"
+      }
+    })
+      .then(
+        response => {
+          // setIsPageFetchRequested(false);
+          if (!response.ok)
+            setResponseError(`HTTP status code ${response.status} for ${page}`);
+          // could import lookup for status
+          return response.json();
+        },
+        error => {
+          // setIsPageFetchRequested(false);
+          setResponseError(error);
+        }
+      )
+      .then(
+        data => {
+          try {
+            // setIsPageFetchRequested(false);
+            if (data.version !== PageContentVersion) {
+              setParseError(
+                `Mismatching application and json formats. Expected ${PageContentVersion} but encountered ${data.version} in content`
+              );
+            } else {
+              let content: IPageContent = data as IPageContent;
+              message = `Parsing json for "${page}"`;
+              dispatch(Request.Message_set(message));
+              // setPageContext(null);
+              let pageLists: CPageLists = new CPageLists(
+                content.showTags,
+                content.terminalList,
+                content.headingList,
+                content.sectionList,
+                content.sentenceList,
+                content.linkList,
+                content.fillinList
+              );
+              setPageContext(pageLists);
+              setPageContent(content);
+              dispatch(Request.Message_set(message));
+              dispatch(Request.Page_setContext(pageLists));
+              setIsPageContentFetched(true);
+              message = `Page fetched, data loaded and parsed successfully for "${page}"`;
+              dispatch(Request.Message_set(message));
+            }
+          } catch (e) {
+            let message: string = (e as Error).message;
+            message = `Encountered unexpected loading error: ${message}`;
+            dispatch(Request.Message_set(message));
+          }
+        },
+        error => {
+          // some other parseError
+          if (parseError.length > 0) setParseError(error);
+        }
+      );
+  }, [
+    dispatch,
+    // setParseError,
+    // setResponseError,
+    // setPageContent,
+    // setPageContext,
+    // setIsPageContentFetched,
+    pageRequested.page,
+    distDir,
+    parseError.length
+  ]);
+
+  //////////////////////
+  // initial entry point
+  //////////////////////
 
   // triggers to render
-  const userPageRequested: IPageRequestItem = useAppSelector(
+  const pageRequested_link: IPageRequestItem = useAppSelector(
     store => store.page_requested
   );
-  const pagePopRequested: boolean = useAppSelector(
+  const pageRequested_pop: boolean = useAppSelector(
     store => store.page_pop_requested
   );
-  const pageHomeRequested: boolean = useAppSelector(
+  const pageRequested_home: boolean = useAppSelector(
     store => store.page_home_requested
   );
   const currentTermIdx: number = useAppSelector(
     store => store.cursor_terminalIdx
   );
-  const reducerPageContext = useAppSelector(store => store.pageContext);
-
   useEffect(() => {
     setPageMessage(parseError);
+    setParseError("");
   }, [parseError]);
   useEffect(() => {
     setPageMessage(responseError);
+    setIsPageRequestInProgress(false);
   }, [responseError]);
-
-  // Set userRequestedPage based on userPageRequested
+  /////////////////////////////////////
+  // page requested: home, pop, or link
+  /////////////////////////////////////
   useEffect(() => {
-    if (
-      userPageRequested.page.length > 0 &&
-      userPageRequested.page !== userRequestedPage.page &&
-      userPageRequested.page !== requestedPage.page &&
-      userPageRequested.page !== loadedPage.page
-    ) {
-      // userPageRequested cannot be same as the immediately previous
-      // userRequestedPage especially when immediately preceded by
-      // pageHomeRequested or pagePopRequested requests.
-      setUserRequestedPage(userPageRequested);
-    }
-  }, [userPageRequested]);
-
-  // Before page is fetched, determine requested page based on user event
-  useEffect(() => {
-    // Sets requestedPage given changes to pagePopRequested, pageHomeRequested,
-    // userRequestedPage
-    if (pageHomeRequested) {
-      setRequestedPage(PageRequestItemInitializer(homePage));
-      dispatch(Request.Page_loaded(false));
-      if (loadedPage.page !== homePage) {
-        message = "**Requesting Home page";
+    //setPageRequested iff no current pageRequested (i.e., pageRequested.page
+    // is currently unspecified.
+    let requestedPage: IPageRequestItem;
+    let requestedType: PageRequestItemType;
+    if (!isPageRequestInProgress) {
+      if (pageRequested_home) {
+        requestedPage = PageRequestItemInitializer(homePagePath);
+        requestedType = PageRequestItemType.home;
+      } else if (pageRequested_pop) {
+        requestedPage = previousPages.slice(-1)[0];
+        requestedType = PageRequestItemType.pop;
+      } else if (pageRequested_link.page.length > 0) {
+        requestedPage = pageRequested_link;
+        requestedType = PageRequestItemType.link;
       } else {
-        message = "Home page already loaded";
+        requestedPage = PageRequestItemInitializer();
+        requestedType = PageRequestItemType.unknown;
       }
-    } else if (pagePopRequested) {
-      if (previousPages.length > 0) {
-        setRequestedPage(previousPages.slice(-1)[0]);
-        dispatch(Request.Page_loaded(false));
-        message = `Requesting pop to "${previousPages.slice(-1)[0].page}"`;
-      } else {
-        message = `Warning: No previous page to which to pop`;
-      }
-    } else {
-      // user page requested
       if (
-        userRequestedPage.page.length > 0 &&
-        userRequestedPage.page !== loadedPage.page
+        requestedPage.page !== pageLoaded.page &&
+        requestedType !== PageRequestItemType.unknown
       ) {
-        message = `**Requesting page "${userRequestedPage.page}"`;
-        setRequestedPage(userRequestedPage);
-        dispatch(Request.Page_loaded(false));
-      } else if (userRequestedPage.page.length === 0) {
-        // userRequestPage is set to "" explicitly and purposely ignored
-        // to prevent retriggering when pop and home page requests are
-        // reset to false.
-      } else if (userRequestedPage.page === loadedPage.page) {
-        message = `Warning: Attempting to reload loaded page ${userRequestedPage.page}`;
-      } else {
-        message = `Warning: Unexpected request state where requested page =""${requestedPage}"`;
-      }
-    }
-    setPageMessage(message);
-    console.log(message);
-  }, [userRequestedPage, pagePopRequested, pageHomeRequested]);
-
-  // After requestPage change, Fetch page
-  useEffect(() => {
-    if (!pageLoaded && requestedPage.page.length > 0) {
-      setPageMessage(`Fetching ${requestedPage.page}`);
-      console.log(`**Fetching "${requestedPage.page}"`);
-      let page: string = distDir + requestedPage.page + ".json";
-      fetchRequest(page);
-    }
-  }, [requestedPage]);
-
-  // After page is fetched but before page is loaded, parse and loaded
-  // content and context
-  useEffect(() => {
-    // After fetch and pageContext load into reducer, mark page loaded
-    if (isPageFetched && reducerPageContext === pageContext) {
-      if (loadedPage.page.length > 0) {
-        setPreviouslyLoadedPage({
-          page: loadedPage.page,
-          currentTermIdx: currentTermIdx
-        });
-      }
-      setLoadedPage(requestedPage);
-      dispatch(Request.Page_loaded(true));
-      setPageMessage(`Page data loaded and parsed successfully`);
-    } else {
-      setPageMessage(`Reducer page context not set yet`);
-    }
-  }, [isPageFetched, reducerPageContext, pageContext]);
-
-  // After page is loaded update previousPages stack
-  useEffect(() => {
-    if (pageLoaded) {
-      if (requestedPage.currentTermIdx < 0) {
-        dispatch(Request.Cursor_gotoWordByIdx(0)); // default to first terminal
-      } else {
-        dispatch(Request.Cursor_gotoWordByIdx(requestedPage.currentTermIdx));
-      }
-      let pageStack: IPageRequestItem[] = [];
-      if (pagePopRequested) {
-        dispatch(Request.Page_popped());
-        pageStack = [...previousPages];
+        setIsPageRequestInProgress(true);
+        setPageRequested(requestedPage);
+        setPageRequestType(requestedType);
         console.log(
-          `pageLoaded before pop ${dumpPageRequestItemsAsCsv(pageStack)}`
+          `@@page requested: pageRequested=${requestedPage.page} !== pageLoaded=${pageLoaded.page} type=${requestedType}`
         );
-        if (previousPages.length > 0) {
-          pageStack = [...previousPages].slice(0, -1);
+      } else {
+        console.log(`@@page requested already loaded: ${requestedPage.page}`);
+      }
+    }
+  }, [
+    pageRequested,
+    pageRequested_link,
+    pageRequested_home,
+    pageRequested_pop,
+    setPageRequested,
+    setPageRequestType,
+    isPageRequestInProgress,
+    setIsPageRequestInProgress,
+    homePagePath,
+    pageLoaded.page,
+    previousPages
+  ]);
+  ////////////////////////////////////////////////////////
+  // page fetching after pageRequested: home, pop, or link
+  ////////////////////////////////////////////////////////
+
+  useEffect(() => {
+    let message: string = ``;
+    if (
+      isPageRequestInProgress &&
+      !isPageContentFetched &&
+      pageRequested.page.length > 0
+    ) {
+      console.log(
+        `@@page fetching: page=${pageRequested.page}  pageRequested=${pageRequested.page},pageLoaded=${pageLoaded.page})`
+      );
+      dispatch(Request.Page_loaded(false));
+      setIsPageContentFetched(false);
+
+      fetchPageRequested();
+      // }
+      console.log(message);
+      setPageMessage(message);
+    }
+  }, [
+    pageRequested,
+    pageLoaded,
+    pageRequested.page,
+    isPageContentFetched,
+    // setPageMessage,
+    dispatch,
+    parseError,
+    distDir,
+    // setPageContext,
+    // setPageContent,
+    pageRequestType,
+    isPageRequestInProgress,
+    fetchPageRequested
+    //    setPageLoaded
+  ]);
+  // Handles (re)setting state after page fetch completes until page is loaded
+  useEffect(() => {
+    if (isPageContentFetched) {
+      console.log(`@@page content fetched:
+pageRequested=${pageRequested.page},isPageContentFetched=${isPageContentFetched},pageLoaded=${pageLoaded.page}`);
+      let message: string = "After page fetched";
+      if (isPageContentFetched) {
+        if (pageLoaded.page.length > 0) {
+          setPreviouslyLoadedPage({
+            page: pageLoaded.page,
+            currentTermIdx: currentTermIdx
+          });
+          message = `Page fetched, data loaded and parsed successfully for "${pageRequested.page}"`;
+        } else {
+          console.log(`No previous page to push into stack`);
         }
-        console.log(
-          `pageLoaded after pop ${dumpPageRequestItemsAsCsv(pageStack)}`
-        );
-      } else if (pageHomeRequested) {
-        dispatch(Request.Page_homed());
-        pageStack = [];
-      } else if (
-        loadedPage.page.length > 0 &&
-        previouslyLoadedPage.page.length > 0 &&
-        loadedPage.page !== previouslyLoadedPage.page
-      ) {
-        console.log(
-          `pageLoaded before push ${dumpPageRequestItemsAsCsv(pageStack)}`
-        );
-        pageStack = [...previousPages, previouslyLoadedPage];
-        setUserRequestedPage(PageRequestItemInitializer());
+        setPageLoaded(pageRequested);
       } else {
-        console.log(`unknown  ${dumpPageRequestItemsAsCsv(pageStack)}`);
-        pageStack = [];
+        message = `Page fetch not yet requested`;
+        setPageMessage(message);
       }
-      if (pageStack.length === 0) {
-        dispatch(Request.Page_previousEnabled(false)); // ghost button
-        dispatch(Request.Page_homeEnabled(false)); // ghost button
-      } else {
-        dispatch(Request.Page_previousEnabled(true));
-        dispatch(Request.Page_homeEnabled(true));
-      }
-      setPreviousPages(pageStack);
     }
-  }, [pageLoaded]);
+  }, [
+    // setPreviouslyLoadedPage,
+    isPageContentFetched,
+    pageLoaded,
+    // setPageMessage,
+    currentTermIdx,
+    pageRequested,
+    pageRequestType
+  ]);
+  // After page is loaded update currentTermIdx and previousPages stack
+  useEffect(() => {
+    if (pageRequested.page.length > 0 && pageLoaded.page.length > 0) {
+      console.log(
+        `@@page loaded: pageRequested=${pageRequested.page},pageLoaded=${pageLoaded.page}`
+      );
+      setIsPageContentFetched(false);
+      if (
+        pageRequested.page === pageLoaded.page &&
+        pageRequested.currentTermIdx === pageLoaded.currentTermIdx
+      ) {
+        // setIsPageInitialized(true);
+        if (pageLoaded.currentTermIdx < 0) {
+          dispatch(Request.Cursor_gotoWordByIdx(0)); // default to first terminal
+        } else {
+          dispatch(Request.Cursor_gotoWordByIdx(pageLoaded.currentTermIdx));
+        }
+        let pageStack: IPageRequestItem[] = [];
+        if (pageRequestType === PageRequestItemType.pop) {
+          dispatch(Request.Page_popped());
+          pageStack = [...previousPages];
+          console.log(
+            `isPageLoaded before pop ${dumpPageRequestItemsAsCsv(pageStack)}`
+          );
+          if (previousPages.length > 0) {
+            pageStack = [...previousPages].slice(0, -1);
+          }
+          console.log(
+            `isPageLoaded after pop ${dumpPageRequestItemsAsCsv(pageStack)}`
+          );
+        } else if (pageRequestType === PageRequestItemType.home) {
+          dispatch(Request.Page_homed());
+          pageStack = [];
+        } else if (
+          pageLoaded.page.length > 0 &&
+          previouslyLoadedPage.page.length > 0 &&
+          pageLoaded.page !== previouslyLoadedPage.page
+        ) {
+          console.log(
+            `isPageLoaded before push ${dumpPageRequestItemsAsCsv(pageStack)}`
+          );
+          pageStack = [...previousPages, previouslyLoadedPage];
+          ///////        setUserRequestedPage(PageRequestItemInitializer());
+        } else {
+          console.log(`unknown  ${dumpPageRequestItemsAsCsv(pageStack)}`);
+          pageStack = [];
+        }
+        if (pageStack.length === 0) {
+          dispatch(Request.Page_previousEnabled(false)); // ghost button
+          dispatch(Request.Page_homeEnabled(false)); // ghost button
+        } else {
+          dispatch(Request.Page_previousEnabled(true));
+          dispatch(Request.Page_homeEnabled(true));
+        }
+        setPreviousPages(pageStack);
+        dispatch(Request.Page_loaded(true));
+        setPageRequested(PageRequestItemInitializer());
+        // setIsPageInitialized(true);
+        setIsPageRequestInProgress(false);
+        console.log(`@@page load completed`);
+      }
+    }
+  }, [
+    pageRequested,
+    pageLoaded,
+    dispatch,
+    previouslyLoadedPage,
+    previousPages,
+    pageRequestType
+    // setIsPageContentFetched,
+    // setPageRequested,
+    // setPreviousPages,
+    // setIsPageRequestInProgress
+  ]);
 
   useEffect(() => {
     if (previousPages.length === 0) {
@@ -339,7 +434,9 @@ export const Page = React.memo((props: IPagePropsType) => {
       console.log(`${dumpPageRequestItemsAsCsv(previousPages)}`);
     }
   }, [previousPages]);
-
+  ////////////
+  // Rendering
+  ////////////
   console.log(pageMessage);
   dispatch(Request.Message_set(pageMessage));
   return (
