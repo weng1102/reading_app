@@ -90,6 +90,7 @@ export class TerminalNode_MLTAG_PHONENUMBER extends TerminalNode_MLTAG_
               undefined,
               undefined,
               undefined,
+              undefined,
               true
             )
           ) - 1;
@@ -130,6 +131,7 @@ export class TerminalNode_MLTAG_PHONENUMBER extends TerminalNode_MLTAG_
               undefined,
               undefined,
               undefined,
+              undefined,
               true
             )
           ) - 1;
@@ -154,6 +156,7 @@ export class TerminalNode_MLTAG_PHONENUMBER extends TerminalNode_MLTAG_
           this.meta.lineNumber.push(
             ITerminalInfoInitializer(
               digit,
+              undefined,
               undefined,
               undefined,
               undefined,
