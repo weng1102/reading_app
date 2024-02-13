@@ -81,7 +81,7 @@ export const TerminalFillin = React.memo((props: ITerminalPropsType): any => {
         visible: { ...terminalFillin.visible, [relativeIdx]: visibleSetFill }
       });
     }
-  }, [showTerminalIdx, terminalFillin]);
+  }, [showTerminalIdx, terminalFillin, visibleSetFill]);
 
   useEffect(() => {
     // console.log(
@@ -111,7 +111,8 @@ export const TerminalFillin = React.memo((props: ITerminalPropsType): any => {
     sectionFillinContext.sectionFillin.loaded,
     sectionFillinContext.sectionFillin.modified,
     sectionFillinContext.sectionFillin.currentSetting.showResponsesInPrompts,
-    visibleResetFill
+    visibleResetFill,
+    fillinContent.sectionFillinIdx
   ]);
   // useEffect(() => {
   //   console.log(`TerminalFillin5: preset changes`);
