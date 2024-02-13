@@ -345,7 +345,6 @@ export class TerminalNode_SYMBOL extends AbstractTerminalNode
     prefix?: string
   ): string {
     let outputStr = super.serialize(format, label, prefix);
-    console.log(`hello`);
     return outputStr;
   }
   transform() {
@@ -732,8 +731,9 @@ export class TerminalNode_MLTAG_USD extends TerminalNode_MLTAG_
   parse(tokenList: TokenListType): number {
     super.parse(tokenList);
     // KNOWN ISSUE HERE
+    this.meta.amount = ITerminalInfoInitializer(this.content);
     this.termIdx = this.userContext.terminals.push(
-      ITerminalListItemInitializer(this.meta.currency)
+      ITerminalListItemInitializer(this.meta.amount)
     );
     this.firstTermIdx = this.termIdx;
     this.lastTermIdx = this.termIdx;
