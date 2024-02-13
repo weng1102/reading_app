@@ -102,7 +102,8 @@ export class TerminalNode_MLTAG_FILLIN extends TerminalNode_MLTAG_
             responseIdx
           ] = this.userContext.fillins.addResponse(
             this.content,
-            terminalNode.cues.partOfSpeech
+            terminalNode.cues.partOfSpeech,
+            terminalNode.cues.alternatives
           );
           (<ITerminalInfo>terminalNode.meta).fillin.responseIdx = responseIdx;
           this.meta.sectionFillinIdx = fillinSectionIdx;
