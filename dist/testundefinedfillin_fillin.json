@@ -6,11 +6,11 @@
   "owner": "anonymous",
   "author": "Wen",
   "category": "Fillins",
-  "version": "20230706.1",
+  "version": "20231102.1",
   "pageFormatType": 0,
-  "created": "Sat Jul 29 2023 08:13:29 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Sat Jul 29 2023 08:13:29 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Sat Jul 29 2023 08:13:29 GMT-0700 (Pacific Daylight Time)",
+  "created": "Sun Feb 04 2024 17:05:05 GMT-0800 (Pacific Standard Time)",
+  "modified": "Sun Feb 04 2024 17:05:05 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Sun Feb 04 2024 17:05:05 GMT-0800 (Pacific Standard Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -30,7 +30,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 0,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -105,7 +105,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 1,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -196,6 +196,7 @@
           "helpfulness": 814
         },
         "allowReset": true,
+        "maxPromptsPerSection": 0,
         "promptColumns": 2,
         "showPresets": true,
         "prompts": [
@@ -648,12 +649,19 @@
             "meta": {
               "depth": 1,
               "startNumber": 0,
-              "listType": 6
+              "listType": 6,
+              "subsectionOrdinal": 1
             },
             "type": "ordered_list"
           }
-        ]
-      }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     }
   ],
   "terminalList": [
@@ -668,7 +676,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -699,7 +707,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -850,13 +858,15 @@
     {
       "headingLevel": 1,
       "title": "Foods",
-      "termIdx": 0,
+      "firstTermIdx": 0,
+      "lastTermIdx": 0,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 2,
       "title": "Breakfast",
-      "termIdx": 1,
+      "firstTermIdx": 1,
+      "lastTermIdx": 5,
       "terminalCountPriorToHeading": -9999
     }
   ],
@@ -936,16 +946,19 @@
         {
           "content": "ice",
           "tag": "noun",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "cream",
           "tag": "noun",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "dessert",
           "tag": "noun",
+          "alternatives": [],
           "referenceCount": 1
         }
       ],

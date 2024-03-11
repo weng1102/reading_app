@@ -6,11 +6,11 @@
   "owner": "anonymous",
   "author": "Wen",
   "category": "Sentence Completion (trailing word)",
-  "version": "20230706.1",
+  "version": "20231102.1",
   "pageFormatType": 0,
-  "created": "Sat Jul 29 2023 08:13:28 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Sat Jul 29 2023 08:13:28 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Sat Jul 29 2023 08:13:28 GMT-0700 (Pacific Daylight Time)",
+  "created": "Sun Feb 04 2024 17:05:03 GMT-0800 (Pacific Standard Time)",
+  "modified": "Sun Feb 04 2024 17:05:03 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Sun Feb 04 2024 17:05:03 GMT-0800 (Pacific Standard Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -30,7 +30,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 0,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -454,7 +454,7 @@
                 },
                 "firstTermIdx": 5,
                 "lastTermIdx": 5,
-                "type": 17,
+                "type": 12,
                 "meta": {
                   "content": "exercises",
                   "cues": [],
@@ -2468,7 +2468,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 29,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -2559,6 +2559,7 @@
           "helpfulness": 814
         },
         "allowReset": true,
+        "maxPromptsPerSection": 0,
         "promptColumns": 1,
         "showPresets": true,
         "prompts": [
@@ -12497,12 +12498,19 @@
             "meta": {
               "depth": 1,
               "startNumber": 0,
-              "listType": 6
+              "listType": 6,
+              "subsectionOrdinal": 1
             },
             "type": "unordered_list"
           }
-        ]
-      }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -12534,6 +12542,7 @@
           "helpfulness": 814
         },
         "allowReset": true,
+        "maxPromptsPerSection": 0,
         "promptColumns": 1,
         "showPresets": true,
         "prompts": [
@@ -22536,12 +22545,19 @@
             "meta": {
               "depth": 1,
               "startNumber": 0,
-              "listType": 6
+              "listType": 6,
+              "subsectionOrdinal": 1
             },
             "type": "unordered_list"
           }
-        ]
-      }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -22573,6 +22589,7 @@
           "helpfulness": 814
         },
         "allowReset": true,
+        "maxPromptsPerSection": 0,
         "promptColumns": 1,
         "showPresets": true,
         "prompts": [
@@ -31859,12 +31876,19 @@
             "meta": {
               "depth": 1,
               "startNumber": 0,
-              "listType": 6
+              "listType": 6,
+              "subsectionOrdinal": 1
             },
             "type": "unordered_list"
           }
-        ]
-      }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -31896,6 +31920,7 @@
           "helpfulness": 814
         },
         "allowReset": true,
+        "maxPromptsPerSection": 0,
         "promptColumns": 1,
         "showPresets": true,
         "prompts": [
@@ -40482,7 +40507,7 @@
                                     },
                                     "firstTermIdx": 451,
                                     "lastTermIdx": 451,
-                                    "type": 17,
+                                    "type": 12,
                                     "meta": {
                                       "content": "taxidermist",
                                       "cues": [],
@@ -40574,12 +40599,19 @@
             "meta": {
               "depth": 1,
               "startNumber": 0,
-              "listType": 6
+              "listType": 6,
+              "subsectionOrdinal": 1
             },
             "type": "unordered_list"
           }
-        ]
-      }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -40606,7 +40638,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -40637,7 +40669,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -40668,7 +40700,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -40914,7 +40946,7 @@
         9
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -41162,7 +41194,7 @@
         17
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -41348,7 +41380,7 @@
         23
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "know",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -41505,7 +41537,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -41782,7 +41814,7 @@
         37
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "and|ann|anne|n",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -41999,7 +42031,7 @@
         44
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -42340,7 +42372,7 @@
         55
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -43456,7 +43488,7 @@
         91
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -44045,7 +44077,7 @@
         110
       ],
       "altpronunciation": "rights",
-      "altrecognition": "",
+      "altrecognition": "rites|rights",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -44138,7 +44170,7 @@
         113
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "and|ann|anne|n",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -44913,7 +44945,7 @@
         138
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "disk",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -45161,7 +45193,7 @@
         146
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -46308,7 +46340,7 @@
         183
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "minor",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -46556,7 +46588,7 @@
         191
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -46804,7 +46836,7 @@
         199
       ],
       "altpronunciation": "cells",
-      "altrecognition": "",
+      "altrecognition": "cells",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -47548,7 +47580,7 @@
         223
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -47579,7 +47611,7 @@
         224
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "and|ann|anne|n",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -49594,7 +49626,7 @@
         289
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "and|ann|anne|n",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -50059,7 +50091,7 @@
         304
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "medal",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -50121,7 +50153,7 @@
         306
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "medal",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -50152,7 +50184,7 @@
         307
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "buy",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -50400,7 +50432,7 @@
         315
       ],
       "altpronunciation": "rights",
-      "altrecognition": "",
+      "altrecognition": "rites|rights",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -50896,7 +50928,7 @@
         331
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "and|ann|anne|n",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -51578,7 +51610,7 @@
         353
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "and|ann|anne|n",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -51981,7 +52013,7 @@
         366
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "and|ann|anne|n",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -52446,7 +52478,7 @@
         381
       ],
       "altpronunciation": "cells",
-      "altrecognition": "",
+      "altrecognition": "cells",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -52632,7 +52664,7 @@
         387
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "traitor",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -53159,7 +53191,7 @@
         404
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "overseas",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -53438,7 +53470,7 @@
         413
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "here's",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -53593,7 +53625,7 @@
         418
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -53934,7 +53966,7 @@
         429
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "and|ann|anne|n",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -54608,13 +54640,15 @@
     {
       "headingLevel": 1,
       "title": "Completing sentences progressively",
-      "termIdx": 0,
+      "firstTermIdx": 0,
+      "lastTermIdx": 28,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 2,
       "title": "Occupations",
-      "termIdx": 29,
+      "firstTermIdx": 29,
+      "lastTermIdx": 451,
       "terminalCountPriorToHeading": -9999
     }
   ],
@@ -55084,56 +55118,67 @@
         {
           "content": "artist",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "waiter",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "cook",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "photographer",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "biologist",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "florist",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "mechanic",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "author",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "mason",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "disc",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "jockey",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         }
       ],
@@ -55190,51 +55235,61 @@
         {
           "content": "lawyer",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "veterinarian",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "soldier",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "miner",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "jeweler",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "realtor",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "conductor",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "receptionist",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "candidate",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "professor",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         }
       ],
@@ -55291,51 +55346,61 @@
         {
           "content": "geologist",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "pediatrician",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "pharmacist",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "optometrist",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "chauffeur",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "welder",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "journalist",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "architect",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "neurologist",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "astronomer",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         }
       ],
@@ -55392,46 +55457,55 @@
         {
           "content": "archaeologist",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "meteorologist",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "trader",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "psychologist",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "banker",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "judge",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "orthodontist",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "dermatologist",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "taxidermist",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         }
       ],

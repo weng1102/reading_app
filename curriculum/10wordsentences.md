@@ -1,4 +1,4 @@
-[[page: Ten-word Sentences, Ronlyn, Wen, 7/11/2022, Sentence Bank, Sentences containing ten words /]]
+[[page: Sentences with Ten Words, Ronlyn, Wen, 7/11/2022, Sentence Bank, Sentences containing ten words /]]
 
 1. Will you get a headache if you think too hard?
 1. We will go home at the end of the day.

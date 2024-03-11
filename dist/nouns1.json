@@ -6,11 +6,11 @@
   "owner": "anonymous",
   "author": "Wen",
   "category": "Fillins",
-  "version": "20230706.1",
+  "version": "20231102.1",
   "pageFormatType": 0,
-  "created": "Sat Jul 29 2023 08:13:26 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Sat Jul 29 2023 08:13:26 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Sat Jul 29 2023 08:13:26 GMT-0700 (Pacific Daylight Time)",
+  "created": "Sun Feb 04 2024 17:05:02 GMT-0800 (Pacific Standard Time)",
+  "modified": "Sun Feb 04 2024 17:05:02 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Sun Feb 04 2024 17:05:02 GMT-0800 (Pacific Standard Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -30,7 +30,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 0,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -435,7 +435,7 @@
       "type": "fillin",
       "meta": {
         "sectionFillinIdx": 0,
-        "presetLevel": 4,
+        "presetLevel": 5,
         "authorSetting": {
           "description": "no description",
           "responsesLabel": "Responses already filled in",
@@ -455,6 +455,7 @@
           "helpfulness": 814
         },
         "allowReset": true,
+        "maxPromptsPerSection": 0,
         "promptColumns": 2,
         "showPresets": true,
         "prompts": [
@@ -1170,7 +1171,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 1
             }
           },
           {
@@ -1801,7 +1803,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 2
             }
           },
           {
@@ -2264,7 +2267,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 3
             }
           },
           {
@@ -2727,7 +2731,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 4
             }
           },
           {
@@ -3358,7 +3363,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 5
             }
           },
           {
@@ -4093,7 +4099,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 6
             }
           },
           {
@@ -4472,7 +4479,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 7
             }
           },
           {
@@ -4935,7 +4943,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 8
             }
           },
           {
@@ -5482,11 +5491,18 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 9
             }
           }
-        ]
-      }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -5498,7 +5514,7 @@
       "type": "fillin",
       "meta": {
         "sectionFillinIdx": 1,
-        "presetLevel": 4,
+        "presetLevel": 5,
         "authorSetting": {
           "description": "no description",
           "responsesLabel": "Responses already filled in",
@@ -5518,6 +5534,7 @@
           "helpfulness": 814
         },
         "allowReset": true,
+        "maxPromptsPerSection": 0,
         "promptColumns": 2,
         "showPresets": true,
         "prompts": [
@@ -5897,7 +5914,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 1
             }
           },
           {
@@ -6360,11 +6378,18 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 2
             }
           }
-        ]
-      }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -6382,7 +6407,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 69,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -6531,7 +6556,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 71,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -6686,7 +6711,7 @@
       "type": "fillin",
       "meta": {
         "sectionFillinIdx": 2,
-        "presetLevel": 4,
+        "presetLevel": 5,
         "authorSetting": {
           "description": "no description",
           "responsesLabel": "Use the following responses in the prompts below",
@@ -6706,6 +6731,7 @@
           "helpfulness": 514
         },
         "allowReset": true,
+        "maxPromptsPerSection": 0,
         "promptColumns": 2,
         "showPresets": true,
         "prompts": [
@@ -7085,7 +7111,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 1
             }
           },
           {
@@ -7464,7 +7491,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 2
             }
           },
           {
@@ -8115,7 +8143,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 3
             }
           },
           {
@@ -8494,7 +8523,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 4
             }
           },
           {
@@ -8873,7 +8903,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 5
             }
           },
           {
@@ -9336,7 +9367,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 6
             }
           },
           {
@@ -9631,7 +9663,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 7
             }
           },
           {
@@ -9926,7 +9959,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 8
             }
           },
           {
@@ -10305,7 +10339,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 9
             }
           },
           {
@@ -10768,11 +10803,18 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 10
             }
           }
-        ]
-      }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -10790,7 +10832,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 116,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -10855,7 +10897,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 117,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -16174,7 +16216,7 @@
       "type": "fillin",
       "meta": {
         "sectionFillinIdx": 3,
-        "presetLevel": 4,
+        "presetLevel": 5,
         "authorSetting": {
           "description": "no description",
           "responsesLabel": "Use the following responses in the prompts below",
@@ -16194,6 +16236,7 @@
           "helpfulness": 514
         },
         "allowReset": true,
+        "maxPromptsPerSection": 0,
         "promptColumns": 2,
         "showPresets": true,
         "prompts": [
@@ -16573,7 +16616,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 1
             }
           },
           {
@@ -16868,7 +16912,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 2
             }
           },
           {
@@ -17247,7 +17292,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 3
             }
           },
           {
@@ -17626,7 +17672,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 4
             }
           },
           {
@@ -18005,7 +18052,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 5
             }
           },
           {
@@ -18468,11 +18516,18 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 6
             }
           }
-        ]
-      }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -18496,7 +18551,7 @@
       "type": "fillin",
       "meta": {
         "sectionFillinIdx": 4,
-        "presetLevel": 4,
+        "presetLevel": 5,
         "authorSetting": {
           "description": "no description",
           "responsesLabel": "Use the following responses in the prompts below",
@@ -18516,6 +18571,7 @@
           "helpfulness": 514
         },
         "allowReset": true,
+        "maxPromptsPerSection": 0,
         "promptColumns": 2,
         "showPresets": true,
         "prompts": [
@@ -19063,7 +19119,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 1
             }
           },
           {
@@ -19442,7 +19499,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 2
             }
           },
           {
@@ -19821,7 +19879,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 3
             }
           },
           {
@@ -20284,7 +20343,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 4
             }
           },
           {
@@ -20663,7 +20723,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 5
             }
           },
           {
@@ -21042,11 +21103,18 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 6
             }
           }
-        ]
-      }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -21064,7 +21132,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 223,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -23785,7 +23853,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 250,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -26137,7 +26205,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -26168,7 +26236,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -26199,7 +26267,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -26230,7 +26298,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -26261,7 +26329,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -26290,7 +26358,7 @@
         4
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -26445,7 +26513,7 @@
         9
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -26507,7 +26575,7 @@
         11
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "sync",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -26538,7 +26606,7 @@
         12
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -26662,7 +26730,7 @@
         16
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -26755,7 +26823,7 @@
         19
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -26910,7 +26978,7 @@
         24
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -26972,7 +27040,7 @@
         26
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -27065,7 +27133,7 @@
         29
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -27189,7 +27257,7 @@
         33
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -27282,7 +27350,7 @@
         36
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -27406,7 +27474,7 @@
         40
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -27530,7 +27598,7 @@
         44
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -27654,7 +27722,7 @@
         48
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -27809,7 +27877,7 @@
         53
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -27995,7 +28063,7 @@
         59
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -28181,7 +28249,7 @@
         65
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -28276,7 +28344,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28307,7 +28375,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28338,7 +28406,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28369,7 +28437,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28584,7 +28652,7 @@
         78
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "bored",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -28925,7 +28993,7 @@
         89
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "and|ann|anne|n",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -29576,7 +29644,7 @@
         110
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "j",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -29733,7 +29801,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -29764,7 +29832,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -29795,7 +29863,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -29826,7 +29894,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -29857,7 +29925,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -29888,7 +29956,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -29979,7 +30047,7 @@
         123
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "r",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -30661,7 +30729,7 @@
         145
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "bee|b",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -30754,7 +30822,7 @@
         148
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "gee",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -31250,7 +31318,7 @@
         164
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -31467,7 +31535,7 @@
         171
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -31622,7 +31690,7 @@
         176
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "wok",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -31715,7 +31783,7 @@
         179
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "r",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -32211,7 +32279,7 @@
         195
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -32304,7 +32372,7 @@
         198
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "bee|b",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -32335,7 +32403,7 @@
         199
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "buy",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -32552,7 +32620,7 @@
         206
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "r",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -33050,7 +33118,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -33081,7 +33149,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -33112,7 +33180,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -33203,7 +33271,7 @@
         227
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "r",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -33887,7 +33955,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -33918,7 +33986,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -34009,7 +34077,7 @@
         253
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "r",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -34381,7 +34449,7 @@
         265
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "hiss",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -34505,7 +34573,7 @@
         269
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "hours",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -34536,7 +34604,7 @@
         270
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "there|they're",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -34565,7 +34633,7 @@
         271
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "there's",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -34590,43 +34658,50 @@
     {
       "headingLevel": 1,
       "title": "Common nouns about my life",
-      "termIdx": 0,
+      "firstTermIdx": 0,
+      "lastTermIdx": 68,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 1,
       "title": "Subjective nouns",
-      "termIdx": 69,
+      "firstTermIdx": 69,
+      "lastTermIdx": 70,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 1,
       "title": "Objective nouns",
-      "termIdx": 71,
+      "firstTermIdx": 71,
+      "lastTermIdx": 115,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 1,
       "title": "Pronouns",
-      "termIdx": 116,
+      "firstTermIdx": 116,
+      "lastTermIdx": 116,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 2,
       "title": "Personal pronouns (subjective aka nominative)",
-      "termIdx": 117,
+      "firstTermIdx": 117,
+      "lastTermIdx": 222,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 2,
       "title": "Personal pronouns (objective)",
-      "termIdx": 223,
+      "firstTermIdx": 223,
+      "lastTermIdx": 249,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 2,
       "title": "Possessive pronouns",
-      "termIdx": 250,
+      "firstTermIdx": 250,
+      "lastTermIdx": 272,
       "terminalCountPriorToHeading": -9999
     }
   ],
@@ -35049,7 +35124,7 @@
     {
       "idx": 0,
       "showPresets": true,
-      "presetLevel": 4,
+      "presetLevel": 5,
       "authorSetting": {
         "description": "no description",
         "responsesLabel": "Responses already filled in",
@@ -35096,51 +35171,61 @@
         {
           "content": "sink",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "dishwasher",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "stove",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "oven",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "refrigerator",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "microwave",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "oven",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "squares",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "bread",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "muffins",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         }
       ],
@@ -35150,7 +35235,7 @@
     {
       "idx": 1,
       "showPresets": true,
-      "presetLevel": 4,
+      "presetLevel": 5,
       "authorSetting": {
         "description": "no description",
         "responsesLabel": "Responses already filled in",
@@ -35197,11 +35282,13 @@
         {
           "content": "door",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "car",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         }
       ],
@@ -35211,7 +35298,7 @@
     {
       "idx": 2,
       "showPresets": true,
-      "presetLevel": 4,
+      "presetLevel": 5,
       "authorSetting": {
         "description": "no description",
         "responsesLabel": "Use the following responses in the prompts below",
@@ -35258,56 +35345,67 @@
         {
           "content": "door",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "games",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "State",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Warriors",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "iPhone",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "groceries",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "home",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "pianos",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "art",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "languages",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "visit",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         }
       ],
@@ -35317,7 +35415,7 @@
     {
       "idx": 3,
       "showPresets": true,
-      "presetLevel": 4,
+      "presetLevel": 5,
       "authorSetting": {
         "description": "no description",
         "responsesLabel": "Use the following responses in the prompts below",
@@ -35364,31 +35462,37 @@
         {
           "content": "I",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "We",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "They",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "He",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "She",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "You",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         }
       ],
@@ -35398,7 +35502,7 @@
     {
       "idx": 4,
       "showPresets": true,
-      "presetLevel": 4,
+      "presetLevel": 5,
       "authorSetting": {
         "description": "no description",
         "responsesLabel": "Use the following responses in the prompts below",
@@ -35445,31 +35549,37 @@
         {
           "content": "I",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "You",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "They",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "We",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "He",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "She",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         }
       ],

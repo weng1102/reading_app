@@ -6,11 +6,11 @@
   "owner": "anonymous",
   "author": "Wen",
   "category": "Sentence Completion (trailing word)",
-  "version": "20230706.1",
+  "version": "20231102.1",
   "pageFormatType": 0,
-  "created": "Sat Jul 29 2023 08:13:27 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Sat Jul 29 2023 08:13:27 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Sat Jul 29 2023 08:13:27 GMT-0700 (Pacific Daylight Time)",
+  "created": "Sun Feb 04 2024 17:05:02 GMT-0800 (Pacific Standard Time)",
+  "modified": "Sun Feb 04 2024 17:05:02 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Sun Feb 04 2024 17:05:02 GMT-0800 (Pacific Standard Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -30,7 +30,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 0,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -119,6 +119,7 @@
           "helpfulness": 314
         },
         "allowReset": false,
+        "maxPromptsPerSection": 0,
         "promptColumns": 1,
         "showPresets": false,
         "prompts": [
@@ -575,7 +576,7 @@
                             {
                               "id": 0,
                               "termIdx": -9999,
-                              "content": " ",
+                              "content": " [",
                               "cueList": "",
                               "cues": {
                                 "partOfSpeech": "untagged",
@@ -587,7 +588,7 @@
                               "lastTermIdx": -9999,
                               "type": 16,
                               "meta": {
-                                "content": " ",
+                                "content": " [",
                                 "cues": [],
                                 "termIdx": -9999,
                                 "nextTermIdx": [],
@@ -615,6 +616,46 @@
                             {
                               "id": 0,
                               "termIdx": -9999,
+                              "content": "_",
+                              "cueList": "",
+                              "cues": {
+                                "partOfSpeech": "untagged",
+                                "definition": "",
+                                "image": "",
+                                "alternatives": []
+                              },
+                              "firstTermIdx": -9999,
+                              "lastTermIdx": -9999,
+                              "type": 11,
+                              "meta": {
+                                "content": "_",
+                                "cues": [],
+                                "termIdx": -9999,
+                                "nextTermIdx": [],
+                                "prevTermIdx": [],
+                                "altpronunciation": "",
+                                "altrecognition": "",
+                                "recitable": false,
+                                "heading": false,
+                                "audible": true,
+                                "linkable": false,
+                                "visible": true,
+                                "visited": false,
+                                "numberAsNumerals": false,
+                                "linkIdx": -9999,
+                                "hintsIdx": -9999,
+                                "fillin": {
+                                  "sectionIdx": -9999,
+                                  "responseIdx": -9999
+                                },
+                                "bold": false,
+                                "italics": false,
+                                "markupTag": false
+                              }
+                            },
+                            {
+                              "id": 0,
+                              "termIdx": 6,
                               "content": "Valentine's",
                               "cueList": "",
                               "cues": {
@@ -625,61 +666,81 @@
                               },
                               "firstTermIdx": 6,
                               "lastTermIdx": 6,
-                              "type": 4,
+                              "type": 17,
                               "meta": {
-                                "terminals": [
-                                  {
-                                    "id": 0,
-                                    "termIdx": 6,
-                                    "content": "Valentine's",
-                                    "cueList": "",
-                                    "cues": {
-                                      "partOfSpeech": "untagged",
-                                      "definition": "",
-                                      "image": "",
-                                      "alternatives": []
-                                    },
-                                    "firstTermIdx": 6,
-                                    "lastTermIdx": 6,
-                                    "type": 17,
-                                    "meta": {
-                                      "content": "Valentine's",
-                                      "cues": [],
-                                      "termIdx": 6,
-                                      "nextTermIdx": [
-                                        7
-                                      ],
-                                      "prevTermIdx": [
-                                        5
-                                      ],
-                                      "altpronunciation": "",
-                                      "altrecognition": "",
-                                      "recitable": true,
-                                      "heading": false,
-                                      "audible": true,
-                                      "linkable": false,
-                                      "visible": true,
-                                      "visited": false,
-                                      "numberAsNumerals": false,
-                                      "linkIdx": -9999,
-                                      "hintsIdx": -9999,
-                                      "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 0
-                                      },
-                                      "bold": false,
-                                      "italics": false,
-                                      "markupTag": false
-                                    }
-                                  }
+                                "content": "Valentine's",
+                                "cues": [],
+                                "termIdx": 6,
+                                "nextTermIdx": [
+                                  7
                                 ],
-                                "sectionFillinIdx": 0
+                                "prevTermIdx": [
+                                  5
+                                ],
+                                "altpronunciation": "",
+                                "altrecognition": "",
+                                "recitable": true,
+                                "heading": false,
+                                "audible": true,
+                                "linkable": false,
+                                "visible": true,
+                                "visited": false,
+                                "numberAsNumerals": false,
+                                "linkIdx": -9999,
+                                "hintsIdx": -9999,
+                                "fillin": {
+                                  "sectionIdx": -9999,
+                                  "responseIdx": -9999
+                                },
+                                "bold": false,
+                                "italics": false,
+                                "markupTag": false
                               }
                             },
                             {
                               "id": 0,
                               "termIdx": -9999,
-                              "content": " ",
+                              "content": "_",
+                              "cueList": "",
+                              "cues": {
+                                "partOfSpeech": "untagged",
+                                "definition": "",
+                                "image": "",
+                                "alternatives": []
+                              },
+                              "firstTermIdx": -9999,
+                              "lastTermIdx": -9999,
+                              "type": 11,
+                              "meta": {
+                                "content": "_",
+                                "cues": [],
+                                "termIdx": -9999,
+                                "nextTermIdx": [],
+                                "prevTermIdx": [],
+                                "altpronunciation": "",
+                                "altrecognition": "",
+                                "recitable": false,
+                                "heading": false,
+                                "audible": true,
+                                "linkable": false,
+                                "visible": true,
+                                "visited": false,
+                                "numberAsNumerals": false,
+                                "linkIdx": -9999,
+                                "hintsIdx": -9999,
+                                "fillin": {
+                                  "sectionIdx": -9999,
+                                  "responseIdx": -9999
+                                },
+                                "bold": false,
+                                "italics": false,
+                                "markupTag": false
+                              }
+                            },
+                            {
+                              "id": 0,
+                              "termIdx": -9999,
+                              "content": "] ",
                               "cueList": "",
                               "cues": {
                                 "partOfSpeech": "untagged",
@@ -691,7 +752,7 @@
                               "lastTermIdx": -9999,
                               "type": 16,
                               "meta": {
-                                "content": " ",
+                                "content": "] ",
                                 "cues": [],
                                 "termIdx": -9999,
                                 "nextTermIdx": [],
@@ -767,7 +828,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 1
+                                        "responseIdx": 0
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -837,12 +898,19 @@
             "meta": {
               "depth": 1,
               "startNumber": 0,
-              "listType": 6
+              "listType": 6,
+              "subsectionOrdinal": 1
             },
             "type": "ordered_list"
           }
-        ]
-      }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -869,7 +937,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -1064,8 +1132,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 0
+        "sectionIdx": -9999,
+        "responseIdx": -9999
       },
       "bold": false,
       "italics": false,
@@ -1094,7 +1162,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 1
+        "responseIdx": 0
       },
       "bold": false,
       "italics": false,
@@ -1107,7 +1175,8 @@
     {
       "headingLevel": 1,
       "title": "Holidays",
-      "termIdx": 0,
+      "firstTermIdx": 0,
+      "lastTermIdx": 7,
       "terminalCountPriorToHeading": -9999
     }
   ],
@@ -1180,13 +1249,9 @@
       ],
       "responses": [
         {
-          "content": "Valentine's",
-          "tag": "untagged",
-          "referenceCount": 1
-        },
-        {
           "content": "Day",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         }
       ],

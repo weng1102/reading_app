@@ -6,11 +6,11 @@
   "owner": "Ronlyn",
   "author": "Wen",
   "category": "Verbs with images",
-  "version": "20230706.1",
+  "version": "20231102.1",
   "pageFormatType": 0,
-  "created": "Sat Jul 29 2023 08:13:29 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Sat Jul 29 2023 08:13:29 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Sat Jul 29 2023 08:13:29 GMT-0700 (Pacific Daylight Time)",
+  "created": "Sun Feb 04 2024 17:05:05 GMT-0800 (Pacific Standard Time)",
+  "modified": "Sun Feb 04 2024 17:05:05 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Sun Feb 04 2024 17:05:05 GMT-0800 (Pacific Standard Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -30,7 +30,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 0,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -287,11 +287,12 @@
                 "showResponsesInPrompts": false,
                 "responsesLayout": "above",
                 "showAlternatives": false,
-                "unique": true,
-                "showReferenceCount": true,
+                "unique": false,
+                "showReferenceCount": false,
                 "helpfulness": 304
               },
               "allowReset": false,
+              "maxPromptsPerSection": 0,
               "promptColumns": 1,
               "showPresets": false,
               "prompts": [
@@ -2674,12 +2675,19 @@
                   "meta": {
                     "depth": 1,
                     "startNumber": 0,
-                    "listType": 6
+                    "listType": 6,
+                    "subsectionOrdinal": 1
                   },
                   "type": "ordered_list"
                 }
-              ]
-            }
+              ],
+              "subsectionOrdinal": -1,
+              "subsectionInterval": 0,
+              "subsectionLabel": ""
+            },
+            "subsectionOrdinal": 0,
+            "subsectionInterval": 0,
+            "subsectionLabel": ""
           }
         ]
       }
@@ -2721,11 +2729,12 @@
           "showResponsesInPrompts": false,
           "responsesLayout": "above",
           "showAlternatives": false,
-          "unique": true,
-          "showReferenceCount": true,
+          "unique": false,
+          "showReferenceCount": false,
           "helpfulness": 304
         },
         "allowReset": false,
+        "maxPromptsPerSection": 0,
         "promptColumns": 1,
         "showPresets": false,
         "prompts": [
@@ -4718,12 +4727,19 @@
             "meta": {
               "depth": 1,
               "startNumber": 0,
-              "listType": 6
+              "listType": 6,
+              "subsectionOrdinal": 1
             },
             "type": "ordered_list"
           }
-        ]
-      }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -4750,7 +4766,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -4781,7 +4797,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -5151,7 +5167,7 @@
         12
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -5368,7 +5384,7 @@
         19
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -5554,7 +5570,7 @@
         25
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -5678,7 +5694,7 @@
         29
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "r",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -5957,7 +5973,7 @@
         38
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "r",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -6050,7 +6066,7 @@
         41
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "r",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -6104,7 +6120,8 @@
     {
       "headingLevel": 1,
       "title": "Verb: Baking",
-      "termIdx": 0,
+      "firstTermIdx": 0,
+      "lastTermIdx": 43,
       "terminalCountPriorToHeading": -9999
     }
   ],
@@ -6242,8 +6259,8 @@
         "showResponsesInPrompts": false,
         "responsesLayout": "above",
         "showAlternatives": false,
-        "unique": true,
-        "showReferenceCount": true,
+        "unique": false,
+        "showReferenceCount": false,
         "helpfulness": 304
       },
       "currentSetting": {
@@ -6260,8 +6277,8 @@
         "showResponsesInPrompts": false,
         "responsesLayout": "above",
         "showAlternatives": false,
-        "unique": true,
-        "showReferenceCount": true,
+        "unique": false,
+        "showReferenceCount": false,
         "helpfulness": 304
       },
       "allowReset": false,
@@ -6274,51 +6291,61 @@
         {
           "content": "baking",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "baking",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "cookies",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "baking",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "cookies",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "oven",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "baking",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "cookies",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "oven",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "pan",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         }
       ],
@@ -6343,8 +6370,8 @@
         "showResponsesInPrompts": false,
         "responsesLayout": "above",
         "showAlternatives": false,
-        "unique": true,
-        "showReferenceCount": true,
+        "unique": false,
+        "showReferenceCount": false,
         "helpfulness": 304
       },
       "currentSetting": {
@@ -6361,8 +6388,8 @@
         "showResponsesInPrompts": false,
         "responsesLayout": "above",
         "showAlternatives": false,
-        "unique": true,
-        "showReferenceCount": true,
+        "unique": false,
+        "showReferenceCount": false,
         "helpfulness": 304
       },
       "allowReset": false,
@@ -6375,61 +6402,73 @@
         {
           "content": "am",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "baking",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "are",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "baking",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "is",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "baking",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "is",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "baking",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "are",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "baking",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "are",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "baking",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         }
       ],

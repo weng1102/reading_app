@@ -41,7 +41,8 @@
 # My Family
 [[image-entry: personal, above, 20%]]
 ![Wen and Ronlyn](wedding7a.jpg),![Wen and Ronlyn](ronlynwenBW.jpg),![Wen and Ronlyn](ronlynWen.jpg)
-* Wen and I got married in my childhood parish.
+* Wen and I had our [first date](ronwenfirstdate,page) in 1983.
+* We got married in my childhood parish.
 * We held our reception across from the ferry building in San Francisco.
 * We have been married for over 30 years.
 * We just celebrated the anniversary of our first date 40 years ago.

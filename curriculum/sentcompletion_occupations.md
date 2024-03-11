@@ -3,7 +3,7 @@
 # Completing sentences progressively
 The following exercises allow me to fill in the prompts given the corresponding response lists in increasingly more difficult ordering until no response list is shown.
 ## Occupations
-[[fillin: hidden, true, 1, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 7, insert, true, true, true, true, true, false]]
+[[fillin: gridOrder, true, 1, true, , , grid, 6, insert, true, true, true, true, true, false]]
 * An [_artist_] is a person who creates paintings or sculptures.
 * A [_waiter_] is a person who serves food in a restaurant.
 * A [_cook_] is a person who cooks food in a restaurant.
@@ -15,7 +15,7 @@ The following exercises allow me to fill in the prompts given the corresponding 
 * A [_mason_] is a person who builds things with brick or stone.
 * A [_disc_] [_jockey_] is a person who announces music played on the radio.
 [[/fillin]]
-[[fillin: hidden, true, 1, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 7, insert, true, true, true, true, true, false]]
+[[fillin: gridOrder, true, 1, true, , , grid, 6, insert, true, true, true, true, true, false]]
 * A [_lawyer_] is a person who argues a case in court.
 * A [_veterinarian_] is a person who takes care of injured or sick pets.
 * A [_soldier_] is a person who fights in the army.
@@ -27,7 +27,7 @@ The following exercises allow me to fill in the prompts given the corresponding 
 * A [_candidate_] is a person who runs for public office.
 * A [_professor_] is a person who teaches courses at a college or university.
 [[/fillin]]
-[[fillin: hidden, true, 1, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 7, insert, true, true, true, true, true, false]]
+[[fillin: gridOrder, true, 1, true, , , grid, 6, insert, true, true, true, true, true, false]]
 * A [_geologist_] is a person who studies rock formations.
 * A [_pediatrician_] is a doctor who treats only children and babies.
 * A [_pharmacist_] is a person who fills prescriptions.
@@ -39,7 +39,7 @@ The following exercises allow me to fill in the prompts given the corresponding 
 * A [_neurologist_] is a medical doctor who diagnoses, treats and manages brain disorders.
 * An [_astronomer_] is a person who studies stars and planets.
 [[/fillin]]
-[[fillin: hidden, true, 1, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 7, insert, true, true, true, true, true, false]]
+[[fillin: gridOrder, true, 1, true, , , grid, 6, insert, true, true, true, true, true, false]]
 * An [_archaeologist_] is a person who digs up the remains of ancient cultures.
 * A [_meteorologist_] is a person who forecasts weather patterns.
 * A [_trader_] is a person who buys, sells, and trades stock.

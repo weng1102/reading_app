@@ -8,33 +8,6 @@ The model lost much of her fluency to a deep brain hemorrhagic stroke that resul
 Her primary goal is to recover as much conversational speech as possible. Fortunately, her loss of verbal skills did not include basic oral reading skills. To work toward regaining her voice in complete sentences, she can leverage her remaining oral reading skills to repeatedly practice as she builds her ability and confidence to speak again. Essential to this, improved word finding and sentence completion can strengthen her flow of thought, her working memory issues notwithstanding.
 [[/image-entry]]
 
-## Requirements: (What is needed?)
-The model will be presented with curated and formatted multimodal content to encourage and facilitate reading. The model will have her speech recognized and tracked as she reads to ensure accuracy and instill confidence. The model will have the content recited on demand to provide oral modeling. The model will practice “filling in the blank” within context to practice word finding as well as multiple "filling in" key grammatical elements within a sentence to practice sentence construction. 
-
-The model will use the reading companion from her primary touchscreen-based electronic platforms. The content will be accessible across all instances of the reading companion app to minimize pushing content.
-
-The following reflects the most useful specific requirements to address the challenges observed and recommendations from her speech language pathologists.
-
-* Authoring/curating familiar and relevant content to the user
-  * Custom content
-  * Multimodal context: visual, verbal (oral and written), link
-  * Prose structuring, ordered and unordered lists, bullets, blocks, indenting
-  * Navigation to related content
-* Formatting content for the user
-  * Font sizing
-  * Sentence spacing
-  * Page indexing
-  * Customizable application look and feel
-  * Repeating layouts (e.g., journaling/chronicling (date, images, captions)
-* Tracking, recognizing and correcting the content spoken by the users
-  * Current word tracking
-  * Recite on demand with selectable voice and rate
-  * Special formats (e.g., numbers, proper names, dates, phone numbers, numerals, email addresses, symbols)
-  * Corrective action (after retries)
-* Retrieving words
-  * Word fill-ins
-  * Hints/cueing hierarchy
-
 ## Rationale: (Why create it?)
 Given the aforementioned requirements, a product search revealed no single viable candidate. Most published content can be presented with different font sizing and line spacing, printed or otherwise. Some apps could recognize words and sentences, many could generate speech, but none could present custom prose much less interleaved images and recognize and synthesize speech. Some apps can highlight the current word but only for predefined content and few support cueing hierarchies. 
 
@@ -71,7 +44,34 @@ The reading companion app can recite the text content to provide oral modeling o
 
 Different voices can be selected for reciting depending upon the voices provided by the underlying platform. The recitation volume can be adjusted within the app as well as through the platform. Most importantly, the rate of recitation can be sped up or slowed down.
 
-## Word finding and sentence construction (fill in the blanks)
+### Word finding and sentence construction (fill in the blanks)
 Word finding (fill in the blanks)
 The companion supports word finding by allowing concealed words within content. To help with the finding process, cueing hierarchy provides progressively more help with the concealed word.
+
+## Requirements: (What is needed?)
+The model will be presented with curated and formatted multimodal content to encourage and facilitate reading. The model will have her speech recognized and tracked as she reads to ensure accuracy and instill confidence. The model will have the content recited on demand to provide oral modeling. The model will practice “filling in the blank” within context to practice word finding as well as multiple "filling in" key grammatical elements within a sentence to practice sentence construction. 
+
+The model will use the reading companion from her primary touchscreen-based electronic platforms. The content will be accessible across all instances of the reading companion app to minimize pushing content.
+
+The following reflects the most useful specific requirements to address the challenges observed and recommendations from her speech language pathologists.
+
+* Authoring/curating familiar and relevant content to the user
+  * Custom content
+  * Multimodal context: visual, verbal (oral and written), link
+  * Prose structuring, ordered and unordered lists, bullets, blocks, indenting
+  * Navigation to related content
+* Formatting content for the user
+  * Font sizing
+  * Sentence spacing
+  * Page indexing
+  * Customizable application look and feel
+  * Repeating layouts (e.g., journaling/chronicling (date, images, captions)
+* Tracking, recognizing and correcting the content spoken by the users
+  * Current word tracking
+  * Recite on demand with selectable voice and rate
+  * Special formats (e.g., numbers, proper names, dates, phone numbers, numerals, email addresses, symbols)
+  * Corrective action (after retries)
+* Retrieving words
+  * Word fill-ins
+  * Hints/cueing hierarchy
 

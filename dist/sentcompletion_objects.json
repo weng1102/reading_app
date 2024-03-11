@@ -6,11 +6,11 @@
   "owner": "anonymous",
   "author": "Wen",
   "category": "Sentence Completion (trailing word)",
-  "version": "20230706.1",
+  "version": "20231102.1",
   "pageFormatType": 0,
-  "created": "Sat Jul 29 2023 08:13:28 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Sat Jul 29 2023 08:13:28 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Sat Jul 29 2023 08:13:28 GMT-0700 (Pacific Daylight Time)",
+  "created": "Sun Feb 04 2024 17:05:03 GMT-0800 (Pacific Standard Time)",
+  "modified": "Sun Feb 04 2024 17:05:03 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Sun Feb 04 2024 17:05:03 GMT-0800 (Pacific Standard Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -30,7 +30,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 0,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -454,7 +454,7 @@
                 },
                 "firstTermIdx": 5,
                 "lastTermIdx": 5,
-                "type": 17,
+                "type": 12,
                 "meta": {
                   "content": "exercises",
                   "cues": [],
@@ -2468,7 +2468,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 29,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -2577,7 +2577,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 31,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -3000,6 +3000,7 @@
           "helpfulness": 814
         },
         "allowReset": false,
+        "maxPromptsPerSection": 0,
         "promptColumns": 1,
         "showPresets": false,
         "prompts": [
@@ -9962,7 +9963,7 @@
                                     },
                                     "firstTermIdx": 107,
                                     "lastTermIdx": 107,
-                                    "type": 17,
+                                    "type": 12,
                                     "meta": {
                                       "content": "mailbox",
                                       "cues": [],
@@ -23930,12 +23931,19 @@
             "meta": {
               "depth": 1,
               "startNumber": 0,
-              "listType": 6
+              "listType": 6,
+              "subsectionOrdinal": 1
             },
             "type": "ordered_list"
           }
-        ]
-      }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -23953,7 +23961,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 249,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -24292,10 +24300,17 @@
           "helpfulness": 314
         },
         "allowReset": false,
+        "maxPromptsPerSection": 0,
         "promptColumns": 1,
         "showPresets": false,
-        "prompts": []
-      }
+        "prompts": [],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -24313,7 +24328,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 252,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -24736,10 +24751,17 @@
           "helpfulness": 314
         },
         "allowReset": false,
+        "maxPromptsPerSection": 0,
         "promptColumns": 1,
         "showPresets": false,
-        "prompts": []
-      }
+        "prompts": [],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -24757,7 +24779,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 256,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -25180,10 +25202,17 @@
           "helpfulness": 314
         },
         "allowReset": false,
+        "maxPromptsPerSection": 0,
         "promptColumns": 1,
         "showPresets": false,
-        "prompts": []
-      }
+        "prompts": [],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -25201,7 +25230,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 260,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -25538,10 +25567,17 @@
           "helpfulness": 314
         },
         "allowReset": false,
+        "maxPromptsPerSection": 0,
         "promptColumns": 1,
         "showPresets": false,
-        "prompts": []
-      }
+        "prompts": [],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -25568,7 +25604,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -25599,7 +25635,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -25630,7 +25666,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -25876,7 +25912,7 @@
         9
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -26124,7 +26160,7 @@
         17
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -26310,7 +26346,7 @@
         23
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "know",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -26467,7 +26503,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -26498,7 +26534,7 @@
       "altpronunciation": "",
       "altrecognition": "^(four|for|fore)$",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -26529,7 +26565,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -26560,7 +26596,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -26591,7 +26627,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -26620,9 +26656,9 @@
         33
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -26961,7 +26997,7 @@
         44
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "bawl",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -28263,7 +28299,7 @@
         86
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "peace",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -28604,7 +28640,7 @@
         97
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "wares|where's",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -28821,7 +28857,7 @@
         104
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -29100,7 +29136,7 @@
         113
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -30371,7 +30407,7 @@
         154
       ],
       "altpronunciation": "",
-      "altrecognition": "tee",
+      "altrecognition": "tee|t",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -30619,7 +30655,7 @@
         162
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "and|ann|anne|n",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -30805,7 +30841,7 @@
         168
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -31580,7 +31616,7 @@
         193
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "rite|right",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -31828,7 +31864,7 @@
         201
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "and|ann|anne|n",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -32603,7 +32639,7 @@
         226
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -32727,7 +32763,7 @@
         230
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -32882,7 +32918,7 @@
         235
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -32944,7 +32980,7 @@
         237
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "sync",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -33287,7 +33323,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -33316,9 +33352,9 @@
         249
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -33349,7 +33385,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -33380,7 +33416,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -33409,9 +33445,9 @@
         252
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -33442,7 +33478,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -33473,7 +33509,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -33504,7 +33540,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -33533,9 +33569,9 @@
         256
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -33566,7 +33602,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -33597,7 +33633,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -33628,7 +33664,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -33659,7 +33695,7 @@
       "altpronunciation": "",
       "altrecognition": "knot",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -33688,7 +33724,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -33711,43 +33747,50 @@
     {
       "headingLevel": 1,
       "title": "Completing sentences progressively",
-      "termIdx": 0,
+      "firstTermIdx": 0,
+      "lastTermIdx": 28,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 2,
       "title": "Objects4",
-      "termIdx": 29,
+      "firstTermIdx": 29,
+      "lastTermIdx": 30,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "Responses (already filled in)",
-      "termIdx": 31,
+      "firstTermIdx": 31,
+      "lastTermIdx": 248,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "Responses (in order)",
-      "termIdx": 249,
+      "firstTermIdx": 249,
+      "lastTermIdx": 251,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "Responses (in alphabetical order)",
-      "termIdx": 252,
+      "firstTermIdx": 252,
+      "lastTermIdx": 255,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "Responses (in random order)",
-      "termIdx": 256,
+      "firstTermIdx": 256,
+      "lastTermIdx": 259,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "Responses (not shown)",
-      "termIdx": 260,
+      "firstTermIdx": 260,
+      "lastTermIdx": 262,
       "terminalCountPriorToHeading": -9999
     }
   ],
@@ -34352,251 +34395,301 @@
         {
           "content": "baby",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "bacon",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "ball",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "bread",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "broom",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "bus",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "cards",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "chair",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "effs",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "fire",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "fish",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "gum",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "hammer",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "hat",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "mailbox",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "match",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "potatoes",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "soap",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "soup",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "spoon",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "bed",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "bell",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "clock",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "flowers",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "cream",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "tea",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "juice",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "letter",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "orange",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "banana",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "pan",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "picture",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "ring",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "pearls",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "leaves",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "money",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "knife",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "pen",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "iron",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "window",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "toothpaste",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "toothbrush",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "cookies",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "stove",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "oven",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "microwave",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "sink",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "pepper",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "floor",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "door",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         }
       ],

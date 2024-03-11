@@ -2,12 +2,12 @@
 
 # My Sentence Banks
 ## Practice sentences
-[Three-word sentences](3wordsentences,0,0)
-[Four-word sentences](4wordsentences,0,0)
-[Five-word sentences](5wordsentences,0,0)
-[Six-word sentences](6wordsentences,0,0)
-[Seven-word sentences](7wordsentences,0,0)
-[Ten-word sentences](10wordsentences,0,0)
+[Three-word sentences](3wordsentences,page,)
+[Four-word sentences](4wordsentences,page)
+[Five-word sentences](5wordsentences,page)
+[Six-word sentences](6wordsentences,page)
+[Seven-word sentences](7wordsentences,page)
+[Ten-word sentences](10wordsentences,page)
 
 ## Who am I
 - My name is Ronlyn Goo.

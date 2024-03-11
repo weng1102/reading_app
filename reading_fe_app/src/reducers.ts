@@ -80,7 +80,7 @@ const LISTENING_AVAILABLE = "listening/available";
 // const LISTENING_FLUSH = "listening/flush"; // clear transcript
 // const LISTENING_FLUSHED = "listening/flushed"; // clear transcript
 const LISTENING_MATCH = "listening/match"; // match word with argument with //
-const LISTENING_MESSAGE = "listent/message";
+const LISTENING_MESSAGE = "listening/message";
 const LISTENING_START = "listening/start";
 // const LISTENING_RETRY = "listening/retry";
 // const LISTENING_RETRY_RESET = "listening/retry reset";
@@ -614,6 +614,7 @@ interface IReduxState {
   page_spacingDown_enabled: boolean;
   page_previous_enabled: boolean;
   page_sitemap_enabled: boolean;
+  page_reciteMode: number;
 
   // page link info sent to page requested where it is validatable ( message
   // in a bottle)
@@ -686,6 +687,7 @@ const IReduxStateInitialState: IReduxState = {
   page_spacingDown_enabled: false,
   page_previous_enabled: false,
   page_sitemap_enabled: false,
+  page_reciteMode: 0,
 
   cursor_terminalIdx_proposed: 0,
   cursor_sectionIdx_proposed: 0,
@@ -893,9 +895,9 @@ export const rootReducer = (
       return state;
     case PAGE_LOADED:
       state.page_loaded = action.payload as boolean;
-      // state.page_requested = { ...state.page_requested, page: "" };
-      // state.page_pop_requested = false;
-      // state.page_home_requested = false;
+      state.page_requested = { ...state.page_requested, page: "" };
+      state.page_pop_requested = false;
+      state.page_home_requested = false;
       return state;
     case PAGE_TOP:
       setTerminalState([state.pageContext.firstTerminalIdx]);
@@ -1011,29 +1013,29 @@ export const rootReducer = (
       // resetListeningRetries();
       setListeningMessage(action.payload);
       setToNextTerminalState();
-      return state;
+      return { ...state };
     case LISTENING_MESSAGE:
       setListeningMessage(action.payload);
-      return state;
+      return { ...state };
     case WORD_NEXT:
       setListeningMessage(action.payload);
       setToNextTerminalState();
-      return state;
+      return { ...state };
     case WORD_PREVIOUS:
       setToPrevTerminalState();
-      return state;
+      return { ...state };
     case WORD_SETCURRENTFILLIN:
       state.fillin_currentTerminalIdx = +action.payload;
-      return state;
+      return { ...state };
     case SENTENCE_NEXT:
       setToNextSentenceTerminalState();
-      return state;
+      return { ...state };
     case SENTENCE_PREVIOUS:
       setToPrevSentenceTerminalState();
-      return state;
+      return { ...state };
     case WORD_SELECT:
       setTerminalState([+action.payload]);
-      return state;
+      return { ...state };
     case LISTENING_TOGGLE:
       if (state.listen_available) {
         state.listen_active = !state.listen_active;
@@ -1042,17 +1044,17 @@ export const rootReducer = (
         //   resetListeningRetries();
         // }
       }
-      return state;
+      return { ...state };
     case LISTENING_STOP:
       state.listen_active = false;
       // state.listen_retries = 0;
       // state.listen_retriesExceeded = false;
       setListeningMessage((!state.listen_active).toString());
-      return state;
+      return { ...state };
     case LISTENING_AVAILABLE:
       state.listen_available = action.payload;
       setListeningMessage(state.listen_available.toString());
-      return state;
+      return { ...state };
     // case LISTENING_FLUSH:
     //   state.listen_flush = true; // resets transcript
     //   resetListeningRetries();
@@ -1076,10 +1078,10 @@ export const rootReducer = (
     //   return state;
     case ANNOUNCE_MESSAGE:
       state.announce_message = action.payload; // resets transcript
-      return state;
+      return { ...state };
     case ANNOUNCE_ACKNOWLEDGED:
       state.announce_message = ""; // resets transcript
-      return state;
+      return { ...state };
     case TRANSITION_ACKNOWLEDGE:
       state.cursor_newPageTransition = false;
       state.cursor_newSectionTransition = false;
@@ -1087,37 +1089,37 @@ export const rootReducer = (
       state.cursor_beginningOfPageReached = false;
       state.cursor_endOfPageReached = false;
       state.announce_message = "";
-      return state;
+      return { ...state };
     case RECITE_START:
       state.recite_requested = true;
-      return state;
+      return { ...state };
     case RECITE_STOP:
       state.recite_requested = false;
-      return state;
+      return { ...state };
     case RECITING_STARTED:
       state.reciting = true;
-      return state;
+      return { ...state };
     case RECITING_ENDED:
       state.reciting = false;
-      return state;
+      return { ...state };
 
     case RECITE_TOGGLE:
       state.recite_requested = !state.recite_requested;
-      return state;
+      return { ...state };
     case RECITE_WORD:
       state.recite_word_requested = true;
-      return state;
+      return { ...state };
     case RECITED_WORD:
       state.recite_word_requested = false;
-      return state;
+      return { ...state };
     case SETTINGS_TOGGLE:
       state.settings_toggle = !state.settings_toggle;
       if (state.settings_toggle) state.listen_active = false;
-      return state;
+      return { ...state };
 
     case STATUSBAR_MESSAGE_SET:
       state.statusBar_message1 = action.payload;
-      return state;
+      return { ...state };
     case MESSAGE_SET: {
       switch (action.payload.messageType as StatusBarMessageType) {
         case StatusBarMessageType.application:
@@ -1131,12 +1133,12 @@ export const rootReducer = (
           break;
         default:
       }
-      return state;
+      return { ...state };
     }
     case FILLIN_RESETSECTION: {
       state.fillin_resetSectionIdx = action.payload;
       state.fillin_showTerminalIdx = IDX_INITIALIZER;
-      return state;
+      return { ...state };
     }
     // case FILLIN_TOGGLETAGSSECTION: {
     //   state.fillin_toggleShowTagsSectionIdx = action.payload;
@@ -1168,14 +1170,14 @@ export const rootReducer = (
           break;
         default:
       }
-      return state;
+      return { ...state };
     }
     case NAVBAR_TOGGLE: {
       state.navbar_toggle = !state.navbar_toggle;
-      return state;
+      return { ...state };
     }
     default:
-      console.log(`looking for undefined`);
-      return state;
+      console.log(`looking for undefined: ${action.type}`);
+      return { ...state };
   }
 };

@@ -6,11 +6,11 @@
   "owner": "anonymous",
   "author": "Wen",
   "category": "Sentence Completion (trailing word)",
-  "version": "20230706.1",
+  "version": "20231102.1",
   "pageFormatType": 0,
-  "created": "Sat Jul 29 2023 08:13:27 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Sat Jul 29 2023 08:13:27 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Sat Jul 29 2023 08:13:27 GMT-0700 (Pacific Daylight Time)",
+  "created": "Sun Feb 04 2024 17:05:03 GMT-0800 (Pacific Standard Time)",
+  "modified": "Sun Feb 04 2024 17:05:03 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Sun Feb 04 2024 17:05:03 GMT-0800 (Pacific Standard Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -30,7 +30,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 0,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -454,7 +454,7 @@
                 },
                 "firstTermIdx": 5,
                 "lastTermIdx": 5,
-                "type": 17,
+                "type": 12,
                 "meta": {
                   "content": "exercises",
                   "cues": [],
@@ -2468,7 +2468,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 29,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -2713,7 +2713,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 32,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -2863,7 +2863,7 @@
       "name": "",
       "description": "",
       "firstTermIdx": -9999,
-      "lastTermIdx": 168,
+      "lastTermIdx": 85,
       "items": [],
       "type": "fillin",
       "meta": {
@@ -2888,6 +2888,7 @@
           "helpfulness": 814
         },
         "allowReset": true,
+        "maxPromptsPerSection": 0,
         "promptColumns": 2,
         "showPresets": false,
         "prompts": [
@@ -7769,7 +7770,66 @@
                   "startNumber": 0,
                   "listType": 1
                 }
-              },
+              }
+            ],
+            "meta": {
+              "depth": 1,
+              "startNumber": 0,
+              "listType": 6,
+              "subsectionOrdinal": 1
+            },
+            "type": "ordered_list"
+          }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
+    },
+    {
+      "id": 0,
+      "name": "",
+      "description": "",
+      "firstTermIdx": -9999,
+      "lastTermIdx": 133,
+      "items": [],
+      "type": "fillin",
+      "meta": {
+        "sectionFillinIdx": 1,
+        "presetLevel": 2,
+        "authorSetting": {
+          "description": "no description",
+          "responsesLabel": "Responses already filled in",
+          "promptsLabel": "Recite the following prompts including the underlined words:",
+          "layout": "grid",
+          "showProgression": true,
+          "progressionOrder": "in order",
+          "gridColumns": 6,
+          "showResponseTags": true,
+          "showPromptTags": true,
+          "groupByTags": true,
+          "showResponsesInPrompts": false,
+          "responsesLayout": "above",
+          "showAlternatives": false,
+          "unique": true,
+          "showReferenceCount": true,
+          "helpfulness": 814
+        },
+        "allowReset": true,
+        "maxPromptsPerSection": 0,
+        "promptColumns": 2,
+        "showPresets": false,
+        "prompts": [
+          {
+            "id": 0,
+            "name": "",
+            "description": "",
+            "firstTermIdx": -9999,
+            "lastTermIdx": -9999,
+            "items": [
               {
                 "id": 0,
                 "name": "",
@@ -8097,8 +8157,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 8
+                                        "sectionIdx": 1,
+                                        "responseIdx": 0
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -8106,7 +8166,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -8743,8 +8803,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 9
+                                        "sectionIdx": 1,
+                                        "responseIdx": 1
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -8752,7 +8812,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -9429,8 +9489,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 10
+                                        "sectionIdx": 1,
+                                        "responseIdx": 2
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -9438,7 +9498,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -9907,8 +9967,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 11
+                                        "sectionIdx": 1,
+                                        "responseIdx": 3
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -9916,7 +9976,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -10553,8 +10613,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 12
+                                        "sectionIdx": 1,
+                                        "responseIdx": 4
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -10562,7 +10622,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -11115,8 +11175,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 13
+                                        "sectionIdx": 1,
+                                        "responseIdx": 5
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -11124,7 +11184,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -11717,8 +11777,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 14
+                                        "sectionIdx": 1,
+                                        "responseIdx": 6
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -11726,7 +11786,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -12279,8 +12339,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 15
+                                        "sectionIdx": 1,
+                                        "responseIdx": 7
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -12288,7 +12348,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -12345,7 +12405,66 @@
                   "startNumber": 0,
                   "listType": 1
                 }
-              },
+              }
+            ],
+            "meta": {
+              "depth": 1,
+              "startNumber": 0,
+              "listType": 6,
+              "subsectionOrdinal": 1
+            },
+            "type": "ordered_list"
+          }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
+    },
+    {
+      "id": 0,
+      "name": "",
+      "description": "",
+      "firstTermIdx": -9999,
+      "lastTermIdx": 168,
+      "items": [],
+      "type": "fillin",
+      "meta": {
+        "sectionFillinIdx": 2,
+        "presetLevel": 2,
+        "authorSetting": {
+          "description": "no description",
+          "responsesLabel": "Responses already filled in",
+          "promptsLabel": "Recite the following prompts including the underlined words:",
+          "layout": "grid",
+          "showProgression": true,
+          "progressionOrder": "in order",
+          "gridColumns": 6,
+          "showResponseTags": true,
+          "showPromptTags": true,
+          "groupByTags": true,
+          "showResponsesInPrompts": false,
+          "responsesLayout": "above",
+          "showAlternatives": false,
+          "unique": true,
+          "showReferenceCount": true,
+          "helpfulness": 814
+        },
+        "allowReset": true,
+        "maxPromptsPerSection": 0,
+        "promptColumns": 2,
+        "showPresets": false,
+        "prompts": [
+          {
+            "id": 0,
+            "name": "",
+            "description": "",
+            "firstTermIdx": -9999,
+            "lastTermIdx": -9999,
+            "items": [
               {
                 "id": 0,
                 "name": "",
@@ -13009,8 +13128,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 16
+                                        "sectionIdx": 2,
+                                        "responseIdx": 0
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -13018,7 +13137,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 2
                               }
                             },
                             {
@@ -13487,8 +13606,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 17
+                                        "sectionIdx": 2,
+                                        "responseIdx": 1
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -13496,7 +13615,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 2
                               }
                             },
                             {
@@ -14049,8 +14168,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 18
+                                        "sectionIdx": 2,
+                                        "responseIdx": 2
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -14058,7 +14177,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 2
                               }
                             },
                             {
@@ -14527,8 +14646,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 19
+                                        "sectionIdx": 2,
+                                        "responseIdx": 3
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -14536,7 +14655,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 2
                               }
                             },
                             {
@@ -15005,8 +15124,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 20
+                                        "sectionIdx": 2,
+                                        "responseIdx": 4
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -15014,7 +15133,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 2
                               }
                             },
                             {
@@ -15567,8 +15686,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 21
+                                        "sectionIdx": 2,
+                                        "responseIdx": 5
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -15576,7 +15695,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 2
                               }
                             },
                             {
@@ -15638,12 +15757,19 @@
             "meta": {
               "depth": 1,
               "startNumber": 0,
-              "listType": 6
+              "listType": 6,
+              "subsectionOrdinal": 1
             },
             "type": "ordered_list"
           }
-        ]
-      }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -15661,7 +15787,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 169,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -15844,12 +15970,12 @@
       "name": "",
       "description": "",
       "firstTermIdx": -9999,
-      "lastTermIdx": 292,
+      "lastTermIdx": 244,
       "items": [],
       "type": "fillin",
       "meta": {
-        "sectionFillinIdx": 1,
-        "presetLevel": 4,
+        "sectionFillinIdx": 3,
+        "presetLevel": 5,
         "authorSetting": {
           "description": "no description",
           "responsesLabel": "Responses already filled in",
@@ -15869,6 +15995,7 @@
           "helpfulness": 814
         },
         "allowReset": true,
+        "maxPromptsPerSection": 0,
         "promptColumns": 1,
         "showPresets": true,
         "prompts": [
@@ -16710,7 +16837,7 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 1,
+                                        "sectionIdx": 3,
                                         "responseIdx": 0
                                       },
                                       "bold": false,
@@ -16719,13 +16846,13 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 1
+                                "sectionFillinIdx": 3
                               }
                             },
                             {
                               "id": 0,
                               "termIdx": -9999,
-                              "content": " ",
+                              "content": " [",
                               "cueList": "",
                               "cues": {
                                 "partOfSpeech": "untagged",
@@ -16737,7 +16864,7 @@
                               "lastTermIdx": -9999,
                               "type": 16,
                               "meta": {
-                                "content": " ",
+                                "content": " [",
                                 "cues": [],
                                 "termIdx": -9999,
                                 "nextTermIdx": [],
@@ -16765,6 +16892,46 @@
                             {
                               "id": 0,
                               "termIdx": -9999,
+                              "content": "_",
+                              "cueList": "",
+                              "cues": {
+                                "partOfSpeech": "untagged",
+                                "definition": "",
+                                "image": "",
+                                "alternatives": []
+                              },
+                              "firstTermIdx": -9999,
+                              "lastTermIdx": -9999,
+                              "type": 11,
+                              "meta": {
+                                "content": "_",
+                                "cues": [],
+                                "termIdx": -9999,
+                                "nextTermIdx": [],
+                                "prevTermIdx": [],
+                                "altpronunciation": "",
+                                "altrecognition": "",
+                                "recitable": false,
+                                "heading": false,
+                                "audible": true,
+                                "linkable": false,
+                                "visible": true,
+                                "visited": false,
+                                "numberAsNumerals": false,
+                                "linkIdx": -9999,
+                                "hintsIdx": -9999,
+                                "fillin": {
+                                  "sectionIdx": -9999,
+                                  "responseIdx": -9999
+                                },
+                                "bold": false,
+                                "italics": false,
+                                "markupTag": false
+                              }
+                            },
+                            {
+                              "id": 0,
+                              "termIdx": 182,
                               "content": "Year's",
                               "cueList": "",
                               "cues": {
@@ -16775,61 +16942,81 @@
                               },
                               "firstTermIdx": 182,
                               "lastTermIdx": 182,
-                              "type": 4,
+                              "type": 17,
                               "meta": {
-                                "terminals": [
-                                  {
-                                    "id": 0,
-                                    "termIdx": 182,
-                                    "content": "Year's",
-                                    "cueList": "",
-                                    "cues": {
-                                      "partOfSpeech": "untagged",
-                                      "definition": "",
-                                      "image": "",
-                                      "alternatives": []
-                                    },
-                                    "firstTermIdx": 182,
-                                    "lastTermIdx": 182,
-                                    "type": 17,
-                                    "meta": {
-                                      "content": "Year's",
-                                      "cues": [],
-                                      "termIdx": 182,
-                                      "nextTermIdx": [
-                                        183
-                                      ],
-                                      "prevTermIdx": [
-                                        181
-                                      ],
-                                      "altpronunciation": "",
-                                      "altrecognition": "",
-                                      "recitable": true,
-                                      "heading": false,
-                                      "audible": true,
-                                      "linkable": false,
-                                      "visible": true,
-                                      "visited": false,
-                                      "numberAsNumerals": false,
-                                      "linkIdx": -9999,
-                                      "hintsIdx": -9999,
-                                      "fillin": {
-                                        "sectionIdx": 1,
-                                        "responseIdx": 1
-                                      },
-                                      "bold": false,
-                                      "italics": false,
-                                      "markupTag": false
-                                    }
-                                  }
+                                "content": "Year's",
+                                "cues": [],
+                                "termIdx": 182,
+                                "nextTermIdx": [
+                                  183
                                 ],
-                                "sectionFillinIdx": 1
+                                "prevTermIdx": [
+                                  181
+                                ],
+                                "altpronunciation": "",
+                                "altrecognition": "",
+                                "recitable": true,
+                                "heading": false,
+                                "audible": true,
+                                "linkable": false,
+                                "visible": true,
+                                "visited": false,
+                                "numberAsNumerals": false,
+                                "linkIdx": -9999,
+                                "hintsIdx": -9999,
+                                "fillin": {
+                                  "sectionIdx": -9999,
+                                  "responseIdx": -9999
+                                },
+                                "bold": false,
+                                "italics": false,
+                                "markupTag": false
                               }
                             },
                             {
                               "id": 0,
                               "termIdx": -9999,
-                              "content": " ",
+                              "content": "_",
+                              "cueList": "",
+                              "cues": {
+                                "partOfSpeech": "untagged",
+                                "definition": "",
+                                "image": "",
+                                "alternatives": []
+                              },
+                              "firstTermIdx": -9999,
+                              "lastTermIdx": -9999,
+                              "type": 11,
+                              "meta": {
+                                "content": "_",
+                                "cues": [],
+                                "termIdx": -9999,
+                                "nextTermIdx": [],
+                                "prevTermIdx": [],
+                                "altpronunciation": "",
+                                "altrecognition": "",
+                                "recitable": false,
+                                "heading": false,
+                                "audible": true,
+                                "linkable": false,
+                                "visible": true,
+                                "visited": false,
+                                "numberAsNumerals": false,
+                                "linkIdx": -9999,
+                                "hintsIdx": -9999,
+                                "fillin": {
+                                  "sectionIdx": -9999,
+                                  "responseIdx": -9999
+                                },
+                                "bold": false,
+                                "italics": false,
+                                "markupTag": false
+                              }
+                            },
+                            {
+                              "id": 0,
+                              "termIdx": -9999,
+                              "content": "] ",
                               "cueList": "",
                               "cues": {
                                 "partOfSpeech": "untagged",
@@ -16841,7 +17028,7 @@
                               "lastTermIdx": -9999,
                               "type": 16,
                               "meta": {
-                                "content": " ",
+                                "content": "] ",
                                 "cues": [],
                                 "termIdx": -9999,
                                 "nextTermIdx": [],
@@ -17544,8 +17731,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 1,
-                                        "responseIdx": 2
+                                        "sectionIdx": 3,
+                                        "responseIdx": 1
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -17553,7 +17740,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 1
+                                "sectionFillinIdx": 3
                               }
                             },
                             {
@@ -17648,8 +17835,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 1,
-                                        "responseIdx": 3
+                                        "sectionIdx": 3,
+                                        "responseIdx": 2
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -17657,7 +17844,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 1
+                                "sectionFillinIdx": 3
                               }
                             },
                             {
@@ -17752,8 +17939,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 1,
-                                        "responseIdx": 4
+                                        "sectionIdx": 3,
+                                        "responseIdx": 3
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -17761,7 +17948,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 1
+                                "sectionFillinIdx": 3
                               }
                             },
                             {
@@ -18393,7 +18580,7 @@
                             {
                               "id": 0,
                               "termIdx": -9999,
-                              "content": " ",
+                              "content": " [",
                               "cueList": "",
                               "cues": {
                                 "partOfSpeech": "untagged",
@@ -18405,7 +18592,7 @@
                               "lastTermIdx": -9999,
                               "type": 16,
                               "meta": {
-                                "content": " ",
+                                "content": " [",
                                 "cues": [],
                                 "termIdx": -9999,
                                 "nextTermIdx": [],
@@ -18433,6 +18620,46 @@
                             {
                               "id": 0,
                               "termIdx": -9999,
+                              "content": "_",
+                              "cueList": "",
+                              "cues": {
+                                "partOfSpeech": "untagged",
+                                "definition": "",
+                                "image": "",
+                                "alternatives": []
+                              },
+                              "firstTermIdx": -9999,
+                              "lastTermIdx": -9999,
+                              "type": 11,
+                              "meta": {
+                                "content": "_",
+                                "cues": [],
+                                "termIdx": -9999,
+                                "nextTermIdx": [],
+                                "prevTermIdx": [],
+                                "altpronunciation": "",
+                                "altrecognition": "",
+                                "recitable": false,
+                                "heading": false,
+                                "audible": true,
+                                "linkable": false,
+                                "visible": true,
+                                "visited": false,
+                                "numberAsNumerals": false,
+                                "linkIdx": -9999,
+                                "hintsIdx": -9999,
+                                "fillin": {
+                                  "sectionIdx": -9999,
+                                  "responseIdx": -9999
+                                },
+                                "bold": false,
+                                "italics": false,
+                                "markupTag": false
+                              }
+                            },
+                            {
+                              "id": 0,
+                              "termIdx": 200,
                               "content": "Valentine's",
                               "cueList": "",
                               "cues": {
@@ -18443,61 +18670,81 @@
                               },
                               "firstTermIdx": 200,
                               "lastTermIdx": 200,
-                              "type": 4,
+                              "type": 17,
                               "meta": {
-                                "terminals": [
-                                  {
-                                    "id": 0,
-                                    "termIdx": 200,
-                                    "content": "Valentine's",
-                                    "cueList": "",
-                                    "cues": {
-                                      "partOfSpeech": "untagged",
-                                      "definition": "",
-                                      "image": "",
-                                      "alternatives": []
-                                    },
-                                    "firstTermIdx": 200,
-                                    "lastTermIdx": 200,
-                                    "type": 17,
-                                    "meta": {
-                                      "content": "Valentine's",
-                                      "cues": [],
-                                      "termIdx": 200,
-                                      "nextTermIdx": [
-                                        201
-                                      ],
-                                      "prevTermIdx": [
-                                        199
-                                      ],
-                                      "altpronunciation": "",
-                                      "altrecognition": "",
-                                      "recitable": true,
-                                      "heading": false,
-                                      "audible": true,
-                                      "linkable": false,
-                                      "visible": true,
-                                      "visited": false,
-                                      "numberAsNumerals": false,
-                                      "linkIdx": -9999,
-                                      "hintsIdx": -9999,
-                                      "fillin": {
-                                        "sectionIdx": 1,
-                                        "responseIdx": 5
-                                      },
-                                      "bold": false,
-                                      "italics": false,
-                                      "markupTag": false
-                                    }
-                                  }
+                                "content": "Valentine's",
+                                "cues": [],
+                                "termIdx": 200,
+                                "nextTermIdx": [
+                                  201
                                 ],
-                                "sectionFillinIdx": 1
+                                "prevTermIdx": [
+                                  199
+                                ],
+                                "altpronunciation": "",
+                                "altrecognition": "",
+                                "recitable": true,
+                                "heading": false,
+                                "audible": true,
+                                "linkable": false,
+                                "visible": true,
+                                "visited": false,
+                                "numberAsNumerals": false,
+                                "linkIdx": -9999,
+                                "hintsIdx": -9999,
+                                "fillin": {
+                                  "sectionIdx": -9999,
+                                  "responseIdx": -9999
+                                },
+                                "bold": false,
+                                "italics": false,
+                                "markupTag": false
                               }
                             },
                             {
                               "id": 0,
                               "termIdx": -9999,
-                              "content": " ",
+                              "content": "_",
+                              "cueList": "",
+                              "cues": {
+                                "partOfSpeech": "untagged",
+                                "definition": "",
+                                "image": "",
+                                "alternatives": []
+                              },
+                              "firstTermIdx": -9999,
+                              "lastTermIdx": -9999,
+                              "type": 11,
+                              "meta": {
+                                "content": "_",
+                                "cues": [],
+                                "termIdx": -9999,
+                                "nextTermIdx": [],
+                                "prevTermIdx": [],
+                                "altpronunciation": "",
+                                "altrecognition": "",
+                                "recitable": false,
+                                "heading": false,
+                                "audible": true,
+                                "linkable": false,
+                                "visible": true,
+                                "visited": false,
+                                "numberAsNumerals": false,
+                                "linkIdx": -9999,
+                                "hintsIdx": -9999,
+                                "fillin": {
+                                  "sectionIdx": -9999,
+                                  "responseIdx": -9999
+                                },
+                                "bold": false,
+                                "italics": false,
+                                "markupTag": false
+                              }
+                            },
+                            {
+                              "id": 0,
+                              "termIdx": -9999,
+                              "content": "] ",
                               "cueList": "",
                               "cues": {
                                 "partOfSpeech": "untagged",
@@ -18509,7 +18756,7 @@
                               "lastTermIdx": -9999,
                               "type": 16,
                               "meta": {
-                                "content": " ",
+                                "content": "] ",
                                 "cues": [],
                                 "termIdx": -9999,
                                 "nextTermIdx": [],
@@ -19212,8 +19459,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 1,
-                                        "responseIdx": 6
+                                        "sectionIdx": 3,
+                                        "responseIdx": 4
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -19221,7 +19468,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 1
+                                "sectionFillinIdx": 3
                               }
                             },
                             {
@@ -19774,8 +20021,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 1,
-                                        "responseIdx": 7
+                                        "sectionIdx": 3,
+                                        "responseIdx": 5
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -19783,7 +20030,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 1
+                                "sectionFillinIdx": 3
                               }
                             },
                             {
@@ -19878,8 +20125,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 1,
-                                        "responseIdx": 8
+                                        "sectionIdx": 3,
+                                        "responseIdx": 6
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -19887,7 +20134,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 1
+                                "sectionFillinIdx": 3
                               }
                             },
                             {
@@ -20608,8 +20855,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 1,
-                                        "responseIdx": 9
+                                        "sectionIdx": 3,
+                                        "responseIdx": 7
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -20617,7 +20864,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 1
+                                "sectionFillinIdx": 3
                               }
                             },
                             {
@@ -21506,8 +21753,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 1,
-                                        "responseIdx": 10
+                                        "sectionIdx": 3,
+                                        "responseIdx": 8
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -21515,7 +21762,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 1
+                                "sectionFillinIdx": 3
                               }
                             },
                             {
@@ -22488,8 +22735,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 1,
-                                        "responseIdx": 11
+                                        "sectionIdx": 3,
+                                        "responseIdx": 9
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -22497,7 +22744,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 1
+                                "sectionFillinIdx": 3
                               }
                             },
                             {
@@ -22554,7 +22801,66 @@
                   "startNumber": 0,
                   "listType": 1
                 }
-              },
+              }
+            ],
+            "meta": {
+              "depth": 1,
+              "startNumber": 0,
+              "listType": 6,
+              "subsectionOrdinal": 1
+            },
+            "type": "ordered_list"
+          }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
+    },
+    {
+      "id": 0,
+      "name": "",
+      "description": "",
+      "firstTermIdx": -9999,
+      "lastTermIdx": 292,
+      "items": [],
+      "type": "fillin",
+      "meta": {
+        "sectionFillinIdx": 4,
+        "presetLevel": 5,
+        "authorSetting": {
+          "description": "no description",
+          "responsesLabel": "Responses already filled in",
+          "promptsLabel": "Recite the following prompts including the underlined words:",
+          "layout": "grid",
+          "showProgression": true,
+          "progressionOrder": "in order",
+          "gridColumns": 6,
+          "showResponseTags": true,
+          "showPromptTags": true,
+          "groupByTags": true,
+          "showResponsesInPrompts": false,
+          "responsesLayout": "above",
+          "showAlternatives": false,
+          "unique": true,
+          "showReferenceCount": true,
+          "helpfulness": 814
+        },
+        "allowReset": true,
+        "maxPromptsPerSection": 0,
+        "promptColumns": 1,
+        "showPresets": true,
+        "prompts": [
+          {
+            "id": 0,
+            "name": "",
+            "description": "",
+            "firstTermIdx": -9999,
+            "lastTermIdx": -9999,
+            "items": [
               {
                 "id": 0,
                 "name": "",
@@ -23386,8 +23692,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 1,
-                                        "responseIdx": 12
+                                        "sectionIdx": 4,
+                                        "responseIdx": 0
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -23395,7 +23701,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 1
+                                "sectionFillinIdx": 4
                               }
                             },
                             {
@@ -24368,8 +24674,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 1,
-                                        "responseIdx": 13
+                                        "sectionIdx": 4,
+                                        "responseIdx": 1
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -24377,7 +24683,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 1
+                                "sectionFillinIdx": 4
                               }
                             },
                             {
@@ -25266,8 +25572,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 1,
-                                        "responseIdx": 14
+                                        "sectionIdx": 4,
+                                        "responseIdx": 2
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -25275,7 +25581,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 1
+                                "sectionFillinIdx": 4
                               }
                             },
                             {
@@ -25996,8 +26302,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 1,
-                                        "responseIdx": 15
+                                        "sectionIdx": 4,
+                                        "responseIdx": 3
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -26005,7 +26311,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 1
+                                "sectionFillinIdx": 4
                               }
                             },
                             {
@@ -26726,8 +27032,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 1,
-                                        "responseIdx": 16
+                                        "sectionIdx": 4,
+                                        "responseIdx": 4
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -26735,7 +27041,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 1
+                                "sectionFillinIdx": 4
                               }
                             },
                             {
@@ -26879,12 +27185,19 @@
             "meta": {
               "depth": 1,
               "startNumber": 0,
-              "listType": 6
+              "listType": 6,
+              "subsectionOrdinal": 1
             },
             "type": "ordered_list"
           }
-        ]
-      }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -26911,7 +27224,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -26942,7 +27255,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -26973,7 +27286,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -27219,7 +27532,7 @@
         9
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -27467,7 +27780,7 @@
         17
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -27653,7 +27966,7 @@
         23
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "know",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -27810,7 +28123,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -27841,7 +28154,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -27872,7 +28185,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -27903,7 +28216,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -27934,7 +28247,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28056,7 +28369,7 @@
         36
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -28211,7 +28524,7 @@
         41
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "r",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -28273,7 +28586,7 @@
         43
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "buy",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -28304,7 +28617,7 @@
         44
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "heir",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -28459,7 +28772,7 @@
         49
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "heir",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -28490,7 +28803,7 @@
         50
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "fear|fair|faire",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -28800,7 +29113,7 @@
         60
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -28862,7 +29175,7 @@
         62
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -29451,7 +29764,7 @@
         81
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -29679,8 +29992,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 8
+        "sectionIdx": 1,
+        "responseIdx": 0
       },
       "bold": false,
       "italics": false,
@@ -29823,7 +30136,7 @@
         93
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "buy",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -29896,8 +30209,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 9
+        "sectionIdx": 1,
+        "responseIdx": 1
       },
       "bold": false,
       "italics": false,
@@ -30113,8 +30426,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 10
+        "sectionIdx": 1,
+        "responseIdx": 2
       },
       "bold": false,
       "italics": false,
@@ -30133,7 +30446,7 @@
         103
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -30268,8 +30581,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 11
+        "sectionIdx": 1,
+        "responseIdx": 3
       },
       "bold": false,
       "italics": false,
@@ -30485,8 +30798,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 12
+        "sectionIdx": 1,
+        "responseIdx": 4
       },
       "bold": false,
       "italics": false,
@@ -30536,7 +30849,7 @@
         116
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "sea|c",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -30660,7 +30973,7 @@
         120
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "ants",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -30671,8 +30984,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 13
+        "sectionIdx": 1,
+        "responseIdx": 5
       },
       "bold": false,
       "italics": false,
@@ -30722,7 +31035,7 @@
         122
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "mourning",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -30857,8 +31170,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 14
+        "sectionIdx": 1,
+        "responseIdx": 6
       },
       "bold": false,
       "italics": false,
@@ -30908,7 +31221,7 @@
         128
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "wok",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -31043,8 +31356,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 15
+        "sectionIdx": 1,
+        "responseIdx": 7
       },
       "bold": false,
       "italics": false,
@@ -31280,7 +31593,7 @@
         140
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "blew",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -31291,8 +31604,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 16
+        "sectionIdx": 2,
+        "responseIdx": 0
       },
       "bold": false,
       "italics": false,
@@ -31311,7 +31624,7 @@
         141
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -31342,7 +31655,7 @@
         142
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "sea|c",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -31446,8 +31759,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 17
+        "sectionIdx": 2,
+        "responseIdx": 1
       },
       "bold": false,
       "italics": false,
@@ -31632,8 +31945,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 18
+        "sectionIdx": 2,
+        "responseIdx": 2
       },
       "bold": false,
       "italics": false,
@@ -31787,8 +32100,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 19
+        "sectionIdx": 2,
+        "responseIdx": 3
       },
       "bold": false,
       "italics": false,
@@ -31942,8 +32255,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 20
+        "sectionIdx": 2,
+        "responseIdx": 4
       },
       "bold": false,
       "italics": false,
@@ -32086,7 +32399,7 @@
         166
       ],
       "altpronunciation": "",
-      "altrecognition": "(2|to{1,2})",
+      "altrecognition": "(to|2|too)",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -32128,8 +32441,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 21
+        "sectionIdx": 2,
+        "responseIdx": 5
       },
       "bold": false,
       "italics": false,
@@ -32148,9 +32461,9 @@
         168
       ],
       "altpronunciation": "united",
-      "altrecognition": "",
+      "altrecognition": "ewe|you",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -32179,9 +32492,9 @@
         169
       ],
       "altpronunciation": "states",
-      "altrecognition": "",
+      "altrecognition": "ess",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -32212,7 +32525,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -32520,7 +32833,7 @@
         180
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "knew",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -32531,7 +32844,7 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 1,
+        "sectionIdx": 3,
         "responseIdx": 0
       },
       "bold": false,
@@ -32562,8 +32875,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 1,
-        "responseIdx": 1
+        "sectionIdx": -9999,
+        "responseIdx": -9999
       },
       "bold": false,
       "italics": false,
@@ -32706,7 +33019,7 @@
         186
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "rites|writes",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -32810,8 +33123,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 1,
-        "responseIdx": 2
+        "sectionIdx": 3,
+        "responseIdx": 1
       },
       "bold": false,
       "italics": false,
@@ -32841,8 +33154,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 1,
-        "responseIdx": 3
+        "sectionIdx": 3,
+        "responseIdx": 2
       },
       "bold": false,
       "italics": false,
@@ -32872,8 +33185,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 1,
-        "responseIdx": 4
+        "sectionIdx": 3,
+        "responseIdx": 3
       },
       "bold": false,
       "italics": false,
@@ -33120,8 +33433,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 1,
-        "responseIdx": 5
+        "sectionIdx": -9999,
+        "responseIdx": -9999
       },
       "bold": false,
       "italics": false,
@@ -33368,8 +33681,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 1,
-        "responseIdx": 6
+        "sectionIdx": 3,
+        "responseIdx": 4
       },
       "bold": false,
       "italics": false,
@@ -33554,8 +33867,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 1,
-        "responseIdx": 7
+        "sectionIdx": 3,
+        "responseIdx": 5
       },
       "bold": false,
       "italics": false,
@@ -33585,8 +33898,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 1,
-        "responseIdx": 8
+        "sectionIdx": 3,
+        "responseIdx": 6
       },
       "bold": false,
       "italics": false,
@@ -33833,8 +34146,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 1,
-        "responseIdx": 9
+        "sectionIdx": 3,
+        "responseIdx": 7
       },
       "bold": false,
       "italics": false,
@@ -34143,8 +34456,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 1,
-        "responseIdx": 10
+        "sectionIdx": 3,
+        "responseIdx": 8
       },
       "bold": false,
       "italics": false,
@@ -34484,8 +34797,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 1,
-        "responseIdx": 11
+        "sectionIdx": 3,
+        "responseIdx": 9
       },
       "bold": false,
       "italics": false,
@@ -34794,8 +35107,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 1,
-        "responseIdx": 12
+        "sectionIdx": 4,
+        "responseIdx": 0
       },
       "bold": false,
       "italics": false,
@@ -35135,8 +35448,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 1,
-        "responseIdx": 13
+        "sectionIdx": 4,
+        "responseIdx": 1
       },
       "bold": false,
       "italics": false,
@@ -35445,8 +35758,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 1,
-        "responseIdx": 14
+        "sectionIdx": 4,
+        "responseIdx": 2
       },
       "bold": false,
       "italics": false,
@@ -35558,7 +35871,7 @@
         278
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "berth",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -35693,8 +36006,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 1,
-        "responseIdx": 15
+        "sectionIdx": 4,
+        "responseIdx": 3
       },
       "bold": false,
       "italics": false,
@@ -35941,8 +36254,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 1,
-        "responseIdx": 16
+        "sectionIdx": 4,
+        "responseIdx": 4
       },
       "bold": false,
       "italics": false,
@@ -35984,25 +36297,29 @@
     {
       "headingLevel": 1,
       "title": "Completing sentences progressively",
-      "termIdx": 0,
+      "firstTermIdx": 0,
+      "lastTermIdx": 28,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 2,
       "title": "Holidays and recreation",
-      "termIdx": 29,
+      "firstTermIdx": 29,
+      "lastTermIdx": 31,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "My Trip",
-      "termIdx": 32,
+      "firstTermIdx": 32,
+      "lastTermIdx": 168,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "US Holidays",
-      "termIdx": 169,
+      "firstTermIdx": 169,
+      "lastTermIdx": 292,
       "terminalCountPriorToHeading": -9999
     }
   ],
@@ -36442,111 +36759,49 @@
         {
           "content": "plans",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "air",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "card",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "airport",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "car",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "gasoline",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "lot",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "passport",
           "tag": "untagged",
-          "referenceCount": 1
-        },
-        {
-          "content": "Hawaii",
-          "tag": "untagged",
-          "referenceCount": 1
-        },
-        {
-          "content": "pilot",
-          "tag": "untagged",
-          "referenceCount": 1
-        },
-        {
-          "content": "drinks",
-          "tag": "untagged",
-          "referenceCount": 1
-        },
-        {
-          "content": "relatives",
-          "tag": "untagged",
-          "referenceCount": 1
-        },
-        {
-          "content": "hotel",
-          "tag": "untagged",
-          "referenceCount": 1
-        },
-        {
-          "content": "aunts",
-          "tag": "untagged",
-          "referenceCount": 1
-        },
-        {
-          "content": "breakfast",
-          "tag": "untagged",
-          "referenceCount": 1
-        },
-        {
-          "content": "beach",
-          "tag": "untagged",
-          "referenceCount": 1
-        },
-        {
-          "content": "blue",
-          "tag": "untagged",
-          "referenceCount": 1
-        },
-        {
-          "content": "trees",
-          "tag": "untagged",
-          "referenceCount": 1
-        },
-        {
-          "content": "pool",
-          "tag": "untagged",
-          "referenceCount": 1
-        },
-        {
-          "content": "galleries",
-          "tag": "untagged",
-          "referenceCount": 1
-        },
-        {
-          "content": "restaurants",
-          "tag": "untagged",
-          "referenceCount": 1
-        },
-        {
-          "content": "weeks",
-          "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         }
       ],
@@ -36555,8 +36810,194 @@
     },
     {
       "idx": 1,
+      "showPresets": false,
+      "presetLevel": 2,
+      "authorSetting": {
+        "description": "no description",
+        "responsesLabel": "Responses already filled in",
+        "promptsLabel": "Recite the following prompts including the underlined words:",
+        "layout": "grid",
+        "showProgression": true,
+        "progressionOrder": "in order",
+        "gridColumns": 6,
+        "showResponseTags": true,
+        "showPromptTags": true,
+        "groupByTags": true,
+        "showResponsesInPrompts": false,
+        "responsesLayout": "above",
+        "showAlternatives": false,
+        "unique": true,
+        "showReferenceCount": true,
+        "helpfulness": 814
+      },
+      "currentSetting": {
+        "description": "no description",
+        "responsesLabel": "Responses already filled in",
+        "promptsLabel": "Recite the following prompts including the underlined words:",
+        "layout": "grid",
+        "showProgression": true,
+        "progressionOrder": "in order",
+        "gridColumns": 6,
+        "showResponseTags": true,
+        "showPromptTags": true,
+        "groupByTags": true,
+        "showResponsesInPrompts": false,
+        "responsesLayout": "above",
+        "showAlternatives": false,
+        "unique": true,
+        "showReferenceCount": true,
+        "helpfulness": 814
+      },
+      "allowReset": true,
+      "promptColumns": 2,
+      "alternatives": [],
+      "tags": [
+        "untagged"
+      ],
+      "responses": [
+        {
+          "content": "Hawaii",
+          "tag": "untagged",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "pilot",
+          "tag": "untagged",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "drinks",
+          "tag": "untagged",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "relatives",
+          "tag": "untagged",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "hotel",
+          "tag": "untagged",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "aunts",
+          "tag": "untagged",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "breakfast",
+          "tag": "untagged",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "beach",
+          "tag": "untagged",
+          "alternatives": [],
+          "referenceCount": 1
+        }
+      ],
+      "loaded": false,
+      "modified": false
+    },
+    {
+      "idx": 2,
+      "showPresets": false,
+      "presetLevel": 2,
+      "authorSetting": {
+        "description": "no description",
+        "responsesLabel": "Responses already filled in",
+        "promptsLabel": "Recite the following prompts including the underlined words:",
+        "layout": "grid",
+        "showProgression": true,
+        "progressionOrder": "in order",
+        "gridColumns": 6,
+        "showResponseTags": true,
+        "showPromptTags": true,
+        "groupByTags": true,
+        "showResponsesInPrompts": false,
+        "responsesLayout": "above",
+        "showAlternatives": false,
+        "unique": true,
+        "showReferenceCount": true,
+        "helpfulness": 814
+      },
+      "currentSetting": {
+        "description": "no description",
+        "responsesLabel": "Responses already filled in",
+        "promptsLabel": "Recite the following prompts including the underlined words:",
+        "layout": "grid",
+        "showProgression": true,
+        "progressionOrder": "in order",
+        "gridColumns": 6,
+        "showResponseTags": true,
+        "showPromptTags": true,
+        "groupByTags": true,
+        "showResponsesInPrompts": false,
+        "responsesLayout": "above",
+        "showAlternatives": false,
+        "unique": true,
+        "showReferenceCount": true,
+        "helpfulness": 814
+      },
+      "allowReset": true,
+      "promptColumns": 2,
+      "alternatives": [],
+      "tags": [
+        "untagged"
+      ],
+      "responses": [
+        {
+          "content": "blue",
+          "tag": "untagged",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "trees",
+          "tag": "untagged",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "pool",
+          "tag": "untagged",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "galleries",
+          "tag": "untagged",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "restaurants",
+          "tag": "untagged",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "weeks",
+          "tag": "untagged",
+          "alternatives": [],
+          "referenceCount": 1
+        }
+      ],
+      "loaded": false,
+      "modified": false
+    },
+    {
+      "idx": 3,
       "showPresets": true,
-      "presetLevel": 4,
+      "presetLevel": 5,
       "authorSetting": {
         "description": "no description",
         "responsesLabel": "Responses already filled in",
@@ -36603,86 +37044,142 @@
         {
           "content": "New",
           "tag": "untagged",
-          "referenceCount": 1
-        },
-        {
-          "content": "Year's",
-          "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Martin",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Luther",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "King",
           "tag": "untagged",
-          "referenceCount": 1
-        },
-        {
-          "content": "Valentine's",
-          "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Presidents",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Ash",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Wednesday",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Easter",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Memorial",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Juneteenth",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
-        },
+        }
+      ],
+      "loaded": false,
+      "modified": false
+    },
+    {
+      "idx": 4,
+      "showPresets": true,
+      "presetLevel": 5,
+      "authorSetting": {
+        "description": "no description",
+        "responsesLabel": "Responses already filled in",
+        "promptsLabel": "Recite the following prompts including the underlined words:",
+        "layout": "grid",
+        "showProgression": true,
+        "progressionOrder": "in order",
+        "gridColumns": 6,
+        "showResponseTags": true,
+        "showPromptTags": true,
+        "groupByTags": true,
+        "showResponsesInPrompts": false,
+        "responsesLayout": "above",
+        "showAlternatives": false,
+        "unique": true,
+        "showReferenceCount": true,
+        "helpfulness": 814
+      },
+      "currentSetting": {
+        "description": "no description",
+        "responsesLabel": "Responses already filled in",
+        "promptsLabel": "Recite the following prompts including the underlined words:",
+        "layout": "grid",
+        "showProgression": true,
+        "progressionOrder": "in order",
+        "gridColumns": 6,
+        "showResponseTags": true,
+        "showPromptTags": true,
+        "groupByTags": true,
+        "showResponsesInPrompts": false,
+        "responsesLayout": "above",
+        "showAlternatives": false,
+        "unique": true,
+        "showReferenceCount": true,
+        "helpfulness": 814
+      },
+      "allowReset": true,
+      "promptColumns": 1,
+      "alternatives": [],
+      "tags": [
+        "untagged"
+      ],
+      "responses": [
         {
           "content": "Labor",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Veterans",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Thanksgiving",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Christmas",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Inauguration",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         }
       ],

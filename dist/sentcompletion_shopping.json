@@ -6,11 +6,11 @@
   "owner": "anonymous",
   "author": "Wen",
   "category": "Sentence Completion (trailing word)",
-  "version": "20230706.1",
+  "version": "20231102.1",
   "pageFormatType": 0,
-  "created": "Sat Jul 29 2023 08:13:28 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Sat Jul 29 2023 08:13:28 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Sat Jul 29 2023 08:13:28 GMT-0700 (Pacific Daylight Time)",
+  "created": "Sun Feb 04 2024 17:05:04 GMT-0800 (Pacific Standard Time)",
+  "modified": "Sun Feb 04 2024 17:05:04 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Sun Feb 04 2024 17:05:04 GMT-0800 (Pacific Standard Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -30,7 +30,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 0,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -454,7 +454,7 @@
                 },
                 "firstTermIdx": 5,
                 "lastTermIdx": 5,
-                "type": 17,
+                "type": 12,
                 "meta": {
                   "content": "exercises",
                   "cues": [],
@@ -2468,7 +2468,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 29,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -2533,7 +2533,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 30,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -2956,6 +2956,7 @@
           "helpfulness": 814
         },
         "allowReset": false,
+        "maxPromptsPerSection": 0,
         "promptColumns": 1,
         "showPresets": false,
         "prompts": [
@@ -18864,7 +18865,7 @@
                             {
                               "id": 0,
                               "termIdx": -9999,
-                              "content": " ",
+                              "content": " [",
                               "cueList": "",
                               "cues": {
                                 "partOfSpeech": "untagged",
@@ -18876,7 +18877,7 @@
                               "lastTermIdx": -9999,
                               "type": 16,
                               "meta": {
-                                "content": " ",
+                                "content": " [",
                                 "cues": [],
                                 "termIdx": -9999,
                                 "nextTermIdx": [],
@@ -18904,6 +18905,46 @@
                             {
                               "id": 0,
                               "termIdx": -9999,
+                              "content": "_",
+                              "cueList": "",
+                              "cues": {
+                                "partOfSpeech": "untagged",
+                                "definition": "",
+                                "image": "",
+                                "alternatives": []
+                              },
+                              "firstTermIdx": -9999,
+                              "lastTermIdx": -9999,
+                              "type": 11,
+                              "meta": {
+                                "content": "_",
+                                "cues": [],
+                                "termIdx": -9999,
+                                "nextTermIdx": [],
+                                "prevTermIdx": [],
+                                "altpronunciation": "",
+                                "altrecognition": "",
+                                "recitable": false,
+                                "heading": false,
+                                "audible": true,
+                                "linkable": false,
+                                "visible": true,
+                                "visited": false,
+                                "numberAsNumerals": false,
+                                "linkIdx": -9999,
+                                "hintsIdx": -9999,
+                                "fillin": {
+                                  "sectionIdx": -9999,
+                                  "responseIdx": -9999
+                                },
+                                "bold": false,
+                                "italics": false,
+                                "markupTag": false
+                              }
+                            },
+                            {
+                              "id": 0,
+                              "termIdx": 205,
                               "content": "Michael's",
                               "cueList": "",
                               "cues": {
@@ -18914,55 +18955,115 @@
                               },
                               "firstTermIdx": 205,
                               "lastTermIdx": 205,
-                              "type": 4,
+                              "type": 17,
                               "meta": {
-                                "terminals": [
-                                  {
-                                    "id": 0,
-                                    "termIdx": 205,
-                                    "content": "Michael's",
-                                    "cueList": "",
-                                    "cues": {
-                                      "partOfSpeech": "untagged",
-                                      "definition": "",
-                                      "image": "",
-                                      "alternatives": []
-                                    },
-                                    "firstTermIdx": 205,
-                                    "lastTermIdx": 205,
-                                    "type": 17,
-                                    "meta": {
-                                      "content": "Michael's",
-                                      "cues": [],
-                                      "termIdx": 205,
-                                      "nextTermIdx": [
-                                        206
-                                      ],
-                                      "prevTermIdx": [
-                                        204
-                                      ],
-                                      "altpronunciation": "",
-                                      "altrecognition": "",
-                                      "recitable": true,
-                                      "heading": false,
-                                      "audible": true,
-                                      "linkable": false,
-                                      "visible": true,
-                                      "visited": false,
-                                      "numberAsNumerals": false,
-                                      "linkIdx": -9999,
-                                      "hintsIdx": -9999,
-                                      "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 26
-                                      },
-                                      "bold": false,
-                                      "italics": false,
-                                      "markupTag": false
-                                    }
-                                  }
+                                "content": "Michael's",
+                                "cues": [],
+                                "termIdx": 205,
+                                "nextTermIdx": [
+                                  206
                                 ],
-                                "sectionFillinIdx": 0
+                                "prevTermIdx": [
+                                  204
+                                ],
+                                "altpronunciation": "",
+                                "altrecognition": "",
+                                "recitable": true,
+                                "heading": false,
+                                "audible": true,
+                                "linkable": false,
+                                "visible": true,
+                                "visited": false,
+                                "numberAsNumerals": false,
+                                "linkIdx": -9999,
+                                "hintsIdx": -9999,
+                                "fillin": {
+                                  "sectionIdx": -9999,
+                                  "responseIdx": -9999
+                                },
+                                "bold": false,
+                                "italics": false,
+                                "markupTag": false
+                              }
+                            },
+                            {
+                              "id": 0,
+                              "termIdx": -9999,
+                              "content": "_",
+                              "cueList": "",
+                              "cues": {
+                                "partOfSpeech": "untagged",
+                                "definition": "",
+                                "image": "",
+                                "alternatives": []
+                              },
+                              "firstTermIdx": -9999,
+                              "lastTermIdx": -9999,
+                              "type": 11,
+                              "meta": {
+                                "content": "_",
+                                "cues": [],
+                                "termIdx": -9999,
+                                "nextTermIdx": [],
+                                "prevTermIdx": [],
+                                "altpronunciation": "",
+                                "altrecognition": "",
+                                "recitable": false,
+                                "heading": false,
+                                "audible": true,
+                                "linkable": false,
+                                "visible": true,
+                                "visited": false,
+                                "numberAsNumerals": false,
+                                "linkIdx": -9999,
+                                "hintsIdx": -9999,
+                                "fillin": {
+                                  "sectionIdx": -9999,
+                                  "responseIdx": -9999
+                                },
+                                "bold": false,
+                                "italics": false,
+                                "markupTag": false
+                              }
+                            },
+                            {
+                              "id": 0,
+                              "termIdx": -9999,
+                              "content": "]",
+                              "cueList": "",
+                              "cues": {
+                                "partOfSpeech": "untagged",
+                                "definition": "",
+                                "image": "",
+                                "alternatives": []
+                              },
+                              "firstTermIdx": -9999,
+                              "lastTermIdx": -9999,
+                              "type": 16,
+                              "meta": {
+                                "content": "]",
+                                "cues": [],
+                                "termIdx": -9999,
+                                "nextTermIdx": [],
+                                "prevTermIdx": [],
+                                "altpronunciation": "",
+                                "altrecognition": "",
+                                "recitable": false,
+                                "heading": false,
+                                "audible": true,
+                                "linkable": false,
+                                "visible": true,
+                                "visited": false,
+                                "numberAsNumerals": false,
+                                "linkIdx": -9999,
+                                "hintsIdx": -9999,
+                                "fillin": {
+                                  "sectionIdx": -9999,
+                                  "responseIdx": -9999
+                                },
+                                "bold": false,
+                                "italics": false,
+                                "markupTag": false
                               }
                             },
                             {
@@ -19516,7 +19617,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 27
+                                        "responseIdx": 26
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -20162,7 +20263,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 28
+                                        "responseIdx": 27
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -20232,12 +20333,19 @@
             "meta": {
               "depth": 1,
               "startNumber": 0,
-              "listType": 6
+              "listType": 6,
+              "subsectionOrdinal": 1
             },
             "type": "ordered_list"
           }
-        ]
-      }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -20255,7 +20363,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 219,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -20594,10 +20702,17 @@
           "helpfulness": 314
         },
         "allowReset": false,
+        "maxPromptsPerSection": 0,
         "promptColumns": 1,
         "showPresets": false,
-        "prompts": []
-      }
+        "prompts": [],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -20615,7 +20730,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 222,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -21038,10 +21153,17 @@
           "helpfulness": 314
         },
         "allowReset": false,
+        "maxPromptsPerSection": 0,
         "promptColumns": 1,
         "showPresets": false,
-        "prompts": []
-      }
+        "prompts": [],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -21059,7 +21181,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 226,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -21482,10 +21604,17 @@
           "helpfulness": 314
         },
         "allowReset": false,
+        "maxPromptsPerSection": 0,
         "promptColumns": 1,
         "showPresets": false,
-        "prompts": []
-      }
+        "prompts": [],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -21503,7 +21632,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 230,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -21840,10 +21969,17 @@
           "helpfulness": 314
         },
         "allowReset": false,
+        "maxPromptsPerSection": 0,
         "promptColumns": 1,
         "showPresets": false,
-        "prompts": []
-      }
+        "prompts": [],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -21870,7 +22006,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -21901,7 +22037,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -21932,7 +22068,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -22178,7 +22314,7 @@
         9
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -22426,7 +22562,7 @@
         17
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -22612,7 +22748,7 @@
         23
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "know",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -22769,7 +22905,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -22800,7 +22936,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -22831,7 +22967,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -22862,7 +22998,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -22891,9 +23027,9 @@
         32
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -23077,7 +23213,7 @@
         38
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "maul",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -23263,7 +23399,7 @@
         44
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "sail",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -23511,7 +23647,7 @@
         52
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "pleas",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -24069,7 +24205,7 @@
         70
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -24348,7 +24484,7 @@
         79
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -24472,7 +24608,7 @@
         83
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "their|they're",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -24534,7 +24670,7 @@
         85
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "know",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -24658,7 +24794,7 @@
         89
       ],
       "altpronunciation": "",
-      "altrecognition": "(2|to{1,2})",
+      "altrecognition": "(to|2|too)",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -25030,7 +25166,7 @@
         101
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -25092,7 +25228,7 @@
         103
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -25216,7 +25352,7 @@
         107
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "due|dew",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -25340,7 +25476,7 @@
         111
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -25495,7 +25631,7 @@
         116
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "bee|b",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -25898,7 +26034,7 @@
         129
       ],
       "altpronunciation": "cells",
-      "altrecognition": "",
+      "altrecognition": "cells",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -25991,7 +26127,7 @@
         132
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -26115,7 +26251,7 @@
         136
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -26828,7 +26964,7 @@
         159
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "isle",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -26890,7 +27026,7 @@
         161
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "fined",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -26983,7 +27119,7 @@
         164
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -27045,7 +27181,7 @@
         166
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "meet",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -27324,7 +27460,7 @@
         175
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -27355,7 +27491,7 @@
         176
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "by",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -27665,7 +27801,7 @@
         186
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -27882,7 +28018,7 @@
         193
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "fined",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -28068,7 +28204,7 @@
         199
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -28099,7 +28235,7 @@
         200
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "fined",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -28234,8 +28370,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 26
+        "sectionIdx": -9999,
+        "responseIdx": -9999
       },
       "bold": false,
       "italics": false,
@@ -28421,7 +28557,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 27
+        "responseIdx": 26
       },
       "bold": false,
       "italics": false,
@@ -28638,7 +28774,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 28
+        "responseIdx": 27
       },
       "bold": false,
       "italics": false,
@@ -28659,7 +28795,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28688,9 +28824,9 @@
         219
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28721,7 +28857,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28752,7 +28888,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28781,9 +28917,9 @@
         222
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28814,7 +28950,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28845,7 +28981,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28876,7 +29012,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28905,9 +29041,9 @@
         226
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28938,7 +29074,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28969,7 +29105,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -29000,7 +29136,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -29031,7 +29167,7 @@
       "altpronunciation": "",
       "altrecognition": "knot",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -29060,7 +29196,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -29083,43 +29219,50 @@
     {
       "headingLevel": 1,
       "title": "Completing sentences progressively",
-      "termIdx": 0,
+      "firstTermIdx": 0,
+      "lastTermIdx": 28,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 2,
       "title": "Shopping",
-      "termIdx": 29,
+      "firstTermIdx": 29,
+      "lastTermIdx": 29,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "Responses (already filled in)",
-      "termIdx": 30,
+      "firstTermIdx": 30,
+      "lastTermIdx": 218,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "Responses (in order)",
-      "termIdx": 219,
+      "firstTermIdx": 219,
+      "lastTermIdx": 221,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "Responses (in alphabetical order)",
-      "termIdx": 222,
+      "firstTermIdx": 222,
+      "lastTermIdx": 225,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "Responses (in random order)",
-      "termIdx": 226,
+      "firstTermIdx": 226,
+      "lastTermIdx": 229,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "Responses (not shown)",
-      "termIdx": 230,
+      "firstTermIdx": 230,
+      "lastTermIdx": 232,
       "terminalCountPriorToHeading": -9999
     }
   ],
@@ -29514,146 +29657,169 @@
         {
           "content": "mall",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "sale",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "store",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "name",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "gasoline",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "lot",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "card",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "department",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "return",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "one",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "door",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "line",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "size",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "charge",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "vegetables",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "goods",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "room",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "shopping",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "out",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "aisle",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "section",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "bakery",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Starbucks",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Costco",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "back",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Tree",
           "tag": "untagged",
-          "referenceCount": 1
-        },
-        {
-          "content": "Michael's",
-          "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Gap",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Nike",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         }
       ],

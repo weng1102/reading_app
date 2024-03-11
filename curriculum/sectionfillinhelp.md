@@ -1,4 +1,4 @@
-[[page: Section Fil-in Section Help, Ronlyn, Wen, 7/27/2023, Help,  /]]
+[[page: Section Fill-in Section Help, Ronlyn, Wen, 7/27/2023, Help,  /]]
 # Help for Section Fill-in Buttons
 ## Reset fill-ins
 [[image-entry: Reset Responses Prompts, left, 7%]]
@@ -54,7 +54,20 @@ The group by tags button displays responses grouped by their respective tags.
 ![Ungroup tags](button_categorize_hide.png, 40, 40)
 The ungroup from tags button removes responses grouping by tags.
 [[/image-entry]]
-[[image-entry: Disable tag caetgory, left, 7%]]
+[[image-entry: Disable tag category, left, 7%]]
 ![Ungroup tags](button_categorize_ghosted.png, 40, 40)
 The group by tags button is disabled when tags are hidden and/or no tags are available in the section.
+[[/image-entry]]
+## Show/Hide reference count
+[[image-entry: Show reference count, left, 7%]]
+![Show Reference Count](button_responsesrefcnt_show.png, 40, 40)
+The show reference count button displays only unique responses along with respective reference counts.
+[[/image-entry]]
+[[image-entry: Hide reference count, left, 7%]]
+![Hide Reference Count](button_responsesrefcnt_hide.png, 40, 40)
+The hide reference count displays all responses obviating the need for reference counts.
+[[/image-entry]]
+[[image-entry: Disable reference count, left, 7%]]
+![Disabled Reference Count](button_responsesRefcnt_ghosted.png, 40, 40)
+The reference count buttons are disabled when no responses are not shown.
 [[/image-entry]]

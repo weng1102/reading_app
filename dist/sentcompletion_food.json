@@ -6,11 +6,13 @@
   "owner": "anonymous",
   "author": "Wen",
   "category": "Sentence Completion (trailing word)",
-  "version": "20230706.1",
+  "version": "20231102.1",
   "pageFormatType": 0,
-  "created": "Sat Jul 29 2023 08:13:27 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Sat Jul 29 2023 08:13:27 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Sat Jul 29 2023 08:13:27 GMT-0700 (Pacific Daylight Time)",
+  "created": "Tue Feb 06 2024 15:12:34 GMT-0800 (Pacific Standard Time)",
+  "modified": "Tue Feb 06 2024 15:12:34 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Tue Feb 06 2024 15:12:34 GMT-0800 (Pacific Standard Time)",
+  "showTags": false,
+  "columnCount": 0,
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -18,8 +20,10 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 0,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
+      "showTags": false,
+      "columnCount": 0,
       "items": [],
       "type": "heading",
       "meta": {
@@ -251,6 +255,8 @@
       "description": "",
       "firstTermIdx": 3,
       "lastTermIdx": 28,
+      "showTags": false,
+      "columnCount": 0,
       "items": [],
       "type": "paragraph",
       "meta": {
@@ -442,7 +448,7 @@
                 },
                 "firstTermIdx": 5,
                 "lastTermIdx": 5,
-                "type": 17,
+                "type": 12,
                 "meta": {
                   "content": "exercises",
                   "cues": [],
@@ -2456,8 +2462,10 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 29,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
+      "showTags": false,
+      "columnCount": 0,
       "items": [],
       "type": "heading",
       "meta": {
@@ -2523,6 +2531,8 @@
       "description": "",
       "firstTermIdx": -9999,
       "lastTermIdx": 61,
+      "showTags": false,
+      "columnCount": 0,
       "items": [],
       "type": "fillin",
       "meta": {
@@ -2547,6 +2557,7 @@
           "helpfulness": 814
         },
         "allowReset": true,
+        "maxPromptsPerSection": 0,
         "promptColumns": 2,
         "showPresets": true,
         "prompts": [
@@ -2556,6 +2567,8 @@
             "description": "",
             "firstTermIdx": -9999,
             "lastTermIdx": -9999,
+            "showTags": false,
+            "columnCount": 0,
             "items": [
               {
                 "id": 0,
@@ -2563,6 +2576,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 1,
@@ -2570,13 +2585,15 @@
                     "description": "",
                     "firstTermIdx": 30,
                     "lastTermIdx": 32,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
                       "sentences": [
                         {
                           "id": 3,
-                          "content": "Spaghetti=(noun) and [_meatballs=(noun)_].",
+                          "content": "Spaghetti and [_meatballs_].",
                           "firstTermIdx": 30,
                           "lastTermIdx": 32,
                           "terminals": [
@@ -2584,9 +2601,9 @@
                               "id": 0,
                               "termIdx": 30,
                               "content": "Spaghetti",
-                              "cueList": "noun",
+                              "cueList": "",
                               "cues": {
-                                "partOfSpeech": "noun",
+                                "partOfSpeech": "untagged",
                                 "definition": "",
                                 "image": "",
                                 "alternatives": []
@@ -2596,9 +2613,7 @@
                               "type": 17,
                               "meta": {
                                 "content": "Spaghetti",
-                                "cues": [
-                                  "noun"
-                                ],
+                                "cues": [],
                                 "termIdx": 30,
                                 "nextTermIdx": [
                                   31
@@ -2770,9 +2785,9 @@
                                     "id": 0,
                                     "termIdx": 32,
                                     "content": "meatballs",
-                                    "cueList": "noun",
+                                    "cueList": "",
                                     "cues": {
-                                      "partOfSpeech": "noun",
+                                      "partOfSpeech": "untagged",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -2782,9 +2797,7 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "meatballs",
-                                      "cues": [
-                                        "noun"
-                                      ],
+                                      "cues": [],
                                       "termIdx": 32,
                                       "nextTermIdx": [
                                         33
@@ -2877,6 +2890,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 2,
@@ -2884,13 +2899,15 @@
                     "description": "",
                     "firstTermIdx": 33,
                     "lastTermIdx": 36,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
                       "sentences": [
                         {
                           "id": 4,
-                          "content": "Sausage=(noun) and mushroom [_pizza=(noun)_].",
+                          "content": "Sausage and mushroom [_pizza_].",
                           "firstTermIdx": 33,
                           "lastTermIdx": 36,
                           "terminals": [
@@ -2898,9 +2915,9 @@
                               "id": 0,
                               "termIdx": 33,
                               "content": "Sausage",
-                              "cueList": "noun",
+                              "cueList": "",
                               "cues": {
-                                "partOfSpeech": "noun",
+                                "partOfSpeech": "untagged",
                                 "definition": "",
                                 "image": "",
                                 "alternatives": []
@@ -2910,9 +2927,7 @@
                               "type": 17,
                               "meta": {
                                 "content": "Sausage",
-                                "cues": [
-                                  "noun"
-                                ],
+                                "cues": [],
                                 "termIdx": 33,
                                 "nextTermIdx": [
                                   34
@@ -3168,9 +3183,9 @@
                                     "id": 0,
                                     "termIdx": 36,
                                     "content": "pizza",
-                                    "cueList": "noun",
+                                    "cueList": "",
                                     "cues": {
-                                      "partOfSpeech": "noun",
+                                      "partOfSpeech": "untagged",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -3180,9 +3195,7 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "pizza",
-                                      "cues": [
-                                        "noun"
-                                      ],
+                                      "cues": [],
                                       "termIdx": 36,
                                       "nextTermIdx": [
                                         37
@@ -3275,6 +3288,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 3,
@@ -3282,13 +3297,15 @@
                     "description": "",
                     "firstTermIdx": 37,
                     "lastTermIdx": 38,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
                       "sentences": [
                         {
                           "id": 5,
-                          "content": "Sirloin [_steak=(noun)_].",
+                          "content": "Sirloin [_steak_].",
                           "firstTermIdx": 37,
                           "lastTermIdx": 38,
                           "terminals": [
@@ -3396,9 +3413,9 @@
                                     "id": 0,
                                     "termIdx": 38,
                                     "content": "steak",
-                                    "cueList": "noun",
+                                    "cueList": "",
                                     "cues": {
-                                      "partOfSpeech": "noun",
+                                      "partOfSpeech": "untagged",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -3408,9 +3425,7 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "steak",
-                                      "cues": [
-                                        "noun"
-                                      ],
+                                      "cues": [],
                                       "termIdx": 38,
                                       "nextTermIdx": [
                                         39
@@ -3503,6 +3518,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 4,
@@ -3510,13 +3527,15 @@
                     "description": "",
                     "firstTermIdx": 39,
                     "lastTermIdx": 41,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
                       "sentences": [
                         {
                           "id": 6,
-                          "content": "Fish=(noun) and [_chips_].",
+                          "content": "Fish and [_chips_].",
                           "firstTermIdx": 39,
                           "lastTermIdx": 41,
                           "terminals": [
@@ -3524,9 +3543,9 @@
                               "id": 0,
                               "termIdx": 39,
                               "content": "Fish",
-                              "cueList": "noun",
+                              "cueList": "",
                               "cues": {
-                                "partOfSpeech": "noun",
+                                "partOfSpeech": "untagged",
                                 "definition": "",
                                 "image": "",
                                 "alternatives": []
@@ -3536,9 +3555,7 @@
                               "type": 17,
                               "meta": {
                                 "content": "Fish",
-                                "cues": [
-                                  "noun"
-                                ],
+                                "cues": [],
                                 "termIdx": 39,
                                 "nextTermIdx": [
                                   40
@@ -3815,6 +3832,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 5,
@@ -3822,13 +3841,15 @@
                     "description": "",
                     "firstTermIdx": 42,
                     "lastTermIdx": 44,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
                       "sentences": [
                         {
                           "id": 7,
-                          "content": "Prime rib [_roast=(noun)_].",
+                          "content": "Prime rib [_roast_].",
                           "firstTermIdx": 42,
                           "lastTermIdx": 44,
                           "terminals": [
@@ -4020,9 +4041,9 @@
                                     "id": 0,
                                     "termIdx": 44,
                                     "content": "roast",
-                                    "cueList": "noun",
+                                    "cueList": "",
                                     "cues": {
-                                      "partOfSpeech": "noun",
+                                      "partOfSpeech": "untagged",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -4032,9 +4053,7 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "roast",
-                                      "cues": [
-                                        "noun"
-                                      ],
+                                      "cues": [],
                                       "termIdx": 44,
                                       "nextTermIdx": [
                                         45
@@ -4127,6 +4146,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 6,
@@ -4134,13 +4155,15 @@
                     "description": "",
                     "firstTermIdx": 45,
                     "lastTermIdx": 46,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
                       "sentences": [
                         {
                           "id": 8,
-                          "content": "Baked [_potato=(noun)_].",
+                          "content": "Baked [_potato_].",
                           "firstTermIdx": 45,
                           "lastTermIdx": 46,
                           "terminals": [
@@ -4248,9 +4271,9 @@
                                     "id": 0,
                                     "termIdx": 46,
                                     "content": "potato",
-                                    "cueList": "noun",
+                                    "cueList": "",
                                     "cues": {
-                                      "partOfSpeech": "noun",
+                                      "partOfSpeech": "untagged",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -4260,9 +4283,7 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "potato",
-                                      "cues": [
-                                        "noun"
-                                      ],
+                                      "cues": [],
                                       "termIdx": 46,
                                       "nextTermIdx": [
                                         47
@@ -4355,6 +4376,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 7,
@@ -4362,13 +4385,15 @@
                     "description": "",
                     "firstTermIdx": 47,
                     "lastTermIdx": 48,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
                       "sentences": [
                         {
                           "id": 9,
-                          "content": "Pepperoni=(noun) [_pizza=(noun)_].",
+                          "content": "Pepperoni [_pizza_].",
                           "firstTermIdx": 47,
                           "lastTermIdx": 48,
                           "terminals": [
@@ -4376,9 +4401,9 @@
                               "id": 0,
                               "termIdx": 47,
                               "content": "Pepperoni",
-                              "cueList": "noun",
+                              "cueList": "",
                               "cues": {
-                                "partOfSpeech": "noun",
+                                "partOfSpeech": "untagged",
                                 "definition": "",
                                 "image": "",
                                 "alternatives": []
@@ -4388,9 +4413,7 @@
                               "type": 17,
                               "meta": {
                                 "content": "Pepperoni",
-                                "cues": [
-                                  "noun"
-                                ],
+                                "cues": [],
                                 "termIdx": 47,
                                 "nextTermIdx": [
                                   48
@@ -4478,9 +4501,9 @@
                                     "id": 0,
                                     "termIdx": 48,
                                     "content": "pizza",
-                                    "cueList": "noun",
+                                    "cueList": "",
                                     "cues": {
-                                      "partOfSpeech": "noun",
+                                      "partOfSpeech": "untagged",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -4490,9 +4513,7 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "pizza",
-                                      "cues": [
-                                        "noun"
-                                      ],
+                                      "cues": [],
                                       "termIdx": 48,
                                       "nextTermIdx": [
                                         49
@@ -4585,6 +4606,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 8,
@@ -4592,13 +4615,15 @@
                     "description": "",
                     "firstTermIdx": 49,
                     "lastTermIdx": 50,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
                       "sentences": [
                         {
                           "id": 10,
-                          "content": "Roast [_beef=(noun)_].",
+                          "content": "Roast [_beef_].",
                           "firstTermIdx": 49,
                           "lastTermIdx": 50,
                           "terminals": [
@@ -4706,9 +4731,9 @@
                                     "id": 0,
                                     "termIdx": 50,
                                     "content": "beef",
-                                    "cueList": "noun",
+                                    "cueList": "",
                                     "cues": {
-                                      "partOfSpeech": "noun",
+                                      "partOfSpeech": "untagged",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -4718,9 +4743,7 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "beef",
-                                      "cues": [
-                                        "noun"
-                                      ],
+                                      "cues": [],
                                       "termIdx": 50,
                                       "nextTermIdx": [
                                         51
@@ -4813,6 +4836,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 9,
@@ -4820,13 +4845,15 @@
                     "description": "",
                     "firstTermIdx": 51,
                     "lastTermIdx": 53,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
                       "sentences": [
                         {
                           "id": 11,
-                          "content": "Grilled cheese=(noun) [_sandwich=(noun)_].",
+                          "content": "Grilled cheese [_sandwich_].",
                           "firstTermIdx": 51,
                           "lastTermIdx": 53,
                           "terminals": [
@@ -4918,9 +4945,9 @@
                               "id": 0,
                               "termIdx": 52,
                               "content": "cheese",
-                              "cueList": "noun",
+                              "cueList": "",
                               "cues": {
-                                "partOfSpeech": "noun",
+                                "partOfSpeech": "untagged",
                                 "definition": "",
                                 "image": "",
                                 "alternatives": []
@@ -4930,9 +4957,7 @@
                               "type": 17,
                               "meta": {
                                 "content": "cheese",
-                                "cues": [
-                                  "noun"
-                                ],
+                                "cues": [],
                                 "termIdx": 52,
                                 "nextTermIdx": [
                                   53
@@ -5020,9 +5045,9 @@
                                     "id": 0,
                                     "termIdx": 53,
                                     "content": "sandwich",
-                                    "cueList": "noun",
+                                    "cueList": "",
                                     "cues": {
-                                      "partOfSpeech": "noun",
+                                      "partOfSpeech": "untagged",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -5032,9 +5057,7 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "sandwich",
-                                      "cues": [
-                                        "noun"
-                                      ],
+                                      "cues": [],
                                       "termIdx": 53,
                                       "nextTermIdx": [
                                         54
@@ -5127,6 +5150,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 10,
@@ -5134,13 +5159,15 @@
                     "description": "",
                     "firstTermIdx": 54,
                     "lastTermIdx": 55,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
                       "sentences": [
                         {
                           "id": 12,
-                          "content": "Caesar [_salad=(noun)_].",
+                          "content": "Caesar [_salad_].",
                           "firstTermIdx": 54,
                           "lastTermIdx": 55,
                           "terminals": [
@@ -5248,9 +5275,9 @@
                                     "id": 0,
                                     "termIdx": 55,
                                     "content": "salad",
-                                    "cueList": "noun",
+                                    "cueList": "",
                                     "cues": {
-                                      "partOfSpeech": "noun",
+                                      "partOfSpeech": "untagged",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -5260,9 +5287,7 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "salad",
-                                      "cues": [
-                                        "noun"
-                                      ],
+                                      "cues": [],
                                       "termIdx": 55,
                                       "nextTermIdx": [
                                         56
@@ -5355,6 +5380,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 11,
@@ -5362,13 +5389,15 @@
                     "description": "",
                     "firstTermIdx": 56,
                     "lastTermIdx": 57,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
                       "sentences": [
                         {
                           "id": 13,
-                          "content": "Mashed [_potatoes=(noun)_].",
+                          "content": "Mashed [_potatoes_].",
                           "firstTermIdx": 56,
                           "lastTermIdx": 57,
                           "terminals": [
@@ -5476,9 +5505,9 @@
                                     "id": 0,
                                     "termIdx": 57,
                                     "content": "potatoes",
-                                    "cueList": "noun",
+                                    "cueList": "",
                                     "cues": {
-                                      "partOfSpeech": "noun",
+                                      "partOfSpeech": "untagged",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -5488,9 +5517,7 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "potatoes",
-                                      "cues": [
-                                        "noun"
-                                      ],
+                                      "cues": [],
                                       "termIdx": 57,
                                       "nextTermIdx": [
                                         58
@@ -5583,6 +5610,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 12,
@@ -5590,13 +5619,15 @@
                     "description": "",
                     "firstTermIdx": 58,
                     "lastTermIdx": 61,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
                       "sentences": [
                         {
                           "id": 14,
-                          "content": "I [_like=(verb)_] baked [_potatoes=(noun)_].",
+                          "content": "I like baked [_potatoes_].",
                           "firstTermIdx": 58,
                           "lastTermIdx": 61,
                           "terminals": [
@@ -5686,7 +5717,7 @@
                             },
                             {
                               "id": 0,
-                              "termIdx": -9999,
+                              "termIdx": 59,
                               "content": "like",
                               "cueList": "",
                               "cues": {
@@ -5697,57 +5728,35 @@
                               },
                               "firstTermIdx": 59,
                               "lastTermIdx": 59,
-                              "type": 4,
+                              "type": 17,
                               "meta": {
-                                "terminals": [
-                                  {
-                                    "id": 0,
-                                    "termIdx": 59,
-                                    "content": "like",
-                                    "cueList": "verb",
-                                    "cues": {
-                                      "partOfSpeech": "verb",
-                                      "definition": "",
-                                      "image": "",
-                                      "alternatives": []
-                                    },
-                                    "firstTermIdx": 59,
-                                    "lastTermIdx": 59,
-                                    "type": 17,
-                                    "meta": {
-                                      "content": "like",
-                                      "cues": [
-                                        "verb"
-                                      ],
-                                      "termIdx": 59,
-                                      "nextTermIdx": [
-                                        60
-                                      ],
-                                      "prevTermIdx": [
-                                        58
-                                      ],
-                                      "altpronunciation": "",
-                                      "altrecognition": "",
-                                      "recitable": true,
-                                      "heading": false,
-                                      "audible": true,
-                                      "linkable": false,
-                                      "visible": true,
-                                      "visited": false,
-                                      "numberAsNumerals": false,
-                                      "linkIdx": -9999,
-                                      "hintsIdx": -9999,
-                                      "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 11
-                                      },
-                                      "bold": false,
-                                      "italics": false,
-                                      "markupTag": false
-                                    }
-                                  }
+                                "content": "like",
+                                "cues": [],
+                                "termIdx": 59,
+                                "nextTermIdx": [
+                                  60
                                 ],
-                                "sectionFillinIdx": 0
+                                "prevTermIdx": [
+                                  58
+                                ],
+                                "altpronunciation": "",
+                                "altrecognition": "",
+                                "recitable": true,
+                                "heading": false,
+                                "audible": true,
+                                "linkable": false,
+                                "visible": true,
+                                "visited": false,
+                                "numberAsNumerals": false,
+                                "linkIdx": -9999,
+                                "hintsIdx": -9999,
+                                "fillin": {
+                                  "sectionIdx": -9999,
+                                  "responseIdx": -9999
+                                },
+                                "bold": false,
+                                "italics": false,
+                                "markupTag": false
                               }
                             },
                             {
@@ -5894,9 +5903,9 @@
                                     "id": 0,
                                     "termIdx": 61,
                                     "content": "potatoes",
-                                    "cueList": "noun",
+                                    "cueList": "",
                                     "cues": {
-                                      "partOfSpeech": "noun",
+                                      "partOfSpeech": "untagged",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -5906,9 +5915,7 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "potatoes",
-                                      "cues": [
-                                        "noun"
-                                      ],
+                                      "cues": [],
                                       "termIdx": 61,
                                       "nextTermIdx": [
                                         62
@@ -5929,7 +5936,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 12
+                                        "responseIdx": 11
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -5999,19 +6006,28 @@
             "meta": {
               "depth": 1,
               "startNumber": 0,
-              "listType": 6
+              "listType": 6,
+              "subsectionOrdinal": 1
             },
             "type": "ordered_list"
           }
-        ]
-      }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 62,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
+      "showTags": false,
+      "columnCount": 0,
       "items": [],
       "type": "heading",
       "meta": {
@@ -6161,6 +6177,8 @@
       "description": "",
       "firstTermIdx": -9999,
       "lastTermIdx": 102,
+      "showTags": false,
+      "columnCount": 0,
       "items": [],
       "type": "fillin",
       "meta": {
@@ -6185,6 +6203,7 @@
           "helpfulness": 812
         },
         "allowReset": true,
+        "maxPromptsPerSection": 0,
         "promptColumns": 2,
         "showPresets": true,
         "prompts": [
@@ -6194,6 +6213,8 @@
             "description": "",
             "firstTermIdx": -9999,
             "lastTermIdx": -9999,
+            "showTags": false,
+            "columnCount": 0,
             "items": [
               {
                 "id": 0,
@@ -6201,6 +6222,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 13,
@@ -6208,6 +6231,8 @@
                     "description": "",
                     "firstTermIdx": 64,
                     "lastTermIdx": 66,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -6511,6 +6536,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 14,
@@ -6518,6 +6545,8 @@
                     "description": "",
                     "firstTermIdx": 67,
                     "lastTermIdx": 70,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -6905,6 +6934,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 15,
@@ -6912,6 +6943,8 @@
                     "description": "",
                     "firstTermIdx": 71,
                     "lastTermIdx": 73,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -7215,6 +7248,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 16,
@@ -7222,6 +7257,8 @@
                     "description": "",
                     "firstTermIdx": 74,
                     "lastTermIdx": 77,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -7609,6 +7646,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 17,
@@ -7616,6 +7655,8 @@
                     "description": "",
                     "firstTermIdx": 78,
                     "lastTermIdx": 80,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -7919,6 +7960,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 18,
@@ -7926,6 +7969,8 @@
                     "description": "",
                     "firstTermIdx": 81,
                     "lastTermIdx": 83,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -8229,6 +8274,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 19,
@@ -8236,6 +8283,8 @@
                     "description": "",
                     "firstTermIdx": 84,
                     "lastTermIdx": 88,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -8707,6 +8756,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 20,
@@ -8714,6 +8765,8 @@
                     "description": "",
                     "firstTermIdx": 89,
                     "lastTermIdx": 90,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -8933,6 +8986,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 21,
@@ -8940,6 +8995,8 @@
                     "description": "",
                     "firstTermIdx": 91,
                     "lastTermIdx": 92,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -9159,6 +9216,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 22,
@@ -9166,6 +9225,8 @@
                     "description": "",
                     "firstTermIdx": 93,
                     "lastTermIdx": 95,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -9469,6 +9530,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 23,
@@ -9476,6 +9539,8 @@
                     "description": "",
                     "firstTermIdx": 96,
                     "lastTermIdx": 99,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -9863,6 +9928,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 24,
@@ -9870,6 +9937,8 @@
                     "description": "",
                     "firstTermIdx": 100,
                     "lastTermIdx": 102,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -10171,19 +10240,28 @@
             "meta": {
               "depth": 1,
               "startNumber": 0,
-              "listType": 6
+              "listType": 6,
+              "subsectionOrdinal": 1
             },
             "type": "ordered_list"
           }
-        ]
-      }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 103,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
+      "showTags": false,
+      "columnCount": 0,
       "items": [],
       "type": "heading",
       "meta": {
@@ -10249,6 +10327,8 @@
       "description": "",
       "firstTermIdx": -9999,
       "lastTermIdx": 131,
+      "showTags": false,
+      "columnCount": 0,
       "items": [],
       "type": "fillin",
       "meta": {
@@ -10273,6 +10353,7 @@
           "helpfulness": 814
         },
         "allowReset": true,
+        "maxPromptsPerSection": 0,
         "promptColumns": 2,
         "showPresets": true,
         "prompts": [
@@ -10282,6 +10363,8 @@
             "description": "",
             "firstTermIdx": -9999,
             "lastTermIdx": -9999,
+            "showTags": false,
+            "columnCount": 0,
             "items": [
               {
                 "id": 0,
@@ -10289,6 +10372,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 25,
@@ -10296,6 +10381,8 @@
                     "description": "",
                     "firstTermIdx": 104,
                     "lastTermIdx": 106,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -10599,6 +10686,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 26,
@@ -10606,6 +10695,8 @@
                     "description": "",
                     "firstTermIdx": 107,
                     "lastTermIdx": 109,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -10909,6 +11000,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 27,
@@ -10916,6 +11009,8 @@
                     "description": "",
                     "firstTermIdx": 110,
                     "lastTermIdx": 111,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -11135,6 +11230,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 28,
@@ -11142,6 +11239,8 @@
                     "description": "",
                     "firstTermIdx": 112,
                     "lastTermIdx": 114,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -11445,6 +11544,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 29,
@@ -11452,6 +11553,8 @@
                     "description": "",
                     "firstTermIdx": 115,
                     "lastTermIdx": 117,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -11755,6 +11858,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 30,
@@ -11762,6 +11867,8 @@
                     "description": "",
                     "firstTermIdx": 118,
                     "lastTermIdx": 120,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -12065,6 +12172,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 31,
@@ -12072,6 +12181,8 @@
                     "description": "",
                     "firstTermIdx": 121,
                     "lastTermIdx": 122,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -12291,6 +12402,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 32,
@@ -12298,6 +12411,8 @@
                     "description": "",
                     "firstTermIdx": 123,
                     "lastTermIdx": 125,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -12621,6 +12736,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 33,
@@ -12628,6 +12745,8 @@
                     "description": "",
                     "firstTermIdx": 126,
                     "lastTermIdx": 128,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -12931,6 +13050,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 34,
@@ -12938,6 +13059,8 @@
                     "description": "",
                     "firstTermIdx": 129,
                     "lastTermIdx": 131,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -13239,12 +13362,19 @@
             "meta": {
               "depth": 1,
               "startNumber": 0,
-              "listType": 6
+              "listType": 6,
+              "subsectionOrdinal": 1
             },
             "type": "ordered_list"
           }
-        ]
-      }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -13252,18 +13382,8 @@
       "description": "",
       "firstTermIdx": -9999,
       "lastTermIdx": -9999,
-      "items": [],
-      "type": "empty",
-      "meta": {
-        "count": 1
-      }
-    },
-    {
-      "id": 0,
-      "name": "",
-      "description": "",
-      "firstTermIdx": 132,
-      "lastTermIdx": -9999,
+      "showTags": false,
+      "columnCount": 0,
       "items": [],
       "type": "heading",
       "meta": {
@@ -13411,8 +13531,10 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 134,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
+      "showTags": false,
+      "columnCount": 0,
       "items": [],
       "type": "heading",
       "meta": {
@@ -13562,6 +13684,8 @@
       "description": "",
       "firstTermIdx": -9999,
       "lastTermIdx": 170,
+      "showTags": false,
+      "columnCount": 0,
       "items": [],
       "type": "fillin",
       "meta": {
@@ -13586,6 +13710,7 @@
           "helpfulness": 814
         },
         "allowReset": true,
+        "maxPromptsPerSection": 0,
         "promptColumns": 2,
         "showPresets": true,
         "prompts": [
@@ -13595,6 +13720,8 @@
             "description": "",
             "firstTermIdx": -9999,
             "lastTermIdx": -9999,
+            "showTags": false,
+            "columnCount": 0,
             "items": [
               {
                 "id": 0,
@@ -13602,6 +13729,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 35,
@@ -13609,6 +13738,8 @@
                     "description": "",
                     "firstTermIdx": 136,
                     "lastTermIdx": 138,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -13912,6 +14043,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 36,
@@ -13919,6 +14052,8 @@
                     "description": "",
                     "firstTermIdx": 139,
                     "lastTermIdx": 142,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -14306,6 +14441,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 37,
@@ -14313,6 +14450,8 @@
                     "description": "",
                     "firstTermIdx": 143,
                     "lastTermIdx": 145,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -14616,6 +14755,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 38,
@@ -14623,6 +14764,8 @@
                     "description": "",
                     "firstTermIdx": 146,
                     "lastTermIdx": 148,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -14926,6 +15069,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 39,
@@ -14933,6 +15078,8 @@
                     "description": "",
                     "firstTermIdx": 149,
                     "lastTermIdx": 153,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -15404,6 +15551,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 40,
@@ -15411,6 +15560,8 @@
                     "description": "",
                     "firstTermIdx": 154,
                     "lastTermIdx": 157,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -15798,6 +15949,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 41,
@@ -15805,6 +15958,8 @@
                     "description": "",
                     "firstTermIdx": 158,
                     "lastTermIdx": 159,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -16024,6 +16179,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 42,
@@ -16031,6 +16188,8 @@
                     "description": "",
                     "firstTermIdx": 160,
                     "lastTermIdx": 162,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -16334,6 +16493,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 43,
@@ -16341,6 +16502,8 @@
                     "description": "",
                     "firstTermIdx": 163,
                     "lastTermIdx": 165,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -16644,6 +16807,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 44,
@@ -16651,6 +16816,8 @@
                     "description": "",
                     "firstTermIdx": 166,
                     "lastTermIdx": 167,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -16870,6 +17037,8 @@
                 "description": "",
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
+                "showTags": false,
+                "columnCount": 0,
                 "items": [
                   {
                     "id": 45,
@@ -16877,6 +17046,8 @@
                     "description": "",
                     "firstTermIdx": 168,
                     "lastTermIdx": 170,
+                    "showTags": false,
+                    "columnCount": 0,
                     "items": [],
                     "type": "paragraph",
                     "meta": {
@@ -17178,19 +17349,28 @@
             "meta": {
               "depth": 1,
               "startNumber": 0,
-              "listType": 6
+              "listType": 6,
+              "subsectionOrdinal": 1
             },
             "type": "ordered_list"
           }
-        ]
-      }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 171,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
+      "showTags": false,
+      "columnCount": 0,
       "items": [],
       "type": "heading",
       "meta": {
@@ -17213,7 +17393,7 @@
               },
               "firstTermIdx": 171,
               "lastTermIdx": 171,
-              "type": 17,
+              "type": 12,
               "meta": {
                 "content": "Mexican",
                 "cues": [],
@@ -17339,7 +17519,9 @@
       "name": "",
       "description": "",
       "firstTermIdx": -9999,
-      "lastTermIdx": 177,
+      "lastTermIdx": 182,
+      "showTags": false,
+      "columnCount": 0,
       "items": [],
       "type": "fillin",
       "meta": {
@@ -17364,6 +17546,7 @@
           "helpfulness": 814
         },
         "allowReset": true,
+        "maxPromptsPerSection": 0,
         "promptColumns": 2,
         "showPresets": true,
         "prompts": [
@@ -17372,7 +17555,9 @@
             "name": "",
             "description": "",
             "firstTermIdx": 173,
-            "lastTermIdx": 173,
+            "lastTermIdx": 174,
+            "showTags": false,
+            "columnCount": 0,
             "items": [],
             "type": "paragraph",
             "meta": {
@@ -17512,96 +17697,14 @@
                 },
                 {
                   "id": 54,
-                  "content": "[__].",
-                  "firstTermIdx": 174,
-                  "lastTermIdx": 173,
-                  "terminals": [
-                    {
-                      "id": 0,
-                      "termIdx": -9999,
-                      "content": "",
-                      "cueList": "",
-                      "cues": {
-                        "partOfSpeech": "untagged",
-                        "definition": "",
-                        "image": "",
-                        "alternatives": []
-                      },
-                      "firstTermIdx": -9999,
-                      "lastTermIdx": -9999,
-                      "type": 4,
-                      "meta": {
-                        "terminals": [],
-                        "sectionFillinIdx": -9999
-                      }
-                    },
-                    {
-                      "id": 0,
-                      "termIdx": -9999,
-                      "content": ".",
-                      "cueList": "",
-                      "cues": {
-                        "partOfSpeech": "untagged",
-                        "definition": "",
-                        "image": "",
-                        "alternatives": []
-                      },
-                      "firstTermIdx": -9999,
-                      "lastTermIdx": -9999,
-                      "type": 11,
-                      "meta": {
-                        "content": ".",
-                        "cues": [],
-                        "termIdx": -9999,
-                        "nextTermIdx": [],
-                        "prevTermIdx": [],
-                        "altpronunciation": "",
-                        "altrecognition": "",
-                        "recitable": false,
-                        "heading": false,
-                        "audible": true,
-                        "linkable": false,
-                        "visible": true,
-                        "visited": false,
-                        "numberAsNumerals": false,
-                        "linkIdx": -9999,
-                        "hintsIdx": -9999,
-                        "fillin": {
-                          "sectionIdx": -9999,
-                          "responseIdx": -9999
-                        },
-                        "bold": false,
-                        "italics": false,
-                        "markupTag": false
-                      }
-                    }
-                  ],
-                  "lastPunctuation": "."
-                }
-              ],
-              "style": ""
-            }
-          },
-          {
-            "id": 47,
-            "name": "",
-            "description": "",
-            "firstTermIdx": 174,
-            "lastTermIdx": 174,
-            "items": [],
-            "type": "paragraph",
-            "meta": {
-              "sentences": [
-                {
-                  "id": 55,
-                  "content": "1.  ",
+                  "content": "[_tacos_].",
                   "firstTermIdx": 174,
                   "lastTermIdx": 174,
                   "terminals": [
                     {
                       "id": 0,
-                      "termIdx": 174,
-                      "content": "1",
+                      "termIdx": -9999,
+                      "content": "tacos",
                       "cueList": "",
                       "cues": {
                         "partOfSpeech": "untagged",
@@ -17611,143 +17714,55 @@
                       },
                       "firstTermIdx": 174,
                       "lastTermIdx": 174,
-                      "type": 17,
-                      "meta": {
-                        "content": "1",
-                        "cues": [],
-                        "termIdx": 174,
-                        "nextTermIdx": [
-                          175
-                        ],
-                        "prevTermIdx": [
-                          173
-                        ],
-                        "altpronunciation": "",
-                        "altrecognition": "1",
-                        "recitable": true,
-                        "heading": false,
-                        "audible": true,
-                        "linkable": false,
-                        "visible": true,
-                        "visited": false,
-                        "numberAsNumerals": false,
-                        "linkIdx": -9999,
-                        "hintsIdx": -9999,
-                        "fillin": {
-                          "sectionIdx": -9999,
-                          "responseIdx": -9999
-                        },
-                        "bold": false,
-                        "italics": false,
-                        "markupTag": false
-                      }
-                    },
-                    {
-                      "id": 0,
-                      "termIdx": -9999,
-                      "content": ".",
-                      "cueList": "",
-                      "cues": {
-                        "partOfSpeech": "untagged",
-                        "definition": "",
-                        "image": "",
-                        "alternatives": []
-                      },
-                      "firstTermIdx": -9999,
-                      "lastTermIdx": -9999,
-                      "type": 11,
-                      "meta": {
-                        "content": ".",
-                        "cues": [],
-                        "termIdx": -9999,
-                        "nextTermIdx": [],
-                        "prevTermIdx": [],
-                        "altpronunciation": "",
-                        "altrecognition": "",
-                        "recitable": false,
-                        "heading": false,
-                        "audible": true,
-                        "linkable": false,
-                        "visible": true,
-                        "visited": false,
-                        "numberAsNumerals": false,
-                        "linkIdx": -9999,
-                        "hintsIdx": -9999,
-                        "fillin": {
-                          "sectionIdx": -9999,
-                          "responseIdx": -9999
-                        },
-                        "bold": false,
-                        "italics": false,
-                        "markupTag": false
-                      }
-                    },
-                    {
-                      "id": 0,
-                      "termIdx": -9999,
-                      "content": "  ",
-                      "cueList": "",
-                      "cues": {
-                        "partOfSpeech": "untagged",
-                        "definition": "",
-                        "image": "",
-                        "alternatives": []
-                      },
-                      "firstTermIdx": -9999,
-                      "lastTermIdx": -9999,
-                      "type": 16,
-                      "meta": {
-                        "content": "  ",
-                        "cues": [],
-                        "termIdx": -9999,
-                        "nextTermIdx": [],
-                        "prevTermIdx": [],
-                        "altpronunciation": "",
-                        "altrecognition": "",
-                        "recitable": false,
-                        "heading": false,
-                        "audible": true,
-                        "linkable": false,
-                        "visible": true,
-                        "visited": false,
-                        "numberAsNumerals": false,
-                        "linkIdx": -9999,
-                        "hintsIdx": -9999,
-                        "fillin": {
-                          "sectionIdx": -9999,
-                          "responseIdx": -9999
-                        },
-                        "bold": false,
-                        "italics": false,
-                        "markupTag": false
-                      }
-                    }
-                  ],
-                  "lastPunctuation": "."
-                },
-                {
-                  "id": 56,
-                  "content": "[__].",
-                  "firstTermIdx": 175,
-                  "lastTermIdx": 174,
-                  "terminals": [
-                    {
-                      "id": 0,
-                      "termIdx": -9999,
-                      "content": "",
-                      "cueList": "",
-                      "cues": {
-                        "partOfSpeech": "untagged",
-                        "definition": "",
-                        "image": "",
-                        "alternatives": []
-                      },
-                      "firstTermIdx": -9999,
-                      "lastTermIdx": -9999,
                       "type": 4,
                       "meta": {
-                        "terminals": [],
-                        "sectionFillinIdx": -9999
+                        "terminals": [
+                          {
+                            "id": 0,
+                            "termIdx": 174,
+                            "content": "tacos",
+                            "cueList": "",
+                            "cues": {
+                              "partOfSpeech": "untagged",
+                              "definition": "",
+                              "image": "",
+                              "alternatives": []
+                            },
+                            "firstTermIdx": 174,
+                            "lastTermIdx": 174,
+                            "type": 17,
+                            "meta": {
+                              "content": "tacos",
+                              "cues": [],
+                              "termIdx": 174,
+                              "nextTermIdx": [
+                                175
+                              ],
+                              "prevTermIdx": [
+                                173
+                              ],
+                              "altpronunciation": "",
+                              "altrecognition": "",
+                              "recitable": true,
+                              "heading": false,
+                              "audible": true,
+                              "linkable": false,
+                              "visible": true,
+                              "visited": false,
+                              "numberAsNumerals": false,
+                              "linkIdx": -9999,
+                              "hintsIdx": -9999,
+                              "fillin": {
+                                "sectionIdx": 4,
+                                "responseIdx": 0
+                              },
+                              "bold": false,
+                              "italics": false,
+                              "markupTag": false
+                            }
+                          }
+                        ],
+                        "sectionFillinIdx": 4
                       }
                     },
                     {
@@ -17794,21 +17809,24 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 1
             }
           },
           {
-            "id": 48,
+            "id": 47,
             "name": "",
             "description": "",
             "firstTermIdx": 175,
-            "lastTermIdx": 175,
+            "lastTermIdx": 176,
+            "showTags": false,
+            "columnCount": 0,
             "items": [],
             "type": "paragraph",
             "meta": {
               "sentences": [
                 {
-                  "id": 57,
+                  "id": 55,
                   "content": "1.  ",
                   "firstTermIdx": 175,
                   "lastTermIdx": 175,
@@ -17941,97 +17959,15 @@
                   "lastPunctuation": "."
                 },
                 {
-                  "id": 58,
-                  "content": "[__].",
-                  "firstTermIdx": 176,
-                  "lastTermIdx": 175,
-                  "terminals": [
-                    {
-                      "id": 0,
-                      "termIdx": -9999,
-                      "content": "",
-                      "cueList": "",
-                      "cues": {
-                        "partOfSpeech": "untagged",
-                        "definition": "",
-                        "image": "",
-                        "alternatives": []
-                      },
-                      "firstTermIdx": -9999,
-                      "lastTermIdx": -9999,
-                      "type": 4,
-                      "meta": {
-                        "terminals": [],
-                        "sectionFillinIdx": -9999
-                      }
-                    },
-                    {
-                      "id": 0,
-                      "termIdx": -9999,
-                      "content": ".",
-                      "cueList": "",
-                      "cues": {
-                        "partOfSpeech": "untagged",
-                        "definition": "",
-                        "image": "",
-                        "alternatives": []
-                      },
-                      "firstTermIdx": -9999,
-                      "lastTermIdx": -9999,
-                      "type": 11,
-                      "meta": {
-                        "content": ".",
-                        "cues": [],
-                        "termIdx": -9999,
-                        "nextTermIdx": [],
-                        "prevTermIdx": [],
-                        "altpronunciation": "",
-                        "altrecognition": "",
-                        "recitable": false,
-                        "heading": false,
-                        "audible": true,
-                        "linkable": false,
-                        "visible": true,
-                        "visited": false,
-                        "numberAsNumerals": false,
-                        "linkIdx": -9999,
-                        "hintsIdx": -9999,
-                        "fillin": {
-                          "sectionIdx": -9999,
-                          "responseIdx": -9999
-                        },
-                        "bold": false,
-                        "italics": false,
-                        "markupTag": false
-                      }
-                    }
-                  ],
-                  "lastPunctuation": "."
-                }
-              ],
-              "style": ""
-            }
-          },
-          {
-            "id": 49,
-            "name": "",
-            "description": "",
-            "firstTermIdx": 176,
-            "lastTermIdx": 176,
-            "items": [],
-            "type": "paragraph",
-            "meta": {
-              "sentences": [
-                {
-                  "id": 59,
-                  "content": "1.  ",
+                  "id": 56,
+                  "content": "[_enchiladas_].",
                   "firstTermIdx": 176,
                   "lastTermIdx": 176,
                   "terminals": [
                     {
                       "id": 0,
-                      "termIdx": 176,
-                      "content": "1",
+                      "termIdx": -9999,
+                      "content": "enchiladas",
                       "cueList": "",
                       "cues": {
                         "partOfSpeech": "untagged",
@@ -18041,143 +17977,55 @@
                       },
                       "firstTermIdx": 176,
                       "lastTermIdx": 176,
-                      "type": 17,
-                      "meta": {
-                        "content": "1",
-                        "cues": [],
-                        "termIdx": 176,
-                        "nextTermIdx": [
-                          177
-                        ],
-                        "prevTermIdx": [
-                          175
-                        ],
-                        "altpronunciation": "",
-                        "altrecognition": "1",
-                        "recitable": true,
-                        "heading": false,
-                        "audible": true,
-                        "linkable": false,
-                        "visible": true,
-                        "visited": false,
-                        "numberAsNumerals": false,
-                        "linkIdx": -9999,
-                        "hintsIdx": -9999,
-                        "fillin": {
-                          "sectionIdx": -9999,
-                          "responseIdx": -9999
-                        },
-                        "bold": false,
-                        "italics": false,
-                        "markupTag": false
-                      }
-                    },
-                    {
-                      "id": 0,
-                      "termIdx": -9999,
-                      "content": ".",
-                      "cueList": "",
-                      "cues": {
-                        "partOfSpeech": "untagged",
-                        "definition": "",
-                        "image": "",
-                        "alternatives": []
-                      },
-                      "firstTermIdx": -9999,
-                      "lastTermIdx": -9999,
-                      "type": 11,
-                      "meta": {
-                        "content": ".",
-                        "cues": [],
-                        "termIdx": -9999,
-                        "nextTermIdx": [],
-                        "prevTermIdx": [],
-                        "altpronunciation": "",
-                        "altrecognition": "",
-                        "recitable": false,
-                        "heading": false,
-                        "audible": true,
-                        "linkable": false,
-                        "visible": true,
-                        "visited": false,
-                        "numberAsNumerals": false,
-                        "linkIdx": -9999,
-                        "hintsIdx": -9999,
-                        "fillin": {
-                          "sectionIdx": -9999,
-                          "responseIdx": -9999
-                        },
-                        "bold": false,
-                        "italics": false,
-                        "markupTag": false
-                      }
-                    },
-                    {
-                      "id": 0,
-                      "termIdx": -9999,
-                      "content": "  ",
-                      "cueList": "",
-                      "cues": {
-                        "partOfSpeech": "untagged",
-                        "definition": "",
-                        "image": "",
-                        "alternatives": []
-                      },
-                      "firstTermIdx": -9999,
-                      "lastTermIdx": -9999,
-                      "type": 16,
-                      "meta": {
-                        "content": "  ",
-                        "cues": [],
-                        "termIdx": -9999,
-                        "nextTermIdx": [],
-                        "prevTermIdx": [],
-                        "altpronunciation": "",
-                        "altrecognition": "",
-                        "recitable": false,
-                        "heading": false,
-                        "audible": true,
-                        "linkable": false,
-                        "visible": true,
-                        "visited": false,
-                        "numberAsNumerals": false,
-                        "linkIdx": -9999,
-                        "hintsIdx": -9999,
-                        "fillin": {
-                          "sectionIdx": -9999,
-                          "responseIdx": -9999
-                        },
-                        "bold": false,
-                        "italics": false,
-                        "markupTag": false
-                      }
-                    }
-                  ],
-                  "lastPunctuation": "."
-                },
-                {
-                  "id": 60,
-                  "content": "[__].",
-                  "firstTermIdx": 177,
-                  "lastTermIdx": 176,
-                  "terminals": [
-                    {
-                      "id": 0,
-                      "termIdx": -9999,
-                      "content": "",
-                      "cueList": "",
-                      "cues": {
-                        "partOfSpeech": "untagged",
-                        "definition": "",
-                        "image": "",
-                        "alternatives": []
-                      },
-                      "firstTermIdx": -9999,
-                      "lastTermIdx": -9999,
                       "type": 4,
                       "meta": {
-                        "terminals": [],
-                        "sectionFillinIdx": -9999
+                        "terminals": [
+                          {
+                            "id": 0,
+                            "termIdx": 176,
+                            "content": "enchiladas",
+                            "cueList": "",
+                            "cues": {
+                              "partOfSpeech": "untagged",
+                              "definition": "",
+                              "image": "",
+                              "alternatives": []
+                            },
+                            "firstTermIdx": 176,
+                            "lastTermIdx": 176,
+                            "type": 17,
+                            "meta": {
+                              "content": "enchiladas",
+                              "cues": [],
+                              "termIdx": 176,
+                              "nextTermIdx": [
+                                177
+                              ],
+                              "prevTermIdx": [
+                                175
+                              ],
+                              "altpronunciation": "",
+                              "altrecognition": "",
+                              "recitable": true,
+                              "heading": false,
+                              "audible": true,
+                              "linkable": false,
+                              "visible": true,
+                              "visited": false,
+                              "numberAsNumerals": false,
+                              "linkIdx": -9999,
+                              "hintsIdx": -9999,
+                              "fillin": {
+                                "sectionIdx": 4,
+                                "responseIdx": 1
+                              },
+                              "bold": false,
+                              "italics": false,
+                              "markupTag": false
+                            }
+                          }
+                        ],
+                        "sectionFillinIdx": 4
                       }
                     },
                     {
@@ -18224,21 +18072,24 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 2
             }
           },
           {
-            "id": 50,
+            "id": 48,
             "name": "",
             "description": "",
             "firstTermIdx": 177,
-            "lastTermIdx": 177,
+            "lastTermIdx": 178,
+            "showTags": false,
+            "columnCount": 0,
             "items": [],
             "type": "paragraph",
             "meta": {
               "sentences": [
                 {
-                  "id": 61,
+                  "id": 57,
                   "content": "1.  ",
                   "firstTermIdx": 177,
                   "lastTermIdx": 177,
@@ -18261,7 +18112,9 @@
                         "content": "1",
                         "cues": [],
                         "termIdx": 177,
-                        "nextTermIdx": [],
+                        "nextTermIdx": [
+                          178
+                        ],
                         "prevTermIdx": [
                           176
                         ],
@@ -18369,15 +18222,15 @@
                   "lastPunctuation": "."
                 },
                 {
-                  "id": 62,
-                  "content": "[__].",
+                  "id": 58,
+                  "content": "[_burritos_].",
                   "firstTermIdx": 178,
-                  "lastTermIdx": 177,
+                  "lastTermIdx": 178,
                   "terminals": [
                     {
                       "id": 0,
                       "termIdx": -9999,
-                      "content": "",
+                      "content": "burritos",
                       "cueList": "",
                       "cues": {
                         "partOfSpeech": "untagged",
@@ -18385,12 +18238,57 @@
                         "image": "",
                         "alternatives": []
                       },
-                      "firstTermIdx": -9999,
-                      "lastTermIdx": -9999,
+                      "firstTermIdx": 178,
+                      "lastTermIdx": 178,
                       "type": 4,
                       "meta": {
-                        "terminals": [],
-                        "sectionFillinIdx": -9999
+                        "terminals": [
+                          {
+                            "id": 0,
+                            "termIdx": 178,
+                            "content": "burritos",
+                            "cueList": "",
+                            "cues": {
+                              "partOfSpeech": "untagged",
+                              "definition": "",
+                              "image": "",
+                              "alternatives": []
+                            },
+                            "firstTermIdx": 178,
+                            "lastTermIdx": 178,
+                            "type": 17,
+                            "meta": {
+                              "content": "burritos",
+                              "cues": [],
+                              "termIdx": 178,
+                              "nextTermIdx": [
+                                179
+                              ],
+                              "prevTermIdx": [
+                                177
+                              ],
+                              "altpronunciation": "",
+                              "altrecognition": "",
+                              "recitable": true,
+                              "heading": false,
+                              "audible": true,
+                              "linkable": false,
+                              "visible": true,
+                              "visited": false,
+                              "numberAsNumerals": false,
+                              "linkIdx": -9999,
+                              "hintsIdx": -9999,
+                              "fillin": {
+                                "sectionIdx": 4,
+                                "responseIdx": 2
+                              },
+                              "bold": false,
+                              "italics": false,
+                              "markupTag": false
+                            }
+                          }
+                        ],
+                        "sectionFillinIdx": 4
                       }
                     },
                     {
@@ -18437,11 +18335,542 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 3
+            }
+          },
+          {
+            "id": 49,
+            "name": "",
+            "description": "",
+            "firstTermIdx": 179,
+            "lastTermIdx": 180,
+            "showTags": false,
+            "columnCount": 0,
+            "items": [],
+            "type": "paragraph",
+            "meta": {
+              "sentences": [
+                {
+                  "id": 59,
+                  "content": "1.  ",
+                  "firstTermIdx": 179,
+                  "lastTermIdx": 179,
+                  "terminals": [
+                    {
+                      "id": 0,
+                      "termIdx": 179,
+                      "content": "1",
+                      "cueList": "",
+                      "cues": {
+                        "partOfSpeech": "untagged",
+                        "definition": "",
+                        "image": "",
+                        "alternatives": []
+                      },
+                      "firstTermIdx": 179,
+                      "lastTermIdx": 179,
+                      "type": 17,
+                      "meta": {
+                        "content": "1",
+                        "cues": [],
+                        "termIdx": 179,
+                        "nextTermIdx": [
+                          180
+                        ],
+                        "prevTermIdx": [
+                          178
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "1",
+                        "recitable": true,
+                        "heading": false,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": ".",
+                      "cueList": "",
+                      "cues": {
+                        "partOfSpeech": "untagged",
+                        "definition": "",
+                        "image": "",
+                        "alternatives": []
+                      },
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 11,
+                      "meta": {
+                        "content": ".",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "heading": false,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": "  ",
+                      "cueList": "",
+                      "cues": {
+                        "partOfSpeech": "untagged",
+                        "definition": "",
+                        "image": "",
+                        "alternatives": []
+                      },
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": "  ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "heading": false,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    }
+                  ],
+                  "lastPunctuation": "."
+                },
+                {
+                  "id": 60,
+                  "content": "[_nachos_].",
+                  "firstTermIdx": 180,
+                  "lastTermIdx": 180,
+                  "terminals": [
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": "nachos",
+                      "cueList": "",
+                      "cues": {
+                        "partOfSpeech": "untagged",
+                        "definition": "",
+                        "image": "",
+                        "alternatives": []
+                      },
+                      "firstTermIdx": 180,
+                      "lastTermIdx": 180,
+                      "type": 4,
+                      "meta": {
+                        "terminals": [
+                          {
+                            "id": 0,
+                            "termIdx": 180,
+                            "content": "nachos",
+                            "cueList": "",
+                            "cues": {
+                              "partOfSpeech": "untagged",
+                              "definition": "",
+                              "image": "",
+                              "alternatives": []
+                            },
+                            "firstTermIdx": 180,
+                            "lastTermIdx": 180,
+                            "type": 17,
+                            "meta": {
+                              "content": "nachos",
+                              "cues": [],
+                              "termIdx": 180,
+                              "nextTermIdx": [
+                                181
+                              ],
+                              "prevTermIdx": [
+                                179
+                              ],
+                              "altpronunciation": "",
+                              "altrecognition": "",
+                              "recitable": true,
+                              "heading": false,
+                              "audible": true,
+                              "linkable": false,
+                              "visible": true,
+                              "visited": false,
+                              "numberAsNumerals": false,
+                              "linkIdx": -9999,
+                              "hintsIdx": -9999,
+                              "fillin": {
+                                "sectionIdx": 4,
+                                "responseIdx": 3
+                              },
+                              "bold": false,
+                              "italics": false,
+                              "markupTag": false
+                            }
+                          }
+                        ],
+                        "sectionFillinIdx": 4
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": ".",
+                      "cueList": "",
+                      "cues": {
+                        "partOfSpeech": "untagged",
+                        "definition": "",
+                        "image": "",
+                        "alternatives": []
+                      },
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 11,
+                      "meta": {
+                        "content": ".",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "heading": false,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    }
+                  ],
+                  "lastPunctuation": "."
+                }
+              ],
+              "style": "",
+              "subsectionOrdinal": 4
+            }
+          },
+          {
+            "id": 50,
+            "name": "",
+            "description": "",
+            "firstTermIdx": 181,
+            "lastTermIdx": 182,
+            "showTags": false,
+            "columnCount": 0,
+            "items": [],
+            "type": "paragraph",
+            "meta": {
+              "sentences": [
+                {
+                  "id": 61,
+                  "content": "1.  ",
+                  "firstTermIdx": 181,
+                  "lastTermIdx": 181,
+                  "terminals": [
+                    {
+                      "id": 0,
+                      "termIdx": 181,
+                      "content": "1",
+                      "cueList": "",
+                      "cues": {
+                        "partOfSpeech": "untagged",
+                        "definition": "",
+                        "image": "",
+                        "alternatives": []
+                      },
+                      "firstTermIdx": 181,
+                      "lastTermIdx": 181,
+                      "type": 17,
+                      "meta": {
+                        "content": "1",
+                        "cues": [],
+                        "termIdx": 181,
+                        "nextTermIdx": [
+                          182
+                        ],
+                        "prevTermIdx": [
+                          180
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "1",
+                        "recitable": true,
+                        "heading": false,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": ".",
+                      "cueList": "",
+                      "cues": {
+                        "partOfSpeech": "untagged",
+                        "definition": "",
+                        "image": "",
+                        "alternatives": []
+                      },
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 11,
+                      "meta": {
+                        "content": ".",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "heading": false,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": "  ",
+                      "cueList": "",
+                      "cues": {
+                        "partOfSpeech": "untagged",
+                        "definition": "",
+                        "image": "",
+                        "alternatives": []
+                      },
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 16,
+                      "meta": {
+                        "content": "  ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "heading": false,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    }
+                  ],
+                  "lastPunctuation": "."
+                },
+                {
+                  "id": 62,
+                  "content": "[_fajitas_].",
+                  "firstTermIdx": 182,
+                  "lastTermIdx": 182,
+                  "terminals": [
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": "fajitas",
+                      "cueList": "",
+                      "cues": {
+                        "partOfSpeech": "untagged",
+                        "definition": "",
+                        "image": "",
+                        "alternatives": []
+                      },
+                      "firstTermIdx": 182,
+                      "lastTermIdx": 182,
+                      "type": 4,
+                      "meta": {
+                        "terminals": [
+                          {
+                            "id": 0,
+                            "termIdx": 182,
+                            "content": "fajitas",
+                            "cueList": "",
+                            "cues": {
+                              "partOfSpeech": "untagged",
+                              "definition": "",
+                              "image": "",
+                              "alternatives": []
+                            },
+                            "firstTermIdx": 182,
+                            "lastTermIdx": 182,
+                            "type": 17,
+                            "meta": {
+                              "content": "fajitas",
+                              "cues": [],
+                              "termIdx": 182,
+                              "nextTermIdx": [],
+                              "prevTermIdx": [
+                                181
+                              ],
+                              "altpronunciation": "",
+                              "altrecognition": "",
+                              "recitable": true,
+                              "heading": false,
+                              "audible": true,
+                              "linkable": false,
+                              "visible": true,
+                              "visited": false,
+                              "numberAsNumerals": false,
+                              "linkIdx": -9999,
+                              "hintsIdx": -9999,
+                              "fillin": {
+                                "sectionIdx": 4,
+                                "responseIdx": 4
+                              },
+                              "bold": false,
+                              "italics": false,
+                              "markupTag": false
+                            }
+                          }
+                        ],
+                        "sectionFillinIdx": 4
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": ".",
+                      "cueList": "",
+                      "cues": {
+                        "partOfSpeech": "untagged",
+                        "definition": "",
+                        "image": "",
+                        "alternatives": []
+                      },
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 11,
+                      "meta": {
+                        "content": ".",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "heading": false,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    }
+                  ],
+                  "lastPunctuation": "."
+                }
+              ],
+              "style": "",
+              "subsectionOrdinal": 5
             }
           }
-        ]
-      }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     }
   ],
   "terminalList": [
@@ -18456,7 +18885,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -18487,7 +18916,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -18518,7 +18947,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -18764,7 +19193,7 @@
         9
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -19012,7 +19441,7 @@
         17
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -19198,7 +19627,7 @@
         23
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "know",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -19355,7 +19784,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -19375,9 +19804,7 @@
     },
     {
       "content": "Spaghetti",
-      "cues": [
-        "noun"
-      ],
+      "cues": [],
       "termIdx": 30,
       "nextTermIdx": [
         31
@@ -19439,9 +19866,7 @@
     },
     {
       "content": "meatballs",
-      "cues": [
-        "noun"
-      ],
+      "cues": [],
       "termIdx": 32,
       "nextTermIdx": [
         33
@@ -19472,9 +19897,7 @@
     },
     {
       "content": "Sausage",
-      "cues": [
-        "noun"
-      ],
+      "cues": [],
       "termIdx": 33,
       "nextTermIdx": [
         34
@@ -19567,9 +19990,7 @@
     },
     {
       "content": "pizza",
-      "cues": [
-        "noun"
-      ],
+      "cues": [],
       "termIdx": 36,
       "nextTermIdx": [
         37
@@ -19631,9 +20052,7 @@
     },
     {
       "content": "steak",
-      "cues": [
-        "noun"
-      ],
+      "cues": [],
       "termIdx": 38,
       "nextTermIdx": [
         39
@@ -19664,9 +20083,7 @@
     },
     {
       "content": "Fish",
-      "cues": [
-        "noun"
-      ],
+      "cues": [],
       "termIdx": 39,
       "nextTermIdx": [
         40
@@ -19821,9 +20238,7 @@
     },
     {
       "content": "roast",
-      "cues": [
-        "noun"
-      ],
+      "cues": [],
       "termIdx": 44,
       "nextTermIdx": [
         45
@@ -19885,9 +20300,7 @@
     },
     {
       "content": "potato",
-      "cues": [
-        "noun"
-      ],
+      "cues": [],
       "termIdx": 46,
       "nextTermIdx": [
         47
@@ -19918,9 +20331,7 @@
     },
     {
       "content": "Pepperoni",
-      "cues": [
-        "noun"
-      ],
+      "cues": [],
       "termIdx": 47,
       "nextTermIdx": [
         48
@@ -19951,9 +20362,7 @@
     },
     {
       "content": "pizza",
-      "cues": [
-        "noun"
-      ],
+      "cues": [],
       "termIdx": 48,
       "nextTermIdx": [
         49
@@ -20015,9 +20424,7 @@
     },
     {
       "content": "beef",
-      "cues": [
-        "noun"
-      ],
+      "cues": [],
       "termIdx": 50,
       "nextTermIdx": [
         51
@@ -20079,9 +20486,7 @@
     },
     {
       "content": "cheese",
-      "cues": [
-        "noun"
-      ],
+      "cues": [],
       "termIdx": 52,
       "nextTermIdx": [
         53
@@ -20112,9 +20517,7 @@
     },
     {
       "content": "sandwich",
-      "cues": [
-        "noun"
-      ],
+      "cues": [],
       "termIdx": 53,
       "nextTermIdx": [
         54
@@ -20176,9 +20579,7 @@
     },
     {
       "content": "salad",
-      "cues": [
-        "noun"
-      ],
+      "cues": [],
       "termIdx": 55,
       "nextTermIdx": [
         56
@@ -20240,9 +20641,7 @@
     },
     {
       "content": "potatoes",
-      "cues": [
-        "noun"
-      ],
+      "cues": [],
       "termIdx": 57,
       "nextTermIdx": [
         58
@@ -20282,7 +20681,7 @@
         57
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -20304,9 +20703,7 @@
     },
     {
       "content": "like",
-      "cues": [
-        "verb"
-      ],
+      "cues": [],
       "termIdx": 59,
       "nextTermIdx": [
         60
@@ -20326,8 +20723,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 11
+        "sectionIdx": -9999,
+        "responseIdx": -9999
       },
       "bold": false,
       "italics": false,
@@ -20368,9 +20765,7 @@
     },
     {
       "content": "potatoes",
-      "cues": [
-        "noun"
-      ],
+      "cues": [],
       "termIdx": 61,
       "nextTermIdx": [
         62
@@ -20391,7 +20786,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 12
+        "responseIdx": 11
       },
       "bold": false,
       "italics": false,
@@ -20412,7 +20807,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -20443,7 +20838,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -21464,7 +21859,7 @@
         95
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "knew",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -21683,7 +22078,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -22582,7 +22977,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -22613,7 +23008,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -22644,7 +23039,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -22675,7 +23070,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -23791,7 +24186,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -23822,7 +24217,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -23872,7 +24267,7 @@
       "sectionIdx": 46
     },
     {
-      "content": "1",
+      "content": "tacos",
       "cues": [],
       "termIdx": 174,
       "nextTermIdx": [
@@ -23882,7 +24277,7 @@
         173
       ],
       "altpronunciation": "",
-      "altrecognition": "^(one|won)$",
+      "altrecognition": "",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -23893,14 +24288,14 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": -9999,
-        "responseIdx": -9999
+        "sectionIdx": 4,
+        "responseIdx": 0
       },
       "bold": false,
       "italics": false,
       "markupTag": false,
-      "sentenceIdx": 55,
-      "sectionIdx": 47
+      "sentenceIdx": 54,
+      "sectionIdx": 46
     },
     {
       "content": "1",
@@ -23930,11 +24325,11 @@
       "bold": false,
       "italics": false,
       "markupTag": false,
-      "sentenceIdx": 57,
-      "sectionIdx": 48
+      "sentenceIdx": 55,
+      "sectionIdx": 47
     },
     {
-      "content": "1",
+      "content": "enchiladas",
       "cues": [],
       "termIdx": 176,
       "nextTermIdx": [
@@ -23942,6 +24337,99 @@
       ],
       "prevTermIdx": [
         175
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "heading": false,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": 4,
+        "responseIdx": 1
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 56,
+      "sectionIdx": 47
+    },
+    {
+      "content": "1",
+      "cues": [],
+      "termIdx": 177,
+      "nextTermIdx": [
+        178
+      ],
+      "prevTermIdx": [
+        176
+      ],
+      "altpronunciation": "",
+      "altrecognition": "^(one|won)$",
+      "recitable": true,
+      "heading": false,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": -9999,
+        "responseIdx": -9999
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 57,
+      "sectionIdx": 48
+    },
+    {
+      "content": "burritos",
+      "cues": [],
+      "termIdx": 178,
+      "nextTermIdx": [
+        179
+      ],
+      "prevTermIdx": [
+        177
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "heading": false,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": 4,
+        "responseIdx": 2
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 58,
+      "sectionIdx": 48
+    },
+    {
+      "content": "1",
+      "cues": [],
+      "termIdx": 179,
+      "nextTermIdx": [
+        180
+      ],
+      "prevTermIdx": [
+        178
       ],
       "altpronunciation": "",
       "altrecognition": "^(one|won)$",
@@ -23965,12 +24453,45 @@
       "sectionIdx": 49
     },
     {
+      "content": "nachos",
+      "cues": [],
+      "termIdx": 180,
+      "nextTermIdx": [
+        181
+      ],
+      "prevTermIdx": [
+        179
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "heading": false,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": 4,
+        "responseIdx": 3
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 60,
+      "sectionIdx": 49
+    },
+    {
       "content": "1",
       "cues": [],
-      "termIdx": 177,
-      "nextTermIdx": [],
+      "termIdx": 181,
+      "nextTermIdx": [
+        182
+      ],
       "prevTermIdx": [
-        176
+        180
       ],
       "altpronunciation": "",
       "altrecognition": "^(one|won)$",
@@ -23992,49 +24513,85 @@
       "markupTag": false,
       "sentenceIdx": 61,
       "sectionIdx": 50
+    },
+    {
+      "content": "fajitas",
+      "cues": [],
+      "termIdx": 182,
+      "nextTermIdx": [],
+      "prevTermIdx": [
+        181
+      ],
+      "altpronunciation": "",
+      "altrecognition": "",
+      "recitable": true,
+      "heading": false,
+      "audible": true,
+      "linkable": false,
+      "visible": true,
+      "visited": false,
+      "numberAsNumerals": false,
+      "linkIdx": -9999,
+      "hintsIdx": -9999,
+      "fillin": {
+        "sectionIdx": 4,
+        "responseIdx": 4
+      },
+      "bold": false,
+      "italics": false,
+      "markupTag": false,
+      "sentenceIdx": 62,
+      "sectionIdx": 50
     }
   ],
   "headingList": [
     {
       "headingLevel": 1,
       "title": "Completing sentences progressively",
-      "termIdx": 0,
+      "firstTermIdx": 0,
+      "lastTermIdx": 28,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 2,
       "title": "Food",
-      "termIdx": 29,
+      "firstTermIdx": 29,
+      "lastTermIdx": 61,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 2,
       "title": "More food",
-      "termIdx": 62,
+      "firstTermIdx": 62,
+      "lastTermIdx": 102,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 2,
       "title": "Desserts",
-      "termIdx": 103,
+      "firstTermIdx": 103,
+      "lastTermIdx": 131,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 2,
       "title": "International Food",
-      "termIdx": 132,
+      "firstTermIdx": 132,
+      "lastTermIdx": 133,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "Chinese Food",
-      "termIdx": 134,
+      "firstTermIdx": 134,
+      "lastTermIdx": 170,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "Mexican Food",
-      "termIdx": 171,
+      "firstTermIdx": 171,
+      "lastTermIdx": 182,
       "terminalCountPriorToHeading": -9999
     }
   ],
@@ -24271,27 +24828,27 @@
     },
     {
       "firstTermIdx": 173,
-      "lastTermIdx": 173,
-      "type": "paragraph"
-    },
-    {
-      "firstTermIdx": 174,
       "lastTermIdx": 174,
       "type": "paragraph"
     },
     {
       "firstTermIdx": 175,
-      "lastTermIdx": 175,
-      "type": "paragraph"
-    },
-    {
-      "firstTermIdx": 176,
       "lastTermIdx": 176,
       "type": "paragraph"
     },
     {
       "firstTermIdx": 177,
-      "lastTermIdx": 177,
+      "lastTermIdx": 178,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 179,
+      "lastTermIdx": 180,
+      "type": "paragraph"
+    },
+    {
+      "firstTermIdx": 181,
+      "lastTermIdx": 182,
       "type": "paragraph"
     }
   ],
@@ -24568,16 +25125,6 @@
     },
     {
       "firstTermIdx": 174,
-      "lastTermIdx": 173,
-      "lastPunctuation": "."
-    },
-    {
-      "firstTermIdx": 174,
-      "lastTermIdx": 174,
-      "lastPunctuation": "."
-    },
-    {
-      "firstTermIdx": 175,
       "lastTermIdx": 174,
       "lastPunctuation": "."
     },
@@ -24588,16 +25135,6 @@
     },
     {
       "firstTermIdx": 176,
-      "lastTermIdx": 175,
-      "lastPunctuation": "."
-    },
-    {
-      "firstTermIdx": 176,
-      "lastTermIdx": 176,
-      "lastPunctuation": "."
-    },
-    {
-      "firstTermIdx": 177,
       "lastTermIdx": 176,
       "lastPunctuation": "."
     },
@@ -24608,7 +25145,27 @@
     },
     {
       "firstTermIdx": 178,
-      "lastTermIdx": 177,
+      "lastTermIdx": 178,
+      "lastPunctuation": "."
+    },
+    {
+      "firstTermIdx": 179,
+      "lastTermIdx": 179,
+      "lastPunctuation": "."
+    },
+    {
+      "firstTermIdx": 180,
+      "lastTermIdx": 180,
+      "lastPunctuation": "."
+    },
+    {
+      "firstTermIdx": 181,
+      "lastTermIdx": 181,
+      "lastPunctuation": "."
+    },
+    {
+      "firstTermIdx": 182,
+      "lastTermIdx": 182,
       "lastPunctuation": "."
     }
   ],
@@ -24658,74 +25215,79 @@
       "promptColumns": 2,
       "alternatives": [],
       "tags": [
-        "noun",
-        "verb",
         "untagged"
       ],
       "responses": [
         {
           "content": "meatballs",
-          "tag": "noun",
+          "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "pizza",
-          "tag": "noun",
+          "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "steak",
-          "tag": "noun",
+          "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "chips",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "roast",
-          "tag": "noun",
+          "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "potato",
-          "tag": "noun",
+          "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "pizza",
-          "tag": "noun",
+          "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "beef",
-          "tag": "noun",
+          "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "sandwich",
-          "tag": "noun",
+          "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "salad",
-          "tag": "noun",
+          "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "potatoes",
-          "tag": "noun",
-          "referenceCount": 1
-        },
-        {
-          "content": "like",
-          "tag": "verb",
+          "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "potatoes",
-          "tag": "noun",
+          "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         }
       ],
@@ -24782,61 +25344,73 @@
         {
           "content": "pepper",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "egg",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "bread",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "cob",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "soup",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "eggs",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "eggs",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "juice",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "pizza",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "pie",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "chowder",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "chicken",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         }
       ],
@@ -24893,56 +25467,67 @@
         {
           "content": "cake",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "cream",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "muffin",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "cake",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "bread",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "cake",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "pie",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "ice",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "cream",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "cookies",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "pie",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         }
       ],
@@ -24999,56 +25584,67 @@
         {
           "content": "mein",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "pork",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "salad",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "eggplant",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "beef",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "soup",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "chicken",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "chicken",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "beef",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "beef",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "prawns",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         }
       ],
@@ -25098,8 +25694,41 @@
       "allowReset": true,
       "promptColumns": 2,
       "alternatives": [],
-      "tags": [],
-      "responses": [],
+      "tags": [
+        "untagged"
+      ],
+      "responses": [
+        {
+          "content": "tacos",
+          "tag": "untagged",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "enchiladas",
+          "tag": "untagged",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "burritos",
+          "tag": "untagged",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "nachos",
+          "tag": "untagged",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "fajitas",
+          "tag": "untagged",
+          "alternatives": [],
+          "referenceCount": 1
+        }
+      ],
       "loaded": false,
       "modified": false
     }

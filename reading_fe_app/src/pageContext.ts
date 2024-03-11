@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2024 Wen Eng - All Rights Reserved
  *
  * File name: pageContext.ts
  *
@@ -75,6 +75,7 @@ const PageListsContextProvider = (props:any) => {
 */
 export class CPageLists {
   constructor(
+    showTags: boolean = false,
     terminalList: ITerminalListItem[] = [],
     headingList: IHeadingListItem[] = [],
     sectionList: ISectionListItem[] = [],
@@ -82,6 +83,7 @@ export class CPageLists {
     linkList: ILinkListItem[] = [],
     fillinList: ISectionFillinItem[] = []
   ) {
+    this.showTags = showTags;
     this.terminalList = terminalList;
     this.headingList = headingList;
     this.sectionList = sectionList;
@@ -89,6 +91,7 @@ export class CPageLists {
     this.linkList = linkList;
     this.fillinList = fillinList;
   }
+  showTags: boolean;
   terminalList: ITerminalListItem[];
   headingList: IHeadingListItem[];
   sectionList: ISectionListItem[];

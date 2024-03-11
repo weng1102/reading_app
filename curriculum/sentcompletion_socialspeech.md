@@ -11,6 +11,8 @@ The following exercises allow me to fill in the prompts given the corresponding 
 1. Please sit [_down_].
 1. Please make yourself at [_home_].
 1. What's mine is [_yours_].
+[[/fillin]]
+[[fillin: gridInOrder, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 7, insert, true, true, true, true, true, false]]
 1. Thank you very [_much_].
 1. The pleasure is all [_mine_].
 1. I beg your [_pardon_].
@@ -19,6 +21,8 @@ The following exercises allow me to fill in the prompts given the corresponding 
 1. What's his first [_name_]?
 1. I apologize, I'm so [_sorry_].
 1. Are you coming on Saturday or [_Sunday_]?
+[[/fillin]]
+[[fillin: gridInOrder, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 7, insert, true, true, true, true, true, false]]
 1. Let's go out for [_dinner_].
 1. Give them my [_number_].
 1. We must get [_together_].

@@ -184,7 +184,7 @@ He [_was=(helping verb)_] [_sitting=(verb)_] on a sofa.
 She [_was=(helping verb)_] [_sitting=(verb)_] on a sofa.
 You [_were=(helping verb)_] [_sitting=(verb)_] on a sofa.
 We [_were=(helping verb)_] [_sitting=(verb)_] on a sofa.
-They [_were=(helping verb)_] [_sitting=(verb)_] sit.
+They [_were=(helping verb)_] [_sitting=(verb)_] on a sofa.
 [[/fillin]]
 
 ### Sit (future simple tense)

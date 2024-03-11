@@ -6,11 +6,11 @@
   "owner": "Ronlyn",
   "author": "Wen",
   "category": "Sentence Completion",
-  "version": "20230706.1",
+  "version": "20231102.1",
   "pageFormatType": 0,
-  "created": "Sat Jul 29 2023 08:13:29 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Sat Jul 29 2023 08:13:29 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Sat Jul 29 2023 08:13:29 GMT-0700 (Pacific Daylight Time)",
+  "created": "Sun Feb 04 2024 17:05:04 GMT-0800 (Pacific Standard Time)",
+  "modified": "Sun Feb 04 2024 17:05:04 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Sun Feb 04 2024 17:05:04 GMT-0800 (Pacific Standard Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -30,7 +30,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 0,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -261,7 +261,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 3,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -418,7 +418,7 @@
         "sentences": [
           {
             "id": 2,
-            "content": "[Three-word sentences](3wordsentences,0,0)",
+            "content": "[Three-word sentences](3wordsentences,page,)",
             "firstTermIdx": 5,
             "lastTermIdx": 7,
             "terminals": [
@@ -661,23 +661,8 @@
                   },
                   "className": "",
                   "style": "",
-                  "linkIdx": -9999
+                  "linkIdx": 0
                 }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": "</link>",
-                "cueList": "",
-                "cues": {
-                  "partOfSpeech": "untagged",
-                  "definition": "",
-                  "image": "",
-                  "alternatives": []
-                },
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 13
               }
             ],
             "lastPunctuation": ""
@@ -698,7 +683,7 @@
         "sentences": [
           {
             "id": 3,
-            "content": "[Four-word sentences](4wordsentences,0,0)",
+            "content": "[Four-word sentences](4wordsentences,page)",
             "firstTermIdx": 8,
             "lastTermIdx": 10,
             "terminals": [
@@ -941,23 +926,8 @@
                   },
                   "className": "",
                   "style": "",
-                  "linkIdx": -9999
+                  "linkIdx": 1
                 }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": "</link>",
-                "cueList": "",
-                "cues": {
-                  "partOfSpeech": "untagged",
-                  "definition": "",
-                  "image": "",
-                  "alternatives": []
-                },
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 13
               }
             ],
             "lastPunctuation": ""
@@ -978,7 +948,7 @@
         "sentences": [
           {
             "id": 4,
-            "content": "[Five-word sentences](5wordsentences,0,0)",
+            "content": "[Five-word sentences](5wordsentences,page)",
             "firstTermIdx": 11,
             "lastTermIdx": 13,
             "terminals": [
@@ -1221,23 +1191,8 @@
                   },
                   "className": "",
                   "style": "",
-                  "linkIdx": -9999
+                  "linkIdx": 2
                 }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": "</link>",
-                "cueList": "",
-                "cues": {
-                  "partOfSpeech": "untagged",
-                  "definition": "",
-                  "image": "",
-                  "alternatives": []
-                },
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 13
               }
             ],
             "lastPunctuation": ""
@@ -1258,7 +1213,7 @@
         "sentences": [
           {
             "id": 5,
-            "content": "[Six-word sentences](6wordsentences,0,0)",
+            "content": "[Six-word sentences](6wordsentences,page)",
             "firstTermIdx": 14,
             "lastTermIdx": 16,
             "terminals": [
@@ -1291,7 +1246,7 @@
                       },
                       "firstTermIdx": 14,
                       "lastTermIdx": 14,
-                      "type": 17,
+                      "type": 12,
                       "meta": {
                         "content": "Six",
                         "cues": [],
@@ -1501,23 +1456,8 @@
                   },
                   "className": "",
                   "style": "",
-                  "linkIdx": -9999
+                  "linkIdx": 3
                 }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": "</link>",
-                "cueList": "",
-                "cues": {
-                  "partOfSpeech": "untagged",
-                  "definition": "",
-                  "image": "",
-                  "alternatives": []
-                },
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 13
               }
             ],
             "lastPunctuation": ""
@@ -1538,7 +1478,7 @@
         "sentences": [
           {
             "id": 6,
-            "content": "[Seven-word sentences](7wordsentences,0,0)",
+            "content": "[Seven-word sentences](7wordsentences,page)",
             "firstTermIdx": 17,
             "lastTermIdx": 19,
             "terminals": [
@@ -1781,23 +1721,8 @@
                   },
                   "className": "",
                   "style": "",
-                  "linkIdx": -9999
+                  "linkIdx": 4
                 }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": "</link>",
-                "cueList": "",
-                "cues": {
-                  "partOfSpeech": "untagged",
-                  "definition": "",
-                  "image": "",
-                  "alternatives": []
-                },
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 13
               }
             ],
             "lastPunctuation": ""
@@ -1818,7 +1743,7 @@
         "sentences": [
           {
             "id": 7,
-            "content": "[Ten-word sentences](10wordsentences,0,0)",
+            "content": "[Ten-word sentences](10wordsentences,page)",
             "firstTermIdx": 20,
             "lastTermIdx": 22,
             "terminals": [
@@ -2061,23 +1986,8 @@
                   },
                   "className": "",
                   "style": "",
-                  "linkIdx": -9999
+                  "linkIdx": 5
                 }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": "</link>",
-                "cueList": "",
-                "cues": {
-                  "partOfSpeech": "untagged",
-                  "definition": "",
-                  "image": "",
-                  "alternatives": []
-                },
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 13
               }
             ],
             "lastPunctuation": ""
@@ -2102,7 +2012,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 23,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -6656,8 +6566,8 @@
                               "audible": true,
                               "linkable": false,
                               "visible": true,
-                              "visited": true,
-                              "numberAsNumerals": false,
+                              "visited": false,
+                              "numberAsNumerals": true,
                               "linkIdx": -9999,
                               "hintsIdx": -9999,
                               "fillin": {
@@ -6685,8 +6595,8 @@
                               "audible": true,
                               "linkable": false,
                               "visible": true,
-                              "visited": true,
-                              "numberAsNumerals": false,
+                              "visited": false,
+                              "numberAsNumerals": true,
                               "linkIdx": -9999,
                               "hintsIdx": -9999,
                               "fillin": {
@@ -6714,8 +6624,8 @@
                               "audible": true,
                               "linkable": false,
                               "visible": true,
-                              "visited": true,
-                              "numberAsNumerals": false,
+                              "visited": false,
+                              "numberAsNumerals": true,
                               "linkIdx": -9999,
                               "hintsIdx": -9999,
                               "fillin": {
@@ -6795,8 +6705,8 @@
                               "audible": true,
                               "linkable": false,
                               "visible": true,
-                              "visited": true,
-                              "numberAsNumerals": false,
+                              "visited": false,
+                              "numberAsNumerals": true,
                               "linkIdx": -9999,
                               "hintsIdx": -9999,
                               "fillin": {
@@ -6824,8 +6734,8 @@
                               "audible": true,
                               "linkable": false,
                               "visible": true,
-                              "visited": true,
-                              "numberAsNumerals": false,
+                              "visited": false,
+                              "numberAsNumerals": true,
                               "linkIdx": -9999,
                               "hintsIdx": -9999,
                               "fillin": {
@@ -6853,8 +6763,8 @@
                               "audible": true,
                               "linkable": false,
                               "visible": true,
-                              "visited": true,
-                              "numberAsNumerals": false,
+                              "visited": false,
+                              "numberAsNumerals": true,
                               "linkIdx": -9999,
                               "hintsIdx": -9999,
                               "fillin": {
@@ -6909,8 +6819,8 @@
                               "audible": true,
                               "linkable": false,
                               "visible": true,
-                              "visited": true,
-                              "numberAsNumerals": false,
+                              "visited": false,
+                              "numberAsNumerals": true,
                               "linkIdx": -9999,
                               "hintsIdx": -9999,
                               "fillin": {
@@ -6938,8 +6848,8 @@
                               "audible": true,
                               "linkable": false,
                               "visible": true,
-                              "visited": true,
-                              "numberAsNumerals": false,
+                              "visited": false,
+                              "numberAsNumerals": true,
                               "linkIdx": -9999,
                               "hintsIdx": -9999,
                               "fillin": {
@@ -6967,8 +6877,8 @@
                               "audible": true,
                               "linkable": false,
                               "visible": true,
-                              "visited": true,
-                              "numberAsNumerals": false,
+                              "visited": false,
+                              "numberAsNumerals": true,
                               "linkIdx": -9999,
                               "hintsIdx": -9999,
                               "fillin": {
@@ -6996,8 +6906,8 @@
                               "audible": true,
                               "linkable": false,
                               "visible": true,
-                              "visited": true,
-                              "numberAsNumerals": false,
+                              "visited": false,
+                              "numberAsNumerals": true,
                               "linkIdx": -9999,
                               "hintsIdx": -9999,
                               "fillin": {
@@ -7884,8 +7794,8 @@
                               "audible": true,
                               "linkable": false,
                               "visible": true,
-                              "visited": true,
-                              "numberAsNumerals": false,
+                              "visited": false,
+                              "numberAsNumerals": true,
                               "linkIdx": -9999,
                               "hintsIdx": -9999,
                               "fillin": {
@@ -7913,8 +7823,8 @@
                               "audible": true,
                               "linkable": false,
                               "visible": true,
-                              "visited": true,
-                              "numberAsNumerals": false,
+                              "visited": false,
+                              "numberAsNumerals": true,
                               "linkIdx": -9999,
                               "hintsIdx": -9999,
                               "fillin": {
@@ -7942,8 +7852,8 @@
                               "audible": true,
                               "linkable": false,
                               "visible": true,
-                              "visited": true,
-                              "numberAsNumerals": false,
+                              "visited": false,
+                              "numberAsNumerals": true,
                               "linkIdx": -9999,
                               "hintsIdx": -9999,
                               "fillin": {
@@ -8023,8 +7933,8 @@
                               "audible": true,
                               "linkable": false,
                               "visible": true,
-                              "visited": true,
-                              "numberAsNumerals": false,
+                              "visited": false,
+                              "numberAsNumerals": true,
                               "linkIdx": -9999,
                               "hintsIdx": -9999,
                               "fillin": {
@@ -8052,8 +7962,8 @@
                               "audible": true,
                               "linkable": false,
                               "visible": true,
-                              "visited": true,
-                              "numberAsNumerals": false,
+                              "visited": false,
+                              "numberAsNumerals": true,
                               "linkIdx": -9999,
                               "hintsIdx": -9999,
                               "fillin": {
@@ -8081,8 +7991,8 @@
                               "audible": true,
                               "linkable": false,
                               "visible": true,
-                              "visited": true,
-                              "numberAsNumerals": false,
+                              "visited": false,
+                              "numberAsNumerals": true,
                               "linkIdx": -9999,
                               "hintsIdx": -9999,
                               "fillin": {
@@ -8137,8 +8047,8 @@
                               "audible": true,
                               "linkable": false,
                               "visible": true,
-                              "visited": true,
-                              "numberAsNumerals": false,
+                              "visited": false,
+                              "numberAsNumerals": true,
                               "linkIdx": -9999,
                               "hintsIdx": -9999,
                               "fillin": {
@@ -8166,8 +8076,8 @@
                               "audible": true,
                               "linkable": false,
                               "visible": true,
-                              "visited": true,
-                              "numberAsNumerals": false,
+                              "visited": false,
+                              "numberAsNumerals": true,
                               "linkIdx": -9999,
                               "hintsIdx": -9999,
                               "fillin": {
@@ -8195,8 +8105,8 @@
                               "audible": true,
                               "linkable": false,
                               "visible": true,
-                              "visited": true,
-                              "numberAsNumerals": false,
+                              "visited": false,
+                              "numberAsNumerals": true,
                               "linkIdx": -9999,
                               "hintsIdx": -9999,
                               "fillin": {
@@ -8224,8 +8134,8 @@
                               "audible": true,
                               "linkable": false,
                               "visible": true,
-                              "visited": true,
-                              "numberAsNumerals": false,
+                              "visited": false,
+                              "numberAsNumerals": true,
                               "linkIdx": -9999,
                               "hintsIdx": -9999,
                               "fillin": {
@@ -8318,7 +8228,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 104,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -15941,7 +15851,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 190,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -17771,7 +17681,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 210,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -23086,7 +22996,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 270,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -26597,7 +26507,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 309,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -26621,7 +26531,7 @@
               },
               "firstTermIdx": 309,
               "lastTermIdx": 309,
-              "type": 17,
+              "type": 12,
               "meta": {
                 "content": "Extended",
                 "cues": [],
@@ -28867,7 +28777,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 334,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -30043,7 +29953,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 347,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -30360,7 +30270,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 351,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -36552,7 +36462,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 417,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -42248,7 +42158,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 478,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -46288,7 +46198,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 522,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -56246,7 +56156,7 @@
                         },
                         "firstTermIdx": 628,
                         "lastTermIdx": 628,
-                        "type": 17,
+                        "type": 12,
                         "meta": {
                           "content": "exercise",
                           "cues": [],
@@ -57531,7 +57441,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -57562,7 +57472,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -57593,7 +57503,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -57624,7 +57534,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -57655,7 +57565,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -58244,7 +58154,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -58275,7 +58185,7 @@
       "altpronunciation": "",
       "altrecognition": "a?m?",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -58304,9 +58214,9 @@
         24
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -58490,7 +58400,7 @@
         30
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -58645,7 +58555,7 @@
         35
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -58800,7 +58710,7 @@
         40
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -58986,7 +58896,7 @@
         46
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -59079,7 +58989,7 @@
         49
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "and|ann|anne|n",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -59234,7 +59144,7 @@
         54
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -59891,8 +59801,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -59922,8 +59832,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -59953,8 +59863,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -59984,8 +59894,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -60015,8 +59925,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -60046,8 +59956,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -60077,8 +59987,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -60108,8 +60018,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -60139,8 +60049,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -60170,8 +60080,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -60195,7 +60105,7 @@
         85
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -60319,7 +60229,7 @@
         89
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "pleas",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -60449,8 +60359,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -60480,8 +60390,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -60511,8 +60421,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -60542,8 +60452,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -60573,8 +60483,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -60604,8 +60514,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -60635,8 +60545,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -60666,8 +60576,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -60697,8 +60607,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -60728,8 +60638,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -60755,7 +60665,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -60786,7 +60696,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -60817,7 +60727,7 @@
       "altpronunciation": "",
       "altrecognition": "(too|2|two)",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -60848,7 +60758,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -60877,7 +60787,7 @@
         107
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -61032,7 +60942,7 @@
         112
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -61156,7 +61066,7 @@
         116
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -61342,7 +61252,7 @@
         122
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -61528,7 +61438,7 @@
         128
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "rite|write",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -62272,7 +62182,7 @@
         152
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -62551,7 +62461,7 @@
         161
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -62706,7 +62616,7 @@
         166
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -62799,7 +62709,7 @@
         169
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -62923,7 +62833,7 @@
         173
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -63047,7 +62957,7 @@
         177
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -63140,7 +63050,7 @@
         180
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -63421,7 +63331,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -63452,7 +63362,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -63884,7 +63794,7 @@
         204
       ],
       "altpronunciation": "",
-      "altrecognition": "(2|to{1,2})",
+      "altrecognition": "(to|2|too)",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -64041,7 +63951,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -64566,7 +64476,7 @@
         226
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -65124,7 +65034,7 @@
         244
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -65901,7 +65811,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -66333,7 +66243,7 @@
         283
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -67110,7 +67020,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -67141,7 +67051,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -67387,7 +67297,7 @@
         317
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "r",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -67885,7 +67795,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -68288,7 +68198,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -68319,7 +68229,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -68350,7 +68260,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -68381,7 +68291,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -68410,9 +68320,9 @@
         350
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -68443,7 +68353,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -68472,9 +68382,9 @@
         352
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "mourning",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -68503,7 +68413,7 @@
         353
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -68596,7 +68506,7 @@
         356
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -68751,7 +68661,7 @@
         361
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -68906,7 +68816,7 @@
         366
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -68999,7 +68909,7 @@
         369
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -69154,7 +69064,7 @@
         374
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -69309,7 +69219,7 @@
         379
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -69464,7 +69374,7 @@
         384
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -69619,7 +69529,7 @@
         389
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -69712,7 +69622,7 @@
         392
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "here|hear|hare",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -69743,7 +69653,7 @@
         393
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -69867,7 +69777,7 @@
         397
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -69991,7 +69901,7 @@
         401
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -70146,7 +70056,7 @@
         406
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -70177,7 +70087,7 @@
         407
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "wok",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -70332,7 +70242,7 @@
         412
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -70458,7 +70368,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -70487,9 +70397,9 @@
         417
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -70520,7 +70430,7 @@
       "altpronunciation": "",
       "altrecognition": "a?m?",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -70551,7 +70461,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -70580,7 +70490,7 @@
         420
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -70735,7 +70645,7 @@
         425
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -70828,7 +70738,7 @@
         428
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -70921,7 +70831,7 @@
         431
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -71045,7 +70955,7 @@
         435
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -71138,7 +71048,7 @@
         438
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -71231,7 +71141,7 @@
         441
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -71417,7 +71327,7 @@
         447
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -71603,7 +71513,7 @@
         453
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -71789,7 +71699,7 @@
         459
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -71944,7 +71854,7 @@
         464
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -72130,7 +72040,7 @@
         470
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -72349,7 +72259,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -72378,9 +72288,9 @@
         478
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -72411,7 +72321,7 @@
       "altpronunciation": "",
       "altrecognition": "a?m?",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -72442,7 +72352,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -72471,7 +72381,7 @@
         481
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -72657,7 +72567,7 @@
         487
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -72781,7 +72691,7 @@
         491
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -72936,7 +72846,7 @@
         496
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -73091,7 +73001,7 @@
         501
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -73401,7 +73311,7 @@
         511
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -73713,7 +73623,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -73744,7 +73654,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -73775,7 +73685,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -73804,7 +73714,7 @@
         524
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -73835,7 +73745,7 @@
         525
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "wok",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -73959,7 +73869,7 @@
         529
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -73990,7 +73900,7 @@
         530
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "wok",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -74145,7 +74055,7 @@
         535
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -74176,7 +74086,7 @@
         536
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "wok",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -74331,7 +74241,7 @@
         541
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -74362,7 +74272,7 @@
         542
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "wok",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -74486,7 +74396,7 @@
         546
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -74517,7 +74427,7 @@
         547
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "wok",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -74641,7 +74551,7 @@
         551
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -74672,7 +74582,7 @@
         552
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "wok",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -74734,7 +74644,7 @@
         554
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -74765,7 +74675,7 @@
         555
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "wok",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -74920,7 +74830,7 @@
         560
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -74951,7 +74861,7 @@
         561
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "reed|red",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -75044,7 +74954,7 @@
         564
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -75168,7 +75078,7 @@
         568
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -75292,7 +75202,7 @@
         572
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -75385,7 +75295,7 @@
         575
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -75478,7 +75388,7 @@
         578
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -75602,7 +75512,7 @@
         582
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -75633,7 +75543,7 @@
         583
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "reed|red",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -75695,7 +75605,7 @@
         585
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -75819,7 +75729,7 @@
         589
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -75912,7 +75822,7 @@
         592
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -76036,7 +75946,7 @@
         596
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -76160,7 +76070,7 @@
         600
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -76253,7 +76163,7 @@
         603
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -76315,7 +76225,7 @@
         605
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -76408,7 +76318,7 @@
         608
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -76563,7 +76473,7 @@
         613
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -76718,7 +76628,7 @@
         618
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -76873,7 +76783,7 @@
         623
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -77059,7 +76969,7 @@
         629
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -77121,7 +77031,7 @@
         631
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -77245,7 +77155,7 @@
         635
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -77423,85 +77333,99 @@
     {
       "headingLevel": 1,
       "title": "My Sentence Banks",
-      "termIdx": 0,
+      "firstTermIdx": 0,
+      "lastTermIdx": 2,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 2,
       "title": "Practice sentences",
-      "termIdx": 3,
+      "firstTermIdx": 3,
+      "lastTermIdx": 22,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 2,
       "title": "Who am I",
-      "termIdx": 23,
+      "firstTermIdx": 23,
+      "lastTermIdx": 103,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 2,
       "title": "What happened to me",
-      "termIdx": 104,
+      "firstTermIdx": 104,
+      "lastTermIdx": 189,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 2,
       "title": "My Family",
-      "termIdx": 190,
+      "firstTermIdx": 190,
+      "lastTermIdx": 209,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "David",
-      "termIdx": 210,
+      "firstTermIdx": 210,
+      "lastTermIdx": 269,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "Robert",
-      "termIdx": 270,
+      "firstTermIdx": 270,
+      "lastTermIdx": 308,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "Extended family",
-      "termIdx": 309,
+      "firstTermIdx": 309,
+      "lastTermIdx": 333,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "Friends",
-      "termIdx": 334,
+      "firstTermIdx": 334,
+      "lastTermIdx": 346,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 2,
       "title": "When I'm at home",
-      "termIdx": 347,
+      "firstTermIdx": 347,
+      "lastTermIdx": 350,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "In the morning...",
-      "termIdx": 351,
+      "firstTermIdx": 351,
+      "lastTermIdx": 416,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "When I am hungry...",
-      "termIdx": 417,
+      "firstTermIdx": 417,
+      "lastTermIdx": 477,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "When I am thirsty...",
-      "termIdx": 478,
+      "firstTermIdx": 478,
+      "lastTermIdx": 521,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "During the daytime,...",
-      "termIdx": 522,
+      "firstTermIdx": 522,
+      "lastTermIdx": 641,
       "terminalCountPriorToHeading": -9999
     }
   ],
@@ -78586,76 +78510,76 @@
   ],
   "linkList": [
     {
-      "label": "",
+      "label": "Three-word sentences",
       "destination": {
-        "page": "",
+        "page": "3wordsentences",
         "directory": "",
         "linkIdxType": "page",
         "headingIdx": -9999,
         "sectionIdx": -9999,
         "terminalIdx": -9999
       },
-      "valid": false
+      "valid": true
     },
     {
-      "label": "",
+      "label": "Four-word sentences",
       "destination": {
-        "page": "",
+        "page": "4wordsentences",
         "directory": "",
         "linkIdxType": "page",
         "headingIdx": -9999,
         "sectionIdx": -9999,
         "terminalIdx": -9999
       },
-      "valid": false
+      "valid": true
     },
     {
-      "label": "",
+      "label": "Five-word sentences",
       "destination": {
-        "page": "",
+        "page": "5wordsentences",
         "directory": "",
         "linkIdxType": "page",
         "headingIdx": -9999,
         "sectionIdx": -9999,
         "terminalIdx": -9999
       },
-      "valid": false
+      "valid": true
     },
     {
-      "label": "",
+      "label": "Six-word sentences",
       "destination": {
-        "page": "",
+        "page": "6wordsentences",
         "directory": "",
         "linkIdxType": "page",
         "headingIdx": -9999,
         "sectionIdx": -9999,
         "terminalIdx": -9999
       },
-      "valid": false
+      "valid": true
     },
     {
-      "label": "",
+      "label": "Seven-word sentences",
       "destination": {
-        "page": "",
+        "page": "7wordsentences",
         "directory": "",
         "linkIdxType": "page",
         "headingIdx": -9999,
         "sectionIdx": -9999,
         "terminalIdx": -9999
       },
-      "valid": false
+      "valid": true
     },
     {
-      "label": "",
+      "label": "Ten-word sentences",
       "destination": {
-        "page": "",
+        "page": "10wordsentences",
         "directory": "",
         "linkIdxType": "page",
         "headingIdx": -9999,
         "sectionIdx": -9999,
         "terminalIdx": -9999
       },
-      "valid": false
+      "valid": true
     }
   ],
   "fillinList": []

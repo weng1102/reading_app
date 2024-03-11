@@ -6,11 +6,11 @@
   "owner": "anonymous",
   "author": "anonymous",
   "category": "Miscellaneous",
-  "version": "20230706.1",
+  "version": "20231102.1",
   "pageFormatType": 0,
-  "created": "Sat Jul 29 2023 08:13:24 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Sat Jul 29 2023 08:13:24 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Sat Jul 29 2023 08:13:24 GMT-0700 (Pacific Daylight Time)",
+  "created": "Sun Feb 04 2024 17:04:59 GMT-0800 (Pacific Standard Time)",
+  "modified": "Sun Feb 04 2024 17:04:59 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Sun Feb 04 2024 17:04:59 GMT-0800 (Pacific Standard Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -329,8 +329,8 @@
         "showResponsesInPrompts": false,
         "responsesLayout": "above",
         "showAlternatives": false,
-        "unique": true,
-        "showReferenceCount": true,
+        "unique": false,
+        "showReferenceCount": false,
         "helpfulness": -1
       },
       "currentSetting": {
@@ -347,8 +347,8 @@
         "showResponsesInPrompts": false,
         "responsesLayout": "above",
         "showAlternatives": false,
-        "unique": true,
-        "showReferenceCount": true,
+        "unique": false,
+        "showReferenceCount": false,
         "helpfulness": -1
       },
       "allowReset": true,
@@ -361,6 +361,7 @@
         {
           "content": "walking",
           "tag": "noun",
+          "alternatives": [],
           "referenceCount": 1
         }
       ],

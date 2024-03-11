@@ -6,11 +6,11 @@
   "owner": "anonymous",
   "author": "Wen",
   "category": "Sentence Completion (trailing word)",
-  "version": "20230706.1",
+  "version": "20231102.1",
   "pageFormatType": 0,
-  "created": "Sat Jul 29 2023 08:13:29 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Sat Jul 29 2023 08:13:29 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Sat Jul 29 2023 08:13:29 GMT-0700 (Pacific Daylight Time)",
+  "created": "Sun Feb 04 2024 17:05:04 GMT-0800 (Pacific Standard Time)",
+  "modified": "Sun Feb 04 2024 17:05:04 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Sun Feb 04 2024 17:05:04 GMT-0800 (Pacific Standard Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -30,7 +30,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 0,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -454,7 +454,7 @@
                 },
                 "firstTermIdx": 5,
                 "lastTermIdx": 5,
-                "type": 17,
+                "type": 12,
                 "meta": {
                   "content": "exercises",
                   "cues": [],
@@ -2468,7 +2468,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 29,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -2534,12 +2534,12 @@
       "name": "",
       "description": "",
       "firstTermIdx": -9999,
-      "lastTermIdx": 95,
+      "lastTermIdx": 54,
       "items": [],
       "type": "fillin",
       "meta": {
         "sectionFillinIdx": 0,
-        "presetLevel": 4,
+        "presetLevel": 5,
         "authorSetting": {
           "description": "no description",
           "responsesLabel": "Responses already filled in",
@@ -2559,6 +2559,7 @@
           "helpfulness": 814
         },
         "allowReset": true,
+        "maxPromptsPerSection": 0,
         "promptColumns": 2,
         "showPresets": false,
         "prompts": [
@@ -2588,13 +2589,13 @@
                       "sentences": [
                         {
                           "id": 3,
-                          "content": "Mow the [_lawn_].",
+                          "content": "[_Mow=(verb)_] the [_lawn=(noun)_].",
                           "firstTermIdx": 30,
                           "lastTermIdx": 32,
                           "terminals": [
                             {
                               "id": 0,
-                              "termIdx": 30,
+                              "termIdx": -9999,
                               "content": "Mow",
                               "cueList": "",
                               "cues": {
@@ -2605,35 +2606,57 @@
                               },
                               "firstTermIdx": 30,
                               "lastTermIdx": 30,
-                              "type": 17,
+                              "type": 4,
                               "meta": {
-                                "content": "Mow",
-                                "cues": [],
-                                "termIdx": 30,
-                                "nextTermIdx": [
-                                  31
+                                "terminals": [
+                                  {
+                                    "id": 0,
+                                    "termIdx": 30,
+                                    "content": "Mow",
+                                    "cueList": "verb",
+                                    "cues": {
+                                      "partOfSpeech": "verb",
+                                      "definition": "",
+                                      "image": "",
+                                      "alternatives": []
+                                    },
+                                    "firstTermIdx": 30,
+                                    "lastTermIdx": 30,
+                                    "type": 17,
+                                    "meta": {
+                                      "content": "Mow",
+                                      "cues": [
+                                        "verb"
+                                      ],
+                                      "termIdx": 30,
+                                      "nextTermIdx": [
+                                        31
+                                      ],
+                                      "prevTermIdx": [
+                                        29
+                                      ],
+                                      "altpronunciation": "",
+                                      "altrecognition": "",
+                                      "recitable": true,
+                                      "heading": false,
+                                      "audible": true,
+                                      "linkable": false,
+                                      "visible": true,
+                                      "visited": false,
+                                      "numberAsNumerals": false,
+                                      "linkIdx": -9999,
+                                      "hintsIdx": -9999,
+                                      "fillin": {
+                                        "sectionIdx": 0,
+                                        "responseIdx": 0
+                                      },
+                                      "bold": false,
+                                      "italics": false,
+                                      "markupTag": false
+                                    }
+                                  }
                                 ],
-                                "prevTermIdx": [
-                                  29
-                                ],
-                                "altpronunciation": "",
-                                "altrecognition": "",
-                                "recitable": true,
-                                "heading": false,
-                                "audible": true,
-                                "linkable": false,
-                                "visible": true,
-                                "visited": false,
-                                "numberAsNumerals": false,
-                                "linkIdx": -9999,
-                                "hintsIdx": -9999,
-                                "fillin": {
-                                  "sectionIdx": -9999,
-                                  "responseIdx": -9999
-                                },
-                                "bold": false,
-                                "italics": false,
-                                "markupTag": false
+                                "sectionFillinIdx": 0
                               }
                             },
                             {
@@ -2780,9 +2803,9 @@
                                     "id": 0,
                                     "termIdx": 32,
                                     "content": "lawn",
-                                    "cueList": "",
+                                    "cueList": "noun",
                                     "cues": {
-                                      "partOfSpeech": "untagged",
+                                      "partOfSpeech": "noun",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -2792,7 +2815,9 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "lawn",
-                                      "cues": [],
+                                      "cues": [
+                                        "noun"
+                                      ],
                                       "termIdx": 32,
                                       "nextTermIdx": [
                                         33
@@ -2813,7 +2838,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 0
+                                        "responseIdx": 1
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -2898,13 +2923,13 @@
                       "sentences": [
                         {
                           "id": 4,
-                          "content": "Trim the [_hedges_].",
+                          "content": "[_Trim=(verb)_] the [_hedges=(noun)_].",
                           "firstTermIdx": 33,
                           "lastTermIdx": 35,
                           "terminals": [
                             {
                               "id": 0,
-                              "termIdx": 33,
+                              "termIdx": -9999,
                               "content": "Trim",
                               "cueList": "",
                               "cues": {
@@ -2915,35 +2940,57 @@
                               },
                               "firstTermIdx": 33,
                               "lastTermIdx": 33,
-                              "type": 17,
+                              "type": 4,
                               "meta": {
-                                "content": "Trim",
-                                "cues": [],
-                                "termIdx": 33,
-                                "nextTermIdx": [
-                                  34
+                                "terminals": [
+                                  {
+                                    "id": 0,
+                                    "termIdx": 33,
+                                    "content": "Trim",
+                                    "cueList": "verb",
+                                    "cues": {
+                                      "partOfSpeech": "verb",
+                                      "definition": "",
+                                      "image": "",
+                                      "alternatives": []
+                                    },
+                                    "firstTermIdx": 33,
+                                    "lastTermIdx": 33,
+                                    "type": 17,
+                                    "meta": {
+                                      "content": "Trim",
+                                      "cues": [
+                                        "verb"
+                                      ],
+                                      "termIdx": 33,
+                                      "nextTermIdx": [
+                                        34
+                                      ],
+                                      "prevTermIdx": [
+                                        32
+                                      ],
+                                      "altpronunciation": "",
+                                      "altrecognition": "",
+                                      "recitable": true,
+                                      "heading": false,
+                                      "audible": true,
+                                      "linkable": false,
+                                      "visible": true,
+                                      "visited": false,
+                                      "numberAsNumerals": false,
+                                      "linkIdx": -9999,
+                                      "hintsIdx": -9999,
+                                      "fillin": {
+                                        "sectionIdx": 0,
+                                        "responseIdx": 2
+                                      },
+                                      "bold": false,
+                                      "italics": false,
+                                      "markupTag": false
+                                    }
+                                  }
                                 ],
-                                "prevTermIdx": [
-                                  32
-                                ],
-                                "altpronunciation": "",
-                                "altrecognition": "",
-                                "recitable": true,
-                                "heading": false,
-                                "audible": true,
-                                "linkable": false,
-                                "visible": true,
-                                "visited": false,
-                                "numberAsNumerals": false,
-                                "linkIdx": -9999,
-                                "hintsIdx": -9999,
-                                "fillin": {
-                                  "sectionIdx": -9999,
-                                  "responseIdx": -9999
-                                },
-                                "bold": false,
-                                "italics": false,
-                                "markupTag": false
+                                "sectionFillinIdx": 0
                               }
                             },
                             {
@@ -3090,9 +3137,9 @@
                                     "id": 0,
                                     "termIdx": 35,
                                     "content": "hedges",
-                                    "cueList": "",
+                                    "cueList": "noun",
                                     "cues": {
-                                      "partOfSpeech": "untagged",
+                                      "partOfSpeech": "noun",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -3102,7 +3149,9 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "hedges",
-                                      "cues": [],
+                                      "cues": [
+                                        "noun"
+                                      ],
                                       "termIdx": 35,
                                       "nextTermIdx": [
                                         36
@@ -3123,7 +3172,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 1
+                                        "responseIdx": 3
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -3208,13 +3257,13 @@
                       "sentences": [
                         {
                           "id": 5,
-                          "content": "Plant the [_seeds_].",
+                          "content": "[_Plant=(verb)_] the [_seeds=(noun)_].",
                           "firstTermIdx": 36,
                           "lastTermIdx": 38,
                           "terminals": [
                             {
                               "id": 0,
-                              "termIdx": 36,
+                              "termIdx": -9999,
                               "content": "Plant",
                               "cueList": "",
                               "cues": {
@@ -3225,35 +3274,57 @@
                               },
                               "firstTermIdx": 36,
                               "lastTermIdx": 36,
-                              "type": 17,
+                              "type": 4,
                               "meta": {
-                                "content": "Plant",
-                                "cues": [],
-                                "termIdx": 36,
-                                "nextTermIdx": [
-                                  37
+                                "terminals": [
+                                  {
+                                    "id": 0,
+                                    "termIdx": 36,
+                                    "content": "Plant",
+                                    "cueList": "verb",
+                                    "cues": {
+                                      "partOfSpeech": "verb",
+                                      "definition": "",
+                                      "image": "",
+                                      "alternatives": []
+                                    },
+                                    "firstTermIdx": 36,
+                                    "lastTermIdx": 36,
+                                    "type": 17,
+                                    "meta": {
+                                      "content": "Plant",
+                                      "cues": [
+                                        "verb"
+                                      ],
+                                      "termIdx": 36,
+                                      "nextTermIdx": [
+                                        37
+                                      ],
+                                      "prevTermIdx": [
+                                        35
+                                      ],
+                                      "altpronunciation": "",
+                                      "altrecognition": "",
+                                      "recitable": true,
+                                      "heading": false,
+                                      "audible": true,
+                                      "linkable": false,
+                                      "visible": true,
+                                      "visited": false,
+                                      "numberAsNumerals": false,
+                                      "linkIdx": -9999,
+                                      "hintsIdx": -9999,
+                                      "fillin": {
+                                        "sectionIdx": 0,
+                                        "responseIdx": 4
+                                      },
+                                      "bold": false,
+                                      "italics": false,
+                                      "markupTag": false
+                                    }
+                                  }
                                 ],
-                                "prevTermIdx": [
-                                  35
-                                ],
-                                "altpronunciation": "",
-                                "altrecognition": "",
-                                "recitable": true,
-                                "heading": false,
-                                "audible": true,
-                                "linkable": false,
-                                "visible": true,
-                                "visited": false,
-                                "numberAsNumerals": false,
-                                "linkIdx": -9999,
-                                "hintsIdx": -9999,
-                                "fillin": {
-                                  "sectionIdx": -9999,
-                                  "responseIdx": -9999
-                                },
-                                "bold": false,
-                                "italics": false,
-                                "markupTag": false
+                                "sectionFillinIdx": 0
                               }
                             },
                             {
@@ -3400,9 +3471,9 @@
                                     "id": 0,
                                     "termIdx": 38,
                                     "content": "seeds",
-                                    "cueList": "",
+                                    "cueList": "noun",
                                     "cues": {
-                                      "partOfSpeech": "untagged",
+                                      "partOfSpeech": "noun",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -3412,7 +3483,9 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "seeds",
-                                      "cues": [],
+                                      "cues": [
+                                        "noun"
+                                      ],
                                       "termIdx": 38,
                                       "nextTermIdx": [
                                         39
@@ -3433,7 +3506,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 2
+                                        "responseIdx": 5
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -3518,13 +3591,13 @@
                       "sentences": [
                         {
                           "id": 6,
-                          "content": "Transplant [_seedlings_].",
+                          "content": "[_Transplant=(verb)_] [_seedlings=(noun)_].",
                           "firstTermIdx": 39,
                           "lastTermIdx": 40,
                           "terminals": [
                             {
                               "id": 0,
-                              "termIdx": 39,
+                              "termIdx": -9999,
                               "content": "Transplant",
                               "cueList": "",
                               "cues": {
@@ -3535,35 +3608,57 @@
                               },
                               "firstTermIdx": 39,
                               "lastTermIdx": 39,
-                              "type": 17,
+                              "type": 4,
                               "meta": {
-                                "content": "Transplant",
-                                "cues": [],
-                                "termIdx": 39,
-                                "nextTermIdx": [
-                                  40
+                                "terminals": [
+                                  {
+                                    "id": 0,
+                                    "termIdx": 39,
+                                    "content": "Transplant",
+                                    "cueList": "verb",
+                                    "cues": {
+                                      "partOfSpeech": "verb",
+                                      "definition": "",
+                                      "image": "",
+                                      "alternatives": []
+                                    },
+                                    "firstTermIdx": 39,
+                                    "lastTermIdx": 39,
+                                    "type": 17,
+                                    "meta": {
+                                      "content": "Transplant",
+                                      "cues": [
+                                        "verb"
+                                      ],
+                                      "termIdx": 39,
+                                      "nextTermIdx": [
+                                        40
+                                      ],
+                                      "prevTermIdx": [
+                                        38
+                                      ],
+                                      "altpronunciation": "",
+                                      "altrecognition": "",
+                                      "recitable": true,
+                                      "heading": false,
+                                      "audible": true,
+                                      "linkable": false,
+                                      "visible": true,
+                                      "visited": false,
+                                      "numberAsNumerals": false,
+                                      "linkIdx": -9999,
+                                      "hintsIdx": -9999,
+                                      "fillin": {
+                                        "sectionIdx": 0,
+                                        "responseIdx": 6
+                                      },
+                                      "bold": false,
+                                      "italics": false,
+                                      "markupTag": false
+                                    }
+                                  }
                                 ],
-                                "prevTermIdx": [
-                                  38
-                                ],
-                                "altpronunciation": "",
-                                "altrecognition": "",
-                                "recitable": true,
-                                "heading": false,
-                                "audible": true,
-                                "linkable": false,
-                                "visible": true,
-                                "visited": false,
-                                "numberAsNumerals": false,
-                                "linkIdx": -9999,
-                                "hintsIdx": -9999,
-                                "fillin": {
-                                  "sectionIdx": -9999,
-                                  "responseIdx": -9999
-                                },
-                                "bold": false,
-                                "italics": false,
-                                "markupTag": false
+                                "sectionFillinIdx": 0
                               }
                             },
                             {
@@ -3626,9 +3721,9 @@
                                     "id": 0,
                                     "termIdx": 40,
                                     "content": "seedlings",
-                                    "cueList": "",
+                                    "cueList": "noun",
                                     "cues": {
-                                      "partOfSpeech": "untagged",
+                                      "partOfSpeech": "noun",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -3638,7 +3733,9 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "seedlings",
-                                      "cues": [],
+                                      "cues": [
+                                        "noun"
+                                      ],
                                       "termIdx": 40,
                                       "nextTermIdx": [
                                         41
@@ -3659,7 +3756,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 3
+                                        "responseIdx": 7
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -3744,13 +3841,13 @@
                       "sentences": [
                         {
                           "id": 7,
-                          "content": "Rake the [_leaves_].",
+                          "content": "[_Rake=(verb)_] the [_leaves=(noun)_].",
                           "firstTermIdx": 41,
                           "lastTermIdx": 43,
                           "terminals": [
                             {
                               "id": 0,
-                              "termIdx": 41,
+                              "termIdx": -9999,
                               "content": "Rake",
                               "cueList": "",
                               "cues": {
@@ -3761,35 +3858,57 @@
                               },
                               "firstTermIdx": 41,
                               "lastTermIdx": 41,
-                              "type": 17,
+                              "type": 4,
                               "meta": {
-                                "content": "Rake",
-                                "cues": [],
-                                "termIdx": 41,
-                                "nextTermIdx": [
-                                  42
+                                "terminals": [
+                                  {
+                                    "id": 0,
+                                    "termIdx": 41,
+                                    "content": "Rake",
+                                    "cueList": "verb",
+                                    "cues": {
+                                      "partOfSpeech": "verb",
+                                      "definition": "",
+                                      "image": "",
+                                      "alternatives": []
+                                    },
+                                    "firstTermIdx": 41,
+                                    "lastTermIdx": 41,
+                                    "type": 17,
+                                    "meta": {
+                                      "content": "Rake",
+                                      "cues": [
+                                        "verb"
+                                      ],
+                                      "termIdx": 41,
+                                      "nextTermIdx": [
+                                        42
+                                      ],
+                                      "prevTermIdx": [
+                                        40
+                                      ],
+                                      "altpronunciation": "",
+                                      "altrecognition": "",
+                                      "recitable": true,
+                                      "heading": false,
+                                      "audible": true,
+                                      "linkable": false,
+                                      "visible": true,
+                                      "visited": false,
+                                      "numberAsNumerals": false,
+                                      "linkIdx": -9999,
+                                      "hintsIdx": -9999,
+                                      "fillin": {
+                                        "sectionIdx": 0,
+                                        "responseIdx": 8
+                                      },
+                                      "bold": false,
+                                      "italics": false,
+                                      "markupTag": false
+                                    }
+                                  }
                                 ],
-                                "prevTermIdx": [
-                                  40
-                                ],
-                                "altpronunciation": "",
-                                "altrecognition": "",
-                                "recitable": true,
-                                "heading": false,
-                                "audible": true,
-                                "linkable": false,
-                                "visible": true,
-                                "visited": false,
-                                "numberAsNumerals": false,
-                                "linkIdx": -9999,
-                                "hintsIdx": -9999,
-                                "fillin": {
-                                  "sectionIdx": -9999,
-                                  "responseIdx": -9999
-                                },
-                                "bold": false,
-                                "italics": false,
-                                "markupTag": false
+                                "sectionFillinIdx": 0
                               }
                             },
                             {
@@ -3936,9 +4055,9 @@
                                     "id": 0,
                                     "termIdx": 43,
                                     "content": "leaves",
-                                    "cueList": "",
+                                    "cueList": "noun",
                                     "cues": {
-                                      "partOfSpeech": "untagged",
+                                      "partOfSpeech": "noun",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -3948,7 +4067,9 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "leaves",
-                                      "cues": [],
+                                      "cues": [
+                                        "noun"
+                                      ],
                                       "termIdx": 43,
                                       "nextTermIdx": [
                                         44
@@ -3969,7 +4090,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 4
+                                        "responseIdx": 9
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -4054,13 +4175,13 @@
                       "sentences": [
                         {
                           "id": 8,
-                          "content": "Harvest fruit off the [_tree_].",
+                          "content": "[_Harvest=(verb)_] fruit off the [_tree=(noun)_].",
                           "firstTermIdx": 44,
                           "lastTermIdx": 48,
                           "terminals": [
                             {
                               "id": 0,
-                              "termIdx": 44,
+                              "termIdx": -9999,
                               "content": "Harvest",
                               "cueList": "",
                               "cues": {
@@ -4071,35 +4192,57 @@
                               },
                               "firstTermIdx": 44,
                               "lastTermIdx": 44,
-                              "type": 17,
+                              "type": 4,
                               "meta": {
-                                "content": "Harvest",
-                                "cues": [],
-                                "termIdx": 44,
-                                "nextTermIdx": [
-                                  45
+                                "terminals": [
+                                  {
+                                    "id": 0,
+                                    "termIdx": 44,
+                                    "content": "Harvest",
+                                    "cueList": "verb",
+                                    "cues": {
+                                      "partOfSpeech": "verb",
+                                      "definition": "",
+                                      "image": "",
+                                      "alternatives": []
+                                    },
+                                    "firstTermIdx": 44,
+                                    "lastTermIdx": 44,
+                                    "type": 17,
+                                    "meta": {
+                                      "content": "Harvest",
+                                      "cues": [
+                                        "verb"
+                                      ],
+                                      "termIdx": 44,
+                                      "nextTermIdx": [
+                                        45
+                                      ],
+                                      "prevTermIdx": [
+                                        43
+                                      ],
+                                      "altpronunciation": "",
+                                      "altrecognition": "",
+                                      "recitable": true,
+                                      "heading": false,
+                                      "audible": true,
+                                      "linkable": false,
+                                      "visible": true,
+                                      "visited": false,
+                                      "numberAsNumerals": false,
+                                      "linkIdx": -9999,
+                                      "hintsIdx": -9999,
+                                      "fillin": {
+                                        "sectionIdx": 0,
+                                        "responseIdx": 10
+                                      },
+                                      "bold": false,
+                                      "italics": false,
+                                      "markupTag": false
+                                    }
+                                  }
                                 ],
-                                "prevTermIdx": [
-                                  43
-                                ],
-                                "altpronunciation": "",
-                                "altrecognition": "",
-                                "recitable": true,
-                                "heading": false,
-                                "audible": true,
-                                "linkable": false,
-                                "visible": true,
-                                "visited": false,
-                                "numberAsNumerals": false,
-                                "linkIdx": -9999,
-                                "hintsIdx": -9999,
-                                "fillin": {
-                                  "sectionIdx": -9999,
-                                  "responseIdx": -9999
-                                },
-                                "bold": false,
-                                "italics": false,
-                                "markupTag": false
+                                "sectionFillinIdx": 0
                               }
                             },
                             {
@@ -4414,9 +4557,9 @@
                                     "id": 0,
                                     "termIdx": 48,
                                     "content": "tree",
-                                    "cueList": "",
+                                    "cueList": "noun",
                                     "cues": {
-                                      "partOfSpeech": "untagged",
+                                      "partOfSpeech": "noun",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -4426,7 +4569,9 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "tree",
-                                      "cues": [],
+                                      "cues": [
+                                        "noun"
+                                      ],
                                       "termIdx": 48,
                                       "nextTermIdx": [
                                         49
@@ -4447,7 +4592,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 5
+                                        "responseIdx": 11
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -4532,13 +4677,13 @@
                       "sentences": [
                         {
                           "id": 9,
-                          "content": "Chop fire [_wood_].",
+                          "content": "[_Chop=(verb)_] fire [_wood=(noun)_].",
                           "firstTermIdx": 49,
                           "lastTermIdx": 51,
                           "terminals": [
                             {
                               "id": 0,
-                              "termIdx": 49,
+                              "termIdx": -9999,
                               "content": "Chop",
                               "cueList": "",
                               "cues": {
@@ -4549,35 +4694,57 @@
                               },
                               "firstTermIdx": 49,
                               "lastTermIdx": 49,
-                              "type": 17,
+                              "type": 4,
                               "meta": {
-                                "content": "Chop",
-                                "cues": [],
-                                "termIdx": 49,
-                                "nextTermIdx": [
-                                  50
+                                "terminals": [
+                                  {
+                                    "id": 0,
+                                    "termIdx": 49,
+                                    "content": "Chop",
+                                    "cueList": "verb",
+                                    "cues": {
+                                      "partOfSpeech": "verb",
+                                      "definition": "",
+                                      "image": "",
+                                      "alternatives": []
+                                    },
+                                    "firstTermIdx": 49,
+                                    "lastTermIdx": 49,
+                                    "type": 17,
+                                    "meta": {
+                                      "content": "Chop",
+                                      "cues": [
+                                        "verb"
+                                      ],
+                                      "termIdx": 49,
+                                      "nextTermIdx": [
+                                        50
+                                      ],
+                                      "prevTermIdx": [
+                                        48
+                                      ],
+                                      "altpronunciation": "",
+                                      "altrecognition": "",
+                                      "recitable": true,
+                                      "heading": false,
+                                      "audible": true,
+                                      "linkable": false,
+                                      "visible": true,
+                                      "visited": false,
+                                      "numberAsNumerals": false,
+                                      "linkIdx": -9999,
+                                      "hintsIdx": -9999,
+                                      "fillin": {
+                                        "sectionIdx": 0,
+                                        "responseIdx": 12
+                                      },
+                                      "bold": false,
+                                      "italics": false,
+                                      "markupTag": false
+                                    }
+                                  }
                                 ],
-                                "prevTermIdx": [
-                                  48
-                                ],
-                                "altpronunciation": "",
-                                "altrecognition": "",
-                                "recitable": true,
-                                "heading": false,
-                                "audible": true,
-                                "linkable": false,
-                                "visible": true,
-                                "visited": false,
-                                "numberAsNumerals": false,
-                                "linkIdx": -9999,
-                                "hintsIdx": -9999,
-                                "fillin": {
-                                  "sectionIdx": -9999,
-                                  "responseIdx": -9999
-                                },
-                                "bold": false,
-                                "italics": false,
-                                "markupTag": false
+                                "sectionFillinIdx": 0
                               }
                             },
                             {
@@ -4724,9 +4891,9 @@
                                     "id": 0,
                                     "termIdx": 51,
                                     "content": "wood",
-                                    "cueList": "",
+                                    "cueList": "noun",
                                     "cues": {
-                                      "partOfSpeech": "untagged",
+                                      "partOfSpeech": "noun",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -4736,7 +4903,9 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "wood",
-                                      "cues": [],
+                                      "cues": [
+                                        "noun"
+                                      ],
                                       "termIdx": 51,
                                       "nextTermIdx": [
                                         52
@@ -4757,7 +4926,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 6
+                                        "responseIdx": 13
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -4842,13 +5011,13 @@
                       "sentences": [
                         {
                           "id": 10,
-                          "content": "Prune the [_roses_].",
+                          "content": "[_Prune=(verb)_] the [_roses=(noun)_].",
                           "firstTermIdx": 52,
                           "lastTermIdx": 54,
                           "terminals": [
                             {
                               "id": 0,
-                              "termIdx": 52,
+                              "termIdx": -9999,
                               "content": "Prune",
                               "cueList": "",
                               "cues": {
@@ -4859,35 +5028,57 @@
                               },
                               "firstTermIdx": 52,
                               "lastTermIdx": 52,
-                              "type": 17,
+                              "type": 4,
                               "meta": {
-                                "content": "Prune",
-                                "cues": [],
-                                "termIdx": 52,
-                                "nextTermIdx": [
-                                  53
+                                "terminals": [
+                                  {
+                                    "id": 0,
+                                    "termIdx": 52,
+                                    "content": "Prune",
+                                    "cueList": "verb",
+                                    "cues": {
+                                      "partOfSpeech": "verb",
+                                      "definition": "",
+                                      "image": "",
+                                      "alternatives": []
+                                    },
+                                    "firstTermIdx": 52,
+                                    "lastTermIdx": 52,
+                                    "type": 17,
+                                    "meta": {
+                                      "content": "Prune",
+                                      "cues": [
+                                        "verb"
+                                      ],
+                                      "termIdx": 52,
+                                      "nextTermIdx": [
+                                        53
+                                      ],
+                                      "prevTermIdx": [
+                                        51
+                                      ],
+                                      "altpronunciation": "",
+                                      "altrecognition": "",
+                                      "recitable": true,
+                                      "heading": false,
+                                      "audible": true,
+                                      "linkable": false,
+                                      "visible": true,
+                                      "visited": false,
+                                      "numberAsNumerals": false,
+                                      "linkIdx": -9999,
+                                      "hintsIdx": -9999,
+                                      "fillin": {
+                                        "sectionIdx": 0,
+                                        "responseIdx": 14
+                                      },
+                                      "bold": false,
+                                      "italics": false,
+                                      "markupTag": false
+                                    }
+                                  }
                                 ],
-                                "prevTermIdx": [
-                                  51
-                                ],
-                                "altpronunciation": "",
-                                "altrecognition": "",
-                                "recitable": true,
-                                "heading": false,
-                                "audible": true,
-                                "linkable": false,
-                                "visible": true,
-                                "visited": false,
-                                "numberAsNumerals": false,
-                                "linkIdx": -9999,
-                                "hintsIdx": -9999,
-                                "fillin": {
-                                  "sectionIdx": -9999,
-                                  "responseIdx": -9999
-                                },
-                                "bold": false,
-                                "italics": false,
-                                "markupTag": false
+                                "sectionFillinIdx": 0
                               }
                             },
                             {
@@ -5034,9 +5225,9 @@
                                     "id": 0,
                                     "termIdx": 54,
                                     "content": "roses",
-                                    "cueList": "",
+                                    "cueList": "noun",
                                     "cues": {
-                                      "partOfSpeech": "untagged",
+                                      "partOfSpeech": "noun",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -5046,7 +5237,9 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "roses",
-                                      "cues": [],
+                                      "cues": [
+                                        "noun"
+                                      ],
                                       "termIdx": 54,
                                       "nextTermIdx": [
                                         55
@@ -5067,7 +5260,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 7
+                                        "responseIdx": 15
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -5132,7 +5325,66 @@
                   "startNumber": 0,
                   "listType": 1
                 }
-              },
+              }
+            ],
+            "meta": {
+              "depth": 1,
+              "startNumber": 0,
+              "listType": 6,
+              "subsectionOrdinal": 1
+            },
+            "type": "ordered_list"
+          }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
+    },
+    {
+      "id": 0,
+      "name": "",
+      "description": "",
+      "firstTermIdx": -9999,
+      "lastTermIdx": 82,
+      "items": [],
+      "type": "fillin",
+      "meta": {
+        "sectionFillinIdx": 1,
+        "presetLevel": 5,
+        "authorSetting": {
+          "description": "no description",
+          "responsesLabel": "Responses already filled in",
+          "promptsLabel": "Recite the following prompts including the underlined words:",
+          "layout": "grid",
+          "showProgression": true,
+          "progressionOrder": "in order",
+          "gridColumns": 6,
+          "showResponseTags": true,
+          "showPromptTags": true,
+          "groupByTags": true,
+          "showResponsesInPrompts": false,
+          "responsesLayout": "above",
+          "showAlternatives": false,
+          "unique": true,
+          "showReferenceCount": true,
+          "helpfulness": 814
+        },
+        "allowReset": true,
+        "maxPromptsPerSection": 0,
+        "promptColumns": 2,
+        "showPresets": false,
+        "prompts": [
+          {
+            "id": 0,
+            "name": "",
+            "description": "",
+            "firstTermIdx": -9999,
+            "lastTermIdx": -9999,
+            "items": [
               {
                 "id": 0,
                 "name": "",
@@ -5152,13 +5404,13 @@
                       "sentences": [
                         {
                           "id": 11,
-                          "content": "Take out the [_trash_].",
+                          "content": "[_Take=(verb)_] out the [_trash=(noun)_].",
                           "firstTermIdx": 55,
                           "lastTermIdx": 58,
                           "terminals": [
                             {
                               "id": 0,
-                              "termIdx": 55,
+                              "termIdx": -9999,
                               "content": "Take",
                               "cueList": "",
                               "cues": {
@@ -5169,35 +5421,57 @@
                               },
                               "firstTermIdx": 55,
                               "lastTermIdx": 55,
-                              "type": 17,
+                              "type": 4,
                               "meta": {
-                                "content": "Take",
-                                "cues": [],
-                                "termIdx": 55,
-                                "nextTermIdx": [
-                                  56
+                                "terminals": [
+                                  {
+                                    "id": 0,
+                                    "termIdx": 55,
+                                    "content": "Take",
+                                    "cueList": "verb",
+                                    "cues": {
+                                      "partOfSpeech": "verb",
+                                      "definition": "",
+                                      "image": "",
+                                      "alternatives": []
+                                    },
+                                    "firstTermIdx": 55,
+                                    "lastTermIdx": 55,
+                                    "type": 17,
+                                    "meta": {
+                                      "content": "Take",
+                                      "cues": [
+                                        "verb"
+                                      ],
+                                      "termIdx": 55,
+                                      "nextTermIdx": [
+                                        56
+                                      ],
+                                      "prevTermIdx": [
+                                        54
+                                      ],
+                                      "altpronunciation": "",
+                                      "altrecognition": "",
+                                      "recitable": true,
+                                      "heading": false,
+                                      "audible": true,
+                                      "linkable": false,
+                                      "visible": true,
+                                      "visited": false,
+                                      "numberAsNumerals": false,
+                                      "linkIdx": -9999,
+                                      "hintsIdx": -9999,
+                                      "fillin": {
+                                        "sectionIdx": 1,
+                                        "responseIdx": 0
+                                      },
+                                      "bold": false,
+                                      "italics": false,
+                                      "markupTag": false
+                                    }
+                                  }
                                 ],
-                                "prevTermIdx": [
-                                  54
-                                ],
-                                "altpronunciation": "",
-                                "altrecognition": "",
-                                "recitable": true,
-                                "heading": false,
-                                "audible": true,
-                                "linkable": false,
-                                "visible": true,
-                                "visited": false,
-                                "numberAsNumerals": false,
-                                "linkIdx": -9999,
-                                "hintsIdx": -9999,
-                                "fillin": {
-                                  "sectionIdx": -9999,
-                                  "responseIdx": -9999
-                                },
-                                "bold": false,
-                                "italics": false,
-                                "markupTag": false
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -5428,9 +5702,9 @@
                                     "id": 0,
                                     "termIdx": 58,
                                     "content": "trash",
-                                    "cueList": "",
+                                    "cueList": "noun",
                                     "cues": {
-                                      "partOfSpeech": "untagged",
+                                      "partOfSpeech": "noun",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -5440,7 +5714,9 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "trash",
-                                      "cues": [],
+                                      "cues": [
+                                        "noun"
+                                      ],
                                       "termIdx": 58,
                                       "nextTermIdx": [
                                         59
@@ -5460,8 +5736,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 8
+                                        "sectionIdx": 1,
+                                        "responseIdx": 1
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -5469,7 +5745,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -5546,13 +5822,13 @@
                       "sentences": [
                         {
                           "id": 12,
-                          "content": "Wash and wax the [_car_].",
+                          "content": "[_Wash=(verb)_] and wax the [_car=(noun)_].",
                           "firstTermIdx": 59,
                           "lastTermIdx": 63,
                           "terminals": [
                             {
                               "id": 0,
-                              "termIdx": 59,
+                              "termIdx": -9999,
                               "content": "Wash",
                               "cueList": "",
                               "cues": {
@@ -5563,35 +5839,57 @@
                               },
                               "firstTermIdx": 59,
                               "lastTermIdx": 59,
-                              "type": 17,
+                              "type": 4,
                               "meta": {
-                                "content": "Wash",
-                                "cues": [],
-                                "termIdx": 59,
-                                "nextTermIdx": [
-                                  60
+                                "terminals": [
+                                  {
+                                    "id": 0,
+                                    "termIdx": 59,
+                                    "content": "Wash",
+                                    "cueList": "verb",
+                                    "cues": {
+                                      "partOfSpeech": "verb",
+                                      "definition": "",
+                                      "image": "",
+                                      "alternatives": []
+                                    },
+                                    "firstTermIdx": 59,
+                                    "lastTermIdx": 59,
+                                    "type": 17,
+                                    "meta": {
+                                      "content": "Wash",
+                                      "cues": [
+                                        "verb"
+                                      ],
+                                      "termIdx": 59,
+                                      "nextTermIdx": [
+                                        60
+                                      ],
+                                      "prevTermIdx": [
+                                        58
+                                      ],
+                                      "altpronunciation": "",
+                                      "altrecognition": "",
+                                      "recitable": true,
+                                      "heading": false,
+                                      "audible": true,
+                                      "linkable": false,
+                                      "visible": true,
+                                      "visited": false,
+                                      "numberAsNumerals": false,
+                                      "linkIdx": -9999,
+                                      "hintsIdx": -9999,
+                                      "fillin": {
+                                        "sectionIdx": 1,
+                                        "responseIdx": 2
+                                      },
+                                      "bold": false,
+                                      "italics": false,
+                                      "markupTag": false
+                                    }
+                                  }
                                 ],
-                                "prevTermIdx": [
-                                  58
-                                ],
-                                "altpronunciation": "",
-                                "altrecognition": "",
-                                "recitable": true,
-                                "heading": false,
-                                "audible": true,
-                                "linkable": false,
-                                "visible": true,
-                                "visited": false,
-                                "numberAsNumerals": false,
-                                "linkIdx": -9999,
-                                "hintsIdx": -9999,
-                                "fillin": {
-                                  "sectionIdx": -9999,
-                                  "responseIdx": -9999
-                                },
-                                "bold": false,
-                                "italics": false,
-                                "markupTag": false
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -5731,7 +6029,7 @@
                               },
                               "firstTermIdx": 61,
                               "lastTermIdx": 61,
-                              "type": 17,
+                              "type": 12,
                               "meta": {
                                 "content": "wax",
                                 "cues": [],
@@ -5906,9 +6204,9 @@
                                     "id": 0,
                                     "termIdx": 63,
                                     "content": "car",
-                                    "cueList": "",
+                                    "cueList": "noun",
                                     "cues": {
-                                      "partOfSpeech": "untagged",
+                                      "partOfSpeech": "noun",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -5918,7 +6216,9 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "car",
-                                      "cues": [],
+                                      "cues": [
+                                        "noun"
+                                      ],
                                       "termIdx": 63,
                                       "nextTermIdx": [
                                         64
@@ -5938,8 +6238,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 9
+                                        "sectionIdx": 1,
+                                        "responseIdx": 3
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -5947,7 +6247,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -6024,13 +6324,13 @@
                       "sentences": [
                         {
                           "id": 13,
-                          "content": "Water the [_plants_].",
+                          "content": "[_Water=(verb)_] the [_plants=(noun)_].",
                           "firstTermIdx": 64,
                           "lastTermIdx": 66,
                           "terminals": [
                             {
                               "id": 0,
-                              "termIdx": 64,
+                              "termIdx": -9999,
                               "content": "Water",
                               "cueList": "",
                               "cues": {
@@ -6041,35 +6341,57 @@
                               },
                               "firstTermIdx": 64,
                               "lastTermIdx": 64,
-                              "type": 17,
+                              "type": 4,
                               "meta": {
-                                "content": "Water",
-                                "cues": [],
-                                "termIdx": 64,
-                                "nextTermIdx": [
-                                  65
+                                "terminals": [
+                                  {
+                                    "id": 0,
+                                    "termIdx": 64,
+                                    "content": "Water",
+                                    "cueList": "verb",
+                                    "cues": {
+                                      "partOfSpeech": "verb",
+                                      "definition": "",
+                                      "image": "",
+                                      "alternatives": []
+                                    },
+                                    "firstTermIdx": 64,
+                                    "lastTermIdx": 64,
+                                    "type": 17,
+                                    "meta": {
+                                      "content": "Water",
+                                      "cues": [
+                                        "verb"
+                                      ],
+                                      "termIdx": 64,
+                                      "nextTermIdx": [
+                                        65
+                                      ],
+                                      "prevTermIdx": [
+                                        63
+                                      ],
+                                      "altpronunciation": "",
+                                      "altrecognition": "",
+                                      "recitable": true,
+                                      "heading": false,
+                                      "audible": true,
+                                      "linkable": false,
+                                      "visible": true,
+                                      "visited": false,
+                                      "numberAsNumerals": false,
+                                      "linkIdx": -9999,
+                                      "hintsIdx": -9999,
+                                      "fillin": {
+                                        "sectionIdx": 1,
+                                        "responseIdx": 4
+                                      },
+                                      "bold": false,
+                                      "italics": false,
+                                      "markupTag": false
+                                    }
+                                  }
                                 ],
-                                "prevTermIdx": [
-                                  63
-                                ],
-                                "altpronunciation": "",
-                                "altrecognition": "",
-                                "recitable": true,
-                                "heading": false,
-                                "audible": true,
-                                "linkable": false,
-                                "visible": true,
-                                "visited": false,
-                                "numberAsNumerals": false,
-                                "linkIdx": -9999,
-                                "hintsIdx": -9999,
-                                "fillin": {
-                                  "sectionIdx": -9999,
-                                  "responseIdx": -9999
-                                },
-                                "bold": false,
-                                "italics": false,
-                                "markupTag": false
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -6216,9 +6538,9 @@
                                     "id": 0,
                                     "termIdx": 66,
                                     "content": "plants",
-                                    "cueList": "",
+                                    "cueList": "noun",
                                     "cues": {
-                                      "partOfSpeech": "untagged",
+                                      "partOfSpeech": "noun",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -6228,7 +6550,9 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "plants",
-                                      "cues": [],
+                                      "cues": [
+                                        "noun"
+                                      ],
                                       "termIdx": 66,
                                       "nextTermIdx": [
                                         67
@@ -6248,8 +6572,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 10
+                                        "sectionIdx": 1,
+                                        "responseIdx": 5
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -6257,7 +6581,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -6334,13 +6658,13 @@
                       "sentences": [
                         {
                           "id": 14,
-                          "content": "Fertilize the [_grass_].",
+                          "content": "[_Fertilize=(verb)_] the [_grass=(noun)_].",
                           "firstTermIdx": 67,
                           "lastTermIdx": 69,
                           "terminals": [
                             {
                               "id": 0,
-                              "termIdx": 67,
+                              "termIdx": -9999,
                               "content": "Fertilize",
                               "cueList": "",
                               "cues": {
@@ -6351,35 +6675,57 @@
                               },
                               "firstTermIdx": 67,
                               "lastTermIdx": 67,
-                              "type": 17,
+                              "type": 4,
                               "meta": {
-                                "content": "Fertilize",
-                                "cues": [],
-                                "termIdx": 67,
-                                "nextTermIdx": [
-                                  68
+                                "terminals": [
+                                  {
+                                    "id": 0,
+                                    "termIdx": 67,
+                                    "content": "Fertilize",
+                                    "cueList": "verb",
+                                    "cues": {
+                                      "partOfSpeech": "verb",
+                                      "definition": "",
+                                      "image": "",
+                                      "alternatives": []
+                                    },
+                                    "firstTermIdx": 67,
+                                    "lastTermIdx": 67,
+                                    "type": 17,
+                                    "meta": {
+                                      "content": "Fertilize",
+                                      "cues": [
+                                        "verb"
+                                      ],
+                                      "termIdx": 67,
+                                      "nextTermIdx": [
+                                        68
+                                      ],
+                                      "prevTermIdx": [
+                                        66
+                                      ],
+                                      "altpronunciation": "",
+                                      "altrecognition": "",
+                                      "recitable": true,
+                                      "heading": false,
+                                      "audible": true,
+                                      "linkable": false,
+                                      "visible": true,
+                                      "visited": false,
+                                      "numberAsNumerals": false,
+                                      "linkIdx": -9999,
+                                      "hintsIdx": -9999,
+                                      "fillin": {
+                                        "sectionIdx": 1,
+                                        "responseIdx": 6
+                                      },
+                                      "bold": false,
+                                      "italics": false,
+                                      "markupTag": false
+                                    }
+                                  }
                                 ],
-                                "prevTermIdx": [
-                                  66
-                                ],
-                                "altpronunciation": "",
-                                "altrecognition": "",
-                                "recitable": true,
-                                "heading": false,
-                                "audible": true,
-                                "linkable": false,
-                                "visible": true,
-                                "visited": false,
-                                "numberAsNumerals": false,
-                                "linkIdx": -9999,
-                                "hintsIdx": -9999,
-                                "fillin": {
-                                  "sectionIdx": -9999,
-                                  "responseIdx": -9999
-                                },
-                                "bold": false,
-                                "italics": false,
-                                "markupTag": false
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -6526,9 +6872,9 @@
                                     "id": 0,
                                     "termIdx": 69,
                                     "content": "grass",
-                                    "cueList": "",
+                                    "cueList": "noun",
                                     "cues": {
-                                      "partOfSpeech": "untagged",
+                                      "partOfSpeech": "noun",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -6538,7 +6884,9 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "grass",
-                                      "cues": [],
+                                      "cues": [
+                                        "noun"
+                                      ],
                                       "termIdx": 69,
                                       "nextTermIdx": [
                                         70
@@ -6558,8 +6906,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 11
+                                        "sectionIdx": 1,
+                                        "responseIdx": 7
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -6567,7 +6915,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -6644,13 +6992,13 @@
                       "sentences": [
                         {
                           "id": 15,
-                          "content": "Weed the [_lawn_].",
+                          "content": "[_Weed=(verb)_] the [_lawn=(noun)_].",
                           "firstTermIdx": 70,
                           "lastTermIdx": 72,
                           "terminals": [
                             {
                               "id": 0,
-                              "termIdx": 70,
+                              "termIdx": -9999,
                               "content": "Weed",
                               "cueList": "",
                               "cues": {
@@ -6661,35 +7009,57 @@
                               },
                               "firstTermIdx": 70,
                               "lastTermIdx": 70,
-                              "type": 17,
+                              "type": 4,
                               "meta": {
-                                "content": "Weed",
-                                "cues": [],
-                                "termIdx": 70,
-                                "nextTermIdx": [
-                                  71
+                                "terminals": [
+                                  {
+                                    "id": 0,
+                                    "termIdx": 70,
+                                    "content": "Weed",
+                                    "cueList": "verb",
+                                    "cues": {
+                                      "partOfSpeech": "verb",
+                                      "definition": "",
+                                      "image": "",
+                                      "alternatives": []
+                                    },
+                                    "firstTermIdx": 70,
+                                    "lastTermIdx": 70,
+                                    "type": 17,
+                                    "meta": {
+                                      "content": "Weed",
+                                      "cues": [
+                                        "verb"
+                                      ],
+                                      "termIdx": 70,
+                                      "nextTermIdx": [
+                                        71
+                                      ],
+                                      "prevTermIdx": [
+                                        69
+                                      ],
+                                      "altpronunciation": "",
+                                      "altrecognition": "",
+                                      "recitable": true,
+                                      "heading": false,
+                                      "audible": true,
+                                      "linkable": false,
+                                      "visible": true,
+                                      "visited": false,
+                                      "numberAsNumerals": false,
+                                      "linkIdx": -9999,
+                                      "hintsIdx": -9999,
+                                      "fillin": {
+                                        "sectionIdx": 1,
+                                        "responseIdx": 8
+                                      },
+                                      "bold": false,
+                                      "italics": false,
+                                      "markupTag": false
+                                    }
+                                  }
                                 ],
-                                "prevTermIdx": [
-                                  69
-                                ],
-                                "altpronunciation": "",
-                                "altrecognition": "",
-                                "recitable": true,
-                                "heading": false,
-                                "audible": true,
-                                "linkable": false,
-                                "visible": true,
-                                "visited": false,
-                                "numberAsNumerals": false,
-                                "linkIdx": -9999,
-                                "hintsIdx": -9999,
-                                "fillin": {
-                                  "sectionIdx": -9999,
-                                  "responseIdx": -9999
-                                },
-                                "bold": false,
-                                "italics": false,
-                                "markupTag": false
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -6836,9 +7206,9 @@
                                     "id": 0,
                                     "termIdx": 72,
                                     "content": "lawn",
-                                    "cueList": "",
+                                    "cueList": "noun",
                                     "cues": {
-                                      "partOfSpeech": "untagged",
+                                      "partOfSpeech": "noun",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -6848,7 +7218,9 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "lawn",
-                                      "cues": [],
+                                      "cues": [
+                                        "noun"
+                                      ],
                                       "termIdx": 72,
                                       "nextTermIdx": [
                                         73
@@ -6868,8 +7240,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 12
+                                        "sectionIdx": 1,
+                                        "responseIdx": 9
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -6877,7 +7249,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -6954,13 +7326,13 @@
                       "sentences": [
                         {
                           "id": 16,
-                          "content": "Sweep the [_driveway_].",
+                          "content": "[_Sweep=(verb)_] the [_driveway=(noun)_].",
                           "firstTermIdx": 73,
                           "lastTermIdx": 75,
                           "terminals": [
                             {
                               "id": 0,
-                              "termIdx": 73,
+                              "termIdx": -9999,
                               "content": "Sweep",
                               "cueList": "",
                               "cues": {
@@ -6971,35 +7343,57 @@
                               },
                               "firstTermIdx": 73,
                               "lastTermIdx": 73,
-                              "type": 17,
+                              "type": 4,
                               "meta": {
-                                "content": "Sweep",
-                                "cues": [],
-                                "termIdx": 73,
-                                "nextTermIdx": [
-                                  74
+                                "terminals": [
+                                  {
+                                    "id": 0,
+                                    "termIdx": 73,
+                                    "content": "Sweep",
+                                    "cueList": "verb",
+                                    "cues": {
+                                      "partOfSpeech": "verb",
+                                      "definition": "",
+                                      "image": "",
+                                      "alternatives": []
+                                    },
+                                    "firstTermIdx": 73,
+                                    "lastTermIdx": 73,
+                                    "type": 17,
+                                    "meta": {
+                                      "content": "Sweep",
+                                      "cues": [
+                                        "verb"
+                                      ],
+                                      "termIdx": 73,
+                                      "nextTermIdx": [
+                                        74
+                                      ],
+                                      "prevTermIdx": [
+                                        72
+                                      ],
+                                      "altpronunciation": "",
+                                      "altrecognition": "",
+                                      "recitable": true,
+                                      "heading": false,
+                                      "audible": true,
+                                      "linkable": false,
+                                      "visible": true,
+                                      "visited": false,
+                                      "numberAsNumerals": false,
+                                      "linkIdx": -9999,
+                                      "hintsIdx": -9999,
+                                      "fillin": {
+                                        "sectionIdx": 1,
+                                        "responseIdx": 10
+                                      },
+                                      "bold": false,
+                                      "italics": false,
+                                      "markupTag": false
+                                    }
+                                  }
                                 ],
-                                "prevTermIdx": [
-                                  72
-                                ],
-                                "altpronunciation": "",
-                                "altrecognition": "",
-                                "recitable": true,
-                                "heading": false,
-                                "audible": true,
-                                "linkable": false,
-                                "visible": true,
-                                "visited": false,
-                                "numberAsNumerals": false,
-                                "linkIdx": -9999,
-                                "hintsIdx": -9999,
-                                "fillin": {
-                                  "sectionIdx": -9999,
-                                  "responseIdx": -9999
-                                },
-                                "bold": false,
-                                "italics": false,
-                                "markupTag": false
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -7146,9 +7540,9 @@
                                     "id": 0,
                                     "termIdx": 75,
                                     "content": "driveway",
-                                    "cueList": "",
+                                    "cueList": "noun",
                                     "cues": {
-                                      "partOfSpeech": "untagged",
+                                      "partOfSpeech": "noun",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -7158,7 +7552,9 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "driveway",
-                                      "cues": [],
+                                      "cues": [
+                                        "noun"
+                                      ],
                                       "termIdx": 75,
                                       "nextTermIdx": [
                                         76
@@ -7178,8 +7574,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 13
+                                        "sectionIdx": 1,
+                                        "responseIdx": 11
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -7187,7 +7583,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -7264,13 +7660,13 @@
                       "sentences": [
                         {
                           "id": 17,
-                          "content": "Spray the [_weeds_].",
+                          "content": "[_Spray=(verb)_] the [_weeds=(noun)_].",
                           "firstTermIdx": 76,
                           "lastTermIdx": 78,
                           "terminals": [
                             {
                               "id": 0,
-                              "termIdx": 76,
+                              "termIdx": -9999,
                               "content": "Spray",
                               "cueList": "",
                               "cues": {
@@ -7281,35 +7677,57 @@
                               },
                               "firstTermIdx": 76,
                               "lastTermIdx": 76,
-                              "type": 17,
+                              "type": 4,
                               "meta": {
-                                "content": "Spray",
-                                "cues": [],
-                                "termIdx": 76,
-                                "nextTermIdx": [
-                                  77
+                                "terminals": [
+                                  {
+                                    "id": 0,
+                                    "termIdx": 76,
+                                    "content": "Spray",
+                                    "cueList": "verb",
+                                    "cues": {
+                                      "partOfSpeech": "verb",
+                                      "definition": "",
+                                      "image": "",
+                                      "alternatives": []
+                                    },
+                                    "firstTermIdx": 76,
+                                    "lastTermIdx": 76,
+                                    "type": 17,
+                                    "meta": {
+                                      "content": "Spray",
+                                      "cues": [
+                                        "verb"
+                                      ],
+                                      "termIdx": 76,
+                                      "nextTermIdx": [
+                                        77
+                                      ],
+                                      "prevTermIdx": [
+                                        75
+                                      ],
+                                      "altpronunciation": "",
+                                      "altrecognition": "",
+                                      "recitable": true,
+                                      "heading": false,
+                                      "audible": true,
+                                      "linkable": false,
+                                      "visible": true,
+                                      "visited": false,
+                                      "numberAsNumerals": false,
+                                      "linkIdx": -9999,
+                                      "hintsIdx": -9999,
+                                      "fillin": {
+                                        "sectionIdx": 1,
+                                        "responseIdx": 12
+                                      },
+                                      "bold": false,
+                                      "italics": false,
+                                      "markupTag": false
+                                    }
+                                  }
                                 ],
-                                "prevTermIdx": [
-                                  75
-                                ],
-                                "altpronunciation": "",
-                                "altrecognition": "",
-                                "recitable": true,
-                                "heading": false,
-                                "audible": true,
-                                "linkable": false,
-                                "visible": true,
-                                "visited": false,
-                                "numberAsNumerals": false,
-                                "linkIdx": -9999,
-                                "hintsIdx": -9999,
-                                "fillin": {
-                                  "sectionIdx": -9999,
-                                  "responseIdx": -9999
-                                },
-                                "bold": false,
-                                "italics": false,
-                                "markupTag": false
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -7456,9 +7874,9 @@
                                     "id": 0,
                                     "termIdx": 78,
                                     "content": "weeds",
-                                    "cueList": "",
+                                    "cueList": "noun",
                                     "cues": {
-                                      "partOfSpeech": "untagged",
+                                      "partOfSpeech": "noun",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -7468,7 +7886,9 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "weeds",
-                                      "cues": [],
+                                      "cues": [
+                                        "noun"
+                                      ],
                                       "termIdx": 78,
                                       "nextTermIdx": [
                                         79
@@ -7488,8 +7908,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 14
+                                        "sectionIdx": 1,
+                                        "responseIdx": 13
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -7497,7 +7917,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -7574,13 +7994,13 @@
                       "sentences": [
                         {
                           "id": 18,
-                          "content": "Chop down a [_tree_].",
+                          "content": "[_Chop=(verb)_] down a [_tree=(noun)_].",
                           "firstTermIdx": 79,
                           "lastTermIdx": 82,
                           "terminals": [
                             {
                               "id": 0,
-                              "termIdx": 79,
+                              "termIdx": -9999,
                               "content": "Chop",
                               "cueList": "",
                               "cues": {
@@ -7591,35 +8011,57 @@
                               },
                               "firstTermIdx": 79,
                               "lastTermIdx": 79,
-                              "type": 17,
+                              "type": 4,
                               "meta": {
-                                "content": "Chop",
-                                "cues": [],
-                                "termIdx": 79,
-                                "nextTermIdx": [
-                                  80
+                                "terminals": [
+                                  {
+                                    "id": 0,
+                                    "termIdx": 79,
+                                    "content": "Chop",
+                                    "cueList": "verb",
+                                    "cues": {
+                                      "partOfSpeech": "verb",
+                                      "definition": "",
+                                      "image": "",
+                                      "alternatives": []
+                                    },
+                                    "firstTermIdx": 79,
+                                    "lastTermIdx": 79,
+                                    "type": 17,
+                                    "meta": {
+                                      "content": "Chop",
+                                      "cues": [
+                                        "verb"
+                                      ],
+                                      "termIdx": 79,
+                                      "nextTermIdx": [
+                                        80
+                                      ],
+                                      "prevTermIdx": [
+                                        78
+                                      ],
+                                      "altpronunciation": "",
+                                      "altrecognition": "",
+                                      "recitable": true,
+                                      "heading": false,
+                                      "audible": true,
+                                      "linkable": false,
+                                      "visible": true,
+                                      "visited": false,
+                                      "numberAsNumerals": false,
+                                      "linkIdx": -9999,
+                                      "hintsIdx": -9999,
+                                      "fillin": {
+                                        "sectionIdx": 1,
+                                        "responseIdx": 14
+                                      },
+                                      "bold": false,
+                                      "italics": false,
+                                      "markupTag": false
+                                    }
+                                  }
                                 ],
-                                "prevTermIdx": [
-                                  78
-                                ],
-                                "altpronunciation": "",
-                                "altrecognition": "",
-                                "recitable": true,
-                                "heading": false,
-                                "audible": true,
-                                "linkable": false,
-                                "visible": true,
-                                "visited": false,
-                                "numberAsNumerals": false,
-                                "linkIdx": -9999,
-                                "hintsIdx": -9999,
-                                "fillin": {
-                                  "sectionIdx": -9999,
-                                  "responseIdx": -9999
-                                },
-                                "bold": false,
-                                "italics": false,
-                                "markupTag": false
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -7850,9 +8292,9 @@
                                     "id": 0,
                                     "termIdx": 82,
                                     "content": "tree",
-                                    "cueList": "",
+                                    "cueList": "noun",
                                     "cues": {
-                                      "partOfSpeech": "untagged",
+                                      "partOfSpeech": "noun",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -7862,7 +8304,9 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "tree",
-                                      "cues": [],
+                                      "cues": [
+                                        "noun"
+                                      ],
                                       "termIdx": 82,
                                       "nextTermIdx": [
                                         83
@@ -7882,7 +8326,7 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
+                                        "sectionIdx": 1,
                                         "responseIdx": 15
                                       },
                                       "bold": false,
@@ -7891,7 +8335,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -7948,7 +8392,66 @@
                   "startNumber": 0,
                   "listType": 1
                 }
-              },
+              }
+            ],
+            "meta": {
+              "depth": 1,
+              "startNumber": 0,
+              "listType": 6,
+              "subsectionOrdinal": 1
+            },
+            "type": "ordered_list"
+          }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
+    },
+    {
+      "id": 0,
+      "name": "",
+      "description": "",
+      "firstTermIdx": -9999,
+      "lastTermIdx": 95,
+      "items": [],
+      "type": "fillin",
+      "meta": {
+        "sectionFillinIdx": 2,
+        "presetLevel": 5,
+        "authorSetting": {
+          "description": "no description",
+          "responsesLabel": "Responses already filled in",
+          "promptsLabel": "Recite the following prompts including the underlined words:",
+          "layout": "grid",
+          "showProgression": true,
+          "progressionOrder": "in order",
+          "gridColumns": 6,
+          "showResponseTags": true,
+          "showPromptTags": true,
+          "groupByTags": true,
+          "showResponsesInPrompts": false,
+          "responsesLayout": "above",
+          "showAlternatives": false,
+          "unique": true,
+          "showReferenceCount": true,
+          "helpfulness": 814
+        },
+        "allowReset": true,
+        "maxPromptsPerSection": 0,
+        "promptColumns": 2,
+        "showPresets": false,
+        "prompts": [
+          {
+            "id": 0,
+            "name": "",
+            "description": "",
+            "firstTermIdx": -9999,
+            "lastTermIdx": -9999,
+            "items": [
               {
                 "id": 0,
                 "name": "",
@@ -7968,13 +8471,13 @@
                       "sentences": [
                         {
                           "id": 19,
-                          "content": "Clean out the swimming [_pool_].",
+                          "content": "[_Clean=(verb)_] out the swimming [_pool=(noun)_].",
                           "firstTermIdx": 83,
                           "lastTermIdx": 87,
                           "terminals": [
                             {
                               "id": 0,
-                              "termIdx": 83,
+                              "termIdx": -9999,
                               "content": "Clean",
                               "cueList": "",
                               "cues": {
@@ -7985,35 +8488,57 @@
                               },
                               "firstTermIdx": 83,
                               "lastTermIdx": 83,
-                              "type": 17,
+                              "type": 4,
                               "meta": {
-                                "content": "Clean",
-                                "cues": [],
-                                "termIdx": 83,
-                                "nextTermIdx": [
-                                  84
+                                "terminals": [
+                                  {
+                                    "id": 0,
+                                    "termIdx": 83,
+                                    "content": "Clean",
+                                    "cueList": "verb",
+                                    "cues": {
+                                      "partOfSpeech": "verb",
+                                      "definition": "",
+                                      "image": "",
+                                      "alternatives": []
+                                    },
+                                    "firstTermIdx": 83,
+                                    "lastTermIdx": 83,
+                                    "type": 17,
+                                    "meta": {
+                                      "content": "Clean",
+                                      "cues": [
+                                        "verb"
+                                      ],
+                                      "termIdx": 83,
+                                      "nextTermIdx": [
+                                        84
+                                      ],
+                                      "prevTermIdx": [
+                                        82
+                                      ],
+                                      "altpronunciation": "",
+                                      "altrecognition": "",
+                                      "recitable": true,
+                                      "heading": false,
+                                      "audible": true,
+                                      "linkable": false,
+                                      "visible": true,
+                                      "visited": false,
+                                      "numberAsNumerals": false,
+                                      "linkIdx": -9999,
+                                      "hintsIdx": -9999,
+                                      "fillin": {
+                                        "sectionIdx": 2,
+                                        "responseIdx": 0
+                                      },
+                                      "bold": false,
+                                      "italics": false,
+                                      "markupTag": false
+                                    }
+                                  }
                                 ],
-                                "prevTermIdx": [
-                                  82
-                                ],
-                                "altpronunciation": "",
-                                "altrecognition": "",
-                                "recitable": true,
-                                "heading": false,
-                                "audible": true,
-                                "linkable": false,
-                                "visible": true,
-                                "visited": false,
-                                "numberAsNumerals": false,
-                                "linkIdx": -9999,
-                                "hintsIdx": -9999,
-                                "fillin": {
-                                  "sectionIdx": -9999,
-                                  "responseIdx": -9999
-                                },
-                                "bold": false,
-                                "italics": false,
-                                "markupTag": false
+                                "sectionFillinIdx": 2
                               }
                             },
                             {
@@ -8328,9 +8853,9 @@
                                     "id": 0,
                                     "termIdx": 87,
                                     "content": "pool",
-                                    "cueList": "",
+                                    "cueList": "noun",
                                     "cues": {
-                                      "partOfSpeech": "untagged",
+                                      "partOfSpeech": "noun",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -8340,7 +8865,9 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "pool",
-                                      "cues": [],
+                                      "cues": [
+                                        "noun"
+                                      ],
                                       "termIdx": 87,
                                       "nextTermIdx": [
                                         88
@@ -8360,8 +8887,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 16
+                                        "sectionIdx": 2,
+                                        "responseIdx": 1
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -8369,7 +8896,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 2
                               }
                             },
                             {
@@ -8446,13 +8973,13 @@
                       "sentences": [
                         {
                           "id": 20,
-                          "content": "Repot the [_plants_].",
+                          "content": "[_Repot=(verb)_] the [_plants=(noun)_].",
                           "firstTermIdx": 88,
                           "lastTermIdx": 90,
                           "terminals": [
                             {
                               "id": 0,
-                              "termIdx": 88,
+                              "termIdx": -9999,
                               "content": "Repot",
                               "cueList": "",
                               "cues": {
@@ -8463,35 +8990,57 @@
                               },
                               "firstTermIdx": 88,
                               "lastTermIdx": 88,
-                              "type": 17,
+                              "type": 4,
                               "meta": {
-                                "content": "Repot",
-                                "cues": [],
-                                "termIdx": 88,
-                                "nextTermIdx": [
-                                  89
+                                "terminals": [
+                                  {
+                                    "id": 0,
+                                    "termIdx": 88,
+                                    "content": "Repot",
+                                    "cueList": "verb",
+                                    "cues": {
+                                      "partOfSpeech": "verb",
+                                      "definition": "",
+                                      "image": "",
+                                      "alternatives": []
+                                    },
+                                    "firstTermIdx": 88,
+                                    "lastTermIdx": 88,
+                                    "type": 17,
+                                    "meta": {
+                                      "content": "Repot",
+                                      "cues": [
+                                        "verb"
+                                      ],
+                                      "termIdx": 88,
+                                      "nextTermIdx": [
+                                        89
+                                      ],
+                                      "prevTermIdx": [
+                                        87
+                                      ],
+                                      "altpronunciation": "",
+                                      "altrecognition": "",
+                                      "recitable": true,
+                                      "heading": false,
+                                      "audible": true,
+                                      "linkable": false,
+                                      "visible": true,
+                                      "visited": false,
+                                      "numberAsNumerals": false,
+                                      "linkIdx": -9999,
+                                      "hintsIdx": -9999,
+                                      "fillin": {
+                                        "sectionIdx": 2,
+                                        "responseIdx": 2
+                                      },
+                                      "bold": false,
+                                      "italics": false,
+                                      "markupTag": false
+                                    }
+                                  }
                                 ],
-                                "prevTermIdx": [
-                                  87
-                                ],
-                                "altpronunciation": "",
-                                "altrecognition": "",
-                                "recitable": true,
-                                "heading": false,
-                                "audible": true,
-                                "linkable": false,
-                                "visible": true,
-                                "visited": false,
-                                "numberAsNumerals": false,
-                                "linkIdx": -9999,
-                                "hintsIdx": -9999,
-                                "fillin": {
-                                  "sectionIdx": -9999,
-                                  "responseIdx": -9999
-                                },
-                                "bold": false,
-                                "italics": false,
-                                "markupTag": false
+                                "sectionFillinIdx": 2
                               }
                             },
                             {
@@ -8638,9 +9187,9 @@
                                     "id": 0,
                                     "termIdx": 90,
                                     "content": "plants",
-                                    "cueList": "",
+                                    "cueList": "noun",
                                     "cues": {
-                                      "partOfSpeech": "untagged",
+                                      "partOfSpeech": "noun",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -8650,7 +9199,9 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "plants",
-                                      "cues": [],
+                                      "cues": [
+                                        "noun"
+                                      ],
                                       "termIdx": 90,
                                       "nextTermIdx": [
                                         91
@@ -8670,8 +9221,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 17
+                                        "sectionIdx": 2,
+                                        "responseIdx": 3
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -8679,7 +9230,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 2
                               }
                             },
                             {
@@ -8756,13 +9307,13 @@
                       "sentences": [
                         {
                           "id": 21,
-                          "content": "Clean out the rain [_gutters_].",
+                          "content": "[_Clean=(verb)_] out the rain [_gutters=(noun)_].",
                           "firstTermIdx": 91,
                           "lastTermIdx": 95,
                           "terminals": [
                             {
                               "id": 0,
-                              "termIdx": 91,
+                              "termIdx": -9999,
                               "content": "Clean",
                               "cueList": "",
                               "cues": {
@@ -8773,35 +9324,57 @@
                               },
                               "firstTermIdx": 91,
                               "lastTermIdx": 91,
-                              "type": 17,
+                              "type": 4,
                               "meta": {
-                                "content": "Clean",
-                                "cues": [],
-                                "termIdx": 91,
-                                "nextTermIdx": [
-                                  92
+                                "terminals": [
+                                  {
+                                    "id": 0,
+                                    "termIdx": 91,
+                                    "content": "Clean",
+                                    "cueList": "verb",
+                                    "cues": {
+                                      "partOfSpeech": "verb",
+                                      "definition": "",
+                                      "image": "",
+                                      "alternatives": []
+                                    },
+                                    "firstTermIdx": 91,
+                                    "lastTermIdx": 91,
+                                    "type": 17,
+                                    "meta": {
+                                      "content": "Clean",
+                                      "cues": [
+                                        "verb"
+                                      ],
+                                      "termIdx": 91,
+                                      "nextTermIdx": [
+                                        92
+                                      ],
+                                      "prevTermIdx": [
+                                        90
+                                      ],
+                                      "altpronunciation": "",
+                                      "altrecognition": "",
+                                      "recitable": true,
+                                      "heading": false,
+                                      "audible": true,
+                                      "linkable": false,
+                                      "visible": true,
+                                      "visited": false,
+                                      "numberAsNumerals": false,
+                                      "linkIdx": -9999,
+                                      "hintsIdx": -9999,
+                                      "fillin": {
+                                        "sectionIdx": 2,
+                                        "responseIdx": 4
+                                      },
+                                      "bold": false,
+                                      "italics": false,
+                                      "markupTag": false
+                                    }
+                                  }
                                 ],
-                                "prevTermIdx": [
-                                  90
-                                ],
-                                "altpronunciation": "",
-                                "altrecognition": "",
-                                "recitable": true,
-                                "heading": false,
-                                "audible": true,
-                                "linkable": false,
-                                "visible": true,
-                                "visited": false,
-                                "numberAsNumerals": false,
-                                "linkIdx": -9999,
-                                "hintsIdx": -9999,
-                                "fillin": {
-                                  "sectionIdx": -9999,
-                                  "responseIdx": -9999
-                                },
-                                "bold": false,
-                                "italics": false,
-                                "markupTag": false
+                                "sectionFillinIdx": 2
                               }
                             },
                             {
@@ -9116,9 +9689,9 @@
                                     "id": 0,
                                     "termIdx": 95,
                                     "content": "gutters",
-                                    "cueList": "",
+                                    "cueList": "noun",
                                     "cues": {
-                                      "partOfSpeech": "untagged",
+                                      "partOfSpeech": "noun",
                                       "definition": "",
                                       "image": "",
                                       "alternatives": []
@@ -9128,7 +9701,9 @@
                                     "type": 17,
                                     "meta": {
                                       "content": "gutters",
-                                      "cues": [],
+                                      "cues": [
+                                        "noun"
+                                      ],
                                       "termIdx": 95,
                                       "nextTermIdx": [],
                                       "prevTermIdx": [
@@ -9146,8 +9721,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 18
+                                        "sectionIdx": 2,
+                                        "responseIdx": 5
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -9155,7 +9730,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 2
                               }
                             },
                             {
@@ -9217,12 +9792,19 @@
             "meta": {
               "depth": 1,
               "startNumber": 0,
-              "listType": 6
+              "listType": 6,
+              "subsectionOrdinal": 1
             },
             "type": "ordered_list"
           }
-        ]
-      }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     }
   ],
   "terminalList": [
@@ -9237,7 +9819,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -9268,7 +9850,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -9299,7 +9881,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -9545,7 +10127,7 @@
         9
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -9793,7 +10375,7 @@
         17
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -9979,7 +10561,7 @@
         23
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "know",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -10136,7 +10718,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -10156,7 +10738,9 @@
     },
     {
       "content": "Mow",
-      "cues": [],
+      "cues": [
+        "verb"
+      ],
       "termIdx": 30,
       "nextTermIdx": [
         31
@@ -10176,8 +10760,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": -9999,
-        "responseIdx": -9999
+        "sectionIdx": 0,
+        "responseIdx": 0
       },
       "bold": false,
       "italics": false,
@@ -10218,7 +10802,9 @@
     },
     {
       "content": "lawn",
-      "cues": [],
+      "cues": [
+        "noun"
+      ],
       "termIdx": 32,
       "nextTermIdx": [
         33
@@ -10239,7 +10825,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 0
+        "responseIdx": 1
       },
       "bold": false,
       "italics": false,
@@ -10249,7 +10835,9 @@
     },
     {
       "content": "Trim",
-      "cues": [],
+      "cues": [
+        "verb"
+      ],
       "termIdx": 33,
       "nextTermIdx": [
         34
@@ -10269,8 +10857,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": -9999,
-        "responseIdx": -9999
+        "sectionIdx": 0,
+        "responseIdx": 2
       },
       "bold": false,
       "italics": false,
@@ -10311,7 +10899,9 @@
     },
     {
       "content": "hedges",
-      "cues": [],
+      "cues": [
+        "noun"
+      ],
       "termIdx": 35,
       "nextTermIdx": [
         36
@@ -10332,7 +10922,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 1
+        "responseIdx": 3
       },
       "bold": false,
       "italics": false,
@@ -10342,7 +10932,9 @@
     },
     {
       "content": "Plant",
-      "cues": [],
+      "cues": [
+        "verb"
+      ],
       "termIdx": 36,
       "nextTermIdx": [
         37
@@ -10362,8 +10954,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": -9999,
-        "responseIdx": -9999
+        "sectionIdx": 0,
+        "responseIdx": 4
       },
       "bold": false,
       "italics": false,
@@ -10404,7 +10996,9 @@
     },
     {
       "content": "seeds",
-      "cues": [],
+      "cues": [
+        "noun"
+      ],
       "termIdx": 38,
       "nextTermIdx": [
         39
@@ -10425,7 +11019,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 2
+        "responseIdx": 5
       },
       "bold": false,
       "italics": false,
@@ -10435,7 +11029,9 @@
     },
     {
       "content": "Transplant",
-      "cues": [],
+      "cues": [
+        "verb"
+      ],
       "termIdx": 39,
       "nextTermIdx": [
         40
@@ -10455,8 +11051,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": -9999,
-        "responseIdx": -9999
+        "sectionIdx": 0,
+        "responseIdx": 6
       },
       "bold": false,
       "italics": false,
@@ -10466,7 +11062,9 @@
     },
     {
       "content": "seedlings",
-      "cues": [],
+      "cues": [
+        "noun"
+      ],
       "termIdx": 40,
       "nextTermIdx": [
         41
@@ -10487,7 +11085,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 3
+        "responseIdx": 7
       },
       "bold": false,
       "italics": false,
@@ -10497,7 +11095,9 @@
     },
     {
       "content": "Rake",
-      "cues": [],
+      "cues": [
+        "verb"
+      ],
       "termIdx": 41,
       "nextTermIdx": [
         42
@@ -10517,8 +11117,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": -9999,
-        "responseIdx": -9999
+        "sectionIdx": 0,
+        "responseIdx": 8
       },
       "bold": false,
       "italics": false,
@@ -10559,7 +11159,9 @@
     },
     {
       "content": "leaves",
-      "cues": [],
+      "cues": [
+        "noun"
+      ],
       "termIdx": 43,
       "nextTermIdx": [
         44
@@ -10580,7 +11182,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 4
+        "responseIdx": 9
       },
       "bold": false,
       "italics": false,
@@ -10590,7 +11192,9 @@
     },
     {
       "content": "Harvest",
-      "cues": [],
+      "cues": [
+        "verb"
+      ],
       "termIdx": 44,
       "nextTermIdx": [
         45
@@ -10610,8 +11214,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": -9999,
-        "responseIdx": -9999
+        "sectionIdx": 0,
+        "responseIdx": 10
       },
       "bold": false,
       "italics": false,
@@ -10714,7 +11318,9 @@
     },
     {
       "content": "tree",
-      "cues": [],
+      "cues": [
+        "noun"
+      ],
       "termIdx": 48,
       "nextTermIdx": [
         49
@@ -10735,7 +11341,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 5
+        "responseIdx": 11
       },
       "bold": false,
       "italics": false,
@@ -10745,7 +11351,9 @@
     },
     {
       "content": "Chop",
-      "cues": [],
+      "cues": [
+        "verb"
+      ],
       "termIdx": 49,
       "nextTermIdx": [
         50
@@ -10765,8 +11373,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": -9999,
-        "responseIdx": -9999
+        "sectionIdx": 0,
+        "responseIdx": 12
       },
       "bold": false,
       "italics": false,
@@ -10807,7 +11415,9 @@
     },
     {
       "content": "wood",
-      "cues": [],
+      "cues": [
+        "noun"
+      ],
       "termIdx": 51,
       "nextTermIdx": [
         52
@@ -10828,7 +11438,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 6
+        "responseIdx": 13
       },
       "bold": false,
       "italics": false,
@@ -10838,7 +11448,9 @@
     },
     {
       "content": "Prune",
-      "cues": [],
+      "cues": [
+        "verb"
+      ],
       "termIdx": 52,
       "nextTermIdx": [
         53
@@ -10858,8 +11470,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": -9999,
-        "responseIdx": -9999
+        "sectionIdx": 0,
+        "responseIdx": 14
       },
       "bold": false,
       "italics": false,
@@ -10900,7 +11512,9 @@
     },
     {
       "content": "roses",
-      "cues": [],
+      "cues": [
+        "noun"
+      ],
       "termIdx": 54,
       "nextTermIdx": [
         55
@@ -10921,7 +11535,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 7
+        "responseIdx": 15
       },
       "bold": false,
       "italics": false,
@@ -10931,7 +11545,9 @@
     },
     {
       "content": "Take",
-      "cues": [],
+      "cues": [
+        "verb"
+      ],
       "termIdx": 55,
       "nextTermIdx": [
         56
@@ -10951,8 +11567,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": -9999,
-        "responseIdx": -9999
+        "sectionIdx": 1,
+        "responseIdx": 0
       },
       "bold": false,
       "italics": false,
@@ -11024,7 +11640,9 @@
     },
     {
       "content": "trash",
-      "cues": [],
+      "cues": [
+        "noun"
+      ],
       "termIdx": 58,
       "nextTermIdx": [
         59
@@ -11044,8 +11662,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 8
+        "sectionIdx": 1,
+        "responseIdx": 1
       },
       "bold": false,
       "italics": false,
@@ -11055,7 +11673,9 @@
     },
     {
       "content": "Wash",
-      "cues": [],
+      "cues": [
+        "verb"
+      ],
       "termIdx": 59,
       "nextTermIdx": [
         60
@@ -11075,8 +11695,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": -9999,
-        "responseIdx": -9999
+        "sectionIdx": 1,
+        "responseIdx": 2
       },
       "bold": false,
       "italics": false,
@@ -11179,7 +11799,9 @@
     },
     {
       "content": "car",
-      "cues": [],
+      "cues": [
+        "noun"
+      ],
       "termIdx": 63,
       "nextTermIdx": [
         64
@@ -11199,8 +11821,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 9
+        "sectionIdx": 1,
+        "responseIdx": 3
       },
       "bold": false,
       "italics": false,
@@ -11210,7 +11832,9 @@
     },
     {
       "content": "Water",
-      "cues": [],
+      "cues": [
+        "verb"
+      ],
       "termIdx": 64,
       "nextTermIdx": [
         65
@@ -11230,8 +11854,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": -9999,
-        "responseIdx": -9999
+        "sectionIdx": 1,
+        "responseIdx": 4
       },
       "bold": false,
       "italics": false,
@@ -11272,7 +11896,9 @@
     },
     {
       "content": "plants",
-      "cues": [],
+      "cues": [
+        "noun"
+      ],
       "termIdx": 66,
       "nextTermIdx": [
         67
@@ -11292,8 +11918,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 10
+        "sectionIdx": 1,
+        "responseIdx": 5
       },
       "bold": false,
       "italics": false,
@@ -11303,7 +11929,9 @@
     },
     {
       "content": "Fertilize",
-      "cues": [],
+      "cues": [
+        "verb"
+      ],
       "termIdx": 67,
       "nextTermIdx": [
         68
@@ -11323,8 +11951,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": -9999,
-        "responseIdx": -9999
+        "sectionIdx": 1,
+        "responseIdx": 6
       },
       "bold": false,
       "italics": false,
@@ -11365,7 +11993,9 @@
     },
     {
       "content": "grass",
-      "cues": [],
+      "cues": [
+        "noun"
+      ],
       "termIdx": 69,
       "nextTermIdx": [
         70
@@ -11385,8 +12015,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 11
+        "sectionIdx": 1,
+        "responseIdx": 7
       },
       "bold": false,
       "italics": false,
@@ -11396,7 +12026,9 @@
     },
     {
       "content": "Weed",
-      "cues": [],
+      "cues": [
+        "verb"
+      ],
       "termIdx": 70,
       "nextTermIdx": [
         71
@@ -11416,8 +12048,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": -9999,
-        "responseIdx": -9999
+        "sectionIdx": 1,
+        "responseIdx": 8
       },
       "bold": false,
       "italics": false,
@@ -11458,7 +12090,9 @@
     },
     {
       "content": "lawn",
-      "cues": [],
+      "cues": [
+        "noun"
+      ],
       "termIdx": 72,
       "nextTermIdx": [
         73
@@ -11478,8 +12112,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 12
+        "sectionIdx": 1,
+        "responseIdx": 9
       },
       "bold": false,
       "italics": false,
@@ -11489,7 +12123,9 @@
     },
     {
       "content": "Sweep",
-      "cues": [],
+      "cues": [
+        "verb"
+      ],
       "termIdx": 73,
       "nextTermIdx": [
         74
@@ -11509,8 +12145,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": -9999,
-        "responseIdx": -9999
+        "sectionIdx": 1,
+        "responseIdx": 10
       },
       "bold": false,
       "italics": false,
@@ -11551,7 +12187,9 @@
     },
     {
       "content": "driveway",
-      "cues": [],
+      "cues": [
+        "noun"
+      ],
       "termIdx": 75,
       "nextTermIdx": [
         76
@@ -11571,8 +12209,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 13
+        "sectionIdx": 1,
+        "responseIdx": 11
       },
       "bold": false,
       "italics": false,
@@ -11582,7 +12220,9 @@
     },
     {
       "content": "Spray",
-      "cues": [],
+      "cues": [
+        "verb"
+      ],
       "termIdx": 76,
       "nextTermIdx": [
         77
@@ -11602,8 +12242,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": -9999,
-        "responseIdx": -9999
+        "sectionIdx": 1,
+        "responseIdx": 12
       },
       "bold": false,
       "italics": false,
@@ -11644,7 +12284,9 @@
     },
     {
       "content": "weeds",
-      "cues": [],
+      "cues": [
+        "noun"
+      ],
       "termIdx": 78,
       "nextTermIdx": [
         79
@@ -11664,8 +12306,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 14
+        "sectionIdx": 1,
+        "responseIdx": 13
       },
       "bold": false,
       "italics": false,
@@ -11675,7 +12317,9 @@
     },
     {
       "content": "Chop",
-      "cues": [],
+      "cues": [
+        "verb"
+      ],
       "termIdx": 79,
       "nextTermIdx": [
         80
@@ -11695,8 +12339,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": -9999,
-        "responseIdx": -9999
+        "sectionIdx": 1,
+        "responseIdx": 14
       },
       "bold": false,
       "italics": false,
@@ -11768,7 +12412,9 @@
     },
     {
       "content": "tree",
-      "cues": [],
+      "cues": [
+        "noun"
+      ],
       "termIdx": 82,
       "nextTermIdx": [
         83
@@ -11788,7 +12434,7 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
+        "sectionIdx": 1,
         "responseIdx": 15
       },
       "bold": false,
@@ -11799,7 +12445,9 @@
     },
     {
       "content": "Clean",
-      "cues": [],
+      "cues": [
+        "verb"
+      ],
       "termIdx": 83,
       "nextTermIdx": [
         84
@@ -11819,8 +12467,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": -9999,
-        "responseIdx": -9999
+        "sectionIdx": 2,
+        "responseIdx": 0
       },
       "bold": false,
       "italics": false,
@@ -11923,7 +12571,9 @@
     },
     {
       "content": "pool",
-      "cues": [],
+      "cues": [
+        "noun"
+      ],
       "termIdx": 87,
       "nextTermIdx": [
         88
@@ -11943,8 +12593,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 16
+        "sectionIdx": 2,
+        "responseIdx": 1
       },
       "bold": false,
       "italics": false,
@@ -11954,7 +12604,9 @@
     },
     {
       "content": "Repot",
-      "cues": [],
+      "cues": [
+        "verb"
+      ],
       "termIdx": 88,
       "nextTermIdx": [
         89
@@ -11974,8 +12626,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": -9999,
-        "responseIdx": -9999
+        "sectionIdx": 2,
+        "responseIdx": 2
       },
       "bold": false,
       "italics": false,
@@ -12016,7 +12668,9 @@
     },
     {
       "content": "plants",
-      "cues": [],
+      "cues": [
+        "noun"
+      ],
       "termIdx": 90,
       "nextTermIdx": [
         91
@@ -12036,8 +12690,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 17
+        "sectionIdx": 2,
+        "responseIdx": 3
       },
       "bold": false,
       "italics": false,
@@ -12047,7 +12701,9 @@
     },
     {
       "content": "Clean",
-      "cues": [],
+      "cues": [
+        "verb"
+      ],
       "termIdx": 91,
       "nextTermIdx": [
         92
@@ -12067,8 +12723,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": -9999,
-        "responseIdx": -9999
+        "sectionIdx": 2,
+        "responseIdx": 4
       },
       "bold": false,
       "italics": false,
@@ -12149,7 +12805,7 @@
         93
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "reign",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -12171,7 +12827,9 @@
     },
     {
       "content": "gutters",
-      "cues": [],
+      "cues": [
+        "noun"
+      ],
       "termIdx": 95,
       "nextTermIdx": [],
       "prevTermIdx": [
@@ -12189,8 +12847,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 18
+        "sectionIdx": 2,
+        "responseIdx": 5
       },
       "bold": false,
       "italics": false,
@@ -12203,13 +12861,15 @@
     {
       "headingLevel": 1,
       "title": "Completing sentences progressively",
-      "termIdx": 0,
+      "firstTermIdx": 0,
+      "lastTermIdx": 28,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 2,
       "title": "Yardwork",
-      "termIdx": 29,
+      "firstTermIdx": 29,
+      "lastTermIdx": 95,
       "terminalCountPriorToHeading": -9999
     }
   ],
@@ -12432,7 +13092,7 @@
     {
       "idx": 0,
       "showPresets": false,
-      "presetLevel": 4,
+      "presetLevel": 5,
       "authorSetting": {
         "description": "no description",
         "responsesLabel": "Responses already filled in",
@@ -12473,102 +13133,340 @@
       "promptColumns": 2,
       "alternatives": [],
       "tags": [
-        "untagged"
+        "noun",
+        "verb"
       ],
       "responses": [
         {
+          "content": "Mow",
+          "tag": "verb",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
           "content": "lawn",
-          "tag": "untagged",
+          "tag": "noun",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "Trim",
+          "tag": "verb",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "hedges",
-          "tag": "untagged",
+          "tag": "noun",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "Plant",
+          "tag": "verb",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "seeds",
-          "tag": "untagged",
+          "tag": "noun",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "Transplant",
+          "tag": "verb",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "seedlings",
-          "tag": "untagged",
+          "tag": "noun",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "Rake",
+          "tag": "verb",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "leaves",
-          "tag": "untagged",
+          "tag": "noun",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "Harvest",
+          "tag": "verb",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "tree",
-          "tag": "untagged",
+          "tag": "noun",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "Chop",
+          "tag": "verb",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "wood",
-          "tag": "untagged",
+          "tag": "noun",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "Prune",
+          "tag": "verb",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "roses",
-          "tag": "untagged",
+          "tag": "noun",
+          "alternatives": [],
+          "referenceCount": 1
+        }
+      ],
+      "loaded": false,
+      "modified": false
+    },
+    {
+      "idx": 1,
+      "showPresets": false,
+      "presetLevel": 5,
+      "authorSetting": {
+        "description": "no description",
+        "responsesLabel": "Responses already filled in",
+        "promptsLabel": "Recite the following prompts including the underlined words:",
+        "layout": "grid",
+        "showProgression": true,
+        "progressionOrder": "in order",
+        "gridColumns": 6,
+        "showResponseTags": true,
+        "showPromptTags": true,
+        "groupByTags": true,
+        "showResponsesInPrompts": false,
+        "responsesLayout": "above",
+        "showAlternatives": false,
+        "unique": true,
+        "showReferenceCount": true,
+        "helpfulness": 814
+      },
+      "currentSetting": {
+        "description": "no description",
+        "responsesLabel": "Responses already filled in",
+        "promptsLabel": "Recite the following prompts including the underlined words:",
+        "layout": "grid",
+        "showProgression": true,
+        "progressionOrder": "in order",
+        "gridColumns": 6,
+        "showResponseTags": true,
+        "showPromptTags": true,
+        "groupByTags": true,
+        "showResponsesInPrompts": false,
+        "responsesLayout": "above",
+        "showAlternatives": false,
+        "unique": true,
+        "showReferenceCount": true,
+        "helpfulness": 814
+      },
+      "allowReset": true,
+      "promptColumns": 2,
+      "alternatives": [],
+      "tags": [
+        "noun",
+        "verb"
+      ],
+      "responses": [
+        {
+          "content": "Take",
+          "tag": "verb",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "trash",
-          "tag": "untagged",
+          "tag": "noun",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "Wash",
+          "tag": "verb",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "car",
-          "tag": "untagged",
+          "tag": "noun",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "Water",
+          "tag": "verb",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "plants",
-          "tag": "untagged",
+          "tag": "noun",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "Fertilize",
+          "tag": "verb",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "grass",
-          "tag": "untagged",
+          "tag": "noun",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "Weed",
+          "tag": "verb",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "lawn",
-          "tag": "untagged",
+          "tag": "noun",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "Sweep",
+          "tag": "verb",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "driveway",
-          "tag": "untagged",
+          "tag": "noun",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "Spray",
+          "tag": "verb",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "weeds",
-          "tag": "untagged",
+          "tag": "noun",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "Chop",
+          "tag": "verb",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "tree",
-          "tag": "untagged",
+          "tag": "noun",
+          "alternatives": [],
+          "referenceCount": 1
+        }
+      ],
+      "loaded": false,
+      "modified": false
+    },
+    {
+      "idx": 2,
+      "showPresets": false,
+      "presetLevel": 5,
+      "authorSetting": {
+        "description": "no description",
+        "responsesLabel": "Responses already filled in",
+        "promptsLabel": "Recite the following prompts including the underlined words:",
+        "layout": "grid",
+        "showProgression": true,
+        "progressionOrder": "in order",
+        "gridColumns": 6,
+        "showResponseTags": true,
+        "showPromptTags": true,
+        "groupByTags": true,
+        "showResponsesInPrompts": false,
+        "responsesLayout": "above",
+        "showAlternatives": false,
+        "unique": true,
+        "showReferenceCount": true,
+        "helpfulness": 814
+      },
+      "currentSetting": {
+        "description": "no description",
+        "responsesLabel": "Responses already filled in",
+        "promptsLabel": "Recite the following prompts including the underlined words:",
+        "layout": "grid",
+        "showProgression": true,
+        "progressionOrder": "in order",
+        "gridColumns": 6,
+        "showResponseTags": true,
+        "showPromptTags": true,
+        "groupByTags": true,
+        "showResponsesInPrompts": false,
+        "responsesLayout": "above",
+        "showAlternatives": false,
+        "unique": true,
+        "showReferenceCount": true,
+        "helpfulness": 814
+      },
+      "allowReset": true,
+      "promptColumns": 2,
+      "alternatives": [],
+      "tags": [
+        "noun",
+        "verb"
+      ],
+      "responses": [
+        {
+          "content": "Clean",
+          "tag": "verb",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "pool",
-          "tag": "untagged",
+          "tag": "noun",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "Repot",
+          "tag": "verb",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "plants",
-          "tag": "untagged",
+          "tag": "noun",
+          "alternatives": [],
+          "referenceCount": 1
+        },
+        {
+          "content": "Clean",
+          "tag": "verb",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "gutters",
-          "tag": "untagged",
+          "tag": "noun",
+          "alternatives": [],
           "referenceCount": 1
         }
       ],

@@ -6,11 +6,11 @@
   "owner": "Ronlyn",
   "author": "Wen",
   "category": "Testing",
-  "version": "20230706.1",
+  "version": "20231102.1",
   "pageFormatType": 0,
   "created": "6/26/2022",
-  "modified": "Sat Jul 29 2023 08:13:24 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Sat Jul 29 2023 08:13:24 GMT-0700 (Pacific Daylight Time)",
+  "modified": "Sun Feb 04 2024 17:04:59 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Sun Feb 04 2024 17:04:59 GMT-0800 (Pacific Standard Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -18,7 +18,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 0,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -107,6 +107,7 @@
           "helpfulness": 814
         },
         "allowReset": true,
+        "maxPromptsPerSection": 0,
         "promptColumns": 2,
         "showPresets": true,
         "prompts": [
@@ -545,8 +546,8 @@
                             "audible": true,
                             "linkable": false,
                             "visible": true,
-                            "visited": true,
-                            "numberAsNumerals": false,
+                            "visited": false,
+                            "numberAsNumerals": true,
                             "linkIdx": -9999,
                             "hintsIdx": -9999,
                             "fillin": {
@@ -574,8 +575,8 @@
                             "audible": true,
                             "linkable": false,
                             "visible": true,
-                            "visited": true,
-                            "numberAsNumerals": false,
+                            "visited": false,
+                            "numberAsNumerals": true,
                             "linkIdx": -9999,
                             "hintsIdx": -9999,
                             "fillin": {
@@ -603,8 +604,8 @@
                             "audible": true,
                             "linkable": false,
                             "visible": true,
-                            "visited": true,
-                            "numberAsNumerals": false,
+                            "visited": false,
+                            "numberAsNumerals": true,
                             "linkIdx": -9999,
                             "hintsIdx": -9999,
                             "fillin": {
@@ -684,8 +685,8 @@
                             "audible": true,
                             "linkable": false,
                             "visible": true,
-                            "visited": true,
-                            "numberAsNumerals": false,
+                            "visited": false,
+                            "numberAsNumerals": true,
                             "linkIdx": -9999,
                             "hintsIdx": -9999,
                             "fillin": {
@@ -713,8 +714,8 @@
                             "audible": true,
                             "linkable": false,
                             "visible": true,
-                            "visited": true,
-                            "numberAsNumerals": false,
+                            "visited": false,
+                            "numberAsNumerals": true,
                             "linkIdx": -9999,
                             "hintsIdx": -9999,
                             "fillin": {
@@ -742,8 +743,8 @@
                             "audible": true,
                             "linkable": false,
                             "visible": true,
-                            "visited": true,
-                            "numberAsNumerals": false,
+                            "visited": false,
+                            "numberAsNumerals": true,
                             "linkIdx": -9999,
                             "hintsIdx": -9999,
                             "fillin": {
@@ -798,8 +799,8 @@
                             "audible": true,
                             "linkable": false,
                             "visible": true,
-                            "visited": true,
-                            "numberAsNumerals": false,
+                            "visited": false,
+                            "numberAsNumerals": true,
                             "linkIdx": -9999,
                             "hintsIdx": -9999,
                             "fillin": {
@@ -827,8 +828,8 @@
                             "audible": true,
                             "linkable": false,
                             "visible": true,
-                            "visited": true,
-                            "numberAsNumerals": false,
+                            "visited": false,
+                            "numberAsNumerals": true,
                             "linkIdx": -9999,
                             "hintsIdx": -9999,
                             "fillin": {
@@ -856,8 +857,8 @@
                             "audible": true,
                             "linkable": false,
                             "visible": true,
-                            "visited": true,
-                            "numberAsNumerals": false,
+                            "visited": false,
+                            "numberAsNumerals": true,
                             "linkIdx": -9999,
                             "hintsIdx": -9999,
                             "fillin": {
@@ -883,8 +884,8 @@
                             "audible": true,
                             "linkable": false,
                             "visible": true,
-                            "visited": true,
-                            "numberAsNumerals": false,
+                            "visited": false,
+                            "numberAsNumerals": true,
                             "linkIdx": -9999,
                             "hintsIdx": -9999,
                             "fillin": {
@@ -942,11 +943,18 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "subsectionOrdinal": 1
             }
           }
-        ]
-      }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     }
   ],
   "terminalList": [
@@ -961,7 +969,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -1120,8 +1128,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -1151,8 +1159,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -1182,8 +1190,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -1213,8 +1221,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -1244,8 +1252,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -1275,8 +1283,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -1306,8 +1314,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -1337,8 +1345,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -1368,8 +1376,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -1397,8 +1405,8 @@
       "audible": true,
       "linkable": false,
       "visible": true,
-      "visited": true,
-      "numberAsNumerals": false,
+      "visited": false,
+      "numberAsNumerals": true,
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
@@ -1416,7 +1424,8 @@
     {
       "headingLevel": 1,
       "title": "fillin",
-      "termIdx": 0,
+      "firstTermIdx": 0,
+      "lastTermIdx": 14,
       "terminalCountPriorToHeading": -9999
     }
   ],

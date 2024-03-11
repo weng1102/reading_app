@@ -6,11 +6,11 @@
   "owner": "anonymous",
   "author": "Wen",
   "category": "Sentence Completion (trailing word)",
-  "version": "20230706.1",
+  "version": "20231102.1",
   "pageFormatType": 0,
-  "created": "Sat Jul 29 2023 08:13:28 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Sat Jul 29 2023 08:13:28 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Sat Jul 29 2023 08:13:28 GMT-0700 (Pacific Daylight Time)",
+  "created": "Sun Feb 04 2024 17:05:04 GMT-0800 (Pacific Standard Time)",
+  "modified": "Sun Feb 04 2024 17:05:04 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Sun Feb 04 2024 17:05:04 GMT-0800 (Pacific Standard Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -30,7 +30,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 0,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -454,7 +454,7 @@
                 },
                 "firstTermIdx": 5,
                 "lastTermIdx": 5,
-                "type": 17,
+                "type": 12,
                 "meta": {
                   "content": "exercises",
                   "cues": [],
@@ -2468,7 +2468,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 29,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -2618,7 +2618,7 @@
       "name": "",
       "description": "",
       "firstTermIdx": -9999,
-      "lastTermIdx": 137,
+      "lastTermIdx": 64,
       "items": [],
       "type": "fillin",
       "meta": {
@@ -2643,6 +2643,7 @@
           "helpfulness": 814
         },
         "allowReset": true,
+        "maxPromptsPerSection": 0,
         "promptColumns": 2,
         "showPresets": true,
         "prompts": [
@@ -5914,7 +5915,66 @@
                   "startNumber": 0,
                   "listType": 1
                 }
-              },
+              }
+            ],
+            "meta": {
+              "depth": 1,
+              "startNumber": 0,
+              "listType": 6,
+              "subsectionOrdinal": 1
+            },
+            "type": "ordered_list"
+          }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
+    },
+    {
+      "id": 0,
+      "name": "",
+      "description": "",
+      "firstTermIdx": -9999,
+      "lastTermIdx": 104,
+      "items": [],
+      "type": "fillin",
+      "meta": {
+        "sectionFillinIdx": 1,
+        "presetLevel": 3,
+        "authorSetting": {
+          "description": "no description",
+          "responsesLabel": "Use the following words:",
+          "promptsLabel": "Recite the following prompts about the images:",
+          "layout": "grid",
+          "showProgression": true,
+          "progressionOrder": "in order",
+          "gridColumns": 7,
+          "showResponseTags": true,
+          "showPromptTags": true,
+          "groupByTags": true,
+          "showResponsesInPrompts": false,
+          "responsesLayout": "above",
+          "showAlternatives": false,
+          "unique": true,
+          "showReferenceCount": true,
+          "helpfulness": 814
+        },
+        "allowReset": true,
+        "maxPromptsPerSection": 0,
+        "promptColumns": 2,
+        "showPresets": true,
+        "prompts": [
+          {
+            "id": 0,
+            "name": "",
+            "description": "",
+            "firstTermIdx": -9999,
+            "lastTermIdx": -9999,
+            "items": [
               {
                 "id": 0,
                 "name": "",
@@ -6242,8 +6302,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 7
+                                        "sectionIdx": 1,
+                                        "responseIdx": 0
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -6251,7 +6311,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -6720,8 +6780,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 8
+                                        "sectionIdx": 1,
+                                        "responseIdx": 1
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -6729,7 +6789,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -7114,8 +7174,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 9
+                                        "sectionIdx": 1,
+                                        "responseIdx": 2
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -7123,7 +7183,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -7424,8 +7484,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 10
+                                        "sectionIdx": 1,
+                                        "responseIdx": 3
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -7433,7 +7493,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -8194,8 +8254,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 11
+                                        "sectionIdx": 1,
+                                        "responseIdx": 4
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -8203,7 +8263,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -8588,8 +8648,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 12
+                                        "sectionIdx": 1,
+                                        "responseIdx": 5
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -8597,7 +8657,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -9106,8 +9166,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 13
+                                        "sectionIdx": 1,
+                                        "responseIdx": 6
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -9115,7 +9175,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -9752,8 +9812,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 14
+                                        "sectionIdx": 1,
+                                        "responseIdx": 7
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -9761,7 +9821,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 1
                               }
                             },
                             {
@@ -9818,7 +9878,66 @@
                   "startNumber": 0,
                   "listType": 1
                 }
-              },
+              }
+            ],
+            "meta": {
+              "depth": 1,
+              "startNumber": 0,
+              "listType": 6,
+              "subsectionOrdinal": 1
+            },
+            "type": "ordered_list"
+          }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
+    },
+    {
+      "id": 0,
+      "name": "",
+      "description": "",
+      "firstTermIdx": -9999,
+      "lastTermIdx": 137,
+      "items": [],
+      "type": "fillin",
+      "meta": {
+        "sectionFillinIdx": 2,
+        "presetLevel": 3,
+        "authorSetting": {
+          "description": "no description",
+          "responsesLabel": "Use the following words:",
+          "promptsLabel": "Recite the following prompts about the images:",
+          "layout": "grid",
+          "showProgression": true,
+          "progressionOrder": "in order",
+          "gridColumns": 7,
+          "showResponseTags": true,
+          "showPromptTags": true,
+          "groupByTags": true,
+          "showResponsesInPrompts": false,
+          "responsesLayout": "above",
+          "showAlternatives": false,
+          "unique": true,
+          "showReferenceCount": true,
+          "helpfulness": 814
+        },
+        "allowReset": true,
+        "maxPromptsPerSection": 0,
+        "promptColumns": 2,
+        "showPresets": true,
+        "prompts": [
+          {
+            "id": 0,
+            "name": "",
+            "description": "",
+            "firstTermIdx": -9999,
+            "lastTermIdx": -9999,
+            "items": [
               {
                 "id": 0,
                 "name": "",
@@ -10230,8 +10349,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 15
+                                        "sectionIdx": 2,
+                                        "responseIdx": 0
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -10239,7 +10358,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 2
                               }
                             },
                             {
@@ -10624,8 +10743,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 16
+                                        "sectionIdx": 2,
+                                        "responseIdx": 1
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -10633,7 +10752,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 2
                               }
                             },
                             {
@@ -11018,8 +11137,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 17
+                                        "sectionIdx": 2,
+                                        "responseIdx": 2
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -11027,7 +11146,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 2
                               }
                             },
                             {
@@ -11536,8 +11655,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 18
+                                        "sectionIdx": 2,
+                                        "responseIdx": 3
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -11545,7 +11664,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 2
                               }
                             },
                             {
@@ -11886,8 +12005,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 19
+                                        "sectionIdx": 2,
+                                        "responseIdx": 4
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -11895,7 +12014,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 2
                               }
                             },
                             {
@@ -12280,8 +12399,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 20
+                                        "sectionIdx": 2,
+                                        "responseIdx": 5
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -12289,7 +12408,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 2
                               }
                             },
                             {
@@ -12674,8 +12793,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 21
+                                        "sectionIdx": 2,
+                                        "responseIdx": 6
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -12683,7 +12802,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 2
                               }
                             },
                             {
@@ -13066,8 +13185,8 @@
                                       "linkIdx": -9999,
                                       "hintsIdx": -9999,
                                       "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 22
+                                        "sectionIdx": 2,
+                                        "responseIdx": 7
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -13075,7 +13194,7 @@
                                     }
                                   }
                                 ],
-                                "sectionFillinIdx": 0
+                                "sectionFillinIdx": 2
                               }
                             },
                             {
@@ -13137,12 +13256,19 @@
             "meta": {
               "depth": 1,
               "startNumber": 0,
-              "listType": 6
+              "listType": 6,
+              "subsectionOrdinal": 1
             },
             "type": "ordered_list"
           }
-        ]
-      }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -13169,7 +13295,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -13200,7 +13326,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -13231,7 +13357,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -13477,7 +13603,7 @@
         9
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -13725,7 +13851,7 @@
         17
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -13911,7 +14037,7 @@
         23
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "know",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -14068,7 +14194,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -14099,7 +14225,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -14159,7 +14285,7 @@
         31
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "r",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -14252,7 +14378,7 @@
         34
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "mourning",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -14500,7 +14626,7 @@
         42
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "due|dew",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -14562,7 +14688,7 @@
         44
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "due|dew",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -14717,7 +14843,7 @@
         49
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "meat",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -14810,7 +14936,7 @@
         52
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "pleas",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -14903,7 +15029,7 @@
         55
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "pleas",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -15286,8 +15412,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 7
+        "sectionIdx": 1,
+        "responseIdx": 0
       },
       "bold": false,
       "italics": false,
@@ -15441,8 +15567,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 8
+        "sectionIdx": 1,
+        "responseIdx": 1
       },
       "bold": false,
       "italics": false,
@@ -15461,7 +15587,7 @@
         73
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -15565,8 +15691,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 9
+        "sectionIdx": 1,
+        "responseIdx": 2
       },
       "bold": false,
       "italics": false,
@@ -15658,8 +15784,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 10
+        "sectionIdx": 1,
+        "responseIdx": 3
       },
       "bold": false,
       "italics": false,
@@ -15678,7 +15804,7 @@
         80
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -15740,7 +15866,7 @@
         82
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "no",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -15906,8 +16032,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 11
+        "sectionIdx": 1,
+        "responseIdx": 4
       },
       "bold": false,
       "italics": false,
@@ -15957,7 +16083,7 @@
         89
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "hiss",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -16030,8 +16156,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 12
+        "sectionIdx": 1,
+        "responseIdx": 5
       },
       "bold": false,
       "italics": false,
@@ -16050,7 +16176,7 @@
         92
       ],
       "altpronunciation": "",
-      "altrecognition": "one",
+      "altrecognition": "one|eye",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -16143,7 +16269,7 @@
         95
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "sow",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -16185,8 +16311,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 13
+        "sectionIdx": 1,
+        "responseIdx": 6
       },
       "bold": false,
       "italics": false,
@@ -16205,7 +16331,7 @@
         97
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "r",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -16402,8 +16528,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 14
+        "sectionIdx": 1,
+        "responseIdx": 7
       },
       "bold": false,
       "italics": false,
@@ -16557,8 +16683,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 15
+        "sectionIdx": 2,
+        "responseIdx": 0
       },
       "bold": false,
       "italics": false,
@@ -16681,8 +16807,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 16
+        "sectionIdx": 2,
+        "responseIdx": 1
       },
       "bold": false,
       "italics": false,
@@ -16805,8 +16931,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 17
+        "sectionIdx": 2,
+        "responseIdx": 2
       },
       "bold": false,
       "italics": false,
@@ -16960,8 +17086,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 18
+        "sectionIdx": 2,
+        "responseIdx": 3
       },
       "bold": false,
       "italics": false,
@@ -16980,7 +17106,7 @@
         122
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "sea|c",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -17053,8 +17179,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 19
+        "sectionIdx": 2,
+        "responseIdx": 4
       },
       "bold": false,
       "italics": false,
@@ -17177,8 +17303,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 20
+        "sectionIdx": 2,
+        "responseIdx": 5
       },
       "bold": false,
       "italics": false,
@@ -17301,8 +17427,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 21
+        "sectionIdx": 2,
+        "responseIdx": 6
       },
       "bold": false,
       "italics": false,
@@ -17423,8 +17549,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 22
+        "sectionIdx": 2,
+        "responseIdx": 7
       },
       "bold": false,
       "italics": false,
@@ -17437,13 +17563,15 @@
     {
       "headingLevel": 1,
       "title": "Completing sentences progressively",
-      "termIdx": 0,
+      "firstTermIdx": 0,
+      "lastTermIdx": 28,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 2,
       "title": "Social Speech",
-      "termIdx": 29,
+      "firstTermIdx": 29,
+      "lastTermIdx": 137,
       "terminalCountPriorToHeading": -9999
     }
   ],
@@ -17753,116 +17881,241 @@
         {
           "content": "morning",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "acquaintance",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "do",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "friend",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "down",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "home",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "yours",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
-        },
+        }
+      ],
+      "loaded": false,
+      "modified": false
+    },
+    {
+      "idx": 1,
+      "showPresets": true,
+      "presetLevel": 3,
+      "authorSetting": {
+        "description": "no description",
+        "responsesLabel": "Use the following words:",
+        "promptsLabel": "Recite the following prompts about the images:",
+        "layout": "grid",
+        "showProgression": true,
+        "progressionOrder": "in order",
+        "gridColumns": 7,
+        "showResponseTags": true,
+        "showPromptTags": true,
+        "groupByTags": true,
+        "showResponsesInPrompts": false,
+        "responsesLayout": "above",
+        "showAlternatives": false,
+        "unique": true,
+        "showReferenceCount": true,
+        "helpfulness": 814
+      },
+      "currentSetting": {
+        "description": "no description",
+        "responsesLabel": "Use the following words:",
+        "promptsLabel": "Recite the following prompts about the images:",
+        "layout": "grid",
+        "showProgression": true,
+        "progressionOrder": "in order",
+        "gridColumns": 7,
+        "showResponseTags": true,
+        "showPromptTags": true,
+        "groupByTags": true,
+        "showResponsesInPrompts": false,
+        "responsesLayout": "above",
+        "showAlternatives": false,
+        "unique": true,
+        "showReferenceCount": true,
+        "helpfulness": 814
+      },
+      "allowReset": true,
+      "promptColumns": 2,
+      "alternatives": [],
+      "tags": [
+        "untagged"
+      ],
+      "responses": [
         {
           "content": "much",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "mine",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "pardon",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "fine",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "introduced",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "name",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "sorry",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Sunday",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
-        },
+        }
+      ],
+      "loaded": false,
+      "modified": false
+    },
+    {
+      "idx": 2,
+      "showPresets": true,
+      "presetLevel": 3,
+      "authorSetting": {
+        "description": "no description",
+        "responsesLabel": "Use the following words:",
+        "promptsLabel": "Recite the following prompts about the images:",
+        "layout": "grid",
+        "showProgression": true,
+        "progressionOrder": "in order",
+        "gridColumns": 7,
+        "showResponseTags": true,
+        "showPromptTags": true,
+        "groupByTags": true,
+        "showResponsesInPrompts": false,
+        "responsesLayout": "above",
+        "showAlternatives": false,
+        "unique": true,
+        "showReferenceCount": true,
+        "helpfulness": 814
+      },
+      "currentSetting": {
+        "description": "no description",
+        "responsesLabel": "Use the following words:",
+        "promptsLabel": "Recite the following prompts about the images:",
+        "layout": "grid",
+        "showProgression": true,
+        "progressionOrder": "in order",
+        "gridColumns": 7,
+        "showResponseTags": true,
+        "showPromptTags": true,
+        "groupByTags": true,
+        "showResponsesInPrompts": false,
+        "responsesLayout": "above",
+        "showAlternatives": false,
+        "unique": true,
+        "showReferenceCount": true,
+        "helpfulness": 814
+      },
+      "allowReset": true,
+      "promptColumns": 2,
+      "alternatives": [],
+      "tags": [
+        "untagged"
+      ],
+      "responses": [
         {
           "content": "dinner",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "number",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "together",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "goodbye",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "later",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "luck",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "day",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "safely",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         }
       ],

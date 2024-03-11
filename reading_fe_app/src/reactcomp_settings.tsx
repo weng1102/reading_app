@@ -29,11 +29,13 @@ import CancelIcon from "./img/button_cancel.png";
 import { ConfigSettings } from "./reactcomp_config";
 import { SpeechSettings } from "./reactcomp_speech";
 import { ListenSettings } from "./reactcomp_listen";
+import { ISectionFillinItem } from "./pageContentType";
 import {
   IConfigSettings,
   IListenSettings,
   ISpeechSettings
 } from "./settingsContext";
+import { SectionFillinContext } from "./fillinContext";
 import { ISettingsContext, SettingsContext } from "./settingsContext";
 interface ISettingsDialogPropsType {
   isActive: boolean;
@@ -84,6 +86,13 @@ export const SettingsDialog = (props: ISettingsDialogPropsType) => {
     // setInitial(false);
     setModified(true);
   };
+  // const setFillinSettings = (fillinSettings: ISectionFillinItem) => {
+  //   _setFillinSettings(fillinSettings);
+  //   // if (!initial) setModified(true);
+  //   // setInitial(false);
+  //   setModified(true);
+  // };
+  //
   const clickOK = () => {
     if (modified) {
       props.hide();
@@ -96,6 +105,7 @@ export const SettingsDialog = (props: ISettingsDialogPropsType) => {
         config: configSettings,
         speech: speechSettings,
         listen: listenSettings
+        // fillin:
       });
       setModified(false);
       dispatch(Request.Page_restore()); // could be in useDialog

@@ -6,11 +6,11 @@
   "owner": "anonymous",
   "author": "Wen",
   "category": "Sentence Completion (trailing word)",
-  "version": "20230706.1",
+  "version": "20231102.1",
   "pageFormatType": 0,
-  "created": "Sat Jul 29 2023 08:13:28 GMT-0700 (Pacific Daylight Time)",
-  "modified": "Sat Jul 29 2023 08:13:28 GMT-0700 (Pacific Daylight Time)",
-  "transformed": "Sat Jul 29 2023 08:13:28 GMT-0700 (Pacific Daylight Time)",
+  "created": "Sun Feb 04 2024 17:05:04 GMT-0800 (Pacific Standard Time)",
+  "modified": "Sun Feb 04 2024 17:05:04 GMT-0800 (Pacific Standard Time)",
+  "transformed": "Sun Feb 04 2024 17:05:04 GMT-0800 (Pacific Standard Time)",
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -30,7 +30,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 0,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -454,7 +454,7 @@
                 },
                 "firstTermIdx": 5,
                 "lastTermIdx": 5,
-                "type": 17,
+                "type": 12,
                 "meta": {
                   "content": "exercises",
                   "cues": [],
@@ -2468,7 +2468,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 29,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -2533,7 +2533,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 30,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -2956,6 +2956,7 @@
           "helpfulness": 814
         },
         "allowReset": false,
+        "maxPromptsPerSection": 0,
         "promptColumns": 1,
         "showPresets": false,
         "prompts": [
@@ -11530,7 +11531,7 @@
                                     },
                                     "firstTermIdx": 121,
                                     "lastTermIdx": 121,
-                                    "type": 17,
+                                    "type": 12,
                                     "meta": {
                                       "content": "Express",
                                       "cues": [],
@@ -12646,7 +12647,7 @@
                             {
                               "id": 0,
                               "termIdx": -9999,
-                              "content": " ",
+                              "content": " [",
                               "cueList": "",
                               "cues": {
                                 "partOfSpeech": "untagged",
@@ -12658,7 +12659,7 @@
                               "lastTermIdx": -9999,
                               "type": 16,
                               "meta": {
-                                "content": " ",
+                                "content": " [",
                                 "cues": [],
                                 "termIdx": -9999,
                                 "nextTermIdx": [],
@@ -12686,6 +12687,46 @@
                             {
                               "id": 0,
                               "termIdx": -9999,
+                              "content": "_",
+                              "cueList": "",
+                              "cues": {
+                                "partOfSpeech": "untagged",
+                                "definition": "",
+                                "image": "",
+                                "alternatives": []
+                              },
+                              "firstTermIdx": -9999,
+                              "lastTermIdx": -9999,
+                              "type": 11,
+                              "meta": {
+                                "content": "_",
+                                "cues": [],
+                                "termIdx": -9999,
+                                "nextTermIdx": [],
+                                "prevTermIdx": [],
+                                "altpronunciation": "",
+                                "altrecognition": "",
+                                "recitable": false,
+                                "heading": false,
+                                "audible": true,
+                                "linkable": false,
+                                "visible": true,
+                                "visited": false,
+                                "numberAsNumerals": false,
+                                "linkIdx": -9999,
+                                "hintsIdx": -9999,
+                                "fillin": {
+                                  "sectionIdx": -9999,
+                                  "responseIdx": -9999
+                                },
+                                "bold": false,
+                                "italics": false,
+                                "markupTag": false
+                              }
+                            },
+                            {
+                              "id": 0,
+                              "termIdx": 133,
                               "content": "Cuckoo's",
                               "cueList": "",
                               "cues": {
@@ -12696,61 +12737,81 @@
                               },
                               "firstTermIdx": 133,
                               "lastTermIdx": 133,
-                              "type": 4,
+                              "type": 17,
                               "meta": {
-                                "terminals": [
-                                  {
-                                    "id": 0,
-                                    "termIdx": 133,
-                                    "content": "Cuckoo's",
-                                    "cueList": "",
-                                    "cues": {
-                                      "partOfSpeech": "untagged",
-                                      "definition": "",
-                                      "image": "",
-                                      "alternatives": []
-                                    },
-                                    "firstTermIdx": 133,
-                                    "lastTermIdx": 133,
-                                    "type": 17,
-                                    "meta": {
-                                      "content": "Cuckoo's",
-                                      "cues": [],
-                                      "termIdx": 133,
-                                      "nextTermIdx": [
-                                        134
-                                      ],
-                                      "prevTermIdx": [
-                                        132
-                                      ],
-                                      "altpronunciation": "",
-                                      "altrecognition": "",
-                                      "recitable": true,
-                                      "heading": false,
-                                      "audible": true,
-                                      "linkable": false,
-                                      "visible": true,
-                                      "visited": false,
-                                      "numberAsNumerals": false,
-                                      "linkIdx": -9999,
-                                      "hintsIdx": -9999,
-                                      "fillin": {
-                                        "sectionIdx": 0,
-                                        "responseIdx": 29
-                                      },
-                                      "bold": false,
-                                      "italics": false,
-                                      "markupTag": false
-                                    }
-                                  }
+                                "content": "Cuckoo's",
+                                "cues": [],
+                                "termIdx": 133,
+                                "nextTermIdx": [
+                                  134
                                 ],
-                                "sectionFillinIdx": 0
+                                "prevTermIdx": [
+                                  132
+                                ],
+                                "altpronunciation": "",
+                                "altrecognition": "",
+                                "recitable": true,
+                                "heading": false,
+                                "audible": true,
+                                "linkable": false,
+                                "visible": true,
+                                "visited": false,
+                                "numberAsNumerals": false,
+                                "linkIdx": -9999,
+                                "hintsIdx": -9999,
+                                "fillin": {
+                                  "sectionIdx": -9999,
+                                  "responseIdx": -9999
+                                },
+                                "bold": false,
+                                "italics": false,
+                                "markupTag": false
                               }
                             },
                             {
                               "id": 0,
                               "termIdx": -9999,
-                              "content": " ",
+                              "content": "_",
+                              "cueList": "",
+                              "cues": {
+                                "partOfSpeech": "untagged",
+                                "definition": "",
+                                "image": "",
+                                "alternatives": []
+                              },
+                              "firstTermIdx": -9999,
+                              "lastTermIdx": -9999,
+                              "type": 11,
+                              "meta": {
+                                "content": "_",
+                                "cues": [],
+                                "termIdx": -9999,
+                                "nextTermIdx": [],
+                                "prevTermIdx": [],
+                                "altpronunciation": "",
+                                "altrecognition": "",
+                                "recitable": false,
+                                "heading": false,
+                                "audible": true,
+                                "linkable": false,
+                                "visible": true,
+                                "visited": false,
+                                "numberAsNumerals": false,
+                                "linkIdx": -9999,
+                                "hintsIdx": -9999,
+                                "fillin": {
+                                  "sectionIdx": -9999,
+                                  "responseIdx": -9999
+                                },
+                                "bold": false,
+                                "italics": false,
+                                "markupTag": false
+                              }
+                            },
+                            {
+                              "id": 0,
+                              "termIdx": -9999,
+                              "content": "] ",
                               "cueList": "",
                               "cues": {
                                 "partOfSpeech": "untagged",
@@ -12762,7 +12823,7 @@
                               "lastTermIdx": -9999,
                               "type": 16,
                               "meta": {
-                                "content": " ",
+                                "content": "] ",
                                 "cues": [],
                                 "termIdx": -9999,
                                 "nextTermIdx": [],
@@ -12840,7 +12901,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 30
+                                        "responseIdx": 29
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -13318,7 +13379,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 31
+                                        "responseIdx": 30
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -13544,7 +13605,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 32
+                                        "responseIdx": 31
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -13854,7 +13915,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 33
+                                        "responseIdx": 32
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -14164,7 +14225,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 34
+                                        "responseIdx": 33
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -14474,7 +14535,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 35
+                                        "responseIdx": 34
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -14868,7 +14929,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 36
+                                        "responseIdx": 35
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -15262,7 +15323,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 37
+                                        "responseIdx": 36
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -15656,7 +15717,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 38
+                                        "responseIdx": 37
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -16050,7 +16111,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 39
+                                        "responseIdx": 38
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -16528,7 +16589,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 40
+                                        "responseIdx": 39
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -16632,7 +16693,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 41
+                                        "responseIdx": 40
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -16858,7 +16919,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 42
+                                        "responseIdx": 41
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -17252,7 +17313,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 43
+                                        "responseIdx": 42
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -17562,7 +17623,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 44
+                                        "responseIdx": 43
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -18124,7 +18185,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 45
+                                        "responseIdx": 44
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -18518,7 +18579,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 46
+                                        "responseIdx": 45
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -18828,7 +18889,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 47
+                                        "responseIdx": 46
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -19222,7 +19283,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 48
+                                        "responseIdx": 47
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -19326,7 +19387,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 49
+                                        "responseIdx": 48
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -19636,7 +19697,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 50
+                                        "responseIdx": 49
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -20030,7 +20091,7 @@
                                       "hintsIdx": -9999,
                                       "fillin": {
                                         "sectionIdx": 0,
-                                        "responseIdx": 51
+                                        "responseIdx": 50
                                       },
                                       "bold": false,
                                       "italics": false,
@@ -20100,12 +20161,19 @@
             "meta": {
               "depth": 1,
               "startNumber": 0,
-              "listType": 6
+              "listType": 6,
+              "subsectionOrdinal": 1
             },
             "type": "ordered_list"
           }
-        ]
-      }
+        ],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -20123,7 +20191,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 207,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -20462,10 +20530,17 @@
           "helpfulness": 314
         },
         "allowReset": false,
+        "maxPromptsPerSection": 0,
         "promptColumns": 1,
         "showPresets": false,
-        "prompts": []
-      }
+        "prompts": [],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -20483,7 +20558,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 210,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -20906,10 +20981,17 @@
           "helpfulness": 314
         },
         "allowReset": false,
+        "maxPromptsPerSection": 0,
         "promptColumns": 1,
         "showPresets": false,
-        "prompts": []
-      }
+        "prompts": [],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -20927,7 +21009,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 214,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -21350,10 +21432,17 @@
           "helpfulness": 314
         },
         "allowReset": false,
+        "maxPromptsPerSection": 0,
         "promptColumns": 1,
         "showPresets": false,
-        "prompts": []
-      }
+        "prompts": [],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -21371,7 +21460,7 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": 218,
+      "firstTermIdx": -9999,
       "lastTermIdx": -9999,
       "items": [],
       "type": "heading",
@@ -21708,10 +21797,17 @@
           "helpfulness": 314
         },
         "allowReset": false,
+        "maxPromptsPerSection": 0,
         "promptColumns": 1,
         "showPresets": false,
-        "prompts": []
-      }
+        "prompts": [],
+        "subsectionOrdinal": -1,
+        "subsectionInterval": 0,
+        "subsectionLabel": ""
+      },
+      "subsectionOrdinal": 0,
+      "subsectionInterval": 0,
+      "subsectionLabel": ""
     },
     {
       "id": 0,
@@ -21738,7 +21834,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -21769,7 +21865,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -21800,7 +21896,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -22046,7 +22142,7 @@
         9
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -22294,7 +22390,7 @@
         17
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -22480,7 +22576,7 @@
         23
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "know",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -22637,7 +22733,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -22668,7 +22764,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -22699,7 +22795,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -22730,7 +22826,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -22759,9 +22855,9 @@
         32
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -23100,7 +23196,7 @@
         43
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -23255,7 +23351,7 @@
         48
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -23317,7 +23413,7 @@
         50
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "daze",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -23906,7 +24002,7 @@
         69
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "em|am",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -25673,7 +25769,7 @@
         126
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "fear|fare|faire",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -25766,7 +25862,7 @@
         129
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "flue",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -25870,8 +25966,8 @@
       "linkIdx": -9999,
       "hintsIdx": -9999,
       "fillin": {
-        "sectionIdx": 0,
-        "responseIdx": 29
+        "sectionIdx": -9999,
+        "responseIdx": -9999
       },
       "bold": false,
       "italics": false,
@@ -25902,7 +25998,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 30
+        "responseIdx": 29
       },
       "bold": false,
       "italics": false,
@@ -26057,7 +26153,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 31
+        "responseIdx": 30
       },
       "bold": false,
       "italics": false,
@@ -26119,7 +26215,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 32
+        "responseIdx": 31
       },
       "bold": false,
       "italics": false,
@@ -26212,7 +26308,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 33
+        "responseIdx": 32
       },
       "bold": false,
       "italics": false,
@@ -26305,7 +26401,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 34
+        "responseIdx": 33
       },
       "bold": false,
       "italics": false,
@@ -26386,7 +26482,7 @@
         149
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "piece",
       "recitable": true,
       "heading": false,
       "audible": true,
@@ -26398,7 +26494,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 35
+        "responseIdx": 34
       },
       "bold": false,
       "italics": false,
@@ -26522,7 +26618,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 36
+        "responseIdx": 35
       },
       "bold": false,
       "italics": false,
@@ -26646,7 +26742,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 37
+        "responseIdx": 36
       },
       "bold": false,
       "italics": false,
@@ -26770,7 +26866,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 38
+        "responseIdx": 37
       },
       "bold": false,
       "italics": false,
@@ -26894,7 +26990,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 39
+        "responseIdx": 38
       },
       "bold": false,
       "italics": false,
@@ -27049,7 +27145,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 40
+        "responseIdx": 39
       },
       "bold": false,
       "italics": false,
@@ -27080,7 +27176,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 41
+        "responseIdx": 40
       },
       "bold": false,
       "italics": false,
@@ -27142,7 +27238,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 42
+        "responseIdx": 41
       },
       "bold": false,
       "italics": false,
@@ -27266,7 +27362,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 43
+        "responseIdx": 42
       },
       "bold": false,
       "italics": false,
@@ -27359,7 +27455,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 44
+        "responseIdx": 43
       },
       "bold": false,
       "italics": false,
@@ -27545,7 +27641,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 45
+        "responseIdx": 44
       },
       "bold": false,
       "italics": false,
@@ -27669,7 +27765,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 46
+        "responseIdx": 45
       },
       "bold": false,
       "italics": false,
@@ -27762,7 +27858,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 47
+        "responseIdx": 46
       },
       "bold": false,
       "italics": false,
@@ -27886,7 +27982,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 48
+        "responseIdx": 47
       },
       "bold": false,
       "italics": false,
@@ -27917,7 +28013,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 49
+        "responseIdx": 48
       },
       "bold": false,
       "italics": false,
@@ -28010,7 +28106,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 50
+        "responseIdx": 49
       },
       "bold": false,
       "italics": false,
@@ -28134,7 +28230,7 @@
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": 0,
-        "responseIdx": 51
+        "responseIdx": 50
       },
       "bold": false,
       "italics": false,
@@ -28155,7 +28251,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28184,9 +28280,9 @@
         207
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28217,7 +28313,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28248,7 +28344,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28277,9 +28373,9 @@
         210
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28310,7 +28406,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28341,7 +28437,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28372,7 +28468,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28401,9 +28497,9 @@
         214
       ],
       "altpronunciation": "",
-      "altrecognition": "",
+      "altrecognition": "inn",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28434,7 +28530,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28465,7 +28561,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28496,7 +28592,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28527,7 +28623,7 @@
       "altpronunciation": "",
       "altrecognition": "knot",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28556,7 +28652,7 @@
       "altpronunciation": "",
       "altrecognition": "",
       "recitable": true,
-      "heading": false,
+      "heading": true,
       "audible": true,
       "linkable": false,
       "visible": true,
@@ -28579,43 +28675,50 @@
     {
       "headingLevel": 1,
       "title": "Completing sentences progressively",
-      "termIdx": 0,
+      "firstTermIdx": 0,
+      "lastTermIdx": 28,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 2,
       "title": "Titles",
-      "termIdx": 29,
+      "firstTermIdx": 29,
+      "lastTermIdx": 29,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "Responses (already filled in)",
-      "termIdx": 30,
+      "firstTermIdx": 30,
+      "lastTermIdx": 206,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "Responses (in order)",
-      "termIdx": 207,
+      "firstTermIdx": 207,
+      "lastTermIdx": 209,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "Responses (in alphabetical order)",
-      "termIdx": 210,
+      "firstTermIdx": 210,
+      "lastTermIdx": 213,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "Responses (in random order)",
-      "termIdx": 214,
+      "firstTermIdx": 214,
+      "lastTermIdx": 217,
       "terminalCountPriorToHeading": -9999
     },
     {
       "headingLevel": 3,
       "title": "Responses (not shown)",
-      "termIdx": 218,
+      "firstTermIdx": 218,
+      "lastTermIdx": 220,
       "terminalCountPriorToHeading": -9999
     }
   ],
@@ -29130,261 +29233,307 @@
         {
           "content": "Oz",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Robin",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Hood",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Wonderland",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Eighty",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Days",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Sundance",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Kid",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Tin",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Roof",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Monte",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Cristo",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Murder",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Ann",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Frank",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Empire",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Roof",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Broadway",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Wind",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Wrath",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Earth",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Notre",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Dame",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Lover",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Arabia",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Orient",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Express",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Bounty",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Lady",
           "tag": "untagged",
-          "referenceCount": 1
-        },
-        {
-          "content": "Cuckoo's",
-          "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Nest",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Opera",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Miserables",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Greek",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Juliet",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Peace",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Rings",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Mockingbird",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Wild",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Future",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Seven",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Dwarfs",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Beauty",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Professor",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Book",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Pooh",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Beast",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Musketeers",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Giant",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Peach",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "King",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         },
         {
           "content": "Caribbean",
           "tag": "untagged",
+          "alternatives": [],
           "referenceCount": 1
         }
       ],

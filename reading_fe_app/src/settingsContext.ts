@@ -17,9 +17,9 @@
 import React from "react";
 import { Synthesizer } from "./reactcomp_speech";
 import {
-  ISectionFillinSetting,
+  ISectionFillinSettings,
   ISectionFillinPresets,
-  ISectionFillinSettingInitializer,
+  ISectionFillinSettingsInitializer,
   ISectionFillinPresetsInitializer,
   SectionFillinLayoutType,
   SectionFillinSortOrder
@@ -42,6 +42,7 @@ export interface ISettings {
   config: IConfigSettings;
   speech: ISpeechSettings;
   listen: IListenSettings;
+  // fillin: ISectionFillinSettings;
 }
 export interface ISettingsContext {
   settings: ISettings;
@@ -51,12 +52,14 @@ export const SettingsInitializer = (
   config: IConfigSettings = ConfigSettingsInitializer(),
   speech: ISpeechSettings = SpeechSettingsInitializer(),
   listen: IListenSettings = ListenSettingsInitializer()
+  // fillin: ISectionFillinSettings = ISectionFillinSettingsInitializer()
 ): ISettings => {
   // console.log(`retrieve voice and index`);
   return {
     config,
     speech,
     listen
+    // fillin
   };
 };
 export interface IConfigSettings {

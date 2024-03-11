@@ -611,7 +611,7 @@
 [[fillin: gridInOrder, true, 2, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 1. I [_am=(helping verb)_] [_running=(verb)_].
 1. You [_are=(helping verb)_] [_running=(verb)_].
-1. I [_am=(helping verb)_] [_running=(verb)_].
+1. It [_is=(helping verb)_] [_running=(verb)_].
 1. He [_is=(helping verb)_] [_running=(verb)_].
 1. She [_is=(helping verb)_] [_running=(verb)_].
 1. We [_are=(helping verb)_] [_running=(verb)_].
