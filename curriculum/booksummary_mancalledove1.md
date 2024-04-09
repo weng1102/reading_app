@@ -116,7 +116,7 @@ Shortly after, Ove would find out that Sonja was pregnant. They would surely nee
 What are your feelings between Ove and the cat he rescued in the snowbank?
 * Do you think Ove would have rescued the cat on his own without Parvaneh?
 * If you were in Ove's shoes, how would you have handled the cat rescue?
- * Parvaneh has been influencing Ove throughout the book. Do you think he knows the impact she is having on him?
+  * Parvaneh has been influencing Ove throughout the book. Do you think he knows the impact she is having on him?
   * Will Ove continue to break out of his tough shell?
 * It was briefly mentioned that Sonja was in an accident. What clues have we
 learned so far about her condition before her death?

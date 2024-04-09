@@ -2,5 +2,5 @@
 
 # Markdown passthru
 
-The <passthru>text within passthru</passthru> markup tags.
+The <label>text within passthru</label> markup tags.
 

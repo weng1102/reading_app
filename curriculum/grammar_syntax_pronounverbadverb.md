@@ -175,7 +175,7 @@ The following practice combines a list of personal pronouns with the most common
 * He=(subject) moves=(verb) cautiously=(adverb).
 * It=(subject) moves=(verb) cautiously=(adverb).
 * You=(subject) move=(verb) cautiously=(adverb).
-* (subject) move=(verb) cautiously=(adverb).
+* They=(subject) move=(verb) cautiously=(adverb).
 * We=(subject) move=(verb) cautiously=(adverb).
 ## Panic
 * I=(subject) panic=(verb) hysterically=(adverb).

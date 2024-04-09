@@ -52,10 +52,10 @@
 [[/fillin]]
 ## Mechanic
 [[fillin: gridOrder, true, 1, true, , , grid, 6, insert, true, true, true, true, true, false]]
-* A mechanic=(noun) repairs=(verb) cars=(noun) in=(preposition) a garage=(noun).
+* A mechanic=(noun) repairs=(verb) cars=(noun) in=(preposition) a garage=(noun). 
 * Who repairs cars? A [_mechanic=(noun)_] repairs=(verb) cars=(noun). 
 * What does a mechanic do? The [_mechanic=(noun)_] repairs=(verb) cars=(noun). 
-* Where does a mechanic repair cars?
+* Where does a mechanic repair cars? A mechanic=(noun) repairs=(verb) cars=(noun) [_in=(preposition)_] a [_garage=(noun)_].
 * The [_mechanic=(noun)_] [_repairs=(verb)_] [_cars=(noun)_] [_in=(preposition)_] a [_garage=(noun)_].
 [[/fillin]]
 ## Author

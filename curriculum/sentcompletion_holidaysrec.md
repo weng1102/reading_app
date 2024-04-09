@@ -5,7 +5,7 @@ The following exercises allow me to fill in the prompts given the corresponding 
 ## Holidays and recreation
 
 ### My Trip
-[[fillin: gridAlpha, false, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: gridAlpha, false, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. My spouse and I have travel [_plans_].
 1. We are traveling by [_air_].
 1. We pay for our air fare with a credit [_card_].
@@ -15,7 +15,7 @@ The following exercises allow me to fill in the prompts given the corresponding 
 1. We park the car at the airport [_lot_].
 1. At the security checkpoint, I show my [_passport_].
 [[/fillin]]
-[[fillin: gridAlpha, false, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: gridAlpha, false, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. We fly to [_Hawaii_].
 1. The plane is flown by a [_pilot_].
 1. During the flight, the attendant serves [_drinks_].
@@ -25,7 +25,7 @@ The following exercises allow me to fill in the prompts given the corresponding 
 1. Every morning, we have free [_breakfast_].
 1. We walk on the sandy [_beach_].
 [[/fillin]]
-[[fillin: gridAlpha, false, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: gridAlpha, false, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. The color of the ocean is clear [_blue_].
 1. I see many palm [_trees_].
 1. The hotel has a swimming [_pool_].
@@ -35,7 +35,7 @@ The following exercises allow me to fill in the prompts given the corresponding 
 [[/fillin]]
 
 ### US Holidays
-[[fillin: inline, true, 1, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: inline, true, 1, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. We celebrate the first day of the year on [_New_] [_Year's_] Day.
 1. We commemorate civil rights leader on [_Martin_] [_Luther_] [_King_] Day.
 1. We celebrate romance and love on [_Valentine's_] Day.
@@ -45,7 +45,7 @@ The following exercises allow me to fill in the prompts given the corresponding 
 1. We honor those who died defending our country on [_Memorial_] Day.
 1. We commemorate the freeing of enslaved African Americans on [_Juneteenth_].
 [[/fillin]]
-[[fillin: inline, true, 1, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: inline, true, 1, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. We celebrate the labor of the common worker on [_Labor_] Day.
 1. We commemorate the end of World War 1 on [_Veterans_] Day.
 1. We celebrate the harvest and other blessings on [_Thanksgiving_].

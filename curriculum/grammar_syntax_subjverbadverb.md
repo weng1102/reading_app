@@ -181,7 +181,7 @@
 [[image-entry: Hugging, left, 25%]]
 ![Hugging](verb-hug.jpg)
 [[fillin: gridInOrder, true,, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-1. The [_girl=(subject)_] [_hugs=(verb)_] [_=(affectionately=(adverb)_].
+1. The [_girl=(subject)_] [_hugs=(verb)_] [_affectionately=(adverb)_].
 1. The [_girl=(subject)_] [_is=(helping verb)_] [_hugging=(verb)_] [_affectionately=(adverb)_].
 [[/fillin]]
 [[/image-entry]]

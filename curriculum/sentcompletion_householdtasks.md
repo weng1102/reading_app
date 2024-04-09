@@ -3,7 +3,7 @@
 # Completing sentences progressively
 The following exercises allow me to fill in the prompts given the corresponding response lists in increasingly more difficult ordering until no response list is shown.
 ## Household tasks
-[[fillin: inline, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: inline, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. [_Vacuum=(verb)_] the bare [_floor=(noun)_].
 1. [_Make=(verb)_] the [_bed=(noun)_].
 1. [_Wash=(verb)_] the lunch and dinner [_dishes=(noun)_].
@@ -13,7 +13,7 @@ The following exercises allow me to fill in the prompts given the corresponding 
 1. [_Iron=(verb)_] the dress [_shirts=(noun)_].
 1. [_Pay=(verb)_] the utility [_bills=(noun)_].
 [[/fillin]]
-[[fillin: inline, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: inline, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. [_Put=(verb)_] the clothes in the [_washer=(noun)_].
 1. [_Fold=(verb)_] the clean [_laundry=(noun)_].
 1. [_Hang=(verb)_] up your winter [_coat=(noun)_].

@@ -1,3 +1,1 @@
-[[page: Link rendering v3,, Wen,, Testing, /]]
-
-The quick [brown fox](link1)
+[Ronlyn's brown fox](link1,page) [fox](link2,heading)

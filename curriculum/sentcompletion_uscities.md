@@ -4,7 +4,7 @@
 The following exercises allow me to fill in the prompts given the corresponding response lists in increasingly more difficult ordering until no response list is shown.
 ## State Capitals
 ### A through B
-[[fillin: inline, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: inline, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 Albany is the capital of [_New_] [_York_].
 Annapolis is the capital of [_Maryland_].
 Atlanta is the capital of [_Georgia_].
@@ -16,7 +16,7 @@ Boise is the capital of [_Idaho_].
 Boston is the capital of [_Massachusetts_].
 [[/fillin]]
 ### C through D
-[[fillin: inline, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: inline, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 Carson City is the capital of [_Nevada_].
 Charleston is the capital of [_West_] [_Virginia_].
 Cheyenne is the capital of [_Wyoming_].
@@ -28,7 +28,7 @@ Des Moines is the capital of [_Iowa_].
 Dover is the capital of [_Delaware_].
 [[/fillin]]
 ### F through J
-[[fillin: inline, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: inline, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 Frankfort is the capital of [_Kentucky_].
 Harrisburg is the capital of [_Pennsylvania_].
 Hartford is the capital of [_Connecticut_].
@@ -40,7 +40,7 @@ Jefferson City is the capital of [_Missouri_].
 Juneau is the capital of [_Alaska_].
 [[/fillin]]
 ### L through O
-[[fillin: inline, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: inline, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 Lansing is the capital of [_Michigan_].
 Lincoln is the capital of [_Nebraska_].
 Little Rock is the capital of [_Arkansas_].
@@ -52,7 +52,7 @@ Oklahoma City is the capital of [_Oklahoma_].
 Olympia is the capital of [_Washington_].
 [[/fillin]]
 ### P through S
-[[fillin: inline, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: inline, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 Phoenix is the capital of [_Arizona_].
 Pierre is the capital of [_South_] [_Dakota_].
 Providence is the capital of [_Rhode_] [_Island_].
@@ -66,7 +66,7 @@ Springfield is the capital of [_Illinois_].
 St. Paul is the capital of [_Minnesota_].
 [[/fillin]]
 ### T through Z
-[[fillin: inline, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: inline, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 Tallahassee is the capital of [_Florida_].
 Topeka is the capital of [_Kansas_].
 Trenton is the capital of [_New_] [_Jersey_].

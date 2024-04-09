@@ -3,7 +3,7 @@
 # Completing sentences progressively
 The following exercises allow me to fill in the prompts given the corresponding response lists in increasingly more difficult ordering until no response list is shown.
 ## Around the House
-[[fillin: inline, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: inline, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. How are you this [_morning_]?
 1. I'm pleased to make your [_acquaintance_].
 1. How do you [_do_]?

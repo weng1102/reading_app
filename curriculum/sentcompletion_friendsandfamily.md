@@ -3,7 +3,7 @@
 # Completing sentences progressively
 The following exercises allow me to fill in the prompts given the corresponding response lists in increasingly more difficult ordering until no response list is shown.
 ## Friends and family
-[[fillin: inline, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: inline, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. He has a mother and a [_father=(noun)_].
 1. She has two sisters and one [_brother=(noun)_].
 1. Their family has two adults and three [_children=(noun)_].
@@ -13,7 +13,7 @@ The following exercises allow me to fill in the prompts given the corresponding 
 1. On Sunday they go to [_church=(noun)_].
 1. My uncle is driving my [_aunt=(noun)_].
 [[/fillin]]
-[[fillin: inline, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: inline, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. My grandmother is married to my [_grandfather=(noun)_].
 1. Do you have a pet cat or [_dog=(noun)_]?
 1. The woman is pregnant with her third [_child=(noun)_].
@@ -23,7 +23,7 @@ The following exercises allow me to fill in the prompts given the corresponding 
 1. You can sleep in the guest [_room=(noun)_].
 1. She plays with other girls and [_boys=(noun)_].
 [[/fillin]]
-[[fillin: inline, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: inline, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. He bought her an engagement [_ring=(noun)_].
 1. The engaged couple announced their [_marriage=(noun)_].
 1. A future spouse is called a [_fiancee=(noun)_].

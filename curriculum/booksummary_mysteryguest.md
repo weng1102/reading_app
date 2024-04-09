@@ -260,3 +260,159 @@
 1. Someone knocks on the door. At first, Molly thinks it is the woman returning their money. Instead, it is Mr. Rosso. He is there to collect rent. 
 1. Gran tells Mr. Rosso she does not have the rent money. She promises to pay him soon. Mr. Rosso threatens Gran with “consequences”. Gran assures Molly there is nothing to worry about. 
 1. Gran and Molly deep clean the apartment to cheer themselves up. When evening comes, the electricity goes out. Molly hears Gran start to cry. 
+## Chapters 16-19 
+### Vocabulary terms
+1. Tome: A large book 
+1. Fabergé: What Molly and Gran call a large bank account 
+1. Odious: Extremely unpleasant; repulsive 
+1. Bona fide: Genuine; real 
+1. Hirsute: Hairy
+### Chapter 16 Summary
+1. This chapter takes place in the present. Molly spends her work day cleaning rooms with Lily. Lily remains silent all day. 
+1. After work, Molly goes to the housekeeping quarters to change. Just then, Angela appears. Angela tells Molly she taste-tested all the liquids in the kitchen for poison. Molly tells Angela she is taking things too far. 
+1. Molly tells Angela about Mr. Preston and the rare book. Angela assures Molly that Mr. Preston had nothing to do with Mr. Grimthorpe’s death. 
+1. Molly goes to the Olive Garden to meet Mr. Preston. Molly immediately confronts Mr. Preston about selling the rare book. 
+1. Mr. Preston admits to selling the book. The book’s value has increased substantially. Plus, Mr. Preston needs extra money for his retirement. 
+1. Molly accuses Mr. Preston of stealing the book from Serena’s bankers box. She also accuses Mr. Preston of poisoning Mr. Grimthorpe. 
+1. Mr. Preston denies Molly’s accusations. Mr. Preston explains he used to work for Mr. Grimthorpe as his gatekeeper. Mr. Grimthorpe gave Mr. Preston the rare book many years ago. 
+1. Molly connects the dots: Mr. Preston knew Molly when she was a child at the Grimthorpe mansion. Molly remembers the gatekeeper (Mr. Preston) being extremely kind to her and Gran. 
+1. Molly feels awful for accusing Mr. Preston of theft and murder. She profusely apologizes. Mr. Preston forgives her. He still has one important thing to tell Molly, but he will save this for later...
+### Chapter 17 Summary
+1. This chapter takes place in the past. Molly and Gran are in their dark apartment. Gran lights the apartment with candles and makes iced tea. Molly remembers Gran as someone who always ignited hope. 
+1. The next morning, Molly and Gran arrive at the Grimthorpe mansion. Gran makes a quick stop at the gatekeeper’s watchtower. When Gran returns, she tells Molly the gatekeeper lent them the rent money. Gran says the gatekeeper has been watching over them. 
+1. That afternoon, Molly encounters Mr. Grimthorpe in a cheerful mood. He says he is almost finished with his new book, all thanks to Molly. 
+1. Meanwhile, Molly hears Mr. Grimthorpe’s secretary typing. Molly asks Mr. Grimthorpe where the secretary’s office is. Mr. Grimthorpe gives Molly a vague answer, but remains in a cheerful mood. 
+1. Just then, Gran calls Molly for teatime. Mr. Grimthorpe tells Molly how Gran used to take care of him. Now, Gran never comes upstairs to see him. Molly tells Mr. Grimthorpe he can just go downstairs to see Gran. 
+1. Molly quickly excuses herself and sneaks out the front door. She picks a rose from the garden. Through the intercom, she thanks the mystery gatekeeper for his generosity. She leaves him the rose as a gift. 
+### Chapter 18 Summary
+1. This chapter takes place in the present. Molly feels like a failure for accusing Mr. Preston of murder. Earlier this morning, Juan Manuel reassured Molly that she is a good egg. 
+1. At the hotel, Mr. Preston comforts Molly. Mr. Preston says he has been in contact with Angela about the missing banker’s box. Now, Angela wants to talk to Mr. Preston and Molly. 
+1. Angela shows Mr. Preston and Molly an online shopping website for memorabilia. She clicks on a seller’s profile called ‘The Grim Reaper’. The Grim Reaper sells items related to Mr. Grimthorpe AND Mr. Black. 
+1. Angela, Molly, and Mr. Preston discuss the notable listings: 
+  1. Mr. Grimthorpe’s fountain pen 
+  1. A love letter to Serena (that is actually from Mr. Snow) 
+  1. Mr. Black’s empty scotch bottles 
+  1. Mr. Grimthorpe’s notebook 
+  1. Cue cards with Mr. Grimthorpe’s announcement 
+1. Angela, Mr. Preston, and Molly conclude that ‘The Grim Reaper’ must be a hotel employee. 
+1. Angela shows Mr. Preston and Molly one final listing. It is a signed copy of Mr. Grimthorpe’s latest book addressed to Lily. This implies that Lily may be the ‘The Grim Reaper’. 
+### Chapter 19 Summary
+1. This chapter takes place in the past. Molly has just left her gift for the gatekeeper. She tiptoes to the tea parlor and finds Gran and Mr. Grimthorpe. She decides to watch them silently for a moment. 
+1. Mr. Grimthorpe accuses Gran of abandoning him. Then Mr. Grimthorpe attacks Gran, groping her and kissing her neck. 
+1. Molly interrupts and yells for Gran. Mr. Grimthorpe immediately releases Gran and pretends nothing happened. Molly notices tears in Gran’s eyes. Molly realizes that Mr. Grimthorpe is in fact a monster. 
+## Chapters 20-22 
+### Vocabulary terms
+1. Pestilent Harmful or deadly 
+1. Ersatz Artificial 
+1. Seismically Having a very great or important effect 
+1. Blight A plant disease 
+1. Anomaly Something that is abnormal or out of the ordinary 6. Paragon A perfect example of something 
+1. Ephemera Lasting for a very short time 
+### Chapter 20 Summary
+1. This chapter takes place in the present. Molly has just fainted after learning that Lily might be the ‘Grim Reaper’. Molly, Mr. Preston, and Angela decide they must get Lily to talk to them. 
+1. Molly finds Lily and brings her to the Social restaurant. Angela shows Lily the Grim Reaper’s website. They ask Lily to explain herself. 
+1. At first, Lily says nothing. Eventually, Lily admits that Cheryl forced Lily to pull the fire alarm so Cheryl could steal the banker’s box. Lily has stayed quiet because Cheryl threatened Lily’s job if she said anything. 
+1. Molly goes to find Cheryl. Molly convinces Cheryl to come to the Social by promising free juice and muffins. Cheryl happily abides. 
+1. Angela shows Cheryl the Grim Reaper’s website. Cheryl says this has nothing to do with her. Lily tells Cheryl that Molly, Mr. Preston, and Angela know the truth about Cheryl. 
+1. Cheryl offers a deal to Molly, Mr. Preston, and Angela. Cheryl says she will split the proceeds of her sales with them if they keep quiet. No one takes Cheryl’s deal. Instead, Molly goes to retrieve Mr. Snow. 
+### Chapter 21 
+1. This chapter takes place in the past. Molly recalls how Mr. Grimthorpe attacked Gran in the parlor. Now, Molly understands why some days were so difficult for Gran. 
+1. The morning after Mr. Grimthorpe’s attack, Molly tries convincing Gran to not return to the Grimthorpe mansion. Gran tries to stay positive and insists today is a new day. However, Molly has a plan… 
+1. Molly and Gran arrive at the Grimthorpe mansion. Mrs. Grimthorpe orders Gran to do the laundry. Molly asks if she can read in the parlor today. Mrs. Grimthorpe agrees but tells Molly to not touch anything. 
+1. After Molly retrieves her book from the library, she pretends to read in the parlor. She waits until she is alone. Then she grabs the Fabergé and hides it in her lap. 
+1. Hours later, Molly and Gran are in the basement. Mrs. Grimthorpe screams Gran’s name. Gran and Molly go upstairs. 
+1. Mrs. Grimthorpe leads Gran and Molly to the silver pantry. The Fabergé is wrapped in Molly’s apron. Molly admits to stealing the Fabergé. Molly insists that Gran had nothing to do with it. 
+1. Gran is shocked by Molly’s actions. Gran begs Mrs. Grimthorpe to keep her job, but Mrs. Grimthorpe orders Gran and Molly to leave now. 1. Gran asks Molly why she tried to steal the Fabergé. Molly does not answer. Molly is just happy Mr. Grimthorpe will never lay a hand on Gran again. 
+### Chapter 22 Summary
+1. This chapter takes place in the present. Molly retrieves Mr. Snow from his office. She leads him to the Social where Angela, Mr. Preston, Lily, and Cheryl are waiting. 
+1. Angela shows Mr. Snow the Grim Reaper’s website. Cheryl admits to being the ‘Grim Reaper’. However, Cheryl does not think she did anything wrong. 
+1. Angela asks Cheryl why she calls herself the ‘Grim Reaper’. Cheryl says the name is good marketing. Mr. Preston thinks the name is suggestive of murder. Cheryl says she is not a killer. 
+1. Mr. Snow calls Detective Stark so Cheryl can explain everything. When Detective Stark arrives, Angela shows Detective Stark the evidence on Cheryl’s website. 
+1. Stark asks Cheryl what was written on Mr. Grimthorpe’s cue cards. Cheryl says she does not know. She sold the cards to an anonymous buyer. 
+1. Stark asks Cheryl about the love note to Serena. Cheryl thinks Mr. Grimthorpe wrote the love note. Mr. Snow admits to writing the note. 1. Stark asks Lily about her signed copy of Mr. Grimthorpe’s book. Lily says Cheryl took Lily’s book without her permission. 
+1. Stark asks Cheryl about the first-edition book from the banker’s box. Cheryl says she sold it at the pawn shop for top dollar. 
+1. Molly asks Cheryl if she took the honey pot and spoon from Mr. Grimthorpe’s tea cart. Cheryl says she did not take these items. 10. Stark asks Cheryl about Mr. Grimthorpe’s notebook. Cheryl says it was just filled with doodles and no legible words. 
+1. Molly has a sudden realization. Molly remembers Mr. Grimthorpe’s writer’s block and stacks of notebooks. She tells Detective Stark that Mr. Grimthorpe did not write his own books. Someone else did, and Molly thinks this could be a motive for Mr. Grimthorpe’s murder. 
+## Chapters 23-26 
+### Vocabulary terms
+1. Ghostwriter A person who writes material for someone else who is the named author 
+1. Fawlty Towers A British television sitcom → 
+1. Nigh A short distance away 
+1. Susceptible Vulnerable to something 
+1. Detritus Waste or debris 
+1. Columbo An American crime drama TV series 
+### Chapter 23 Summary
+1. The remaining chapters take place in the present. Molly tells Detective Stark about the time she spent at the Grimthorpe mansion as a child. For once, Stark listens to Molly intently and patiently. 
+1. Molly tells Stark about Mr. Grimthorpe’s previous personal secretary. Molly thinks the secretary was a ghostwriter for Mr. Grimthorpe. 
+1. Detective Stark secures a search warrant for the Grimthorpe mansion. Stark and Molly drive to the mansion, which is now dilapidated. 
+1. The gardener, Mr. Jenkins, answers the door. Mr. Jenkins is cleaning out the mansion. He says the property will go up for sale soon. 
+1. Molly leads Stark to the library. Molly opens the secret door to Mr. Grimthorpe’s office. There are endless stacks of black notebooks. 1. Stark and Molly open several of the notebooks. Each one is filled with illegible doodles and scribbles. 
+1. Detective Stark finds another hidden door in Mr. Grimthorpe’s office. She opens the door and discovers the secretary’s office. 
+1. Molly notices the secretary’s typewriter and a photo. Pictured is Mr. Grimthorpe’s old secretary and a child. The child is Serena Sharpe. 
+### Chapter 24  Summary
+1. Detective Stark and Molly are in the secretary’s office when Serena arrives. Serena admits that her mother was Mr. Grimthorpe’s previous secretary. Serena also says her mother is the real author of Mr. Grimthorpe’s novels. 
+1. Stark asks Serena why she did not reveal this information at the police station. Serena could not say anything because she signed a legal contract. Serena explains the entire story as follows: 
+  1. Serena knew her mother was Mr. Grimthorpe’s ghostwriter for years. She wanted her mother to ask for proper compensation. However, Serena’s mother was intimidated by Mr. Grimthorpe. 
+  1. Serena’s mother died last year. Her mother never received compensation for writing Mr. Grimthorpe’s books. This made Serena angry. So, Serena devised a plan. 
+  1. Serena took over as Mr. Grimthorpe’s secretary. However, Serena was not a gifted writer. Mr. Grimthorpe threatened to fire Serena when he discovered this. 
+  1. In return, Serena threatened to reveal Mr. Grimthorpe as a fraud. She demanded $5 million and 100% of his royalties moving forward. 
+  1. Mr. Grimthorpe agreed to Serena’s demands. But he asked to publicize the news himself at the press conference. If Serena said anything before the conference, the contract was void. 
+  1. Serena still cannot reveal the truth, even though Mr. Grimthorpe is dead. 
+1. Detective Stark asks Serena if she poisoned Mr. Grimthorpe. Serena admits she hated Mr. Grimthorpe but did not kill him. Serena says Mr. Grimthorpe made unwelcome advances on her AND her mother. 
+1. Mr. Jenkins brings some tea. As Molly stirs her tea, the tinkling sound reminds her of the Regency Grand spoon and teacup. Suddenly, Molly says she knows exactly who killed Mr. Grimthorpe. 
+### Chapter 25 Summary
+1. Molly recalls Gran’s story of the maid, rat, and spoon. In this story, the maid was blamed for stealing the spoon. 
+1. Detective Stark and Molly rush to the Regency Grand hotel. Molly asks Mr. Snow if the LAMBS have checked out yet. Mr. Snow says the LAMBS are due to check out tomorrow. 
+1. Stark demands to enter one of the LAMBS’ rooms. Stark, Molly, and Mr. Snow enter Room 404 (Beulah’s room). The room is a mess. 
+1. Stark discovers notebooks belonging to Mr. Grimthorpe and Beulah. In Beulah’s notebook, she describes her many attempts at contacting Mr. Grimthorpe. Mr. Grimthorpe ignored every attempt. 
+1. Molly goes to retrieve Lily. Molly and Lily explain how Beulah kept a stainless-steel spoon. The spoon was in Beulah’s peanut bar jar the day before the press conference. Now, it is on Beulah’s nightstand. 
+1. Stark opens Beulah’s nightstand. She finds a Regency Grand honey pot inside a satin box. Stark opens the honey pot and discovers a strange odor and color. The honey is mixed with antifreeze. 
+### Chapter 26 Summary
+1. Detective Stark and Molly make a plan to trap Beulah. Mr. Snow announces a free seminar on Mr. Grimthorpe in five minutes. The “seminar” will be in the tearoom and feature a VIP guest. 
+1. Several of the LAMBS quickly arrive. Mr. Snow explains the VIP guest is Mr. Grimthorpe’s #1 fan. The LAMBS all claim to be the #1 fan. 1. Detective Stark selects Beulah as Mr. Grimthorpe’s #1 fan. Stark and Molly tell Beulah they need her help finding Mr. Grimthorpe’s killer. They usher Beulah into the tearoom alone. 
+1. Stark and Molly tell Beulah about the memorabilia website. Beulah admits that she bought the entire Grimthorpe collection. 
+1. Beulah talks about Mr. Grimthorpe’s secrets. Beulah says Mr. Grimthorpe was a fraud and an alcoholic. She plans to publish these secrets in his biography. 
+1. Just then, Angela and Lily arrive with a tea cart. They serve Beulah tea. Beulah says she knows Mr. Grimthorpe took his tea with extra honey. 
+1. Three undercover police officers arrive with a banker’s box. Stark brings the box to Beulah. The honey pot and stainless-steel spoon are inside the box. 
+1. Detective Stark accuses Beulah of poisoning Mr. Grimthorpe. Stark claims Beulah’s motive is being rejected by Mr. Grimthorpe. Beulah denies everything. Beulah says Lily and Molly are the killers. 
+1. Stark places Beulah under arrest. Angela reveals she has been recording the entire conversation. The undercover officers take Beulah away in handcuffs. 
+## Chapter 27
+### Vocabulary terms
+1. Foibles Strange or bad characteristics 
+1. Clemency Mercy, lenience 
+1. Reverie Daydream 
+1. Cordon Barrier 
+1. Seismic Something of an enormous effect 
+### Chapter 27 Summary
+1. Beulah has just been arrested. Detective Stark praises Lily and Angela for helping them trap Beulah. 
+1. Stark asks to speak with Molly in private. Stark asks Molly how she knew the stainless steel spoon was the key to everything. Molly recalls Mr. Grimthorpe stirring his tea at the podium. The spoon from the honey pot made a dull clanking sound instead of a high-pitched tinkling sound. Molly realized this was the same spoon from Beulah’s room. 
+1. Stark admits she was wrong about Molly. Stark offers Molly a job as a detective. Molly declines and says her job is to be a maid. 
+1. Molly recalls the moment right after Gran died. In this memory, Molly is holding the serenity pillow. Molly thinks of the serenity prayer. She wonders what she needs to accept and what she can change. 
+1. Molly and Stark go to the lobby, which is packed with guests and reporters. Police officers lead Beulah to a police car. Beulah admits to killing Mr. Grimthorpe in front of the lobby crowd. 
+1. Gladys and Birdy yell at Beulah for killing Mr. Grimthorpe. Beulah yells that Mr. Grimthorpe was a fraud and a predator. Gladys exiles Beulah from the LAMBS forever. 
+1. Mr. Preston approaches Beulah. The officers allow Mr. Preston to take Beulah’s arm. Beulah asks Mr. Preston to protect her research about Mr. Grimthorpe and to find someone to take care of her cats. 
+1. The police car takes Beulah to the station. Then Stark asks the crowd to direct any questions to her. Stark clarifies that the hotel staff had nothing to do with Mr. Grimthorpe’s murder. 
+1. Molly starts to feel dizzy. Mr. Preston takes Molly’s arm and comforts her. They talk about Beulah. Mr. Preston thinks if Beulah had kindness, things might be different. 
+1. Mr. Preston asks Molly if they can finally have their chat. Molly worries that Mr. Preston is sick. Mr. Preston assures Molly he is healthy. Molly asks if they can chat once Juan Manuel returns.
+## Chapter 28 
+1. It is one week later. Molly is preparing the tearoom for today’s big event - a VIP press conference about J.D. Grimthorpe. 
+1. Today is also the day of Molly and Mr. Preston’s chat. Molly thinks Mr. Preston is going to announce his retirement. They will chat later today when Juan Manuel returns. 
+1. Molly rushes downstairs to find Lily. Molly promotes Lily from maid-in-training to maid. Molly puts Lily in charge of serving the tea at today’s VIP press conference. 
+1. Cheryl arrives for her shift. Molly decided to give Cheryl one last chance instead of firing her. 
+1. Upstairs, Detective Stark and Angela greet Molly. Stark says that Beulah pled guilty and is waiting to be sentenced. Beulah also told Stark some other details, including: 
+  1. Long ago, Beulah tracked down a maid who worked for Mr. Grimthorpe. This maid knew all along that the secretary was Mr. Grimthorpe’s ghostwriter. The maid asked to stay anonymous. 
+  1. Beulah wrote two versions of Mr. Grimthorpe’s biography. One version is flattering, while the other says he is a fraud. 
+  1. Beulah had been poisoning every tea cart outside of Mr. Grimthorpe’s room for an entire day. 
+1. Mr. Snow arrives and lets the guests into the tearoom. The room is filled with LAMBS members (Gladys and Birdy included) and reporters. Stark also attends the event. 
+1. Mr. Snow takes the podium and introduces the VIP speaker, Serena Sharpe. Serena reveals that her mother wrote all of Mr. Grimthorpe’s novels. Mr. Grimthorpe’s publishers are working to get Serena’s mother, Abigail Sharpe, acknowledged as the rightful author. 
+1. Serena leaves the tearoom and dodges the crowd’s questions. Meanwhile, Stark offers Molly a detective job again. Molly says she will consider the opportunity. Detective Stark gives Molly a curtsy as she leaves. 
+## Epilogue 
+1. Molly is at her apartment. She cleans the Fabergé and sets it next to a photo of her mother, Maggie. Maggie died three years after her surprise appearance at Molly and Gran’s door. 
+1. Mr. Preston arrives for their chat. Mr. Preston reveals he is Molly’s grandfather. Molly feels like she is going to faint. 
+1. Mr. Preston explains how this is possible: 
+  1. Mr. Preston got Gran pregnant when they were teenagers. They planned to elope and live happily ever after. 
+  1. But Gran’s parents sent her to a home for unwed mothers. Gran escaped from this home and begged her parents for forgiveness. c. Gran’s parents disowned her when Gran was 8 months pregnant. Gran got a job as a maid and raised Maggie. 
+  1. Mr. Preston tried to help Gran, but Gran would not let him. Eventually, Gran let him back into her life. But by then, Mr. Preston was married with a daughter. 
+1. Molly is so happy that Mr. Preston is her grandfather. She has a piece of her family back. Molly decides to call Mr. Preston “Gran-dad”. 
+1. Just then, Juan Manuel returns. Juan shows Molly and Mr. Preston family photos from his trip. Molly and Mr. Preston prepare to tell Juan Manuel about the murder and their new family ties. 
+1. Meanwhile, Molly thinks of her Gran’s wisdom. Molly knows her Gran is always with her… 

@@ -3,7 +3,7 @@
 # Completing sentences progressively
 The following exercises allow me to fill in the prompts given the corresponding response lists in increasingly more difficult ordering until no response list is shown.
 ## Kitchen
-[[fillin: gridInOrder, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: gridInOrder, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. [_Peel=(verb)_] the yellow [_banana=(noun)_].
 1. [_Fry=(verb)_] a sirloin [_steak=(noun)_].
 1. [_Scrub=(verb)_] the casserole [_dish=(noun)_].
@@ -12,7 +12,7 @@ The following exercises allow me to fill in the prompts given the corresponding 
 1. [_Dispose=(verb)_] of the [_garbage=(noun)_].
 1. [_Boil=(verb)_] water for [_tea=(noun)_].
 [[/fillin]]
-[[fillin: gridInOrder, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: gridInOrder, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. [_Brew=(verb)_] hot [_coffee=(noun)_]
 1. [_Set=(verb)_] the [_table=(noun)_].
 1. [_Eat=(verb)_] your morning meal at [_breakfast=(noun)_].
@@ -22,7 +22,7 @@ The following exercises allow me to fill in the prompts given the corresponding 
 1. [_Cook=(verb)_] on the [_stove=(noun)_].
 1. [_Bake=(verb)_] in the [_oven=(noun)_].
 [[/fillin]]
-[[fillin: gridInOrder, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: gridInOrder, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. [_Wash=(verb)_] dishes automatically in the [_dishwasher=(noun)_].
 1. [_Wash=(verb)_] dishes manually in the [_sink=(noun)_].
 1. [_Keep=(verb)_] food cold in the [_refrigerator=(noun)_].
@@ -32,7 +32,7 @@ The following exercises allow me to fill in the prompts given the corresponding 
 1. [_Bake=(verb)_] a [_cake=(noun)_].
 1. [_Bake=(verb)_] a cake from [_scratch=(noun)_].
 [[/fillin]]
-[[fillin: gridInOrder, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: gridInOrder, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. [_Toss=(verb)_] the [_salad=(noun)_].
 1. On a birthday cake, we [_light=(verb)_] [_candles=(noun)_].
 1. [_Stir=(verb)_] the [_pot=(noun)_].

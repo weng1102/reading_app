@@ -153,7 +153,7 @@ The following practice combines a list of personal pronouns with the most common
 * You=(subject) listen=(verb).
 * They=(subject) listen=(verb).
 * We=(subject) listen=(verb).
-## March
+## 1. March
 * I=(subject) march=(verb).
 * She=(subject) marches=(verb).
 * He=(subject) marches=(verb).
@@ -175,7 +175,7 @@ The following practice combines a list of personal pronouns with the most common
 * He=(subject) moves=(verb).
 * It=(subject) moves=(verb).
 * You=(subject) move=(verb).
-* (subject) move=(verb).
+* They=(subject) move=(verb).
 * We=(subject) move=(verb).
 ## Panic
 * I=(subject) panic=(verb).

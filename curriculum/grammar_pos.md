@@ -1,13 +1,18 @@
 [[page: Parts of Speech,, Wen,, grammar, /]]
 # Parts of Speech
-The grammar of the English language have several parts of speech: noun, verb, adverb, adjective, preposition, conjunction, interjection and article.
+The grammar of the English language have several parts of speech: [noun](grammar_pos_noun,page), verb, adverb, adjective, [preposition](grammar_pos_preposition,page), conjunction, interjection, article
 ## Noun
 A noun is a person, place, thing, or concept. A noun can be proper or common. A proper noun is used for people, places or organizations and typically start with capital letters. A common noun is not capitalized unless they appear at the beginning of sentences. A noun can be singular or plural. A noun can be concrete like real world objects or abstract like feelings, ideas or concepts.
-* Person: teacher, child.
-* Place: home, school.
-* Thing: desk, book.
+* [Person](grammar_pos_noun,heading,1)
+* [Place](grammar_pos_noun,heading,2)
+* [Thing](grammar_pos_noun,heading,3)
+* [Concept or Idea](grammar_pos_noun,heading,7)
+* [Feelings](grammar_pos_noun,heading,8)
+* [Organization](grammar_pos_noun,heading,9)
+* [Event](grammar_pos_noun,heading,10)
+* [Time](grammar_pos_noun,heading,11)
 ## Verb
-A verb expresses an action, condition or experience.There are several types of verbs:
+A verb expresses an action, condition or experience. There are several types of verbs:
 * Main verb. They are related to actions, events and states.
   * Examples: come, go, sit, stand, laugh, cry, read, write
 * Linking (copular or state of being) verb. Some main verbs also known as linking verbs that connect the subject of a sentence with more information about that subject. The verb state of being is the most common type of linking verb. Other linking verbs such as become, seem and sense verbs linking "feel", "smell" in sentences.
@@ -50,7 +55,7 @@ Pronoun is used in place of a noun. There are several types of pronouns:
 * Interogative pronoun. They are used to ask questions.
   * Examples: what, which, who, whom, whose.
 ## Preposition
-Preposition is used before a noun, a noun phrase or pronoun connecting or relating it to another word.
+Preposition is used before a noun, a noun phrase or pronoun connecting or relating it to another word. Prepositions location and place, direction, time
 Examples: on, in, at, under, behind, with, between, over, during, since, before, into.
 ## Conjunction
 Conjunction is a word used to join and coordinate words, clauses or sentences.

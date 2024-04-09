@@ -165,7 +165,7 @@
 ![Eating](verb-eat1.jpg)
 [[fillin: gridInOrder, true, 1, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 1. The [_boy=(subject)_] [_eats=(verb)_] [_salad=(object)_].
-1. The [_boy=(subject)_] [_is=(helping verb)_] [_salad=(object)_].
+1. The [_boy=(subject)_] [_is=(helping verb)_] [_eating=(verb)_] [_salad=(object)_].
 [[/fillin]]
 [[/image-entry]]
 ## Go
@@ -213,7 +213,7 @@
 ![Laughing](verb-laugh.jpg)
 [[fillin: gridInOrder, true, 1, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 1. The [_girl=(subject)_] [_laughs=(verb)_] a [_happy=(adjective)_] [_laugh=(object)_].
-1. The [_girl=(subject)_] [_is=(helping verb)_] [_laughs=(verb)_]  a [_happy=(adjective)_] [_laugh=(verb)_].
+1. The [_girl=(subject)_] [_is=(helping verb)_] [_laughing=(verb)_]  a [_happy=(adjective)_] [_laugh=(verb)_].
 [[/fillin]]
 [[/image-entry]]
 ## Mow

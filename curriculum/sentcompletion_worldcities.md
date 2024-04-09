@@ -3,7 +3,7 @@
 # Completing sentences progressively
 The following exercises allow me to fill in the prompts given the corresponding response lists in increasingly more difficult ordering until no response list is shown.
 ## International Cities
-[[fillin: inline, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: inline, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. Copenhagen is in [_Denmark_].
 1. Paris is in [_France_].
 1. Caracas is in [_Venezuela_].
@@ -15,7 +15,7 @@ The following exercises allow me to fill in the prompts given the corresponding 
 1. Tokyo is in [_Japan_].
 1. Buenos Aires is in [_Argentina_].
 [[/fillin]]
-[[fillin: inline, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: inline, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. Tehran is in [_Iran_].
 1. Brussels is in [_Belgium_].
 1. Berlin is in [_Germany_].
@@ -27,7 +27,7 @@ The following exercises allow me to fill in the prompts given the corresponding 
 1. Dublin is in [_Ireland_].
 1. Havana is in [_Cuba_].
 [[/fillin]]
-[[fillin: inline, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: inline, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. Manila is in the [_Philipines_].
 1. Hanoi is in [_Vietnam_].
 1. Lima is in [_Peru_].
@@ -39,7 +39,7 @@ The following exercises allow me to fill in the prompts given the corresponding 
 1. New Delhi is in [_India_].
 1. Edinburgh is in [_Scotland_].
 [[/fillin]]
-[[fillin: inline, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: inline, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. Syndey is in [_Australia_].
 1. Vancouver is in [_Canada_].
 1. Quebec is in [_Canada_].
@@ -51,7 +51,7 @@ The following exercises allow me to fill in the prompts given the corresponding 
 1. Helsinki is in [_Finland_].
 1. Barcelona is in [_Spain_].
 [[/fillin]]
-[[fillin: inline, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: inline, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. Zurich is in [_Switzerland_].
 1. Osaka is in [_Japan_].
 1. Hong Kong is in [_China_].

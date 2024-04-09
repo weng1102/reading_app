@@ -3,7 +3,7 @@
 # Completing sentences progressively
 The following exercises allow me to fill in the prompts given the corresponding response lists in increasingly more difficult ordering until no response list is shown.
 ## Things To Wear
-[[fillin: gridInOrder, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: gridInOrder, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. On my head I wear a [_hat_].
 1. I see better wearing a pair of [_eyeglasses_].
 1. When I am cold outside I wear a winter [_coat_].
@@ -13,7 +13,7 @@ The following exercises allow me to fill in the prompts given the corresponding 
 1. On my finger I have a wedding [_ring_].
 1. In their ears some people wear [_earrings_].
 [[/fillin]]
-[[fillin: gridInOrder, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: gridInOrder, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. In bed I wear a pair of [_pajamas_].
 1. In a formal evening event, she wears a silk [_gown_].
 1. She bought a new [_dress_].
@@ -23,7 +23,7 @@ The following exercises allow me to fill in the prompts given the corresponding 
 1. When he dresses up, he wears a shirt and [_tie_].
 1. At work, he wears a three piece [_suit_].
 [[/fillin]]
-[[fillin: gridInOrder, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: gridInOrder, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. My hands are in my [_pockets_].
 1. She carries all her stuff in a [_purse_].
 1. When my hands are cold, I wear a pair of [_gloves_].

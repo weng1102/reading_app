@@ -2,7 +2,7 @@
 # Completing sentences progressively
 The following exercises allow me to fill in the prompts given the corresponding response lists in increasingly more difficult ordering until no response list is shown.
 ## Food
-[[fillin: gridInOrder, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: gridInOrder, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. Spaghetti and [_meatballs_].
 1. Sausage and mushroom [_pizza_].
 1. Sirloin [_steak_].
@@ -17,7 +17,7 @@ The following exercises allow me to fill in the prompts given the corresponding 
 1. I like baked [_potatoes_].
 [[/fillin]]
 ## More food
-[[fillin: override, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, csv, , insert, true, true, true, true, true, false]]
+[[fillin: override, true, 2, true,, Recite the following prompts including the underlined words:, csv, , insert, true, true, true, true, true, false]]
 1. Salt and [_pepper_].
 1. A hard-boiled [_egg_].
 1. Loaf of [_bread_].
@@ -32,7 +32,7 @@ The following exercises allow me to fill in the prompts given the corresponding 
 1. South fried [_chicken_].
 [[/fillin]]
 ## Desserts
-[[fillin: gridInOrder, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: gridInOrder, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. Angel food [_cake_].
 1. Vanilla ice [_cream_].
 1. Blueberry [_muffin_].
@@ -46,7 +46,7 @@ The following exercises allow me to fill in the prompts given the corresponding 
 [[/fillin]]
 ## International Food
 ### Chinese Food
-[[fillin: gridInOrder, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: gridInOrder, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. Chicken chow [_mein_].
 1. Sweet and sour [_pork_].
 1. Chinese chicken [_salad_].
@@ -60,7 +60,7 @@ The following exercises allow me to fill in the prompts given the corresponding 
 1. Honey walnut [_prawns_].
 [[/fillin]]
 ### Mexican Food
-[[fillin: gridInOrder, true, 2, true, Responses already filled in, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
+[[fillin: gridInOrder, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1.  [_tacos_].
 1.  [_enchiladas_].
 1.  [_burritos_].

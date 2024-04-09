@@ -1,4 +1,4 @@
-[[page: Heading Levels rendering, Wen, Wen, 1/1/2022, Testing, /]]
+[[page: Heading Levels rendering, Wen, Wen, 1/1/2022, Testing, , , numeric /]]
 
 # Who am I. I am who?
 
