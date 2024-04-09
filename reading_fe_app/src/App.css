@@ -769,7 +769,15 @@ input[type="radio"]{
 }
 .imageentry-image {
   margin: 0px 10px 10px 0px;
+}
+.imageentry-image-rounded-box {
   border-radius: 5px;
+}
+.imageentry-image-line-border {
+  border: 1px solid black;
+}
+.imageentry-image-photo-border {
+  border: 5px solid white;
 }
 .imageentry-image-box-shadow {
   box-shadow: 5px 5px 10px gray;
@@ -932,6 +940,86 @@ input[type="radio"]{
 .textbox-control:read-only {
   color: #aaa;
   border: 0px solid #aaa;
+}
+/* scenario numbering */
+ol.scenarios-A1 {
+  list-style-type: none;
+  list-style-position: outside;
+  padding-left: 0px;
+  counter-reset: A1-level-1;
+  counter-set: A1-level-1 var(--A1-level-start-var);
+}
+ol.scenarios-A1 > li {
+  counter-increment: A1-level-1;
+}
+ol.scenarios-A1 > li:before {
+  font-weight: bold;
+  font-family: Arial;
+  content: counter(A1-level-1, upper-alpha) ".";
+  margin-right: 5px;
+}
+/* second level numbering */
+ol.scenarios-A1 > li > ol {
+  list-style-type: none;
+  padding-left: 5px;
+  list-style-position: outside;
+  counter-reset: A1-level-2;
+}
+ol.scenarios-A1 > li > ol > li {
+  /* list-style: none; */
+/*  content: counter(A1-level-1) "="; */
+  counter-increment: A1-level-2;
+}
+ol.scenarios-A1 > li > ol > li:before {
+  font-weight: bold;
+  font-family: Arial;
+  content: counter(A1-level-1, upper-alpha) counter(A1-level-2) ".";
+  margin-right: 5px;
+}
+/* third level numbering */
+ol.scenarios-A1 > li > ol > li > ol {
+  /* reset ordered list style*/
+  list-style-type: none;
+  padding-left: 5px;
+  list-style-position: outside;
+  counter-reset: A1-level-3;
+}
+ol.scenarios-A1 > li > ol > li > ol > li {
+/*  list-style: none; */
+  counter-increment: A1-level-3;
+}
+ol.scenarios-A1 > li > ol > li > ol > li:before {
+  font-weight: bold;
+  font-family: Arial;
+  content: counter(A1-level-1, upper-alpha) counter(A1-level-2) "."
+    counter(A1-level-3) " ";
+  margin-right: 5px;
+}
+.no-wrap {
+  display: inline;
+}
+ol.multiple-choice > li:before {
+  font-weight: bold;
+  font-family: Arial;
+  content: counter(MC-level-1) ".";
+  margin-right: 5px;
+}
+ol.multiple-choice > li > ol {
+  list-style-type: none;
+  padding-left: 5px;
+  list-style-position: outside;
+  counter-reset: MC-level-2;
+}
+ol.multiple-choice > li > ol > li {
+  /* list-style: none; */
+  content: counter(MC-level-1) "=";
+  counter-increment: MC-level-2;
+}
+ol.multiple-choice > li > ol > li:before {
+  font-weight: bold;
+  font-family: Arial;
+  content: counter(MC-level-2, lower-alpha) ".";
+  margin-right: 5px;
 }
 .ddlb-voiceselect {
   display: flex;
