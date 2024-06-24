@@ -1,0 +1,88 @@
+<style>
+      ol.customList {
+        list-style-type: none;
+        list-style-position: inside;
+      }
+
+      ol.customList > li {
+        list-style: none;
+        counter-increment: subscene;
+      }
+
+      ol.customList > li:before {
+        font-weight: bold;
+        content: counter(subscene, upper-alpha) ".";
+        list-style-position: inside;
+      }
+
+      ol.customList > li > ol {
+        list-style-type: none;
+        list-style-position: inside;
+      }
+
+      ol.customList > li > ol > li {
+        list-style: none;
+        content: counter(subscene) "=";
+        counter-increment: subsubscene;
+      }
+
+      ol.customList > li > ol > li:before {
+        font-weight: bold;
+        content: counter(subscene, upper-alpha) counter(subsubscene) ".";
+        list-style-position: inside;
+      }
+
+      ol.customList > li > ol > li > ol {
+        list-style-type: none;
+        list-style-position: inside;
+      }
+
+      ol.customList > li > ol > li > ol > li {
+        list-style: none;
+        counter-increment: subsubsubscene;
+      }
+
+      ol.customList > li > ol > li > ol > li:before {
+        font-weight: bold;
+        content: counter(subscene, upper-alpha) counter(subsubscene) "."
+          counter(subsubsubscene) " ";
+        list-style-position: inside;
+      }
+    </style>
+<ol class="customList">
+<li>abc</li>
+<li>def</li>
+</ol>
+
+<ol class="customList">
+<li>abc
+<ol>
+<li>ghi</li>
+</ol>
+</li>
+<li>def</li>
+</ol>
+
+<ol class="customList">
+<li>abc</li>
+<ol>
+<li>ghi</li>
+</ol>
+<li>def</li>
+</ol>
+
+<ol class="customList">
+<li>abc</li>
+<ul>
+<li>ghi</li>
+</ul>
+<li>def</li>
+</ol>
+
+<ol class="customList">
+<li>abc</li>
+<ul>
+<li>ghi</li>
+</ul>
+<li>def</li>
+</ol>

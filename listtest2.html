@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      /* first/top level numbering */
+      ol.scenarios-A1 {
+        list-style-type: none;
+        list-style-position: outside;
+        padding-left: 0px;
+        counter-reset: A1-level-1;
+        counter-set: A1-level-1 var(--A1-level-start-var);
+      }
+      ol.scenarios-A1 > li {
+        counter-increment: A1-level-1;
+      }
+      ol.scenarios-A1 > li:before {
+        font-weight: bold;
+        font-family: Arial;
+        content: counter(A1-level-1, upper-alpha) ".";
+        margin-right: 5px;
+      }
+      /* second level numbering */
+      ol.scenarios-A1 > li > ol {
+        list-style-type: none;
+        padding-left: 5px;
+        list-style-position: outside;
+        counter-reset: A1-level-2;
+      }
+      ol.scenarios-A1 > li > ol > li {
+        /* list-style: none; */
+        content: counter(A1-level-1) "=";
+        counter-increment: A1-level-2;
+      }
+      ol.scenarios-A1 > li > ol > li:before {
+        font-weight: bold;
+        font-family: Arial;
+        content: counter(A1-level-1, upper-alpha) counter(A1-level-2) ".";
+        margin-right: 5px;
+      }
+      /* third level numbering */
+      ol.scenarios-A1 > li > ol > li > ol {
+        /* reset ordered list style*/
+        list-style-type: none;
+        list-style-position: outside;
+        counter-reset: A1-level-3;
+        padding-left: 5px;
+      }
+      ol.scenarios-A1 > li > ol > li > ol > li {
+        list-style: none;
+        counter-increment: A1-level-3;
+      }
+      ol.scenarios-A1 > li > ol > li > ol > li:before {
+        font-weight: bold;
+        font-family: Arial;
+        content: counter(A1-level-1, upper-alpha) counter(A1-level-2) "."
+          counter(A1-level-3) " ";
+        margin-right: 5px;
+      }
+.no-wrap {
+  display: inline;
+}
+    </style>
+  </head>
+  <body>
+<ol class="scenarios-A1 counter-set=1">
+  <li>
+    <div class="no-wrap"><span class="sentence"><span class="word  recitable-word  active ">expect</span><span class="whitespace"> </span><span class="word  recitable-word   ">A</span></span></div>
+    <ol class="">
+      <li>
+        <div class="no-wrap"><span class="sentence"><span class="word  recitable-word   ">expect</span><span class="whitespace"> </span><span class="word  recitable-word   ">A</span><span class="word  recitable-word   ">1</span></span></div>
+    </li>
+    <li>
+      <div class="no-wrap"><span class="sentence"><span class="word  recitable-word   ">expect</span><span class="whitespace"> </span><span class="word  recitable-word   ">A</span><span class="word  recitable-word   ">2</span></span></div>
+    </li>
+      <li>
+        <div class="no-wrap"><span class="sentence"><span class="word  recitable-word   ">expect</span><span class="whitespace"> </span><span class="word  recitable-word   ">A</span><span class="word  recitable-word   ">3</span></span></div>
+      </li>
+      <li>
+        <div class="no-wrap"><span class="sentence"><span class="word  recitable-word   ">expect</span><span class="whitespace"> </span><span class="word  recitable-word   ">A</span><span class="word  recitable-word   ">4</span></span></div>
+      </li>
+      </ol>
+      <li>
+        <div class="no-wrap"><span class="sentence"><span class="word  recitable-word   ">expect</span><span class="whitespace"> </span><span class="word  recitable-word   ">B</span></span></div><ol class="">
+          <li>
+            <div class="no-wrap"><span class="sentence"><span class="word  recitable-word   ">expect</span><span class="whitespace"> </span><span class="word  recitable-word   ">B</span><span class="word  recitable-word   ">1</span></span></div>
+          </li>
+          <li>
+            <div class="no-wrap"><span class="sentence"><span class="word  recitable-word   ">expect</span><span class="whitespace"> </span><span class="word  recitable-word   ">B</span><span class="word  recitable-word   ">2</span></span></div>
+          </li>
+          <li>
+            <div class="no-wrap"><span class="sentence"><span class="word  recitable-word   ">expect</span><span class="whitespace"> </span><span class="word  recitable-word   ">B</span><span class="word  recitable-word   ">3</span></span></div>
+          </li>
+          <li>
+            <div class="no-wrap"><span class="sentence"><span class="word  recitable-word   ">expect</span><span class="whitespace"> </span><span class="word  recitable-word   ">B</span><span class="word  recitable-word   ">4</span></span></div>
+          </li>
+    </ol>
+  </li>
+</li>
+</ol>
+</body>
+</html>

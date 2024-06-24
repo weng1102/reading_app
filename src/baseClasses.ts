@@ -28,9 +28,13 @@ import {
   ILinkListItem,
   ISectionFillinSettings,
   ISectionFillinItem,
+  IReciteButtonItem,
   LinkIdxDestinationType,
   ISectionFillinItemInitializer,
   PartOfSpeechEnumType,
+  ReciteScopeEnumType,
+  ReciteCursorActionEnumType,
+  ReciteListeningActionEnumType,
   SectionFillinResponsesProgressionEnum,
   SectionFillinLayoutType
 } from "./pageContentType";
@@ -121,7 +125,10 @@ class TerminalArray extends Array<ITerminalListItem> {
       } else {
         altrecog = "";
       }
-      if (element.altpronunciation.length > 0) {
+      if (
+        element.altpronunciation !== undefined &&
+        element.altpronunciation.length > 0
+      ) {
         altpro = `(pro: ${element.altpronunciation})`;
       } else {
         altpro = "";
@@ -595,6 +602,107 @@ class LinkArray extends Array<ILinkListItem> {
     return outputStr;
   }
 }
+class ReciteButtonArray extends Array<IReciteButtonItem> {
+  constructor(...args: any) {
+    super(...args);
+  }
+  push(reciteButton: IReciteButtonItem): number {
+    return super.push(reciteButton);
+  }
+  parse(
+    terminalList: ITerminalListItem[],
+    sentenceList: ISentenceListItem[]
+  ): number {
+    try {
+      for (let reciteButton of this) {
+        let toBeRecited: string = "";
+        // console.log(
+        //   `reciteButtons.parsing ${reciteButton.scope} from termIdx=${reciteButton.termIdx}`
+        // );
+        switch (reciteButton.scope) {
+          case ReciteScopeEnumType.label:
+            reciteButton.toBeRecited =
+              reciteButton.hint.length > 0
+                ? reciteButton.hint
+                : reciteButton.label;
+            break;
+          case ReciteScopeEnumType.word:
+            for (
+              let idx = reciteButton.termIdx + 1;
+              idx <= reciteButton.termIdx + reciteButton.span &&
+              idx < terminalList.length;
+              idx++
+            ) {
+              toBeRecited += ` ${terminalList[idx].content}`;
+            }
+            if (
+              sentenceList[terminalList[reciteButton.termIdx + 1].sentenceIdx]
+                .lastTermIdx ===
+              reciteButton.termIdx + reciteButton.span
+            ) {
+              toBeRecited +=
+                sentenceList[terminalList[reciteButton.termIdx].sentenceIdx]
+                  .lastPunctuation;
+            }
+            // console.log(`toBeRecited="${toBeRecited}"`);
+
+            // terminalList[reciteButton.termIdx].sentenceIdx
+            // terminalList[reciteButton.termIdx]
+            // reciteButton.termIdx
+            // reciteButton.toBeRecited =
+            break;
+          case ReciteScopeEnumType.sentence:
+            // console.log(
+            //   `sentence(span=${reciteButton.span}): sentenceIdx[${
+            //     reciteButton.termIdx
+            //   }]=${terminalList[reciteButton.termIdx + 1].sentenceIdx}`
+            // );
+            let sentenceIdx: number =
+              terminalList[reciteButton.termIdx + 1].sentenceIdx;
+            // console.log(
+            //   `firstIdx=${sentenceList[sentenceIdx].firstTermIdx}  lastIdx=${sentenceList[sentenceIdx].lastTermIdx}`
+            // );
+            for (
+              let idx = sentenceList[sentenceIdx].firstTermIdx;
+              idx <= sentenceList[sentenceIdx].lastTermIdx;
+              idx++
+            ) {
+              toBeRecited += ` ${terminalList[idx].content}`;
+            }
+            toBeRecited += sentenceList[sentenceIdx].lastPunctuation;
+            break;
+          default:
+        }
+        reciteButton.toBeRecited = toBeRecited;
+      }
+    } catch (e) {
+      console.log(e);
+    }
+    return this.length;
+  }
+  serialize(): string {
+    let outputStr: string =
+      "[idx]:term scope    sp cursor            listen           rt toBeRecited\n";
+    for (const [i, element] of this.entries()) {
+      outputStr = `${outputStr}[${i
+        .toString()
+        .padStart(3, "0")}]: ${element.termIdx
+        .toString()
+        .padStart(3, " ")} ${element.scope.padEnd(
+        8,
+        " "
+      )} ${element.span
+        .toString()
+        .padStart(2, " ")} ${element.cursorAction.padEnd(
+        17,
+        " "
+      )} ${element.listeningAction.padEnd(14, " ")} ${element.rate
+        .toFixed(1)
+        .padStart(3, " ")} ${element.toBeRecited}\n`;
+    }
+    return outputStr;
+  }
+}
 export class UserContext {
   /* look at the altPro and altRec that are for personalized entries
      should be readable from an external file that will not require recompile
@@ -631,6 +739,7 @@ export class UserContext {
   sentences: SentenceArray;
   links: LinkArray;
   fillins: FillinArray;
+  reciteButtons: ReciteButtonArray;
   // need authentication infoblock at some point
   constructor(name: string) {
     //    this._parent = parent;
@@ -641,6 +750,7 @@ export class UserContext {
     this.sentences = new SentenceArray();
     this.links = new LinkArray();
     this.fillins = new FillinArray();
+    this.reciteButtons = new ReciteButtonArray();
     ////    this._pages = new Array();
   }
   // protected terminalIdx: number = 0;

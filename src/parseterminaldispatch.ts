@@ -30,6 +30,7 @@ import {
   TerminalNode_WHITESPACE,
   TerminalNode_PASSTHRUTAG
 } from "./parseterminals";
+import { TerminalNode_MLTAG_RECITEBUTTON } from "./parseterminals_button";
 import { TerminalNode_MLTAG_FILLIN } from "./parseterminals_fillin";
 import { TerminalNode_ACRONYM } from "./parseterminals_acronym";
 import {
@@ -93,6 +94,10 @@ export function GetTerminalNode(
           termNode = new TerminalNode_MLTAG_IMAGE(parent);
           break;
         }
+        case MarkupLabelType.RECITEBUTTON: {
+          termNode = new TerminalNode_MLTAG_RECITEBUTTON(parent);
+          break;
+        }
         case MarkupLabelType.LINK: {
           termNode = new TerminalNode_MLTAG_LINK(parent);
           break;
@@ -141,6 +146,7 @@ export function GetTerminalNode(
       break;
     }
     case TokenType.WORD: {
+      //      console.log(`token.content=${token.content}`);
       if (
         token.content === token.content.toUpperCase() &&
         AcronymMap.has(token.content.toUpperCase())

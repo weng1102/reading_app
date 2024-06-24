@@ -8,7 +8,7 @@
  *
  **/
 export const IDX_INITIALIZER = -9999;
-export const PageContentVersion = "20231102.1";
+export const PageContentVersion = "20240611.1";
 export enum PageFormatEnumType {
   default = 0
 }
@@ -20,6 +20,7 @@ export interface IPageContent {
   owner: string;
   author: string;
   category: string;
+  headingNumbering: string;
   showTags: boolean;
   columnCount: number;
   version: string;
@@ -46,6 +47,7 @@ export function PageContentInitializer(): IPageContent {
     owner: "",
     author: "anonymous",
     category: "Miscellaneous",
+    headingNumbering: "",
     showTags: false,
     columnCount: 0,
     version: PageContentVersion,
@@ -106,28 +108,32 @@ export enum SectionVariantEnumType {
   empty = "empty",
   tbd = "tbd"
 }
-export enum ListTypeEnumType {
-  bulleted,
-  numerical,
-  alphabetical_uppercase,
-  alphabetical_lowercase,
-  roman_uppercase,
-  roman_lowercase,
-  tbd
+export enum AutodNumberedHeadingEnumType {
+  none = "",
+  list = "list", // flat numercal list
+  numerical = "numerical",
+  alphaNumerical = "alphaNumerical",
+  outline = "outline",
+  alphabetical = "alphabetical",
+  numAlphabetical = "numericAlphabetical"
 }
-export enum OrderedListTypeEnumType { // standard HTML
-  numerical,
-  alphabetical_uppercase,
-  alphabetical_lowercase,
-  roman_uppercase,
-  roman_lowercase
+export enum AutodNumberedOrderedListTypeEnumType {
+  none = "",
+  numberedList = "list", // flat numercal list
+  numerical = "numerical",
+  alphaNumerical = "alphaNumerical",
+  outline = "outline",
+  alphabetical = "alphabetical",
+  numAlphabetical = "numericAlphabetical",
+  scenario = "scenario",
+  multipleChoice = "multipleChoice"
 }
 export enum UnorderedListMarkerEnumType { // standard HTML
-  disc,
+  disc, //default
   circle,
   square,
   none,
-  other
+  custom
 }
 // export interface ISectionHeadingVariant1 {
 //   title: string; // ISentenceContent where audible/recitable can be disabled at run time.
@@ -140,6 +146,7 @@ export enum UnorderedListMarkerEnumType { // standard HTML
 export interface ISectionHeadingVariant {
   heading: ISentenceContent;
   level: number;
+  tag: string;
 }
 // export function ISectionHeadingVariantInitializer1(): ISectionHeadingVariant1 {
 //   return {
@@ -160,7 +167,8 @@ export function ISectionHeadingVariantInitializer(): ISectionHeadingVariant {
       terminals: [],
       lastPunctuation: ""
     }, // overrides name and description above
-    level: 0
+    level: 0,
+    tag: ""
   };
 }
 export interface ISectionButtonGridVariant {
@@ -204,14 +212,10 @@ export function ISectionEmptyVariantInitializer() {
 }
 export interface ISectionListitemVariant {
   depth: number;
-  startNumber: number;
-  listType: ListTypeEnumType;
 }
 export function ISectionListitemVariantInitializer(): ISectionListitemVariant {
   return {
-    depth: 0,
-    startNumber: 0,
-    listType: ListTypeEnumType.tbd
+    depth: 0
   };
 }
 export interface ISectionUnorderedListVariant {
@@ -223,7 +227,7 @@ export function ISectionUnorderedListVariantInitializer(): ISectionUnorderedList
   return {
     items: [],
     depth: 0,
-    marker: UnorderedListMarkerEnumType.disc // overrides css but not user profile
+    marker: UnorderedListMarkerEnumType.disc
   };
 }
 export interface ISectionOrderedListVariant {
@@ -231,25 +235,27 @@ export interface ISectionOrderedListVariant {
   ///  items: ISectionNode[]; // list item (paragraph) or another deeper list
   depth: number;
   startNumber: number;
-  listType: OrderedListTypeEnumType; //  overrides css but not user profile
+  orderedListType: AutodNumberedOrderedListTypeEnumType;
 }
 export function ISectionOrderedListVariantInitializer(): ISectionOrderedListVariant {
   return {
     items: [], // list item (paragraph) or another deeper list
     depth: 0,
     startNumber: 0,
-    listType: OrderedListTypeEnumType.numerical //  overrides css but not user profile
+    orderedListType: AutodNumberedOrderedListTypeEnumType.numberedList //  overrides css but not user profile
   };
 }
 export interface ISectionParagraphVariant {
   sentences: ISentenceContent[];
   //sentences: ISentenceNode[];
   style: string; // overrides css but not user profile
+  class: string;
 }
 export function ISectionParagraphVariantInitializer(): ISectionParagraphVariant {
   return {
     sentences: [],
-    style: "" // overrides css but not user profile
+    style: "", // overrides css but not user profile
+    class: "p"
   };
 }
 // key = valid response; distractor = invalid key/alternatives
@@ -630,6 +636,7 @@ export interface ISectionImageEntryVariant {
   title: string;
   orientation: ImageEntryOrientationEnumType;
   percent: string;
+  frameFormat: string;
   separator: string;
   images: ITerminalContent[]; // path to img/filenames
   captions: ISectionContent[];
@@ -639,6 +646,7 @@ export function ISectionImageEntryVariantInitializer(): ISectionImageEntryVarian
     title: "",
     orientation: ImageEntryOrientationEnumType.left,
     percent: "33%",
+    frameFormat: "rounded-box box-shadow",
     separator: "",
     images: [],
     captions: []
@@ -673,6 +681,7 @@ export function ISentenceContentInitializer(): ISentenceContent {
 }
 export enum TerminalMetaEnumType {
   acronym,
+  recitebutton,
   currency,
   date,
   emailaddress,
@@ -706,6 +715,8 @@ export enum PartOfSpeechEnumType { // ordered by frequency
   numeral = "numeral",
   subject = "subject",
   object = "object",
+  directObject = "direct object",
+  objectIndirect = "indirect object",
   untagged = "untagged"
 }
 interface PartOfSpeechItemType {
@@ -725,6 +736,12 @@ export const PartOfSpeechDictionary = {
     description: "identifies a person, a class of people, places or things",
     pattern: /(^[Nn].*)/
   },
+  [PartOfSpeechEnumType.helpingVerb]: {
+    name: "helping verb",
+    abbreviation: "hv.",
+    description: "verb that helps main verb",
+    pattern: /(^[Hh]elp.*)/
+  },
   [PartOfSpeechEnumType.verb]: {
     name: "verb",
     abbreviation: "v.",
@@ -732,71 +749,77 @@ export const PartOfSpeechDictionary = {
     pattern: /(^[Vv].*)/
     // distinction between linking (copular) and helping (auxliary) verbs?
   },
-  [PartOfSpeechEnumType.pronoun]: {
-    name: "pronoun",
-    abbreviation: "pron.",
-    description: "substitutes for a noun",
-    pattern: /([Pp]ro.*)/
-  },
-  [PartOfSpeechEnumType.helpingVerb]: {
-    name: "helping verb",
-    abbreviation: "hv.",
-    description: "verb that helps main verb",
-    pattern: /([Hh]elp.*)/
-  },
-  [PartOfSpeechEnumType.preposition]: {
-    name: "prep.",
-    abbreviation: "prep.",
-    description: "relates objects spatially or temporally",
-    pattern: /([Pp]re.*)/
+  [PartOfSpeechEnumType.adjective]: {
+    name: "adjective",
+    abbreviation: "adj.",
+    description: "modifies noun or pronoun",
+    pattern: /(^[Aa]dj.*)/
   },
   [PartOfSpeechEnumType.adverb]: {
     name: "adverb",
     abbreviation: "adv.",
     description: "modifies adjective, verb or another adverb",
-    pattern: /([Aa]dv.*)/
+    pattern: /(^[Aa]dv.*)/
   },
-  [PartOfSpeechEnumType.adjective]: {
-    name: "adjective",
-    abbreviation: "adj.",
-    description: "modifies noun or pronoun",
-    pattern: /([Aa]dj.*)/
+  [PartOfSpeechEnumType.preposition]: {
+    name: "preposition",
+    abbreviation: "prep.",
+    description: "relates objects spatially or temporally",
+    pattern: /(^[Pp]re.*)/
   },
-  [PartOfSpeechEnumType.interjection]: {
-    name: "interjection",
-    abbreviation: "interj.",
-    description: "expresses feeling or emotion",
-    pattern: /([Ii].*)/
-  },
-  [PartOfSpeechEnumType.article]: {
-    name: "article",
-    abbreviation: "art.",
-    description: "describes (in)definiteness or limits quantity of noun(s)",
-    pattern: /([Aa]r.*)/
+  [PartOfSpeechEnumType.pronoun]: {
+    name: "pronoun",
+    abbreviation: "pron.",
+    description: "substitutes for a noun",
+    pattern: /(^[Pp]ro.*)/
   },
   [PartOfSpeechEnumType.conjunction]: {
     name: "conjunction",
     abbreviation: "conj.",
     description: "conjunction",
-    pattern: /([Cc].*)/
+    pattern: /(^[Cc].*)/
+  },
+  [PartOfSpeechEnumType.article]: {
+    name: "article",
+    abbreviation: "art.",
+    description: "describes (in)definiteness or limits quantity of noun(s)",
+    pattern: /(^[Aa]r.*)/
+  },
+  [PartOfSpeechEnumType.interjection]: {
+    name: "interjection",
+    abbreviation: "interj.",
+    description: "expresses feeling or emotion",
+    pattern: /(^[Ii]nt.*)/
   },
   [PartOfSpeechEnumType.numeral]: {
     name: "numeral/number",
     abbreviation: "num.",
     description: "numeral",
-    pattern: /([Nn]u.*)/
+    pattern: /(^[Nn]u.*)/
   },
   [PartOfSpeechEnumType.subject]: {
     name: "subject",
     abbreviation: "subj.",
     description: "describes subject of sentence",
-    pattern: /([Ss]u.*)/
+    pattern: /(^[Ss]u.*)/
   },
   [PartOfSpeechEnumType.object]: {
     name: "object",
     abbreviation: "obj.",
-    description: "describes object of setnence",
-    pattern: /([Oo]b.*)/
+    description: "describes object of sentence",
+    pattern: /(^[Oo]b.*)/
+  },
+  [PartOfSpeechEnumType.directObject]: {
+    name: "direct object",
+    abbreviation: "DO",
+    description: "describes object affected by verb",
+    pattern: /(^[Dd]ir.*)/
+  },
+  [PartOfSpeechEnumType.objectIndirect]: {
+    name: "indirect object",
+    abbreviation: "IO",
+    description: "describes object affected by transitive verb",
+    pattern: /(^[Ii]nd.*)/
   },
   [PartOfSpeechEnumType.untagged]: {
     name: "untagged",
@@ -846,6 +869,7 @@ export interface ITerminalContent {
 }
 export type TerminalMetaType =
   | IAcronymTerminalMeta
+  | IReciteButtonTerminalMeta
   | ICurrencyTerminalMeta
   | IDateTerminalMeta
   | IEmailAddressTerminalMeta
@@ -950,6 +974,20 @@ export interface IAcronymTerminalMeta {
 export function IAcronymTerminalMetaInitializer(): IAcronymTerminalMeta {
   return {
     letters: []
+  };
+}
+export interface IReciteButtonTerminalMeta {
+  buttonIdx: number;
+  label: string;
+  image: string;
+  attributes: string;
+}
+export function IReciteButtonTerminalMetaInitializer(): IReciteButtonTerminalMeta {
+  return {
+    buttonIdx: IDX_INITIALIZER,
+    label: "Recite",
+    image: "button_speak.png",
+    attributes: ""
   };
 }
 export interface ICurrencyTerminalMeta {
@@ -1077,6 +1115,7 @@ export function IPassthruTagTerminalMetaTerminalMetaInitializer(): IPassthruTagT
 }
 export interface IImageTerminalMeta {
   src: string;
+  overlay: string;
   label: string;
   width: number;
   height: number;
@@ -1089,6 +1128,7 @@ export interface IImageTerminalMeta {
 export function IImageTerminalMetaInitializer(): IImageTerminalMeta {
   return {
     src: "",
+    overlay: "",
     label: "",
     width: 0,
     height: 0,
@@ -1289,7 +1329,7 @@ export interface ITerminalListItem extends ITerminalInfo {
   sectionIdx: number;
 }
 export function ITerminalListItemInitializer(
-  terminalInfo: ITerminalInfo,
+  terminalInfo: ITerminalInfo = ITerminalInfoInitializer(),
   sentIdx: number = 0,
   sectIdx: number = 0
 ): ITerminalListItem {
@@ -1377,6 +1417,54 @@ export function ILinkListItemInitializer(
 ): ILinkListItem {
   return { label, destination, valid };
 }
+export enum ReciteScopeEnumType {
+  label = "label", // label provided
+  word = "word", // next words up to count
+  sentence = "sentence" // next sentence
+}
+export enum ReciteCursorActionEnumType {
+  cursorUnchanged = "cursorUnchanged", // (default) cursor unchanged
+  cursorAtEnd = "cursorAtEnd", // after prose in scope
+  cursorAtBeginning = "cursorAtBeginning" // before prose in scope
+}
+export enum ReciteListeningActionEnumType {
+  startListening = "startListening",
+  notListening = "notListening"
+}
+export interface IReciteButtonItem {
+  termIdx: number;
+  scope: ReciteScopeEnumType;
+  cursorAction: ReciteCursorActionEnumType;
+  listeningAction: ReciteListeningActionEnumType;
+  span: number;
+  label: string;
+  hint: string;
+  rate: number; // otherwise default to page, app settings
+  toBeRecited: string;
+}
+export function IReciteButtonItemInitializer(
+  termIdx = IDX_INITIALIZER,
+  scope = ReciteScopeEnumType.label,
+  cursorAction = ReciteCursorActionEnumType.cursorUnchanged,
+  listeningAction: ReciteListeningActionEnumType = ReciteListeningActionEnumType.notListening,
+  span: number = IDX_INITIALIZER,
+  label: string = "",
+  hint: string = "",
+  rate: number = 1,
+  toBeRecited = ""
+): IReciteButtonItem {
+  return {
+    termIdx,
+    scope,
+    cursorAction,
+    listeningAction,
+    span,
+    label,
+    hint,
+    rate,
+    toBeRecited
+  };
+}
 // export interface IFillinItem {
 //   content: string; // for display in response list
 //   referenceCount: number;
@@ -1456,7 +1544,8 @@ export enum PageRequestItemType {
   unknown = 0,
   home = 1,
   pop = 2,
-  link = 3
+  link = 3,
+  urlParameter = 4
 }
 export interface IPageRequestItem {
   page: string;

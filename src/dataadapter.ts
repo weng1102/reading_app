@@ -12,6 +12,7 @@
  **/
 //import * as path from "path";
 import * as fs from "fs";
+import { strict as assert } from "assert";
 import {
   BaseClass,
   //  UserContext,
@@ -148,6 +149,16 @@ export interface TaggedStringType {
   headingLevel: number; // mutually exclusive from listDepth
   autoNumberedTag: string;
   lineNo: number;
+}
+function TaggedStringInitializer(): TaggedStringType {
+  return {
+    content: "",
+    recordType: MarkdownRecordType.TBD,
+    listDepth: 0,
+    headingLevel: 0,
+    autoNumberedTag: "",
+    lineNo: 0
+  };
 }
 // interface RegExpMatchArrayWithTagType {
 //   groups: RegExpMatchArray;
@@ -410,10 +421,10 @@ export interface IDataSource {
   disconnect(): void;
   parse(
     depth: number,
-    buffer: string[],
-    current: number,
-    resultBuffer: TaggedStringType[]
-  ): number;
+    // buffer: string[],
+    current: number
+  ): // resultBuffer: TaggedStringType[]
+  number;
   currentIdx(): number;
   setCurrentIdx(idx: number): void;
   currentRecord(): TaggedStringType;
@@ -436,9 +447,11 @@ export interface IDataSource {
   //  buffer: TaggedStringType[]
 }
 abstract class MarkdownSource extends BaseClass implements IDataSource {
-  protected buffer: TaggedStringType[] = [];
+  protected inputBuffer: string[] = [];
+  protected outputBuffer: TaggedStringType[] = [];
+  // protected buffer: TaggedStringType[] = [];
   protected pageContent!: IPageContent;
-  protected bufferIdx: number = -1;
+  protected outputBufferIdx: number = -1;
   fileName: string = "";
   constructor(parent: any) {
     super(parent);
@@ -448,45 +461,48 @@ abstract class MarkdownSource extends BaseClass implements IDataSource {
   }
   abstract connect(fileName: string): number;
   disconnect(): void {
-    this.buffer = [];
-    // OR this.buffer.length = 0;
+    this.outputBuffer = [];
+    // OR this.outputBuffer.length = 0;
   }
   abstract parse(
     depth: number,
-    inputBuffer: string[],
-    current: number,
-    resultBuffer: TaggedStringType[]
+    current: number
+    // resultBuffer: TaggedStringType[]
   ): number;
   currentIdx() {
-    return this.bufferIdx;
+    return this.outputBufferIdx;
   }
   setCurrentIdx(idx: number) {
-    if (idx > 0 && idx < this.buffer.length) this.bufferIdx;
+    if (idx > 0 && idx < this.outputBuffer.length) this.outputBufferIdx;
   }
   currentRecord(): TaggedStringType {
     // could throw TypeError upon access attempt
-    return this.buffer[this.bufferIdx];
+    return this.outputBuffer[this.outputBufferIdx];
   }
   EOF(): boolean {
-    return this.bufferIdx > this.buffer.length - 1;
+    return this.outputBufferIdx > this.outputBuffer.length - 1;
   }
   firstRecord(): TaggedStringType {
     // could throw TypeError upon access attempt
-    this.bufferIdx = 0;
-    return this.buffer[this.bufferIdx];
+    this.outputBufferIdx = 0;
+    return this.outputBuffer[this.outputBufferIdx];
   }
   length(): number {
-    return this.buffer.length;
+    return this.outputBuffer.length;
   }
   nextRecord(): TaggedStringType {
     // could throw TypeError upon access attempt
-    this.bufferIdx = Math.min(this.bufferIdx + 1, this.buffer.length);
-    return this.buffer[this.bufferIdx];
+    this.outputBufferIdx = Math.min(
+      this.outputBufferIdx + 1,
+      this.outputBuffer.length
+    );
+    return this.outputBuffer[this.outputBufferIdx];
   }
   previousRecord(): TaggedStringType {
     // could throw TypeError upon access attempt
-    this.bufferIdx = this.bufferIdx === 0 ? 0 : this.bufferIdx - 1;
-    return this.buffer[this.bufferIdx];
+    this.outputBufferIdx =
+      this.outputBufferIdx === 0 ? 0 : this.outputBufferIdx - 1;
+    return this.outputBuffer[this.outputBufferIdx];
   }
   serialize(
     format?: ParseNodeSerializeFormatEnumType,
@@ -557,15 +573,16 @@ abstract class MarkdownSource extends BaseClass implements IDataSource {
 }
 export class RawMarkdownSource extends MarkdownSource implements IDataSource {
   readonly parent: any;
+  // inputBuffer: string[] = [];
   constructor(parent: any) {
     super(parent);
   }
   connect(fileName: string): number {
     this.fileName = fileName;
-    let inputBuffer: string[];
+    // let inputBuffer: string[];
     //    this.logger.diagnosticMode = true;
     this.logger.diagnostic(`input file: ${fileName}`);
-    inputBuffer = fs
+    this.inputBuffer = fs
       .readFileSync(fileName)
       .toString()
       .replace(/[\u2018\u2019]/g, "'") // single { left | right } quote to apostrophe
@@ -575,7 +592,8 @@ export class RawMarkdownSource extends MarkdownSource implements IDataSource {
       .replace(/[\u0009]+/g, "\t") // non-printables
       .split("\n");
 
-    let inputCount = this.parse(0, inputBuffer, 0, this.buffer);
+    // let inputCount = this.parse(0, 0, this.outputBuffer);
+    let inputCount = this.parse(0, 0);
 
     if (this.logger.warnings() > 0) {
       this.logger.warning(
@@ -584,40 +602,41 @@ export class RawMarkdownSource extends MarkdownSource implements IDataSource {
         } parsing '${fileName}'`
       );
     }
-    this.bufferIdx = 0;
+    this.outputBufferIdx = 0;
     return inputCount;
   }
   parse(
     depth: number,
-    inputBuffer: string[],
-    currentIdx: number,
-    resultBuffer: TaggedStringType[]
+    // inputBuffer: string[],
+    inputBufferIdx: number
+    // resultBuffer: TaggedStringType[]
   ): number {
-    // recursive descent
-    if (currentIdx < inputBuffer.length) {
+    if (inputBufferIdx < this.inputBuffer.length) {
       let result: TaggedStringType = {
         content: "",
         recordType: MarkdownRecordType.TBD,
         listDepth: depth,
         headingLevel: 0,
         autoNumberedTag: "",
-        lineNo: currentIdx + 1
+        lineNo: inputBufferIdx + 1
       };
       let match: RegExpMatchArray = [];
       if (
         MarkdownPatternDictionary[MarkdownRecordTagType.EMPTY].pattern.test(
-          inputBuffer[currentIdx]
+          this.inputBuffer[inputBufferIdx]
         )
       ) {
-        result.content = inputBuffer[currentIdx];
+        result.content = this.inputBuffer[inputBufferIdx];
         result.recordType = MarkdownRecordType.EMPTY;
       } else {
-        match = inputBuffer[currentIdx].match(/^(.*)$/)!;
+        match = this.inputBuffer[inputBufferIdx].match(/^(.*)$/)!;
         result.content = match[1];
         result.recordType = MarkdownRecordType.TBD;
       }
-      this.buffer.push(result);
-      this.parse(depth, inputBuffer, currentIdx + 1, resultBuffer);
+      this.outputBuffer.push(result);
+      // this.parse(depth, this.inputBuffer, inputBufferIdx + 1, resultBuffer);
+      // this.parse(depth, inputBufferIdx + 1, resultBuffer);
+      this.parse(depth, inputBufferIdx + 1);
     }
     return 0;
   }
@@ -630,31 +649,262 @@ export class BasicMarkdownSource extends RawMarkdownSource
     Object.defineProperty(this, "_logger", { enumerable: false });
     Object.defineProperty(this, "_parent", { enumerable: false });
   }
-  private parseParagraph(
+  private lookup(mdString: string): TaggedStringType {
+    let mdTag: MarkdownRecordTagType = MarkdownRecordTagType.TBD;
+    let depth: number = 0;
+    let autoNumberedTag: string = "";
+    let contentCaptureGroup: string = "";
+    let matches: RegExpMatchArray = [];
+    // LISTITEM_ORDERED* has two capture groups and not one.
+    for (mdTag in MarkdownPatternDictionary) {
+      let regexpPattern = MarkdownPatternDictionary[mdTag].pattern;
+      if (regexpPattern.test(mdString)) {
+        matches = mdString.match(regexpPattern)!; // full match, capture groups
+        //        matches = regexpPattern.exec(mdString)!;
+        contentCaptureGroup =
+          matches[MarkdownPatternDictionary[mdTag].contentCaptureGroup];
+        if (MarkdownPatternDictionary[mdTag].labelTagCaptureGroup > 0) {
+          autoNumberedTag =
+            matches[MarkdownPatternDictionary[mdTag].labelTagCaptureGroup];
+        }
+        // if (Number.isNaN(parseInt(mdTag.slice(-2))))
+        //   depth = parseInt(mdTag.slice(-2));
+        // else depth = 0;
+        //
+        depth = Number.isNaN((depth = parseInt(mdTag.slice(-2)))) ? 0 : depth;
+        // console.log(`inside lookup depth=${depth} for ${mdTag}`);
+        // console.log(mdString);
+        // console.log(
+        //   `${mdTag}: content="${contentCaptureGroup}", tag="${autoNumberedTag}", depth=${depth}`
+        // );
+        break;
+      }
+    }
+    return {
+      content: contentCaptureGroup,
+      recordType: MarkdownPatternDictionary[mdTag].recordType,
+      listDepth:
+        MarkdownPatternDictionary[mdTag].recordType !==
+        MarkdownRecordType.HEADING
+          ? depth
+          : 0,
+      headingLevel:
+        MarkdownPatternDictionary[mdTag].recordType ===
+        MarkdownRecordType.HEADING
+          ? depth
+          : 0,
+      autoNumberedTag: autoNumberedTag,
+      lineNo: 0 // tbd
+    };
+  }
+  private lookupByIndex(inputBufferIdx: number): TaggedStringType {
+    let parsedRecord: TaggedStringType;
+    if (inputBufferIdx >= 0 && inputBufferIdx < this.inputBuffer.length) {
+      parsedRecord = this.lookup(this.inputBuffer[inputBufferIdx]);
+    } else {
+      parsedRecord = TaggedStringInitializer();
+    }
+    return parsedRecord;
+  }
+  private parseListItemRecord(
+    parsedRecord: TaggedStringType,
     depth: number,
-    current: TaggedStringType,
-    resultBuffer: TaggedStringType[]
-  ) {
-    // if (current.content === undefined) {
-    //   resultBuffer.push({
-    //     content: "",
-    //     recordType: MarkdownRecordType.EMPTY,
-    //     depth: depth,
-    //     headingLevel: 0,
-    //     lineNo: current.lineNo
-    //   });
-    //   return;
-    // }
+    inputBufferIdx: number
+  ): number {
+    // parses recordType for listItems and implicit (no explicit record type)
     try {
-      if (current.content !== undefined) {
-        let sentences = current.content.split(PARAGRAPH_TO_SENTENCES);
-        resultBuffer.push({
+      // console.log(
+      //   `dataadapter.parseListItemRecord(): ${parsedRecord.recordType} recordType=${parsedRecord.recordType} lineNo=${parsedRecord.lineNo} depth=${depth}`
+      // );
+      assert(
+        parsedRecord.recordType === MarkdownRecordType.LISTITEM_ORDERED ||
+          parsedRecord.recordType === MarkdownRecordType.LISTITEM_UNORDERED,
+        `unexpected markdown record type ${parsedRecord.recordType}; expected ${MarkdownRecordType.LISTITEM_ORDERED} or ${MarkdownRecordType.LISTITEM_ORDERED}`
+      );
+      // another list item or list section
+      this.outputBuffer.push({
+        content: `[LIST ITEM START AT DEPTH ${depth}]`,
+        recordType: parsedRecord.recordType,
+        // current.recordType === MarkdownRecordType.LISTITEM_ORDERED
+        //   ? MarkdownRecordType.SECTION_ORDERED
+        //   : MarkdownRecordType.SECTION_UNORDERED,
+        listDepth: parsedRecord.listDepth,
+        headingLevel: parsedRecord.headingLevel,
+        autoNumberedTag: parsedRecord.autoNumberedTag,
+        lineNo: parsedRecord.lineNo
+      });
+      inputBufferIdx = this.parseParagraphRecord(
+        parsedRecord,
+        depth,
+        inputBufferIdx
+      );
+      let nextRecordListDepth: number = this.lookupByIndex(inputBufferIdx + 1)
+        .listDepth;
+      if (nextRecordListDepth === depth + 1) {
+        inputBufferIdx++;
+        inputBufferIdx = this.insertListRecord(
+          parsedRecord,
+          depth + 1,
+          inputBufferIdx
+        );
+      }
+      if (parsedRecord.listDepth !== depth) {
+        // typically listDepth > depth + 1
+        let msg: string = `invalid list depth; expected ${depth} or ${depth +
+          1} but encountered ${parsedRecord.listDepth} at lineNo ${
+          parsedRecord.lineNo
+        }`;
+        // console.log(msg);
+        this.logger.warning(msg);
+      }
+      // console.log(
+      //   `dataadapter.parse(): [LISTITEM END] ${parsedRecord.content}  (${parsedRecord.listDepth}===${depth}) at lineNo ${parsedRecord.lineNo}`
+      // );
+      this.outputBuffer.push({
+        content: `[LIST ITEM END AT DEPTH ${depth}]`,
+        recordType: MarkdownRecordType.LISTITEM_END,
+        // current.recordType === MarkdownRecordType.LISTITEM_ORDERED
+        //   ? MarkdownRecordType.LISTITEM_ORDERED
+        //   : MarkdownRecordType.LISTITEM_UNORDERED,
+        listDepth: depth,
+        headingLevel: 0,
+        autoNumberedTag: "",
+        lineNo: parsedRecord.lineNo
+      });
+    } catch (e) {
+      this.logger.error(
+        `Unexpected error encountered parsing sentences at line ${parsedRecord.lineNo}`
+      );
+    }
+    return inputBufferIdx;
+  }
+  private insertListRecord(
+    parsedRecord: TaggedStringType,
+    depth: number,
+    inputBufferIdx: number
+  ): number {
+    // assume that EOF lookup are already been called properly
+    // console.log(
+    //   `dataadapter.insertListRecord(): ${parsedRecord.recordType} recordType=${parsedRecord.recordType} lineNo=${parsedRecord.lineNo} depth=${depth}`
+    // );
+    assert(
+      parsedRecord.recordType === MarkdownRecordType.LISTITEM_ORDERED ||
+        parsedRecord.recordType === MarkdownRecordType.LISTITEM_UNORDERED,
+      `unexpected markdown record type ${parsedRecord.recordType}; expected ${MarkdownRecordType.LISTITEM_ORDERED} or ${MarkdownRecordType.LISTITEM_ORDERED}`
+    );
+    // another list item or list section
+    // console.log(
+    //   `dataadapter.insertListRecord(): [SECTION START] (${parsedRecord.listDepth}>${depth}) at lineNo ${parsedRecord.lineNo}`
+    // );
+    this.outputBuffer.push({
+      content: `[SECTION START AT DEPTH ${depth}]`,
+      recordType:
+        parsedRecord.recordType === MarkdownRecordType.LISTITEM_ORDERED
+          ? MarkdownRecordType.SECTION_ORDERED
+          : MarkdownRecordType.SECTION_UNORDERED,
+      listDepth: depth,
+      headingLevel: parsedRecord.headingLevel,
+      autoNumberedTag: parsedRecord.autoNumberedTag,
+      lineNo: parsedRecord.lineNo
+    });
+    let unwind: boolean = false;
+    for (
+      ;
+      inputBufferIdx < this.inputBuffer.length && ~unwind;
+      inputBufferIdx++
+    ) {
+      let parsedRecord: TaggedStringType = this.lookup(
+        this.inputBuffer[inputBufferIdx]
+      );
+      parsedRecord.lineNo = inputBufferIdx + 1;
+      // console.log(
+      //   `dataadapter.insertListRecord(after lookup): ${parsedRecord.recordType} recordType=${parsedRecord.recordType} lineNo=${parsedRecord.lineNo} listdepth=${parsedRecord.listDepth} depth=${depth}`
+      // );
+      // console.log(
+      //   `listitem=${parsedRecord.content} listdepth=${parsedRecord.listDepth} depth=${depth}`
+      // );
+      if (parsedRecord.listDepth === depth + 1) {
+        // console.log(
+        //   `found child sectionlist=${parsedRecord.content} listdepth=${parsedRecord.listDepth} lineNo=${parsedRecord.lineNo} depth=${depth}`
+        // );
+        inputBufferIdx = this.insertListRecord(
+          parsedRecord,
+          depth + 1,
+          inputBufferIdx
+        );
+      } else if (parsedRecord.listDepth === depth) {
+        // console.log(
+        //   `found child listitem=${parsedRecord.content} listdepth=${parsedRecord.listDepth} lineNo=${parsedRecord.lineNo} depth=${depth}`
+        // );
+        inputBufferIdx = this.parseListItemRecord(
+          parsedRecord,
+          depth,
+          inputBufferIdx
+        );
+      } else if (parsedRecord.listDepth === depth - 1) {
+        // console.log(`unwind section list1`);
+        unwind = true;
+        inputBufferIdx--;
+        break;
+        // unwind
+      } else if (parsedRecord.listDepth === 0 || depth === 0) {
+        // console.log(`unwind section list2`);
+        inputBufferIdx--;
+        unwind = true;
+        break;
+      } else {
+        let msg: string = `invalid list depth; expected ${depth} but encountered ${parsedRecord.listDepth} at lineNo ${parsedRecord.lineNo}`;
+        console.log(msg);
+        this.logger.warning(msg);
+      }
+      // parsedRecord.lineNo = inputBufferIdx + 1;
+      // console.log(
+      //   `dataadapter.insertListRecord(): lookup ${parsedRecord.recordType} "${parsedRecord.content}" (${parsedRecord.listDepth}?${depth}) at lineNo ${parsedRecord.lineNo}`
+      // );
+    }
+    this.outputBuffer.push({
+      content: `[SECTION END AT DEPTH=${depth} TAG="${parsedRecord.autoNumberedTag}"]`,
+      recordType: MarkdownRecordType.SECTION_END,
+      listDepth: depth,
+      headingLevel: 0,
+      autoNumberedTag: parsedRecord.autoNumberedTag,
+      lineNo: parsedRecord.lineNo
+    });
+    // console.log(
+    //   `dataadapter.insertListRecord(): [SECTION END] (${parsedRecord.listDepth}>${depth} at lineNo ${parsedRecord.lineNo}`
+    // );
+    // use current record to determine record type (again) from lookup
+    return inputBufferIdx;
+  }
+  private parseParagraphRecord(
+    parsedRecord: TaggedStringType,
+    depth: number,
+    inputBufferIdx: number
+  ): number {
+    // parses recordType for listItems and implicit (no explicit record type)
+    // parses paragraph record that does not include list item that are handled
+    // separately because list items can contain section (sub)lists whereas
+    // paragraphs are flat.
+    try {
+      // console.log(
+      //   `dataadapter.parse(): ${parsedRecord.recordType} parseParagraph() parsedRecord.recordType=${parsedRecord.recordType}`
+      // );
+      assert(
+        parsedRecord.recordType === MarkdownRecordType.LISTITEM_ORDERED ||
+          parsedRecord.recordType === MarkdownRecordType.LISTITEM_UNORDERED ||
+          parsedRecord.recordType === MarkdownRecordType.PARAGRAPH,
+        `invalid markdown record type; expected
+          ${MarkdownRecordType.PARAGRAPH}, ${MarkdownRecordType.LISTITEM_ORDERED} or ${MarkdownRecordType.LISTITEM_ORDERED}`
+      );
+      if (parsedRecord.content !== undefined) {
+        let sentences = parsedRecord.content.split(PARAGRAPH_TO_SENTENCES);
+        this.outputBuffer.push({
           content: "[PARAGRAPH]",
           recordType: MarkdownRecordType.PARAGRAPH,
-          listDepth: current.listDepth, //+ 1
+          listDepth: depth, //+ 1
           headingLevel: 0,
           autoNumberedTag: "",
-          lineNo: current.lineNo
+          lineNo: parsedRecord.lineNo
         });
         for (
           let sentenceIdx = 0;
@@ -672,39 +922,40 @@ export class BasicMarkdownSource extends RawMarkdownSource
           // requirement) BUT ONLY APPLIES TO the sentence record object
           // (i.e., MarkdownRecordType.SENTENCE) AND NOT any other record types.
           // Sometime in the future, take a deep dive into a better fix.
-          resultBuffer.push({
+          this.outputBuffer.push({
             content:
               sentences[sentenceIdx] +
               (sentences[sentenceIdx + 1] !== undefined
                 ? sentences[sentenceIdx + 1] + " "
                 : ""),
             recordType: MarkdownRecordType.SENTENCE,
-            listDepth: current.listDepth, //+ 1
+            listDepth: parsedRecord.listDepth, //+ 1
             headingLevel: 0,
             autoNumberedTag: "",
-            lineNo: current.lineNo
+            lineNo: parsedRecord.lineNo
           });
         }
       } else {
         this.logger.error(
-          `Undefined current.content encountered parsing sentences at line ${current.lineNo}`
+          `Undefined current.content encountered parsing sentences at line ${parsedRecord.lineNo}`
         );
       }
     } catch (e) {
       this.logger.error(
-        `Unexpected error encountered parsing sentences at line ${current.lineNo}`
+        `Unexpected error encountered parsing sentences at line ${parsedRecord.lineNo}`
       );
     }
-    resultBuffer.push({
+    this.outputBuffer.push({
       content: "[PARAGRAPH END]",
       recordType: MarkdownRecordType.PARAGRAPH_END,
-      listDepth: depth, //+ 1
+      listDepth: parsedRecord.listDepth, //+ 1
       headingLevel: 0,
       autoNumberedTag: "",
-      lineNo: current.lineNo
+      lineNo: parsedRecord.lineNo
     });
+    return inputBufferIdx;
   }
-  private lookup(mdString: string): TaggedStringType {
+  private lookup1(mdString: string): TaggedStringType {
     let mdTag: MarkdownRecordTagType = MarkdownRecordTagType.TBD;
     let depth: number = 0;
     let autoNumberedTag: string = "";
@@ -799,22 +1050,7 @@ export class BasicMarkdownSource extends RawMarkdownSource
         // break;
       }
     }
-    //     return {
-    //     content: matches.length > 0 ? matches[1] : "",
-    //     recordType: MarkdownPatternDictionary[mdTag].recordType,
-    //     depth:
-    //       MarkdownPatternDictionary[mdTag].recordType !==
-    //       MarkdownRecordType.HEADING
-    //         ? depth
-    //         : 0,
-    //     headingLevel:
-    //       MarkdownPatternDictionary[mdTag].recordType ===
-    //       MarkdownRecordType.HEADING
-    //         ? depth
-    //         : 0,
-    //     lineNo: 0
-    //   };
-    // }
+
     return {
       content: contentCaptureGroup,
       recordType: MarkdownPatternDictionary[mdTag].recordType,
@@ -832,142 +1068,378 @@ export class BasicMarkdownSource extends RawMarkdownSource
       lineNo: 0 // tbd
     };
   }
-  parse(
-    listDepth: number,
-    inputBuffer: string[],
-    currentInputIdx: number,
-    resultBuffer: TaggedStringType[]
-  ): number {
-    if (currentInputIdx > inputBuffer.length) {
-      return inputBuffer.length; // EOF
-    }
-    let idx: number = 0;
-    for (idx = currentInputIdx; idx < inputBuffer.length; idx++) {
-      let current: TaggedStringType = this.lookup(inputBuffer[idx]);
-      //this.logger.diagnosticMode = true;
-      current.lineNo = idx + 1;
-      this.logger.diagnostic(
-        `markdown looking up: "${inputBuffer[idx]}" as ${current.recordType} at line ${current.lineNo}`
-      );
-      // isListItem =
-      //   current.recordType === MarkdownRecordType.LISTITEM_ORDERED ||
-      //   current.recordType === MarkdownRecordType.LISTITEM_UNORDERED;
-
-      // Needed to ignore depth for heading records
-      if (current.listDepth < listDepth) {
-        // just pop parse() call stack and allow completion of (current.listDepth
-        // > depth) condition handle it (recursively)
-        return idx;
-      } else if (current.listDepth > listDepth) {
-        // need to determine style of list from current record
-        resultBuffer.push({
-          content: `[SECTION START AT DEPTH=${listDepth + 1} TAG="${
-            current.autoNumberedTag
-          }"]`,
-          recordType:
-            current.recordType === MarkdownRecordType.LISTITEM_ORDERED
-              ? MarkdownRecordType.SECTION_ORDERED
-              : MarkdownRecordType.SECTION_UNORDERED,
-          listDepth: listDepth + 1,
-          headingLevel: 0,
-          autoNumberedTag: current.autoNumberedTag,
-          lineNo: current.lineNo
-        });
-        // Reposition to previous record so next pass (which
-        // increments) can parse this record. OR could distribute idx++
-        idx = this.parse(listDepth + 1, inputBuffer, idx, resultBuffer) - 1;
-        resultBuffer.push({
-          content: `[SECTION END AT DEPTH=${listDepth + 1} TAG="${
-            current.autoNumberedTag
-          }"]`,
-          recordType: MarkdownRecordType.SECTION_END,
-          listDepth: listDepth + 1,
-          headingLevel: 0,
-          autoNumberedTag: current.autoNumberedTag,
-          lineNo: current.lineNo
-        });
-      } else {
-        switch (current.recordType) {
-          case MarkdownRecordType.PAGE: {
-            resultBuffer.push(current);
-            break;
-          }
-          case MarkdownRecordType.EMPTY: {
-            this.buffer.push(current); //EMPTY
-            break;
-          }
-          case MarkdownRecordType.HEADING: {
-            resultBuffer.push(current);
-            break;
-          }
-          case MarkdownRecordType.LISTITEM_ORDERED:
-          case MarkdownRecordType.LISTITEM_UNORDERED: {
-            resultBuffer.push({
-              content: `[LIST ITEM START AT DEPTH ${listDepth}]`,
-              recordType: current.recordType,
-              // current.recordType === MarkdownRecordType.LISTITEM_ORDERED
-              //   ? MarkdownRecordType.SECTION_ORDERED
-              //   : MarkdownRecordType.SECTION_UNORDERED,
-              listDepth: listDepth,
-              headingLevel: current.headingLevel,
-              autoNumberedTag: current.autoNumberedTag,
-              lineNo: current.lineNo
-            });
-            this.parseParagraph(current.listDepth, current, this.buffer);
-            resultBuffer.push({
-              content: `[LIST ITEM END AT DEPTH ${listDepth}]`,
-              recordType: MarkdownRecordType.LISTITEM_END,
-              // current.recordType === MarkdownRecordType.LISTITEM_ORDERED
-              //   ? MarkdownRecordType.LISTITEM_ORDERED
-              //   : MarkdownRecordType.LISTITEM_UNORDERED,
-              listDepth: listDepth,
-              headingLevel: 0,
-              autoNumberedTag: "",
-              lineNo: current.lineNo
-            });
-            break;
-          }
-          case MarkdownRecordType.BLOCKQUOTE: {
-            resultBuffer.push({
-              content: `[BLOCKQUOTE START ${listDepth}]`,
-              recordType: MarkdownRecordType.BLOCKQUOTE,
-              listDepth: current.listDepth,
-              headingLevel: current.headingLevel,
-              autoNumberedTag: "",
-              lineNo: current.lineNo
-            });
-            this.parseParagraph(current.listDepth, current, this.buffer);
-            resultBuffer.push({
-              content: `[BLOCKQUOTE END ${listDepth}]`,
-              recordType: MarkdownRecordType.SECTION_END,
-              listDepth: current.listDepth,
-              headingLevel: current.headingLevel,
-              autoNumberedTag: "",
-              lineNo: current.lineNo
-            });
-            break;
-          }
-          case MarkdownRecordType.PARAGRAPH: {
-            this.parseParagraph(current.listDepth, current, this.buffer);
-            break;
-          }
-          case MarkdownRecordType.IMAGEENTRY: {
-            resultBuffer.push({
-              content: current.content,
-              recordType: MarkdownRecordType.IMAGEENTRY,
-              listDepth: current.listDepth,
-              headingLevel: current.headingLevel,
-              autoNumberedTag: "",
-              lineNo: current.lineNo
-            });
-            break;
-          }
-          default: {
-            resultBuffer.push(current);
-          }
-        } //end switch
-      }
-    }
-    return idx; //parse next record
+  parse(): number {
+    let retVal = this.parseRecords(0, 0);
+    // console.log(this.serialize(ParseNodeSerializeFormatEnumType.TABULAR));
+    return retVal;
   }
+  parseRecords(depth: number, inputBufferIdx: number): number {
+    // Since LIST SECTION openings are not explicitly defined in the markdown,
+    // they must be inferred deterministically way by examining the depth and
+    // initial tags from lookup. When LISTITEM is encountered AND the depth
+    // increases then a [SECTION] is emitted before parsing the list items AND
+    // [SECTION END] emitted when LISTITEMS at the same depth are no longer
+    // detected at which time a [SECTION END] is emitted.
+    //
+    // Need to maintain a parseDepth and listDepth. The parseDepth is based on
+    // stack frame depth while list depth is defined by the depth within the
+    // markdown content and is relative to the local value of parseDepth.
+    //
+    // The LIST type i.e., (ordered or unordered) is determined by the tag.
+    // Likewise, the SECTION closings are generated when an opening at
+    // the same parse depth was previously emitted AND a LISTITEM with a
+    // decremented
+    //  depth or other record with  input record type that does not explicit
+    // have a depth is encountered.
+    // (except for PARAGRAPH)
+    // paragraphs not explicitly embedded into a LIST ITEM.
+    // A preorder recursive descent allows simplier impementation of paired
+    // open/close than an explicit stack.
+    // elements.
+    // console.log(
+    //   `dataadapter.parseRecords(): ***call start parseDepth=${depth} inputBufferIdx=${inputBufferIdx}`
+    // );
+    if (inputBufferIdx > this.inputBuffer.length) {
+      // EOF
+      return this.inputBuffer.length;
+    }
+    for (; inputBufferIdx < this.inputBuffer.length; inputBufferIdx++) {
+      // could be a while syntax above
+      let parsedRecord: TaggedStringType = this.lookup(
+        this.inputBuffer[inputBufferIdx]
+      );
+      parsedRecord.lineNo = inputBufferIdx + 1;
+      // console.log(
+      //   `dataadapter.parse(): lookup ${parsedRecord.recordType} "${parsedRecord.content}" (${parsedRecord.listDepth}?${depth}) at lineNo ${parsedRecord.lineNo}`
+      // );
+      this.logger.diagnostic(
+        `markdown looking up: "${this.inputBuffer[inputBufferIdx]}" as ${parsedRecord.recordType} at lineNo ${parsedRecord.lineNo}`
+      );
+      if (parsedRecord.listDepth < depth) {
+        // unwind to previous stack frame to close list item in the previously
+        // called parseSectionItemRecord() without changing the inputBufferIdx
+        return inputBufferIdx;
+      }
+      switch (parsedRecord.recordType) {
+        case MarkdownRecordType.LISTITEM_ORDERED:
+        case MarkdownRecordType.LISTITEM_UNORDERED: {
+          if (parsedRecord.listDepth > depth) {
+            // console.log(
+            //   `dataadapter.parse(): inserting list section (${parsedRecord.listDepth}<${depth}) at at lineNo ${parsedRecord.lineNo}`
+            // );
+            inputBufferIdx = this.insertListRecord(
+              parsedRecord,
+              depth + 1,
+              inputBufferIdx
+            );
+            // console.log(
+            //   `dataadapter.parse(): inserted list section (${parsedRecord.listDepth}<${depth}) at at lineNo ${parsedRecord.lineNo}`
+            // );
+          } else {
+            this.logger.error(
+              `Inconsistent depth encountered while parsing list item listDepth(${parsedRecord.listDepth}<=${depth}) at lineNo ${parsedRecord.lineNo}`
+            );
+          }
+          //
+          //
+          // // another list item or list section
+          // this.outputBuffer.push({
+          //   content: `[LIST ITEM START AT DEPTH ${depth}]`,
+          //   recordType: parsedRecord.recordType,
+          //   // current.recordType === MarkdownRecordType.LISTITEM_ORDERED
+          //   //   ? MarkdownRecordType.SECTION_ORDERED
+          //   //   : MarkdownRecordType.SECTION_UNORDERED,
+          //   listDepth: depth,
+          //   headingLevel: parsedRecord.headingLevel,
+          //   autoNumberedTag: parsedRecord.autoNumberedTag,
+          //   lineNo: parsedRecord.lineNo
+          // });
+          // console.log(
+          //   `dataadapter.parse(): [LISTITEM] ${parsedRecord.content}  (${parsedRecord.listDepth}===${depth}) at lineNo ${parsedRecord.lineNo}`
+          // );
+          // // The next record is:
+          // // depth is unchanged: paragraph,
+          // // depth decrements: listitem end
+          // // depth increments: section (ordered or unordered) w/ depth++
+          // // basically call parse1 again() that will perform the aforementioned
+          // // conditions.
+          //
+          // // this.pushParagraphRecord(current.listDepth, current, this.outputBuffer);
+          //
+          // inputBufferIdx = this.parseParagraphRecord(parsedRecord, depth, inputBufferIdx);
+          // console.log(
+          //   `dataadapter.parse(): after paragraph recordType=${parsedRecord.recordType} ${parsedRecord.content} depth=${parsedRecord.listDepth}`
+          // );
+          // // if next record is deeper than call parse recursively here
+          // if (inputBufferIdx + 1 < this.inputBuffer.length) {
+          //   let nextRecord: TaggedStringType = this.lookup(
+          //     this.inputBuffer[inputBufferIdx + 1]
+          //   );
+          //   if (nextRecord.listDepth > parsedRecord.listDepth) {
+          //     console.log(
+          //       `dataadapter.parse(): ***calling previousDepth=${depth} inputBufferIdx=${inputBufferIdx}`
+          //     );
+          //     inputBufferIdx = this.parseRecords(parsedRecord
+          //       depth,
+          //       inputBufferIdx + 1
+          //     );
+          //     console.log(
+          //       `dataadapter.parse(): ***called previousDepth=${depth} inputBufferIdx=${inputBufferIdx}`
+          //     );
+          //   }
+          // }
+          // // look ahead if next record depth is > current.depth then
+          // //            parse1(currentInputIdx) to handle list sections or more list items
+          // //else
+          // // === MarkdownRecordType.LISTITEM_END)
+          // // inputBufferIdx = this.parse(previousDepth + 1, inputBufferIdx) - 1; //
+          break;
+        }
+        case MarkdownRecordType.BLOCKQUOTE: {
+          this.outputBuffer.push({
+            content: `[BLOCKQUOTE START ${depth}]`,
+            recordType: MarkdownRecordType.BLOCKQUOTE,
+            listDepth: parsedRecord.listDepth,
+            headingLevel: parsedRecord.headingLevel,
+            autoNumberedTag: "",
+            lineNo: parsedRecord.lineNo
+          });
+          inputBufferIdx = this.parseParagraphRecord(
+            parsedRecord,
+            depth,
+            inputBufferIdx
+          );
+          this.outputBuffer.push({
+            content: `[BLOCKQUOTE END ${parsedRecord.listDepth}]`,
+            recordType: MarkdownRecordType.SECTION_END,
+            listDepth: parsedRecord.listDepth,
+            headingLevel: parsedRecord.headingLevel,
+            autoNumberedTag: "",
+            lineNo: parsedRecord.lineNo
+          });
+          break;
+        }
+        case MarkdownRecordType.PARAGRAPH: {
+          // this.pushParagraphRecord(current.listDepth, current, this.outputBuffer);
+          // console.log(
+          //   `dataadapter.parse(): ${parsedRecord.recordType} ${parsedRecord.content}  (${parsedRecord.listDepth}===${parsedRecord}) at lineNo ${parsedRecord.lineNo}`
+          // );
+          inputBufferIdx = this.parseParagraphRecord(
+            parsedRecord,
+            depth,
+            inputBufferIdx
+          );
+          break;
+        }
+        case MarkdownRecordType.IMAGEENTRY: {
+          this.outputBuffer.push({
+            content: parsedRecord.content,
+            recordType: MarkdownRecordType.IMAGEENTRY,
+            listDepth: parsedRecord.listDepth,
+            headingLevel: parsedRecord.headingLevel,
+            autoNumberedTag: "",
+            lineNo: parsedRecord.lineNo
+          });
+          // console.log(
+          //   `dataadapter.parse(): ${parsedRecord.recordType} ${parsedRecord.content}  (${parsedRecord.listDepth}===${parsedRecord}) at lineNo ${parsedRecord.lineNo}`
+          // );
+          break;
+        }
+        case MarkdownRecordType.PAGE:
+        case MarkdownRecordType.EMPTY:
+        case MarkdownRecordType.HEADING:
+        default: {
+          // console.log(
+          //   `dataadapter.parse(): ${parsedRecord.recordType} ${parsedRecord.content} (lvl=${parsedRecord.headingLevel}) at lineNo ${parsedRecord.lineNo}`
+          // );
+          this.outputBuffer.push(parsedRecord);
+        } // default
+      } // switch
+      // } //depth comparison
+    } // for loop
+    // console.log(
+    //   `dataadapter.parse(): ***end previousDepth=${depth}  inputBufferIdx=${inputBufferIdx}`
+    // );
+    return inputBufferIdx; // return next inputBufferIdx
+  }
+  // parse1(
+  //   listDepth: number,
+  //   // inputBuffer: string[],
+  //   currentInputIdx: number
+  //   // resultBuffer: TaggedStringType[]
+  // ): number {
+  //   if (currentInputIdx > this.inputBuffer.length) {
+  //     return this.inputBuffer.length; // EOF
+  //   }
+  //   //    let idx: number = 0;
+  //   for (; currentInputIdx < this.inputBuffer.length; currentInputIdx++) {
+  //     let current: TaggedStringType = this.lookup(
+  //       this.inputBuffer[currentInputIdx]
+  //     );
+  //     //this.logger.diagnosticMode = true;
+  //     current.lineNo = currentInputIdx + 1;
+  //     console.log(
+  //       `***dataadapter.parse(): ${current.recordType} "${current.content}" depth=${current.listDepth}at ${current.lineNo} ***`
+  //     );
+  //     this.logger.diagnostic(
+  //       `markdown looking up: "${this.inputBuffer[currentInputIdx]}" as ${current.recordType} at line ${current.lineNo}`
+  //     );
+  //     // isListItem =
+  //     //   current.recordType === MarkdownRecordType.LISTITEM_ORDERED ||
+  //     //   current.recordType === MarkdownRecordType.LISTITEM_UNORDERED;
+  //
+  //     // Needed to ignore depth for heading records
+  //     if (current.listDepth < listDepth) {
+  //       console.log(
+  //         `dataadapter.parse(): popping (${current.listDepth}<${listDepth}) at ${current.lineNo}`
+  //       );
+  //       // just pop parse() call stack and allow completion of (current.listDepth
+  //       // > depth) condition handle it (recursively)
+  //       return currentInputIdx;
+  //     } else if (current.listDepth > listDepth) {
+  //       console.log(
+  //         `dataadapter.parse(): pushing (${current.listDepth}<${listDepth}) at ${current.lineNo}`
+  //       );
+  //       console.log(
+  //         `dataadapter.parse(): [SECTION START] (${current.listDepth}>${listDepth}) at ${current.lineNo}`
+  //       );
+  //       // need to determine style of list from current record
+  //       this.outputBuffer.push({
+  //         content: `[SECTION START AT DEPTH=${listDepth + 1} TAG="${
+  //           current.autoNumberedTag
+  //         }"]`,
+  //         recordType:
+  //           current.recordType === MarkdownRecordType.LISTITEM_ORDERED
+  //             ? MarkdownRecordType.SECTION_ORDERED
+  //             : MarkdownRecordType.SECTION_UNORDERED,
+  //         listDepth: listDepth + 1,
+  //         headingLevel: 0,
+  //         autoNumberedTag: current.autoNumberedTag,
+  //         lineNo: current.lineNo
+  //       });
+  //       // Reposition to previous record so next pass (which
+  //       // increments) can parse this record. OR could distribute idx++
+  //       // idx = this.parse(listDepth + 1, this.inputBuffer, idx, this.outputBuffer) - 1;
+  //       currentInputIdx = this.parse(listDepth + 1, currentInputIdx) - 1; // console.log(
+  //       //   `dataadapter.parse(): [SECTION END] (${current.listDepth}>${listDepth}) at ${current.lineNo}`
+  //       // );
+  //       this.outputBuffer.push({
+  //         content: `[SECTION END AT DEPTH=${listDepth + 1} TAG="${
+  //           current.autoNumberedTag
+  //         }"]`,
+  //         recordType: MarkdownRecordType.SECTION_END,
+  //         listDepth: listDepth + 1,
+  //         headingLevel: 0,
+  //         autoNumberedTag: current.autoNumberedTag,
+  //         lineNo: current.lineNo
+  //       });
+  //       console.log(
+  //         `dataadapter.parse(): [SECTION END] (${current.listDepth}>${listDepth} at ${current.lineNo}`
+  //       );
+  //     } else {
+  //       console.log(
+  //         `dataadapter.parse(): processing ${current.content}  (${current.listDepth}===${listDepth}) at ${current.lineNo}`
+  //       );
+  //       // console.log(
+  //       //   `dataadapter.parse(): (${current.listDepth}===${listDepth}) at ${current.lineNo}`
+  //       // );
+  //       switch (current.recordType) {
+  //         case MarkdownRecordType.PAGE: {
+  //           this.outputBuffer.push(current);
+  //           break;
+  //         }
+  //         case MarkdownRecordType.EMPTY: {
+  //           this.outputBuffer.push(current); //EMPTY
+  //           break;
+  //         }
+  //         case MarkdownRecordType.HEADING: {
+  //           this.outputBuffer.push(current);
+  //           break;
+  //         }
+  //         case MarkdownRecordType.LISTITEM_ORDERED:
+  //         case MarkdownRecordType.LISTITEM_UNORDERED: {
+  //           this.outputBuffer.push({
+  //             content: `[LIST ITEM START AT DEPTH ${listDepth}]`,
+  //             recordType: current.recordType,
+  //             // current.recordType === MarkdownRecordType.LISTITEM_ORDERED
+  //             //   ? MarkdownRecordType.SECTION_ORDERED
+  //             //   : MarkdownRecordType.SECTION_UNORDERED,
+  //             listDepth: listDepth,
+  //             headingLevel: current.headingLevel,
+  //             autoNumberedTag: current.autoNumberedTag,
+  //             lineNo: current.lineNo
+  //           });
+  //           console.log(
+  //             `dataadapter.parse(): [LISTITEM] ${current.content}  (${current.listDepth}===${listDepth}) at ${current.lineNo}`
+  //           );
+  //           // this.pushParagraphRecord(current.listDepth, current, this.outputBuffer);
+  //           this.pushParagraphRecord(current.listDepth, current);
+  //           console.log(
+  //             `after paragraph recordType=${current.recordType} depth=${current.listDepth}`
+  //           );
+  //           // === MarkdownRecordType.LISTITEM_END)
+  //           console.log(
+  //             `dataadapter.parse(): [LISTITEM END] ${current.content}  (${current.listDepth}===${listDepth}) at ${current.lineNo}`
+  //           );
+  //           this.outputBuffer.push({
+  //             content: `[LIST ITEM END AT DEPTH ${listDepth}]`,
+  //             recordType: MarkdownRecordType.LISTITEM_END,
+  //             // current.recordType === MarkdownRecordType.LISTITEM_ORDERED
+  //             //   ? MarkdownRecordType.LISTITEM_ORDERED
+  //             //   : MarkdownRecordType.LISTITEM_UNORDERED,
+  //             listDepth: listDepth,
+  //             headingLevel: 0,
+  //             autoNumberedTag: "",
+  //             lineNo: current.lineNo
+  //           });
+  //           // console.log(
+  //           //   `dataadapter.parse(): [LISTITEM END] (${current.listDepth}===${listDepth}) at ${current.lineNo}`
+  //           // );
+  //           break;
+  //         }
+  //         case MarkdownRecordType.BLOCKQUOTE: {
+  //           this.outputBuffer.push({
+  //             content: `[BLOCKQUOTE START ${listDepth}]`,
+  //             recordType: MarkdownRecordType.BLOCKQUOTE,
+  //             listDepth: current.listDepth,
+  //             headingLevel: current.headingLevel,
+  //             autoNumberedTag: "",
+  //             lineNo: current.lineNo
+  //           });
+  //           // this.pushParagraphRecord(current.listDepth, current, this.outputBuffer);
+  //           this.pushParagraphRecord(current.listDepth, current);
+  //           this.outputBuffer.push({
+  //             content: `[BLOCKQUOTE END ${listDepth}]`,
+  //             recordType: MarkdownRecordType.SECTION_END,
+  //             listDepth: current.listDepth,
+  //             headingLevel: current.headingLevel,
+  //             autoNumberedTag: "",
+  //             lineNo: current.lineNo
+  //           });
+  //           break;
+  //         }
+  //         case MarkdownRecordType.PARAGRAPH: {
+  //           // this.pushParagraphRecord(current.listDepth, current, this.outputBuffer);
+  //           this.pushParagraphRecord(current.listDepth, current);
+  //           break;
+  //         }
+  //         case MarkdownRecordType.IMAGEENTRY: {
+  //           this.outputBuffer.push({
+  //             content: current.content,
+  //             recordType: MarkdownRecordType.IMAGEENTRY,
+  //             listDepth: current.listDepth,
+  //             headingLevel: current.headingLevel,
+  //             autoNumberedTag: "",
+  //             lineNo: current.lineNo
+  //           });
+  //           break;
+  //         }
+  //         default: {
+  //           this.outputBuffer.push(current);
+  //         }
+  //       } //end switch
+  //     }
+  //   }
+  //   return currentInputIdx; //parse next record
+  // }
 }

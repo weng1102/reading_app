@@ -1,6 +1,6 @@
 /*******************************************
  * Reading Monitor v2.0
- * (c) 2017, 2018, 2019, 2020 by Wen Eng. All rights reserved.
+ * (c) 2017 - 2024 by Wen Eng. All rights reserved.
  ********************************************/
 
 "use strict";
@@ -115,9 +115,12 @@ export const enum MarkupLabelType {
   TOKEN = "<explicittoken>", // <token>
 
   // for markdowns
-  FILLIN = "<fillin>",
+  RECITEBUTTON = "<recite-button>",
   CUELIST = "<cuelist>",
   CUELIST_CLOSE = "</cuelist>",
+  FILLIN = "<fillin>",
+  LABEL = "<label>",
+  LABEL_END = "</label>",
 
   // passthru markdowns
   STRONG = "<strong>",
@@ -168,8 +171,9 @@ const TokenDictionary: TokenDictionaryType = {
   [TokenType.SYMBOL]: {
     type: TokenType.SYMBOL,
     label: TokenLabelType.SYMBOL,
-    pattern: /([@#%&\+\=x])/
+    pattern: /([@#%&\+\=\*])/
     // pattern: /([@#%&]|((?<=\d| \s)\+(?=\s|\d|$)))|((?<=\s|\d)\=(?=\s|\d))/
+    //([@#&]|((?<=[\d])%)|(?<=[\d\s])[x\=\-](?=[\d\s]))
   },
   [TokenType.PUNCTUATION]: {
     type: TokenType.PUNCTUATION,
@@ -316,7 +320,10 @@ const MarkupTokenDictionary: MarkupTokenDictionaryType = {
   [MarkupTokenType.LINK]: {
     type: MarkupTokenType.LINK,
     label: MarkupLabelType.LINK,
-    pattern: /(?<!\!)(\[.+\])(\([^\(]*\))/g
+    pattern: /(?<!\!)\[([\s\w'\/\@\$\(\)\*\.\,\?\!\#\&\+\-\:\<\>]+\])(\([^\(]*\))/g
+    // pattern: /(?<!\!)(\[(\w|\s|['\"\/\@\$\(\)\*\.\,\?\!\#\&\+\-\:])+\])(\([^\(]*\))/g
+    //    pattern: /(?<!\!)(\[.+\])(\([^\(]*\))/g
+
     // (["'\(\[]?|\!\[|\[\()
     // scan for token that require potential markup tags [link name](url)
   }
@@ -324,17 +331,21 @@ const MarkupTokenDictionary: MarkupTokenDictionaryType = {
 export const enum MarkdownIndexType {
   // defines order of markdown replacement e.g., FILLIN processed first.
   FILLIN = 0,
+  RECITEBUTTON,
   CUELIST,
   EM,
   NUMERALS,
-  STRONG
+  STRONG,
+  LABEL
 }
 export const enum MarkdownTokenType {
+  RECITEBUTTON,
   CUELIST,
   FILLIN,
   EM,
   NUMERALS,
-  STRONG
+  STRONG,
+  LABEL
   // STRONG_EM_OPEN,
   // STRONG_EM_CLOSE
 }
@@ -344,15 +355,17 @@ interface MarkdownTokenItemType {
   label: MarkupLabelType;
   pattern: RegExp;
 }
-const enum MarkdownLabelType {
-  EM = "**",
-  FILLIN_OPEN = "[_",
-  FILLIN_CLOSE = "_]",
-  STRONG = "*",
-  STRONG_EM = "***", // cannot handle this combined tag. See below
-  CUELIST_OPEN = "=(",
-  CUELIST_CLOSE = ")"
-}
+// const enum MarkdownLabelType {
+//   EM = "**",
+//   FILLIN_OPEN = "[_",
+//   FILLIN_CLOSE = "_]",
+//   STRONG = "*",
+//   STRONG_EM = "***", // cannot handle this combined tag. See below
+//   CUELIST_OPEN = "=(",
+//   CUELIST_CLOSE = ")",
+//   LABEL_OPEN = "[[label:",
+//   LABEL_CLOSE = "/]]"
+// }
 type MarkdownTokenDictionaryType = Record<
   MarkdownIndexType,
   MarkdownTokenItemType
@@ -361,7 +374,8 @@ const MarkdownTokenDictionary: MarkdownTokenDictionaryType = {
   [MarkdownIndexType.FILLIN]: {
     type: MarkdownTokenType.FILLIN,
     label: MarkupLabelType.FILLIN,
-    pattern: /(?<=\s|^|[\.,!'"])\[_(\w+(=\(\w*(,{0,1}\s*[\w\.\-\_\/\@\%\&]*)*\)){0,1})_\](?=$|\s|[\.,!"\?])/g
+    pattern: /(?<=\s|^|[\.,!'"])\[_((\w+|(\<contraction\>\w+(\'s|s\')*\<\/contraction\>))(=\(\w*(,{0,1}\s*[\w\.\-\_\/\@\%\&\']*)*\)){0,1})_\](?=$|\s|[\.,!"\?])/g
+    // pattern: /(?<=\s|^|[\.,!'"])\[_(\w+(=\(\w*(,{0,1}\s*[\w\.\-\_\/\@\%\&\']*)*\)){0,1})_\](?=$|\s|[\.,!"\?])/g
 
     // (?<=\s|^|[\.,!'"])\[_(\w+(=\(\w*(,\s*\w*)*\)){0,1})_\](?=$|\s|[\.,!"\?])
     // /(?<=\s|^|[\.,!'"])\[_((\<\w+( \w+)*\>){0,1}(\w|\s|\w=\([^)]*\)|[',:\-\(\)@_\.#\$])*((<(\/\w+( \w+)*\>)){0,1}))_](?=$|\s|[\.,!"\?])/g
@@ -375,6 +389,11 @@ const MarkdownTokenDictionary: MarkdownTokenDictionaryType = {
     // pattern: /(?<=\s|^|[\.,!'"])\[_((\w+)(=\((\w+|\s|,)*\)){0,1})_\](?=$|\s|[\.,!"\?])/g
     // pattern: /(?<=\s|^|[\.,!'"])\[_((\w|[\s"'\/\-\(\)\@\.,\:;\$\<\>%!])+)_\](?=$|\s|[\.,!"\?])/g
     //    markdown: MarkdownLabelType.FILLIN_OPEN
+  },
+  [MarkdownIndexType.RECITEBUTTON]: {
+    type: MarkdownTokenType.RECITEBUTTON,
+    label: MarkupLabelType.RECITEBUTTON,
+    pattern: /(?<=\s|^|[\.,!'"])\[recite-button:\s+((\w+|\-|,|\.|\s)*)\/\](?=$|\s|[\.,!"\?])/gi
   },
   [MarkdownIndexType.CUELIST]: {
     type: MarkdownTokenType.CUELIST,
@@ -404,7 +423,14 @@ const MarkdownTokenDictionary: MarkdownTokenDictionaryType = {
     label: MarkupLabelType.STRONG,
     pattern: /(?<=\s|^|[\.,!'"])\*((\w|[\s"'\/\-\(\)\_\@\.,\:;\$\<\>])+)\*(?=$|\s|[\.,!"\?])/g
     //    markdown: MarkdownLabelType.STRONG
+  },
+  [MarkdownIndexType.LABEL]: {
+    type: MarkdownTokenType.LABEL,
+    label: MarkupLabelType.LABEL,
+    pattern: /(?<=\s|^|[\.,!'"])\[\[label:[\w\s,]*\/\]\](?=$|\s|[\.,!"\?])/g
+    //    markdown: MarkdownLabelType.STRONG
   }
+
   ///////////////////////////////////////////////////////////////////////////
   // Combined ***:
   // CANNOT define what is the closing tag for *** because it may not be ***
@@ -436,7 +462,7 @@ export class Tokenizer {
     this.logger = new Logger(this);
     this.tokenizingPattern = new RegExp(TokenizingPatternSource, "g");
   }
-  tokenize(sentence: string): TokenListType {
+  tokenize(sentence: string, lineNo: number = 0): TokenListType {
     // matches token pattern without whitespace instead of using delimited
     // whitespace.
     let tokenOnlyList: RegExpMatchArray | null;
@@ -460,6 +486,7 @@ export class Tokenizer {
             new Token(
               prefix,
               TokenType.WHITESPACE,
+              lineNo,
               currentPos,
               tokenPos - currentPos
             )
@@ -472,6 +499,7 @@ export class Tokenizer {
             new Token(
               tokenOnly,
               this.tokenType(tokenOnly),
+              lineNo,
               currentPos,
               tokenOnly.length
             )
@@ -494,6 +522,7 @@ export class Tokenizer {
           new Token(
             postfix,
             TokenType.WHITESPACE,
+            lineNo,
             currentPos,
             sentence.length - currentPos
           )
@@ -697,6 +726,7 @@ export class Tokenizer {
 export class Token {
   readonly content: string = "";
   readonly type: TokenType = TokenType.TBD;
+  readonly lineNo: number = 0;
   readonly position: number = 0;
   readonly length: number = 0;
   //  protected parserType: number;
@@ -705,14 +735,17 @@ export class Token {
   constructor(
     content: string,
     type: TokenType,
+    lineNo: number,
     position: number,
     length: number
   ) {
     switch (arguments.length) {
-      case 4:
+      case 5:
         this.length = length;
-      case 3:
+      case 4:
         this.position = position;
+      case 3:
+        this.lineNo = lineNo;
       case 2:
         this.type = type;
       case 1:

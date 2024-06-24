@@ -23,11 +23,13 @@ import {
 import { Logger } from "./logger";
 import { MarkdownRecordType, TaggedStringType } from "./dataadapter";
 import {
+  AutodNumberedHeadingEnumType,
   ISectionFillinItem,
   IHeadingListItem,
   ILinkListItem,
   IPageContent,
   IRangeItem,
+  IReciteButtonItem,
   ISentenceListItem,
   ISectionListItem,
   ITerminalInfo,
@@ -64,6 +66,7 @@ export class PageParseNode extends ParseNode implements IPageContent {
   owner: string = "anonymous";
   author: string = "anonymous";
   category: string = "Miscellaneous";
+  headingNumbering: string = "";
   version: string = PageContentVersion;
   pageFormatType = PageFormatEnumType.default;
   created: string = InitialDate;
@@ -80,6 +83,7 @@ export class PageParseNode extends ParseNode implements IPageContent {
   sentenceList: ISentenceListItem[] = [];
   linkList: ILinkListItem[] = [];
   fillinList: ISectionFillinItem[] = [];
+  reciteButtons: IReciteButtonItem[] = [];
   constructor(parent?: PageParseNode | AppNode) {
     super(parent);
   }
@@ -93,6 +97,7 @@ export class PageParseNode extends ParseNode implements IPageContent {
       [3]  date created
       [4]  category
       [5]  description
+      [6]  numbering scheme
       */
       let args: string[] = argString.split(",").map(arg => arg.trim());
       let argNum: number = 0;
@@ -166,6 +171,16 @@ export class PageParseNode extends ParseNode implements IPageContent {
         lineNo,
         this.logger
       ) as boolean;
+      argNum++;
+      this.headingNumbering = ValidateArg(
+        args[argNum] in AutodNumberedHeadingEnumType,
+        "heading numbering",
+        args[argNum],
+        this.headingNumbering,
+        argNum,
+        lineNo,
+        this.logger
+      ) as AutodNumberedHeadingEnumType;
       this.logger.diagnostic(`Validated ${argNum} parameters`);
     };
 
@@ -219,6 +234,12 @@ export class PageParseNode extends ParseNode implements IPageContent {
 
       this.userContext.fillins.parse();
       this.fillinList = this.userContext.fillins;
+
+      this.userContext.reciteButtons.parse(
+        this.terminalList,
+        this.sentenceList
+      );
+      this.reciteButtons = this.userContext.reciteButtons;
 
       this.modified = new Date(Date.now()).toString();
     } catch (e) {

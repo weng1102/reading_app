@@ -1,16 +1,19 @@
 {
   "id": 0,
-  "title": "Link rendering v3",
+  "title": "",
   "filename": "links3.json",
   "description": "",
   "owner": "anonymous",
-  "author": "Wen",
-  "category": "Testing",
-  "version": "20231102.1",
+  "author": "anonymous",
+  "category": "Miscellaneous",
+  "headingNumbering": "",
+  "version": "20240611.1",
   "pageFormatType": 0,
-  "created": "Sun Feb 04 2024 17:05:01 GMT-0800 (Pacific Standard Time)",
-  "modified": "Sun Feb 04 2024 17:05:01 GMT-0800 (Pacific Standard Time)",
-  "transformed": "Sun Feb 04 2024 17:05:01 GMT-0800 (Pacific Standard Time)",
+  "created": "Sat Jun 22 2024 19:38:55 GMT-0700 (Pacific Daylight Time)",
+  "modified": "Sat Jun 22 2024 19:38:55 GMT-0700 (Pacific Daylight Time)",
+  "transformed": "Sat Jun 22 2024 19:38:55 GMT-0700 (Pacific Daylight Time)",
+  "showTags": false,
+  "columnCount": 0,
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -18,34 +21,24 @@
       "id": 0,
       "name": "",
       "description": "",
-      "firstTermIdx": -9999,
-      "lastTermIdx": -9999,
-      "items": [],
-      "type": "empty",
-      "meta": {
-        "count": 1
-      }
-    },
-    {
-      "id": 0,
-      "name": "",
-      "description": "",
       "firstTermIdx": 0,
       "lastTermIdx": 3,
+      "showTags": false,
+      "columnCount": 0,
       "items": [],
       "type": "paragraph",
       "meta": {
         "sentences": [
           {
             "id": 0,
-            "content": "The quick [brown fox](link1)",
+            "content": "[Ronlyn's brown fox](link1,page) [fox](link2,heading)",
             "firstTermIdx": 0,
             "lastTermIdx": 3,
             "terminals": [
               {
                 "id": 0,
-                "termIdx": 0,
-                "content": "The",
+                "termIdx": -9999,
+                "content": "Ronlyn's brown fox",
                 "cueList": "",
                 "cues": {
                   "partOfSpeech": "untagged",
@@ -54,179 +47,95 @@
                   "alternatives": []
                 },
                 "firstTermIdx": 0,
-                "lastTermIdx": 0,
-                "type": 17,
-                "meta": {
-                  "content": "The",
-                  "cues": [],
-                  "termIdx": 0,
-                  "nextTermIdx": [
-                    1
-                  ],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "heading": false,
-                  "audible": true,
-                  "linkable": false,
-                  "visible": true,
-                  "visited": false,
-                  "numberAsNumerals": false,
-                  "linkIdx": -9999,
-                  "hintsIdx": -9999,
-                  "fillin": {
-                    "sectionIdx": -9999,
-                    "responseIdx": -9999
-                  },
-                  "bold": false,
-                  "italics": false,
-                  "markupTag": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "cueList": "",
-                "cues": {
-                  "partOfSpeech": "untagged",
-                  "definition": "",
-                  "image": "",
-                  "alternatives": []
-                },
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 16,
-                "meta": {
-                  "content": " ",
-                  "cues": [],
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "heading": false,
-                  "audible": true,
-                  "linkable": false,
-                  "visible": true,
-                  "visited": false,
-                  "numberAsNumerals": false,
-                  "linkIdx": -9999,
-                  "hintsIdx": -9999,
-                  "fillin": {
-                    "sectionIdx": -9999,
-                    "responseIdx": -9999
-                  },
-                  "bold": false,
-                  "italics": false,
-                  "markupTag": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": 1,
-                "content": "quick",
-                "cueList": "",
-                "cues": {
-                  "partOfSpeech": "untagged",
-                  "definition": "",
-                  "image": "",
-                  "alternatives": []
-                },
-                "firstTermIdx": 1,
-                "lastTermIdx": 1,
-                "type": 17,
-                "meta": {
-                  "content": "quick",
-                  "cues": [],
-                  "termIdx": 1,
-                  "nextTermIdx": [
-                    2
-                  ],
-                  "prevTermIdx": [
-                    0
-                  ],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": true,
-                  "heading": false,
-                  "audible": true,
-                  "linkable": false,
-                  "visible": true,
-                  "visited": false,
-                  "numberAsNumerals": false,
-                  "linkIdx": -9999,
-                  "hintsIdx": -9999,
-                  "fillin": {
-                    "sectionIdx": -9999,
-                    "responseIdx": -9999
-                  },
-                  "bold": false,
-                  "italics": false,
-                  "markupTag": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": " ",
-                "cueList": "",
-                "cues": {
-                  "partOfSpeech": "untagged",
-                  "definition": "",
-                  "image": "",
-                  "alternatives": []
-                },
-                "firstTermIdx": -9999,
-                "lastTermIdx": -9999,
-                "type": 16,
-                "meta": {
-                  "content": " ",
-                  "cues": [],
-                  "termIdx": -9999,
-                  "nextTermIdx": [],
-                  "prevTermIdx": [],
-                  "altpronunciation": "",
-                  "altrecognition": "",
-                  "recitable": false,
-                  "heading": false,
-                  "audible": true,
-                  "linkable": false,
-                  "visible": true,
-                  "visited": false,
-                  "numberAsNumerals": false,
-                  "linkIdx": -9999,
-                  "hintsIdx": -9999,
-                  "fillin": {
-                    "sectionIdx": -9999,
-                    "responseIdx": -9999
-                  },
-                  "bold": false,
-                  "italics": false,
-                  "markupTag": false
-                }
-              },
-              {
-                "id": 0,
-                "termIdx": -9999,
-                "content": "brown fox",
-                "cueList": "",
-                "cues": {
-                  "partOfSpeech": "untagged",
-                  "definition": "",
-                  "image": "",
-                  "alternatives": []
-                },
-                "firstTermIdx": 2,
-                "lastTermIdx": 3,
-                "type": 6,
+                "lastTermIdx": 2,
+                "type": 7,
                 "meta": {
                   "label": [
                     {
                       "id": 0,
-                      "termIdx": 2,
+                      "termIdx": 0,
+                      "content": "Ronlyn's",
+                      "cueList": "",
+                      "cues": {
+                        "partOfSpeech": "untagged",
+                        "definition": "",
+                        "image": "",
+                        "alternatives": []
+                      },
+                      "firstTermIdx": 0,
+                      "lastTermIdx": 0,
+                      "type": 18,
+                      "meta": {
+                        "content": "Ronlyn's",
+                        "cues": [],
+                        "termIdx": 0,
+                        "nextTermIdx": [
+                          1
+                        ],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "heading": false,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": -9999,
+                      "content": " ",
+                      "cueList": "",
+                      "cues": {
+                        "partOfSpeech": "untagged",
+                        "definition": "",
+                        "image": "",
+                        "alternatives": []
+                      },
+                      "firstTermIdx": -9999,
+                      "lastTermIdx": -9999,
+                      "type": 17,
+                      "meta": {
+                        "content": " ",
+                        "cues": [],
+                        "termIdx": -9999,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": false,
+                        "heading": false,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    },
+                    {
+                      "id": 0,
+                      "termIdx": 1,
                       "content": "brown",
                       "cueList": "",
                       "cues": {
@@ -235,18 +144,18 @@
                         "image": "",
                         "alternatives": []
                       },
-                      "firstTermIdx": 2,
-                      "lastTermIdx": 2,
-                      "type": 17,
+                      "firstTermIdx": 1,
+                      "lastTermIdx": 1,
+                      "type": 18,
                       "meta": {
                         "content": "brown",
                         "cues": [],
-                        "termIdx": 2,
+                        "termIdx": 1,
                         "nextTermIdx": [
-                          3
+                          2
                         ],
                         "prevTermIdx": [
-                          1
+                          0
                         ],
                         "altpronunciation": "",
                         "altrecognition": "",
@@ -281,7 +190,7 @@
                       },
                       "firstTermIdx": -9999,
                       "lastTermIdx": -9999,
-                      "type": 16,
+                      "type": 17,
                       "meta": {
                         "content": " ",
                         "cues": [],
@@ -310,7 +219,7 @@
                     },
                     {
                       "id": 0,
-                      "termIdx": 3,
+                      "termIdx": 2,
                       "content": "fox",
                       "cueList": "",
                       "cues": {
@@ -319,16 +228,18 @@
                         "image": "",
                         "alternatives": []
                       },
-                      "firstTermIdx": 3,
-                      "lastTermIdx": 3,
-                      "type": 12,
+                      "firstTermIdx": 2,
+                      "lastTermIdx": 2,
+                      "type": 18,
                       "meta": {
                         "content": "fox",
                         "cues": [],
-                        "termIdx": 3,
-                        "nextTermIdx": [],
+                        "termIdx": 2,
+                        "nextTermIdx": [
+                          3
+                        ],
                         "prevTermIdx": [
-                          2
+                          1
                         ],
                         "altpronunciation": "",
                         "altrecognition": "",
@@ -361,13 +272,13 @@
                   },
                   "className": "",
                   "style": "",
-                  "linkIdx": -9999
+                  "linkIdx": 0
                 }
               },
               {
                 "id": 0,
                 "termIdx": -9999,
-                "content": "</link>",
+                "content": " ",
                 "cueList": "",
                 "cues": {
                   "partOfSpeech": "untagged",
@@ -377,13 +288,111 @@
                 },
                 "firstTermIdx": -9999,
                 "lastTermIdx": -9999,
-                "type": 13
+                "type": 17,
+                "meta": {
+                  "content": " ",
+                  "cues": [],
+                  "termIdx": -9999,
+                  "nextTermIdx": [],
+                  "prevTermIdx": [],
+                  "altpronunciation": "",
+                  "altrecognition": "",
+                  "recitable": false,
+                  "heading": false,
+                  "audible": true,
+                  "linkable": false,
+                  "visible": true,
+                  "visited": false,
+                  "numberAsNumerals": false,
+                  "linkIdx": -9999,
+                  "hintsIdx": -9999,
+                  "fillin": {
+                    "sectionIdx": -9999,
+                    "responseIdx": -9999
+                  },
+                  "bold": false,
+                  "italics": false,
+                  "markupTag": false
+                }
+              },
+              {
+                "id": 0,
+                "termIdx": -9999,
+                "content": "fox",
+                "cueList": "",
+                "cues": {
+                  "partOfSpeech": "untagged",
+                  "definition": "",
+                  "image": "",
+                  "alternatives": []
+                },
+                "firstTermIdx": 3,
+                "lastTermIdx": 3,
+                "type": 7,
+                "meta": {
+                  "label": [
+                    {
+                      "id": 0,
+                      "termIdx": 3,
+                      "content": "fox",
+                      "cueList": "",
+                      "cues": {
+                        "partOfSpeech": "untagged",
+                        "definition": "",
+                        "image": "",
+                        "alternatives": []
+                      },
+                      "firstTermIdx": 3,
+                      "lastTermIdx": 3,
+                      "type": 18,
+                      "meta": {
+                        "content": "fox",
+                        "cues": [],
+                        "termIdx": 3,
+                        "nextTermIdx": [],
+                        "prevTermIdx": [
+                          2
+                        ],
+                        "altpronunciation": "",
+                        "altrecognition": "",
+                        "recitable": true,
+                        "heading": false,
+                        "audible": true,
+                        "linkable": false,
+                        "visible": true,
+                        "visited": false,
+                        "numberAsNumerals": false,
+                        "linkIdx": -9999,
+                        "hintsIdx": -9999,
+                        "fillin": {
+                          "sectionIdx": -9999,
+                          "responseIdx": -9999
+                        },
+                        "bold": false,
+                        "italics": false,
+                        "markupTag": false
+                      }
+                    }
+                  ],
+                  "destination": {
+                    "page": "link2",
+                    "directory": "",
+                    "linkIdxType": "heading",
+                    "headingIdx": -9999,
+                    "sectionIdx": -9999,
+                    "terminalIdx": -9999
+                  },
+                  "className": "",
+                  "style": "",
+                  "linkIdx": 1
+                }
               }
             ],
             "lastPunctuation": ""
           }
         ],
-        "style": ""
+        "style": "",
+        "class": "p"
       }
     },
     {
@@ -392,6 +401,8 @@
       "description": "",
       "firstTermIdx": -9999,
       "lastTermIdx": -9999,
+      "showTags": false,
+      "columnCount": 0,
       "items": [],
       "type": "empty",
       "meta": {
@@ -401,7 +412,7 @@
   ],
   "terminalList": [
     {
-      "content": "The",
+      "content": "Ronlyn's",
       "cues": [],
       "termIdx": 0,
       "nextTermIdx": [
@@ -417,7 +428,7 @@
       "visible": true,
       "visited": false,
       "numberAsNumerals": false,
-      "linkIdx": -9999,
+      "linkIdx": 0,
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": -9999,
@@ -430,7 +441,7 @@
       "sectionIdx": 0
     },
     {
-      "content": "quick",
+      "content": "brown",
       "cues": [],
       "termIdx": 1,
       "nextTermIdx": [
@@ -448,7 +459,7 @@
       "visible": true,
       "visited": false,
       "numberAsNumerals": false,
-      "linkIdx": -9999,
+      "linkIdx": 0,
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": -9999,
@@ -461,7 +472,7 @@
       "sectionIdx": 0
     },
     {
-      "content": "brown",
+      "content": "fox",
       "cues": [],
       "termIdx": 2,
       "nextTermIdx": [
@@ -508,7 +519,7 @@
       "visible": true,
       "visited": false,
       "numberAsNumerals": false,
-      "linkIdx": 0,
+      "linkIdx": 1,
       "hintsIdx": -9999,
       "fillin": {
         "sectionIdx": -9999,
@@ -538,9 +549,9 @@
   ],
   "linkList": [
     {
-      "label": "",
+      "label": "Ronlyn's brown fox",
       "destination": {
-        "page": "",
+        "page": "link1",
         "directory": "",
         "linkIdxType": "page",
         "headingIdx": -9999,
@@ -548,7 +559,20 @@
         "terminalIdx": -9999
       },
       "valid": false
+    },
+    {
+      "label": "fox",
+      "destination": {
+        "page": "link2",
+        "directory": "",
+        "linkIdxType": "heading",
+        "headingIdx": -9999,
+        "sectionIdx": -9999,
+        "terminalIdx": -9999
+      },
+      "valid": false
     }
   ],
-  "fillinList": []
+  "fillinList": [],
+  "reciteButtons": []
 }

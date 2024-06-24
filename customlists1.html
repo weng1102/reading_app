@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      ol.customList {
+        list-style-type: none;
+        list-style-position: inside;
+      }
+
+      ol.customList > li {
+        list-style: none;
+        counter-increment: subscene;
+      }
+
+      ol.customList > li:before {
+        font-weight: bold;
+        content: counter(subscene, upper-alpha) ".";
+        list-style-position: inside;
+      }
+
+      ol.customList > li > ol {
+        list-style-type: none;
+        list-style-position: inside;
+      }
+
+      ol.customList > li > ol > li {
+        list-style: none;
+        content: counter(subscene) "=";
+        counter-increment: subsubscene;
+      }
+
+      ol.customList > li > ol > li:before {
+        font-weight: bold;
+        content: counter(subscene, upper-alpha) counter(subsubscene) ".";
+        list-style-position: inside;
+      }
+
+      ol.customList > li > ol > li > ol {
+        list-style-type: none;
+        list-style-position: inside;
+      }
+
+      ol.customList > li > ol > li > ol > li {
+        list-style: none;
+        counter-increment: subsubsubscene;
+      }
+
+      ol.customList > li > ol > li > ol > li:before {
+        font-weight: bold;
+        content: counter(subscene, upper-alpha) counter(subsubscene) "."
+          counter(subsubsubscene) " ";
+        list-style-position: inside;
+      }
+    </style>
+  </head>
+  <body>
+    <ol class="customList">
+      <li>
+        Introduction
+        <ol>
+          <li>HTML List</li>
+          <li>What is counter-increment?</li>
+          <li>What is and how to use content?</li>
+        </ol>
+      </li>
+      <li>
+        Examples
+        <ol>
+          <li>
+            Basic Example
+            <ol>
+              <li>Letter List</li>
+              <li>Number List</li>
+              <li>Letter & Number List</li>
+            </ol>
+          </li>
+          <li>
+            Advanced Example
+            <ol>
+              <li>Nested Letter List</li>
+              <li>Nested Number List</li>
+              <li>Nested Letter & Number List</li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+    </ol>
+  </body>
+</html>

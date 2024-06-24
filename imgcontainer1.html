@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .imageentry-container-left {
+        display: grid;
+        grid-template-columns: [images] 25% [divider] 10px [captions] auto;
+      }
+      .imageentry-images-left {
+        grid-column: images;
+      }
+      .imageentry-images-left > img {
+        object-fit: contain;
+        width: 100%;
+      }
+      .imageentry-container-divider-left {
+        grid-column: divider;
+        max-width: 2px;
+      }
+      .imageentry-captions-left {
+        grid-column: captions;
+      }
+      .imageentry-images-above {
+        grid-row: images;
+        /* display: inline-block; */
+        overflow: hidden;
+      }
+      .imageentry-captions-above {
+        grid-row: divider;
+      }
+      .imageentry-captions-above {
+        grid-row: captions;
+      }
+      .imageentry-image {
+        object-fit: contain;
+        margin: 0px 10px 10px 0px;
+      }
+      .imageentry-divider-above {
+        height: 10px;
+      }
+      .imageentry-captions-above {
+        height: auto;
+      }
+      .image-overlay-container {
+        display: inline-block;
+        position: relative;
+        object-fit: contain;
+      }
+      .image-overlay {
+        position: absolute;
+        top: 0;
+      }
+      .imageentry-container-above1 {
+        display: inline-block;
+        position: relative;
+        /*        object-fit: contain;
+      */
+        margin: 0px 10px 10px 0px;
+      }
+
+      /*      .imageentry-container-above1 * {
+              max-height: 30vh;
+            }
+        */
+      .imageentry-container-above1 img {
+        max-height: 20vh;
+      }
+      /*
+            .imageentry-images-above1 * {
+              max-height: 10vh;
+            }
+            */
+      .imageentry-captions-above1 {
+        height: auto;
+      }
+      .image-link-overlay-container {
+        display: inline-block;
+        position: relative;
+        object-fit: contain;
+        margin: 0px 10px 10px 0px;
+      }
+      .image-link-overlay-container * {
+        max-height: 20vh;
+      }
+      .image-link-overlay {
+        border-radius: 4px;
+        background-color: green;
+        position: absolute;
+        max-width: 40px;
+        right: 10px;
+        bottom: 10px;
+        opacity: 0.6;
+        filter: drop-shadow(5px 5px 5px black);
+      }
+      .image-link-overlay-container2 {
+        display: inline-block;
+        position: relative;
+        /* object-fit: contain; */
+        max-height: inherit;
+        margin: 0px 20px 20px 0px;
+      }
+      .image-link-overlay2 {
+        border-radius: 4px;
+        background-color: green;
+        position: absolute;
+        max-width: 25%;
+        right: 0px;
+        bottom: 0px;
+        opacity: 0.6;
+        filter: drop-shadow(5px 5px 5px black);
+      }
+      .imageentry-container-above2 {
+        display: inline-block;
+        max-height: 25vh;
+      }
+      .imageentry-images-above2 {
+        /* object-fit: contain; */
+        display: inline-block;
+        max-height: inherit;
+        /* position: relative; */
+      }
+      /*
+            .imageentry-images-above2 > img {
+              object-fit: contain;
+              position: relative;
+              max-height: 100%;
+            }
+            */
+      .imageentry-captions-above2 {
+      }
+      .imageentry-image2 {
+        max-height: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="imageentry-container-above1">
+      <div class="imageentry-images-above1">
+        <img
+          class="imageentry-image1 imageentry-image-rounded-box imageentry-image-box-shadow "
+          src="https://weng1102.github.io/reading-companion//img/PXL_20230429_185219410.MPa.jpg"
+          alt="Handicapables"
+          width=""
+          height=""
+        />
+        <img
+          class="imageentry-image1 imageentry-image-rounded-box imageentry-image-box-shadow "
+          src="https://weng1102.github.io/reading-companion//img/PXL_20230429_192650369.MPa.jpg"
+          alt="Handicapables"
+          width=""
+          height=""
+        />
+      </div>
+    </div>
+    <div class="imageentry-captions-above1">
+      <ul>
+        <li>
+          <div class="no-wrap">
+            <span class="sentence"
+              ><span class="word  recitable-word   ">These</span
+              ><span class="whitespace"> </span
+              ><span class="word  recitable-word   ">are</span
+              ><span class="whitespace"> </span
+              ><span class="word  recitable-word   ">past</span
+              ><span class="whitespace"> </span
+              ><span class="word  recitable-word   ">book</span
+              ><span class="whitespace"> </span
+              ><span class="word  recitable-word   ">club</span
+              ><span class="whitespace"> </span
+              ><span class="word  recitable-word   ">summaries</span
+              ><span class="whitespace">.</span></span
+            >
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="image-link-overlay-container">
+      <img class="imageentry-image imageentry-image-rounded-box
+      imageentry-image-box-shadow "
+      src="https://weng1102.github.io/reading-companion//img/shoedog.jpg"
+      alt="Shoe Dog" width="100%" height="100%" max-height: "inherit" />
+      <img
+        src="https://weng1102.github.io/reading-companion//img/link_overlay_white.png"
+        class="image-link-overlay"
+      />
+    </div>
+    <div class="image-link-overlay-container">
+      <img
+        class="imageentry-image imageentry-image-rounded-box imageentry-image-box-shadow "
+        src="https://weng1102.github.io/reading-companion//img/lastliarstanding.jpg"
+        alt="Last Liar Standing"
+        width="100%"
+        height="100%"
+      />
+      <img
+        src="https://weng1102.github.io/reading-companion//img/link_overlay_white.png"
+        class="image-link-overlay"
+      />
+    </div>
+    <div class="image-link-overlay-container">
+      <img
+        class="imageentry-image imageentry-image-rounded-box imageentry-image-box-shadow "
+        src="https://weng1102.github.io/reading-companion//img/justmercy.jpg"
+        alt="Just Mercy"
+        width="100%"
+        height="100%"
+      />
+      <img
+        src="https://weng1102.github.io/reading-companion//img/link_overlay_white.png"
+        class="image-link-overlay"
+      />
+    </div>
+    <div class="image-link-overlay-container">
+      <img
+        class="imageentry-image imageentry-image-rounded-box imageentry-image-box-shadow "
+        src="https://weng1102.github.io/reading-companion//img/ordinarygrace.jpg"
+        alt="Ordinary Grace"
+        width="100%"
+        height="100%"
+      />
+      <img
+        src="https://weng1102.github.io/reading-companion//img/link_overlay_white.png"
+        class="image-link-overlay"
+      />
+    </div>
+    <div class="image-link-overlay-container">
+      <img
+        class="imageentry-image imageentry-image-rounded-box imageentry-image-box-shadow "
+        src="https://weng1102.github.io/reading-companion//img/catchmeifyoucan1.jpg"
+        alt="Catch Me If You Can"
+        width="100%"
+        height="100%"
+      />
+      <img
+        src="https://weng1102.github.io/reading-companion//img/link_overlay_white.png"
+        class="image-link-overlay"
+      />
+    </div>
+    <div class="image-link-overlay-container">
+      <img
+        class="imageentry-image imageentry-image-rounded-box imageentry-image-box-shadow "
+        src="https://weng1102.github.io/reading-companion//img/mancalledove1.jpg"
+        alt="A Man Called Ove"
+        width="100%"
+        height="100%"
+      />
+      <img
+        src="https://weng1102.github.io/reading-companion//img/link_overlay_white.png"
+        class="image-link-overlay"
+      />
+    </div>
+    <div class="imageentry-container-divider-above"></div>
+    <div class="imageentry-captions-above">
+      <ul>
+        <li>
+          <div class="no-wrap">
+            <span class="sentence"
+              ><span class="word  recitable-word   ">These</span
+              ><span class="whitespace"> </span
+              ><span class="word  recitable-word   ">are</span
+              ><span class="whitespace"> </span
+              ><span class="word  recitable-word   ">past</span
+              ><span class="whitespace"> </span
+              ><span class="word  recitable-word   ">book</span
+              ><span class="whitespace"> </span
+              ><span class="word  recitable-word   ">club</span
+              ><span class="whitespace"> </span
+              ><span class="word  recitable-word   ">summaries</span
+              ><span class="whitespace">.</span></span
+            >
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div
+      class="imageentry-container-left"
+      style="grid-template-columns: [images] 20% [divider] 10px [captions] auto;"
+    >
+      <div class="imageentry-images-left">
+        <div class="image-link-overlay-container">
+          <img
+            class="imageentry-image imageentry-image-rounded-box imageentry-image-box-shadow "
+            src="https://weng1102.github.io/reading-companion//img/shadowdivers.jpg"
+            alt="Shadow Diver"
+            width=""
+          /><img
+            src="https://weng1102.github.io/reading-companion//img/link_overlay_white.png"
+            class="image-link-overlay"
+          />
+        </div>
+      </div>
+      <div class="imageentry-container-divider-left"></div>
+      <div class="imageentry-captions-left">
+        <ul>
+          <li>
+            <div class="no-wrap">
+              <span class="sentence">
+                <span class="word  recitable-word   ">This</span>
+                <span class="whitespace"> </span>
+                <span class="word  recitable-word   ">book</span>
+              </span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="imageentry-container-above2">
+      <div class="imageentry-images-above2">
+        <img
+          class="imageentry-image2 imageentry-image-rounded-box imageentry-image-box-shadow "
+          src="https://weng1102.github.io/reading-companion//img/PXL_20230429_185219410.MPa.jpg"
+          alt="Handicapables"
+          width=""
+          height=""
+        />
+        <img
+          class="imageentry-image2 imageentry-image-rounded-box imageentry-image-box-shadow "
+          src="https://weng1102.github.io/reading-companion//img/PXL_20230429_192650369.MPa.jpg"
+          alt="Handicapables"
+          width=""
+          height=""
+        />
+      </div>
+      <div class="imageentry-captions-above2">
+        <ul>
+          <li>
+            <div class="no-wrap">
+              <span class="sentence"
+                ><span class="word  recitable-word   ">These</span
+                ><span class="whitespace"> </span
+                ><span class="word  recitable-word   ">are</span
+                ><span class="whitespace"> </span
+                ><span class="word  recitable-word   ">past</span
+                ><span class="whitespace"> </span
+                ><span class="word  recitable-word   ">book</span
+                ><span class="whitespace"> </span
+                ><span class="word  recitable-word   ">club</span
+                ><span class="whitespace"> </span
+                ><span class="word  recitable-word   ">summaries</span
+                ><span class="whitespace">.</span></span
+              >
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="imageentry-container-above2">
+      <div class="imageentry-images-above2">
+        <div class="image-link-overlay-container2">
+          <img
+            class="imageentry-image2 imageentry-image-rounded-box imageentry-image-box-shadow "
+            src="https://weng1102.github.io/reading-companion//img/shoedog.jpg"
+            alt="Shoe Dog"
+            width="100%"
+            height="100%"
+          />
+          <img
+            src="https://weng1102.github.io/reading-companion//img/link_overlay_white.png"
+            class="image-link-overlay2"
+          />
+        </div>
+        <div class="image-link-overlay-container2">
+          <img
+            class="imageentry-image2 imageentry-image-rounded-box imageentry-image-box-shadow "
+            src="https://weng1102.github.io/reading-companion//img/lastliarstanding.jpg"
+            alt="Last Liar Standing"
+            width="100%"
+            height="100%"
+          />
+          <img
+            src="https://weng1102.github.io/reading-companion//img/link_overlay_white.png"
+            class="image-link-overlay2"
+          />
+        </div>
+
+        <div class="image-link-overlay-container2">
+          <img
+            class="imageentry-image2 imageentry-image-rounded-box imageentry-image-box-shadow "
+            src="https://weng1102.github.io/reading-companion//img/justmercy.jpg"
+            alt="Just Mercy"
+            width="100%"
+            height="100%"
+          />
+          <img
+            src="https://weng1102.github.io/reading-companion//img/link_overlay_white.png"
+            class="image-link-overlay2"
+          />
+        </div>
+        <div class="image-link-overlay-container2">
+          <img
+            class="imageentry-image2 imageentry-image-rounded-box imageentry-image-box-shadow "
+            src="https://weng1102.github.io/reading-companion//img/ordinarygrace.jpg"
+            alt="Ordinary Grace"
+            width="100%"
+          />
+          <img
+            src="https://weng1102.github.io/reading-companion//img/link_overlay_white.png"
+            class="image-link-overlay2"
+          />
+        </div>
+        <div class="image-link-overlay-container2">
+          <img
+            class="imageentry-image2 imageentry-image-rounded-box
+          imageentry-image-box-shadow "
+            src="https://weng1102.github.io/reading-companion//img/catchmeifyoucan1.jpg"
+            alt="Catch Me If You Can"
+            width="100%"
+            height="100%"
+          />
+          <img
+            src="https://weng1102.github.io/reading-companion//img/link_overlay_white.png"
+            class="image-link-overlay2"
+          />
+        </div>
+        <div class="image-link-overlay-container2">
+          <img
+            class="imageentry-image2 imageentry-image-rounded-box imageentry-image-box-shadow "
+            src="https://weng1102.github.io/reading-companion//img/mancalledove1.jpg"
+            alt="A Man Called Ove"
+            width="100%"
+            height="100%"
+          />
+          <img
+            src="https://weng1102.github.io/reading-companion//img/link_overlay_white.png"
+            class="image-link-overlay2"
+          />
+        </div>
+      </div>
+      <div class="imageentry-container-divider-above"></div>
+      <div class="imageentry-captions-above">
+        <ul>
+          <li>
+            <div class="no-wrap">
+              <span class="sentence"
+                ><span class="word  recitable-word   ">These</span
+                ><span class="whitespace"> </span
+                ><span class="word  recitable-word   ">are</span
+                ><span class="whitespace"> </span
+                ><span class="word  recitable-word   ">past</span
+                ><span class="whitespace"> </span
+                ><span class="word  recitable-word   ">book</span
+                ><span class="whitespace"> </span
+                ><span class="word  recitable-word   ">club</span
+                ><span class="whitespace"> </span
+                ><span class="word  recitable-word   ">summaries</span
+                ><span class="whitespace">.</span></span
+              >
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div
+      class="imageentry-container-left"
+      style="grid-template-columns: [images] 20% [divider] 10px [captions] auto;"
+    >
+      <div class="imageentry-images-left">
+        <div class="image-link-overlay-container">
+          <img
+            class="imageentry-image-left imageentry-image-line-border "
+            src="https://weng1102.github.io/reading-companion//img/mystrokestory.jpg"
+            alt="My stroke story"
+            width="100%"
+            height="100%"
+          /><img
+            src="https://weng1102.github.io/reading-companion//img/link_overlay_white.png"
+            class="image-link-overlay"
+          />
+        </div>
+      </div>
+      <div class="imageentry-container-divider-left"></div>
+      <div class="imageentry-captions-left">
+        <div class="p">
+          <span class="sentence"
+            ><span class="word  recitable-word   ">I</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">tell</span
+            ><span class="whitespace"> </span>
+            <div class="terminal-block">
+              <div class="terminal-block-link">
+                <span class="word  recitable-word   ">my</span
+                ><span class="whitespace"> </span
+                ><span class="word  recitable-word   ">stroke</span
+                ><span class="whitespace"> </span
+                ><span class="word  recitable-word   ">story</span>
+              </div>
+            </div>
+            <span class="whitespace"> </span
+            ><span class="word  recitable-word   ">since</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">my</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">aphasia</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">using</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">this</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">reading</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">companion</span
+            ><span class="whitespace">.</span
+            ><span class="whitespace"> </span></span
+          ><span class="sentence"
+            ><span class="word  recitable-word   ">I</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">describe</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">who</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">I</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">was</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">and</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">who</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">I</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">am</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">since</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">my</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">severe</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">hemorrhagic</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">stroke</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">in</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">2015</span
+            ><span class="whitespace">.</span
+            ><span class="whitespace"> </span></span
+          ><span class="sentence"
+            ><span class="word  recitable-word   ">The</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">speech</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">recognition</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">feature</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">allows</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">me</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">to</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">practice</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">by</span
+            ><span class="whitespace"> </span
+            ><span class="word  recitable-word   ">myself</span
+            ><span class="whitespace">.</span
+            ><span class="whitespace"> </span></span
+          ><span class="sentence"></span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

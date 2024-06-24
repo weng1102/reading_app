@@ -6,11 +6,14 @@
   "owner": "anonymous",
   "author": "Wen",
   "category": "Testing",
-  "version": "20231102.1",
+  "headingNumbering": "",
+  "version": "20240611.1",
   "pageFormatType": 0,
-  "created": "Sun Feb 04 2024 17:05:00 GMT-0800 (Pacific Standard Time)",
-  "modified": "Sun Feb 04 2024 17:05:00 GMT-0800 (Pacific Standard Time)",
-  "transformed": "Sun Feb 04 2024 17:05:00 GMT-0800 (Pacific Standard Time)",
+  "created": "Sat Jun 22 2024 19:38:54 GMT-0700 (Pacific Daylight Time)",
+  "modified": "Sat Jun 22 2024 19:38:54 GMT-0700 (Pacific Daylight Time)",
+  "transformed": "Sat Jun 22 2024 19:38:54 GMT-0700 (Pacific Daylight Time)",
+  "showTags": false,
+  "columnCount": 0,
   "firstTermIdx": -9999,
   "lastTermIdx": -9999,
   "sections": [
@@ -20,12 +23,15 @@
       "description": "",
       "firstTermIdx": 0,
       "lastTermIdx": 2,
+      "showTags": false,
+      "columnCount": 0,
       "items": [],
       "type": "image_entry",
       "meta": {
         "title": "image visualize heading",
         "orientation": "left",
         "percent": "20%",
+        "frameFormat": "rounded-box box-shadow",
         "separator": "",
         "images": [
           {
@@ -41,9 +47,10 @@
             },
             "firstTermIdx": -9999,
             "lastTermIdx": -9999,
-            "type": 5,
+            "type": 6,
             "meta": {
               "src": "visualize.png",
+              "overlay": "",
               "label": "visualize it",
               "width": 0,
               "height": 0,
@@ -69,6 +76,8 @@
             "description": "",
             "firstTermIdx": 0,
             "lastTermIdx": 2,
+            "showTags": false,
+            "columnCount": 0,
             "items": [],
             "type": "paragraph",
             "meta": {
@@ -92,7 +101,7 @@
                       },
                       "firstTermIdx": 0,
                       "lastTermIdx": 0,
-                      "type": 17,
+                      "type": 18,
                       "meta": {
                         "content": "Focus",
                         "cues": [],
@@ -134,7 +143,7 @@
                       },
                       "firstTermIdx": -9999,
                       "lastTermIdx": -9999,
-                      "type": 16,
+                      "type": 17,
                       "meta": {
                         "content": " ",
                         "cues": [],
@@ -174,7 +183,7 @@
                       },
                       "firstTermIdx": 1,
                       "lastTermIdx": 1,
-                      "type": 17,
+                      "type": 18,
                       "meta": {
                         "content": "on",
                         "cues": [],
@@ -218,7 +227,7 @@
                       },
                       "firstTermIdx": -9999,
                       "lastTermIdx": -9999,
-                      "type": 16,
+                      "type": 17,
                       "meta": {
                         "content": " ",
                         "cues": [],
@@ -258,7 +267,7 @@
                       },
                       "firstTermIdx": 2,
                       "lastTermIdx": 2,
-                      "type": 17,
+                      "type": 18,
                       "meta": {
                         "content": "it",
                         "cues": [],
@@ -300,7 +309,7 @@
                       },
                       "firstTermIdx": -9999,
                       "lastTermIdx": -9999,
-                      "type": 11,
+                      "type": 12,
                       "meta": {
                         "content": ".",
                         "cues": [],
@@ -331,7 +340,8 @@
                   "lastPunctuation": "."
                 }
               ],
-              "style": ""
+              "style": "",
+              "class": "p"
             }
           }
         ]
@@ -343,6 +353,8 @@
       "description": "",
       "firstTermIdx": -9999,
       "lastTermIdx": -9999,
+      "showTags": false,
+      "columnCount": 0,
       "items": [],
       "type": "empty",
       "meta": {
@@ -462,5 +474,6 @@
     }
   ],
   "linkList": [],
-  "fillinList": []
+  "fillinList": [],
+  "reciteButtons": []
 }

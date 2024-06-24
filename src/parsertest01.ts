@@ -14,23 +14,24 @@ const Usage: string =
   `Usage: node parsetest01.ts [OPTIONS] [FILE(s)]\n` +
   `Parses markdown files into json output for reader\n\n` +
   `Options:\n` +
-  `  --dumpdatasource display parsed markdown\n` +
-  `  --dumpheadings   display headings for navbar\n` +
-  `  --dumpfillins    display fillins\n` +
-  `  --dumpjsondataappdisplay generated json\n` +
-  `  --dumplinks      display link list\n` +
-  `  --dumpsections   display section list\n` +
-  `  --dumpsentences  display sentence list\n` +
-  `  --dumpsitemap    display sitemap iff --sitemap\n` +
-  `  --dumpterminals  display terminal list\n` +
-  `  --dumptree       display parse tree\n` +
-  `  --sitemap        creates sitemap json\n` +
-  `  -x=[exclusions]  sitemap exclusions (must follow --sitemap)\n` +
-  `  --nooutput       do not generate output json file(s)\n` +
-  `  --testreload     reload generated file\n` +
-  `  --adorn          adorn output mode\n` +
-  `  --diagnostic     diagnostic output mode\n` +
-  `  --verbose        verbose output mode\n`;
+  `  --dumpdatasource    display parsed markdown\n` +
+  `  --dumpheadings      display headings for navbar\n` +
+  `  --dumpfillins       display fillins\n` +
+  `  --dumpjsondataapp   display generated json\n` +
+  `  --dumplinks         display link list\n` +
+  `  --dumprecitebuttons display recite buttons\n` +
+  `  --dumpsections      display section list\n` +
+  `  --dumpsentences     display sentence list\n` +
+  `  --dumpsitemap       display sitemap iff --sitemap\n` +
+  `  --dumpterminals     display terminal list\n` +
+  `  --dumptree          display parse tree\n` +
+  `  --sitemap           creates sitemap json\n` +
+  `  -x=[exclusions]     sitemap exclusions (must follow --sitemap)\n` +
+  `  --nooutput          do not generate output json file(s)\n` +
+  `  --testreload        reload generated file\n` +
+  `  --adorn             adorn output mode\n` +
+  `  --diagnostic        diagnostic output mode\n` +
+  `  --verbose           verbose output mode\n`;
 
 const curriculumPath: string = "curriculum/";
 const distPath: string = "dist/";
@@ -260,6 +261,22 @@ if (switches.includes("--sitemap")) {
         );
         logger.info(
           pageNode.userContext.fillins.serialize(),
+          false,
+          false,
+          false,
+          false
+        );
+      }
+      if (switches.includes("--dumprecitebuttons")) {
+        logger.info(
+          `dumping recite buttons for ${path.basename(outputFileSpec)}`,
+          false,
+          false,
+          false,
+          false
+        );
+        logger.info(
+          pageNode.userContext.reciteButtons.serialize(),
           false,
           false,
           false,

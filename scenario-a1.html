@@ -1,0 +1,110 @@
+<html lang="en" style="--nav-width: 300px;">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/reading_app/rmgcartoon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="/reading_app/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="/reading_app/manifest.json" />
+    <!--
+      Notice the use of /reading_app in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "/reading_app/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Reading Companion</title>
+    <style>
+      /* first/top level numbering */
+      ol.scenarios-A1 {
+        list-style-type: none;
+        list-style-position: outside;
+        padding-left: 0px;
+        counter-reset: A1-level-1;
+        counter-set: A1-level-1 var(--A1-level-start-var);
+      }
+      ol.scenarios-A1 > li {
+        counter-increment: A1-level-1;
+      }
+      ol.scenarios-A1 > li:before {
+        font-weight: bold;
+        font-family: Arial;
+        content: counter(A1-level-1, upper-alpha) ".";
+        margin-right: 5px;
+      }
+      /* second level numbering */
+      ol.scenarios-A1 > li > ol {
+        list-style-type: none;
+        padding-left: 5px;
+        list-style-position: outside;
+        counter-reset: A1-level-2;
+      }
+      ol.scenarios-A1 > li > ol > li {
+        /* list-style: none; */
+        content: counter(A1-level-1) "=";
+        counter-increment: A1-level-2;
+      }
+      ol.scenarios-A1 > li > ol > li:before {
+        font-weight: bold;
+        font-family: Arial;
+        content: counter(A1-level-1, upper-alpha) counter(A1-level-2) ".";
+        margin-right: 5px;
+      }
+      /* third level numbering */
+      ol.scenarios-A1 > li > ol > li > ol {
+        /* reset ordered list style*/
+        list-style-type: none;
+        list-style-position: outside;
+        counter-reset: A1-level-3;
+        padding-left: 5px;
+      }
+      ol.scenarios-A1 > li > ol > li > ol > li {
+        list-style: none;
+        counter-increment: A1-level-3;
+      }
+      ol.scenarios-A1 > li > ol > li > ol > li:before {
+        font-weight: bold;
+        font-family: Arial;
+        content: counter(A1-level-1, upper-alpha) counter(A1-level-2) "."
+          counter(A1-level-3) " ";
+        margin-right: 5px;
+      }
+      .no-wrap {
+        display: inline;
+      }
+    </style>
+  </head>
+  <body>
+    <ol class="scenarios-A1">
+      <li>
+        <div class="no-wrap">expect</div>
+      </li>
+      <ol>
+        <li>
+          <div class="no-wrap">expect A1</div>
+        </li>
+        <li>
+          <div class="no-wrap">expect A2</div>
+        </li>
+        <ol>
+          <li>
+            <div class="no-wrap">expect A1.1</div>
+          </li>
+        </ol>
+        <li>
+          <div class="no-wrap">expect A3</div>
+        </li>
+      </ol>
+    </ol>
+  </body>
+</html>

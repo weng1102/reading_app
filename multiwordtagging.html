@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      ol {
+        padding-left: 2em;
+      }
+      .sentence-tagged {
+      }
+      .terminal-block-word {
+      }
+      .terminals-block {
+        display: inline;
+      }
+      .terminal-block {
+        display: inline-grid;
+        line-height: 100%;
+        text-align: center;
+        grid-template-columns: auto;
+        grid-template-rows: auto;
+      }
+      .terminal-block-word {
+      }
+      .terminal-block-tag {
+        font-style: italic;
+        font-size: 75%;
+        height: fit-content;
+        margin: 0;
+        padding-left: 2px;
+        padding-right: 2px;
+        padding-bottom: 5px;
+      }
+      .terminal-block-word1 {
+      }
+      .terminals-block1 {
+        display: inline;
+      }
+      .terminal-block1 {
+        display: inline-grid;
+        line-height: 100%;
+        text-align: center;
+        grid-template-columns: auto;
+        grid-template-rows: auto;
+      }
+      .terminal-block2 {
+        display: inline-grid;
+        line-height: 100%;
+        text-align: center;
+        grid-template-rows: [words1] auto [tags] auto;
+        grid-auto-columns: auto;
+        text-overflow: ellipsis;
+      }
+      .terminal-block-word1 {
+      }
+      .terminal-block-word2 {
+        grid-row-start: words1;
+        grid-template-columns: auto-fit;
+        width: fit-content;
+      }
+      .terminal-block-tag1 {
+        font-style: italic;
+        font-size: 75%;
+        height: fit-content;
+        margin: 0;
+        padding-left: 2px;
+        padding-right: 2px;
+        padding-bottom: 5px;
+      }
+      .terminal-block-tag2 {
+        grid-row-start: tags;
+        font-style: italic;
+        font-size: 75%;
+        height: fit-content;
+        margin: 0;
+        padding-left: 2px;
+        padding-right: 2px;
+        padding-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="p">
+      <span class="sentence sentence-tagged">
+        <div class="terminal-block">
+          <div>
+            <span class="word  recitable-word   ">I</span>
+          </div>
+          <div class="terminal-block-tag">subject</div>
+        </div>
+        <div class="terminal-block">
+          <span class="whitespace"> </span>
+          <div class="terminal-block-tag"></div>
+        </div>
+        <div class="terminal-block">
+          <span class="word  recitable-word   ">act</span>
+          <div class="terminal-block-tag2">verb</div>
+        </div>
+        <div class="terminal-block">
+          <span class="whitespace"> </span>
+          <div class="terminal-block-tag"></div>
+        </div>
+        <div class="terminal-block">
+          <div class="terminal-block-words">
+            <span class="word  recitable-word   ">appropriately</span>
+          </div>
+          <div class="terminal-block-tag">adverb</div>
+        </div>
+        <div class="terminal-block">
+          <span class="whitespace">.</span>
+          <div class="terminal-block-tag"></div>
+        </div>
+      </span>
+    </div>
+
+    <div class="p">
+      <span class="sentence sentence-tagged">
+        <div class="terminal-block2">
+          <div class="terminal-block-words">
+            <span class="word  recitable-word">He</span>
+          </div>
+          <div class="terminal-block-tag2">subject</div>
+        </div>
+        <div class="terminal-block2">
+          <span class="whitespace"> </span>
+          <div class="terminal-block-tag2"></div>
+        </div>
+        <div class="terminal-block2">
+          <div class="terminal-block-words">
+            <span class="word  recitable-word">acts</span>
+            <span class="whitespace"> </span>
+            <span class="word  recitable-word">appropriately</span>
+            <span class="whitespace"> </span>
+            <span class="word  recitable-word">over</span>
+            <span class="whitespace"> </span>
+            <span class="word  recitable-word">there</span>
+          </div>
+          <div class="terminal-block-tag2">predicate</div>
+          <div class="terminal-block2">
+            <span class="whitespace">.</span>
+            <div class="terminal-block-tag2"></div>
+          </div>
+        </div>
+      </span>
+    </div>
+  </body>
+</html>
