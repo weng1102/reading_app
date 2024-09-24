@@ -8,7 +8,17 @@
  *
  **/
 export const IDX_INITIALIZER = -9999;
-export const PageContentVersion = "20240611.1";
+export const PageContentVersion = "20240916.1";
+// 20230916 - Modified inlineButtonItem.sectionIdx
+// 20240821 - Added inlineButtonItem.nextTermIdx
+// 20240817 - Added inlineButtonItem.endListIdx
+// 20240807 - Added support for inlineButton and buttongrid
+// 20240713 - Move and renamed enum const InlineButton* to
+// 20240719 - Added position to IInlineButtonItem
+//            Renamed RecitationPosition to RecitationPlacement and retasked
+//            (cursor) position enum for relative position of prose to be
+//            recited for inline button.
+// 20240724 - Added InlineButtonActionEnumType in IInlineButtonItem
 export enum PageFormatEnumType {
   default = 0
 }
@@ -37,6 +47,7 @@ export interface IPageContent {
   sentenceList: ISentenceListItem[];
   linkList: ILinkListItem[];
   fillinList: ISectionFillinItem[];
+  inlineButtonList: IInlineButtonItem[];
 }
 export function PageContentInitializer(): IPageContent {
   return {
@@ -63,7 +74,8 @@ export function PageContentInitializer(): IPageContent {
     sectionList: [],
     sentenceList: [],
     linkList: [],
-    fillinList: []
+    fillinList: [],
+    inlineButtonList: []
   };
 }
 export interface ISectionContent {
@@ -177,7 +189,10 @@ export interface ISectionButtonGridVariant {
   description: string;
   columnCount: number;
   minColumnWidth: number;
-  buttonText: string[];
+  sorted: boolean;
+  groupedBy: boolean;
+  rate: number;
+  buttons: ITerminalContent[];
 }
 export function ISectionButtonGridVariantInitializer(): ISectionButtonGridVariant {
   return {
@@ -185,8 +200,11 @@ export function ISectionButtonGridVariantInitializer(): ISectionButtonGridVarian
     buttonWidth: 0,
     description: "",
     columnCount: 0,
-    minColumnWidth: 50,
-    buttonText: []
+    minColumnWidth: 11, // %vw
+    sorted: false,
+    groupedBy: false,
+    rate: 1,
+    buttons: []
   };
 }
 export interface ISectionBlockquoteVariant {
@@ -248,12 +266,14 @@ export function ISectionOrderedListVariantInitializer(): ISectionOrderedListVari
 export interface ISectionParagraphVariant {
   sentences: ISentenceContent[];
   //sentences: ISentenceNode[];
+  listItem: boolean;
   style: string; // overrides css but not user profile
   class: string;
 }
 export function ISectionParagraphVariantInitializer(): ISectionParagraphVariant {
   return {
     sentences: [],
+    listItem: false,
     style: "", // overrides css but not user profile
     class: "p"
   };
@@ -681,7 +701,7 @@ export function ISentenceContentInitializer(): ISentenceContent {
 }
 export enum TerminalMetaEnumType {
   acronym,
-  recitebutton,
+  inlinebutton,
   currency,
   date,
   emailaddress,
@@ -869,7 +889,7 @@ export interface ITerminalContent {
 }
 export type TerminalMetaType =
   | IAcronymTerminalMeta
-  | IReciteButtonTerminalMeta
+  | IInlineButtonTerminalMeta
   | ICurrencyTerminalMeta
   | IDateTerminalMeta
   | IEmailAddressTerminalMeta
@@ -976,17 +996,17 @@ export function IAcronymTerminalMetaInitializer(): IAcronymTerminalMeta {
     letters: []
   };
 }
-export interface IReciteButtonTerminalMeta {
+export interface IInlineButtonTerminalMeta {
   buttonIdx: number;
   label: string;
-  image: string;
+  // image: string;
   attributes: string;
 }
-export function IReciteButtonTerminalMetaInitializer(): IReciteButtonTerminalMeta {
+export function IInlineButtonTerminalMetaInitializer(): IInlineButtonTerminalMeta {
   return {
     buttonIdx: IDX_INITIALIZER,
     label: "Recite",
-    image: "button_speak.png",
+    // image: "button_speak.png",
     attributes: ""
   };
 }
@@ -1417,51 +1437,92 @@ export function ILinkListItemInitializer(
 ): ILinkListItem {
   return { label, destination, valid };
 }
-export enum ReciteScopeEnumType {
-  label = "label", // label provided
-  word = "word", // next words up to count
-  sentence = "sentence" // next sentence
+export enum InlineButtonActionEnumType {
+  choice = "choice", // recites correct/incorrect
+  completion = "completion", //recite up to then listen
+  converse = "converse", // diaglog of sentence pairs
+  cues = "cues", // embedded text
+  label = "label", // label with icon
+  model = "model", // recite then listen for the same words/sentence
+  none = "none", // do nothing
+  term = "term" // label with no icon
 }
-export enum ReciteCursorActionEnumType {
-  cursorUnchanged = "cursorUnchanged", // (default) cursor unchanged
-  cursorAtEnd = "cursorAtEnd", // after prose in scope
-  cursorAtBeginning = "cursorAtBeginning" // before prose in scope
+export enum RecitationScopeEnumType {
+  words = "words",
+  sentence = "sentence",
+  section = "section",
+  passThru = "passThru"
 }
-export enum ReciteListeningActionEnumType {
+// strictly for inlineButton words, sentence, section only based on currentTerm
+export enum RecitationReferenceEnumType {
+  preceding = "preceding",
+  following = "following"
+}
+export enum RecitationPlacementEnumType {
+  unchanged = "cursorUnchanged", // (default) cursor unchanged
+  end = "cursorAtEnd", // after prose in scope
+  beginning = "cursorAtBeginning" // before prose in scope
+}
+export enum RecitationListeningEnumType {
   startListening = "startListening",
+  startEndListening = "start then end listening",
   notListening = "notListening"
 }
-export interface IReciteButtonItem {
+// export enum InlineButtonScopeEnumType {
+//   label = "label", // label provided
+//   word = "word", // next words up to count
+//   hint = "hint", // hint in parameter list
+//   sentence = "sentence" // next sentence
+// }
+// export enum InlineButtonCursorActionEnumType {
+//   cursorUnchanged = "cursorUnchanged", // (default) cursor unchanged
+//   cursorAtEnd = "cursorAtEnd", // after prose in scope
+//   cursorAtBeginning = "cursorAtBeginning" // before prose in scope
+// }
+// export enum InlineButtonListeningActionEnumType {
+//   startListening = "startListening",
+//   notListening = "notListening"
+// }
+export interface IInlineButtonItem {
+  buttonIdx: number;
   termIdx: number;
-  scope: ReciteScopeEnumType;
-  cursorAction: ReciteCursorActionEnumType;
-  listeningAction: ReciteListeningActionEnumType;
+  sectionIdx: number;
+  lastTermIdx: number;
+  action: InlineButtonActionEnumType;
   span: number;
   label: string;
-  hint: string;
+  cues: string; // should be string[]
   rate: number; // otherwise default to page, app settings
+  voiceIndex: number;
+  nextTermIdx: number;
   toBeRecited: string;
 }
-export function IReciteButtonItemInitializer(
+export function IInlineButtonItemInitializer(
+  buttonIdx = IDX_INITIALIZER,
   termIdx = IDX_INITIALIZER,
-  scope = ReciteScopeEnumType.label,
-  cursorAction = ReciteCursorActionEnumType.cursorUnchanged,
-  listeningAction: ReciteListeningActionEnumType = ReciteListeningActionEnumType.notListening,
-  span: number = IDX_INITIALIZER,
-  label: string = "",
-  hint: string = "",
-  rate: number = 1,
+  sectionIdx = IDX_INITIALIZER,
+  lastTermIdx = IDX_INITIALIZER,
+  action = InlineButtonActionEnumType.label,
+  span = 0,
+  label = "",
+  cues = "",
+  rate = 1,
+  voiceIndex = 0,
+  nextTermIdx = IDX_INITIALIZER,
   toBeRecited = ""
-): IReciteButtonItem {
+): IInlineButtonItem {
   return {
+    buttonIdx,
     termIdx,
-    scope,
-    cursorAction,
-    listeningAction,
+    sectionIdx,
+    lastTermIdx,
+    action,
     span,
     label,
-    hint,
+    cues,
     rate,
+    voiceIndex,
+    nextTermIdx,
     toBeRecited
   };
 }
