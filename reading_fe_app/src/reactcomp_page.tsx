@@ -147,7 +147,9 @@ export const Page = React.memo((props: IPagePropsType) => {
         response => {
           // setIsPageFetchRequested(false);
           if (!response.ok)
-            setResponseError(`HTTP status code ${response.status} for ${page}`);
+            setResponseError(
+              `HTTP status code ${response.status} encountered retrieving page object "${page}""`
+            );
           // could import lookup for status
           return response.json();
         },
@@ -162,7 +164,7 @@ export const Page = React.memo((props: IPagePropsType) => {
             // setIsPageFetchRequested(false);
             if (data.version !== PageContentVersion) {
               setParseError(
-                `Mismatching application and json formats. Expected ${PageContentVersion} but encountered ${data.version} in content`
+                `Incompatible object format encountered for page  "${pageRequested.page}". The object format expected by the application (of ${PageContentVersion}) is not compatible with the format (of ${data.version}) in the page object.`
               );
             } else {
               let content: IPageContent = data as IPageContent;
@@ -176,7 +178,8 @@ export const Page = React.memo((props: IPagePropsType) => {
                 content.sectionList,
                 content.sentenceList,
                 content.linkList,
-                content.fillinList
+                content.fillinList,
+                content.inlineButtonList
               );
               setPageContext(pageLists);
               setPageContent(content);
@@ -198,15 +201,15 @@ export const Page = React.memo((props: IPagePropsType) => {
         }
       );
   }, [
-    dispatch,
+    // dispatch,
     // setParseError,
     // setResponseError,
     // setPageContent,
     // setPageContext,
     // setIsPageContentFetched,
-    pageRequested.page,
-    distDir,
-    parseError.length
+    pageRequested.page
+    // distDir,
+    // parseError.length
   ]);
 
   //////////////////////
@@ -226,14 +229,16 @@ export const Page = React.memo((props: IPagePropsType) => {
   const currentTermIdx: number = useAppSelector(
     store => store.cursor_terminalIdx
   );
-  useEffect(() => {
-    setPageMessage(parseError);
-    setParseError("");
-  }, [parseError]);
-  useEffect(() => {
-    setPageMessage(responseError);
-    setIsPageRequestInProgress(false);
-  }, [responseError]);
+  // useEffect(() => {
+  //   setPageMessage(parseError);
+  //   console.log(`parseError=${parseError}`);
+  //   setParseError("");
+  // }, [parseError]);
+  //
+  // useEffect(() => {
+  //   setPageMessage(responseError);
+  //   setIsPageRequestInProgress(false);
+  // }, [responseError]);
   /////////////////////////////////////
   // page requested: home, pop, or link
   /////////////////////////////////////
@@ -252,6 +257,7 @@ export const Page = React.memo((props: IPagePropsType) => {
       } else if (pageRequested_link.page.length > 0) {
         requestedPage = pageRequested_link;
         requestedType = PageRequestItemType.link;
+        // } else if (pageRequested_url.length > 0) {
       } else {
         requestedPage = PageRequestItemInitializer();
         requestedType = PageRequestItemType.unknown;
@@ -275,10 +281,10 @@ export const Page = React.memo((props: IPagePropsType) => {
     pageRequested_link,
     pageRequested_home,
     pageRequested_pop,
-    setPageRequested,
-    setPageRequestType,
+    // setPageRequested,
+    // setPageRequestType,
     isPageRequestInProgress,
-    setIsPageRequestInProgress,
+    // setIsPageRequestInProgress,
     homePagePath,
     pageLoaded.page,
     previousPages
@@ -289,22 +295,26 @@ export const Page = React.memo((props: IPagePropsType) => {
 
   useEffect(() => {
     let message: string = ``;
-    if (
+    if (parseError.length > 0) {
+      message = parseError;
+      setIsPageContentFetched(true);
+      console.log(message);
+      setPageMessage(message);
+    } else if (
       isPageRequestInProgress &&
       !isPageContentFetched &&
       pageRequested.page.length > 0
     ) {
       console.log(
-        `@@page fetching: page=${pageRequested.page}  pageRequested=${pageRequested.page},pageLoaded=${pageLoaded.page})`
+        `page fetching: page=${pageRequested.page}  pageRequested=${pageRequested.page},pageLoaded=${pageLoaded.page})`
       );
       dispatch(Request.Page_loaded(false));
       setIsPageContentFetched(false);
-
       fetchPageRequested();
       // }
-      console.log(message);
-      setPageMessage(message);
     }
+    console.log(message);
+    setPageMessage(message);
   }, [
     pageRequested,
     pageLoaded,
@@ -316,7 +326,7 @@ export const Page = React.memo((props: IPagePropsType) => {
     distDir,
     // setPageContext,
     // setPageContent,
-    pageRequestType,
+    // pageRequestType,
     isPageRequestInProgress,
     fetchPageRequested
     //    setPageLoaded
@@ -349,8 +359,8 @@ pageRequested=${pageRequested.page},isPageContentFetched=${isPageContentFetched}
     pageLoaded,
     // setPageMessage,
     currentTermIdx,
-    pageRequested,
-    pageRequestType
+    pageRequested
+    // pageRequestType
   ]);
   // After page is loaded update currentTermIdx and previousPages stack
   useEffect(() => {
@@ -417,7 +427,7 @@ pageRequested=${pageRequested.page},isPageContentFetched=${isPageContentFetched}
   }, [
     pageRequested,
     pageLoaded,
-    dispatch,
+    // dispatch,
     previouslyLoadedPage,
     previousPages,
     pageRequestType
@@ -438,6 +448,13 @@ pageRequested=${pageRequested.page},isPageContentFetched=${isPageContentFetched}
   // Rendering
   ////////////
   console.log(pageMessage);
+  const postamble: string =
+    "Please notify the administrator of this error. Refresh the browser window to continue.";
+  let pageLoadError: string;
+  if (responseError.length > 0) pageLoadError = responseError;
+  else if (parseError.length > 0) pageLoadError = parseError;
+  else pageLoadError = "";
+  // if (pageLoadError.length > 0) {
   dispatch(Request.Message_set(pageMessage));
   return (
     <PageContext.Provider value={pageContext}>
@@ -447,7 +464,18 @@ pageRequested=${pageRequested.page},isPageContentFetched=${isPageContentFetched}
         <NavBar
           headings={pageContent === null ? [] : pageContent!.headingList}
         />
-        <Content content={pageContent!} />
+        {pageLoadError.length === 0 ? (
+          <Content content={pageContent!} />
+        ) : (
+          <>
+            <div className="pageError">
+              You have encountered a fatal error: {pageLoadError}
+              <br />
+              <br />
+              <i>{postamble}</i>
+            </div>
+          </>
+        )}
         <PageFooter />
       </div>
     </PageContext.Provider>
@@ -455,6 +483,10 @@ pageRequested=${pageRequested.page},isPageContentFetched=${isPageContentFetched}
 });
 interface IContentPropsType {
   content: IPageContent;
+}
+interface IContentErrorPropsType {
+  pageRequested: string;
+  message: string;
 }
 export const Content = React.memo((props: IContentPropsType): any => {
   //  const userAppSelector = useAppDispatch();

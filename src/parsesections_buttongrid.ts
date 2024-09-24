@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2024 Wen Eng - All Rights Reserved
  *
  * File name: parsesections_ibuttongrid.ts
  *
@@ -8,41 +8,39 @@
  *
  **/
 import { strict as assert } from "assert";
-import { IsError, IsDefined } from "./utilities";
 import {
-  IDX_INITIALIZER,
   ParseNodeSerializeTabular,
   ParseNodeSerializeFormatEnumType
 } from "./baseclasses";
 import { MarkdownRecordType, TaggedStringType } from "./dataadapter";
+import { tokenizeParameterList } from "./tokenizer";
 import {
-  ISectionImageEntryVariantInitializer,
-  ISectionImageEntryVariant,
-  ISectionParagraphVariant,
+  IInlineButtonTerminalMeta,
   ISectionButtonGridVariant,
-  ISectionParagraphVariantInitializer,
   ISectionButtonGridVariantInitializer,
-  ITerminalContent,
   SectionVariantEnumType,
-  TerminalMetaEnumType,
-  IImageTerminalMeta
+  TerminalMetaEnumType
 } from "./pageContentType";
-import { GetSectionNode } from "./parsesectiondispatch";
 import { ITerminalNode } from "./parseterminals";
 import { IPageNode } from "./parsepages";
 import { ISectionNode } from "./parsesections";
 import { SectionParseNode_GRID } from "./parsesections";
 import { ISentenceNode, SentenceNode } from "./parsesentences";
+import {
+  IsError,
+  IsValidBooleanString,
+  IsValidString,
+  IsValidWholeNumberString,
+  ValidateArg
+} from "./utilities";
 export class SectionParseNode_BUTTONGRID extends SectionParseNode_GRID
   implements ISectionNode {
   constructor(parent: IPageNode | ISectionNode) {
     super(parent);
-    //  console.log("creating paragraph section");
   }
   type = SectionVariantEnumType.button_grid;
   meta: ISectionButtonGridVariant = ISectionButtonGridVariantInitializer();
   parse() {
-    //this.logger.diagnosticMode = true;
     this.logger.diagnostic(`${this.constructor.name}`);
     try {
       assert(this.dataSource !== undefined, `Undefined datasource encountered`);
@@ -53,84 +51,133 @@ export class SectionParseNode_BUTTONGRID extends SectionParseNode_GRID
         current.recordType === MarkdownRecordType.BUTTONGRID,
         `Expected "${MarkdownRecordType.BUTTONGRID}" at line ${current.lineNo}`
       );
-      let args: string[] = current.content.split(",").map(arg => arg.trim());
-      if (IsDefined(args[0])) this.meta.description = args[0];
-      if (IsDefined(args[1])) {
-        assert(
-          !isNaN(+args[1]),
-          `Invalid column count "${args[1]}" encountered, expected a number at line ${current.lineNo}`
-        );
-        this.meta.columnCount = +args[1];
-      }
-      if (IsDefined(args[2])) {
-        assert(
-          !isNaN(+args[2]),
-          `Invalid minimum column width "${args[2]}" encountered, expected a number at line ${current.lineNo}`
-        );
-        this.meta.minColumnWidth = +args[2];
-      }
-      current = this.dataSource.nextRecord();
-      assert(
-        current.recordType === MarkdownRecordType.PARAGRAPH,
-        `Expected "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.recordType}" at line ${current.lineNo}`
+      let args: string[] = tokenizeParameterList(current.content).map(arg =>
+        arg.trim()
       );
-      current = this.dataSource.nextRecord();
-      assert(
-        current.recordType === MarkdownRecordType.SENTENCE,
-        `Expected "${MarkdownRecordType.SENTENCE}" but encountered "${current.recordType}" at line ${current.lineNo}`
-      );
-      // find list of buttonText
-      this.firstTermIdx = this.userContext.terminals.lastIdx + 1;
-      let sentence: ISentenceNode = new SentenceNode(this);
-      sentence.parse();
-      for (const terminal of sentence.terminals) {
-        if (terminal.type === TerminalMetaEnumType.image) {
-          (<IImageTerminalMeta>terminal.meta).className = "imageentry-image";
-          this.meta.buttonText.push(terminal.content);
-        }
-      }
-      assert(
-        this.meta.buttonText.length > 0,
-        `Expected image declaraction(s) immediately following "${MarkdownRecordType.IMAGEENTRY}" at line ${current.lineNo}`
-      );
-      current = this.dataSource.nextRecord();
-      assert(
-        current.recordType === MarkdownRecordType.PARAGRAPH_END,
-        `Expected "${MarkdownRecordType.PARAGRAPH_END}" to "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.recordType}"  at line ${current.lineNo}`
-      );
-      //keep processing sections until imageentry_end
+      let argNum: number = 0;
+      this.meta.description = ValidateArg(
+        IsValidString(args[argNum]),
+        "description",
+        args[argNum],
+        this.meta.description,
+        argNum,
+        current.lineNo,
+        this.logger
+      ) as string;
+      argNum++;
+      this.meta.columnCount = ValidateArg(
+        IsValidWholeNumberString(args[argNum]),
+        "column count",
+        args[argNum],
+        this.meta.columnCount,
+        argNum,
+        current.lineNo,
+        this.logger
+      ) as number;
+      argNum++;
+      this.meta.minColumnWidth = ValidateArg(
+        IsValidWholeNumberString(args[argNum]),
+        "minimum column width",
+        args[argNum],
+        this.meta.minColumnWidth,
+        argNum,
+        current.lineNo,
+        this.logger
+      ) as number;
+      argNum++;
+      this.meta.sorted = ValidateArg(
+        IsValidBooleanString(args[argNum]),
+        "sorted",
+        args[argNum],
+        this.meta.sorted,
+        argNum,
+        current.lineNo,
+        this.logger
+      ) as boolean;
+      argNum++;
+      this.meta.groupedBy = ValidateArg(
+        IsValidBooleanString(args[argNum]),
+        "groupedBy",
+        args[argNum],
+        this.meta.groupedBy,
+        argNum,
+        current.lineNo,
+        this.logger
+      ) as boolean;
+      argNum++;
+      this.meta.rate = ValidateArg(
+        IsValidWholeNumberString(args[argNum]),
+        "rate",
+        args[argNum],
+        this.meta.rate,
+        argNum,
+        current.lineNo,
+        this.logger
+      ) as number;
+      // looking for a list of inlineButtons only; otherwise error
       for (
         current = this.dataSource.nextRecord();
-        !this.dataSource.EOF() &&
-        current.recordType !== MarkdownRecordType.IMAGEENTRY_END;
-        current = this.dataSource.currentRecord() // update current modified in parse()
+        current.recordType !== MarkdownRecordType.BUTTONGRID_END;
+        current = this.dataSource.nextRecord()
       ) {
-        let sectionNode: ISectionNode = GetSectionNode(
-          current.recordType,
-          this
+        assert(
+          current.recordType === MarkdownRecordType.PARAGRAPH,
+          `Expected "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.recordType}" at line ${current.lineNo}`
         );
-        this.meta.buttonText.push("hi there");
-        this.logger.diagnostic(
-          `pushed section=${current.recordType} ${sectionNode.constructor.name} ${current.content}`
+        current = this.dataSource.nextRecord();
+        assert(
+          current.recordType === MarkdownRecordType.SENTENCE,
+          `Expected "${MarkdownRecordType.SENTENCE}" but encountered "${current.recordType}" at line ${current.lineNo}`
         );
-        sectionNode.parse();
-        //        current = this.dataSource.currentRecord();
+        let sentence: ISentenceNode = new SentenceNode(this);
+        sentence.parse();
+        // look for mutliple buttons per line
+        sentence.terminals.forEach(terminal => {
+          if (terminal.type === TerminalMetaEnumType.inlinebutton) {
+            let inlineButton = terminal.meta as IInlineButtonTerminalMeta;
+            terminal.content = inlineButton.label;
+            this.meta.buttons.push(terminal);
+          } else if (terminal.type === TerminalMetaEnumType.whitespace) {
+            // akip valid separator
+          } else {
+            this.logger.warning(
+              `Expected terminal meta type="${
+                TerminalMetaEnumType[TerminalMetaEnumType.inlinebutton]
+              }" but encountered "${
+                TerminalMetaEnumType[terminal.type]
+              }" at line ${
+                current.lineNo
+              } - Ignored but author should remove it from this ${
+                SectionVariantEnumType.button_grid
+              }.`
+            );
+          }
+        });
+        current = this.dataSource.nextRecord();
+        assert(
+          current.recordType === MarkdownRecordType.PARAGRAPH_END,
+          `Expected "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.recordType}" at line ${current.lineNo}`
+        );
       }
-      if (current.recordType === MarkdownRecordType.IMAGEENTRY_END) {
-        this.lastTermIdx = this.userContext.terminals.lastIdx;
-        // this.id =
-        //   this.userContext.sections.push(
-        //     ISectionImageEntryInitializer(
-        //       this.firstTermIdx,
-        //       this.lastTermIdx,
-        //       this.type.toString()
-        //     )
-        //   ) - 1;
-        for (let idx = this.firstTermIdx; idx <= this.lastTermIdx; idx++) {
-          this.userContext.terminals[idx].sectionIdx = this.id;
-        }
-        this.dataSource.nextRecord(); // move to next grouping
+      assert(
+        current.recordType === MarkdownRecordType.BUTTONGRID_END,
+        `Expected "${MarkdownRecordType.BUTTONGRID_END}" but encountered "${current.recordType}" at line ${current.lineNo}`
+      );
+      if (this.meta.sorted || this.meta.groupedBy) {
+        // btw, manage grouped by feature at runtime
+        let sortedButtons = [...this.meta.buttons];
+        this.meta.buttons = sortedButtons.sort((left, right) => {
+          if (left.content.toLowerCase() < right.content.toLowerCase()) {
+            return -1;
+          } else if (left.content.toLowerCase() > right.content.toLowerCase()) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+        this.meta.buttons = [...sortedButtons];
       }
+      this.dataSource.nextRecord(); // move to next grouping
     } catch (e) {
       this.dataSource.nextRecord(); // move to next grouping
       if (IsError(e)) {
@@ -150,36 +197,44 @@ export class SectionParseNode_BUTTONGRID extends SectionParseNode_GRID
     let outputStr: string = "";
     switch (format) {
       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
-        label += `: title="${this.meta.title}", width=${this.meta.buttonWidth}`;
+        label += `: title="${this.meta.title}", sorted=${this.meta.sorted}, groupedBy=${this.meta.groupedBy}, width=${this.meta.buttonWidth}`;
         outputStr = `${super.serialize(format, label, prefix)}`;
-        outputStr = `${outputStr}${super.serialize(
-          format,
-          "buttonText:",
-          prefix + "| "
-        )}`;
-        for (const [i, button] of this.meta.buttonText.entries()) {
-          //          let imageNode: IImageTerminalMeta = button.meta as IImageTerminalMeta;
-          outputStr = `${outputStr}${super.serialize(
+        for (const [i, button] of this.meta.buttons.entries()) {
+          label = `${button.type}`;
+          let buttonX: ITerminalNode = button as ITerminalNode;
+          outputStr = `${outputStr}${buttonX.serialize(
             format,
-            // imageNode.src,
-            prefix + "| " + (i < this.meta.buttonText.length - 1 ? "| " : "  ")
+            undefined,
+            prefix + (i < this.meta.buttons.length - 1 ? "| " : "  ")
           )}`;
         }
-        // for (const [i, section] of this.meta.captions.entries()) {
-        //   let sectionNode: ISectionNode = section as ISectionNode;
-        //   outputStr = `${outputStr}${sectionNode.serialize(
+        ///////////
+        // label = `button grid: ${this.description}`;
+        // outputStr = super.serialize(format, label, prefix);
+        // for (const [i, terminal] of this.meta.buttons.entries()) {
+        //   label = `${terminal.type}`;
+        //   outputStr = `${outputStr}${terminal.serialize(
         //     format,
-        //     `captions: (${section.type})`,
-        //     prefix + (i < this.meta.captions.length - 1 ? "| " : "  ")
+        //     undefined,
+        //     prefix + (i < this.meta.buttons.length - 1 ? "| " : "  ")
         //   )}`;
         // }
-        //     format,
-        //     label,
-        //     //            prefix + " ".padEnd(2)
-        //     prefix + (i < this.meta.sentences.length - 1 ? "| " : "  ")
-        //   )}`;
+
+        ///////////
+        // for (const button of this.meta.buttons) {
+        //   if (button.type === TerminalMetaEnumType.inlinebutton) {
+        //     const buttonMeta = button.meta as IInlineButtonTerminalMeta;
+        //     outputStr = `${outputStr}${super.serialize(
+        //       format,
+        //       prefix +
+        //         `+-button: ${buttonMeta.label} (buttonIdx=${buttonMeta.buttonIdx})`
+        //     )}`;
+        //   } else {
+        //     outputStr = `${outputStr} Unexpected type encountered ${
+        //       TerminalMetaEnumType[button.type]
+        //     }`;
+        //   }
         // }
-        //        outputStr = outputStr.slice(0, -1);
         break;
       }
       case ParseNodeSerializeFormatEnumType.TABULAR: {
@@ -190,17 +245,6 @@ export class SectionParseNode_BUTTONGRID extends SectionParseNode_GRID
             // `sentence count=${this.meta.sentences.length}`
           )
         );
-        //        if (colWidth0 === undefined) colWidth0 = 2;
-        // for (let sentence of this.meta.sentences) {
-        //   let sentenceNode: ISentenceNode = <SentenceNode>sentence;
-        //   outputStr =
-        //     outputStr +
-        //     sentenceNode.serialize(
-        //       format,
-        //       sentence.constructor.name,
-        //       sentence.content
-        //     );
-        // }
         break;
       }
       case ParseNodeSerializeFormatEnumType.UNITTEST: {

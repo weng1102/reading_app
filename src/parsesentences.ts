@@ -160,25 +160,39 @@ export class SentenceNode extends AbstractSentenceNode
       this.logger.diagnostic(
         `${this.constructor.name} parsing "${this.content}"`
       );
+      this.logger.diagnostic(this.content);
       let markedUpSentence: string = this.tokenizer.addMarkupTags(this.content);
+      this.logger.diagnostic(`markedUpSentence=${markedUpSentence}`);
       // console.log(`markedupSentence=${markedUpSentence}`);
-      let tokenList: TokenListType = this.tokenizer.tokenize(markedUpSentence);
-      this.firstTermIdx = this.userContext.terminals.lastIdx + 1; //nextIdx
+      let tokenList: TokenListType = this.tokenizer.tokenize(
+        markedUpSentence,
+        this.dataSource.currentRecord().lineNo
+      );
+      let previousLastTerm: number = this.userContext.terminals.lastIdx;
+      this.logger.diagnostic(`tokenList.length=${tokenList.length}`);
       this.parseTokens(tokenList);
-      this.lastTermIdx = this.userContext.terminals.lastIdx;
-      // update all above terminals
-      //      this.id = this.userContext.sentences.push( { firstTermIdx: this.firstTermIdx, lastTermIdx: this.lastTermIdx});
-      // got each terminal and update sentence id
-      this.id =
-        this.userContext.sentences.push(
-          ISentenceListItemInitializer(
-            this.firstTermIdx,
-            this.lastTermIdx,
-            this.lastPunctuation
-          )
-        ) - 1;
-      for (let idx = this.firstTermIdx; idx <= this.lastTermIdx; idx++) {
-        this.userContext.terminals[idx].sentenceIdx = this.id;
+      if (previousLastTerm === this.userContext.terminals.lastIdx) {
+        // no additional terminals added within sentence
+      } else {
+        this.firstTermIdx = previousLastTerm + 1;
+        this.lastTermIdx = this.userContext.terminals.lastIdx;
+        // update all above terminals
+        //      this.id = this.userContext.sentences.push( { firstTermIdx: this.firstTermIdx, lastTermIdx: this.lastTermIdx});
+        // got each terminal and update sentence id
+        // iff firstTermIdx < previousLastTermIdx
+        this.id =
+          this.userContext.sentences.push(
+            ISentenceListItemInitializer(
+              this.firstTermIdx,
+              this.lastTermIdx,
+              this.lastPunctuation
+            )
+          ) - 1;
+        // console.log(`first=${this.firstTermIdx},last=${this.lastTermIdx}`);
+        for (let idx = this.firstTermIdx; idx <= this.lastTermIdx; idx++) {
+          // console.log(`idx=${idx}, ${this.id}`);
+          this.userContext.terminals[idx].sentenceIdx = this.id;
+        }
       }
     } catch (e) {
       if (IsError(e)) {

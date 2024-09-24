@@ -24,6 +24,7 @@ import {
   ITerminalInfo,
   IAcronymTerminalMeta,
   ICurrencyTerminalMeta,
+  ImageEntryOrientationEnumType,
   IImageTerminalMeta,
   INumeralsTerminalMeta,
   IPassthruTagTerminalMeta,
@@ -31,14 +32,15 @@ import {
   SectionFillinResponsesProgressionEnum,
   TerminalMetaEnumType
 } from "./pageContentType";
-import { TerminalFillinContext } from "./fillinContext";
 import { SectionFillinContext } from "./fillinContext";
 import { TerminalDate } from "./reactcomp_terminals_dates";
+import { TerminalFillin } from "./reactcomp_terminals_fillin";
+import { TerminalFillinContext } from "./fillinContext";
 import { TerminalEmailaddress } from "./reactcomp_terminals_emailaddress";
-import { TerminalPhoneNumber } from "./reactcomp_terminals_phonenumbers";
 import { TerminalImageEntry } from "./reactcomp_terminals_image";
 import { TerminalLink } from "./reactcomp_terminals_link";
-import { TerminalFillin } from "./reactcomp_terminals_fillin";
+import { TerminalPhoneNumber } from "./reactcomp_terminals_phonenumbers";
+import { TerminalInlineButton } from "./reactcomp_terminals_inlinebutton";
 import { ISettingsContext, SettingsContext } from "./settingsContext";
 import { PageContext } from "./pageContext";
 
@@ -47,10 +49,6 @@ export interface ITerminalPropsType {
   terminal: ITerminalContent;
   terminalCssSubclass: string;
   tagged: boolean;
-  // terminalTag: {
-  //   style: string
-  //   label: string,
-  // }
 }
 export interface ITerminalInfoPropsType {
   active: boolean;
@@ -70,6 +68,7 @@ export const TerminalDispatcher = React.memo(
               currentTerminalIdx >= props.terminal.firstTermIdx &&
               currentTerminalIdx <= props.terminal.lastTermIdx
             }
+            key={props.terminal.id}
             terminal={props.terminal}
             terminalCssSubclass={""}
             tagged={false}
@@ -89,6 +88,7 @@ export const TerminalDispatcher = React.memo(
                 props.active &&
                 currentTerminalIdx === props.terminal.firstTermIdx
               }
+              key={props.terminal.termIdx}
               terminal={props.terminal}
               terminalCssSubclass={props.terminalCssSubclass}
               tagged={props.tagged}
@@ -101,6 +101,7 @@ export const TerminalDispatcher = React.memo(
                 props.active &&
                 currentTerminalIdx === props.terminal.firstTermIdx
               }
+              key={props.terminal.termIdx}
               terminal={props.terminal}
               terminalCssSubclass={""}
               tagged={false}
@@ -111,6 +112,7 @@ export const TerminalDispatcher = React.memo(
         return (
           <TerminalWhitespace
             active={false}
+            key={props.terminal.termIdx}
             terminal={props.terminal}
             terminalCssSubclass={""}
             tagged={false}
@@ -123,6 +125,7 @@ export const TerminalDispatcher = React.memo(
               currentTerminalIdx >= props.terminal.firstTermIdx &&
               currentTerminalIdx <= props.terminal.lastTermIdx
             }
+            key={props.terminal.termIdx}
             terminal={props.terminal}
             terminalCssSubclass={""}
             tagged={false}
@@ -135,6 +138,7 @@ export const TerminalDispatcher = React.memo(
               currentTerminalIdx >= props.terminal.firstTermIdx &&
               currentTerminalIdx <= props.terminal.lastTermIdx
             }
+            key={props.terminal.termIdx}
             terminal={props.terminal}
             terminalCssSubclass={""}
             tagged={false}
@@ -147,6 +151,7 @@ export const TerminalDispatcher = React.memo(
               currentTerminalIdx >= props.terminal.firstTermIdx &&
               currentTerminalIdx <= props.terminal.lastTermIdx
             }
+            key={props.terminal.termIdx}
             terminal={props.terminal}
             terminalCssSubclass={""}
             tagged={false}
@@ -159,6 +164,7 @@ export const TerminalDispatcher = React.memo(
               currentTerminalIdx >= props.terminal.firstTermIdx &&
               currentTerminalIdx <= props.terminal.lastTermIdx
             }
+            key={props.terminal.termIdx}
             terminal={props.terminal}
             terminalCssSubclass={props.terminalCssSubclass}
             tagged={props.tagged}
@@ -172,6 +178,7 @@ export const TerminalDispatcher = React.memo(
               currentTerminalIdx >= props.terminal.firstTermIdx &&
               currentTerminalIdx <= props.terminal.lastTermIdx
             }
+            key={props.terminal.termIdx}
             terminal={props.terminal}
             terminalCssSubclass={""}
             tagged={false}
@@ -184,6 +191,17 @@ export const TerminalDispatcher = React.memo(
               currentTerminalIdx >= props.terminal.firstTermIdx &&
               currentTerminalIdx <= props.terminal.lastTermIdx
             }
+            key={props.terminal.termIdx}
+            terminal={props.terminal}
+            terminalCssSubclass={""}
+            tagged={false}
+          />
+        );
+      case TerminalMetaEnumType.inlinebutton:
+        return (
+          <TerminalInlineButton
+            active={false}
+            key={props.terminal.termIdx}
             terminal={props.terminal}
             terminalCssSubclass={""}
             tagged={false}
@@ -196,6 +214,7 @@ export const TerminalDispatcher = React.memo(
               currentTerminalIdx >= props.terminal.firstTermIdx &&
               currentTerminalIdx <= props.terminal.lastTermIdx
             }
+            key={props.terminal.termIdx}
             terminal={props.terminal}
             terminalCssSubclass={""}
             tagged={false}
@@ -208,6 +227,7 @@ export const TerminalDispatcher = React.memo(
               currentTerminalIdx >= props.terminal.firstTermIdx &&
               currentTerminalIdx <= props.terminal.lastTermIdx
             }
+            key={props.terminal.termIdx}
             terminal={props.terminal}
             terminalCssSubclass={""}
             tagged={false}
@@ -217,6 +237,7 @@ export const TerminalDispatcher = React.memo(
         return (
           <TerminalWhitespace
             active={false}
+            key={props.terminal.termIdx}
             terminal={props.terminal}
             terminalCssSubclass={""}
             tagged={false}
@@ -234,6 +255,7 @@ export const TerminalDispatcher = React.memo(
         return (
           <TerminalPassthru
             active={false}
+            key={props.terminal.termIdx}
             terminal={props.terminal}
             terminalCssSubclass={""}
             tagged={false}
@@ -536,83 +558,3 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
     return <span>{props.terminalInfo.content}</span>;
   }
 });
-export interface ITerminalImagePropsType {
-  class: string;
-  active: boolean;
-  imageInfo: IImageTerminalMeta;
-}
-export const TerminalImage = React.memo(
-  (props: ITerminalImagePropsType): any => {
-    const dispatch = useAppDispatch();
-    let settingsContext: ISettingsContext = useContext(
-      SettingsContext
-    ) as ISettingsContext;
-    let distDir = settingsContext.settings.config.distDir;
-    let path: string = `${distDir}/img/${props.imageInfo.src}`;
-    let overlayImgSrc = `${distDir}/img/link_overlay_white.png`;
-    let overlayClass = `imageentry-image-link ${props.imageInfo.className}`;
-    let hasDimensions = props.imageInfo.width > 0 && props.imageInfo.height > 0;
-    let hasLink = props.imageInfo.linkIdx >= 0;
-    let classNameString = `${props.imageInfo.className}`;
-    let fileType: string | undefined = props.imageInfo.src.split(".").pop();
-    if (fileType !== undefined && fileType.toLowerCase() === "png") {
-      classNameString = `${props.imageInfo.className}-png`;
-    } else {
-      classNameString = props.imageInfo.className;
-    }
-    console.log(` src=${props.imageInfo.src}`);
-
-    if (hasLink) {
-      console.log(
-        `hasLink width=${props.imageInfo.width},height=${props.imageInfo.height}`
-      );
-      return (
-        <div className="image-link-overlay-container">
-          <img
-            className={props.imageInfo.className}
-            src={path}
-            alt={props.imageInfo.label}
-            onClick={() =>
-              dispatch(Request.Page_gotoLink(props.imageInfo.linkIdx))
-            }
-          />
-          <img
-            src={overlayImgSrc}
-            className="image-link-overlay"
-            onClick={() =>
-              dispatch(Request.Page_gotoLink(props.imageInfo.linkIdx))
-            }
-          />
-        </div>
-      );
-    } else if (hasDimensions) {
-      console.log(
-        `hasDim width=${props.imageInfo.width},height=${props.imageInfo.height}`
-      );
-      return (
-        <>
-          <img
-            className={classNameString}
-            src={path}
-            alt={props.imageInfo.label}
-            width={props.imageInfo.width.toString()}
-            height={props.imageInfo.height.toString()}
-          />
-        </>
-      );
-    } else {
-      console.log(
-        `neither width=${props.imageInfo.width},height=${props.imageInfo.height}`
-      );
-      return (
-        <>
-          <img
-            className={classNameString}
-            src={path}
-            alt={props.imageInfo.label}
-          />
-        </>
-      );
-    }
-  }
-);

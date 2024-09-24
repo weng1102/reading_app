@@ -16,11 +16,17 @@
  **/
 import { CPageLists } from "./pageContext";
 import {
+  // InlineButtonScopeEnumType,
+  // InlineButtonCursorActionEnumType,
+  // InlineButtonListeningActionEnumType,
   IPageRequestItem,
   LinkIdxDestinationType,
   PageRequestItemInitializer
+  // RecitationScopeEnumType,
+  // RecitationPositionEnumType,
+  // RecitationListeningEnumType
 } from "./pageContentType";
-const IDX_INITIALIZER = -9999;
+export const IDX_INITIALIZER = -9999;
 // import {
 //   ISettings,
 //   ISettingsContext,
@@ -111,9 +117,27 @@ const TRANSITION_ACKNOWLEDGE = "transition/acknowledge";
 //const RECITE = "recite";  // requests to start and stop recite
 const RECITE_START = "recite/start";
 const RECITE_STOP = "recite/stop";
-const RECITE_TOGGLE = "recite/toggle"; // request from recite button
+// const RECITE_TOGGLE = "recite/toggle"; // request from recite button
 const RECITE_WORD = "recite/word"; // exclusively for wordNext
 const RECITED_WORD = "recited/word"; // exclusively for wordNext
+// const RECITE_WORKFLOW_START = "recite/workflow start";
+// const RECITE_WORKFLOW_END = "recite/workflow end";
+const RECITEBUTTON_CLICK = "recitebutton/click";
+const RECITEBUTTON_CLICKED = "recitebutton/clicked";
+
+// inline button click/clicked wrap the subsequent subactions below
+const INLINEBUTTON_CLICK = "inlinebutton/click"; // starting
+const INLINEBUTTON_CLICKED = "inlinebutton/clicked"; // ended
+
+// action states within inline button cllick
+const INLINEBUTTON_LISTEN = "inlinebutton/listen";
+const INLINEBUTTON_LISTENED = "inlinebutton/listened";
+const INLINEBUTTON_MOVE = "inlinebutton/move";
+const INLINEBUTTON_MOVED = "inlinebutton/moved";
+const INLINEBUTTON_RECITE = "inlinebutton/recite";
+const INLINEBUTTON_RECITED = "inlinebutton/recited";
+const INLINEBUTTON_SIGNAL = "inlinebutton/signal";
+const INLINEBUTTON_SIGNALED = "inlinebutton/signaled";
 
 const RECITING_STARTED = "reciting/started"; // actual state of reciting
 const RECITING_ENDED = "reciting/ended"; // actual state of reciting
@@ -273,6 +297,76 @@ const Fillin_resetSection = (sectionIdx: number) => {
 //     payload: sectionIdx
 //   };
 // };
+const InlineButton_click = (buttondIdx: number) => {
+  return {
+    type: INLINEBUTTON_CLICK,
+    payload: buttondIdx
+  };
+};
+const InlineButton_clicked = () => {
+  return {
+    type: INLINEBUTTON_CLICKED
+  };
+};
+const InlineButton_listen = () => {
+  return {
+    type: INLINEBUTTON_LISTEN
+  };
+};
+const InlineButton_listened = () => {
+  return {
+    type: INLINEBUTTON_LISTENED
+  };
+};
+const InlineButton_move = () => {
+  return {
+    type: INLINEBUTTON_MOVE
+  };
+};
+const InlineButton_moved = () => {
+  return {
+    type: INLINEBUTTON_MOVED
+  };
+};
+const InlineButton_recite = (toBeRecited: string[]) => {
+  return {
+    type: INLINEBUTTON_RECITE,
+    payload: toBeRecited
+  };
+};
+const InlineButton_recited = () => {
+  return {
+    type: INLINEBUTTON_RECITED
+  };
+};
+const InlineButton_signal = () => {
+  return {
+    type: INLINEBUTTON_SIGNAL
+  };
+};
+const InlineButton_signaled = () => {
+  return {
+    type: INLINEBUTTON_SIGNALED
+  };
+};
+// const ReciteWorkflow_start = (
+//   termIdx: number = IDX_INITIALIZER,
+//   scope: RecitationScopeEnumType = RecitationScopeEnumType.words,
+//   span: number = 0,
+//   position: RecitationPositionEnumType = RecitationPositionEnumType.unchanged,
+//   listening: RecitationListeningEnumType = RecitationListeningEnumType.notListening
+// ) => {
+//   return {
+//     type: RECITE_WORKFLOW_START,
+//     payload: {
+//       termIdx: termIdx,
+//       scope: scope,
+//       span: span,
+//       position: RecitationPositionEnumType,
+//       listening: RecitationListeningEnumType
+//     }
+//   };
+// };
 const Message_set = (
   message: string,
   msgType: StatusBarMessageType = StatusBarMessageType.application
@@ -429,10 +523,10 @@ const Recognition_message = (message: string) => {
 //     payload: message
 //   };
 // };
-const Recognition_start = (maxRetries: number) => {
+const Recognition_start = (stopAtEOS: boolean = false) => {
   return {
     type: LISTENING_START,
-    payload: maxRetries
+    payload: stopAtEOS
   };
 };
 const Recognition_stop = () => {
@@ -478,11 +572,11 @@ const Recite_stop = () => {
     type: RECITE_STOP
   };
 };
-const Recite_toggle = () => {
-  return {
-    type: RECITE_TOGGLE
-  };
-};
+// const Recite_toggle = () => {
+//   return {
+//     type: RECITE_TOGGLE
+//   };
+// };
 const Settings_toggle = () => {
   return {
     type: SETTINGS_TOGGLE
@@ -510,6 +604,17 @@ export const Request = {
   Fillin_resetSection,
   // Fillin_toggleTagsSection,
   // Fillin_selectLayoutSection,
+  InlineButton_click,
+  InlineButton_clicked,
+  // ReciteButton_clicked,
+  InlineButton_listen,
+  InlineButton_listened,
+  InlineButton_move,
+  InlineButton_moved,
+  InlineButton_recite,
+  InlineButton_recited,
+  InlineButton_signal,
+  InlineButton_signaled,
 
   Message_set,
   Message_clear,
@@ -539,7 +644,7 @@ export const Request = {
   Recite_stop,
   Recite_currentWord,
   Recited_currentWord,
-  Recite_toggle, // strictly for button event
+  // Recite_toggle, // strictly for button event
 
   Recognition_toggle,
   Recognition_setAvailability,
@@ -575,6 +680,7 @@ interface IReduxState {
 
   listen_available: boolean;
   listen_active: boolean;
+  listen_stopAtEOS: boolean;
   // listen_flush: boolean;
   listen_silenceStartTime: number;
   // listen_retriesExceeded: boolean;
@@ -626,6 +732,7 @@ interface IReduxState {
 
   navbar_toggle: boolean;
 
+  // recite_toggle: boolean; // on/off
   recite_requested: boolean;
   recite_word_requested: boolean;
   recite_word_completed: boolean;
@@ -639,6 +746,13 @@ interface IReduxState {
   message_application: string;
   message_listening: string;
   message_state: string;
+
+  inlinebutton_idx: number;
+  inlinebutton_listen_requested: boolean;
+  inlinebutton_move_requested: boolean;
+  inlinebutton_recite_requested: boolean;
+  inlinebutton_recite_toBeRecited: string[];
+  inlinebutton_signal_requested: boolean;
 }
 const IReduxStateInitialState: IReduxState = {
   announce_available: false,
@@ -647,8 +761,9 @@ const IReduxStateInitialState: IReduxState = {
 
   listen_available: false,
   listen_active: false,
-  // listen_flush: false,
+  listen_stopAtEOS: false,
   listen_silenceStartTime: 0,
+  // listen_flush: false,
   // listen_retries_max: 0,
   // listen_retries: 0,
   // listen_retriesExceeded: false,
@@ -708,7 +823,13 @@ const IReduxStateInitialState: IReduxState = {
   message_listening: "",
   message_state: "",
   //  pageContext: PageContextInitializer()
-  navbar_toggle: true
+  navbar_toggle: true,
+  inlinebutton_idx: IDX_INITIALIZER,
+  inlinebutton_recite_toBeRecited: [],
+  inlinebutton_listen_requested: false,
+  inlinebutton_move_requested: false,
+  inlinebutton_recite_requested: false,
+  inlinebutton_signal_requested: false
 };
 export const rootReducer = (
   state: IReduxState = IReduxStateInitialState,
@@ -719,7 +840,13 @@ export const rootReducer = (
     currentSentenceIdx: number
   ): [number, boolean] => {
     let sentenceIdx: number = state.pageContext.sentenceIdx(terminalIdx);
-    return [sentenceIdx, sentenceIdx !== currentSentenceIdx];
+    // console.log(
+    //   `@@@@setSentenceState:newsentence=${sentenceIdx !== currentSentenceIdx}`
+    // );
+    return [
+      sentenceIdx,
+      terminalIdx === 0 || sentenceIdx !== currentSentenceIdx
+    ];
   };
   const setSectionState = (
     terminalIdx: number,
@@ -872,7 +999,7 @@ export const rootReducer = (
   //   state.listen_retriesExceeded = false;
   // };
   const setListeningMessage = (message: string): string => {
-    state.message_state = `${action.type}: ${message}`;
+    state.message_state = `${action.type}: ${message}.`;
     console.log(`Listening: ${state.message_state}`);
     return state.message_state;
   };
@@ -1039,17 +1166,27 @@ export const rootReducer = (
     case LISTENING_TOGGLE:
       if (state.listen_available) {
         state.listen_active = !state.listen_active;
+        console.log(`toggle: listen_active=${state.listen_active}`);
         // if (state.listen_active) {
         //   state.listen_retries_max = +action.payload;
         //   resetListeningRetries();
         // }
       }
       return { ...state };
+    case LISTENING_START:
+      if (state.listen_available) {
+        state.listen_stopAtEOS = action.payload;
+        state.listen_active = true;
+        console.log(`start: listen_active=${state.listen_active}`);
+      }
+      return { ...state };
     case LISTENING_STOP:
       state.listen_active = false;
+      state.listen_stopAtEOS = false; // reset
       // state.listen_retries = 0;
       // state.listen_retriesExceeded = false;
       setListeningMessage((!state.listen_active).toString());
+      console.log(`stop: listen_active=${state.listen_active}`);
       return { ...state };
     case LISTENING_AVAILABLE:
       state.listen_available = action.payload;
@@ -1103,9 +1240,10 @@ export const rootReducer = (
       state.reciting = false;
       return { ...state };
 
-    case RECITE_TOGGLE:
-      state.recite_requested = !state.recite_requested;
-      return { ...state };
+    // case RECITE_TOGGLE:
+    //   // either via inline button or recite button
+    //   state.recite_requested = !state.recite_requested;
+    //   return { ...state };
     case RECITE_WORD:
       state.recite_word_requested = true;
       return { ...state };
@@ -1114,7 +1252,12 @@ export const rootReducer = (
       return { ...state };
     case SETTINGS_TOGGLE:
       state.settings_toggle = !state.settings_toggle;
-      if (state.settings_toggle) state.listen_active = false;
+      if (state.settings_toggle) {
+        state.listen_active = false;
+        console.log(`settingtoggle: listen_active=${state.listen_active}`);
+
+        state.listen_stopAtEOS = false; // reset
+      }
       return { ...state };
 
     case STATUSBAR_MESSAGE_SET:
@@ -1175,6 +1318,60 @@ export const rootReducer = (
     case NAVBAR_TOGGLE: {
       state.navbar_toggle = !state.navbar_toggle;
       return { ...state };
+    }
+    case INLINEBUTTON_CLICK: {
+      state.inlinebutton_idx = action.payload;
+      state.inlinebutton_listen_requested = false;
+      state.inlinebutton_move_requested = false;
+      state.inlinebutton_recite_requested = false;
+      state.inlinebutton_signal_requested = false;
+      // console.log(`reducer inlinebutton idx=${action.payload}`);
+      return state;
+    }
+    case INLINEBUTTON_CLICKED: {
+      state.inlinebutton_idx = IDX_INITIALIZER;
+      state.inlinebutton_recite_toBeRecited = [];
+      //      state.inlinebutton_listen_requested = false;
+      state.inlinebutton_move_requested = false;
+      state.inlinebutton_recite_requested = false;
+      state.inlinebutton_signal_requested = false;
+      return state;
+    }
+    case INLINEBUTTON_LISTEN: {
+      state.inlinebutton_listen_requested = true;
+      return state;
+    }
+    case INLINEBUTTON_LISTENED: {
+      state.inlinebutton_listen_requested = false;
+      return state;
+    }
+    case INLINEBUTTON_MOVE: {
+      state.inlinebutton_move_requested = true;
+      // assumes inlinebutton_idx is valid
+      return state;
+    }
+    case INLINEBUTTON_MOVED: {
+      state.inlinebutton_move_requested = false;
+      return state;
+    }
+    case INLINEBUTTON_RECITE: {
+      state.inlinebutton_recite_requested = true;
+      state.inlinebutton_recite_toBeRecited = action.payload;
+      // assumes inlinebutton_idx is valid
+      return state;
+    }
+    case INLINEBUTTON_RECITED: {
+      state.inlinebutton_recite_requested = false;
+      return state;
+    }
+    case INLINEBUTTON_SIGNAL: {
+      state.inlinebutton_signal_requested = true;
+      // assumes inlinebutton_idx is valid
+      return state;
+    }
+    case INLINEBUTTON_SIGNALED: {
+      state.inlinebutton_signal_requested = false;
+      return state;
     }
     default:
       console.log(`looking for undefined: ${action.type}`);

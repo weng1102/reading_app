@@ -9,8 +9,6 @@
  **/
 import * as fs from "fs";
 import { Logger } from "./logger";
-import DictionaryType from "./dictionary";
-import { PronunciationDictionary, RecognitionDictionary } from "./dictionary";
 "use strict";
 // export abstract class BaseClass {
 //   protected _logger: Logger;

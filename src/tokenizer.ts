@@ -115,7 +115,7 @@ export const enum MarkupLabelType {
   TOKEN = "<explicittoken>", // <token>
 
   // for markdowns
-  RECITEBUTTON = "<recite-button>",
+  INLINEBUTTON = "<button>",
   CUELIST = "<cuelist>",
   CUELIST_CLOSE = "</cuelist>",
   FILLIN = "<fillin>",
@@ -331,7 +331,7 @@ const MarkupTokenDictionary: MarkupTokenDictionaryType = {
 export const enum MarkdownIndexType {
   // defines order of markdown replacement e.g., FILLIN processed first.
   FILLIN = 0,
-  RECITEBUTTON,
+  INLINEBUTTON,
   CUELIST,
   EM,
   NUMERALS,
@@ -339,7 +339,7 @@ export const enum MarkdownIndexType {
   LABEL
 }
 export const enum MarkdownTokenType {
-  RECITEBUTTON,
+  INLINEBUTTON,
   CUELIST,
   FILLIN,
   EM,
@@ -390,15 +390,15 @@ const MarkdownTokenDictionary: MarkdownTokenDictionaryType = {
     // pattern: /(?<=\s|^|[\.,!'"])\[_((\w|[\s"'\/\-\(\)\@\.,\:;\$\<\>%!])+)_\](?=$|\s|[\.,!"\?])/g
     //    markdown: MarkdownLabelType.FILLIN_OPEN
   },
-  [MarkdownIndexType.RECITEBUTTON]: {
-    type: MarkdownTokenType.RECITEBUTTON,
-    label: MarkupLabelType.RECITEBUTTON,
-    pattern: /(?<=\s|^|[\.,!'"])\[recite-button:\s+((\w+|\-|,|\.|\s)*)\/\](?=$|\s|[\.,!"\?])/gi
+  [MarkdownIndexType.INLINEBUTTON]: {
+    type: MarkdownTokenType.INLINEBUTTON,
+    label: MarkupLabelType.INLINEBUTTON,
+    pattern: /(?<=\s|^|[\.,!'"])\[button:\s+((\w+|\-|,|\.|'|\s|\<contraction\>|\<\/contraction\>|\<numberwcommas>|\<\/numberwcommas\>|\<explicittoken\>|\<\/explicittoken\>)*)\/\](?=$|\s|[\.,!"\?])/gi
   },
   [MarkdownIndexType.CUELIST]: {
     type: MarkdownTokenType.CUELIST,
     label: MarkupLabelType.CUELIST,
-    pattern: /(?<=\w)=\((\w+(,{0,1}\s*([\w\s*\.\>\!\,\-\_\/\@\%\&]*))*)\)(?=$|\.|\s|<\/|\*|_)/g
+    pattern: /(?<=\w)=\((\w+(,{0,1}\s*([\w\s*\.\>\!\,\-\_\/\@\%\&]*))*)\)(?=$|\.|\s|<\/|\*|_|\<contraction\>|\<\/contraction\>)/g
 
     // /(?<=\w)=\((\w+)(,{0,1}\s{0,1}(POS:, DEF:,IMG:ALT){0,1}(\w+))*\)/g
 
@@ -800,6 +800,77 @@ export class Token {
     return JSON.stringify(tokenJson);
   }
 } // Token class
+export function tokenizeParameterList(paramString: string): string[] {
+  /////////////
+  // STRICTLY APPLIES TO ARGUMENT LIST OF MARKUP OBJECTS E.G. BUTTONS.
+  // This should behave like split(paramList.split(",") except it is aware of
+  // relevant _MLTAGS i.e., contraction and numbers with commas and perhaps
+  // quoted strings containing the aforementioned.
+  //
+  // In the case of contractions, just remove the tags. In the case of the
+  // numbers with commas, the comma is escaped/ignored for tokening while
+  // leaving the markup tags intact.
+  //
+  // This is applicable for the first and second parameters for label and cues.
+  // Initally, just implement number with commas and contractions.
+  // const smallestPositiveValue = (initVal: number, ...numbers: number[]) => {
+  //   let retVal: number = initVal;
+  //   for (const number of numbers) {
+  //     if (number > 0 && number < retVal) retVal = number;
+  //     console.log(number);
+  //   }
+  //   return retVal;
+  // };
+  let retArr: string[] = [];
+  let startingPos: number = 0;
+  let commaPos: number;
+  let tokenPos: number;
+  const numberTagPos: number = paramString.indexOf(
+    MarkupLabelType.NUMBER_WITHCOMMAS
+  );
+  const numberEndTagPos: number = paramString.indexOf(
+    endMarkupTag(MarkupLabelType.NUMBER_WITHCOMMAS)
+  );
+  const withinNumberTag = (pos: number): boolean => {
+    return pos > numberTagPos && pos < numberEndTagPos;
+  };
+  // console.log(`removing contraction tags`);
+  MarkupLabelType.CONTRACTION; // does not have a comma by definition
+  paramString = paramString
+    .replace(MarkupLabelType.CONTRACTION, "")
+    .replace(endMarkupTag(MarkupLabelType.CONTRACTION), "");
+  // console.log(
+  //   `tokenizing inline button? ${paramString} ${paramString.indexOf(
+  //     MarkupLabelType.INLINEBUTTON
+  //   )}`
+  // );
+  let param = "";
+  let pos: number;
+  const delimiter = ",";
+  // console.log(`numberTagPos=${numberTagPos}`);
+  // console.log(`numberEndTagPos=${numberEndTagPos}`);
+  // console.log(`withinTag=${withinNumberTag}`);
+  for (let pos = 0; pos <= paramString.length; pos++) {
+    if (
+      (paramString[pos] === delimiter && !withinNumberTag(pos)) ||
+      pos === paramString.length
+    ) {
+      // console.log(param);
+      param = param
+        .replace(MarkupLabelType.NUMBER_WITHCOMMAS, "")
+        .replace(endMarkupTag(MarkupLabelType.NUMBER_WITHCOMMAS), "");
+      // console.log(param);
+      retArr.push(param.trim());
+      param = "";
+    } else {
+      param += paramString[pos];
+    }
+  }
+  //  retArr.push(currentWord);
+  // console.log(`retArr`);
+  // console.log(retArr);
+  return retArr;
+}
 export function isValidMarkupTag(tag: string): boolean {
   // should apply match with patterns
   return (

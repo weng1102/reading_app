@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2023 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2024 Wen Eng - All Rights Reserved
  *
  * File name: reactcomp_speech.tsx
  *
@@ -22,9 +22,18 @@ import UAParser from "ua-parser-js";
 import { parse } from "useragent";
 //import { parse } from "useragent";
 import {
+  RecitationScopeEnumType,
+  RecitationPlacementEnumType,
+  RecitationReferenceEnumType,
+  RecitationListeningEnumType
+} from "./pageContentType";
+import {
   ISpeechSettings,
   ISettingsContext,
-  RecitationMode,
+  // RecitationMode,
+  // RecitationListeningEnumType,
+  // RecitationPositionEnumType,
+  // RecitationScopeEnumType,
   SettingsContext
 } from "./settingsContext";
 
@@ -63,6 +72,9 @@ class CSpeechSynthesizer {
   voiceList: SpeechSynthesisVoice[] = [];
   selectedVoiceIndex: number;
   // who is this decault voice? differs from windows to osx
+  cancel() {
+    window.speechSynthesis.cancel();
+  }
   get voices(): SpeechSynthesisVoice[] {
     return this.voiceList;
   }
@@ -203,14 +215,38 @@ interface ISpeechSettingsProps {
   active: boolean;
 }
 export const SpeechSettings = (props: ISpeechSettingsProps) => {
-  const [recitationMode, _setRecitationMode] = useState(
-    props.speechSettings.recitationMode
+  const [recitationScope, _setRecitationScope] = useState(
+    props.speechSettings.scope
   );
-  const setRecitationMode = (recitationMode: RecitationMode) => {
-    _setRecitationMode(recitationMode);
+  const setRecitationScope = (recitationScope: RecitationScopeEnumType) => {
+    _setRecitationScope(recitationScope);
     props.setSpeechSettings({
       ...props.speechSettings,
-      recitationMode: recitationMode
+      scope: recitationScope
+    });
+  };
+  const [recitationPlacement, _setRecitationPlacement] = useState(
+    props.speechSettings.placement
+  );
+  const setRecitationPlacement = (
+    recitationPlacement: RecitationPlacementEnumType
+  ) => {
+    _setRecitationPlacement(recitationPlacement);
+    props.setSpeechSettings({
+      ...props.speechSettings,
+      placement: recitationPlacement
+    });
+  };
+  const [recitationListening, _setRecitationListening] = useState(
+    props.speechSettings.listening
+  );
+  const setRecitationListening = (
+    recitationListening: RecitationListeningEnumType
+  ) => {
+    _setRecitationListening(recitationListening);
+    props.setSpeechSettings({
+      ...props.speechSettings,
+      listening: recitationListening
     });
   };
   const [voiceIndex, _setVoiceIndex] = useState(
@@ -242,9 +278,13 @@ export const SpeechSettings = (props: ISpeechSettingsProps) => {
   if (props.active) {
     return (
       <>
-        <RecitationModeRadioButton
-          recitationMode={recitationMode}
-          setRecitationMode={setRecitationMode}
+        <RecitationOptions
+          recitationScope={recitationScope}
+          setRecitationScope={setRecitationScope}
+          recitationPlacement={recitationPlacement}
+          setRecitationPlacement={setRecitationPlacement}
+          recitationListening={recitationListening}
+          setRecitationListening={setRecitationListening}
         />
         <VoiceCharacteristics
           voiceIndex={voiceIndex}
@@ -312,122 +352,148 @@ const VoiceTestButton = (props: IVoiceCharacteristicsPropsType) => {
     </>
   );
 };
-interface IRecitationModeRadioButtonProps {
-  recitationMode: RecitationMode;
-  setRecitationMode: (recitationMode: RecitationMode) => void;
+interface IRecitationOptionsProps {
+  recitationScope: RecitationScopeEnumType;
+  setRecitationScope: (recitationScope: RecitationScopeEnumType) => void;
+  recitationPlacement: RecitationPlacementEnumType;
+  setRecitationPlacement: (
+    recitationPlacement: RecitationPlacementEnumType
+  ) => void;
+  recitationListening: RecitationListeningEnumType;
+  setRecitationListening: (
+    setRecitationListening: RecitationListeningEnumType
+  ) => void;
 }
-export const RecitationModeRadioButton = (
-  props: IRecitationModeRadioButtonProps
-) => {
-  const onChangeValue = (event: any) => {
-    console.log(`recitationMode onchange=${event.target.value}`);
-    props.setRecitationMode(event.target.value);
+export const RecitationOptions = (props: IRecitationOptionsProps) => {
+  const onScopeChange = (event: any) => {
+    console.log(`recitationScope onchange=${event.target.value}`);
+    props.setRecitationScope(event.target.value);
   };
+  const onPlacementChange = (event: any) => {
+    console.log(`recitationPlacement onchange=${event.target.value}`);
+    props.setRecitationPlacement(event.target.value);
+  };
+  const onListeningChange = (event: any) => {
+    console.log(`recitationListening onchange=${event.target.value}`);
+    props.setRecitationListening(event.target.value);
+  };
+  console.log(`recitationScope=${props.recitationScope}`);
   return (
     <>
-      <div className="settings-grid-section-header">Recitation mode</div>
+      <div className="settings-grid-section-header">Recitation scope</div>
       <div
         className="recitation-radioButton settings-grid-section-item-recitation"
-        onChange={onChangeValue}
+        onChange={onScopeChange}
       >
         <div className="settings-grid-section-item-recitation-control-group">
           <input
             type="radio"
-            value={RecitationMode.wordOnly}
-            name="recitationMode"
-            defaultChecked={props.recitationMode === RecitationMode.wordOnly}
+            value={RecitationScopeEnumType.words}
+            name="recitationScope"
+            defaultChecked={
+              props.recitationScope === RecitationScopeEnumType.words
+            }
           />
-          {RecitationMode.wordOnly}
+          {RecitationScopeEnumType.words}
           <input
             type="radio"
-            value={RecitationMode.wordNext}
-            name="recitationMode"
-            defaultChecked={props.recitationMode === RecitationMode.wordNext}
+            value={RecitationScopeEnumType.sentence}
+            name="recitationScope"
+            defaultChecked={
+              props.recitationScope === RecitationScopeEnumType.sentence
+            }
           />
-          {RecitationMode.wordNext}
+          {RecitationScopeEnumType.sentence}
+          <input
+            type="radio"
+            value={RecitationScopeEnumType.section}
+            name="recitationScope"
+            defaultChecked={
+              props.recitationScope === RecitationScopeEnumType.section
+            }
+          />
+          {RecitationScopeEnumType.section}
         </div>
+        <div className="settings-grid-section-footer">
+          Scope option determines how much of the current prose are recited when
+          speak button is activated.
+        </div>
+      </div>
+      <div className="settings-grid-section-header">
+        Placement of cursor after reciting
+      </div>
+      <div
+        className="recitation-radioButton settings-grid-section-item-recitation"
+        onChange={onPlacementChange}
+      >
         <div className="settings-grid-section-item-recitation-control-group">
           <input
             type="radio"
-            value={RecitationMode.uptoExclusive}
-            name="recitationMode"
+            value={RecitationPlacementEnumType.unchanged}
+            name="recitationPlacement"
             defaultChecked={
-              props.recitationMode === RecitationMode.uptoExclusive
+              props.recitationPlacement ===
+              RecitationPlacementEnumType.unchanged
             }
           />
-          {RecitationMode.uptoExclusive}
+          unchanged
           <input
             type="radio"
-            value={RecitationMode.uptoInclusive}
-            name="recitationMode"
+            value={RecitationPlacementEnumType.beginning}
+            name="recitationPlacement"
             defaultChecked={
-              props.recitationMode === RecitationMode.uptoInclusive
+              props.recitationPlacement ===
+              RecitationPlacementEnumType.unchanged
             }
           />
-          {RecitationMode.uptoInclusive}
+          at the beginning
+          <input
+            type="radio"
+            value={RecitationPlacementEnumType.end}
+            name="recitationPlacement"
+            defaultChecked={
+              props.recitationPlacement ===
+              RecitationPlacementEnumType.unchanged
+            }
+          />
+          at the end
         </div>
+        <div className="settings-grid-section-footer">
+          Placement option determines whether the current word position is
+          unchanged, at the beginning or end of scope.
+        </div>
+      </div>
+      <div className="settings-grid-section-header">
+        Listening after recitation
+      </div>
+      <div
+        className="recitation-radioButton settings-grid-section-item-recitation"
+        onChange={onListeningChange}
+      >
         <div className="settings-grid-section-item-recitation-control-group">
           <input
             type="radio"
-            id="2"
-            value={RecitationMode.entireSentence}
-            name="recitationMode"
+            value={RecitationListeningEnumType.startListening}
+            name="recitationListening"
             defaultChecked={
-              props.recitationMode === RecitationMode.entireSentence
+              props.recitationListening ===
+              RecitationListeningEnumType.notListening
             }
           />
-          {RecitationMode.entireSentence}
+          start listening
           <input
-            disabled
             type="radio"
-            id="2"
-            value={RecitationMode.entireSentenceNext}
-            name="recitationMode"
+            value={RecitationListeningEnumType.notListening}
+            name="recitationListening"
             defaultChecked={
-              props.recitationMode === RecitationMode.entireSentenceNext
+              props.recitationListening ===
+              RecitationListeningEnumType.notListening
             }
           />
-          {RecitationMode.entireSentenceNext} TO BE IMPLEMENTED
-          <div className="settings-grid-section-item-recitation-control-group">
-            <input
-              type="radio"
-              value={RecitationMode.section}
-              name="recitationMode"
-              defaultChecked={props.recitationMode === RecitationMode.section}
-            />
-            {RecitationMode.section}
-            <input
-              disabled
-              type="radio"
-              value={RecitationMode.sectionNext}
-              name="recitationMode"
-              defaultChecked={props.recitationMode === RecitationMode.section}
-            />
-            {RecitationMode.sectionNext} TO BE IMPLEMENTED
-          </div>
+          not listening
         </div>
         <div className="settings-grid-section-footer">
-          Recitation mode determines how prose are recited when speak button is
-          activated. The "partial" (sentence) options determine whether the
-          current word is included or excluded in the recitation of the current
-          sentence.
-        </div>
-        <div className="checkbox-container cursor-advance-checkbox-container">
-          <input
-            onChange={onChangeValue}
-            className="checkbox-control"
-            type="checkbox"
-            //          checked={props.stopAtEOS}
-          />
-          <label>
-            PLACEHOLDER Advance cursor to the first word of the next sentence
-          </label>
-        </div>
-        <div className="settings-grid-section-footer">
-          Moves cursor to the first word of the next sentence (including first
-          sentence of the next section or paragraph) when recitation node is
-          either "entire sentence" or "section/paragraph" after reciting
-          recitation is complete. This is meant to facilitate flow of
+          Listening option determines whether to start listening after
           recitation.
         </div>
       </div>

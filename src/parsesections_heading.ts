@@ -57,6 +57,7 @@ export class SectionParseNode_HEADING extends SectionParseNode
 
       this.meta.heading = sentence;
       this.meta.level = current.headingLevel;
+      this.meta.tag = current.autoNumberedTag;
       this.meta.heading.firstTermIdx = firstTermIdx;
 
       this.userContext.headings.push({
@@ -87,7 +88,7 @@ export class SectionParseNode_HEADING extends SectionParseNode
     prefix?: string
   ): string {
     let sentenceNode: ISentenceNode = <SentenceNode>this.meta.heading;
-    label = `heading id=${sentenceNode.id} (at level ${this.meta.level})`;
+    label = `heading id=${sentenceNode.id} (at level ${this.meta.level}, tag="${this.meta.tag}")`;
     // prefix += "  ";
     let outputStr: string = `${super.serialize(
       format,

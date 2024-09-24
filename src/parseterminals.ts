@@ -126,10 +126,9 @@ export abstract class AbstractTerminalNode extends ParseNode
           }
           if (this.cues.partOfSpeech === PartOfSpeechEnumType.untagged) {
             this.logger.warning(
-              `"invalid cuelist argument 1 "${cues[0]}" specified"`
+              `"invalid cuelist argument 1 "${cues[0]}" specified at line  ${token.lineNo}"`
             );
           }
-
           if (cues.length >= 2 && cues[1].length > 0)
             this.cues.definition = cues[1].trim();
 

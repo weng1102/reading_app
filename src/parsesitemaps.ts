@@ -44,7 +44,7 @@ export default class CSiteMap extends BaseClass {
   constructor(parent: AppNode) {
     super(parent);
   }
-  inputPath: string = "dist/";
+  inputPath: string = "reading-companion/";
   inputExtension: string = ".json";
   outputPath: string = "curriculum/";
   outputExtension: string = ".md";

@@ -28,6 +28,8 @@ interface ISectionImageEntryImagesPropsType {
   active: boolean;
   className: string;
   images: ITerminalContent[];
+  // width: string;
+  // height: string;
 }
 interface ISectionImageEntryCaptionsPropsType {
   active: boolean;
@@ -35,18 +37,25 @@ interface ISectionImageEntryCaptionsPropsType {
   captions: ISectionContent[];
 }
 export const SectionImageEntry = React.memo((props: ISectionPropsType): any => {
+  // aware of orientation
   let imageEntry: ISectionImageEntryVariant = props.section
     .meta as ISectionImageEntryVariant;
   let orientation: string = imageEntry.orientation.toString();
-  let className: string = `imageentry-container-${orientation}`;
-  let dividerClassName: string = `${className}-divider`;
-  // console.log(`imageEntry.percent=${imageEntry.percent}`);
-  let style = {};
-  let vh = imageEntry.percent.replace("%", "vh");
-  style = {
-    ["--imageentry-container-left-image-width" as any]: imageEntry.percent,
-    ["--imageentry-min-image-height" as any]: vh
-  };
+  const classPrefix: string = `imageentry-container`;
+  let className: string = `${classPrefix}-${orientation}`;
+  let dividerClassName: string = `${classPrefix}-divider-${orientation}`;
+  let style: React.CSSProperties | any;
+  let maxHeight: string = "";
+  if (imageEntry.orientation === ImageEntryOrientationEnumType.above) {
+    maxHeight = imageEntry.percent.replace("%", "vh");
+    style = { maxHeight: `${maxHeight}` };
+  } else if (imageEntry.orientation === ImageEntryOrientationEnumType.left) {
+    style = {
+      gridTemplateColumns: `[images] ${imageEntry.percent} [divider] 10px [captions] auto`
+    };
+  } else {
+    style = {};
+  }
   return (
     <>
       <div className={dividerClassName}></div>
@@ -69,6 +78,20 @@ export const SectionImageEntry = React.memo((props: ISectionPropsType): any => {
 export const SectionImageEntryImages = React.memo(
   (props: ISectionImageEntryImagesPropsType): any => {
     let images: ITerminalContent[] = props.images;
+    let style: React.CSSProperties | any;
+    console.log(`images.type=${images[0].type}`);
+    // if (props.orientation === ImageEntryOrientationEnumType.above) {
+    //   let vh = imageEntry.percent.replace("%", "vh");
+    //
+    //   // style = { "> img": { maxHeight: "10vh" } };
+    //   style = { maxHeight: "14vh" };
+    //   // style = { maxHeight: "10vh" };
+    //   // style = { imageentryImagesAbove: { maxHeight: "17vh" } };
+    //   console.log(`%%%className=${props.className} style=${style}`);
+    // } else {
+    //   style = {};
+    // }
+    // style = {};
     return (
       <>
         <div className={props.className}>

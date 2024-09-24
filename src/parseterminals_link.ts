@@ -1,6 +1,6 @@
-/** Copyright (C) 2020 - 2023 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2024 Wen Eng - All Rights Reserved
  *
- * File name: parsesections_link.ts
+ * File name: parsetermminals_link.ts
  *
  * Create terminal link objects from serialized input.
  *
@@ -53,21 +53,21 @@ export class TerminalNode_MLTAG_LINK extends TerminalNode_MLTAG_
 
       assert(
         tokenList.length >= 8,
-        "Expected at least 8 tokens parsing image token"
+        "Expected at least 8 tokens parsing link token"
       );
       assert(
         isValidMarkupTag(startTag),
-        `Expected valid markup tag but encountered "${startTag}" parsing image token`
+        `Expected valid markup tag but encountered "${startTag}" parsing link token`
       );
       assert(
         startTag.toLowerCase === MarkupLabelType.LINK.toLowerCase,
-        `Expected markup tag ${MarkupLabelType.LINK.toLowerCase} but encountered "${startTag}" parsing image token`
+        `Expected markup tag ${MarkupLabelType.LINK.toLowerCase} but encountered "${startTag}" parsing link token`
       );
       tokenList.shift(); // discard startTag
       token = tokenList.shift()!; // discards LBRACKET
       assert(
         token.content === TokenLiteral.LBRACKET,
-        `Expected "${TokenLiteral.LBRACKET}" but encountered "${token.content}" while parsing image token`
+        `Expected "${TokenLiteral.LBRACKET}" but encountered "${token.content}" while parsing link token at line ${token.lineNo}`
       );
       let label: string = "";
       linkIdx = this.userContext.links.push(ILinkListItemInitializer()) - 1;
@@ -85,6 +85,7 @@ export class TerminalNode_MLTAG_LINK extends TerminalNode_MLTAG_
             `Created terminalNode type=${terminalNode.constructor.name} for "${token.content}"`
           );
           terminalNode.parse(tokenList); // responsible for advancing tokenlist
+          // console.log(`link content=${terminalNode.content}`);
           // assumed added in parse() above
           if (
             terminalNode.firstTermIdx !== IDX_INITIALIZER &&
@@ -103,14 +104,14 @@ export class TerminalNode_MLTAG_LINK extends TerminalNode_MLTAG_
           this.meta.label.push(terminalNode);
         } else {
           this.logger.error(
-            `Encountered unhandled token type=${token.type} for token "${token.content}"`
+            `Encountered unhandled token type=${token.type} for token "${token.content}" at line ${token.lineNo}`
           );
         }
       }
       token = tokenList.shift()!;
       assert(
         token.content === TokenLiteral.RBRACKET,
-        `Expected ${TokenLiteral.RBRACKET} but encountered "${token.content}" while parsing link token`
+        `Expected ${TokenLiteral.RBRACKET} but encountered "${token.content}" while parsing link token at line ${token.lineNo}`
       );
       this.content = label;
       if (this.meta.label.length > 0) {
@@ -120,7 +121,7 @@ export class TerminalNode_MLTAG_LINK extends TerminalNode_MLTAG_
       token = tokenList.shift()!;
       assert(
         token.content === TokenLiteral.LPAREN,
-        `Expected "${TokenLiteral.LPAREN} but encountered "${token.content}" while parsing link token`
+        `Expected "${TokenLiteral.LPAREN} but encountered "${token.content}" while parsing link token at line ${token.lineNo}`
       );
       //      token = tokenList.shift()!;
       let destination: string = "";
@@ -142,7 +143,7 @@ export class TerminalNode_MLTAG_LINK extends TerminalNode_MLTAG_
       } else {
         assert(
           IsDefined(chunks[1]) && chunks[1] in LinkIdxDestinationType,
-          `Expected link type but encountered "${chunks[1]}" while parsing link destination type`
+          `Expected link type but encountered "${chunks[1]}" while parsing link destination type at line ${token.lineNo}`
         );
       }
       if (IsDefined(chunks[2]) && Number(chunks[2]) !== NaN) {
@@ -167,7 +168,7 @@ export class TerminalNode_MLTAG_LINK extends TerminalNode_MLTAG_
       } else {
         assert(
           Number(chunks[2]) !== NaN,
-          `Expected a numeric but encountered "${chunks[2]}" while parsing link destination index`
+          `Expected a numeric but encountered "${chunks[2]}" while parsing link destination index at line ${token.lineNo}`
         );
       }
       let directory: string = `dist\\`;
@@ -207,14 +208,14 @@ export class TerminalNode_MLTAG_LINK extends TerminalNode_MLTAG_
       //      token = tokenList.shift()!;
       assert(
         token.content === TokenLiteral.RPAREN,
-        `Expected right parenthesis but encountered "${token.content}" while parsing image`
+        `Expected right parenthesis but encountered "${token.content}" while parsing link at line ${token.lineNo}`
       );
       token = tokenList.shift()!;
       assert(
         token.content === endMarkupTag(startTag),
         `Expected closing tag "${endMarkupTag(
           startTag
-        )}" while parsing image token`
+        )}" while parsing link token at line ${token.lineNo}`
       );
       this.meta.linkIdx = linkIdx;
       this.userContext.links[linkIdx] = ILinkListItemInitializer(

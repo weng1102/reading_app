@@ -19,7 +19,7 @@ const Usage: string =
   `  --dumpfillins       display fillins\n` +
   `  --dumpjsondataapp   display generated json\n` +
   `  --dumplinks         display link list\n` +
-  `  --dumprecitebuttons display recite buttons\n` +
+  `  --dumpbuttons       display inline buttons\n` +
   `  --dumpsections      display section list\n` +
   `  --dumpsentences     display sentence list\n` +
   `  --dumpsitemap       display sitemap iff --sitemap\n` +
@@ -34,7 +34,7 @@ const Usage: string =
   `  --verbose           verbose output mode\n`;
 
 const curriculumPath: string = "curriculum/";
-const distPath: string = "dist/";
+const distPath: string = "reading-companion/";
 const mdExtension: string = ".md"; // markdown
 const jsonExtension: string = ".json";
 let appNode: AppNode = new AppNode();
@@ -267,16 +267,16 @@ if (switches.includes("--sitemap")) {
           false
         );
       }
-      if (switches.includes("--dumprecitebuttons")) {
+      if (switches.includes("--dumpbuttons")) {
         logger.info(
-          `dumping recite buttons for ${path.basename(outputFileSpec)}`,
+          `dumping inline buttons for ${path.basename(outputFileSpec)}`,
           false,
           false,
           false,
           false
         );
         logger.info(
-          pageNode.userContext.reciteButtons.serialize(),
+          pageNode.userContext.inlineButtons.serialize(),
           false,
           false,
           false,

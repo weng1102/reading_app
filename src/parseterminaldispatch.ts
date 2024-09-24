@@ -30,7 +30,7 @@ import {
   TerminalNode_WHITESPACE,
   TerminalNode_PASSTHRUTAG
 } from "./parseterminals";
-import { TerminalNode_MLTAG_RECITEBUTTON } from "./parseterminals_button";
+import { TerminalNode_MLTAG_INLINEBUTTON } from "./parseterminals_inlinebutton";
 import { TerminalNode_MLTAG_FILLIN } from "./parseterminals_fillin";
 import { TerminalNode_ACRONYM } from "./parseterminals_acronym";
 import {
@@ -94,8 +94,8 @@ export function GetTerminalNode(
           termNode = new TerminalNode_MLTAG_IMAGE(parent);
           break;
         }
-        case MarkupLabelType.RECITEBUTTON: {
-          termNode = new TerminalNode_MLTAG_RECITEBUTTON(parent);
+        case MarkupLabelType.INLINEBUTTON: {
+          termNode = new TerminalNode_MLTAG_INLINEBUTTON(parent);
           break;
         }
         case MarkupLabelType.LINK: {

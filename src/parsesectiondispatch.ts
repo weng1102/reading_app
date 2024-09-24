@@ -27,6 +27,7 @@ import {
   SectionParseNode_LISTITEM_UNORDERED
 } from "./parsesections_listitem";
 import { SectionParseNode_BLOCKQUOTE } from "./parsesections_blockquote";
+import { SectionParseNode_BUTTONGRID } from "./parsesections_buttongrid";
 import { SectionParseNode_HEADING } from "./parsesections_heading";
 
 export function GetSectionNode(
@@ -112,6 +113,10 @@ export function GetSectionNode(
     }
     case MarkdownRecordType.BLOCKQUOTE: {
       sectionNode = new SectionParseNode_BLOCKQUOTE(parent);
+      break;
+    }
+    case MarkdownRecordType.BUTTONGRID: {
+      sectionNode = new SectionParseNode_BUTTONGRID(parent);
       break;
     }
     case MarkdownRecordType.EMPTY: {

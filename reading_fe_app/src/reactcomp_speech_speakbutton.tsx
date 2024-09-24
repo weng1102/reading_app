@@ -16,12 +16,9 @@ import speakInactiveIcon from "./img/button_speak.png";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { useEffect, useState, useContext } from "react";
 import { CPageLists } from "./pageContext";
-import {
-  ISettingsContext,
-  RecitationMode,
-  SettingsContext
-} from "./settingsContext";
+import { ISettingsContext, SettingsContext } from "./settingsContext";
 import { Synthesizer } from "./reactcomp_speech";
+import { RecitationScopeEnumType } from "./pageContentType";
 
 export const SpeakButton = () => {
   let dispatch = useAppDispatch();
@@ -34,8 +31,8 @@ export const SpeakButton = () => {
   // cannot use useContext(PageContext) because context is only scoped within
   // a page
   const settingsContext: ISettingsContext = useContext(SettingsContext)!;
-  const recitationMode: RecitationMode =
-    settingsContext.settings.speech.recitationMode;
+  const recitationScope: RecitationScopeEnumType =
+    settingsContext.settings.speech.scope;
 
   useEffect(() => {
     // stop speaking when termIdx changes
@@ -77,7 +74,8 @@ export const SpeakButton = () => {
         setRecitationQueue([...recitationQueue]);
         Synthesizer.volume = settingsContext.settings.speech.volume;
         Synthesizer.speak(sentence, setSpeakingNow);
-        if (RecitationMode.wordNext) dispatch(Request.Cursor_gotoNextWord());
+        if (RecitationScopeEnumType.words)
+          dispatch(Request.Cursor_gotoNextWord());
       }
     }
   }, [speakingNow, recitationQueue]);
@@ -142,35 +140,34 @@ export const SpeakButton = () => {
       return strQ;
     };
     // given all the array accessing, should wrap in try/catch
-    switch (recitationMode) {
-      case RecitationMode.wordOnly:
-      case RecitationMode.wordNext:
+    switch (recitationScope) {
+      case RecitationScopeEnumType.words:
         messageQueue.push(wordToRecite(termIdx));
         break;
-      case RecitationMode.entireSentence:
+      case RecitationScopeEnumType.sentence:
         messageQueue.push(
           sentenceToRecite(pageContext.terminalList[termIdx].sentenceIdx)
         );
         break;
-      case RecitationMode.uptoExclusive:
-        messageQueue.push(
-          sentenceToRecite(
-            pageContext.terminalList[termIdx].sentenceIdx,
-            termIdx - 1, // excluding current terminal
-            "?" // not end of sentence
-          )
-        );
-        break;
-      case RecitationMode.uptoInclusive:
-        messageQueue.push(
-          sentenceToRecite(
-            pageContext.terminalList[termIdx].sentenceIdx,
-            termIdx, // including current terminal
-            "?" // not end of sentence
-          )
-        );
-        break;
-      case RecitationMode.section:
+      // case RecitationMode.uptoExclusive:
+      //   messageQueue.push(
+      //     sentenceToRecite(
+      //       pageContext.terminalList[termIdx].sentenceIdx,
+      //       termIdx - 1, // excluding current terminal
+      //       "?" // not end of sentence
+      //     )
+      //   );
+      //   break;
+      // case RecitationMode.uptoInclusive:
+      //   messageQueue.push(
+      //     sentenceToRecite(
+      //       pageContext.terminalList[termIdx].sentenceIdx,
+      //       termIdx, // including current terminal
+      //       "?" // not end of sentence
+      //     )
+      //   );
+      //   break;
+      case RecitationScopeEnumType.section:
         messageQueue = [
           ...messageQueue,
           ...sectionToRecite(pageContext.terminalList[termIdx].sectionIdx)
@@ -186,7 +183,7 @@ export const SpeakButton = () => {
     <>
       <img
         className="icon"
-        alt="speak"
+        alt="recite"
         src={
           window.speechSynthesis === null
             ? speakGhostedIcon
@@ -195,7 +192,7 @@ export const SpeakButton = () => {
             : speakInactiveIcon
         }
         title="recite word"
-        onClick={() => dispatch(Request.Recite_toggle())}
+        // onClick={() => dispatch(Request.Recite_toggle())}
       />
     </>
   );

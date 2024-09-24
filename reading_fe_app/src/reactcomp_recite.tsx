@@ -264,9 +264,11 @@ export const ReciteButton = () => {
     if (!reciteActivated) {
       // Synthesizer.cancel();
       // setRecitationQueue([]);
-    } else if (pageLists.terminalList.length > 0) {
+    } else {
+      const validTerminalList = pageLists.terminalList.length > 0;
       switch (recitationScope) {
         case RecitationScopeEnumType.words:
+          if (!validTerminalList) break;
           if (recitationSpan === 0) {
             setRecitationQueue(WordsToBeRecited(pageLists, recitationStartIdx));
           } else {
@@ -281,6 +283,7 @@ export const ReciteButton = () => {
           }
           break;
         case RecitationScopeEnumType.sentence:
+          if (!validTerminalList) break;
           let sentenceList: string[] = SentenceToBeRecited(
             pageLists,
             pageLists.terminalList[recitationStartIdx].sentenceIdx
@@ -290,6 +293,7 @@ export const ReciteButton = () => {
           console.log(`recitationQueue.length=${recitationQueue.length}`);
           break;
         case RecitationScopeEnumType.section:
+          if (!validTerminalList) break;
           console.log(`reciteButton: currentTermIdx=${recitationStartIdx}`);
           setRecitationQueue(
             SectionToBeRecited(

@@ -22,6 +22,7 @@ import {
 } from "./utilities";
 import { Logger } from "./logger";
 import { MarkdownRecordType, TaggedStringType } from "./dataadapter";
+import { tokenizeParameterList } from "./tokenizer";
 import {
   AutodNumberedHeadingEnumType,
   ISectionFillinItem,
@@ -29,7 +30,7 @@ import {
   ILinkListItem,
   IPageContent,
   IRangeItem,
-  IReciteButtonItem,
+  IInlineButtonItem,
   ISentenceListItem,
   ISectionListItem,
   ITerminalInfo,
@@ -83,7 +84,7 @@ export class PageParseNode extends ParseNode implements IPageContent {
   sentenceList: ISentenceListItem[] = [];
   linkList: ILinkListItem[] = [];
   fillinList: ISectionFillinItem[] = [];
-  reciteButtons: IReciteButtonItem[] = [];
+  inlineButtonList: IInlineButtonItem[] = [];
   constructor(parent?: PageParseNode | AppNode) {
     super(parent);
   }
@@ -99,7 +100,9 @@ export class PageParseNode extends ParseNode implements IPageContent {
       [5]  description
       [6]  numbering scheme
       */
-      let args: string[] = argString.split(",").map(arg => arg.trim());
+      let args: string[] = tokenizeParameterList(argString).map(arg =>
+        arg.trim()
+      );
       let argNum: number = 0;
       this.title = ValidateArg(
         IsValidString(args[argNum]),
@@ -214,9 +217,11 @@ export class PageParseNode extends ParseNode implements IPageContent {
       this.userContext.terminals.parse();
       this.terminalList = this.userContext.terminals;
 
-      this.userContext.headings.parse(
-        this.terminalList[this.terminalList.length - 1].termIdx
-      );
+      const lastTermIdx: number =
+        this.terminalList.length > 0
+          ? this.terminalList[this.terminalList.length - 1].termIdx
+          : IDX_INITIALIZER;
+      this.userContext.headings.parse(lastTermIdx);
       this.headingList = this.userContext.headings;
 
       this.userContext.sentences.parse();
@@ -235,11 +240,8 @@ export class PageParseNode extends ParseNode implements IPageContent {
       this.userContext.fillins.parse();
       this.fillinList = this.userContext.fillins;
 
-      this.userContext.reciteButtons.parse(
-        this.terminalList,
-        this.sentenceList
-      );
-      this.reciteButtons = this.userContext.reciteButtons;
+      this.userContext.inlineButtons.parse(this.sectionList, this.terminalList);
+      this.inlineButtonList = this.userContext.inlineButtons;
 
       this.modified = new Date(Date.now()).toString();
     } catch (e) {

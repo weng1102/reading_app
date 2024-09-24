@@ -44,20 +44,38 @@ export const TerminalInlineButton = React.memo(
   (props: ITerminalPropsType): any => {
     const enum actionStateEnumType {
       start = "start",
-      signalStart = "signalStart",
+      signalStart = "signalStart", // asynchronously
       signaling = "signaling",
       signalEnd = "signalEnd",
       signal = "signal",
-      reciteStart = "reciteStart",
+      correctResponseStart = "correctResponseStart",
+      correctResponse = "correctResponse",
+      correctResponseEnd = "correctResponseEnd",
+      // incorrect = "incorrect",
+      reciteStart = "reciteStart", // asynchronously
       reciting = "reciting",
       reciteEnd = "reciteEnd",
+      delayStart = "delaytart", // asynchronously
+      delaying = "delaying",
+      delayEnd = "delayEnd",
+      resetSentence = "showSentence",
+      ghostSentence = "ghostSentence",
+      unghostWord = "unghostWord",
       gotoNextWord = "nextWord", // executes synchronously
       gotoNextSentence = "nextSentence", // executes synchronously
-      listenStart = "listenStart",
+      nextSection = "nextSection",
+      listenStart = "listenStart", // asynchronously
       listening = "listening",
       listenEnd = "listenEnd",
       end = "end"
     }
+    const [listeningStartedViaButton, setListeningStartedViaButton] = useState(
+      false
+    );
+    const [choiceResponseSectionIdx, setChoiceResponseSectionIdx] = useState(
+      IDX_INITIALIZER
+    );
+    // const stopAtEndOfSentence: boolean = true;
     const dispatch = useAppDispatch();
     const audioPlay = async (src: string) => {
       const context = new AudioContext();
@@ -79,9 +97,11 @@ export const TerminalInlineButton = React.memo(
     const buttonInfo: IInlineButtonTerminalMeta = props.terminal
       .meta as IInlineButtonTerminalMeta;
     const pageLists: CPageLists = useContext(PageContext)!;
-    const buttonIdx = buttonInfo.buttonIdx;
-    const buttonAction: InlineButtonActionEnumType =
-      pageLists.inlineButtonList[buttonIdx].action;
+    const thisButtonIdx = buttonInfo.buttonIdx;
+    let buttonAction: InlineButtonActionEnumType =
+      thisButtonIdx >= 0 && thisButtonIdx < pageLists.inlineButtonList.length
+        ? pageLists.inlineButtonList[thisButtonIdx].action
+        : InlineButtonActionEnumType.none;
 
     // let settingsContext: ISettingsContext = useContext(
     //   SettingsContext
@@ -96,9 +116,17 @@ export const TerminalInlineButton = React.memo(
     const moveRequested = useAppSelector(
       store => store.inlinebutton_move_requested
     );
-    const listenRequested = useAppSelector(
+    const listeningRequested = useAppSelector(
       store => store.inlinebutton_listen_requested
     );
+    // const newSentence = useAppSelector(
+    //   store => store.cursor_newSentenceTransition
+    // );
+    const newSection = useAppSelector(
+      store => store.cursor_newSectionTransition
+    );
+    const currentSectionIdx = useAppSelector(store => store.cursor_sectionIdx);
+    const listeningAlready = useAppSelector(store => store.listen_active);
     const reciteRequested = useAppSelector(
       store => store.inlinebutton_recite_requested
     );
@@ -112,24 +140,43 @@ export const TerminalInlineButton = React.memo(
     //   dispatch(Request.InlineButton_signaled());
     // };
     useEffect(() => {
-      if (clickedButtonIdx === buttonIdx) {
+      if (buttonAction === InlineButtonActionEnumType.choice)
+        setChoiceResponseSectionIdx(currentSectionIdx);
+    }, [newSection, currentSectionIdx]);
+    useEffect(() => {
+      if (clickedButtonIdx === thisButtonIdx) {
         setNextActionState(actionStateEnumType.start);
       } else {
         setNextActionState(actionStateEnumType.end);
       }
     }, [clickedButtonIdx]);
+    // useEffect(() => {
+    //   if (moveRequested) {
+    //     const termIdx: number =
+    //       pageLists.inlineButtonList[clickedButtonIdx].termIdx;
+    //     dispatch(Request.Cursor_gotoWordByIdx(termIdx));
+    //     console.log(`moving`);
+    //   } else {
+    //   }
+    // }, [moveRequested, clickedButtonIdx]);
+    useEffect(() => {
+      if (listeningRequested) {
+        dispatch(Request.Recognition_start());
+      } else {
+        dispatch(Request.Recognition_stop());
+      }
+    }, [listeningRequested]);
     const choiceWorkflow = () => {
+      console.log(`@@@ nextActionState=${nextActionState}`);
       switch (nextActionState) {
         case actionStateEnumType.start:
-          // if (!signalRequested) {
-          //   setNextActionState(actionStateEnumType.end);
-          // } else {
+          setListeningStartedViaButton(false);
           setNextActionState(actionStateEnumType.signalStart);
-          // }
           break;
         case actionStateEnumType.signalStart:
           if (!signalRequested) {
             dispatch(Request.InlineButton_signal());
+            console.log(`inlinebutton=${buttonInfo.label.toLowerCase()}`);
             if (buttonInfo.label.toLowerCase() === "correct") {
               audioPlay(BellShort);
             } else {
@@ -144,42 +191,74 @@ export const TerminalInlineButton = React.memo(
           }
           break;
         case actionStateEnumType.signalEnd:
-          setNextActionState(actionStateEnumType.reciteStart);
-          break;
-        case actionStateEnumType.reciteStart:
-          if (!reciteRequested) {
-            const termIdx: number =
-              pageLists.inlineButtonList[clickedButtonIdx].termIdx + 1;
-            const sentenceIdx: number =
-              pageLists.terminalList[termIdx].sentenceIdx;
-            const strQ: string[] = SentenceToBeRecited(pageLists, sentenceIdx);
-
-            dispatch(Request.InlineButton_recite(strQ));
-            setNextActionState(actionStateEnumType.reciting);
+          if (buttonInfo.label.toLowerCase() === "correct") {
+            setNextActionState(actionStateEnumType.correctResponseStart);
+            // setNextActionState(actionStateEnumType.gotoNextWord);
+          } else {
+            setNextActionState(actionStateEnumType.end);
           }
           break;
-        case actionStateEnumType.reciting:
-          if (!reciteRequested) {
-            setNextActionState(actionStateEnumType.reciteEnd);
+        case actionStateEnumType.correctResponseStart:
+          const termIdx: number =
+            pageLists.inlineButtonList[clickedButtonIdx].termIdx;
+          dispatch(Request.InlineButton_move());
+          dispatch(Request.Cursor_gotoWordByIdx(termIdx));
+          setNextActionState(actionStateEnumType.correctResponse);
+          break;
+        case actionStateEnumType.correctResponse:
+          if (moveRequested) {
+            setNextActionState(actionStateEnumType.correctResponseEnd);
+            dispatch(Request.InlineButton_moved());
           }
           break;
-        case actionStateEnumType.reciteEnd:
+        case actionStateEnumType.correctResponseEnd:
+          setNextActionState(actionStateEnumType.listenStart);
+          // }
+          break;
+        case actionStateEnumType.listenStart:
+          // dispatch(Request.InlineButton_moved());
+          if (listeningAlready) {
+            // do nothing
+          } else {
+            // not already listening from before
+            setListeningStartedViaButton(true);
+            dispatch(Request.Recognition_start());
+          }
+          setNextActionState(actionStateEnumType.listening);
+          break;
+        case actionStateEnumType.listening:
+          if (choiceResponseSectionIdx !== currentSectionIdx) {
+            setNextActionState(actionStateEnumType.listenEnd);
+          } else {
+            // keep listening
+          }
+          break;
+        case actionStateEnumType.listenEnd:
+          if (listeningStartedViaButton) {
+            dispatch(Request.Recognition_stop());
+            setListeningStartedViaButton(false);
+          }
+          setNextActionState(actionStateEnumType.nextSection);
+          break;
+        case actionStateEnumType.nextSection:
+          const nextSectionTermIdx =
+            pageLists.inlineButtonList[clickedButtonIdx].nextTermIdx;
+          if (
+            nextSectionTermIdx >= 0 &&
+            nextSectionTermIdx < pageLists.terminalList.length
+          ) {
+            // If this is the end of stentence and cursor_stopAtEOS = true
+            //
+            dispatch(Request.Cursor_gotoWordByIdx(nextSectionTermIdx));
+          } else {
+            console.log(
+              `invalid nextTermIdx=${nextSectionTermIdx} encountered in ${InlineButtonActionEnumType.choice}`
+            );
+          }
           setNextActionState(actionStateEnumType.end);
           break;
         case actionStateEnumType.end:
           dispatch(Request.InlineButton_clicked()); // reset clickedButtonIdx
-          break;
-        case actionStateEnumType.gotoNextWord:
-          const termIdx = pageLists.inlineButtonList[clickedButtonIdx].termIdx;
-          dispatch(Request.Cursor_gotoWordByIdx(termIdx));
-          break;
-        case actionStateEnumType.listenStart:
-          dispatch(Request.InlineButton_listen());
-          break;
-        case actionStateEnumType.listenEnd:
-          dispatch(Request.InlineButton_listened());
-          break;
-        case actionStateEnumType.end:
           break;
         default:
           console.log(
@@ -250,8 +329,52 @@ export const TerminalInlineButton = React.memo(
           );
       }
     };
+    const modelWorkFlow = () => {
+      console.log(`nextActionState=${nextActionState}`);
+      switch (nextActionState) {
+        case actionStateEnumType.start:
+          setNextActionState(actionStateEnumType.reciteStart);
+          break;
+        case actionStateEnumType.reciteStart:
+          if (!reciteRequested) {
+            const termIdx: number =
+              pageLists.inlineButtonList[clickedButtonIdx].termIdx + 1;
+            const sentenceIdx: number =
+              pageLists.terminalList[termIdx].sentenceIdx;
+            const strQ: string[] = SentenceToBeRecited(pageLists, sentenceIdx);
+
+            dispatch(Request.InlineButton_recite(strQ));
+            setNextActionState(actionStateEnumType.reciting);
+          }
+          break;
+        case actionStateEnumType.reciting:
+          if (!reciteRequested) {
+            setNextActionState(actionStateEnumType.reciteEnd);
+          }
+          break;
+        case actionStateEnumType.reciteEnd:
+          setNextActionState(actionStateEnumType.end);
+          break;
+        case actionStateEnumType.ghostSentence:
+          setNextActionState(actionStateEnumType.end);
+          break;
+        case actionStateEnumType.unghostWord:
+
+        case actionStateEnumType.end:
+          dispatch(Request.InlineButton_clicked()); // reset clickedButtonIdx
+          break;
+        default:
+          console.log(
+            `Unhandled action state encountered  ${buttonAction}:${nextActionState}`
+          );
+      }
+    };
     useEffect(() => {
-      if (clickedButtonIdx !== buttonIdx) return;
+      if (clickedButtonIdx !== thisButtonIdx) return;
+      let buttonAction: InlineButtonActionEnumType =
+        thisButtonIdx >= 0 && thisButtonIdx < pageLists.inlineButtonList.length
+          ? pageLists.inlineButtonList[thisButtonIdx].action
+          : InlineButtonActionEnumType.none;
       switch (buttonAction) {
         case InlineButtonActionEnumType.choice:
           choiceWorkflow();
@@ -267,6 +390,7 @@ export const TerminalInlineButton = React.memo(
           labelWorkflow();
           break;
         case InlineButtonActionEnumType.model:
+          modelWorkFlow();
           break;
         case InlineButtonActionEnumType.none:
           break;
@@ -276,10 +400,13 @@ export const TerminalInlineButton = React.memo(
       }
     }, [
       nextActionState,
-      // moveRequested,
-      listenRequested,
+      currentSectionIdx,
+      moveRequested,
+      listeningAlready,
+      listeningStartedViaButton,
       reciteRequested,
-      signalRequested
+      signalRequested,
+      choiceResponseSectionIdx
     ]);
     interface IInlineButtonFormat {
       icon: string;
@@ -321,11 +448,16 @@ export const TerminalInlineButton = React.memo(
           return { icon: InlineButtonDefault, showText: false };
       }
     };
-    if (buttonIdx >= 0 && buttonIdx < pageLists.inlineButtonList.length) {
+    if (
+      thisButtonIdx >= 0 &&
+      thisButtonIdx < pageLists.inlineButtonList.length
+    ) {
       let cssFormat: string;
       const buttonItem: IInlineButtonItem =
-        pageLists.inlineButtonList[buttonIdx];
+        pageLists.inlineButtonList[thisButtonIdx];
       // const buttonAction: InlineButtonActionEnumType = buttonItem.action;
+      // const { icon, showText } = InlineButtonFormat(buttonItem.action);
+      // const showIcon: boolean = icon.length > 0;
       const { icon, showText } = InlineButtonFormat(buttonItem.action);
       const showIcon: boolean = icon.length > 0;
       let label: string = buttonItem.label;
@@ -339,6 +471,7 @@ export const TerminalInlineButton = React.memo(
       if (showText) {
         label = buttonItem.label;
         if (showIcon) {
+          // return <>1..</>;
           cssFormat = "inlinebutton-labeledicon-container inlinebutton-format";
           return (
             <>
@@ -363,10 +496,12 @@ export const TerminalInlineButton = React.memo(
       } else {
         if (showIcon) {
           cssFormat = "inlinebutton-icon-container inlinebutton-format";
+          // cssFormat = "inlinebutton-icon-container inlinebutton-image";
+
           return (
             <>
-              <span className={cssFormat} onClick={onButtonClick}>
-                <div className="inlinebutton-image">
+              <span onClick={onButtonClick}>
+                <div className={cssFormat}>
                   <img className="icon inlinebutton-image-png" src={icon} />
                 </div>
               </span>
@@ -374,9 +509,11 @@ export const TerminalInlineButton = React.memo(
           );
         } else {
           cssFormat = "inlinebutton-container inlinebutton-format"; // what is this? blank button?
-          return <>/</>;
+          return <></>;
         }
       }
+    } else {
+      return <>what?</>;
     }
   }
 );

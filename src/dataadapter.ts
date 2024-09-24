@@ -265,10 +265,10 @@ const MarkdownPatternDictionary: MarkdownPatternDictionaryType = {
     contentCaptureGroup: 1
   },
   [MarkdownRecordTagType.BUTTONGRID]: {
-    pattern: /^\[\[button-grid:\s(.*)\]\]\s*$/,
+    pattern: /^\[\[button-grid:\s(.*)\]\]$/,
     recordType: MarkdownRecordType.BUTTONGRID,
     labelTagCaptureGroup: 0,
-    contentCaptureGroup: 0
+    contentCaptureGroup: 1
   },
   [MarkdownRecordTagType.BUTTONGRID_END]: {
     pattern: /^\[\[\/button-grid\]\]\s*$/,

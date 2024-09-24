@@ -16,7 +16,7 @@ import { CPageLists, PageContext } from "./pageContext";
 //import { ISettingsContext, SettingsContext } from "./settingsContext";
 import { Request } from "./reducers";
 import { SpeechMonitor } from "./reactcomp_speech";
-import { ReciteButton } from "./reactcomp_speech_recite";
+import { ReciteButton } from "./reactcomp_recite";
 //import { SpeakButton } from "./reactcomp_speech_speakbutton";
 import { ListenButton, ListeningMonitor } from "./reactcomp_listen";
 import nextwordIcon from "./img/button_nextword.png";
@@ -41,7 +41,7 @@ export const PageFooter = React.memo(() => {
         <div className="footer-grid-listen">
           <ListenButton />
         </div>
-        <div className="footer-grid-speak">
+        <div className="footer-grid-recite">
           <ReciteButton />
         </div>
         <div className="footer-grid-prevWord">

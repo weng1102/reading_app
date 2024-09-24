@@ -27,6 +27,7 @@ import {
   ParseNodeSerializeFormatEnumType
 } from "./baseclasses";
 import { MarkdownRecordType, TaggedStringType } from "./dataadapter";
+import { tokenizeParameterList } from "./tokenizer";
 import {
   ImageEntryOrientationEnumType,
   ISectionImageEntryVariantInitializer,
@@ -55,9 +56,12 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
         [0]  response title
         [1]  orientation: image on left, image above
         [2]  percent portion of page for image
-        [3]  separator format at top of image section (TBD)
+        [3]  frame format at top of image section
+        [4]  separator format at top of image section (TBD)
         */
-      let args: string[] = argString.split(",").map(arg => arg.trim());
+      let args: string[] = tokenizeParameterList(argString).map(arg =>
+        arg.trim()
+      );
       let argNum = 0;
       // consider try/catch
       this.meta.title = ValidateArg(
@@ -86,6 +90,16 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
         "image orientation percent",
         args[argNum],
         this.meta.percent,
+        argNum,
+        lineNo,
+        this.logger
+      ) as string;
+      argNum++;
+      this.meta.frameFormat = ValidateArg(
+        IsValidString(args[argNum]),
+        "frame format",
+        args[argNum],
+        this.meta.frameFormat,
         argNum,
         lineNo,
         this.logger
@@ -131,8 +145,14 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
       let sentence: ISentenceNode = new SentenceNode(this);
       sentence.parse();
       for (const terminal of sentence.terminals) {
+        let frameFormat: string = prependToListItems(
+          "imageentry-image",
+          this.meta.frameFormat
+        );
         if (terminal.type === TerminalMetaEnumType.image) {
-          (<IImageTerminalMeta>terminal.meta).className = "imageentry-image";
+          (<IImageTerminalMeta>terminal.meta).className =
+            `imageentry-image-${this.meta.orientation.toString()} ` +
+            frameFormat;
           this.meta.images.push(terminal);
         }
       }
@@ -213,7 +233,7 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
           let imageNode: IImageTerminalMeta = image.meta as IImageTerminalMeta;
           let hasDimensions = imageNode.width > 0 && imageNode.height > 0;
           let dimensions: string =
-            ", WxH:" +
+            "WxH:" +
             (imageNode.width > 0 ? imageNode.width.toString() : "") +
             "x" +
             (imageNode.height > 0 ? imageNode.height.toString() : "") +
@@ -223,7 +243,9 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
             imageNode.label +
               " (src: " +
               imageNode.src +
-              (hasDimensions ? dimensions : ""),
+              ", overlay: " +
+              (imageNode.overlay.length > 0 ? imageNode.overlay : "(none)") +
+              (hasDimensions ? ", " + dimensions : ""),
             prefix + "| " + (i < this.meta.images.length - 1 ? "| " : "  ")
           )})`;
         }
@@ -277,3 +299,14 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
     return outputStr;
   }
 }
+const prependToListItems = (prefix: string, list: string): string => {
+  let listItems: string[];
+  let listRetVal: string = "";
+  // console.log(`list=${list}`);
+  listItems = list.split(" ");
+  listItems.forEach(item => {
+    listRetVal += `${prefix}-${item} `;
+    // console.log(`prependlist=${listRetVal}`);
+  });
+  return listRetVal;
+};

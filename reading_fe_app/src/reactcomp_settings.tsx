@@ -115,7 +115,7 @@ export const SettingsDialog = (props: ISettingsDialogPropsType) => {
   const clickCancel = () => {
     //    setInitial(true);
     console.log(
-      `SettingDialog: speechSettings.recitationMode=${speechSettings.recitationMode}`
+      `SettingDialog: speechSettings.recitationScope=${speechSettings.scope}`
     );
     setModified(false);
     // setNewSettings(SettingsCloner(settingsContext));
@@ -185,7 +185,7 @@ export const TabControlButtons = (props: ITabControlButtonsProps) => {
           className="settings-tabControl-tab1"
           onClick={() => props.setActiveTab(1)}
         >
-          Speaking
+          Reciting
         </div>
         <div
           className="settings-tabControl-tab2"

@@ -11,7 +11,10 @@
 import React from "react";
 import { useAppSelector } from "./hooks";
 
-import { ITerminalInfo, IPhoneNumberTerminalMeta } from "./pageContentType";
+import {
+  ITerminalInfo,
+  IPhoneNumberTerminalMeta
+} from "./../src/pageContentType";
 import { TerminalNode, ITerminalPropsType } from "./reactcomp_terminals";
 
 export const TerminalPhoneNumber = React.memo(

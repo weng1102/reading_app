@@ -250,27 +250,35 @@ const ResponsesDescription = () => {
   ) {
     return <></>;
   } else {
-    let responsesLabel: string = "Responses displayed";
-    let withPromptTags: string = fillinContext.sectionFillin.currentSetting
-      .showPromptTags
-      ? "prompt"
-      : "";
-    let withResponseTags: string = fillinContext.sectionFillin.currentSetting
-      .showResponseTags
-      ? "response"
-      : "";
-    let groupedBy: string =
-      fillinContext.sectionFillin.currentSetting.groupByTags &&
-      fillinContext.sectionFillin.currentSetting.showResponseTags
-        ? ", grouped by tags"
+    let responsesLabel: string;
+    console.log(
+      `responsesLabel.length=${fillinContext.sectionFillin.authorSetting.responsesLabel.length}, responsesLabel=${fillinContext.sectionFillin.authorSetting.responsesLabel}`
+    );
+    if (fillinContext.sectionFillin.authorSetting.responsesLabel.length > 0) {
+      responsesLabel = fillinContext.sectionFillin.authorSetting.responsesLabel;
+    } else {
+      responsesLabel = "Responses displayed";
+      let withPromptTags: string = fillinContext.sectionFillin.currentSetting
+        .showPromptTags
+        ? "prompt"
         : "";
-    let tagDescription: string =
-      withPromptTags.length + withPromptTags.length === 0
-        ? ""
-        : ` with ${withPromptTags} ${
-            withResponseTags.length > 0 ? "and" : ""
-          } ${withResponseTags} tagged`;
-    responsesLabel = `${responsesLabel} ${fillinContext.sectionFillin.currentSetting.progressionOrder} as  ${fillinContext.sectionFillin.currentSetting.layout}${groupedBy} ${tagDescription}`;
+      let withResponseTags: string = fillinContext.sectionFillin.currentSetting
+        .showResponseTags
+        ? "response"
+        : "";
+      let groupedBy: string =
+        fillinContext.sectionFillin.currentSetting.groupByTags &&
+        fillinContext.sectionFillin.currentSetting.showResponseTags
+          ? ", grouped by tags"
+          : "";
+      let tagDescription: string =
+        withPromptTags.length + withPromptTags.length === 0
+          ? ""
+          : ` with ${withPromptTags} ${
+              withResponseTags.length > 0 ? "and" : ""
+            } ${withResponseTags} tagged`;
+      responsesLabel = `${responsesLabel} ${fillinContext.sectionFillin.currentSetting.progressionOrder} as  ${fillinContext.sectionFillin.currentSetting.layout}${groupedBy} ${tagDescription}`;
+    }
     return <div className="fillin-responses-label">{responsesLabel}</div>;
   }
 };

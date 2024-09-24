@@ -279,6 +279,7 @@ abstract class SectionParseNode_LISTITEM extends SectionParseNode_LIST
           current.recordType === MarkdownRecordType.SECTION_UNORDERED ||
           `expected ${MarkdownRecordType.LISTITEM_ORDERED},  ${MarkdownRecordType.LISTITEM_UNORDERED}, ${MarkdownRecordType.SECTION_ORDERED}, or ${MarkdownRecordType.SECTION_UNORDERED} at line ${current.lineNo}`
       );
+      let parentRecordType: MarkdownRecordType = current.recordType;
       for (
         current = this.dataSource.nextRecord();
         !this.dataSource.EOF() &&
@@ -298,7 +299,8 @@ abstract class SectionParseNode_LISTITEM extends SectionParseNode_LIST
               current.recordType,
               this
             );
-            (paragraph.meta as ISectionParagraphVariant).class = "no-wrap";
+            // if (parentRecordType = )
+            (paragraph.meta as ISectionParagraphVariant).listItem = true;
             this.items.push(paragraph);
             this.logger.diagnostic(
               `pushed paragraph ${current.content} at ${current.lineNo}`

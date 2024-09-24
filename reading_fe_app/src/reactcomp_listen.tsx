@@ -74,7 +74,7 @@ import {
   SettingsContext
 } from "./settingsContext";
 export const ListeningMonitor = React.memo(() => {
-  // console.log = () => {};
+  //console.log = () => {};
   console.log(`ListeningMonitor`);
   // Purpose:
   // 1) Determines whether (interim) transcript has changed since the last
@@ -125,6 +125,9 @@ export const ListeningMonitor = React.memo(() => {
 
   const listeningRequested: boolean = useAppSelector(
     store => store.listen_active
+  );
+  const stopListeningAtEOS: boolean = useAppSelector(
+    store => store.listen_stopAtEOS
   );
   const pageContext: CPageLists = useContext(PageContext)!;
 
@@ -199,6 +202,8 @@ export const ListeningMonitor = React.memo(() => {
       setPreviousTranscript("");
       setPreviousTranscriptMatchEndOffset(0);
       resetTranscript();
+      if (stopListeningAtEOS) dispatch(Request.Recognition_stop());
+      console.log(`@@@@newsentence=${newSentence}`);
     }
   }, [newSentence]);
   const expectedTerminalIdx: number = useAppSelector(
@@ -216,18 +221,18 @@ export const ListeningMonitor = React.memo(() => {
   useEffect(() => {
     if (expectedTerminalIdx - previousMatchedTerminalIdx !== 1) {
       // Non-sequential word transition detected
-      console.log(`Clearing transcripts because non-sequential word position detected:
-       expectedTerminalIdx=${expectedTerminalIdx},
-       previousMatchedTerminalIdx=${previousMatchedTerminalIdx}`);
+      // console.log(`Clearing transcripts because non-sequential word position detected:
+      //  expectedTerminalIdx=${expectedTerminalIdx},
+      //  previousMatchedTerminalIdx=${previousMatchedTerminalIdx}`);
       setWordRetries(0);
       setPreviousTranscript("");
       setPreviousTranscriptMatchEndOffset(0);
       setPreviousMatchedTerminalIdx(-1);
       resetTranscript();
     } else if (previousMatchedTerminalIdx === expectedTerminalIdx) {
-      console.log(`sequential word position detected:
-       expectedTerminalIdx (=${expectedTerminalIdx}) equals
-       previousMatchedTerminalIdx`);
+      // console.log(`sequential word position detected:
+      //  expectedTerminalIdx (=${expectedTerminalIdx}) equals
+      //  previousMatchedTerminalIdx`);
     }
   }, [expectedTerminalIdx]);
 
@@ -239,15 +244,15 @@ export const ListeningMonitor = React.memo(() => {
     // New transcript available
     // Match required
     // Matched found
-    console.log(
-      `listening=${listening},
-      interimTranscript="${interimTranscript}",
-      finalTranscript="${finalTranscript}",
-      previousTranscript="${previousTranscript}",
-      previousTranscriptMatchEndOffset=${previousTranscriptMatchEndOffset},
-      expectedTerminalIdx=${expectedTerminalIdx},
-      newSentence=${newSentence}`
-    );
+    // console.log(
+    //   `listening=${listening},
+    //   interimTranscript="${interimTranscript}",
+    //   finalTranscript="${finalTranscript}",
+    //   previousTranscript="${previousTranscript}",
+    //   previousTranscriptMatchEndOffset=${previousTranscriptMatchEndOffset},
+    //   expectedTerminalIdx=${expectedTerminalIdx},
+    //   newSentence=${newSentence}`
+    // );
     //
     let matchMessage: string = "";
     let isListening: boolean;
@@ -340,11 +345,11 @@ export const ListeningMonitor = React.memo(() => {
       transcriptToBeScanned = transcript;
       transcriptEndOffset = 0;
 
-      console.log(
-        `before optimize :
-        isDetectingNewTranscript=${isDetectingNewTranscript},
-        isDetectingNewWordToMatch=${isDetectingNewWordToMatch}`
-      );
+      // console.log(
+      //   `before optimize :
+      //   isDetectingNewTranscript=${isDetectingNewTranscript},
+      //   isDetectingNewWordToMatch=${isDetectingNewWordToMatch}`
+      // );
       if (optimizeUsingPreviousTranscript) {
         let previousTranscriptOverlap: string = "";
         let isTranscriptOverlap: boolean = false; // with previousTranscript
@@ -443,21 +448,21 @@ export const ListeningMonitor = React.memo(() => {
         } else {
           console.log(`unhandled case for overlap`);
         }
-        console.log(
-          `Optimize using previous transcript state:
-          isDetectingNewTranscript=${isDetectingNewTranscript},
-          isDetectingNewWordToMatch=${isDetectingNewWordToMatch},
-          previousTranscript="${previousTranscript}",
-          previousTranscriptMatchEndOffset=${previousTranscriptMatchEndOffset},
-          isTranscriptOverlap=${isTranscriptOverlap},
-          isTranscriptOverlapNext=${isTranscriptOverlapNext},
-          isTranscriptOverlapNextPartialWord=${isTranscriptOverlapNextPartialWord},
-          isTranscriptOverlapFirstWord=${isTranscriptOverlapFirstWord},
-          isTranscriptOverlapNextNumeral=${isTranscriptOverlapNextNumeral}`
-        );
-        console.log(
-          `previousTranscriptOverlap="${previousTranscriptOverlap}" has transcriptOverlapOffset=${transcriptOverlapOffset} into transcript="${transcript}"`
-        );
+        // console.log(
+        //   `Optimize using previous transcript state:
+        //   isDetectingNewTranscript=${isDetectingNewTranscript},
+        //   isDetectingNewWordToMatch=${isDetectingNewWordToMatch},
+        //   previousTranscript="${previousTranscript}",
+        //   previousTranscriptMatchEndOffset=${previousTranscriptMatchEndOffset},
+        //   isTranscriptOverlap=${isTranscriptOverlap},
+        //   isTranscriptOverlapNext=${isTranscriptOverlapNext},
+        //   isTranscriptOverlapNextPartialWord=${isTranscriptOverlapNextPartialWord},
+        //   isTranscriptOverlapFirstWord=${isTranscriptOverlapFirstWord},
+        //   isTranscriptOverlapNextNumeral=${isTranscriptOverlapNextNumeral}`
+        // );
+        // console.log(
+        //   `previousTranscriptOverlap="${previousTranscriptOverlap}" has transcriptOverlapOffset=${transcriptOverlapOffset} into transcript="${transcript}"`
+        // );
         // transcriptToBeScanned based on optimizations
         if (transcriptOverlapOffset < transcript.length) {
           // truncate overlap
@@ -523,7 +528,6 @@ export const ListeningMonitor = React.memo(() => {
             pageContext.terminalList[expectedTerminalIdx].numberAsNumerals;
 
           scanArray = transcriptToBeScanned.split(" ");
-          console.log(`scanArray=${scanArray}`);
           let firstWordInTranscript: boolean;
           let matchEndOffset: number = 0; // first character excluded
           for (

@@ -10,6 +10,7 @@
  **/
 import * as fs from "fs";
 import { FileExists } from "./utilities";
+import React, { useContext } from "react";
 import DictionaryType, {
   PronunciationDictionary,
   RecognitionDictionary
@@ -28,17 +29,19 @@ import {
   ILinkListItem,
   ISectionFillinSettings,
   ISectionFillinItem,
-  IReciteButtonItem,
+  IInlineButtonItem,
   LinkIdxDestinationType,
   ISectionFillinItemInitializer,
   PartOfSpeechEnumType,
-  ReciteScopeEnumType,
-  ReciteCursorActionEnumType,
-  ReciteListeningActionEnumType,
+  InlineButtonActionEnumType,
+  RecitationScopeEnumType,
+  RecitationReferenceEnumType,
+  RecitationListeningEnumType,
   SectionFillinResponsesProgressionEnum,
-  SectionFillinLayoutType
+  SectionFillinLayoutType,
+  IPageContent
 } from "./pageContentType";
-import { IPageContent } from "./pageContentType";
+// import { IPageContent } from "./pageContentType";
 import { IsDefined } from "./utilities";
 export const TREEVIEW_PREFIX = "+-";
 export const IDX_INITIALIZER = -9999;
@@ -118,7 +121,7 @@ class TerminalArray extends Array<ITerminalListItem> {
       altpro: string = "";
     let outputStr: string =
       "Audible,Recitable,Linkable,Visible,Numbers as numerals,Bold,Italics,Heading\n" +
-      "[idx ]:  term ARLVNBIH  next prev sent  sect link   fillins content\n";
+      "[ idx]:  term ARLVNBIH  next prev sent  sect link   fillins content\n";
     for (const [i, element] of this.entries()) {
       if (element.altrecognition.length > 0) {
         altrecog = `(rec: ${element.altrecognition})`;
@@ -253,7 +256,7 @@ responses.filter(item => {
     return [fillinListIdx, fillinIdx];
   }
   serialize(): string {
-    let outputStr: string = `[idx ]: ${"".padEnd(
+    let outputStr: string = `[ idx]: ${"".padEnd(
       17
     )} tag          refCount order\n`;
     for (const [i, element] of this.entries()) {
@@ -277,7 +280,7 @@ responses.filter(item => {
         element.authorSetting.showResponsesInPrompts
           ? "showResponsesInPrompts"
           : ""
-      }\n[idx ]: ${"fillin".padEnd(24)} tag          refCount alternatives\n`;
+      }\n[ idx]: ${"fillin".padEnd(24)} tag          refCount alternatives\n`;
       for (const [j, response] of element.responses
         //        .sort((a, b) => (a.content > b.content ? 1 : -1))
         .entries()) {
@@ -477,7 +480,7 @@ class LinkArray extends Array<ILinkListItem> {
         } else {
         }
       } else {
-        let pageFile: string = `dist\\${element.destination.page.trim()}.json`;
+        let pageFile: string = `reading-companion\\${element.destination.page.trim()}.json`;
         if (FileExists(pageFile)) {
           // and not already the currently open
           // load json and check section and terminal lists
@@ -570,7 +573,7 @@ class LinkArray extends Array<ILinkListItem> {
   }
   serialize(): string {
     let outputStr: string =
-      "[idx ]  " +
+      "[ idx]  " +
       "page/url".padEnd(40, " ") +
       "type       head sect term valid \n";
     for (const [i, element] of this.entries()) {
@@ -602,79 +605,220 @@ class LinkArray extends Array<ILinkListItem> {
     return outputStr;
   }
 }
-class ReciteButtonArray extends Array<IReciteButtonItem> {
+class InlineButtonArray extends Array<IInlineButtonItem> {
   constructor(...args: any) {
     super(...args);
   }
-  push(reciteButton: IReciteButtonItem): number {
-    return super.push(reciteButton);
+  push(inlineButton: IInlineButtonItem): number {
+    return super.push(inlineButton);
   }
   parse(
-    terminalList: ITerminalListItem[],
-    sentenceList: ISentenceListItem[]
+    sectionList: ISectionListItem[],
+    terminalList: ITerminalListItem[]
   ): number {
     try {
-      for (let reciteButton of this) {
+      for (let inlineButton of this) {
         let toBeRecited: string = "";
-        // console.log(
-        //   `reciteButtons.parsing ${reciteButton.scope} from termIdx=${reciteButton.termIdx}`
-        // );
-        switch (reciteButton.scope) {
-          case ReciteScopeEnumType.label:
-            reciteButton.toBeRecited =
-              reciteButton.hint.length > 0
-                ? reciteButton.hint
-                : reciteButton.label;
-            break;
-          case ReciteScopeEnumType.word:
-            for (
-              let idx = reciteButton.termIdx + 1;
-              idx <= reciteButton.termIdx + reciteButton.span &&
-              idx < terminalList.length;
-              idx++
-            ) {
-              toBeRecited += ` ${terminalList[idx].content}`;
-            }
-            if (
-              sentenceList[terminalList[reciteButton.termIdx + 1].sentenceIdx]
-                .lastTermIdx ===
-              reciteButton.termIdx + reciteButton.span
-            ) {
-              toBeRecited +=
-                sentenceList[terminalList[reciteButton.termIdx].sentenceIdx]
-                  .lastPunctuation;
-            }
-            // console.log(`toBeRecited="${toBeRecited}"`);
-
-            // terminalList[reciteButton.termIdx].sentenceIdx
-            // terminalList[reciteButton.termIdx]
-            // reciteButton.termIdx
-            // reciteButton.toBeRecited =
-            break;
-          case ReciteScopeEnumType.sentence:
-            // console.log(
-            //   `sentence(span=${reciteButton.span}): sentenceIdx[${
-            //     reciteButton.termIdx
-            //   }]=${terminalList[reciteButton.termIdx + 1].sentenceIdx}`
-            // );
-            let sentenceIdx: number =
-              terminalList[reciteButton.termIdx + 1].sentenceIdx;
-            // console.log(
-            //   `firstIdx=${sentenceList[sentenceIdx].firstTermIdx}  lastIdx=${sentenceList[sentenceIdx].lastTermIdx}`
-            // );
-            for (
-              let idx = sentenceList[sentenceIdx].firstTermIdx;
-              idx <= sentenceList[sentenceIdx].lastTermIdx;
-              idx++
-            ) {
-              toBeRecited += ` ${terminalList[idx].content}`;
-            }
-            toBeRecited += sentenceList[sentenceIdx].lastPunctuation;
-            break;
-          default:
+        if (inlineButton.action === InlineButtonActionEnumType.cues) {
+          toBeRecited = inlineButton.cues;
+        } else {
+          toBeRecited = inlineButton.label;
         }
-        reciteButton.toBeRecited = toBeRecited;
+        inlineButton.toBeRecited = toBeRecited;
+        // console.log(
+        //   `inlineButton.termIdx=${inlineButton.termIdx}, ${
+        //     terminalList.length
+        //   }, ${terminalList[inlineButton.termIdx].sentenceIdx}, ${
+        //     terminalList[inlineButton.termIdx + 1].sentenceIdx
+        //   }`
+        // );
+        // console.log(
+        //   `inlineButton.termIdx=${
+        //     inlineButton.termIdx
+        //   }\nterminalList[inlineButton.termIdx].sentenceIdx+1=${terminalList[
+        //     inlineButton.termIdx
+        //   ].sentenceIdx +
+        //     1}\nterminalList[inlineButton.termIdx + 1].sentenceIdx=${
+        //     terminalList[inlineButton.termIdx + 1].sentenceIdx
+        //   }\n`
+        // );
       }
+      const parseCueButtons = () => {
+        for (let inlineButton of this) {
+          let toBeRecited: string = "";
+          if (inlineButton.action === InlineButtonActionEnumType.cues) {
+            inlineButton.toBeRecited = toBeRecited;
+          }
+        }
+      };
+      const parseLabelButtons = () => {
+        for (let inlineButton of this) {
+          let toBeRecited: string = "";
+          if (inlineButton.action === InlineButtonActionEnumType.label) {
+            inlineButton.toBeRecited = toBeRecited;
+          }
+        }
+      };
+      const parseMultipleChoiceButtons = () => {
+        // Update the sectionIdx field of the correct responses so that the
+        // reactcomp can determine whether the newSection reducer refers
+        // to the proper response.
+        // Update "next" field of correct responses that refers to the terminal
+        // after the final choice response, presumably the next prompt. AND
+
+        // validation rules:
+        // 1) action === multiple choice
+        // 2) immediately preceded by prompt of one or more sentences
+        // 3) more than one consective multiple choice button
+        // 4) at least single correct choice within the group indicated
+        //    by the grouping field that correspond to the prompt termIdx
+        let isValid: boolean = true;
+        // Update termIdx that was set during parsing as the last terminal
+        // before the inline button to the next terminal after the button
+        // assumed to be termIdx++. Based on this update termIdx, determine
+        // sectionIdx of choice reponses
+        try {
+          for (let inlineButton of this) {
+            if (inlineButton.action !== InlineButtonActionEnumType.choice) {
+              console.log(
+                `Ignoring inlineButton=${inlineButton.buttonIdx} while parsing mulitple choice`
+              );
+            } else if (
+              inlineButton.termIdx < 0 ||
+              inlineButton.termIdx + 1 >= terminalList.length
+            ) {
+              isValid = false;
+              console.log(
+                `Invalid inlineButton.termIdx of ${inlineButton.termIdx +
+                  1} is out of bounds: not between 1 and ${
+                  terminalList.length
+                }.`
+              );
+              isValid = false;
+              // do not reset termIdx for debugging purposes
+            } else if (
+              terminalList[inlineButton.termIdx].sectionIdx + 1 ===
+              terminalList[inlineButton.termIdx + 1].sectionIdx
+            ) {
+              // if the next termIdx is a new juxtapositioned section, adjust
+              // termIdx from referencing the end of previous section to
+              // the new section.
+              inlineButton.termIdx++;
+              inlineButton.sectionIdx =
+                terminalList[inlineButton.termIdx].sectionIdx;
+              inlineButton.lastTermIdx =
+                sectionList[inlineButton.sectionIdx].lastTermIdx;
+              terminalList[inlineButton.termIdx].sectionIdx;
+            } else {
+              console.log(
+                `Invalid inlineButton.termIdx=${
+                  inlineButton.termIdx
+                } encountered. Prior section sectionIdx=${
+                  terminalList[inlineButton.termIdx].sectionIdx
+                } and sectionIdx=${
+                  terminalList[inlineButton.termIdx + 1].sectionIdx
+                } must be consecutive`
+              );
+              isValid = false;
+            }
+          }
+        } catch (e) {
+          console.log(`Unexpected error adjusting termIdx. Error ${e}`);
+          isValid = false;
+        }
+        // if (isValid) {
+
+        // for (let buttonIdx: number = 0; buttonIdx < this.length; buttonIdx++) {
+        // this[buttonIdx].termIdx isnow assumed to be the first element of
+        // the section; otherwise error
+        // this[buttonIdx].sectionIdx =
+        //   terminalList[this[buttonIdx].termIdx].sectionIdx;
+        // }
+
+        if (isValid) {
+          let grouping: number[] = new Array(this.length).fill(0); // indexed by buttonIdx
+          // To determine the "next" field of the correctResponse, group the
+          // other juxtapositioned/consecutive responses that correspond to
+          // prompts. The terminal idx following the last in each group is the
+          // "next" prompt.
+          try {
+            for (
+              let buttonIdx: number = 0;
+              buttonIdx < this.length;
+              buttonIdx++
+            ) {
+              if (
+                this[buttonIdx].action !== InlineButtonActionEnumType.choice
+              ) {
+                // skip
+              } else if (buttonIdx === 0) {
+                grouping[buttonIdx] = 1; // start of first grouping
+              } else if (
+                sectionList[this[buttonIdx].sectionIdx].firstTermIdx ===
+                sectionList[this[buttonIdx - 1].sectionIdx].lastTermIdx + 1
+              ) {
+                grouping[buttonIdx] = grouping[buttonIdx - 1];
+              } else {
+                grouping[buttonIdx] = grouping[buttonIdx - 1] + 1;
+              }
+            }
+          } catch (e) {
+            console.log(`Unexpected error calculating choice groupings`);
+          } finally {
+          }
+          let correctButtonIdx: number = IDX_INITIALIZER;
+          for (
+            let buttonIdx: number = 0;
+            buttonIdx < this.length;
+            buttonIdx++
+          ) {
+            if (this[buttonIdx].action === InlineButtonActionEnumType.choice) {
+              if (this[buttonIdx].label === "correct") {
+                correctButtonIdx = buttonIdx;
+              }
+              // when grouping changes, determine the first term of next section
+              let currentGrouping: number;
+              let nextGrouping: number;
+              currentGrouping = grouping[buttonIdx];
+              if (buttonIdx >= 0 && buttonIdx < this.length - 1) {
+                nextGrouping = grouping[buttonIdx + 1];
+              } else {
+                nextGrouping = IDX_INITIALIZER;
+              }
+              if (currentGrouping === nextGrouping) {
+                //
+              } else {
+                // next sentence immediately following the last grouping
+                try {
+                  let nextTermForCurrentGrouping: number;
+                  let sectionIdx: number =
+                    terminalList[this[buttonIdx].termIdx].sectionIdx;
+                  if (sectionIdx >= 0 && sectionIdx < sectionList.length - 1) {
+                    nextTermForCurrentGrouping =
+                      sectionList[sectionIdx + 1].firstTermIdx;
+                  } else {
+                    nextTermForCurrentGrouping = IDX_INITIALIZER;
+                  }
+                  if (correctButtonIdx >= 0 && correctButtonIdx < this.length) {
+                    this[
+                      correctButtonIdx
+                    ].nextTermIdx = nextTermForCurrentGrouping;
+                    correctButtonIdx = IDX_INITIALIZER;
+                  } else {
+                    console.log(`invalid correctButtonIdx`);
+                  }
+                } catch (e) {
+                  console.log(`access violation buttonIdx=${buttonIdx}`);
+                } finally {
+                }
+              }
+            }
+          }
+        }
+      };
+      parseCueButtons();
+      parseLabelButtons();
+      parseMultipleChoiceButtons();
     } catch (e) {
       console.log(e);
     }
@@ -682,23 +826,26 @@ class ReciteButtonArray extends Array<IReciteButtonItem> {
   }
   serialize(): string {
     let outputStr: string =
-      "[idx]:term scope    sp cursor            listen           rt toBeRecited\n";
+      "[ idx]: bIdx first  last sectn action sp  rt  next toBeRecited\n";
     for (const [i, element] of this.entries()) {
       outputStr = `${outputStr}[${i
         .toString()
-        .padStart(3, "0")}]: ${element.termIdx
+        .padStart(4, "0")}]:${element.buttonIdx
         .toString()
-        .padStart(3, " ")} ${element.scope.padEnd(
-        8,
-        " "
-      )} ${element.span
+        .padStart(5, " ")} ${element.termIdx
         .toString()
-        .padStart(2, " ")} ${element.cursorAction.padEnd(
-        17,
+        .padStart(5, " ")} ${element.lastTermIdx
+        .toString()
+        .padStart(5, " ")} ${element.sectionIdx
+        .toString()
+        .padStart(5, " ")} ${element.action.padEnd(
+        6,
         " "
-      )} ${element.listeningAction.padEnd(14, " ")} ${element.rate
+      )} ${element.span.toString().padStart(2, " ")} ${element.rate
         .toFixed(1)
-        .padStart(3, " ")} ${element.toBeRecited}\n`;
+        .padStart(3, " ")} ${element.nextTermIdx.toString().padStart(5, " ")} ${
+        element.toBeRecited
+      }\n`;
     }
     return outputStr;
   }
@@ -739,7 +886,7 @@ export class UserContext {
   sentences: SentenceArray;
   links: LinkArray;
   fillins: FillinArray;
-  reciteButtons: ReciteButtonArray;
+  inlineButtons: InlineButtonArray;
   // need authentication infoblock at some point
   constructor(name: string) {
     //    this._parent = parent;
@@ -750,7 +897,7 @@ export class UserContext {
     this.sentences = new SentenceArray();
     this.links = new LinkArray();
     this.fillins = new FillinArray();
-    this.reciteButtons = new ReciteButtonArray();
+    this.inlineButtons = new InlineButtonArray();
     ////    this._pages = new Array();
   }
   // protected terminalIdx: number = 0;

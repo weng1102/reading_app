@@ -31,6 +31,7 @@ import {
   MarkdownRecordTagType,
   TaggedStringType
 } from "./dataadapter";
+import { tokenizeParameterList } from "./tokenizer";
 // import { SortOrderToLabel } from "./baseClasses";
 import {
   SectionFillinPresetInfo,
@@ -100,7 +101,9 @@ export class SectionParseNode_FILLIN extends SectionParseNode_LIST
       [14] showResponsesInPrompts: boolean, show responwses initially filled
            in)
         */
-      let args: string[] = argString.split(",").map(arg => arg.trim());
+      let args: string[] = tokenizeParameterList(argString).map(arg =>
+        arg.trim()
+      );
 
       let argNum = 0;
       let argLevel: SectionFillinPresetLevel;
