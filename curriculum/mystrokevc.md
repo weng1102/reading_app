@@ -50,8 +50,8 @@
 [[image-entry: My family, above, 15%]]
 ![dinner out](myfamilydinner.jpg),![David and Robert](myfamily2013.jpg),![My family after stroke](MommyDavidRobert.jpg), ![David and Robert](myfamily2022.jpg)
 * We have two children, David and Robert.
-* David is 28 years old. 
-* Robert is 27 years old.
+* David is 30 years old. 
+* Robert is 28 years old.
 [[/image-entry]]
 [[image-entry: David, left, 10%]]
 ![Stanford logo](stanford logo.jpg)

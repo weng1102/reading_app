@@ -54,8 +54,15 @@
 import React from "react";
 import "./App.css";
 import { Request } from "./reducers";
-import { useAppDispatch, useAppSelector, useDialog } from "./hooks";
-import { useEffect, useState, useContext, useCallback } from "react";
+import { useAppDispatch, useAppSelector, useDialog, useDivRef } from "./hooks";
+import {
+  useEffect,
+  useState,
+  useContext,
+  useCallback,
+  useRef,
+  useLayoutEffect
+} from "react";
 import {
   IPageContent,
   IPageRequestItem,
@@ -269,11 +276,12 @@ export const Page = React.memo((props: IPagePropsType) => {
         setIsPageRequestInProgress(true);
         setPageRequested(requestedPage);
         setPageRequestType(requestedType);
-        console.log(
-          `@@page requested: pageRequested=${requestedPage.page} !== pageLoaded=${pageLoaded.page} type=${requestedType}`
-        );
+
+        // console.log(
+        //   `@@page requested: pageRequested=${requestedPage.page} !== pageLoaded=${pageLoaded.page} type=${requestedType}`
+        // );
       } else {
-        console.log(`@@page requested already loaded: ${requestedPage.page}`);
+        console.log(`Page requested already loaded: ${requestedPage.page}`);
       }
     }
   }, [
@@ -334,8 +342,8 @@ export const Page = React.memo((props: IPagePropsType) => {
   // Handles (re)setting state after page fetch completes until page is loaded
   useEffect(() => {
     if (isPageContentFetched) {
-      console.log(`@@page content fetched:
-pageRequested=${pageRequested.page},isPageContentFetched=${isPageContentFetched},pageLoaded=${pageLoaded.page}`);
+      //       console.log(`@@page content fetched:
+      // pageRequested=${pageRequested.page},isPageContentFetched=${isPageContentFetched},pageLoaded=${pageLoaded.page}`);
       let message: string = "After page fetched";
       if (isPageContentFetched) {
         if (pageLoaded.page.length > 0) {
@@ -365,9 +373,9 @@ pageRequested=${pageRequested.page},isPageContentFetched=${isPageContentFetched}
   // After page is loaded update currentTermIdx and previousPages stack
   useEffect(() => {
     if (pageRequested.page.length > 0 && pageLoaded.page.length > 0) {
-      console.log(
-        `@@page loaded: pageRequested=${pageRequested.page},pageLoaded=${pageLoaded.page}`
-      );
+      // console.log(
+      //   `@@page loaded: pageRequested=${pageRequested.page},pageLoaded=${pageLoaded.page}`
+      // );
       setIsPageContentFetched(false);
       if (
         pageRequested.page === pageLoaded.page &&
@@ -379,6 +387,8 @@ pageRequested=${pageRequested.page},isPageContentFetched=${isPageContentFetched}
         } else {
           dispatch(Request.Cursor_gotoWordByIdx(pageLoaded.currentTermIdx));
         }
+        // setIsInitialScrollTop(true);
+
         let pageStack: IPageRequestItem[] = [];
         if (pageRequestType === PageRequestItemType.pop) {
           dispatch(Request.Page_popped());
@@ -421,7 +431,7 @@ pageRequested=${pageRequested.page},isPageContentFetched=${isPageContentFetched}
         setPageRequested(PageRequestItemInitializer());
         // setIsPageInitialized(true);
         setIsPageRequestInProgress(false);
-        console.log(`@@page load completed`);
+        // console.log(`@@page load completed`);
       }
     }
   }, [
@@ -444,6 +454,9 @@ pageRequested=${pageRequested.page},isPageContentFetched=${isPageContentFetched}
       console.log(`${dumpPageRequestItemsAsCsv(previousPages)}`);
     }
   }, [previousPages]);
+  // useEffect(() => {
+  //   dispatch(Request.Content_layoutCompleted(false));
+  // });
   ////////////
   // Rendering
   ////////////
@@ -489,25 +502,92 @@ interface IContentErrorPropsType {
   message: string;
 }
 export const Content = React.memo((props: IContentPropsType): any => {
-  //  const userAppSelector = useAppDispatch();
+  const dispatch = useAppDispatch();
+  // useEffect(()=>{
+  // },[])
+  // const [isIinitialScrollTop, setIsInitialScrollTop] = useState(false);
+  const contentDivRef = useDivRef();
+  const initialScrollTop: number = useAppSelector(
+    store => store.content_scroll_top_initial
+  );
   const currentSectionIdx: number = useAppSelector(
     store => store.cursor_sectionIdx
   );
+  // const layoutCompleted = useAppSelector(
+  //   store => store.content_layout_completed
+  // );
+
+  // const [scrollTop, setScrollTop] = useState(-1);
+  const scrollTimeoutIdRef = useRef<number | null>(null);
+  useEffect(() => {
+    if (contentDivRef.current) {
+      let rect = contentDivRef.current.getBoundingClientRect();
+      dispatch(Request.Page_contentTop(rect.top));
+    } else {
+      console.log(`<Content> contentRef=null`);
+      // dispatch(Request.Content_initialScrollTop(0));
+    }
+  }, []);
+  // useLayoutEffect(() => {
+  //   // if (layoutCompleted) console.log(`@@@ Content: dispatch relayout=true`);
+  //   console.log(`inside Content:useLayoutEffect`);
+  //   // imagesContainerDivLoaded=${imagesContainerDivLoaded}`
+  //
+  //   console.log(`<Content> Content_layoutCompleted(true)`);
+  //   dispatch(Request.Content_layoutCompleted(true));
+  // }, []);
+  // const ContentLoadHandler = (event: any): void => {
+  //   console.log(`ContentLoadHandler: bubbled content loaded=${event.target}`);
+  // };
+  // const [
+  //   initialScrollTopEncountered,
+  //   setInitialScrollTopEncountered
+  // ] = useState(false);
+  const ScrollDispatcher = (event: any): void => {
+    // setScrollTop(event.target.scrollTop);
+    // console.log(
+    //   `insideScrollDispatcher=${Math.trunc(scrollTop)},${Math.trunc(
+    //     event.target.scrollTop
+    //   )}`
+    // );
+    // debounce: Wait a time (0.25s) after initial scroll detected before
+    // dispatching scrolltop through reducer and on to other components
+    // console.log(`@@scrollTop=${scrollTop}`);
+    if (scrollTimeoutIdRef.current) {
+      window.clearTimeout(scrollTimeoutIdRef.current);
+    }
+    scrollTimeoutIdRef.current = window.setTimeout(() => {
+      // dispatch with Y position info
+      // dispatch(Request.Page_scrollTop(scrollTop));
+      if (initialScrollTop === 0) {
+        dispatch(Request.Content_initialScrollTop(event.target.scrollTop));
+        // console.log(`content: initial scrollTop = ${event.target.scrollTop}`);
+        // setInitialScrollTopEncountered(true);
+      } else {
+        // dispatch(Request.Content_layoutCompleted(false));
+        // console.log(`content:initial scrollTop not triggered`);
+      }
+      dispatch(Request.Content_scrollTop(event.target.scrollTop));
+      // console.log(`@@scrollTop (debounced)=${scrollTop}`);
+    }, 250);
+  };
   const message: string = useAppSelector(store => store.message_application);
   if (props.content === null) {
-    return <div>{message}</div>;
+    return <div ref={contentDivRef}>{message}</div>;
   } else {
     return (
-      <main>
-        {props.content.sections.map(
-          (section: ISectionContent, keyvalue: number) => (
-            <SectionDispatcher
-              key={keyvalue}
-              active={currentSectionIdx === section.id}
-              section={section}
-            />
-          )
-        )}
+      <main onScroll={ScrollDispatcher}>
+        <div ref={contentDivRef}>
+          {props.content.sections.map(
+            (section: ISectionContent, keyvalue: number) => (
+              <SectionDispatcher
+                key={keyvalue}
+                active={currentSectionIdx === section.id}
+                section={section}
+              />
+            )
+          )}
+        </div>
       </main>
     );
   }

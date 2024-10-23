@@ -56,13 +56,14 @@ const SENTENCE_PREVIOUS = "sentence/prev"; // first word of previous sentence
 // const SECTION_PREVIOUS = "section/prev";
 // const SECTION_RESET = "section/reset"; // first section in sections
 const SECTION_CHANGE = "section/change"; // absolute positioning e.g., navbar
+// const SECTION_IMAGEENTRY_RELAYOUT_COMPLETED = "section/relayouted";
 
 // page actions
+// const PAGE_CONTENT_Y = "page/content y";
 const PAGE_LOAD = "page/load";
 const PAGE_LOADED = "page/loaded";
 const PAGE_TOP = "page/top";
 const PAGE_LINKTO = "page/link to";
-
 const PAGE_POP = "page/pop";
 const PAGE_POPPED = "page/popped";
 const PAGE_RESTORE = "page/restore";
@@ -73,8 +74,12 @@ const PAGE_HOME_ENABLED = "page/home icon enabled";
 const PAGE_PREVIOUS_ENABLED = "page/previous icon enabled";
 const PAGE_SITEMAP_ENABLED = "page/sitemap icon enabled";
 const PAGE_FONTDOWN_ENABLED = "page/font down icon enabled";
+const CONTENT_SCROLL_TOP = "content/scroll top";
+const CONTENT_SCROLL_TOP_INITIAL = "content/initial scroll";
+const PAGE_CONTENT_TOP = "page/content top";
 const PAGE_SPACINGUP_ENABLED = "page/text spacing up icon enabled";
 const PAGE_SPACINGDOWN_ENABLED = "page/text spacing down icon enabled";
+
 const NAVBAR_TOGGLE = "navbar/toggle";
 
 // intrapage administrative actions (non-user initiated)
@@ -153,6 +158,7 @@ const TEST_SET = "test/set";
 const TEST_RESET = "test/reset";
 
 const FILLIN_RESETSECTION = "fillin/reset section";
+const IMAGESENTRY_RESIZE = "images entry/resize";
 // const FILLIN_TOGGLETAGSSECTION = "fillin/toggle tags section";
 // const FILLIN_SELECTLAYOUTSECTION = "fillin/select layout section";
 // Actions
@@ -433,6 +439,11 @@ const Page_popped = () => {
     type: PAGE_POPPED
   };
 };
+// const Page_resize = () => {
+//   return {
+//     type: PAGE_RESIZE
+//   };
+// };
 const Page_restore = () => {
   return {
     type: PAGE_RESTORE
@@ -463,6 +474,24 @@ const Page_previousEnabled = (yes: boolean) => {
   return {
     type: PAGE_PREVIOUS_ENABLED,
     payload: yes
+  };
+};
+const Page_contentTop = (y: number) => {
+  return {
+    type: PAGE_CONTENT_TOP,
+    payload: y
+  };
+};
+const Content_initialScrollTop = (top: number) => {
+  return {
+    type: CONTENT_SCROLL_TOP_INITIAL,
+    payload: top
+  };
+};
+const Content_scrollTop = (top: number) => {
+  return {
+    type: CONTENT_SCROLL_TOP,
+    payload: top
   };
 };
 const Page_sitemapEnabled = (yes: boolean) => {
@@ -589,6 +618,7 @@ const Navbar_toggle = () => {
 };
 
 export const Request = {
+  Content_initialScrollTop,
   Cursor_gotoFirstSection, // first word in page
   Cursor_gotoFirstSentence, // first word in section
   Cursor_gotoFirstWord, // first word in sentence
@@ -598,6 +628,7 @@ export const Request = {
   Cursor_gotoPreviousWord,
   Cursor_gotoWordByIdx,
   Cursor_gotoSectionByIdx,
+
   //  Cursor_acknowledgeTransition,
 
   Fillin_setCurrent,
@@ -626,6 +657,9 @@ export const Request = {
 
   Page_sitemapEnabled,
 
+  // Page_contentY,
+  Page_contentTop,
+  Content_scrollTop,
   Page_load,
   Page_loaded,
   Page_setContext,
@@ -638,6 +672,8 @@ export const Request = {
   Page_homed,
   Page_homeEnabled,
   Page_previousEnabled,
+  // Page_resize,
+
   Reciting_started,
   Reciting_ended,
   Recite_start,
@@ -656,7 +692,6 @@ export const Request = {
   // Recognition_reset_retry,
   Recognition_start,
   Recognition_stop,
-
   Settings_toggle,
 
   Speech_setAvailability,
@@ -686,6 +721,7 @@ interface IReduxState {
   // listen_retriesExceeded: boolean;
   // listen_retries: number;
   // listen_retries_max: number;
+  // content_layout_completed: boolean;
 
   cursor_sectionIdx: number;
   cursor_sentenceIdx: number;
@@ -707,6 +743,9 @@ interface IReduxState {
   // fillin_toggleShowTagsSectionIdx: number;
   // fillin_selectLayoutSectionIdx: number;
 
+  page_content_top: number;
+  content_scroll_top: number;
+  content_scroll_top_initial: number;
   page_requested: IPageRequestItem;
   page_loaded: boolean;
   page_section: number;
@@ -768,6 +807,8 @@ const IReduxStateInitialState: IReduxState = {
   // listen_retries: 0,
   // listen_retriesExceeded: false,
 
+  // content_layout_completed: false,
+
   cursor_sectionIdx: 0,
   cursor_sentenceIdx: 0,
   cursor_terminalIdx: 0,
@@ -792,6 +833,9 @@ const IReduxStateInitialState: IReduxState = {
 
   page_requested: PageRequestItemInitializer(),
   page_loaded: false,
+  page_content_top: 0,
+  content_scroll_top: 0,
+  content_scroll_top_initial: 0,
   page_section: 0,
   page_pop_requested: false,
   page_restore_requested: false,
@@ -1025,6 +1069,7 @@ export const rootReducer = (
       state.page_requested = { ...state.page_requested, page: "" };
       state.page_pop_requested = false;
       state.page_home_requested = false;
+      state.content_scroll_top_initial = 0;
       return state;
     case PAGE_TOP:
       setTerminalState([state.pageContext.firstTerminalIdx]);
@@ -1105,6 +1150,16 @@ export const rootReducer = (
       return state;
     case PAGE_FONTDOWN_ENABLED:
       state.page_fontDown_enabled = action.payload;
+      return state;
+    case PAGE_CONTENT_TOP:
+      state.page_content_top = action.payload;
+      return state;
+    case CONTENT_SCROLL_TOP:
+      state.content_scroll_top = action.payload;
+      return state;
+    case CONTENT_SCROLL_TOP_INITIAL:
+      // console.log(`reducer: contentlayoutcompleted=${action.payload}`);
+      state.content_scroll_top_initial = action.payload;
       return state;
     case PAGE_SITEMAP_ENABLED:
       state.page_previous_enabled = action.payload;

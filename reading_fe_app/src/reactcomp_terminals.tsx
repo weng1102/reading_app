@@ -16,7 +16,13 @@
 import React from "react";
 import { Request } from "./reducers";
 import { useAppDispatch, useAppSelector, useSpanRef } from "./hooks";
-import { useContext, useEffect } from "react";
+import {
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  useLayoutEffect
+} from "react";
 
 // is this really necessary if availablility is removed below
 import {
@@ -172,6 +178,8 @@ export const TerminalDispatcher = React.memo(
         );
       case TerminalMetaEnumType.image:
         //active should be false regardless
+        // kludgy
+        // const undefinedItem: () => void | undefined = undefined!;
         return (
           <TerminalImageEntry
             active={
@@ -182,6 +190,7 @@ export const TerminalDispatcher = React.memo(
             terminal={props.terminal}
             terminalCssSubclass={""}
             tagged={false}
+            // onLoad={undefinedItem}
           />
         );
       case TerminalMetaEnumType.link:
@@ -475,8 +484,21 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
   );
   //const [attribute, setAttribute] = useState(false)
   const { sectionFillin, setSectionFillin } = useContext(SectionFillinContext);
-  useEffect(() => {
-    //    console.log(`<TerminalNode> useEffect() active, expecting scrollToView()`);
+  // const [boundingBoxBottom, setBoundingBoxBottom] = useState(0);
+  // const [scrollIntoView, setScrollIntoView] = useState(false);
+  // useEffect(() => {
+  //   console.log(`<TerminalNode> scrollIntoView=${scrollIntoView}`);
+  //   if (scrollIntoView) {
+  //     if (terminalRef.current !== null) {
+  //       let rect = terminalRef.current.getBoundingClientRect();
+  //       console.log(`<TerminalNode> after scroll top=${rect.top}`);
+  //       console.log(`<TerminalNode> after scroll y=${rect.y}`);
+  //       // dispatch(Request.Page_autoScrolled(rect.top));
+  //       setScrollIntoView(false);
+  //     }
+  //   }
+  // }, [scrollIntoView]);
+  useLayoutEffect(() => {
     /* Consider multiple scrollIntoView modes:
       interparagraph/section: scroll to top of new sectionName
       intraparagraph: scroll line-by-line until new section/paragraph
@@ -486,18 +508,39 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
     block (Optional) Defines vertical alignment. One of start, center, end, or nearest. Defaults to start.
     inline Optional Defines horizontal alignment. One of start, center, end, or nearest. Defaults to nearest.
 */
-    if (props.active && terminalRef.current != null) {
+    if (props.active && terminalRef.current) {
       let rect = terminalRef.current.getBoundingClientRect();
-      if (rect.top < 200 || rect.bottom > window.innerHeight) {
+      // top adjusted by header height
+      // bottom adjusted by footer height
+      if (rect.top < 50 || rect.bottom > window.innerHeight - 50) {
+        console.log(`@@@ reactcomp_terminalNode scrollIntoView`);
+        // setBoundingBoxBottom(rect.bottom);
+        // console.log(
+        //   `<TerminalNode> before scroll top=${rect.top}, bottom=${rect.bottom}`
+        // );
+        // console.log(`terminal before scroll delta=${delta}`);
         //200 header height
         terminalRef.current.scrollIntoView({
           behavior: "smooth",
           block: "start",
           inline: "nearest"
         });
+        // rect = terminalRef.current.getBoundingClientRect();
+        // console.log(`<TerminalNode> after scroll y=${rect.y}`);
+        // console.log(`<TerminalNode> after scroll top=${rect.top}`);
+        // console.log(`<TerminalNode> after scroll bottom=${rect.bottom}`);
+        // dispatch(Request.Page_autoScrolled(rect.top));
+        // setScrollIntoView(true);
+        // let rectAfterScroll = terminalRef.current.getBoundingClientRect();
+        // // console.log(`after scroll delta=${delta + rect.top}`);
+        // delta = rect.top - rectAfterScroll.top;
+        // console.log(
+        //   `terminal after scroll top=${rectAfterScroll.top}, bottom=${rectAfterScroll.bottom}`
+        // );
+        // console.log(`terminal after scroll delta=${delta}`);
       }
     }
-  }, [props.active, terminalRef]);
+  }, [props.active, terminalRef.current]);
   let hidden: string = "";
   // refactor the following
   // console.log(

@@ -1,8 +1,8 @@
 [[page: Ronlyn's Home Page, Ronlyn, Wen, 11/9/2022, Home Page,  /]]
 # Personal
 ## My Stroke Story
-[[image-entry: My stroke story, left, 20%, line-border]]
-![My stroke story](mystrokestory.jpg, , , ,mystrokevc,page)
+[[image-entry: My stroke story, left, 20%]]
+![My stroke story](mystrokestory.jpg, , , ,,mystrokevc,page)
 I tell [my stroke story](mystrokevc,page) since my aphasia using this reading companion. I describe who I was and who I am since my severe hemorrhagic stroke in 2015. The speech recognition feature allows me to practice by myself. 
 [[/image-entry]]
 ### Goal
@@ -13,7 +13,7 @@ I use this when I introduce myself to others. I will be able to introduce myself
 I can practice introducing myself everyday.
 ## My Strategies
 [[image-entry: My strategies, left, 20%]]
-![My Strategies](multimodal2.jpg, , , ,mystrategies,page)
+![My Strategies](multimodal2.jpg,,,,, mystrategies,page)
 I use [my strategies](mystrategies,page) to help me recover from aphasia caused by my severe hemorrhagic stroke in 2015. The speech recognition feature allows me to practice by myself.
 [[/image-entry]]
 ### Goal
@@ -69,7 +69,7 @@ I can practice my sentence formation everyday
 # Flashcard Fillins
 ## Verb Flashcards
 [[image-entry: Verb Flashcards fillin, left, 20%]]
-![Verb flashcard](verbflashcardsfillins.jpg,,,,verbsimages,page)
+![Verb flashcard](verbflashcardsfillins.jpg,,,,,verbsimages,page)
 I can practice retrieving action words on flashcards.
 [[/image-entry]]
 ### Goal
@@ -80,41 +80,116 @@ I use these fillin exercises to practice recalling action words based on flashca
 I can practice these flashcard fillins each week.
 # Book Club Summaries
 ## Current 
-[[image-entry: Current book clubs, left, 15%]]
-![ShadowDivers](shadowdivers.jpg,,,,booksummary_shadowdivers,page)
-* This book club is reading Shadow Divers and is hosted by Voices of Hope for Aphasia for Spring 2024.
+[[image-entry: Current book clubs, left, 10%]]
+![Lock Every Door](lockeverydoor.jpg,,,,,booksummary_lockeverydoor,page)
+### Lock Every Door
+* This book club is reading [Lock Every Door](booksummary_lockeverydoor,page).
+* Tim Carosi is hosting it for Spring 2024. 
 [[/image-entry]]
-[[image-entry: Current book clubs, left, 15%]]
-![Lessons In Chemistry](lessonsinchemistry.jpg,,,,booksummary_lessonsinchemistry,page)
-* This book club is reading Lessons In Chemistry and is hosted by Aphasia Treatment Program for Winter 2024.
+[[image-entry: Current book clubs, left, 10%]]
+![Shadow Diver](shadowdivers.jpg,,,,,booksummary_shadowdivers,page)
+### Shadow Divers
+* This book club is reading [Shadow Divers](booksummary_shadowdivers,page).
+* Voices of Hope for Aphasia is hosting it for Spring 2024. 
 [[/image-entry]]
-[[image-entry: Current book clubs, left, 15%]]
-![I Must Betray You](imustbetrayyou.jpg,,,,booksummary_imustbetrayyou,page)
-* This book club is reading I Must Betray You and is hosted by Boston University for Winter 2024.
+[[image-entry: Current book clubs, left, 10%]]
+![Lessons In Chemistry](lessonsinchemistry.jpg,,,,,booksummary_lessonsinchemistry,page)
+### Lessons In Chemistry
+* This book club is reading [Lessons In Chemistry](booksummary_lessonsinchemistry,page).
+* Aphasia Treatment Program is hosting this for Winter 2024.
 [[/image-entry]]
-[[image-entry: Current book clubs, left, 15%]]
-![Remarkably Bright Creatures](remarkablybrightcreatures.jpg,,,,booksummary_remarkablybrightcreatures,page)
-* This book club is reading Remarkably Bright Creatures and is hosted by Speech Recovery Pathways for Winter 2024.
+[[image-entry: Current book clubs, left, 10%]]
+![I Must Betray You](imustbetrayyou.jpg,,,,,booksummary_imustbetrayyou,page)
+### I Must Betray You
+* This book club is reading [I Must Betray You](booksummary_imustbetrayyou,page).
+* Boston University is hosting this for Winter 2024.
+[[/image-entry]]
+[[image-entry: Current book clubs, left, 10%]]
+![Remarkably Bright Creatures](remarkablybrightcreatures.jpg,,,,,booksummary_remarkablybrightcreatures,page)
+### Remarkably Bright Creatures
+* This book club is reading [Remarkably Bright Creatures](booksummary_remarkablybrightcreatures,page).
+* Speech Recovery Pathways is hosting this for Winter 2024.
 [[/image-entry]]
 ## Past
+These are past book club summaries.
 [[image-entry: Past book clubs, above, 20%]]
-![Shoe Dog](shoedog.jpg,,,,booksummary_shoedog,page),![Last Liar Standing](lastliarstanding.jpg,,,,booksummary_lastliarstanding,page),![Just Mercy](justmercy.jpg,,,,booksummary_justmercy,page),![Ordinary Grace](ordinarygrace.jpg,,,,booksummary_ordinarygrace,page),![Catch Me If You Can](catchmeifyoucan.jpg,,,,booksummary_catchmeifyoucan,page),![A Man Called Ove](mancalledove1.jpg,,,,booksummary_mancalledove1,page),![A Man Called Ove](mancalledove1.jpg,,,,booksummary_mancalledove1,page), ![Mystery Guest](mysteryguest.jpg,,,,booksummary_mysteryguest,page)
-[[/image-entry]]
-* These are past book club summaries.
+![Shoe Dog](shoedog.jpg,,,,,booksummary_shoedog,page),![Last Liar Standing](lastliarstanding.jpg,,,,,booksummary_lastliarstanding,page),![Just Mercy](justmercy.jpg,,,,,booksummary_justmercy,page),![Ordinary Grace](ordinarygrace.jpg,,,,,booksummary_ordinarygrace,page),![Catch Me If You Can](mancalledove1.jpg,,,,,booksummary_mancalledove1,page),![A Man Called Ove](mancalledove1.jpg,,,,,booksummary_mancalledove1,page),![Mystery Guest](mysteryguest.jpg,,,,,booksummary_mysteryguest,page)
 [[/image-entry]]
 # Scene Narratives
+Scene narratives allow me practice forming multiple sentences related to complex illustrated scenes. The scenes are decomposed into simpler subscenes. The illustrations have overlays of numbered headings that correspond to their respective subscene descriptions to afford me more structure, if necessary.
+These subscenes serve as the bases for sentence formation fill-in as well as reading exercises. 
 ## Goal
-Scene narratives the user describe complex scenes in a structured approach with numeric labels.
+I want to improve my sentence formation. Scene narratives promote sentence formation by providing multiple-modal sentence completion progressions. 
 ## Rationale
-I use these narrative fillin exercises to practice describing complex scenes in a structured approach with numeric labels.
+The scene narratives allow me to express ideas using multiple sentences. If I practice these exercises with multiple related sentences, my ability to form sentences can improve.
 ## Regimen
 I can practice these narratives each week.
-Richer descriptions
+## Exercises
+### Hair salon
 [[image-entry: Scene narratives, left, 20%]]
-![Hair Salon](scene_hairsalon.jpg,,,,scene_hairsalon1,page)
-* A man goes to the hair salon. 
-* Another man is already in the waiting room
-* The hair designer is cutting a woman's hair
+![Hair Salon](scene_hairsalon.jpg,,,,,scene_hairsalon,page)
+#### Sentence Formation Practice
+[Narrative Fill-ins with labels by subscenes](scene_hairsalon,heading,2) 
+#### Reading Practice
+[Narrative with labels by subscenes](scene_hairsalon,heading,8), [Narrative with labels](scene_hairsalon,heading,9), [Narrative  with labels by subscenes](scene_hairsalon,heading,10)
+[[/image-entry]]
+### Family Breakfast
+[[image-entry: Scene narratives, left, 20%]]
+![Family Breakfast](scene_familybreakfast.jpg,,,,,scene_familybreakfast,page)
+#### Sentence Formation Practice
+[Narrative fill-ins with labels by subscenes](scene_familybreakfast,heading,2) 
+#### Reading Practice
+[Narrative with labels by subscenes](scene_familybreakfast,heading,8), [Narrative with labels](scene_familybreakfast,heading,9), [Narrative with labels by subscenes](scene_familybreakfast,heading,10)
+[[/image-entry]]
+### Kitchen Preparation
+[[image-entry: Scene narratives, left, 20%]]
+![Kitchen Prep](scene_kitchenprep.jpg,,,,,scene_kitchenprep,page)
+#### Sentence Formation Practice
+[Narrative fill-ins with labels by subscenes](scene_kitchenprep,heading,2) 
+#### Reading Practice
+[Narrative with labels by subscenes](scene_kitchenprep,heading,8), [Narrative with labels](scene_kitchenprep,heading,9), [Narrative  with labels by subscenes](scene_kitchenprep,heading,10)
+[[/image-entry]]
+### Yard Work
+[[image-entry: Scene narratives, left, 20%]]
+![Yark Work](scene_yardwork.jpg,,,,,scene_yardwork,page)
+#### Sentence Formation Practice
+[Narrative fill-ins with labels by subscenes](scene_yardwork,heading,2) 
+#### Reading Practice
+[Narrative with labels by subscenes](scene_yardwork,heading,8), [Narrative with labels](scene_yardwork,heading,9), [Narrative with labels by subscenes](scene_yardwork,heading,10)
+[[/image-entry]]
+### Lunch Preparation
+[[image-entry: Scene narratives, left, 20%]]
+![Lunch Preparation](scene_boysandwich.jpg,,,,,scene_boysandwich,page)
+#### Sentence Formation Practice
+[Narrative fill-ins with labels by subscenes](scene_boysandwich,heading,2) 
+#### Reading Practice
+[Narrative with labels by subscenes](scene_boysandwich,heading,8), [Narrative with labels](scene_boysandwich,heading,9), [Narrative with labels by subscenes](scene_boysandwich,heading,10)
+[[/image-entry]]
+### Pizza Night
+[[image-entry: Scene narratives, left, 20%]]
+![Pizza dinner](scene_familypizza.jpg,,,,,scene_familypizza,page)
+#### Sentence Formation Practice
+[Narrative fill-ins with labels by subscenes](scene_familypizza,heading,2) 
+#### Reading Practice
+[Narrative with labels by subscenes](scene_familypizza,heading,8), [Narrative with labels](scene_familypizza,heading,9), [Narrative with labels by subscenes](scene_familypizza,heading,10)
+[[/image-entry]]
+### Kids Playing
+[[image-entry: Scene narratives, left, 20%]]
+![Kids Playing](scene_kidsswing.jpg,,,,,scene_kidsplaying,page)
+#### Sentence Formation Practice
+[Narrative fill-ins with labels by subscenes](scene_kidsplaying,heading,2) 
+#### Reading Practice
+[Narrative with labels by subscenes](scene_kidsplaying,heading,8), [Narrative with labels](scene_kidsplaying,heading,9), [Narrative with labels by subscenes](scene_kidsplaying,heading,10)
+[[/image-entry]]
+# Multiple Choice
+- [multiple choice](verbsimagesmctest,page)
+
+# Word Banks
+[[image-entry: Sentence Bank, left, 20%]]
+![Work Bank](wordbank.jpg,,,,,wordbank,page)
+I can find words and hear how they are pronounced.
+- [word bank](wordbank,page)
+- [country bank](countries, page)
 [[/image-entry]]
 # Sentence Banks
 [[image-entry: Sentence Bank, left, 20%]]
@@ -144,15 +219,13 @@ I can review my recent experiences and practice recounting my current events by 
 - [June 2023](journal202306,page)
 - [May 2023](journal202305,page)
 - [April 2023](journal202304,page)
-
 # About my reading companion
 [About my reading companion](aboutcompanion,page)
 - [Case for action](aboutcompanion,heading, 1)
-- [Requirements](aboutcompanion,heading, 2)
-- [Rationale](aboutcompanion,heading, 3)
-- [Features](aboutcompanion,heading, 4)
-  - [Curation/Authoring](aboutcompanion,heading, 5)
-  - [Formatting](aboutcompanion,heading, 6)
-  - [Speech recognition](aboutcompanion,heading, 7)
-  - [Speech synthesis](aboutcompanion,heading, 8)
-  - [Word finding](aboutcompanion,heading, 9)
+- [Rationale](aboutcompanion,heading, 2)
+- [Features](aboutcompanion,heading, 3)
+  - [Curation/Authoring](aboutcompanion,heading, 4)
+  - [Formatting](aboutcompanion,heading, 5)
+  - [Speech recognition](aboutcompanion,heading, 6)
+  - [Speech synthesis](aboutcompanion,heading, 7)
+  - [Word finding](aboutcompanion,heading, 8)

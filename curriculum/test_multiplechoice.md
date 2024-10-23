@@ -1,6 +1,7 @@
-[[page: Multiple Choice testing,, Wen,, Testing, test/]]
-[[Multiple-choice: format, order, section instruction, grid]]
-* A triple dip cone has [_3=(numeral,,,1,2,4)_] scoops.
-* A single dip cone has [_1=(numeral,,,2,3,4)_] scoop.
-* A pair of shoes has [_2=(numeral,,,1,3,4,5)_] shoes.
-[[/fillin]]
+[[page: Multiple Choice Images, Ronlyn, Wen, , mc test, Test/]]
+1a. What activity is happening?
+  1a. [button: choice, , , , css attributes/] The person is cooking.
+  1a. [button: choice, correct, , , css attributes/] The person is baking cookies in the oven at a random time of day went electricity may be more expensive.
+  1a. [button: choice, , , , css attributes/] The person is washing.
+  1a. [button: choice, , , , css attributes/] The person is mopping. She bakes at a random time of day went electricity may be more expensive.
+  1a. [button: choice, , , , css attributes/] The person is mopping. She bakes at a random time of day. It went electricity may be more expensive.

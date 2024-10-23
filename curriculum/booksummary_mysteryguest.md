@@ -416,3 +416,17 @@
 1. Molly is so happy that Mr. Preston is her grandfather. She has a piece of her family back. Molly decides to call Mr. Preston “Gran-dad”. 
 1. Just then, Juan Manuel returns. Juan shows Molly and Mr. Preston family photos from his trip. Molly and Mr. Preston prepare to tell Juan Manuel about the murder and their new family ties. 
 1. Meanwhile, Molly thinks of her Gran’s wisdom. Molly knows her Gran is always with her… 
+## Chapter 29
+Despite the flat tire, Ethan's friend offered to haul Cameron's camper to Ethan's house. While the two sat down for some drinks, Cameron asked Ethan for a job in order to get the tire fixed and pay aunt Jeanne her money back. Ethan couldn't offer him a job but knew of a job that his friend was looking to fill. The next morning, Cameron heads to the aquarium for an interview with Terry regarding a maintenance position at the aquarium. Despite the unusual encounter, Terry offers Cameron the job. As he waits for Etha to pick him up he receives a call from John Hall who happens go work for Mr. Brinks.
+As Marcellus waits for the perfect time to eat the rock crabs he cannot wait for Cameron to start. The floors have been dirtier than eve since Tova has left.
+Cameron begins to feel the effects of working at the aquarium, he had no idea how much the job was going to take a toll on his body. However following his first paycheck, Cameron was able to fix the tire of the camper and decided to drive it to Sowell Bay's main commercial block in hopes of finding Simon Brinks. Despite his efforts, Cameron has no luck of finding Simon at the building. Instead he encountered a realtor by the name of Jessica. With some heavy convincing, he managed to convince Jessica to help find Simon. While waiting for Jessica to track down Simon, Cameron encounter Avery, a young woman who worked next door. Soon Jessica walked out with an address and wished Cameron good luck in finding Simon.
+Tovas prepares the necessary things she needs for the application of the house. She is surprised at how much in needed to do a simple application. While buying some pens she encounters Ethan, who asks her out for some tea. On her way from the store she decides to stop at the aquarium to notify Marcellus of her move to Charter Village. With much surprise she's a camper in the parking lot. After entering the aquarium so is surprised yet impressed to see how clean the new maintenance worker has left it.
+### Discussion
+* How do you predict Terry's and Cameron's relationship with go?
+* Do you think Marcellus will grow fond of Cameron as he did with Tova? 
+* What do you think about Avery's and Cameron's encounter?
+  * Any predictions on how their relationship will grow in the book?
+* At the end of Chapter 32, Tova approaches the entrance to the back of the octopus enclosure and frowns. Then a fluorenscent clow seeps from under the door, someone has left the light on, then a terrible clatter erups inside.
+  * What do you think has happened?
+Check in: Thoughts on the book so far? Any feedback you'd like to share.
+

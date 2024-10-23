@@ -33,7 +33,6 @@ The following exercises allow me to fill in the prompts given the corresponding 
 1. We eat at local [_restaurants_].
 1. We return home after two [_weeks_].
 [[/fillin]]
-
 ### US Holidays
 [[fillin: inline, true, 1, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
 1. We celebrate the first day of the year on [_New_] [_Year's_] Day.

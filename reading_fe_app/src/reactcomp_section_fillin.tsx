@@ -251,9 +251,9 @@ const ResponsesDescription = () => {
     return <></>;
   } else {
     let responsesLabel: string;
-    console.log(
-      `responsesLabel.length=${fillinContext.sectionFillin.authorSetting.responsesLabel.length}, responsesLabel=${fillinContext.sectionFillin.authorSetting.responsesLabel}`
-    );
+    // console.log(
+    //   `responsesLabel.length=${fillinContext.sectionFillin.authorSetting.responsesLabel.length}, responsesLabel=${fillinContext.sectionFillin.authorSetting.responsesLabel}`
+    // );
     if (fillinContext.sectionFillin.authorSetting.responsesLabel.length > 0) {
       responsesLabel = fillinContext.sectionFillin.authorSetting.responsesLabel;
     } else {

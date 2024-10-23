@@ -552,7 +552,7 @@ May 1960
 1. Elizbeth explained that Walter was a good employee. He should not be fired for her actions.
 1. Lebensmal did not like anyone who questioned his authority. He started to unloop his belt. He unzipped his pants and walked over to Zott. 
 1. She shook her head in wonder. Calmly, she withdrew a freshly sharpened fourteen inch knife. He fainted dead.
-## Chapter #31: The Get-Well Card
+## Chapter 31: The Get-Well Card
 1. Phil had a massive heart attack. He would be on bed rest for a year.
 1. Walter demanded to know what happened. Why was Elizabeth in his office?
 1. Elizabeth explained that he had fired everyone who worked on the show. She already told the whole building. 
@@ -565,6 +565,9 @@ May 1960
 1. Walter made several deals. Supper at Six would be playing on both coasts.
 1. He updated everyone on Phil’s condition. They cheered. Many people wrote horrible things on his “get well” card. Walter was relieved he was not the only one who hated his boss.
 1. He decided to follow Elizabeth Zott’s simple advice to do what was right. Things had to change. He would start with himself.
+### Worksheet Questions
+1a. What does the cheering indicate to you about how the television crew felt about Phil? Write or Draw Below.
+1a. The show was much more successful than Phil said it was. Why do you think he hid this information? Write or Draw Below.
 ## Chapter 32: Medium Rare 
 1. Madeline was assigned to Mudford’s class again. 
 1. Harriet wrote a fake note and took Mad from school. Elizabeth didn’t know. 
@@ -583,7 +586,17 @@ May 1960
 1. Elizabeth took a question from the audience. They asked Elizabeth for her favorite prayer. “I don’t have one because I’m atheist,” Elizabeth said. 
 1. Elizabeth kept speaking, “I do believe in the people who made food possible. The farmers and the grocery store shelf stockers. But most of all, I believe in you.” Because you made a meal to nourish your family. Because of you, others live. 
 1. Walter’s phone began to ring nonstop.
-## Chapter #33: Faith
+### Worksheet Questions
+1a. Why do you think Walter’s phone began to ring nonstop?
+  1a. Elizabeth was a woman
+  1a. They love Elizabeth
+  1a. Elizabeth said she is atheist
+1a. How do you think Elizabeth would feel if she saw Harriet and Mad in the audience?
+  1a. Happy
+  1a. Shocked
+  1a. Angry
+1a. When the parking lot attendant told Harriet and Mad that he gets yelled at, Mad said ”My mom wouldn’t want your job to be this hard”. What does this tell us about Mad? Write or draw your answer.
+## Chapter 33: Faith
 1. In 1960, people did not say they did not believe in God on television. Walter’s phone was soon filled with threats.
 1. He pleaded for Elizabeth to keep her beliefs to herself on national television.
 1. Elizabeth was surprised. “I’m glad Edna Flattistein can express her belief in God, and I believe I have the same right. Plenty of people don’t believe in God…Have a little faith, Walter.”
@@ -595,6 +608,10 @@ May 1960
 1. Right then, some women walked by talking about cast iron temperatures. It was something they had learned from Supper at Six.
 1. The reverend told Mad that All Saints denied Calvin Evans had ever lived there. He called several times.
 1. Mad shook her head. She was positive it was the right home. Everybody lies.
+### Worksheet Questions
+For the following questions, write or draw your answers:
+1. Elizabeth keeps making statements that are not typical for the 1960s. Do you think this is making her more or less popular? To who?
+1. Mad is determined to find more out about her Dad. Have you ever continued to work on something even when someone tried to stop you?
 ## Chapter 34: All Saints
 1. In 1933, the bishop went to All Saints, a ratty boys home in Iowa.
 1. They wanted him to discipline the boys and find money for the home.
@@ -618,10 +635,20 @@ May 1960
 1. Wakely gave Madeline the address he found for Mr. Wilson’s P.O. box. He told her not to get her hopes up.
 1. Madeline said she didn’t have hopes, she had faith. Wakely said it was a funny word to hear from her because religion is based on faith.
 1. Mad said, “You realize that faith isn’t based on religion. Right?”
-## Chapter #35: The Smell of Failure
+### Worksheet Questions
+1a. Why did the bishop keep lying?
+  1a. Dislike of children
+  1a. To raise money
+  1a. Revenge on Calvin
+1a. What proof helped Wakely confirm Calvin grew up at All Saints?
+  1a. A photograph
+  1a. The Calvin Evans Memorial Fund
+  1a. He asked Mr. Wilson
+1a. Mad pointed out that you can have faith in things other than religion. What is something you have faith in?
+## Chapter 35: The Smell of Failure
 1. On a Monday morning, Elizabeth went to the boathouse at 4:30 AM, as she always did.
 1. Elizabeth parked her car. Something felt different. Every parking space was taken. A lot of women were there.
-2. The same thing happened at other boat houses across the country.
+1. The same thing happened at other boat houses across the country.
 1. Some people did not like this. People were outside the KCTV studio with picket signs. These said “GODLESS WOMAN!” and, “BURN IN HELL!”
 1. Walter worried. Elizabeth was getting death threats. He told security and Harriet. He did not tell Elizabeth.
 1. Six-Thirty also worried. He saw on TV that some people did not clap at the end of her show. So, he walked to the studio.
@@ -632,3 +659,126 @@ May 1960
 1. He found a stiff, unforgiving woman in the fourth row. Here, he smelled a bomb ingredient in the woman’s bag.
 1. Six-Thirty remembered his bomb-searching training, Six-Thirty took it to security. They called the police.
 1. Seymour was interviewed. He didn’t know Six-Thirty brought over the bag. He took credit. This crushed Six-Thirty.
+### Worksheet Questions
+1a. What was different about the boathouse in the morning?
+  1a. The boathouse was locked.
+  1a. There were protesters there.
+  1a. There were a lot of women.
+1a. How did Six-Thirty get on Elizabeth’s show?
+  1a. Walter loves dogs.
+  1a. Elizabeth threatened to quit.
+  1a. There were a lot of women.
+1a. Have you ever agreed to something because you weren’t listening? What happened?
+## Chapter 36:
+1. A week later Walter shared big news. He sat at the table with Elizabeth, Harriet, Madeline, and Amanda.
+1. “Life magazine called today”, Walter said. “Not interested,” Elizabeth said back. “You can’t say no to every magazine,” Walter said.
+1. Walter shared that he had called Chemistry Today. “They did not want to talk to a lady who cooks on TV,” Walter said. Elizabeth stood up and walked out.
+1. Amanda asked Harriet to play. Walter told Harriet that Amanda liked her. Walter found himself thinking of Harriet for hours each time he left Elizabeth’s home.
+1. Harriet told Walter to speak to the interviewer. “Keep it focused on what she’s done. Tell him not to ask about Calvin.”
+1. The interview was one week later. The reporter sat in the audience of Supper at Six. His name is Franklin Roth.
+1. He saw that all the women there had a notepad and pencil. A few had chemistry books.
+1. During a break, Franklin asked the woman next to him what she likes about the show. “Being taken seriously”, she said. “Sometimes I think that if a man were to spend a day being a woman in America, he wouldn’t make it past noon.”
+1. The woman on the other side of him tapped his knee. She said, “get ready for a revolt.”
+1. After the show, Franklin met Elizabeth and Six-Thirty. Franklin told Elizabeth that her pants were a bold choice. She told him that she liked his same bold choice. There was a tone.
+1. Franklin could tell that Elizabeth did not want to do the interview. He left. Seymour stopped Franklin in the parking lot. Elizabeth drove Franklin to her lab.
+1. Franklin kept asking questions. He did not find her interesting.
+1. “I brought you here for a reason. I want you to know, I’m not really a TV cooking show host. I’m a chemist. I tried to solve one of the biggest mysteries of our time”. She went on to explain her projects.
+1. Franklin decided to ask her about Calvin. Walter had told him not to.
+1. Elizabeth was very upset. She questioned why he asked. They sat in silence. Then, Elizabeth opened his notepad. “You want to know about Calvin and me?” she said.
+1. Then, she told him one thing no one should ever tell a reporter. The truth. Franklin hardly knew what to do with it.
+### Worksheet Questions
+1a. How did Elizabeth’s interview with Life Magazine go?
+  1a. Very bad
+  1a. Ok
+  1a. Great
+1a. If you were contacted for an interview by a famous magazine company, what would you want to talk about? Write or draw your response.
+  1a. Cooking
+  1a. Sports
+  1a. Your hobby
+  1a. Other
+1a. What do you think Elizabeth said to the interviewer at the end of this chapter?
+## Chapter 37
+1. Franklin ordered drinks on the airplane. He thought about his interview with Elizabeth. He felt emotion toward Elizabeth’s story. He would never forget her words.
+1. “Calvin and I were soulmates. We had respect for each other’s work. Do you know how rare that is? That a man would treat his lover’s work as his own?”
+1. She told him about Dr. Donatti stealing her research. He asked why she didn’t say anything. “You’re kidding”. Franklin felt bad. He wasn’t sure he would even believe a woman over a man.
+1. “I fell in love with Calvin because he was smart and kind. He was also the first man to take me seriously. Think about if all men took women seriously. Education would change. The workforce would change. Do you see my point?”
+1. He did. His wife had left him. She said he did not respect her job as a housewife and mother. He didn’t think it was a job.
+1. “That's why I wanted to teach chemistry on Supper at Six. When women understand chemistry, they begin to understand how things work. Then, they can begin to see the false limits that have been created for them.” “You mean by men?” Franklin asked. “By made up cultural and religious beliefs that put men in that role.”
+1. Elizabeth told Franklin about being raped by her professor. Then about being raised by her brother. And his suicide. She told him about her dad in jail and her mom in Brazil.
+1. Then she shared about Calvin’s life. Including the death of his parents, and sexual abuse from the the priest. She blamed herself for his death.
+1. Franklin sat to write his article about Elizabeth. He would write plenty but say nothing. He would tell about her, but not tell on her.
+1. He wrote a two-thousand word description of her chemistry projects. He described her show as “a 30 minute lesson in life. And not in who we are or what we’re made of, but rather, who we’re capable of becoming.
+1. Franklin’s boss was mad that there was no drama in the article.
+1. Franklin’s boss made it his job to find dirt on Elizabeth.
+1. He interviewed Dr. Donatti. He said “Luscious was a great lab tech - that’s a position we have for people who want to be in science but don't have the brains.”
+1. Then Franklin’s boss interviewed Mrs. Mudford. She gave him Madeline’s family tree. Walter was on the tree. 
+Everyone assumed Elizabeth was sleeping with her producer. Mad also drew her grandfather in jail and Six-Thirty reading a book.
+1. Two months later, the article came out. The magazine sold out in under twenty-four hours.
+### Worksheet Questions
+1a. Was it ok for Franklin’s boss to write bad things about Elizabeth? Write or draw your answer.
+  1a. Yes
+  1a. No
+  1a. Maybe
+1a. Franklin’s boss made it his job to find dirt on Elizabeth. What does it mean to “find dirt” about someone?
+  1a. What do you think will happen next?
+## Chapter 38: Brownies
+July 1961
+1. Supper at Six exploded in popularity, but Elizabeth was still upset about the article.
+1. Several manufacturers wanted to create all-new lines in Elizabeth’s name: pots, knives, even a girl’s chemistry set!
+1. Elizabeth groaned at the sight of a pink box. She was still hurt.
+1. Walter explained this was an opportunity for financial security for their daughters. They had to think beyond themselves.
+1. Elizabeth stood behind a cutting board, ready to prepare an eggplant for tonight’s dinner. She turned it over in her hands. She exhaled loudly and threw it aside.
+1. “Forget it. We’re making brownies. I make brownies on my bad days,” Elizabeth confessed. 
+1. Madeline lay watching the television at home. She yelled to Harriet, “Looks like we’re having brownies for the 5th night in a row!”
+1. Harriet had to run out for a bit. She instructed Mad to not answer the door or leave the house.
+1. Madeline watched the TV closely as her mother carefully made brownies. She had read the Life article and spilled tears over the photograph of her mother fixing her hair.
+1. “My mom’s a scientist. A Chemist,” she told herself.
+1. Out of nowhere came the doorbell. Harriett never let her answer the door anymore.
+1. She peeked out the window and saw Reverent Wakely. She opened the door.
+1. Elizabeth came home early to find Reverent Wakely in the living room.
+1. He explained how he met Mad at the library, helped her with her family tree, and was a friend of Calvin’s.
+1. The TV was still playing. At the mention of Madeline being “illegitimate”, the Reverend quickly shut off the TV. Then he turned to leave.
+1. Elizabeth put a hand on him, “We’ve met before,” she said sadly.
+1. Wakely stayed for dinner and explained to Mad why he hadn’t told her he was at her Dad’s funeral. He wanted to find the right words to help her mom with her loss, but he failed.
+1. All of the sudden, Wakely remembered why he was there. He pulled out a manila envelope labeled: Elizabeth Zott. PRIVATE.
+1. Mad began to cry. Wakely and Mad both admitted they had read the article inside. His typist had read it too. It was Roth’s attempt to make things right.
+1. Elizabeth found an article inside that told the truth. It was about women in science. There was a photo of Elizabeth in her home lab with Six-Thirty by her side.
+1. Mad continued to cry. It was her fault she got fired. It was her fault she was not a real chemist anymore.
+### Worksheet Questions
+1a. How did Elizabeth react when she found Reverend Wakely at home with Mad?
+  1a. She told him to leave
+  1a. She was angry
+  1a. She remained calm
+1a. Why is Elizabeth upset about the article? Write or Draw Below.
+## Chapter 39: Dear Sirs
+1. Two days earlier, Miss Frask was trying to beat the world record for words typed per minute. A child suddenly appeared with a manila envelope in her hands.
+1. She asked for Wakely. Mad began to tell the woman her name, but the woman finished her sentence for her. They both looked at each other in equal surprise.
+1. Frask explained how she worked with Mad’s Mom and Dad over at Hastings. She left out the part where she spread vicious rumors about her mother, ultimately leading to her being fired.
+1. As she answered more questions, Mad knew when she was lying. She asked for the truth. Eventually, Frask told her that her mother had been fired because she was pregnant out of wedlock.
+1. Mad sobbed for 10 minutes. She didn’t believe Frask when she told her it wasn’t her fault. She said Elizabeth was lucky to have gotten out of Hastings.
+1. Madeline apologized for ruining her typing test and left the envelope for Wakely.
+1. Frask ignored the child’s instructions and opened the envelope. “Holy hell. Zott really is the real deal,” she fumed.
+1. Thirty seconds later, Frask typed ferociously. She wrote a letter to Life magazine explaining how the recent article was a complete lie. She had worked with Dr.Donatti and knew the truth. He stole her work and fired her without reason.
+1. She knew Life would never have the guts to print her letter, but she wrote it anyway. It appeared in the very next issue.
+1. Harriett ran to Elizabeth excitedly. She held the latest copy of Life in her hands.
+1. Women from all over were on Elizabeth’s side, it’s a rebellion!
+1. Elizabeth was not interested. For the last few weeks, she did the best to keep her head up. Being misrepresented in Life had beat her down. The damage felt permanent.
+1. Harriet and Mad were both worried about Elizabeth. Her depression was evident. There were empty research notebooks and untouched chemical supplies everywhere.
+1. Suddenly, Harriet had an idea.
+### Worksheet Questions
+1a. List clues that tell you Elizabeth is feeling depressed. Write or Draw below.
+1a. What made Miss Frask change how she felt about Elizabeth Zott?
+  1a. Reading the new article
+  1a. Mad told her nice stories about her Mom
+## Chapter 40: Normal
+1. Elizabeth and Wakely sat together on the back step. Their voices were low. Elizabeth confessed she often thinks about death.
+1. Calvin thought back to the time he and Mad shared secrets. She told him Six-Thirty knew 981 words. Why did she lie? He told her he didn’t believe in God.
+1. Elizabeth admitted she had also read Calvin and Wakely’s letters many years ago. He was the reason Calvin had moved to Commons. He had told him it had the best weather in the world.
+1. They both felt at fault for his death. Calvin had moved to Commons because of Wakely. Elizabeth had bought the leash he took Six-Thirty out with that morning.
+1. Elizabeth confessed she also had a brother pass away. He hung himself when she was 10.
+1. She almost died once too. Her brother saved her from drowning even though he didn’t know how to swim either. He saved her, but she couldn&#39;t save him. She still feels guilty.
+1. Wakely didn’t know what to say at first. Finally, he told her she must accept. Sometimes the unacceptable happens and you can’t change it.
+1. Elizabeth went on, “Sometimes I understand why my brother left. After everything that’s happened, sometimes I feel like I want out, too.”
+1. Wakely looked at her, “Believe me, that’s not really your problem. What you want is back in.”
+### Worksheet Questions
+1a. Sometimes it is hard to find words to say to someone going through a hard time. What do you normally do in those situations? Write or Draw below. 

@@ -1,27 +1,53 @@
-[[page: Verbs with images, Ronlyn, Wen, , Verbs with images, Words with images/]]
+[[page: Multiple Choice Images, Ronlyn, Wen, , Verbs with images, Multiple Choice/]]
 # Verbs
 ## Baking
 [[image-entry: Baking, left, 20%]]
 ![Baking](verb-bake.jpg)
-[[fillin: gridInOrder, true, 2, true,, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-1. She is [_baking=(verb)_].
-1. She is [_baking=(verb)_] [_cookies=(noun)_].
-1. She is [_baking=(verb)_] [_cookies=(noun)_] in the [_oven=(noun)_].
-1. She is [_baking=(verb)_] [_cookies=(noun)_] in the [_oven=(noun)_] on a [_pan=(noun)_].
-[[/fillin]]
+1a. What activity is happening?
+  1a. [button: choice, , , , css attributes/] The person is cooking.
+  1a. [button: choice, correct, , , css attributes/] The person is baking.
+  1a. [button: choice, , , , css attributes/] The person is washing.
+  1a. [button: choice, , , , css attributes/] The person is mopping.
+1a. What baked good is being made?
+  1a. [button: choice, , , , css attributes/] The person is baking bread.
+  1a. [button: choice, , , , css attributes/] The person is baking meat loaf.
+  1a. [button: choice, correct, , , css attributes/] The person is baking cookies.
+  1a. [button: choice, , , , css attributes/] The person is baking brownies.
+1a. In what room do you bake?
+  1a. [button: choice, , , , css attributes/] The person is in the bathroom.
+  1a. [button: choice, , , , css attributes/] The person is in the garage.
+  1a. [button: choice, , , , css attributes/] The person is baking bedroom.
+  1a. [button: choice, correct, , , css attributes/] The person is in the kitchen.
+1a. What appliance is used to bake?
+  1a. [button: choice, correct, , , css attributes/] The oven is used to bake.
+  1a. [button: choice, , , , css attributes/] The chair is used to sit.
+  1a. [button: choice, , , , css attributes/] The bed is used to sleep.
+  1a. [button: choice, , , , css attributes/] The sink is used to wash.
+1a. What protect the hands?
+  1a. [button: choice, , , , css attributes/] The protect nails the hands.
+  1a. [button: choice, , , , css attributes/] The protect lotion the hands.
+  1a. [button: choice, correct, , , css attributes/] The mitts protect the hands.
+  1a. [button: choice, , , , css attributes/] The pot holders protect the hands.
 [[/image-entry]]
-[[fillin: gridInOrder, true, 2, true,, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
-1. I [_am=(helping verb)_] [_baking=(verb)_].
-1. You [_are=(helping verb)_] [_baking=(verb)_].
-1. It [_is=(helping verb)_] [_baking=(verb)_].
-1. He [_is=(helping verb)_] [_baking=(verb)_].
-1. She [_is=(helping verb)_] [_baking=(verb)_].
-1. We [_are=(helping verb)_] [_baking=(verb)_].
-1. They [_are=(helping verb)_] [_baking=(verb)_].
-[[/fillin]]
+
+[[image-entry: Baking, left, 20%]]
+![Baking](verb-bake.jpg)
+1a. Describe the image.
+  1a. [button: choice, correct, , , css attributes/] The person is baking cookies
+  1a. [button: choice, , , , css attributes/] The person is baking bread
+  1a. [button: choice, , , , css attributes/] The person is baking meat loaf
+  1a. [button: choice, , , , css attributes/] The person is baking brownies
+[[/image-entry]]
 ## Bouncing
 [[image-entry: Bouncing, left, 20%]]
 ![Bouncing](verb-bounce.jpg)
+1a. What activity is happening?
+  1a. [button: choice, , , , css attributes/] The person is bouncing.
+  1a. [button: choice, correct, , , css attributes/] The person is baking.
+  1a. [button: choice, , , , css attributes/] The person is washing.
+  1a. [button: choice, , , , css attributes/] The person is mopping.
+[[/image-entry]]
+
 [[fillin: gridInOrder, true, 2, true,, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 1. The girl is [_bouncing=(verb)_].
 1. The girl is [_bouncing=(verb)_] a [_ball=(noun)_].

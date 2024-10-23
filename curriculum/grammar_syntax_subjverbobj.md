@@ -64,8 +64,8 @@
 1. The [_baby=(subject)_] [_is=(helping verb)_] [_crawling=(verb)_] his [_way=(object)_].
 [[/fillin]]
 [[/image-entry]]
-[[image-entry: Crying, left, 25%]]
 ## Cry
+[[image-entry: Crying, left, 25%]]
 ![Crying](verb-cry1.jpg)
 [[fillin: gridInOrder, true, 1, true, Use the following words:, Recite the following prompts about the images:, grid, 6, insert, true, true, true, true, true, false]]
 1. The [_child=(subject)_] [_cries=(verb)_] [_tears=(object)_].

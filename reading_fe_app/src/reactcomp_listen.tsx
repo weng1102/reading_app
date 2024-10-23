@@ -203,7 +203,6 @@ export const ListeningMonitor = React.memo(() => {
       setPreviousTranscriptMatchEndOffset(0);
       resetTranscript();
       if (stopListeningAtEOS) dispatch(Request.Recognition_stop());
-      console.log(`@@@@newsentence=${newSentence}`);
     }
   }, [newSentence]);
   const expectedTerminalIdx: number = useAppSelector(

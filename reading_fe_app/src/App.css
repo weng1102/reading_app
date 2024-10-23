@@ -748,6 +748,13 @@ input[type="radio"]{
   width: 100%;
   max-height: auto;
 }
+.imageentry-images-left-grouping {
+position: relative;
+top: inherit;
+left: inherit;
+display: inherit;
+max-height: inherit;
+}
 .imageentry-container-divider-left {
   grid-column: divider;
   max-width: 2px;
@@ -766,6 +773,11 @@ input[type="radio"]{
 }
 .imageentry-captions-above {
   height: auto;
+}
+.imageentry-images-above-grouping {
+display: inherit;
+left: inherit;
+max-height: inherit;
 }
 .imageentry-container-divider-above {
   height: 1px;
@@ -801,14 +813,14 @@ input[type="radio"]{
 .image-overlay-container {
   display: inline-block;
   position: relative;
-  top: inherit;
+  top: 0;
   left: inherit;
   max-height: inherit;
 /*  width: 100%; */
 }
 .image-overlay {
   position: absolute;
-  top: inherit;
+  top: 0;
   left: inherit;
 }
 .image-link-overlay-container {

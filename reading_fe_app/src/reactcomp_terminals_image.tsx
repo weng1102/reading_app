@@ -19,10 +19,11 @@ import { useAppDispatch, useAppSelector } from "./hooks";
 import { ITerminalPropsType } from "./reactcomp_terminals";
 import { ISettingsContext, SettingsContext } from "./settingsContext";
 interface ITerminalImageEntryPropsType extends ITerminalPropsType {
-  orientation: ImageEntryOrientationEnumType;
+  orientation?: ImageEntryOrientationEnumType;
+  // onLoad: () => void | undefined;
 }
 export const TerminalImageEntry = React.memo(
-  (props: ITerminalPropsType): any => {
+  (props: ITerminalImageEntryPropsType): any => {
     // FUTURE:image link to internal curriculum page link. Need to
     // emit <a href> with path/link to destination.
     let imageInfo: IImageTerminalMeta = props.terminal
@@ -34,6 +35,7 @@ export const TerminalImageEntry = React.memo(
         active={props.active}
         class={imageInfo.className}
         imageInfo={imageInfo}
+        // onLoad={props.onLoad}
       />
     );
   }
@@ -42,6 +44,7 @@ interface ITerminalImagePropsType {
   class: string;
   active: boolean;
   imageInfo: IImageTerminalMeta;
+  // onLoad?: () => void;
 }
 export const TerminalImage = React.memo(
   (props: ITerminalImagePropsType): any => {
@@ -72,11 +75,11 @@ export const TerminalImage = React.memo(
       props.imageInfo.overlay.length > 0;
     let linkOverlaySpec: string;
 
-    console.log(
-      `imgSrc=${props.imageInfo.src}, linkIdx=${props.imageInfo.linkIdx} valid=${validLink} list.length=${pageList.linkList.length}`
-    );
-    console.log(`hasLinkOverlay=${hasLinkOverlay}`);
-    console.log(`hasImageOverlay=${hasImageOverlay}`);
+    // console.log(
+    //   `imgSrc=${props.imageInfo.src}, linkIdx=${props.imageInfo.linkIdx} valid=${validLink} list.length=${pageList.linkList.length}`
+    // );
+    // console.log(`hasLinkOverlay=${hasLinkOverlay}`);
+    // console.log(`hasImageOverlay=${hasImageOverlay}`);
     if (hasLinkOverlay) {
       linkOverlaySpec = `${distDir}/img/link_overlay_white.png`;
     } else {
@@ -100,6 +103,7 @@ export const TerminalImage = React.memo(
             onClick={() =>
               dispatch(Request.Page_gotoLink(props.imageInfo.linkIdx))
             }
+            // onLoad={props.onLoad}
           />
           <img src={linkOverlaySpec} className="image-link-overlay" />
         </div>
@@ -115,6 +119,7 @@ export const TerminalImage = React.memo(
             alt={props.imageInfo.label}
             width={width}
             height={height}
+            // onLoad={props.onLoad}
           />
           <img
             src={overlaySpec}
@@ -147,6 +152,7 @@ export const TerminalImage = React.memo(
             alt={props.imageInfo.label}
             width={width}
             max-height={height}
+            // onLoad={props.onLoad}
           />
         </div>
       );

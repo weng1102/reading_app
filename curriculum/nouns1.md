@@ -170,13 +170,13 @@ We drive in a [_car=(noun)_].
 Objective pronouns are used typically as indirect objects. Objective pronouns include: me, you, him, her, it, us, them.
 [[fillin: , true, 1, true,,, grid, 6, insert, true, true, true, true, true, false]]
 She loves [_him=(pronoun)_].
-I saw them at the store." (them is the pronoun object)
+I saw [_them=(pronoun)_] at the store.
 He gave [_her=(pronoun)_] a gift.
 We found [_it=(pronoun)_] under the table.
 They told [_us=(pronoun)_] the news.
 The teacher called [_him=(pronoun)_] to answer.
 Please pass [_me=(pronoun)_] the salt.
-She baked [_him=(peonoun)_] a cake for his birthday.
+She baked [_him=(pronoun)_] a cake for his birthday.
 They showed [_us=(pronoun)_] their new house.
 I sent [_her=(pronoun)_] an email yesterday.
 [[/fillin]]
