@@ -559,7 +559,7 @@ export const Content = React.memo((props: IContentPropsType): any => {
     scrollTimeoutIdRef.current = window.setTimeout(() => {
       // dispatch with Y position info
       // dispatch(Request.Page_scrollTop(scrollTop));
-      if (initialScrollTop === 0) {
+      if (initialScrollTop === -1) {
         dispatch(Request.Content_initialScrollTop(event.target.scrollTop));
         // console.log(`content: initial scrollTop = ${event.target.scrollTop}`);
         // setInitialScrollTopEncountered(true);

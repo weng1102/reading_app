@@ -24,6 +24,11 @@ import {
   SectionFillinLayoutType,
   SectionFillinSortOrder
 } from "./pageContentType";
+import {
+  RecitationScopeEnumType,
+  RecitationPlacementEnumType,
+  RecitationListeningEnumType
+} from "./pageContentType";
 export enum RecitationMode {
   wordOnly = "word only",
   wordNext = "word (then advance)",
@@ -34,6 +39,28 @@ export enum RecitationMode {
   section = "section, paragraph, etc.",
   sectionNext = "section, paragraph, etc. (then advance)"
 }
+export enum RecitationMode1 {
+  words = "word sequence",
+  sentence = "entire sentence",
+  section = "section, paragraph, etc.",
+  embedded = "embedded label or hint from inline button"
+}
+// export enum RecitationScopeEnumType {
+//   words = "word",
+//   sentence = "sentence",
+//   section = "section",
+//   label = "label",
+//   embedded = "embedded"
+// }
+// export enum RecitationPositionEnumType {
+//   unchanged = "unchanged", // (default) cursor unchanged
+//   end = "atEnd", // after prose in scope
+//   beginning = "atBeginning" // before prose in scope
+// }
+// export enum RecitationListeningEnumType {
+//   startListening = "startListening",
+//   notListening = "notListening"
+// }
 export enum NotificationMode {
   sound = "sound",
   voice = "voice"
@@ -74,7 +101,9 @@ export interface IConfigSettings {
   fillinPresets: ISectionFillinPresets;
 }
 export interface ISpeechSettings {
-  recitationMode: RecitationMode;
+  scope: RecitationScopeEnumType;
+  placement: RecitationPlacementEnumType;
+  listening: RecitationListeningEnumType;
   lang: string;
   locale: string;
   gender: string;
@@ -110,18 +139,22 @@ export function ConfigSettingsInitializer(
   };
 }
 export function SpeechSettingsInitializer(
-  recitationMode: RecitationMode = RecitationMode.wordOnly,
+  scope: RecitationScopeEnumType = RecitationScopeEnumType.sentence,
+  placement: RecitationPlacementEnumType = RecitationPlacementEnumType.unchanged,
+  listening: RecitationListeningEnumType = RecitationListeningEnumType.notListening,
   lang: string = "English",
   locale: string = "en-US",
   gender: string = "female",
   pitch: number = 0,
   rate: number = 1,
   volume: number = 0.5,
-  selectedVoiceIndex: number = Synthesizer.selectedVoiceIndex, // ms female voice
-  os: string = "windows"
+  selectedVoiceIndex: number = Synthesizer.selectedVoiceIndex // ms female voice
+  // os: string = "windows"
 ): ISpeechSettings {
   return {
-    recitationMode,
+    scope,
+    placement,
+    listening,
     lang,
     locale,
     gender,

@@ -11,13 +11,13 @@
 import React from "react";
 import { useEffect, useLayoutEffect, useState } from "react";
 import "./App.css";
-import { Request } from "./reducers";
+// import { Request, SCROLLTOP_INITIAL } from "./reducers";
 import {
   ImageEntryOrientationEnumType,
   ISectionContent,
   ISectionImageEntryVariant,
-  ITerminalContent,
-  IImageTerminalMeta
+  ITerminalContent
+  // IImageTerminalMeta
 } from "./pageContentType";
 import { useAppSelector, useAppDispatch, useDivRef } from "./hooks";
 import { TerminalImageEntry } from "./reactcomp_terminals_image";
@@ -40,14 +40,6 @@ export const SectionImageEntry = React.memo((props: ISectionPropsType): any => {
   // aware of orientation
   let imageEntry: ISectionImageEntryVariant = props.section
     .meta as ISectionImageEntryVariant;
-  const dispatch = useAppDispatch();
-  const [componentsToBeLoaded, setComponentsToBeLoaded] = useState(0);
-  // const sectionImagesLoadHandler = (): void => {
-  //   console.log(
-  //     `sectionImagesLoadHandler bubbling captured out of total=${imageEntry
-  //       .images.length + imageEntry.captions.length}`
-  //   );
-  // };
   let orientation: string = imageEntry.orientation.toString();
   const classPrefix: string = `imageentry-container`;
   let className: string = `${classPrefix}-${orientation}`;
@@ -64,13 +56,6 @@ export const SectionImageEntry = React.memo((props: ISectionPropsType): any => {
   } else {
     style = {};
   }
-  // setComponentsToBeLoaded(
-  //   imageEntry.images.length + imageEntry.captions.length
-  // );
-  // console.log(
-  //   `total subcomponents=${imageEntry.images.length +
-  //     imageEntry.captions.length}`
-  // );
   return (
     <>
       <div className={dividerClassName}></div>
@@ -93,14 +78,24 @@ export const SectionImageEntry = React.memo((props: ISectionPropsType): any => {
 export const SectionImageEntryImages = React.memo(
   (props: ISectionImageEntryImagesPropsType): any => {
     // Naming convention: "top" values are relative to the scrollable content
-    // area. The top values are derived from absolute page positions returned
-    // from DOM using getBoundingClientRect() less page_content_top to make it
-    // relative the scrollable  content window
+    // area. The top values are derived from initial content window positions
+    // relative to the top of the content window returned from DOM
+    // getBoundingClientRect()s less page_content_top.
+    //
+    // TL;DR These values are retrieved after the initial rendering and window
+    // resize events to ensure that valid dimensions are reflected. This delay
+    // allows the browser to finish loading elements that affect the resulting
+    // dimensions such as the image loading and captions rendering. The
+    // useLayoutEffect() doe not necessarily wait for images to be loaded. And
+    // when the images are already cached in the browser, the complex captions
+    // rendering seems cause inconsistently incorrect container height values
+    // in cases where the height of the captions defines the images container
+    //  height.
     //
     // Auto image scrolling is triggered by the scrollTop (actually
     // event.target.scrollTop) that originates from the reactcomp_page object
     // (via reducer) and is relative vertical offset (i.e., relative to the
-    // top of scrolled area.)
+    // top of scrolled area and does not include the page header above.)
     //
     // Although scrollTop is relative to the scrollable area as opposed to the
     // top of the page, the imagesContainerTop is an absolute y-axis position.
@@ -109,105 +104,116 @@ export const SectionImageEntryImages = React.memo(
     //
     // The imagesGrouping is a bounding div that contains the image(s) to be
     // scrolled. This allows the images within its corresponding container
-    // within an image section to be scrolled as a single block to scroll by
-    // specifying an imagesGroupingTop offset.
-    // For instance, imagesGroupTop=0 is at the top of the imagesContainer.
-    // So the imagesGroupTop should be more aptly named
-    // imagesGroupOffsetIntoItsImageContainer.
+    // within an image section to be scrolled as a single block scrolled by
+    // specifying an imagesGroupingTop offset relative to the top of the
+    // container. For instance, imagesGroupTopOffset=0 is at the top of the
+    // imagesContainer. Although the DOM images grouping top is retrieved as
+    // absolute location via getBoundingClientRect(), the top style location
+    // attribute used to specify the rendered HTML element's grouping top is
+    // relative to its container, and hence an offset.
     //
     // The heights (for container and grouping divs) are just lengths with no
-    // origins/coordinates.
+    // origins/coordinates. Valid top values are always non-negative and
+    // based on the top of content window as origin (zero value).
     //
     // Since each image section auto scroll is triggered by the scrollTop. The
     // initial retrieval of these dimensions must occur after the browser
-    // complets loading the entire page because the DOM dimensions may not
+    // completes loading the entire page because the DOM dimensions may not
     // reflect the images final dimension NOR the captions dimensions. So the
-    // safesst approach is to retrieve these measurements after the page is
-    // completely loaded and delayed until the the initial scroll request When
-    // the dimensions are potentially required. Since these dimensions change
-    //upon content window resize event, the logic for both situations
-    // have been combined.
+    // most conservative approach is to retrieve these measurements after the
+    //  page is completely loaded and delayed until the the initial scroll
+    // request when the dimensions are potentially required. Since these
+    // dimensions change upon content window resize event, the logic for both
+    // situations have been combined.
 
     // const [imagesLoadedCount, setImagesLoadedCount] = useState(0);
     // const [isImagesLoaded, setIsImagesLoaded] = useState(false);
     const [resize, setResize] = useState(false);
-    // const [imagesContainerDivLoaded, setImagesContainerDivLoaded] = useState(
-    //   false
-    // );
-    // const [scrollLayoutCompleted, setScrollLayoutCompleted] = useState(false);
-    // const [totalImagesToBeLoaded, setTotalImagesToBeLoaded] = useState(0);
-
     const [imagesContainerTop, setImagesContainerTop] = useState(0);
-    const [imagesGroupingTop, setImagesGroupingTop] = useState(0);
+    const [imagesGroupingTopOffset, setImagesGroupingTopOffset] = useState(0);
     // const [imagesGroupingOffset, setImagesGroupingOffset] = useState(0);
     const [imagesContainerHeight, setImagesContainerHeight] = useState(0);
     const [imagesGroupingHeight, setImagesGroupingHeight] = useState(0);
-    // const [initialScrollTop, setInitialScrollTop] = useState(0);
-    // const [
-    //   imagesContainerDivRect,
-    //   setImagesContainerDivRect
-    // ] = useState<null | DOMRect>(null);
-    // const [
-    //   imagesContainerDivRect,
-    //   setImagesContainerDivRect
-    // ] = useState<null | DOMRect>(null);
-    // const [
-    //   imagesGroupingDivRect,
-    //   setImagesGroupingDivRect
-    // ] = useState<null | DOMRect>(null);
-    // const contentDivRef = useDivRef();
     const imagesContainerDivRef = useDivRef();
     const imagesGroupingDivRef = useDivRef();
-    // const contentY: number = useAppSelector(store => store.page_content_y);
-    const initialContentTop: number = useAppSelector(
-      store => store.page_content_top
-    );
-    // const pageTop: number = useAppSelector(store => store.page_content_top);
+    const contentTop: number = useAppSelector(store => store.page_content_top);
     const scrollTop: number = useAppSelector(store => store.content_scroll_top);
     const initialScrollTop: number = useAppSelector(
       store => store.content_scroll_top_initial
     );
 
     useEffect(() => {
+      const mutationHandler: MutationCallback = () => {
+        // If images container top (from height changes sections above) or
+        // heightits own height changes (from caption height change)
+        if (imagesContainerDivRef.current) {
+          let rect = imagesContainerDivRef.current.getBoundingClientRect();
+          let currentTop = Math.round(
+            imagesContainerDivRef.current.getBoundingClientRect().top -
+              contentTop +
+              scrollTop
+          );
+          if (
+            rect.height !== imagesContainerHeight ||
+            currentTop !== imagesContainerTop
+          ) {
+            // Container height changed based on change to captions
+            // since this only triggers with subtree option implies that it
+            // is observing the change in groupingTop as opposed to the
+            // change of container top that triggers less often vs. every
+            // scroll event.
+
+            // console.log(
+            //   `mutation handler triggered on top or height change\n${rect.height}(rect.height) !== ${imagesContainerHeight}(imagesContainerHeight) || \ntop=${currentTop}(currentTop) !== ${imagesContainerTop}(imagesContainerTop)\ncurrentTop=${rect.top}(rect.top) - ${contentTop}(contentTop) + ${scrollTop}(scrollTop)`
+            // );
+            // \ntop diff=${imagesContainerTop -
+            //   imagesContainerDivRef.current.getBoundingClientRect()
+            //     .top},\n scrollTop - diff=${scrollTop -
+            //   (imagesContainerTop -
+            //     imagesContainerDivRef.current.getBoundingClientRect().top)}`
+            // );
+            // Only need to resize subsequent sections below but that requires
+            // more logic to convey resize to siblings. Probably need to
+            // employ reducer state variable that signals resize based on
+            // a sequence number id that mapped to each image section so that
+            // all image sections after this one (e.g. 3) can be resize
+            // themselves.
+            setResize(true);
+          }
+        } else {
+          console.log(`invalid imagesContainerDivRef.current`);
+        }
+      };
+      const observer = new MutationObserver(mutationHandler);
+      // console.log(`observer.observe setting up`);
+      if (imagesContainerDivRef.current) {
+        // console.log(`observer.observe set up`);
+        observer.observe(imagesContainerDivRef.current, {
+          attributes: true,
+          subtree: true,
+          attributeFilter: ["style"]
+        });
+      }
+      return () => observer.disconnect();
+    }, [imagesContainerTop, imagesContainerHeight, scrollTop, contentTop]);
+    useEffect(() => {
       const resizeHandler = () => {
-        // console.log(`resize triggered`);
+        // console.log(` resize handler triggered`);
         setResize(true);
       };
-      const ImagesEntryLoadedHandler = () => {
-        // console.log(`images entry loaded triggered`);
-      };
+      // initial but probably triggering before layout complete
+      resizeHandler();
       window.addEventListener("resize", resizeHandler);
-      // window.addEventListener("load", ImagesEntryLoadedHandler);
-      // console.log(`initial resize=true`);
-      // setResize(true); // initial resize
-      // Cleanup the event listener on component unmount
       return () => {
         setResize(false);
         window.removeEventListener("resize", resizeHandler);
       };
     }, []);
-    // useEffect(() => {
-    //   const pageLoadedHandler = () => {
-    //     console.log(`Page load handler state=${document.readyState}`);
-    //     if (document.readyState === "complete") {
-    //       // good luck!
-    //       console.log("Page load complete");
-    //       setResize(true); // initial resize
-    //     }
-    //   };
-    //   document.addEventListener("DOMContentLoaded", pageLoadedHandler);
-    //   return () => {
-    //     setResize(false);
-    //     window.removeEventListener("DOMContentLoaded", pageLoadedHandler);
-    //   };
-    // }, []);
-    // useEffect(() => {
-    //   console.log(
-    //     `initial contentTop=${initialContentTop}, initialScrollTop=${scrollTop}`
-    //   );
-    // }, [initialContentTop]);
-    useEffect(() => {
-      // console.log(`initialScrollTop=${initialScrollTop}`);
+
+    useLayoutEffect(() => {
+      // console.log(
+      //   `initial initialScrollTop=${initialScrollTop},scrollTop=${scrollTop}`
+      // );
       if (initialScrollTop === scrollTop) {
         // console.log(`initial resize=true`);
         setResize(true);
@@ -216,327 +222,145 @@ export const SectionImageEntryImages = React.memo(
         setResize(false);
       }
     }, [initialScrollTop, scrollTop]);
-    // useEffect(() => {
-    //   if (initialScrollTop !== scrollTop) {
-    //   }
-    // }, [initialScrollTop, scrollTop]);
-    // useEffect(() => {
-    //   console.log(`scrollTop=${scrollTop}, initial=${initialScrollTop}`);
-    // }, [scrollTop]);
-    // useEffect(() => {
-    //   if (initialScrollTop >= 0 && scrollTop !== initialScrollTop) {
-    //     setResize(true);
-    //     setInitialScrollTop(-1); // disable additional checking
-    //   }
-    // }, [scrollTop]);
     useEffect(() => {
       // console.log(`$$$$ inside resize=${resize}`);
-      if (imagesContainerDivRef.current) {
-        const rect = imagesContainerDivRef.current.getBoundingClientRect();
-        setImagesContainerHeight(rect.height);
-        setImagesContainerTop(rect.top - initialContentTop);
-        // console.log(
-        //   `ECHO: imagesContainerHeight=${Math.trunc(
-        //     imagesContainerHeight
-        //   )} at height=${Math.trunc(imagesContainerTop)}`
-        // );
+      if (!resize) {
       } else {
-        console.log(`invalid imagesContainerDivRef.current`);
-      }
-      if (imagesGroupingDivRef.current) {
-        const rect = imagesGroupingDivRef.current.getBoundingClientRect();
-        setImagesGroupingHeight(rect.height);
-        setImagesGroupingTop(0);
+        if (imagesContainerDivRef.current) {
+          const rect = imagesContainerDivRef.current.getBoundingClientRect();
+          // const parent = imagesContainerDivRef.current.parentElement;
+          // const parentTop: number = parent!.offsetTop;
+          // const grandparent = parent!.parentElement;
+          // const grandparentTop: number = grandparent!.offsetTop;
+          setImagesContainerHeight(rect.height);
+          let top = Math.round(rect.top - contentTop + scrollTop);
+          setImagesContainerTop(top);
+          // console.log(
+          //   `### resize setImagesContainerTop: ${Math.round(top)} \noffsetTop=${
+          //     imagesContainerDivRef.current.offsetTop
+          //   }, parentOffsetTop=${parentTop}, grandparentOffsetTop=${grandparentTop}, grandparentOffsetHeight=${
+          //     grandparent!.offsetHeight
+          //   }\n = ${Math.round(rect.top)} (rect.top) - ${Math.round(
+          //     contentTop
+          //   )} (contentTop) + ${Math.round(
+          //     scrollTop
+          //   )} (scrollTop), initialScrollTop=${Math.trunc(initialScrollTop)}`
+          // );
+          // offsetParent.offsetTop=${imagesContainerDivRef.current.offsetParent.offsetTop};
+        } else {
+          console.log(`RESIZE: invalid imagesContainerDivRef.current`);
+        }
+        if (imagesGroupingDivRef.current) {
+          const rect = imagesGroupingDivRef.current.getBoundingClientRect();
+          setImagesGroupingHeight(rect.height);
+          setImagesGroupingTopOffset(0);
+        } else {
+          console.log(`RESIZE: invalid imagesGroupingDivRef.current`);
+        }
         // console.log(
-        //   `ECHO: imagesGroupingHeight=${Math.trunc(
+        //   `RESIZE: scrollTop=${Math.trunc(scrollTop)}, top=${Math.trunc(
+        //     imagesContainerTop
+        //   )} with imagesContainerHeight=${Math.trunc(
         //     imagesContainerHeight
-        //   )} at height=${Math.trunc(imagesContainerTop)}`
+        //   )}, contenttop=${Math.trunc(contentTop)}, offset=${Math.trunc(
+        //     imagesGroupingTopOffset
+        //   )} with imagesGroupingHeight=${Math.trunc(imagesGroupingHeight)}`
         // );
-      } else {
-        console.log(`invalid imagesGroupingDivRef.current`);
+        setResize(false);
       }
-      setResize(false);
     }, [resize]);
-
-    // useEffect(() => {
-    //   if (imagesContainerDivRef.current)
-    //     setImagesContainerDivRect(
-    //       imagesContainerDivRef.current.getBoundingClientRect()
-    //     );
-    //   if (imagesGroupingDivRef.current)
-    //     setImagesGroupingDivRect(
-    //       imagesGroupingDivRef.current.getBoundingClientRect()
-    //     );
-    // }, []); // run once on mount
-    // useEffect(() => {
-    //   if (imagesContainerDivRef.current) {
-    //     setImagesContainerDivRect(
-    //       imagesContainerDivRef.current.getBoundingClientRect()
-    //     );
-    //   } else {
-    //     // throw exception!!!
-    //     console.log(`imagesContainerDivRef.current not available`);
-    //   }
-    //   if (imagesGroupingDivRef.current) {
-    //     setImagesContainerDivRect(
-    //       imagesGroupingDivRef.current.getBoundingClientRect()
-    //     );
-    //   } else {
-    //     console.log(`imagesGroupingDivRef.current not available`);
-    //     //throw exception
-    //   }
-    // }, [imagesContainerDivRef.current, imagesGroupingDivRef.current]);
-    // useEffect(() => {
-    //   console.log(`inside contentLayoutCompleted=${contentLayoutCompleted}`);
-    //   console.log(
-    //     `inside contentLayoutCompleted`
-    //     // imagesContainerDivLoaded=${imagesContainerDivLoaded}`
-    //   );
-    //   if (imagesContainerDivRef.current) {
-    //     const rect = imagesContainerDivRef.current.getBoundingClientRect();
-    //     setImagesContainerHeight(rect.height);
-    //     setImagesContainerTop(rect.top);
-    //   } else {
-    //     console.log(`invalid imagesContainerDivRef.current2`);
-    //   }
-    //   if (imagesGroupingDivRef.current) {
-    //     const rect = imagesGroupingDivRef.current.getBoundingClientRect();
-    //     setImagesGroupingHeight(rect.height);
-    //     setImagesGroupingTop(rect.top);
-    //   } else {
-    //     console.log(`invalid imagesGroupingDivRef.current2`);
-    //   }
-    // }, [contentLayoutCompleted]);
-    // useEffect(() => {
-    //   if (contentLayoutCompleted) {
-    //     console.log(
-    //       `inside contentLayoutCompleted`
-    //       // imagesContainerDivLoaded=${imagesContainerDivLoaded}`
-    //     );
-    //     if (imagesContainerDivRef.current) {
-    //       const rect = imagesContainerDivRef.current.getBoundingClientRect();
-    //       setImagesContainerHeight(rect.height);
-    //       setImagesContainerTop(rect.top);
-    //     } else {
-    //       console.log(`invalid imagesContainerDivRef.current2`);
-    //     }
-    //     if (imagesGroupingDivRef.current) {
-    //       const rect = imagesGroupingDivRef.current.getBoundingClientRect();
-    //       setImagesGroupingHeight(rect.height);
-    //       setImagesGroupingTop(rect.top);
-    //     } else {
-    //       console.log(`invalid imagesGroupingDivRef.current2`);
-    //     }
-    //     // if (imagesContainerDivRef.current) {
-    //     //   const rect = imagesContainerDivRef.current.getBoundingClientRect();
-    //     //   console.log(
-    //     //     `! contentLayoutCompleted: container height=${Math.trunc(
-    //     //       rect.height
-    //     //     )}, top=${Math.trunc(rect.top)}`
-    //     //   );
-    //     //   if (rect.top < 0)
-    //     //     console.log(
-    //     //       `! contentLayoutCompleted: negative top encountered!!!!!!!!!!!!!!!!`
-    //     //     );
-    //     // }
-    //   }
-    // }, [contentLayoutCompleted]);
-    // useEffect(
-    //   () => {
-    //     console.log(`inside isImagesLoaded`);
-    //     // if (isImagesLoaded) {
-    //     // Presumably, all DOM elements and their respective boundingClientRect
-    //     // values are finalized
-    //     // if (imagesContainerDivLoaded) {
-    //     //   window.scrollTo({ top: 0 });
-    //     if (imagesContainerDivRef.current) {
-    //       const rect = imagesContainerDivRef.current.getBoundingClientRect();
-    //       setImagesContainerHeight(rect.height);
-    //       setImagesContainerTop(rect.top - initialContentTop);
-    //       console.log(
-    //         `ECHO: imagesContainerHeight=${Math.trunc(
-    //           imagesContainerHeight
-    //         )} at height=${Math.trunc(imagesContainerTop)}`
-    //       );
-    //     } else {
-    //       console.log(`invalid imagesContainerDivRef.current1`);
-    //       // console.log(
-    //       //   `! imagesContainerDivLoaded: container height=${Math.trunc(
-    //       //     rect.height
-    //       //   )}, top=${Math.trunc(rect.top)}`
-    //       // );
-    //       // if (rect.top < 0)
-    //       //   console.log(
-    //       //     `! imagesContainerDivLoaded: negative top encountered!!!!!!!!!!!!!!!!`
-    //       //   );
-    //     }
-    //     if (imagesGroupingDivRef.current) {
-    //       const rect = imagesGroupingDivRef.current.getBoundingClientRect();
-    //       setImagesGroupingHeight(rect.height);
-    //       setImagesGroupingTop(0);
-    //       console.log(
-    //         `ECHO: imagesGroupingHeight=${Math.trunc(
-    //           imagesContainerHeight
-    //         )} at height=${Math.trunc(imagesContainerTop)}`
-    //       );
-    //     } else {
-    //       console.log(`invalid imagesGroupingDivRef.current1`);
-    //       // console.log(
-    //       //   `! imagesContainerDivLoaded: grouping height=${Math.trunc(
-    //       //     rect.height
-    //       //   )}, top=${Math.trunc(rect.top)}`
-    //       // );
-    //     }
-    //     // if (imagesContainerDivRef.current)
-    //     //   setImagesContainerDivRect(
-    //     //     imagesContainerDivRef.current.getBoundingClientRect()
-    //     //   );
-    //     // if (imagesGroupingDivRef.current)
-    //     //   setImagesGroupingDivRect(
-    //     //     imagesGroupingDivRef.current.getBoundingClientRect()
-    //     //   );
-    //     // window.scrollTo({ top: 0 });
-    //     // console.log(`all images loaded, scroll to top`);
-    //     //
-    //     // console.log(`$$$$$ initialContentTop=${initialContentTop}`);
-    //     // getBoundingClientRect
-    //     // const rect = imagesContainerDivRef.current.getBoundingClientRect()
-    //     // if (imagesContainerDivRef.current) {
-    //     //   const rect = imagesContainerDivRef.current.getBoundingClientRect();
-    //     //   setImagesContainerHeight(rect.height);
-    //     //   console.log(
-    //     //     `$$$$$ inside container useEffect: imagesContainerHeight(rect)=${Math.trunc(
-    //     //       rect.height
-    //     //     )}`
-    //     //   );
-    //     //   console.log(
-    //     //     `$$$$$ inside container useEffect: initialContentTop(rect)=${Math.trunc(
-    //     //       initialContentTop
-    //     //     )}`
-    //     //   );
-    //     //   setImagesContainerTop(rect.top - initialContentTop);
-    //     //   console.log(
-    //     //     `$$$$$ inside container useEffect: imagesContainerTop(rect)=${Math.trunc(
-    //     //       rect.top
-    //     //     )}, imagesContainerHeight=${Math.trunc(imagesContainerHeight)}`
-    //     //   );
-    //     // } else {
-    //     //   console.log(
-    //     //     `$$$$$ SectionImageEntryImages:inside container invalid divRect`
-    //     //   );
-    //     // }
-    //     // }
-    //     //   if (imagesGroupingDivRef.current) {
-    //     //     const rect = imagesGroupingDivRef.current.getBoundingClientRect();
-    //     //     // console.log(`height2=${rect.height}`);
-    //     //     setImagesGroupingHeight(rect.height);
-    //     //     setImagesGroupingTop(0); //
-    //     //     console.log(
-    //     //       `$$$$$ inside grouping useEffect: imagesGroupingTop=${Math.trunc(
-    //     //         imagesGroupingTop
-    //     //       )}, imagesGroupingHeight=${Math.trunc(imagesGroupingHeight)}`
-    //     //     );
-    //     //     // }
-    //     //   } else {
-    //     //     console.log(`$$$$$ inside grouping invalid divRect`);
-    //     //   }
-    //     //   setScrollLayoutCompleted(true);
-    //     // } else {
-    //     //   console.log(`$$$$$ contentLayoutCompleted=false`);
-    //     // }
-    //     // }
-    //   },
-    //   [
-    //     // isImagesLoaded
-    //     // contentLayoutCompleted,
-    //     // initialContentTop
-    //     // imagesContainerHeight
-    //     // // imagesGroupingHeight
-    //   ]
-    // );
-    // useEffect(() => {
-    //   if (imagesContainerHeight > 0) {
-    //     console.log(
-    //       `ECHO:imagesContainerTop=${Math.trunc(
-    //         imagesContainerTop
-    //       )} with height=${Math.trunc(imagesContainerHeight)}`
-    //     );
-    //   }
-    // }, [imagesContainerHeight, imagesContainerTop]);
-    // useEffect(() => {
-    //   if (imagesGroupingHeight > 0) {
-    //     console.log(
-    //       `ECHO: imagesGroupingTop=${Math.trunc(
-    //         imagesGroupingTop
-    //       )} with height=${Math.trunc(imagesGroupingHeight)}`
-    //     );
-    //   }
-    // }, [imagesGroupingTop, imagesGroupingHeight]);
     useEffect(() => {
-      // if (scrollTop !== initialScrollTop) {
-      //   setResize(true); // force recalculation
-      //   console.log(
-      //     `SCROLL: scrollTop changed from ${initialScrollTop} to ${scrollTop}`
-      //   );
-      // }
+      // Because the scrollTop value will always to an absolute value from 0 at
+      // the top of the scrollable content window to the number of pixels
+      // necessary to reach the bottom of the window.
+      //
+      // That said, the scrollOffset represents the scroll offset relative to
+      // each images container top. Thus. scrollOffset=0 indicates that the
+      // images container is at the top of the window.
       let scrollOffset = scrollTop - imagesContainerTop;
-      let scrollBottomThreshold = imagesContainerHeight - imagesGroupingHeight;
+      let bottomScrollOffset = imagesContainerHeight - imagesGroupingHeight;
       // console.log(
-      //   `SCROLL 0 scrollOffset (${Math.trunc(scrollOffset)}) = ${Math.trunc(
+      //   `${Math.trunc(scrollOffset)} (scrollOffset) = ${Math.trunc(
       //     scrollTop
-      //   )} (scrollTop) - ${Math.trunc(
-      //     imagesContainerTop
-      //   )} (imagesContainerTop)\nSCROLL scrollBottomThreshold=${Math.trunc(
+      //   )} (scrollTop) - ${Math.trunc(imagesContainerTop)} (imagesContainerTop)`
+      // );
+      // console.log(
+      //   `SCROLL bottomScrollOffset=${Math.trunc(
       //     imagesContainerHeight
       //   )} (imagesContainerHeight) - ${Math.trunc(
       //     imagesGroupingHeight
       //   )} (imagesGroupingHeight)`
       // );
-
+      //
       if (scrollOffset >= 0 && scrollOffset <= imagesContainerHeight) {
+        // Within the range for possible autoscrolling
         // console.log(
         //   `SCROLL 1 scrollOffset(${Math.trunc(
         //     scrollOffset
         //   )}) > 0 && < imagesContainerHeight (${Math.trunc(
         //     imagesContainerHeight
-        //   )})\nscrollBottomThreshold=${Math.trunc(
-        //     scrollBottomThreshold
-        //   )})\nimagesGroupingTop=${Math.trunc(imagesGroupingTop)}`
+        //   )})\nbottomScrollOffset=${Math.trunc(
+        //     bottomScrollOffset
+        //   )})\nimagesGroupingTopOffset=${Math.trunc(imagesGroupingTopOffset)}`
         // );
-
         // When the scrollTop changes, all (of the SectionImageEntryImages)
         // components with a scrollTop dependency will be invoked. But active
         // scrolling is limited by the specified conditions.
         // the range scrolling, the code
-        if (scrollBottomThreshold === 0) {
+        if (bottomScrollOffset === 0) {
+          // No autoscrolling is required because the container and grouping
+          // coincide.
+          // } else if (scrollOffset < bottomScrollOffset && scrollOffsetimagesContainerTop
+          // ) {
+          //   setImagesGroupingTopOffset(scrollOffset);
           // console.log(
-          //   `SCROLL 2 scrollBottomThreshold(${Math.trunc(
-          //     scrollBottomThreshold
-          //   )})`
+          //   `SCROLL 2 bottomScrollOffset(${Math.trunc(bottomScrollOffset)})`
           // );
-          // already at the bottom
-        } else if (scrollOffset < scrollBottomThreshold) {
+        } else if (scrollOffset < bottomScrollOffset) {
+          // It is implied that scrollOffset > 0 here
+          // Within the autoscrollable range betweeen the top of the container
+          // and not passed the threshold where the grouping bottom reaches the  container bottom (bottomScrollOffset):
           // console.log(
           //   `SCROLL 3 scrollOffset(${Math.trunc(
           //     scrollOffset
-          //   )})  < scrollBottomThreshold (${Math.trunc(scrollBottomThreshold)})`
+          //   )})  < bottomScrollOffset (${Math.trunc(
+          //     bottomScrollOffset
+          //   )}) && scrollOffset > imagesContainerTop(${Math.trunc(
+          //     imagesContainerTop
+          //   )})`
           // );
-          setImagesGroupingTop(scrollOffset);
-        } else if (scrollOffset > scrollBottomThreshold) {
+          setImagesGroupingTopOffset(scrollOffset);
+        } else if (scrollOffset >= bottomScrollOffset) {
+          // Within the range where the image grouping bottom would be passed
+          // the thresold where the grouping container bottom exceeds the
+          // container bottom (bottomScrollOffset): No further scrolling
+          // requred.
           // console.log(
           //   `SCROLL 4 scrollOffset(${Math.trunc(
           //     scrollOffset
-          //   )})  > scrollBottomThreshold (${Math.trunc(scrollBottomThreshold)})`
+          //   )})  > bottomScrollOffset (${Math.trunc(bottomScrollOffset)})`
           // );
-          setImagesGroupingTop(scrollBottomThreshold);
+          setImagesGroupingTopOffset(bottomScrollOffset);
         } else {
+          // Within the autoscrollable range of imageContainer
+          // console.log(
+          //   `SCROLL 5 scrollOffset=${Math.trunc(
+          //     scrollOffset
+          //   )}, imagesContainerHeight=${Math.trunc(
+          //     imagesContainerHeight
+          //   )}, bottomScrollOffset=${Math.trunc(
+          //     bottomScrollOffset
+          //   )}, imagesGroupingTopOffset=${Math.trunc(imagesGroupingTopOffset)}`
+          // );
         }
-      } else if (scrollOffset < 0 && imagesGroupingTop !== 0) {
-        setImagesGroupingTop(0);
+      } else if (scrollOffset < 0 && imagesGroupingTopOffset !== 0) {
+        setImagesGroupingTopOffset(0);
         // console.log(
         //   `SCROLL 5 scrollOffset(${Math.trunc(
         //     scrollOffset
-        //   )}  < 0  (imagesGroupingTop=${Math.trunc(imagesGroupingTop)} !== 0)`
+        //   )}  < 0  (imagesGroupingTopOffset=${Math.trunc(
+        //     imagesGroupingTopOffset
+        //   )} !== 0)`
         // );
         // if (scrollTop < window.innerHeight)
         // however, if the section image is viewable: scrollTop > image
@@ -551,118 +375,13 @@ export const SectionImageEntryImages = React.memo(
       imagesContainerTop,
       imagesContainerHeight,
       imagesGroupingHeight,
-      imagesGroupingTop
+      imagesGroupingTopOffset
     ]);
     let images: ITerminalContent[] = props.images;
     let style: React.CSSProperties | any;
     // setTotalImagesToBeLoaded(props.images.length);
 
     const groupingClassName: string = `${props.className}-grouping`;
-    // const loadContainerHandler = () => {
-    //   console.log(`loadContainerHandler: container loaded`);
-    //
-    //   // if (isImagesLoaded) {
-    //   //   console.log(`!!!! loadContainerHandler: all images loaded`);
-    //   //   setImagesContainerDivLoaded(true);
-    //   // }
-    //   // if (imagesContainerDivRef.current) {
-    //   //   const rect = imagesContainerDivRef.current.getBoundingClientRect();
-    //   //   console.log(
-    //   //     `!!!! loadContainerHandler height=${Math.trunc(
-    //   //       rect.height
-    //   //     )},top=${Math.trunc(rect.top)}`
-    //   //   );
-    //   //  top=${Math.trunc(rect.top)}, window.screentop=${
-    //   //   window.screenTop
-    //   // }, window.scrollY=${Math.trunc(window.scrollY)}`
-    //   // );
-    //   // let height = ;
-    //   // console.log(`height1=${Math.trunc(height)}`);
-    //   // setImagesContainerHeight(rect.height);
-    //   // setImagesContainerTop(rect.top - initialContentTop);
-    //   // setImagesContainerHeight(rect.height);
-    //   // console.log(`initialContentTop=${initialContentTop}`);
-    //   // setImagesContainerTop(rect.top - initialContentTop);
-    //   // console.log(`# loadContainerHandler top=${imagesContainerTop}`);
-    //   // console.log(`# loadContainerHandler height=${imagesContainerHeight}`);
-    //   // }
-    // };
-    // const loadGroupingHandler = () => {
-    //   // if (imagesGroupingDivRef.current) {
-    //   //   const rect = imagesGroupingDivRef.current.getBoundingClientRect();
-    //   //   setImagesGroupingDivRect(rect);
-    //   // console.log(`# loadGroupingHandler height=${rect.height}`);
-    //   // if (imagesGroupingDivRef.current) {
-    //   //   const rect = imagesGroupingDivRef.current.getBoundingClientRect();
-    //   //   setImagesGroupingHeight(rect.height);
-    //   //   setImagesGroupingTop(0); //
-    //   //   console.log(
-    //   //     `!!!! loadGroupingHandler height=${Math.trunc(rect.height)}`
-    //   //   );
-    //   // }
-    //   // // console.log(`# loadGroupingHandler height=${imagesGroupingTop}`);
-    //   // // console.log(`# loadGroupingHandler height=${imagesGroupingHeight}`);
-    //   // }
-    // };
-    // const loadImageCounter = () => {
-    //   console.log(`loadImageCounter image loaded`);
-    //   // if (images.length > 0) {
-    //   //   setImagesLoadedCount(imagesLoaded => imagesLoaded + 1);
-    //   //   // setImagesAllLoaded(imagesLoaded === images.length);
-    //   //   console.log(
-    //   //     `loadImageCounter imagesLoaded=${imagesLoadedCount}/${images.length -
-    //   //       1}`
-    //   //   );
-    //   //   if (imagesLoadedCount === images.length - 1) {
-    //   //     setIsImagesLoaded(true);
-    //   //     // setImagesContainerDivLoaded(true);
-    //   //     console.log(`loadImageCounter all images loaded`);
-    //   //   }
-    //   // } else {
-    //   //   console.log(`loadImageCounter: No images to load`);
-    //   // }
-    //
-    //   // if (imagesGroupingDivRef.current) {
-    //   //   const rect = imagesGroupingDivRef.current.getBoundingClientRect();
-    //   //   console.log(
-    //   //     `#### inside imageLoader: imagesGroupingHeight(rect)=${Math.trunc(
-    //   //       rect.height
-    //   //     )}`
-    //   //   );
-    //   //   // console.log(
-    //   //   //   `#### inside imageLoader: initialContentTop(rect)=${Math.trunc(
-    //   //   //     initialContentTop
-    //   //   //   )}`
-    //   //   // );
-    //   // }
-    //   // if (imagesContainerDivRef.current) {
-    //   //   const rect = imagesContainerDivRef.current.getBoundingClientRect();
-    //   //   // setImagesContainerHeight(rect.height);
-    //   //   console.log(
-    //   //     `#### inside imageLoader: imagesContainerHeight(rect)=${Math.trunc(
-    //   //       rect.height
-    //   //     )}`
-    //   //   );
-    //   //   // console.log(
-    //   //   //   `#### inside imageLoader: initialContentTop(rect)=${Math.trunc(
-    //   //   //     initialContentTop
-    //   //   //   )}`
-    //   //   // );
-    //   //   // // setImagesContainerTop(rect.top - initialContentTop);
-    //   //   // console.log(
-    //   //   //   `#### inside imageLoader: imagesContainerTop(rect)=${Math.trunc(
-    //   //   //     rect.top
-    //   //   //   )}, imagesContainerHeight=${Math.trunc(imagesContainerHeight)}`
-    //   //   // );
-    //   // } else {
-    //   //   console.log(`#### inside imageLoader: invalid divRect`);
-    //   // }
-    //   // }
-    // };
-    // // let topOfImagesGroup: number = imagesGroupingTop;
-
-    const len: number = images.length;
-    // setImagesLoaded(0);
     return (
       <>
         <div
@@ -672,7 +391,7 @@ export const SectionImageEntryImages = React.memo(
         >
           <div
             className={groupingClassName}
-            style={{ top: `${imagesGroupingTop}px` }}
+            style={{ top: `${imagesGroupingTopOffset}px` }}
             ref={imagesGroupingDivRef}
             // onLoad={loadGroupingHandler}
           >
@@ -694,15 +413,6 @@ export const SectionImageEntryImages = React.memo(
 );
 export const SectionImageEntryCaptions = React.memo(
   (props: ISectionImageEntryCaptionsPropsType): any => {
-    // const captionLoadedHandler = (): void => {
-    //   console.log(`captionLoadedHandler: caption loaded`);
-    // };
-    // useEffect(() => {
-    //   console.log(` captions rendered`);
-    // }, []);
-    // const loadsignal = () => {
-    //   console.log(` captions loaded2`);
-    // };
     return (
       <>
         <div className={props.className}>

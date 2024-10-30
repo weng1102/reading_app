@@ -27,6 +27,7 @@ import {
   // RecitationListeningEnumType
 } from "./pageContentType";
 export const IDX_INITIALIZER = -9999;
+export const SCROLLTOP_INITIAL = -1;
 // import {
 //   ISettings,
 //   ISettingsContext,
@@ -835,7 +836,7 @@ const IReduxStateInitialState: IReduxState = {
   page_loaded: false,
   page_content_top: 0,
   content_scroll_top: 0,
-  content_scroll_top_initial: 0,
+  content_scroll_top_initial: SCROLLTOP_INITIAL,
   page_section: 0,
   page_pop_requested: false,
   page_restore_requested: false,
@@ -1069,7 +1070,7 @@ export const rootReducer = (
       state.page_requested = { ...state.page_requested, page: "" };
       state.page_pop_requested = false;
       state.page_home_requested = false;
-      state.content_scroll_top_initial = 0;
+      state.content_scroll_top_initial = -1;
       return state;
     case PAGE_TOP:
       setTerminalState([state.pageContext.firstTerminalIdx]);

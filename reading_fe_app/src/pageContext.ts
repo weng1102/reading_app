@@ -18,7 +18,8 @@ import {
   ISentenceListItem,
   ISectionListItem,
   ITerminalListItem,
-  ISectionFillinItem
+  ISectionFillinItem,
+  IInlineButtonItem
 } from "./pageContentType";
 
 // export interface IPageContext1 {
@@ -38,6 +39,7 @@ export interface IPageLists {
   sentenceList: ISentenceListItem[];
   linkList: ILinkListItem[];
   fillinList: ISectionFillinItem[];
+  inlineButtonList: IInlineButtonItem[];
 }
 export function PageListsInitializer(
   terminalList: ITerminalListItem[] = [],
@@ -45,7 +47,8 @@ export function PageListsInitializer(
   sectionList: ISectionListItem[] = [],
   sentenceList: ISentenceListItem[] = [],
   linkList: ILinkListItem[] = [],
-  fillinList: ISectionFillinItem[] = []
+  fillinList: ISectionFillinItem[] = [],
+  inlineButtonList: IInlineButtonItem[] = []
 ): IPageLists {
   return {
     terminalList: terminalList,
@@ -53,7 +56,8 @@ export function PageListsInitializer(
     sectionList: sectionList,
     sentenceList: sentenceList,
     linkList: linkList,
-    fillinList: fillinList
+    fillinList: fillinList,
+    inlineButtonList: inlineButtonList
   };
 }
 // export const PageContext = React.createContext(null as IPageContext | null);
@@ -81,7 +85,8 @@ export class CPageLists {
     sectionList: ISectionListItem[] = [],
     sentenceList: ISentenceListItem[] = [],
     linkList: ILinkListItem[] = [],
-    fillinList: ISectionFillinItem[] = []
+    fillinList: ISectionFillinItem[] = [],
+    inlineButtonList: IInlineButtonItem[] = []
   ) {
     this.showTags = showTags;
     this.terminalList = terminalList;
@@ -90,6 +95,7 @@ export class CPageLists {
     this.sentenceList = sentenceList;
     this.linkList = linkList;
     this.fillinList = fillinList;
+    this.inlineButtonList = inlineButtonList;
   }
   showTags: boolean;
   terminalList: ITerminalListItem[];
@@ -98,6 +104,7 @@ export class CPageLists {
   sentenceList: ISentenceListItem[];
   linkList: ILinkListItem[];
   fillinList: ISectionFillinItem[];
+  inlineButtonList: IInlineButtonItem[];
 
   get firstTerminalIdx(): number {
     return 0;
