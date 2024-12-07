@@ -240,7 +240,11 @@ export class PageParseNode extends ParseNode implements IPageContent {
       this.userContext.fillins.parse();
       this.fillinList = this.userContext.fillins;
 
-      this.userContext.inlineButtons.parse(this.sectionList, this.terminalList);
+      this.userContext.inlineButtons.parse(
+        this.sectionList,
+        this.sentenceList,
+        this.terminalList
+      );
       this.inlineButtonList = this.userContext.inlineButtons;
 
       this.modified = new Date(Date.now()).toString();

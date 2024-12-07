@@ -31,7 +31,8 @@ const Usage: string =
   `  --testreload        reload generated file\n` +
   `  --adorn             adorn output mode\n` +
   `  --diagnostic        diagnostic output mode\n` +
-  `  --verbose           verbose output mode\n`;
+  `  --verbose           verbose output mode\n` +
+  `  --warnings          show warning messages`;
 
 const curriculumPath: string = "curriculum/";
 const distPath: string = "reading-companion/";
@@ -54,6 +55,10 @@ if (switches.includes("--help") || switches.includes("-help")) {
 logger.adornMode = switches.includes("--adorn");
 logger.diagnosticMode = switches.includes("--diagnostic");
 logger.verboseMode = switches.includes("--verbose");
+logger.showErrors = !switches.includes("--noerrors");
+logger.showFatals = !switches.includes("--nofatals");
+logger.showInfo = !switches.includes("--noinfos");
+logger.showWarnings = !switches.includes("--nowarnings");
 logger.info(`adorn mode: ${logger.adornMode ? "ON" : "OFF"}`);
 logger.info(`diagnostic mode: ${logger.diagnosticMode ? "ON" : "OFF"}`);
 logger.info(`verbose mode: ${logger.verboseMode ? "ON" : "OFF"}`);
@@ -103,7 +108,14 @@ if (switches.includes("--sitemap")) {
         inputFileSpecs.length === 1 ? "" : "s"
       }.`
     );
+    let fileCount: number = 0;
+    let errorCount: number = 0;
+    let fatalCount: number = 0;
+    let infoCount: number = 0;
+    let warningCount: number = 0;
+
     for (let inputFileSpec of inputFileSpecs) {
+      fileCount++;
       let pageNode = new PageParseNode(appNode);
       let linesParsed: number;
       linesParsed = pageNode.dataSource.connect(inputFileSpec);
@@ -313,7 +325,29 @@ if (switches.includes("--sitemap")) {
           );
         }
       }
+      console.log(
+        `Parsing ${path.basename(outputFileSpec)} with ${logger.countSummary(
+          logger.fatalCount(),
+          logger.errorCount(),
+          logger.warningCount(),
+          logger.infoCount()
+        )}`
+      );
+      errorCount += logger.errorCount();
+      fatalCount += logger.fatalCount();
+      warningCount += logger.warningCount();
+      infoCount += logger.infoCount();
+      logger.resetCounts();
     }
+    if (fileCount > 1)
+      console.log(
+        `Parsing summary: ${fileCount} files processed with ${logger.countSummary(
+          fatalCount,
+          errorCount,
+          warningCount,
+          infoCount
+        )}`
+      );
   }
   // this switch should ignore any other file list parsing with a warning.
   // create site map.

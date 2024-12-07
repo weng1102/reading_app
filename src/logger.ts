@@ -1,11 +1,19 @@
 import { MyDate } from "./utilities";
 export class Logger {
   // logging from within supported objects
+  //
+  // Warnings require minor remediation but parsing can continute
+  // Errors are not recoverable within an individual file input scope
+  // Fatal errors are not recoverable for the entire input scope
   protected _appName: string = "";
   protected _parent: any = undefined;
   protected _terseFormat: boolean = false; // do not show only severity with message
   protected _adornMode: boolean = false; // do not show adorning messages
   protected _verboseMode: boolean = false; // do not show info and adorn messages
+  protected _showErrors: boolean = true; // show errors
+  protected _showFatals: boolean = true; // show fatal
+  protected _showInfo: boolean = true; // show information messages
+  protected _showWarnings: boolean = true; // show warnings
   protected _diagnosticMode: boolean = false; // do not show diagnostic messages
   protected _errorObject!: Error;
   protected _showSeverity: boolean = true;
@@ -15,6 +23,7 @@ export class Logger {
   protected _errorCount: number = 0;
   protected _fatalCount: number = 0;
   protected _warningCount: number = 0;
+  protected _infoCount: number = 0;
   constructor(parent: any | null | undefined) {
     if (parent !== undefined && parent !== null) {
       this._parent = parent; // required to find proper stack frame
@@ -80,6 +89,30 @@ export class Logger {
     }
     this._verboseMode = onOff;
   }
+  get showErrors() {
+    return this._showErrors;
+  }
+  set showErrors(mode: boolean) {
+    this._showErrors = mode;
+  }
+  get showFatals() {
+    return this._showFatals;
+  }
+  set showFatals(mode: boolean) {
+    this._showFatals = mode;
+  }
+  get showInfo() {
+    return this._showInfo;
+  }
+  set showInfo(mode: boolean) {
+    this._showInfo = mode;
+  }
+  get showWarnings() {
+    return this._showWarnings;
+  }
+  set showWarnings(mode: boolean) {
+    this._showWarnings = mode;
+  }
   assert(message: string) {
     console.log(message);
   }
@@ -127,8 +160,37 @@ export class Logger {
       );
     }
   }
-  errors() {
+  errorCount() {
     return this._errorCount;
+  }
+  fatalCount() {
+    return this._fatalCount;
+  }
+  infoCount() {
+    return this._infoCount;
+  }
+  warningCount() {
+    return this._warningCount;
+  }
+  countSummary(
+    fatals: number,
+    errors: number,
+    warnings: number,
+    infos: number
+  ): string {
+    return `${fatals} ${pluralize(
+      fatals,
+      "fatal error",
+      "fatal errors"
+    )}, ${errors} ${pluralize(
+      errors,
+      "error",
+      "errors"
+    )}, ${warnings} ${pluralize(
+      warnings,
+      "warning",
+      "warnings"
+    )}, ${infos} ${pluralize(infos, "informational", "informationals")}`;
   }
   info(
     message: string,
@@ -137,32 +199,36 @@ export class Logger {
     showTimestamp: boolean = this._showTimestamp,
     showModuleName: boolean = this._showModuleLocation
   ) {
-    console.log(
-      this.logEntry(
-        "INFO",
-        message,
-        showSeverity,
-        showFunctionName,
-        showTimestamp,
-        showModuleName
-      )
-    );
+    this._infoCount++;
+    if (this._showInfo)
+      console.log(
+        this.logEntry(
+          "INFO",
+          message,
+          showSeverity,
+          showFunctionName,
+          showTimestamp,
+          showModuleName
+        )
+      );
   }
   error(message: string) {
     this._errorCount++;
     // Operational or programmatic try to fix
-    console.error(this.logEntry("ERROR", message, true, true, true, true));
+    if (this._showErrors)
+      console.error(this.logEntry("ERROR", message, true, true, true, true));
     // should throw AppError here
   }
   fatal(message: string) {
     this._fatalCount++;
     //unrecoverable error
-    console.log(message);
+    if (this._showFatals) console.log(message);
     // should throw AppError here
   }
-  resetCount() {
+  resetCounts() {
     this._errorCount = 0;
     this._fatalCount = 0;
+    this._infoCount = 0;
     this._warningCount = 0;
   }
   trace(message: string) {
@@ -171,16 +237,17 @@ export class Logger {
   }
   warning(message: string) {
     this._warningCount++;
-    console.log(
-      this.logEntry(
-        "WARNING",
-        message,
-        this._showSeverity,
-        this._showFunctionName,
-        this._showTimestamp,
-        this._showModuleLocation
-      )
-    );
+    if (this._showWarnings)
+      console.log(
+        this.logEntry(
+          "WARNING",
+          message,
+          this._showSeverity,
+          this._showFunctionName,
+          this._showTimestamp,
+          this._showModuleLocation
+        )
+      );
   }
   warnings() {
     return this._warningCount;
@@ -253,6 +320,7 @@ export class Logger {
     let frame: string;
     let frameIdx: number;
     let stackFrames: string[] = new Error()?.stack?.split("\n") as string[]; // optional chaining
+    // console.log(`stack frame ${stackFrames}`);
     let moduleLocation: string = "<unknown>";
     let modulePath: string = "<unknown>";
     let objectNameLocator: string = " at Object.";
@@ -275,6 +343,7 @@ export class Logger {
         .slice(-1)[0]
         .slice(0, -1)
         .split(":")[1];
+      // console.log(`$$$$ modulePath=${modulePath}`);
       frame =
         stackFrames[
           stackFrames.findIndex(element => element.includes(modulePath))
@@ -287,6 +356,7 @@ export class Logger {
         .slice(0, -1)
         .join(":");
     }
+    // console.log(`$$$$ moduleLocation=${moduleLocation}`);
     return moduleLocation;
   }
   logEntry(
@@ -297,6 +367,8 @@ export class Logger {
     showTimestamp: boolean,
     showModuleLocation: boolean
   ) {
+    // console.log(`$$$ getModuleName()=${this.getMethodName()}`);
+    // console.log(`$$$ getModuleLocation()=${this.getModuleLocation()}`);
     let timestamp: string = new MyDate().yyyymmddhhmmss();
     return (
       (showSeverity ? severityTag + ":" : "") +
@@ -308,3 +380,7 @@ export class Logger {
     );
   }
 }
+const pluralize = (count: number, singularForm: string, pluralForm: string) => {
+  if (count === 1) return singularForm;
+  else return pluralForm;
+};
