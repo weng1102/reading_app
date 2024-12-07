@@ -1077,15 +1077,13 @@ ol.multiple-choice > li > ol {
 ol.multiple-choice > li > ol > li {
   display: flex; /* allow gap between counter and button to be set */
   counter-increment: MC-level-2;
-
+  padding-top: 10px;
 }
 ol.multiple-choice > li > ol > li:before {
   content: counter(MC-level-2, lower-alpha) ".";
   flex: 0 0 1.5em; /* defines flex-basis of space between li counter and button */
 }
 ol.multiple-choice > li > ol > li:after {
-}
-.inlinebutton-container {
 }
 .inlinebutton-format {
 white-space: nowrap;
