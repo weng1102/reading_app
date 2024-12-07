@@ -74,6 +74,7 @@ export class TerminalNode_MLTAG_INLINEBUTTON extends TerminalNode_MLTAG_
       //       -cursor {unchanged | AtEnd | AtBeginning }
       //       { -listening  | -notListening },
       // [2]: hints/label description,
+      // [3] sortKey (proposed)
       // [3]: speech rate
       // [4]: voice index
       // [5]: css button attributes (override default),
@@ -137,12 +138,15 @@ export class TerminalNode_MLTAG_INLINEBUTTON extends TerminalNode_MLTAG_
       // console.log(`label=${buttonTokens[1]}`);
       label = buttonTokens[1].trim();
       this.logger.diagnostic(`button label=${label}`);
+      // let sortKey: string = buttonTokens[2] !== undefined ? buttonTokens[2].trim() : "";
       let cues: string =
         buttonTokens[2] !== undefined ? buttonTokens[2].trim() : "";
       let rate: number =
         buttonTokens[3] !== undefined && !isNaN(+buttonTokens[3])
           ? +buttonTokens[3]
           : 0;
+      // buttonTokens[2] can also be sortkey for term
+
       let termIdx: number = this.userContext.terminals.lastIdx;
       let lastTermIdx: number = IDX_INITIALIZER;
       let sectionIdx: number = IDX_INITIALIZER;

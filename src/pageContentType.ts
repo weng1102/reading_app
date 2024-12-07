@@ -8,7 +8,7 @@
  *
  **/
 export const IDX_INITIALIZER = -9999;
-export const PageContentVersion = "20240916.1";
+export const PageContentVersion = "20241111.1";
 // 20230916 - Modified inlineButtonItem.sectionIdx
 // 20240821 - Added inlineButtonItem.nextTermIdx
 // 20240817 - Added inlineButtonItem.endListIdx
@@ -19,6 +19,7 @@ export const PageContentVersion = "20240916.1";
 //            (cursor) position enum for relative position of prose to be
 //            recited for inline button.
 // 20240724 - Added InlineButtonActionEnumType in IInlineButtonItem
+// 20241111 - Added sentence transition to SentenceListItem[]
 export enum PageFormatEnumType {
   default = 0
 }
@@ -1000,6 +1001,7 @@ export interface IInlineButtonTerminalMeta {
   buttonIdx: number;
   label: string;
   // image: string;
+  // sortKey: string;
   attributes: string;
 }
 export function IInlineButtonTerminalMetaInitializer(): IInlineButtonTerminalMeta {
@@ -1007,6 +1009,7 @@ export function IInlineButtonTerminalMetaInitializer(): IInlineButtonTerminalMet
     buttonIdx: IDX_INITIALIZER,
     label: "Recite",
     // image: "button_speak.png",
+    // sortKey: "",
     attributes: ""
   };
 }
@@ -1415,15 +1418,29 @@ export function ISectionListItemInitializer(
   type = type.toString();
   return { firstTermIdx, lastTermIdx, type };
 }
+export enum SentenceListItemEnumType {
+  default = "default",
+  multipleChoiceOption = "mcoption",
+  fillin = "fillin",
+  multipleChoiceQuestion = "mcquestion",
+  model = "model"
+}
 export interface ISentenceListItem extends IRangeItem {
   lastPunctuation: string;
+  type: SentenceListItemEnumType;
 }
 export function ISentenceListItemInitializer(
   firstTermIdx: number = IDX_INITIALIZER,
   lastTermIdx: number = IDX_INITIALIZER,
-  lastPunctuation: string = "."
+  lastPunctuation: string = ".",
+  type: SentenceListItemEnumType = SentenceListItemEnumType.default
 ): ISentenceListItem {
-  return { firstTermIdx, lastTermIdx, lastPunctuation };
+  return {
+    firstTermIdx,
+    lastTermIdx,
+    lastPunctuation,
+    type
+  };
 }
 export interface ILinkListItem {
   label: string;
