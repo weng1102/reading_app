@@ -172,6 +172,9 @@ export class SectionParseNode_SECTION_ORDERED extends SectionParseNode_SECTION
     } else if (scenarioAutoNumberedPattern.test(tag)) {
       this.meta.orderedListType = AutodNumberedOrderedListTypeEnumType.scenario;
       this.meta.startNumber = alphaVal(tag[0]) - 1;
+      // console.log(
+      //   `${current.content}, depth=${this.meta.depth}, tag=${tag[0]} startNumber=${this.meta.startNumber}`
+      // );
     } else if (outlineHierarchyAutoNumberedPattern.test(tag)) {
       this.meta.orderedListType = AutodNumberedOrderedListTypeEnumType.outline;
     } else if (numericalHierarchyAutoNumberedPattern.test(tag)) {
