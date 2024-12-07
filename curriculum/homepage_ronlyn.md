@@ -65,55 +65,41 @@ I can practice my sentence formation everyday
 - [Sentence Tense](grammar_tenses,page)
 - [Sentence Syntax](grammar_syntax,page)
 - [Sentence Structure](grammar_structure,page)
-
-# Flashcard Fillins
-## Verb Flashcards
-[[image-entry: Verb Flashcards fillin, left, 20%]]
-![Verb flashcard](verbflashcardsfillins.jpg,,,,,verbsimages,page)
-I can practice retrieving action words on flashcards.
-[[/image-entry]]
+# Flashcards
 ### Goal
 I want to improve my ability to recall verbs and including helping and linking verbs until I overcome aphasia.
 ### Rationale
 I use these fillin exercises to practice recalling action words based on flashcard pictures until I say them. 
 ### Regimen
 I can practice these flashcard fillins each week.
+## Fill-ins
+[[image-entry: Verb Flashcards fillin, left, 20%]]
+![Verb flashcard](verbflashcardsfillins.jpg,,,,,verbsimages,page)
+I can practice [filling in words](verbsimages,page) using flashcards.
+[[/image-entry]]
+## Multiple Choice
+[[image-entry: Verb Flashcards multiple choice, left, 20%]]
+![Verb flashcard mc](verbsimagesmc.jpg,,,,,verbsimagesmc,page)
+I can practice answering [multiple choice questions](verbsimagesmc,page) using flashcards.
+[[/image-entry]]
 # Book Club Summaries
 ## Current 
 [[image-entry: Current book clubs, left, 10%]]
-![Lock Every Door](lockeverydoor.jpg,,,,,booksummary_lockeverydoor,page)
-### Lock Every Door
-* This book club is reading [Lock Every Door](booksummary_lockeverydoor,page).
-* Tim Carosi is hosting it for Spring 2024. 
+![Never Lie](neverlie.jpg,,,,,booksummary_neverlie,page)
+### Never Lie
+* The Voices of Hope for Aphasia book club is reading [Never Lie](booksummary_neverlie,page) this Fall 2024.
+* Lauren Hoadley is hosting. 
 [[/image-entry]]
+## Stillhouse Lake
 [[image-entry: Current book clubs, left, 10%]]
-![Shadow Diver](shadowdivers.jpg,,,,,booksummary_shadowdivers,page)
-### Shadow Divers
-* This book club is reading [Shadow Divers](booksummary_shadowdivers,page).
-* Voices of Hope for Aphasia is hosting it for Spring 2024. 
+![Stillhouse Lake](stillhouselake.jpg,,,,,booksummary_stillhouselake,page)
+* The Boston University for Aphasia book club is reading [Stillhouse Lake](booksummary_stillhouselake,page) this Fall 2024.
+* Amanda Wong is hosting. 
 [[/image-entry]]
-[[image-entry: Current book clubs, left, 10%]]
-![Lessons In Chemistry](lessonsinchemistry.jpg,,,,,booksummary_lessonsinchemistry,page)
-### Lessons In Chemistry
-* This book club is reading [Lessons In Chemistry](booksummary_lessonsinchemistry,page).
-* Aphasia Treatment Program is hosting this for Winter 2024.
-[[/image-entry]]
-[[image-entry: Current book clubs, left, 10%]]
-![I Must Betray You](imustbetrayyou.jpg,,,,,booksummary_imustbetrayyou,page)
-### I Must Betray You
-* This book club is reading [I Must Betray You](booksummary_imustbetrayyou,page).
-* Boston University is hosting this for Winter 2024.
-[[/image-entry]]
-[[image-entry: Current book clubs, left, 10%]]
-![Remarkably Bright Creatures](remarkablybrightcreatures.jpg,,,,,booksummary_remarkablybrightcreatures,page)
-### Remarkably Bright Creatures
-* This book club is reading [Remarkably Bright Creatures](booksummary_remarkablybrightcreatures,page).
-* Speech Recovery Pathways is hosting this for Winter 2024.
-[[/image-entry]]
+
 ## Past
-These are past book club summaries.
-[[image-entry: Past book clubs, above, 20%]]
-![Shoe Dog](shoedog.jpg,,,,,booksummary_shoedog,page),![Last Liar Standing](lastliarstanding.jpg,,,,,booksummary_lastliarstanding,page),![Just Mercy](justmercy.jpg,,,,,booksummary_justmercy,page),![Ordinary Grace](ordinarygrace.jpg,,,,,booksummary_ordinarygrace,page),![Catch Me If You Can](mancalledove1.jpg,,,,,booksummary_mancalledove1,page),![A Man Called Ove](mancalledove1.jpg,,,,,booksummary_mancalledove1,page),![Mystery Guest](mysteryguest.jpg,,,,,booksummary_mysteryguest,page)
+[[image-entry: Past book clubs, above, 10%]]
+![Lock Every Door](lockeverydoor.jpg,,,,,booksummary_lockeverydoor,page),![Shadow Diver](shadowdivers.jpg,,,,,booksummary_shadowdivers,page),![Lessons In Chemistry](lessonsinchemistry.jpg,,,,,booksummary_lessonsinchemistry,page),![I Must Betray You](imustbetrayyou.jpg,,,,,booksummary_imustbetrayyou,page),![Remarkably Bright Creatures](remarkablybrightcreatures.jpg,,,,,booksummary_remarkablybrightcreatures,page),![Shoe Dog](shoedog.jpg,,,,,booksummary_shoedog,page),![Last Liar Standing](lastliarstanding.jpg,,,,,booksummary_lastliarstanding,page),![Just Mercy](justmercy.jpg,,,,,booksummary_justmercy,page),![Ordinary Grace](ordinarygrace.jpg,,,,,booksummary_ordinarygrace,page),![Catch Me If You Can](mancalledove1.jpg,,,,,booksummary_mancalledove1,page),![A Man Called Ove](mancalledove1.jpg,,,,,booksummary_mancalledove1,page),![Mystery Guest](mysteryguest.jpg,,,,,booksummary_mysteryguest,page)
 [[/image-entry]]
 # Scene Narratives
 Scene narratives allow me practice forming multiple sentences related to complex illustrated scenes. The scenes are decomposed into simpler subscenes. The illustrations have overlays of numbered headings that correspond to their respective subscene descriptions to afford me more structure, if necessary.
@@ -132,6 +118,8 @@ I can practice these narratives each week.
 [Narrative Fill-ins with labels by subscenes](scene_hairsalon,heading,2) 
 #### Reading Practice
 [Narrative with labels by subscenes](scene_hairsalon,heading,8), [Narrative with labels](scene_hairsalon,heading,9), [Narrative  with labels by subscenes](scene_hairsalon,heading,10)
+#### Multiple Choice
+[Narratives with Multiple Choice](scene_hairsalon,heading,15)
 [[/image-entry]]
 ### Family Breakfast
 [[image-entry: Scene narratives, left, 20%]]
@@ -140,6 +128,8 @@ I can practice these narratives each week.
 [Narrative fill-ins with labels by subscenes](scene_familybreakfast,heading,2) 
 #### Reading Practice
 [Narrative with labels by subscenes](scene_familybreakfast,heading,8), [Narrative with labels](scene_familybreakfast,heading,9), [Narrative with labels by subscenes](scene_familybreakfast,heading,10)
+#### Multiple Choice
+[Narratives with Multiple Choice](scene_familybreakfast,heading,14)
 [[/image-entry]]
 ### Kitchen Preparation
 [[image-entry: Scene narratives, left, 20%]]
@@ -148,6 +138,8 @@ I can practice these narratives each week.
 [Narrative fill-ins with labels by subscenes](scene_kitchenprep,heading,2) 
 #### Reading Practice
 [Narrative with labels by subscenes](scene_kitchenprep,heading,8), [Narrative with labels](scene_kitchenprep,heading,9), [Narrative  with labels by subscenes](scene_kitchenprep,heading,10)
+#### Multiple Choice
+[Narratives with Multiple Choice](scene_kitchenprep,heading,11)
 [[/image-entry]]
 ### Yard Work
 [[image-entry: Scene narratives, left, 20%]]
@@ -156,6 +148,8 @@ I can practice these narratives each week.
 [Narrative fill-ins with labels by subscenes](scene_yardwork,heading,2) 
 #### Reading Practice
 [Narrative with labels by subscenes](scene_yardwork,heading,8), [Narrative with labels](scene_yardwork,heading,9), [Narrative with labels by subscenes](scene_yardwork,heading,10)
+#### Multiple Choice
+[Narratives with Multiple Choice](scene_yardwork,heading,15)
 [[/image-entry]]
 ### Lunch Preparation
 [[image-entry: Scene narratives, left, 20%]]
@@ -164,6 +158,8 @@ I can practice these narratives each week.
 [Narrative fill-ins with labels by subscenes](scene_boysandwich,heading,2) 
 #### Reading Practice
 [Narrative with labels by subscenes](scene_boysandwich,heading,8), [Narrative with labels](scene_boysandwich,heading,9), [Narrative with labels by subscenes](scene_boysandwich,heading,10)
+#### Multiple Choice
+[Narratives with Multiple Choice](scene_boysandwich,heading,13)
 [[/image-entry]]
 ### Pizza Night
 [[image-entry: Scene narratives, left, 20%]]
@@ -172,18 +168,19 @@ I can practice these narratives each week.
 [Narrative fill-ins with labels by subscenes](scene_familypizza,heading,2) 
 #### Reading Practice
 [Narrative with labels by subscenes](scene_familypizza,heading,8), [Narrative with labels](scene_familypizza,heading,9), [Narrative with labels by subscenes](scene_familypizza,heading,10)
+#### Multiple Choice
+[Narratives with Multiple Choice](scene_familypizza,heading,15)
 [[/image-entry]]
 ### Kids Playing
 [[image-entry: Scene narratives, left, 20%]]
-![Kids Playing](scene_kidsswing.jpg,,,,,scene_kidsplaying,page)
+![Kids Playing](scene_kidsswing.jpg,,,,,scene_kidswinging,page)
 #### Sentence Formation Practice
-[Narrative fill-ins with labels by subscenes](scene_kidsplaying,heading,2) 
+[Narrative fill-ins with labels by subscenes](scene_kidswinging,heading,2) 
 #### Reading Practice
-[Narrative with labels by subscenes](scene_kidsplaying,heading,8), [Narrative with labels](scene_kidsplaying,heading,9), [Narrative with labels by subscenes](scene_kidsplaying,heading,10)
+[Narrative with labels by subscenes](scene_kidswinging,heading,8), [Narrative with labels](scene_kidswinging,heading,9), [Narrative with labels by subscenes](scene_kidswinging,heading,10)
+#### Multiple Choice
+[Narratives with Multiple Choice](scene_kidswinging,heading,14)
 [[/image-entry]]
-# Multiple Choice
-- [multiple choice](verbsimagesmctest,page)
-
 # Word Banks
 [[image-entry: Sentence Bank, left, 20%]]
 ![Work Bank](wordbank.jpg,,,,,wordbank,page)

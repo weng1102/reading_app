@@ -1,4 +1,4 @@
-[[page: Verbs with images, Ronlyn, Wen, , Verbs with images, Words with images/]]
+[[page: Verbs With Images (Fill-ins), Ronlyn, Wen, , Verbs with images, Fill-ins/]]
 # Verbs
 ## Baking
 [[image-entry: Baking, left, 20%]]
