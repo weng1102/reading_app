@@ -1,4 +1,4 @@
-[[page: Narrative and Progression,, Wen,, Fillins, /]]
+[[page: Narrative Fill-ins and Q&A Multiple Choice,, Wen,, Fillins, /]]
 # Kitchen Preparation
 Scene narrative progressions let the user describe complex scenes by decomposing it into simpler subscenes.
 ## Narrative
@@ -90,4 +90,48 @@ C1. Chopping vegetables
   C1. [_She=(pronoun)_] will be [_chopping=(verb)_] [_green=(adjective)_] [_onions=(noun)_] and [_tomatoes=(noun)_] [_next=(adverb)_].
   C1. [_She=(pronoun)_] seems to be [_chopping=(verb)_] [_with=(preposition)_] [_her=(pronoun)_] [_eyes=(noun)_] [_closed=(verb)_].
 [[/fillin]]
+[[/image-entry]]
+## Multiple Choice
+[[image-entry: Scene narratives, left, 40%, shadow-box rounded-box]]
+![Kitchen Prep](scene_kitchenprep.jpg)
+1a. What is happening?
+  1a. [button: choice, correct, , , css attributes/] A woman is chopping vegetables.
+  1a. [button: choice, , , , css attributes/] A woman is preparing a speech.
+  1a. [button: choice, , , , css attributes/] A woman is preparing to leave.
+  1a. [button: choice, , , , css attributes/] A woman is preparing to dinner together.
+1a. What is the color of her hair?
+  1a. [button: choice, , , , css attributes/] She has blond hair.
+  1a. [button: choice, correct, , , css attributes/] She has gray hair.
+  1a. [button: choice, , , , css attributes/] She has black hair.
+  1a. [button: choice, , , , css attributes/] She has brown hair.
+1a. What is the color of her blouse?
+  1a. [button: choice, , , , css attributes/] She is wearing a red blouse.
+  1a. [button: choice, correct, , , css attributes/] She is wearing a purple blouse.
+  1a. [button: choice, , , , css attributes/] She is wearing a blue blouse.
+  1a. [button: choice, , , , css attributes/] She is wearing a yellow blouse.
+1a. Why would someone think she is married?
+  1a. [button: choice, , , , css attributes/] She has a smile on her face.
+  1a. [button: choice, , , , css attributes/] She has to cook dinner.
+  1a. [button: choice, correct, , , css attributes/] She has a wedding band on left ring finger.
+  1a. [button: choice, , , , css attributes/] She has a knife in her hand.
+1a. Where is the woman chopping vegetables?
+  1a. [button: choice, , , , css attributes/] She is chopping vegetables in the bedroom.
+  1a. [button: choice, correct, , , css attributes/] She is chopping vegetables in the kitchen.
+  1a. [button: choice, , , , css attributes/] She is chopping vegetables in the garage.
+  1a. [button: choice, , , , css attributes/] She is chopping vegetables in the bathroom.
+1a. What is the woman using to chop?
+  1a. [button: choice, correct, , , css attributes/] She is holding a knife.
+  1a. [button: choice, correct, , , css attributes/] She has kitchen shears on the counter.
+  1a. [button: choice, correct, , , css attributes/] She is using a knife and kitchen shears.
+  1a. [button: choice, , , , css attributes/] She is using a knife block.
+1a. What is the woman using to protect the countertop?
+  1a. [button: choice, , , , css attributes/] She is cutting gingerly.
+  1a. [button: choice, correct, , , css attributes/] She is using a cutting board.
+  1a. [button: choice, , , , css attributes/] She is using a dull knife.
+  1a. [button: choice, , , , css attributes/] She is using a plastic knife.
+1a. What is the woman chopping at the moment?
+  1a. [button: choice, , , , css attributes/] She is chopping onions.
+  1a. [button: choice, correct, , , css attributes/] She is chopping carrots.
+  1a. [button: choice, , , , css attributes/] She is chopping tomatoes.
+  1a. [button: choice, , , , css attributes/] She is chopping zucchini.
 [[/image-entry]]

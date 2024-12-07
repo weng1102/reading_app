@@ -1136,7 +1136,7 @@
 [button: term, Good Friday /]
 [button: term, Easter Sunday /]
 [button: term, Tax Day /]
-[button: term, Mothe'rs Day /]
+[button: term, Mother's Day /]
 [button: term, Memorial Day /]
 [button: term, Graduation Day /]
 [button: term, Independence Day /]

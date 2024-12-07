@@ -131,3 +131,81 @@ D1. Fulfilling their order
   D1. The grandparents are having sausage and mushroom pizza.
   D1. They are all drinking ice cold soda with their meal.
 [[/image-entry]]
+## Multiple Choice
+[[image-entry: Scene narratives, left, 40%, shadow-box rounded-box]]
+![Family pizza](scene_familypizza.jpg)
+1a. What is happening?
+  1a. [button: choice, , , , css attributes/] The family is driving to a restaurant.
+  1a. [button: choice, correct, , , css attributes/] The family is going out to eat.
+  1a. [button: choice, , , , css attributes/] The family is walking to a restaurant.
+  1a. [button: choice, , , , css attributes/] The family is visiting a mall.
+1a. Where is the family sitting?
+  1a. [button: choice, correct, , , css attributes/] They are sitting at a round table.
+  1a. [button: choice, , , , css attributes/]  They are sitting at a square table.
+  1a. [button: choice, , , , css attributes/]  They are sitting on a sofa.
+  1a. [button: choice, , , , css attributes/] They are sitting at a picnic table.
+1a. How is the table decorated?
+  1a. [button: choice, , , , css attributes/] The table is covered with a white tablecloth.
+  1a. [button: choice, correct, , , css attributes/] The table is covered with a checkered tablecloth.
+  1a. [button: choice, , , , css attributes/] The table is covered with a red tablecloth.
+  1a. [button: choice, , , , css attributes/] The table is covered with a yellow tablecloth.
+1a. How are the adults and children sitting at the table related?
+  1a. [button: choice, , , , css attributes/] The adults are siblings of the children.
+  1a. [button: choice, , , , css attributes/] The adults are not related to the children.
+  1a. [button: choice, correct, , , css attributes/] The adults are grandparents to the children.
+  1a. [button: choice, , , , css attributes/] The adults are too old to be their parents.
+1a.  Where are the grandparents sitting relative to each other?
+  1a. [button: choice, correct, , , css attributes/] The grandfather is sitting to the right of the grandmother.
+  1a. [button: choice, , , , css attributes/] The grandfather is sitting across from the grandmother.
+  1a. [button: choice, , , , css attributes/] The grandfather is sitting to the left of the grandmother.
+1a. What is the grandfather wearing?
+  1a. [button: choice, , , , css attributes/] He is wearing a solid mustard shirt.
+  1a. [button: choice, correct, , , css attributes/] He is wearing a solid blue shirt.
+  1a. [button: choice, , , , css attributes/] He is wearing a solid red shirt.
+  1a. [button: choice, , , , css attributes/] He is wearing a solid black shirt.
+1a. What is the grandmother wearing?
+  1a. [button: choice, , , , css attributes/] She is wearing a solid red blouse.
+  1a. [button: choice, , , , css attributes/] She is wearing a solid blue blouse .
+  1a. [button: choice, correct, , , css attributes/] She is wearing a solid purple blouse.
+  1a. [button: choice, , , , css attributes/] She is wearing a solid a black blouse.
+1a. What color are the grandchilren wearing?
+  1a. [button: choice, correct, , , css attributes/] The grandkids are wearing shirts with striped sleeves.
+  1a. [button: choice, , , , css attributes/] The grandkids are wearing shirts with numbers.
+  1a. [button: choice, , , , css attributes/] The grandkids are wearing shirts with logos.
+  1a. [button: choice, , , , css attributes/] The grandkids are wearing shirts with collars.
+1a. Who is their server?
+  1a. [button: choice, , , , css attributes/] Lisa is their server.
+  1a. [button: choice, correct, , , css attributes/] Angela is their server.
+  1a. [button: choice, , , , css attributes/] Susan is their server.
+  1a. [button: choice, , , , css attributes/] Alice is their server.
+1a. What does the server look like? 
+  1a. [button: choice, , , , css attributes/] She is a young woman with blond hair.
+  1a. [button: choice, , , , css attributes/] She is an older woman with brown hair.
+  1a. [button: choice, , , , css attributes/] She is a older woman with gray hair.
+  1a. [button: choice, correct, , , css attributes/] She is a young woman with brown hair.
+1a. What is the server wearing? 
+  1a. [button: choice, , , , css attributes/] She is wearing a solid red shirt and slacks.
+  1a. [button: choice, , , , css attributes/] She is wearing a white shirt, blue tunic, and slacks.
+  1a. [button: choice, correct, , , css attributes/] She is wearing a striped blouse, maroon tunic and slacks.
+  1a. [button: choice, , , , css attributes/] His shirt is wearing a solid green shirt and slacks.
+1a. What is she serving?
+  1a. [button: choice, correct, , , css attributes/] She is serving two pizzas.
+  1a. [button: choice, , , , css attributes/] She is serving a pizza.
+  1a. [button: choice, , , , css attributes/] She is serving pizza and spaghetti.
+  1a. [button: choice, , , , css attributes/] She is serving sandwiches and bread sticks.
+1a. What pizza toppings do the grandkids choose?
+  1a. [button: choice, correct, , , css attributes/] The grandkids are choosing pepperoni pizza.
+  1a. [button: choice, , , , css attributes/] The grandkids are choosing cheese pizza.
+  1a. [button: choice, , , , css attributes/] The grandkids are choosing margherita pizza.
+  1a. [button: choice, , , , css attributes/] The grandkids are choosing anchovy pizza.
+1a. What pizza toppings do the grandparents choose?
+  1a. [button: choice, , , , css attributes/] The grandparents are choosing cheese pizza.
+  1a. [button: choice, , , , css attributes/] The grandparents are choosing margherita pizza.
+  1a. [button: choice, correct, , , css attributes/] The grandparents are choosing sausage and mushroom pizza.
+  1a. [button: choice, , , , css attributes/] The grandparents are choosing anchovy pizza.
+1a. What is the family drinking?
+  1a. [button: choice, , , , css attributes/] They are drinking juice.
+  1a. [button: choice, correct, , , css attributes/] They are drinking soda.
+  1a. [button: choice, , , , css attributes/] They are drinking coffee.
+  1a. [button: choice, , , , css attributes/] They are drinking milk.
+[[/image-entry]]

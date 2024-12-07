@@ -83,17 +83,71 @@ A1. Making lunch
 #### Finding ingredients for lunch
 [[image-entry: Scene narratives, left, 40%, shadow-box rounded-box]]
 ![Hair Salon](scene_boysandwich.jpg, scene_boysandwich_overlayB.png)
-A1. Finding ingredients for lunch
-  A1. The boy has peanut butter.
-  A1. He has jelly made from fruit juice and sugar. 
-  A1. He has bread made from whole wheat flour.
-  A1. He has a bowl of fruit with apple, orange, banana, and grapes.
+B1. Finding ingredients for lunch
+  B1. The boy has peanut butter.
+  B1. He has jelly made from fruit juice and sugar. 
+  B1. He has bread made from whole wheat flour.
+  B1. He has a bowl of fruit with apple, orange, banana, and grapes.
 [[/image-entry]]
 #### Making a sandwich
 [[image-entry: Scene narratives, left, 40%, shadow-box rounded-box]]
-![Hair Salon](scene_boysandwich.jpg, scene_boysandwich_overlayC.png)
-A1. Making a sandwich
-  A1. The boy puts two slices of bread on his plate.
-  A1. The boy is spreading peanut butter on the bread.
-  A1. The boy will spread jelly on his sandwich.
+![Boy making lunch](scene_boysandwich.jpg, scene_boysandwich_overlayC.png)
+C1. Making a sandwich
+  C1. The boy puts two slices of bread on his plate.
+  C1. The boy is spreading peanut butter on the bread.
+  C1. The boy will spread jelly on his sandwich.
+[[/image-entry]]
+## Multiple Choice
+[[image-entry: Scene narratives, left, 40%, shadow-box rounded-box]]
+![Boy making lunch](scene_boysandwich.jpg)
+1a. What is happening?
+  1a. [button: choice, , , , css attributes/] A boy is making a mess.
+  1a. [button: choice, correct, , , css attributes/] A boy is making his lunch.
+  1a. [button: choice, , , , css attributes/] A boy is making his bed.
+  1a. [button: choice, , , , css attributes/] A boy is cleaning the kitchen. 
+1a. Why is the boy making his lunch?
+  1a. [button: choice, , , , css attributes/] He is thirsty.
+  1a. [button: choice, , , , css attributes/] He is bored.
+  1a. [button: choice, correct, , , css attributes/] He is hungry.
+  1a. [button: choice, , , , css attributes/] He is sated.
+1a. What color is the boy's hair?
+  1a. [button: choice, , , , css attributes/] He has blond hair.
+  1a. [button: choice, correct, , , css attributes/] He has black hair.
+  1a. [button: choice, , , , css attributes/] He has brown hair.
+  1a. [button: choice, , , , css attributes/] He has red hair.
+1a. What is the boy wearing?
+  1a. [button: choice, , , , css attributes/] He is wearing a yellow and black striped shirt.
+  1a. [button: choice, correct, , , css attributes/] He is wearing a yellow and white striped shirt.
+  1a. [button: choice, , , , css attributes/] He is wearing a solid yellow shirt.
+  1a. [button: choice, , , , css attributes/] He is wearing a solid white shirt.
+1a. Where is the boy making lunch?
+  1a. [button: choice, , , , css attributes/] He is making his lunch at a kitchen table.
+  1a. [button: choice, , , , css attributes/] He is making his lunch in a car.
+  1a. [button: choice, correct, , , css attributes/] He is making his lunch on a counter.
+  1a. [button: choice, , , , css attributes/] He is making his lunch at a picnic bench.
+1a. What is the boy making for lunch?
+  1a. [button: choice, , , , css attributes/] He is making a baloney sandwich.
+  1a. [button: choice, correct, , , css attributes/] He is making a peanut butter and jelly sandwich..
+  1a. [button: choice, , , , css attributes/] He is making a grilled cheese sandwich.
+  1a. [button: choice, , , , css attributes/] He is making a tuna salad sandwich.
+1a. What kind of bread is the boy using?
+  1a. [button: choice, , , , css attributes/] He is using white bread.
+  1a. [button: choice, , , , css attributes/] He is using raisin bread.
+  1a. [button: choice, , , , css attributes/] He is using sourdough bread.
+  1a. [button: choice, correct, , , css attributes/] He is using wheat bread.
+1a. What is the boy doing at the moment?
+  1a. [button: choice, , , , css attributes/] He is taking a slice bread from the loaf.
+  1a. [button: choice, correct, , , css attributes/] He is spreading peanut butter on a slice of bread.
+  1a. [button: choice, , , , css attributes/] He is cutting his sandwich in half.
+  1a. [button: choice, , , , css attributes/] He is eating his sandwich.
+1a. How is the boy spreading peanut butter?
+  1a. [button: choice, , , , css attributes/] He is spreading peanut butter with a fork.
+  1a. [button: choice, , , , css attributes/] He is spreading peanut butter with a spoon.
+  1a. [button: choice, correct, , , css attributes/] He is spreading peanut butter with a knife.
+  1a. [button: choice, , , , css attributes/] He is spreading peanut butter with a spatula.
+1a. What fresh fruits are not available?
+  1a. [button: choice, , , , css attributes/] There are no apples.
+  1a. [button: choice, correct, , , css attributes/] There are no pomegranates.
+  1a. [button: choice, , , , css attributes/] There are no ornages.
+  1a. [button: choice, , , , css attributes/] There are no bananas.
 [[/image-entry]]

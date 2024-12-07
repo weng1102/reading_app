@@ -103,7 +103,7 @@ B1. Mowing the lawn
 [[image-entry: Scene narratives, left, 40%, shadow-box rounded-box]]
 ![Yard Work](scene_yardwork.jpg, scene_yardwork_overlayC.png)
 C1. Bringing new flowers
-  C1. The father is carrying a box of plants.
+  C1. The father is carrying a box of seedlings.
   C1. He is bringing plants to the mother.
 [[/image-entry]]
 #### Planting new flowers
@@ -113,4 +113,73 @@ D1. Planting new flowers
   D1. The mother is sitting next to the planting bed.
   D1. She is planting new flowers.
   D1. The flowers are yellow and white.
+[[/image-entry]]
+## Multiple Choice
+[[image-entry: Scene narratives, left, 40%, shadow-box rounded-box]]
+![Yard Work](scene_yardwork.jpg)
+1a. What is happening?
+  1a. [button: choice, , , , css attributes/] A family is working on the house.
+  1a. [button: choice, correct, , , css attributes/] A family is working on the yard.
+  1a. [button: choice, , , , css attributes/] A family is working on the car.
+  1a. [button: choice, , , , css attributes/] A family is working on the famiy.
+1a. Who are the family members in the yard?
+  1a. [button: choice, correct, , , css attributes/] The mother, father and son are in the yard. 
+  1a. [button: choice, correct, , , css attributes/] The mother and father are in the yard. 
+  1a. [button: choice, correct, , , css attributes/] The father and son are in the yard. 
+  1a. [button: choice, correct, , , css attributes/] The mother and son are in the yard. 
+1a. What is the mother doing?
+  1a. [button: choice, correct, , , css attributes/] She is planting new flowers.
+  1a. [button: choice, , , , css attributes/] She is planting shrubs.
+  1a. [button: choice, , , , css attributes/] She is planting grass.
+  1a. [button: choice, correct, , , css attributes/] She is planting vegetables.
+1a. Where is the mother?
+  1a. [button: choice, , , , css attributes/] She is sitting on the patio.
+  1a. [button: choice, correct, , , css attributes/] She is sitting beside the planting bed.
+  1a. [button: choice, , , , css attributes/] She is sitting in the kitchen.
+  1a. [button: choice, , , , css attributes/] She is sitting in the car.
+1a. What is the mother wearing?
+  1a. [button: choice, , , , css attributes/] She is wearing a green blouse with matching gloves.
+  1a. [button: choice, , , , css attributes/] She is wearing a red  blouse with matching gloves.
+  1a. [button: choice, , , , css attributes/] She is wearing a blue blouse with matching gloves.
+  1a. [button: choice, correct, , , css attributes/] She is wearing a magenta blouse with matching gloves.
+1a. What color are the flower buds?
+  1a. [button: choice, , , , css attributes/] The flowers are purple and white.
+  1a. [button: choice, correct, , , css attributes/] The flowers are yellow and white.
+  1a. [button: choice, , , , css attributes/] The flowers are red and white.
+  1a. [button: choice, correct, , , css attributes/] The flowers are all white.
+1a. What is the father doing?
+  1a. [button: choice, , , , css attributes/] He is carrying compost to the planting bed.
+  1a. [button: choice, , , , css attributes/] He is carrying fertilizer to be planted.
+  1a. [button: choice, correct, , , css attributes/] He is carrying seedlings to be planted.
+  1a. [button: choice, , , , css attributes/] He is carrying grass to be planted.
+1a.  Where is the father going with the seedlings?
+  1a. [button: choice, , , , css attributes/] He is going to the house.
+  1a. [button: choice, , , , css attributes/] He is going to the patio.
+  1a. [button: choice, correct, , , css attributes/] He is going to the planting bed.
+  1a. [button: choice, , , , css attributes/] He is going to the garage.
+1a. What is the father wearing?
+  1a. [button: choice, , , , css attributes/] He is wearing a long sleeve shirt and long pants.
+  1a. [button: choice, , , , css attributes/] He is wearing a long sleeve shirt and shorts.
+  1a. [button: choice, correct, , , css attributes/] He is wearing a shirt, shorts and gloves.
+  1a. [button: choice, , , , css attributes/] He is wearing a tank top and shorts.
+1a. What is the son doing?
+  1a. [button: choice, , , , css attributes/] He is weeding the lawn.
+  1a. [button: choice, , , , css attributes/] He is edging the lawn.
+  1a. [button: choice, , , , css attributes/] He is fertilizing the lawn.
+  1a. [button: choice, correct, , , css attributes/] He is mowing the lawn.
+1a. What is the son wearing?
+  1a. [button: choice, , , , css attributes/] He is wearing a blue shirt with blue shorts.
+  1a. [button: choice, , , , css attributes/] He is wearing a red shirt with white shorts.
+  1a. [button: choice, correct, , , css attributes/] He is wearing a purple shirt with tan shorts.
+  1a. [button: choice, , , , css attributes/] He is wearing a green shirt with long shorts.
+1a. Where is the son?
+  1a. [button: choice, , , , css attributes/] He is mowing the lawn near the planting bed.
+  1a. [button: choice, , , , css attributes/] He is sitting on the patio.
+  1a. [button: choice, correct, , , css attributes/] He is mowing the lawn near the fence.
+  1a. [button: choice, , , , css attributes/] He is gaming inside the house.
+1a. What color is the lawn mower?
+  1a. [button: choice, , , , css attributes/] The lawn mower is red.
+  1a. [button: choice, correct, , , css attributes/] The lawn mower is green.
+  1a. [button: choice, , , , css attributes/] The lawn mower is gray.
+  1a. [button: choice, , , , css attributes/] The lawn mower is black.
 [[/image-entry]]

@@ -1,4 +1,4 @@
-[[page: Family Breakfast Narrative and Progression,, Wen,, Fillins, /]]
+[[page: Family Breakfast Narrative,, Wen,, Fillins, /]]
 # Family Breakfast 
 This scene narrative allow me to practice describing complex illustrated scene. The scene is decomposed into simpler subscenes. These subscenes are identified by overlays with corresponding subscene labels. These subscenes serve as the bases for sentence fill-in and reading exercises that promote sentence formation.
 ## Sentence Formation Practice
@@ -113,4 +113,94 @@ D1. Drinking their morning beverage.
   D1. The mother's coffee mug is red.
   D1. The father's coffee mug is green.
   D1. Both children are drinking orange juice from glasses.
+[[/image-entry]]
+## Multiple Choice Practice
+[[image-entry: Scene narratives multiple choice, left, 40%, shadow-box rounded-box]]
+![Family Breakfast](scene_familybreakfast.jpg)
+1a. What is happening?
+  1a. [button: choice, correct, , , css attributes/] The family is having breakfast together.
+  1a. [button: choice, , , , css attributes/] The family is having breakfast separately.
+  1a. [button: choice, , , , css attributes/] The family is having lunch together.
+  1a. [button: choice, , , , css attributes/] The family is having dinner together.
+1a. Where is the family sitting?
+  1a. [button: choice, correct, , , css attributes/] They are sitting at a round table.
+  1a. [button: choice, , , , css attributes/]  They are sitting at a square table.
+  1a. [button: choice, , , , css attributes/]  They are sitting on a sofa.
+  1a. [button: choice, , , , css attributes/] They are sitting at a picnic table.
+1a. How is the table decorated?
+  1a. [button: choice, correct, , , css attributes/] The table is covered with a white tablecloth.
+  1a. [button: choice, , , , css attributes/] The table is covered with a checkered tablecloth.
+  1a. [button: choice, , , , css attributes/] The table is covered with a red tablecloth.
+  1a. [button: choice, , , , css attributes/] The table is covered with a yellow tablecloth.
+1a.  Where are parents sitting relative to each other?
+  1a. [button: choice, , , , css attributes/] The father is sitting to the right of the mother.
+  1a. [button: choice, , , , css attributes/] The father is sitting across from the mother.
+  1a. [button: choice, correct, , , css attributes/] The father is sitting to the left of the mother.
+1a. Where is the son sitting relative to his mother?
+  1a. [button: choice, correct, , , css attributes/] He is sitting to the right of his mother.
+  1a. [button: choice, , , , css attributes/] He is sitting to the left of his mother.
+  1a. [button: choice, , , , css attributes/] He is sitting across from his mother.
+1a. Where is the daughter sitting relative to her mother?
+  1a. [button: choice, , , , css attributes/] The daughter is sitting next to the mother.
+  1a. [button: choice, , , , css attributes/] The daughter is sitting on the other side of the mother.
+  1a. [button: choice, correct, , , css attributes/] The daughter is sitting across from her mother.
+1a. Where is the sister sitting relative to her brother?
+  1a. [button: choice, , , , css attributes/] She is sitting to the left of her brother.
+  1a. [button: choice, correct, , , css attributes/] She is sitting across from her brother.
+  1a. [button: choice, correct, , , css attributes/] She is sitting to the right of her brother.
+1a. What is the father wearing?
+  1a. [button: choice, , , , css attributes/] He is wearing a solid red shirt.
+  1a. [button: choice, correct, , , css attributes/] He is wearing a solid mustard shirt.
+  1a. [button: choice, , , , css attributes/] He is wearing a solid blue shirt.
+  1a. [button: choice, , , , css attributes/] He is wearing a solid black shirt.
+1a. What is the mother wearing?
+  1a. [button: choice, , , , css attributes/] She is wearing a solid red blouse.
+  1a. [button: choice, , , , css attributes/] She is wearing a solid blue blouse .
+  1a. [button: choice, correct, , , css attributes/] She is wearing a solid brown blouse.
+  1a. [button: choice, , , , css attributes/] She is wearing a solid a black blouse.
+1a. What color is the boy wearing?
+  1a. [button: choice, , , , css attributes/] He is wearing a solid blue shirt.
+  1a. [button: choice, correct, , , css attributes/] He is wearing a solid maroon shirt.
+  1a. [button: choice, correct, , , css attributes/] He is wearing a solid red shirt.
+  1a. [button: choice, , , , css attributes/] He is wearing a solid green shirt.
+1a. What is the daughter wearing? 
+  1a. [button: choice, , , , css attributes/] She is wearing a solid red shirt.
+  1a. [button: choice, , , , css attributes/] She is wearing a blue floral shirt.
+  1a. [button: choice, correct, , , css attributes/] She is wearing a green floral shirt. 
+  1a. [button: choice, , , , css attributes/] His shirt is wearing a solid green shirt.
+1a. What are the parents eating for breakfast?
+  1a. [button: choice, , , , css attributes/] They are eating cereal.
+  1a. [button: choice, correct, , , css attributes/] They are eating bacon and scrambled eggs.
+  1a. [button: choice, , , , css attributes/] They are eating toast.
+  1a. [button: choice, , , , css attributes/] They are eating fruit salad.
+1a. What is the father doing at this moment?
+  1a. [button: choice, correct, , , css attributes/] He is stealing a slice of bacon from his spouse.
+  1a. [button: choice, , , , css attributes/] He is giving a slice of bacon to his spouse.
+  1a. [button: choice, correct, , , css attributes/] He is eating his own slice of bacon.
+  1a. [button: choice, correct, , , css attributes/] He is not giving a slice of bacon to his spouse.
+1a. What is the son eating for breakfast?
+  1a. [button: choice, , , , css attributes/] He is eating fruit salad.
+  1a. [button: choice, , , , css attributes/] He is eating bacon and scrambled eggs.
+  1a. [button: choice, correct, , , css attributes/] He is eating cereal.
+  1a. [button: choice, , , , css attributes/] He is eating eating toast.
+1a. What is the daughter eating for breakfast?
+  1a. [button: choice, , , , css attributes/] She is eating fruit salad.
+  1a. [button: choice, correct, , , css attributes/] She is eating cereal and toast.
+  1a. [button: choice, , , , css attributes/] She is eating bacon and scrambled eggs.
+  1a. [button: choice, , , , css attributes/] She is eating eating toast.
+1a. What are the parents drinking?
+  1a. [button: choice, , , , css attributes/] They are drinking mimosas.
+  1a. [button: choice, , , , css attributes/] They are drinking juice.
+  1a. [button: choice, correct, , , css attributes/] They are drinking coffee.
+  1a. [button: choice, , , , css attributes/] They are drinking milk.
+1a. What are the parents drinking from mugs?
+  1a. [button: choice, , , , css attributes/] They are drinking mimosas.
+  1a. [button: choice, , , , css attributes/] They are drinking orange juice.
+  1a. [button: choice, correct, , , css attributes/] They are drinking coffee.
+  1a. [button: choice, , , , css attributes/] They are drinking milk.
+1a. What are the children drinking from glasses?
+  1a. [button: choice, , , , css attributes/] They are drinking apple juice.
+  1a. [button: choice, , , , css attributes/] They are drinking grape juice.
+  1a. [button: choice, correct, , , css attributes/] They are drinking orange juice.
+  1a. [button: choice, , , , css attributes/] They are drinking milk.
 [[/image-entry]]

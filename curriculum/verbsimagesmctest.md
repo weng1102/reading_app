@@ -2,7 +2,7 @@
 # Verbs
 ## Baking
 [[image-entry: Baking, left, 20%]]
-![Baking](verb-bake.jpg),![Bouncing](verb-bounce.jpg)
+![Baking](verb-bake.jpg),![Baking](verb-bake.jpg)
 1a. What activity is happening?
   1a. [button: choice, , , , css attributes/] The person is cooking.
   1a. [button: choice, correct, , , css attributes/] The person is baking cookies in the oven at a random time of day went electricity may be more expensive.
@@ -32,3 +32,39 @@
   1a. The mitts protect the hands. The shoes protect the feet.
 [[/image-entry]]
 
+## Bouncing
+[[image-entry: Bouncing, left, 20%]]
+![Bouncing](verb-bounce.jpg)
+1a. What appliance is used to bake?
+  1a. [button: choice, correct, , , css attributes/] The oven is used to bake.
+  1a. [button: choice, , , , css attributes/] The chair is used to sit.
+  1a. [button: choice, , , , css attributes/] The bed is used to sleep.
+  1a. [button: choice, , , , css attributes/] The sink is used to wash.
+1a. What protect the hands?
+  1a. [button: choice, correct, , , css attributes/] The mitts protect the hands.
+  1a. [button: choice, , , , css attributes/] The protect nails the hands.
+  1a. [button: choice, , , , css attributes/] The protect lotion the hands.
+  1a. [button: choice, , , , css attributes/] The pot holders protect the hands.
+1a. What protect the feet?
+  1a. The mitts protect the hands. The shoes protect the feet.
+  1a. [button: choice, , , , css attributes/] The protect lotion the hands.
+  1a. [button: choice, , , , css attributes/] The pot holders protect the hands.
+1a. What protect the hands?
+  1a. [button: choice, correct, , , css attributes/] The mitts protect the hands.
+  1a. [button: choice, , , , css attributes/] The protect nails the hands.
+  1a. [button: choice, , , , css attributes/] The protect lotion the hands.
+  1a. [button: choice, , , , css attributes/] The pot holders protect the hands.
+1a. What protect the feet?
+  1a. The mitts protect the hands. The shoes protect the feet.
+  1a. [button: choice, correct, , , , css attributes/] The protect lotion the hands.
+  1a. [button: choice, , , , css attributes/] The pot holders protect the hands.
+1a. What protect the hands?
+  1a. [button: choice, correct, , , css attributes/] The mitts protect the hands.
+  1a. [button: choice, , , , css attributes/] The protect nails the hands.
+  1a. [button: choice, , , , css attributes/] The protect lotion the hands.
+  1a. [button: choice, , , , css attributes/] The pot holders protect the hands.
+1a. What protect the feet?
+  1a. The mitts protect the hands. The shoes protect the feet.
+  1a. [button: choice, , , , css attributes/] The protect lotion the hands.
+  1a. [button: choice, correct, , , , css attributes/] The pot holders protect the hands.
+[[/image-entry]]
