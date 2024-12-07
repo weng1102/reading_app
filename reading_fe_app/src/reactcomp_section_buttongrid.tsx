@@ -40,7 +40,6 @@ export const SectionButtonGrid = React.memo((props: ISectionPropsType): any => {
     );
     return Array.from(groupedByMap);
   };
-  let css: string = "";
   // let groupIndex: number = 0;
   if (buttonGrid.groupedBy) {
     return (

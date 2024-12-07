@@ -21,7 +21,8 @@ import {
   // InlineButtonListeningActionEnumType,
   IPageRequestItem,
   LinkIdxDestinationType,
-  PageRequestItemInitializer
+  PageRequestItemInitializer,
+  SentenceListItemEnumType
   // RecitationScopeEnumType,
   // RecitationPositionEnumType,
   // RecitationListeningEnumType
@@ -325,9 +326,10 @@ const InlineButton_listened = () => {
     type: INLINEBUTTON_LISTENED
   };
 };
-const InlineButton_move = () => {
+const InlineButton_move = (moveToTermIdx: number) => {
   return {
-    type: INLINEBUTTON_MOVE
+    type: INLINEBUTTON_MOVE,
+    payload: moveToTermIdx
   };
 };
 const InlineButton_moved = () => {
@@ -728,9 +730,9 @@ interface IReduxState {
   cursor_sentenceIdx: number;
   cursor_terminalIdx: number;
 
-  cursor_newSentenceTransition: boolean;
-  cursor_newSectionTransition: boolean;
-  cursor_newPageTransition: boolean;
+  cursor_nextSentenceTransition: boolean;
+  cursor_nextSectionTransition: boolean;
+  cursor_nextPageTransition: boolean;
 
   cursor_beginningOfPageReached: boolean;
   cursor_endOfPageReached: boolean;
@@ -778,6 +780,7 @@ interface IReduxState {
   recite_word_completed: boolean;
   reciting: boolean;
 
+  sentence_type: SentenceListItemEnumType;
   settings_toggle: boolean;
 
   statusBar_message1: string;
@@ -814,9 +817,9 @@ const IReduxStateInitialState: IReduxState = {
   cursor_sentenceIdx: 0,
   cursor_terminalIdx: 0,
 
-  cursor_newSentenceTransition: false,
-  cursor_newSectionTransition: false,
-  cursor_newPageTransition: false,
+  cursor_nextSentenceTransition: false,
+  cursor_nextSectionTransition: false,
+  cursor_nextPageTransition: false,
   cursor_beginningOfPageReached: true,
   cursor_endOfPageReached: false,
 
@@ -859,7 +862,7 @@ const IReduxStateInitialState: IReduxState = {
   recite_word_requested: false,
   recite_word_completed: true,
   reciting: false,
-
+  sentence_type: SentenceListItemEnumType.default,
   settings_toggle: false,
   statusBar_message1: "",
   statusBar_message2: "",
@@ -883,14 +886,25 @@ export const rootReducer = (
   const setSentenceState = (
     terminalIdx: number,
     currentSentenceIdx: number
-  ): [number, boolean] => {
+  ): [number, boolean, SentenceListItemEnumType] => {
     let sentenceIdx: number = state.pageContext.sentenceIdx(terminalIdx);
     // console.log(
-    //   `@@@@setSentenceState:newsentence=${sentenceIdx !== currentSentenceIdx}`
+    //   `@@@@setSentenceState: terminalIdx=${
+    //     state.pageContext.sentenceList[currentSentenceIdx].type
+    //   }  currentSentenceIdx=${currentSentenceIdx} sentenceIdx=${sentenceIdx} nextsentence=${sentenceIdx !==
+    //     currentSentenceIdx} type=${
+    //     state.pageContext.sentenceList[currentSentenceIdx].type
+    //   }`
     // );
+    let type: SentenceListItemEnumType =
+      currentSentenceIdx >= 0 &&
+      currentSentenceIdx < state.pageContext.sentenceList.length
+        ? state.pageContext.sentenceList[currentSentenceIdx].type
+        : SentenceListItemEnumType.default;
     return [
       sentenceIdx,
-      terminalIdx === 0 || sentenceIdx !== currentSentenceIdx
+      terminalIdx === 0 || sentenceIdx !== currentSentenceIdx,
+      type
     ];
   };
   const setSectionState = (
@@ -908,19 +922,23 @@ export const rootReducer = (
     } else if (terminalIdxs.length === 1) {
       state.cursor_endOfPageReached = false;
       // resetListeningRetries();
-      console.log(
-        `setTerminalState single state transition from prevTermIdx=${state.cursor_terminalIdx} to nextTermIdx= ${terminalIdxs[0]}`
-      );
+      // console.log(
+      //   `@@@@setTerminalState single state transition from prevTermIdx=${state.cursor_terminalIdx} to nextTermIdx= ${terminalIdxs[0]}`
+      // );
       if (state.pageContext.isValidTerminalIdx(terminalIdxs[0])) {
         /// set single state
+        // console.log(
+        //   `@@@@terminalIdxs[0]= ${terminalIdxs[0]} state.cursor_sentenceIdx=${state.cursor_sentenceIdx}`
+        // );
         state.cursor_terminalIdx = terminalIdxs[0];
         [
           state.cursor_sentenceIdx,
-          state.cursor_newSentenceTransition
+          state.cursor_nextSentenceTransition,
+          state.sentence_type
         ] = setSentenceState(terminalIdxs[0], state.cursor_sentenceIdx);
         [
           state.cursor_sectionIdx,
-          state.cursor_newSectionTransition
+          state.cursor_nextSectionTransition
         ] = setSectionState(terminalIdxs[0], state.cursor_sectionIdx);
         state.cursor_beginningOfPageReached =
           state.cursor_terminalIdx === state.pageContext.firstTerminalIdx;
@@ -1045,7 +1063,7 @@ export const rootReducer = (
   // };
   const setListeningMessage = (message: string): string => {
     state.message_state = `${action.type}: ${message}.`;
-    console.log(`Listening: ${state.message_state}`);
+    // console.log(`Listening: ${state.message_state}`);
     return state.message_state;
   };
   switch (action.type) {
@@ -1071,6 +1089,7 @@ export const rootReducer = (
       state.page_pop_requested = false;
       state.page_home_requested = false;
       state.content_scroll_top_initial = -1;
+      // state.cursor_sentenceIdx = 0;
       return state;
     case PAGE_TOP:
       setTerminalState([state.pageContext.firstTerminalIdx]);
@@ -1237,12 +1256,13 @@ export const rootReducer = (
       }
       return { ...state };
     case LISTENING_STOP:
+      console.log(`stop: listen_active=${state.listen_active}`);
       state.listen_active = false;
       state.listen_stopAtEOS = false; // reset
       // state.listen_retries = 0;
       // state.listen_retriesExceeded = false;
       setListeningMessage((!state.listen_active).toString());
-      console.log(`stop: listen_active=${state.listen_active}`);
+      // console.log(`stop: listen_active=${state.listen_active}`);
       return { ...state };
     case LISTENING_AVAILABLE:
       state.listen_available = action.payload;
@@ -1276,9 +1296,9 @@ export const rootReducer = (
       state.announce_message = ""; // resets transcript
       return { ...state };
     case TRANSITION_ACKNOWLEDGE:
-      state.cursor_newPageTransition = false;
-      state.cursor_newSectionTransition = false;
-      state.cursor_newSentenceTransition = false;
+      state.cursor_nextPageTransition = false;
+      state.cursor_nextSectionTransition = false;
+      state.cursor_nextSentenceTransition = false;
       state.cursor_beginningOfPageReached = false;
       state.cursor_endOfPageReached = false;
       state.announce_message = "";
@@ -1387,7 +1407,7 @@ export const rootReducer = (
     case INLINEBUTTON_CLICKED: {
       state.inlinebutton_idx = IDX_INITIALIZER;
       state.inlinebutton_recite_toBeRecited = [];
-      //      state.inlinebutton_listen_requested = false;
+      state.inlinebutton_listen_requested = false;
       state.inlinebutton_move_requested = false;
       state.inlinebutton_recite_requested = false;
       state.inlinebutton_signal_requested = false;
@@ -1403,6 +1423,9 @@ export const rootReducer = (
     }
     case INLINEBUTTON_MOVE: {
       state.inlinebutton_move_requested = true;
+      setTerminalState([+action.payload]);
+      return { ...state };
+
       // assumes inlinebutton_idx is valid
       return state;
     }

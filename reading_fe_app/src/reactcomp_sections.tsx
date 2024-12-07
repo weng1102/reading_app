@@ -146,6 +146,9 @@ export const SectionOrderedList = (props: ISectionListPropsType) => {
     .meta as ISectionOrderedListVariant;
   let olClassName: string = "";
   let cssStyles: React.CSSProperties = {};
+  // console.log(
+  //   `orderedList: listType=${orderedListMeta.orderedListType}, depth=${orderedListMeta.depth},startNumber=${orderedListMeta.startNumber}`
+  // );
   if (
     orderedListMeta.orderedListType ===
       AutodNumberedOrderedListTypeEnumType.scenario &&
@@ -153,8 +156,9 @@ export const SectionOrderedList = (props: ISectionListPropsType) => {
   ) {
     olClassName = "scenarios-A1";
     cssStyles = {
-      counterSet: `A1-level-1 ${orderedListMeta.startNumber} display: contents`
+      counterSet: `A1-level-1 ${orderedListMeta.startNumber}`
     };
+    console.log(`cssStyles=${cssStyles.counterSet} ${cssStyles.display}`);
   } else if (
     orderedListMeta.orderedListType ===
       AutodNumberedOrderedListTypeEnumType.multipleChoice &&

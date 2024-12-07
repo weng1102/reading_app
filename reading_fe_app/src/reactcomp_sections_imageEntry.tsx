@@ -9,7 +9,7 @@
  *
  **/
 import React from "react";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 // import { Request, SCROLLTOP_INITIAL } from "./reducers";
 import {
@@ -157,6 +157,7 @@ export const SectionImageEntryImages = React.memo(
             rect.height !== imagesContainerHeight ||
             currentTop !== imagesContainerTop
           ) {
+            //////////////
             // Container height changed based on change to captions
             // since this only triggers with subtree option implies that it
             // is observing the change in groupingTop as opposed to the
@@ -172,6 +173,8 @@ export const SectionImageEntryImages = React.memo(
             //   (imagesContainerTop -
             //     imagesContainerDivRef.current.getBoundingClientRect().top)}`
             // );
+
+            //////////////
             // Only need to resize subsequent sections below but that requires
             // more logic to convey resize to siblings. Probably need to
             // employ reducer state variable that signals resize based on
@@ -210,7 +213,7 @@ export const SectionImageEntryImages = React.memo(
       };
     }, []);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
       // console.log(
       //   `initial initialScrollTop=${initialScrollTop},scrollTop=${scrollTop}`
       // );
@@ -270,6 +273,7 @@ export const SectionImageEntryImages = React.memo(
       }
     }, [resize]);
     useEffect(() => {
+      //////////////
       // Because the scrollTop value will always to an absolute value from 0 at
       // the top of the scrollable content window to the number of pixels
       // necessary to reach the bottom of the window.
