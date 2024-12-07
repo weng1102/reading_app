@@ -139,7 +139,7 @@ export function ConfigSettingsInitializer(
   };
 }
 export function SpeechSettingsInitializer(
-  scope: RecitationScopeEnumType = RecitationScopeEnumType.sentence,
+  scope: RecitationScopeEnumType = RecitationScopeEnumType.words,
   placement: RecitationPlacementEnumType = RecitationPlacementEnumType.unchanged,
   listening: RecitationListeningEnumType = RecitationListeningEnumType.notListening,
   lang: string = "English",
