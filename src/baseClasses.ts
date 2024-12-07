@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2021 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2024 Wen Eng - All Rights Reserved
  *
  * File name: baseclasses.ts
  *
@@ -34,9 +34,10 @@ import {
   ISectionFillinItemInitializer,
   PartOfSpeechEnumType,
   InlineButtonActionEnumType,
-  RecitationScopeEnumType,
-  RecitationReferenceEnumType,
-  RecitationListeningEnumType,
+  SentenceListItemEnumType,
+  // RecitationScopeEnumType,
+  // RecitationReferenceEnumType,
+  // RecitationListeningEnumType,
   SectionFillinResponsesProgressionEnum,
   SectionFillinLayoutType,
   IPageContent
@@ -378,7 +379,7 @@ class HeadingArray extends Array<IHeadingListItem> {
     for (const [i, element] of this.entries()) {
       outputStr = `${outputStr}[${i
         .toString()
-        .padStart(4, "0")}]: ${element.headingLevel
+        .padStart(3, "0")}]: ${element.headingLevel
         .toString()
         .padStart(4, " ")} ${element.firstTermIdx
         .toString()
@@ -400,15 +401,17 @@ class SentenceArray extends Array<ISentenceListItem> {
     return this.length;
   }
   serialize(): string {
-    let outputStr: string = "[ idx]:  1st last punct\n";
+    let outputStr: string = "[ idx]:  1st last punct type\n";
     for (const [i, element] of this.entries()) {
       outputStr = `${outputStr}[${i
         .toString()
         .padStart(4, "0")}]: ${element.firstTermIdx
         .toString()
-        .padStart(4, " ")} ${element.lastTermIdx.toString().padStart(4, " ")} ${
-        element.lastPunctuation
-      }\n`;
+        .padStart(4, " ")} ${element.lastTermIdx
+        .toString()
+        .padStart(4, " ")} ${element.lastPunctuation
+        .toString()
+        .padStart(5, " ")} ${element.type.toString().padEnd(8, " ")}\n`;
     }
     return outputStr;
   }
@@ -614,6 +617,7 @@ class InlineButtonArray extends Array<IInlineButtonItem> {
   }
   parse(
     sectionList: ISectionListItem[],
+    sentenceList: ISentenceListItem[],
     terminalList: ITerminalListItem[]
   ): number {
     try {
@@ -672,6 +676,26 @@ class InlineButtonArray extends Array<IInlineButtonItem> {
         // 3) more than one consective multiple choice button
         // 4) at least single correct choice within the group indicated
         //    by the grouping field that correspond to the prompt termIdx
+        const setSentenceTransition = (buttonIdx: number) => {
+          try {
+            // console.log(`trying to setSentenceTransition(${buttonIdx})`);
+            // sentenceList[
+            //   terminalList[
+            //     sectionList[this[buttonIdx].sectionIdx - 1].lastTermIdx
+            //   ].sentenceIdx
+            // ].stopListeningAtEndOfSentence = true;
+            sentenceList[
+              terminalList[
+                sectionList[this[buttonIdx].sectionIdx - 1].lastTermIdx
+              ].sentenceIdx
+            ].type = SentenceListItemEnumType.multipleChoiceQuestion;
+          } catch (e) {
+            console.log(
+              `array index out of bound setting setSentenceTransition(${buttonIdx}). Error message: "${e}"`
+            );
+          } finally {
+          }
+        };
         let isValid: boolean = true;
         // Update termIdx that was set during parsing as the last terminal
         // before the inline button to the next terminal after the button
@@ -680,9 +704,9 @@ class InlineButtonArray extends Array<IInlineButtonItem> {
         try {
           for (let inlineButton of this) {
             if (inlineButton.action !== InlineButtonActionEnumType.choice) {
-              console.log(
-                `Ignoring inlineButton=${inlineButton.buttonIdx} while parsing mulitple choice`
-              );
+              // console.log(
+              //   `Ignoring inlineButton=${inlineButton.buttonIdx} while parsing mulitple choice`
+              // );
             } else if (
               inlineButton.termIdx < 0 ||
               inlineButton.termIdx + 1 >= terminalList.length
@@ -741,29 +765,89 @@ class InlineButtonArray extends Array<IInlineButtonItem> {
           // other juxtapositioned/consecutive responses that correspond to
           // prompts. The terminal idx following the last in each group is the
           // "next" prompt.
+          let buttonIdx: number = 0;
           try {
-            for (
-              let buttonIdx: number = 0;
-              buttonIdx < this.length;
-              buttonIdx++
-            ) {
+            for (buttonIdx = 0; buttonIdx < this.length; buttonIdx++) {
               if (
                 this[buttonIdx].action !== InlineButtonActionEnumType.choice
               ) {
                 // skip
               } else if (buttonIdx === 0) {
                 grouping[buttonIdx] = 1; // start of first grouping
+                setSentenceTransition(buttonIdx);
               } else if (
                 sectionList[this[buttonIdx].sectionIdx].firstTermIdx ===
                 sectionList[this[buttonIdx - 1].sectionIdx].lastTermIdx + 1
               ) {
+                // consecutive button (within the same grouping)
+                // identify the last sentence in section
+                // console.log(`mc question sentence idx=${}`)
                 grouping[buttonIdx] = grouping[buttonIdx - 1];
               } else {
+                // nonconsecutive button (different grouping)
+                // transitioned to the next section
                 grouping[buttonIdx] = grouping[buttonIdx - 1] + 1;
+                // implies that the previous section is an mc question
+                setSentenceTransition(buttonIdx);
+                //   try {
+                //     sentenceList[
+                //       terminalList[
+                //         sectionList[this[buttonIdx].sectionIdx - 1].lastTermIdx
+                //       ].sentenceIdx
+                //     ].stopAtEndOfSentence = true;
+                //   } catch (e) {
+                //     console.log(
+                //       `array index out of bound setting stopAtEndOfSentence buttonIdx=${buttonIdx}. Error message: "${e}"`
+                //     );
+                // }
+                // finally {}
+                // console.log(
+                //   `firstTermIdx=${
+                //     sectionList[this[buttonIdx].sectionIdx].firstTermIdx
+                //   }, lastTermIdx of previous section=${sectionList[
+                //     this[buttonIdx].sectionIdx - 1
+                //   ].lastTermIdx + 1}`
+                // );
+                //
+                // if (
+                //   this[buttonIdx].action ===
+                //     InlineButtonActionEnumType.choice &&
+                //   (buttonIdx === 0 ||
+                //     grouping[buttonIdx] !== grouping[buttonIdx - 1] + 1)
+                // ) {
+                // console.log(
+                //   `mc question lastTermidx= ${
+                //     sectionList[this[buttonIdx].sectionIdx - 1].lastTermIdx
+                //   }`
+                // );
+                // }
+                //   try {
+                //     sentenceList[
+                //       terminalList[
+                //         sectionList[this[buttonIdx].sectionIdx - 1].lastTermIdx
+                //       ].sentenceIdx
+                //     ].stopAtEndOfSentence = true;
+                //   } catch (e) {
+                //     console.log(
+                //       `array index out of bound setting stopAtEndOfSentence buttonIdx=${buttonIdx}. Error message: "${e}"`
+                //     );
+                // }
+                // finally {}
+                // console.log(
+                //   `new mc answers: buttonidx=${buttonIdx}, grouping=${
+                //     grouping[buttonIdx]
+                //   },firstTermIdx=${
+                //     sectionList[this[buttonIdx].sectionIdx].firstTermIdx
+                //   },lastTermIdx=${
+                //     sectionList[this[buttonIdx].sectionIdx].lastTermIdx
+                //   }`
+                // );
               }
             }
           } catch (e) {
-            console.log(`Unexpected error calculating choice groupings`);
+            console.log(
+              `Unexpected error calculating choice groupings for button=${buttonIdx}. Error ${e}`
+            );
           } finally {
           }
           let correctButtonIdx: number = IDX_INITIALIZER;
@@ -805,7 +889,7 @@ class InlineButtonArray extends Array<IInlineButtonItem> {
                     ].nextTermIdx = nextTermForCurrentGrouping;
                     correctButtonIdx = IDX_INITIALIZER;
                   } else {
-                    console.log(`invalid correctButtonIdx`);
+                    console.log(`invalid correctButtonIdx=${correctButtonIdx}`);
                   }
                 } catch (e) {
                   console.log(`access violation buttonIdx=${buttonIdx}`);
