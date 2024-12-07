@@ -25,7 +25,8 @@ import {
   RecitationScopeEnumType,
   RecitationPlacementEnumType,
   RecitationReferenceEnumType,
-  RecitationListeningEnumType
+  RecitationListeningEnumType,
+  SentenceListItemEnumType
 } from "./pageContentType";
 import {
   ISpeechSettings,
@@ -115,15 +116,15 @@ export const SpeechMonitor = () => {
   // internal state triggered by corresponding cursor transition state changes
   // but detached so their state can be announced and acknowledged without
   // altering the cursor transition state that may be used elsewhere
-  const [announce_newSentence, setAnnounce_newSentence] = useState(false);
+  const [announce_nextSentence, setAnnounce_nextSentence] = useState(false);
   const [announce_beginningOfPage, setAnnounce_beginningOfPage] = useState(
     false
   );
-  const [announce_newSection, setAnnounce_newSection] = useState(false);
+  const [announce_nextSection, setAnnounce_nextSection] = useState(false);
   const resetAnnounce_transitions = () => {
     setAnnounce_beginningOfPage(false);
-    setAnnounce_newSection(false);
-    setAnnounce_newSentence(false);
+    setAnnounce_nextSection(false);
+    setAnnounce_nextSentence(false);
   };
   let settingsContext: ISettingsContext = useContext(SettingsContext)!;
   Synthesizer.volume = settingsContext.settings.speech.volume;
@@ -145,39 +146,107 @@ export const SpeechMonitor = () => {
   const beginningOfPage = useAppSelector(
     store => store.cursor_beginningOfPageReached
   );
-  const newSection = useAppSelector(store => store.cursor_newSectionTransition);
-  const newSentence = useAppSelector(
-    store => store.cursor_newSentenceTransition
+  const nextSection = useAppSelector(
+    store => store.cursor_nextSectionTransition
+  );
+  const nextSentence = useAppSelector(
+    store => store.cursor_nextSentenceTransition
+  );
+  const sentenceListeningTransition: SentenceListItemEnumType = useAppSelector(
+    store => store.sentence_type
   );
   const sectionIdx = useAppSelector(store => store.cursor_sectionIdx);
 
   useEffect(() => {
+    // translate cursor transition to announcement. Using local state variables
+    // so the can be reset independently of the reducer state variables using
+    // resetAnnounce_transitions() above.
+    console.log(`##transition=${nextSentence}, ${nextSection}`);
     setAnnounce_beginningOfPage(beginningOfPage);
-    setAnnounce_newSection(newSection);
-    setAnnounce_newSentence(newSentence);
-  }, [beginningOfPage, newSection, newSentence]);
+    setAnnounce_nextSection(nextSection);
+    setAnnounce_nextSentence(nextSentence);
+  }, [beginningOfPage, nextSection, nextSentence]);
 
   useEffect(() => {
-    let message: string = "";
-    if (announce_beginningOfPage) {
-      message = "beginning of page";
-      Synthesizer.speak(message);
-    } else if (announce_newSection) {
-      let sectionType: string = pageContext.sectionList[sectionIdx].type;
-      message = `new ${sectionType === "undefined" ? "section" : sectionType}`;
-      Synthesizer.speak(message);
-    } else if (announce_newSentence) {
-      message = "new sentence";
-      Synthesizer.speak(message);
+    // Listeningmessage dispatcher: Interprets the listening transition in the
+    // context a sentence transition that may coincide with a section/paragraph
+    // beginning or end of page transitions. An explicit listening transition
+    // overrides announce messages.
+    console.log(
+      `@@inside useEffect [${announce_beginningOfPage}, ${announce_nextSection}, ${announce_nextSentence}]`
+    );
+    /*
+    switch (sentenceListeningTransition) {
+      case SentenceListItemEnumType.default:
+        if (announce_beginningOfPage) {
+          // message = ;
+          Synthesizer.speak("beginning of page");
+        } else if (announce_nextSection) {
+          // console.log(`##section ${newSentenceTransition}`);
+          let sectionType: string = pageContext.sectionList[sectionIdx].type;
+          // message = ;
+          Synthesizer.speak(
+            `next ${sectionType === "undefined" ? "section" : sectionType}`
+          );
+        } else if (announce_nextSentence) {
+          console.log(`##message newSentence`);
+          // message = ;
+          Synthesizer.speak("next sentence");
+        } else {
+          //
+        }
+        // Synthesizer.speak(message);
+        break;
+      case SentenceListItemEnumType.multipleChoiceQuestion:
+        if (announce_nextSentence) {
+          Synthesizer.speak("choose the correct option");
+        }
+        break;
+      case SentenceListItemEnumType.multipleChoiceOption:
+        if (announce_nextSentence) {
+          Synthesizer.speak("choose the correct option");
+        }
+        break;
+      case SentenceListItemEnumType.model:
+        if (announce_nextSentence) {
+          Synthesizer.speak("repeat the prompt");
+        }
+        break;
+      default:
     }
+    */
     resetAnnounce_transitions();
-  }, [
-    announce_beginningOfPage,
-    announce_newSection,
-    announce_newSentence,
-    pageContext.sectionList,
-    sectionIdx
-  ]);
+    // console.log(`###newSentence=${message}`);
+
+    // if (announce_beginningOfPage) {
+    //   console.log(`##beginning`);
+    //   message = "beginning of page";
+    //   Synthesizer.speak(message);
+    // } else if (announce_newSection) {
+    //   console.log(`##section ${newSentenceTransition}`);
+    //   let sectionType: string = pageContext.sectionList[sectionIdx].type;
+    //   message = `new ${sectionType === "undefined" ? "section" : sectionType}`;
+    //   Synthesizer.speak(message);
+    // } else if (announce_newSentence) {
+    //   console.log(`##newSentence`);
+    //   switch (newSentenceTransition) {
+    //     case SentenceListItemEnumType.announce:
+    //       message = "next sentence";
+    //       break;
+    //     case SentenceListItemEnumType.choose:
+    //       message = "choose the correct option";
+    //       break;
+    //     case SentenceListItemEnumType.model:
+    //       message = "repeat the prompt";
+    //       break;
+    //     default:
+    //       message = "next sentence";
+    //   }
+    //   console.log(`###newSentence=${message}`);
+    //   Synthesizer.speak(message);
+    // } else {
+    //   console.log(`##else`);
+  }, [announce_beginningOfPage, announce_nextSection, announce_nextSentence]);
 
   const endOfPage = useAppSelector(store => store.cursor_endOfPageReached);
   useEffect(() => {
