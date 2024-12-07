@@ -64,6 +64,7 @@ import {
   useState,
   useContext
 } from "react";
+import { SentenceListItemEnumType } from "./pageContentType";
 import SpeechRecognition, {
   useSpeechRecognition
 } from "react-speech-recognition";
@@ -105,7 +106,9 @@ export const ListeningMonitor = React.memo(() => {
   const [previousMatchedTerminalIdx, setPreviousMatchedTerminalIdx] = useState(
     -1 as number
   );
-
+  const [nextSentenceAcknowledged, setNextSentenceAcknowledged] = useState(
+    false
+  );
   // To detect change of expectedTerminalIdx across invocations by setting
   // it to the current expected terminal idx before exiting listening
   // useEffect() and comparing it with the expectedTerminalIdx to define
@@ -169,9 +172,31 @@ export const ListeningMonitor = React.memo(() => {
       // console.log(`clearSilenceTimer: No timer to clear`);
     }
   };
+  const expectedTerminalIdx: number = useAppSelector(
+    store => store.cursor_terminalIdx
+  );
+  const nextSentence: boolean = useAppSelector(
+    store => store.cursor_nextSentenceTransition
+  );
+  const sentenceType: SentenceListItemEnumType = useAppSelector(
+    store => store.sentence_type
+  );
+  const reciteWordRequested = useAppSelector(
+    store => store.recite_word_requested
+  );
   ////////////////////////////////////
   // Start and stop listening manually
   ////////////////////////////////////
+  console.log(`listening=${listening},
+  interimTranscript=${interimTranscript},
+  finalTranscript=${finalTranscript},
+  expectedTerminalIdx=${expectedTerminalIdx},
+  previousMatchedTerminalIdx=${previousMatchedTerminalIdx},
+  nextSentence=${nextSentence}
+  listening=${listening}, listeningRequested=${listeningRequested}
+  wordRetries=${wordRetries},
+  reciteWordRequested=${reciteWordRequested}`);
+
   useEffect(() => {
     if (!listening && listeningRequested) {
       // console.log(`restart listening because browser eventually times out`);
@@ -180,7 +205,7 @@ export const ListeningMonitor = React.memo(() => {
       // );
       SpeechRecognition.startListening(ContinuousListeningInEnglish);
     }
-  }, [listening, listeningRequested, ContinuousListeningInEnglish]);
+  }, [listening, listeningRequested]);
   useEffect(() => {
     if (!listeningRequested) {
       dispatch(Request.Recognition_stop());
@@ -192,22 +217,30 @@ export const ListeningMonitor = React.memo(() => {
       startSilenceTimer();
     }
   }, [startSilenceTimer, listeningRequested, ContinuousListeningInEnglish]);
-  const newSentence: boolean = useAppSelector(
-    store => store.cursor_newSentenceTransition
-  );
   useEffect(() => {
-    if (newSentence) {
-      console.log(`LISTENING: new sentence transition`);
+    if (nextSentence) {
+      console.log(
+        `@@@listening: resetting transcripts on nextSentence=${nextSentence}`
+      );
+      resetTranscript();
       setWordRetries(0);
       setPreviousTranscript("");
+      setPreviousMatchedTerminalIdx(-1);
       setPreviousTranscriptMatchEndOffset(0);
-      resetTranscript();
+      setNextSentenceAcknowledged(false);
+      // if (sentenceType === SentenceListItemEnumType.default) {
+      //   //
+      // } else if (
+      //   sentenceType === SentenceListItemEnumType.multipleChoiceQuestion
+      // ) {
+      //   // dispatch(Request.Recognition_stop());
+      // } else {
+      //   console.log(`@LISTENING: sentenceTransition=${sentenceType}`);
+      // }
       if (stopListeningAtEOS) dispatch(Request.Recognition_stop());
+      return;
     }
-  }, [newSentence]);
-  const expectedTerminalIdx: number = useAppSelector(
-    store => store.cursor_terminalIdx
-  );
+  }, [nextSentence]);
   // useEffect(() => {
   //   console.log(`previousMatchedTerminalIdx=${previousMatchedTerminalIdx} changed
   //   expectedTerminalIdx=${expectedTerminalIdx}`);
@@ -220,9 +253,10 @@ export const ListeningMonitor = React.memo(() => {
   useEffect(() => {
     if (expectedTerminalIdx - previousMatchedTerminalIdx !== 1) {
       // Non-sequential word transition detected
-      // console.log(`Clearing transcripts because non-sequential word position detected:
-      //  expectedTerminalIdx=${expectedTerminalIdx},
-      //  previousMatchedTerminalIdx=${previousMatchedTerminalIdx}`);
+
+      console.log(`Clearing transcripts because non-sequential word position detected:
+       expectedTerminalIdx=${expectedTerminalIdx},
+       previousMatchedTerminalIdx=${previousMatchedTerminalIdx}`);
       setWordRetries(0);
       setPreviousTranscript("");
       setPreviousTranscriptMatchEndOffset(0);
@@ -250,16 +284,28 @@ export const ListeningMonitor = React.memo(() => {
     //   previousTranscript="${previousTranscript}",
     //   previousTranscriptMatchEndOffset=${previousTranscriptMatchEndOffset},
     //   expectedTerminalIdx=${expectedTerminalIdx},
-    //   newSentence=${newSentence}`
+    //   nextSentence=${nextSentence}`
     // );
-    //
+    ///////////////////// still does not solve issue
+    // After nextSentence, wait for pinterim and final transcripts to be reset
+    // if (nextSentence && !nextSentenceAcknowledged) {
+    //   console.log(`LISTENING: next sentence skipping `);
+    //   console.log(
+    //     `LISTENING: previousTranscript=${previousTranscript}  finalTranscript=${finalTranscript} interimTranscript=${interimTranscript}`
+    //   );
+    //   setNextSentenceAcknowledged(true);
+    //   resetTranscript();
+    //   return;
+    // }
+    /////////////////////
+
     let matchMessage: string = "";
     let isListening: boolean;
     let isDetectingNewTranscript: boolean;
     let isDetectingNewWordToMatch: boolean;
     // must have more transcript separated with blank
     let isScanningWords: boolean;
-    let isFinalTranscript: boolean = false;
+    // let isFinalTranscript: boolean = false;
     let transcript: string = "";
     let transcriptEndOffset: number = 0;
     //
@@ -269,25 +315,49 @@ export const ListeningMonitor = React.memo(() => {
     // e.g., "The", "The quick", "The quick brown",
     // interim transcript should be concatenated to the final transcript
     isDetectingNewTranscript = false;
-    isFinalTranscript = false;
+    // isFinalTranscript = false;
     if (isListening) {
-      // concatentate final transcript (if any) with interim transcript
-      if (finalTranscript.length > 0) {
-        transcript = finalTranscript;
-        if (interimTranscript.length > 0) {
-          transcript = transcript + " " + interimTranscript;
-        } else {
-          // do nothing more to transcript
-        }
+      if (nextSentence && !nextSentenceAcknowledged) {
+        // keep listening but reset transcript until interimTranscript and
+        // finalTranscript are finally reset.
+        setNextSentenceAcknowledged(true);
+        console.log(
+          `LISTENING: acknowledging next sentence skipping when interimTranscript=${interimTranscript} finalTranscript=${finalTranscript}`
+        );
+        transcript = "";
       } else {
-        transcript = interimTranscript;
+        // concatentate final transcript (if any) with interim transcript
+        // if (nextSentence) {
+        //   setWordRetries(0);
+        //   setPreviousTranscript("");
+        //   setPreviousTranscriptMatchEndOffset(0);
+        //   setPreviousMatchedTerminalIdx(-1);
+        //   resetTranscript();
+        //   transcript = "";
+        //   console.log(
+        //     `@@@ reset finalTranscript=${finalTranscript} interim=${interimTranscript}`
+        //   );
+        // }
+        // prioritize  final transcript before interim
+        // if (finalTranscript.length > 0) {
+        //   transcript = finalTranscript;
+        //   if (interimTranscript.length > 0) {
+        //     transcript = transcript + " " + interimTranscript;
+        //   } else {
+        //     // do nothing more to transcript
+        //   }
+        // } else {
+        //   transcript = interimTranscript;
+        // }
+        // transcript = transcript.toLowerCase();
+        transcript = (finalTranscript + " " + interimTranscript)
+          .trim()
+          .toLowerCase();
       }
-      transcript = transcript.toLowerCase();
-
-      isDetectingNewTranscript = previousTranscript !== transcript;
       console.log(
-        `LISTENING: transcript="${transcript}", isDetectingNewTranscript=${isDetectingNewTranscript}`
+        `LISTENING: transcript="${transcript}" finalTranscript=${finalTranscript} interimTranscript=${interimTranscript}`
       );
+      isDetectingNewTranscript = previousTranscript !== transcript;
     } else {
     }
     if (isListening && isDetectingNewTranscript)
@@ -672,11 +742,8 @@ export const ListeningMonitor = React.memo(() => {
     terminalList,
     expectedTerminalIdx,
     previousMatchedTerminalIdx,
-    newSentence
+    nextSentence
   ]);
-  const reciteWordRequested = useAppSelector(
-    store => store.recite_word_requested
-  );
   useEffect(() => {
     // console.log(`LISTENING: retries`);
     if (wordRetries > maxRetries + 1) {
@@ -709,7 +776,7 @@ export const ListeningMonitor = React.memo(() => {
       console.log("LISTENING: stopped listening at end of page");
       dispatch(Request.Recognition_stop());
     }
-  }, [listening, endOfPageReached, dispatch, resetTranscript]);
+  }, [listening, endOfPageReached]);
 
   if (SpeechRecognition.browserSupportsSpeechRecognition()) {
     // listenButton disallows listening already but just in case
