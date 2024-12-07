@@ -25,7 +25,7 @@ import {
 import { SentenceToBeRecited, WordsToBeRecited } from "./reactcomp_recite";
 // import { TerminalDispatcher } from "./reactcomp_terminals";
 import { ITerminalPropsType } from "./reactcomp_terminals";
-import { ISettingsContext, SettingsContext } from "./settingsContext";
+// import { ISettingsContext, SettingsContext } from "./settingsContext";
 import { CPageLists, PageContext } from "./pageContext";
 import InlineButtonChoice from "./img/button_inline_choice.png";
 import InlineButtonConverse from "./img/button_inline_converse.png";
@@ -35,11 +35,6 @@ import InlineButtonModel from "./img/button_inline_model.png";
 import InlineButtonDefault from "./img/button_recite.png";
 import BellShort from "./audio/bell_short.mp3";
 import BuzzerShort from "./audio/buzzer_short.mp3";
-// declare global {
-// interface Window {
-// AudioContext: typeof AudioContext;
-// webkitAudioContext: typeof AudioContext;
-// }
 export const TerminalInlineButton = React.memo(
   (props: ITerminalPropsType): any => {
     const enum actionStateEnumType {
@@ -51,7 +46,6 @@ export const TerminalInlineButton = React.memo(
       correctResponseStart = "correctResponseStart",
       correctResponse = "correctResponse",
       correctResponseEnd = "correctResponseEnd",
-      // incorrect = "incorrect",
       reciteStart = "reciteStart", // asynchronously
       reciting = "reciting",
       reciteEnd = "reciteEnd",
@@ -80,7 +74,6 @@ export const TerminalInlineButton = React.memo(
     const audioPlay = async (src: string) => {
       const context = new AudioContext();
       const source = context.createBufferSource();
-      // source.addEventListener("onended", onEndHandler);
       source.addEventListener("ended", event => {
         dispatch(Request.InlineButton_signaled());
         console.log(`signaled`);
@@ -109,6 +102,7 @@ export const TerminalInlineButton = React.memo(
     // const [currentAction, setCurrentAction] = useState(
     //   InlineButtonActionEnumType.none as InlineButtonActionEnumType
     // );
+    const [listeningActiveAlready, setListeningActiveAlready] = useState(false);
     const [nextActionState, setNextActionState] = useState(
       actionStateEnumType.end as actionStateEnumType
     );
@@ -119,37 +113,31 @@ export const TerminalInlineButton = React.memo(
     const listeningRequested = useAppSelector(
       store => store.inlinebutton_listen_requested
     );
-    // const newSentence = useAppSelector(
-    //   store => store.cursor_newSentenceTransition
-    // );
-    const newSection = useAppSelector(
-      store => store.cursor_newSectionTransition
+    const nextSentence = useAppSelector(
+      store => store.cursor_nextSentenceTransition
+    );
+    const nextSection = useAppSelector(
+      store => store.cursor_nextSectionTransition
     );
     const currentSectionIdx = useAppSelector(store => store.cursor_sectionIdx);
-    const listeningAlready = useAppSelector(store => store.listen_active);
+    const listeningActive = useAppSelector(store => store.listen_active);
     const reciteRequested = useAppSelector(
       store => store.inlinebutton_recite_requested
     );
     const signalRequested = useAppSelector(
       store => store.inlinebutton_signal_requested
     );
-    // correctSound.onended = () => {
-    //   dispatch(Request.InlineButton_signaled());
-    // };
-    // incorrectSound.onended = () => {
-    //   dispatch(Request.InlineButton_signaled());
-    // };
     useEffect(() => {
       if (buttonAction === InlineButtonActionEnumType.choice)
         setChoiceResponseSectionIdx(currentSectionIdx);
-    }, [newSection, currentSectionIdx]);
+    }, [nextSection, currentSectionIdx]);
     useEffect(() => {
       if (clickedButtonIdx === thisButtonIdx) {
         setNextActionState(actionStateEnumType.start);
       } else {
         setNextActionState(actionStateEnumType.end);
       }
-    }, [clickedButtonIdx]);
+    }, [clickedButtonIdx, thisButtonIdx]);
     // useEffect(() => {
     //   if (moveRequested) {
     //     const termIdx: number =
@@ -160,17 +148,29 @@ export const TerminalInlineButton = React.memo(
     //   }
     // }, [moveRequested, clickedButtonIdx]);
     useEffect(() => {
-      if (listeningRequested) {
+      if (clickedButtonIdx !== thisButtonIdx) return;
+      if (listeningRequested && !listeningActive) {
         dispatch(Request.Recognition_start());
       } else {
-        dispatch(Request.Recognition_stop());
+        // dispatch(Request.Recognition_stop());
       }
-    }, [listeningRequested]);
+      // if (!listeningActive && listeningRequested) {
+      //   dispatch(Request.Recognition_start());
+      // } else if (listeningActive && !listeningRequested) {
+      //   dispatch(Request.Recognition_stop());
+      // }
+    }, [listeningRequested, listeningActive, clickedButtonIdx, thisButtonIdx]);
     const choiceWorkflow = () => {
+      // The inline buttons should not change the flow of the prose. This includes the incorrect buttons that only signal the negative. However,
+      // when a correct button is clicked, it sounds a positive signal, moves
+      // the cursor to the beginning of that option and starts listening for
+      // for the user to start reciting the option. When complete, the cursor
+      // jumps to the next section/question. If the app will return the
+      // the listening state to that prior to the button being clicked.
       console.log(`@@@ nextActionState=${nextActionState}`);
       switch (nextActionState) {
         case actionStateEnumType.start:
-          setListeningStartedViaButton(false);
+          // setListeningStartedViaButton(false);
           setNextActionState(actionStateEnumType.signalStart);
           break;
         case actionStateEnumType.signalStart:
@@ -182,7 +182,7 @@ export const TerminalInlineButton = React.memo(
             } else {
               audioPlay(BuzzerShort);
             }
-            setNextActionState(actionStateEnumType.signaling);
+            setNextActionState(actionStateEnumType.signalEnd);
           }
           break;
         case actionStateEnumType.signaling:
@@ -201,14 +201,14 @@ export const TerminalInlineButton = React.memo(
         case actionStateEnumType.correctResponseStart:
           const termIdx: number =
             pageLists.inlineButtonList[clickedButtonIdx].termIdx;
-          dispatch(Request.InlineButton_move());
-          dispatch(Request.Cursor_gotoWordByIdx(termIdx));
+          console.log(`inlinebutton_move: move to termIdx=${termIdx}`);
+          dispatch(Request.InlineButton_move(termIdx));
           setNextActionState(actionStateEnumType.correctResponse);
           break;
         case actionStateEnumType.correctResponse:
           if (moveRequested) {
-            setNextActionState(actionStateEnumType.correctResponseEnd);
             dispatch(Request.InlineButton_moved());
+            setNextActionState(actionStateEnumType.correctResponseEnd);
           }
           break;
         case actionStateEnumType.correctResponseEnd:
@@ -217,12 +217,15 @@ export const TerminalInlineButton = React.memo(
           break;
         case actionStateEnumType.listenStart:
           // dispatch(Request.InlineButton_moved());
-          if (listeningAlready) {
-            // do nothing
-          } else {
-            // not already listening from before
-            setListeningStartedViaButton(true);
+          // save listening active state to restore at the end. So if the app
+          // was not already listening before the button push then then
+          // listening will be stopped at the end of this button push action.
+          setListeningActiveAlready(listeningActive);
+          if (!listeningActive) {
             dispatch(Request.Recognition_start());
+          } else {
+            // Explicitly reset listening transcript even though
+            // inlineButton_move should have caused a reset.
           }
           setNextActionState(actionStateEnumType.listening);
           break;
@@ -234,9 +237,9 @@ export const TerminalInlineButton = React.memo(
           }
           break;
         case actionStateEnumType.listenEnd:
-          if (listeningStartedViaButton) {
-            dispatch(Request.Recognition_stop());
-            setListeningStartedViaButton(false);
+          // reached the end of the response
+          if (!listeningActiveAlready) {
+            dispatch(Request.Recognition_start());
           }
           setNextActionState(actionStateEnumType.nextSection);
           break;
@@ -402,7 +405,7 @@ export const TerminalInlineButton = React.memo(
       nextActionState,
       currentSectionIdx,
       moveRequested,
-      listeningAlready,
+      listeningActive,
       listeningStartedViaButton,
       reciteRequested,
       signalRequested,
