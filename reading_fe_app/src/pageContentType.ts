@@ -8,7 +8,8 @@
  *
  **/
 export const IDX_INITIALIZER = -9999;
-export const PageContentVersion = "20241111.1";
+export const PageContentVersion = "20250109.1";
+// 20250109 - Added nextButtonIdx IInlineButtonItem
 // 20230916 - Modified inlineButtonItem.sectionIdx
 // 20240821 - Added inlineButtonItem.nextTermIdx
 // 20240817 - Added inlineButtonItem.endListIdx
@@ -1512,6 +1513,7 @@ export interface IInlineButtonItem {
   rate: number; // otherwise default to page, app settings
   voiceIndex: number;
   nextTermIdx: number;
+  nextButtonIdx: number;
   toBeRecited: string;
 }
 export function IInlineButtonItemInitializer(
@@ -1526,6 +1528,7 @@ export function IInlineButtonItemInitializer(
   rate = 1,
   voiceIndex = 0,
   nextTermIdx = IDX_INITIALIZER,
+  nextButtonIdx = IDX_INITIALIZER,
   toBeRecited = ""
 ): IInlineButtonItem {
   return {
@@ -1540,6 +1543,7 @@ export function IInlineButtonItemInitializer(
     rate,
     voiceIndex,
     nextTermIdx,
+    nextButtonIdx,
     toBeRecited
   };
 }
@@ -1623,7 +1627,8 @@ export enum PageRequestItemType {
   home = 1,
   pop = 2,
   link = 3,
-  urlParameter = 4
+  urlParameter = 4,
+  intrapage = 5
 }
 export interface IPageRequestItem {
   page: string;

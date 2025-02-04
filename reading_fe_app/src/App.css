@@ -1,7 +1,7 @@
 :root {
   --header-height: 50px;  /* consider expanding real estate to allow basic format changes (.e.g., font) */
   --footer-height: 50px;
-  --nav-width: 300px;
+  --nav-width: 250px;
 /*  --imageentry-min-image-width: 200px;
   --imageentry-min-image-height: 30vh;
   */
@@ -314,7 +314,7 @@ span.whitespace {
 }
 .settings-container {
   position: absolute;
-  top: 0px;
+  top: -15px; /* offset back from settingIcon */
   left: 0;
   z-index: 1050;
   width: 100%;
@@ -341,7 +341,7 @@ span.whitespace {
 }
 .settings {
   display: grid;
-  grid-template-rows: var(--header-height) auto 4px 60vh var(--footer-height);
+  grid-template-rows: var(--header-height) auto 4px 60vh ;
   vertical-align: top;
   background: white;
   margin: 1.75rem auto;
@@ -354,48 +354,98 @@ span.whitespace {
   display: grid;
   background-color: lightgray;
   grid-row: 1;
-  padding: 10px;
+/*  padding: 10px;
+*/
   font-size: 20px;
   user-select: none;
+  grid-template-columns: [title] auto  [okicon] var(--footer-height) [cancelicon] var(--footer-height);
+  align-items: center;
+}
+.header-title {
+  grid-column: title;
+  display: flex;
+  padding:10px
+}
+.header-grid-OK {
+  grid-column: okicon;
+  display: flex;
+  padding:10px
+}
+.header-grid-cancel {
+  grid-column: cancelicon;
+  display: flex;
+  padding:10px
+}
+.footer-grid-cancel {
+  grid-column: cancelicon;
+  display: flex;
+  padding:10px
 }
 .settings-tabControl-grid {
   display: grid;
   grid-row: 2;
   text-align: center;
   font-size: 18px;
-  grid-template-columns: 3;
+  grid-template-columns: 5;
   user-select: none;
 }
-.settings-tabControl-tab1 {
+.settings-tabControl-tab0 {
   padding-bottom: 5px;
   grid-column: 1;
 }
-.settings-tabControl-tab2 {
+.settings-tabControl-tab1 {
   padding-bottom: 5px;
   grid-column: 2;
 }
+.settings-tabControl-tab2 {
+  padding-bottom: 5px;
+  grid-column: 3;
+}
 .settings-tabControl-tab3 {
   padding-bottom: 5px;
-  grid-column: 3
+  grid-column: 4
+}
+.settings-tabControl-tab4 {
+  padding-bottom: 5px;
+  grid-column: 5
+}
+.settings-tabControl-tab5 {
+  padding-bottom: 5px;
+  grid-column: 6
 }
 .settings-tabControl-markers-grid {
   grid-row: 3;
   display: grid;
-  grid-template-columns: 3;
+  grid-template-columns: 5;
   vertical-align: top;
   user-select: none;
 }
-.settings-tabControl-marker1 {
+.settings-tabControl-marker0 {
   grid-column: 1;
   height: 3px;
 }
-.settings-tabControl-marker2 {
+.settings-tabControl-marker1 {
   grid-column: 2;
   height: 3px;
 }
-.settings-tabControl-marker3 {
+.settings-tabControl-marker2 {
   grid-column: 3;
   height: 3px;
+}
+.settings-tabControl-marker3 {
+  grid-column: 4;
+  height: 3px;
+}
+.settings-tabControl-marker4 {
+  grid-column: 5;
+  height: 3px;
+}
+.settings-tabControl-marker5 {
+  grid-column: 6;
+  height: 3px;
+}
+.settings-tabControl-marker0.active {
+  background-color: lightgray;
 }
 .settings-tabControl-marker1.active {
   background-color: lightgray;
@@ -406,13 +456,18 @@ span.whitespace {
 .settings-tabControl-marker3.active {
   background-color: lightgray;
 }
+.settings-tabControl-marker4.active {
+  background-color: lightgray;
+}
+.settings-tabControl-marker5.active {
+  background-color: lightgray;
+}
 .settings-grid-container {
   grid-row: 4;
   vertical-align: top;
   padding: 5px;
-  display: grid;
+  display: block;
   grid-template-rows: auto;
-  height: fit-content;
   overflow: auto;
 }
 .settings-content {
@@ -458,6 +513,14 @@ span.whitespace {
   grid-column-start: 3;
   vertical-align: top;
 }
+.settings-grid-col2-control-button {
+  grid-column-start: 4;
+  vertical-align: top;
+}
+.settings-grid-col2-control-button {
+  grid-column-start: 5;
+  vertical-align: top;
+}
 .settings-grid-section-footer {
   font-size: 14px;
   font-style: italic;
@@ -467,6 +530,13 @@ span.whitespace {
   user-select: none;
   vertical-align: top;
 }
+ .setting-obscured-text-example {
+   font-size: 20px;
+   padding: 5px;
+   background-color: light-gray;
+   border: 1px solid gray;
+   width: 50%;
+ }
 .stopAtEOS-checkbox-container {
   padding-left: 10px;
   font-size: 14px;
@@ -488,6 +558,9 @@ span.whitespace {
 }
 .rate-slider-container {
   width: 80%;
+}
+.opacity-slider-container {
+  width: 50%;
 }
 .slider-control {
   width: 100%;
@@ -660,6 +733,7 @@ span.whitespace {
 }
 .ticklist {
   display: flex;
+  text-align: center;
   grid-column-start: 2;
   grid-row-start: 2;
   font-size: 12px;
@@ -674,6 +748,14 @@ span.whitespace {
   padding: 2px
 }
 .settings-footer-buttonbar {
+}
+.settings-radiobutton {
+  font-size: 14px;
+  display: flex;
+  align-items:center;
+  padding-left: 10px;
+  cursor: pointer;
+  user-select: none;
 }
 h1 {
   border-top: solid;
@@ -720,7 +802,7 @@ ol {
   padding-top: 5px;
 }
 .recitation-radioButton {
-  font-size: 14px;
+    font-size: 14px;
   padding-left: 5px
 }
 input[type="radio"]{
@@ -887,6 +969,30 @@ max-height: inherit;
 }
 .terminal-block-word {
 }
+.sentence-lightgray {
+  color: rgba(0,0,0,1); ;
+  color: rgba(0,0,0,0.05);
+}
+.sentence-obscured-4 {
+  color: rgba(0,0,0,0);
+  text-shadow: 0 0 0px rgba(0,0,0,0);
+}
+.sentence-obscured-3 {
+  color: rgba(0,0,0,0);
+  text-shadow: 0 0 8px rgba(0,0,0,0.125);
+}
+.sentence-obscured-2 {
+  color: rgba(0,0,0,0);
+  text-shadow: 0 0 6px rgba(0,0,0,0.25);
+}
+.sentence-obscured-1 {
+  color: rgba(0,0,0,0);
+  text-shadow: 0 0 3px rgba(0,0,0,0.5);
+}
+.sentence-obscured-0 {
+  color: rgba(0,0,0,0);
+  text-shadow: 0 0 0px rgba(0,0,0,1);
+}
 .terminal-block-tag {
   font-style: italic;
   font-size: 75%;
@@ -915,7 +1021,7 @@ max-height: inherit;
   padding-right: 10px;
 }
 .fillin-prompts-terminal-hidden {
-  color: rgba(0,0,0,0.0); /* transparent */
+  color: rgba(0,0,0,0.0); /* transparent */ /* transparent */
 
 }
 .fillin-responses-attributes {
@@ -1081,7 +1187,7 @@ ol.multiple-choice > li > ol > li {
 }
 ol.multiple-choice > li > ol > li:before {
   content: counter(MC-level-2, lower-alpha) ".";
-  flex: 0 0 1.5em; /* defines flex-basis of space between li counter and button */
+  flex: 0 0 1em; /* defines flex-basis of space between li counter and button */
 }
 ol.multiple-choice > li > ol > li:after {
 }
@@ -1098,6 +1204,23 @@ padding-left: 5px;
 padding-top: 2px;
 padding-bottom: 2px;
 user-select: none;
+border-radius: 4px;
+padding-right: 5px;
+margin-right: 5px;
+padding-left: 5px;
+padding-top: 2px;
+padding-bottom: 2px;
+}
+.iniinebutton-format-round {
+  border-radius: 50%;
+  padding-right: 1px;
+  margin-right: 0px;
+  padding-left: 1px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+.inlinebutton-format-spacing-post {
+  padding-right: 5px
 }
 .inlinebutton-icon-container {
   display: inline-grid;
