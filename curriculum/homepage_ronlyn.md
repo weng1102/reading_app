@@ -1,4 +1,29 @@
 [[page: Ronlyn's Home Page, Ronlyn, Wen, 11/9/2022, Home Page,  /]]
+# What's new (January 2025)
+This section describes the latest additions and improvements to my reading companion.
+## Auditory Modeling feature 
+Auditory modeling is a technique used to improve my listening comprehension and speech. In general, aphasia modeling involves using visual, auditory, verbal cues to guide and produce speech. Specifically, this new feature incorporates oral cues that are initially shown, recited and then obscured to allow me to recount the model text rather than just rereading it aloud. This feature will be added to any appropriate content but should not change the existing reading method. The behavior of this feature can be modified via the settings dialog. I can practice modeling with the following:
+### Modeling 
+#### Sentences with images
+- [My Stroke Story](mystrokevc,page).
+- [My Strategies](mystrategies,page).
+- [Verbs with images](verbsimagesmodeling,page).
+#### Scene Narratives
+- [Hair Salon](scene_hairsalon,heading,25)
+- [Family Breakfast](scene_familybreakfast,heading,25)
+- [Kitchen Prep](scene_kitchenprep,heading,21)
+- [Yard Work](scene_yardwork,heading,24)
+- [Lunch Preparation](scene_boysandwich,heading,22)
+- [Pizza Dinner](scene_familypizza,heading,25)
+- [Kids Playing](scene_kidsswing,heading,25)
+### Sentences of differing lengths
+- [My Sentences](sentencebank_ronlyn,page)
+- [Three-word Sentences](3wordsentences,page)
+- [Four-word Sentences](4wordsentences,page)
+- [Five-word Sentences](5wordsentences,page)
+- [Six-word Sentences](6wordsentences,page)
+- [Seven-word Sentences](7wordsentences,page)
+- [Sentences with numbers](sentence_numbers,page)
 # Personal
 ## My Stroke Story
 [[image-entry: My stroke story, left, 20%]]
@@ -54,12 +79,12 @@ These exercises allow me to fill in sentences progressively.
 - [World Cities](sentcompletion_worldcities,page)
 # Applying Grammar
 ## Goal
-Improve my sentence formation by understanding the underlying syntax rules and patterns.  parts of speech and sentence structure.
+Improve my sentence production by understanding the underlying syntax rules and patterns, parts of speech and sentence structure.
 the sentence tenses (like past present, future), syntax rules and patterns (like arrangement, order).
 ## Rationale
-I can improve my sentence formation by relearning the rules by which sentences are constructed.
+I can improve my sentence production by relearning the rules by which sentences are constructed.
 ## Regimen
-I can practice my sentence formation everyday
+I can practice my sentence production everyday
 ## Exercises
 - [Parts of Speech](grammar_pos,page)
 - [Sentence Tense](grammar_tenses,page)
@@ -82,104 +107,92 @@ I can practice [filling in words](verbsimages,page) using flashcards.
 ![Verb flashcard mc](verbsimagesmc.jpg,,,,,verbsimagesmc,page)
 I can practice answering [multiple choice questions](verbsimagesmc,page) using flashcards.
 [[/image-entry]]
+## Modeling
+[[image-entry: Verb Flashcards modeling, left, 20%]]
+![Verb flashcard mc](verbsimagesmodeling.jpg,,,,,verbsimagesmodeling,page)
+I can practice modeling sentences [modeling related sentences](verbsimagesmodeling,page) using flashcards.
+[[/image-entry]]
 # Book Club Summaries
 ## Current 
-[[image-entry: Current book clubs, left, 10%]]
-![Never Lie](neverlie.jpg,,,,,booksummary_neverlie,page)
-### Never Lie
-* The Voices of Hope for Aphasia book club is reading [Never Lie](booksummary_neverlie,page) this Fall 2024.
-* Lauren Hoadley is hosting. 
-[[/image-entry]]
-## Stillhouse Lake
-[[image-entry: Current book clubs, left, 10%]]
-![Stillhouse Lake](stillhouselake.jpg,,,,,booksummary_stillhouselake,page)
-* The Boston University for Aphasia book club is reading [Stillhouse Lake](booksummary_stillhouselake,page) this Fall 2024.
-* Amanda Wong is hosting. 
-[[/image-entry]]
-
+None
 ## Past
 [[image-entry: Past book clubs, above, 10%]]
-![Lock Every Door](lockeverydoor.jpg,,,,,booksummary_lockeverydoor,page),![Shadow Diver](shadowdivers.jpg,,,,,booksummary_shadowdivers,page),![Lessons In Chemistry](lessonsinchemistry.jpg,,,,,booksummary_lessonsinchemistry,page),![I Must Betray You](imustbetrayyou.jpg,,,,,booksummary_imustbetrayyou,page),![Remarkably Bright Creatures](remarkablybrightcreatures.jpg,,,,,booksummary_remarkablybrightcreatures,page),![Shoe Dog](shoedog.jpg,,,,,booksummary_shoedog,page),![Last Liar Standing](lastliarstanding.jpg,,,,,booksummary_lastliarstanding,page),![Just Mercy](justmercy.jpg,,,,,booksummary_justmercy,page),![Ordinary Grace](ordinarygrace.jpg,,,,,booksummary_ordinarygrace,page),![Catch Me If You Can](mancalledove1.jpg,,,,,booksummary_mancalledove1,page),![A Man Called Ove](mancalledove1.jpg,,,,,booksummary_mancalledove1,page),![Mystery Guest](mysteryguest.jpg,,,,,booksummary_mysteryguest,page)
+![Lock Every Door](lockeverydoor.jpg,,,,,booksummary_lockeverydoor,page),![Shadow Diver](shadowdivers.jpg,,,,,booksummary_shadowdivers,page),![Lessons In Chemistry](lessonsinchemistry.jpg,,,,,booksummary_lessonsinchemistry,page),![I Must Betray You](imustbetrayyou.jpg,,,,,booksummary_imustbetrayyou,page),![Remarkably Bright Creatures](remarkablybrightcreatures.jpg,,,,,booksummary_remarkablybrightcreatures,page),![Shoe Dog](shoedog.jpg,,,,,booksummary_shoedog,page),![Last Liar Standing](lastliarstanding.jpg,,,,,booksummary_lastliarstanding,page),![Just Mercy](justmercy.jpg,,,,,booksummary_justmercy,page),![Ordinary Grace](ordinarygrace.jpg,,,,,booksummary_ordinarygrace,page),![Catch Me If You Can](mancalledove1.jpg,,,,,booksummary_mancalledove1,page),![A Man Called Ove](mancalledove1.jpg,,,,,booksummary_mancalledove1,page),![Mystery Guest](mysteryguest.jpg,,,,,booksummary_mysteryguest,page),![Never Lie](neverlie.jpg,,,,,booksummary_neverlie,page), ![Stillhouse Lake](stillhouselake.jpg,,,,,booksummary_stillhouselake,page).
+
 [[/image-entry]]
 # Scene Narratives
-Scene narratives allow me practice forming multiple sentences related to complex illustrated scenes. The scenes are decomposed into simpler subscenes. The illustrations have overlays of numbered headings that correspond to their respective subscene descriptions to afford me more structure, if necessary.
-These subscenes serve as the bases for sentence formation fill-in as well as reading exercises. 
+The scenes, illustrated narratives, consist of an illustration and related set of descriptive sentences. They allow me to practice sentence completion and production by describing complex scenes with different types of exercises. The scenes are decomposed into simpler subscenes. The illustrations have unique annotated overlays corresponding to their respective subscene descriptions. These annotations guide in identifying the appropriate sentences. In subsequent sections, these labels are selectively omitted to be more challenging. 
 ## Goal
-I want to improve my sentence formation. Scene narratives promote sentence formation by providing multiple-modal sentence completion progressions. 
+I want to improve my sentence production. 
 ## Rationale
-The scene narratives allow me to express ideas using multiple sentences. If I practice these exercises with multiple related sentences, my ability to form sentences can improve.
+These exercises can promote sentence production by applying a structured progression of multiple-modal word finding, sentence completion, reading comprehension, and sentence modeling to a scene, a set of related sentences. These scenes allow me to reinforce and ultimately develop better sentence production skills by practicing (and reinforcing) the following.
+### Reading
+I can practice with perfect oral execution for a group of related sentences. Annotations are available for the entire scene and for each subscene, respectively.
+### Fill-in
+I can practice finding words and constructing sentences for a group of related sentences. The possible ambiguity of the responses requires me to consider context and grammatical cues offered by the subscene description. Fill-in responses of entire scenes (labeled and unlabeled) have been omitted because the potentially confusing and overwhelming number of responses consolidated across all subscenes.
+### Multiple choice response
+I can practice my read comprehension for a group of related sentences. Since each question will be posed with specific context, subscenes (labeled or otherwise) will not be  needed.
+### Modeling 
+I can practice  producing (and not just reading) sentences for a group of related sentences. The exercise provides multi-modal cues (the visual and verbal) of the the accompanying text but obscures the text to prevent me from just reading it when responding.
+Subscenes (labeled or otherwise) seem redundant and will not be presented.
 ## Regimen
-I can practice these narratives each week.
+I can practice these narratives over the span of a week.
 ## Exercises
 ### Hair salon
 [[image-entry: Scene narratives, left, 20%]]
 ![Hair Salon](scene_hairsalon.jpg,,,,,scene_hairsalon,page)
-#### Sentence Formation Practice
-[Narrative Fill-ins with labels by subscenes](scene_hairsalon,heading,2) 
-#### Reading Practice
-[Narrative with labels by subscenes](scene_hairsalon,heading,8), [Narrative with labels](scene_hairsalon,heading,9), [Narrative  with labels by subscenes](scene_hairsalon,heading,10)
-#### Multiple Choice
-[Narratives with Multiple Choice](scene_hairsalon,heading,15)
+* [Reading](scene_hairsalon,heading,2)
+* [Fill-in](scene_hairsalon,heading,10)
+* [Multiple choice response](scene_hairsalon,heading,22)
+* [Modeling](scene_hairsalon,heading,25)
 [[/image-entry]]
 ### Family Breakfast
 [[image-entry: Scene narratives, left, 20%]]
 ![Family Breakfast](scene_familybreakfast.jpg,,,,,scene_familybreakfast,page)
-#### Sentence Formation Practice
-[Narrative fill-ins with labels by subscenes](scene_familybreakfast,heading,2) 
-#### Reading Practice
-[Narrative with labels by subscenes](scene_familybreakfast,heading,8), [Narrative with labels](scene_familybreakfast,heading,9), [Narrative with labels by subscenes](scene_familybreakfast,heading,10)
-#### Multiple Choice
-[Narratives with Multiple Choice](scene_familybreakfast,heading,14)
+* [Reading](scene_familybreakfast,heading,2)
+* [Fill-in](scene_familybreakfast,heading,10)
+* [Multiple choice response](scene_familybreakfast,heading,22)
+* [Modeling](scene_familybreakfast,heading,25)
 [[/image-entry]]
-### Kitchen Preparation
+### Kitchen Prep
 [[image-entry: Scene narratives, left, 20%]]
 ![Kitchen Prep](scene_kitchenprep.jpg,,,,,scene_kitchenprep,page)
-#### Sentence Formation Practice
-[Narrative fill-ins with labels by subscenes](scene_kitchenprep,heading,2) 
-#### Reading Practice
-[Narrative with labels by subscenes](scene_kitchenprep,heading,8), [Narrative with labels](scene_kitchenprep,heading,9), [Narrative  with labels by subscenes](scene_kitchenprep,heading,10)
-#### Multiple Choice
-[Narratives with Multiple Choice](scene_kitchenprep,heading,11)
+* [Reading](scene_kitchenprep,heading,2)
+* [Fill-in](scene_kitchenprep,heading,9)
+* [Multiple choice response](scene_kitchenprep,heading,19)
+* [Modeling](scene_kitchenprep,heading,21)
 [[/image-entry]]
 ### Yard Work
 [[image-entry: Scene narratives, left, 20%]]
-![Yark Work](scene_yardwork.jpg,,,,,scene_yardwork,page)
-#### Sentence Formation Practice
-[Narrative fill-ins with labels by subscenes](scene_yardwork,heading,2) 
-#### Reading Practice
-[Narrative with labels by subscenes](scene_yardwork,heading,8), [Narrative with labels](scene_yardwork,heading,9), [Narrative with labels by subscenes](scene_yardwork,heading,10)
-#### Multiple Choice
-[Narratives with Multiple Choice](scene_yardwork,heading,15)
+![Yard Work](scene_yardwork.jpg,,,,,scene_yardwork,page)
+* [Reading](scene_yardwork,heading,2)
+* [Fill-in](scene_yardwork,heading,10)
+* [Multiple choice response](scene_yardwork,heading,21)
+* [Modeling](scene_yardwork,heading,25)
 [[/image-entry]]
-### Lunch Preparation
+### Lunch Prep
 [[image-entry: Scene narratives, left, 20%]]
-![Lunch Preparation](scene_boysandwich.jpg,,,,,scene_boysandwich,page)
-#### Sentence Formation Practice
-[Narrative fill-ins with labels by subscenes](scene_boysandwich,heading,2) 
-#### Reading Practice
-[Narrative with labels by subscenes](scene_boysandwich,heading,8), [Narrative with labels](scene_boysandwich,heading,9), [Narrative with labels by subscenes](scene_boysandwich,heading,10)
-#### Multiple Choice
-[Narratives with Multiple Choice](scene_boysandwich,heading,13)
+![Yard Work](scene_boysandwich.jpg,,,,,scene_yardwork,page)
+* [Reading](scene_boysandwich,heading,2)
+* [Fill-in](scene_boysandwich,heading,9)
+* [Multiple choice response](scene_boysandwich,heading,19)
+* [Modeling](scene_boysandwich,heading,22)
 [[/image-entry]]
 ### Pizza Night
 [[image-entry: Scene narratives, left, 20%]]
 ![Pizza dinner](scene_familypizza.jpg,,,,,scene_familypizza,page)
-#### Sentence Formation Practice
-[Narrative fill-ins with labels by subscenes](scene_familypizza,heading,2) 
-#### Reading Practice
-[Narrative with labels by subscenes](scene_familypizza,heading,8), [Narrative with labels](scene_familypizza,heading,9), [Narrative with labels by subscenes](scene_familypizza,heading,10)
-#### Multiple Choice
-[Narratives with Multiple Choice](scene_familypizza,heading,15)
+* [Reading](scene_familypizza,heading,2)
+* [Fill-in](scene_familypizza,heading,10)
+* [Multiple choice response](scene_familypizza,heading,22)
+* [Modeling](scene_familypizza,heading,25)
 [[/image-entry]]
 ### Kids Playing
 [[image-entry: Scene narratives, left, 20%]]
-![Kids Playing](scene_kidsswing.jpg,,,,,scene_kidswinging,page)
-#### Sentence Formation Practice
-[Narrative fill-ins with labels by subscenes](scene_kidswinging,heading,2) 
-#### Reading Practice
-[Narrative with labels by subscenes](scene_kidswinging,heading,8), [Narrative with labels](scene_kidswinging,heading,9), [Narrative with labels by subscenes](scene_kidswinging,heading,10)
-#### Multiple Choice
-[Narratives with Multiple Choice](scene_kidswinging,heading,14)
+![Kids Playing](scene_kidsswing.jpg,,,,,scene_kidsswing,page)
+* [Reading](scene_kidsswing,heading,2)
+* [Fill-in](scene_kidsswing,heading,10)
+* [Multiple choice response](scene_kidsswing,heading,22)
+* [Modeling](scene_kidsswing,heading,25)
 [[/image-entry]]
 # Word Banks
 [[image-entry: Sentence Bank, left, 20%]]

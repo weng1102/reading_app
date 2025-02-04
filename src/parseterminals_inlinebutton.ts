@@ -175,6 +175,7 @@ export class TerminalNode_MLTAG_INLINEBUTTON extends TerminalNode_MLTAG_
             rate,
             undefined,
             undefined,
+            undefined,
             toBeRecited
           )
         ) - 1;

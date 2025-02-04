@@ -179,3 +179,48 @@ D1. Climbing up the slide
   1a. [button: choice, correct, , , css attributes/] She is wearing a lavender top.
   1a. [button: choice, , , , css attributes/] She is wearing a yellow top.
 [[/image-entry]]
+## Modeling Practice
+### Modeling Practice (labeled)
+[[image-entry: Scene narratives, left, 40%, shadow-box rounded-box]]
+![Kids Playing](scene_kidsswing.jpg, scene_kidsswing_overlay.png)
+A1. Visiting a public park
+  A1. [button: choice, , , , css attributes/] The family goes to the park.
+  A1. [button: choice, , , , css attributes/] The community library is in the background.
+  A1. [button: choice, , , , css attributes/] A flagpole is sitting in front of the building.
+  A1. [button: choice, , , , css attributes/] The play area is surrounded by green grass.
+A1. Swinging back and forth
+  A1. [button: choice, , , , css attributes/] The oldest daughter is riding on the swing.
+  A1. [button: choice, , , , css attributes/] She is wearing pink overalls and matching shoes.
+  A1. [button: choice, , , , css attributes/] Her father is pushing her.
+A1. Sliding down
+  A1. [button: choice, , , , css attributes/] The little girl is going down a blue slide.
+  A1. [button: choice, , , , css attributes/] She is holding her arms up while sliding.
+  A1. [button: choice, , , , css attributes/] She is wearing a floral top and purple shorts.
+A1. Climbing the up
+  A1. [button: choice, , , , css attributes/] The toddler is climbing the slide ladder.
+  A1. [button: choice, , , , css attributes/] He is wearing a blue shirt.
+  A1. [button: choice, , , , css attributes/] His mother is helping him get up the ladder.
+  A1. [button: choice, , , , css attributes/] She is wearing a lavender top.
+[[/image-entry]]
+### Modeling Practice (unlabeled)
+[[image-entry: Scene narratives, left, 40%, shadow-box rounded-box]]
+![Kids Playing](scene_kidsswing.jpg)
+A1. Visiting a public park
+  A1. [button: choice, , , , css attributes/] The family goes to the park.
+  A1. [button: choice, , , , css attributes/] The community library is in the background.
+  A1. [button: choice, , , , css attributes/] A flagpole is sitting in front of the building.
+  A1. [button: choice, , , , css attributes/] The play area is surrounded by green grass.
+A1. Swinging back and forth
+  A1. [button: choice, , , , css attributes/] The oldest daughter is riding on the swing.
+  A1. [button: choice, , , , css attributes/] She is wearing pink overalls and matching shoes.
+  A1. [button: choice, , , , css attributes/] Her father is pushing her.
+A1. Sliding down
+  A1. [button: choice, , , , css attributes/] The little girl is going down a blue slide.
+  A1. [button: choice, , , , css attributes/] She is holding her arms up while sliding.
+  A1. [button: choice, , , , css attributes/] She is wearing a floral top and purple shorts.
+A1. Climbing the up
+  A1. [button: choice, , , , css attributes/] The toddler is climbing the slide ladder.
+  A1. [button: choice, , , , css attributes/] He is wearing a blue shirt.
+  A1. [button: choice, , , , css attributes/] His mother is helping him get up the ladder.
+  A1. [button: choice, , , , css attributes/] She is wearing a lavender top.
+[[/image-entry]]

@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2025 Wen Eng - All Rights Reserved
  *
  * File name: parsesections_images.ts
  *
@@ -153,6 +153,11 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
           (<IImageTerminalMeta>terminal.meta).className =
             `imageentry-image-${this.meta.orientation.toString()} ` +
             frameFormat;
+          // console.log(
+          //   `terminal=${(<IImageTerminalMeta>terminal.meta).src} ${
+          //     (<IImageTerminalMeta>terminal.meta).overlay
+          //   }`
+          // );
           this.meta.images.push(terminal);
         }
       }

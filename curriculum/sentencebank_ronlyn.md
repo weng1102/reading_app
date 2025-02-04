@@ -10,65 +10,71 @@
 [Ten-word sentences](10wordsentences,page)
 
 ## Who am I
-- My name is Ronlyn Goo.
-- I am 60 years old.
-- I have a Bachelor's degree in Chemical Engineering from UC Berkeley.
-- I also have an MBA degree from Stanford.
-- I live at #20680# Seaton Ave.
-- My current occupation is stroke recovery.
-- My cell phone number is (408) 206-5963.
-- In case of emergency, please call Wen at (408) 267-6076.
+- [button: model, , , , css attributes/] My name is Ronlyn Goo.
+- [button: model, , , , css attributes/] I am 62 years old.
+- [button: model, , , , css attributes/] I have a Bachelor's degree in Chemical Engineering from UC Berkeley.
+- [button: model, , , , css attributes/] I also have an MBA degree from Stanford.
+- [button: model, , , , css attributes/] I live at #20680# Seaton Ave.
+- [button: model, , , , css attributes/] My current occupation is stroke recovery.
+- [button: model, , , , css attributes/] My cell phone number is (408) 206-5963.
+- [button: model, , , , css attributes/] In case of emergency, please call Wen at (408) 267-6076.
 
 ## What happened to me
-- I had a hemorrhagic stroke in 2015. A bleed in my head damaged my brain.
-- I was initially paralyzed on my right side and had severe aphasia.
-- Aphasia is the loss of language skills.
-- Each stroke victim is affected differently.
-- Survivors recover at different rates.
-- I could only say one word after my stroke.
-- I am starting to speak in sentences again.
-- I get frustrated when I cannot say what I am thinking.
-- I have problems with simple math and remembering things.
+- [button: model, , , , css attributes/] I had a hemorrhagic stroke in 2015. 
+- [button: model, , , , css attributes/] A bleed in my head damaged my brain.
+- [button: model, , , , css attributes/] I was initially paralyzed on my right side.
+- [button: model, , , , css attributes/] I also had severe aphasia.
+- [button: model, , , , css attributes/] Aphasia is the loss of language skills.
+- [button: model, , , , css attributes/] Each stroke victim is affected differently.
+- [button: model, , , , css attributes/] Survivors recover at different rates.
+- [button: model, , , , css attributes/] I could only say one word after my stroke.
+- [button: model, , , , css attributes/] I am starting to speak in sentences again.
+- [button: model, , , , css attributes/] I get frustrated when I cannot say what I am thinking.
+- [button: model, , , , css attributes/] I have problems with simple math and remembering things.
 
 ## My Family
-- My husband is named Wen.
-- We have been married 30 years.
-- We have two children, David and Robert.
+- [button: model, , , , css attributes/] My husband is named Wen.
+- [button: model, , , , css attributes/] We have been married over 30 years.
+- [button: model, , , , css attributes/] We have two children, David and Robert.
 ### David
-- David is 28 years old.
-- David graduated from Stanford with Bachelor and Master of Science degrees in Computer Science.
-- He lectured at Stanford while considering a PhD or startup.
-- He founded Bunker Hill Health in 2019. The company just closed a series A round of funding.
-- Bunker Hill enables the creation and distribution of computer vision, machine learning algorithms.
+- [button: model, , , , css attributes/] David is 30 years old.
+- [button: model, , , , css attributes/] David graduated from Stanford with Bachelor and Master of Science degrees in Computer Science.
+- [button: model, , , , css attributes/] He lectured at Stanford while considering a PhD or startup.
+- [button: model, , , , css attributes/] He founded Bunker Hill Health in 2019. 
+- [button: model, , , , css attributes/] His company just closed a Series A round of funding.
+- [button: model, , , , css attributes/] Bunker Hill enables the commercialization of medical imaging with AI.
 ### Robert
-- Robert is 26 years old.
-- He graduated from Caltech.
-- He earned Bachelor degrees in computer science and history.
-- He worked for startups called Project Affinity and Ikazi.
-- Robert founded Pylon. The company intends to create customer support services.
+- [button: model, , , , css attributes/] Robert is 28 years old.
+- [button: model, , , , css attributes/] He graduated from Caltech.
+- [button: model, , , , css attributes/] He earned Bachelor degrees in Computer Science and History.
+- [button: model, , , , css attributes/] Robert founded Pylon in 2023. 
+- [button: model, , , , css attributes/] Pylon closed a Series A round of funding in 2024. 
+- [button: model, , , , css attributes/] The company develops productivity app services.
 ### Extended family
-- Jaylynne is my younger sister. Her children are named Brandon and Caitie.
-- Stacy is my youngest sister too. Her son is named Caden.
+- [button: model, , , , css attributes/] Jaylynne is my younger sister. 
+- [button: model, , , , css attributes/] Her children are named Brandon and Caitie.
+- [button: model, , , , css attributes/] Stacy is my youngest sister. 
+- [button: model, , , , css attributes/] Her son is named Caden.
 ### Friends
-- Aruna Gambhir is my best friend.
-- Berna is my good friend too.
+- [button: model, , , , css attributes/] Aruna Gambhir was my best friend.
+- [button: model, , , , css attributes/] Berna is my good friend too.
 
 ## When I'm at home
 ### In the morning...
-- I wake up.
-- I get out of bed.
-- I go to the bathroom.
-- I get dressed.
-- I pull up my socks.
-- I strap on my brace.
-- I put on my shoes.
-- I put on my eyeglasses.
-- I brush my hair.
-- I brush my teeth.
-- I put on earrings.
-- I put on my watch.
-- I walk out to the kitchen.
-- I eat my breakfast.
+- [button: model, , , , css attributes/] I wake up.
+- [button: model, , , , css attributes/] I get out of bed.
+- [button: model, , , , css attributes/] I go to the bathroom.
+- [button: model, , , , css attributes/] I get dressed.
+- [button: model, , , , css attributes/] I pull up my socks.
+- [button: model, , , , css attributes/] I strap on my ankle brace.
+- [button: model, , , , css attributes/] I put on my shoes.
+- [button: model, , , , css attributes/] I put on my eyeglasses.
+- [button: model, , , , css attributes/] I brush my hair.
+- [button: model, , , , css attributes/] I brush my teeth.
+- [button: model, , , , css attributes/] I put on earrings.
+- [button: model, , , , css attributes/] I put on my watch.
+- [button: model, , , , css attributes/] I walk out to the kitchen.
+- [button: model, , , , css attributes/] I eat my breakfast.
 ### When I am hungry...
 - I get something to eat.
 - I eat breakfast.

@@ -231,9 +231,10 @@ export class PageParseNode extends ParseNode implements IPageContent {
       this.sectionList = this.userContext.sections;
 
       this.userContext.links.parse(
-        this.headingList.length,
-        this.sectionList.length,
-        this.terminalList.length
+        this.headingList,
+        this.sectionList,
+        // this.sentenceList,
+        this.terminalList
       );
       this.linkList = this.userContext.links;
 

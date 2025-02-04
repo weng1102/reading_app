@@ -2,201 +2,200 @@
 
 # My sentences
 
-1. I am here.
-1. I am there.
-1. I'm a woman.
-1. I can speak.
-1. I can bake.
-1. I can walk.
-1. I have Aphasia.
-1. I am impaired.
-1. I married Wen.
-1. He's my spouse.
-1. We're together forever.
-1. I'm in Saratoga.
-1. I'm on Seaton.
-1. We have children.
-1. David's our son.
-1. Robert's our son.
-1. I ride Paratransit.
-1. Ronlyn is here.
-1. I attend SPARC
-1. Wen drives me.
-1. We go shopping.
-1. We're a team.
-1. I like baking.
-1. I like painting.
+1. [button: model, , , , css attributes/] I am here.
+1. [button: model, , , , css attributes/] I am there.
+1. [button: model, , , , css attributes/] I'm a woman.
+1. [button: model, , , , css attributes/] I can speak.
+1. [button: model, , , , css attributes/] I can bake.
+1. [button: model, , , , css attributes/] I can walk.
+1. [button: model, , , , css attributes/] I have Aphasia.
+1. [button: model, , , , css attributes/] I am impaired.
+1. [button: model, , , , css attributes/] I married Wen.
+1. [button: model, , , , css attributes/] He's my spouse.
+1. [button: model, , , , css attributes/] We're together forever.
+1. [button: model, , , , css attributes/] I'm in Saratoga.
+1. [button: model, , , , css attributes/] I'm on Seaton.
+1. [button: model, , , , css attributes/] We have children.
+1. [button: model, , , , css attributes/] David's our son.
+1. [button: model, , , , css attributes/] Robert's our son.
+1. [button: model, , , , css attributes/] I ride Paratransit.
+1. [button: model, , , , css attributes/] Ronlyn is here.
+1. [button: model, , , , css attributes/] Wen drives me.
+1. [button: model, , , , css attributes/] We go shopping.
+1. [button: model, , , , css attributes/] We're a team.
+1. [button: model, , , , css attributes/] I like baking.
+1. [button: model, , , , css attributes/] I like painting.
 
 # Generic sentences
 
-1. I am here.
-1. He is here.
-1. She is here.
-1. It is here.
-1. You are here.
-1. They are here.
-1. Who is he?
-1. Who is she?
-1. Who is it?
-1. Who are you ?
-1. Who are they?
-1. Who is that?
-1. It is his.
-1. He said hello.
-1. She said hello.
-1. You said hello.
-1. They said hello.
-1. He said goodbye.
-1. She said goodbye.
-1. You said goodbye.
-1. They said goodbye.
-1. What is this?
-1. What is that?
-1. I can go.
-1. you can go.
-1. He can go.
-1. She can go.
-1. They can go.
-1. Who was first?
-1. Is that yours?
-1. Is that ours?
-1. Let's compare notes.
-1. Cows produce milk.
-1. Anything is possible!
-1. He is nice.
-1. She is nice.
-1. You are nice.
-1. They are nice.
-1. It's a map.
-1. I'm in town.
-1. We're with him.
-1. We're with her.
-1. We're with them.
-1. It is beautiful.
-1. The cat's happy.
-1. Yes, I know.
-1. Oh dear, sorry.
-1. Where's the brush?
-1. Any vegetables, sir?
-1. One moment, sir.
-1. This bottle's empty.
-1. Certainly, sir. Immediately.
-1. Here's the wine.
-1. Here you are.
-1. This water's warm.
-1. He's over there.
-1. Here's the bill.
-1. Here's a pound.
-1. This is bad.
-1. Where's the bell?
-1. Here it is.
-1. Yes, that's OK.
-1. It's Mrs. Smith's.
-1. Now once again.
-1. It's no good.
-1. Mrs. Smith's asleep.
-1. Close the door.
-1. What's your name?
-1. What's your address?
-1. Once again, please.
-1. Is that OK?
-1. It's Sunday afternoon.
-1. What's she carrying?
-1. He's going in!
-1. Where is Arthur?
-1. I am tired.
-1. He is tired.
-1. She is tired.
-1. You are tired.
-1. They are tired.
-1. Look at me.
-1. Look at him.
-1. Look at her.
-1. Look at you.
-1. Look at them.
-1. Where are they?
-1. I am downstairs.
-1. I must walk.
-1. Mary is there.
-1. You are late.
-1. What's the time?
-1. You are stupid!
-1. Where's my handbag?
-1. Perhaps he's ill.
-1. Thanks very much.
-1. Isn't that funny?
-1. The train's leaving.
-1. I'm thirsty too.
-1. Must I go?
-1. Three teas, please.
-1. Jennifer wants me.
-1. I am sorry.
-1. There's gasoline everywhere.
-1. It's nothing serious.
-1. Yes, you're right.
-1. Give it back!
-1. Now hurry up.
-1. It's Monday morning.
-1. You mean these?
-1. Wait a moment.
-1. He's happy again.
-1. I don't know.
-1. Come on, Mary.
-1. What about Saturday?
-1. Here's my diary.
-1. Hello, you two.
-1. See you tomorrow.
-1. Are there any?
-1. We'd like some.
-1. There you are.
-1. Yes, let's go.
-1. Where's the boat?
-1. Yes, I'm sorry.
-1. Never mind, Arthur.
-1. Here's the card.
-1. I remember now.
-1. Oh, I see.
-1. Yes, go on.
-1. Now, switch off.
-1. Now try again.
-1. Switch off again.
-1. Beautiful, isn't it?
-1. Yes, you're right.
-1. I suppose not.
-1. I get it.
-1. I'll take it.
-1. Oh, I remeber.
-1. It doesn't count.
-1. I'll park here.
-1. This was illegal.
-1. Shut up, Jennifer!
-1. Don't be rude!
-1. Come on, Arthur.
-1. Where's your money?
-1. What's happened now?
-1. Quite right too.
-1. I saw him.
-1. Say that again!
-1. Oh! My eye!
-1. Mr Steele's coming.
-1. He's my brother.
-1. Children are here.
-1. I learn English.
-1. They're nice people.
-1. I'm a student.
-1. Orange is food.
-1. Today is Wednewsday.
-1. I like ice-cream.
-1. I understand you.
-1. He likes us.
-1. Speak slowly, please.
-1. The train left.
-1. Winter is over.
-1. Sometimes I'm free.
-1. Everybody knows it.
-1. Is this important?
-1. Everybody loves talking.
-1. My bike disappeared.
-1. Boarding pass, please!
-1. What's your destination?
-1. Come here, immediatelly.
+1. [button: model, , , , css attributes/] I am here.
+1. [button: model, , , , css attributes/] He is here.
+1. [button: model, , , , css attributes/] She is here.
+1. [button: model, , , , css attributes/] It is here.
+1. [button: model, , , , css attributes/] You are here.
+1. [button: model, , , , css attributes/] They are here.
+1. [button: model, , , , css attributes/] Who is he?
+1. [button: model, , , , css attributes/] Who is she?
+1. [button: model, , , , css attributes/] Who is it?
+1. [button: model, , , , css attributes/] Who are you ?
+1. [button: model, , , , css attributes/] Who are they?
+1. [button: model, , , , css attributes/] Who is that?
+1. [button: model, , , , css attributes/] It is his.
+1. [button: model, , , , css attributes/] He said hello.
+1. [button: model, , , , css attributes/] She said hello.
+1. [button: model, , , , css attributes/] You said hello.
+1. [button: model, , , , css attributes/] They said hello.
+1. [button: model, , , , css attributes/] He said goodbye.
+1. [button: model, , , , css attributes/] She said goodbye.
+1. [button: model, , , , css attributes/] You said goodbye.
+1. [button: model, , , , css attributes/] They said goodbye.
+1. [button: model, , , , css attributes/] What is this?
+1. [button: model, , , , css attributes/] What is that?
+1. [button: model, , , , css attributes/] I can go.
+1. [button: model, , , , css attributes/] you can go.
+1. [button: model, , , , css attributes/] He can go.
+1. [button: model, , , , css attributes/] She can go.
+1. [button: model, , , , css attributes/] They can go.
+1. [button: model, , , , css attributes/] Who was first?
+1. [button: model, , , , css attributes/] Is that yours?
+1. [button: model, , , , css attributes/] Is that ours?
+1. [button: model, , , , css attributes/] Let's compare notes.
+1. [button: model, , , , css attributes/] Cows produce milk.
+1. [button: model, , , , css attributes/] Anything is possible!
+1. [button: model, , , , css attributes/] He is nice.
+1. [button: model, , , , css attributes/] She is nice.
+1. [button: model, , , , css attributes/] You are nice.
+1. [button: model, , , , css attributes/] They are nice.
+1. [button: model, , , , css attributes/] It's a map.
+1. [button: model, , , , css attributes/] I'm in town.
+1. [button: model, , , , css attributes/] We're with him.
+1. [button: model, , , , css attributes/] We're with her.
+1. [button: model, , , , css attributes/] We're with them.
+1. [button: model, , , , css attributes/] It is beautiful.
+1. [button: model, , , , css attributes/] The cat's happy.
+1. [button: model, , , , css attributes/] Yes, I know.
+1. [button: model, , , , css attributes/] Oh dear, sorry.
+1. [button: model, , , , css attributes/] Where's the brush?
+1. [button: model, , , , css attributes/] Any vegetables, sir?
+1. [button: model, , , , css attributes/] One moment, sir.
+1. [button: model, , , , css attributes/] This bottle's empty.
+1. [button: model, , , , css attributes/] Certainly, sir. Immediately.
+1. [button: model, , , , css attributes/] Here's the wine.
+1. [button: model, , , , css attributes/] Here you are.
+1. [button: model, , , , css attributes/] This water's warm.
+1. [button: model, , , , css attributes/] He's over there.
+1. [button: model, , , , css attributes/] Here's the bill.
+1. [button: model, , , , css attributes/] Here's a pound.
+1. [button: model, , , , css attributes/] This is bad.
+1. [button: model, , , , css attributes/] Where's the bell?
+1. [button: model, , , , css attributes/] Here it is.
+1. [button: model, , , , css attributes/] Yes, that's OK.
+1. [button: model, , , , css attributes/] It's Mrs. Smith's.
+1. [button: model, , , , css attributes/] Now once again.
+1. [button: model, , , , css attributes/] It's no good.
+1. [button: model, , , , css attributes/] Mrs. Smith's asleep.
+1. [button: model, , , , css attributes/] Close the door.
+1. [button: model, , , , css attributes/] What's your name?
+1. [button: model, , , , css attributes/] What's your address?
+1. [button: model, , , , css attributes/] Once again, please.
+1. [button: model, , , , css attributes/] Is that OK?
+1. [button: model, , , , css attributes/] It's Sunday afternoon.
+1. [button: model, , , , css attributes/] What's she carrying?
+1. [button: model, , , , css attributes/] He's going in!
+1. [button: model, , , , css attributes/] Where is Arthur?
+1. [button: model, , , , css attributes/] I am tired.
+1. [button: model, , , , css attributes/] He is tired.
+1. [button: model, , , , css attributes/] She is tired.
+1. [button: model, , , , css attributes/] You are tired.
+1. [button: model, , , , css attributes/] They are tired.
+1. [button: model, , , , css attributes/] Look at me.
+1. [button: model, , , , css attributes/] Look at him.
+1. [button: model, , , , css attributes/] Look at her.
+1. [button: model, , , , css attributes/] Look at you.
+1. [button: model, , , , css attributes/] Look at them.
+1. [button: model, , , , css attributes/] Where are they?
+1. [button: model, , , , css attributes/] I am downstairs.
+1. [button: model, , , , css attributes/] I must walk.
+1. [button: model, , , , css attributes/] Mary is there.
+1. [button: model, , , , css attributes/] You are late.
+1. [button: model, , , , css attributes/] What's the time?
+1. [button: model, , , , css attributes/] You are stupid!
+1. [button: model, , , , css attributes/] Where's my handbag?
+1. [button: model, , , , css attributes/] Perhaps he's ill.
+1. [button: model, , , , css attributes/] Thanks very much.
+1. [button: model, , , , css attributes/] Isn't that funny?
+1. [button: model, , , , css attributes/] The train's leaving.
+1. [button: model, , , , css attributes/] I'm thirsty too.
+1. [button: model, , , , css attributes/] Must I go?
+1. [button: model, , , , css attributes/] Three teas, please.
+1. [button: model, , , , css attributes/] Jennifer wants me.
+1. [button: model, , , , css attributes/] I am sorry.
+1. [button: model, , , , css attributes/] There's gasoline everywhere.
+1. [button: model, , , , css attributes/] It's nothing serious.
+1. [button: model, , , , css attributes/] Yes, you're right.
+1. [button: model, , , , css attributes/] Give it back!
+1. [button: model, , , , css attributes/] Now hurry up.
+1. [button: model, , , , css attributes/] It's Monday morning.
+1. [button: model, , , , css attributes/] You mean these?
+1. [button: model, , , , css attributes/] Wait a moment.
+1. [button: model, , , , css attributes/] He's happy again.
+1. [button: model, , , , css attributes/] I don't know.
+1. [button: model, , , , css attributes/] Come on, Mary.
+1. [button: model, , , , css attributes/] What about Saturday?
+1. [button: model, , , , css attributes/] Here's my diary.
+1. [button: model, , , , css attributes/] Hello, you two.
+1. [button: model, , , , css attributes/] See you tomorrow.
+1. [button: model, , , , css attributes/] Are there any?
+1. [button: model, , , , css attributes/] We'd like some.
+1. [button: model, , , , css attributes/] There you are.
+1. [button: model, , , , css attributes/] Yes, let's go.
+1. [button: model, , , , css attributes/] Where's the boat?
+1. [button: model, , , , css attributes/] Yes, I'm sorry.
+1. [button: model, , , , css attributes/] Never mind, Arthur.
+1. [button: model, , , , css attributes/] Here's the card.
+1. [button: model, , , , css attributes/] I remember now.
+1. [button: model, , , , css attributes/] Oh, I see.
+1. [button: model, , , , css attributes/] Yes, go on.
+1. [button: model, , , , css attributes/] Now, switch off.
+1. [button: model, , , , css attributes/] Now try again.
+1. [button: model, , , , css attributes/] Switch off again.
+1. [button: model, , , , css attributes/] Beautiful, isn't it?
+1. [button: model, , , , css attributes/] Yes, you're right.
+1. [button: model, , , , css attributes/] I suppose not.
+1. [button: model, , , , css attributes/] I get it.
+1. [button: model, , , , css attributes/] I'll take it.
+1. [button: model, , , , css attributes/] Oh, I remember.
+1. [button: model, , , , css attributes/] It doesn't count.
+1. [button: model, , , , css attributes/] I'll park here.
+1. [button: model, , , , css attributes/] This was illegal.
+1. [button: model, , , , css attributes/] Shut up, Jennifer!
+1. [button: model, , , , css attributes/] Don't be rude!
+1. [button: model, , , , css attributes/] Come on, Arthur.
+1. [button: model, , , , css attributes/] Where's your money?
+1. [button: model, , , , css attributes/] What's happened now?
+1. [button: model, , , , css attributes/] Quite right too.
+1. [button: model, , , , css attributes/] I saw him.
+1. [button: model, , , , css attributes/] Say that again!
+1. [button: model, , , , css attributes/] Oh! My eye!
+1. [button: model, , , , css attributes/] Mr Steele's coming.
+1. [button: model, , , , css attributes/] He's my brother.
+1. [button: model, , , , css attributes/] Children are here.
+1. [button: model, , , , css attributes/] I learn English.
+1. [button: model, , , , css attributes/] They're nice people.
+1. [button: model, , , , css attributes/] I'm a student.
+1. [button: model, , , , css attributes/] Orange is food.
+1. [button: model, , , , css attributes/] Today is Wednewsday.
+1. [button: model, , , , css attributes/] I like ice-cream.
+1. [button: model, , , , css attributes/] I understand you.
+1. [button: model, , , , css attributes/] He likes us.
+1. [button: model, , , , css attributes/] Speak slowly, please.
+1. [button: model, , , , css attributes/] The train left.
+1. [button: model, , , , css attributes/] Winter is over.
+1. [button: model, , , , css attributes/] Sometimes I'm free.
+1. [button: model, , , , css attributes/] Everybody knows it.
+1. [button: model, , , , css attributes/] Is this important?
+1. [button: model, , , , css attributes/] Everybody loves talking.
+1. [button: model, , , , css attributes/] My bike disappeared.
+1. [button: model, , , , css attributes/] Boarding pass, please!
+1. [button: model, , , , css attributes/] What's your destination?
+1. [button: model, , , , css attributes/] Come here, immediatelly.

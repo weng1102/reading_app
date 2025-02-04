@@ -609,3 +609,92 @@ Transcript of recording
 1a. What was PL’s motive for murder? Were PL’s actions justified? 
 1a. What was Adrienne’s motive for murder? Were Adrienne’s actions justified? 
 1a. Which character do you like LESS? PL or Adrienne? Why? 
+# Chapters 49 - Epilogue
+## Characters
+* Adrienne – Psychiatrist who mysteriously disappeared 
+* EJ/Edward Jamison – Adrienne’s patient who she killed 
+* Luke – Adrienne’s love interest 
+* Tricia/Patricia Lawton/PL – Main character; Adrienne’s patient who faked PTSD 
+* Ethan – Tricia’s husband 
+* Judy – Tricia’s real estate agent 
+* GW/“Gail Wiley” – Adrienne’s patient with paranoia and Ethan’s mother 
+* Delilah – Tricia and Ethan’s daughter 
+## Summary
+### Chapter 49 Adrienne - past 
+* By now, EJ (also known as Edward Jamison) has been dead for four months. The smell in Adrienne’s office was disgusting at first. The police never questioned Adrienne about EJ’s disappearance. 
+* Adrienne has been on a book tour for the last month. Her book, The Anatomy of Fear, is #8 on the New York Times bestseller list. 
+* Adrienne arrives at the free clinic to see patients. She finds Luke doing a software update. Adrienne and Luke say they miss each other. Adrienne lies and says she got rid of EJ by paying him. 
+* Adrienne and Luke make dinner plans for tonight. Luke plans to pick Adrienne up at her house at 9 PM. 
+* Adrienne gets home from the clinic at 8 PM. Patricia is waiting outside. Patricia is nervous about being caught for kidnapping EJ. Patricia asks Adrienne what she did with EJ’s body. Adrienne refuses to talk about it. 
+* Adrienne says they just need to keep this a secret. Patricia says the only way two people can keep a secret is if one of them is dead. Then Patricia bites Adrienne’s arm. 
+### Chapter 50 Tricia - present day 
+* Tricia thinks about all the people she has killed, including Adrienne. Tricia killed Adrienne and buried her body a few hours away. 
+* Tricia still needed to find and dispose of EJ’s body, but she didn’t have time to search for it. The police were at Adrienne’s the morning after she disappeared. The police never found EJ’s body. 
+* A few years go by. Tricia meets and marries Ethan. Then, Tricia notices Adrienne’s house is for sale. Tricia worries that someone might come across EJ’s body. 
+* Tricia made a plan to visit Adrienne’s house during the blizzard. She knew this would give her a few days to search for EJ’s body. 
+* Now, Tricia has to deal with Luke. Luke knows there is a dead body in the house. He also knows it is not Adrienne’s body. 
+### Chapter 51 Tricia - present day 
+* After over an hour, Ethan finally returns to the house. Ethan found cell reception near the main road. He called a snow plow company, who will come help tomorrow morning. 
+### Chapter 52 Tricia - present day 
+* Tricia and Ethan hear Luke shouting. Luke pleads for some water. Tricia wants to help Luke, but Ethan refuses. Ethan still thinks that Luke killed Adrienne. Tricia and Ethan head upstairs to bed. 
+### Chapter 53 Tricia - present day 
+* Tricia wakes up alone in the middle of the night. She finds Ethan downstairs by the fireplace. Ethan burns the tapes parked “GW”. GW is Gail Wiley, Ethan’s mother. 
+* Tricia has always known who Gail is. Tricia used to run into Gail at Adrienne’s office. Tricia remembers hearing about Gail’s “untimely death”. Gail fell down the stairs, leaving Ethan with a big insurance payout. 
+* After that, Tricia became very interested in Ethan. She planned their first meeting very carefully. 
+* Tricia thinks about why she brought Ethan on this trip. She hoped Ethan would finally confess about what he did to his mother. 
+* Tricia tells Ethan she listened to Gail’s tapes. Ethan finally confesses that he killed Gail. 
+### Chapter 54 
+Tricia - present day 
+* Ethan explains that his mother was awful. She was a paranoid alcoholic for most of his life. Plus, he really needed the insurance money. 
+* Tricia tells Ethan the truth about everything. She starts with the murders at the cabin and ends with Adrienne’s murder. Tricia is nervous about how Ethan will react. 
+* Ethan says that Luke knows too much. Ethan decides to take care of Luke himself. Ethan grabs a carving knife and walks toward Adrienne’s office… 
+### Epilogue Two years later 
+* Two years later, Ethan and Tricia have a daughter named Delilah. 
+* Tricia and Ethan bought Adrienne’s house for full price. They did not want Judy showing the house to anyone else and potentially discovering its secrets. Now, Tricia is pregnant again. 
+* Tricia looks at a patch of grass where Luke is buried. The grass didn’t grow here for a year, but now the patch is greener than ever. EJ’s body is buried a few feet away. 
+* Tricia thinks about her love for Ethan and their secrets. She sometimes wonders if Ethan will crack under pressure if people ask questions. If this happens, Tricia is prepared to take care of the situation...
+## Multiple Choice Questions 
+1a. Which character killed Adrienne? 
+  1a. Luke 
+  1a. Patricia 
+  1a. Ethan 
+  1a. Judy 
+1a. What confession does Ethan make? 
+  1a. He is bankrupt. 
+  1a. He has another wife. 
+  1a. He is living under a stolen identity. 
+  1a. He killed his mother. 
+1a. What happens to Luke? 
+  1a. Luke escapes. 
+  1a. Luke is taken by the police for questioning. 
+  1a. Luke is killed. 
+  1a. Luke is left in Adrienne’s office. 
+1a. TRUE OR FALSE: Tricia and Ethan happily buy Adrienne’s house. 
+  1a. TRUE 
+  1a. FALSE 
+## Discussion Questions 
+* The book is called Never Lie, hinting there is a theme of lying throughout the book. Rate each character’s tendency to lie using the scale. 
+
+* For each character, write a number rating (1 - 5) and explain why. 
+  * Tricia: 
+  * Adrienne: 
+  * Ethan: 
+  * EJ: 
+  * Luke: 
+* Did you like the ending of Never Lie? Why or why not? 
+* If you could rewrite the ending, how would you end things for the following characters: 
+  * Tricia: 
+  * Adrienne: 
+  * Ethan: 
+  * EJ: 
+  * Luke: 
+* What was your opinion about Tricia at the beginning and middle of the book? Did you still like Tricia by the end? 
+* In the last passage, Tricia says she is “prepared to take care of the situation”, referring to Ethan. What do you think Tricia means by this? 
+* Which character did you like the MOST? The LEAST? Why? 
+  * Tricia 
+  * Adrienne 
+  * Ethan 
+  * EJ
+  * Luke 
+* I liked _______________ the most because ______________________ ____________________________. 
+* I liked _______________ the least because ______________________ ___________________________.

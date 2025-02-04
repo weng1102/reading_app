@@ -1,71 +1,47 @@
-[[page: Hair Salon Narrative Fill-ins and Q&A Multiple Choice,, Wen,, Fillins, /]]
-# Hair salon 
-This scene narrative allow me to practice describing complex illustrated scene. The scene is decomposed into simpler subscenes. These subscenes are identified by overlays with corresponding subscene labels. These subscenes serve as the bases for sentence fill-in and reading exercises that promote sentence formation.
-## Sentence Formation Practice
-### Subscene Narratives with Fill-ins (labeled)
-The subscene narrative fill-ins lets me practice forming sentences that describe a single illustration. The illustration has overlays of numbered headings that correspond to the subscene descriptions to afford me more structure, if necessary.
+[[page: Hair Salon Scene Narrative,, Wen,, Scenes, /]]
+# Hair Salon Scene Narrative
+Within each type of exercise (reading, fill-in, multiple choice and modeling), the scene and it corresponding subscenes (labeled and unlabeled) are ordered to offer more challenge by broadening the scope (from subscenes to entire scene) and eliminating overlaid visual cues.
+## Links within page
+* [Reading](, heading,2): [Subscenes (labeled)](, heading, 3), [Scene (labeled)](,heading,8), [Scene and Subscenes (unlabeled)](,heading,9)
+* [Fill-in](, heading,10): [Subscenes (labeled)](, heading, 11), [Subscenes (unlabeled)](,heading, 16)
+* [Multiple Choice Response](, heading,22): [Scene (unlabeled)](,heading, 24)
+* [Modeling](, heading,25): [Subscenes (labeled)](,heading,26), [Scene (labeled)](,heading, 27), [Scene and Subscenes (unlabeled)](,heading, 28)
+## Reading
+The following Reading exercise lets me practice perfect oral execution for a group of related sentences. 
+### Subscenes (labeled)
 #### Going to get a haircut
-[[image-entry: Scene narratives, left, 40%, shadow-box rounded-box]]
+[[image-entry: Going to get a haircut, left, 40%, shadow-box rounded-box]]
 ![Hair Salon](scene_hairsalon.jpg, scene_hairsalon_overlayA.png)
-[[fillin: gridInOrder, true, 1, true,, Recite the following prompts about the image:, grid, 6, insert, true, true, true, true, true, false]]
-A1. Going to get a haircut
-  A1. A [_man=(noun)_] is [_getting=(verb)_] a [_haircut=(noun)_].
-  A1. The [_man=(noun)_] is [_wearing=(verb)_] a [_yellow=(adjective)_] [_shirt=(noun)_] and [_blue=(adjective)_] [_jeans=(noun)_]. 
-  A1. [_He=(pronun)_] is [_walking=(verb)_] onto=(preposition) the [_sidewalk=(noun)_] [_from=(preposition)_] the [_street=(noun)_].
-[[/fillin]]
-[[/image-entry]]
-#### Finding Ann's hair salon
-[[image-entry: Scene narratives, left, 40%, shadow-box rounded-box]]
-![Hair Salon](scene_hairsalon.jpg, scene_hairsalon_overlayB.png)
-[[fillin: gridInOrder, true, 1, true,, Recite the following prompts about the image:, grid, 6, insert, true, true, true, true, true, false]]
-B1. Finding Ann's hair salon
-  B1. The [_storefront=(noun)_] has [_large=(adjective)_] glass [_windows=(noun)_]. 
-  B1. The front [_door=(noun)_] is [_red=(adjective)_].
-  B1. A welcome [_mat=(noun)_] [_sits=(verb)_] [_below=(preposition)_] the [_door=(noun)_].
-[[/fillin]]
-[[/image-entry]]
-#### Cutting hair
-[[image-entry: Scene narratives, left, 40%, shadow-box rounded-box]]
-![Hair Salon](scene_hairsalon.jpg, scene_hairsalon_overlayC.png)
-[[fillin: gridInOrder, true, 1, true,, Recite the following prompts about the image:, grid, 6, insert, true, true, true, true, true, false]]
-C1. Cutting hair
-  C1. The hair stylist is [_wearing=(verb)_] a [_yellow=(adjective)_] [_dress=(noun)_]. 
-  C1. [_She=(pronoun)_]  is [_standing=(verb)_] [_over=(preposition)_] a [_client=(noun)_].
-  C1. [_She=(pronoun)_] is [_cutting=(verb)_] a client's [_long=(adjective)_] [_hair=(noun)_]. 
-[[/fillin]]
-[[/image-entry]]
-#### Waiting for a haircut
-[[image-entry: Scene narratives, left, 40%, shadow-box rounded-box]]
-![Hair Salon](scene_hairsalon.jpg, scene_hairsalon_overlayD.png)
-[[fillin: gridInOrder, true, 1, true,, Recite the following prompts about the image:, grid, 6, insert, true, true, true, true, true, false]]
-D1. Waiting for a haircut
-  D1. Another [_man=(noun)_] is [_waiting=(verb)_].
-  D1. [_He=(pronoun)_] is [_wearing=(verb)_] an [_orange=(adjective)_] [_shirt=(noun)_].
-  D1. [_He=(pronoun)_] is [_reading=(verb)_] a [_magazine=(noun)_]. 
-[[/fillin]]
-[[/image-entry]]
-## Sentence Reading Practice
-The labeled narrative lets me practice reading multiple sentences that describe a single illustration.
-### Scene Narrative (unlabeled)
-[[image-entry: Scene narratives, left, 40%, shadow-box rounded-box]]
-![Hair Salon](scene_hairsalon.jpg)
 A1. Going to get a haircut
   A1. A man is getting a haircut.
   A1. The man is wearing a yellow shirt and blue jeans. 
   A1. He is walking onto the sidewalk from the street. 
-A1. Finding Ann's hair salon
-  A1. The storefront has large glass windows. 
-  A1. The front door is red.
-  A1. A welcome mat sits below the door.
-A1. Cutting hair
-  A1. The hair stylist is wearing a yellow dress. 
-  A1. She is cutting a client's long hair. 
-A1. Waiting for a haircut
-  A1. Another man is waiting. 
-  A1. He is wearing an orange shirt.
-  A1. He is reading a magazine. 
 [[/image-entry]]
-### Scene Narrative (labeled)
+#### Finding Ann's hair salon
+[[image-entry: Finding hair salon, left, 40%, shadow-box rounded-box]]
+![Hair Salon](scene_hairsalon.jpg, scene_hairsalon_overlayB.png)
+B1. Finding Ann's hair salon
+  B1. The storefront has large glass windows. 
+  B1. The front door is red.
+  B1. A welcome mat sits below the door.
+[[/image-entry]]
+#### Cutting hair
+[[image-entry: Cutting hair, left, 40%, shadow-box rounded-box]]
+![Hair Salon](scene_hairsalon.jpg, scene_hairsalon_overlayC.png)
+C1. Cutting hair
+  C1. The hair stylist is wearing a yellow dress. 
+  C1. She is standing over a client.
+  C1. She is cutting a client's long hair. 
+[[/image-entry]]
+#### Waiting for a haircut
+[[image-entry: Waiting for a haircut, left, 40%, shadow-box rounded-box]]
+![Hair Salon](scene_hairsalon.jpg, scene_hairsalon_overlayD.png)
+D1. Waiting for a haircut
+  D1. Another man is waiting. 
+  D1. He is wearing an orange shirt.
+  D1. He is reading a magazine. 
+[[/image-entry]]
+### Scene (labeled)
 [[image-entry: Scene narratives, left, 40%, shadow-box rounded-box]]
 ![Hair Salon](scene_hairsalon.jpg, scene_hairsalon_overlay.png)
 A1. Going to get a haircut
@@ -84,41 +60,115 @@ A1. Waiting for a haircut
   A1. He is wearing an orange shirt.
   A1. He is reading a magazine. 
 [[/image-entry]]
-### Subscene Narrative (labeled)
-#### Going to get a haircut
-[[image-entry: Scene narratives, left, 40%, shadow-box rounded-box]]
-![Hair Salon](scene_hairsalon.jpg, scene_hairsalon_overlayA.png)
+### Scene and Subscenes (unlabeled)
+[[image-entry: Scene labeled, left, 40%, shadow-box rounded-box]]
+![Hair Salon](scene_hairsalon.jpg)
 A1. Going to get a haircut
   A1. A man is getting a haircut.
   A1. The man is wearing a yellow shirt and blue jeans. 
   A1. He is walking onto the sidewalk from the street. 
+A1. Finding Ann's hair salon
+  A1. The storefront has large glass windows. 
+  A1. The front door is red.
+  A1. A welcome mat sits below the door.
+A1. Cutting hair
+  A1. The hair stylist is wearing a yellow dress. 
+  A1. She is cutting a client's long hair. 
+A1. Waiting for a haircut
+  A1. Another man is waiting. 
+  A1. He is wearing an orange shirt.
+  A1. He is reading a magazine. 
+[[/image-entry]]
+## Fill-in
+The Fill-in exercise below lets me practice finding words and constructing sentences for a group of related sentences.
+### Subscenes (labeled)
+#### Going to get a haircut
+[[image-entry: Going to get a haircut, left, 40%, shadow-box rounded-box]]
+![Hair Salon](scene_hairsalon.jpg, scene_hairsalon_overlayA.png)
+[[fillin: gridInOrder, true, 1, true,, Recite the following prompts about the image:, grid, 6, insert, true, true, true, true, true, false]]
+A1. Going to get a haircut
+  A1. A [_man=(noun)_] is [_getting=(verb)_] a [_haircut=(noun)_].
+  A1. The [_man=(noun)_] is [_wearing=(verb)_] a [_yellow=(adjective)_] [_shirt=(noun)_] and [_blue=(adjective)_] [_jeans=(noun)_]. 
+  A1. [_He=(pronun)_] is [_walking=(verb)_] onto=(preposition) the [_sidewalk=(noun)_] [_from=(preposition)_] the [_street=(noun)_].
+[[/fillin]]
 [[/image-entry]]
 #### Finding Ann's hair salon
-[[image-entry: Scene narratives, left, 40%, shadow-box rounded-box]]
+[[image-entry: Finding a hair salon, left, 40%, shadow-box rounded-box]]
 ![Hair Salon](scene_hairsalon.jpg, scene_hairsalon_overlayB.png)
+[[fillin: gridInOrder, true, 1, true,, Recite the following prompts about the image:, grid, 6, insert, true, true, true, true, true, false]]
 B1. Finding Ann's hair salon
-  B1. The storefront has large glass windows. 
-  B1. The front door is red.
-  B1. A welcome mat sits below the door.
+  B1. The [_storefront=(noun)_] has [_large=(adjective)_] glass [_windows=(noun)_]. 
+  B1. The front [_door=(noun)_] is [_red=(adjective)_].
+  B1. A welcome [_mat=(noun)_] [_sits=(verb)_] [_below=(preposition)_] the [_door=(noun)_].
+[[/fillin]]
 [[/image-entry]]
 #### Cutting hair
-[[image-entry: Scene narratives, left, 40%, shadow-box rounded-box]]
+[[image-entry: Cutting hair, left, 40%, shadow-box rounded-box]]
 ![Hair Salon](scene_hairsalon.jpg, scene_hairsalon_overlayC.png)
+[[fillin: gridInOrder, true, 1, true,, Recite the following prompts about the image:, grid, 6, insert, true, true, true, true, true, false]]
 C1. Cutting hair
-  C1. The hair stylist is wearing a yellow dress. 
-  C1. She is standing over a client.
-  C1. She is cutting a client's long hair. 
+  C1. The hair stylist is [_wearing=(verb)_] a [_yellow=(adjective)_] [_dress=(noun)_]. 
+  C1. [_She=(pronoun)_]  is [_standing=(verb)_] [_over=(preposition)_] a [_client=(noun)_].
+  C1. [_She=(pronoun)_] is [_cutting=(verb)_] a client's [_long=(adjective)_] [_hair=(noun)_]. 
+[[/fillin]]
 [[/image-entry]]
 #### Waiting for a haircut
-[[image-entry: Scene narratives, left, 40%, shadow-box rounded-box]]
+[[image-entry: Waiting for a haircut, left, 40%, shadow-box rounded-box]]
 ![Hair Salon](scene_hairsalon.jpg, scene_hairsalon_overlayD.png)
+[[fillin: gridInOrder, true, 1, true,, Recite the following prompts about the image:, grid, 6, insert, true, true, true, true, true, false]]
 D1. Waiting for a haircut
-  D1. Another man is waiting. 
-  D1. He is wearing an orange shirt.
-  D1. He is reading a magazine. 
+  D1. Another [_man=(noun)_] is [_waiting=(verb)_].
+  D1. [_He=(pronoun)_] is [_wearing=(verb)_] an [_orange=(adjective)_] [_shirt=(noun)_].
+  D1. [_He=(pronoun)_] is [_reading=(verb)_] a [_magazine=(noun)_]. 
+[[/fillin]]
 [[/image-entry]]
-## Multiple Choice Practice
-[[image-entry: Scene narratives multiple choice, left, 40%, shadow-box rounded-box]]
+### Subscenes (unlabeled)
+#### Going to get a haircut
+[[image-entry: Going to get a haircut, left, 40%, shadow-box rounded-box]]
+![Hair Salon](scene_hairsalon.jpg)
+[[fillin: gridInOrder, true, 1, true,, Recite the following prompts about the image:, grid, 6, insert, true, true, true, true, true, false]]
+A1. Going to get a haircut
+  A1. A [_man=(noun)_] is [_getting=(verb)_] a [_haircut=(noun)_].
+  A1. The [_man=(noun)_] is [_wearing=(verb)_] a [_yellow=(adjective)_] [_shirt=(noun)_] and [_blue=(adjective)_] [_jeans=(noun)_]. 
+  A1. [_He=(pronun)_] is [_walking=(verb)_] onto=(preposition) the [_sidewalk=(noun)_] [_from=(preposition)_] the [_street=(noun)_].
+[[/fillin]]
+[[/image-entry]]
+#### Finding Ann's hair salon
+[[image-entry: Finding a hair salon, left, 40%, shadow-box rounded-box]]
+![Hair Salon](scene_hairsalon.jpg)
+[[fillin: gridInOrder, true, 1, true,, Recite the following prompts about the image:, grid, 6, insert, true, true, true, true, true, false]]
+B1. Finding Ann's hair salon
+  B1. The [_storefront=(noun)_] has [_large=(adjective)_] glass [_windows=(noun)_]. 
+  B1. The front [_door=(noun)_] is [_red=(adjective)_].
+  B1. A welcome [_mat=(noun)_] [_sits=(verb)_] [_below=(preposition)_] the [_door=(noun)_].
+[[/fillin]]
+[[/image-entry]]
+#### Cutting hair
+[[image-entry: Cutting hair, left, 40%, shadow-box rounded-box]]
+![Hair Salon](scene_hairsalon.jpg)
+[[fillin: gridInOrder, true, 1, true,, Recite the following prompts about the image:, grid, 6, insert, true, true, true, true, true, false]]
+C1. Cutting hair
+  C1. The hair stylist is [_wearing=(verb)_] a [_yellow=(adjective)_] [_dress=(noun)_]. 
+  C1. [_She=(pronoun)_]  is [_standing=(verb)_] [_over=(preposition)_] a [_client=(noun)_].
+  C1. [_She=(pronoun)_] is [_cutting=(verb)_] a client's [_long=(adjective)_] [_hair=(noun)_]. 
+[[/fillin]]
+[[/image-entry]]
+#### Waiting for a haircut
+[[image-entry: Waiting for a haircut, left, 40%, shadow-box rounded-box]]
+![Hair Salon](scene_hairsalon.jpg)
+[[fillin: gridInOrder, true, 1, true,, Recite the following prompts about the image:, grid, 6, insert, true, true, true, true, true, false]]
+D1. Waiting for a haircut
+  D1. Another [_man=(noun)_] is [_waiting=(verb)_].
+  D1. [_He=(pronoun)_] is [_wearing=(verb)_] an [_orange=(adjective)_] [_shirt=(noun)_].
+  D1. [_He=(pronoun)_] is [_reading=(verb)_] a [_magazine=(noun)_]. 
+[[/fillin]]
+[[/image-entry]]
+### Scene (unlabeled)
+This unlabeled section is purposely omitted to avoid ambiguity and confusion due to so many fill-in responses for an entire scene.
+## Multiple Choice Response
+The multiple choice response exercise below lets me practice comprehending a group of related sentences.
+### Scene (unlabeled)
+[[image-entry: Scene multiple choice, left, 40%, shadow-box rounded-box]]
 ![Hair Salon](scene_hairsalon.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is going to a store.
@@ -200,4 +250,74 @@ D1. Waiting for a haircut
   1a. [button: choice, correct, , , css attributes/] He is reading a magazine.
   1a. [button: choice, , , , css attributes/] He is reading a newspaper.
   1a. [button: choice, , , , css attributes/] He is watching television.
+[[/image-entry]]
+### Scene (labeled)
+This section is not currently implemented until the need arises.
+## Modeling
+The modeling exercise below lets me practice producing (and not just reading) sentences for a group of related sentences.
+### Subscenes (labeled)
+[[image-entry: Scene labeled, left, 40%, shadow-box rounded-box]]
+![Hair Salon](scene_hairsalon.jpg, scene_hairsalon_overlayA.png)
+A1. Going to get a haircut
+  A1. [button: model, , , , css attributes/] A man is getting a haircut.
+  A1. [button: model, , , , css attributes/] The man is wearing a yellow shirt and blue jeans. 
+  A1. [button: model, , , , css attributes/] He is walking onto the sidewalk from the street. 
+[[/image-entry]]
+[[image-entry: Scene labeled, left, 40%, shadow-box rounded-box]]
+![Hair Salon](scene_hairsalon.jpg, scene_hairsalon_overlayB.png)
+B1. Finding Ann's hair salon
+  B1. [button: model, , , , css attributes/] The storefront has large glass windows. 
+  B1. [button: model, , , , css attributes/] The front door is red.
+  B1. [button: model, , , , css attributes/] A welcome mat sits below the door.
+[[/image-entry]]
+[[image-entry: Scene labeled, left, 40%, shadow-box rounded-box]]
+![Hair Salon](scene_hairsalon.jpg, scene_hairsalon_overlayC.png)
+C1. Cutting hair
+  C1. [button: model, , , , css attributes/] The hair stylist is wearing a yellow dress. 
+  C1. [button: model, , , , css attributes/] She is cutting a client's long hair. 
+[[/image-entry]]
+[[image-entry: Scene labeled, left, 40%, shadow-box rounded-box]]
+![Hair Salon](scene_hairsalon.jpg, scene_hairsalon_overlayD.png)
+D1. Waiting for a haircut
+  D1. [button: model, , , , css attributes/] Another man is waiting. 
+  D1. [button: model, , , , css attributes/] He is wearing an orange shirt.
+  D1. [button: model, , , , css attributes/] He is reading a magazine. 
+[[/image-entry]]
+### Scene (labeled)
+[[image-entry: Scene labeled, left, 40%, shadow-box rounded-box]]
+![Hair Salon](scene_hairsalon.jpg, scene_hairsalon_overlay.png)
+A1. Going to get a haircut
+  A1. [button: model, , , , css attributes/] A man is getting a haircut.
+  A1. [button: model, , , , css attributes/] The man is wearing a yellow shirt and blue jeans. 
+  A1. [button: model, , , , css attributes/] He is walking onto the sidewalk from the street. 
+A1. Finding Ann's hair salon
+  A1. [button: model, , , , css attributes/] The storefront has large glass windows. 
+  A1. [button: model, , , , css attributes/] The front door is red.
+  A1. [button: model, , , , css attributes/] A welcome mat sits below the door.
+A1. Cutting hair
+  A1. [button: model, , , , css attributes/] The hair stylist is wearing a yellow dress. 
+  A1. [button: model, , , , css attributes/] She is cutting a client's long hair. 
+A1. Waiting for a haircut
+  A1. [button: model, , , , css attributes/] Another man is waiting. 
+  A1. [button: model, , , , css attributes/] He is wearing an orange shirt.
+  A1. [button: model, , , , css attributes/] He is reading a magazine. 
+[[/image-entry]]
+### Scene and Subscenes (unlabeled)
+[[image-entry: Scene unlabeled, left, 40%, shadow-box rounded-box]]
+![Hair Salon](scene_hairsalon.jpg)
+A1. Going to get a haircut
+  A1. [button: model, , , , css attributes/] A man is getting a haircut.
+  A1. [button: model, , , , css attributes/] The man is wearing a yellow shirt and blue jeans. 
+  A1. [button: model, , , , css attributes/] He is walking onto the sidewalk from the street. 
+A1. Finding Ann's hair salon
+  A1. [button: model, , , , css attributes/] The storefront has large glass windows. 
+  A1. [button: model, , , , css attributes/] The front door is red.
+  A1. [button: model, , , , css attributes/] A welcome mat sits below the door.
+A1. Cutting hair
+  A1. [button: model, , , , css attributes/] The hair stylist is wearing a yellow dress. 
+  A1. [button: model, , , , css attributes/] She is cutting a client's long hair. 
+A1. Waiting for a haircut
+  A1. [button: model, , , , css attributes/] Another man is waiting. 
+  A1. [button: model, , , , css attributes/] He is wearing an orange shirt.
+  A1. [button: model, , , , css attributes/] He is reading a magazine. 
 [[/image-entry]]

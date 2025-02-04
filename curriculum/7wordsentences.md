@@ -1,418 +1,418 @@
 [[page: Seven-word Sentences, Ronlyn, Wen, 1/1/2022, Sentence Bank, Sentences containing seven words /]]
 
-1. My children and I go to school.
-1. She said hello to the little girl.
-1. He has as many children as them.
-1. He can go and so can she.
-1. There are only five students here today.
-1. His name is very hard to spell.
-1. She said that she needed my help.
-1. They have two girls and one boy.
-1. Can you change the way you dress?
-1. She would like to answer that question.
-1. We can all learn from this exercise.
-1. You can have any thing you want.
-1. Does your boss need any new workers?
-1. I asked him to check my work.
-1. The charity is in need of funding
-1. Make sure you put your toys away.
-1. You seem to live a nice life.
-1. I am great today, how about you?
-1. It is much harder to do that.
-1. It is just about the same thing.
-1. You can use another piece of paper.
-1. This is what an orange looks like.
-1. That is how we do things here.
-1. I will help you with your work.
-1. Can you get up on the roof?
-1. How about we go to the movies?
-1. We like to go out on Saturday.
-1. He will take us into the caves.
-1. I don't have the time right now.
-1. Will you look at this for me?
-1. You can have one or two cookies.
-1. I am going to write a letter.
-1. Do you know which way they went?
-1. That could have been a bad accident.
-1. There are a lot of people here.
-1. She would rather have apples than oranges.
-1. Today has been a very long day.
-1. Will you help me find my wallet.
-1. I am going down to the basement.
-1. Everyone needs good luck for an interview.
-1. This is the end of the line.
-1. What was the name of that person?
-1. What was the price of that car?
-1. As time goes by, we get older.
-1. I spoke to my father this morning.
-1. There are a few of them left.
-1. I have lived a very long life.
-1. You can do this more than once.
-1. He went to bed late last night.
-1. That is a large body of water.
-1. I saw him walking across the street.
-1. The waves in the ocean are beautiful.
-1. I will meet you at five p.m.
-1. Who is the king of the castle?
-1. What kind of fish did you catch?
-1. He would like to ride a horse.
-1. Would you like another piece of pie?
-1. One hundred days is a long time.
-1. She is going into town later today.
-1. They are the last to be served.
-1. There are five years in high school.
-1. Can you read me a story tonight?
-1. There are 26 letters in the alphabet.
-1. I will meet you around the block.
-1. There are sixty minutes in an hour.
-1. A stove produces a lot of heat.
-1. What speed do you drive your car?
-1. I like to sail on the ocean.
-1. I couldn't think of anything to do.
-1. In case of an emergency, call 911.
-1. What was the result of the test?
-1. I have a new pair of shoes.
-1. She decided to wear a dress today.
-1. He left me a note this morning.
-1. She has less money than she thought.
-1. A circle is a very common shape.
-1. The road is meant for driving on.
-1. Is what you are saying a fact?
-1. I have known them for a while.
-1. I am going to do an experiment.
-1. Men and women are equal in Canada!
-1. You still need to write a report.
-1. I am going to visit my family.
-1. I have direct deposit with my bank.
-1. I am going to visit my uncle.
-1. How many students are in your class?
-1. He is the president of the company.
-1. Some math numbers use a decimal point.
-1. The glue will stick to the paper.
-1. Let's go to the movies this weekend!
-1. I like to be friends with everyone.
-1. Babies are very tiny compared to adults.
-1. Please be quiet, the baby is sleeping!
-1. Can you teach me how to act?
-1. I can count very high in French.
-1. Be careful you don't cut your fingers!
-1. I will include you in the game.
-1. He had shown me his stamp collection.
-1. Please cross the road at the lights.
-1. What is the amount of the bill?
-1. Some women go through a natural birth.
-1. I need new wheels for my car.
-1. The base of the lamp is broken.
-1. Will you explain that to me again?
-1. The shape of a ball is round.
-1. How did you do on the test?
-1. It's not good to fight with people.
-1. I like the beat to this song.
-1. Can you help me solve this problem?
-1. What factors is your decision based on?
-1. What type of music do you like?
-1. That was a wonderful moment we shared.
-1. There are five members in this club.
-1. Your legs are stronger than your arms.
-1. Am I going in the right direction?
-1. You must learn to use your mind.
-1. That is a large sum of money.
-1. You lay the baby on the bed.
-1. He made a long distance phone call.
-1. I heard you started a new job.
-1. We have many cells in our brains.
-1. What is the cause of this problem?
-1. Have you ever gone on a train?
-1. We sat at the table for dinner.
-1. All of our crops died this year.
-1. Please go play with your toy soldiers.
-1. You have a good sense of humour!
-1. He is the observer for this class.
-1. He works for a very large company.
-1. I would love to travel to France.
-1. How many people are in the office?
-1. Death is very sad for some people.
-1. He hopes he will win the contest.
-1. I need to buy some new tools.
-1. Take a right at the next corner.
-1. Most kittens like to play with string.
-1. There are many bare branches right now.
-1. I want to learn the Japanese language.
-1. She will be eight years old tomorrow.
-1. Our math test required doing some division.
-1. There is a new shop opening today.
-1. Some recipes require a lot of sugar.
-1. My son is huge for his age.
-1. My husband bought me a rose today.
-1. Does this have any effect on you?
-1. You must be silent in the library.
-1. There will be a big crowd tonight!
-1. There are seven days in a week.
-1. You must ring the bell before entering.
-1. That's a very emotional poem you wrote!
-1. Do you want to sell your car?
-1. Your dance requires a lot of movement.
-1. My uncle owns a couple of factories.
-1. The entrance is located at the rear.
-1. Your nose is located on you face.
-1. What is the suffix of that word?
-1. What colour of apple do you like?
-1. That movie had a lot of action.
-1. What's the chance of it snowing today?
-1. You have many molecules in your body.
-1. Have you ever seen the Northern Lights?
-1. I like the smell of cooked turkey.
-1. I like the view from this office.
-1. Where do you get your art supply.
-1. What position does your baby sleep in?
-1. What are the terms of the contract?
-1. I don't like that tone of voice.
-1. He broke several bones in the fall.
-1. We need an addition to the house.
-1. If he asked me, I‘d come.
-1. My son is older than my daughter.
-1. Will you go on holiday this summer?
-1. A fork is used to eat with.
-1. Mr Jones asked how I was yesterday. (=”How are you today?”)
-1. It rained all day yesterday, didn't it?
-1. If I were you, I would go.
-1. I have written this letter in ink.
-1. Do you ever go shopping without money?
-1. The teacher was angry with the pupil.
-1. Yesterday I sewed my son's trousers.
-1. If he asks me, I'll stay.
-1. My father's sister is my aunt.
-1. I wish I had passed the exam.
-1. Do you have a bath every day?
-1. "You are standing on my foot." - "Sorry!"
-1. I can hear a strange noise now.
-1. John saw this film two months ago.
-1. I haven't taken any photographs for years.
-1. The teacher agreed to come with us.
-1. I wasn't introduced to her mother.
-1. John is interested in passing his exam.
-1. I wish I could speak several languages.
-1. He wasn't surprised at what he saw.
-1. I saw your friend two weeks ago.
-1. You are asked to report at 9 o’clock.
-1. He has been watching television for hours.
-1. A single or a double room, sir?
-1. You will find the answer on page 75.
-1. I was told to rewrite my letter.
-1. The boy that ran away was David.
-1. Football is an interesting and popular game.
-1. He is very good at translating Latin texts.
-1. Smoking is a bad habit of yours.
-1. Our windows will be cleaned this afternoon.
-1. I don’t know what you mean.
-1. Please close the windows before you leave.
-1. Remember to wash your hands before dinner.
-1. Shall I open the door for you?
-1. We arrived in the village at night.
-1. Who came to see you last night?
-1. Arabic is the native language of Egypt.
-1. He has a good knowledge of history.
-1. Will you please lend me this book?
-1. You should brush your teeth after breakfast.
-1. May I have another piece of cake?
-1. Who did he talk to? - His friend.
-1. All our suggestions have been turned down.
-1. Can you exchange these dollars for forints?
-1. There is no excuse for coming late.
-1. The noise did not let me sleep.
-1. Waiter, when do I get my breakfast?
-1. His mother’s brother is his uncle.
-1. What’s the weather like in Britain?
-1. You are right, Genova is in Italy.
-1. He arrived at the station at 4 pm.
-1. This street is narrower than that one.
-1. He drank half a glass of milk.
-1. American children watch television 36 hours a week.
-1. Look, Mother! Jack has brought you some flowers.
-1. So far I have had no trouble.
-1. The scissors are lying on the table.
-1. Please ring me up when you arrive.
-1. I am looking forward to seeing you.
-1. He has been to London four times since 1974.
-1. I have a new pair of shoes.
-1. We arrived at the airport in time.
-1. After eating I often go to sleep.
-1. My brother's son is my nephew.
-1. Do you know how to make coffee?
-1. The lift was again out of order.
-1. I haven't driven since my accident.
-1. I have been working very hard lately.
-1. There was an accident here at midnight.
-1. He came late because of an accident.
-1. You had better go home at once.
-1. I know how to drive a car.
-1. What does he do for a living?
-1. He talks as if he knew everything.
-1. He asked me what games I played.
-1. The house he lives in needs repairing.
-1. „I am very unhappy today.” - „Cheer up!”
-1. I get up at six every morning.
-1. Henry was sick yesterday and missed his classes.
-1. My father has more books than you.
-1. You can buy meat at the butcher’s.
-1. If I were Peter, I would marry Sue.
-1. Sheila has a two-month-old baby.
-1. What is the price of this watch?
-1. Telling lies is a very bad habit.
-1. Is this a table? - Yes, it is.
-1. Where’s Mrs Harrison? - She’s in the kitchen.
-1. The window’s open and the door’s closed.
-1. Which books? - Those in front of you.
-1. I want those boxes. - These blue boxes?
-1. They’ve got wine and I’ve got water.
-1. Their hands and feet are not cold.
-1. But, of course, they have some money.
-1. Their wallets are not empty like Sue’s.
-1. There are no lights in the house.
-1. Come on, Mrs Harrison, open the door!
-1. Is there a bell? - Yes, of course.
-1. Is it yours? - No, it isn’t mine.
-1. Now Mrs Harrison’s walking into the sitting-room.
-1. In his dream Arthur’s got a car.
-1. Bruce isn’t driving the car; Arthur is.
-1. It’s a beautiful day and Arthur’s happy.
-1. Arthur and Mary are librarians in Middleford.
-1. He’s coming out of the water now.
-1. He has some books in his hand.
-1. They’re sending another box of books tomorrow.
-1. Mary, come here. - Coming, Mr Steele.
-1. It is now a quarter past nine.
-1. He cannot get up in the morning.
-1. ’I must find them,’ he is thinking.
-1. Oh dear, the bus is not stopping.
-1. Arthur is looking through the library window.
-1. He isn’t late today - he’s early.
-1. This morning he has time for breakfast.
-1. Now Mrs Harrison’s bringing in the post.
-1. How much is the fare to Applefield?
-1. There’s only one girl in this room.
-1. We're going to her aunt's in London.
-1. How many stops are there before London?
-1. I've only got one pair of hands.
-1. Now Bob is talking to the porter.
-1. Is that for me? What is it?
-1. I’m a student. I’m at London University.
-1. This is Bob. Bob, this is Mary.
-1. She’s got your bag and your overcoat.
-1. I sometimes see him in the summer.
-1. There’s a young man in the car.
-1. Don’t come anywhere near the car, please!
-1. Can you hold this torch for me?
-1. Now, can somebody give me my bag?
-1. Now it’s eleven o’clock on Sunday morning.
-1. He has not even had a shave.
-1. What are you doing with that paper?
-1. Sheila, what do you want to drink?
-1. Just a sweet sherry for me, please.
-1. I’m going to have a tomato juice.
-1. James, of course, is still in hospital.
-1. Now Mr Steele has just come in.
-1. He hasn’t gone into his office yet
-1. Have you been here since nine o’clock?
-1. Well, 5 days, that’s nearly a week.
-1. Come into my office for a minute.
-1. Well, you haven’t sent me an email.
-1. Last weekend in Applefield Arthur was broke.
-1. It was the end of the month.
-1. We can go home now, can’t we?
-1. There were a lot of people in.
-1. Well, it’s a lovely evening, isn’t it?
-1. We must both work tomorrow, mustn’t we?
-1. That was very nice of you, Arthur.
-1. Arthur got up early on Saturday morning.
-1. He wanted to hear the weather forecast.
-1. I can row first if you like.
-1. I’m not too big, am I, Arthur?
-1. Perhaps it’s time to go back now.
-1. It’s a bit cloudy too, isn’t it?
-1. Mary didn’t even say goodnight to Arthur.
-1. You gave it to me on Monday.
-1. Did you ever learn about the controls?
-1. What do you think of that one?
-1. I must say it looks very nice.
-1. A bit too much for you, perhaps?
-1. I can see you’ve got the taste.
-1. That’s only three thousand, five hundred pounds.
-1. It goes well. That’s the main thing.
-1. Charlie, come over here for a minute.
-1. You want to buy that, do you?
-1. Why not drive it round the block?
-1. He needn’t go by train this time.
-1. He told her about his ‘new’ car.
-1. Now where did we put the car?
-1. I’ll sit in front because I’m navigating.
-1. Well, personally, I think it’s very nice.
-1. Look, it says Swanage - two miles.
-1. Arthur’s car was at the police station.
-1. That’s him over there, the grey one.
-1. He’s the nicest horse I’ve ever seen.
-1. I like ’Darling Mary’. (a horse’s name)
-1. We can see the race better there.
-1. You haven’t got much farther to go.
-1. It’s the slowest horse in the race.
-1. Didcot’s nearer to Applefield than Middleford is.
-1. I was talking to my friend, actually.
-1. What did you say about our Fred?
-1. It was a brief moment of joy.
-1. Mary was also working in the library.
-1. You see, I thought I was lucky.
-1. I have a flat and a house.
-1. I have a map in my notebook.
-1. I'm married and I have two children.
-1. I live in the south of Hungary.
-1. I want to drink a cold tea.
-1. I have a niece and a nephew.
-1. What are you doing in the afternoon?
-1. When will you come and see us?
-1. He has two hours to get here.
-1. Have you ever seen a big plane?
-1. I have to speak to the receptionist.
-1. What the hell are you doing here?
-1. I need to have a hobby.
-1. I don’t want you to be late.
-1. I never drink alcohol when I drive.
-1. It’s very windy now – let’s go sailing!
-1. This is one of my favourite songs.
-1. In winter I love having hot baths.
-1. Do you know what is behind you?
-1. In my room the carpet is grey.
-1. When were you last at the chemist's?
-1. Do you wake up by an alarm-clock?
-1. I was very happy during the weekend.
-1. My friend would like to be famous.
-1. I can't find food in the fridge.
-1. How often are you in your kitchen?
-1. Are you a member of the library?
-1. There isn't a mirror in my room.
-1. My radio-reading lamp-alarm clock is very modern.
-1. I haven't been to a big palace.
-1. There are six pictures on our wall.
-1. This is a great place in summer.
-1. We have a sofa opposite the tv.
-1. I got a stereo for my birthday.
-1. My cat likes sitting on my table.
-1. Do you know the new car-racing champion?
-1. Tell me where the check-in desk is.
-1. I can't answer you this question fluently.
-1. Who is that man at the gate?
-1. Can you hear me in this noise?
-1. How much did you earn last month?
-1. They stopped us at the passport control.
-1. I have to practice this all day.
-1. Can you smell this smoke or something?
-1. What do you think of this problem?
-1. Do you know who her clerk is?
-1. How much would you like to earn?
-1. What do you enjoy most in summer?
-1. Where can I find you in summer?
-1. What do you want to eat later?
-1. When did you come home last night?
-1. My grandfather is over 90 years old.
-1. It isn’t so good to be popular.
-1. Have you ever seen a real star?
-1. The weather is wonderful by the sea.
+1. [button: model, , , , css attributes/] My children and I go to school.
+1. [button: model, , , , css attributes/] She said hello to the little girl.
+1. [button: model, , , , css attributes/] He has as many children as them.
+1. [button: model, , , , css attributes/] He can go and so can she.
+1. [button: model, , , , css attributes/] There are only five students here today.
+1. [button: model, , , , css attributes/] His name is very hard to spell.
+1. [button: model, , , , css attributes/] She said that she needed my help.
+1. [button: model, , , , css attributes/] They have two girls and one boy.
+1. [button: model, , , , css attributes/] Can you change the way you dress?
+1. [button: model, , , , css attributes/] She would like to answer that question.
+1. [button: model, , , , css attributes/] We can all learn from this exercise.
+1. [button: model, , , , css attributes/] You can have any thing you want.
+1. [button: model, , , , css attributes/] Does your boss need any new workers?
+1. [button: model, , , , css attributes/] I asked him to check my work.
+1. [button: model, , , , css attributes/] The charity is in need of funding
+1. [button: model, , , , css attributes/] Make sure you put your toys away.
+1. [button: model, , , , css attributes/] You seem to live a nice life.
+1. [button: model, , , , css attributes/] I am great today, how about you?
+1. [button: model, , , , css attributes/] It is much harder to do that.
+1. [button: model, , , , css attributes/] It is just about the same thing.
+1. [button: model, , , , css attributes/] You can use another piece of paper.
+1. [button: model, , , , css attributes/] This is what an orange looks like.
+1. [button: model, , , , css attributes/] That is how we do things here.
+1. [button: model, , , , css attributes/] I will help you with your work.
+1. [button: model, , , , css attributes/] Can you get up on the roof?
+1. [button: model, , , , css attributes/] How about we go to the movies?
+1. [button: model, , , , css attributes/] We like to go out on Saturday.
+1. [button: model, , , , css attributes/] He will take us into the caves.
+1. [button: model, , , , css attributes/] I don't have the time right now.
+1. [button: model, , , , css attributes/] Will you look at this for me?
+1. [button: model, , , , css attributes/] You can have one or two cookies.
+1. [button: model, , , , css attributes/] I am going to write a letter.
+1. [button: model, , , , css attributes/] Do you know which way they went?
+1. [button: model, , , , css attributes/] That could have been a bad accident.
+1. [button: model, , , , css attributes/] There are a lot of people here.
+1. [button: model, , , , css attributes/] She would rather have apples than oranges.
+1. [button: model, , , , css attributes/] Today has been a very long day.
+1. [button: model, , , , css attributes/] Will you help me find my wallet.
+1. [button: model, , , , css attributes/] I am going down to the basement.
+1. [button: model, , , , css attributes/] Everyone needs good luck for an interview.
+1. [button: model, , , , css attributes/] This is the end of the line.
+1. [button: model, , , , css attributes/] What was the name of that person?
+1. [button: model, , , , css attributes/] What was the price of that car?
+1. [button: model, , , , css attributes/] As time goes by, we get older.
+1. [button: model, , , , css attributes/] I spoke to my father this morning.
+1. [button: model, , , , css attributes/] There are a few of them left.
+1. [button: model, , , , css attributes/] I have lived a very long life.
+1. [button: model, , , , css attributes/] You can do this more than once.
+1. [button: model, , , , css attributes/] He went to bed late last night.
+1. [button: model, , , , css attributes/] That is a large body of water.
+1. [button: model, , , , css attributes/] I saw him walking across the street.
+1. [button: model, , , , css attributes/] The waves in the ocean are beautiful.
+1. [button: model, , , , css attributes/] I will meet you at five p.m.
+1. [button: model, , , , css attributes/] Who is the king of the castle?
+1. [button: model, , , , css attributes/] What kind of fish did you catch?
+1. [button: model, , , , css attributes/] He would like to ride a horse.
+1. [button: model, , , , css attributes/] Would you like another piece of pie?
+1. [button: model, , , , css attributes/] One hundred days is a long time.
+1. [button: model, , , , css attributes/] She is going into town later today.
+1. [button: model, , , , css attributes/] They are the last to be served.
+1. [button: model, , , , css attributes/] There are five years in high school.
+1. [button: model, , , , css attributes/] Can you read me a story tonight?
+1. [button: model, , , , css attributes/] There are 26 letters in the alphabet.
+1. [button: model, , , , css attributes/] I will meet you around the block.
+1. [button: model, , , , css attributes/] There are sixty minutes in an hour.
+1. [button: model, , , , css attributes/] A stove produces a lot of heat.
+1. [button: model, , , , css attributes/] What speed do you drive your car?
+1. [button: model, , , , css attributes/] I like to sail on the ocean.
+1. [button: model, , , , css attributes/] I couldn't think of anything to do.
+1. [button: model, , , , css attributes/] In case of an emergency, call 911.
+1. [button: model, , , , css attributes/] What was the result of the test?
+1. [button: model, , , , css attributes/] I have a new pair of shoes.
+1. [button: model, , , , css attributes/] She decided to wear a dress today.
+1. [button: model, , , , css attributes/] He left me a note this morning.
+1. [button: model, , , , css attributes/] She has less money than she thought.
+1. [button: model, , , , css attributes/] A circle is a very common shape.
+1. [button: model, , , , css attributes/] The road is meant for driving on.
+1. [button: model, , , , css attributes/] Is what you are saying a fact?
+1. [button: model, , , , css attributes/] I have known them for a while.
+1. [button: model, , , , css attributes/] I am going to do an experiment.
+1. [button: model, , , , css attributes/] Men and women are equal in Canada!
+1. [button: model, , , , css attributes/] You still need to write a report.
+1. [button: model, , , , css attributes/] I am going to visit my family.
+1. [button: model, , , , css attributes/] I have direct deposit with my bank.
+1. [button: model, , , , css attributes/] I am going to visit my uncle.
+1. [button: model, , , , css attributes/] How many students are in your class?
+1. [button: model, , , , css attributes/] He is the president of the company.
+1. [button: model, , , , css attributes/] Some math numbers use a decimal point.
+1. [button: model, , , , css attributes/] The glue will stick to the paper.
+1. [button: model, , , , css attributes/] Let's go to the movies this weekend!
+1. [button: model, , , , css attributes/] I like to be friends with everyone.
+1. [button: model, , , , css attributes/] Babies are very tiny compared to adults.
+1. [button: model, , , , css attributes/] Please be quiet, the baby is sleeping!
+1. [button: model, , , , css attributes/] Can you teach me how to act?
+1. [button: model, , , , css attributes/] I can count very high in French.
+1. [button: model, , , , css attributes/] Be careful you don't cut your fingers!
+1. [button: model, , , , css attributes/] I will include you in the game.
+1. [button: model, , , , css attributes/] He had shown me his stamp collection.
+1. [button: model, , , , css attributes/] Please cross the road at the lights.
+1. [button: model, , , , css attributes/] What is the amount of the bill?
+1. [button: model, , , , css attributes/] Some women go through a natural birth.
+1. [button: model, , , , css attributes/] I need new wheels for my car.
+1. [button: model, , , , css attributes/] The base of the lamp is broken.
+1. [button: model, , , , css attributes/] Will you explain that to me again?
+1. [button: model, , , , css attributes/] The shape of a ball is round.
+1. [button: model, , , , css attributes/] How did you do on the test?
+1. [button: model, , , , css attributes/] It's not good to fight with people.
+1. [button: model, , , , css attributes/] I like the beat to this song.
+1. [button: model, , , , css attributes/] Can you help me solve this problem?
+1. [button: model, , , , css attributes/] What factors is your decision based on?
+1. [button: model, , , , css attributes/] What type of music do you like?
+1. [button: model, , , , css attributes/] That was a wonderful moment we shared.
+1. [button: model, , , , css attributes/] There are five members in this club.
+1. [button: model, , , , css attributes/] Your legs are stronger than your arms.
+1. [button: model, , , , css attributes/] Am I going in the right direction?
+1. [button: model, , , , css attributes/] You must learn to use your mind.
+1. [button: model, , , , css attributes/] That is a large sum of money.
+1. [button: model, , , , css attributes/] You lay the baby on the bed.
+1. [button: model, , , , css attributes/] He made a long distance phone call.
+1. [button: model, , , , css attributes/] I heard you started a new job.
+1. [button: model, , , , css attributes/] We have many cells in our brains.
+1. [button: model, , , , css attributes/] What is the cause of this problem?
+1. [button: model, , , , css attributes/] Have you ever gone on a train?
+1. [button: model, , , , css attributes/] We sat at the table for dinner.
+1. [button: model, , , , css attributes/] All of our crops died this year.
+1. [button: model, , , , css attributes/] Please go play with your toy soldiers.
+1. [button: model, , , , css attributes/] You have a good sense of humour!
+1. [button: model, , , , css attributes/] He is the observer for this class.
+1. [button: model, , , , css attributes/] He works for a very large company.
+1. [button: model, , , , css attributes/] I would love to travel to France.
+1. [button: model, , , , css attributes/] How many people are in the office?
+1. [button: model, , , , css attributes/] Death is very sad for some people.
+1. [button: model, , , , css attributes/] He hopes he will win the contest.
+1. [button: model, , , , css attributes/] I need to buy some new tools.
+1. [button: model, , , , css attributes/] Take a right at the next corner.
+1. [button: model, , , , css attributes/] Most kittens like to play with string.
+1. [button: model, , , , css attributes/] There are many bare branches right now.
+1. [button: model, , , , css attributes/] I want to learn the Japanese language.
+1. [button: model, , , , css attributes/] She will be eight years old tomorrow.
+1. [button: model, , , , css attributes/] Our math test required doing some division.
+1. [button: model, , , , css attributes/] There is a new shop opening today.
+1. [button: model, , , , css attributes/] Some recipes require a lot of sugar.
+1. [button: model, , , , css attributes/] My son is huge for his age.
+1. [button: model, , , , css attributes/] My husband bought me a rose today.
+1. [button: model, , , , css attributes/] Does this have any effect on you?
+1. [button: model, , , , css attributes/] You must be silent in the library.
+1. [button: model, , , , css attributes/] There will be a big crowd tonight!
+1. [button: model, , , , css attributes/] There are seven days in a week.
+1. [button: model, , , , css attributes/] You must ring the bell before entering.
+1. [button: model, , , , css attributes/] That's a very emotional poem you wrote!
+1. [button: model, , , , css attributes/] Do you want to sell your car?
+1. [button: model, , , , css attributes/] Your dance requires a lot of movement.
+1. [button: model, , , , css attributes/] My uncle owns a couple of factories.
+1. [button: model, , , , css attributes/] The entrance is located at the rear.
+1. [button: model, , , , css attributes/] Your nose is located on you face.
+1. [button: model, , , , css attributes/] What is the suffix of that word?
+1. [button: model, , , , css attributes/] What colour of apple do you like?
+1. [button: model, , , , css attributes/] That movie had a lot of action.
+1. [button: model, , , , css attributes/] What's the chance of it snowing today?
+1. [button: model, , , , css attributes/] You have many molecules in your body.
+1. [button: model, , , , css attributes/] Have you ever seen the Northern Lights?
+1. [button: model, , , , css attributes/] I like the smell of cooked turkey.
+1. [button: model, , , , css attributes/] I like the view from this office.
+1. [button: model, , , , css attributes/] Where do you get your art supply.
+1. [button: model, , , , css attributes/] What position does your baby sleep in?
+1. [button: model, , , , css attributes/] What are the terms of the contract?
+1. [button: model, , , , css attributes/] I don't like that tone of voice.
+1. [button: model, , , , css attributes/] He broke several bones in the fall.
+1. [button: model, , , , css attributes/] We need an addition to the house.
+1. [button: model, , , , css attributes/] If he asked me, I‘d come.
+1. [button: model, , , , css attributes/] My son is older than my daughter.
+1. [button: model, , , , css attributes/] Will you go on holiday this summer?
+1. [button: model, , , , css attributes/] A fork is used to eat with.
+1. [button: model, , , , css attributes/] Mr Jones asked how I was yesterday. (=”How are you today?”)
+1. [button: model, , , , css attributes/] It rained all day yesterday, didn't it?
+1. [button: model, , , , css attributes/] If I were you, I would go.
+1. [button: model, , , , css attributes/] I have written this letter in ink.
+1. [button: model, , , , css attributes/] Do you ever go shopping without money?
+1. [button: model, , , , css attributes/] The teacher was angry with the pupil.
+1. [button: model, , , , css attributes/] Yesterday I sewed my son's trousers.
+1. [button: model, , , , css attributes/] If he asks me, I'll stay.
+1. [button: model, , , , css attributes/] My father's sister is my aunt.
+1. [button: model, , , , css attributes/] I wish I had passed the exam.
+1. [button: model, , , , css attributes/] Do you have a bath every day?
+1. [button: model, , , , css attributes/] "You are standing on my foot." - "Sorry!"
+1. [button: model, , , , css attributes/] I can hear a strange noise now.
+1. [button: model, , , , css attributes/] John saw this film two months ago.
+1. [button: model, , , , css attributes/] I haven't taken any photographs for years.
+1. [button: model, , , , css attributes/] The teacher agreed to come with us.
+1. [button: model, , , , css attributes/] I wasn't introduced to her mother.
+1. [button: model, , , , css attributes/] John is interested in passing his exam.
+1. [button: model, , , , css attributes/] I wish I could speak several languages.
+1. [button: model, , , , css attributes/] He wasn't surprised at what he saw.
+1. [button: model, , , , css attributes/] I saw your friend two weeks ago.
+1. [button: model, , , , css attributes/] You are asked to report at 9 o’clock.
+1. [button: model, , , , css attributes/] He has been watching television for hours.
+1. [button: model, , , , css attributes/] A single or a double room, sir?
+1. [button: model, , , , css attributes/] You will find the answer on page 75.
+1. [button: model, , , , css attributes/] I was told to rewrite my letter.
+1. [button: model, , , , css attributes/] The boy that ran away was David.
+1. [button: model, , , , css attributes/] Football is an interesting and popular game.
+1. [button: model, , , , css attributes/] He is very good at translating Latin texts.
+1. [button: model, , , , css attributes/] Smoking is a bad habit of yours.
+1. [button: model, , , , css attributes/] Our windows will be cleaned this afternoon.
+1. [button: model, , , , css attributes/] I don’t know what you mean.
+1. [button: model, , , , css attributes/] Please close the windows before you leave.
+1. [button: model, , , , css attributes/] Remember to wash your hands before dinner.
+1. [button: model, , , , css attributes/] Shall I open the door for you?
+1. [button: model, , , , css attributes/] We arrived in the village at night.
+1. [button: model, , , , css attributes/] Who came to see you last night?
+1. [button: model, , , , css attributes/] Arabic is the native language of Egypt.
+1. [button: model, , , , css attributes/] He has a good knowledge of history.
+1. [button: model, , , , css attributes/] Will you please lend me this book?
+1. [button: model, , , , css attributes/] You should brush your teeth after breakfast.
+1. [button: model, , , , css attributes/] May I have another piece of cake?
+1. [button: model, , , , css attributes/] Who did he talk to? - His friend.
+1. [button: model, , , , css attributes/] All our suggestions have been turned down.
+1. [button: model, , , , css attributes/] Can you exchange these dollars for forints?
+1. [button: model, , , , css attributes/] There is no excuse for coming late.
+1. [button: model, , , , css attributes/] The noise did not let me sleep.
+1. [button: model, , , , css attributes/] Waiter, when do I get my breakfast?
+1. [button: model, , , , css attributes/] His mother’s brother is his uncle.
+1. [button: model, , , , css attributes/] What’s the weather like in Britain?
+1. [button: model, , , , css attributes/] You are right, Genova is in Italy.
+1. [button: model, , , , css attributes/] He arrived at the station at 4 pm.
+1. [button: model, , , , css attributes/] This street is narrower than that one.
+1. [button: model, , , , css attributes/] He drank half a glass of milk.
+1. [button: model, , , , css attributes/] American children watch television 36 hours a week.
+1. [button: model, , , , css attributes/] Look, Mother! Jack has brought you some flowers.
+1. [button: model, , , , css attributes/] So far I have had no trouble.
+1. [button: model, , , , css attributes/] The scissors are lying on the table.
+1. [button: model, , , , css attributes/] Please ring me up when you arrive.
+1. [button: model, , , , css attributes/] I am looking forward to seeing you.
+1. [button: model, , , , css attributes/] He has been to London four times since 1974.
+1. [button: model, , , , css attributes/] I have a new pair of shoes.
+1. [button: model, , , , css attributes/] We arrived at the airport in time.
+1. [button: model, , , , css attributes/] After eating I often go to sleep.
+1. [button: model, , , , css attributes/] My brother's son is my nephew.
+1. [button: model, , , , css attributes/] Do you know how to make coffee?
+1. [button: model, , , , css attributes/] The lift was again out of order.
+1. [button: model, , , , css attributes/] I haven't driven since my accident.
+1. [button: model, , , , css attributes/] I have been working very hard lately.
+1. [button: model, , , , css attributes/] There was an accident here at midnight.
+1. [button: model, , , , css attributes/] He came late because of an accident.
+1. [button: model, , , , css attributes/] You had better go home at once.
+1. [button: model, , , , css attributes/] I know how to drive a car.
+1. [button: model, , , , css attributes/] What does he do for a living?
+1. [button: model, , , , css attributes/] He talks as if he knew everything.
+1. [button: model, , , , css attributes/] He asked me what games I played.
+1. [button: model, , , , css attributes/] The house he lives in needs repairing.
+1. [button: model, , , , css attributes/] „I am very unhappy today.” - „Cheer up!”
+1. [button: model, , , , css attributes/] I get up at six every morning.
+1. [button: model, , , , css attributes/] Henry was sick yesterday and missed his classes.
+1. [button: model, , , , css attributes/] My father has more books than you.
+1. [button: model, , , , css attributes/] You can buy meat at the butcher’s.
+1. [button: model, , , , css attributes/] If I were Peter, I would marry Sue.
+1. [button: model, , , , css attributes/] Sheila has a two-month-old baby.
+1. [button: model, , , , css attributes/] What is the price of this watch?
+1. [button: model, , , , css attributes/] Telling lies is a very bad habit.
+1. [button: model, , , , css attributes/] Is this a table? - Yes, it is.
+1. [button: model, , , , css attributes/] Where’s Mrs Harrison? - She’s in the kitchen.
+1. [button: model, , , , css attributes/] The window’s open and the door’s closed.
+1. [button: model, , , , css attributes/] Which books? - Those in front of you.
+1. [button: model, , , , css attributes/] I want those boxes. - These blue boxes?
+1. [button: model, , , , css attributes/] They’ve got wine and I’ve got water.
+1. [button: model, , , , css attributes/] Their hands and feet are not cold.
+1. [button: model, , , , css attributes/] But, of course, they have some money.
+1. [button: model, , , , css attributes/] Their wallets are not empty like Sue’s.
+1. [button: model, , , , css attributes/] There are no lights in the house.
+1. [button: model, , , , css attributes/] Come on, Mrs Harrison, open the door!
+1. [button: model, , , , css attributes/] Is there a bell? - Yes, of course.
+1. [button: model, , , , css attributes/] Is it yours? - No, it isn’t mine.
+1. [button: model, , , , css attributes/] Now Mrs Harrison’s walking into the sitting-room.
+1. [button: model, , , , css attributes/] In his dream Arthur’s got a car.
+1. [button: model, , , , css attributes/] Bruce isn’t driving the car; Arthur is.
+1. [button: model, , , , css attributes/] It’s a beautiful day and Arthur’s happy.
+1. [button: model, , , , css attributes/] Arthur and Mary are librarians in Middleford.
+1. [button: model, , , , css attributes/] He’s coming out of the water now.
+1. [button: model, , , , css attributes/] He has some books in his hand.
+1. [button: model, , , , css attributes/] They’re sending another box of books tomorrow.
+1. [button: model, , , , css attributes/] Mary, come here. - Coming, Mr Steele.
+1. [button: model, , , , css attributes/] It is now a quarter past nine.
+1. [button: model, , , , css attributes/] He cannot get up in the morning.
+1. [button: model, , , , css attributes/] ’I must find them,’ he is thinking.
+1. [button: model, , , , css attributes/] Oh dear, the bus is not stopping.
+1. [button: model, , , , css attributes/] Arthur is looking through the library window.
+1. [button: model, , , , css attributes/] He isn’t late today - he’s early.
+1. [button: model, , , , css attributes/] This morning he has time for breakfast.
+1. [button: model, , , , css attributes/] Now Mrs Harrison’s bringing in the post.
+1. [button: model, , , , css attributes/] How much is the fare to Applefield?
+1. [button: model, , , , css attributes/] There’s only one girl in this room.
+1. [button: model, , , , css attributes/] We're going to her aunt's in London.
+1. [button: model, , , , css attributes/] How many stops are there before London?
+1. [button: model, , , , css attributes/] I've only got one pair of hands.
+1. [button: model, , , , css attributes/] Now Bob is talking to the porter.
+1. [button: model, , , , css attributes/] Is that for me? What is it?
+1. [button: model, , , , css attributes/] I’m a student. I’m at London University.
+1. [button: model, , , , css attributes/] This is Bob. Bob, this is Mary.
+1. [button: model, , , , css attributes/] She’s got your bag and your overcoat.
+1. [button: model, , , , css attributes/] I sometimes see him in the summer.
+1. [button: model, , , , css attributes/] There’s a young man in the car.
+1. [button: model, , , , css attributes/] Don’t come anywhere near the car, please!
+1. [button: model, , , , css attributes/] Can you hold this torch for me?
+1. [button: model, , , , css attributes/] Now, can somebody give me my bag?
+1. [button: model, , , , css attributes/] Now it’s eleven o’clock on Sunday morning.
+1. [button: model, , , , css attributes/] He has not even had a shave.
+1. [button: model, , , , css attributes/] What are you doing with that paper?
+1. [button: model, , , , css attributes/] Sheila, what do you want to drink?
+1. [button: model, , , , css attributes/] Just a sweet sherry for me, please.
+1. [button: model, , , , css attributes/] I’m going to have a tomato juice.
+1. [button: model, , , , css attributes/] James, of course, is still in hospital.
+1. [button: model, , , , css attributes/] Now Mr Steele has just come in.
+1. [button: model, , , , css attributes/] He hasn’t gone into his office yet
+1. [button: model, , , , css attributes/] Have you been here since nine o’clock?
+1. [button: model, , , , css attributes/] Well, 5 days, that’s nearly a week.
+1. [button: model, , , , css attributes/] Come into my office for a minute.
+1. [button: model, , , , css attributes/] Well, you haven’t sent me an email.
+1. [button: model, , , , css attributes/] Last weekend in Applefield Arthur was broke.
+1. [button: model, , , , css attributes/] It was the end of the month.
+1. [button: model, , , , css attributes/] We can go home now, can’t we?
+1. [button: model, , , , css attributes/] There were a lot of people in.
+1. [button: model, , , , css attributes/] Well, it’s a lovely evening, isn’t it?
+1. [button: model, , , , css attributes/] We must both work tomorrow, mustn’t we?
+1. [button: model, , , , css attributes/] That was very nice of you, Arthur.
+1. [button: model, , , , css attributes/] Arthur got up early on Saturday morning.
+1. [button: model, , , , css attributes/] He wanted to hear the weather forecast.
+1. [button: model, , , , css attributes/] I can row first if you like.
+1. [button: model, , , , css attributes/] I’m not too big, am I, Arthur?
+1. [button: model, , , , css attributes/] Perhaps it’s time to go back now.
+1. [button: model, , , , css attributes/] It’s a bit cloudy too, isn’t it?
+1. [button: model, , , , css attributes/] Mary didn’t even say goodnight to Arthur.
+1. [button: model, , , , css attributes/] You gave it to me on Monday.
+1. [button: model, , , , css attributes/] Did you ever learn about the controls?
+1. [button: model, , , , css attributes/] What do you think of that one?
+1. [button: model, , , , css attributes/] I must say it looks very nice.
+1. [button: model, , , , css attributes/] A bit too much for you, perhaps?
+1. [button: model, , , , css attributes/] I can see you’ve got the taste.
+1. [button: model, , , , css attributes/] That’s only three thousand, five hundred pounds.
+1. [button: model, , , , css attributes/] It goes well. That’s the main thing.
+1. [button: model, , , , css attributes/] Charlie, come over here for a minute.
+1. [button: model, , , , css attributes/] You want to buy that, do you?
+1. [button: model, , , , css attributes/] Why not drive it round the block?
+1. [button: model, , , , css attributes/] He needn’t go by train this time.
+1. [button: model, , , , css attributes/] He told her about his ‘new’ car.
+1. [button: model, , , , css attributes/] Now where did we put the car?
+1. [button: model, , , , css attributes/] I’ll sit in front because I’m navigating.
+1. [button: model, , , , css attributes/] Well, personally, I think it’s very nice.
+1. [button: model, , , , css attributes/] Look, it says Swanage - two miles.
+1. [button: model, , , , css attributes/] Arthur’s car was at the police station.
+1. [button: model, , , , css attributes/] That’s him over there, the grey one.
+1. [button: model, , , , css attributes/] He’s the nicest horse I’ve ever seen.
+1. [button: model, , , , css attributes/] I like ’Darling Mary’. (a horse’s name)
+1. [button: model, , , , css attributes/] We can see the race better there.
+1. [button: model, , , , css attributes/] You haven’t got much farther to go.
+1. [button: model, , , , css attributes/] It’s the slowest horse in the race.
+1. [button: model, , , , css attributes/] Didcot’s nearer to Applefield than Middleford is.
+1. [button: model, , , , css attributes/] I was talking to my friend, actually.
+1. [button: model, , , , css attributes/] What did you say about our Fred?
+1. [button: model, , , , css attributes/] It was a brief moment of joy.
+1. [button: model, , , , css attributes/] Mary was also working in the library.
+1. [button: model, , , , css attributes/] You see, I thought I was lucky.
+1. [button: model, , , , css attributes/] I have a flat and a house.
+1. [button: model, , , , css attributes/] I have a map in my notebook.
+1. [button: model, , , , css attributes/] I'm married and I have two children.
+1. [button: model, , , , css attributes/] I live in the south of Hungary.
+1. [button: model, , , , css attributes/] I want to drink a cold tea.
+1. [button: model, , , , css attributes/] I have a niece and a nephew.
+1. [button: model, , , , css attributes/] What are you doing in the afternoon?
+1. [button: model, , , , css attributes/] When will you come and see us?
+1. [button: model, , , , css attributes/] He has two hours to get here.
+1. [button: model, , , , css attributes/] Have you ever seen a big plane?
+1. [button: model, , , , css attributes/] I have to speak to the receptionist.
+1. [button: model, , , , css attributes/] What the hell are you doing here?
+1. [button: model, , , , css attributes/] I need to have a hobby.
+1. [button: model, , , , css attributes/] I don’t want you to be late.
+1. [button: model, , , , css attributes/] I never drink alcohol when I drive.
+1. [button: model, , , , css attributes/] It’s very windy now – let’s go sailing!
+1. [button: model, , , , css attributes/] This is one of my favourite songs.
+1. [button: model, , , , css attributes/] In winter I love having hot baths.
+1. [button: model, , , , css attributes/] Do you know what is behind you?
+1. [button: model, , , , css attributes/] In my room the carpet is grey.
+1. [button: model, , , , css attributes/] When were you last at the chemist's?
+1. [button: model, , , , css attributes/] Do you wake up by an alarm-clock?
+1. [button: model, , , , css attributes/] I was very happy during the weekend.
+1. [button: model, , , , css attributes/] My friend would like to be famous.
+1. [button: model, , , , css attributes/] I can't find food in the fridge.
+1. [button: model, , , , css attributes/] How often are you in your kitchen?
+1. [button: model, , , , css attributes/] Are you a member of the library?
+1. [button: model, , , , css attributes/] There isn't a mirror in my room.
+1. [button: model, , , , css attributes/] My radio-reading lamp-alarm clock is very modern.
+1. [button: model, , , , css attributes/] I haven't been to a big palace.
+1. [button: model, , , , css attributes/] There are six pictures on our wall.
+1. [button: model, , , , css attributes/] This is a great place in summer.
+1. [button: model, , , , css attributes/] We have a sofa opposite the tv.
+1. [button: model, , , , css attributes/] I got a stereo for my birthday.
+1. [button: model, , , , css attributes/] My cat likes sitting on my table.
+1. [button: model, , , , css attributes/] Do you know the new car-racing champion?
+1. [button: model, , , , css attributes/] Tell me where the check-in desk is.
+1. [button: model, , , , css attributes/] I can't answer you this question fluently.
+1. [button: model, , , , css attributes/] Who is that man at the gate?
+1. [button: model, , , , css attributes/] Can you hear me in this noise?
+1. [button: model, , , , css attributes/] How much did you earn last month?
+1. [button: model, , , , css attributes/] They stopped us at the passport control.
+1. [button: model, , , , css attributes/] I have to practice this all day.
+1. [button: model, , , , css attributes/] Can you smell this smoke or something?
+1. [button: model, , , , css attributes/] What do you think of this problem?
+1. [button: model, , , , css attributes/] Do you know who her clerk is?
+1. [button: model, , , , css attributes/] How much would you like to earn?
+1. [button: model, , , , css attributes/] What do you enjoy most in summer?
+1. [button: model, , , , css attributes/] Where can I find you in summer?
+1. [button: model, , , , css attributes/] What do you want to eat later?
+1. [button: model, , , , css attributes/] When did you come home last night?
+1. [button: model, , , , css attributes/] My grandfather is over 90 years old.
+1. [button: model, , , , css attributes/] It isn’t so good to be popular.
+1. [button: model, , , , css attributes/] Have you ever seen a real star?
+1. [button: model, , , , css attributes/] The weather is wonderful by the sea.

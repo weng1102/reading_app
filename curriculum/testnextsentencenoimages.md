@@ -1,8 +1,6 @@
 [[page: Verbs With Images (Multiple Choice), Ronlyn, Wen, , Verbs with images, Multiple Choice/]]
 # Verbs
 ## Baking
-[[image-entry: Baking, left, 25%]]
-![Baking](verb-bake.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is cooking.
   1a. [button: choice, correct, , , css attributes/] A person is baking.
@@ -33,10 +31,7 @@
   1a. [button: choice, correct, , , css attributes/] The person wants fresh baked cookies.
   1a. [button: choice, , , , css attributes/] The person wants a drink.
   1a. [button: choice, , , , css attributes/] The person wants a healthy meal.
-[[/image-entry]]
 ## Bouncing
-[[image-entry: Bouncing, left, 25%]]
-![Bouncing](verb-bounce.jpg)
 1a. What is happening?
   1a. [button: choice, correct, , , css attributes/] The person is bouncing a ball.
   1a. [button: choice, , , , css attributes/] A person is baking cookies.
@@ -67,10 +62,7 @@
   1a. [button: choice, , , , css attributes/] She wants to sleep.
   1a. [button: choice, , , , css attributes/] She wants to eat.
   1a. [button: choice, correct, , , css attributes/] She wants to play.
-[[/image-entry]]
 ## Brushing
-[[image-entry: Brushing, left, 25%]]
-![Brushing](verb-brush.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is brushing his hair.
   1a. [button: choice, correct, , , css attributes/] A person is brushing his teeth.
@@ -96,10 +88,7 @@
   1a. [button: choice, , , , css attributes/] He wants to stay awake.
   1a. [button: choice, , , , css attributes/] He wants to eat dessert.
   1a. [button: choice, , , , css attributes/] He wants to jog.
-[[/image-entry]]
 ## Building
-[[image-entry: Building, left, 25%]]
-![Building](verb-build.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is playing with wood.
   1a. [button: choice, , , , css attributes/] A person is catching a ball.
@@ -125,10 +114,7 @@
   1a. [button: choice, , , , css attributes/] The child wants to eat.
   1a. [button: choice, , , , css attributes/] The child wants to work.
   1a. [button: choice, correct, , , css attributes/] The child wants to play.
-[[/image-entry]]
 ## Carrying
-[[image-entry: Carrying, left, 25%]]
-![Carrying](verb-carry.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is shopping.
   1a. [button: choice, correct, , , css attributes/] A person is carrying.
@@ -154,10 +140,7 @@
   1a. [button: choice, correct, , , css attributes/] He wants to make more space.
   1a. [button: choice, correct, , , css attributes/] He wants to work out his arms.
   1a. [button: choice, , , , css attributes/] He wants to play.
-[[/image-entry]]
 ## Climbing
-[[image-entry: Climbing, left, 25%]]
-![Climbing](verb-climb.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is skipping.
   1a. [button: choice, correct, , , css attributes/] A person is climbing.
@@ -183,10 +166,7 @@
   1a. [button: choice, correct, , , css attributes/] The child wants to get higher.
   1a. [button: choice, , , , css attributes/] The child wants to rest.
   1a. [button: choice, , , , css attributes/] The child wants to stay still.
-[[/image-entry]]
 ## Cooking
-[[image-entry: Cooking, left, 25%]]
-![Cooking](verb-cook.jpg)
 1a. What is happening?
   1a. [button: choice, correct, , , css attributes/] A person is cooking.
   1a. [button: choice, , , , css attributes/] A person is climbing.
@@ -212,10 +192,7 @@
   1a. [button: choice, correct, , , css attributes/] She is hungry.
   1a. [button: choice, , , , css attributes/] She is tired.
   1a. [button: choice, , , , css attributes/] She is lazy.
-[[/image-entry]]
 ## Crawling
-[[image-entry: Crawling, left, 25%]]
-![Crawling](verb-crawl.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is walking.
   1a. [button: choice, correct, , , css attributes/]  A person is crawling.
@@ -236,10 +213,7 @@
   1a. [button: choice, correct, , , css attributes/] The baby is active.
   1a. [button: choice, correct, , , css attributes/] The baby is curious.
   1a. [button: choice, , , , css attributes/] The baby is hungry.
-[[/image-entry]]
 ## Crying
-[[image-entry: Crying, left, 25%]]
-![Crying](verb-cry1.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is swinging.
   1a. [button: choice, correct, , , css attributes/] A person is crying.
@@ -265,9 +239,6 @@
   1a. [button: choice, , , , css attributes/] She is happy.
   1a. [button: choice, , , , css attributes/] She is indifferent.
   1a. [button: choice, correct, , , css attributes/] She is mad.
-[[/image-entry]]
-[[image-entry: Crying, left, 25%]]
-![Crying](verb-cry.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is hugging.
   1a. [button: choice, , , , css attributes/] A person is cooking.
@@ -293,10 +264,7 @@
   1a. [button: choice, correct, , , css attributes/] He is sad.
   1a. [button: choice, , , , css attributes/] He is indifferent.
   1a. [button: choice, correct, , , css attributes/] He is mad.
-[[/image-entry]]
 ## Cutting
-[[image-entry: Cutting, left, 25%]]
-![Cutting](verb-cut.jpg)
 1a. What is happening?
   1a. [button: choice, correct, , , css attributes/] A person is cutting.
   1a. [button: choice, , , , css attributes/] A person is peddling.
@@ -322,10 +290,7 @@
   1a. [button: choice, , , , css attributes/] The person is cutting paper dolls.
   1a. [button: choice, correct, , , css attributes/] The person is creating paper cut art.
   1a. [button: choice, , , , css attributes/] The person is cutting a sandwich. 
-[[/image-entry]]
 ## Dancing
-[[image-entry: Dancing, left, 25%]]
-![Dancing](verb-dance.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is running.
   1a. [button: choice, correct, , , css attributes/] A person is dancing
@@ -351,10 +316,7 @@
   1a. [button: choice, correct, , , css attributes/] She wants to perform.
   1a. [button: choice, , , , css attributes/] She is feeling fearful.
   1a. [button: choice, , , , css attributes/] She wants to stay private.
-[[/image-entry]]
 ## Digging
-[[image-entry: Digging, left, 25%]]
-![Digging](verb-dig.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is cutting.
   1a. [button: choice, , , , css attributes/] A person is laughing.
@@ -380,10 +342,7 @@
   1a. [button: choice, , , , css attributes/] She wants to weed.
   1a. [button: choice, , , , css attributes/] She wants to bury treasure.
   1a. [button: choice, , , , css attributes/] She wants to exercise.
-[[/image-entry]]
 ## Digging
-[[image-entry: Digging, left, 25%]]
-![Digging](verb-dig1.jpg)
 1a. What is happening?
   1a. [button: choice, correct, , , css attributes/] A person is digging.
   1a. [button: choice, , , , css attributes/] A person is mowing.
@@ -397,7 +356,7 @@
 1a. What tool is the person using to dig?
   1a. [button: choice, correct, , , css attributes/] The person is digging with a spade.
   1a. [button: choice, , , , css attributes/] The person is digging with a hoe.
-  1a. [button: choice, , , , css attributes/] The person is digging with a post digger.
+  1a. [button: choice, , , , css attributes/] THe person is digging with a post digger.
   1a. [button: choice, correct, , , css attributes/] The person is digging with a shovel.
 1a. Where is the person digging?
   1a. [button: choice, , , , css attributes/] The person is digging in the kitchen.
@@ -409,11 +368,9 @@
   1a. [button: choice, correct, , , css attributes/] The person wants to plant flowers.
   1a. [button: choice, correct, , , css attributes/] The person wants to exercise.
   1a. [button: choice, , , , css attributes/] The person wants to weed.
-[[/image-entry]]
+
 ## Drawing
 
-[[image-entry: Drawing, left, 25%]]
-![Drawing](verb-draw1.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is washing.
   1a. [button: choice, , , , css attributes/] A person is digging.
@@ -439,10 +396,8 @@
   1a. [button: choice, correct, , , css attributes/] The child wants to be creative.
   1a. [button: choice, , , , css attributes/] The child wants to sleep.
   1a. [button: choice, , , , css attributes/] The child wants to eat.
-[[/image-entry]]
+
 ## Drinking
-[[image-entry: Drinking, left, 25%]]
-![Drinking](verb-drink.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is sleeping.
   1a. [button: choice, , , , css attributes/] A person is peddling.
@@ -468,10 +423,8 @@
   1a. [button: choice, , , , css attributes/] She feels spry.
   1a. [button: choice, , , , css attributes/] She feels too hot.
   1a. [button: choice, correct, , , css attributes/] She feels sleepy.
-[[/image-entry]]
+
 ## Driving
-[[image-entry: Driving, left, 25%]]
-![Driving](verb-drive1.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is walking.
   1a. [button: choice, , , , css attributes/] A person is running.
@@ -497,10 +450,7 @@
   1a. [button: choice, , , , css attributes/] He wants to go to sleep.
   1a. [button: choice, , , , css attributes/] He wants to stay home.
   1a. [button: choice, correct, , , css attributes/] He wants to walk during the day. 
-[[/image-entry]]
 ## Drying
-[[image-entry: Drying, left, 25%]]
-![Drying](verb-dry.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/]  A woman is combing.
   1a. [button: choice, correct, , , css attributes/] A woman is blow drying.
@@ -526,10 +476,7 @@
   1a. [button: choice, , , , css attributes/] She wants to wash her hair.
   1a. [button: choice, , , , css attributes/] She wants to dye her hair.
   1a. [button: choice, correct, , , css attributes/] She wants to style her hair.
-[[/image-entry]]
 ## Eating
-[[image-entry: Eating, left, 25%]]
-![Eating](verb-eat.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A girl is drinking.
   1a. [button: choice, correct, , , css attributes/] A girl is eating.
@@ -555,10 +502,7 @@
   1a. [button: choice, , , , css attributes/] She is tired.
   1a. [button: choice, , , , css attributes/] She is bored.
   1a. [button: choice, correct, , , css attributes/] She is hungry.
-[[/image-entry]]
 ## Eating
-[[image-entry: Eating, left, 25%]]
-![Eating](verb-eat1.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A boy is yawning.
   1a. [button: choice, , , , css attributes/] A boy is drinking.
@@ -584,10 +528,7 @@
   1a. [button: choice, , , , css attributes/] He is tired.
   1a. [button: choice, correct, , , css attributes/] He is hungry.
   1a. [button: choice, , , , css attributes/] He is bored.
-[[/image-entry]]
 ## Hugging
-[[image-entry: Hugging, left, 25%]]
-![Hugging](verb-hug.jpg)
 1a. What is happening?
   1a. [button: choice, correct, , , css attributes/] A girl is hugging.
   1a. [button: choice, , , , css attributes/] A girl is kissing.
@@ -613,10 +554,7 @@
   1a. [button: choice, , , , css attributes/] They do not know each other.
   1a. [button: choice, correct, , , css attributes/] They are happy to see each other.
   1a. [button: choice, , , , css attributes/] They are surprised to see each other.
-[[/image-entry]]
 ## Jumping
-[[image-entry: Jumping, left, 25%]]
-![Jumping](verb-jump.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is skipping.
   1a. [button: choice, correct, , , css attributes/] A person is jumping.
@@ -643,10 +581,7 @@
   1a. [button: choice, , , , css attributes/] She is tired.
   1a. [button: choice, , , , css attributes/] She is lethargic.
   1a. [button: choice, correct, , , css attributes/] She wants to see how high she can jump.
-[[/image-entry]]
 ## Kicking
-[[image-entry: Kicking, left, 25%]]
-![Kicking](verb-kick.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is peddling.
   1a. [button: choice, correct, , , css attributes/] A person is kicking.
@@ -672,10 +607,7 @@
   1a. [button: choice, correct, , , css attributes/] He is playing soccer.
   1a. [button: choice, , , , css attributes/] He is playing basketball.
   1a. [button: choice, , , , css attributes/] He is playing baseball
-[[/image-entry]]
 ## Kissing
-[[image-entry: Kissing, left, 25%]]
-![Kissing](verb-kiss.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A child is yawning.
   1a. [button: choice, correct, , , css attributes/] A child is kissing.
@@ -692,8 +624,8 @@
   1a. [button: choice, , , , css attributes/] The boy is kissing the cat.
   1a. [button: choice, , , , css attributes/] The boy is kissing the dog.
 1a. How are they kissing?
-  1a. [button: choice, correct, , , css attributes/] They are kissing on the lips.
-  1a. [button: choice, , , , css attributes/] They are kissing on the cheek.
+  1a. [button: choice, , , , css attributes/] They are kissing on the lips.
+  1a. [button: choice, correct, , , css attributes/] They are kissing on the cheek.
   1a. [button: choice, , , , css attributes/] They are kissing on the on chin.
   1a. [button: choice, , , , css attributes/] They are kissing on forehead.
 1a. Why are they kissing?
@@ -701,10 +633,7 @@
   1a. [button: choice, , , , css attributes/] The boy wants a go outside.
   1a. [button: choice, , , , css attributes/] The boy wants a favor.
   1a. [button: choice, , , , css attributes/] The boy wants to go play.
-[[/image-entry]]
 ## Laughing
-[[image-entry: Laughing, left, 25%]]
-![Laughing](verb-laugh.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is crying.
   1a. [button: choice, correct, , , css attributes/] A person is laughing.
@@ -725,10 +654,7 @@
   1a. [button: choice, , , , css attributes/]  She is laughing at something sad.
   1a. [button: choice, , , , css attributes/] She is laughing at something boring.
   1a. [button: choice, , , , css attributes/] She is laughing at something irksome.
-[[/image-entry]]
 ## Mowing
-[[image-entry: Mowing, left, 25%]]
-![Mowing](verb-mow.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/]  A person is sweeping.
   1a. [button: choice, , , , css attributes/]  A person is riding.
@@ -754,10 +680,7 @@
   1a. [button: choice, , , , css attributes/] He wants his lawn to be messy.
   1a. [button: choice, correct, , , css attributes/] He wants to earn his allowance.
   1a. [button: choice, , , , css attributes/] He wants his lawn to look neglected.
-[[/image-entry]]
 ## Painting
-[[image-entry: Painting, left, 25%]]
-![Painting](verb-paint.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is cutting.
   1a. [button: choice, correct, , , css attributes/] A person is painting.
@@ -783,10 +706,7 @@
   1a. [button: choice, , , , css attributes/] He wants to find himself.
   1a. [button: choice, , , , css attributes/] He wants to express himself.
   1a. [button: choice, correct, , , css attributes/] He wants to improve his painting.
-[[/image-entry]]
 ## Peddling
-[[image-entry: Peddling, left, 25%]]
-![Peddling](verb-peddle.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is swimming.
   1a. [button: choice, , , , css attributes/] A person is running.
@@ -812,10 +732,7 @@
   1a. [button: choice, , , , css attributes/] He is peddling to get somewhere.
   1a. [button: choice, correct, , , css attributes/] He is peddling to warm himself up.
   1a. [button: choice, , , , css attributes/] He is peddling to occupy his time.
-[[/image-entry]]
 ## Playing
-[[image-entry: Playing, left, 25%]]
-![Playing](verb-play.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is working.
   1a. [button: choice, correct, , , css attributes/] A person is playing.
@@ -841,10 +758,7 @@
   1a. [button: choice, correct, , , css attributes/] He is playing piano to build his memory skills.
   1a. [button: choice, correct, , , css attributes/] He is playing piano to build his math skills.
   1a. [button: choice, correct, , , css attributes/] He is playing piano to build his reading skills.
-[[/image-entry]]
 ## Pushing
-[[image-entry: Pushing, left, 25%]]
-![Pushing](verb-push.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] People are pulling.
   1a. [button: choice, , , , css attributes/] People are sliding.
@@ -870,10 +784,7 @@
   1a. [button: choice, , , , css attributes/] They are pushing a car that ran out of gasoline.
   1a. [button: choice, , , , css attributes/] They are pushing a car that broke down.
   1a. [button: choice, , , , css attributes/] They are pushing a car that is locked.
-[[/image-entry]]
 ## Reading
-[[image-entry: Reading, left, 25%]]
-![Reading](verb-read.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is sleeping
   1a. [button: choice, correct, , , css attributes/] A person is reading.
@@ -899,10 +810,7 @@
   1a. [button: choice, , , , css attributes/] She is reading a book for pay.
   1a. [button: choice, , , , css attributes/] She is reading a book for dinner.
   1a. [button: choice, correct, , , css attributes/] She is reading a book for a school assignment.
-[[/image-entry]]
 ## Riding
-[[image-entry: Riding, left, 25%]]
-![Riding](verb-ride.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is sliding.
   1a. [button: choice, correct, , , css attributes/] A person is riding.
@@ -928,10 +836,7 @@
   1a. [button: choice, , , , css attributes/] She is riding her bicycle to the car mechanics.
   1a. [button: choice, , , , css attributes/] She is riding her bicycle to the bike shop.
   1a. [button: choice, correct, , , css attributes/] She is riding her bicycle to school.
-[[/image-entry]]
 ## Running
-[[image-entry: Running, left, 25%]]
-![Running](verb-run.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is walking.
   1a. [button: choice, correct, , , css attributes/] A person is running.
@@ -957,10 +862,7 @@
   1a. [button: choice, , , , css attributes/] The man is running for practice.
   1a. [button: choice, correct, , , css attributes/] The man is running in a race.
   1a. [button: choice, , , , css attributes/] The man is running for President.
-[[/image-entry]]
 ## Seeing
-[[image-entry: Seeing, left, 25%]]
-![Seeing](verb-see.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is sleeping.
   1a. [button: choice, correct, , , css attributes/] A person is seeing.
@@ -986,10 +888,7 @@
   1a. [button: choice, , , , css attributes/] She is a dog walker.
   1a. [button: choice, , , , css attributes/] She is a cat sitter.
   1a. [button: choice, , , , css attributes/] She is a snake charmer.
-[[/image-entry]]
 ## Singing
-[[image-entry: Singing, left, 25%]]
-![Singing](verb-sing.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is talking.
   1a. [button: choice, correct, , , css attributes/] A person is singing.
@@ -1010,15 +909,12 @@
   1a. [button: choice, , , , css attributes/] She is singing in a stadium.
   1a. [button: choice, correct, , , css attributes/] She is singing in front of a audience.
   1a. [button: choice, , , , css attributes/] She is singing in a studio.
-1a. Why is she singing?
+1a. Why is ?
   1a. [button: choice, , , , css attributes/] She is singing to test her vocal range.
   1a. [button: choice, correct, , , css attributes/] She is singing to express herself.
   1a. [button: choice, , , , css attributes/] She is singing to tire herself out.
   1a. [button: choice, correct, , , css attributes/] She is singing to entertain others.
-[[/image-entry]]
 ## Sitting
-[[image-entry: Sitting, left, 25%]]
-![Sitting](verb-sit.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is standing.
   1a. [button: choice, correct, , , css attributes/] A person is sitting.
@@ -1044,15 +940,12 @@
   1a. [button: choice, correct, , , css attributes/] She is sitting to calm down.
   1a. [button: choice, correct, , , css attributes/] She is sitting to rest.
   1a. [button: choice, , , , css attributes/] She is sitting to take a nap.
-[[/image-entry]]
-[[image-entry: Sitting, left, 25%]]
-![Sitting](verb-sit1.jpg)
 1a. What is happening?
   1a. [button: choice, correct, , , css attributes/] A person is sitting.
   1a. [button: choice, , , , css attributes/] A person is standing.
   1a. [button: choice, , , , css attributes/] A person is talking.
   1a. [button: choice, , , , css attributes/] A person is sleeping.
-1a. Who is sitting?
+1a. Who is ?
   1a. [button: choice, correct, , , css attributes/] A man is sitting.
   1a. [button: choice, , , , css attributes/] A child is sitting.
   1a. [button: choice, , , , css attributes/] A woman is sitting.
@@ -1072,10 +965,7 @@
   1a. [button: choice, correct, , , css attributes/] He is sitting as part of an exercise.
   1a. [button: choice, , , , css attributes/] He is sitting while playing musical chairs.
   1a. [button: choice, correct, , , css attributes/] He is sitting to practice proper posture.
-[[/image-entry]]
 ## Skipping
-[[image-entry: Skipping, left, 25%]]
-![Skipping](verb-skip.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is sliding.
   1a. [button: choice, correct, , , css attributes/] The person is skipping.
@@ -1101,10 +991,7 @@
   1a. [button: choice, , , , css attributes/] She is skipping rope for work.
   1a. [button: choice, correct, , , css attributes/] She is skipping rope for exercise.
   1a. [button: choice, , , , css attributes/] She is skipping rope for school.
-[[/image-entry]]
 ## Sleeping
-[[image-entry: Sleeping, left, 25%]]
-![Sleeping](verb-sleep.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is eating.
   1a. [button: choice, , , , css attributes/] A person is yawning.
@@ -1130,10 +1017,7 @@
   1a. [button: choice, , , , css attributes/] He is sleeping because he was excited.
   1a. [button: choice, correct, , , css attributes/] He is sleeping because he was bored.
   1a. [button: choice, , , , css attributes/] He is sleeping because he was stressed.
-[[/image-entry]]
 ## Sliding
-[[image-entry: Sliding, left, 25%]]
-![Sliding](verb-slide.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is swinging.
   1a. [button: choice, , , , css attributes/] A person is sitting.
@@ -1159,10 +1043,7 @@
   1a. [button: choice, , , , css attributes/] She is sliding for exercise.
   1a. [button: choice, , , , css attributes/] She is sliding for practice.
   1a. [button: choice, correct, , , css attributes/] She is sliding to overcome her fear.
-[[/image-entry]]
 ## Sneezing
-[[image-entry: Sneezing, left, 25%]]
-![Sneezing](verb-sneeze.jpg)
 1a. What is happening?
   1a. [button: choice, correct, , , css attributes/] A person is sneezing.
   1a. [button: choice, , , , css attributes/]  A person is drying.
@@ -1183,10 +1064,7 @@
   1a. [button: choice, , , , css attributes/] She is sneezing from insects.
   1a. [button: choice, correct, , , css attributes/] She is sneezing due a pollen allergy.
   1a. [button: choice, correct, , , css attributes/] She is sneezing from dust.
-[[/image-entry]]
 ## Sweeping
-[[image-entry: Sweeping, left, 25%]]
-![Sweeping](verb-sweep.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is walking.
   1a. [button: choice, correct, , , css attributes/] A person is sweeping.
@@ -1212,10 +1090,7 @@
   1a. [button: choice, correct, , , css attributes/] She is sweeping a dirty porch.
   1a. [button: choice, , , , css attributes/] She is sweeping for fun.
   1a. [button: choice, , , , css attributes/] She is sweeping for practice.
-[[/image-entry]]
 ## Swimming
-[[image-entry: Swimming, left, 25%]]
-![Swimming](verb-swim.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is running.
   1a. [button: choice, correct, , , css attributes/] A person is swimming.
@@ -1241,10 +1116,7 @@
   1a. [button: choice, correct, , , css attributes/] She is swimming to compete against others.
   1a. [button: choice, , , , css attributes/] She is swimming for fun.
   1a. [button: choice, , , , css attributes/] She is swimming for exercise.
-[[/image-entry]]
 ## Swinging
-[[image-entry: Swinging, left, 25%]]
-![Swinging](verb-swing.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is jumping.
   1a. [button: choice, correct, , , css attributes/] A person is swinging.
@@ -1270,10 +1142,7 @@
   1a. [button: choice, correct, , , css attributes/] She is swinging for fun.
   1a. [button: choice, , , , css attributes/] She is swinging for practice.
   1a. [button: choice, correct, , , css attributes/] She is swinging to overcome her fear.
-[[/image-entry]]
 ## Talking
-[[image-entry: Talking, left, 25%]]
-![Talking](verb-talk.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is eating.
   1a. [button: choice, correct, , , css attributes/] A person is talking.
@@ -1300,10 +1169,7 @@
   1a. [button: choice, correct, , , css attributes/] She is talking to practice vocal fry.
   1a. [button: choice, correct, , , css attributes/] She is talking to practice proper diction.
 
-[[/image-entry]]
 ## Throwing
-[[image-entry: Throwing, left, 25%]]
-![Throwing](verb-throw.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is playing.
   1a. [button: choice, correct, , , css attributes/] A person is throwing.
@@ -1329,10 +1195,7 @@
   1a. [button: choice, correct, , , css attributes/] He is throwing the baseball to warm up.
   1a. [button: choice, correct, , , css attributes/] He is throwing the baseball back to the pitcher.
   1a. [button: choice, , , , css attributes/] He is throwing the baseball into the dugout.
-[[/image-entry]]
 ## Walking
-[[image-entry: Walking, left, 25%]]
-![Walking](verb-walk.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is sweeping.
   1a. [button: choice, correct, , , css attributes/] A person is walking.
@@ -1358,10 +1221,7 @@
   1a. [button: choice, , , , css attributes/] She is walking to exercise.
   1a. [button: choice, correct, , , css attributes/] She is walking to show off her dress.
   1a. [button: choice, correct, , , css attributes/] She is walking to cross the path.
-[[/image-entry]]
 ## Wanting
-[[image-entry: Wanting, left, 25%]]
-![Wanting](verb-want.jpg)
 1a. What is happening?
   1a. [button: choice, correct, , , css attributes/] A person is wanting.
   1a. [button: choice, , , , css attributes/] A person is laughing.
@@ -1387,10 +1247,7 @@
   1a. [button: choice, , , , css attributes/] He is wanting his sprots team to play.
   1a. [button: choice, correct, , , css attributes/] He is wanting his sports team to win.
   1a. [button: choice, , , , css attributes/] He is wanting his sprots team to forfeit.
-[[/image-entry]]
 ## Waving
-[[image-entry: Waving, left, 25%]]
-![Waving](verb-wave.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is jumping.
   1a. [button: choice, correct, , , css attributes/] A person is waving.
@@ -1415,10 +1272,7 @@
   1a. [button: choice, correct, , , css attributes/] She is waving hello to her parents.
   1a. [button: choice, correct, , , css attributes/] She is waving to cars passing by.
   1a. [button: choice, correct, , , css attributes/] She is waving people walking by.
-[[/image-entry]]
 ## Whispering
-[[image-entry: Whispering, left, 25%]]
-![Whispering](verb-whisper.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] The person is walking.
   1a. [button: choice, correct, , , css attributes/] The person is whispering..
@@ -1444,10 +1298,7 @@
   1a. [button: choice, correct, , , css attributes/] She is whispering so others cannot listen.
   1a. [button: choice, , , , css attributes/] She is whispering so others can reply.
   1a. [button: choice, , , , css attributes/] She is whispering so others cannot see.
-[[/image-entry]]
 ## Yawning
-[[image-entry: Yawning, left, 25%]]
-![Yawning](verb-yawn.jpg)
 1a. What is happening?
   1a. [button: choice, , , , css attributes/] A person is laughing.
   1a. [button: choice, , , , css attributes/] A person is whispering.
@@ -1473,4 +1324,3 @@
   1a. [button: choice, correct, , , css attributes/] He is yawning from boredom.
   1a. [button: choice, , , , css attributes/] He is yawning from hunger.
   1a. [button: choice, correct, , , css attributes/] He is yawning from fatigue.
-[[/image-entry]]
