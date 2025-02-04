@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2024 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2025 Wen Eng - All Rights Reserved
  *
  * File name: parsetermminals_link.ts
  *
@@ -76,8 +76,9 @@ export class TerminalNode_MLTAG_LINK extends TerminalNode_MLTAG_
         token !== undefined &&
         token.content !== TokenLiteral.RBRACKET &&
         tokenList.length > 0;
-        token = tokenList[0] //  peek
+        token = tokenList[0] //  peek0
       ) {
+        // console.log(`...${token.content}, ${token.type}`);
         assert(token !== undefined, `undefined token detected`);
         let terminalNode: ITerminalNode = GetTerminalNode(token, this._parent);
         if (terminalNode) {
@@ -85,8 +86,13 @@ export class TerminalNode_MLTAG_LINK extends TerminalNode_MLTAG_
             `Created terminalNode type=${terminalNode.constructor.name} for "${token.content}"`
           );
           terminalNode.parse(tokenList); // responsible for advancing tokenlist
-          // console.log(`link content=${terminalNode.content}`);
+          // console.log(
+          //   `link content=${terminalNode.content}, type=${this.type},  first=${terminalNode.firstTermIdx},last=${terminalNode.lastTermIdx}`
+          // );
           // assumed added in parse() above
+          // console.log(
+          //   `first/last1=${terminalNode.firstTermIdx} ${terminalNode.lastTermIdx}`
+          // );
           if (
             terminalNode.firstTermIdx !== IDX_INITIALIZER &&
             terminalNode.lastTermIdx !== IDX_INITIALIZER
@@ -115,9 +121,34 @@ export class TerminalNode_MLTAG_LINK extends TerminalNode_MLTAG_
       );
       this.content = label;
       if (this.meta.label.length > 0) {
-        this.firstTermIdx = this.meta.label[0].termIdx;
-        this.lastTermIdx = this.meta.label[this.meta.label.length - 1].termIdx;
+        // Scan forward for first valid termIdx and backward for last
+        // valid termIdx to ignore non-words bracketing
+        for (
+          let i: number = 0, found: boolean = false;
+          !found && i < this.meta.label.length;
+          i++
+        ) {
+          if (this.meta.label[i].termIdx >= 0) {
+            found = true;
+            this.firstTermIdx = this.meta.label[i].termIdx;
+          }
+        }
+        for (
+          let i: number = this.meta.label.length - 1, found: boolean = false;
+          !found && i >= 0;
+          i--
+        ) {
+          if (this.meta.label[i].termIdx >= 0) {
+            found = true;
+            this.lastTermIdx = this.meta.label[i].termIdx;
+          }
+        }
+        // this.firstTermIdx = this.meta.label[0].termIdx;
+        // this.lastTermIdx = this.meta.label[this.meta.label.length - 1].termIdx;
       }
+      // console.log(
+      //   `${label} first/last2=${this.firstTermIdx}/${this.lastTermIdx}`
+      // );
       token = tokenList.shift()!;
       assert(
         token.content === TokenLiteral.LPAREN,
@@ -133,6 +164,8 @@ export class TerminalNode_MLTAG_LINK extends TerminalNode_MLTAG_
         token = tokenList.shift()!
       ) {
         destination += token.content;
+        // console.log(`token:${token.content}`);
+        // console.log(`running destination:${destination}`);
         // to be consistent, destination should have a parse that at least
         // advances the tokenList queue and NOT using for-loop step
       }
