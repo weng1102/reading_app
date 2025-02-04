@@ -375,7 +375,7 @@ class HeadingArray extends Array<IHeadingListItem> {
     return this.length;
   }
   serialize(): string {
-    let outputStr: string = "[hidx]: lvl   1st last title\n";
+    let outputStr: string = "[hidx]: lvl  1st last title\n";
     for (const [i, element] of this.entries()) {
       outputStr = `${outputStr}[${i
         .toString()
@@ -448,10 +448,13 @@ class LinkArray extends Array<ILinkListItem> {
     return super.push(link);
   }
   parse(
-    headingListLength: number,
-    sectionListLength: number,
-    terminalListLength: number
+    headingList: IHeadingListItem[],
+    sectionList: ISectionListItem[],
+    // sentenceList: ISentenceListItem[],
+    terminalList: ITerminalListItem[]
   ): number {
+    // Should be refactored to share single logic flow for both intra and interpage
+    // link parsing.
     // If both section and terminal indices are specified, terminal idx
     // takes precedence over section idx.
     // Validate links and sectionIdx and terminalIdx before setting
@@ -467,19 +470,32 @@ class LinkArray extends Array<ILinkListItem> {
         ) {
           element.valid =
             element.destination.headingIdx >= 0 &&
-            element.destination.headingIdx < headingListLength;
+            element.destination.headingIdx < headingList.length;
+          if (element.valid) {
+            element.destination.terminalIdx =
+              headingList[element.destination.headingIdx].firstTermIdx;
+          }
         } else if (
           element.destination.linkIdxType === LinkIdxDestinationType.section
         ) {
           element.valid =
             element.destination.sectionIdx >= 0 &&
-            element.destination.sectionIdx < sectionListLength;
+            element.destination.sectionIdx < sectionList.length;
+          if (element.valid) {
+            element.destination.sectionIdx =
+              terminalList[element.destination.terminalIdx].sectionIdx;
+          }
         } else if (
           element.destination.linkIdxType === LinkIdxDestinationType.terminal
         ) {
           element.valid =
             element.destination.terminalIdx >= 0 &&
-            element.destination.terminalIdx < terminalListLength;
+            element.destination.terminalIdx < terminalList.length;
+          if (element.valid) {
+            // already have terminalIdx
+            element.destination.terminalIdx =
+              terminalList[element.destination.terminalIdx].sectionIdx;
+          }
         } else {
         }
       } else {
@@ -569,6 +585,10 @@ class LinkArray extends Array<ILinkListItem> {
             } else {
             }
           }
+        } else {
+          console.log(
+            `Invalid page link: ${pageFile} file does not exist (yet)?`
+          );
         }
       }
     }
@@ -663,6 +683,60 @@ class InlineButtonArray extends Array<IInlineButtonItem> {
           }
         }
       };
+      const parseModelingButtons = () => {
+        // identify and record the next model. Loop through all buttons remembering the previous model button idx
+        let isValid: boolean = false;
+        try {
+          let previousModelButtonIdx: number = IDX_INITIALIZER;
+          this.forEach((inlineButton, index) => {
+            // this loop construct (not for-in) is required to retain buttonIdx
+            if (inlineButton.action !== InlineButtonActionEnumType.model) {
+              isValid = false;
+            } else if (
+              inlineButton.termIdx < 0 ||
+              inlineButton.termIdx + 1 >= terminalList.length
+            ) {
+              isValid = false;
+              console.log(
+                `Invalid inlineButton.termIdx of ${inlineButton.termIdx +
+                  1} is out of bounds: not between 1 and ${
+                  terminalList.length
+                }.`
+              );
+              isValid = false;
+              // do not reset termIdx for debugging purposes
+            } else {
+              inlineButton.termIdx++;
+              inlineButton.sectionIdx =
+                terminalList[inlineButton.termIdx].sectionIdx;
+              inlineButton.lastTermIdx =
+                sectionList[inlineButton.sectionIdx].lastTermIdx;
+              if (
+                previousModelButtonIdx >= 0 &&
+                previousModelButtonIdx < this.length
+              ) {
+                this[previousModelButtonIdx].nextButtonIdx = index;
+              }
+              previousModelButtonIdx = index;
+            }
+            // if (
+            //   isValid ||
+            //   (previousModelButtonIdx >= 0 &&
+            //     previousModelButtonIdx < this.length &&
+            //     this[previousModelButtonIdx].action ===
+            //       InlineButtonActionEnumType.model)
+            // ) {
+            //   this[previousModelButtonIdx].nextButtonIdx = index;
+            //   previousModelButtonIdx = index; // save for next model button
+            // } else {
+            //   console.log(`non modeling button idx=${inlineButton.termIdx}`);
+            // }
+          });
+        } catch (e) {
+          console.log(e);
+        } finally {
+        }
+      };
       const parseMultipleChoiceButtons = () => {
         // Update the sectionIdx field of the correct responses so that the
         // reactcomp can determine whether the newSection reducer refers
@@ -713,7 +787,7 @@ class InlineButtonArray extends Array<IInlineButtonItem> {
             ) {
               isValid = false;
               console.log(
-                `Invalid inlineButton.termIdx of ${inlineButton.termIdx +
+                `mc:Invalid inlineButton.termIdx of ${inlineButton.termIdx +
                   1} is out of bounds: not between 1 and ${
                   terminalList.length
                 }.`
@@ -732,7 +806,7 @@ class InlineButtonArray extends Array<IInlineButtonItem> {
                 terminalList[inlineButton.termIdx].sectionIdx;
               inlineButton.lastTermIdx =
                 sectionList[inlineButton.sectionIdx].lastTermIdx;
-              terminalList[inlineButton.termIdx].sectionIdx;
+              // terminalList[inlineButton.termIdx].sectionIdx;
             } else {
               console.log(
                 `Invalid inlineButton.termIdx=${
@@ -776,8 +850,9 @@ class InlineButtonArray extends Array<IInlineButtonItem> {
                 grouping[buttonIdx] = 1; // start of first grouping
                 setSentenceTransition(buttonIdx);
               } else if (
+                this[buttonIdx - 1].sectionIdx >= 0 &&
                 sectionList[this[buttonIdx].sectionIdx].firstTermIdx ===
-                sectionList[this[buttonIdx - 1].sectionIdx].lastTermIdx + 1
+                  sectionList[this[buttonIdx - 1].sectionIdx].lastTermIdx + 1
               ) {
                 // consecutive button (within the same grouping)
                 // identify the last sentence in section
@@ -789,59 +864,6 @@ class InlineButtonArray extends Array<IInlineButtonItem> {
                 grouping[buttonIdx] = grouping[buttonIdx - 1] + 1;
                 // implies that the previous section is an mc question
                 setSentenceTransition(buttonIdx);
-                //   try {
-                //     sentenceList[
-                //       terminalList[
-                //         sectionList[this[buttonIdx].sectionIdx - 1].lastTermIdx
-                //       ].sentenceIdx
-                //     ].stopAtEndOfSentence = true;
-                //   } catch (e) {
-                //     console.log(
-                //       `array index out of bound setting stopAtEndOfSentence buttonIdx=${buttonIdx}. Error message: "${e}"`
-                //     );
-                // }
-                // finally {}
-                // console.log(
-                //   `firstTermIdx=${
-                //     sectionList[this[buttonIdx].sectionIdx].firstTermIdx
-                //   }, lastTermIdx of previous section=${sectionList[
-                //     this[buttonIdx].sectionIdx - 1
-                //   ].lastTermIdx + 1}`
-                // );
-                //
-                // if (
-                //   this[buttonIdx].action ===
-                //     InlineButtonActionEnumType.choice &&
-                //   (buttonIdx === 0 ||
-                //     grouping[buttonIdx] !== grouping[buttonIdx - 1] + 1)
-                // ) {
-                // console.log(
-                //   `mc question lastTermidx= ${
-                //     sectionList[this[buttonIdx].sectionIdx - 1].lastTermIdx
-                //   }`
-                // );
-                // }
-                //   try {
-                //     sentenceList[
-                //       terminalList[
-                //         sectionList[this[buttonIdx].sectionIdx - 1].lastTermIdx
-                //       ].sentenceIdx
-                //     ].stopAtEndOfSentence = true;
-                //   } catch (e) {
-                //     console.log(
-                //       `array index out of bound setting stopAtEndOfSentence buttonIdx=${buttonIdx}. Error message: "${e}"`
-                //     );
-                // }
-                // finally {}
-                // console.log(
-                //   `new mc answers: buttonidx=${buttonIdx}, grouping=${
-                //     grouping[buttonIdx]
-                //   },firstTermIdx=${
-                //     sectionList[this[buttonIdx].sectionIdx].firstTermIdx
-                //   },lastTermIdx=${
-                //     sectionList[this[buttonIdx].sectionIdx].lastTermIdx
-                //   }`
-                // );
               }
             }
           } catch (e) {
@@ -889,7 +911,9 @@ class InlineButtonArray extends Array<IInlineButtonItem> {
                     ].nextTermIdx = nextTermForCurrentGrouping;
                     correctButtonIdx = IDX_INITIALIZER;
                   } else {
-                    console.log(`invalid correctButtonIdx=${correctButtonIdx}`);
+                    console.log(
+                      `No correct multiple choice detected for group that includes buttonIdx=${buttonIdx}`
+                    );
                   }
                 } catch (e) {
                   console.log(`access violation buttonIdx=${buttonIdx}`);
@@ -903,6 +927,7 @@ class InlineButtonArray extends Array<IInlineButtonItem> {
       parseCueButtons();
       parseLabelButtons();
       parseMultipleChoiceButtons();
+      parseModelingButtons();
     } catch (e) {
       console.log(e);
     }
@@ -910,7 +935,7 @@ class InlineButtonArray extends Array<IInlineButtonItem> {
   }
   serialize(): string {
     let outputStr: string =
-      "[ idx]: bIdx first  last sectn action sp  rt  next toBeRecited\n";
+      "[ idx]: bIdx first  last sectn action sp  rt  next nxtBn toBeRecited\n";
     for (const [i, element] of this.entries()) {
       outputStr = `${outputStr}[${i
         .toString()
@@ -927,9 +952,11 @@ class InlineButtonArray extends Array<IInlineButtonItem> {
         " "
       )} ${element.span.toString().padStart(2, " ")} ${element.rate
         .toFixed(1)
-        .padStart(3, " ")} ${element.nextTermIdx.toString().padStart(5, " ")} ${
-        element.toBeRecited
-      }\n`;
+        .padStart(3, " ")} ${element.nextTermIdx
+        .toString()
+        .padStart(5, " ")} ${element.nextButtonIdx
+        .toString()
+        .padStart(5, " ")} ${element.toBeRecited}\n`;
     }
     return outputStr;
   }
