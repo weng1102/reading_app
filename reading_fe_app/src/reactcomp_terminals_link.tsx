@@ -27,6 +27,9 @@ export const TerminalLink = React.memo((props: ITerminalPropsType): any => {
   let terminalBlockSubclass: string = `${terminalBlockClass}-${terminalTag}`;
   let terminalCssSubclass: string = "fillin-prompts-terminal";
   let explicitLinkTag: boolean = false;
+  console.log(
+    `@@@@ <TerminalLink>: active=${props.active}, ${props.terminal.content}`
+  );
   return (
     <>
       <div className={terminalBlockClass}>

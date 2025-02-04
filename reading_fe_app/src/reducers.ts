@@ -51,6 +51,7 @@ const WORD_SETCURRENTFILLIN = "word/set current fillin";
 const SENTENCE_FIRST = "sentence/first"; // position at first word in sent.
 const SENTENCE_NEXT = "sentence/next"; // position at first word of next sent.
 const SENTENCE_PREVIOUS = "sentence/prev"; // first word of previous sentence
+const SENTENCE_SETOPACITY = "sentence/set opacity";
 
 // section actions
 // const SECTION_FIRST = "section/first"; // first word in first section
@@ -148,6 +149,7 @@ const INLINEBUTTON_SIGNALED = "inlinebutton/signaled";
 
 const RECITING_STARTED = "reciting/started"; // actual state of reciting
 const RECITING_ENDED = "reciting/ended"; // actual state of reciting
+const SENTENCE_ACKNOWLEDGETRANSITION = "sentence/acknowledge transition";
 
 const SETTINGS_TOGGLE = "settings/toggle";
 
@@ -614,6 +616,17 @@ const Settings_toggle = () => {
     type: SETTINGS_TOGGLE
   };
 };
+const Sentence_acknowledgeTransition = () => {
+  return {
+    type: SENTENCE_ACKNOWLEDGETRANSITION
+  };
+};
+const Sentence_setOpacity = (opacity: number) => {
+  return {
+    type: SENTENCE_SETOPACITY,
+    payload: opacity
+  };
+};
 const Navbar_toggle = () => {
   return {
     type: NAVBAR_TOGGLE
@@ -697,6 +710,8 @@ export const Request = {
   Recognition_stop,
   Settings_toggle,
 
+  Sentence_setOpacity,
+  Sentence_acknowledgeTransition,
   Speech_setAvailability,
   Speech_acknowledged,
   Speech_announceCurrentContent,
@@ -796,6 +811,8 @@ interface IReduxState {
   inlinebutton_recite_requested: boolean;
   inlinebutton_recite_toBeRecited: string[];
   inlinebutton_signal_requested: boolean;
+  sentence_idxObscured: number;
+  sentence_opacity: number;
 }
 const IReduxStateInitialState: IReduxState = {
   announce_available: false,
@@ -877,7 +894,9 @@ const IReduxStateInitialState: IReduxState = {
   inlinebutton_listen_requested: false,
   inlinebutton_move_requested: false,
   inlinebutton_recite_requested: false,
-  inlinebutton_signal_requested: false
+  inlinebutton_signal_requested: false,
+  sentence_idxObscured: IDX_INITIALIZER,
+  sentence_opacity: 1
 };
 export const rootReducer = (
   state: IReduxState = IReduxStateInitialState,
@@ -896,16 +915,17 @@ export const rootReducer = (
     //     state.pageContext.sentenceList[currentSentenceIdx].type
     //   }`
     // );
+    let newSentence: boolean;
     let type: SentenceListItemEnumType =
       currentSentenceIdx >= 0 &&
       currentSentenceIdx < state.pageContext.sentenceList.length
         ? state.pageContext.sentenceList[currentSentenceIdx].type
         : SentenceListItemEnumType.default;
-    return [
-      sentenceIdx,
-      terminalIdx === 0 || sentenceIdx !== currentSentenceIdx,
-      type
-    ];
+    newSentence = terminalIdx === 0 || sentenceIdx !== currentSentenceIdx;
+    if (newSentence) {
+      state.sentence_idxObscured = IDX_INITIALIZER;
+    }
+    return [sentenceIdx, newSentence, type];
   };
   const setSectionState = (
     terminalIdx: number,
@@ -1108,6 +1128,7 @@ export const rootReducer = (
         linkIdx =
           state.pageContext.terminalList[state.cursor_terminalIdx].linkIdx;
       }
+      console.log(`@@ linkidx=${linkIdx}`);
       // if (linkIdx > 0 && linkIdx < state.pageContext.linkList.length) {
       //   savePageLinkInitialState(
       //     state.pageContext.linkList[linkIdx].destination.page,
@@ -1235,6 +1256,14 @@ export const rootReducer = (
     case SENTENCE_PREVIOUS:
       setToPrevSentenceTerminalState();
       return { ...state };
+    case SENTENCE_SETOPACITY:
+      state.sentence_opacity = +action.payload;
+      state.sentence_idxObscured = state.cursor_sentenceIdx;
+      // console.log(
+      //   `@@@ opacity=${action.payload} idxObscured=${state.sentence_idxObscured} state.cursor_sentenceIdx=${state.cursor_sentenceIdx}`
+      // );
+      // gets reset when sentence transitions
+      return { ...state };
     case WORD_SELECT:
       setTerminalState([+action.payload]);
       return { ...state };
@@ -1335,7 +1364,9 @@ export const rootReducer = (
         state.listen_stopAtEOS = false; // reset
       }
       return { ...state };
-
+    case SENTENCE_ACKNOWLEDGETRANSITION:
+      state.cursor_nextSentenceTransition = false;
+      return { ...state };
     case STATUSBAR_MESSAGE_SET:
       state.statusBar_message1 = action.payload;
       return { ...state };
@@ -1396,6 +1427,9 @@ export const rootReducer = (
       return { ...state };
     }
     case INLINEBUTTON_CLICK: {
+      console.log(
+        `modelFlow reducer action.payload=${action.payload}, ${state.inlinebutton_idx}`
+      );
       state.inlinebutton_idx = action.payload;
       state.inlinebutton_listen_requested = false;
       state.inlinebutton_move_requested = false;
@@ -1441,6 +1475,7 @@ export const rootReducer = (
     }
     case INLINEBUTTON_RECITED: {
       state.inlinebutton_recite_requested = false;
+      state.inlinebutton_recite_toBeRecited = [];
       return state;
     }
     case INLINEBUTTON_SIGNAL: {

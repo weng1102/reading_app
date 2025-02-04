@@ -513,7 +513,7 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
       // top adjusted by header height
       // bottom adjusted by footer height
       if (rect.top < 50 || rect.bottom > window.innerHeight - 50) {
-        console.log(`@@@ reactcomp_terminalNode scrollIntoView`);
+        // console.log(`@@@ reactcomp_terminalNode scrollIntoView`);
         // setBoundingBoxBottom(rect.bottom);
         // console.log(
         //   `<TerminalNode> before scroll top=${rect.top}, bottom=${rect.bottom}`
@@ -565,6 +565,9 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
   }
   // console.log(`${props.terminalInfo.content}: hidden1=${hidden} `);
   if (props.terminalInfo.recitable) {
+    // console.log(
+    //   `@@@@ <TerminalNode>  active=${props.active}, recitable=${props.terminalInfo.recitable}, content=${props.terminalInfo.content}`
+    // );
     let attributes: string = `${
       props.terminalInfo.fillin.responseIdx >= 0
         ? " fillin-prompts-terminal "

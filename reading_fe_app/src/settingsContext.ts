@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2023 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2025 Wen Eng - All Rights Reserved
  *
  * File name: settingsContext.ts
  *
@@ -45,22 +45,6 @@ export enum RecitationMode1 {
   section = "section, paragraph, etc.",
   embedded = "embedded label or hint from inline button"
 }
-// export enum RecitationScopeEnumType {
-//   words = "word",
-//   sentence = "sentence",
-//   section = "section",
-//   label = "label",
-//   embedded = "embedded"
-// }
-// export enum RecitationPositionEnumType {
-//   unchanged = "unchanged", // (default) cursor unchanged
-//   end = "atEnd", // after prose in scope
-//   beginning = "atBeginning" // before prose in scope
-// }
-// export enum RecitationListeningEnumType {
-//   startListening = "startListening",
-//   notListening = "notListening"
-// }
 export enum NotificationMode {
   sound = "sound",
   voice = "voice"
@@ -69,7 +53,8 @@ export interface ISettings {
   config: IConfigSettings;
   speech: ISpeechSettings;
   listen: IListenSettings;
-  // fillin: ISectionFillinSettings;
+  modeling: IModelingSettings;
+  fillin: IFillinSettings;
 }
 export interface ISettingsContext {
   settings: ISettings;
@@ -78,15 +63,17 @@ export interface ISettingsContext {
 export const SettingsInitializer = (
   config: IConfigSettings = ConfigSettingsInitializer(),
   speech: ISpeechSettings = SpeechSettingsInitializer(),
-  listen: IListenSettings = ListenSettingsInitializer()
-  // fillin: ISectionFillinSettings = ISectionFillinSettingsInitializer()
+  listen: IListenSettings = ListenSettingsInitializer(),
+  modeling: IModelingSettings = ModelingSettingsInitializer(),
+  fillin: IFillinSettings = IFillinSettingsInitializer()
 ): ISettings => {
   // console.log(`retrieve voice and index`);
   return {
     config,
     speech,
-    listen
-    // fillin
+    listen,
+    modeling,
+    fillin
   };
 };
 export interface IConfigSettings {
@@ -100,21 +87,6 @@ export interface IConfigSettings {
   lineSpacingAdjustment: number; // in px
   fillinPresets: ISectionFillinPresets;
 }
-export interface ISpeechSettings {
-  scope: RecitationScopeEnumType;
-  placement: RecitationPlacementEnumType;
-  listening: RecitationListeningEnumType;
-  lang: string;
-  locale: string;
-  gender: string;
-  pitch: number;
-  rate: number;
-  volume: number;
-  selectedVoiceIndex: number;
-}
-
-//distDir: string = "https://weng1102.github.io/reading_app/dist/",
-//
 export function ConfigSettingsInitializer(
   homePage: string = "ronlyn",
   distDir: string = "https://weng1102.github.io/reading-companion/",
@@ -138,6 +110,18 @@ export function ConfigSettingsInitializer(
     fillinPresets
   };
 }
+export interface ISpeechSettings {
+  scope: RecitationScopeEnumType;
+  placement: RecitationPlacementEnumType;
+  listening: RecitationListeningEnumType;
+  lang: string;
+  locale: string;
+  gender: string;
+  pitch: number;
+  rate: number;
+  volume: number;
+  selectedVoiceIndex: number;
+}
 export function SpeechSettingsInitializer(
   scope: RecitationScopeEnumType = RecitationScopeEnumType.words,
   placement: RecitationPlacementEnumType = RecitationPlacementEnumType.unchanged,
@@ -146,7 +130,7 @@ export function SpeechSettingsInitializer(
   locale: string = "en-US",
   gender: string = "female",
   pitch: number = 0,
-  rate: number = 1,
+  rate: number = 0.75,
   volume: number = 0.5,
   selectedVoiceIndex: number = Synthesizer.selectedVoiceIndex // ms female voice
   // os: string = "windows"
@@ -193,6 +177,115 @@ export function ListenSettingsInitializer(
     sentenceNotification,
     sectionNotification,
     excludeHeadings
+  };
+}
+export const enum ObscuredTextDegreeEnum {
+  // defines the degree to which prompt/response is obscured
+  min = 0,
+  unobscured = 0,
+  barely = 1,
+  partially = 2,
+  default = 2,
+  mostly = 3,
+  invisible = 4,
+  totallyObscured = 4,
+  max = 4
+}
+export const enum ObscuredTextTimingEnum {
+  // defines when prompt/response is first obscured
+  min = 0,
+  never = 0,
+  afterActivation = 1,
+  beforePrompting = 2,
+  afterPrompting = 3,
+  default = 3,
+  afterRecognition = 4,
+  always = 5,
+  max = 5
+}
+export const enum ModelingContinuationEnum {
+  // defines when prompt/response is first obscured
+  min = 0,
+  default = 2,
+  nextWordAndStop = 0,
+  nextModelAndStop = 1,
+  nextModelAndContinue = 2,
+  max = 2
+}
+export interface IModelingSettings {
+  obscuredTextTiming: ObscuredTextTimingEnum;
+  obscuredTextDegree: ObscuredTextDegreeEnum;
+  directions: string;
+  continuationAction: ModelingContinuationEnum;
+  continueToNextModel: boolean;
+}
+export function ModelingSettingsInitializer(): IModelingSettings {
+  return {
+    obscuredTextDegree: ObscuredTextDegreeEnum.default, // not obscured
+    directions: "repeat the following",
+    obscuredTextTiming: ObscuredTextTimingEnum.default, //
+    continuationAction: ModelingContinuationEnum.default,
+    continueToNextModel: false
+  };
+}
+export enum FillinResponsesProgressionEnum {
+  hidden = "hidden",
+  random = "randomly",
+  alphabetical = "alphabetically",
+  inorder = "in order",
+  inline = "inline"
+}
+export enum FillinLayoutType {
+  grid = "grid",
+  list = "list",
+  csv = "csv",
+  hidden = "hidden"
+}
+export enum FillinPositionType {
+  above = "above",
+  left = "left",
+  right = "right",
+  below = "below"
+}
+export interface IFillinSettings {
+  description: string;
+  responsesLabel: string;
+  promptsLabel: string;
+  layout: FillinLayoutType;
+  showProgression: boolean;
+  progressionOrder: FillinResponsesProgressionEnum;
+  gridColumns: number;
+  showResponsesInPrompts: boolean;
+  responsesLayout: FillinPositionType;
+  showAlternatives: boolean;
+  groupByTags: boolean;
+  showResponseTags: boolean; //same as groupCategory?
+  showPromptTags: boolean;
+  unique: boolean; // identical words grouped as single response entry
+  showReferenceCount: boolean;
+}
+export function IFillinSettingsInitializer(
+  description: string = "",
+  promptsLabel: string = "",
+  responsesLabel: string = "",
+  layout = FillinLayoutType.grid
+): IFillinSettings {
+  return {
+    description: description,
+    responsesLabel: responsesLabel,
+    promptsLabel: promptsLabel,
+    layout: layout,
+    showProgression: true,
+    progressionOrder: FillinResponsesProgressionEnum.inorder,
+    gridColumns: 6,
+    showResponseTags: false,
+    showPromptTags: false,
+    groupByTags: false,
+    showResponsesInPrompts: false,
+    responsesLayout: FillinPositionType.above,
+    showAlternatives: false,
+    unique: false, // identical words grouped as single response entry
+    showReferenceCount: false
   };
 }
 export const SettingsContext = React.createContext(

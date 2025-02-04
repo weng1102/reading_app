@@ -126,7 +126,7 @@ export const SpeechMonitor = () => {
     setAnnounce_nextSection(false);
     setAnnounce_nextSentence(false);
   };
-  let settingsContext: ISettingsContext = useContext(SettingsContext)!;
+  const settingsContext: ISettingsContext = useContext(SettingsContext)!;
   Synthesizer.volume = settingsContext.settings.speech.volume;
   Synthesizer.rate = settingsContext.settings.speech.rate;
   let pageContext: CPageLists = useAppSelector(store => store.pageContext);
@@ -454,7 +454,7 @@ export const RecitationOptions = (props: IRecitationOptionsProps) => {
         className="recitation-radioButton settings-grid-section-item-recitation"
         onChange={onScopeChange}
       >
-        <div className="settings-grid-section-item-recitation-control-group">
+        <div className="settings-grid-section-item-recitation-control-group settings-radiobutton">
           <input
             type="radio"
             value={RecitationScopeEnumType.words}
@@ -495,7 +495,7 @@ export const RecitationOptions = (props: IRecitationOptionsProps) => {
         className="recitation-radioButton settings-grid-section-item-recitation"
         onChange={onPlacementChange}
       >
-        <div className="settings-grid-section-item-recitation-control-group">
+        <div className="settings-grid-section-item-recitation-control-group settings-radiobutton">
           <input
             type="radio"
             value={RecitationPlacementEnumType.unchanged}
@@ -539,7 +539,7 @@ export const RecitationOptions = (props: IRecitationOptionsProps) => {
         className="recitation-radioButton settings-grid-section-item-recitation"
         onChange={onListeningChange}
       >
-        <div className="settings-grid-section-item-recitation-control-group">
+        <div className="settings-grid-section-item-recitation-control-group settings-radiobutton">
           <input
             type="radio"
             value={RecitationListeningEnumType.startListening}
@@ -559,7 +559,7 @@ export const RecitationOptions = (props: IRecitationOptionsProps) => {
               RecitationListeningEnumType.notListening
             }
           />
-          not listening
+          stop listening
         </div>
         <div className="settings-grid-section-footer">
           Listening option determines whether to start listening after

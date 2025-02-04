@@ -187,15 +187,15 @@ export const ListeningMonitor = React.memo(() => {
   ////////////////////////////////////
   // Start and stop listening manually
   ////////////////////////////////////
-  console.log(`listening=${listening},
-  interimTranscript=${interimTranscript},
-  finalTranscript=${finalTranscript},
-  expectedTerminalIdx=${expectedTerminalIdx},
-  previousMatchedTerminalIdx=${previousMatchedTerminalIdx},
-  nextSentence=${nextSentence}
-  listening=${listening}, listeningRequested=${listeningRequested}
-  wordRetries=${wordRetries},
-  reciteWordRequested=${reciteWordRequested}`);
+  // console.log(`listening=${listening},
+  // interimTranscript=${interimTranscript},
+  // finalTranscript=${finalTranscript},
+  // expectedTerminalIdx=${expectedTerminalIdx},
+  // previousMatchedTerminalIdx=${previousMatchedTerminalIdx},
+  // nextSentence=${nextSentence}
+  // listening=${listening}, listeningRequested=${listeningRequested}
+  // wordRetries=${wordRetries},
+  // reciteWordRequested=${reciteWordRequested}`);
 
   useEffect(() => {
     if (!listening && listeningRequested) {
@@ -1067,7 +1067,7 @@ export const NotificationModeRadioButton = (
     <>
       <div className="settings-grid-section-header">Notification mode</div>
       <div
-        className="notificationMode-radioButton settings-grid-section-item-notification"
+        className="notificationMode-radioButton settings-grid-section-item-notification settings-radiobutton"
         onChange={onChangeValue}
       >
         <input

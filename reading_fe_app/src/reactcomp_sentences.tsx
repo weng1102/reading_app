@@ -10,10 +10,24 @@
  **/
 import React from "react";
 import "./App.css";
-
-import { ISentenceContent, ITerminalContent } from "./pageContentType";
+import { CPageLists, PageContext } from "./pageContext";
+import {
+  ISentenceContent,
+  ITerminalContent,
+  SentenceListItemEnumType
+} from "./pageContentType";
+import {
+  IModelingSettings,
+  ISettingsContext,
+  // RecitationMode,
+  // RecitationListeningEnumType,
+  // RecitationPositionEnumType,
+  // RecitationScopeEnumType,
+  SettingsContext
+} from "./settingsContext";
 import { TerminalDispatcher } from "./reactcomp_terminals";
-
+import { useContext, useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "./hooks";
 export interface ISentencePropsType {
   //  key: number;
   active: boolean;
@@ -27,9 +41,30 @@ export const Sentence = React.memo((props: ISentencePropsType) => {
   // console.log(
   //   `<Sentence sentenceIdx=${props.sentence.id} active=${props.active} content=${props.sentence.content}>`
   // );
+  // const pageContext: CPageLists = useContext(PageContext)!;
+  const settingsContext: ISettingsContext = useContext(SettingsContext)!;
+  const currentSentIdx: number = useAppSelector(
+    store => store.cursor_sentenceIdx
+  );
+  const obscuredSentIdx: number = useAppSelector(
+    store => store.sentence_idxObscured
+  );
+  let sentenceClasses: string = "";
+
+  if (props.sentence.id === obscuredSentIdx) {
+    console.log(
+      `obscuredIndex=${settingsContext.settings.modeling.obscuredTextDegree}`
+    );
+    sentenceClasses = `sentence sentence-obscured-${settingsContext.settings.modeling.obscuredTextDegree}`;
+    console.log(
+      `obscuredIndex=${settingsContext.settings.modeling.obscuredTextDegree} sentenceClassess=${sentenceClasses}`
+    );
+  } else {
+    sentenceClasses = "sentence";
+  }
   return (
     <>
-      <span className="sentence">
+      <span className={sentenceClasses}>
         {props.sentence.terminals.map(
           (terminal: ITerminalContent, keyvalue: number) => (
             <TerminalDispatcher

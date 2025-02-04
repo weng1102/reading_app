@@ -1,7 +1,7 @@
-/** Copyright (C) 2020 - 2023 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2025 Wen Eng - All Rights Reserved
  *
  * File name: reactcomp_page.tsx
- *
+ *const
  * Defines React front end functional components for page and subcomponents.
  *
  * Terminals represent the group of words, punctuations, whitespace,
@@ -250,8 +250,6 @@ export const Page = React.memo((props: IPagePropsType) => {
   // page requested: home, pop, or link
   /////////////////////////////////////
   useEffect(() => {
-    //setPageRequested iff no current pageRequested (i.e., pageRequested.page
-    // is currently unspecified.
     let requestedPage: IPageRequestItem;
     let requestedType: PageRequestItemType;
     if (!isPageRequestInProgress) {
@@ -262,26 +260,42 @@ export const Page = React.memo((props: IPagePropsType) => {
         requestedPage = previousPages.slice(-1)[0];
         requestedType = PageRequestItemType.pop;
       } else if (pageRequested_link.page.length > 0) {
+        // inter page link
         requestedPage = pageRequested_link;
         requestedType = PageRequestItemType.link;
         // } else if (pageRequested_url.length > 0) {
+      } else if (
+        // intrapage link
+        pageLoaded.page.length > 0 &&
+        pageRequested.page.length === 0 &&
+        pageRequested_link.currentTermIdx >= 0
+      ) {
+        // should check upper bound too!
+        // intrapage link
+        requestedPage = PageRequestItemInitializer();
+        requestedType = PageRequestItemType.intrapage;
       } else {
+        console.log(
+          `proposaled unknown requested loaded: , ${pageLoaded.currentTermIdx}`
+        );
         requestedPage = PageRequestItemInitializer();
         requestedType = PageRequestItemType.unknown;
       }
-      if (
+      if (requestedType === PageRequestItemType.intrapage) {
+        dispatch(
+          Request.Cursor_gotoWordByIdx(pageRequested_link.currentTermIdx)
+        );
+      } else if (
         requestedPage.page !== pageLoaded.page &&
         requestedType !== PageRequestItemType.unknown
       ) {
         setIsPageRequestInProgress(true);
         setPageRequested(requestedPage);
         setPageRequestType(requestedType);
-
-        // console.log(
-        //   `@@page requested: pageRequested=${requestedPage.page} !== pageLoaded=${pageLoaded.page} type=${requestedType}`
-        // );
       } else {
-        console.log(`Page requested already loaded: ${requestedPage.page}`);
+        console.log(
+          `Page requested already loaded: ${requestedPage.page}, ${pageLoaded.page}, ${requestedType}`
+        );
       }
     }
   }, [
@@ -373,10 +387,14 @@ export const Page = React.memo((props: IPagePropsType) => {
   // After page is loaded update currentTermIdx and previousPages stack
   useEffect(() => {
     if (pageRequested.page.length > 0 && pageLoaded.page.length > 0) {
-      // console.log(
-      //   `@@page loaded: pageRequested=${pageRequested.page},pageLoaded=${pageLoaded.page}`
-      // );
+      console.log(
+        `@@page loaded: pageRequested=${pageRequested.page},pageLoaded=${pageLoaded.page}`
+      );
       setIsPageContentFetched(false);
+      console.log(
+        `@@page loaded:
+        pageRequested.currentTermIdx=${pageLoaded.currentTermIdx}`
+      );
       if (
         pageRequested.page === pageLoaded.page &&
         pageRequested.currentTermIdx === pageLoaded.currentTermIdx
