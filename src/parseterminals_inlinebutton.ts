@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2024 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2025 Wen Eng - All Rights Reserved
  *
  * File name: parseterminals_inlinebutton.ts
  *

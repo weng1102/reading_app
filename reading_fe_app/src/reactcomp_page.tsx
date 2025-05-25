@@ -61,7 +61,7 @@ import {
   useContext,
   useCallback,
   useRef,
-  useLayoutEffect
+  // useLayoutEffect
 } from "react";
 import {
   IPageContent,
@@ -208,14 +208,14 @@ export const Page = React.memo((props: IPagePropsType) => {
         }
       );
   }, [
-    // dispatch,
-    // setParseError,
+    dispatch,
+    parseError.length,
     // setResponseError,
     // setPageContent,
     // setPageContext,
     // setIsPageContentFetched,
-    pageRequested.page
-    // distDir,
+    pageRequested.page,
+    distDir,
     // parseError.length
   ]);
 
@@ -309,7 +309,9 @@ export const Page = React.memo((props: IPagePropsType) => {
     // setIsPageRequestInProgress,
     homePagePath,
     pageLoaded.page,
-    previousPages
+    pageLoaded.currentTermIdx,
+    previousPages,
+    dispatch
   ]);
   ////////////////////////////////////////////////////////
   // page fetching after pageRequested: home, pop, or link
@@ -458,11 +460,12 @@ export const Page = React.memo((props: IPagePropsType) => {
     // dispatch,
     previouslyLoadedPage,
     previousPages,
-    pageRequestType
+    pageRequestType,
     // setIsPageContentFetched,
     // setPageRequested,
     // setPreviousPages,
     // setIsPageRequestInProgress
+    dispatch
   ]);
 
   useEffect(() => {
@@ -515,10 +518,10 @@ export const Page = React.memo((props: IPagePropsType) => {
 interface IContentPropsType {
   content: IPageContent;
 }
-interface IContentErrorPropsType {
-  pageRequested: string;
-  message: string;
-}
+// interface IContentErrorPropsType {
+//   pageRequested: string;
+//   message: string;
+// }
 export const Content = React.memo((props: IContentPropsType): any => {
   const dispatch = useAppDispatch();
   // useEffect(()=>{
@@ -545,7 +548,7 @@ export const Content = React.memo((props: IContentPropsType): any => {
       console.log(`<Content> contentRef=null`);
       // dispatch(Request.Content_initialScrollTop(0));
     }
-  }, []);
+  }, [contentDivRef,dispatch]);
   // useLayoutEffect(() => {
   //   // if (layoutCompleted) console.log(`@@@ Content: dispatch relayout=true`);
   //   console.log(`inside Content:useLayoutEffect`);

@@ -375,7 +375,9 @@ export const ReciteButton1 = () => {
       }
     }
   }, [
+    currentTermIdx,
     dispatch,
+    recitationPlacement,
     recitingNow,
     reciting,
     recitationQueue,

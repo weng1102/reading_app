@@ -352,8 +352,8 @@ abstract class AbstractSentenceNode extends ParseNode implements ISentenceNode {
         for (let terminalNode of this.terminals) {
           // for (let i: number = 0; i < this.terminals.length; i++) {
           // console.log(`terminal1=${this.terminals[i].content}`);
-          console.log(`terminal1=${terminalNode.content}`);
-          console.log(`terminal type=${terminalNode.constructor.name}`);
+          // console.log(`terminal1=${terminalNode.content}`);
+          // console.log(`terminal type=${terminalNode.constructor.name}`);
           let temp: string = terminalNode.serialize(
             // `${this.terminals[i].serialize(
             ParseNodeSerializeFormatEnumType.TABULAR,

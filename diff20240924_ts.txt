@@ -1,0 +1,2266 @@
+diff --git a/src/baseClasses.ts b/src/baseClasses.ts
+index 3c8f276..9746f77 100644
+--- a/src/baseClasses.ts
++++ b/src/baseClasses.ts
+@@ -10,6 +10,7 @@
+  **/
+ import * as fs from "fs";
+ import { FileExists } from "./utilities";
++import React, { useContext } from "react";
+ import DictionaryType, {
+   PronunciationDictionary,
+   RecognitionDictionary
+@@ -28,17 +29,19 @@ import {
+   ILinkListItem,
+   ISectionFillinSettings,
+   ISectionFillinItem,
+-  IReciteButtonItem,
++  IInlineButtonItem,
+   LinkIdxDestinationType,
+   ISectionFillinItemInitializer,
+   PartOfSpeechEnumType,
+-  ReciteScopeEnumType,
+-  ReciteCursorActionEnumType,
+-  ReciteListeningActionEnumType,
++  InlineButtonActionEnumType,
++  RecitationScopeEnumType,
++  RecitationReferenceEnumType,
++  RecitationListeningEnumType,
+   SectionFillinResponsesProgressionEnum,
+-  SectionFillinLayoutType
++  SectionFillinLayoutType,
++  IPageContent
+ } from "./pageContentType";
+-import { IPageContent } from "./pageContentType";
++// import { IPageContent } from "./pageContentType";
+ import { IsDefined } from "./utilities";
+ export const TREEVIEW_PREFIX = "+-";
+ export const IDX_INITIALIZER = -9999;
+@@ -118,7 +121,7 @@ class TerminalArray extends Array<ITerminalListItem> {
+       altpro: string = "";
+     let outputStr: string =
+       "Audible,Recitable,Linkable,Visible,Numbers as numerals,Bold,Italics,Heading\n" +
+-      "[idx ]:  term ARLVNBIH  next prev sent  sect link   fillins content\n";
++      "[ idx]:  term ARLVNBIH  next prev sent  sect link   fillins content\n";
+     for (const [i, element] of this.entries()) {
+       if (element.altrecognition.length > 0) {
+         altrecog = `(rec: ${element.altrecognition})`;
+@@ -253,7 +256,7 @@ responses.filter(item => {
+     return [fillinListIdx, fillinIdx];
+   }
+   serialize(): string {
+-    let outputStr: string = `[idx ]: ${"".padEnd(
++    let outputStr: string = `[ idx]: ${"".padEnd(
+       17
+     )} tag          refCount order\n`;
+     for (const [i, element] of this.entries()) {
+@@ -277,7 +280,7 @@ responses.filter(item => {
+         element.authorSetting.showResponsesInPrompts
+           ? "showResponsesInPrompts"
+           : ""
+-      }\n[idx ]: ${"fillin".padEnd(24)} tag          refCount alternatives\n`;
++      }\n[ idx]: ${"fillin".padEnd(24)} tag          refCount alternatives\n`;
+       for (const [j, response] of element.responses
+         //        .sort((a, b) => (a.content > b.content ? 1 : -1))
+         .entries()) {
+@@ -477,7 +480,7 @@ class LinkArray extends Array<ILinkListItem> {
+         } else {
+         }
+       } else {
+-        let pageFile: string = `dist\\${element.destination.page.trim()}.json`;
++        let pageFile: string = `reading-companion\\${element.destination.page.trim()}.json`;
+         if (FileExists(pageFile)) {
+           // and not already the currently open
+           // load json and check section and terminal lists
+@@ -570,7 +573,7 @@ class LinkArray extends Array<ILinkListItem> {
+   }
+   serialize(): string {
+     let outputStr: string =
+-      "[idx ]  " +
++      "[ idx]  " +
+       "page/url".padEnd(40, " ") +
+       "type       head sect term valid \n";
+     for (const [i, element] of this.entries()) {
+@@ -602,79 +605,220 @@ class LinkArray extends Array<ILinkListItem> {
+     return outputStr;
+   }
+ }
+-class ReciteButtonArray extends Array<IReciteButtonItem> {
++class InlineButtonArray extends Array<IInlineButtonItem> {
+   constructor(...args: any) {
+     super(...args);
+   }
+-  push(reciteButton: IReciteButtonItem): number {
+-    return super.push(reciteButton);
++  push(inlineButton: IInlineButtonItem): number {
++    return super.push(inlineButton);
+   }
+   parse(
+-    terminalList: ITerminalListItem[],
+-    sentenceList: ISentenceListItem[]
++    sectionList: ISectionListItem[],
++    terminalList: ITerminalListItem[]
+   ): number {
+     try {
+-      for (let reciteButton of this) {
++      for (let inlineButton of this) {
+         let toBeRecited: string = "";
++        if (inlineButton.action === InlineButtonActionEnumType.cues) {
++          toBeRecited = inlineButton.cues;
++        } else {
++          toBeRecited = inlineButton.label;
++        }
++        inlineButton.toBeRecited = toBeRecited;
+         // console.log(
+-        //   `reciteButtons.parsing ${reciteButton.scope} from termIdx=${reciteButton.termIdx}`
++        //   `inlineButton.termIdx=${inlineButton.termIdx}, ${
++        //     terminalList.length
++        //   }, ${terminalList[inlineButton.termIdx].sentenceIdx}, ${
++        //     terminalList[inlineButton.termIdx + 1].sentenceIdx
++        //   }`
+         // );
+-        switch (reciteButton.scope) {
+-          case ReciteScopeEnumType.label:
+-            reciteButton.toBeRecited =
+-              reciteButton.hint.length > 0
+-                ? reciteButton.hint
+-                : reciteButton.label;
+-            break;
+-          case ReciteScopeEnumType.word:
+-            for (
+-              let idx = reciteButton.termIdx + 1;
+-              idx <= reciteButton.termIdx + reciteButton.span &&
+-              idx < terminalList.length;
+-              idx++
++        // console.log(
++        //   `inlineButton.termIdx=${
++        //     inlineButton.termIdx
++        //   }\nterminalList[inlineButton.termIdx].sentenceIdx+1=${terminalList[
++        //     inlineButton.termIdx
++        //   ].sentenceIdx +
++        //     1}\nterminalList[inlineButton.termIdx + 1].sentenceIdx=${
++        //     terminalList[inlineButton.termIdx + 1].sentenceIdx
++        //   }\n`
++        // );
++      }
++      const parseCueButtons = () => {
++        for (let inlineButton of this) {
++          let toBeRecited: string = "";
++          if (inlineButton.action === InlineButtonActionEnumType.cues) {
++            inlineButton.toBeRecited = toBeRecited;
++          }
++        }
++      };
++      const parseLabelButtons = () => {
++        for (let inlineButton of this) {
++          let toBeRecited: string = "";
++          if (inlineButton.action === InlineButtonActionEnumType.label) {
++            inlineButton.toBeRecited = toBeRecited;
++          }
++        }
++      };
++      const parseMultipleChoiceButtons = () => {
++        // Update the sectionIdx field of the correct responses so that the
++        // reactcomp can determine whether the newSection reducer refers
++        // to the proper response.
++        // Update "next" field of correct responses that refers to the terminal
++        // after the final choice response, presumably the next prompt. AND
++
++        // validation rules:
++        // 1) action === multiple choice
++        // 2) immediately preceded by prompt of one or more sentences
++        // 3) more than one consective multiple choice button
++        // 4) at least single correct choice within the group indicated
++        //    by the grouping field that correspond to the prompt termIdx
++        let isValid: boolean = true;
++        // Update termIdx that was set during parsing as the last terminal
++        // before the inline button to the next terminal after the button
++        // assumed to be termIdx++. Based on this update termIdx, determine
++        // sectionIdx of choice reponses
++        try {
++          for (let inlineButton of this) {
++            if (inlineButton.action !== InlineButtonActionEnumType.choice) {
++              console.log(
++                `Ignoring inlineButton=${inlineButton.buttonIdx} while parsing mulitple choice`
++              );
++            } else if (
++              inlineButton.termIdx < 0 ||
++              inlineButton.termIdx + 1 >= terminalList.length
+             ) {
+-              toBeRecited += ` ${terminalList[idx].content}`;
+-            }
+-            if (
+-              sentenceList[terminalList[reciteButton.termIdx + 1].sentenceIdx]
+-                .lastTermIdx ===
+-              reciteButton.termIdx + reciteButton.span
++              isValid = false;
++              console.log(
++                `Invalid inlineButton.termIdx of ${inlineButton.termIdx +
++                  1} is out of bounds: not between 1 and ${
++                  terminalList.length
++                }.`
++              );
++              isValid = false;
++              // do not reset termIdx for debugging purposes
++            } else if (
++              terminalList[inlineButton.termIdx].sectionIdx + 1 ===
++              terminalList[inlineButton.termIdx + 1].sectionIdx
+             ) {
+-              toBeRecited +=
+-                sentenceList[terminalList[reciteButton.termIdx].sentenceIdx]
+-                  .lastPunctuation;
++              // if the next termIdx is a new juxtapositioned section, adjust
++              // termIdx from referencing the end of previous section to
++              // the new section.
++              inlineButton.termIdx++;
++              inlineButton.sectionIdx =
++                terminalList[inlineButton.termIdx].sectionIdx;
++              inlineButton.lastTermIdx =
++                sectionList[inlineButton.sectionIdx].lastTermIdx;
++              terminalList[inlineButton.termIdx].sectionIdx;
++            } else {
++              console.log(
++                `Invalid inlineButton.termIdx=${
++                  inlineButton.termIdx
++                } encountered. Prior section sectionIdx=${
++                  terminalList[inlineButton.termIdx].sectionIdx
++                } and sectionIdx=${
++                  terminalList[inlineButton.termIdx + 1].sectionIdx
++                } must be consecutive`
++              );
++              isValid = false;
+             }
+-            // console.log(`toBeRecited="${toBeRecited}"`);
++          }
++        } catch (e) {
++          console.log(`Unexpected error adjusting termIdx. Error ${e}`);
++          isValid = false;
++        }
++        // if (isValid) {
+ 
+-            // terminalList[reciteButton.termIdx].sentenceIdx
+-            // terminalList[reciteButton.termIdx]
+-            // reciteButton.termIdx
+-            // reciteButton.toBeRecited =
+-            break;
+-          case ReciteScopeEnumType.sentence:
+-            // console.log(
+-            //   `sentence(span=${reciteButton.span}): sentenceIdx[${
+-            //     reciteButton.termIdx
+-            //   }]=${terminalList[reciteButton.termIdx + 1].sentenceIdx}`
+-            // );
+-            let sentenceIdx: number =
+-              terminalList[reciteButton.termIdx + 1].sentenceIdx;
+-            // console.log(
+-            //   `firstIdx=${sentenceList[sentenceIdx].firstTermIdx}  lastIdx=${sentenceList[sentenceIdx].lastTermIdx}`
+-            // );
++        // for (let buttonIdx: number = 0; buttonIdx < this.length; buttonIdx++) {
++        // this[buttonIdx].termIdx isnow assumed to be the first element of
++        // the section; otherwise error
++        // this[buttonIdx].sectionIdx =
++        //   terminalList[this[buttonIdx].termIdx].sectionIdx;
++        // }
++
++        if (isValid) {
++          let grouping: number[] = new Array(this.length).fill(0); // indexed by buttonIdx
++          // To determine the "next" field of the correctResponse, group the
++          // other juxtapositioned/consecutive responses that correspond to
++          // prompts. The terminal idx following the last in each group is the
++          // "next" prompt.
++          try {
+             for (
+-              let idx = sentenceList[sentenceIdx].firstTermIdx;
+-              idx <= sentenceList[sentenceIdx].lastTermIdx;
+-              idx++
++              let buttonIdx: number = 0;
++              buttonIdx < this.length;
++              buttonIdx++
+             ) {
+-              toBeRecited += ` ${terminalList[idx].content}`;
++              if (
++                this[buttonIdx].action !== InlineButtonActionEnumType.choice
++              ) {
++                // skip
++              } else if (buttonIdx === 0) {
++                grouping[buttonIdx] = 1; // start of first grouping
++              } else if (
++                sectionList[this[buttonIdx].sectionIdx].firstTermIdx ===
++                sectionList[this[buttonIdx - 1].sectionIdx].lastTermIdx + 1
++              ) {
++                grouping[buttonIdx] = grouping[buttonIdx - 1];
++              } else {
++                grouping[buttonIdx] = grouping[buttonIdx - 1] + 1;
++              }
+             }
+-            toBeRecited += sentenceList[sentenceIdx].lastPunctuation;
+-            break;
+-          default:
++          } catch (e) {
++            console.log(`Unexpected error calculating choice groupings`);
++          } finally {
++          }
++          let correctButtonIdx: number = IDX_INITIALIZER;
++          for (
++            let buttonIdx: number = 0;
++            buttonIdx < this.length;
++            buttonIdx++
++          ) {
++            if (this[buttonIdx].action === InlineButtonActionEnumType.choice) {
++              if (this[buttonIdx].label === "correct") {
++                correctButtonIdx = buttonIdx;
++              }
++              // when grouping changes, determine the first term of next section
++              let currentGrouping: number;
++              let nextGrouping: number;
++              currentGrouping = grouping[buttonIdx];
++              if (buttonIdx >= 0 && buttonIdx < this.length - 1) {
++                nextGrouping = grouping[buttonIdx + 1];
++              } else {
++                nextGrouping = IDX_INITIALIZER;
++              }
++              if (currentGrouping === nextGrouping) {
++                //
++              } else {
++                // next sentence immediately following the last grouping
++                try {
++                  let nextTermForCurrentGrouping: number;
++                  let sectionIdx: number =
++                    terminalList[this[buttonIdx].termIdx].sectionIdx;
++                  if (sectionIdx >= 0 && sectionIdx < sectionList.length - 1) {
++                    nextTermForCurrentGrouping =
++                      sectionList[sectionIdx + 1].firstTermIdx;
++                  } else {
++                    nextTermForCurrentGrouping = IDX_INITIALIZER;
++                  }
++                  if (correctButtonIdx >= 0 && correctButtonIdx < this.length) {
++                    this[
++                      correctButtonIdx
++                    ].nextTermIdx = nextTermForCurrentGrouping;
++                    correctButtonIdx = IDX_INITIALIZER;
++                  } else {
++                    console.log(`invalid correctButtonIdx`);
++                  }
++                } catch (e) {
++                  console.log(`access violation buttonIdx=${buttonIdx}`);
++                } finally {
++                }
++              }
++            }
++          }
+         }
+-        reciteButton.toBeRecited = toBeRecited;
+-      }
++      };
++      parseCueButtons();
++      parseLabelButtons();
++      parseMultipleChoiceButtons();
+     } catch (e) {
+       console.log(e);
+     }
+@@ -682,23 +826,26 @@ class ReciteButtonArray extends Array<IReciteButtonItem> {
+   }
+   serialize(): string {
+     let outputStr: string =
+-      "[idx]:term scope    sp cursor            listen           rt toBeRecited\n";
++      "[ idx]: bIdx first  last sectn action sp  rt  next toBeRecited\n";
+     for (const [i, element] of this.entries()) {
+       outputStr = `${outputStr}[${i
+         .toString()
+-        .padStart(3, "0")}]: ${element.termIdx
++        .padStart(4, "0")}]:${element.buttonIdx
+         .toString()
+-        .padStart(3, " ")} ${element.scope.padEnd(
+-        8,
+-        " "
+-      )} ${element.span
++        .padStart(5, " ")} ${element.termIdx
++        .toString()
++        .padStart(5, " ")} ${element.lastTermIdx
+         .toString()
+-        .padStart(2, " ")} ${element.cursorAction.padEnd(
+-        17,
++        .padStart(5, " ")} ${element.sectionIdx
++        .toString()
++        .padStart(5, " ")} ${element.action.padEnd(
++        6,
+         " "
+-      )} ${element.listeningAction.padEnd(14, " ")} ${element.rate
++      )} ${element.span.toString().padStart(2, " ")} ${element.rate
+         .toFixed(1)
+-        .padStart(3, " ")} ${element.toBeRecited}\n`;
++        .padStart(3, " ")} ${element.nextTermIdx.toString().padStart(5, " ")} ${
++        element.toBeRecited
++      }\n`;
+     }
+     return outputStr;
+   }
+@@ -739,7 +886,7 @@ export class UserContext {
+   sentences: SentenceArray;
+   links: LinkArray;
+   fillins: FillinArray;
+-  reciteButtons: ReciteButtonArray;
++  inlineButtons: InlineButtonArray;
+   // need authentication infoblock at some point
+   constructor(name: string) {
+     //    this._parent = parent;
+@@ -750,7 +897,7 @@ export class UserContext {
+     this.sentences = new SentenceArray();
+     this.links = new LinkArray();
+     this.fillins = new FillinArray();
+-    this.reciteButtons = new ReciteButtonArray();
++    this.inlineButtons = new InlineButtonArray();
+     ////    this._pages = new Array();
+   }
+   // protected terminalIdx: number = 0;
+diff --git a/src/dataadapter.ts b/src/dataadapter.ts
+index f9224ed..cefe5dc 100644
+--- a/src/dataadapter.ts
++++ b/src/dataadapter.ts
+@@ -265,10 +265,10 @@ const MarkdownPatternDictionary: MarkdownPatternDictionaryType = {
+     contentCaptureGroup: 1
+   },
+   [MarkdownRecordTagType.BUTTONGRID]: {
+-    pattern: /^\[\[button-grid:\s(.*)\]\]\s*$/,
++    pattern: /^\[\[button-grid:\s(.*)\]\]$/,
+     recordType: MarkdownRecordType.BUTTONGRID,
+     labelTagCaptureGroup: 0,
+-    contentCaptureGroup: 0
++    contentCaptureGroup: 1
+   },
+   [MarkdownRecordTagType.BUTTONGRID_END]: {
+     pattern: /^\[\[\/button-grid\]\]\s*$/,
+diff --git a/src/dictionary.ts b/src/dictionary.ts
+index 75cb0be..f98f6d3 100644
+--- a/src/dictionary.ts
++++ b/src/dictionary.ts
+@@ -355,6 +355,8 @@ export const RecognitionDictionary: DictionaryType = {
+   ["pique"]: "peek|peak",
+   ["piques"]: "peeks|peaks",
+   ["pleas"]: "please",
++  ["praise"]: "prays",
++  ["prays"]: "praise",
+   ["presence"]: "presents",
+   ["presents"]: "presence",
+   ["pries"]: "prize",
+@@ -536,52 +538,60 @@ export const RecognitionDictionary: DictionaryType = {
+   // proper names
+   ["bryan"]: "brian",
+   ["brien"]: "brian",
+-  ["Ronlyn"]: "^(robin|(ron|ro[ns]a{0,1}l[aiye]nd{0,1}))$",
+-  ["Ronlyn's"]: "^(robin's|(ron|ro[ns]a{0,1}l[aiye]nd{0,1}'s))$",
+-  ["Goo"]: "^(google|(g[ou](od)*))$",
+-  ["Wen"]: "^(wh{0,1}en)$",
++  ["ronlyn"]: "^(robin|(ron|ro[ns]a{0,1}l[aiye]nd{0,1}))$",
++  ["ronlyn's"]: "^(robin's|(ron|ro[ns]a{0,1}l[aiye]nd{0,1}'s))$",
++  ["goo"]: "^(google|(g[ou](od)*))$",
+   ["wen"]: "^(wh{0,1}en)$",
+-  ["Eng"]: "^(egg|aang|hang)$",
+-  ["Wen's"]: "^(wh{0,1}en's)$",
+-  ["Aruna"]: "^([ai]runa)$",
+-  ["Berna"]: "^(b[eu]rn[ae]t{0,2})$",
+-  ["Berna's"]: "^(b[eu]rn[ae]t{0,2}s)$",
+-  ["Bett"]: "^(bet{1,2})$",
+-  ["Bett's"]: "^(bet{1,2}s)$",
+-  ["Gambhir"]: "^(gamb[ie]e{0,1}r)$",
++  ["eng"]: "^(egg|aang|hang)$",
++  ["wen's"]: "^(wh{0,1}en's)$",
++  ["aruna"]: "^([ai]runa)$",
++  ["berna"]: "^(b[eu]rn[ae]t{0,2})$",
++  ["berna's"]: "^(b[eu]rn[ae]t{0,2}s)$",
++  ["bett"]: "^(bet{1,2})$",
++  ["bett's"]: "^(bet{1,2}s)$",
++  ["shawshesku"]: "ceausescu",
++  ["shawshesco"]: "ceausescu",
++  ["chauchesco"]: "ceausescu",
++  ["chauchescoo"]: "ceausescu",
++  ["school"]: "ceausescu",
++  ["cici"]: "cc",
++  ["cici's"]: "cc'{0,1}s",
++  ["cristian"]: "christian|kristen|kristin",
++  ["cristian's"]: "christian'{0,1}s|kristen'{0,1}s|kristin'{0.1}s",
++  ["gambhir"]: "^(gamb[ie]e{0,1}r)$",
+   ["shao"]: "^(sh[ae]ll)$",
+   ["mai"]: "^(my)",
+   ["cheung"]: "^(ch[euo]ng)$",
+   ["gaw"]: "^(ga{0,1}o{0,1}l{0,1}w{0,1})$",
+   ["negin"]: "^(n[ei]ge{1,2}ne{0,1})$",
+-  ["Jaylynne"]: "^(ja[yi]l[ey]n{1,2}e{0,1})$",
+-  ["Lynda"]: "^(l[iy]nda)$",
+-  ["Melisse"]: "^(m[ei]lis{1,2}e{0,1})$",
+-  ["Meilan"]: "^(m[aei]y{0,1}land{0,1})$",
+-  ["Popo's"]: "^(popo'{0,1}s)$",
+-  ["Auntie"]: "^([ant{1,2}[iy])$",
+-  ["Ag"]: "^([ae]g{1,2})$",
+-  ["Seaton"]: "^(sea{0,1}ton)$",
+-  ["Ave"]: "^(avenue)$",
+-  ["St"]: "^(street)$",
++  ["jaylynne"]: "^(ja[yi]l[ey]n{1,2}e{0,1})$",
++  ["lynda"]: "^(l[iy]nda)$",
++  ["melisse"]: "^(m[ei]lis{1,2}e{0,1})$",
++  ["meilan"]: "^(m[aei]y{0,1}land{0,1})$",
++  ["popo's"]: "^(popo'{0,1}s)$",
++  ["auntie"]: "^([ant{1,2}[iy])$",
++  ["ag"]: "^([ae]g{1,2})$",
++  ["seaton"]: "^(sea{0,1}ton)$",
++  ["ave"]: "^(avenue)$",
++  ["st"]: "^(street)$",
+   ["char"]: "^(char{0,1})$",
+   ["siu"]: "^(si{0,1}ue{0,1})$",
+   ["bao"]: "^(ba{0,1}ow{0,1})$",
+   ["chueng"]: "^(chu[mn]g{0,1})$",
+-  ["Popeye's"]: "^(popeyes)$",
+-  ["Talkfest"]: "^(fest)$",
+-  ["Giovanola"]: "(v[ae]nt{0,1}[io]l{0,1}a)$",
+-  ["Dianne"]: "^(dian{1,2}e)$",
+-  ["Dori"]: "^(dor[iy])$",
+-  ["Dr"]: "dr.",
+-  ["Cyndi"]: "c[iy]nd[yi]",
+-  ["Cyndi's"]: "c[iy]nd[yi]'s",
+-  ["Aileen"]: "[ae]ileen",
+-  ["Mex"]: "max",
+-  ["Aqui"]: "a{0,1}c{0,1}ke[ey]",
+-  ["Tin"]: "t[ei]n",
+-  ["Anne"]: "an{1,2}e{0,1}",
+-  ["Cathleen"]: "[ck]athleen",
++  ["popeye's"]: "^(popeyes)$",
++  ["talkfest"]: "^(fest)$",
++  ["giovanola"]: "(v[ae]nt{0,1}[io]l{0,1}a)$",
++  ["dianne"]: "^(dian{1,2}e)$",
++  ["dori"]: "^(dor[iy])$",
++  ["cyndi"]: "c[iy]nd[yi]",
++  ["cyndi's"]: "c[iy]nd[yi]'s",
++  ["aileen"]: "[ae]ileen",
++  ["mex"]: "max",
++  ["aqui"]: "a{0,1}c{0,1}ke[ey]",
++  ["tin"]: "t[ei]n",
++  ["anne"]: "an{1,2}e{0,1}",
++  ["cathleen"]: "[ck]athleen",
++  ["sloane"]: "(slow|sloan)",
+ 
+   //numerals and numbers
+   ["1"]: "^(one|won)$",
+@@ -621,7 +631,6 @@ export const RecognitionDictionary: DictionaryType = {
+   ["eighteen"]: "18",
+   ["nineteen"]: "19",
+ 
+-  ["Theatre"]: "theater",
+   ["theatre"]: "theater",
+   ["pm"]: "p.?m.?",
+   ["am"]: "a?m?",
+@@ -629,41 +638,31 @@ export const RecognitionDictionary: DictionaryType = {
+   ["Terra"]: "t[ea]r{1,2}a",
+   ["mows"]: "moe's",
+   ["SPARC"]: "spark",
+-  ["Hacktech"]: "h[ae]ct[ie][ck]",
+-  ["Koshi"]: "kosh[iy]",
+-  ["Soo"]: "[Ss]ue",
+-  ["Alyse"]: "[Aa]lice",
+-  ["Paige"]: "[Pp]age",
+-  ["Handicapables"]: "handi-capables",
++  ["hacktech"]: "h[ae]ct[ie][ck]",
++  ["koshi"]: "kosh[iy]",
++  ["soo"]: "[Ss]ue",
++  ["alyse"]: "[Aa]lice",
++  ["paige"]: "[Pp]age",
++  ["handicapables"]: "handi-capables",
+   ["@"]: "at",
+-  ["Jan"]: "january",
+-  ["Feb"]: "february",
+-  ["Mar"]: "march",
+-  ["Apr"]: "april",
+-  ["Jun"]: "june",
+-  ["Jul"]: "july",
+-  ["Aug"]: "august",
+-  ["Sep"]: "september",
+-  ["Sept"]: "september",
+-  ["Oct"]: "october",
+-  ["Nov"]: "november",
+-  ["Dec"]: "december",
+-  ["CA"]: "california",
+-  ["Ca"]: "california",
++  ["jan"]: "january",
++  ["feb"]: "february",
++  ["mar"]: "march",
++  ["apr"]: "april",
++  ["jun"]: "june",
++  ["jul"]: "july",
++  ["aug"]: "august",
++  ["sep"]: "september",
++  ["sept"]: "september",
++  ["oct"]: "october",
++  ["nov"]: "november",
++  ["dec"]: "december",
++  ["ca"]: "california",
+   ["."]: "dot",
+   ["_"]: "underscore",
+   ["-"]: "dash|minus",
+   ["="]: "equal{0,1}s",
+   //["I"]: "one", //handled above as homophone alternative
+-  ["II"]: "two",
+-  ["III"]: "three",
+-  ["IV"]: "four",
+-  ["V"]: "five",
+-  ["VI"]: "six",
+-  ["VII"]: "seven",
+-  ["VIII"]: "eight",
+-  ["IX"]: "nine",
+-  ["X"]: "ten",
+   ["i"]: "one|eye",
+   ["ii"]: "two",
+   ["iii"]: "three",
+@@ -677,33 +676,33 @@ export const RecognitionDictionary: DictionaryType = {
+ export const PronunciationDictionary: DictionaryType = {
+   ["@"]: "at",
+   ["-"]: "minus",
+-  ["SPARC"]: "spark",
+-  ["Caden"]: "Kayden",
+-  ["Elan"]: "Elon",
+-  ["Melisse"]: "Meh-leese",
+-  ["Bodapati"]: "Boda-potti",
+-  ["Meilan"]: "May-lon",
+-  ["Jaylynne"]: "Jayleen",
+-  ["Gambhir"]: "gambeer",
++  ["sparc"]: "spark",
++  ["caden"]: "Kayden",
++  ["elan"]: "Elon",
++  ["melisse"]: "Meh-leese",
++  ["bodapati"]: "Boda-potti",
++  ["meilan"]: "May-lon",
++  ["jaylynne"]: "Jayleen",
++  ["gambhir"]: "gambeer",
+   ["frappocino"]: "frappachino",
+   ["quiche"]: "keesch",
+   ["bathing"]: "batheing",
+-  ["Auntie"]: "anty",
+-  ["Ag"]: "agg",
+-  ["Manuel"]: "manual",
+-  ["Berna"]: "burrna",
+-  ["Giovanola"]: "geo-ven-nola",
+-  ["Giovanolas"]: "geo-ven-nolas",
+-  ["Lagos"]: "loggos",
+-  ["PE"]: "P.E.",
+-  ["Negin"]: "negeen",
++  ["auntie"]: "anty",
++  ["ag"]: "agg",
++  ["manuel"]: "manual",
++  ["berna"]: "burrna",
++  ["giovanola"]: "geo-ven-nola",
++  ["giovanolas"]: "geo-ven-nolas",
++  ["lagos"]: "loggos",
++  ["pe"]: "P.E.",
++  ["negin"]: "negeen",
+   //  ["20680"]: "2 0 6 8 0", // handled as numerals within app
+   //  ["95070"]: "9 5 0 7 0", // handled as numerals within app
+-  ["Rummikub"]: "rummy cube",
+-  ["Dr"]: "doctor",
+-  ["Degas"]: "day gah",
+-  ["Handicapables"]: "handy capables",
++  ["rummikub"]: "rummy cube",
++  ["dr"]: "doctor",
++  ["degas"]: "day gah",
++  ["handicapables"]: "handy capables",
+   ["writes"]: "rights",
+   ["sells"]: "cells",
+-  ["Paratransit"]: "pair-ah-transit"
++  ["paratransit"]: "pair-ah-transit"
+ };
+diff --git a/src/pageContentType.ts b/src/pageContentType.ts
+index 86d79f4..dc78d90 100644
+--- a/src/pageContentType.ts
++++ b/src/pageContentType.ts
+@@ -8,7 +8,17 @@
+  *
+  **/
+ export const IDX_INITIALIZER = -9999;
+-export const PageContentVersion = "20240611.1";
++export const PageContentVersion = "20240916.1";
++// 20230916 - Modified inlineButtonItem.sectionIdx
++// 20240821 - Added inlineButtonItem.nextTermIdx
++// 20240817 - Added inlineButtonItem.endListIdx
++// 20240807 - Added support for inlineButton and buttongrid
++// 20240713 - Move and renamed enum const InlineButton* to
++// 20240719 - Added position to IInlineButtonItem
++//            Renamed RecitationPosition to RecitationPlacement and retasked
++//            (cursor) position enum for relative position of prose to be
++//            recited for inline button.
++// 20240724 - Added InlineButtonActionEnumType in IInlineButtonItem
+ export enum PageFormatEnumType {
+   default = 0
+ }
+@@ -37,6 +47,7 @@ export interface IPageContent {
+   sentenceList: ISentenceListItem[];
+   linkList: ILinkListItem[];
+   fillinList: ISectionFillinItem[];
++  inlineButtonList: IInlineButtonItem[];
+ }
+ export function PageContentInitializer(): IPageContent {
+   return {
+@@ -63,7 +74,8 @@ export function PageContentInitializer(): IPageContent {
+     sectionList: [],
+     sentenceList: [],
+     linkList: [],
+-    fillinList: []
++    fillinList: [],
++    inlineButtonList: []
+   };
+ }
+ export interface ISectionContent {
+@@ -177,7 +189,10 @@ export interface ISectionButtonGridVariant {
+   description: string;
+   columnCount: number;
+   minColumnWidth: number;
+-  buttonText: string[];
++  sorted: boolean;
++  groupedBy: boolean;
++  rate: number;
++  buttons: ITerminalContent[];
+ }
+ export function ISectionButtonGridVariantInitializer(): ISectionButtonGridVariant {
+   return {
+@@ -185,8 +200,11 @@ export function ISectionButtonGridVariantInitializer(): ISectionButtonGridVarian
+     buttonWidth: 0,
+     description: "",
+     columnCount: 0,
+-    minColumnWidth: 50,
+-    buttonText: []
++    minColumnWidth: 11, // %vw
++    sorted: false,
++    groupedBy: false,
++    rate: 1,
++    buttons: []
+   };
+ }
+ export interface ISectionBlockquoteVariant {
+@@ -248,12 +266,14 @@ export function ISectionOrderedListVariantInitializer(): ISectionOrderedListVari
+ export interface ISectionParagraphVariant {
+   sentences: ISentenceContent[];
+   //sentences: ISentenceNode[];
++  listItem: boolean;
+   style: string; // overrides css but not user profile
+   class: string;
+ }
+ export function ISectionParagraphVariantInitializer(): ISectionParagraphVariant {
+   return {
+     sentences: [],
++    listItem: false,
+     style: "", // overrides css but not user profile
+     class: "p"
+   };
+@@ -681,7 +701,7 @@ export function ISentenceContentInitializer(): ISentenceContent {
+ }
+ export enum TerminalMetaEnumType {
+   acronym,
+-  recitebutton,
++  inlinebutton,
+   currency,
+   date,
+   emailaddress,
+@@ -869,7 +889,7 @@ export interface ITerminalContent {
+ }
+ export type TerminalMetaType =
+   | IAcronymTerminalMeta
+-  | IReciteButtonTerminalMeta
++  | IInlineButtonTerminalMeta
+   | ICurrencyTerminalMeta
+   | IDateTerminalMeta
+   | IEmailAddressTerminalMeta
+@@ -976,17 +996,17 @@ export function IAcronymTerminalMetaInitializer(): IAcronymTerminalMeta {
+     letters: []
+   };
+ }
+-export interface IReciteButtonTerminalMeta {
++export interface IInlineButtonTerminalMeta {
+   buttonIdx: number;
+   label: string;
+-  image: string;
++  // image: string;
+   attributes: string;
+ }
+-export function IReciteButtonTerminalMetaInitializer(): IReciteButtonTerminalMeta {
++export function IInlineButtonTerminalMetaInitializer(): IInlineButtonTerminalMeta {
+   return {
+     buttonIdx: IDX_INITIALIZER,
+     label: "Recite",
+-    image: "button_speak.png",
++    // image: "button_speak.png",
+     attributes: ""
+   };
+ }
+@@ -1417,51 +1437,92 @@ export function ILinkListItemInitializer(
+ ): ILinkListItem {
+   return { label, destination, valid };
+ }
+-export enum ReciteScopeEnumType {
+-  label = "label", // label provided
+-  word = "word", // next words up to count
+-  sentence = "sentence" // next sentence
++export enum InlineButtonActionEnumType {
++  choice = "choice", // recites correct/incorrect
++  completion = "completion", //recite up to then listen
++  converse = "converse", // diaglog of sentence pairs
++  cues = "cues", // embedded text
++  label = "label", // label with icon
++  model = "model", // recite then listen for the same words/sentence
++  none = "none", // do nothing
++  term = "term" // label with no icon
++}
++export enum RecitationScopeEnumType {
++  words = "words",
++  sentence = "sentence",
++  section = "section",
++  passThru = "passThru"
++}
++// strictly for inlineButton words, sentence, section only based on currentTerm
++export enum RecitationReferenceEnumType {
++  preceding = "preceding",
++  following = "following"
+ }
+-export enum ReciteCursorActionEnumType {
+-  cursorUnchanged = "cursorUnchanged", // (default) cursor unchanged
+-  cursorAtEnd = "cursorAtEnd", // after prose in scope
+-  cursorAtBeginning = "cursorAtBeginning" // before prose in scope
++export enum RecitationPlacementEnumType {
++  unchanged = "cursorUnchanged", // (default) cursor unchanged
++  end = "cursorAtEnd", // after prose in scope
++  beginning = "cursorAtBeginning" // before prose in scope
+ }
+-export enum ReciteListeningActionEnumType {
++export enum RecitationListeningEnumType {
+   startListening = "startListening",
++  startEndListening = "start then end listening",
+   notListening = "notListening"
+ }
+-export interface IReciteButtonItem {
++// export enum InlineButtonScopeEnumType {
++//   label = "label", // label provided
++//   word = "word", // next words up to count
++//   hint = "hint", // hint in parameter list
++//   sentence = "sentence" // next sentence
++// }
++// export enum InlineButtonCursorActionEnumType {
++//   cursorUnchanged = "cursorUnchanged", // (default) cursor unchanged
++//   cursorAtEnd = "cursorAtEnd", // after prose in scope
++//   cursorAtBeginning = "cursorAtBeginning" // before prose in scope
++// }
++// export enum InlineButtonListeningActionEnumType {
++//   startListening = "startListening",
++//   notListening = "notListening"
++// }
++export interface IInlineButtonItem {
++  buttonIdx: number;
++  sectionIdx: number;
+   termIdx: number;
+-  scope: ReciteScopeEnumType;
+-  cursorAction: ReciteCursorActionEnumType;
+-  listeningAction: ReciteListeningActionEnumType;
++  lastTermIdx: number;
++  action: InlineButtonActionEnumType;
+   span: number;
+   label: string;
+-  hint: string;
++  cues: string; // should be string[]
+   rate: number; // otherwise default to page, app settings
++  voiceIndex: number;
++  nextTermIdx: number;
+   toBeRecited: string;
+ }
+-export function IReciteButtonItemInitializer(
++export function IInlineButtonItemInitializer(
++  buttonIdx = IDX_INITIALIZER,
+   termIdx = IDX_INITIALIZER,
+-  scope = ReciteScopeEnumType.label,
+-  cursorAction = ReciteCursorActionEnumType.cursorUnchanged,
+-  listeningAction: ReciteListeningActionEnumType = ReciteListeningActionEnumType.notListening,
+-  span: number = IDX_INITIALIZER,
+-  label: string = "",
+-  hint: string = "",
+-  rate: number = 1,
++  sectionIdx = IDX_INITIALIZER,
++  lastTermIdx = IDX_INITIALIZER,
++  action = InlineButtonActionEnumType.label,
++  span = 0,
++  label = "",
++  cues = "",
++  rate = 1,
++  voiceIndex = 0,
++  nextTermIdx = IDX_INITIALIZER,
+   toBeRecited = ""
+-): IReciteButtonItem {
++): IInlineButtonItem {
+   return {
++    buttonIdx,
+     termIdx,
+-    scope,
+-    cursorAction,
+-    listeningAction,
++    sectionIdx,
++    lastTermIdx,
++    action,
+     span,
+     label,
+-    hint,
++    cues,
+     rate,
++    voiceIndex,
++    nextTermIdx,
+     toBeRecited
+   };
+ }
+diff --git a/src/parsepages.ts b/src/parsepages.ts
+index 09e2803..7530fa0 100644
+--- a/src/parsepages.ts
++++ b/src/parsepages.ts
+@@ -22,6 +22,7 @@ import {
+ } from "./utilities";
+ import { Logger } from "./logger";
+ import { MarkdownRecordType, TaggedStringType } from "./dataadapter";
++import { tokenizeParameterList } from "./tokenizer";
+ import {
+   AutodNumberedHeadingEnumType,
+   ISectionFillinItem,
+@@ -29,7 +30,7 @@ import {
+   ILinkListItem,
+   IPageContent,
+   IRangeItem,
+-  IReciteButtonItem,
++  IInlineButtonItem,
+   ISentenceListItem,
+   ISectionListItem,
+   ITerminalInfo,
+@@ -83,7 +84,7 @@ export class PageParseNode extends ParseNode implements IPageContent {
+   sentenceList: ISentenceListItem[] = [];
+   linkList: ILinkListItem[] = [];
+   fillinList: ISectionFillinItem[] = [];
+-  reciteButtons: IReciteButtonItem[] = [];
++  inlineButtonList: IInlineButtonItem[] = [];
+   constructor(parent?: PageParseNode | AppNode) {
+     super(parent);
+   }
+@@ -99,7 +100,9 @@ export class PageParseNode extends ParseNode implements IPageContent {
+       [5]  description
+       [6]  numbering scheme
+       */
+-      let args: string[] = argString.split(",").map(arg => arg.trim());
++      let args: string[] = tokenizeParameterList(argString).map(arg =>
++        arg.trim()
++      );
+       let argNum: number = 0;
+       this.title = ValidateArg(
+         IsValidString(args[argNum]),
+@@ -214,9 +217,11 @@ export class PageParseNode extends ParseNode implements IPageContent {
+       this.userContext.terminals.parse();
+       this.terminalList = this.userContext.terminals;
+ 
+-      this.userContext.headings.parse(
+-        this.terminalList[this.terminalList.length - 1].termIdx
+-      );
++      const lastTermIdx: number =
++        this.terminalList.length > 0
++          ? this.terminalList[this.terminalList.length - 1].termIdx
++          : IDX_INITIALIZER;
++      this.userContext.headings.parse(lastTermIdx);
+       this.headingList = this.userContext.headings;
+ 
+       this.userContext.sentences.parse();
+@@ -235,11 +240,8 @@ export class PageParseNode extends ParseNode implements IPageContent {
+       this.userContext.fillins.parse();
+       this.fillinList = this.userContext.fillins;
+ 
+-      this.userContext.reciteButtons.parse(
+-        this.terminalList,
+-        this.sentenceList
+-      );
+-      this.reciteButtons = this.userContext.reciteButtons;
++      this.userContext.inlineButtons.parse(this.sectionList, this.terminalList);
++      this.inlineButtonList = this.userContext.inlineButtons;
+ 
+       this.modified = new Date(Date.now()).toString();
+     } catch (e) {
+diff --git a/src/parsertest01.ts b/src/parsertest01.ts
+index 61f00b6..023920f 100644
+--- a/src/parsertest01.ts
++++ b/src/parsertest01.ts
+@@ -19,7 +19,7 @@ const Usage: string =
+   `  --dumpfillins       display fillins\n` +
+   `  --dumpjsondataapp   display generated json\n` +
+   `  --dumplinks         display link list\n` +
+-  `  --dumprecitebuttons display recite buttons\n` +
++  `  --dumpbuttons       display inline buttons\n` +
+   `  --dumpsections      display section list\n` +
+   `  --dumpsentences     display sentence list\n` +
+   `  --dumpsitemap       display sitemap iff --sitemap\n` +
+@@ -34,7 +34,7 @@ const Usage: string =
+   `  --verbose           verbose output mode\n`;
+ 
+ const curriculumPath: string = "curriculum/";
+-const distPath: string = "dist/";
++const distPath: string = "reading-companion/";
+ const mdExtension: string = ".md"; // markdown
+ const jsonExtension: string = ".json";
+ let appNode: AppNode = new AppNode();
+@@ -267,16 +267,16 @@ if (switches.includes("--sitemap")) {
+           false
+         );
+       }
+-      if (switches.includes("--dumprecitebuttons")) {
++      if (switches.includes("--dumpbuttons")) {
+         logger.info(
+-          `dumping recite buttons for ${path.basename(outputFileSpec)}`,
++          `dumping inline buttons for ${path.basename(outputFileSpec)}`,
+           false,
+           false,
+           false,
+           false
+         );
+         logger.info(
+-          pageNode.userContext.reciteButtons.serialize(),
++          pageNode.userContext.inlineButtons.serialize(),
+           false,
+           false,
+           false,
+diff --git a/src/parsesectiondispatch.ts b/src/parsesectiondispatch.ts
+index b8ab151..264aaae 100644
+--- a/src/parsesectiondispatch.ts
++++ b/src/parsesectiondispatch.ts
+@@ -27,6 +27,7 @@ import {
+   SectionParseNode_LISTITEM_UNORDERED
+ } from "./parsesections_listitem";
+ import { SectionParseNode_BLOCKQUOTE } from "./parsesections_blockquote";
++import { SectionParseNode_BUTTONGRID } from "./parsesections_buttongrid";
+ import { SectionParseNode_HEADING } from "./parsesections_heading";
+ 
+ export function GetSectionNode(
+@@ -114,6 +115,10 @@ export function GetSectionNode(
+       sectionNode = new SectionParseNode_BLOCKQUOTE(parent);
+       break;
+     }
++    case MarkdownRecordType.BUTTONGRID: {
++      sectionNode = new SectionParseNode_BUTTONGRID(parent);
++      break;
++    }
+     case MarkdownRecordType.EMPTY: {
+       sectionNode = new SectionParseNode_EMPTY(parent);
+       break;
+diff --git a/src/parsesections_buttongrid.ts b/src/parsesections_buttongrid.ts
+index 0460603..c83926e 100644
+--- a/src/parsesections_buttongrid.ts
++++ b/src/parsesections_buttongrid.ts
+@@ -1,4 +1,4 @@
+-/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
++/** Copyright (C) 2020 - 2024 Wen Eng - All Rights Reserved
+  *
+  * File name: parsesections_ibuttongrid.ts
+  *
+@@ -8,41 +8,39 @@
+  *
+  **/
+ import { strict as assert } from "assert";
+-import { IsError, IsDefined } from "./utilities";
+ import {
+-  IDX_INITIALIZER,
+   ParseNodeSerializeTabular,
+   ParseNodeSerializeFormatEnumType
+ } from "./baseclasses";
+ import { MarkdownRecordType, TaggedStringType } from "./dataadapter";
++import { tokenizeParameterList } from "./tokenizer";
+ import {
+-  ISectionImageEntryVariantInitializer,
+-  ISectionImageEntryVariant,
+-  ISectionParagraphVariant,
++  IInlineButtonTerminalMeta,
+   ISectionButtonGridVariant,
+-  ISectionParagraphVariantInitializer,
+   ISectionButtonGridVariantInitializer,
+-  ITerminalContent,
+   SectionVariantEnumType,
+-  TerminalMetaEnumType,
+-  IImageTerminalMeta
++  TerminalMetaEnumType
+ } from "./pageContentType";
+-import { GetSectionNode } from "./parsesectiondispatch";
+ import { ITerminalNode } from "./parseterminals";
+ import { IPageNode } from "./parsepages";
+ import { ISectionNode } from "./parsesections";
+ import { SectionParseNode_GRID } from "./parsesections";
+ import { ISentenceNode, SentenceNode } from "./parsesentences";
++import {
++  IsError,
++  IsValidBooleanString,
++  IsValidString,
++  IsValidWholeNumberString,
++  ValidateArg
++} from "./utilities";
+ export class SectionParseNode_BUTTONGRID extends SectionParseNode_GRID
+   implements ISectionNode {
+   constructor(parent: IPageNode | ISectionNode) {
+     super(parent);
+-    //  console.log("creating paragraph section");
+   }
+   type = SectionVariantEnumType.button_grid;
+   meta: ISectionButtonGridVariant = ISectionButtonGridVariantInitializer();
+   parse() {
+-    //this.logger.diagnosticMode = true;
+     this.logger.diagnostic(`${this.constructor.name}`);
+     try {
+       assert(this.dataSource !== undefined, `Undefined datasource encountered`);
+@@ -53,84 +51,133 @@ export class SectionParseNode_BUTTONGRID extends SectionParseNode_GRID
+         current.recordType === MarkdownRecordType.BUTTONGRID,
+         `Expected "${MarkdownRecordType.BUTTONGRID}" at line ${current.lineNo}`
+       );
+-      let args: string[] = current.content.split(",").map(arg => arg.trim());
+-      if (IsDefined(args[0])) this.meta.description = args[0];
+-      if (IsDefined(args[1])) {
+-        assert(
+-          !isNaN(+args[1]),
+-          `Invalid column count "${args[1]}" encountered, expected a number at line ${current.lineNo}`
+-        );
+-        this.meta.columnCount = +args[1];
+-      }
+-      if (IsDefined(args[2])) {
+-        assert(
+-          !isNaN(+args[2]),
+-          `Invalid minimum column width "${args[2]}" encountered, expected a number at line ${current.lineNo}`
+-        );
+-        this.meta.minColumnWidth = +args[2];
+-      }
+-      current = this.dataSource.nextRecord();
+-      assert(
+-        current.recordType === MarkdownRecordType.PARAGRAPH,
+-        `Expected "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.recordType}" at line ${current.lineNo}`
++      let args: string[] = tokenizeParameterList(current.content).map(arg =>
++        arg.trim()
+       );
+-      current = this.dataSource.nextRecord();
+-      assert(
+-        current.recordType === MarkdownRecordType.SENTENCE,
+-        `Expected "${MarkdownRecordType.SENTENCE}" but encountered "${current.recordType}" at line ${current.lineNo}`
+-      );
+-      // find list of buttonText
+-      this.firstTermIdx = this.userContext.terminals.lastIdx + 1;
+-      let sentence: ISentenceNode = new SentenceNode(this);
+-      sentence.parse();
+-      for (const terminal of sentence.terminals) {
+-        if (terminal.type === TerminalMetaEnumType.image) {
+-          (<IImageTerminalMeta>terminal.meta).className = "imageentry-image";
+-          this.meta.buttonText.push(terminal.content);
+-        }
+-      }
+-      assert(
+-        this.meta.buttonText.length > 0,
+-        `Expected image declaraction(s) immediately following "${MarkdownRecordType.IMAGEENTRY}" at line ${current.lineNo}`
+-      );
+-      current = this.dataSource.nextRecord();
+-      assert(
+-        current.recordType === MarkdownRecordType.PARAGRAPH_END,
+-        `Expected "${MarkdownRecordType.PARAGRAPH_END}" to "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.recordType}"  at line ${current.lineNo}`
+-      );
+-      //keep processing sections until imageentry_end
++      let argNum: number = 0;
++      this.meta.description = ValidateArg(
++        IsValidString(args[argNum]),
++        "description",
++        args[argNum],
++        this.meta.description,
++        argNum,
++        current.lineNo,
++        this.logger
++      ) as string;
++      argNum++;
++      this.meta.columnCount = ValidateArg(
++        IsValidWholeNumberString(args[argNum]),
++        "column count",
++        args[argNum],
++        this.meta.columnCount,
++        argNum,
++        current.lineNo,
++        this.logger
++      ) as number;
++      argNum++;
++      this.meta.minColumnWidth = ValidateArg(
++        IsValidWholeNumberString(args[argNum]),
++        "minimum column width",
++        args[argNum],
++        this.meta.minColumnWidth,
++        argNum,
++        current.lineNo,
++        this.logger
++      ) as number;
++      argNum++;
++      this.meta.sorted = ValidateArg(
++        IsValidBooleanString(args[argNum]),
++        "sorted",
++        args[argNum],
++        this.meta.sorted,
++        argNum,
++        current.lineNo,
++        this.logger
++      ) as boolean;
++      argNum++;
++      this.meta.groupedBy = ValidateArg(
++        IsValidBooleanString(args[argNum]),
++        "groupedBy",
++        args[argNum],
++        this.meta.groupedBy,
++        argNum,
++        current.lineNo,
++        this.logger
++      ) as boolean;
++      argNum++;
++      this.meta.rate = ValidateArg(
++        IsValidWholeNumberString(args[argNum]),
++        "rate",
++        args[argNum],
++        this.meta.rate,
++        argNum,
++        current.lineNo,
++        this.logger
++      ) as number;
++      // looking for a list of inlineButtons only; otherwise error
+       for (
+         current = this.dataSource.nextRecord();
+-        !this.dataSource.EOF() &&
+-        current.recordType !== MarkdownRecordType.IMAGEENTRY_END;
+-        current = this.dataSource.currentRecord() // update current modified in parse()
++        current.recordType !== MarkdownRecordType.BUTTONGRID_END;
++        current = this.dataSource.nextRecord()
+       ) {
+-        let sectionNode: ISectionNode = GetSectionNode(
+-          current.recordType,
+-          this
++        assert(
++          current.recordType === MarkdownRecordType.PARAGRAPH,
++          `Expected "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.recordType}" at line ${current.lineNo}`
+         );
+-        this.meta.buttonText.push("hi there");
+-        this.logger.diagnostic(
+-          `pushed section=${current.recordType} ${sectionNode.constructor.name} ${current.content}`
++        current = this.dataSource.nextRecord();
++        assert(
++          current.recordType === MarkdownRecordType.SENTENCE,
++          `Expected "${MarkdownRecordType.SENTENCE}" but encountered "${current.recordType}" at line ${current.lineNo}`
++        );
++        let sentence: ISentenceNode = new SentenceNode(this);
++        sentence.parse();
++        // look for mutliple buttons per line
++        sentence.terminals.forEach(terminal => {
++          if (terminal.type === TerminalMetaEnumType.inlinebutton) {
++            let inlineButton = terminal.meta as IInlineButtonTerminalMeta;
++            terminal.content = inlineButton.label;
++            this.meta.buttons.push(terminal);
++          } else if (terminal.type === TerminalMetaEnumType.whitespace) {
++            // akip valid separator
++          } else {
++            this.logger.warning(
++              `Expected terminal meta type="${
++                TerminalMetaEnumType[TerminalMetaEnumType.inlinebutton]
++              }" but encountered "${
++                TerminalMetaEnumType[terminal.type]
++              }" at line ${
++                current.lineNo
++              } - Ignored but author should remove it from this ${
++                SectionVariantEnumType.button_grid
++              }.`
++            );
++          }
++        });
++        current = this.dataSource.nextRecord();
++        assert(
++          current.recordType === MarkdownRecordType.PARAGRAPH_END,
++          `Expected "${MarkdownRecordType.PARAGRAPH}" but encountered "${current.recordType}" at line ${current.lineNo}`
+         );
+-        sectionNode.parse();
+-        //        current = this.dataSource.currentRecord();
+       }
+-      if (current.recordType === MarkdownRecordType.IMAGEENTRY_END) {
+-        this.lastTermIdx = this.userContext.terminals.lastIdx;
+-        // this.id =
+-        //   this.userContext.sections.push(
+-        //     ISectionImageEntryInitializer(
+-        //       this.firstTermIdx,
+-        //       this.lastTermIdx,
+-        //       this.type.toString()
+-        //     )
+-        //   ) - 1;
+-        for (let idx = this.firstTermIdx; idx <= this.lastTermIdx; idx++) {
+-          this.userContext.terminals[idx].sectionIdx = this.id;
+-        }
+-        this.dataSource.nextRecord(); // move to next grouping
++      assert(
++        current.recordType === MarkdownRecordType.BUTTONGRID_END,
++        `Expected "${MarkdownRecordType.BUTTONGRID_END}" but encountered "${current.recordType}" at line ${current.lineNo}`
++      );
++      if (this.meta.sorted || this.meta.groupedBy) {
++        // btw, manage grouped by feature at runtime
++        let sortedButtons = [...this.meta.buttons];
++        this.meta.buttons = sortedButtons.sort((left, right) => {
++          if (left.content.toLowerCase() < right.content.toLowerCase()) {
++            return -1;
++          } else if (left.content.toLowerCase() > right.content.toLowerCase()) {
++            return 1;
++          } else {
++            return 0;
++          }
++        });
++        this.meta.buttons = [...sortedButtons];
+       }
++      this.dataSource.nextRecord(); // move to next grouping
+     } catch (e) {
+       this.dataSource.nextRecord(); // move to next grouping
+       if (IsError(e)) {
+@@ -150,36 +197,44 @@ export class SectionParseNode_BUTTONGRID extends SectionParseNode_GRID
+     let outputStr: string = "";
+     switch (format) {
+       case ParseNodeSerializeFormatEnumType.TREEVIEW: {
+-        label += `: title="${this.meta.title}", width=${this.meta.buttonWidth}`;
++        label += `: title="${this.meta.title}", sorted=${this.meta.sorted}, groupedBy=${this.meta.groupedBy}, width=${this.meta.buttonWidth}`;
+         outputStr = `${super.serialize(format, label, prefix)}`;
+-        outputStr = `${outputStr}${super.serialize(
+-          format,
+-          "buttonText:",
+-          prefix + "| "
+-        )}`;
+-        for (const [i, button] of this.meta.buttonText.entries()) {
+-          //          let imageNode: IImageTerminalMeta = button.meta as IImageTerminalMeta;
+-          outputStr = `${outputStr}${super.serialize(
++        for (const [i, button] of this.meta.buttons.entries()) {
++          label = `${button.type}`;
++          let buttonX: ITerminalNode = button as ITerminalNode;
++          outputStr = `${outputStr}${buttonX.serialize(
+             format,
+-            // imageNode.src,
+-            prefix + "| " + (i < this.meta.buttonText.length - 1 ? "| " : "  ")
++            undefined,
++            prefix + (i < this.meta.buttons.length - 1 ? "| " : "  ")
+           )}`;
+         }
+-        // for (const [i, section] of this.meta.captions.entries()) {
+-        //   let sectionNode: ISectionNode = section as ISectionNode;
+-        //   outputStr = `${outputStr}${sectionNode.serialize(
++        ///////////
++        // label = `button grid: ${this.description}`;
++        // outputStr = super.serialize(format, label, prefix);
++        // for (const [i, terminal] of this.meta.buttons.entries()) {
++        //   label = `${terminal.type}`;
++        //   outputStr = `${outputStr}${terminal.serialize(
+         //     format,
+-        //     `captions: (${section.type})`,
+-        //     prefix + (i < this.meta.captions.length - 1 ? "| " : "  ")
++        //     undefined,
++        //     prefix + (i < this.meta.buttons.length - 1 ? "| " : "  ")
+         //   )}`;
+         // }
+-        //     format,
+-        //     label,
+-        //     //            prefix + " ".padEnd(2)
+-        //     prefix + (i < this.meta.sentences.length - 1 ? "| " : "  ")
+-        //   )}`;
++
++        ///////////
++        // for (const button of this.meta.buttons) {
++        //   if (button.type === TerminalMetaEnumType.inlinebutton) {
++        //     const buttonMeta = button.meta as IInlineButtonTerminalMeta;
++        //     outputStr = `${outputStr}${super.serialize(
++        //       format,
++        //       prefix +
++        //         `+-button: ${buttonMeta.label} (buttonIdx=${buttonMeta.buttonIdx})`
++        //     )}`;
++        //   } else {
++        //     outputStr = `${outputStr} Unexpected type encountered ${
++        //       TerminalMetaEnumType[button.type]
++        //     }`;
++        //   }
+         // }
+-        //        outputStr = outputStr.slice(0, -1);
+         break;
+       }
+       case ParseNodeSerializeFormatEnumType.TABULAR: {
+@@ -190,17 +245,6 @@ export class SectionParseNode_BUTTONGRID extends SectionParseNode_GRID
+             // `sentence count=${this.meta.sentences.length}`
+           )
+         );
+-        //        if (colWidth0 === undefined) colWidth0 = 2;
+-        // for (let sentence of this.meta.sentences) {
+-        //   let sentenceNode: ISentenceNode = <SentenceNode>sentence;
+-        //   outputStr =
+-        //     outputStr +
+-        //     sentenceNode.serialize(
+-        //       format,
+-        //       sentence.constructor.name,
+-        //       sentence.content
+-        //     );
+-        // }
+         break;
+       }
+       case ParseNodeSerializeFormatEnumType.UNITTEST: {
+diff --git a/src/parsesections_fillin.ts b/src/parsesections_fillin.ts
+index fc2efc1..2f6111f 100644
+--- a/src/parsesections_fillin.ts
++++ b/src/parsesections_fillin.ts
+@@ -31,6 +31,7 @@ import {
+   MarkdownRecordTagType,
+   TaggedStringType
+ } from "./dataadapter";
++import { tokenizeParameterList } from "./tokenizer";
+ // import { SortOrderToLabel } from "./baseClasses";
+ import {
+   SectionFillinPresetInfo,
+@@ -100,7 +101,9 @@ export class SectionParseNode_FILLIN extends SectionParseNode_LIST
+       [14] showResponsesInPrompts: boolean, show responwses initially filled
+            in)
+         */
+-      let args: string[] = argString.split(",").map(arg => arg.trim());
++      let args: string[] = tokenizeParameterList(argString).map(arg =>
++        arg.trim()
++      );
+ 
+       let argNum = 0;
+       let argLevel: SectionFillinPresetLevel;
+diff --git a/src/parsesections_heading.ts b/src/parsesections_heading.ts
+index 9d21789..a4befc9 100644
+--- a/src/parsesections_heading.ts
++++ b/src/parsesections_heading.ts
+@@ -57,6 +57,7 @@ export class SectionParseNode_HEADING extends SectionParseNode
+ 
+       this.meta.heading = sentence;
+       this.meta.level = current.headingLevel;
++      this.meta.tag = current.autoNumberedTag;
+       this.meta.heading.firstTermIdx = firstTermIdx;
+ 
+       this.userContext.headings.push({
+@@ -87,7 +88,7 @@ export class SectionParseNode_HEADING extends SectionParseNode
+     prefix?: string
+   ): string {
+     let sentenceNode: ISentenceNode = <SentenceNode>this.meta.heading;
+-    label = `heading id=${sentenceNode.id} (at level ${this.meta.level})`;
++    label = `heading id=${sentenceNode.id} (at level ${this.meta.level}, tag="${this.meta.tag}")`;
+     // prefix += "  ";
+     let outputStr: string = `${super.serialize(
+       format,
+diff --git a/src/parsesections_images.ts b/src/parsesections_images.ts
+index 1031e0a..771df1d 100644
+--- a/src/parsesections_images.ts
++++ b/src/parsesections_images.ts
+@@ -27,6 +27,7 @@ import {
+   ParseNodeSerializeFormatEnumType
+ } from "./baseclasses";
+ import { MarkdownRecordType, TaggedStringType } from "./dataadapter";
++import { tokenizeParameterList } from "./tokenizer";
+ import {
+   ImageEntryOrientationEnumType,
+   ISectionImageEntryVariantInitializer,
+@@ -55,9 +56,12 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
+         [0]  response title
+         [1]  orientation: image on left, image above
+         [2]  percent portion of page for image
+-        [3]  separator format at top of image section (TBD)
++        [3]  frame format at top of image section
++        [4]  separator format at top of image section (TBD)
+         */
+-      let args: string[] = argString.split(",").map(arg => arg.trim());
++      let args: string[] = tokenizeParameterList(argString).map(arg =>
++        arg.trim()
++      );
+       let argNum = 0;
+       // consider try/catch
+       this.meta.title = ValidateArg(
+@@ -91,6 +95,16 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
+         this.logger
+       ) as string;
+       argNum++;
++      this.meta.frameFormat = ValidateArg(
++        IsValidString(args[argNum]),
++        "frame format",
++        args[argNum],
++        this.meta.frameFormat,
++        argNum,
++        lineNo,
++        this.logger
++      ) as string;
++      argNum++;
+       this.meta.separator = ValidateArg(
+         IsValidString(args[argNum]),
+         "separator",
+@@ -131,8 +145,14 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
+       let sentence: ISentenceNode = new SentenceNode(this);
+       sentence.parse();
+       for (const terminal of sentence.terminals) {
++        let frameFormat: string = prependToListItems(
++          "imageentry-image",
++          this.meta.frameFormat
++        );
+         if (terminal.type === TerminalMetaEnumType.image) {
+-          (<IImageTerminalMeta>terminal.meta).className = "imageentry-image";
++          (<IImageTerminalMeta>terminal.meta).className =
++            `imageentry-image-${this.meta.orientation.toString()} ` +
++            frameFormat;
+           this.meta.images.push(terminal);
+         }
+       }
+@@ -213,7 +233,7 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
+           let imageNode: IImageTerminalMeta = image.meta as IImageTerminalMeta;
+           let hasDimensions = imageNode.width > 0 && imageNode.height > 0;
+           let dimensions: string =
+-            ", WxH:" +
++            "WxH:" +
+             (imageNode.width > 0 ? imageNode.width.toString() : "") +
+             "x" +
+             (imageNode.height > 0 ? imageNode.height.toString() : "") +
+@@ -223,7 +243,9 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
+             imageNode.label +
+               " (src: " +
+               imageNode.src +
+-              (hasDimensions ? dimensions : ""),
++              ", overlay: " +
++              (imageNode.overlay.length > 0 ? imageNode.overlay : "(none)") +
++              (hasDimensions ? ", " + dimensions : ""),
+             prefix + "| " + (i < this.meta.images.length - 1 ? "| " : "  ")
+           )})`;
+         }
+@@ -277,3 +299,14 @@ export class SectionParseNode_IMAGEENTRY extends SectionParseNode_LIST
+     return outputStr;
+   }
+ }
++const prependToListItems = (prefix: string, list: string): string => {
++  let listItems: string[];
++  let listRetVal: string = "";
++  // console.log(`list=${list}`);
++  listItems = list.split(" ");
++  listItems.forEach(item => {
++    listRetVal += `${prefix}-${item} `;
++    // console.log(`prependlist=${listRetVal}`);
++  });
++  return listRetVal;
++};
+diff --git a/src/parsesections_listitem.ts b/src/parsesections_listitem.ts
+index 2a35c49..aa7ed94 100644
+--- a/src/parsesections_listitem.ts
++++ b/src/parsesections_listitem.ts
+@@ -279,6 +279,7 @@ abstract class SectionParseNode_LISTITEM extends SectionParseNode_LIST
+           current.recordType === MarkdownRecordType.SECTION_UNORDERED ||
+           `expected ${MarkdownRecordType.LISTITEM_ORDERED},  ${MarkdownRecordType.LISTITEM_UNORDERED}, ${MarkdownRecordType.SECTION_ORDERED}, or ${MarkdownRecordType.SECTION_UNORDERED} at line ${current.lineNo}`
+       );
++      let parentRecordType: MarkdownRecordType = current.recordType;
+       for (
+         current = this.dataSource.nextRecord();
+         !this.dataSource.EOF() &&
+@@ -298,7 +299,8 @@ abstract class SectionParseNode_LISTITEM extends SectionParseNode_LIST
+               current.recordType,
+               this
+             );
+-            (paragraph.meta as ISectionParagraphVariant).class = "no-wrap";
++            // if (parentRecordType = )
++            (paragraph.meta as ISectionParagraphVariant).listItem = true;
+             this.items.push(paragraph);
+             this.logger.diagnostic(
+               `pushed paragraph ${current.content} at ${current.lineNo}`
+diff --git a/src/parsesentences.ts b/src/parsesentences.ts
+index 2eb65fd..d950dbd 100644
+--- a/src/parsesentences.ts
++++ b/src/parsesentences.ts
+@@ -160,25 +160,39 @@ export class SentenceNode extends AbstractSentenceNode
+       this.logger.diagnostic(
+         `${this.constructor.name} parsing "${this.content}"`
+       );
++      this.logger.diagnostic(this.content);
+       let markedUpSentence: string = this.tokenizer.addMarkupTags(this.content);
++      this.logger.diagnostic(`markedUpSentence=${markedUpSentence}`);
+       // console.log(`markedupSentence=${markedUpSentence}`);
+-      let tokenList: TokenListType = this.tokenizer.tokenize(markedUpSentence);
+-      this.firstTermIdx = this.userContext.terminals.lastIdx + 1; //nextIdx
++      let tokenList: TokenListType = this.tokenizer.tokenize(
++        markedUpSentence,
++        this.dataSource.currentRecord().lineNo
++      );
++      let previousLastTerm: number = this.userContext.terminals.lastIdx;
++      this.logger.diagnostic(`tokenList.length=${tokenList.length}`);
+       this.parseTokens(tokenList);
+-      this.lastTermIdx = this.userContext.terminals.lastIdx;
+-      // update all above terminals
+-      //      this.id = this.userContext.sentences.push( { firstTermIdx: this.firstTermIdx, lastTermIdx: this.lastTermIdx});
+-      // got each terminal and update sentence id
+-      this.id =
+-        this.userContext.sentences.push(
+-          ISentenceListItemInitializer(
+-            this.firstTermIdx,
+-            this.lastTermIdx,
+-            this.lastPunctuation
+-          )
+-        ) - 1;
+-      for (let idx = this.firstTermIdx; idx <= this.lastTermIdx; idx++) {
+-        this.userContext.terminals[idx].sentenceIdx = this.id;
++      if (previousLastTerm === this.userContext.terminals.lastIdx) {
++        // no additional terminals added within sentence
++      } else {
++        this.firstTermIdx = previousLastTerm + 1;
++        this.lastTermIdx = this.userContext.terminals.lastIdx;
++        // update all above terminals
++        //      this.id = this.userContext.sentences.push( { firstTermIdx: this.firstTermIdx, lastTermIdx: this.lastTermIdx});
++        // got each terminal and update sentence id
++        // iff firstTermIdx < previousLastTermIdx
++        this.id =
++          this.userContext.sentences.push(
++            ISentenceListItemInitializer(
++              this.firstTermIdx,
++              this.lastTermIdx,
++              this.lastPunctuation
++            )
++          ) - 1;
++        // console.log(`first=${this.firstTermIdx},last=${this.lastTermIdx}`);
++        for (let idx = this.firstTermIdx; idx <= this.lastTermIdx; idx++) {
++          // console.log(`idx=${idx}, ${this.id}`);
++          this.userContext.terminals[idx].sentenceIdx = this.id;
++        }
+       }
+     } catch (e) {
+       if (IsError(e)) {
+diff --git a/src/parsesitemaps.ts b/src/parsesitemaps.ts
+index 529b4bc..e4b904c 100644
+--- a/src/parsesitemaps.ts
++++ b/src/parsesitemaps.ts
+@@ -44,7 +44,7 @@ export default class CSiteMap extends BaseClass {
+   constructor(parent: AppNode) {
+     super(parent);
+   }
+-  inputPath: string = "dist/";
++  inputPath: string = "reading-companion/";
+   inputExtension: string = ".json";
+   outputPath: string = "curriculum/";
+   outputExtension: string = ".md";
+diff --git a/src/parseterminaldispatch.ts b/src/parseterminaldispatch.ts
+index d8a2d90..1d61562 100644
+--- a/src/parseterminaldispatch.ts
++++ b/src/parseterminaldispatch.ts
+@@ -30,7 +30,7 @@ import {
+   TerminalNode_WHITESPACE,
+   TerminalNode_PASSTHRUTAG
+ } from "./parseterminals";
+-import { TerminalNode_MLTAG_RECITEBUTTON } from "./parseterminals_button";
++import { TerminalNode_MLTAG_INLINEBUTTON } from "./parseterminals_inlinebutton";
+ import { TerminalNode_MLTAG_FILLIN } from "./parseterminals_fillin";
+ import { TerminalNode_ACRONYM } from "./parseterminals_acronym";
+ import {
+@@ -94,8 +94,8 @@ export function GetTerminalNode(
+           termNode = new TerminalNode_MLTAG_IMAGE(parent);
+           break;
+         }
+-        case MarkupLabelType.RECITEBUTTON: {
+-          termNode = new TerminalNode_MLTAG_RECITEBUTTON(parent);
++        case MarkupLabelType.INLINEBUTTON: {
++          termNode = new TerminalNode_MLTAG_INLINEBUTTON(parent);
+           break;
+         }
+         case MarkupLabelType.LINK: {
+diff --git a/src/parseterminals.ts b/src/parseterminals.ts
+index d0160e9..1ff0ff1 100644
+--- a/src/parseterminals.ts
++++ b/src/parseterminals.ts
+@@ -126,10 +126,9 @@ export abstract class AbstractTerminalNode extends ParseNode
+           }
+           if (this.cues.partOfSpeech === PartOfSpeechEnumType.untagged) {
+             this.logger.warning(
+-              `"invalid cuelist argument 1 "${cues[0]}" specified"`
++              `"invalid cuelist argument 1 "${cues[0]}" specified at line  ${token.lineNo}"`
+             );
+           }
+-
+           if (cues.length >= 2 && cues[1].length > 0)
+             this.cues.definition = cues[1].trim();
+ 
+diff --git a/src/parseterminals_image.ts b/src/parseterminals_image.ts
+index b5cce89..602b7c0 100644
+--- a/src/parseterminals_image.ts
++++ b/src/parseterminals_image.ts
+@@ -1,6 +1,6 @@
+-/** Copyright (C) 2020 - 2023 Wen Eng - All Rights Reserved
++/** Copyright (C) 2020 - 2024 Wen Eng - All Rights Reserved
+  *
+- * File name: parsesections_image.ts
++ * File name: parseterminals_image.ts
+  *
+  * Create terminalimage objects from serialized input.
+  *
+@@ -8,7 +8,13 @@
+  *
+  **/
+ import { strict as assert } from "assert";
+-import { IsError, IsDefined, FileExists } from "./utilities";
++import {
++  IsError,
++  IsDefined,
++  FileExists,
++  IsValidWholeNumberString,
++  ValidateArg
++} from "./utilities";
+ import {
+   ParseNodeSerializeFormatEnumType,
+   ParseNodeSerializeColumnWidths
+@@ -16,6 +22,7 @@ import {
+ import {
+   endMarkupTag,
+   isValidMarkupTag,
++  tokenizeParameterList,
+   TokenListType,
+   TokenLiteral,
+   Token,
+@@ -42,40 +49,59 @@ export class TerminalNode_MLTAG_IMAGE extends TerminalNode_MLTAG_
+   type = TerminalMetaEnumType.image;
+   meta: IImageTerminalMeta = IImageTerminalMetaInitializer();
+   parse(tokenList: TokenListType): number {
++    const dir: string = `reading-companion\\`;
++    const imgDir: string = `${dir}img\\`;
++    const isValidImageFile = (fileName: string, lineNo: number): boolean => {
++      if (FileExists(`${imgDir}${fileName}`)) {
++      } else {
++        this.logger.warning(
++          `Image file ${this.meta.overlay} specified at line ${lineNo} does not exist (yet?)`
++        );
++      }
++      return true; // alsways true since image may yet exist
++    };
++    const isValidImageOverlay = (fileName: string, lineNo: number): boolean => {
++      if (FileExists(`${imgDir}${fileName}`)) {
++        if (fileName.split(".").pop() === "png") {
++          this.logger.warning(
++            `Image overlay file ${this.meta.overlay} should be .png at line ${lineNo}`
++          );
++        }
++      } else {
++        this.logger.warning(
++          `Image file ${this.meta.overlay} specified at line ${lineNo} does not exist (yet?)`
++        );
++      }
++      return true;
++    };
+     try {
+       // catch undefined runtime assertion
+       let startTag = tokenList[0].content;
+       //      this.logger.diagnosticMode = true;
+-      let token: Token | undefined;
++      let token: Token | undefined = tokenList[0];
+ 
+       assert(
+         tokenList.length >= 10,
+-        "Expected at least 10 tokens parsing image token"
++        `Expected at least 10 tokens parsing image token at line ${token.lineNo}`
+       );
+       assert(
+         isValidMarkupTag(startTag),
+-        `Expected valid markup tag but ecnountered "${startTag}" parsing image token`
++        `Expected valid markup tag but ecnountered "${startTag}" parsing image token at line ${token.lineNo}`
+       );
+       assert(
+         startTag.toLowerCase === MarkupLabelType.IMAGE.toLowerCase,
+-        `Expected markup tag ${MarkupLabelType.IMAGE.toLowerCase} but encountered "${startTag}" parsing image token`
++        `Expected markup tag ${MarkupLabelType.IMAGE.toLowerCase} but encountered "${startTag}" parsing image token at line ${token.lineNo}`
+       );
+       tokenList.shift(); // discard startTag
+-
+-      // token = tokenList.shift()!;
+-      // this.content = this.content + token.content;
+-      // this.meta.countryCode ;
+-      // this.content = this.content + token.content;
+-
+       token = tokenList.shift()!;
+       assert(
+         token.content === TokenLiteral.EXCLAMATION,
+-        `Expected "${TokenLiteral.EXCLAMATION}" but encountered "${token.content}" while parsing image token`
++        `Expected "${TokenLiteral.EXCLAMATION}" but encountered "${token.content}" while parsing image token at line ${token.lineNo}`
+       );
+       token = tokenList.shift()!;
+       assert(
+         token.content === TokenLiteral.LBRACKET,
+-        `Expected "${TokenLiteral.LBRACKET}" but encountered "${token.content}" while parsing image token`
++        `Expected "${TokenLiteral.LBRACKET}" but encountered "${token.content}" while parsing image token at line ${token.lineNo}`
+       );
+       let label: string = "";
+       for (
+@@ -87,14 +113,14 @@ export class TerminalNode_MLTAG_IMAGE extends TerminalNode_MLTAG_
+       }
+       assert(
+         token.content === TokenLiteral.RBRACKET,
+-        `Expected ${TokenLiteral.RBRACKET} but encountered "${token.content}" while parsing image token`
++        `Expected ${TokenLiteral.RBRACKET} but encountered "${token.content}" while parsing image token at line ${token.lineNo}`
+       );
+       this.meta.label = label;
+       this.content = label;
+       token = tokenList.shift()!;
+       assert(
+         token.content === TokenLiteral.LPAREN,
+-        `Expected "${TokenLiteral.LPAREN} but encountered "${token.content}" while parsing image token`
++        `Expected "${TokenLiteral.LPAREN} but encountered "${token.content}" while parsing image token at line ${token.lineNo}`
+       );
+       let src: string = "";
+       for (
+@@ -106,41 +132,140 @@ export class TerminalNode_MLTAG_IMAGE extends TerminalNode_MLTAG_
+       }
+       assert(
+         token.content === TokenLiteral.RPAREN,
+-        `Expected right parenthesis but encountered "${token.content}" while parsing image`
++        `Expected right parenthesis but encountered "${token.content}" while parsing image at line ${token.lineNo}`
+       );
+-      let chunks: string[] = src.split(",");
+-      // let chunks: string[] = src.split(",").map(chunk => chunk.trim());
+-      if (IsDefined(chunks[0])) this.meta.src = chunks[0].trim();
+-      if (!FileExists(`dist\\img\\${this.meta.src}`)) {
+-        this.logger.warning(
+-          `Image file ${this.meta.src} does not exist (yet?)`
+-        );
++      let args: string[] = tokenizeParameterList(src);
++      // let chunks: string[] = tokenizeParameterList(src);
++
++      let argNum: number = 0;
++      this.meta.src = ValidateArg(
++        isValidImageFile(args[argNum], token.lineNo),
++        "image",
++        args[argNum],
++        this.meta.src,
++        argNum,
++        token.lineNo,
++        this.logger
++      ) as string;
++
++      argNum++;
++      this.meta.overlay = ValidateArg(
++        isValidImageOverlay(args[argNum], token.lineNo),
++        "image overlay",
++        args[argNum],
++        this.meta.overlay,
++        argNum,
++        token.lineNo,
++        this.logger
++      ) as string;
++
++      argNum++;
++      this.meta.width = ValidateArg(
++        IsValidWholeNumberString(args[argNum]),
++        "width",
++        args[argNum],
++        this.meta.width,
++        argNum,
++        token.lineNo,
++        this.logger
++      ) as number;
++
++      argNum++;
++      this.meta.height = ValidateArg(
++        IsValidWholeNumberString(args[argNum]),
++        "height",
++        args[argNum],
++        this.meta.height,
++        argNum,
++        token.lineNo,
++        this.logger
++      ) as number;
++
++      argNum++;
++      this.meta.attributes = ValidateArg(
++        IsDefined(args[argNum]),
++        "attribute",
++        args[argNum],
++        this.meta.attributes,
++        argNum,
++        token.lineNo,
++        this.logger
++      ) as string;
++
++      argNum++;
++      this.meta.destination.page = ValidateArg(
++        IsDefined(args[argNum]),
++        "destination page",
++        args[argNum],
++        this.meta.destination.page,
++        argNum,
++        token.lineNo,
++        this.logger
++      ) as string;
++
++      argNum++;
++      this.meta.attributes = ValidateArg(
++        IsDefined(args[argNum]) && args[argNum] in LinkIdxDestinationType,
++        "link destination type",
++        args[argNum],
++        this.meta.destination.linkIdxType,
++        argNum,
++        token.lineNo,
++        this.logger
++      ) as string;
++
++      argNum++;
++      if (IsValidWholeNumberString(args[argNum])) {
++        let idx = +args[argNum];
++        switch (this.meta.destination.linkIdxType) {
++          case LinkIdxDestinationType.page:
++            // do nothing
++            break;
++          case LinkIdxDestinationType.heading:
++            this.meta.destination.headingIdx = idx;
++            break;
++          case LinkIdxDestinationType.section:
++            this.meta.destination.sectionIdx = idx;
++            break;
++          case LinkIdxDestinationType.terminal:
++            this.meta.destination.terminalIdx = idx;
++            break;
++        }
+       }
++      /*
++        if (IsDefined(args[argNum])) this.meta.attributes = args[argNum]);
++        if (IsDefined(chunks[4])) this.meta.attributes = chunks[4];
++      // optional link may be included. Need to explicitly specify a
++      // valid linkIdxType.
++      //
++      if (IsDefined(chunks[5])) this.meta.destination.page = chunks[5].trim();
++      if (IsDefined(chunks[6]) && chunks[6] in LinkIdxDestinationType) {
++        this.meta.destination.linkIdxType = chunks[6] as LinkIdxDestinationType;
+ 
+-      if (IsDefined(chunks[1])) this.meta.width = +chunks[1]; // no units;
++      if (IsDefined(chunks[2])) this.meta.width = +chunks[2]; // no units;
+       assert(
+-        Number(chunks[1]) !== NaN,
+-        `Expected a numeric width but encountered "${chunks[1]}" while parsing image link`
++        Number(chunks[2]) !== NaN,
++        `Expected a numeric width but encountered "${chunks[2]}" while parsing image link at line ${token.lineNo}`
+       );
+-      if (IsDefined(chunks[2])) this.meta.height = +chunks[2]; // no units; assumed px
++      if (IsDefined(chunks[3])) this.meta.height = +chunks[3]; // no units; assumed px
+       assert(
+-        Number(chunks[2]) !== NaN,
+-        `Expected a numeric height but encountered "${chunks[2]}" while parsing image link`
++        Number(chunks[3]) !== NaN,
++        `Expected a numeric height but encountered "${chunks[3]}" while parsing image link at line ${token.lineNo}`
+       );
+-      if (IsDefined(chunks[3])) this.meta.attributes = chunks[3];
++      if (IsDefined(chunks[4])) this.meta.attributes = chunks[4];
+       // optional link may be included. Need to explicitly specify a
+       // valid linkIdxType.
+       //
+-      if (IsDefined(chunks[4])) this.meta.destination.page = chunks[4];
+-      if (IsDefined(chunks[5]) && chunks[5] in LinkIdxDestinationType) {
+-        this.meta.destination.linkIdxType = chunks[5] as LinkIdxDestinationType;
+-        console.log(
+-          `image link found for ${this.meta.label} src= ${this.meta.src}`
+-        );
+-        let directory: string = `dist\\`;
++      if (IsDefined(chunks[5])) this.meta.destination.page = chunks[5].trim();
++      if (IsDefined(chunks[6]) && chunks[6] in LinkIdxDestinationType) {
++        this.meta.destination.linkIdxType = chunks[6] as LinkIdxDestinationType;
++        // console.log(
++        //   `image link found for ${this.meta.label} src= ${this.meta.src}`
++        // );
+ 
+-        if (IsDefined(chunks[6]) && Number(chunks[6]) !== NaN) {
+-          let idx: number = +chunks[6];
++
++        if (IsDefined(chunks[7]) && Number(chunks[7]) !== NaN) {
++          let idx: number = +chunks[7];
+           if (
+             this.meta.destination.linkIdxType === LinkIdxDestinationType.page
+           ) {
+@@ -162,28 +287,29 @@ export class TerminalNode_MLTAG_IMAGE extends TerminalNode_MLTAG_
+           } else {
+           }
+         }
+-        this.meta.linkIdx =
+-          this.userContext.links.push(
+-            ILinkListItemInitializer(
+-              this.meta.label,
+-              {
+-                page: this.meta.destination.page,
+-                directory: directory,
+-                linkIdxType: this.meta.destination.linkIdxType,
+-                headingIdx: this.meta.destination.headingIdx,
+-                sectionIdx: this.meta.destination.sectionIdx,
+-                terminalIdx: this.meta.destination.terminalIdx
+-              },
+-              false // set after linklist parse validates the link info
+-            )
+-          ) - 1;
+-      }
++*/
++      this.meta.linkIdx =
++        this.userContext.links.push(
++          ILinkListItemInitializer(
++            this.meta.label,
++            {
++              page: this.meta.destination.page,
++              directory: dir,
++              linkIdxType: this.meta.destination.linkIdxType,
++              headingIdx: this.meta.destination.headingIdx,
++              sectionIdx: this.meta.destination.sectionIdx,
++              terminalIdx: this.meta.destination.terminalIdx
++            },
++            false // set after linklist parse validates the link info
++          )
++        ) - 1;
++      // }
+       token = tokenList.shift()!;
+       assert(
+         token.content === endMarkupTag(startTag),
+         `Expected closing tag "${endMarkupTag(
+           startTag
+-        )}" while parsing image token`
++        )}" while parsing image token at line ${token.lineNo}`
+       );
+     } catch (e) {
+       if (IsError(e)) {
+@@ -214,7 +340,8 @@ export class TerminalNode_MLTAG_IMAGE extends TerminalNode_MLTAG_
+         prefix = prefix + "| ";
+         outputStr +=
+           super.serialize(format, `{${this.meta.label}}`, prefix) +
+-          super.serialize(format, `{${this.meta.src}}`, prefix);
++          super.serialize(format, `{${this.meta.src}}`, prefix) +
++          super.serialize(format, `{${this.meta.overlay}}`, prefix);
+ 
+         if (this.meta.width > 0)
+           outputStr += super.serialize(
+diff --git a/src/parseterminals_link.ts b/src/parseterminals_link.ts
+index 58d523c..971c34b 100644
+--- a/src/parseterminals_link.ts
++++ b/src/parseterminals_link.ts
+@@ -1,6 +1,6 @@
+-/** Copyright (C) 2020 - 2023 Wen Eng - All Rights Reserved
++/** Copyright (C) 2020 - 2024 Wen Eng - All Rights Reserved
+  *
+- * File name: parsesections_link.ts
++ * File name: parsetermminals_link.ts
+  *
+  * Create terminal link objects from serialized input.
+  *
+@@ -53,21 +53,21 @@ export class TerminalNode_MLTAG_LINK extends TerminalNode_MLTAG_
+ 
+       assert(
+         tokenList.length >= 8,
+-        "Expected at least 8 tokens parsing image token"
++        "Expected at least 8 tokens parsing link token"
+       );
+       assert(
+         isValidMarkupTag(startTag),
+-        `Expected valid markup tag but encountered "${startTag}" parsing image token`
++        `Expected valid markup tag but encountered "${startTag}" parsing link token`
+       );
+       assert(
+         startTag.toLowerCase === MarkupLabelType.LINK.toLowerCase,
+-        `Expected markup tag ${MarkupLabelType.LINK.toLowerCase} but encountered "${startTag}" parsing image token`
++        `Expected markup tag ${MarkupLabelType.LINK.toLowerCase} but encountered "${startTag}" parsing link token`
+       );
+       tokenList.shift(); // discard startTag
+       token = tokenList.shift()!; // discards LBRACKET
+       assert(
+         token.content === TokenLiteral.LBRACKET,
+-        `Expected "${TokenLiteral.LBRACKET}" but encountered "${token.content}" while parsing image token`
++        `Expected "${TokenLiteral.LBRACKET}" but encountered "${token.content}" while parsing link token at line ${token.lineNo}`
+       );
+       let label: string = "";
+       linkIdx = this.userContext.links.push(ILinkListItemInitializer()) - 1;
+@@ -85,6 +85,7 @@ export class TerminalNode_MLTAG_LINK extends TerminalNode_MLTAG_
+             `Created terminalNode type=${terminalNode.constructor.name} for "${token.content}"`
+           );
+           terminalNode.parse(tokenList); // responsible for advancing tokenlist
++          // console.log(`link content=${terminalNode.content}`);
+           // assumed added in parse() above
+           if (
+             terminalNode.firstTermIdx !== IDX_INITIALIZER &&
+@@ -103,14 +104,14 @@ export class TerminalNode_MLTAG_LINK extends TerminalNode_MLTAG_
+           this.meta.label.push(terminalNode);
+         } else {
+           this.logger.error(
+-            `Encountered unhandled token type=${token.type} for token "${token.content}"`
++            `Encountered unhandled token type=${token.type} for token "${token.content}" at line ${token.lineNo}`
+           );
+         }
+       }
+       token = tokenList.shift()!;
+       assert(
+         token.content === TokenLiteral.RBRACKET,
+-        `Expected ${TokenLiteral.RBRACKET} but encountered "${token.content}" while parsing link token`
++        `Expected ${TokenLiteral.RBRACKET} but encountered "${token.content}" while parsing link token at line ${token.lineNo}`
+       );
+       this.content = label;
+       if (this.meta.label.length > 0) {
+@@ -120,7 +121,7 @@ export class TerminalNode_MLTAG_LINK extends TerminalNode_MLTAG_
+       token = tokenList.shift()!;
+       assert(
+         token.content === TokenLiteral.LPAREN,
+-        `Expected "${TokenLiteral.LPAREN} but encountered "${token.content}" while parsing link token`
++        `Expected "${TokenLiteral.LPAREN} but encountered "${token.content}" while parsing link token at line ${token.lineNo}`
+       );
+       //      token = tokenList.shift()!;
+       let destination: string = "";
+@@ -142,7 +143,7 @@ export class TerminalNode_MLTAG_LINK extends TerminalNode_MLTAG_
+       } else {
+         assert(
+           IsDefined(chunks[1]) && chunks[1] in LinkIdxDestinationType,
+-          `Expected link type but encountered "${chunks[1]}" while parsing link destination type`
++          `Expected link type but encountered "${chunks[1]}" while parsing link destination type at line ${token.lineNo}`
+         );
+       }
+       if (IsDefined(chunks[2]) && Number(chunks[2]) !== NaN) {
+@@ -167,7 +168,7 @@ export class TerminalNode_MLTAG_LINK extends TerminalNode_MLTAG_
+       } else {
+         assert(
+           Number(chunks[2]) !== NaN,
+-          `Expected a numeric but encountered "${chunks[2]}" while parsing link destination index`
++          `Expected a numeric but encountered "${chunks[2]}" while parsing link destination index at line ${token.lineNo}`
+         );
+       }
+       let directory: string = `dist\\`;
+@@ -207,14 +208,14 @@ export class TerminalNode_MLTAG_LINK extends TerminalNode_MLTAG_
+       //      token = tokenList.shift()!;
+       assert(
+         token.content === TokenLiteral.RPAREN,
+-        `Expected right parenthesis but encountered "${token.content}" while parsing image`
++        `Expected right parenthesis but encountered "${token.content}" while parsing link at line ${token.lineNo}`
+       );
+       token = tokenList.shift()!;
+       assert(
+         token.content === endMarkupTag(startTag),
+         `Expected closing tag "${endMarkupTag(
+           startTag
+-        )}" while parsing image token`
++        )}" while parsing link token at line ${token.lineNo}`
+       );
+       this.meta.linkIdx = linkIdx;
+       this.userContext.links[linkIdx] = ILinkListItemInitializer(
+diff --git a/src/tokenizer.ts b/src/tokenizer.ts
+index 69d941f..8b37aca 100644
+--- a/src/tokenizer.ts
++++ b/src/tokenizer.ts
+@@ -115,7 +115,7 @@ export const enum MarkupLabelType {
+   TOKEN = "<explicittoken>", // <token>
+ 
+   // for markdowns
+-  RECITEBUTTON = "<recite-button>",
++  INLINEBUTTON = "<button>",
+   CUELIST = "<cuelist>",
+   CUELIST_CLOSE = "</cuelist>",
+   FILLIN = "<fillin>",
+@@ -331,7 +331,7 @@ const MarkupTokenDictionary: MarkupTokenDictionaryType = {
+ export const enum MarkdownIndexType {
+   // defines order of markdown replacement e.g., FILLIN processed first.
+   FILLIN = 0,
+-  RECITEBUTTON,
++  INLINEBUTTON,
+   CUELIST,
+   EM,
+   NUMERALS,
+@@ -339,7 +339,7 @@ export const enum MarkdownIndexType {
+   LABEL
+ }
+ export const enum MarkdownTokenType {
+-  RECITEBUTTON,
++  INLINEBUTTON,
+   CUELIST,
+   FILLIN,
+   EM,
+@@ -390,15 +390,15 @@ const MarkdownTokenDictionary: MarkdownTokenDictionaryType = {
+     // pattern: /(?<=\s|^|[\.,!'"])\[_((\w|[\s"'\/\-\(\)\@\.,\:;\$\<\>%!])+)_\](?=$|\s|[\.,!"\?])/g
+     //    markdown: MarkdownLabelType.FILLIN_OPEN
+   },
+-  [MarkdownIndexType.RECITEBUTTON]: {
+-    type: MarkdownTokenType.RECITEBUTTON,
+-    label: MarkupLabelType.RECITEBUTTON,
+-    pattern: /(?<=\s|^|[\.,!'"])\[recite-button:\s+((\w+|\-|,|\.|\s)*)\/\](?=$|\s|[\.,!"\?])/gi
++  [MarkdownIndexType.INLINEBUTTON]: {
++    type: MarkdownTokenType.INLINEBUTTON,
++    label: MarkupLabelType.INLINEBUTTON,
++    pattern: /(?<=\s|^|[\.,!'"])\[button:\s+((\w+|\-|,|\.|'|\s|\<contraction\>|\<\/contraction\>|\<numberwcommas>|\<\/numberwcommas\>|\<explicittoken\>|\<\/explicittoken\>)*)\/\](?=$|\s|[\.,!"\?])/gi
+   },
+   [MarkdownIndexType.CUELIST]: {
+     type: MarkdownTokenType.CUELIST,
+     label: MarkupLabelType.CUELIST,
+-    pattern: /(?<=\w)=\((\w+(,{0,1}\s*([\w\s*\.\>\!\,\-\_\/\@\%\&]*))*)\)(?=$|\.|\s|<\/|\*|_)/g
++    pattern: /(?<=\w)=\((\w+(,{0,1}\s*([\w\s*\.\>\!\,\-\_\/\@\%\&]*))*)\)(?=$|\.|\s|<\/|\*|_|\<contraction\>|\<\/contraction\>)/g
+ 
+     // /(?<=\w)=\((\w+)(,{0,1}\s{0,1}(POS:, DEF:,IMG:ALT){0,1}(\w+))*\)/g
+ 
+@@ -800,6 +800,77 @@ export class Token {
+     return JSON.stringify(tokenJson);
+   }
+ } // Token class
++export function tokenizeParameterList(paramString: string): string[] {
++  /////////////
++  // STRICTLY APPLIES TO ARGUMENT LIST OF MARKUP OBJECTS E.G. BUTTONS.
++  // This should behave like split(paramList.split(",") except it is aware of
++  // relevant _MLTAGS i.e., contraction and numbers with commas and perhaps
++  // quoted strings containing the aforementioned.
++  //
++  // In the case of contractions, just remove the tags. In the case of the
++  // numbers with commas, the comma is escaped/ignored for tokening while
++  // leaving the markup tags intact.
++  //
++  // This is applicable for the first and second parameters for label and cues.
++  // Initally, just implement number with commas and contractions.
++  // const smallestPositiveValue = (initVal: number, ...numbers: number[]) => {
++  //   let retVal: number = initVal;
++  //   for (const number of numbers) {
++  //     if (number > 0 && number < retVal) retVal = number;
++  //     console.log(number);
++  //   }
++  //   return retVal;
++  // };
++  let retArr: string[] = [];
++  let startingPos: number = 0;
++  let commaPos: number;
++  let tokenPos: number;
++  const numberTagPos: number = paramString.indexOf(
++    MarkupLabelType.NUMBER_WITHCOMMAS
++  );
++  const numberEndTagPos: number = paramString.indexOf(
++    endMarkupTag(MarkupLabelType.NUMBER_WITHCOMMAS)
++  );
++  const withinNumberTag = (pos: number): boolean => {
++    return pos > numberTagPos && pos < numberEndTagPos;
++  };
++  // console.log(`removing contraction tags`);
++  MarkupLabelType.CONTRACTION; // does not have a comma by definition
++  paramString = paramString
++    .replace(MarkupLabelType.CONTRACTION, "")
++    .replace(endMarkupTag(MarkupLabelType.CONTRACTION), "");
++  // console.log(
++  //   `tokenizing inline button? ${paramString} ${paramString.indexOf(
++  //     MarkupLabelType.INLINEBUTTON
++  //   )}`
++  // );
++  let param = "";
++  let pos: number;
++  const delimiter = ",";
++  // console.log(`numberTagPos=${numberTagPos}`);
++  // console.log(`numberEndTagPos=${numberEndTagPos}`);
++  // console.log(`withinTag=${withinNumberTag}`);
++  for (let pos = 0; pos <= paramString.length; pos++) {
++    if (
++      (paramString[pos] === delimiter && !withinNumberTag(pos)) ||
++      pos === paramString.length
++    ) {
++      // console.log(param);
++      param = param
++        .replace(MarkupLabelType.NUMBER_WITHCOMMAS, "")
++        .replace(endMarkupTag(MarkupLabelType.NUMBER_WITHCOMMAS), "");
++      // console.log(param);
++      retArr.push(param.trim());
++      param = "";
++    } else {
++      param += paramString[pos];
++    }
++  }
++  //  retArr.push(currentWord);
++  // console.log(`retArr`);
++  // console.log(retArr);
++  return retArr;
++}
+ export function isValidMarkupTag(tag: string): boolean {
+   // should apply match with patterns
+   return (
+diff --git a/src/utilities.ts b/src/utilities.ts
+index 8fdd796..e4f8180 100644
+--- a/src/utilities.ts
++++ b/src/utilities.ts
+@@ -9,8 +9,6 @@
+  **/
+ import * as fs from "fs";
+ import { Logger } from "./logger";
+-import DictionaryType from "./dictionary";
+-import { PronunciationDictionary, RecognitionDictionary } from "./dictionary";
+ "use strict";
+ // export abstract class BaseClass {
+ //   protected _logger: Logger;

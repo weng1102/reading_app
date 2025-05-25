@@ -5,7 +5,7 @@
 ![Baking](verb-bake.jpg),![Baking](verb-bake.jpg)
 1a. What activity is happening?
   1a. [button: choice, , , , css attributes/] The person is cooking.
-  1a. [button: choice, correct, , , css attributes/] The person is baking cookies in the oven at a random time of day went electricity may be more expensive.
+  1a. [button: choice, correct, , , css attributes/] The person is baking cookies in the oven at a random time of day when electricity may be more expensive.
   1a. [button: choice, , , , css attributes/] The person is washing.
   1a. [button: choice, , , , css attributes/] The person is mopping. She bakes at a random time of day went electricity may be more expensive.
 1a. What baked good is being made?

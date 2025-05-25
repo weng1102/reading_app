@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2022 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2025 Wen Eng - All Rights Reserved
  *
  * File name: reducers.ts
  *
@@ -22,24 +22,24 @@ import {
   IPageRequestItem,
   LinkIdxDestinationType,
   PageRequestItemInitializer,
+  ModelingScopeEnumType,
+  RecitationScopeEnumType,
   SentenceListItemEnumType
   // RecitationScopeEnumType,
   // RecitationPositionEnumType,
   // RecitationListeningEnumType
 } from "./pageContentType";
+import { transpileModule } from "typescript";
+import { ObscuredTextDegreeEnum } from "./settingsContext";
 export const IDX_INITIALIZER = -9999;
 export const SCROLLTOP_INITIAL = -1;
-// import {
-//   ISettings,
-//   ISettingsContext,
-//   SettingsContext
-// } from "./settingsContext";
 export enum StatusBarMessageType {
   application = 0,
   listening = 1,
   state = 2,
   all = 3
 }
+
 //const IDX_INITIALIZER = -9999; // should be same as baseclasses.ts
 
 const WORD_NEXT = "word/next"; // next word in sentence
@@ -51,6 +51,7 @@ const WORD_SETCURRENTFILLIN = "word/set current fillin";
 const SENTENCE_FIRST = "sentence/first"; // position at first word in sent.
 const SENTENCE_NEXT = "sentence/next"; // position at first word of next sent.
 const SENTENCE_PREVIOUS = "sentence/prev"; // first word of previous sentence
+const SENTENCE_RESETOPACITY = "sentence/reset opacity";
 const SENTENCE_SETOPACITY = "sentence/set opacity";
 
 // section actions
@@ -119,36 +120,59 @@ const TRANSITION_ACKNOWLEDGE = "transition/acknowledge";
 
 // reciting
 //const RECITING = "reciting"; // state of reciting
-// const RECITING_BEGIN = "reciting/start"; // actual state of reciting begin
-// const RECITING_END = "reciting/end"; // actual reciting end (stopped)
-
-//const RECITE = "recite";  // requests to start and stop recite
-const RECITE_START = "recite/start";
+const RECITE_START = "recite/start"; // request to start reciting based on settings and current word
+const RECITE_START_WORDS = "recite/start words"; // request to start reciting current word(s)
+const RECITE_START_SENTENCE = "recite/start sentence"; // request to start reciting current sentence
+const RECITE_START_SECTION = "recite/start section"; // request to start reciting current section
+const RECITE_START_PASSTHRU = "recite/start with passthru"; // request to start reciting argument
 const RECITE_STOP = "recite/stop";
-// const RECITE_TOGGLE = "recite/toggle"; // request from recite button
+const RECITE_STARTED = "recite/started"; // reciting started
+const RECITE_ENDED = "recite/ended"; // no more to recite
+const RECITE_COMPLETED = "recite/completed"; // reciting successfully completed
+const RECITE_ACTIVE = "recite/active"; // reciting active
+const RECITE_INACTIVE = "recite/inactive"; // no more to recite
+
 const RECITE_WORD = "recite/word"; // exclusively for wordNext
 const RECITED_WORD = "recited/word"; // exclusively for wordNext
 // const RECITE_WORKFLOW_START = "recite/workflow start";
 // const RECITE_WORKFLOW_END = "recite/workflow end";
-const RECITEBUTTON_CLICK = "recitebutton/click";
-const RECITEBUTTON_CLICKED = "recitebutton/clicked";
+// const RECITEBUTTON_CLICK = "recitebutton/click";
+// const RECITEBUTTON_CLICKED = "recitebutton/clicked";
+// const MODELING_START = "modeling/start"
 
-// inline button click/clicked wrap the subsequent subactions below
-const INLINEBUTTON_CLICK = "inlinebutton/click"; // starting
-const INLINEBUTTON_CLICKED = "inlinebutton/clicked"; // ended
+// modeling action
+const MODELING_START = "modeling/start"; // start based on settings (TBD) current sentence?
+const MODELING_START_WORD = "modeling/start word"; // starting with wordIdx
+const MODELING_START_BUTTON = "modeling/start button"; // starting with buttonIdx
+const MODELING_START_SENTENCE = "modeling/start sentence"; // starting sentenceIdx
+const MODELING_CANCEL = "modeling/cancel"; // canceling
+const MODELING_STOP = "modeling/stop"; // stopping after current
 
-// action states within inline button cllick
-const INLINEBUTTON_LISTEN = "inlinebutton/listen";
-const INLINEBUTTON_LISTENED = "inlinebutton/listened";
-const INLINEBUTTON_MOVE = "inlinebutton/move";
-const INLINEBUTTON_MOVED = "inlinebutton/moved";
-const INLINEBUTTON_RECITE = "inlinebutton/recite";
-const INLINEBUTTON_RECITED = "inlinebutton/recited";
-const INLINEBUTTON_SIGNAL = "inlinebutton/signal";
-const INLINEBUTTON_SIGNALED = "inlinebutton/signaled";
+// Asynchronous completers - instead of implementing aynschronous completers 
+// functions, we use the action types to indicate the completion of (inline
+//  button) actions.
+// These booleans are initially set false by the calling component
+// by calling the starter action (labeled present tense) and set to true
+//  when the action is completed by the external component by calling 
+// the completer action (labeled past tense)). The completion is detected
+// by the original caller via the updated state value change.
+const INLINEBUTTON_CLICKED = "inlinebutton/manually clicked";
+const INLINEBUTTON_CANCELED = "inlinebutton/canceled";
+const INLINEBUTTON_AUTOADVANCE = "inlinebutton/automatic click ";
+// const ACTION_CLICK_STARTING = "inlinebutton/click";
+// const ACTION_CLICK_COMPLETED = "action/clicked";
+// const ACTION_CANCEL = "action/cancel";
+const ACTION_LISTEN_STARTING = "action/listen";
+const ACTION_LISTEN_COMPLETED = "action/listened";
+const ACTION_CURSORMOVE_STARTING = "action/cursormove";
+const ACTION_CURSORMOVE_COMPLETED = "action/cursormoved";
+const ACTION_RECITE_STARTING = "action/recite";
+const ACTION_RECITE_COMPLETED = "action/recited";
+const ACTION_SIGNAL_STARTING = "action/signal";
+const ACTION_SIGNAL_COMPLETED = "action/signaled";
+// const ACTION_ACTIONSTATE_STARTED = "action/actionstate start";
+// const ACTION_ACTIONSTATE_ENDED = "action/actionstate end";
 
-const RECITING_STARTED = "reciting/started"; // actual state of reciting
-const RECITING_ENDED = "reciting/ended"; // actual state of reciting
 const SENTENCE_ACKNOWLEDGETRANSITION = "sentence/acknowledge transition";
 
 const SETTINGS_TOGGLE = "settings/toggle";
@@ -162,7 +186,7 @@ const TEST_SET = "test/set";
 const TEST_RESET = "test/reset";
 
 const FILLIN_RESETSECTION = "fillin/reset section";
-const IMAGESENTRY_RESIZE = "images entry/resize";
+// const IMAGESENTRY_RESIZE = "images entry/resize";
 // const FILLIN_TOGGLETAGSSECTION = "fillin/toggle tags section";
 // const FILLIN_SELECTLAYOUTSECTION = "fillin/select layout section";
 // Actions
@@ -307,57 +331,120 @@ const Fillin_resetSection = (sectionIdx: number) => {
 //     payload: sectionIdx
 //   };
 // };
-const InlineButton_click = (buttondIdx: number) => {
+const InlineButton_clicked = (buttonIdx: number) => {
   return {
-    type: INLINEBUTTON_CLICK,
+    type: INLINEBUTTON_CLICKED,
+    payload: buttonIdx
+  };
+}
+const InlineButton_canceled = (buttonIdx: number) => {
+  return {
+    type: INLINEBUTTON_CANCELED,
+    payload: buttonIdx
+  };
+}
+const InlineButton_autoadvance = (buttonIdx: number) => {
+  return {
+    type: INLINEBUTTON_AUTOADVANCE,
+    payload: buttonIdx
+  };
+}
+const Modeling_start = () => {
+  return {
+    type: MODELING_START,
+  };
+};
+const Modeling_start_button = (buttondIdx: number) => {
+  return {
+    type: MODELING_START_BUTTON,
     payload: buttondIdx
   };
 };
-const InlineButton_clicked = () => {
+const Modeling_start_sentence = (sentenceIdx: number) => {
   return {
-    type: INLINEBUTTON_CLICKED
+    type: MODELING_START_SENTENCE,
+    payload: sentenceIdx
   };
 };
-const InlineButton_listen = () => {
+const Modeling_start_word = (wordIdx: number) => {
   return {
-    type: INLINEBUTTON_LISTEN
+    type: MODELING_START_WORD,
+    payload: wordIdx
   };
 };
-const InlineButton_listened = () => {
+const Modeling_cancel = () => {
   return {
-    type: INLINEBUTTON_LISTENED
+    type: MODELING_CANCEL
   };
 };
-const InlineButton_move = (moveToTermIdx: number) => {
+const Modeling_stop = () => {
   return {
-    type: INLINEBUTTON_MOVE,
-    payload: moveToTermIdx
+    type: MODELING_STOP
   };
 };
-const InlineButton_moved = () => {
+const Action_cursormoveStarting = () => {
   return {
-    type: INLINEBUTTON_MOVED
+    type: ACTION_CURSORMOVE_STARTING
   };
 };
-const InlineButton_recite = (toBeRecited: string[]) => {
+const Action_cursormoveCompleted = () => {
   return {
-    type: INLINEBUTTON_RECITE,
-    payload: toBeRecited
+    type: ACTION_CURSORMOVE_COMPLETED
   };
 };
-const InlineButton_recited = () => {
+// const Action_clickStarting = () => {
+//   return {
+//     type: ACTION_CLICK_STARTING,
+//   };
+// };
+// const Action_clickCompleted = () => {
+//   return {
+//     type: ACTION_CLICK_COMPLETED,
+//   };
+// };
+// const Action_cancel = () => {
+//   return {
+//     type: ACTION_CANCEL
+//   };
+// };
+const Action_listenStarting = () => {
   return {
-    type: INLINEBUTTON_RECITED
+    type: ACTION_LISTEN_STARTING
   };
 };
-const InlineButton_signal = () => {
+const Action_listenCompleted = () => {
   return {
-    type: INLINEBUTTON_SIGNAL
+    type: ACTION_LISTEN_COMPLETED
   };
 };
-const InlineButton_signaled = () => {
+// const Action_moveStarting = () => {
+//   return {
+//     type: ACTION_CURSORMOVE_STARTING
+//   };
+// };
+// const Action_moveCompleted = () => {
+//   return {
+//     type: ACTION_CURSORMOVE_COMPLETED
+//   };
+// };
+const Action_reciteStarting = () => {
   return {
-    type: INLINEBUTTON_SIGNALED
+    type: ACTION_RECITE_STARTING
+  };
+};
+const Action_reciteCompleted = () => {
+  return {
+    type: ACTION_RECITE_COMPLETED
+  };
+};
+const Action_signalStarting = () => {
+  return {
+    type: ACTION_SIGNAL_STARTING
+  };
+};
+const Action_signalCompleted = () => {
+  return {
+    type: ACTION_SIGNAL_COMPLETED
   };
 };
 // const ReciteWorkflow_start = (
@@ -574,14 +661,29 @@ const Recognition_setAvailability = (speechRecognitionSupported: boolean) => {
     payload: speechRecognitionSupported
   };
 };
-const Reciting_started = () => {
+const Recite_started = () => {
   return {
-    type: RECITING_STARTED
+    type: RECITE_STARTED
   };
 };
-const Reciting_ended = () => {
+const Recite_completed = () => {
   return {
-    type: RECITING_ENDED
+    type: RECITE_COMPLETED
+  };
+};
+const Recite_ended = () => {
+  return {
+    type: RECITE_ENDED
+  };
+};
+const Recite_active = () => {
+  return {
+    type: RECITE_ACTIVE
+  };
+};
+const Recite_inactive = () => {
+  return {
+    type: RECITE_INACTIVE
   };
 };
 const Recite_currentWord = () => {
@@ -595,11 +697,59 @@ const Recited_currentWord = () => {
   };
 };
 const Recite_start = () => {
-  //  recite requesting start
+  //  recite requesting start based on settings scope and current cursor terminal idx
   return {
-    type: RECITE_START
+    type: RECITE_START,
   };
 };
+const Recite_start_words = (span: number) => {
+  //  recite requesting start based on current cursor terminal idx
+  return {
+    type: RECITE_START_WORDS,
+    payload: { span: span }
+  };
+};
+const Recite_start_sentence = (sentenceIdx: number = IDX_INITIALIZER) => {
+  //  Recite requesting start based on either sentence idx or 
+  // sentence containing current cursor terminal idx
+  return {
+    type: RECITE_START_SENTENCE,
+    payload: { sentenceIdx: sentenceIdx }
+  }
+};
+const Recite_start_section = (sectionIdx: number = IDX_INITIALIZER) => {
+  //  Recite requesting start based on either section idx or 
+  // section containing current cursor terminal idx
+  return {
+    type: RECITE_START_SECTION,
+    payload: { sectionIdx: sectionIdx }
+  }
+};
+const Recite_start_passThru = (str: string) => {
+  //  recite requesting start
+  return {
+    type: RECITE_START_PASSTHRU,
+    payload: { passThru: str }
+  };
+};
+// const Recite_start_scoped = (
+//   // no argument - defaults to RecitationScopeEnumType.sentence starting with
+//   // of currentTermIdx
+//   // one argument (RecitationScopeEnumType) - starting with of currentTermIdx
+//   // two arguments (RecitationScopeEnumType, string[]) - only 
+//   // RecitationScopeEnumType.passThru AND string[] to be recited
+
+//   // should be swapped for Recite_start so Recite_start(), Recite_start(scope) 
+//   // and Recite_start(scope, strQ) are valid with different types
+//   scope: RecitationScopeEnumType = 
+//   RecitationScopeEnumType.sentence, strQ: string[] = []) => {
+//   //  recite requesting start
+//   console.log(`Recite_start_scoped: strq=${strQ[0]}`)
+//   return {
+//     type: RECITE_START_SCOPED,
+//     payload: { scope: scope, passThru: strQ }
+//   };
+// };
 const Recite_stop = () => {
   //  recite requesting stop
   return {
@@ -619,6 +769,11 @@ const Settings_toggle = () => {
 const Sentence_acknowledgeTransition = () => {
   return {
     type: SENTENCE_ACKNOWLEDGETRANSITION
+  };
+};
+const Sentence_resetOpacity = () => {
+  return {
+    type: SENTENCE_RESETOPACITY,
   };
 };
 const Sentence_setOpacity = (opacity: number) => {
@@ -651,18 +806,37 @@ export const Request = {
   Fillin_resetSection,
   // Fillin_toggleTagsSection,
   // Fillin_selectLayoutSection,
-  InlineButton_click,
-  InlineButton_clicked,
-  // ReciteButton_clicked,
-  InlineButton_listen,
-  InlineButton_listened,
-  InlineButton_move,
-  InlineButton_moved,
-  InlineButton_recite,
-  InlineButton_recited,
-  InlineButton_signal,
-  InlineButton_signaled,
+  Modeling_start,
+  Modeling_start_button,
+  Modeling_start_sentence,
+  Modeling_start_word,
+  Modeling_stop,
+  Modeling_cancel,
 
+  // ReciteButton_clicked,
+
+  InlineButton_clicked,
+  InlineButton_canceled,
+  InlineButton_autoadvance,
+  // InlineButton_cancel,
+  // InlineButton_listen,
+  // InlineButton_listened,
+  // InlineButton_move,
+  // InlineButton_moved,
+  // // InlineButton_recite,
+  // InlineButton_recited,
+  // InlineButton_signal,
+  // InlineButton_signaled,
+  // Action_clickStarting,
+  Action_cursormoveStarting,
+  Action_listenStarting,
+  Action_reciteStarting,
+  Action_signalStarting,
+  // Action_clickCompleted,
+  Action_cursormoveCompleted,
+  Action_listenCompleted,
+  Action_reciteCompleted,
+  Action_signalCompleted,
   Message_set,
   Message_clear,
 
@@ -690,9 +864,16 @@ export const Request = {
   Page_previousEnabled,
   // Page_resize,
 
-  Reciting_started,
-  Reciting_ended,
+  Recite_active,
+  Recite_inactive,
+  Recite_started,
+  Recite_completed,
+  Recite_ended,
   Recite_start,
+  Recite_start_words,
+  Recite_start_sentence,
+  Recite_start_section,
+  Recite_start_passThru,
   Recite_stop,
   Recite_currentWord,
   Recited_currentWord,
@@ -710,6 +891,7 @@ export const Request = {
   Recognition_stop,
   Settings_toggle,
 
+  Sentence_resetOpacity,
   Sentence_setOpacity,
   Sentence_acknowledgeTransition,
   Speech_setAvailability,
@@ -791,6 +973,14 @@ interface IReduxState {
 
   // recite_toggle: boolean; // on/off
   recite_requested: boolean;
+  recite_completed: boolean
+  recite_requested_terminalIdx: number
+  recite_requested_scope: RecitationScopeEnumType;
+  recite_requested_span: number;
+  recite_requested_wordIdx: number;
+  recite_requested_sentenceIdx: number;
+  recite_requested_sectionIdx: number;
+  recite_requested_passthru: string;
   recite_word_requested: boolean;
   recite_word_completed: boolean;
   reciting: boolean;
@@ -805,12 +995,27 @@ interface IReduxState {
   message_listening: string;
   message_state: string;
 
+  inlinebutton_reclicks: number; // needed to determine if the inline button is to be initiated or reset
+  inlinebutton_autoadvance: boolean // determines subsequent click, not user initiated
   inlinebutton_idx: number;
-  inlinebutton_listen_requested: boolean;
-  inlinebutton_move_requested: boolean;
-  inlinebutton_recite_requested: boolean;
-  inlinebutton_recite_toBeRecited: string[];
-  inlinebutton_signal_requested: boolean;
+  inlinebutton_idx_prev: number;
+  modeling_requested: boolean;
+  modeling_requested_scope: ModelingScopeEnumType;
+  modeling_requested_wordIdx: number;
+  modeling_requested_sentenceIdx: number;
+  modeling_requested_buttonIdx: number;
+
+  // action_click_initiated: boolean;
+  action_click_completed: boolean;
+  // action_cursormove_initiated: boolean;
+  action_cursormove_completed: boolean;
+  // action_listen_initiated: boolean;
+  action_listen_completed: boolean;
+  // action_recite_initiated: boolean;
+  action_recite_completed: boolean;
+  // action_signal_initiated: boolean;
+  action_signal_completed: boolean;
+  
   sentence_idxObscured: number;
   sentence_opacity: number;
 }
@@ -876,6 +1081,14 @@ const IReduxStateInitialState: IReduxState = {
   pageContext: new CPageLists(),
 
   recite_requested: false,
+  recite_completed: false,
+  recite_requested_terminalIdx: IDX_INITIALIZER,
+  recite_requested_span: 0,
+  recite_requested_scope: RecitationScopeEnumType.passThru,
+  recite_requested_wordIdx: IDX_INITIALIZER,
+  recite_requested_sentenceIdx: IDX_INITIALIZER,
+  recite_requested_sectionIdx: IDX_INITIALIZER,
+  recite_requested_passthru: "",
   recite_word_requested: false,
   recite_word_completed: true,
   reciting: false,
@@ -889,14 +1102,26 @@ const IReduxStateInitialState: IReduxState = {
   message_state: "",
   //  pageContext: PageContextInitializer()
   navbar_toggle: true,
+
+  modeling_requested: false,
+  modeling_requested_scope: ModelingScopeEnumType.inlineButton,
+  modeling_requested_wordIdx: IDX_INITIALIZER,
+  modeling_requested_sentenceIdx:  IDX_INITIALIZER,
+  modeling_requested_buttonIdx:  IDX_INITIALIZER,
+  inlinebutton_reclicks: 0,
+  inlinebutton_autoadvance: false,
   inlinebutton_idx: IDX_INITIALIZER,
-  inlinebutton_recite_toBeRecited: [],
-  inlinebutton_listen_requested: false,
-  inlinebutton_move_requested: false,
-  inlinebutton_recite_requested: false,
-  inlinebutton_signal_requested: false,
+  inlinebutton_idx_prev: IDX_INITIALIZER,
+  // inlinebutton_recite_toBeRecited: [],
+
+  action_click_completed: false,
+  action_cursormove_completed: false,
+  action_listen_completed: false,
+  action_recite_completed: false,
+  action_signal_completed: false,
+  
   sentence_idxObscured: IDX_INITIALIZER,
-  sentence_opacity: 1
+  sentence_opacity:  ObscuredTextDegreeEnum.unobscured,
 };
 export const rootReducer = (
   state: IReduxState = IReduxStateInitialState,
@@ -950,6 +1175,7 @@ export const rootReducer = (
         // console.log(
         //   `@@@@terminalIdxs[0]= ${terminalIdxs[0]} state.cursor_sentenceIdx=${state.cursor_sentenceIdx}`
         // );
+        state.action_cursormove_completed = state.cursor_terminalIdx !== terminalIdxs[0];
         state.cursor_terminalIdx = terminalIdxs[0];
         [
           state.cursor_sentenceIdx,
@@ -968,7 +1194,7 @@ export const rootReducer = (
         );
       }
     } else {
-      console.log(`setTerminalState multiple state transition encountered`);
+      console.log(`setTerminalState multiple state transition encountered length=${terminalIdxs.length}`);
     }
   };
   const setToNextTerminalState = () => {
@@ -1256,6 +1482,13 @@ export const rootReducer = (
     case SENTENCE_PREVIOUS:
       setToPrevSentenceTerminalState();
       return { ...state };
+    case SENTENCE_RESETOPACITY:
+      state.sentence_opacity = ObscuredTextDegreeEnum.unobscured;
+      state.sentence_idxObscured = IDX_INITIALIZER;
+      console.log(`@@@ reset opacity=${action.payload} idxObscured=${state.sentence_idxObscured}`);
+      // );
+      // gets reset when sentence transitions
+      return { ...state };
     case SENTENCE_SETOPACITY:
       state.sentence_opacity = +action.payload;
       state.sentence_idxObscured = state.cursor_sentenceIdx;
@@ -1332,18 +1565,97 @@ export const rootReducer = (
       state.cursor_endOfPageReached = false;
       state.announce_message = "";
       return { ...state };
+    //All RECITE_START*() are relative to the currentTerminalIdx.
     case RECITE_START:
       state.recite_requested = true;
+      state.recite_completed = false;
+      // should store the following in an object
+      state.recite_requested_scope = RecitationScopeEnumType.default;
+      state.recite_requested_span = 0; // ignored
+      state.recite_requested_passthru = ""; // ignored
+      return { ...state };
+    case RECITE_START_WORDS:
+      state.recite_requested = true;
+      state.recite_completed = false;
+      // state.recite_requested_terminalIdx = action.payload.terminalIdx;
+      state.recite_requested_scope = RecitationScopeEnumType.words;
+      state.recite_requested_sentenceIdx = action.payload.wordIdx;
+      state.recite_requested_span = action.payload.span;
+      state.recite_requested_passthru = ""; // ignored
+      return { ...state };
+    case RECITE_START_SENTENCE:
+      console.log(`@@@ reducer: recite_sentence_started @${(new Date().getTime().toString().slice(-5))}`);
+      state.recite_requested = true;
+      state.recite_completed = false;
+      state.recite_requested_scope = RecitationScopeEnumType.sentence;
+      state.recite_requested_sentenceIdx = action.payload.sentenceIdx;
+      state.recite_requested_span = 0; // ignored
+      state.recite_requested_passthru = ""; // ignored
+      return { ...state };
+    case RECITE_START_SECTION:
+      state.recite_requested = true;
+      state.recite_completed = false;
+      state.recite_requested_scope = RecitationScopeEnumType.section;
+      state.recite_requested_sectionIdx = action.payload.sectionIdx;
+      state.recite_requested_span = 0; // ignored
+      state.recite_requested_passthru = ""; // ignored
+      return { ...state };
+    case RECITE_START_PASSTHRU:
+      // console.log(`@@@ reducer: recite_start_scoped scope=${action.payload.scope} passthru=${action.payload.passThru[0]}`);
+      state.recite_requested = true;
+      state.recite_completed = false;
+      state.recite_requested_scope = RecitationScopeEnumType.passThru;
+      state.recite_requested_span = 0; // ignored
+      state.recite_requested_passthru = action.payload.passThru
+      return { ...state };
+    case RECITE_COMPLETED:
+      if (state.recite_requested) {
+      state.recite_completed = true;
+      console.log(`@@@ reducer: recite_completed @${(new Date().getTime().toString().slice(-5))}`);
+      state.reciting = false;
+      state.recite_requested_passthru = ""
+      state.recite_requested_sentenceIdx = IDX_INITIALIZER;
+      state.recite_requested_sentenceIdx = IDX_INITIALIZER;
+      state.recite_requested_sectionIdx = IDX_INITIALIZER;
+      state.recite_requested_scope = RecitationScopeEnumType.sentence
+      }
       return { ...state };
     case RECITE_STOP:
+    case RECITE_ENDED:
+      // reset everything
+      console.log(`@@@ reducer: recite_ended @${(new Date().getTime().toString().slice(-5))}}`)
       state.recite_requested = false;
-      return { ...state };
-    case RECITING_STARTED:
-      state.reciting = true;
-      return { ...state };
-    case RECITING_ENDED:
+      state.recite_completed = false;
       state.reciting = false;
+      state.action_recite_completed = false;
+      state.recite_requested_passthru = ""
+      state.recite_requested_sentenceIdx = IDX_INITIALIZER;
+      state.recite_requested_sentenceIdx = IDX_INITIALIZER;
+      state.recite_requested_sectionIdx = IDX_INITIALIZER;
+      state.recite_requested_scope = RecitationScopeEnumType.sentence
       return { ...state };
+    case RECITE_STARTED:
+      state.reciting = true;
+      state.recite_completed = false;
+      return { ...state };
+    case RECITE_ACTIVE:
+     console.log(`@@@ reducer: recite_active @${(new Date().getTime().toString().slice(-5))}`);
+      state.reciting = true;
+      // state.recite_requested = false;
+      state.recite_completed = false;
+      return { ...state };
+    case RECITE_INACTIVE:
+     console.log(`@@@ reducer: recite_inactive @${(new Date().getTime().toString().slice(-5))}`);
+      // state.recite_requested = false;
+      state.reciting = false;
+      // state.recite_completed = true;
+      return { ...state };
+    // case RECITE_ENDED:
+    //   state.recite_requested = false; // should this be reset at Recite_started?
+    //   state.reciting = false;
+    //   state.recite_requested_passthru = []
+    //   state.recite_requested_scope = RecitationScopeEnumType.sentence
+    //   return { ...state };
 
     // case RECITE_TOGGLE:
     //   // either via inline button or recite button
@@ -1351,9 +1663,11 @@ export const rootReducer = (
     //   return { ...state };
     case RECITE_WORD:
       state.recite_word_requested = true;
+      state.recite_completed = false;
       return { ...state };
     case RECITED_WORD:
       state.recite_word_requested = false;
+      state.recite_completed = false;
       return { ...state };
     case SETTINGS_TOGGLE:
       state.settings_toggle = !state.settings_toggle;
@@ -1398,6 +1712,44 @@ export const rootReducer = (
     //   state.fillin_selectLayoutSectionIdx = action.payload;
     //   return state;
     // }
+    case INLINEBUTTON_AUTOADVANCE:
+      state.inlinebutton_autoadvance = true;
+      state.inlinebutton_idx_prev = state.inlinebutton_idx
+      state.inlinebutton_idx = action.payload;
+      state.inlinebutton_reclicks = 1;
+      return { ...state }
+    case INLINEBUTTON_CANCELED:
+      if (action.payload === state.inlinebutton_idx) {
+        state.inlinebutton_reclicks = 0;
+        state.inlinebutton_autoadvance = false;
+        state.inlinebutton_idx_prev = IDX_INITIALIZER
+        state.inlinebutton_idx = IDX_INITIALIZER;
+      }
+      return { ...state }
+    case INLINEBUTTON_CLICKED:
+      // if idx and idx_prev are the same, then this is a repeat click
+      state.inlinebutton_autoadvance = false;
+      if (state.inlinebutton_idx === action.payload) {
+        // clicked on the same inlinebutton again
+        state.inlinebutton_reclicks += 1;
+        if (state.inlinebutton_idx !== IDX_INITIALIZER) {
+          // second consecutive click (while active) => pause
+        } else { 
+          // second consecutive click (while active) => pause
+          // state.inlinebutton_idx_prev = IDX_INITIALIZER;
+        }
+      } else {
+        // clicked on a new inlinebutton
+        state.inlinebutton_reclicks = 0;
+      }
+      // with subsequent inlinebutton clicks, should the opacity increase?
+      console.log(
+        `@@@ reducer: inlinebutton_clicked idx=${state.inlinebutton_idx} previdx=${state.inlinebutton_idx_prev} action.payload=${action.payload} prevIdx=${state.inlinebutton_idx_prev} action.payload=${action.payload} inlinebutton_reclicks=${state.inlinebutton_reclicks};
+`)
+      state.inlinebutton_idx_prev = state.inlinebutton_idx
+      state.inlinebutton_idx = action.payload;
+
+      return { ...state };
     case MESSAGE_CLEAR: {
       let msgType: number =
         action.payload.messageType === undefined
@@ -1426,65 +1778,79 @@ export const rootReducer = (
       state.navbar_toggle = !state.navbar_toggle;
       return { ...state };
     }
-    case INLINEBUTTON_CLICK: {
-      console.log(
-        `modelFlow reducer action.payload=${action.payload}, ${state.inlinebutton_idx}`
-      );
-      state.inlinebutton_idx = action.payload;
-      state.inlinebutton_listen_requested = false;
-      state.inlinebutton_move_requested = false;
-      state.inlinebutton_recite_requested = false;
-      state.inlinebutton_signal_requested = false;
-      // console.log(`reducer inlinebutton idx=${action.payload}`);
+    case MODELING_START_BUTTON:
+      state.modeling_requested = true;
+      state.modeling_requested_scope = ModelingScopeEnumType.inlineButton;
+      state.modeling_requested_buttonIdx = action.payload;
+      return {...state}
+    case MODELING_START_SENTENCE:
+      state.modeling_requested = true;
+      state.modeling_requested_scope = ModelingScopeEnumType.sentence;
+      state.modeling_requested_sentenceIdx =action.payload.sentenceIdx;
+      return {...state}
+    case MODELING_START_WORD:
+      state.modeling_requested = true;
+      state.modeling_requested_scope = ModelingScopeEnumType.word;
+      state.modeling_requested_wordIdx = action.payload.wordIdx;
+      return {...state}
+    case MODELING_STOP:
+    case MODELING_CANCEL:
+      state.modeling_requested = false;
+      return {...state}
+    // case ACTION_CANCEL: {
+    //   // state.inlinebutton_idx = action.payload;
+    //   state.action_listen_completed = false;
+    //   state.action_cursormove_completed = false;
+    //   state.action_recite_completed = false;
+    //   state.action_signal_completed = false;
+    //   return state;
+    // }
+    // case ACTION_CANCEL: {
+    //   state.inlinebutton_idx = action.payload;
+    //   state.recite_requested_passthru = [];
+    //   state.inlinebutton_listen_requested = false;
+    //   state.inlinebutton_move_requested = false;
+    //   state.inlinebutton_recite_requested = false;
+    //   state.inlinebutton_signal_requested = false;
+    //   return state;
+    // }
+    case ACTION_LISTEN_STARTING: {
+      // state.action_listen_initiated = true;
+      state.action_listen_completed = false;
       return state;
     }
-    case INLINEBUTTON_CLICKED: {
-      state.inlinebutton_idx = IDX_INITIALIZER;
-      state.inlinebutton_recite_toBeRecited = [];
-      state.inlinebutton_listen_requested = false;
-      state.inlinebutton_move_requested = false;
-      state.inlinebutton_recite_requested = false;
-      state.inlinebutton_signal_requested = false;
+    case ACTION_LISTEN_COMPLETED: {
+      // state.action_listen_initiated = false;
+      state.action_listen_completed = true;
       return state;
     }
-    case INLINEBUTTON_LISTEN: {
-      state.inlinebutton_listen_requested = true;
+    // case ACTION_LISTENED: {
+    //   state.inlinebutton_listen_requested = false;
+    //   return state;
+    // }
+    case ACTION_CURSORMOVE_STARTING: {
+      state.action_cursormove_completed = false;
       return state;
     }
-    case INLINEBUTTON_LISTENED: {
-      state.inlinebutton_listen_requested = false;
+    case ACTION_CURSORMOVE_COMPLETED: {
+      state.action_cursormove_completed = true;
       return state;
     }
-    case INLINEBUTTON_MOVE: {
-      state.inlinebutton_move_requested = true;
-      setTerminalState([+action.payload]);
-      return { ...state };
-
+    case ACTION_RECITE_STARTING: {
+      state.action_recite_completed = false;
+      return state;
+    }
+    case ACTION_RECITE_COMPLETED: {
+      state.action_recite_completed = true;
+      return state;
+    }
+    case ACTION_SIGNAL_STARTING: {
+      state.action_signal_completed = false;
       // assumes inlinebutton_idx is valid
       return state;
     }
-    case INLINEBUTTON_MOVED: {
-      state.inlinebutton_move_requested = false;
-      return state;
-    }
-    case INLINEBUTTON_RECITE: {
-      state.inlinebutton_recite_requested = true;
-      state.inlinebutton_recite_toBeRecited = action.payload;
-      // assumes inlinebutton_idx is valid
-      return state;
-    }
-    case INLINEBUTTON_RECITED: {
-      state.inlinebutton_recite_requested = false;
-      state.inlinebutton_recite_toBeRecited = [];
-      return state;
-    }
-    case INLINEBUTTON_SIGNAL: {
-      state.inlinebutton_signal_requested = true;
-      // assumes inlinebutton_idx is valid
-      return state;
-    }
-    case INLINEBUTTON_SIGNALED: {
-      state.inlinebutton_signal_requested = false;
+    case ACTION_SIGNAL_COMPLETED: {
+      state.action_signal_completed = true;
       return state;
     }
     default:

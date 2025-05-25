@@ -16,15 +16,15 @@
 //import "./App.css";
 import { useAppSelector } from "./hooks";
 import { useEffect, useState, useContext } from "react";
-import { CPageLists } from "./pageContext";
-import UserAgent from "user-agents";
+// import { CPageLists } from "./pageContext";
+// import UserAgent from "user-agents";
 import UAParser from "ua-parser-js";
-import { parse } from "useragent";
+// import { parse } from "useragent";
 //import { parse } from "useragent";
 import {
   RecitationScopeEnumType,
   RecitationPlacementEnumType,
-  RecitationReferenceEnumType,
+  // RecitationReferenceEnumType,
   RecitationListeningEnumType,
   SentenceListItemEnumType
 } from "./pageContentType";
@@ -40,7 +40,7 @@ import {
 
 class CSpeechSynthesizer {
   constructor() {
-    this.paramObj = new SpeechSynthesisUtterance();
+    this.utterance = new SpeechSynthesisUtterance();
     // const userAgent = new UserAgent();
     const parser = new UAParser();
     // console.log(parser.getResult());
@@ -69,7 +69,7 @@ class CSpeechSynthesizer {
       this.selectedVoiceIndex = 2; // zira on windows
     }
   }
-  paramObj: SpeechSynthesisUtterance;
+  utterance: SpeechSynthesisUtterance;
   voiceList: SpeechSynthesisVoice[] = [];
   selectedVoiceIndex: number;
   // who is this decault voice? differs from windows to osx
@@ -92,22 +92,42 @@ class CSpeechSynthesizer {
     //this.selectedVoiceIndex = selectedIndex;
   }
   set rate(rate: number) {
-    this.paramObj.rate = rate;
+    this.utterance.rate = rate;
   }
   set volume(vol: number) {
-    this.paramObj.volume = vol;
+    this.utterance.volume = vol;
   }
+  // const onEndHandler = (setSpeakingCurrently: (toggle: boolean) => void) => { 
+  //   window.speechSynthesis.cancel(); 
+  //   console.log(`@@@ speak: onend @${(new Date().getTime().toString().slice(-5))}`);
+  //   window.speechSynthesis.cancel(); 
+  //   setSpeakingCurrently(false)
+  // }
   speak(message: string, setSpeakingCurrently?: (toggle: boolean) => void) {
     if (setSpeakingCurrently !== undefined) {
-      this.paramObj.onend = () => setSpeakingCurrently(false);
+      setSpeakingCurrently(true);
+      this.utterance.onstart = () => {
+        console.log(`@@@ speak: ${message} onstart @${(new Date().getTime().toString().slice(-5))}`);
+      };
+      this.utterance.onend = () => {
+        window.speechSynthesis.cancel(); 
+        console.log(`@@@ speak: ${message} onend @${(new Date().getTime().toString().slice(-5))}`);
+        setSpeakingCurrently(false)
+      };
+      this.utterance.onerror = () => {
+        window.speechSynthesis.cancel(); 
+        console.log(`@@@ speak:  ${message} onerror @${(new Date().getTime().toString().slice(-5))}`); 
+        setSpeakingCurrently(false);}
+  
     }
     if (this.voiceList.length === 0) {
       this.voiceList = window.speechSynthesis.getVoices();
     }
-    this.paramObj.text = message;
-    this.paramObj.voice = this.voiceList[this.selectedVoiceIndex];
-    if (setSpeakingCurrently !== undefined) setSpeakingCurrently(true);
-    window.speechSynthesis.speak(this.paramObj);
+    this.utterance.text = message;
+    this.utterance.voice = this.voiceList[this.selectedVoiceIndex];
+    console.log(`@@@ speak:  ${this.utterance.text} @${(new Date().getTime().toString().slice(-5))}`); 
+    window.speechSynthesis.cancel(); 
+    window.speechSynthesis.speak(this.utterance);
   }
 }
 export const Synthesizer: CSpeechSynthesizer = new CSpeechSynthesizer();
@@ -129,7 +149,7 @@ export const SpeechMonitor = () => {
   const settingsContext: ISettingsContext = useContext(SettingsContext)!;
   Synthesizer.volume = settingsContext.settings.speech.volume;
   Synthesizer.rate = settingsContext.settings.speech.rate;
-  let pageContext: CPageLists = useAppSelector(store => store.pageContext);
+  // let pageContext: CPageLists = useAppSelector(store => store.pageContext);
   // cannot use useContext(PageContext) because context is only scoped within
   // a page
   // const test: boolean = useAppSelector(store => store.test);

@@ -205,10 +205,11 @@ export const ListeningMonitor = React.memo(() => {
       // );
       SpeechRecognition.startListening(ContinuousListeningInEnglish);
     }
-  }, [listening, listeningRequested]);
+  }, [listening, listeningRequested, ContinuousListeningInEnglish]);
   useEffect(() => {
     if (!listeningRequested) {
       dispatch(Request.Recognition_stop());
+      // dispatch(Request.InlineButton_listened())
       SpeechRecognition.abortListening();
       clearSilenceTimer();
       console.log("LISTENING: stop listening requested");
@@ -216,7 +217,7 @@ export const ListeningMonitor = React.memo(() => {
       SpeechRecognition.startListening(ContinuousListeningInEnglish);
       startSilenceTimer();
     }
-  }, [startSilenceTimer, listeningRequested, ContinuousListeningInEnglish]);
+  }, [startSilenceTimer, listeningRequested, ContinuousListeningInEnglish, dispatch]);
   useEffect(() => {
     if (nextSentence) {
       console.log(
@@ -240,7 +241,9 @@ export const ListeningMonitor = React.memo(() => {
       if (stopListeningAtEOS) dispatch(Request.Recognition_stop());
       return;
     }
-  }, [nextSentence]);
+  }, [nextSentence,
+    dispatch,resetTranscript,stopListeningAtEOS
+  ]);
   // useEffect(() => {
   //   console.log(`previousMatchedTerminalIdx=${previousMatchedTerminalIdx} changed
   //   expectedTerminalIdx=${expectedTerminalIdx}`);
@@ -742,7 +745,12 @@ export const ListeningMonitor = React.memo(() => {
     terminalList,
     expectedTerminalIdx,
     previousMatchedTerminalIdx,
-    nextSentence
+    nextSentence,
+    currentExpectedTerminalIdx,
+    dispatch,
+    nextSentenceAcknowledged,
+    optimizeUsingPreviousTranscript,
+    previousTranscript
   ]);
   useEffect(() => {
     // console.log(`LISTENING: retries`);
@@ -776,7 +784,7 @@ export const ListeningMonitor = React.memo(() => {
       console.log("LISTENING: stopped listening at end of page");
       dispatch(Request.Recognition_stop());
     }
-  }, [listening, endOfPageReached]);
+  }, [listening, endOfPageReached, dispatch]);
 
   if (SpeechRecognition.browserSupportsSpeechRecognition()) {
     // listenButton disallows listening already but just in case
@@ -869,7 +877,7 @@ export const ListenButton = () => {
   console.log(`listenbutton listening=${listening}`);
   console.log(`listenbutton listeningAvailable=${listeningAvailable}`);
   const dispatch = useAppDispatch();
-  dispatch(Request.Recite_stop()); // disable reciting
+  // dispatch(Request.Recite_stop()); // disable reciting
 
   return (
     <>

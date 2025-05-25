@@ -1465,11 +1465,19 @@ export enum InlineButtonActionEnumType {
   none = "none", // do nothing
   term = "term" // label with no icon
 }
+export enum ModelingScopeEnumType {
+  word = "word", // modeling current word 
+  sentence = "sentence", // modeling current sentence (default)
+  inlineButton = "inlineButton" // modeling sentence associated with button idx
+}
 export enum RecitationScopeEnumType {
+  // preceding and succeeding sentence fragments can be described with negative 
+  // and positive spans
+  default = "words",
   words = "words",
   sentence = "sentence",
   section = "section",
-  passThru = "passThru"
+  passThru = "passThru",
 }
 // strictly for inlineButton words, sentence, section only based on currentTerm
 export enum RecitationReferenceEnumType {

@@ -18,9 +18,9 @@ import { Request } from "./reducers";
 import { useAppDispatch, useAppSelector, useSpanRef } from "./hooks";
 import {
   useContext,
-  useEffect,
-  useRef,
-  useState,
+  // useEffect,
+  // useRef,
+  // useState,
   useLayoutEffect
 } from "react";
 
@@ -30,8 +30,9 @@ import {
   ITerminalInfo,
   IAcronymTerminalMeta,
   ICurrencyTerminalMeta,
-  ImageEntryOrientationEnumType,
-  IImageTerminalMeta,
+  // ImageEntryOrientationEnumType,
+  // IImageTerminalMeta,
+  // IInlineButtonTerminalMeta,
   INumeralsTerminalMeta,
   IPassthruTagTerminalMeta,
   PartOfSpeechEnumType,
@@ -207,6 +208,8 @@ export const TerminalDispatcher = React.memo(
           />
         );
       case TerminalMetaEnumType.inlinebutton:
+        // should create <TerminalInlineButton_choice> etc.?
+        // let buttonIdx: number = (props.terminal.meta as IInlineButtonTerminalMeta).buttonIdx
         return (
           <TerminalInlineButton
             active={false}
@@ -540,7 +543,7 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
         // console.log(`terminal after scroll delta=${delta}`);
       }
     }
-  }, [props.active, terminalRef.current]);
+  }, [props.active, terminalRef]);
   let hidden: string = "";
   // refactor the following
   // console.log(

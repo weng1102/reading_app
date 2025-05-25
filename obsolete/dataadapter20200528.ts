@@ -5,7 +5,7 @@ import * as path from "path";
 import * as fs from "fs";
 const AppInfo = require(path.resolve("./appinfo.json")); // should use module.paths and find-me.js
 import { Logger, BaseClass, MyDate, UserContext } from "./utilities";
-import { IPageContent } from "./PageContentType";
+import { IPageContent } from "./pageContentType";
 // import * as rl from 'readline-sync';
 
 export enum MarkdownParsedTagType {
@@ -242,7 +242,10 @@ const MarkdownPatternDictionary: MarkdownPatternDictionaryType = {
     pattern: /^\[\/\/([A-Za-z\-]*)\]:\s([^\s].*)$/,
     tagType: MarkdownRecordType.PASSTHRUTAG
   },
-  [MarkdownType.UNKNOWN]: { pattern: /(.*)$/, tagType: MarkdownRecordType.UNKNOWN }
+  [MarkdownType.UNKNOWN]: {
+    pattern: /(.*)$/,
+    tagType: MarkdownRecordType.UNKNOWN
+  }
 };
 export interface IDataSource {
   connect(fileName: string): number;
@@ -504,7 +507,8 @@ export class BasicMarkdownSource extends RawMarkdownSource
         this.buffer.push(current);
         break;
       }
-      case (MarkdownRecordType.LIST_ORDERED, MarkdownRecordType.LIST_UNORDERED): {
+      case (MarkdownRecordType.LIST_ORDERED,
+      MarkdownRecordType.LIST_UNORDERED): {
         const InitialListDepth = 0;
         currentInputIdx = this.parseList(
           InitialListDepth,

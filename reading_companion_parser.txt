@@ -1,49 +1,3 @@
-node  --loader ts-node/esm src/parsertest01.ts --dumpterminals --dumpfillins curriculum/sentcompletion_food.md
-node  --loader ts-node/esm src/parsertest01.ts --dumpterminals --dumpfillins curriculum/sentcompletion_food.md
-node  --loader ts-node/esm src/parsertest01.ts --dumpterminals --dumpfillins curriculum/homepage_ronlyn.md
-node  --loader ts-node/esm src/parsertest01.ts --dumpterminals --dumpfillins curriculum/*.md
-node  --loader ts-node/esm src/parsertest01.ts curriculum/*.md
-node  --loader ts-node/esm src/parsertest01.ts curriculum/common*.md
-clear
-node  --loader ts-node/esm src/parsertest01.ts curriculum/*.md
-node  --loader ts-node/esm src/parsertest01.ts curriculum/*fillin*.md
-node  --loader ts-node/esm src/parsertest01.ts curriculum/*fillin*.md
-clear
-node  --loader ts-node/esm src/parsertest01.ts curriculum/*fillin*.md
-node  --loader ts-node/esm src/parsertest01.ts curriculum/eating_fillin.md
-clear
-clear
-node  --loader ts-node/esm src/parsertest01.ts curriculum/eating_fillin.md
-node  --loader ts-node/esm src/parsertest01.ts curriculum/testundefinedfillin_fillin.md
-node  --loader ts-node/esm src/parsertest01.ts curriculum/sentcompletion_food.md
-node  --loader ts-node/esm src/parsertest01.ts curriculum/testundefinedfillin_fillin.md
-node  --loader ts-node/esm src/parsertest01.ts curriculum/testundefinedfillin_fillin.md
-node  --loader ts-node/esm src/parsertest01.ts curriculum/testundefinedfillin_fillin.md
-node  --loader ts-node/esm src/parsertest01.ts curriculum/testundefinedfillin_fillin.md
-node  --loader ts-node/esm src/parsertest01.ts curriculum/testundefinedfillin_fillin.md
-node  --loader ts-node/esm src/parsertest01.ts curriculum/testundefinedfillin_fillin.md
-node  --loader ts-node/esm src/parsertest01.ts curriculum/testundefinedfillin_fillin.md
-node  --loader ts-node/esm src/parsertest01.ts curriculum/testundefinedfillin_fillin.md
-node  --loader ts-node/esm src/parsertest01.ts curriculum/testundefinedfillin_fillin.md
-node  --loader ts-node/esm src/parsertest01.ts curriculum/testundefinedfillin_fillin.md
-node  --loader ts-node/esm src/parsertest01.ts curriculum/testundefinedfillin_fillin.md
-node  --loader ts-node/esm src/parsertest01.ts curriculum/testundefinedfillin_fillin.md
-node  --loader ts-node/esm src/parsertest01.ts curriculum/testundefinedfillin_fillin.md
-node  --loader ts-node/esm src/parsertest01.ts curriculum/testundefinedfillin_fillin.md
-node  --loader ts-node/esm src/parsertest01.ts curriculum/testundefinedfillin_fillin.md
-node  --loader ts-node/esm src/parsertest01.ts --dumpfillins curriculum/testundefinedfillin_fillin.md
-node  --loader ts-node/esm src/parsertest01.ts --dumpfillins curriculum/testundefinedfillin_fillin.md
-node  --loader ts-node/esm src/parsertest01.ts --dumpfillins curriculum/testundefinedfillin_fillin.md
-node  --loader ts-node/esm src/parsertest01.ts --dumpfillins curriculum/testundefinedfillin_fillin.md
-node  --loader ts-node/esm src/parsertest01.ts --dumpfillins curriculum/testundefinedfillin_fillin.md
-git add tokenizer.ts
-cd src
-git add tokenizer.ts
-git commit -m"modified fill dictionary pattern to detect individual cuelists"
-node  --loader ts-node/esm src/parsertest01.ts --dumpfillins curriculum/*.md
-clear
-pwd
-cd ..
 clear
 node  --loader ts-node/esm src/parsertest01.ts --dumpfillins curriculum/*.md
 git add tokenizer.ts
@@ -217,7 +171,6 @@ git diff src\tokenizer.ts
 git diff src/tokenizer.ts
 git diff src/dataadapter.ts
 git diff src/parseterminals.ts
-
 node  --loader ts-node/esm src/parsertest01.ts --dumptree curriculum/sentcompletion_house*.md
 node  --loader ts-node/esm src/parsertest01.ts --dumptree curriculum/sentcompletion_kitchen.md
 node  --loader ts-node/esm src/parsertest01.ts --dumptree curriculum/sentcompletion_kitchen.md
@@ -497,4 +450,51 @@ node  --loader ts-node/esm src/parsertest01.ts --dumpfillins curriculum/booksumm
 node  --loader ts-node/esm src/parsertest01.ts --dumpfillins curriculum/booksummary_mancalledove1.md
 node  --loader ts-node/esm src/parsertest01.ts --dumpfillins curriculum/booksummary_twonights*.md
 ls *.txt
+history -w reading_companion_parser.txt
+history
+node  --loader ts-node/esm src/parsertest01.ts --dumpsections curriculum/versimagemc.md
+node  --loader ts-node/esm src/parsertest01.ts --dumpsections curriculum/versimagesmc.md
+node  --loader ts-node/esm src/parsertest01.ts --dumpsections curriculum/verbsimagesmc.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/homepage_ronlyn.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_*.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_bornacrime.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_bornacrime.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_berrypickers.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_12*.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/homepage_ronlyn.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/homepage_ronlyn.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_12*.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_12*.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_dead*.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_12*.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_12*.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_12*.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/modelsentenc.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/verbsimagesmctest.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_themaid.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/homepage_ronlyn.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_themaid.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_themaid.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_themaid.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_themaid.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_berrypickers.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_bornacrime.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_bornacrime.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_berrypickers.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_born*.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_berry*.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_born*.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_berry*.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_dead*.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_berry*.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_berry*.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_born*.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_born*.md
+node  --loader ts-node/esm src/parsertest01.ts --nowarnings curriculum/booksummary_born*.md
+history
+ls *.txt
+history -w reading_compaion_parser.txt
+history
+ls -l *.txt
+history -w reading_companion_parser.txt
 history -w reading_companion_parser.txt
