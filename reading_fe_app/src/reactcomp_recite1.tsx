@@ -234,6 +234,13 @@ export const ReciteButton1 = () => {
 //     store => store.recite_requested_passthru
 //   );  
 useEffect(() => {
+  // This is just precautionary to ensure that recitation is stopped and the
+  // state reset because the reciteButton component does not unmount with each 
+  // new page loaded since it exists in the page footer and not the content 
+  // page.
+  // dispatch(Request.Recite_stop());
+})
+useEffect(() => {
   if (isReciteActivated && isReciteInProgress && isReciteButtonCancelRequested) {
     console.log(`user cancel recitation`);
     Synthesizer.cancel();
@@ -251,7 +258,7 @@ useEffect(() => {
   isReciteButtonCancelRequested
 ])
 useEffect(() => {
-  console.log(`@@Recite: isReciteButtonRequested=${isReciteButtonRequested} reciteActivated=${isReciteActivated} isRecitingInProgress=${isReciteInProgress} isReciteApiRequested=${isReciteApiRequested}`);
+  // console.log(`@@Recite: isReciteButtonRequested=${isReciteButtonRequested} reciteActivated=${isReciteActivated} isRecitingInProgress=${isReciteInProgress} isReciteApiRequested=${isReciteApiRequested}`);
   let recitationScope: RecitationScopeEnumType = settingsContext.settings.speech.scope;
   let recitationStartIdx: number = currentTermIdx;
   let recitationSpan : number = 0;
@@ -301,6 +308,7 @@ useEffect(() => {
           isReciteParametersValidated = true;
         } else {
           isReciteParametersValidated = false;
+          console.log(`@@Recite: invalid sentenceIdx?=${reciteApiSentenceIdx} using default value`);
           recitationStartIdx = pageLists.terminalList[currentTermIdx].sentenceIdx;
         }
         break;
@@ -329,7 +337,7 @@ useEffect(() => {
   }
   // POPULATE RECITATION LIST
   if (!isReciteActivated && isReciteParametersValidated) {
-    console.log(`@@Recite: validated isReciteActivated=${isReciteActivated} recitationScope=${recitationScope} recitationStartIdx=${recitationStartIdx} recitationSpan=${recitationSpan} reciteApiPassThru=${reciteApiPassThru}`);
+    // console.log(`@@Recite: validated isReciteActivated=${isReciteActivated} recitationScope=${recitationScope} recitationStartIdx=${recitationStartIdx} recitationSpan=${recitationSpan} reciteApiPassThru=${reciteApiPassThru}`);
     switch (recitationScope) {
       case RecitationScopeEnumType.words:
         if (recitationSpan === 0) {
@@ -372,27 +380,27 @@ useEffect(() => {
     console.log(`@@@ recite: synthesizing @${(new Date().getTime().toString().slice(-5))}`);
     setIsReciteActivated(true);
     dispatch(Request.Recite_active())
-    console.log(`@@@@@ reciting1: isReciteActivated=${isReciteActivated}
-  recitationList.length=${recitationList.length}, 
-  recitationList=${recitationList},
-  isReciteInProgress=${isReciteInProgress} ,
-  isReciteButtonRequested=${isReciteButtonRequested},
-  isReciteApiRequested=${isReciteApiRequested},
-  currentTermIdx=${currentTermIdx},
-  isReciteActivated=${isReciteActivated},
-  isReciteButtonRequested=${isReciteButtonRequested},
-  isReciteApiRequested=${isReciteApiRequested},
-  isReciteInProgress=${isReciteInProgress},
-  reciteApiPassThru=${reciteApiPassThru},
-  reciteApiScope=${reciteApiScope},
-  reciteApiSectionIdx=${reciteApiSectionIdx},
-  reciteApiSentenceIdx=${reciteApiSentenceIdx},
-  reciteApiSpan=${reciteApiSpan},
-  reciteApiWordIdx=${reciteApiWordIdx},
-  settingsContext.settings.speech.scope=${settingsContext.settings.speech.scope}`);
-  console.log(`@@@ recite: speaking @${(new Date().getTime().toString().slice(-5))}`);
+  //   console.log(`@@@@@ reciting1: isReciteActivated=${isReciteActivated}
+  // recitationList.length=${recitationList.length}, 
+  // recitationList=${recitationList},
+  // isReciteInProgress=${isReciteInProgress} ,
+  // isReciteButtonRequested=${isReciteButtonRequested},
+  // isReciteApiRequested=${isReciteApiRequested},
+  // currentTermIdx=${currentTermIdx},
+  // isReciteActivated=${isReciteActivated},
+  // isReciteButtonRequested=${isReciteButtonRequested},
+  // isReciteApiRequested=${isReciteApiRequested},
+  // isReciteInProgress=${isReciteInProgress},
+  // reciteApiPassThru=${reciteApiPassThru},
+  // reciteApiScope=${reciteApiScope},
+  // reciteApiSectionIdx=${reciteApiSectionIdx},
+  // reciteApiSentenceIdx=${reciteApiSentenceIdx},
+  // reciteApiSpan=${reciteApiSpan},
+  // reciteApiWordIdx=${reciteApiWordIdx},
+  // settingsContext.settings.speech.scope=${settingsContext.settings.speech.scope}`);
+  // console.log(`@@@ recite: speaking @${(new Date().getTime().toString().slice(-5))}`);
   Synthesizer.speak(recitationList, setIsReciteInProgress);
-    console.log(`@@@@@ reciting active`);
+    // console.log(`@@@@@ reciting active`);
   }
 },[
   currentTermIdx,
@@ -420,23 +428,23 @@ useEffect(() => {
   // },[dispatch, isReciteInProgress])
   // CLEANUP
   useEffect(() => {   
-    console.log(`@@@ recite: completed? @${(new Date().getTime().toString().slice(-5))}`);
-    console.log(`@@@@@ reciting2: isReciteActivated=${isReciteActivated},
-  isReciteInProgress=${isReciteInProgress},
-  isReciteButtonRequested=${isReciteButtonRequested},
-  isReciteApiRequested=${isReciteApiRequested},
-  currentTermIdx=${currentTermIdx},
-  isReciteActivated=${isReciteActivated},
-  isReciteButtonRequested=${isReciteButtonRequested},
-  isReciteApiRequested=${isReciteApiRequested},
-  isReciteInProgress=${isReciteInProgress},
-  reciteApiPassThru=${reciteApiPassThru},
-  reciteApiScope=${reciteApiScope},
-  reciteApiSectionIdx=${reciteApiSectionIdx},
-  reciteApiSentenceIdx=${reciteApiSentenceIdx},
-  reciteApiSpan=${reciteApiSpan},
-  reciteApiWordIdx=${reciteApiWordIdx},
-  settingsContext.settings.speech.scope=${settingsContext.settings.speech.scope} at ${(new Date().getTime().toString().slice(-5))}`);
+  //   console.log(`@@@ recite: completed? @${(new Date().getTime().toString().slice(-5))}`);
+  //   console.log(`@@@@@ reciting2: isReciteActivated=${isReciteActivated},
+  // isReciteInProgress=${isReciteInProgress},
+  // isReciteButtonRequested=${isReciteButtonRequested},
+  // isReciteApiRequested=${isReciteApiRequested},
+  // currentTermIdx=${currentTermIdx},
+  // isReciteActivated=${isReciteActivated},
+  // isReciteButtonRequested=${isReciteButtonRequested},
+  // isReciteApiRequested=${isReciteApiRequested},
+  // isReciteInProgress=${isReciteInProgress},
+  // reciteApiPassThru=${reciteApiPassThru},
+  // reciteApiScope=${reciteApiScope},
+  // reciteApiSectionIdx=${reciteApiSectionIdx},
+  // reciteApiSentenceIdx=${reciteApiSentenceIdx},
+  // reciteApiSpan=${reciteApiSpan},
+  // reciteApiWordIdx=${reciteApiWordIdx},
+  // settingsContext.settings.speech.scope=${settingsContext.settings.speech.scope} at ${(new Date().getTime().toString().slice(-5))}`);
     if (isReciteActivated && !isReciteInProgress) {
       // Synthesizer.cancel();
       // Still activated but reciting is no longer in progress

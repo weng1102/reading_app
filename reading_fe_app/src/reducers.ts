@@ -1610,14 +1610,15 @@ export const rootReducer = (
       return { ...state };
     case RECITE_COMPLETED:
       if (state.recite_requested) {
-      state.recite_completed = true;
-      console.log(`@@@ reducer: recite_completed @${(new Date().getTime().toString().slice(-5))}`);
-      state.reciting = false;
-      state.recite_requested_passthru = ""
-      state.recite_requested_sentenceIdx = IDX_INITIALIZER;
-      state.recite_requested_sentenceIdx = IDX_INITIALIZER;
-      state.recite_requested_sectionIdx = IDX_INITIALIZER;
-      state.recite_requested_scope = RecitationScopeEnumType.sentence
+        // state.recite_requested = false;
+        state.recite_completed = true;
+        console.log(`@@@ reducer: recite_completed @${(new Date().getTime().toString().slice(-5))}`);
+        state.reciting = false;
+        state.recite_requested_passthru = ""
+        state.recite_requested_sentenceIdx = IDX_INITIALIZER;
+        state.recite_requested_sentenceIdx = IDX_INITIALIZER;
+        state.recite_requested_sectionIdx = IDX_INITIALIZER;
+        state.recite_requested_scope = RecitationScopeEnumType.sentence
       }
       return { ...state };
     case RECITE_STOP:

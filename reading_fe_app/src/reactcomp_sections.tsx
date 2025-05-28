@@ -158,7 +158,7 @@ export const SectionOrderedList = (props: ISectionListPropsType) => {
     cssStyles = {
       counterSet: `A1-level-1 ${orderedListMeta.startNumber}`
     };
-    console.log(`cssStyles=${cssStyles.counterSet} ${cssStyles.display}`);
+    // console.log(`cssStyles=${cssStyles.counterSet} ${cssStyles.display}`);
   } else if (
     orderedListMeta.orderedListType ===
       AutodNumberedOrderedListTypeEnumType.multipleChoice &&

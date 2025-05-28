@@ -6,7 +6,7 @@
 1. [button: model, , , , css attributes/] I am a woman.
 1. [button: model, , , , css attributes/] I had black hair.
 1. [button: model, , , , css attributes/] I have brown eyes.
-1. [button: model, , , , css attributes/] I'm in my fifties.
+1. [button: model, , , , css attributes/] I'm in my sixties.
 1. [button: model, , , , css attributes/] I had a stroke.
 1. [button: model, , , , css attributes/] I can still speak.
 1. [button: model, , , , css attributes/] I can still walk.
