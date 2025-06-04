@@ -506,18 +506,18 @@ export const TerminalInlineButton = React.memo(
     const modelWorkFlow = useCallback(() => {
       let termIdx: number;
       // console.log(`@@@ nextActionState=${nextActionState}`);
-      console.log(`@@@ current ActionState=${nextActionState}\n
-      buttonAction=${buttonAction},
-      currentSectionIdx=${currentSectionIdx},
-      listeningActive=${listeningActive},
-      modelingStartRequested=${modelingStartRequested},
-      modelingStartButtonIdx=${modelingStartRequestedButtonIdx},
-      nextActionState=${nextActionState},
-      nextModelingButtonIdx=${nextModelingButtonIdx},
-      recitingActive=${recitingActive},
-      recitingCompleted=${recitingCompleted},
-      thisButtonIdx=${thisButtonIdx}
-    `);
+    //   console.log(`@@@ current ActionState=${nextActionState}\n
+    //   buttonAction=${buttonAction},
+    //   currentSectionIdx=${currentSectionIdx},
+    //   listeningActive=${listeningActive},
+    //   modelingStartRequested=${modelingStartRequested},
+    //   modelingStartButtonIdx=${modelingStartRequestedButtonIdx},
+    //   nextActionState=${nextActionState},
+    //   nextModelingButtonIdx=${nextModelingButtonIdx},
+    //   recitingActive=${recitingActive},
+    //   recitingCompleted=${recitingCompleted},
+    //   thisButtonIdx=${thisButtonIdx}
+    // `);
 
     /* possible code to implment multiple click feature
     console.log(`@@@ modeling user clicks=${userClicks}`)
@@ -793,11 +793,8 @@ export const TerminalInlineButton = React.memo(
       audioPlay,
       autoClicked,
       buttonAction,
-      currentSectionIdx,
       dispatch,
       listeningActive,
-      modelingStartRequested,
-      modelingStartRequestedButtonIdx,
       nextActionState,
       nextModelingButtonIdx,
       nextSentenceTransition,

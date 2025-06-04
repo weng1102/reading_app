@@ -1,5 +1,5 @@
 [[page: Ronlyn's Home Page, Ronlyn, Wen, 11/9/2022, Home Page,  /]]
-# What's new (January 2025)
+# What's new (2025)
 This section describes the latest additions and improvements to my reading companion.
 ## Auditory Modeling feature 
 Auditory modeling is a technique used to improve my listening comprehension and speech. In general, aphasia modeling involves using visual, auditory, verbal cues to guide and produce speech. Specifically, this new feature incorporates oral cues that are initially shown, recited and then obscured to allow me to recount the model text rather than just rereading it aloud. This feature will be added to any appropriate content but should not change the existing reading method. The behavior of this feature can be modified via the settings dialog. I can practice modeling with the following:
@@ -118,28 +118,13 @@ I can practice modeling sentences [modeling related sentences](verbsimagesmodeli
 # Book Club Summaries
 ## Current 
 [[image-entry: book clubs, left, 10%]]
-![Born A Crime](bornacrime.jpg,,,,,booksummary_bornacrime,page)
-* ATP is hosting a book club for the book [Born A Crime](booksummary_bornacrime,page) by Trevor Noah.
-[[/image-entry]]
-[[image-entry: book clubs, left, 10%]]
-![The Berry Pickers](berrypickers.jpg,,,,,booksummary_berrypickers,page)
-* Boston University/ARC is hosting a book club for the book [The Berry Pickers](booksummary_berrypickers,page) by Amanda Peters.
-[[/image-entry]]
-[[image-entry: book clubs, left, 10%]]
-![The Dead Romantics](deadromantics.jpg,,,,,booksummary_deadromantics,page)
-* The New Bedford Library  is hosting a book club for the book [The Dead Romantics](booksummary_deadromantics,page) by Ashley Poston.
-[[/image-entry]]
-[[image-entry: book clubs, left, 10%]]
-![12 Months To Live](12monthstolive.jpg,,,,,booksummary_12monthstolive,page)
-* Aphasia Gatherings is hosting a book club for the book [12 Months To Live](booksummary_12monthstolive,page) by James Patterson and Mike Lupica.
-[[/image-entry]]
-[[image-entry: book clubs, left, 10%]]
-![The Maid](themaid.jpg,,,,,booksummary_themaid,page)
-* UConn is hosting a book club for the book [The Maid](booksummary_themaid,page) by Nita Prose. Voices of Hope for Aphasia hosted a book club with the same book in 2023.
+![Long Island](longisland.jpg,,,,,booksummary_longisland,page)
+* BU Aphasia is hosting a book club for the book [Long Island](booksummary_longisland,page) by Colm Tóibín.
 [[/image-entry]]
 ## Past
 [[image-entry: Past book clubs, above, 10%]]
-![Lock Every Door](lockeverydoor.jpg,,,,,booksummary_lockeverydoor,page),![Shadow Diver](shadowdivers.jpg,,,,,booksummary_shadowdivers,page),![Lessons In Chemistry](lessonsinchemistry.jpg,,,,,booksummary_lessonsinchemistry,page),![I Must Betray You](imustbetrayyou.jpg,,,,,booksummary_imustbetrayyou,page),![Remarkably Bright Creatures](remarkablybrightcreatures.jpg,,,,,booksummary_remarkablybrightcreatures,page),![Shoe Dog](shoedog.jpg,,,,,booksummary_shoedog,page),![Last Liar Standing](lastliarstanding.jpg,,,,,booksummary_lastliarstanding,page),![Just Mercy](justmercy.jpg,,,,,booksummary_justmercy,page),![Ordinary Grace](ordinarygrace.jpg,,,,,booksummary_ordinarygrace,page),![Catch Me If You Can](mancalledove1.jpg,,,,,booksummary_mancalledove1,page),![A Man Called Ove](mancalledove1.jpg,,,,,booksummary_mancalledove1,page),![Mystery Guest](mysteryguest.jpg,,,,,booksummary_mysteryguest,page),![Never Lie](neverlie.jpg,,,,,booksummary_neverlie,page), ![Stillhouse Lake](stillhouselake.jpg,,,,,booksummary_stillhouselake,page).
+![Lock Every Door](lockeverydoor.jpg,,,,,booksummary_lockeverydoor,page),![Shadow Diver](shadowdivers.jpg,,,,,booksummary_shadowdivers,page),![Lessons In Chemistry](lessonsinchemistry.jpg,,,,,booksummary_lessonsinchemistry,page),![I Must Betray You](imustbetrayyou.jpg,,,,,booksummary_imustbetrayyou,page),![Remarkably Bright Creatures](remarkablybrightcreatures.jpg,,,,,booksummary_remarkablybrightcreatures,page),![Shoe Dog](shoedog.jpg,,,,,booksummary_shoedog,page),![Last Liar Standing](lastliarstanding.jpg,,,,,booksummary_lastliarstanding,page),![Just Mercy](justmercy.jpg,,,,,booksummary_justmercy,page),![Ordinary Grace](ordinarygrace.jpg,,,,,booksummary_ordinarygrace,page),![Catch Me If You Can](mancalledove1.jpg,,,,,booksummary_mancalledove1,page),![A Man Called Ove](mancalledove1.jpg,,,,,booksummary_mancalledove1,page),![Mystery Guest](mysteryguest.jpg,,,,,booksummary_mysteryguest,page),![Never Lie](neverlie.jpg,,,,,booksummary_neverlie,page), ![Stillhouse Lake](stillhouselake.jpg,,,,,booksummary_stillhouselake,page), ![The Maid](themaid.jpg,,,,,booksummary_themaid,page), ![12 Months To Live](12monthstolive.jpg,,,,,booksummary_12monthstolive,page), ![The Dead Romantics](deadromantics.jpg,,,,,booksummary_deadromantics,page), ![The Berry Pickers](berrypickers.jpg,,,,,booksummary_berrypickers,page),![Born A Crime](bornacrime.jpg,,,,,booksummary_bornacrime,page).
+
 
 [[/image-entry]]
 # Scene Narratives

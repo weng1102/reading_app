@@ -33,7 +33,7 @@ The app hosts textual and visual content authored with a plain-text editor (e.g.
 The look and feel application wide and can be changed based on individual cascading style sheets and internal application settings. More specifically, the font sizing and line spacing can be modified for each page based on the user’s desire to ensure the best viewing. 
 
 ### Speech recognition
-First and foremost, the reading companion reads along with the user by listening while the user reads aloud, recognizes and advances the current word to be spoken to the next word, waits for the correct word to be spoken and eventually states the word after prescribed attempts.
+First and foremost, the reading companion reads along with the user by listening while the user reads aloud, recognizes and advances the current word to be spoken to the next word, waits for the correct word to be spoken and when necessary eventually skips to the subsequent word.
 
 To balance the therapeutic challenge with ongoing self doubt and resultant frustration, the app assumes the word recognition responsibility and affords the reader a (configurable) number of retries before the "stuck" word is recited and the next word is highlighted. 
 
@@ -45,15 +45,47 @@ The reading companion app can recite the text content to provide oral modeling o
 Different voices can be selected for reciting depending upon the voices provided by the underlying platform. The recitation volume can be adjusted within the app as well as through the platform. Most importantly, the rate of recitation can be sped up or slowed down.
 
 ### Word finding and sentence construction (fill in the blanks)
-Word finding (fill in the blanks)
-The companion supports word finding by allowing concealed words within content. To help with the finding process, cueing hierarchy provides progressively more help with the concealed word.
+The reading companion app supports word finding and sentence construction by prompting and listening for specific word or words that fit the verbal context. ​The sentence prompt (known as a stem) induces the user to reply with the valid response (known as a key) in the entry (response to be filled in, fill-in response, or just fill-in). 
+
+The reading companion app supports word finding by allowing the author to selectively conceal words within a prompt (phrase or sentence). Subsequently, the user can read the prompt and:
+* Identify the concealed word by reciting the word correctly whereupon the word is revealed, 
+* Listen to the concealed word without reveal on demand,
+* Reveal the concealed word on demand, 
+* Listen to and reveal the concealed word automatically after the maximum number of retries is exceeded. 
+
+The author is responsible for creating a prompt with enough context so as to allow the user to deduce the concealed response. 
+
+After the concealed word is revealed, the cursor is advanced to the next word to be recited. To aid the user, response(s) can be displayed in a separate section from the prompt, outside the context of the prompt. Within the separate section, responses can be accompanied and sorted by their attributes such as grammatical tags (aka part of speech or, part of sentences), definitions, and possibly other information helpful to the user.
+
+For example,
+[[fillin: gridInOrder, true, 1, true,, Recite the following prompts:,grid, 2, insert, true, true, true, true, true, false]]
+The man=(noun) is [_walking=(verb)_] to the [_market=(noun)_].
+[[/fillin]]
+In the fillin-in example above, while actively reciting the prompt for the app, the user can find the proper word among one or more words in a list. 
+### Reading comprehension (multiple choice questions)
+The reading companion app supports reading comprehension by prompting the user (with a question) and providing a list of responses from which the user can select the proper response. After the user selects the right response, the reading companion listens for the user to recite the proper response.
+
+For example,
+1a. What is my name?
+  1a. [button: choice, , , , css attributes/] My name is Cindy.
+  1a. [button: choice, correct, , , css attributes/] My name is Ronlyn.
+  1a. [button: choice, , , , css attributes/] My name is Karen.
+  1a. [button: choice, , , , css attributes/] My name is Linda.
+In the multiple choice example above, while actively reciting the prompt for the app, the user can select the proper response (by clicking on the leading button) among multiple choices. 
+### Speech modeling
+Speech Modeling is a therapy technique where the user is initially presented with a clear example of a desired word, phrase or sentence (with optional visual cues) to be modeled; then prompted to imitate it without the written cue to allow the user to recall the prose (as opposed to just reading it aloud). The app facilitates this operation on demand by reciting the model prose, obscuring the model prose, prompting the user to repeat the prose, listening for the user’s response, recognizing and advancing the word cursor accordingly. 
+
+For example,
+[button: model, , , , css attributes/] The person is cooking.
+[button: model, , , , css attributes/] The person is walking.
+[button: model, , , , css attributes/] The person is running.
 
 ## Requirements: (What is needed?)
 The model will be presented with curated and formatted multimodal content to encourage and facilitate reading. The model will have her speech recognized and tracked as she reads to ensure accuracy and instill confidence. The model will have the content recited on demand to provide oral modeling. The model will practice “filling in the blank” within context to practice word finding as well as multiple "filling in" key grammatical elements within a sentence to practice sentence construction. 
 
 The model will use the reading companion from her primary touchscreen-based electronic platforms. The content will be accessible across all instances of the reading companion app to minimize pushing content.
 
-The following reflects the most useful specific requirements to address the challenges observed and recommendations from her speech language pathologists.
+The following reflects a summary of the most useful specific requirements to address the challenges observed and recommendations from her speech language pathologists.
 
 * Authoring/curating familiar and relevant content to the user
   * Custom content
@@ -74,4 +106,7 @@ The following reflects the most useful specific requirements to address the chal
 * Retrieving words
   * Word fill-ins
   * Hints/cueing hierarchy
+* Sentence comprehension
+* Speech Modeling
+
 
