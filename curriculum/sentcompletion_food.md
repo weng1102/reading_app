@@ -61,9 +61,10 @@ The following exercises allow me to fill in the prompts given the corresponding 
 [[/fillin]]
 ### Mexican Food
 [[fillin: gridInOrder, true, 2, true,, Recite the following prompts including the underlined words:, grid, 6, insert, true, true, true, true, true, false]]
-1.  [_tacos_].
-1.  [_enchiladas_].
-1.  [_burritos_].
-1.  [_nachos_].
-1.  [_fajitas_].
+1. Fish [_tacos_].
+1. Cheese [_quesedillas_].
+1. Beef and bean [_burritos_].
+1. Melted cheese [_nachos_].
+1. Grilled chicken, peppers and onion [_fajitas_].
+1. Chiles [_rellenos_].
 [[/fillin]]

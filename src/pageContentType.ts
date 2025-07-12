@@ -1463,6 +1463,7 @@ export enum InlineButtonActionEnumType {
   label = "label", // label with icon
   model = "model", // recite then listen for the same words/sentence
   none = "none", // do nothing
+  script = "script", // recite script
   term = "term" // label with no icon
 }
 export enum ModelingScopeEnumType {

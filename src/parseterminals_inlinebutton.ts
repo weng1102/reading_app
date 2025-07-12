@@ -69,12 +69,29 @@ export class TerminalNode_MLTAG_INLINEBUTTON extends TerminalNode_MLTAG_
       // a list of parameters that have no child terminals associated with
       // them like most other terminals AND should be parsed from csv of:
       // <button>
-      // [0]: { choice | complete | converse | cues | label | model | term }
+      //
+      // [0]: button type:
+      //      choice - multiple choice button 
+      //        [1]: { correct | incorrect } 
+      //      complete - TBD
+      //      cues/hints - recite cues/hints embedded within button 
+      //        [1]: text to be recited with button click
+      //      label - recite label embedded within button
+      //        [1]: word to be recited with button click
+      //      model - recite then listen to prompt/response immediately 
+      //      following the button.
+      //        [1]: speech rate
+      //        [2]: obscurity 0-9?
+      //        [3]: progressive retry reveal
+      //      listen - recite then listen to prompt immediately following the button.
+      //      script -  recite prompt then listen for response immediately 
+      //      following the button.
+      //      term
       //{ words | sentence | section }
       //       -cursor {unchanged | AtEnd | AtBeginning }
       //       { -listening  | -notListening },
       // [2]: hints/label description,
-      // [3] sortKey (proposed)
+      // [3] sortKey (proposed) What?
       // [3]: speech rate
       // [4]: voice index
       // [5]: css button attributes (override default),

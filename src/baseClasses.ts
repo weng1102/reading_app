@@ -100,20 +100,26 @@ class TerminalArray extends Array<ITerminalListItem> {
     return terminal.termIdx;
   }
   parse(): number {
+    let key: string;
+    // for (const key in PronunciationDictionary) {
+    //   if (PronunciationDictionary.hasOwnProperty(key)) {
+    //     console.log(key,PronunciationDictionary[key]);
+    //   }
+    // }
+    // console.log(`RecognitionDictionary=${RecognitionDictionary}`)
+    // console.log(`PronunciationDictionary=${PronunciationDictionary}`)
     this.forEach(terminal => {
-      //      if (terminal.altrecognition.length === 0) {
-      terminal.altrecognition =
-        RecognitionDictionary[terminal.content.toLowerCase()] !== undefined
-          ? RecognitionDictionary[terminal.content.toLowerCase()]
-          : "";
-      // } else {
-      //   console.log(`altrecog[${terminal.content}]=${terminal.altrecognition}`);
-      // }
-      if (terminal.altpronunciation.length === 0)
-        terminal.altpronunciation =
-          PronunciationDictionary[terminal.content.toLowerCase()] !== undefined
-            ? PronunciationDictionary[terminal.content]
-            : "";
+      key = terminal.content.toLowerCase().trim();
+      if (RecognitionDictionary[key] !== undefined) {
+        terminal.altrecognition = RecognitionDictionary[key] 
+      } else {
+        terminal.altrecognition = ""
+      }
+      if (PronunciationDictionary[key] !== undefined) {
+        terminal.altpronunciation = PronunciationDictionary[key] 
+      } else {
+        terminal.altpronunciation = ""
+      }
     });
     return this.length;
   }

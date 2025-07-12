@@ -96,10 +96,11 @@ export class SectionParseNode_FILLIN extends SectionParseNode_LIST
       [9]  unique only: boolean, remove duplicate responses and refCount++
       [10] showReferenceCount: boolean, shows in responses iff <> 1
       [11] groupByTags: boolean, groups responses by category e.g., verbs
-      [12]  showResponseTags: boolean, show hints within responses
+      [12] showResponseTags: boolean, show hints within responses
       [13] showPromptTags: boolean, show hints within prompts
-      [14] showResponsesInPrompts: boolean, show responwses initially filled
+      [14] showResponsesInPrompts: boolean, show responses initially filled
            in)
+      [15] helpfulness level?
         */
       let args: string[] = tokenizeParameterList(argString).map(arg =>
         arg.trim()

@@ -122,7 +122,7 @@ I can practice modeling sentences [modeling related sentences](verbsimagesmodeli
 * BU Aphasia is hosting a book club for the book [Long Island](booksummary_longisland,page) by Colm Tóibín.
 [[/image-entry]]
 ## Past
-[[image-entry: Past book clubs, above, 10%]]
+[[image-entry: Past book clubs, above, 20%]]
 ![Lock Every Door](lockeverydoor.jpg,,,,,booksummary_lockeverydoor,page),![Shadow Diver](shadowdivers.jpg,,,,,booksummary_shadowdivers,page),![Lessons In Chemistry](lessonsinchemistry.jpg,,,,,booksummary_lessonsinchemistry,page),![I Must Betray You](imustbetrayyou.jpg,,,,,booksummary_imustbetrayyou,page),![Remarkably Bright Creatures](remarkablybrightcreatures.jpg,,,,,booksummary_remarkablybrightcreatures,page),![Shoe Dog](shoedog.jpg,,,,,booksummary_shoedog,page),![Last Liar Standing](lastliarstanding.jpg,,,,,booksummary_lastliarstanding,page),![Just Mercy](justmercy.jpg,,,,,booksummary_justmercy,page),![Ordinary Grace](ordinarygrace.jpg,,,,,booksummary_ordinarygrace,page),![Catch Me If You Can](mancalledove1.jpg,,,,,booksummary_mancalledove1,page),![A Man Called Ove](mancalledove1.jpg,,,,,booksummary_mancalledove1,page),![Mystery Guest](mysteryguest.jpg,,,,,booksummary_mysteryguest,page),![Never Lie](neverlie.jpg,,,,,booksummary_neverlie,page), ![Stillhouse Lake](stillhouselake.jpg,,,,,booksummary_stillhouselake,page), ![The Maid](themaid.jpg,,,,,booksummary_themaid,page), ![12 Months To Live](12monthstolive.jpg,,,,,booksummary_12monthstolive,page), ![The Dead Romantics](deadromantics.jpg,,,,,booksummary_deadromantics,page), ![The Berry Pickers](berrypickers.jpg,,,,,booksummary_berrypickers,page),![Born A Crime](bornacrime.jpg,,,,,booksummary_bornacrime,page).
 
 

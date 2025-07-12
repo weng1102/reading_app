@@ -1,6 +1,6 @@
 export default interface DictionaryType {
   [key: string]: string;
-};;;;;;;;;;
+};
 export const RecognitionDictionary: DictionaryType = {
   // homophones
   ["accept"]: "except",
@@ -562,6 +562,7 @@ export const RecognitionDictionary: DictionaryType = {
   ["shao"]: "^(sh[ae]ll)$",
   ["mai"]: "^(my)",
   ["cheung"]: "^(ch[euo]ng)$",
+  ["eilis"]: "^(eyeless|eyelish|eyelash)$",
   ["gaw"]: "^(ga{0,1}o{0,1}l{0,1}w{0,1})$",
   ["negin"]: "^(n[ei]ge{1,2}ne{0,1})$",
   ["jaylynne"]: "^(ja[yi]l[ey]n{1,2}e{0,1})$",
@@ -704,5 +705,7 @@ export const PronunciationDictionary: DictionaryType = {
   ["handicapables"]: "handy capables",
   ["writes"]: "rights",
   ["sells"]: "cells",
-  ["paratransit"]: "pair-ah-transit"
+  ["paratransit"]: "pair-ah-transit",
+  ["ronlyn"]: "ron-lin",
+  ["eilis"]: "eye-lish",
 };
