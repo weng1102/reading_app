@@ -19,7 +19,7 @@ import {
   ITerminalContent
   // IImageTerminalMeta
 } from "./pageContentType";
-import { useAppSelector, useAppDispatch, useDivRef } from "./hooks";
+import { useAppSelector, useDivRef } from "./hooks";
 import { TerminalImageEntry } from "./reactcomp_terminals_image";
 import { SectionDispatcher, ISectionPropsType } from "./reactcomp_sections";
 
@@ -126,12 +126,9 @@ export const SectionImageEntryImages = React.memo(
     // dimensions change upon content window resize event, the logic for both
     // situations have been combined.
 
-    // const [imagesLoadedCount, setImagesLoadedCount] = useState(0);
-    // const [isImagesLoaded, setIsImagesLoaded] = useState(false);
     const [resize, setResize] = useState(false);
     const [imagesContainerTop, setImagesContainerTop] = useState(0);
     const [imagesGroupingTopOffset, setImagesGroupingTopOffset] = useState(0);
-    // const [imagesGroupingOffset, setImagesGroupingOffset] = useState(0);
     const [imagesContainerHeight, setImagesContainerHeight] = useState(0);
     const [imagesGroupingHeight, setImagesGroupingHeight] = useState(0);
     const imagesContainerDivRef = useDivRef();
@@ -382,7 +379,7 @@ export const SectionImageEntryImages = React.memo(
       imagesGroupingTopOffset
     ]);
     let images: ITerminalContent[] = props.images;
-    let style: React.CSSProperties | any;
+    // let style: React.CSSProperties | any;
     // setTotalImagesToBeLoaded(props.images.length);
 
     const groupingClassName: string = `${props.className}-grouping`;

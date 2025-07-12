@@ -306,10 +306,12 @@ useEffect(() => {
           && reciteApiSentenceIdx < pageLists.sentenceList.length) {
           recitationStartIdx = reciteApiSentenceIdx
           isReciteParametersValidated = true;
+        } else if (currentTermIdx >= 0 && currentTermIdx < pageLists.terminalList.length) {
+            recitationStartIdx = pageLists.terminalList[currentTermIdx].sentenceIdx;
         } else {
           isReciteParametersValidated = false;
+          recitationStartIdx = IDX_INITIALIZER
           console.log(`@@Recite: invalid sentenceIdx?=${reciteApiSentenceIdx} using default value`);
-          recitationStartIdx = pageLists.terminalList[currentTermIdx].sentenceIdx;
         }
         break;
       case RecitationScopeEnumType.section:
@@ -317,9 +319,12 @@ useEffect(() => {
           && reciteApiSectionIdx < pageLists.sectionList.length) {
           recitationStartIdx = reciteApiSectionIdx;
           isReciteParametersValidated = true;
-        } else {
-          isReciteParametersValidated = false;
+       } else if (currentTermIdx >= 0 && currentTermIdx < pageLists.terminalList.length) {
           recitationStartIdx = pageLists.terminalList[currentTermIdx].sectionIdx;
+      } else {
+          isReciteParametersValidated = false;
+          console.log(`@@Recite: invalid sectionIdx?=${reciteApiSentenceIdx} using default value`);
+          recitationStartIdx = IDX_INITIALIZER
         }
         break;
       case RecitationScopeEnumType.passThru:
@@ -463,9 +468,10 @@ useEffect(() => {
       setIsReciteButtonRequested(false)
     //   dispatch(Request.Recite_inactive()); // communicate to other components
     } else if (!isReciteActivated && !isReciteInProgress) {
-      console.log(`@@@ recite: inactive @${(new Date().getTime().toString().slice(-5))}`);
+      console.log(`@@@ recite: inactive @${(new Date().getTime().toString().slice(-5))}  isReciteButtonRequested=${isReciteButtonRequested} isReciteButtonCancelRequested=${isReciteButtonCancelRequested}`);
     } else if (!isReciteActivated && isReciteInProgress) {
-      console.log(`@@@ recite: invalid end state @${(new Date().getTime().toString().slice(-5))}`);
+      console.log(`@@@ recite: invalid/canceling end state @${(new Date().getTime().toString().slice(-5))} isReciteButtonRequested=${isReciteButtonRequested} isReciteButtonCancelRequested=${isReciteButtonCancelRequested}`);
+
     } else {
       console.log(`@@@ recite: still not completed @${(new Date().getTime().toString().slice(-5))}`);
       console.log(`@@@@@ isReciteActivated=${isReciteActivated} isReciteInProgress=${isReciteInProgress} isReciteApiRequested=${isReciteApiRequested}`); 

@@ -50,9 +50,11 @@ import InlineButtonChoice from "./img/button_inline_choice.png";
 import InlineButtonConverse from "./img/button_inline_converse.png";
 import InlineButtonHint from "./img/button_inline_cues_color.png";
 import InlineButtonLabel from "./img/button_inline_label.png";
-import InlineButtonModel from "./img/button_inline_model.png";
-import InlineButtonModelActive from "./img/button_inline_model_active.gif";
+// import InlineButtonModelGhosted from "./img/button_inline_model_ghosted.png";
 import InlineButtonDefault from "./img/button_recite.png";
+import InlineButtonModelActive from "./img/button_inline_model_active.gif";
+import InlineButtonModel from "./img/button_inline_model.png";
+
 import BellShort from "./audio/bell_short.mp3";
 import BuzzerShort from "./audio/buzzer_short.mp3";
 export const TerminalInlineButton = React.memo(
@@ -115,8 +117,8 @@ export const TerminalInlineButton = React.memo(
     const activeButtonReclicks = useAppSelector(store => store.inlinebutton_reclicks);
     const activeButtonIdx = useAppSelector(store => store.inlinebutton_idx);
     const previouslyActiveButtonIdx = useAppSelector(store => store.inlinebutton_idx_prev);
-    const modelingStartRequested = useAppSelector(store => store.modeling_requested)
-    const modelingStartRequestedButtonIdx = useAppSelector(store => store.modeling_requested_buttonIdx)
+    // const modelingStartRequested = useAppSelector(store => store.modeling_requested)
+    // const modelingStartRequestedButtonIdx = useAppSelector(store => store.modeling_requested_buttonIdx)
     const nextSentenceTransition = useAppSelector(
       store => store.cursor_nextSentenceTransition
     );
@@ -143,7 +145,7 @@ export const TerminalInlineButton = React.memo(
       source.connect(context.destination);
       source.start();
     },[]);
-    // subactions must be split when coordinating asynchronous start/end with
+    const playAudioBell = () => audioPlay(BellShort)    // subactions must be split when coordinating asynchronous start/end with
     // external components to avoid needless, inadvertant blocking.
     const buttonProps: IInlineButtonTerminalMeta = props.terminal
       .meta as IInlineButtonTerminalMeta;
@@ -242,7 +244,7 @@ export const TerminalInlineButton = React.memo(
     ]);
     useEffect(() => {
       // reset the autoadvance at page load
-      console.log(`@@@ inlineButton: pageload only thisButtonIdx=${thisButtonIdx}`);
+      // console.log(`@@@ inlineButton: pageload only thisButtonIdx=${thisButtonIdx}`);
       dispatch(Request.InlineButton_canceled(thisButtonIdx))
     },[])
     const choiceWorkflow = useCallback(() => {
@@ -266,9 +268,10 @@ export const TerminalInlineButton = React.memo(
           // if (!signalRequested) {
           //   dispatch(Request.InlineButton_signal());
           //   console.log(`inlinebutton=${buttonProps.label.toLowerCase()}`);
-            dispatch(Request.Action_signalStarting());
+            // dispatch(Request.Action_signalStarting());
             if (buttonProps.label.toLowerCase() === "correct") {
-              audioPlay(BellShort);
+              // audioPlay(BellShort);
+              playAudioBell()
             } else {
               audioPlay(BuzzerShort);
             }
@@ -398,6 +401,7 @@ export const TerminalInlineButton = React.memo(
       nextSection, 
       pageLists.inlineButtonList, 
       pageLists.terminalList.length, 
+      playAudioBell,
       thisButtonIdx
     ]);
     const cuesWorkflow = useCallback(() => {
@@ -503,8 +507,8 @@ export const TerminalInlineButton = React.memo(
     //   nextActionState,
     //   actionStateEnumType.end
     // ])
-    const modelWorkFlow = useCallback(() => {
-      let termIdx: number;
+    const modelWorkFlow = useCallback((termIdx: number = -9999) => {
+      // let termIdx: number;
       // console.log(`@@@ nextActionState=${nextActionState}`);
     //   console.log(`@@@ current ActionState=${nextActionState}\n
     //   buttonAction=${buttonAction},
@@ -596,16 +600,22 @@ export const TerminalInlineButton = React.memo(
           // cannot cancel instruction
           // wait until reciting is complete (inactive)
           console.log(`@@@ instructing1: recitingActive=${recitingActive}`)
-          if (recitingCompleted) {
+          if (recitingRequested && recitingCompleted) {
             setNextActionState(actionStateEnumType.instructEnd);
               console.log(`@@@ instructing2: completing recitingActive=${recitingActive}}`)
               console.log(`@@@ inlineButton: completing @${(new Date().getTime().toString().slice(-5))}`);
-            } else {
-              console.log(`@@@ instructing3: waiting recitingActive=${recitingActive} `)
-              console.log(`@@@ inlineButton: waiting @${(new Date().getTime().toString().slice(-5))}`);
+          } else if (!recitingRequested && !recitingActive) {
+            console.log(`@@@ instructing4: canceling recitingRequested=${recitingRequested} recitingActive=${recitingActive} `)
+          //   // dispatch(Request.InlineButton_canceled(thisButtonIdx));
+            // dispatch(Request.Recite_stop());
+            setNextActionState(actionStateEnumType.canceling);
+          } else {
+            console.log(`@@@ instructing3: waiting recitingActive=${recitingActive} `)
+            console.log(`@@@ inlineButton: waiting @${(new Date().getTime().toString().slice(-5))}`);
           }
           break;
         case actionStateEnumType.instructEnd:
+          console.log(`@@@ inlineButton: instructEnd @${(new Date().getTime().toString().slice(-5))}`);
           // dispatch(Request.Recite_ended()); // just in case?
           setNextActionState(actionStateEnumType.reciteStart);
           break;
@@ -622,7 +632,8 @@ export const TerminalInlineButton = React.memo(
             setNextActionState(actionStateEnumType.reciting);
           break;
         case actionStateEnumType.reciting:
-          // cannot user cancel
+          // cannot user cancel?
+          // strangely, recitingActive is assumed to be true after recite_start
           // wait until reciting is complete (inactive)
           console.log(`@@@ reciting1: recitingActive=${recitingActive}  recitingCompleted=${recitingCompleted}`)
           console.log(`@@@ inlineButton: reciting @${(new Date().getTime().toString().slice(-5))}`);
@@ -631,6 +642,13 @@ export const TerminalInlineButton = React.memo(
             console.log(`@@@ inlineButton: completing @${(new Date().getTime().toString().slice(-5))}`);
             console.log(`@@@ reciting2: no longer reciting recitingActive=${recitingActive}  recitingCompleted=${recitingCompleted}`)
             setNextActionState(actionStateEnumType.reciteEnd);
+          } else if (recitingRequested && !recitingCompleted && recitingActive) {
+            console.log(`@@@ reciting5: still reciting recitingActive=${recitingActive} `)
+          } else if (!recitingRequested && !recitingActive) {
+            // need to  check for both because there is a corner case where 
+            // testing for just reciteActive prematurely terminates flow
+            console.log(`@@@ reciting4: canceling recitingActive=${recitingActive} `)
+            setNextActionState(actionStateEnumType.canceling);
           } else {
             console.log(`@@@ reciting3: still reciting recitingActive=${recitingActive}  recitingCompleted=${recitingCompleted}`)
             console.log(`@@@ inlineButton: still reciting @${(new Date().getTime().toString().slice(-5))}`);
@@ -899,6 +917,7 @@ actionStateEnumType.reciteEnd, actionStateEnumType.reciteStart, actionStateEnumT
           switch (nextActionState) {
             case actionStateEnumType.instructStart:
             case actionStateEnumType.instructing:
+            case actionStateEnumType.instructEnd:
             case actionStateEnumType.signalEnd:  
             case actionStateEnumType.signalStart:
             case actionStateEnumType.signaling:

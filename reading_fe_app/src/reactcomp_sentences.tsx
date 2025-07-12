@@ -46,16 +46,38 @@ export const Sentence = React.memo((props: ISentencePropsType) => {
   const currentSentIdx: number = useAppSelector(
     store => store.cursor_sentenceIdx
   );
+  const retries: number = useAppSelector(store => store.listen_wordRetries);
   const obscuredSentIdx: number = useAppSelector(
     store => store.sentence_idxObscured
   );
+  useEffect(() => {
+    if (currentSentIdx === obscuredSentIdx) {
+      console.log(
+        `Sentence useEffect: currentSentIdx=${currentSentIdx} obscuredSentIdx=${obscuredSentIdx} retries=${retries}`
+      );
+      // if (settingsContext.settings.modeling.obscuredTextDegree > 0) {
+        // console.log(
+        //   `Sentence useEffect: obscuredTextDegree=${settingsContext.settings.modeling.obscuredTextDegree}`
+        // );
+        if (retries > 0) {
+          console.log(`Sentence useEffect: retries=${retries}`);
+          // settingsContext.setObscuredTextDegree(0);
+        } else {
+          console.log(`Sentence useEffect: reset retries=${retries}`);
+          // settingsContext.setObscuredTextDegree(
+          //   settingsContext.settings.modeling.obscuredTextDegree
+          // );
+        // }
+      }
+    }
+  },[retries, obscuredSentIdx, currentSentIdx]);
   let sentenceClasses: string = "";
 
   if (props.sentence.id === obscuredSentIdx) {
     console.log(
-      `obscuredIndex=${settingsContext.settings.modeling.obscuredTextDegree}`
+      `obscuredIndex=${settingsContext.settings.modeling.obscuredTextDegree} retries=${retries}`
     );
-    sentenceClasses = `sentence sentence-obscured-${settingsContext.settings.modeling.obscuredTextDegree}`;
+    sentenceClasses = `sentence obscured-${settingsContext.settings.modeling.obscuredTextDegree}`;
     console.log(
       `obscuredIndex=${settingsContext.settings.modeling.obscuredTextDegree} sentenceClassess=${sentenceClasses}`
     );

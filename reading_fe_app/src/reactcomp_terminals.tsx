@@ -485,7 +485,18 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
   const { terminalFillin, setTerminalFillin } = useContext(
     TerminalFillinContext
   );
-  //const [attribute, setAttribute] = useState(false)
+  const currentTermIdx: number = useAppSelector(
+    store => store.cursor_terminalIdx);
+  const obscuredSentIdx: number = useAppSelector(
+    store => store.sentence_idxObscured);
+  const currentSentIdx: number = useAppSelector(
+    store => store.cursor_sentenceIdx);
+  const isPartOfObscuredSentence: boolean = obscuredSentIdx === currentSentIdx;
+  const retriesExceeded: boolean = useAppSelector(
+    store => store.listen_wordRetries_limit_exceeded);
+  const retriesProgress: number = useAppSelector(store => store.listen_wordRetries_limit_progress);
+  const retrying: boolean = retriesProgress > 0;
+    //const [attribute, setAttribute] = useState(false)
   const { sectionFillin, setSectionFillin } = useContext(SectionFillinContext);
   // const [boundingBoxBottom, setBoundingBoxBottom] = useState(0);
   // const [scrollIntoView, setScrollIntoView] = useState(false);
@@ -578,8 +589,38 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
     } ${props.terminalInfo.recitable ? "recitable-word " : ""} ${
       props.active ? "active" : ""
     } ${hidden}`;
+    if (props.active && retrying) {
+      attributes += ` retry`;
+    } else {
+
+    }
+    // change obscured for modeled text relative to the settings. 
+    // This must include logic to clear the 
+    // obscured text span attribute when the user completes or terminates the 
+    // exercise. As option, should either display just the retried word and/or
+    // all preceding words in the sentence.
+    //  
+    if (props.active && isPartOfObscuredSentence) {
+    if (retriesExceeded) {
+      attributes += ` obscured-0 `;
+    } else if (retriesProgress >= 0.80) {
+      attributes += ` obscured-0 `;
+    } else if (retriesProgress >= 0.60) {
+      attributes += ` obscured-0 `;
+    } else if (retriesProgress >= 0.40) {
+      attributes += ` obscured-1 `;
+    } else if (retriesProgress >= 0.20) {
+    } else {
+    }
+  //
+    // console.log(
+    //   `@@@@ <TerminalNode>  active=${props.active}, recitable=${props.terminalInfo.recitable}, attributes=${attributes}`
+    // );
     // console.log(`attributes=${attributes}\n`);
     // console.log(`${props.terminalInfo.content}: hidden2=${hidden} `);
+    } else {
+
+    }
     if (
       props.active &&
       props.terminalInfo.fillin.responseIdx >= 0 &&

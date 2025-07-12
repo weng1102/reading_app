@@ -15,17 +15,17 @@
  *
  **/
 import React from "react";
-import { Request } from "./reducers";
-import { useEffect } from "react";
+// import { Request } from "./reducers";
+// import { useEffect } from "react";
 //import "./App.css";
 import {
   IInlineButtonTerminalMeta,
   ITerminalContent,
-  ISectionFillinVariant,
+  // ISectionFillinVariant,
   ISectionButtonGridVariant
 } from "./pageContentType";
 import { TerminalInlineButton } from "./reactcomp_terminals_inlinebutton";
-import { CPageLists, PageContext } from "./pageContext";
+// import { CPageLists, PageContext } from "./pageContext";
 import { SectionDispatcher, ISectionPropsType } from "./reactcomp_sections";
 
 export const SectionButtonGrid = React.memo((props: ISectionPropsType): any => {

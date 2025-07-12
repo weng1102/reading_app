@@ -27,6 +27,12 @@ import nextwordGhostedIcon from "./img/button_nextword_ghosted.png";
 import prevwordGhostedIcon from "./img/button_prevword_ghosted.png";
 import prevsentenceGhostedIcon from "./img/button_prevsentence_ghosted.png";
 import nextsentenceGhostedIcon from "./img/button_nextsentence_ghosted.png";
+// import { ModelingButtonIcon } from "./img/button_inline_model.png";
+// import ModelButton from "./img/button_inline_model.png";
+// import ModelButtonGhosted from "./img/button_inline_model_ghosted.png";
+// import ModelButtonActive from "./img/button_inline_model_active.gif";
+
+// import { ModelingButton } from "./reactcomp_terminals_inlinebutton";
 import gotoLinkIcon from "./img/button_link.png";
 import gotoLinkGhostedIcon from "./img/button_link_ghosted.png";
 interface IPageFooterPropsType {
@@ -44,6 +50,12 @@ export const PageFooter = React.memo(() => {
         <div className="footer-grid-recite">
           <ReciteButton1 />
         </div>
+        {/* <div className="footer-grid-model">
+          <ModelingButton />
+        </div> */}
+        <div className="footer-grid-link">
+          <LinkButton />
+        </div>
         <div className="footer-grid-prevWord">
           <PreviousWordButton />
         </div>
@@ -55,9 +67,6 @@ export const PageFooter = React.memo(() => {
         </div>
         <div className="footer-grid-nextSentence">
           <NextSentenceButton />
-        </div>
-        <div className="footer-grid-link">
-          <LinkButton />
         </div>
       </div>
       <div className="footer-statusBar">
@@ -243,3 +252,30 @@ export const StatusBar = () => {
     </>
   );
 };
+// export const ModelingButton = () => {
+//   useEffect(() => {
+//     modelWorkFlow();
+//   },[])
+//   let dispatch = useAppDispatch();
+//   let icon: string;
+//   let active: boolean;
+//   if (useAppSelector(store => store.cursor_sentenceIdx) === 0) {
+//     icon = modelingButtonGhostedIcon;
+//     // dispatch(Request.Modeling_toggle());
+//     active = false;
+//   } else {
+//     icon = modelingButtonIcon;
+//     active = true;
+//   }
+
+//   return (
+//     <>
+//       <img
+//         className="icon"
+//         alt="model sentence"
+//         src={icon}
+//         title="model sentence"
+//         // onClick={}
+//       />
+//     </>
+//   );}

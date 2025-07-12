@@ -93,7 +93,7 @@ export function ConfigSettingsInitializer(
   firstName: string = "Ronlyn",
   lastName: string = "Goo",
   showSitemap: boolean = false,
-  navbarWidth: number = 300,
+  navbarWidth: number = 25,
   fontSizeAdjustment: number = 0,
   lineSpacingAdjustment: number = 0,
   fillinPresets: ISectionFillinPresets = ISectionFillinPresetsInitializer()
@@ -185,11 +185,11 @@ export const enum ObscuredTextDegreeEnum {
   unobscured = 0,
   barely = 1,
   partially = 2,
-  default = 2,
-  mostly = 3,
-  invisible = 4,
-  totallyObscured = 4,
-  max = 4
+  default = 5,
+  mostly = 7,
+  invisible = 9,
+  totallyObscured = 9,
+  max = 9
 }
 export const enum ObscuredTextTimingEnum {
   // defines when prompt/response is first obscured
@@ -222,7 +222,7 @@ export interface IModelingSettings {
 export function ModelingSettingsInitializer(): IModelingSettings {
   return {
     obscuredTextDegree: ObscuredTextDegreeEnum.default, // not obscured
-    directions: "repeat the following",
+    directions: "repeat the following aloud",
     obscuredTextTiming: ObscuredTextTimingEnum.default, //
     continuationAction: ModelingContinuationEnum.default,
     continueToNextModel: false

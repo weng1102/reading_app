@@ -61,7 +61,7 @@ export const NavBar = React.memo((props: INavPropsType) => {
   document.documentElement.style.setProperty(
     "--nav-width",
     toggleNavBar
-      ? `${settingsContext.settings.config.navbarWidth.toString()}px`
+      ? `${settingsContext.settings.config.navbarWidth.toString()}vw`
       : "0px"
   );
   // don't include home nav entry for home page.

@@ -389,7 +389,7 @@ const ObscuredTextDegree = (props: ObscuredTextDegreeProps) => {
       props.setObscuredTextDegree(ObscuredTextDegreeEnum.default);
     }
   };
-  let sentenceClasses: string = `sentence setting-obscured-text-example sentence-obscured-${props.obscuredText}`;
+  let sentenceClasses: string = `sentence setting-obscured-text-example obscured-${props.obscuredText}`;
   return (
     <>
       <div className="settings-grid-col2-label-control">
@@ -413,6 +413,11 @@ const ObscuredTextDegree = (props: ObscuredTextDegreeProps) => {
               <div className="slider-container-label">
                 <datalist className="ticklist" id="steplist">
                   <span>none</span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
                   <span></span>
                   <span></span>
                   <span></span>

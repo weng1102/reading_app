@@ -95,6 +95,10 @@ const LISTENING_AVAILABLE = "listening/available";
 // const LISTENING_FLUSH = "listening/flush"; // clear transcript
 // const LISTENING_FLUSHED = "listening/flushed"; // clear transcript
 const LISTENING_MATCH = "listening/match"; // match word with argument with //
+const LISTENING_WORDRETRIES = "listening/retries"; // word retry count with argument //
+const LISTENING_WORDRETRIES_INCREMENT = "listening/increment retries"; // increment word retry count//
+const LISTENING_WORDRETRIES_RESET = "listening/reset"; // word retry count reset //
+const LISTENING_WORDRETRIES_SETLIMIT = "listening/set retries limit"; // set word retry limit with argument //
 const LISTENING_MESSAGE = "listening/message";
 const LISTENING_START = "listening/start";
 // const LISTENING_RETRY = "listening/retry";
@@ -121,7 +125,7 @@ const TRANSITION_ACKNOWLEDGE = "transition/acknowledge";
 // reciting
 //const RECITING = "reciting"; // state of reciting
 const RECITE_START = "recite/start"; // request to start reciting based on settings and current word
-const RECITE_START_WORDS = "recite/start words"; // request to start reciting current word(s)
+const RECITE_START_WORDSPAN = "recite/start wordspan"; // request to start reciting current word(s)
 const RECITE_START_SENTENCE = "recite/start sentence"; // request to start reciting current sentence
 const RECITE_START_SECTION = "recite/start section"; // request to start reciting current section
 const RECITE_START_PASSTHRU = "recite/start with passthru"; // request to start reciting argument
@@ -162,14 +166,14 @@ const INLINEBUTTON_AUTOADVANCE = "inlinebutton/automatic click ";
 // const ACTION_CLICK_STARTING = "inlinebutton/click";
 // const ACTION_CLICK_COMPLETED = "action/clicked";
 // const ACTION_CANCEL = "action/cancel";
-const ACTION_LISTEN_STARTING = "action/listen";
-const ACTION_LISTEN_COMPLETED = "action/listened";
-const ACTION_CURSORMOVE_STARTING = "action/cursormove";
-const ACTION_CURSORMOVE_COMPLETED = "action/cursormoved";
-const ACTION_RECITE_STARTING = "action/recite";
-const ACTION_RECITE_COMPLETED = "action/recited";
-const ACTION_SIGNAL_STARTING = "action/signal";
-const ACTION_SIGNAL_COMPLETED = "action/signaled";
+// const ACTION_LISTEN_STARTING = "action/listen";
+// const ACTION_LISTEN_COMPLETED = "action/listened";
+// const ACTION_CURSORMOVE_STARTING = "action/cursormove";
+// const ACTION_CURSORMOVE_COMPLETED = "action/cursormoved";
+// const ACTION_RECITE_STARTING = "action/recite";
+// const ACTION_RECITE_COMPLETED = "action/recited";
+// const ACTION_SIGNAL_STARTING = "action/signal";
+// const ACTION_SIGNAL_COMPLETED = "action/signaled";
 // const ACTION_ACTIONSTATE_STARTED = "action/actionstate start";
 // const ACTION_ACTIONSTATE_ENDED = "action/actionstate end";
 
@@ -382,16 +386,16 @@ const Modeling_stop = () => {
     type: MODELING_STOP
   };
 };
-const Action_cursormoveStarting = () => {
-  return {
-    type: ACTION_CURSORMOVE_STARTING
-  };
-};
-const Action_cursormoveCompleted = () => {
-  return {
-    type: ACTION_CURSORMOVE_COMPLETED
-  };
-};
+// const Action_cursormoveStarting = () => {
+//   return {
+//     type: ACTION_CURSORMOVE_STARTING
+//   };
+// };
+// const Action_cursormoveCompleted = () => {
+//   return {
+//     type: ACTION_CURSORMOVE_COMPLETED
+//   };
+// };
 // const Action_clickStarting = () => {
 //   return {
 //     type: ACTION_CLICK_STARTING,
@@ -407,16 +411,16 @@ const Action_cursormoveCompleted = () => {
 //     type: ACTION_CANCEL
 //   };
 // };
-const Action_listenStarting = () => {
-  return {
-    type: ACTION_LISTEN_STARTING
-  };
-};
-const Action_listenCompleted = () => {
-  return {
-    type: ACTION_LISTEN_COMPLETED
-  };
-};
+// const Action_listenStarting = () => {
+//   return {
+//     type: ACTION_LISTEN_STARTING
+//   };
+// };
+// const Action_listenCompleted = () => {
+//   return {
+//     type: ACTION_LISTEN_COMPLETED
+//   };
+// };
 // const Action_moveStarting = () => {
 //   return {
 //     type: ACTION_CURSORMOVE_STARTING
@@ -427,26 +431,26 @@ const Action_listenCompleted = () => {
 //     type: ACTION_CURSORMOVE_COMPLETED
 //   };
 // };
-const Action_reciteStarting = () => {
-  return {
-    type: ACTION_RECITE_STARTING
-  };
-};
-const Action_reciteCompleted = () => {
-  return {
-    type: ACTION_RECITE_COMPLETED
-  };
-};
-const Action_signalStarting = () => {
-  return {
-    type: ACTION_SIGNAL_STARTING
-  };
-};
-const Action_signalCompleted = () => {
-  return {
-    type: ACTION_SIGNAL_COMPLETED
-  };
-};
+// const Action_reciteStarting = () => {
+//   return {
+//     type: ACTION_RECITE_STARTING
+//   };
+// };
+// const Action_reciteCompleted = () => {
+//   return {
+//     type: ACTION_RECITE_COMPLETED
+//   };
+// };
+// const Action_signalStarting = () => {
+//   return {
+//     type: ACTION_SIGNAL_STARTING
+//   };
+// };
+// const Action_signalCompleted = () => {
+//   return {
+//     type: ACTION_SIGNAL_COMPLETED
+//   };
+// };
 // const ReciteWorkflow_start = (
 //   termIdx: number = IDX_INITIALIZER,
 //   scope: RecitationScopeEnumType = RecitationScopeEnumType.words,
@@ -632,12 +636,29 @@ const Recognition_message = (message: string) => {
     payload: message
   };
 };
-// const Recognition_retry = (message: string) => {
-//   return {
-//     type: LISTENING_RETRY,
-//     payload: message
-//   };
-// };
+const Recognition_wordRetries = (count: number, limit: number = -1) => {
+  return {
+    type: LISTENING_WORDRETRIES,
+    payload: {retries: count, limit: limit }
+  };
+};
+const Recognition_increment_retries = () => {
+  return {
+    type: LISTENING_WORDRETRIES_INCREMENT,
+  };
+};
+const Recognition_set_retries_limit = (limit: number) => {  
+  return {
+    type: LISTENING_WORDRETRIES_SETLIMIT,
+    payload: {limit: limit }
+  };
+};
+const Recognition_reset_retries = (limit?: number) => {
+  return {
+    type: LISTENING_WORDRETRIES_RESET,
+    payload: {limit: limit}
+  };
+};
 // const Recognition_reset_retry = (message: string) => {
 //   return {
 //     type: LISTENING_RETRY_RESET,
@@ -702,11 +723,11 @@ const Recite_start = () => {
     type: RECITE_START,
   };
 };
-const Recite_start_words = (span: number) => {
+const Recite_start_wordspan = (wordIdx: number, span: number = 0) => {
   //  recite requesting start based on current cursor terminal idx
   return {
-    type: RECITE_START_WORDS,
-    payload: { span: span }
+    type: RECITE_START_WORDSPAN,
+    payload: { wordIdx: wordIdx, span: span }
   };
 };
 const Recite_start_sentence = (sentenceIdx: number = IDX_INITIALIZER) => {
@@ -828,15 +849,15 @@ export const Request = {
   // InlineButton_signal,
   // InlineButton_signaled,
   // Action_clickStarting,
-  Action_cursormoveStarting,
-  Action_listenStarting,
-  Action_reciteStarting,
-  Action_signalStarting,
-  // Action_clickCompleted,
-  Action_cursormoveCompleted,
-  Action_listenCompleted,
-  Action_reciteCompleted,
-  Action_signalCompleted,
+  // Action_cursormoveStarting,
+  // Action_listenStarting,
+  // Action_reciteStarting,
+  // Action_signalStarting,
+  // // Action_clickCompleted,
+  // Action_cursormoveCompleted,
+  // Action_listenCompleted,
+  // Action_reciteCompleted,
+  // Action_signalCompleted,
   Message_set,
   Message_clear,
 
@@ -870,7 +891,7 @@ export const Request = {
   Recite_completed,
   Recite_ended,
   Recite_start,
-  Recite_start_words,
+  Recite_start_wordspan,
   Recite_start_sentence,
   Recite_start_section,
   Recite_start_passThru,
@@ -885,7 +906,10 @@ export const Request = {
   // Recognition_flushed,
   Recognition_match,
   Recognition_message,
-  // Recognition_retry,
+  Recognition_increment_retries,
+  Recognition_reset_retries,
+  Recognition_set_retries_limit,
+  Recognition_wordRetries,
   // Recognition_reset_retry,
   Recognition_start,
   Recognition_stop,
@@ -918,9 +942,10 @@ interface IReduxState {
   listen_stopAtEOS: boolean;
   // listen_flush: boolean;
   listen_silenceStartTime: number;
-  // listen_retriesExceeded: boolean;
-  // listen_retries: number;
-  // listen_retries_max: number;
+  listen_wordRetries: number;
+  listen_wordRetries_limit: number;
+  listen_wordRetries_limit_progress: number; // 0-1
+  listen_wordRetries_limit_exceeded: boolean;
   // content_layout_completed: boolean;
 
   cursor_sectionIdx: number;
@@ -1006,15 +1031,15 @@ interface IReduxState {
   modeling_requested_buttonIdx: number;
 
   // action_click_initiated: boolean;
-  action_click_completed: boolean;
+  // action_click_completed: boolean;
   // action_cursormove_initiated: boolean;
-  action_cursormove_completed: boolean;
+  // action_cursormove_completed: boolean;
   // action_listen_initiated: boolean;
-  action_listen_completed: boolean;
+  // action_listen_completed: boolean;
   // action_recite_initiated: boolean;
-  action_recite_completed: boolean;
+  // action_recite_completed: boolean;
   // action_signal_initiated: boolean;
-  action_signal_completed: boolean;
+  // action_signal_completed: boolean;
   
   sentence_idxObscured: number;
   sentence_opacity: number;
@@ -1028,7 +1053,10 @@ const IReduxStateInitialState: IReduxState = {
   listen_active: false,
   listen_stopAtEOS: false,
   listen_silenceStartTime: 0,
-  // listen_flush: false,
+  listen_wordRetries: 0,
+  listen_wordRetries_limit: 0,
+  listen_wordRetries_limit_progress: 0,
+  listen_wordRetries_limit_exceeded: false,
   // listen_retries_max: 0,
   // listen_retries: 0,
   // listen_retriesExceeded: false,
@@ -1114,11 +1142,11 @@ const IReduxStateInitialState: IReduxState = {
   inlinebutton_idx_prev: IDX_INITIALIZER,
   // inlinebutton_recite_toBeRecited: [],
 
-  action_click_completed: false,
-  action_cursormove_completed: false,
-  action_listen_completed: false,
-  action_recite_completed: false,
-  action_signal_completed: false,
+  // action_click_completed: false,
+  // action_cursormove_completed: false,
+  // action_listen_completed: false,
+  // action_recite_completed: false,
+  // action_signal_completed: false,
   
   sentence_idxObscured: IDX_INITIALIZER,
   sentence_opacity:  ObscuredTextDegreeEnum.unobscured,
@@ -1127,6 +1155,11 @@ export const rootReducer = (
   state: IReduxState = IReduxStateInitialState,
   action: any
 ) => {
+  const resetWordRetriesState = () => {
+    state.listen_wordRetries_limit_progress = 0;
+    state.listen_wordRetries_limit_exceeded = false
+    state.listen_wordRetries = 0; // reset
+  }
   const setSentenceState = (
     terminalIdx: number,
     currentSentenceIdx: number
@@ -1175,8 +1208,9 @@ export const rootReducer = (
         // console.log(
         //   `@@@@terminalIdxs[0]= ${terminalIdxs[0]} state.cursor_sentenceIdx=${state.cursor_sentenceIdx}`
         // );
-        state.action_cursormove_completed = state.cursor_terminalIdx !== terminalIdxs[0];
+        // state.action_cursormove_completed = state.cursor_terminalIdx !== terminalIdxs[0];
         state.cursor_terminalIdx = terminalIdxs[0];
+        resetWordRetriesState();
         [
           state.cursor_sentenceIdx,
           state.cursor_nextSentenceTransition,
@@ -1201,6 +1235,7 @@ export const rootReducer = (
     // resetListeningRetries();
     if (state.fillin_currentTerminalIdx === state.cursor_terminalIdx) {
       state.fillin_showTerminalIdx = state.fillin_currentTerminalIdx;
+      // Recognition_reset_retries();
       //    state.fillin_currentTerminalIdx = IDX_INITIALIZER;
     }
     setTerminalState(
@@ -1462,9 +1497,35 @@ export const rootReducer = (
       // resetListeningRetries();
       setListeningMessage(action.payload);
       setToNextTerminalState();
+      // Recognition_reset_retries();
+      state.listen_wordRetries = 0; // reset
       return { ...state };
     case LISTENING_MESSAGE:
       setListeningMessage(action.payload);
+      return { ...state };
+    case LISTENING_WORDRETRIES:
+      console.log(`@@@ LISTENING wordRetries=${+action.payload.retries} limit=${+action.payload.limit}`);
+      state.listen_wordRetries = +action.payload.retries;
+      // change limit iff explicit value is provided
+      if (+action.payload.limit >= 0) state.listen_wordRetries_limit = +action.payload.limit;
+      return { ...state };
+    case LISTENING_WORDRETRIES_INCREMENT:
+      console.log(`@@@ LISTENING wordRetries=${state.listen_wordRetries}`);
+      state.listen_wordRetries = state.listen_wordRetries + 1;
+      state.listen_wordRetries_limit_progress = state.listen_wordRetries/state.listen_wordRetries_limit;
+      state.listen_wordRetries_limit_exceeded = state.listen_wordRetries > state.listen_wordRetries_limit
+      if (state.listen_wordRetries > state.listen_wordRetries_limit) {
+        console.log(`@@@ LISTENING wordRetries=${state.listen_wordRetries} exceeded limit=${state.listen_wordRetries_limit_exceeded}`);
+        state.listen_wordRetries_limit_exceeded = true;
+      }
+      return { ...state };
+    case LISTENING_WORDRETRIES_RESET:
+      resetWordRetriesState()
+      if (action.payload.limit !== undefined) state.listen_wordRetries_limit = +action.payload.limit;
+      return { ...state };
+    case LISTENING_WORDRETRIES_SETLIMIT:
+      resetWordRetriesState()
+      state.listen_wordRetries_limit = +action.payload.limit;
       return { ...state };
     case WORD_NEXT:
       setListeningMessage(action.payload);
@@ -1574,12 +1635,12 @@ export const rootReducer = (
       state.recite_requested_span = 0; // ignored
       state.recite_requested_passthru = ""; // ignored
       return { ...state };
-    case RECITE_START_WORDS:
+    case RECITE_START_WORDSPAN:
       state.recite_requested = true;
       state.recite_completed = false;
       // state.recite_requested_terminalIdx = action.payload.terminalIdx;
       state.recite_requested_scope = RecitationScopeEnumType.words;
-      state.recite_requested_sentenceIdx = action.payload.wordIdx;
+      state.recite_requested_wordIdx = action.payload.wordIdx;
       state.recite_requested_span = action.payload.span;
       state.recite_requested_passthru = ""; // ignored
       return { ...state };
@@ -1628,7 +1689,7 @@ export const rootReducer = (
       state.recite_requested = false;
       state.recite_completed = false;
       state.reciting = false;
-      state.action_recite_completed = false;
+      // state.action_recite_completed = false;
       state.recite_requested_passthru = ""
       state.recite_requested_sentenceIdx = IDX_INITIALIZER;
       state.recite_requested_sentenceIdx = IDX_INITIALIZER;
@@ -1815,45 +1876,45 @@ export const rootReducer = (
     //   state.inlinebutton_signal_requested = false;
     //   return state;
     // }
-    case ACTION_LISTEN_STARTING: {
-      // state.action_listen_initiated = true;
-      state.action_listen_completed = false;
-      return state;
-    }
-    case ACTION_LISTEN_COMPLETED: {
-      // state.action_listen_initiated = false;
-      state.action_listen_completed = true;
-      return state;
-    }
-    // case ACTION_LISTENED: {
-    //   state.inlinebutton_listen_requested = false;
+    // case ACTION_LISTEN_STARTING: {
+    //   // state.action_listen_initiated = true;
+    //   state.action_listen_completed = false;
     //   return state;
     // }
-    case ACTION_CURSORMOVE_STARTING: {
-      state.action_cursormove_completed = false;
-      return state;
-    }
-    case ACTION_CURSORMOVE_COMPLETED: {
-      state.action_cursormove_completed = true;
-      return state;
-    }
-    case ACTION_RECITE_STARTING: {
-      state.action_recite_completed = false;
-      return state;
-    }
-    case ACTION_RECITE_COMPLETED: {
-      state.action_recite_completed = true;
-      return state;
-    }
-    case ACTION_SIGNAL_STARTING: {
-      state.action_signal_completed = false;
-      // assumes inlinebutton_idx is valid
-      return state;
-    }
-    case ACTION_SIGNAL_COMPLETED: {
-      state.action_signal_completed = true;
-      return state;
-    }
+    // case ACTION_LISTEN_COMPLETED: {
+    //   // state.action_listen_initiated = false;
+    //   state.action_listen_completed = true;
+    //   return state;
+    // }
+    // // case ACTION_LISTENED: {
+    // //   state.inlinebutton_listen_requested = false;
+    // //   return state;
+    // // }
+    // case ACTION_CURSORMOVE_STARTING: {
+    //   state.action_cursormove_completed = false;
+    //   return state;
+    // }
+    // case ACTION_CURSORMOVE_COMPLETED: {
+    //   state.action_cursormove_completed = true;
+    //   return state;
+    // }
+    // case ACTION_RECITE_STARTING: {
+    //   state.action_recite_completed = false;
+    //   return state;
+    // }
+    // case ACTION_RECITE_COMPLETED: {
+    //   state.action_recite_completed = true;
+    //   return state;
+    // }
+    // case ACTION_SIGNAL_STARTING: {
+    //   state.action_signal_completed = false;
+    //   // assumes inlinebutton_idx is valid
+    //   return state;
+    // }
+    // case ACTION_SIGNAL_COMPLETED: {
+    //   state.action_signal_completed = true;
+    //   return state;
+    // }
     default:
       console.log(`looking for undefined: ${action.type}`);
       return { ...state };
