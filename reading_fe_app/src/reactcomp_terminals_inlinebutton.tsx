@@ -33,6 +33,8 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { Request } from "./reducers";
+// import { AppAudioContext } from "./audioContext";
+// import { loadSoundFileIntoAudioBuffer, loadSoundFileIntoAudioBuffer1 } from "./rtutilities";
 import {
   IInlineButtonTerminalMeta,
   IInlineButtonItem,
@@ -57,6 +59,7 @@ import InlineButtonModel from "./img/button_inline_model.png";
 
 import BellShort from "./audio/bell_short.mp3";
 import BuzzerShort from "./audio/buzzer_short.mp3";
+import { error } from "console";
 export const TerminalInlineButton = React.memo(
   (props: ITerminalPropsType): any => {
     const enum actionStateEnumType {
@@ -93,6 +96,9 @@ export const TerminalInlineButton = React.memo(
       cancelEnd = "cancelEnd",
       listenEnd = "listenEnd",
       nextAction = "nextAction", // action afterward
+      repeatFirst = "repeatFirst", // 1st time through before repeating
+      repeating = "repeating", // continue to repeat the same model
+      repeatLast = "repeatLast", // last repeat the same model
       gotoNextModel = "gotoNext", // position to but not start next
       startNextModel = "startNext", // start next model automatically
       end = "end",
@@ -113,7 +119,11 @@ export const TerminalInlineButton = React.memo(
     );
     const [nextModelingButtonIdx, setNextModelingButtonIdx] = useState(
       IDX_INITIALIZER
-    );
+    );  
+    // const positiveAudioBuffer: AudioBuffer = useContext(SettingsContext)!.settings.notification.positiveAudioBuffer!;
+    // const negativeAudioBuffer: AudioBuffer = useContext(SettingsContext)!.settings.notification.negativeAudioBuffer!;
+    // const positiveAudioBuffer: AudioBuffer = useContext(SettingsContext).settings.notification.positiveAudioBuffer;
+    const [repetitionsRemaining, setRepetitionsRemaining] = useState(0);
     const activeButtonReclicks = useAppSelector(store => store.inlinebutton_reclicks);
     const activeButtonIdx = useAppSelector(store => store.inlinebutton_idx);
     const previouslyActiveButtonIdx = useAppSelector(store => store.inlinebutton_idx_prev);
@@ -133,25 +143,236 @@ export const TerminalInlineButton = React.memo(
     const autoClicked: boolean = useAppSelector(store=>store.inlinebutton_autoadvance);
     const dispatch = useAppDispatch();
 
-    const audioPlay = useCallback( async (src: string) => {
-      const context = new AudioContext();
-      const source = context.createBufferSource();
-      source.addEventListener("ended", event => {
-      });
-      const audioBuffer = await fetch(src)
-        .then(res => res.arrayBuffer())
-        .then(ArrayBuffer => context.decodeAudioData(ArrayBuffer));
-      source.buffer = audioBuffer;
-      source.connect(context.destination);
-      source.start();
-    },[]);
-    const playAudioBell = () => audioPlay(BellShort)    // subactions must be split when coordinating asynchronous start/end with
+    // const [isLoadedIntoBuffer, setIsLoadedIntoContext] = useState(false)
+    // const [bellShortBuffer, setBellShortBuffer] = useState(null as AudioBuffer | null);
+    // const [buzzerShortBuffer1, setBuzzerShortBuffer] = useState(null as AudioBuffer | null);
+    const bell = new Audio(BellShort);
+    const buzzer = new Audio(BuzzerShort);
+    // const audioPlay = useCallback( async (src: string) => {
+    //   const context = new AudioContext();
+    //   const source: AudioBufferSourceNode = context.createBufferSource();
+    //   source.addEventListener("ended", event => {
+    //   console.log(`@@@ audioPlay ended`);
+    //   });
+    //   const audioBuffer = await fetch(src)
+    //     .then(res => res.arrayBuffer())
+    //     .then(ArrayBuffer => context.decodeAudioData(ArrayBuffer));
+    //   setBellShortBuffer(audioBuffer);
+    //   source.buffer = audioBuffer;
+    //   source.connect(context.destination);
+    //   console.log(`@@@ audioPlay: context=${context.destination}`);
+    //   source.start();
+    //   console.log(`@@@ audioPlay started`);
+    // },[]);
+
+    // const audioContext: AudioContext = new (window.AudioContext)();
+    // const appAudioContext: AudioContext = useContext(AppAudioContext)!
+      
+    // const loadSoundFileIntoAudioBuffer = async (src: string): 
+    //   Promise<AudioBuffer> => {
+    //   const context = new AudioContext();
+    //   const source: AudioBufferSourceNode = context.createBufferSource();
+    //   source.addEventListener("ended", event => {
+    //   console.log(`@@@ audioPlay ended`);
+    //   });
+    //   const audioBuffer = await fetch(src)
+    //     .then(res => res.arrayBuffer()).catch(error => { console.log(`@@@ Error loading sound file: ${src} - ${error.message}`); })
+    //     .then(ArrayBuffer => context.decodeAudioData(ArrayBuffer)).catch(error => {
+    //       console.log(`@@@ Error loading sound file: ${src} - ${error.message}`);
+    
+    //   // source.buffer = audioBuffer;
+    //   // source.connect(context.destination);
+    //   return audioBuffer
+    // }
+/*
+    const loadSoundFileIntoAudioBufferLocal = async (audioContext: AudioContext, src: string): 
+      Promise<AudioBuffer> => {
+      try {
+        // const context = new AudioContext();
+        // const source: AudioBufferSourceNode = context.createBufferSource();
+        const response = await fetch(src)
+        if (!response.ok) {
+          throw new Error(`Failed to fetch sound file: ${response.status}`);
+        } 
+        const arrayBuffer = await response.arrayBuffer();
+        // const audioContext = new AudioContext();
+        const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+        return audioBuffer;
+        // source.buffer = audioBuffer;
+        // source.connect(context.destination);
+      } catch(error) {
+        console.log(`@@@ Error loading sound file: ${src} - ${error}`);
+        throw error;
+      }
+    }
+*/
+    // const loadSoundFileIntoSoundBuffer = async (src: string): 
+    //   Promise<AudioBufferSourceNode> => {
+    //   const context = new AudioContext();
+    //   const source: AudioBufferSourceNode = context.createBufferSource();
+    //   source.addEventListener("ended", event => {
+    //   console.log(`@@@ audioPlay ended`);
+    //   });
+    //   const audioBuffer = await fetch(src)
+    //     .then(res => res.arrayBuffer())
+    //     .then(ArrayBuffer => context.decodeAudioData(ArrayBuffer));
+    //   source.buffer = audioBuffer;
+
+    //   // source.connect(context.destination);
+    //   return source
+    // }
+
+// async function loadSound(src: string) {
+//   const audioContext = new (window.AudioContext)();
+//   const response = await fetch(src);
+//   const arrayBuffer = await response.arrayBuffer();
+//   const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+//   return audioBuffer;
+// }
+/*
+
+const playSound = useCallback ( (audioContext: AudioContext, buffer: AudioBuffer) => {
+// const audioContext: AudioContext = new AudioContext()
+const source: AudioBufferSourceNode = audioContext.createBufferSource();
+  console.log(`@@@ playSound: buffer.length=${buffer.length} bytes`);
+  console.log(`@@@ playing sound buffer`);
+  source.buffer = buffer;
+  source.connect(audioContext.destination);
+  source.start(0);
+},[])
+const playAudioBell = useCallback (() => { 
+  if (bellShortBuffer) {
+    playSound(appAudioContext, bellShortBuffer)
+    console.log(`@@@ playing positive sound buffer`);
+  } else {
+    console.log(`@@@ playing not positive sound buffer`);
+  }
+
+    // settingsContext.settings.notification.playPositive();
+},[appAudioContext,bellShortBuffer,playSound])
+const playAudioBell2 = () => { 
+  if (bellShortBuffer) {
+    playSound(appAudioContext, bellShortBuffer)
+    console.log(`@@@ playing positive sound buffer`);
+  } else {
+    console.log(`@@@ playing not positive sound buffer`);
+  }
+
+    // settingsContext.settings.notification.playPositive();
+}
+const playAudioBell1 = useCallback (() => { 
+  if (positiveAudioBuffer) {
+    playSound(appAudioContext, positiveAudioBuffer)
+    console.log(`@@@ playing positive sound buffer`);
+  } else {
+    console.log(`@@@ playing not positive sound buffer`);
+  }
+
+    // settingsContext.settings.notification.playPositive();
+},[appAudioContext,positiveAudioBuffer,playSound])
+
+const playAudioBuzzer = useCallback (() => { 
+  if (negativeAudioBuffer) playSound(appAudioContext, negativeAudioBuffer)
+},[appAudioContext, negativeAudioBuffer, playSound])
+*/
+    // const createSoundSource = (src: string): AudioBufferSourceNode => {
+    //   const audioContext: AudioContext = new (window.AudioContext)();
+    //   let buffer: AudioBuffer = await loadSoundFileIntoBuffer(src)
+    //   let source = audioContext.createBufferSource();
+    //   source.buffer = buffer;
+    //   source.connect(audioContext.destination)
+    //   return source
+    // }
+    
+    // const [isShortBellLoaded, setIsShortBellLoaded] = useState(false);
+    // const audioPlayBell = async () => {
+    //   let source = audioContext.createBufferSource();
+    //   const context = new AudioContext();
+    //   // source1 = context.createBufferSource();
+    //   source.addEventListener("ended", event => {
+    //   console.log(`@@@ audioPlayBell ended`);
+    //   });
+    //   const audioBuffer1 = await fetch(BellShort)
+    //     .then(res => res.arrayBuffer())
+    //     .then(ArrayBuffer => context.decodeAudioData(ArrayBuffer));
+    //   // setShortBellBuffer(audioBuffer1);
+    //   source.buffer = audioBuffer1;
+    //   source.connect(context.destination);
+    //   // setIsSoundSourceLoaded(true);
+    //   console.log(`@@@ audioPlay: context=${context.destination}`);
+    //   // source1.start();
+    //   console.log(`@@@ audioPlayBell started`);
+    // };
     // external components to avoid needless, inadvertant blocking.
+   
     const buttonProps: IInlineButtonTerminalMeta = props.terminal
       .meta as IInlineButtonTerminalMeta;
     const pageLists: CPageLists = useContext(PageContext)!;
     const settingsContext: ISettingsContext = useContext(SettingsContext)!;
+/*
+    useEffect(() => {     
+    // const audioContext: AudioContext = new AudioContext()
+    console.log(`@@@ initializing sound bell buffer ${BellShort}`);
+    loadSoundFileIntoAudioBuffer1(appAudioContext, BellShort).then(buffer => {
+      console.log(`@@@ loaded bell buffer ${BellShort} ${buffer.length} bytes`);
+      setBellShortBuffer(buffer);
+      // console.log(`@@@ loaded bell buffer ${bellShortBuffer!.length} bytes`);
+    }).catch(error => {console.log(`@@@ error loading sound file: ${BellShort} ${error.message}`)});
 
+    console.log(`@@@ initializing sound buzzer buffer`);
+    loadSoundFileIntoAudioBuffer1(appAudioContext, BuzzerShort).then(buffer => {
+      console.log(`@@@ loaded buzzer buffer ${buffer.length} bytes`);
+      setBuzzerShortBuffer(buffer);
+      // console.log(`@@@ loaded buzzer buffer ${buzzerShortBuffer!.length} bytes`);
+    }).catch(error => {console.log(`@@@ error loading sound file: ${BuzzerShort} ${error.message}`)});
+    },[appAudioContext]);
+*/
+    // let sourceNode: AudioBufferSourceNode = audioContext.createBufferSource();
+    // let audioBuffer: AudioBuffer = loadSoundFileIntoBuffer(BuzzerShort)
+    // setBuzzerShortBuffer(audioBuffer);
+    // setBuzzerShortBuffer();
+    // shortBuzzerSourceNode: AudioBufferSourceNode 
+    //   = loadSoundFileIntoSourceNode(BuzzerShort);
+    //   setBellShortSource(shortBuzzerSourceNode)
+          // const bufferSource: AudioBufferSourceNode = audioContext.createBufferSource()
+          // bufferSource.buffer = shortBellBuffer
+
+
+          // setBellShortSource(shortBellBuffer);
+
+    // const bellShortBufferSource = audioContext.createBufferSource();
+    // bellShortBufferSource.buffer = loadSoundIntoBuffer(BellShort);
+    // bellShortBufferSource.buffer = bellShortBuffer;
+    // bellShortBufferSource.connect(audioContext.destination)
+    
+
+////////////////////////
+    // const audioBuffer = async (src: string):AudioBuffer => {
+    //   const context = new AudioContext();
+    //   const source = context.createBufferSource();
+    //   source.addEventListener("ended", event => {
+    //   console.log(`@@@ audioPlay ended`);
+    //   });
+    //   const audioBuffer = await fetch(src)
+    //     .then(res => res.arrayBuffer())
+    //     .then(ArrayBuffer => context.decodeAudioData(ArrayBuffer));
+    //   source.buffer = audioBuffer;
+    //   source.connect(context.destination);
+
+    // async (src: string): AudioBuffer => {
+    //   const response = await fetch(src)
+    //   const arrayBuffer = await response.arrayBuffer();
+    //   const audioBuffer: AudioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+    //   return audioBuffer;
+    //   return null
+    // }
+    // const audioContext = new (window.AudioContext)();
+    // async function loadSoundIntoBuffer(src: string): Promise<AudioBuffer> { 
+    //   const response = await fetch(src)
+    //   const arrayBuffer = await response.arrayBuffer();
+    //   const audioBuffer: AudioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+    //   return audioBuffer;
+    // }
     ///// general button useEfect()s to launch and cancel button action state machine
     useEffect(() => {
       // console.log(`@@@ setIsActive=${activeButtonIdx}===${thisButtonIdx}?`);
@@ -271,9 +492,9 @@ export const TerminalInlineButton = React.memo(
             // dispatch(Request.Action_signalStarting());
             if (buttonProps.label.toLowerCase() === "correct") {
               // audioPlay(BellShort);
-              playAudioBell()
+              bell.play();
             } else {
-              audioPlay(BuzzerShort);
+              buzzer.play()
             }
             setNextActionState(actionStateEnumType.signalEnd);
           // }
@@ -376,7 +597,6 @@ export const TerminalInlineButton = React.memo(
           );
       }
     },[
-      audioPlay,
       actionStateEnumType.canceling, 
       actionStateEnumType.correctResponse, 
       actionStateEnumType.correctResponseEnd, 
@@ -390,8 +610,10 @@ export const TerminalInlineButton = React.memo(
       actionStateEnumType.signalStart, 
       actionStateEnumType.signaling, 
       actionStateEnumType.start,
+      bell,
       buttonAction, 
       buttonProps.label, 
+      buzzer,
       choiceResponseSectionIdx, 
       currentSectionIdx, 
       dispatch, 
@@ -401,7 +623,6 @@ export const TerminalInlineButton = React.memo(
       nextSection, 
       pageLists.inlineButtonList, 
       pageLists.terminalList.length, 
-      playAudioBell,
       thisButtonIdx
     ]);
     const cuesWorkflow = useCallback(() => {
@@ -508,63 +729,26 @@ export const TerminalInlineButton = React.memo(
     //   actionStateEnumType.end
     // ])
     const modelWorkFlow = useCallback((termIdx: number = -9999) => {
-      // let termIdx: number;
-      // console.log(`@@@ nextActionState=${nextActionState}`);
-    //   console.log(`@@@ current ActionState=${nextActionState}\n
-    //   buttonAction=${buttonAction},
-    //   currentSectionIdx=${currentSectionIdx},
-    //   listeningActive=${listeningActive},
-    //   modelingStartRequested=${modelingStartRequested},
-    //   modelingStartButtonIdx=${modelingStartRequestedButtonIdx},
-    //   nextActionState=${nextActionState},
-    //   nextModelingButtonIdx=${nextModelingButtonIdx},
-    //   recitingActive=${recitingActive},
-    //   recitingCompleted=${recitingCompleted},
-    //   thisButtonIdx=${thisButtonIdx}
-    // `);
-
-    /* possible code to implment multiple click feature
-    console.log(`@@@ modeling user clicks=${userClicks}`)
-    if (userClicks > 1) {
-      switch(nextActionState) {
-        case actionStateEnumType.canceling, actionStateEnumType.end,
-          actionStateEnumType.idle:
-          // clicking again has to effect
-          break;
-        case
-        actionStateEnumType.hideSentence,
-        actionStateEnumType.idle,
-        actionStateEnumType.instructEnd,
-        actionStateEnumType.instructStart,
-        actionStateEnumType.instructing, 
-        actionStateEnumType.listenEnd,
-        actionStateEnumType.listenStart,
-        actionStateEnumType.listening,
-        actionStateEnumType.nextAction,
-        actionStateEnumType.promptEnd,
-        actionStateEnumType.promptStart,
-        actionStateEnumType.prompting,
-        actionStateEnumType.reciteEnd, 
-        actionStateEnumType.reciteStart, 
-        actionStateEnumType.reciting, 
-        actionStateEnumType.signalEnd, 
-        actionStateEnumType.signalStart,
-        actionStateEnumType.start:
-        default: 
-          setNextActionState(actionStateEnumType.canceling)
-          break;
-      }
-    }
-*/
+      console.log(`@@@ modelFlow: nextActionState=${nextActionState} thisButtonIdx=${thisButtonIdx} repetitionsRemaining=${repetitionsRemaining}`);
       switch (nextActionState) {
         case actionStateEnumType.start:
+          // let repetitions: number = pageLists.inlineButtonList[thisButtonIdx].repetitions;
           if (listeningActive) {
             // dispatch(Request.InlineButton_listened());
             dispatch(Request.Recognition_stop());
             // do not keep listening after button click
             setListeningActiveAlready(false);
           }
-          setNextActionState(actionStateEnumType.promptStart);
+          if (pageLists.inlineButtonList[thisButtonIdx].repetitions > 0) {
+            setNextActionState(actionStateEnumType.repeatFirst);
+          } else {
+            setNextActionState(actionStateEnumType.promptStart);
+          }
+          break;
+        case actionStateEnumType.repeatFirst:
+            dispatch(Request.Sentence_disableTransitions());
+            setRepetitionsRemaining(pageLists.inlineButtonList[thisButtonIdx].repetitions)
+            setNextActionState(actionStateEnumType.promptStart);
           break;
         case actionStateEnumType.promptStart:
           termIdx = pageLists.inlineButtonList[thisButtonIdx].termIdx;
@@ -670,9 +854,10 @@ export const TerminalInlineButton = React.memo(
         case actionStateEnumType.listenStart:
           if (!listeningActive) {
             console.log(`@@@ inlineButton: listenStart @${(new Date().getTime().toString().slice(-5))}`);
-            console.log(`@@@@@ listening: listeningActive=${listeningActive}`)
+            console.log(`@@@@@ listening: before start listeningActive=${listeningActive}`)
             // console.log(`@@@ listeningStart: request listening`);
             dispatch(Request.Recognition_start());
+            console.log(`@@@@@ listening: after start listeningActive=${listeningActive}`)
             // dispatch(Request.InlineButton_listen());
             setNextActionState(actionStateEnumType.listening);
           }
@@ -685,6 +870,11 @@ export const TerminalInlineButton = React.memo(
           // );
           console.log(`@@@ listening: nextSent=${nextSentenceTransition} active=${listeningActive} `);
           if (nextSentenceTransition) {
+          // if repetitionsRemaining > 0) { ring the bell and reset the cursor 
+          // to the beginning of the sentence and setNextActionState(actionStateEnumType.listening) 
+          // OR should this action be handled by a different state e.g., repeating
+          // 
+          // } else { setNextActionState(actionStateEnumType.listenEnd)}
             // console.log(`@@@ listening: nextSentence`);
             setNextActionState(actionStateEnumType.listenEnd);
           } else if (!listeningActive) {
@@ -701,68 +891,101 @@ export const TerminalInlineButton = React.memo(
           setNextActionState(actionStateEnumType.signalStart);
           break;
         case actionStateEnumType.signalStart:
-            audioPlay(BellShort);
+          // audioPlay(BellShort);
+          bell.play();
+            // playAudioBell();
+            console.log(`@@@ listening: signalStart`);
             // check settings.modelingSettings.continuationAction
           // }
-          setNextActionState(actionStateEnumType.nextAction);
+          setNextActionState(actionStateEnumType.signalEnd);
           break;
         case actionStateEnumType.signalEnd:
           // This state set within audioPlay() completion event handler
           setNextActionState(actionStateEnumType.nextAction);  
           break;
         case actionStateEnumType.nextAction:
-          // Although this can be handled within the actionStateEnumType.end,
-          // it would clutter the end state with additional logic.
-          console.log(
-            `modelFlow nextAction=${settingsContext.settings.modeling.continuationAction}`
-          );
-          // nextButtonIdx is button type specific, guaranteed to be the same type as current?
-          const nextButtonIdx: number =
-            pageLists.inlineButtonList[thisButtonIdx].nextButtonIdx;
-          console.log(
-            `modelFlow nextAction=${settingsContext.settings.modeling.continuationAction} for nextButtonIdx=${nextButtonIdx}`
-          );
-          switch (settingsContext.settings.modeling.continuationAction) {
-            case ModelingContinuationEnum.nextWordAndStop:
-              // default - allow normal cursor advancement logic to address this.
-              break;
-            case ModelingContinuationEnum.nextModelAndStop:
-            case ModelingContinuationEnum.nextModelAndContinue:
-              // same as  nextWordAndStop iff next word and next model coincide
-              console.log(`modelFlow goto nextButtonTermIdx=${nextButtonIdx}`);
-              const nextTermIdx: number =
-                pageLists.inlineButtonList[nextButtonIdx].termIdx;
-              if (
-                nextTermIdx >= 0 &&
-                nextTermIdx < pageLists.terminalList.length
-              ) {
-                // console.log(`modelFlow goto nextTermIdx=${nextTermIdx}`);
-                dispatch(Request.Cursor_gotoWordByIdx(nextTermIdx)); // don't need completer
-                // console.log(
-                //   `modelFlow goto ${settingsContext.settings.modeling.continuationAction}`
-                // );
-              } else {
+          if (repetitionsRemaining > 0) {
+            setRepetitionsRemaining(repetitionsRemaining - 1); // at least one repetition
+            setNextActionState(actionStateEnumType.repeating);
+            console.log(`### modelFlow repeating thisButtonIdx=${thisButtonIdx} set to ${repetitionsRemaining}`);
+          } else if (repetitionsRemaining === 0) {
+            console.log(`### modelFlow repeatLast current model thisButtonIdx=${thisButtonIdx} set to ${repetitionsRemaining}`);
+            setRepetitionsRemaining(repetitionsRemaining - 1); // at least one repetition
+            setNextActionState(actionStateEnumType.repeatLast);
+          } else {
+            setNextActionState(actionStateEnumType.end);
+            console.log(`### modelFlow last time current model thisButtonIdx=${thisButtonIdx} set to ${repetitionsRemaining}`);
+            // Although this can be handled within the actionStateEnumType.end,
+            // it would clutter the end state with additional logic.
+
+            // Check button-specific attribute that overrides settingsContext
+            let thisButtonContinuationAction: ModelingContinuationEnum = 
+              pageLists.inlineButtonList[thisButtonIdx].continuation
+            let continuationAction: ModelingContinuationEnum = 
+              thisButtonContinuationAction === ModelingContinuationEnum.unspecified? 
+              settingsContext.settings.modeling.continuationAction: 
+              thisButtonContinuationAction
+            // nextButtonIdx is button type specific, guaranteed to be the same type as current?
+            const nextButtonIdx: number =
+              pageLists.inlineButtonList[thisButtonIdx].nextButtonIdx;
+            console.log(
+              `modelFlow nextAction=${thisButtonContinuationAction} for nextButtonIdx=${nextButtonIdx}`
+            );
+            switch (continuationAction) {
+              case ModelingContinuationEnum.nextWordAndStop:
+                // default - allow normal cursor advancement logic to address this.
+                break;
+              case ModelingContinuationEnum.nextModelAndStop:
+              case ModelingContinuationEnum.nextModelAndContinue:
+                // same as  nextWordAndStop iff next word and next model coincide
+                console.log(`modelFlow goto nextButtonTermIdx=${nextButtonIdx}`);
+                const nextTermIdx: number =
+                  pageLists.inlineButtonList[nextButtonIdx].termIdx;
+                if (
+                  nextTermIdx >= 0 &&
+                  nextTermIdx < pageLists.terminalList.length
+                ) {
+                  // console.log(`modelFlow goto nextTermIdx=${nextTermIdx}`);
+                  dispatch(Request.Cursor_gotoWordByIdx(nextTermIdx)); // don't need completer
+                  // console.log(
+                  //   `modelFlow goto ${settingsContext.settings.modeling.continuationAction}`
+                  // );
+                } else {
+                  console.log(
+                    `modelFlow out of range nextTermIdx=${thisButtonIdx}`
+                  );
+                }
+                if (settingsContext.settings.modeling.continuationAction 
+                  === ModelingContinuationEnum.nextModelAndContinue) {
+                // set next button to be activated in end state
+                    setNextModelingButtonIdx(nextButtonIdx)
+                  console.log(
+                    `modelFlow continue to next nextButtonIdx=${nextButtonIdx}, current=${thisButtonIdx}`
+                  );
+                }
+                break;
+              default:
                 console.log(
-                  `modelFlow out of range nextTermIdx=${thisButtonIdx}`
+                  `invalid continuationAction=${settingsContext.settings.modeling.continuationAction}`
                 );
               }
-              if (settingsContext.settings.modeling.continuationAction 
-                === ModelingContinuationEnum.nextModelAndContinue) {
-              // set next button to be activated in end state
-                  setNextModelingButtonIdx(nextButtonIdx)
-                console.log(
-                  `modelFlow continue to next nextButtonIdx=${nextButtonIdx}, current=${thisButtonIdx}`
-                );
-              }
-              break;
-            default:
-              console.log(
-                `invalid continuationAction=${settingsContext.settings.modeling.continuationAction}`
-              );
-              break;
-          }
-          setNextActionState(actionStateEnumType.end); 
+            }
+            break;
+          case actionStateEnumType.repeating:
+          // set to beginning of the model
+          termIdx = pageLists.inlineButtonList[thisButtonIdx].termIdx;
+          dispatch(Request.Cursor_gotoWordByIdx(termIdx));
+          console.log(`@@@ modelFlow repeating termIdx=${termIdx} nextSentenceTransition=${nextSentenceTransition}`)
+          // go to beginning of sentence for this button
+          
+          setNextActionState(actionStateEnumType.hideSentence);
+          // setNextActionState(actionStateEnumType.listening); // continue listening or is that moot?
           break;
+        case actionStateEnumType.repeatLast:
+          dispatch(Request.Sentence_enableTransitions());
+          setNextActionState(actionStateEnumType.nextAction);
+          break;
+
         case actionStateEnumType.end:
           // if (modelingStartRequested) dispatch(Request.Modeling_stop());
             console.log(
@@ -779,6 +1002,9 @@ export const TerminalInlineButton = React.memo(
             console.log(
               `modelFlow: nextActionButtonIdx=${nextModelingButtonIdx}`
             );
+            // auto advance needs to be communicated to the next button whose
+            // state resides in a different inline button component. Hence,
+            // dispatch the request to the next button component.
             dispatch(Request.InlineButton_autoadvance(nextModelingButtonIdx))
             // dispatch(Request.Modeling_start_button(nextModelingButtonIdx))
             setNextModelingButtonIdx(IDX_INITIALIZER)
@@ -793,6 +1019,8 @@ export const TerminalInlineButton = React.memo(
           setNextActionState(actionStateEnumType.idle); 
           break;
         case actionStateEnumType.canceling:
+          if (pageLists.inlineButtonList[thisButtonIdx].repetitions > 0 
+            && repetitionsRemaining > 0) setRepetitionsRemaining(0)
           dispatch(Request.Recognition_stop());
           dispatch(Request.Sentence_resetOpacity());
           dispatch(Request.Recite_stop());
@@ -808,11 +1036,13 @@ export const TerminalInlineButton = React.memo(
           );
       }
     },[
-      audioPlay,
+      // playAudioBell,
       autoClicked,
+      bell,
       buttonAction,
       dispatch,
       listeningActive,
+      repetitionsRemaining,
       nextActionState,
       nextModelingButtonIdx,
       nextSentenceTransition,
@@ -828,7 +1058,9 @@ actionStateEnumType.instructEnd,actionStateEnumType.instructStart,
 actionStateEnumType.instructing, actionStateEnumType.listenEnd,actionStateEnumType.listenStart,
 actionStateEnumType.listening,actionStateEnumType.nextAction,
 actionStateEnumType.promptEnd,actionStateEnumType.promptStart,actionStateEnumType.prompting,
-actionStateEnumType.reciteEnd, actionStateEnumType.reciteStart, actionStateEnumType.reciting, actionStateEnumType.signalEnd, actionStateEnumType.signalStart,actionStateEnumType.start
+actionStateEnumType.reciteEnd, actionStateEnumType.reciteStart, actionStateEnumType.reciting, 
+actionStateEnumType.repeatFirst, actionStateEnumType.repeating, actionStateEnumType.repeatLast,
+actionStateEnumType.signalEnd, actionStateEnumType.signalStart,actionStateEnumType.start
     ]);
     useEffect(() => {
       if (isActive) {

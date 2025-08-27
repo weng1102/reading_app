@@ -53,6 +53,8 @@ const SENTENCE_NEXT = "sentence/next"; // position at first word of next sent.
 const SENTENCE_PREVIOUS = "sentence/prev"; // first word of previous sentence
 const SENTENCE_RESETOPACITY = "sentence/reset opacity";
 const SENTENCE_SETOPACITY = "sentence/set opacity";
+const SENTENCE_ENABLETRANSITIONS = "sentence/enable transitions"; // enable sentence transition defaults
+const SENTENCE_DISABLETRANSITIONS = "sentence/disable transitions"; // disable sentence transition defaults
 
 // section actions
 // const SECTION_FIRST = "section/first"; // first word in first section
@@ -85,6 +87,7 @@ const PAGE_SPACINGUP_ENABLED = "page/text spacing up icon enabled";
 const PAGE_SPACINGDOWN_ENABLED = "page/text spacing down icon enabled";
 
 const NAVBAR_TOGGLE = "navbar/toggle";
+const NAVBAR_HIDE = "navbar/hide";
 
 // intrapage administrative actions (non-user initiated)
 //const PAGECONTEXT_SET = "pagecontext/set";
@@ -792,6 +795,16 @@ const Sentence_acknowledgeTransition = () => {
     type: SENTENCE_ACKNOWLEDGETRANSITION
   };
 };
+const Sentence_disableTransitions = () => {
+  return {
+    type: SENTENCE_DISABLETRANSITIONS
+  };
+}
+const Sentence_enableTransitions = () => {
+  return {
+    type: SENTENCE_ENABLETRANSITIONS
+  };
+}
 const Sentence_resetOpacity = () => {
   return {
     type: SENTENCE_RESETOPACITY,
@@ -801,6 +814,11 @@ const Sentence_setOpacity = (opacity: number) => {
   return {
     type: SENTENCE_SETOPACITY,
     payload: opacity
+  };
+};
+const Navbar_hide = () => {
+  return {
+    type: NAVBAR_HIDE
   };
 };
 const Navbar_toggle = () => {
@@ -861,6 +879,7 @@ export const Request = {
   Message_set,
   Message_clear,
 
+  Navbar_hide,
   Navbar_toggle,
 
   Page_fontDownEnabled,
@@ -915,6 +934,8 @@ export const Request = {
   Recognition_stop,
   Settings_toggle,
 
+  Sentence_disableTransitions,
+  Sentence_enableTransitions,
   Sentence_resetOpacity,
   Sentence_setOpacity,
   Sentence_acknowledgeTransition,
@@ -934,10 +955,10 @@ export const Request = {
 };
 interface IReduxState {
   announce_available: boolean;
-  announce_listening: boolean; // "listening"
   announce_message: string;
 
   listen_available: boolean;
+  listen_announcementEnabled: boolean; // "e.g. listening"
   listen_active: boolean;
   listen_stopAtEOS: boolean;
   // listen_flush: boolean;
@@ -1010,12 +1031,6 @@ interface IReduxState {
   recite_word_completed: boolean;
   reciting: boolean;
 
-  sentence_type: SentenceListItemEnumType;
-  settings_toggle: boolean;
-
-  statusBar_message1: string;
-  statusBar_message2: string;
-
   message_application: string;
   message_listening: string;
   message_state: string;
@@ -1043,10 +1058,16 @@ interface IReduxState {
   
   sentence_idxObscured: number;
   sentence_opacity: number;
+  sentence_type: SentenceListItemEnumType;
+  sentence_useDefaultTransitions: boolean;
+  settings_toggle: boolean;
+
+  statusBar_message1: string;
+  statusBar_message2: string;
 }
 const IReduxStateInitialState: IReduxState = {
   announce_available: false,
-  announce_listening: false, // "listening"
+  listen_announcementEnabled: false, // "e.g., listening" or "not listening"
   announce_message: "",
 
   listen_available: false,
@@ -1120,7 +1141,10 @@ const IReduxStateInitialState: IReduxState = {
   recite_word_requested: false,
   recite_word_completed: true,
   reciting: false,
+  sentence_idxObscured: IDX_INITIALIZER,
+  sentence_opacity:  ObscuredTextDegreeEnum.unobscured,
   sentence_type: SentenceListItemEnumType.default,
+  sentence_useDefaultTransitions: true,
   settings_toggle: false,
   statusBar_message1: "",
   statusBar_message2: "",
@@ -1148,8 +1172,6 @@ const IReduxStateInitialState: IReduxState = {
   // action_recite_completed: false,
   // action_signal_completed: false,
   
-  sentence_idxObscured: IDX_INITIALIZER,
-  sentence_opacity:  ObscuredTextDegreeEnum.unobscured,
 };
 export const rootReducer = (
   state: IReduxState = IReduxStateInitialState,
@@ -1179,7 +1201,7 @@ export const rootReducer = (
       currentSentenceIdx < state.pageContext.sentenceList.length
         ? state.pageContext.sentenceList[currentSentenceIdx].type
         : SentenceListItemEnumType.default;
-    newSentence = terminalIdx === 0 || sentenceIdx !== currentSentenceIdx;
+    newSentence = (terminalIdx === 0 || sentenceIdx !== currentSentenceIdx);
     if (newSentence) {
       state.sentence_idxObscured = IDX_INITIALIZER;
     }
@@ -1520,11 +1542,11 @@ export const rootReducer = (
       }
       return { ...state };
     case LISTENING_WORDRETRIES_RESET:
-      resetWordRetriesState()
+      resetWordRetriesState();
       if (action.payload.limit !== undefined) state.listen_wordRetries_limit = +action.payload.limit;
       return { ...state };
     case LISTENING_WORDRETRIES_SETLIMIT:
-      resetWordRetriesState()
+      resetWordRetriesState();
       state.listen_wordRetries_limit = +action.payload.limit;
       return { ...state };
     case WORD_NEXT:
@@ -1536,6 +1558,14 @@ export const rootReducer = (
       return { ...state };
     case WORD_SETCURRENTFILLIN:
       state.fillin_currentTerminalIdx = +action.payload;
+      return { ...state };
+    case SENTENCE_DISABLETRANSITIONS:
+      state.listen_announcementEnabled = false; // "e.g. listening"
+      state.sentence_useDefaultTransitions = false
+      return { ...state };
+    case SENTENCE_ENABLETRANSITIONS:
+      state.listen_announcementEnabled = true; // "e.g. listening"
+      state.sentence_useDefaultTransitions = true
       return { ...state };
     case SENTENCE_NEXT:
       setToNextSentenceTerminalState();
@@ -1834,6 +1864,10 @@ export const rootReducer = (
           break;
         default:
       }
+      return { ...state };
+    }
+    case NAVBAR_HIDE: {
+      state.navbar_toggle = false;
       return { ...state };
     }
     case NAVBAR_TOGGLE: {

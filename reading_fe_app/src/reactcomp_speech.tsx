@@ -175,16 +175,20 @@ export const SpeechMonitor = () => {
   const sentenceListeningTransition: SentenceListItemEnumType = useAppSelector(
     store => store.sentence_type
   );
+  const announcementEnabled = useAppSelector(store => store.listen_announcementEnabled)
   const sectionIdx = useAppSelector(store => store.cursor_sectionIdx);
-
+  const useDefaultSentenceTransitions: boolean = useAppSelector(store => 
+    store.sentence_useDefaultTransitions);
   useEffect(() => {
     // translate cursor transition to announcement. Using local state variables
     // so the can be reset independently of the reducer state variables using
     // resetAnnounce_transitions() above.
-    console.log(`##transition=${nextSentence}, ${nextSection}`);
-    setAnnounce_beginningOfPage(beginningOfPage);
-    setAnnounce_nextSection(nextSection);
-    setAnnounce_nextSentence(nextSentence);
+
+    // test 
+      console.log(`##transition=${nextSentence}, ${nextSection}`);
+      setAnnounce_beginningOfPage(beginningOfPage);
+      setAnnounce_nextSection(nextSection);
+      setAnnounce_nextSentence(nextSentence && useDefaultSentenceTransitions);
   }, [beginningOfPage, nextSection, nextSentence]);
 
   useEffect(() => {
@@ -288,7 +292,10 @@ export const SpeechMonitor = () => {
   );
   const listening = useAppSelector(store => store.listen_active);
   useEffect(() => {
-    if (listening) {
+    if (!announcementEnabled) {
+      // say nothing
+    }
+    else if (listening) {
       Synthesizer.speak("listening");
     } else {
       Synthesizer.speak("not listening");

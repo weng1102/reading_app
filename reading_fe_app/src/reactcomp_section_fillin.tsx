@@ -584,7 +584,12 @@ const ResponsesItem = (props: IResponseItemPropsType): any => {
   );
 };
 const ResponseContent = (props: IResponseItemPropsType) => {
-  return <span>{props.response.content}</span>;
+    let dispatch = useAppDispatch();
+  const onResponseClick = () => {
+    dispatch(Request.Recite_start_passThru(props.response.content));
+    console.log(`props.response.content${props.response.content}`)
+  }
+  return <span onClick={onResponseClick} >{props.response.content}</span>;
 };
 const ResponseTag = (props: IResponseItemPropsType) => {
   const fillinContext = useContext(SectionFillinContext);

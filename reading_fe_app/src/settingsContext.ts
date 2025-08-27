@@ -16,6 +16,8 @@
  **/
 import React from "react";
 import { Synthesizer } from "./reactcomp_speech";
+import BellShort from "./audio/bell_short.mp3";
+import BuzzerShort from "./audio/buzzer_short.mp3";
 import {
   ISectionFillinSettings,
   ISectionFillinPresets,
@@ -29,6 +31,7 @@ import {
   RecitationPlacementEnumType,
   RecitationListeningEnumType
 } from "./pageContentType";
+// import {playSound} from "./rtutilities";
 export enum RecitationMode {
   wordOnly = "word only",
   wordNext = "word (then advance)",
@@ -51,6 +54,7 @@ export enum NotificationMode {
 }
 export interface ISettings {
   config: IConfigSettings;
+  notification: INotificationSettings;
   speech: ISpeechSettings;
   listen: IListenSettings;
   modeling: IModelingSettings;
@@ -62,6 +66,7 @@ export interface ISettingsContext {
 }
 export const SettingsInitializer = (
   config: IConfigSettings = ConfigSettingsInitializer(),
+  notification: INotificationSettings = NotificationSettingsInitializer(),
   speech: ISpeechSettings = SpeechSettingsInitializer(),
   listen: IListenSettings = ListenSettingsInitializer(),
   modeling: IModelingSettings = ModelingSettingsInitializer(),
@@ -70,6 +75,7 @@ export const SettingsInitializer = (
   // console.log(`retrieve voice and index`);
   return {
     config,
+    notification,
     speech,
     listen,
     modeling,
@@ -179,6 +185,29 @@ export function ListenSettingsInitializer(
     excludeHeadings
   };
 }
+export interface INotificationSettings {
+  positiveSoundFile: string; // path to positive sound file
+  negativeSoundFile: string; // path to negative sound file
+}
+export function NotificationSettingsInitializer(
+  positiveSoundFile: string = BellShort,
+  negativeSoundFile: string = BuzzerShort,
+): INotificationSettings {
+  return {
+    positiveSoundFile,
+    negativeSoundFile,
+    // playPositive: () => {
+    //   if (!positiveAudioBuffer) {
+    //     // load buffer
+    //     playSound = (settings.settings.notification.positiveAudioBuffer) 
+    //   }
+    //   console.log("play positive sound");
+    // },
+    // playNegative: () => {
+    //   console.log("play negative sound");
+    // }
+  };
+}
 export const enum ObscuredTextDegreeEnum {
   // defines the degree to which prompt/response is obscured
   min = 0,
@@ -204,20 +233,20 @@ export const enum ObscuredTextTimingEnum {
   max = 5
 }
 export const enum ModelingContinuationEnum {
-  // defines when prompt/response is first obscured
-  min = 0,
-  default = 2,
-  nextWordAndStop = 0,
-  nextModelAndStop = 1,
-  nextModelAndContinue = 2,
-  max = 2
+  unspecified = 0,
+  min = 1,
+  default = 3,
+  nextWordAndStop = 1,
+  nextModelAndStop = 2,
+  nextModelAndContinue = 3,
+  max = 3
 }
 export interface IModelingSettings {
   obscuredTextTiming: ObscuredTextTimingEnum;
   obscuredTextDegree: ObscuredTextDegreeEnum;
   directions: string;
   continuationAction: ModelingContinuationEnum;
-  continueToNextModel: boolean;
+  repetitions: number;
 }
 export function ModelingSettingsInitializer(): IModelingSettings {
   return {
@@ -225,7 +254,7 @@ export function ModelingSettingsInitializer(): IModelingSettings {
     directions: "repeat the following aloud",
     obscuredTextTiming: ObscuredTextTimingEnum.default, //
     continuationAction: ModelingContinuationEnum.default,
-    continueToNextModel: false
+    repetitions: 3
   };
 }
 export enum FillinResponsesProgressionEnum {

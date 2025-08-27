@@ -37,6 +37,7 @@ import {
   ISpeechSettings,
   IModelingSettings,
   IFillinSettings,
+  INotificationSettings,
   // ModelingObscuredTextActivation
   // ModelingObscuredActivationOptions,
   // MaxObscuredTextActivation,
@@ -49,7 +50,7 @@ import {
   // ModelingObscuredTextOptions,
   // ModelingContinuationOptions
 } from "./settingsContext";
-import { SectionFillinContext } from "./fillinContext";
+// import { SectionFillinContext } from "./fillinContext";
 import { ISettingsContext, SettingsContext } from "./settingsContext";
 interface ISettingsDialogPropsType {
   isActive: boolean;
@@ -62,6 +63,9 @@ export const SettingsDialog = (props: ISettingsDialogPropsType) => {
 
   const [configSettings, _setConfigSettings] = useState(
     settingsContext.settings.config
+  );
+  const [notificationSettings, _setNotificationSettings] = useState(
+    settingsContext.settings.notification
   );
   const [speechSettings, _setSpeechSettings] = useState(
     settingsContext.settings.speech
@@ -81,6 +85,10 @@ export const SettingsDialog = (props: ISettingsDialogPropsType) => {
 
   const setConfigSettings = (configSettings: IConfigSettings) => {
     _setConfigSettings(configSettings);
+    setModified(true);
+  };
+  const setNotificationSettings = (notificationSettings: INotificationSettings) => {
+    _setNotificationSettings(notificationSettings);
     setModified(true);
   };
   const setSpeechSettings = (speechSettings: ISpeechSettings) => {
@@ -104,6 +112,7 @@ export const SettingsDialog = (props: ISettingsDialogPropsType) => {
       props.hide();
       settingsContext.saveSettings({
         config: configSettings,
+        notification: notificationSettings,
         speech: speechSettings,
         listen: listenSettings,
         modeling: modelingSettings,

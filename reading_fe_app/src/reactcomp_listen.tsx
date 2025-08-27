@@ -140,7 +140,8 @@ export const ListeningMonitor = React.memo(() => {
   const listeningRequested: boolean = useAppSelector(
     store => store.listen_active
   );
-  const stopListeningAtEOS: boolean = useAppSelector(
+  console.log(`#### LISTENING: listeningRequested=${listeningRequested}, listening=${listening}`);
+    const stopListeningAtEOS: boolean = useAppSelector(
     store => store.listen_stopAtEOS
   );
   const pageContext: CPageLists = useContext(PageContext)!;

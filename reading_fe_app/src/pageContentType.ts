@@ -8,7 +8,8 @@
  *
  **/
 export const IDX_INITIALIZER = -9999;
-export const PageContentVersion = "20250109.1";
+export const PageContentVersion = "20250718.1";
+// 20250718 - Added more IInlineButtonItem fields// 20250109 - Added nextButtonIdx IInlineButtonItem
 // 20250109 - Added nextButtonIdx IInlineButtonItem
 // 20230916 - Modified inlineButtonItem.sectionIdx
 // 20240821 - Added inlineButtonItem.nextTermIdx
@@ -1463,6 +1464,7 @@ export enum InlineButtonActionEnumType {
   label = "label", // label with icon
   model = "model", // recite then listen for the same words/sentence
   none = "none", // do nothing
+  script = "script", // recite script
   term = "term" // label with no icon
 }
 export enum ModelingScopeEnumType {
@@ -1523,6 +1525,9 @@ export interface IInlineButtonItem {
   nextTermIdx: number;
   nextButtonIdx: number;
   toBeRecited: string;
+  continuation: number; // continuation of modeling
+  repetitions: number;
+  obscurityIndex: number
 }
 export function IInlineButtonItemInitializer(
   buttonIdx = IDX_INITIALIZER,
@@ -1537,7 +1542,10 @@ export function IInlineButtonItemInitializer(
   voiceIndex = 0,
   nextTermIdx = IDX_INITIALIZER,
   nextButtonIdx = IDX_INITIALIZER,
-  toBeRecited = ""
+  toBeRecited = "",
+  continuation = 0,
+  repetitions = 0,
+  obscurityIndex = 0
 ): IInlineButtonItem {
   return {
     buttonIdx,
@@ -1552,7 +1560,10 @@ export function IInlineButtonItemInitializer(
     voiceIndex,
     nextTermIdx,
     nextButtonIdx,
-    toBeRecited
+    toBeRecited,
+    continuation,
+    repetitions,
+    obscurityIndex
   };
 }
 // export interface IFillinItem {
