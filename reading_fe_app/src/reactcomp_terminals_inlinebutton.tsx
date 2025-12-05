@@ -30,7 +30,7 @@
  * Version history:
  *
  **/
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useMemo, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { Request } from "./reducers";
 // import { AppAudioContext } from "./audioContext";
@@ -56,10 +56,11 @@ import InlineButtonLabel from "./img/button_inline_label.png";
 import InlineButtonDefault from "./img/button_recite.png";
 import InlineButtonModelActive from "./img/button_inline_model_active.gif";
 import InlineButtonModel from "./img/button_inline_model.png";
+import { act } from "react-dom/test-utils";
 
-import BellShort from "./audio/bell_short.mp3";
-import BuzzerShort from "./audio/buzzer_short.mp3";
-import { error } from "console";
+// import BellShort from "./audio/bell_short.mp3";
+// import BuzzerShort from "./audio/buzzer_short.mp3";
+// import { error } from "console";
 export const TerminalInlineButton = React.memo(
   (props: ITerminalPropsType): any => {
     const enum actionStateEnumType {
@@ -98,11 +99,53 @@ export const TerminalInlineButton = React.memo(
       nextAction = "nextAction", // action afterward
       repeatFirst = "repeatFirst", // 1st time through before repeating
       repeating = "repeating", // continue to repeat the same model
-      repeatLast = "repeatLast", // last repeat the same model
+      repeatEnd = "repeatEnd", // after last repeat the same model
       gotoNextModel = "gotoNext", // position to but not start next
       startNextModel = "startNext", // start next model automatically
       end = "end",
     }
+    // const workflowState = {
+    //   start: "start",
+    //   signalStart: "signalStart", // asynchronously
+    //   signaling: "signaling",
+    //   signalEnd: "signalEnd",
+    //   signal: "signal",
+    //   correctResponseStart: "correctResponseStart",
+    //   correctResponse: "correctResponse",
+    //   correctResponseEnd: "correctResponseEnd",
+    //   promptStart: "promptStart",
+    //   prompting: "prompting",
+    //   promptEnd: "promptEnd",
+    //   moveCursorEnd: "moveCursorEnd",
+    //   idle: "idle",
+    //   instructStart: "instructStart",
+    //   instructing: "instructing",
+    //   instructEnd: "instructEnd",
+    //   reciteStart: "reciteStart", // asynchronously
+    //   reciting: "reciting",
+    //   reciteEnd: "reciteEnd",
+    //   delayStart: "delayStart", // asynchronously
+    //   delaying: "delaying",
+    //   delayEnd: "delayEnd",
+    //   showSentence: "showSentence",
+    //   hideSentence: "hideSentence",
+    //   gotoNextWord: "nextWord", // executes synchronously
+    //   gotoNextSentence: "nextSentence", // executes synchronously
+    //   nextSection: "nextSection",
+    //   listenStart: "listenStart", // asynchronously
+    //   listening: "listening",
+    //   canceling: "canceling",
+    //   cancelEnd: "cancelEnd",
+    //   listenEnd: "listenEnd",
+    //   nextAction: "nextAction", // action afterward
+    //   repeatFirst: "repeatFirst", // 1st time through before repeating
+    //   repeating: "repeating", // continue to repeat the same model
+    //   repeatEnd: "repeatEnd", // after last repeat the same model
+    //   gotoNextModel: "gotoNext", // position to but not start next
+    //   startNextModel: "startNext", // start next model automatically
+    //   end: "end"
+    // } as const
+    // type workflowStateType = typeof workflowState[keyof typeof workflowState];
     // specific component inline button identifier
     const [thisButtonIdx, setThisButtonIdx] = useState(IDX_INITIALIZER as number); 
     const [isActive, setIsActive] = useState(false as boolean);
@@ -117,18 +160,16 @@ export const TerminalInlineButton = React.memo(
     const [nextActionState, setNextActionState] = useState(
       actionStateEnumType.idle as actionStateEnumType
     );
+    // const [workflowAction, setWorkflowAction] = useState(
+    //   workflowState.idle as workflowStateType
+    // );
     const [nextModelingButtonIdx, setNextModelingButtonIdx] = useState(
       IDX_INITIALIZER
     );  
-    // const positiveAudioBuffer: AudioBuffer = useContext(SettingsContext)!.settings.notification.positiveAudioBuffer!;
-    // const negativeAudioBuffer: AudioBuffer = useContext(SettingsContext)!.settings.notification.negativeAudioBuffer!;
-    // const positiveAudioBuffer: AudioBuffer = useContext(SettingsContext).settings.notification.positiveAudioBuffer;
     const [repetitionsRemaining, setRepetitionsRemaining] = useState(0);
     const activeButtonReclicks = useAppSelector(store => store.inlinebutton_reclicks);
     const activeButtonIdx = useAppSelector(store => store.inlinebutton_idx);
     const previouslyActiveButtonIdx = useAppSelector(store => store.inlinebutton_idx_prev);
-    // const modelingStartRequested = useAppSelector(store => store.modeling_requested)
-    // const modelingStartRequestedButtonIdx = useAppSelector(store => store.modeling_requested_buttonIdx)
     const nextSentenceTransition = useAppSelector(
       store => store.cursor_nextSentenceTransition
     );
@@ -136,243 +177,28 @@ export const TerminalInlineButton = React.memo(
       store => store.cursor_nextSectionTransition
     );
     const currentSectionIdx = useAppSelector(store => store.cursor_sectionIdx);
-    const listeningActive: boolean = useAppSelector(store => store.listen_active);
+    const listeningRequested: boolean = useAppSelector(store => store.recognition_requested);
+    const listeningActive: boolean = useAppSelector(store => store.recognition_active);
     const recitingActive: boolean = useAppSelector(store => store.reciting);
     const recitingRequested: boolean = useAppSelector(store => store.recite_requested);
     const recitingCompleted: boolean = useAppSelector(store => store.recite_completed);
     const autoClicked: boolean = useAppSelector(store=>store.inlinebutton_autoadvance);
+    const endOfPageReached: boolean = useAppSelector(
+        store => store.cursor_endOfPageReached
+      );
     const dispatch = useAppDispatch();
+    // const bell: HTMLAudioElement = useMemo(() =>  new Audio(BellShort),[]);
+    // const buzzer: HTMLAudioElement = useMemo(() => new Audio(BuzzerShort),[]);
 
-    // const [isLoadedIntoBuffer, setIsLoadedIntoContext] = useState(false)
-    // const [bellShortBuffer, setBellShortBuffer] = useState(null as AudioBuffer | null);
-    // const [buzzerShortBuffer1, setBuzzerShortBuffer] = useState(null as AudioBuffer | null);
-    const bell = new Audio(BellShort);
-    const buzzer = new Audio(BuzzerShort);
-    // const audioPlay = useCallback( async (src: string) => {
-    //   const context = new AudioContext();
-    //   const source: AudioBufferSourceNode = context.createBufferSource();
-    //   source.addEventListener("ended", event => {
-    //   console.log(`@@@ audioPlay ended`);
-    //   });
-    //   const audioBuffer = await fetch(src)
-    //     .then(res => res.arrayBuffer())
-    //     .then(ArrayBuffer => context.decodeAudioData(ArrayBuffer));
-    //   setBellShortBuffer(audioBuffer);
-    //   source.buffer = audioBuffer;
-    //   source.connect(context.destination);
-    //   console.log(`@@@ audioPlay: context=${context.destination}`);
-    //   source.start();
-    //   console.log(`@@@ audioPlay started`);
-    // },[]);
-
-    // const audioContext: AudioContext = new (window.AudioContext)();
-    // const appAudioContext: AudioContext = useContext(AppAudioContext)!
-      
-    // const loadSoundFileIntoAudioBuffer = async (src: string): 
-    //   Promise<AudioBuffer> => {
-    //   const context = new AudioContext();
-    //   const source: AudioBufferSourceNode = context.createBufferSource();
-    //   source.addEventListener("ended", event => {
-    //   console.log(`@@@ audioPlay ended`);
-    //   });
-    //   const audioBuffer = await fetch(src)
-    //     .then(res => res.arrayBuffer()).catch(error => { console.log(`@@@ Error loading sound file: ${src} - ${error.message}`); })
-    //     .then(ArrayBuffer => context.decodeAudioData(ArrayBuffer)).catch(error => {
-    //       console.log(`@@@ Error loading sound file: ${src} - ${error.message}`);
-    
-    //   // source.buffer = audioBuffer;
-    //   // source.connect(context.destination);
-    //   return audioBuffer
-    // }
-/*
-    const loadSoundFileIntoAudioBufferLocal = async (audioContext: AudioContext, src: string): 
-      Promise<AudioBuffer> => {
-      try {
-        // const context = new AudioContext();
-        // const source: AudioBufferSourceNode = context.createBufferSource();
-        const response = await fetch(src)
-        if (!response.ok) {
-          throw new Error(`Failed to fetch sound file: ${response.status}`);
-        } 
-        const arrayBuffer = await response.arrayBuffer();
-        // const audioContext = new AudioContext();
-        const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-        return audioBuffer;
-        // source.buffer = audioBuffer;
-        // source.connect(context.destination);
-      } catch(error) {
-        console.log(`@@@ Error loading sound file: ${src} - ${error}`);
-        throw error;
-      }
-    }
-*/
-    // const loadSoundFileIntoSoundBuffer = async (src: string): 
-    //   Promise<AudioBufferSourceNode> => {
-    //   const context = new AudioContext();
-    //   const source: AudioBufferSourceNode = context.createBufferSource();
-    //   source.addEventListener("ended", event => {
-    //   console.log(`@@@ audioPlay ended`);
-    //   });
-    //   const audioBuffer = await fetch(src)
-    //     .then(res => res.arrayBuffer())
-    //     .then(ArrayBuffer => context.decodeAudioData(ArrayBuffer));
-    //   source.buffer = audioBuffer;
-
-    //   // source.connect(context.destination);
-    //   return source
-    // }
-
-// async function loadSound(src: string) {
-//   const audioContext = new (window.AudioContext)();
-//   const response = await fetch(src);
-//   const arrayBuffer = await response.arrayBuffer();
-//   const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-//   return audioBuffer;
-// }
-/*
-
-const playSound = useCallback ( (audioContext: AudioContext, buffer: AudioBuffer) => {
-// const audioContext: AudioContext = new AudioContext()
-const source: AudioBufferSourceNode = audioContext.createBufferSource();
-  console.log(`@@@ playSound: buffer.length=${buffer.length} bytes`);
-  console.log(`@@@ playing sound buffer`);
-  source.buffer = buffer;
-  source.connect(audioContext.destination);
-  source.start(0);
-},[])
-const playAudioBell = useCallback (() => { 
-  if (bellShortBuffer) {
-    playSound(appAudioContext, bellShortBuffer)
-    console.log(`@@@ playing positive sound buffer`);
-  } else {
-    console.log(`@@@ playing not positive sound buffer`);
-  }
-
-    // settingsContext.settings.notification.playPositive();
-},[appAudioContext,bellShortBuffer,playSound])
-const playAudioBell2 = () => { 
-  if (bellShortBuffer) {
-    playSound(appAudioContext, bellShortBuffer)
-    console.log(`@@@ playing positive sound buffer`);
-  } else {
-    console.log(`@@@ playing not positive sound buffer`);
-  }
-
-    // settingsContext.settings.notification.playPositive();
-}
-const playAudioBell1 = useCallback (() => { 
-  if (positiveAudioBuffer) {
-    playSound(appAudioContext, positiveAudioBuffer)
-    console.log(`@@@ playing positive sound buffer`);
-  } else {
-    console.log(`@@@ playing not positive sound buffer`);
-  }
-
-    // settingsContext.settings.notification.playPositive();
-},[appAudioContext,positiveAudioBuffer,playSound])
-
-const playAudioBuzzer = useCallback (() => { 
-  if (negativeAudioBuffer) playSound(appAudioContext, negativeAudioBuffer)
-},[appAudioContext, negativeAudioBuffer, playSound])
-*/
-    // const createSoundSource = (src: string): AudioBufferSourceNode => {
-    //   const audioContext: AudioContext = new (window.AudioContext)();
-    //   let buffer: AudioBuffer = await loadSoundFileIntoBuffer(src)
-    //   let source = audioContext.createBufferSource();
-    //   source.buffer = buffer;
-    //   source.connect(audioContext.destination)
-    //   return source
-    // }
-    
-    // const [isShortBellLoaded, setIsShortBellLoaded] = useState(false);
-    // const audioPlayBell = async () => {
-    //   let source = audioContext.createBufferSource();
-    //   const context = new AudioContext();
-    //   // source1 = context.createBufferSource();
-    //   source.addEventListener("ended", event => {
-    //   console.log(`@@@ audioPlayBell ended`);
-    //   });
-    //   const audioBuffer1 = await fetch(BellShort)
-    //     .then(res => res.arrayBuffer())
-    //     .then(ArrayBuffer => context.decodeAudioData(ArrayBuffer));
-    //   // setShortBellBuffer(audioBuffer1);
-    //   source.buffer = audioBuffer1;
-    //   source.connect(context.destination);
-    //   // setIsSoundSourceLoaded(true);
-    //   console.log(`@@@ audioPlay: context=${context.destination}`);
-    //   // source1.start();
-    //   console.log(`@@@ audioPlayBell started`);
-    // };
-    // external components to avoid needless, inadvertant blocking.
-   
     const buttonProps: IInlineButtonTerminalMeta = props.terminal
       .meta as IInlineButtonTerminalMeta;
     const pageLists: CPageLists = useContext(PageContext)!;
     const settingsContext: ISettingsContext = useContext(SettingsContext)!;
-/*
-    useEffect(() => {     
-    // const audioContext: AudioContext = new AudioContext()
-    console.log(`@@@ initializing sound bell buffer ${BellShort}`);
-    loadSoundFileIntoAudioBuffer1(appAudioContext, BellShort).then(buffer => {
-      console.log(`@@@ loaded bell buffer ${BellShort} ${buffer.length} bytes`);
-      setBellShortBuffer(buffer);
-      // console.log(`@@@ loaded bell buffer ${bellShortBuffer!.length} bytes`);
-    }).catch(error => {console.log(`@@@ error loading sound file: ${BellShort} ${error.message}`)});
-
-    console.log(`@@@ initializing sound buzzer buffer`);
-    loadSoundFileIntoAudioBuffer1(appAudioContext, BuzzerShort).then(buffer => {
-      console.log(`@@@ loaded buzzer buffer ${buffer.length} bytes`);
-      setBuzzerShortBuffer(buffer);
-      // console.log(`@@@ loaded buzzer buffer ${buzzerShortBuffer!.length} bytes`);
-    }).catch(error => {console.log(`@@@ error loading sound file: ${BuzzerShort} ${error.message}`)});
-    },[appAudioContext]);
-*/
-    // let sourceNode: AudioBufferSourceNode = audioContext.createBufferSource();
-    // let audioBuffer: AudioBuffer = loadSoundFileIntoBuffer(BuzzerShort)
-    // setBuzzerShortBuffer(audioBuffer);
-    // setBuzzerShortBuffer();
-    // shortBuzzerSourceNode: AudioBufferSourceNode 
-    //   = loadSoundFileIntoSourceNode(BuzzerShort);
-    //   setBellShortSource(shortBuzzerSourceNode)
-          // const bufferSource: AudioBufferSourceNode = audioContext.createBufferSource()
-          // bufferSource.buffer = shortBellBuffer
-
-
-          // setBellShortSource(shortBellBuffer);
-
-    // const bellShortBufferSource = audioContext.createBufferSource();
-    // bellShortBufferSource.buffer = loadSoundIntoBuffer(BellShort);
-    // bellShortBufferSource.buffer = bellShortBuffer;
-    // bellShortBufferSource.connect(audioContext.destination)
-    
-
-////////////////////////
-    // const audioBuffer = async (src: string):AudioBuffer => {
-    //   const context = new AudioContext();
-    //   const source = context.createBufferSource();
-    //   source.addEventListener("ended", event => {
-    //   console.log(`@@@ audioPlay ended`);
-    //   });
-    //   const audioBuffer = await fetch(src)
-    //     .then(res => res.arrayBuffer())
-    //     .then(ArrayBuffer => context.decodeAudioData(ArrayBuffer));
-    //   source.buffer = audioBuffer;
-    //   source.connect(context.destination);
-
-    // async (src: string): AudioBuffer => {
-    //   const response = await fetch(src)
-    //   const arrayBuffer = await response.arrayBuffer();
-    //   const audioBuffer: AudioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-    //   return audioBuffer;
-    //   return null
-    // }
-    // const audioContext = new (window.AudioContext)();
-    // async function loadSoundIntoBuffer(src: string): Promise<AudioBuffer> { 
-    //   const response = await fetch(src)
-    //   const arrayBuffer = await response.arrayBuffer();
-    //   const audioBuffer: AudioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-    //   return audioBuffer;
-    // }
+    // useEffect(() => {
+    //   console.log(`reactcomp_terminals_inlinebutton: listeningActive=${listeningActive}`)
+    //   },
+    //   [listeningActive]
+    //   )
     ///// general button useEfect()s to launch and cancel button action state machine
     useEffect(() => {
       // console.log(`@@@ setIsActive=${activeButtonIdx}===${thisButtonIdx}?`);
@@ -381,220 +207,256 @@ const playAudioBuzzer = useCallback (() => {
     // useEffect(() => {
     //   console.log(`@@@ setIsActive=${isActive}`);
     // },[isActive])
-   useEffect(() => {
-      // starts the state machine
-      if (isActive){
-        console.log(`@@@ setIsActive=${isActive}`);
-        console.log(`start`)
-        // if model continuation, skip to reciteStart
-        setNextActionState(actionStateEnumType.start);
-      } else {
-        // Necessary to reset to idle state when button is not active so that 
-        // the to start can be detected by the state machine.
-        console.log(`idle`)
-        setNextActionState(actionStateEnumType.idle);
-      }
-    }, [
-      isActive, 
-      actionStateEnumType.start,
-      actionStateEnumType.idle,
-``    ]);    
-    useEffect(() => {
-      // Manage consecutive clicks of the same button
-      // 1) cancel (default)
-      // 2) hints, greater disclosure to be handled within the individual 
-      //    state machine logic below (nice to have)
-      //    e.g., if listening during modeling, then perhaps increase
-      //    opacity on consecutive clicks.  
-      // If each workflow requires a different behavior, consider refactoring
-      // them into individual components instead of this generalized inline
-      // button component
-        if (previouslyActiveButtonIdx === thisButtonIdx) {
-          console.log(`@@@ canceling previouslyActiveButtonIdx=${previouslyActiveButtonIdx} thisButtonIdx=${thisButtonIdx} nextActionState=${nextActionState} isActive=${isActive}`); 
-      }
-      if (previouslyActiveButtonIdx === thisButtonIdx && isActive 
-        && buttonAction !== InlineButtonActionEnumType.label) {
-          // && previouslyActiveButtonIdx !== IDX_INITIALIZER, necessary?
-        if (nextActionState !== actionStateEnumType.canceling 
-          && nextActionState !== actionStateEnumType.end
-          && nextActionState !== actionStateEnumType.idle
-          && previouslyActiveButtonIdx !== IDX_INITIALIZER
-          && activeButtonReclicks > 0
-        ) {
-      // By default, cancel previously active button on the page and allow it
-      // cleanup itself regardless of the current action state. This behavior
-      // can be modified within the specific state machine
-      console.log(`@@@ inlinebutton: canceling isActive=${isActive} thisButtonIdx=${thisButtonIdx} previouslyActiveButtonIdx=${previouslyActiveButtonIdx} nextActionState=${nextActionState}`);
-        setNextActionState(actionStateEnumType.canceling);
-       } 
-      }
-    }, [
-      actionStateEnumType.canceling,
-      actionStateEnumType.end,
-      actionStateEnumType.idle,
-      // actionStateEnumType.listening,
-      activeButtonReclicks,
-      buttonAction,
-      isActive,
-      nextActionState,
-      previouslyActiveButtonIdx,
-      thisButtonIdx, 
-    ]);
-//     useEffect(() => {
-//       // launch automatic continuation for next modeling button in the sequence
-//       if (buttonAction === InlineButtonActionEnumType.model 
-//         && modelingStartRequestedButtonIdx === thisButtonIdx) {
-//         setIsActive(true)
-//       }
-//     }, [
-//       buttonAction,
-//       thisButtonIdx,
-//       modelingStartRequestedButtonIdx
-// ,    ]);
-     useEffect(() => {
-      // Remember next section after proper multiple choice response
-      if (isActive && buttonAction === InlineButtonActionEnumType.choice && nextSection) {
-        console.log(`@@@ choice: nextSection=${nextSection}`);
-        setChoiceResponseSectionIdx(currentSectionIdx);
-      }
-    }, [
-      isActive,
-      buttonAction,
-      nextSection, 
-      currentSectionIdx
-    ]);
-    useEffect(() => {
-      // reset the autoadvance at page load
-      // console.log(`@@@ inlineButton: pageload only thisButtonIdx=${thisButtonIdx}`);
-      dispatch(Request.InlineButton_canceled(thisButtonIdx))
-    },[])
-    const choiceWorkflow = useCallback(() => {
-      // The inline buttons should not change the flow of the prose. This
-      // includes the incorrect buttons that only signal the negative. However,
-      // when a correct button is clicked, it sounds a positive signal, moves
-      // the cursor to the beginning of that option and starts listening for
-      // for the user to start reciting the option. When complete, the cursor
-      // jumps to the next section/question. If the app will return the
-      // the listening state to that prior to the button being clicked.
-      console.log(`@@@ nextActionState=${nextActionState}`);
-      switch (nextActionState) {
-        case actionStateEnumType.start:
-          // setListeningStartedViaButton(false);
-          setListeningActiveAlready(listeningActive);
-          // console.log(`@@@ start: listeningActive=${listeningActive}`);
+  // Extract enum values to variables for useEffect dependency array
+  // const actionStateEnumTypeStart = actionStateEnumType.start;
+  // const actionStateEnumTypeIdle = actionStateEnumType.idle;
 
-          setNextActionState(actionStateEnumType.signalStart);
-          break;
-        case actionStateEnumType.signalStart:
-          // if (!signalRequested) {
-          //   dispatch(Request.InlineButton_signal());
-          //   console.log(`inlinebutton=${buttonProps.label.toLowerCase()}`);
-            // dispatch(Request.Action_signalStarting());
-            if (buttonProps.label.toLowerCase() === "correct") {
-              // audioPlay(BellShort);
-              bell.play();
-            } else {
-              buzzer.play()
-            }
-            setNextActionState(actionStateEnumType.signalEnd);
-          // }
-          break;
-        case actionStateEnumType.signaling:
-          // if (!signalRequested) {
-          //   setNextActionState(actionStateEnumType.signalEnd);
-          // }
-          break;
-        case actionStateEnumType.signalEnd:
+  useEffect(() => {
+    // starts the state machine
+    if (isActive){
+      console.log(`@@@ setIsActive=${isActive}`);
+      console.log(`start`)
+      // if model continuation, skip to reciteStart
+      setNextActionState(actionStateEnumType.start);
+    } else {
+      // Necessary to reset to idle state when button is not active so that 
+      // the to start can be detected by the state machine.
+      console.log(`idle`)
+      setNextActionState(actionStateEnumType.idle);
+    }
+  }, [
+    isActive, 
+    actionStateEnumType.start,
+    actionStateEnumType.idle,
+  ]);
+    // useEffect(() => {
+    //   // Manage consecutive clicks of the same button
+    //   // 1) cancel (default)
+    //   // 2) hints, greater disclosure to be handled within the individual 
+    //   //    state machine logic below (nice to have)
+    //   //    e.g., if listening during modeling, then perhaps increase
+    //   //    opacity on consecutive clicks.  
+    //   // If each workflow requires a different behavior, consider refactoring
+    //   // them into individual components instead of this generalized inline
+    //   // button component
+    //   if (previouslyActiveButtonIdx === thisButtonIdx) {
+    //     console.log(`@@@ canceling previouslyActiveButtonIdx=${previouslyActiveButtonIdx} thisButtonIdx=${thisButtonIdx} nextActionState=${nextActionState} isActive=${isActive}`); 
+    //   }
+    //   if (previouslyActiveButtonIdx === thisButtonIdx && isActive 
+    //     && buttonAction !== InlineButtonActionEnumType.label) {
+    //       // && previouslyActiveButtonIdx !== IDX_INITIALIZER, necessary?
+    //     if (nextActionState !== actionStateEnumType.canceling 
+    //       && nextActionState !== actionStateEnumType.end
+    //       && nextActionState !== actionStateEnumType.idle
+    //       && previouslyActiveButtonIdx !== IDX_INITIALIZER
+    //       && activeButtonReclicks > 0
+    //     ) {
+    //   // By default, cancel previously active button on the page and allow it
+    //   // cleanup itself regardless of the current action state. This behavior
+    //   // can be modified within the specific state machine
+    //   console.log(`@@@ inlinebutton: canceling isActive=${isActive} thisButtonIdx=${thisButtonIdx} previouslyActiveButtonIdx=${previouslyActiveButtonIdx} nextActionState=${nextActionState}`);
+    //     setNextActionState(actionStateEnumType.canceling);
+    //     } 
+    //   }
+    // }, [
+    //   actionStateEnumType.canceling,
+    //   actionStateEnumType.end,
+    //   actionStateEnumType.idle,
+    //   // actionStateEnumType.listening,
+    //   activeButtonReclicks,
+    //   buttonAction,
+    //   isActive,
+    //   nextActionState,
+    //   previouslyActiveButtonIdx,
+    //   thisButtonIdx, 
+    // ]);
+    useEffect(() => {
+    // Remember next section after proper multiple choice response
+    if (isActive && buttonAction === InlineButtonActionEnumType.choice && nextSection) {
+      console.log(`@@@ choice: nextSection=${nextSection}`);
+      setChoiceResponseSectionIdx(currentSectionIdx);
+    }
+  }, [
+    isActive,
+    buttonAction,
+    nextSection, 
+    currentSectionIdx
+  ]);
+  useEffect(() => {
+    // reset the autoadvance at page load
+    // console.log(`@@@ inlineButton: pageload only thisButtonIdx=${thisButtonIdx}`);
+    dispatch(Request.InlineButton_canceled(thisButtonIdx))
+  },[dispatch, thisButtonIdx])
+
+  // requires beause each inline button is not aware of the actions of others
+  // and therefore cannot react to them.
+  // useEffect(() => {
+  //   console.log(`@@@ nextActionState=${nextActionState}`);
+  //   // cancel active choice inline button correct respone
+  //   if (buttonAction === InlineButtonActionEnumType.choice && 
+  //   choiceResponseSectionIdx !== currentSectionIdx) {
+  //     // cancel the specific active choice inline button
+  //   }
+  //   },[buttonAction, nextActionState, choiceResponseSectionIdx, currentSectionIdx]);
+
+  useEffect(() => {
+    console.log(`@@@ inlineButton: repetitionsRemaining=${repetitionsRemaining}`)
+  },[repetitionsRemaining])
+  const choiceWorkflow = useCallback(() => {
+    // The inline buttons should not change the flow of the prose. This
+    // includes the incorrect buttons that only signal the negative. However,
+    // when a correct button is clicked, it sounds a positive signal, moves
+    // the cursor to the beginning of that option and starts listening for
+    // for the user to start reciting the option. When complete, the cursor
+    // jumps to the next section/question. If the app will return the
+    // the listening state to that prior to the button being clicked.
+
+    // If the section has changed then cancel everything
+
+    switch (nextActionState) {
+      case actionStateEnumType.start:
+        // setListeningStartedViaButton(false);
+        setListeningActiveAlready(listeningActive);
+        console.log(`@@@ start: listeningActive=${listeningActive}`);
+
+        setNextActionState(actionStateEnumType.signalStart);
+        break;
+      case actionStateEnumType.signalStart:
+        // if (!signalRequested) {
+        //   dispatch(Request.InlineButton_signal());
+        //   console.log(`inlinebutton=${buttonProps.label.toLowerCase()}`);
+          // dispatch(Request.Action_signalStarting());
           if (buttonProps.label.toLowerCase() === "correct") {
-            setNextActionState(actionStateEnumType.correctResponseStart);
-            // setNextActionState(actionStateEnumType.gotoNextWord);
+            // audioPlay(BellShort);
+            settingsContext.settings.config.bellTone.play();
+            console.log(`@@@ mc signalStart correct: listeningActive=${listeningActive}`);
+          setNextActionState(actionStateEnumType.signalEnd);
           } else {
-            setNextActionState(actionStateEnumType.end);
+            settingsContext.settings.config.buzzerTone.play()
+            console.log(`@@@ mc signalStart incorrect: listeningActive=${listeningActive}`);
+            setNextActionState(actionStateEnumType.canceling);
           }
-          break;
-        case actionStateEnumType.correctResponseStart:
-          const termIdx: number =
-            pageLists.inlineButtonList[thisButtonIdx].termIdx;
-          console.log(`inlinebutton_move: move to termIdx=${termIdx}`);
-          dispatch(Request.Cursor_gotoWordByIdx(termIdx));
-          setNextActionState(actionStateEnumType.correctResponse);
-          break;
-        case actionStateEnumType.correctResponse:
-            setNextActionState(actionStateEnumType.correctResponseEnd);
-          break;
-        case actionStateEnumType.correctResponseEnd:
-          setNextActionState(actionStateEnumType.listenStart);
-          // }
-          break;
-        case actionStateEnumType.listenStart:
-          // dispatch(Request.InlineButton_moved());
-          // save listening active state to restore at the end. So if the app
-          // was not already listening before the button push then then
-          // listening will be stopped at the end of this button push action.
-          if (!listeningActive) {
-            dispatch(Request.Recognition_start());
+        // }
+        break;
+      case actionStateEnumType.signaling:
+        // if (!signalRequested) {
+        //   setNextActionState(actionStateEnumType.signalEnd);
+        // }
+        break;
+      case actionStateEnumType.signalEnd:
+        if (buttonProps.label.toLowerCase() === "correct") {
+          setNextActionState(actionStateEnumType.correctResponseStart);
+          // setNextActionState(actionStateEnumType.gotoNextWord);
+        } else {
+          setNextActionState(actionStateEnumType.end);
+        }
+        break;
+      case actionStateEnumType.correctResponseStart:
+        const termIdx: number =
+          pageLists.inlineButtonList[thisButtonIdx].termIdx;
+        console.log(`inlinebutton_move: move to termIdx=${termIdx}`);
+        dispatch(Request.Cursor_gotoWordByIdx(termIdx));
+        setNextActionState(actionStateEnumType.correctResponse);
+        break;
+      case actionStateEnumType.correctResponse:
+          setNextActionState(actionStateEnumType.correctResponseEnd);
+        break;
+      case actionStateEnumType.correctResponseEnd:
+        setNextActionState(actionStateEnumType.listenStart);
+        // }
+        break;
+      case actionStateEnumType.listenStart:
+        // dispatch(Request.InlineButton_moved());
+        // save listening active state to restore at the end. So if the app
+        // was not already listening before the button push then then
+        // listening will be stopped at the end of this button push action.
+        if (!listeningActive) {
+          dispatch(Request.Recognition_start_requested());
+        } else {
+        //   // Explicitly reset listening transcript even though
+        //   // inlineButton_move should have caused a reset.
+        }
+        setNextActionState(actionStateEnumType.listening);
+        break;
+      case actionStateEnumType.listening:
+        if (choiceResponseSectionIdx === currentSectionIdx) {
+          // still on the same section/response
+            console.log(`@@@ listening: listening to same section  ${choiceResponseSectionIdx}=${currentSectionIdx} listeningActive=${listeningActive} listeningRequested=${listeningRequested}`);
+          if (listeningActive && !listeningRequested) {
+            // cancel listening by user
+            console.log(`@@@ listening: user cancel listening ${choiceResponseSectionIdx}=${currentSectionIdx} listeningActive=${listeningActive} listeningRequested=${listeningRequested}`);
+            setNextActionState(actionStateEnumType.canceling);
+          } else if  (!listeningActive && listeningRequested) {
+            // wait for listening to start (could be part of else clause below)
+            console.log(`@@@ listening: waiting for listening ${choiceResponseSectionIdx}=${currentSectionIdx} listeningActive=${listeningActive} listeningRequested=${listeningRequested}`);
           } else {
-          //   // Explicitly reset listening transcript even though
-          //   // inlineButton_move should have caused a reset.
+          // keep listening
+            console.log(`@@@ listening: keep listening ${choiceResponseSectionIdx}=${currentSectionIdx} listeningActive=${listeningActive} listeningRequested=${listeningRequested}`);
           }
-          setNextActionState(actionStateEnumType.listening);
-          break;
-        case actionStateEnumType.listening:
-          if (choiceResponseSectionIdx !== currentSectionIdx) {
-          console.log(`@@@ listening: no longer in same section ${choiceResponseSectionIdx} !== ${currentSectionIdx}`);
-            // transitioned?
+        } else {
+            console.log(`@@@ listening: listening to different section  ${choiceResponseSectionIdx}=${currentSectionIdx} listeningActive=${listeningActive} listeningRequested=${listeningRequested}`);
+          // different section encountered while listening OR
+          // listening stopped OR cancelled
+          if (listeningActive && listeningRequested) {
+            // end of section transitioned while still listening implies end of
+            //  user response
+            console.log(`@@@ listening: section transition but still listening ${choiceResponseSectionIdx}=${currentSectionIdx} or listeningActive=${listeningActive} or listeningRequested=${listeningRequested}`);
             setNextActionState(actionStateEnumType.listenEnd);
-          } else if (!listeningActive) {
-            console.log(`@@@ listening: cancelled ${listeningActive}`);
-
-            // listen was cancelled while listening
-            setNextActionState(actionStateEnumType.end);
           } else {
-            // keep listening
+            console.log(`@@@ listening: canceling ${listeningActive}`);
+            setNextActionState(actionStateEnumType.canceling);
           }
-          break;
-        case actionStateEnumType.listenEnd:
-          // reached the end of the response
-          if (!listeningActiveAlready) {
-            // dispatch(Request.InlineButton_listened());
-            dispatch(Request.Recognition_stop());
-          }
-          console.log(`@@@ listenEnd=${nextSection}`);
-          setNextActionState(actionStateEnumType.nextSection);
-          break;
-        case actionStateEnumType.nextSection:
-          console.log(`@@@ nextSection=${nextSection}`);
-          const nextSectionTermIdx =
-            pageLists.inlineButtonList[thisButtonIdx].nextTermIdx;
-          if (
-            nextSectionTermIdx >= 0 &&
-            nextSectionTermIdx < pageLists.terminalList.length
-          ) {
-            // If this is the end of stentence and cursor_stopAtEOS = true
-            //
-            dispatch(Request.Cursor_gotoWordByIdx(nextSectionTermIdx));
-          } else {
-            console.log(
-              `invalid nextTermIdx=${nextSectionTermIdx} encountered in ${InlineButtonActionEnumType.choice}`
-            );
-          }
-          setNextActionState(actionStateEnumType.end);
-          break;
-        case actionStateEnumType.canceling:
-          console.log(`@@@ canceling listeningActive=${listeningActive}`);
-          if (!listeningActiveAlready && listeningActive) {
-            dispatch(Request.Recognition_stop());
-          }
-          dispatch(Request.InlineButton_canceled(thisButtonIdx)); // reset inlinebutton_idx*
-          setNextActionState(actionStateEnumType.end);
-          break;
-        case actionStateEnumType.end:
-          // dispatch(Request.InlineButton_clicked()); // reset clickedButtonIdx
-          break;
-        default:
+        }
+        break;
+      case actionStateEnumType.listenEnd:
+        // reached the end of the response
+        if (!listeningActiveAlready) {
+          // dispatch(Request.InlineButton_listened());
+          dispatch(Request.Recognition_stop_requested());
+          // console.log(`@@@@ stop requested3`);
+        }
+        console.log(`@@@ listenEnd=${nextSection}`);
+        setNextActionState(actionStateEnumType.nextSection);
+        break;
+      case actionStateEnumType.nextSection:
+        console.log(`@@@ nextSection=${nextSection}`);
+        const nextSectionTermIdx =
+          pageLists.inlineButtonList[thisButtonIdx].nextTermIdx;
+        if (
+          nextSectionTermIdx >= 0 &&
+          nextSectionTermIdx < pageLists.terminalList.length
+        ) {
+          // If this is the end of sentence and cursor_stopAtEOS = true
+          //
+          dispatch(Request.Cursor_gotoWordByIdx(nextSectionTermIdx));
+        } else if (endOfPageReached) {
+            // corner case where the correct choice is the last sentence on the page
+            // do nothing - end of page reached
           console.log(
-            `Unhandled action state encountered  ${buttonAction}:${nextActionState}`
+            `endOfPageReached=${endOfPageReached} - no cursor movement`
           );
+        } else {
+          console.log(
+            `invalid nextTermIdx=${nextSectionTermIdx} encountered in ${InlineButtonActionEnumType.choice} but assumed to be last section`
+          );
+        }
+        setNextActionState(actionStateEnumType.end);
+        break;
+      case actionStateEnumType.canceling:
+        console.log(`@@@ canceling listeningActive=${listeningActive}`);
+        dispatch(Request.Recognition_stop_requested());
+        dispatch(Request.InlineButton_canceled(thisButtonIdx)); // reset inlinebutton_idx*
+        setNextActionState(actionStateEnumType.end);
+        break;
+      case actionStateEnumType.end:
+        // dispatch(Request.InlineButton_clicked()); // reset clickedButtonIdx
+        /// ay other clean up before idle state
+        setNextActionState(actionStateEnumType.idle);
+        break;
+      default:
+        console.log(
+          `Unhandled action state encountered  ${buttonAction}:${nextActionState}`
+        );
       }
     },[
       actionStateEnumType.canceling, 
@@ -602,6 +464,7 @@ const playAudioBuzzer = useCallback (() => {
       actionStateEnumType.correctResponseEnd, 
       actionStateEnumType.correctResponseStart, 
       actionStateEnumType.end, 
+      actionStateEnumType.idle, 
       actionStateEnumType.listenEnd, 
       actionStateEnumType.listenStart, 
       actionStateEnumType.listening, 
@@ -610,15 +473,17 @@ const playAudioBuzzer = useCallback (() => {
       actionStateEnumType.signalStart, 
       actionStateEnumType.signaling, 
       actionStateEnumType.start,
-      bell,
+      settingsContext.settings.config.bellTone,
+      settingsContext.settings.config.buzzerTone,
       buttonAction, 
       buttonProps.label, 
-      buzzer,
       choiceResponseSectionIdx, 
       currentSectionIdx, 
       dispatch, 
+      endOfPageReached,
       listeningActive, 
       listeningActiveAlready, 
+      listeningRequested,
       nextActionState, 
       nextSection, 
       pageLists.inlineButtonList, 
@@ -648,6 +513,9 @@ const playAudioBuzzer = useCallback (() => {
           break;
         case actionStateEnumType.end:
           // dispatch(Request.InlineButton_clicked()); // reset clickedButtonIdx
+          setNextActionState(actionStateEnumType.idle);
+          break;
+        case actionStateEnumType.idle:
           break;
         default:
           console.log(
@@ -656,6 +524,7 @@ const playAudioBuzzer = useCallback (() => {
       }
     },[
       actionStateEnumType.end, 
+      actionStateEnumType.idle, 
       actionStateEnumType.reciteEnd, 
       actionStateEnumType.reciteStart, 
       actionStateEnumType.reciting, 
@@ -690,12 +559,14 @@ const playAudioBuzzer = useCallback (() => {
           break;
         case actionStateEnumType.end:
           dispatch(Request.InlineButton_canceled(thisButtonIdx));
-          // dispatch(Request.InlineButton_clicked()); // reset clickedButtonIdx
+          setNextActionState(actionStateEnumType.idle);
           break;
         case actionStateEnumType.canceling:
           console.log(`@@@ labelWorkFlow: cancel`)
           dispatch(Request.InlineButton_canceled(thisButtonIdx));
           setNextActionState(actionStateEnumType.end);
+          break;
+        case actionStateEnumType.idle:
           break;
         default:
           console.log(
@@ -705,6 +576,7 @@ const playAudioBuzzer = useCallback (() => {
     },[
       actionStateEnumType.canceling,
       actionStateEnumType.end, 
+      actionStateEnumType.idle, 
       actionStateEnumType.reciteEnd, 
       actionStateEnumType.reciteStart, 
       actionStateEnumType.reciting, 
@@ -716,332 +588,374 @@ const playAudioBuzzer = useCallback (() => {
       recitingActive, 
       dispatch,
   ]);
-    // useEffect(() => {
-    //   // set the next action state to start the state machine associated with
-    //   // the thisButtonIdx paramenter
-    //   if (nextActionState === actionStateEnumType.end) {
-    //   console.log(`@@@ modelingStartRequested=${modelingStartRequested} current ActionState=${nextActionState}`);
-
-    //   }
-    // },[
-    //   modelingStartRequested,
-    //   nextActionState,
-    //   actionStateEnumType.end
-    // ])
     const modelWorkFlow = useCallback((termIdx: number = -9999) => {
-      console.log(`@@@ modelFlow: nextActionState=${nextActionState} thisButtonIdx=${thisButtonIdx} repetitionsRemaining=${repetitionsRemaining}`);
-      switch (nextActionState) {
-        case actionStateEnumType.start:
-          // let repetitions: number = pageLists.inlineButtonList[thisButtonIdx].repetitions;
-          if (listeningActive) {
-            // dispatch(Request.InlineButton_listened());
-            dispatch(Request.Recognition_stop());
-            // do not keep listening after button click
-            setListeningActiveAlready(false);
-          }
-          if (pageLists.inlineButtonList[thisButtonIdx].repetitions > 0) {
-            setNextActionState(actionStateEnumType.repeatFirst);
-          } else {
-            setNextActionState(actionStateEnumType.promptStart);
-          }
-          break;
-        case actionStateEnumType.repeatFirst:
-            dispatch(Request.Sentence_disableTransitions());
-            setRepetitionsRemaining(pageLists.inlineButtonList[thisButtonIdx].repetitions)
-            setNextActionState(actionStateEnumType.promptStart);
-          break;
-        case actionStateEnumType.promptStart:
-          termIdx = pageLists.inlineButtonList[thisButtonIdx].termIdx;
-          dispatch(Request.Cursor_gotoWordByIdx(termIdx));
-          setNextActionState(actionStateEnumType.prompting);
-          break;
-        case actionStateEnumType.prompting:
-          // acknowledge the transition from gotoWord above
-          dispatch(Request.Sentence_acknowledgeTransition());
-          setNextActionState(actionStateEnumType.promptEnd);
-          break;
-        case actionStateEnumType.promptEnd:
-          setNextActionState(actionStateEnumType.instructStart);
-          break;
-        case actionStateEnumType.instructStart:
-          if (settingsContext.settings.modeling.continuationAction 
-            === ModelingContinuationEnum.nextModelAndContinue
-            && autoClicked) {
-              // skip instructions on subsequent auto advance modeling buttons
-              // but how do you determine whether this is the initial button click?
-          // if (!recitingActive) {
-            setNextActionState(actionStateEnumType.reciteStart);
-          } else {
-            const directions: string = (settingsContext ? settingsContext.settings.modeling.directions: "")
-            dispatch(Request.Recite_start_passThru(directions));
-            console.log(`instructStart: recitingActive=${recitingActive} `);
-            // }
-            setNextActionState(actionStateEnumType.instructing);
-          }
-          // }
-          break;
-        case actionStateEnumType.instructing:
-          // cannot cancel instruction
-          // wait until reciting is complete (inactive)
-          console.log(`@@@ instructing1: recitingActive=${recitingActive}`)
-          if (recitingRequested && recitingCompleted) {
-            setNextActionState(actionStateEnumType.instructEnd);
-              console.log(`@@@ instructing2: completing recitingActive=${recitingActive}}`)
-              console.log(`@@@ inlineButton: completing @${(new Date().getTime().toString().slice(-5))}`);
-          } else if (!recitingRequested && !recitingActive) {
-            console.log(`@@@ instructing4: canceling recitingRequested=${recitingRequested} recitingActive=${recitingActive} `)
-          //   // dispatch(Request.InlineButton_canceled(thisButtonIdx));
-            // dispatch(Request.Recite_stop());
-            setNextActionState(actionStateEnumType.canceling);
-          } else {
-            console.log(`@@@ instructing3: waiting recitingActive=${recitingActive} `)
-            console.log(`@@@ inlineButton: waiting @${(new Date().getTime().toString().slice(-5))}`);
-          }
-          break;
-        case actionStateEnumType.instructEnd:
-          console.log(`@@@ inlineButton: instructEnd @${(new Date().getTime().toString().slice(-5))}`);
-          // dispatch(Request.Recite_ended()); // just in case?
-          setNextActionState(actionStateEnumType.reciteStart);
-          break;
-        case actionStateEnumType.reciteStart:
-            // dispatch(Request.Action_reciteStarting());
-          console.log(`@@@ reciteStart1: recitingActive=${recitingActive} thisButtonIdx=${thisButtonIdx}`)
-          console.log(`@@@ inlineButton: reciteStart @${(new Date().getTime().toString().slice(-5))}`);
-          // if (!recitingActive) {
-            termIdx = pageLists.inlineButtonList[thisButtonIdx].termIdx;
-              // pageLists.inlineButtonList[thisButtonIdx].termIdx + 1; //skip passed buton term idx
-            const sentenceIdx: number = pageLists.terminalList[termIdx].sentenceIdx;
-            console.log(`@@@ reciteStart: termIdx=${termIdx} sentenceIdx=${sentenceIdx} recitingCompleted=${recitingCompleted}`)
-            dispatch(Request.Recite_start_sentence(sentenceIdx));
-            setNextActionState(actionStateEnumType.reciting);
-          break;
-        case actionStateEnumType.reciting:
-          // cannot user cancel?
-          // strangely, recitingActive is assumed to be true after recite_start
-          // wait until reciting is complete (inactive)
-          console.log(`@@@ reciting1: recitingActive=${recitingActive}  recitingCompleted=${recitingCompleted}`)
-          console.log(`@@@ inlineButton: reciting @${(new Date().getTime().toString().slice(-5))}`);
-          if (recitingRequested && recitingCompleted) {
-            // sleep(2, "after Recite_start_sentence completed")
-            console.log(`@@@ inlineButton: completing @${(new Date().getTime().toString().slice(-5))}`);
-            console.log(`@@@ reciting2: no longer reciting recitingActive=${recitingActive}  recitingCompleted=${recitingCompleted}`)
-            setNextActionState(actionStateEnumType.reciteEnd);
-          } else if (recitingRequested && !recitingCompleted && recitingActive) {
-            console.log(`@@@ reciting5: still reciting recitingActive=${recitingActive} `)
-          } else if (!recitingRequested && !recitingActive) {
-            // need to  check for both because there is a corner case where 
-            // testing for just reciteActive prematurely terminates flow
-            console.log(`@@@ reciting4: canceling recitingActive=${recitingActive} `)
-            setNextActionState(actionStateEnumType.canceling);
-          } else {
-            console.log(`@@@ reciting3: still reciting recitingActive=${recitingActive}  recitingCompleted=${recitingCompleted}`)
-            console.log(`@@@ inlineButton: still reciting @${(new Date().getTime().toString().slice(-5))}`);
-          }
-          // use recitingRequest to trigger user cancel
-          break;
-        case actionStateEnumType.reciteEnd:
-          console.log(`@@@ inlineButton: recitingEnd @${(new Date().getTime().toString().slice(-5))}`);
-          console.log(`@@@ reciteEnd: reciting recitingActive=${recitingActive}  recitingCompleted=${recitingCompleted}`)
-          dispatch(Request.Recite_ended()); // reset requested
-          setNextActionState(actionStateEnumType.hideSentence);          
-          break;
-        case actionStateEnumType.hideSentence:
-          const opacity: number = (settingsContext ? settingsContext.settings.modeling.obscuredTextDegree: 1)
-          console.log(`@@@ inlineButton: hideSentence @${(new Date().getTime().toString().slice(-5))}`);
-          dispatch(Request.Sentence_setOpacity(opacity));
-          setNextActionState(actionStateEnumType.listenStart);
-          break;
-        case actionStateEnumType.listenStart:
-          if (!listeningActive) {
-            console.log(`@@@ inlineButton: listenStart @${(new Date().getTime().toString().slice(-5))}`);
-            console.log(`@@@@@ listening: before start listeningActive=${listeningActive}`)
-            // console.log(`@@@ listeningStart: request listening`);
-            dispatch(Request.Recognition_start());
-            console.log(`@@@@@ listening: after start listeningActive=${listeningActive}`)
-            // dispatch(Request.InlineButton_listen());
-            setNextActionState(actionStateEnumType.listening);
-          }
-          break;
-        case actionStateEnumType.listening:
-          console.log(`@@@@@ listening: still listening listeningActive=${listeningActive}`)
-          // wait for EOS!
-          // console.log(
-          //   `@@@ listening: nextSentenceTransition=${nextSentenceTransition} listeningRequested=${listeningRequested}`
-          // );
-          console.log(`@@@ listening: nextSent=${nextSentenceTransition} active=${listeningActive} `);
-          if (nextSentenceTransition) {
-          // if repetitionsRemaining > 0) { ring the bell and reset the cursor 
-          // to the beginning of the sentence and setNextActionState(actionStateEnumType.listening) 
-          // OR should this action be handled by a different state e.g., repeating
-          // 
-          // } else { setNextActionState(actionStateEnumType.listenEnd)}
-            // console.log(`@@@ listening: nextSentence`);
-            setNextActionState(actionStateEnumType.listenEnd);
-          } else if (!listeningActive) {
-            console.log(`@@@ listening: cancelled`);
-            setNextActionState(actionStateEnumType.canceling);
-            // console.log(`@@@ listening: not nextSentence`);
-            // keep listening
-          } else {
-            console.log(`@@@ listening: keep listening active=${listeningActive}`);
-          }
-          break;
-        case actionStateEnumType.listenEnd:
-            dispatch(Request.Recognition_stop());
-          setNextActionState(actionStateEnumType.signalStart);
-          break;
-        case actionStateEnumType.signalStart:
-          // audioPlay(BellShort);
-          bell.play();
-            // playAudioBell();
-            console.log(`@@@ listening: signalStart`);
-            // check settings.modelingSettings.continuationAction
-          // }
-          setNextActionState(actionStateEnumType.signalEnd);
-          break;
-        case actionStateEnumType.signalEnd:
-          // This state set within audioPlay() completion event handler
-          setNextActionState(actionStateEnumType.nextAction);  
-          break;
-        case actionStateEnumType.nextAction:
-          if (repetitionsRemaining > 0) {
-            setRepetitionsRemaining(repetitionsRemaining - 1); // at least one repetition
-            setNextActionState(actionStateEnumType.repeating);
-            console.log(`### modelFlow repeating thisButtonIdx=${thisButtonIdx} set to ${repetitionsRemaining}`);
-          } else if (repetitionsRemaining === 0) {
-            console.log(`### modelFlow repeatLast current model thisButtonIdx=${thisButtonIdx} set to ${repetitionsRemaining}`);
-            setRepetitionsRemaining(repetitionsRemaining - 1); // at least one repetition
-            setNextActionState(actionStateEnumType.repeatLast);
-          } else {
-            setNextActionState(actionStateEnumType.end);
-            console.log(`### modelFlow last time current model thisButtonIdx=${thisButtonIdx} set to ${repetitionsRemaining}`);
-            // Although this can be handled within the actionStateEnumType.end,
-            // it would clutter the end state with additional logic.
-
-            // Check button-specific attribute that overrides settingsContext
-            let thisButtonContinuationAction: ModelingContinuationEnum = 
-              pageLists.inlineButtonList[thisButtonIdx].continuation
-            let continuationAction: ModelingContinuationEnum = 
-              thisButtonContinuationAction === ModelingContinuationEnum.unspecified? 
-              settingsContext.settings.modeling.continuationAction: 
-              thisButtonContinuationAction
-            // nextButtonIdx is button type specific, guaranteed to be the same type as current?
-            const nextButtonIdx: number =
-              pageLists.inlineButtonList[thisButtonIdx].nextButtonIdx;
-            console.log(
-              `modelFlow nextAction=${thisButtonContinuationAction} for nextButtonIdx=${nextButtonIdx}`
-            );
-            switch (continuationAction) {
-              case ModelingContinuationEnum.nextWordAndStop:
-                // default - allow normal cursor advancement logic to address this.
-                break;
-              case ModelingContinuationEnum.nextModelAndStop:
-              case ModelingContinuationEnum.nextModelAndContinue:
-                // same as  nextWordAndStop iff next word and next model coincide
-                console.log(`modelFlow goto nextButtonTermIdx=${nextButtonIdx}`);
-                const nextTermIdx: number =
-                  pageLists.inlineButtonList[nextButtonIdx].termIdx;
-                if (
-                  nextTermIdx >= 0 &&
-                  nextTermIdx < pageLists.terminalList.length
-                ) {
-                  // console.log(`modelFlow goto nextTermIdx=${nextTermIdx}`);
-                  dispatch(Request.Cursor_gotoWordByIdx(nextTermIdx)); // don't need completer
-                  // console.log(
-                  //   `modelFlow goto ${settingsContext.settings.modeling.continuationAction}`
-                  // );
-                } else {
-                  console.log(
-                    `modelFlow out of range nextTermIdx=${thisButtonIdx}`
-                  );
-                }
-                if (settingsContext.settings.modeling.continuationAction 
-                  === ModelingContinuationEnum.nextModelAndContinue) {
-                // set next button to be activated in end state
-                    setNextModelingButtonIdx(nextButtonIdx)
-                  console.log(
-                    `modelFlow continue to next nextButtonIdx=${nextButtonIdx}, current=${thisButtonIdx}`
-                  );
-                }
-                break;
-              default:
-                console.log(
-                  `invalid continuationAction=${settingsContext.settings.modeling.continuationAction}`
-                );
-              }
+      console.log(`@@@ modelFlow: nextActionState=${nextActionState} thisButtonIdx=${thisButtonIdx} repetitionsRemaining=${repetitionsRemaining} listeningActive=${listeningActive} nextSentence=${nextSentenceTransition} endOfPageReached=${endOfPageReached}`);
+      try {
+        switch (nextActionState) {
+          case actionStateEnumType.start:
+            // let repetitions: number = pageLists.inlineButtonList[thisButtonIdx].repetitions;
+            if (listeningActive) {
+              // dispatch(Request.InlineButton_listened());
+              dispatch(Request.Recognition_stop_requested());
+              console.log(`@@@@ stop requested1`);
+              // do not keep listening after button click
+              setListeningActiveAlready(false);
+            }
+            if (pageLists.inlineButtonList[thisButtonIdx].repetitions > 0) {
+              setNextActionState(actionStateEnumType.repeatFirst);
+            } else {
+              setNextActionState(actionStateEnumType.promptStart);
             }
             break;
-          case actionStateEnumType.repeating:
-          // set to beginning of the model
-          termIdx = pageLists.inlineButtonList[thisButtonIdx].termIdx;
-          dispatch(Request.Cursor_gotoWordByIdx(termIdx));
-          console.log(`@@@ modelFlow repeating termIdx=${termIdx} nextSentenceTransition=${nextSentenceTransition}`)
-          // go to beginning of sentence for this button
-          
-          setNextActionState(actionStateEnumType.hideSentence);
-          // setNextActionState(actionStateEnumType.listening); // continue listening or is that moot?
-          break;
-        case actionStateEnumType.repeatLast:
-          dispatch(Request.Sentence_enableTransitions());
-          setNextActionState(actionStateEnumType.nextAction);
-          break;
+          case actionStateEnumType.repeatFirst:
+              dispatch(Request.Sentence_disableTransitions());
+              dispatch(Request.Message_set(`Expect to repeat ${pageLists.inlineButtonList[thisButtonIdx].repetitions} times`));
+              console.log(`### modelFlow repeatFirst thisButtonIdx=${thisButtonIdx} set to ${pageLists.inlineButtonList[thisButtonIdx].repetitions}`);
+              setRepetitionsRemaining(pageLists.inlineButtonList[thisButtonIdx].repetitions)
+              setNextActionState(actionStateEnumType.promptStart);
+            break;
+          case actionStateEnumType.promptStart:
+            termIdx = pageLists.inlineButtonList[thisButtonIdx].termIdx;
+            dispatch(Request.Cursor_gotoWordByIdx(termIdx));
+            console.log(`@@@ promptStart: termIdx=${termIdx}`)
+            setNextActionState(actionStateEnumType.prompting);
+            break;
+          case actionStateEnumType.prompting:
+            // acknowledge the transition from gotoWord above
+            dispatch(Request.Sentence_acknowledgeTransition());
+            setNextActionState(actionStateEnumType.promptEnd);
+            break;
+          case actionStateEnumType.promptEnd:
+            setNextActionState(actionStateEnumType.instructStart);
+            break;
+          case actionStateEnumType.instructStart:
+            if (settingsContext.settings.modeling.continuationAction 
+              === ModelingContinuationEnum.nextModelAndContinue
+              && autoClicked) {
+                // skip instructions on subsequent auto advance modeling buttons
+                // but how do you determine whether this is the initial button click?
+            // if (!recitingActive) {
+              setNextActionState(actionStateEnumType.reciteStart);
+            } else {
+              const directions: string = (settingsContext ? settingsContext.settings.modeling.directions: "")
+              dispatch(Request.Recite_start_passThru(directions));
+              console.log(`instructStart: recitingActive=${recitingActive} `);
+              // }
+              setNextActionState(actionStateEnumType.instructing);
+            }
+            // }
+            break;
+          case actionStateEnumType.instructing:
+            // cannot cancel instruction
+            // wait until reciting is complete (inactive)
+            // console.log(`@@@ instructing1: recitingActive=${recitingActive}`)
+            if (recitingRequested && recitingCompleted) {
+              setNextActionState(actionStateEnumType.instructEnd);
+                // console.log(`@@@ instructing2: completing recitingActive=${recitingActive}}`)
+                // console.log(`@@@ inlineButton: completing @${(new Date().getTime().toString().slice(-5))}`);
+            } else if (!recitingRequested && !recitingActive) {
+              // console.log(`@@@ instructing4: canceling recitingRequested=${recitingRequested} recitingActive=${recitingActive} `)
+            //   // dispatch(Request.InlineButton_canceled(thisButtonIdx));
+              // dispatch(Request.Recite_stop());
+              setNextActionState(actionStateEnumType.canceling);
+            } else {
+              console.log(`@@@ instructing3: waiting recitingActive=${recitingActive} `)
+              // console.log(`@@@ inlineButton: waiting @${(new Date().getTime().toString().slice(-5))}`);
+            }
+            break;
+          case actionStateEnumType.instructEnd:
+            // console.log(`@@@ inlineButton: instructEnd @${(new Date().getTime().toString().slice(-5))}`);
+            // dispatch(Request.Recite_ended()); // just in case?
+            setNextActionState(actionStateEnumType.reciteStart);
+            break;
+          case actionStateEnumType.reciteStart:
+              // dispatch(Request.Action_reciteStarting());
+            // console.log(`@@@ reciteStart1: recitingActive=${recitingActive} thisButtonIdx=${thisButtonIdx}`)
+            // console.log(`@@@ inlineButton: reciteStart @${(new Date().getTime().toString().slice(-5))}`);
+            // if (!recitingActive) {
+              termIdx = pageLists.inlineButtonList[thisButtonIdx].termIdx;
+                // pageLists.inlineButtonList[thisButtonIdx].termIdx + 1; //skip passed buton term idx
+              const sentenceIdx: number = pageLists.terminalList[termIdx].sentenceIdx;
+              // console.log(`@@@ reciteStart: termIdx=${termIdx} sentenceIdx=${sentenceIdx} recitingCompleted=${recitingCompleted}`)
+              dispatch(Request.Recite_start_sentence(sentenceIdx));
+              setNextActionState(actionStateEnumType.reciting);
+            break;
+          case actionStateEnumType.reciting:
+            // cannot user cancel?
+            // strangely, recitingActive is assumed to be true after recite_start
+            // wait until reciting is complete (inactive)
+            // console.log(`@@@ reciting1: recitingActive=${recitingActive}  recitingCompleted=${recitingCompleted}`)
+            // console.log(`@@@ inlineButton: reciting @${(new Date().getTime().toString().slice(-5))}`);
+            if (recitingRequested && recitingCompleted) {
+              // sleep(2, "after Recite_start_sentence completed")
+              // console.log(`@@@ inlineButton: completing @${(new Date().getTime().toString().slice(-5))}`);
+              // console.log(`@@@ reciting2: no longer reciting recitingActive=${recitingActive}  recitingCompleted=${recitingCompleted}`)
+              setNextActionState(actionStateEnumType.reciteEnd);
+            } else if (recitingRequested && !recitingCompleted && recitingActive) {
+              // console.log(`@@@ reciting5: still reciting recitingActive=${recitingActive} `)
+            } else if (!recitingRequested && !recitingActive) {
+              // need to  check for both because there is a corner case where 
+              // testing for just reciteActive prematurely terminates flow
+              // console.log(`@@@ reciting4: canceling recitingActive=${recitingActive} `)
+              setNextActionState(actionStateEnumType.canceling);
+            } else {
+              // console.log(`@@@ reciting3: still reciting recitingActive=${recitingActive}  recitingCompleted=${recitingCompleted}`)
+              console.log(`@@@ inlineButton: still reciting @${(new Date().getTime().toString().slice(-5))}`);
+            }
+            // use recitingRequest to trigger user cancel
+            break;
+          case actionStateEnumType.reciteEnd:
+            // console.log(`@@@ inlineButton: recitingEnd @${(new Date().getTime().toString().slice(-5))}`);
+            // console.log(`@@@ reciteEnd: reciting recitingActive=${recitingActive}  recitingCompleted=${recitingCompleted}`)
+            dispatch(Request.Recite_ended()); // reset requested
+            setNextActionState(actionStateEnumType.hideSentence);          
+            break;
+          case actionStateEnumType.hideSentence:
+            const opacity: number = (settingsContext ? settingsContext.settings.modeling.obscuredTextDegree: 1)
+            // console.log(`@@@ inlineButton: hideSentence @${(new Date().getTime().toString().slice(-5))}`);
+            dispatch(Request.Sentence_setOpacity(opacity));
+            setNextActionState(actionStateEnumType.listenStart);
+            break;
+          case actionStateEnumType.listenStart:
+            if (!listeningActive) {
+              // console.log(`@@@ inlineButton: listenStart @${(new Date().getTime().toString().slice(-5))}`);
+              // console.log(`@@@@@ listening: before start listeningActive=${listeningActive}`)
+              // console.log(`@@@ listeningStart: request listening`);
+              dispatch(Request.Recognition_start_requested());
+              // console.log(`@@@@@ listening: after start listeningActive=${listeningActive}`)
+              setNextActionState(actionStateEnumType.listening);
+            }
+            // console.log(`@@@@@ listening: end of start listeningActive=${listeningActive}`)
+            break;
+          case actionStateEnumType.listening:
+            // console.log(`@@@@@ listening: still listening listeningActive=${listeningActive}`)
+            // wait for EOS!
+            // console.log(
+            //   `@@@ listening: nextSentenceTransition=${nextSentenceTransition} listeningRequested=${listeningRequested}`
+            // );
+            // console.log(`@@@ listening: nextSent=${nextSentenceTransition} active=${listeningActive} endOfPageReached=${endOfPageReached}`);
+            if (nextSentenceTransition) {
+            // if repetitionsRemaining > 0) { ring the bell and reset the cursor 
+            // to the beginning of the sentence and setNextActionState(actionStateEnumType.listening) 
+            // OR should this action be handled by a different state e.g., repeating
+            // 
+            // } else { setNextActionState(actionStateEnumType.listenEnd)}
+              // console.log(`@@@ listening: nextSentence transition active=${listeningActive}`);
+              setNextActionState(actionStateEnumType.listenEnd);
+            // } else if (endOfPageReached) {
+            //   console.log(`@@@ listening: endOfPage active=${listeningActive}`);
+            //   setNextActionState(actionStateEnumType.listenEnd);
+            } else if (endOfPageReached) {
+              // console.log(`@@@ listening: endOfPage active=${listeningActive}`);
+              setNextActionState(actionStateEnumType.listenEnd);
+            } else if (listeningActive && !listeningRequested) {
+              // console.log(`@@@ listening: cancelled`);
+              setNextActionState(actionStateEnumType.canceling);
+              // console.log(`@@@ listening: not nextSentence`);
+              // keep listening
+            } else if (!listeningActive && listeningRequested) {
+              console.log(`@@@ listening: waiting for listening to start active=${listeningActive}`);
+            } else {
+              console.log(`@@@ listening: keep listening active=${listeningActive}`);
+            }
+            break;
+          case actionStateEnumType.listenEnd:
+            dispatch(Request.Recognition_stop_requested());
+            // console.log(`@@@@ stop requested2`);
 
-        case actionStateEnumType.end:
-          // if (modelingStartRequested) dispatch(Request.Modeling_stop());
+            setNextActionState(actionStateEnumType.signalStart);
+            break;
+          case actionStateEnumType.signalStart:
+            // audioPlay(BellShort);
+            settingsContext.settings.config.bellTone.play();
+            // playAudioBell();
+            // console.log(`@@@ listening: signalStart`);
+            // check settings.modelingSettings.continuationAction
+            // }
+            setNextActionState(actionStateEnumType.signalEnd);
+            break;
+          case actionStateEnumType.signalEnd:
+            // This state set within audioPlay() completion event handler
+            setNextActionState(actionStateEnumType.nextAction);  
+            break;
+          case actionStateEnumType.nextAction:
+            if (repetitionsRemaining > 0) {
+              dispatch(Request.Message_set(`${repetitionsRemaining} of ${pageLists.inlineButtonList[thisButtonIdx].repetitions} remaining`));
+              setRepetitionsRemaining(repetitionsRemaining => repetitionsRemaining - 1); // at least one repetition
+              setNextActionState(actionStateEnumType.repeating);
+            } else if (repetitionsRemaining === 0) {
+              dispatch(Request.Message_set(`${repetitionsRemaining} of ${pageLists.inlineButtonList[thisButtonIdx].repetitions} remaining`));
+              setRepetitionsRemaining(repetitionsRemaining => repetitionsRemaining - 1); // at least one repetition
+              setNextActionState(actionStateEnumType.repeatEnd);
+            } else { 
+              // no more model repetitions: basically repetitionsRemaining < 0
+              setNextActionState(actionStateEnumType.end);
+
+              // Check button-specific attribute that overrides settingsContext
+              const thisButtonContinuationAction: ModelingContinuationEnum = 
+                pageLists.inlineButtonList[thisButtonIdx].continuation
+              const continuationAction: ModelingContinuationEnum = 
+                thisButtonContinuationAction === ModelingContinuationEnum.unspecified? 
+                settingsContext.settings.modeling.continuationAction: 
+                thisButtonContinuationAction
+              const nextButtonIdx: number =
+                pageLists.inlineButtonList[thisButtonIdx].nextButtonIdx;
+              // nextButtonIdx is button type specific, guaranteed to be the same type as current?
+              if (continuationAction === ModelingContinuationEnum.nextWordAndStop) {
+                console.log(`model: nextWordAndStop`)
+                // default - allow normal cursor advancement logic to address this.
+              } else if (nextButtonIdx < 0 || nextButtonIdx > pageLists.inlineButtonList.length) {
+                // invalid next model/button because:
+                if (endOfPageReached) {
+                  console.log(
+                    `modelFlow end of page reached thisButtonIdx=${thisButtonIdx}`
+                  );
+                  dispatch(Request.Message_set(`End of page reached`));
+                } else {
+                  console.log(`modelFlow unexpected out of range nextButtonIdx=${nextButtonIdx}`);
+                }
+              } else {
+                // next model
+                  const nextTermIdx: number = pageLists.inlineButtonList[nextButtonIdx].termIdx
+                  dispatch(Request.Cursor_gotoWordByIdx(nextTermIdx)); 
+                  if (continuationAction === ModelingContinuationEnum.nextModelAndStop) {
+                    console.log(`model: nextModelAndStop`)
+                    dispatch(Request.Recognition_stop_requested());
+                  } else if ((continuationAction === ModelingContinuationEnum.nextModelAndContinue)) {
+                    console.log(`model: nextModelAndContinue`)
+                    // do nothing else
+                  } else {
+                    console.log(`model: continuation?`)
+                  }
+                  if (settingsContext.settings.modeling.continuationAction 
+                    === ModelingContinuationEnum.nextModelAndContinue) {
+                  // set next button to be activated in end state
+                    setNextModelingButtonIdx(nextButtonIdx)
+                  }
+
+                }
+              }
+                  /*
+              switch (continuationAction) {
+                case ModelingContinuationEnum.nextWordAndStop:
+                  // default - allow normal cursor advancement logic to address this.
+                  break;
+                case ModelingContinuationEnum.nextModelAndStop:
+                case ModelingContinuationEnum.nextModelAndContinue:
+                  // same as  nextWordAndStop iff next word and next model coincide
+                  // console.log(`modelFlow goto nextButtonTermIdx=${nextButtonIdx}`);
+                  console.log(`modelFlow continuationAction=${continuationAction} nextButtonIdx=${nextButtonIdx} endofPageReached=${endOfPageReached}`);
+                  if (nextTermIdx >= 0) {
+                    // console.log(`modelFlow goto nextTermIdx=${nextTermIdx}`);
+                    dispatch(Request.Cursor_gotoWordByIdx(nextTermIdx)); // don't need completer
+                    // console.log(
+                    //   `modelFlow goto ${settingsContext.settings.modeling.continuationAction}`
+                    // );
+                  } else if (endOfPageReached) {
+                    console.log(
+                      `modelFlow end of page reached thisButtonIdx=${thisButtonIdx}`
+                    );
+                    dispatch(Request.Message_set(`End of page reached`));
+                  } else {
+                    console.log(
+                      `modelFlow out of range nextTermIdx=${thisButtonIdx}`
+                    );
+                  }
+                  if (settingsContext.settings.modeling.continuationAction 
+                    === ModelingContinuationEnum.nextModelAndContinue) {
+                  // set next button to be activated in end state
+                      setNextModelingButtonIdx(nextButtonIdx)
+                  }
+                  break;
+                default:
+                  console.log(
+                    `invalid continuationAction=${settingsContext.settings.modeling.continuationAction}`
+                  );
+                }
+              }
+                */
+              break;
+            case actionStateEnumType.repeating:
+            // set to beginning of the model
+            termIdx = pageLists.inlineButtonList[thisButtonIdx].termIdx;
+            dispatch(Request.Cursor_gotoWordByIdx(termIdx));
+            dispatch(Request.Message_set(`${repetitionsRemaining} of ${pageLists.inlineButtonList[thisButtonIdx].repetitions} remaining`));
+            // console.log(`@@@ modelFlow repeating termIdx=${termIdx} repetitionsRemaining=${repetitionsRemaining} nextSentenceTransition=${nextSentenceTransition}`)
+            // go to beginning of sentence for this button
+            
+            setNextActionState(actionStateEnumType.hideSentence);
+            // setNextActionState(actionStateEnumType.listening); // continue listening or is that moot?
+            break;
+          case actionStateEnumType.repeatEnd:
+            dispatch(Request.Sentence_enableTransitions());
+            dispatch(Request.Sentence_resetOpacity());
+            setNextActionState(actionStateEnumType.nextAction);
+            break;
+
+          case actionStateEnumType.end:
+            // if (modelingStartRequested) dispatch(Request.Modeling_stop());
+              // console.log(
+              //   `modelFlow: end nextActionButtonIdx=${nextModelingButtonIdx} thisButtonIdx=${thisButtonIdx}`
+              // )
+            if (
+              nextModelingButtonIdx >= 0 &&
+              nextModelingButtonIdx < pageLists.inlineButtonList.length &&
+              nextModelingButtonIdx !== thisButtonIdx
+            ) {
+              // allows this end state to cleanup before going to next model 
+              // state that sends request to next modeling inline button
+              // component corresponding to nextModelingButtonIdx: not this one.
+              // console.log(
+              //   `modelFlow: nextActionButtonIdx=${nextModelingButtonIdx}`
+              // );
+              // auto advance needs to be communicated to the next button whose
+              // state resides in a different inline button component. Hence,
+              // dispatch the request to the next button component.
+              dispatch(Request.InlineButton_autoadvance(nextModelingButtonIdx))
+              // dispatch(Request.Modeling_start_button(nextModelingButtonIdx))
+              setNextModelingButtonIdx(IDX_INITIALIZER)
+              // setNextActionState(actionStateEnumType.gotoNextModel) // not actual FSM state: only used by useEffect
+            //   // no must be delivered to differnet component of same type
+            //   // setNextActionState(actionStateEnumType.deferredStart); 
+            // } else {
+            //   console.log(
+            //     `modelFlow: nextActionButtonIdx is invalid nextActionButtonIdx=${nextModelingButtonIdx}`
+            //   );
+            }
+            setNextActionState(actionStateEnumType.idle); 
+            break;
+          case actionStateEnumType.canceling:
+            if (pageLists.inlineButtonList[thisButtonIdx].repetitions > 0 
+              && repetitionsRemaining > 0) setRepetitionsRemaining(0)
+            dispatch(Request.Recognition_stop_requested());
+            // console.log(`@@@@ stop requested4`);
+
+            dispatch(Request.Sentence_resetOpacity());
+            dispatch(Request.Recite_stop());
+            dispatch(Request.Recite_start_passThru("canceled"));
+            // console.log(`@@@ canceled: recite canceled`);
+
+            dispatch(Request.InlineButton_canceled(thisButtonIdx)); // reset inlinebutton_idx*
+            setNextActionState(actionStateEnumType.end);
+            break;
+          default:
             console.log(
-              `modelFlow: end nextActionButtonIdx=${nextModelingButtonIdx} thisButtonIdx=${thisButtonIdx}`
-            )
-          if (
-            nextModelingButtonIdx >= 0 &&
-            nextModelingButtonIdx < pageLists.inlineButtonList.length &&
-            nextModelingButtonIdx !== thisButtonIdx
-          ) {
-            // allows this end state to cleanup before going to next model 
-            // state that sends request to next modeling inline button
-            // component corresponding to nextModelingButtonIdx: not this one.
-            console.log(
-              `modelFlow: nextActionButtonIdx=${nextModelingButtonIdx}`
+              `modelFlow: Unhandled action state encountered  ${buttonAction}:${nextActionState}`
             );
-            // auto advance needs to be communicated to the next button whose
-            // state resides in a different inline button component. Hence,
-            // dispatch the request to the next button component.
-            dispatch(Request.InlineButton_autoadvance(nextModelingButtonIdx))
-            // dispatch(Request.Modeling_start_button(nextModelingButtonIdx))
-            setNextModelingButtonIdx(IDX_INITIALIZER)
-            // setNextActionState(actionStateEnumType.gotoNextModel) // not actual FSM state: only used by useEffect
-          //   // no must be delivered to differnet component of same type
-          //   // setNextActionState(actionStateEnumType.deferredStart); 
-          // } else {
-          //   console.log(
-          //     `modelFlow: nextActionButtonIdx is invalid nextActionButtonIdx=${nextModelingButtonIdx}`
-          //   );
-          }
-          setNextActionState(actionStateEnumType.idle); 
-          break;
-        case actionStateEnumType.canceling:
-          if (pageLists.inlineButtonList[thisButtonIdx].repetitions > 0 
-            && repetitionsRemaining > 0) setRepetitionsRemaining(0)
-          dispatch(Request.Recognition_stop());
-          dispatch(Request.Sentence_resetOpacity());
-          dispatch(Request.Recite_stop());
-          dispatch(Request.Recite_start_passThru("canceled"));
-          console.log(`@@@ canceled: recite canceled`);
-
-          dispatch(Request.InlineButton_canceled(thisButtonIdx)); // reset inlinebutton_idx*
-          setNextActionState(actionStateEnumType.end);
-          break;
-        default:
-          console.log(
-            `modelFlow: Unhandled action state encountered  ${buttonAction}:${nextActionState}`
-          );
+        }
+      }
+      catch(error: any) {
+        console.log(`Unexpected exception in modelWorkFlow="${error.message}"`);
       }
     },[
       // playAudioBell,
       autoClicked,
-      bell,
+      // settingsContext.settings.config.bellTone,
       buttonAction,
       dispatch,
+      endOfPageReached,
       listeningActive,
+      listeningRequested,
       repetitionsRemaining,
       nextActionState,
       nextModelingButtonIdx,
@@ -1059,7 +973,7 @@ actionStateEnumType.instructing, actionStateEnumType.listenEnd,actionStateEnumTy
 actionStateEnumType.listening,actionStateEnumType.nextAction,
 actionStateEnumType.promptEnd,actionStateEnumType.promptStart,actionStateEnumType.prompting,
 actionStateEnumType.reciteEnd, actionStateEnumType.reciteStart, actionStateEnumType.reciting, 
-actionStateEnumType.repeatFirst, actionStateEnumType.repeating, actionStateEnumType.repeatLast,
+actionStateEnumType.repeatFirst, actionStateEnumType.repeating, actionStateEnumType.repeatEnd,
 actionStateEnumType.signalEnd, actionStateEnumType.signalStart,actionStateEnumType.start
     ]);
     useEffect(() => {
@@ -1256,8 +1170,10 @@ actionStateEnumType.signalEnd, actionStateEnumType.signalStart,actionStateEnumTy
           return <></>;
         }
       }
+    } else if (thisButtonIdx ===IDX_INITIALIZER) {
+      return <></>
     } else {
-      return <>what?</>;
+      return <>Unknown button index encountered {thisButtonIdx}.</>;
     }
   }
 );
