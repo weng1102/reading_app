@@ -52,7 +52,9 @@ import ResponsesHideRefCntButton from "./img/button_responsesrefcnt_hide.png";
 import ResponsesRefCntDisabledButton from "./img/button_responsesRefcnt_ghosted.png";
 import SectionHelpButton from "./img/button_help.png";
 export const SectionControls = (props: ISectionPropsType) => {
-  const fillinIdx = useContext(SectionFillinContext).sectionFillin.idx;
+// deleted 12/19/2025
+// const fillinIdx = useContext(SectionFillinContext).sectionFillin.idx;
+
   // Manages layout of section heading including hiding, ghosting
   // controls e.g., buttons, sliders. Reset button
   return (
@@ -230,7 +232,7 @@ export const ResponsesProgressionControl = () => {
 };
 export const ProgressionSlider = () => {
   // control manages presentation
-  let fillinContext = useContext(SectionFillinContext);
+  const fillinContext = useContext(SectionFillinContext);
   const showProgression: boolean =
     fillinContext.sectionFillin.currentSetting.showProgression;
   // const [presetLevel, setPresetLevel] = useState(
@@ -248,15 +250,23 @@ export const ProgressionSlider = () => {
     return tick >= 0 && tick <= progressionOrdinalLast;
   };
   useEffect(() => {
-    let clone: ISectionFillinItem = cloneDeep(
-      fillinContext.sectionFillin,
-      fillinContext.sectionFillin.modified
-    );
+    const currentOrder: SectionFillinResponsesProgressionEnum = fillinContext.sectionFillin.currentSetting.progressionOrder;
+    const newOrder: SectionFillinResponsesProgressionEnum 
+      = Object.values(SectionFillinResponsesProgressionEnum)[progressionOrdinal];
+    console.log(`@@@ currentOrder=${currentOrder}`);
+    console.log(`@@@ progressionOrdinal=${progressionOrdinal}`);
+    console.log(`@@@ newOrder=${newOrder}`);
+    if (newOrder !== currentOrder) {
+      const clone: ISectionFillinItem = cloneDeep(
+        fillinContext.sectionFillin,
+        fillinContext.sectionFillin.modified
+      );
     clone.currentSetting.progressionOrder = Object.values(
       SectionFillinResponsesProgressionEnum
     )[progressionOrdinal];
-    fillinContext.setSectionFillin(clone);
-  }, [progressionOrdinal, fillinContext.setSectionFillin]);
+      fillinContext.setSectionFillin(clone);
+    }
+  }, [progressionOrdinal, fillinContext]);
 
   // useEffect(() => {
   //   // console.log(`presetLevel changed to ${presetLevel}`);
