@@ -26,7 +26,7 @@ import {
 } from "./pageContentType";
 import { TerminalInlineButton } from "./reactcomp_terminals_inlinebutton";
 // import { CPageLists, PageContext } from "./pageContext";
-import { SectionDispatcher, ISectionPropsType } from "./reactcomp_sections";
+import { ISectionPropsType } from "./reactcomp_sections";
 
 export const SectionButtonGrid = React.memo((props: ISectionPropsType): any => {
   let buttonGrid: ISectionButtonGridVariant = props.section
