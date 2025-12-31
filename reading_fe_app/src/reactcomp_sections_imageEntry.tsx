@@ -195,7 +195,7 @@ export const SectionImageEntryImages = React.memo(
         });
       }
       return () => observer.disconnect();
-    }, [imagesContainerTop, imagesContainerHeight, scrollTop, contentTop]);
+    }, [imagesContainerTop, imagesContainerHeight, scrollTop, contentTop, imagesContainerDivRef]);
     useEffect(() => {
       const resizeHandler = () => {
         // console.log(` resize handler triggered`);
@@ -268,7 +268,7 @@ export const SectionImageEntryImages = React.memo(
         // );
         setResize(false);
       }
-    }, [resize]);
+    }, [contentTop, imagesContainerDivRef, imagesGroupingDivRef, resize, scrollTop]);
     useEffect(() => {
       //////////////
       // Because the scrollTop value will always to an absolute value from 0 at
