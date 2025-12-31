@@ -562,7 +562,7 @@ export const RecognitionDictionary: DictionaryType = {
   ["shao"]: "^(sh[ae]ll)$",
   ["mai"]: "^(my)",
   ["cheung"]: "^(ch[euo]ng)$",
-  ["eilis"]: "^(eyeless|eyelish|eyelash)$",
+  ["eilis"]: "^(eilish|eyeless|eyelish|eyelash|irish|iris|ellis|ellish)$",
   ["gaw"]: "^(ga{0,1}o{0,1}l{0,1}w{0,1})$",
   ["negin"]: "^(n[ei]ge{1,2}ne{0,1})$",
   ["jaylynne"]: "^(ja[yi]l[ey]n{1,2}e{0,1})$",
