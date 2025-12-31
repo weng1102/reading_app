@@ -941,7 +941,7 @@ class InlineButtonArray extends Array<IInlineButtonItem> {
   }
   serialize(): string {
     let outputStr: string =
-      "[ idx]: bIdx first  last sectn action sp  rt  next nxtBn toBeRecited\n";
+      "[ idx]: bIdx first  last sectn action sp  rt  next nxtBn c r o toBeRecited\n";
     for (const [i, element] of this.entries()) {
       outputStr = `${outputStr}[${i
         .toString()
@@ -962,7 +962,13 @@ class InlineButtonArray extends Array<IInlineButtonItem> {
         .toString()
         .padStart(5, " ")} ${element.nextButtonIdx
         .toString()
-        .padStart(5, " ")} ${element.toBeRecited}\n`;
+        .padStart(5, " ")} ${element.continuation
+        .toString()
+        .padStart(1, " ")} ${element.repetitions
+        .toString()
+        .padStart(1, " ")} ${element.obscurityIndex
+        .toString()
+        .padStart(1, " ")} ${element.toBeRecited}\n`;
     }
     return outputStr;
   }
