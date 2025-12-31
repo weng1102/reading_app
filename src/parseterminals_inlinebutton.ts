@@ -8,7 +8,17 @@
  *
  **/
 import { strict as assert } from "assert";
-import { IsError, IsDefined } from "./utilities";
+import {
+  IsError,
+  IsDefined,
+  IsValidBooleanString,
+  IsValidString,
+  ValidateArgString,
+  ValidateArg,
+  ValidateArgBoolean,
+  ValidationArgMsg
+} from "./utilities";
+import { Logger } from "./logger";
 import {
   IDX_INITIALIZER,
   ParseNodeSerializeFormatEnumType,
@@ -23,6 +33,7 @@ import {
   MarkupLabelType,
   tokenizeParameterList
 } from "./tokenizer";
+
 import {
   TerminalMetaEnumType,
   IInlineButtonTerminalMeta,
@@ -72,17 +83,22 @@ export class TerminalNode_MLTAG_INLINEBUTTON extends TerminalNode_MLTAG_
       //
       // [0]: button type:
       //      choice - multiple choice button 
-      //        [1]: { correct | incorrect } 
-      //      complete - TBD
+      //        [1]: { correct | incorrect } if blank defaults to incorrect
+      //             Should leave "incorrect" blank and allow render component 
+      //             to handle it.
+      //      complete - recite up to span relative to first word in sentence
+      //        [1]: word span to be recited (default 0 => do nothing)
       //      cues/hints - recite cues/hints embedded within button 
       //        [1]: text to be recited with button click
       //      label - recite label embedded within button
       //        [1]: word to be recited with button click
       //      model - recite then listen to prompt/response immediately 
       //      following the button.
-      //        [1]: speech rate
-      //        [2]: obscurity 0-9?
-      //        [3]: progressive retry reveal
+      //        [1]: ModelingContinuationEnum: allows grouping of models
+      //        [2]: repetitions => >0 ModelingContinuationEnum.repeat. Only 
+      //             applicable for nextModelAndContinue and repeat
+      //        [3]: rate
+      //        [4]: obscurity 0-9
       //      listen - recite then listen to prompt immediately following the button.
       //      script -  recite prompt then listen for response immediately 
       //      following the button.
@@ -96,8 +112,8 @@ export class TerminalNode_MLTAG_INLINEBUTTON extends TerminalNode_MLTAG_
       // [4]: voice index
       // [5]: css button attributes (override default),
       // </button>
-      let buttonAction: InlineButtonActionEnumType =
-        InlineButtonActionEnumType.label; //default
+      let buttonAction: InlineButtonActionEnumType;
+      let cues: string = "";
       let span: number = 1; // only for complete
       let subactionIdx = 0;
       let buttonString: string = "";
@@ -114,28 +130,114 @@ export class TerminalNode_MLTAG_INLINEBUTTON extends TerminalNode_MLTAG_
       let buttonTokens: string[] = tokenizeParameterList(buttonString);
       // console.log(`inline parse=${buttonTokens}`);
       // let buttonSubactions: string[] = buttonActions.split("-");
+      let continuationAction: number = 0; // should use 
+      let rate: number = 0;
+      let repetitions: number = 0;
+      let obscurityIndex: number = 0;
       let spanString: string;
       let label: string = "";
+      let toBeRecited: string = "";
       if (buttonTokens[0] in InlineButtonActionEnumType) {
         buttonAction = buttonTokens[0] as InlineButtonActionEnumType;
-      } else if (
-        buttonTokens[0].startsWith(InlineButtonActionEnumType.completion)
-      ) {
-        spanString = buttonAction.slice(
-          buttonAction.length - InlineButtonActionEnumType.completion.length
-        );
-        if (isNaN(+spanString)) {
-          assert(isNaN(+spanString));
-          span = 1;
-          console.log(
-            `Expected a number but encountered "${spanString}" while parsing inline button "span" at line ${token.lineNo}. Using default value=${span}.`
-          );
-          span = 1;
-        } else {
-          span = +spanString;
-        }
       } else {
+        buttonAction = InlineButtonActionEnumType.label
       }
+      switch (buttonTokens[0]) {
+        case InlineButtonActionEnumType.choice: {
+          // [1]: { correct | incorrect }
+          label = buttonTokens.length >= 1 && (buttonTokens[1] === "correct" ||
+            buttonTokens[1] === "incorrect")? buttonTokens[1].trim() : "incorrect";
+          if (label.length === 0){
+            assert(
+              label.length !== 0,
+              `Expected inline button action "choice" parameter 1 to be "correct" or "incorrect" at line ${token.lineNo}`
+            );
+          }
+          // if (buttonTokens.length < 2 && buttonTokens[1] !== "correct" &&
+          //   buttonTokens[1] !== "incorrect"
+          // ) {
+          //   assert(
+          //     false,
+          //     `Expected "correct" or "incorrect" but encountered "${buttonTokens[1]}" while parsing inline button choice action at line ${token.lineNo}`
+          //   );
+          // } else {
+          //     label = buttonTokens[1].trim();
+          // }
+          break;
+        }
+        case InlineButtonActionEnumType.completion: {
+          // [1]: span  to be recited with button click
+            span = isNaN(+buttonTokens[1])? 0:+buttonTokens[1]
+          break;
+        }
+        case InlineButtonActionEnumType.cues: {
+          // [1]: text to be recited with button click
+          label = buttonTokens[1].trim();
+          cues = buttonTokens[2] !== undefined ? buttonTokens[2].trim() : "";
+          toBeRecited = cues;
+          break;
+        }
+        case InlineButtonActionEnumType.label: {
+          // [1]: word to be recited with button click
+          label = buttonTokens[1].trim();
+          break;
+        }
+        case InlineButtonActionEnumType.model: {
+          // [1]: ModelingContinuationEnum: allows grouping of models
+          // [2]: repetitions => >0
+          // [3]: rate
+          // [4]: obscurity 0-9
+          // model - recite then listen to prompt/response immediately following the button.
+          // Use ValidateArgs
+          continuationAction = isNaN(+buttonTokens[1])? 0:+buttonTokens[1];
+          /// -1 should be ModelingContinuationEnum.unspecified
+          repetitions = isNaN(+buttonTokens[2])? 0:+buttonTokens[2];
+          rate = isNaN(+buttonTokens[3])? 0 : +buttonTokens[3];
+          obscurityIndex = isNaN(+buttonTokens[4])? 0 : +buttonTokens[4];
+        
+          // should test (buttonTokens[1] in ModelingContinuationEnum) when
+          // ModelingContinuationEnum is available for parseObject
+          break;
+        }
+        case InlineButtonActionEnumType.none: {
+          // none - do nothing
+          break;
+        }
+        case InlineButtonActionEnumType.script: {
+          // script - recite prompt then listen for response immediately following the button.
+          break;
+        }
+        case InlineButtonActionEnumType.term: {
+          // [1]: word to be recited with button click
+          label = buttonTokens[1].trim();
+          break;
+        }
+        default: {
+          assert(
+            false,
+            `Expected valid inline button action but encountered "${buttonTokens[0]}" while parsing inline button action at line ${token.lineNo}`
+          );
+        }
+      }
+      // if (buttonTokens[0] in InlineButtonActionEnumType) {
+      //   buttonAction = buttonTokens[0] as InlineButtonActionEnumType;
+      // } else if (
+      //   // completion with span
+      //   buttonTokens[0].startsWith(InlineButtonActionEnumType.completion)
+      // ) {
+      //   spanString = buttonAction.slice(
+      //     buttonAction.length - InlineButtonActionEnumType.completion.length
+      //   );
+      //   if (isNaN(+spanString)) {
+      //     assert(isNaN(+spanString));
+      //     span = 1;
+      //     console.log(
+      //       `Expected a number but encountered "${spanString}" while parsing inline button "span" at line ${token.lineNo}. Using default value=${span}.`
+      //     );
+      //     span = 1;
+      //   } else {
+      //     span = +spanString;
+      //   }
       // just assume the defaults for everything
       // determine image based on parameters
       // let imageFile: string; // ReciteScopeEnumType.label (default image)
@@ -153,15 +255,11 @@ export class TerminalNode_MLTAG_INLINEBUTTON extends TerminalNode_MLTAG_
       // console.log(`label=${buttonTokens[1]}`);
       // need to parse string contractions and numbers with commas
       // console.log(`label=${buttonTokens[1]}`);
-      label = buttonTokens[1].trim();
-      this.logger.diagnostic(`button label=${label}`);
+      // label = buttonTokens[1].trim();
+      // this.logger.diagnostic(`button label=${label}`);
       // let sortKey: string = buttonTokens[2] !== undefined ? buttonTokens[2].trim() : "";
-      let cues: string =
-        buttonTokens[2] !== undefined ? buttonTokens[2].trim() : "";
-      let rate: number =
-        buttonTokens[3] !== undefined && !isNaN(+buttonTokens[3])
-          ? +buttonTokens[3]
-          : 0;
+      // let cues: string =
+      //   buttonTokens[2] !== undefined ? buttonTokens[2].trim() : "";
       // buttonTokens[2] can also be sortkey for term
 
       let termIdx: number = this.userContext.terminals.lastIdx;
@@ -170,14 +268,14 @@ export class TerminalNode_MLTAG_INLINEBUTTON extends TerminalNode_MLTAG_
       // This termIdx is a placeholder until buttons.parse() can set the actual termIdx to the start of the next sentence that has yet to be parsed. This
       // current value is required to determine the actual value when
       // buttons.parse() has access to ALL terminals (after this one).
-      let toBeRecited: string = "";
-      switch (buttonAction) {
-        case InlineButtonActionEnumType.cues:
-          toBeRecited = cues;
-          break;
-        default:
-          toBeRecited = `label: ${label}`;
-      }
+
+      // switch (buttonAction) {
+      //   case InlineButtonActionEnumType.cues:
+      //     toBeRecited = cues;
+      //     break;
+      //   default:
+      //     toBeRecited = `label: ${label}`;
+      // }
       this.meta.buttonIdx =
         this.userContext.inlineButtons.push(
           IInlineButtonItemInitializer(
@@ -193,7 +291,10 @@ export class TerminalNode_MLTAG_INLINEBUTTON extends TerminalNode_MLTAG_
             undefined,
             undefined,
             undefined,
-            toBeRecited
+            toBeRecited,
+            continuationAction, 
+            repetitions,
+            obscurityIndex
           )
         ) - 1;
       this.userContext.inlineButtons[
