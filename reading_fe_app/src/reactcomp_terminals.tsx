@@ -13,12 +13,12 @@
  * Version history:
  *
  **/
-import React from "react";
+import React, { useState } from "react";
 import { Request } from "./reducers";
 import { useAppDispatch, useAppSelector, useSpanRef } from "./hooks";
 import {
   useContext,
-  // useEffect,
+  useEffect,
   // useRef,
   // useState,
   useLayoutEffect
@@ -493,11 +493,12 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
     store => store.cursor_sentenceIdx);
   const isPartOfObscuredSentence: boolean = obscuredSentIdx === currentSentIdx;
   const retriesExceeded: boolean = useAppSelector(
-    store => store.listen_wordRetries_limit_exceeded);
-  const retriesProgress: number = useAppSelector(store => store.listen_wordRetries_limit_progress);
+    store => store.recognition_wordRetries_limit_exceeded);
+  const retriesProgress: number = useAppSelector(store => store.recognition_wordRetries_limit_progress);
   const retrying: boolean = retriesProgress > 0;
     //const [attribute, setAttribute] = useState(false)
   const { sectionFillin, setSectionFillin } = useContext(SectionFillinContext);
+  // const [classAttributes, setAttributes] = useState("");
   // const [boundingBoxBottom, setBoundingBoxBottom] = useState(0);
   // const [scrollIntoView, setScrollIntoView] = useState(false);
   // useEffect(() => {
@@ -512,6 +513,22 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
   //     }
   //   }
   // }, [scrollIntoView]);
+//   useEffect(() => {
+//     // sets/resets attributes when current sentence changes
+//     if (obscuredSentIdx === currentSentIdx) {
+//       if (retriesProgress > 0) {
+//       } else {
+//       }
+//     }
+//   },[obscuredSentIdx,currentSentIdx, retriesProgress])
+//   useEffect(() => {
+//     // set/resets attributes associated with retries progress
+    
+//   },[retriesProgress])
+//   useEffect(() => {
+//       console.log(`@@@ TerminalNode:: useEffect: props.content=${props.terminalInfo.content} retriesProgress=${retriesProgress} active=${props.active} `);
+  
+// },[retriesProgress,props.terminalInfo.content, props.active,isPartOfObscuredSentence]);
   useLayoutEffect(() => {
     /* Consider multiple scrollIntoView modes:
       interparagraph/section: scroll to top of new sectionName
@@ -582,15 +599,17 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
     // console.log(
     //   `@@@@ <TerminalNode>  active=${props.active}, recitable=${props.terminalInfo.recitable}, content=${props.terminalInfo.content}`
     // );
-    let attributes: string = `${
+    let attributesDerivedFromReducer: string = "";
+    let attributesDerivedFromProps: string = `${
       props.terminalInfo.fillin.responseIdx >= 0
         ? " fillin-prompts-terminal "
         : ""
     } ${props.terminalInfo.recitable ? "recitable-word " : ""} ${
       props.active ? "active" : ""
     } ${hidden}`;
+
     if (props.active && retrying) {
-      attributes += ` retry`;
+      attributesDerivedFromReducer += ` retry`;
     } else {
 
     }
@@ -601,17 +620,19 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
     // all preceding words in the sentence.
     //  
     if (props.active && isPartOfObscuredSentence) {
-    if (retriesExceeded) {
-      attributes += ` obscured-0 `;
-    } else if (retriesProgress >= 0.80) {
-      attributes += ` obscured-0 `;
-    } else if (retriesProgress >= 0.60) {
-      attributes += ` obscured-0 `;
-    } else if (retriesProgress >= 0.40) {
-      attributes += ` obscured-1 `;
-    } else if (retriesProgress >= 0.20) {
-    } else {
-    }
+      // console.log(`@@@ TerminalNode: word=${props.terminalInfo.content} isPartOfObscuredSentence=${isPartOfObscuredSentence} obscuredSentenceIdx=${obscuredSentIdx} currentSentIdx=${currentSentIdx} retriesProgress=${retriesProgress}`);
+      if (retriesExceeded) {
+        attributesDerivedFromReducer += ` obscured-0 `;
+      } else if (retriesProgress >= 0.80) {
+        attributesDerivedFromReducer += ` obscured-0 `;
+      } else if (retriesProgress >= 0.60) {
+        attributesDerivedFromReducer += ` obscured-0 `;
+      } else if (retriesProgress >= 0.40) {
+        attributesDerivedFromReducer += ` obscured-0 `;
+      } else if (retriesProgress >= 0.20) {
+      } else {
+      }
+        console.log(`@@@ TerminalNode: word=${props.terminalInfo.content} retriesExceeded=${retriesExceeded} attributes="${attributesDerivedFromProps} ${attributesDerivedFromReducer}"`);
   //
     // console.log(
     //   `@@@@ <TerminalNode>  active=${props.active}, recitable=${props.terminalInfo.recitable}, attributes=${attributes}`
@@ -631,7 +652,7 @@ export const TerminalNode = React.memo((props: ITerminalNodePropsType): any => {
     // console.log(`${props.terminalInfo.content}: hidden3=${hidden} `);
     return (
       <span
-        className={`${props.class} ${attributes}`}
+        className={`${props.class} ${attributesDerivedFromProps} ${attributesDerivedFromReducer}`}
         ref={terminalRef}
         onClick={() =>
           dispatch(Request.Cursor_gotoWordByIdx(props.terminalInfo.termIdx))
