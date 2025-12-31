@@ -60,7 +60,9 @@ import ResponsesCategoryHideButton from "./img/button_categorize_hide.png";
 import ResponsesCategoryDisabledButton from "./img/button_categorize_ghosted.png";
 export const SectionFillin = React.memo((props: ISectionPropsType): any => {
   // copy of initial author's settings
-  const fillinContext = useContext(SectionFillinContext);
+
+  // deleted 12/19/2025
+  // const fillinContext = useContext(SectionFillinContext);
 
   // const sectionFillin: ISectionFillinItem = fillinContext.sectionFillin;
   let fillinContent: ISectionFillinVariant = props.section
@@ -78,9 +80,10 @@ export const SectionFillin = React.memo((props: ISectionPropsType): any => {
       fillinContent.authorSetting
     )
   );
-  const [resetRequested, setResetRequested] = useState(
-    fillinContext.sectionFillin.allowReset
-  );
+  // deleted 12/19/2025
+  // const [resetRequested, setResetRequested] = useState(
+  //   fillinContext.sectionFillin.allowReset
+  // );
   const pageLists: CPageLists = useContext(PageContext)!;
 
   // useEffect(() => {
@@ -88,7 +91,10 @@ export const SectionFillin = React.memo((props: ISectionPropsType): any => {
   //     setResetRequested(false);
   //   }
   // }, [resetRequested]);
-  let dispatch = useAppDispatch();
+
+  // deleted 12/19/2025
+  // let dispatch = useAppDispatch();
+
   // for (const value in SectionFillinResponsesProgressionEnum) {
   //   console.log(`ResponsesProgressionName=${value}`);
   // }
@@ -288,7 +294,9 @@ const ResponsesSelect = (props: IResponseItemsPropsType): any => {
   // else emit sinble grouping
   const fillinContext = useContext(SectionFillinContext);
   let responses: IFillinResponseItem[] = cloneDeep(props.responses);
-  let modified: boolean = fillinContext.sectionFillin.modified;
+
+  // deleted 12/19/2025
+  // let modified: boolean = fillinContext.sectionFillin.modified;
   let selectedResponses: IFillinResponseItem[] = [];
 
   if (fillinContext.sectionFillin.currentSetting.unique) {
@@ -409,7 +417,9 @@ const ResponsesSelectGrid = (props: IResponseSelectPropsType): any => {
   }
 };
 const ResponsesSelectGridItems = (props: IResponseSelectPropsType): any => {
-  const fillinContext = useContext(SectionFillinContext);
+    // deleted 12/19/2025
+  // const fillinContext = useContext(SectionFillinContext);
+
   // const columnCount: string = fillinContext.sectionFillin.currentSetting.gridColumns.toString();
   return <ResponsesGridItems responses={props.responses} />;
 };
@@ -434,14 +444,16 @@ const ResponsesList = (props: IResponseItemsPropsType): any => {
     </ul>
   );
 };
-const ResponsesSelectList = (props: IResponseSelectPropsType): any => {
-  // console.log(`<ResponsesList />`);
-  return (
-    <ul>
-      <ResponsesListItems responses={props.responses} />
-    </ul>
-  );
-};
+  // deleted 12/19/2025
+// const ResponsesSelectList = (props: IResponseSelectPropsType): any => {
+//   // console.log(`<ResponsesList />`);
+//   return (
+//     <ul>
+//       <ResponsesListItems responses={props.responses} />
+//     </ul>
+//   );
+// };
+
 // const ResponsesSelectCsvList = (props: IResponseSelectPropsType): any => {
 //   // console.log(`<ResponsesCsv />`);
 //   return <ResponsesSelectCsvItems responses={props.responses} />;
@@ -555,7 +567,10 @@ const ResponsesListItems = (props: IResponseItemsPropsType): any => {
 };
 const ResponsesGridItems = (props: IResponseSelectPropsType): any => {
   let responses: IFillinResponses = props.responses;
-  const fillinContext = useContext(SectionFillinContext);
+
+  // deleted 12/19/2025
+  // const fillinContext = useContext(SectionFillinContext);
+
   // const groupByTags: boolean =
   //   fillinContext.sectionFillin.currentSetting.groupByTags;
   return responses.map((response: IFillinResponseItem, keyvalue: number) => (
