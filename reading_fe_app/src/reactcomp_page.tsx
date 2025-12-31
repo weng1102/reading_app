@@ -72,6 +72,7 @@ import {
   PageRequestItemType,
   PageRequestItemInitializer
 } from "./pageContentType";
+import { LinkIdxDestinationType } from "./pageContentType";
 import { CPageLists, PageContext } from "./pageContext";
 import { SettingsContext, ISettingsContext } from "./settingsContext";
 import { NavBar } from "./reactcomp_navbar";
@@ -119,6 +120,8 @@ export const Page = React.memo((props: IPagePropsType) => {
   const [pageMessage, setPageMessage] = useState<string>("");
   const { isActive, toggleDialog } = useDialog();
   const dispatch = useAppDispatch();
+  const queryParameters: any = new URLSearchParams(window.location.search);
+  const skipSchemaCheck: boolean = queryParameters.get("skipSchemaCheck") !== null;
 
   const settingsContext: ISettingsContext = useContext(SettingsContext)!;
   const distDir: string = settingsContext.settings.config.distDir;
@@ -169,13 +172,16 @@ export const Page = React.memo((props: IPagePropsType) => {
         data => {
           try {
             // setIsPageFetchRequested(false);
-            if (data.version !== PageContentVersion) {
+              console.log(`page: skipSchemaCheck=${skipSchemaCheck}`);
+
+            if (!skipSchemaCheck && data.version !== PageContentVersion) {
               setParseError(
                 `Incompatible object format encountered for page  "${pageRequested.page}". The object format expected by the application (of ${PageContentVersion}) is not compatible with the format (of ${data.version}) in the page object.`
               );
             } else {
               let content: IPageContent = data as IPageContent;
               message = `Parsing json for "${page}"`;
+              if (skipSchemaCheck) message += " (schema check skipped)";
               dispatch(Request.Message_set(message));
               // setPageContext(null);
               let pageLists: CPageLists = new CPageLists(
@@ -215,6 +221,7 @@ export const Page = React.memo((props: IPagePropsType) => {
     // setPageContext,
     // setIsPageContentFetched,
     pageRequested.page,
+    skipSchemaCheck,
     distDir,
     // parseError.length
   ]);
@@ -365,7 +372,8 @@ export const Page = React.memo((props: IPagePropsType) => {
         if (pageLoaded.page.length > 0) {
           setPreviouslyLoadedPage({
             page: pageLoaded.page,
-            currentTermIdx: currentTermIdx
+            currentTermIdx: currentTermIdx,
+            skipSchemaCheck: pageLoaded.skipSchemaCheck
           });
           message = `Page fetched, data loaded and parsed successfully for "${pageRequested.page}"`;
         } else {
@@ -481,6 +489,30 @@ export const Page = React.memo((props: IPagePropsType) => {
   ////////////
   // Rendering
   ////////////
+    // const queryParameters: any = new URLSearchParams(window.location.search);
+  const pageName: string = queryParameters.get("page");
+  if (pageRequested_link.page.length > 0) {
+  console.log(`pagelink=${pageRequested_link.page}`);
+  }
+  else if (settingsContext.settings.config.homePage.length === 0) {
+    dispatch(Request.Page_load("sitemap"));
+  } else if (pageName) {
+    const headingId: number = +queryParameters.get("headingid");
+    // heading id is NOT implemented. Look at reducer for reason. The ids
+    // to be stored in reducer are only valid initially.
+    dispatch(
+      Request.Page_load(pageName, LinkIdxDestinationType.heading, headingId)
+    );
+    /// reset url?
+    // let href = new URL(window.location.href);
+    // href.search = "";
+    //    window.history.replaceState(null, "New Page Title", "/https://weng1102");
+  } else if (pageRequested_home) {
+    dispatch(Request.Page_home());
+  } else {
+  console.log(`page else`);
+
+  }
   console.log(pageMessage);
   const postamble: string =
     "Please notify the administrator of this error. Refresh the browser window to continue.";
@@ -488,7 +520,6 @@ export const Page = React.memo((props: IPagePropsType) => {
   if (responseError.length > 0) pageLoadError = responseError;
   else if (parseError.length > 0) pageLoadError = parseError;
   else pageLoadError = "";
-  // if (pageLoadError.length > 0) {
   dispatch(Request.Message_set(pageMessage));
   return (
     <PageContext.Provider value={pageContext}>
