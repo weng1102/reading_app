@@ -46,10 +46,14 @@ export const Sentence = React.memo((props: ISentencePropsType) => {
   const currentSentIdx: number = useAppSelector(
     store => store.cursor_sentenceIdx
   );
-  const retries: number = useAppSelector(store => store.listen_wordRetries);
+  const retries: number = useAppSelector(store => store.recognition_wordRetries);
   const obscuredSentIdx: number = useAppSelector(
     store => store.sentence_idxObscured
   );
+  // const listeningActive = useAppSelector(store => store.recognition_active);
+  // useEffect(() => {
+  //     console.log(`Sentence useEffect listening_active=${listeningActive}`);
+  //     },[listeningActive])
   useEffect(() => {
     if (currentSentIdx === obscuredSentIdx) {
       console.log(
@@ -72,6 +76,8 @@ export const Sentence = React.memo((props: ISentencePropsType) => {
     }
   },[retries, obscuredSentIdx, currentSentIdx]);
   let sentenceClasses: string = "";
+  // console.log(`Sentence rendering listening_active=${listeningActive}`);
+
 
   if (props.sentence.id === obscuredSentIdx) {
     console.log(
