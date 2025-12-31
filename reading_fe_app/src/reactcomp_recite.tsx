@@ -1022,7 +1022,7 @@ useEffect(() => {
     RecitationReferenceEnumType.following, // or not
     settingsContext.settings.speech.placement
   );
-  dispatch(Request.Recognition_stop);
+  dispatch(Request.Recognition_stop_requested());
   const reciteClicked = () => {
     // setReciteButtonRequested(!reciteButtonRequested);
     // setReciteButtonToggled(!reciteButtonToggled)
