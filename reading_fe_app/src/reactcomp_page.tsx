@@ -372,8 +372,7 @@ export const Page = React.memo((props: IPagePropsType) => {
         if (pageLoaded.page.length > 0) {
           setPreviouslyLoadedPage({
             page: pageLoaded.page,
-            currentTermIdx: currentTermIdx,
-            skipSchemaCheck: pageLoaded.skipSchemaCheck
+            currentTermIdx: currentTermIdx
           });
           message = `Page fetched, data loaded and parsed successfully for "${pageRequested.page}"`;
         } else {

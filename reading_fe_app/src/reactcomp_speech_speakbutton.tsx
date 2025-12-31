@@ -178,7 +178,7 @@ export const SpeakButton = () => {
     return messageQueue;
   }; //somethingToRecite
   // if currently listening, stop and restart after reciting
-  dispatch(Request.Recognition_stop);
+  dispatch(Request.Recognition_stop_requested());
   return (
     <>
       <img
