@@ -65,7 +65,7 @@ import {
   useState,
   useContext
 } from "react";
-import { SentenceListItemEnumType } from "./pageContentType";
+// import { SentenceListItemEnumType } from "./pageContentType";
 import SpeechRecognition, {
   useSpeechRecognition
 } from "react-speech-recognition";
@@ -75,7 +75,7 @@ import {
   NotificationMode,
   SettingsContext
 } from "./settingsContext";
-import { store } from "./store";
+// import { store } from "./store";
 export const ListeningMonitor = React.memo(() => {
   //console.log = () => {};
   console.log(`ListeningMonitor`);
@@ -85,10 +85,11 @@ export const ListeningMonitor = React.memo(() => {
   // 2) how much of the leading words of the current transcript can be
   // truncated because those words were already matched during the previous
   // invocation.
-  const [
-    optimizeUsingPreviousTranscript,
-    setOptimizeUsingPreviousTranscript
-  ] = useState(true as boolean);
+  // const [
+  //   optimizeUsingPreviousTranscript,
+  //   setOptimizeUsingPreviousTranscript
+  // ] = useState(true as boolean);
+  const optimizeUsingPreviousTranscript: boolean = true
 
   // previousTranscript holds the previous interim transcript
   // until the final transcript is scanned, at which time the value is cleared.
@@ -123,9 +124,9 @@ export const ListeningMonitor = React.memo(() => {
   //   _setWordRetries(wordRetries);
   //   // dispatch(Request.Recognition_wordRetries(wordRetries));
   // }
-  const wordRetries: number = useAppSelector(store=> store.listen_wordRetries);
+  const wordRetries: number = useAppSelector(store=> store.recognition_wordRetries);
   const wordRetries_exceeded: boolean = useAppSelector(
-    store=> store.listen_wordRetries_limit_exceeded
+    store=> store.recognition_wordRetries_limit_exceeded
   );
   // const wordRetrying: boolean = useAppSelector(store=> store.listen_wordRetrying);
   const {
@@ -135,17 +136,19 @@ export const ListeningMonitor = React.memo(() => {
     resetTranscript,
     listening
   } = useSpeechRecognition();
-  const dispatch = useAppDispatch();
-
-  const listeningRequested: boolean = useAppSelector(
-    store => store.listen_active
-  );
-  console.log(`#### LISTENING: listeningRequested=${listeningRequested}, listening=${listening}`);
-    const stopListeningAtEOS: boolean = useAppSelector(
-    store => store.listen_stopAtEOS
+  const dispatch = useAppDispatch(); 
+  const stopListeningAtEOS: boolean = useAppSelector(
+    store => store.recognition_stopAtEOS
   );
   const pageContext: CPageLists = useContext(PageContext)!;
-
+  const listeningRequested: boolean = useAppSelector(
+    store => store.recognition_requested
+  );
+  const ContinuousListeningInEnglish: IRecognitionArguments = useMemo(() =>({
+      continuous: true,
+      interimResults: true,
+      language: "en-US"
+    }),[])
   let settingsContext: ISettingsContext = useContext(
     SettingsContext
   ) as ISettingsContext;
@@ -157,11 +160,6 @@ export const ListeningMonitor = React.memo(() => {
     interimResults: boolean;
     language: string;
   }
-  const ContinuousListeningInEnglish: IRecognitionArguments = {
-    continuous: true,
-    interimResults: true,
-    language: "en-US"
-  };
   const silenceTimerIdRef = useRef<number | null>(null);
   const startSilenceTimer = useCallback(() => {
     clearSilenceTimer();
@@ -169,7 +167,9 @@ export const ListeningMonitor = React.memo(() => {
       console.log(`SILENCE TIMEOUT TRIGGERED`);
       resetTranscript();
       SpeechRecognition.abortListening();
-      dispatch(Request.Recognition_stop());
+      dispatch(Request.Recognition_stop_requested());
+      console.log(`@@@@ stop requested9`);
+
     }, silenceTimeout * 1000);
     // console.log(`Starting silence timer for id=${retval}`);
     // console.log(`LISTENING: Setting silence timer`);
@@ -197,6 +197,64 @@ export const ListeningMonitor = React.memo(() => {
   const reciteWordRequested = useAppSelector(
     store => store.recite_word_requested
   );
+
+  useEffect(() => {
+    // update listening state from speechRecognition to reducer 
+    if (listening)
+      dispatch(Request.Recognition_active());
+    else {
+      dispatch(Request.Recognition_inactive());
+  }
+  },[dispatch, listening]);
+
+  useEffect(() => {
+    console.log(`#### LISTENING: listeningRequested=${listeningRequested} listening=${listening}`) 
+    if (listeningRequested) {
+      if (!listening) {
+        console.log(`#### LISTENING: start listening=${listening}`) 
+        dispatch(Request.Recognition_set_retries_limit(maxRetries))
+        SpeechRecognition.startListening(ContinuousListeningInEnglish);
+        startSilenceTimer();
+      } else {
+        console.log(`#### LISTENING: already started listening=${listening}`) 
+      }
+    } else {
+      if (listening) {
+        console.log(`#### LISTENING: stop listening=${listening}`) 
+        dispatch(Request.Recognition_set_retries_limit(maxRetries))
+        SpeechRecognition.abortListening();
+        clearSilenceTimer();
+      } else {
+        console.log(`#### LISTENING: already stopped listening=${listening}`) 
+      }
+    }
+  },[dispatch, listeningRequested, listening, ContinuousListeningInEnglish, maxRetries, startSilenceTimer]);
+
+  // useEffect(() => {
+  //   if (listening) {
+  //     console.log("LISTENING: start listening requested");
+  //     // if (listening) {
+  //     //   console.log("LISTENING: start listening requested while already listening");
+  //     // }else {
+  //       console.log("LISTENING: start listening requested while not listening");
+  //       dispatch(Request.Recognition_set_retries_limit(maxRetries))
+  //       SpeechRecognition.startListening(ContinuousListeningInEnglish);
+  //       // startSilenceTimer();
+  //     // }
+  //   } else {
+  //     console.log("LISTENING: stop listening requested");
+  //     // if (listening) {
+  //       console.log("LISTENING: stop listening requested while listening");
+  //       dispatch(Request.Recognition_stop_requested());
+  //       SpeechRecognition.abortListening();
+  //       clearSilenceTimer();
+  //     // }else {
+  //     //   console.log("LISTENING: stop listening requested while already not listening");
+  //     // }
+  //   }
+  // }, [dispatch, listening, listeningRequested, ContinuousListeningInEnglish, maxRetries]);
+
+
   ////////////////////////////////////
   // Start and stop listening manually
   ////////////////////////////////////
@@ -210,8 +268,10 @@ export const ListeningMonitor = React.memo(() => {
   // wordRetries=${wordRetries},
   // reciteWordRequested=${reciteWordRequested}`);
 
+ /*
   useEffect(() => {
     if (!listening && listeningRequested) {
+      console.log("LISTENING: start listening requested while previously not listening");
       // console.log(`restart listening because browser eventually times out`);
       // console.log(
       //   `ContinuousListeningInEnglish=${ContinuousListeningInEnglish.interimResults},${ContinuousListeningInEnglish.continuous}`
@@ -221,17 +281,44 @@ export const ListeningMonitor = React.memo(() => {
     }
   }, [dispatch, listening, listeningRequested, ContinuousListeningInEnglish, maxRetries]);
   useEffect(() => {
-    if (!listeningRequested) {
+    if (!listeningRequested && listening) {
+      console.log(`LISTENING: stop listening requested listening=${listening}`);
       dispatch(Request.Recognition_stop());
+      console.log(`@@@@ stop requested7`);
+
       // dispatch(Request.InlineButton_listened())
       SpeechRecognition.abortListening();
       clearSilenceTimer();
-      console.log("LISTENING: stop listening requested");
     } else {
+      console.log(`LISTENING: start listening requested while listening=${listening}`);
       SpeechRecognition.startListening(ContinuousListeningInEnglish);
       startSilenceTimer();
     }
-  }, [startSilenceTimer, listeningRequested, ContinuousListeningInEnglish, dispatch]);
+  }, [startSilenceTimer, listeningRequested, ContinuousListeningInEnglish, listening, dispatch]);
+  */
+  // useEffect(() => {
+  //   if (listeningRequested) {
+  //     console.log("LISTENING: start listening requested");
+  //     // if (listening) {
+  //     //   console.log("LISTENING: start listening requested while already listening");
+  //     // }else {
+  //       console.log("LISTENING: start listening requested while not listening");
+  //       dispatch(Request.Recognition_set_retries_limit(maxRetries))
+  //       SpeechRecognition.startListening(ContinuousListeningInEnglish);
+  //       // startSilenceTimer();
+  //     // }
+  //   } else {
+  //     console.log("LISTENING: stop listening requested");
+  //     // if (listening) {
+  //       console.log("LISTENING: stop listening requested while listening");
+  //       dispatch(Request.Recognition_stop_requested());
+  //       SpeechRecognition.abortListening();
+  //       clearSilenceTimer();
+  //     // }else {
+  //     //   console.log("LISTENING: stop listening requested while already not listening");
+  //     // }
+  //   }
+  // }, [dispatch, listening, listeningRequested, ContinuousListeningInEnglish, maxRetries]);
   useEffect(() => {
     if (nextSentence) {
       console.log(
@@ -255,10 +342,10 @@ export const ListeningMonitor = React.memo(() => {
       // } else {
       //   console.log(`@LISTENING: sentenceTransition=${sentenceType}`);
       // }
-      if (stopListeningAtEOS) dispatch(Request.Recognition_stop());
+      if (stopListeningAtEOS) dispatch(Request.Recognition_stop_requested());
       return;
     }
-  }, [dispatch, nextSentence, resetTranscript, stopListeningAtEOS
+  }, [dispatch, maxRetries, nextSentence, resetTranscript, stopListeningAtEOS
   ]);
   // useEffect(() => {
   //   console.log(`previousMatchedTerminalIdx=${previousMatchedTerminalIdx} changed
@@ -329,7 +416,7 @@ export const ListeningMonitor = React.memo(() => {
     let transcript: string = "";
     let transcriptEndOffset: number = 0;
     //
-    isListening = listening && pageContext.terminalList !== null;
+    isListening = listening && pageContext && pageContext.terminalList !== null;
     // LISTENING: determines the following states (initially false)
     // Final transcript is the accumulation of previous interim transcripts.
     // e.g., "The", "The quick", "The quick brown",
@@ -786,12 +873,13 @@ export const ListeningMonitor = React.memo(() => {
     nextSentence,
     nextSentenceAcknowledged,
     optimizeUsingPreviousTranscript,
+    pageContext,
     previousMatchedTerminalIdx,
     previousTranscript,
     previousTranscriptMatchEndOffset, 
     startSilenceTimer,
     terminalList,
-    // wordRetries,
+    wordRetries,
   ]);
   useEffect(() => {
     // console.log(`LISTENING: retries`);
@@ -824,10 +912,11 @@ export const ListeningMonitor = React.memo(() => {
   );
   useEffect(() => {
     if (endOfPageReached) {
-      console.log("LISTENING: stopped listening at end of page");
-      dispatch(Request.Recognition_stop());
+      console.log(`LISTENING: stopped listening at end of page listeningRequested=${listeningRequested}`);
+      // except if last model to be repeated
+      // dispatch(Request.Recognition_stop());
     }
-  }, [listening, endOfPageReached, dispatch]);
+  }, [listening, listeningRequested, endOfPageReached, dispatch]);
 
   if (SpeechRecognition.browserSupportsSpeechRecognition()) {
     // listenButton disallows listening already but just in case
@@ -914,10 +1003,10 @@ export const ListenButton = () => {
   let settingsContext: ISettingsContext = useContext(
     SettingsContext
   ) as ISettingsContext;
-  const listeningAvailable = useAppSelector(store => store.listen_available);
-  const listening = useAppSelector(store => store.listen_active);
+  const listeningAvailable = useAppSelector(store => store.recognition_available);
+  const listeningActive = useAppSelector(store => store.recognition_active);
   const maxRetries: number = settingsContext.settings.listen.retries;
-  console.log(`listenbutton listening=${listening}`);
+  console.log(`listenbutton listeningActive=${listeningActive}`);
   console.log(`listenbutton listeningAvailable=${listeningAvailable}`);
   const dispatch = useAppDispatch();
   // dispatch(Request.Recite_stop()); // disable reciting
@@ -929,7 +1018,7 @@ export const ListenButton = () => {
         alt="mic"
         src={
           listeningAvailable
-            ? listening
+            ? listeningActive
               ? listenRedActiveIcon
               : listenIcon
             : listenGhostedIcon
