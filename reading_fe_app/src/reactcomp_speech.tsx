@@ -175,8 +175,8 @@ export const SpeechMonitor = () => {
   const sentenceListeningTransition: SentenceListItemEnumType = useAppSelector(
     store => store.sentence_type
   );
-  const announcementEnabled = useAppSelector(store => store.listen_announcementEnabled)
-  const sectionIdx = useAppSelector(store => store.cursor_sectionIdx);
+  const announcementEnabled = useAppSelector(store => store.recognition_announcementEnabled)
+  // const sectionIdx = useAppSelector(store => store.cursor_sectionIdx);
   const useDefaultSentenceTransitions: boolean = useAppSelector(store => 
     store.sentence_useDefaultTransitions);
   useEffect(() => {
@@ -185,20 +185,20 @@ export const SpeechMonitor = () => {
     // resetAnnounce_transitions() above.
 
     // test 
-      console.log(`##transition=${nextSentence}, ${nextSection}`);
+      // console.log(`##transition=${nextSentence}, ${nextSection}`);
       setAnnounce_beginningOfPage(beginningOfPage);
       setAnnounce_nextSection(nextSection);
       setAnnounce_nextSentence(nextSentence && useDefaultSentenceTransitions);
-  }, [beginningOfPage, nextSection, nextSentence]);
+  }, [beginningOfPage, nextSection, nextSentence, useDefaultSentenceTransitions]);
 
   useEffect(() => {
     // Listeningmessage dispatcher: Interprets the listening transition in the
     // context a sentence transition that may coincide with a section/paragraph
     // beginning or end of page transitions. An explicit listening transition
     // overrides announce messages.
-    console.log(
-      `@@inside useEffect [${announce_beginningOfPage}, ${announce_nextSection}, ${announce_nextSentence}]`
-    );
+    // console.log(
+    //   `@@inside useEffect [${announce_beginningOfPage}, ${announce_nextSection}, ${announce_nextSentence}]`
+    // );
     /*
     switch (sentenceListeningTransition) {
       case SentenceListItemEnumType.default:
@@ -274,10 +274,10 @@ export const SpeechMonitor = () => {
 
   const endOfPage = useAppSelector(store => store.cursor_endOfPageReached);
   useEffect(() => {
-    if (endOfPage) {
+    if (announcementEnabled && endOfPage) {
       Synthesizer.speak("end of page");
     }
-  }, [endOfPage]);
+  }, [announcementEnabled, endOfPage]);
 
   const announcement = useAppSelector(store => store.announce_message);
   useEffect(
@@ -290,7 +290,7 @@ export const SpeechMonitor = () => {
     },
     [announcement, message] // to recite just the words
   );
-  const listening = useAppSelector(store => store.listen_active);
+  const listening = useAppSelector(store => store.recognition_active);
   useEffect(() => {
     if (!announcementEnabled) {
       // say nothing
@@ -300,7 +300,7 @@ export const SpeechMonitor = () => {
     } else {
       Synthesizer.speak("not listening");
     }
-  }, [listening]);
+  }, [listening, announcementEnabled]);
   if (message.length > 0) message = `SPEECH: ${message}`;
   return <div>{message}</div>;
 };
