@@ -92,6 +92,8 @@ export interface IConfigSettings {
   fontSizeAdjustment: number; // in px
   lineSpacingAdjustment: number; // in px
   fillinPresets: ISectionFillinPresets;
+  bellTone: HTMLAudioElement;
+  buzzerTone: HTMLAudioElement;
 }
 export function ConfigSettingsInitializer(
   homePage: string = "ronlyn",
@@ -102,7 +104,9 @@ export function ConfigSettingsInitializer(
   navbarWidth: number = 25,
   fontSizeAdjustment: number = 0,
   lineSpacingAdjustment: number = 0,
-  fillinPresets: ISectionFillinPresets = ISectionFillinPresetsInitializer()
+  fillinPresets: ISectionFillinPresets = ISectionFillinPresetsInitializer(),
+  bellTone: HTMLAudioElement = new Audio(BellShort),
+  buzzerTone: HTMLAudioElement = new Audio(BuzzerShort)
 ): IConfigSettings {
   return {
     homePage,
@@ -113,7 +117,9 @@ export function ConfigSettingsInitializer(
     navbarWidth,
     fontSizeAdjustment,
     lineSpacingAdjustment,
-    fillinPresets
+    fillinPresets,
+    bellTone,
+    buzzerTone
   };
 }
 export interface ISpeechSettings {
