@@ -94,20 +94,20 @@ const NAVBAR_HIDE = "navbar/hide";
 const CONTEXT_SET = "context/set";
 
 //listening actions
-const LISTENING_AVAILABLE = "listening/available";
-// const LISTENING_FLUSH = "listening/flush"; // clear transcript
-// const LISTENING_FLUSHED = "listening/flushed"; // clear transcript
-const LISTENING_MATCH = "listening/match"; // match word with argument with //
-const LISTENING_WORDRETRIES = "listening/retries"; // word retry count with argument //
-const LISTENING_WORDRETRIES_INCREMENT = "listening/increment retries"; // increment word retry count//
-const LISTENING_WORDRETRIES_RESET = "listening/reset"; // word retry count reset //
-const LISTENING_WORDRETRIES_SETLIMIT = "listening/set retries limit"; // set word retry limit with argument //
-const LISTENING_MESSAGE = "listening/message";
-const LISTENING_START = "listening/start";
-// const LISTENING_RETRY = "listening/retry";
-// const LISTENING_RETRY_RESET = "listening/retry reset";
-const LISTENING_STOP = "listening/stop";
-const LISTENING_TOGGLE = "listening/toggle"; // related to start/stop
+const RECOGNITION_AVAILABLE = "listening/available";
+const RECOGNITION_ACTIVE = "listening/active";
+const RECOGNITION_INACTIVE = "listening/inactive";
+// const RECOGNITION_FLUSH = "listening/flush"; // clear transcript
+// const RECOGNITION_FLUSHED = "listening/flushed"; // clear transcript
+const RECOGNITION_MATCH = "listening/match"; // match word with argument with //
+const RECOGNITION_WORDRETRIES = "listening/retries"; // word retry count with argument //
+const RECOGNITION_WORDRETRIES_INCREMENT = "listening/increment retries"; // increment word retry count//
+const RECOGNITION_WORDRETRIES_RESET = "listening/reset"; // word retry count reset //
+const RECOGNITION_WORDRETRIES_SETLIMIT = "listening/set retries limit"; // set word retry limit with argument //
+const RECOGNITION_MESSAGE = "listening/message";
+const RECOGNITION_START_REQUESTED = "listening/startRequested";
+const RECOGNITION_STOP_REQUESTED = "listening/stopRequested";
+const RECOGNITION_TOGGLE_REQUESTED = "listening/toggleRequested"; // related to start/stop
 
 // speaking actions
 const ANNOUNCE_MESSAGE = "announce/message";
@@ -155,6 +155,10 @@ const MODELING_START_SENTENCE = "modeling/start sentence"; // starting sentenceI
 const MODELING_CANCEL = "modeling/cancel"; // canceling
 const MODELING_STOP = "modeling/stop"; // stopping after current
 
+const INLINEBUTTON_CLICKED = "inlinebutton/manually clicked";
+const INLINEBUTTON_CANCELED = "inlinebutton/canceled";
+const INLINEBUTTON_AUTOADVANCE = "inlinebutton/automatic click "; // sending auto click event to next button
+
 // Asynchronous completers - instead of implementing aynschronous completers 
 // functions, we use the action types to indicate the completion of (inline
 //  button) actions.
@@ -163,9 +167,7 @@ const MODELING_STOP = "modeling/stop"; // stopping after current
 //  when the action is completed by the external component by calling 
 // the completer action (labeled past tense)). The completion is detected
 // by the original caller via the updated state value change.
-const INLINEBUTTON_CLICKED = "inlinebutton/manually clicked";
-const INLINEBUTTON_CANCELED = "inlinebutton/canceled";
-const INLINEBUTTON_AUTOADVANCE = "inlinebutton/automatic click ";
+
 // const ACTION_CLICK_STARTING = "inlinebutton/click";
 // const ACTION_CLICK_COMPLETED = "action/clicked";
 // const ACTION_CANCEL = "action/cancel";
@@ -189,76 +191,30 @@ const STATUSBAR_MESSAGE_SET = "statusbar-set";
 const MESSAGE_SET = "status message/set";
 const MESSAGE_CLEAR = "status message/clear";
 
-const TEST_SET = "test/set";
-const TEST_RESET = "test/reset";
-
 const FILLIN_RESETSECTION = "fillin/reset section";
 // const IMAGESENTRY_RESIZE = "images entry/resize";
 // const FILLIN_TOGGLETAGSSECTION = "fillin/toggle tags section";
 // const FILLIN_SELECTLAYOUTSECTION = "fillin/select layout section";
 // Actions
-const Test_set = () => {
+
+// dispatch request functions
+const Content_initialScrollTop = (top: number) => {
   return {
-    type: TEST_SET
+    type: CONTENT_SCROLL_TOP_INITIAL,
+    payload: top
   };
 };
-const Test_reset = () => {
+const Content_scrollTop = (top: number) => {
   return {
-    type: TEST_RESET
+    type: CONTENT_SCROLL_TOP,
+    payload: top
   };
 };
-const Speech_acknowledged = () => {
-  return {
-    type: ANNOUNCE_ACKNOWLEDGED
-  };
-};
-const Speech_announceMessage = (message: string) => {
-  return {
-    type: ANNOUNCE_MESSAGE,
-    payload: message
-  };
-};
-const Speech_announceListeningStart = () => {
-  //retrieve message from context
-  let message: string = "Listening";
-  return {
-    type: ANNOUNCE_MESSAGE,
-    payload: message
-  };
-};
-const Speech_announceListeningStop = () => {
-  //retrieve message from context
-  let message: string = "Stopped listening";
-  return {
-    type: ANNOUNCE_MESSAGE,
-    payload: message
-  };
-};
-const Speech_setAvailability = (yes: boolean) => {
-  return {
-    type: ANNOUNCE_AVAILABILITY,
-    payload: yes
-  };
-};
-// const Speech_announceNewSection = (yes: boolean) => {
-//   let message: string = "new section";
-//   return {
-//     type: ANNOUNCE_MESSAGE,
-//     payload: message
-//   };
-// };
 const Cursor_gotoFirstSentence = () => {
   return {
     type: SENTENCE_FIRST
   };
 };
-// const Speech_announceNewSentence = (yes: boolean) => {
-//   let message: string = "new section";
-//   return {
-//     type: ANNOUNCE_MESSAGE,
-//     payload: message
-//   };
-// };
 const Speech_announceCurrentContent = () => {
   let message: string = "selected word or sentence";
   return {
@@ -326,18 +282,6 @@ const Fillin_resetSection = (sectionIdx: number) => {
     payload: sectionIdx
   };
 };
-// const Fillin_toggleTagsSection = (sectionIdx: number) => {
-//   return {
-//     type: FILLIN_TOGGLETAGSSECTION,
-//     payload: sectionIdx
-//   };
-// };
-// const Fillin_selectLayoutSection = (sectionIdx: number) => {
-//   return {
-//     type: FILLIN_SELECTLAYOUTSECTION,
-//     payload: sectionIdx
-//   };
-// };
 const InlineButton_clicked = (buttonIdx: number) => {
   return {
     type: INLINEBUTTON_CLICKED,
@@ -356,39 +300,6 @@ const InlineButton_autoadvance = (buttonIdx: number) => {
     payload: buttonIdx
   };
 }
-const Modeling_start = () => {
-  return {
-    type: MODELING_START,
-  };
-};
-const Modeling_start_button = (buttondIdx: number) => {
-  return {
-    type: MODELING_START_BUTTON,
-    payload: buttondIdx
-  };
-};
-const Modeling_start_sentence = (sentenceIdx: number) => {
-  return {
-    type: MODELING_START_SENTENCE,
-    payload: sentenceIdx
-  };
-};
-const Modeling_start_word = (wordIdx: number) => {
-  return {
-    type: MODELING_START_WORD,
-    payload: wordIdx
-  };
-};
-const Modeling_cancel = () => {
-  return {
-    type: MODELING_CANCEL
-  };
-};
-const Modeling_stop = () => {
-  return {
-    type: MODELING_STOP
-  };
-};
 // const Action_cursormoveStarting = () => {
 //   return {
 //     type: ACTION_CURSORMOVE_STARTING
@@ -492,6 +403,38 @@ const Message_clear = (
     payload: messageType
   };
 };
+const Navbar_hide = () => {
+  return {
+    type: NAVBAR_HIDE
+  };
+};
+const Navbar_toggle = () => {
+  return {
+    type: NAVBAR_TOGGLE
+  };
+};
+const Page_gotoLink = (linkIdx: number = IDX_INITIALIZER) => {
+  return {
+    type: PAGE_LINKTO,
+    payload: linkIdx
+  };
+};
+const Page_home = () => {
+  return {
+    type: PAGE_HOME
+  };
+};
+const Page_homed = () => {
+  return {
+    type: PAGE_HOMED
+  };
+};
+const Page_homeEnabled = (yes: boolean) => {
+  return {
+    type: PAGE_HOME_ENABLED,
+    payload: yes
+  };
+};
 const Page_load = (
   page: string,
   linkType?: LinkIdxDestinationType,
@@ -516,18 +459,6 @@ const Page_loaded = (loaded: boolean) => {
     payload: loaded
   };
 };
-const Page_gotoLink = (linkIdx: number = IDX_INITIALIZER) => {
-  return {
-    type: PAGE_LINKTO,
-    payload: linkIdx
-  };
-};
-const Page_setContext = (context: CPageLists) => {
-  return {
-    type: CONTEXT_SET,
-    payload: context
-  };
-};
 const Page_pop = () => {
   return {
     type: PAGE_POP
@@ -536,6 +467,12 @@ const Page_pop = () => {
 const Page_popped = () => {
   return {
     type: PAGE_POPPED
+  };
+};
+const Page_setContext = (context: CPageLists) => {
+  return {
+    type: CONTEXT_SET,
+    payload: context
   };
 };
 // const Page_resize = () => {
@@ -553,22 +490,6 @@ const Page_restored = () => {
     type: PAGE_RESTORED
   };
 };
-const Page_home = () => {
-  return {
-    type: PAGE_HOME
-  };
-};
-const Page_homed = () => {
-  return {
-    type: PAGE_HOMED
-  };
-};
-const Page_homeEnabled = (yes: boolean) => {
-  return {
-    type: PAGE_HOME_ENABLED,
-    payload: yes
-  };
-};
 const Page_previousEnabled = (yes: boolean) => {
   return {
     type: PAGE_PREVIOUS_ENABLED,
@@ -579,18 +500,6 @@ const Page_contentTop = (y: number) => {
   return {
     type: PAGE_CONTENT_TOP,
     payload: y
-  };
-};
-const Content_initialScrollTop = (top: number) => {
-  return {
-    type: CONTENT_SCROLL_TOP_INITIAL,
-    payload: top
-  };
-};
-const Content_scrollTop = (top: number) => {
-  return {
-    type: CONTENT_SCROLL_TOP,
-    payload: top
   };
 };
 const Page_sitemapEnabled = (yes: boolean) => {
@@ -609,80 +518,6 @@ const Page_textSpacingDownEnabled = (yes: boolean) => {
   return {
     type: PAGE_SPACINGDOWN_ENABLED,
     payload: yes
-  };
-};
-const Recognition_toggle = (maxRetries: number) => {
-  return {
-    type: LISTENING_TOGGLE,
-    payload: maxRetries
-  };
-};
-// const Recognition_flush = () => {
-//   return {
-//     type: LISTENING_FLUSH
-//   };
-// };
-// const Recognition_flushed = () => {
-//   return {
-//     type: LISTENING_FLUSHED
-//   };
-// };
-const Recognition_match = (message: string) => {
-  return {
-    type: LISTENING_MATCH,
-    payload: message
-  };
-};
-const Recognition_message = (message: string) => {
-  return {
-    type: LISTENING_MESSAGE,
-    payload: message
-  };
-};
-const Recognition_wordRetries = (count: number, limit: number = -1) => {
-  return {
-    type: LISTENING_WORDRETRIES,
-    payload: {retries: count, limit: limit }
-  };
-};
-const Recognition_increment_retries = () => {
-  return {
-    type: LISTENING_WORDRETRIES_INCREMENT,
-  };
-};
-const Recognition_set_retries_limit = (limit: number) => {  
-  return {
-    type: LISTENING_WORDRETRIES_SETLIMIT,
-    payload: {limit: limit }
-  };
-};
-const Recognition_reset_retries = (limit?: number) => {
-  return {
-    type: LISTENING_WORDRETRIES_RESET,
-    payload: {limit: limit}
-  };
-};
-// const Recognition_reset_retry = (message: string) => {
-//   return {
-//     type: LISTENING_RETRY_RESET,
-//     payload: message
-//   };
-// };
-const Recognition_start = (stopAtEOS: boolean = false) => {
-  return {
-    type: LISTENING_START,
-    payload: stopAtEOS
-  };
-};
-const Recognition_stop = () => {
-  return {
-    type: LISTENING_STOP
-  };
-};
-const Recognition_setAvailability = (speechRecognitionSupported: boolean) => {
-  return {
-    type: LISTENING_AVAILABLE,
-    payload: speechRecognitionSupported
   };
 };
 const Recite_started = () => {
@@ -785,6 +620,84 @@ const Recite_stop = () => {
 //     type: RECITE_TOGGLE
 //   };
 // };
+// const Recognition_flush = () => {
+//   return {
+//     type: RECOGNITION_FLUSH
+//   };
+// };
+// const Recognition_flushed = () => {
+//   return {
+//     type: RECOGNITION_FLUSHED
+//   };
+// };
+const Recognition_active = () => {
+  return {
+    type: RECOGNITION_ACTIVE
+  };
+};
+const Recognition_inactive = () => {
+  return {
+    type: RECOGNITION_INACTIVE
+  };
+};
+const Recognition_increment_retries = () => {
+  return {
+    type: RECOGNITION_WORDRETRIES_INCREMENT,
+  };
+};
+const Recognition_match = (message: string) => {
+  return {
+    type: RECOGNITION_MATCH,
+    payload: message
+  };
+};
+const Recognition_message = (message: string) => {
+  return {
+    type: RECOGNITION_MESSAGE,
+    payload: message
+  };
+};
+const Recognition_reset_retries = (limit?: number) => {
+  return {
+    type: RECOGNITION_WORDRETRIES_RESET,
+    payload: {limit: limit}
+  };
+};
+const Recognition_set_retries_limit = (limit: number) => {  
+  return {
+    type: RECOGNITION_WORDRETRIES_SETLIMIT,
+    payload: {limit: limit }
+  };
+};
+const Recognition_setAvailability = (speechRecognitionSupported: boolean) => {
+  return {
+    type: RECOGNITION_AVAILABLE,
+    payload: speechRecognitionSupported
+  };
+};
+const Recognition_start_requested = (stopAtEOS: boolean = false) => {
+  return {
+    type: RECOGNITION_START_REQUESTED,
+    payload: stopAtEOS
+  };
+};
+const Recognition_stop_requested = () => {
+  return {
+    type: RECOGNITION_STOP_REQUESTED
+  };
+};
+const Recognition_toggle = (maxRetries: number) => {
+  return {
+    type: RECOGNITION_TOGGLE_REQUESTED,
+    payload: maxRetries
+  };
+};
+const Recognition_wordRetries = (count: number, limit: number = -1) => {
+  return {
+    type: RECOGNITION_WORDRETRIES,
+    payload: {retries: count, limit: limit }
+  };
+};
 const Settings_toggle = () => {
   return {
     type: SETTINGS_TOGGLE
@@ -815,19 +728,41 @@ const Sentence_setOpacity = (opacity: number) => {
     type: SENTENCE_SETOPACITY,
     payload: opacity
   };
+// const Speech_acknowledged = () => {
+//   return {
+//     type: ANNOUNCE_ACKNOWLEDGED
+//   };
+// };
+// const Speech_announceMessage = (message: string) => {
+//   return {
+//     type: ANNOUNCE_MESSAGE,
+//     payload: message
+//   };
+// };
+// const Speech_announceListeningStart = () => {
+//   //retrieve message from context
+//   let message: string = "Listening";
+//   return {
+//     type: ANNOUNCE_MESSAGE,
+//     payload: message
+//   };
+// };
+// const Speech_announceListeningStop = () => {
+//   //retrieve message from context
+//   let message: string = "Stopped listening";
+//   return {
+//     type: ANNOUNCE_MESSAGE,
+//     payload: message
+//   };
+// };
+// const Speech_setAvailability = (yes: boolean) => {
+//   return {
+//     type: ANNOUNCE_AVAILABILITY,
+//     payload: yes
+//   };
 };
-const Navbar_hide = () => {
-  return {
-    type: NAVBAR_HIDE
-  };
-};
-const Navbar_toggle = () => {
-  return {
-    type: NAVBAR_TOGGLE
-  };
-};
-
 export const Request = {
+  Content_scrollTop,
   Content_initialScrollTop,
   Cursor_gotoFirstSection, // first word in page
   Cursor_gotoFirstSentence, // first word in section
@@ -845,12 +780,12 @@ export const Request = {
   Fillin_resetSection,
   // Fillin_toggleTagsSection,
   // Fillin_selectLayoutSection,
-  Modeling_start,
-  Modeling_start_button,
-  Modeling_start_sentence,
-  Modeling_start_word,
-  Modeling_stop,
-  Modeling_cancel,
+  // Modeling_start,
+  // Modeling_start_button,
+  // Modeling_start_sentence,
+  // Modeling_start_word,
+  // Modeling_stop,
+  // Modeling_cancel,
 
   // ReciteButton_clicked,
 
@@ -889,7 +824,6 @@ export const Request = {
 
   // Page_contentY,
   Page_contentTop,
-  Content_scrollTop,
   Page_load,
   Page_loaded,
   Page_setContext,
@@ -919,6 +853,8 @@ export const Request = {
   Recited_currentWord,
   // Recite_toggle, // strictly for button event
 
+  Recognition_active,
+  Recognition_inactive,
   Recognition_toggle,
   Recognition_setAvailability,
   // Recognition_flush,
@@ -930,96 +866,89 @@ export const Request = {
   Recognition_set_retries_limit,
   Recognition_wordRetries,
   // Recognition_reset_retry,
-  Recognition_start,
-  Recognition_stop,
+  Recognition_start_requested,
+  Recognition_stop_requested,
+
   Settings_toggle,
 
+  // Speech_acknowledged,
+  // Speech_announceMessage,
+  // Speech_announceCurrentContent,
+  // Speech_announceListeningStart,
+  // Speech_announceListeningStop,
+  // Speech_setAvailability
+
+  Sentence_acknowledgeTransition,
   Sentence_disableTransitions,
   Sentence_enableTransitions,
   Sentence_resetOpacity,
   Sentence_setOpacity,
-  Sentence_acknowledgeTransition,
-  Speech_setAvailability,
-  Speech_acknowledged,
-  Speech_announceCurrentContent,
-  Speech_announceListeningStart,
-  Speech_announceListeningStop,
-  Speech_announceMessage
-
-  // StatusBar_Message_set,
-  // StatusBar_Message_clear,
-  //
-  //  Speech_transitionsAcknowledged
-  // Speech_announceNewSection,
-  // Speech_announceNewSentence
 };
 interface IReduxState {
   announce_available: boolean;
   announce_message: string;
 
-  listen_available: boolean;
-  listen_announcementEnabled: boolean; // "e.g. listening"
-  listen_active: boolean;
-  listen_stopAtEOS: boolean;
-  // listen_flush: boolean;
-  listen_silenceStartTime: number;
-  listen_wordRetries: number;
-  listen_wordRetries_limit: number;
-  listen_wordRetries_limit_progress: number; // 0-1
-  listen_wordRetries_limit_exceeded: boolean;
-  // content_layout_completed: boolean;
-
-  cursor_sectionIdx: number;
-  cursor_sentenceIdx: number;
-  cursor_terminalIdx: number;
-
-  cursor_nextSentenceTransition: boolean;
-  cursor_nextSectionTransition: boolean;
-  cursor_nextPageTransition: boolean;
+  content_scroll_top: number;
+  content_scroll_top_initial: number;
 
   cursor_beginningOfPageReached: boolean;
   cursor_endOfPageReached: boolean;
-
-  cursor_terminalIdx_proposed: number;
+  cursor_nextPageTransition: boolean;
+  cursor_nextSentenceTransition: boolean; // iff next sentence not just new one
+  cursor_nextSectionTransition: boolean;
+  cursor_sectionIdx: number;
   cursor_sectionIdx_proposed: number;
+  cursor_sentenceIdx: number;
+  cursor_terminalIdx: number;
+  cursor_terminalIdx_proposed: number;
 
   fillin_currentTerminalIdx: number;
   fillin_showTerminalIdx: number;
   fillin_resetSectionIdx: number;
-  // fillin_toggleShowTagsSectionIdx: number;
-  // fillin_selectLayoutSectionIdx: number;
-
-  page_content_top: number;
-  content_scroll_top: number;
-  content_scroll_top_initial: number;
-  page_requested: IPageRequestItem;
-  page_loaded: boolean;
-  page_section: number;
-  pageContext: CPageLists;
-  page_pop_requested: boolean;
-  page_restore_requested: boolean;
-  page_home_requested: boolean;
-
-  page_home_enabled: boolean;
-  page_fontDown_enabled: boolean;
-  page_spacingDown_enabled: boolean;
-  page_previous_enabled: boolean;
-  page_sitemap_enabled: boolean;
-  page_reciteMode: number;
+  
+  inlinebutton_autoadvance: boolean // determines subsequent click, not user initiated
+  inlinebutton_idx: number;
+  inlinebutton_idx_prev: number;
+  inlinebutton_reclicks: number; // needed to determine if the inline button is to be initiated or reset
 
   // page link info sent to page requested where it is validatable ( message
   // in a bottle)
-  link_page: string; // should be same as page_requested
-  link_type: LinkIdxDestinationType;
   link_headingIdx: number;
+  link_page: string; // should be same as page_requested
   link_sectionIdx: number;
   link_terminalIdx: number;
+  link_type: LinkIdxDestinationType;
+
+  message_application: string;
+  message_listening: string;
+  message_state: string;
+
+  // modeling_requested: boolean;
+  // modeling_requested_scope: ModelingScopeEnumType;
+  // modeling_requested_wordIdx: number;
+  // modeling_requested_sentenceIdx: number;
+  // modeling_requested_buttonIdx: number;
 
   navbar_toggle: boolean;
 
-  // recite_toggle: boolean; // on/off
-  recite_requested: boolean;
+  page_content_top: number;
+  page_fontDown_enabled: boolean;
+  page_home_enabled: boolean;
+  page_home_requested: boolean;
+  page_loaded: boolean;
+  page_pop_requested: boolean;
+  page_previous_enabled: boolean;
+  page_requested: IPageRequestItem;
+  page_reciteMode: number;
+  page_restore_requested: boolean;
+  page_section: number;
+  page_sitemap_enabled: boolean;
+  page_spacingDown_enabled: boolean; 
+
+  pageContext: CPageLists;
+  
   recite_completed: boolean
+  recite_requested: boolean;
   recite_requested_terminalIdx: number
   recite_requested_scope: RecitationScopeEnumType;
   recite_requested_span: number;
@@ -1027,39 +956,27 @@ interface IReduxState {
   recite_requested_sentenceIdx: number;
   recite_requested_sectionIdx: number;
   recite_requested_passthru: string;
-  recite_word_requested: boolean;
   recite_word_completed: boolean;
+  recite_word_requested: boolean;
+
   reciting: boolean;
 
-  message_application: string;
-  message_listening: string;
-  message_state: string;
-
-  inlinebutton_reclicks: number; // needed to determine if the inline button is to be initiated or reset
-  inlinebutton_autoadvance: boolean // determines subsequent click, not user initiated
-  inlinebutton_idx: number;
-  inlinebutton_idx_prev: number;
-  modeling_requested: boolean;
-  modeling_requested_scope: ModelingScopeEnumType;
-  modeling_requested_wordIdx: number;
-  modeling_requested_sentenceIdx: number;
-  modeling_requested_buttonIdx: number;
-
-  // action_click_initiated: boolean;
-  // action_click_completed: boolean;
-  // action_cursormove_initiated: boolean;
-  // action_cursormove_completed: boolean;
-  // action_listen_initiated: boolean;
-  // action_listen_completed: boolean;
-  // action_recite_initiated: boolean;
-  // action_recite_completed: boolean;
-  // action_signal_initiated: boolean;
-  // action_signal_completed: boolean;
+  recognition_active: boolean;
+  recognition_announcementEnabled: boolean; // "e.g. listening"
+  recognition_available: boolean;
+  recognition_requested: boolean;
+  recognition_silenceStartTime: number;
+  recognition_stopAtEOS: boolean;
+  recognition_wordRetries: number;
+  recognition_wordRetries_limit: number;
+  recognition_wordRetries_limit_progress: number; // 0-1
+  recognition_wordRetries_limit_exceeded: boolean;
   
   sentence_idxObscured: number;
   sentence_opacity: number;
   sentence_type: SentenceListItemEnumType;
   sentence_useDefaultTransitions: boolean;
+
   settings_toggle: boolean;
 
   statusBar_message1: string;
@@ -1067,145 +984,131 @@ interface IReduxState {
 }
 const IReduxStateInitialState: IReduxState = {
   announce_available: false,
-  listen_announcementEnabled: false, // "e.g., listening" or "not listening"
   announce_message: "",
-
-  listen_available: false,
-  listen_active: false,
-  listen_stopAtEOS: false,
-  listen_silenceStartTime: 0,
-  listen_wordRetries: 0,
-  listen_wordRetries_limit: 0,
-  listen_wordRetries_limit_progress: 0,
-  listen_wordRetries_limit_exceeded: false,
-  // listen_retries_max: 0,
-  // listen_retries: 0,
-  // listen_retriesExceeded: false,
-
-  // content_layout_completed: false,
-
-  cursor_sectionIdx: 0,
-  cursor_sentenceIdx: 0,
-  cursor_terminalIdx: 0,
-
-  cursor_nextSentenceTransition: false,
-  cursor_nextSectionTransition: false,
-  cursor_nextPageTransition: false,
-  cursor_beginningOfPageReached: true,
-  cursor_endOfPageReached: false,
-
-  fillin_currentTerminalIdx: IDX_INITIALIZER,
-  fillin_showTerminalIdx: IDX_INITIALIZER,
-  fillin_resetSectionIdx: IDX_INITIALIZER,
-  // fillin_toggleShowTagsSectionIdx: IDX_INITIALIZER,
-  // fillin_selectLayoutSectionIdx: IDX_INITIALIZER,
-
-  link_page: "",
-  link_type: LinkIdxDestinationType.page,
-  link_headingIdx: IDX_INITIALIZER,
-  link_sectionIdx: IDX_INITIALIZER,
-  link_terminalIdx: IDX_INITIALIZER,
-
-  page_requested: PageRequestItemInitializer(),
-  page_loaded: false,
-  page_content_top: 0,
+  
   content_scroll_top: 0,
   content_scroll_top_initial: SCROLLTOP_INITIAL,
-  page_section: 0,
-  page_pop_requested: false,
-  page_restore_requested: false,
-  page_home_requested: false,
-
-  page_home_enabled: false,
-  page_fontDown_enabled: true,
-  page_spacingDown_enabled: false,
-  page_previous_enabled: false,
-  page_sitemap_enabled: false,
-  page_reciteMode: 0,
-
-  cursor_terminalIdx_proposed: 0,
+  
+  cursor_beginningOfPageReached: true,
+  cursor_endOfPageReached: false,
+  cursor_nextPageTransition: false,
+  cursor_nextSectionTransition: false,
+  cursor_nextSentenceTransition: false,
+  cursor_sectionIdx: 0,
   cursor_sectionIdx_proposed: 0,
+  cursor_sentenceIdx: 0,
+  cursor_terminalIdx: 0,
+  cursor_terminalIdx_proposed: 0,
 
-  //page_lists: new CPageLists(),
+  fillin_currentTerminalIdx: IDX_INITIALIZER,
+  fillin_resetSectionIdx: IDX_INITIALIZER,
+  fillin_showTerminalIdx: IDX_INITIALIZER,
+  
+  inlinebutton_autoadvance: false,
+  inlinebutton_idx: IDX_INITIALIZER,
+  inlinebutton_idx_prev: IDX_INITIALIZER,
+  inlinebutton_reclicks: 0,
+
+  link_headingIdx: IDX_INITIALIZER,
+  link_page: "",
+  link_sectionIdx: IDX_INITIALIZER,
+  link_terminalIdx: IDX_INITIALIZER,
+  link_type: LinkIdxDestinationType.page,
+  
+  message_application: "",
+  message_listening: "",
+  message_state: "",
+
+  navbar_toggle: true,
+
+  page_content_top: 0,
+  page_fontDown_enabled: true,
+  page_home_enabled: false,
+  page_home_requested: true,
+  page_loaded: false,
+  page_pop_requested: false,
+  page_previous_enabled: false,
+  page_reciteMode: 0,
+  page_requested: PageRequestItemInitializer(),
+  page_restore_requested: false,
+  page_section: 0,
+  page_spacingDown_enabled: false,
+  page_sitemap_enabled: false,
+
   pageContext: new CPageLists(),
 
-  recite_requested: false,
   recite_completed: false,
-  recite_requested_terminalIdx: IDX_INITIALIZER,
-  recite_requested_span: 0,
-  recite_requested_scope: RecitationScopeEnumType.passThru,
-  recite_requested_wordIdx: IDX_INITIALIZER,
-  recite_requested_sentenceIdx: IDX_INITIALIZER,
-  recite_requested_sectionIdx: IDX_INITIALIZER,
+  recite_requested: false,
   recite_requested_passthru: "",
-  recite_word_requested: false,
+  recite_requested_scope: RecitationScopeEnumType.passThru,
+  recite_requested_sectionIdx: IDX_INITIALIZER,
+  recite_requested_sentenceIdx: IDX_INITIALIZER,
+  recite_requested_span: 0,
+  recite_requested_terminalIdx: IDX_INITIALIZER,
+  recite_requested_wordIdx: IDX_INITIALIZER,
   recite_word_completed: true,
+  recite_word_requested: false,
+  
   reciting: false,
+
+  recognition_active: false,
+  recognition_announcementEnabled: false, // "e.g., listening" or "not listening"
+  recognition_available: false,
+  recognition_requested: false,
+  recognition_silenceStartTime: 0,
+  recognition_stopAtEOS: false,
+  recognition_wordRetries: 0,
+  recognition_wordRetries_limit: 0,
+  recognition_wordRetries_limit_progress: 0,
+  recognition_wordRetries_limit_exceeded: false,
+  
   sentence_idxObscured: IDX_INITIALIZER,
   sentence_opacity:  ObscuredTextDegreeEnum.unobscured,
   sentence_type: SentenceListItemEnumType.default,
   sentence_useDefaultTransitions: true,
+  
   settings_toggle: false,
+  
   statusBar_message1: "",
   statusBar_message2: "",
-
-  message_application: "",
-  message_listening: "",
-  message_state: "",
-  //  pageContext: PageContextInitializer()
-  navbar_toggle: true,
-
-  modeling_requested: false,
-  modeling_requested_scope: ModelingScopeEnumType.inlineButton,
-  modeling_requested_wordIdx: IDX_INITIALIZER,
-  modeling_requested_sentenceIdx:  IDX_INITIALIZER,
-  modeling_requested_buttonIdx:  IDX_INITIALIZER,
-  inlinebutton_reclicks: 0,
-  inlinebutton_autoadvance: false,
-  inlinebutton_idx: IDX_INITIALIZER,
-  inlinebutton_idx_prev: IDX_INITIALIZER,
-  // inlinebutton_recite_toBeRecited: [],
-
-  // action_click_completed: false,
-  // action_cursormove_completed: false,
-  // action_listen_completed: false,
-  // action_recite_completed: false,
-  // action_signal_completed: false,
-  
 };
 export const rootReducer = (
   state: IReduxState = IReduxStateInitialState,
   action: any
 ) => {
   const resetWordRetriesState = () => {
-    state.listen_wordRetries_limit_progress = 0;
-    state.listen_wordRetries_limit_exceeded = false
-    state.listen_wordRetries = 0; // reset
+    state.recognition_wordRetries_limit_progress = 0;
+    state.recognition_wordRetries_limit_exceeded = false
+    state.recognition_wordRetries = 0; // reset
   }
   const setSentenceState = (
-    terminalIdx: number,
+    nextTerminalIdx: number,
     currentSentenceIdx: number
   ): [number, boolean, SentenceListItemEnumType] => {
-    let sentenceIdx: number = state.pageContext.sentenceIdx(terminalIdx);
-    // console.log(
-    //   `@@@@setSentenceState: terminalIdx=${
-    //     state.pageContext.sentenceList[currentSentenceIdx].type
-    //   }  currentSentenceIdx=${currentSentenceIdx} sentenceIdx=${sentenceIdx} nextsentence=${sentenceIdx !==
-    //     currentSentenceIdx} type=${
-    //     state.pageContext.sentenceList[currentSentenceIdx].type
-    //   }`
-    // );
-    let newSentence: boolean;
+    let nextSentenceIdx: number = state.pageContext.sentenceIdx(nextTerminalIdx);
+    let nextSentence: boolean;
+    let sentenceType: SentenceListItemEnumType
+    if (currentSentenceIdx >= 0 &&
+      currentSentenceIdx < state.pageContext.sentenceList.length) {
+        sentenceType = state.pageContext.sentenceList[currentSentenceIdx].type
+    } else {
+        sentenceType = SentenceListItemEnumType.default;
+      }
+    console.log(
+      `@@@@ setSentenceState: nextTerminalIdx=${nextTerminalIdx} currentSentenceIdx=${currentSentenceIdx} 
+        type=${sentenceType} nextSentenceIdx=${nextSentenceIdx} nextsentence=${nextSentenceIdx !==
+        currentSentenceIdx + 1}`
+    );
     let type: SentenceListItemEnumType =
       currentSentenceIdx >= 0 &&
       currentSentenceIdx < state.pageContext.sentenceList.length
         ? state.pageContext.sentenceList[currentSentenceIdx].type
         : SentenceListItemEnumType.default;
-    newSentence = (terminalIdx === 0 || sentenceIdx !== currentSentenceIdx);
-    if (newSentence) {
+    nextSentence = (nextTerminalIdx === 0 || nextSentenceIdx === currentSentenceIdx + 1);
+    if (nextSentence) {
       state.sentence_idxObscured = IDX_INITIALIZER;
     }
-    return [sentenceIdx, newSentence, type];
+    return [nextSentenceIdx, nextSentence, type];
   };
   const setSectionState = (
     terminalIdx: number,
@@ -1215,6 +1118,13 @@ export const rootReducer = (
     return [sectionIdx, sectionIdx !== currentSectionIdx];
   };
   const setTerminalState = (terminalIdxs: number[]) => {
+    // At this point, no terminalIdxs[] means no subsequent terminals.
+    // For now we assume this means end of page. In the future, we may
+    // want to handle this differently:
+    // 1) loop back to beginning of page
+    // 2) go to next page if there is one.
+    // 3) some kind of family feud-style where it goes back to the beginning
+    //   of the current section or end of the current prompt.
     if (terminalIdxs.length === 0) {
       state.cursor_endOfPageReached =
         state.cursor_terminalIdx === state.pageContext.lastTerminalIdx;
@@ -1225,6 +1135,20 @@ export const rootReducer = (
       // console.log(
       //   `@@@@setTerminalState single state transition from prevTermIdx=${state.cursor_terminalIdx} to nextTermIdx= ${terminalIdxs[0]}`
       // );
+    // if (terminalIdxs.length === 0) {
+
+    // } else if (terminalIdxs.length === 0) {
+    //   state.cursor_endOfPageReached =
+    //     state.cursor_terminalIdx === state.pageContext.lastTerminalIdx;
+    //     state.cursor_nextSentenceTransition = true
+    //    console.log(`reducer setTerminalState: next sentence at EOP`);
+    //    console.log(`reducer setTerminalState: end of page?`);
+    // } else if (terminalIdxs.length === 1) {
+    //   state.cursor_endOfPageReached = false;
+    //   // resetListeningRetries();
+    //   // console.log(
+    //   //   `@@@@setTerminalState single state transition from prevTermIdx=${state.cursor_terminalIdx} to nextTermIdx= ${terminalIdxs[0]}`
+    //   // );
       if (state.pageContext.isValidTerminalIdx(terminalIdxs[0])) {
         /// set single state
         // console.log(
@@ -1361,8 +1285,8 @@ export const rootReducer = (
   //   // }
   // };
   // const resetListeningRetries = () => {
-  //   state.listen_retries = 0;
-  //   state.listen_retriesExceeded = false;
+  //   state.recognition_retries = 0;
+  //   state.recognition_retriesExceeded = false;
   // };
   const setListeningMessage = (message: string): string => {
     state.message_state = `${action.type}: ${message}.`;
@@ -1370,32 +1294,136 @@ export const rootReducer = (
     return state.message_state;
   };
   switch (action.type) {
-    case PAGE_LOAD:
-      state.page_requested = {
-        ...state.page_requested,
-        page: action.payload.page as string
-      };
-      // state.page_requested = (action.payload.page as string) + ".json";      // cannot validate these idxs without proper context that will not
-      // be available until the accompanying (payload) page is loaded
-      // savePageLinkInitialState(
-      //   action.payload.page,
-      //   action.payload.linkType,
-      //   action.payload.headingIdx,
-      //   action.payload.sectionIdx,
-      //   action.payload.terminalIdx
-      // );
-      state.page_loaded = false;
+    case ANNOUNCE_MESSAGE:
+      state.announce_message = action.payload; // resets transcript
+      return { ...state };
+    case ANNOUNCE_ACKNOWLEDGED:
+      state.announce_message = ""; // resets transcript
+      return { ...state };
+    case CONTENT_SCROLL_TOP:
+      state.content_scroll_top = action.payload;
       return state;
-    case PAGE_LOADED:
-      state.page_loaded = action.payload as boolean;
-      state.page_requested = { ...state.page_requested, page: "" };
-      state.page_pop_requested = false;
+    case CONTENT_SCROLL_TOP_INITIAL:
+      // console.log(`reducer: contentlayoutcompleted=${action.payload}`);
+      state.content_scroll_top_initial = action.payload;
+      return state;
+    case CONTEXT_SET:
+      // cast object into class instance with methods
+      // strictly a read only reference to react context NOT a copy.
+      // alternatively, could access via useContext iff in provider/consumer
+      // scope
+      state.pageContext = action.payload as CPageLists;
+      // setPageLinkInitialState();
+      return state;
+    case FILLIN_RESETSECTION: {
+      state.fillin_resetSectionIdx = action.payload;
+      state.fillin_showTerminalIdx = IDX_INITIALIZER;
+      return { ...state };
+    }
+    case INLINEBUTTON_AUTOADVANCE:
+      state.inlinebutton_autoadvance = true;
+      state.inlinebutton_idx_prev = state.inlinebutton_idx
+      state.inlinebutton_idx = action.payload;
+      state.inlinebutton_reclicks = 1;
+      return { ...state }
+    case INLINEBUTTON_CANCELED:
+      if (action.payload === state.inlinebutton_idx) {
+        state.inlinebutton_reclicks = 0;
+        state.inlinebutton_autoadvance = false;
+        state.inlinebutton_idx_prev = IDX_INITIALIZER
+        state.inlinebutton_idx = IDX_INITIALIZER;
+      }
+      return { ...state }
+    case INLINEBUTTON_CLICKED:
+      // if idx and idx_prev are the same, then this is a repeat click
+      state.inlinebutton_autoadvance = false;
+      if (state.inlinebutton_idx === action.payload) {
+        // clicked on the same inlinebutton again
+        state.inlinebutton_reclicks += 1;
+        if (state.inlinebutton_idx !== IDX_INITIALIZER) {
+          // second consecutive click (while active) => pause
+        } else { 
+          // second consecutive click (while active) => pause
+          // state.inlinebutton_idx_prev = IDX_INITIALIZER;
+        }
+      } else {
+        // clicked on a new inlinebutton
+        state.inlinebutton_reclicks = 0;
+      }
+      // with subsequent inlinebutton clicks, should the opacity increase?
+      console.log(
+        `@@@ reducer: inlinebutton_clicked idx=${state.inlinebutton_idx} previdx=${state.inlinebutton_idx_prev} action.payload=${action.payload} prevIdx=${state.inlinebutton_idx_prev} action.payload=${action.payload} inlinebutton_reclicks=${state.inlinebutton_reclicks};
+`)
+      state.inlinebutton_idx_prev = state.inlinebutton_idx
+      state.inlinebutton_idx = action.payload;
+      return { ...state };
+    case MESSAGE_CLEAR: {
+      let msgType: number =
+        action.payload.messageType === undefined
+          ? StatusBarMessageType.all
+          : action.payload.messageType;
+      switch (msgType) {
+        case StatusBarMessageType.all:
+          state.message_application = "";
+          state.message_listening = "";
+          state.message_state = "";
+          break;
+        case StatusBarMessageType.application:
+          state.message_application = "";
+          break;
+        case StatusBarMessageType.state:
+          state.message_state = "";
+          break;
+        case StatusBarMessageType.listening:
+          state.message_listening = "";
+          break;
+        default:
+      }
+      return { ...state };
+    }
+    case MESSAGE_SET: {
+      switch (action.payload.messageType as StatusBarMessageType) {
+        case StatusBarMessageType.application:
+          state.message_application = action.payload.message;
+          break;
+        case StatusBarMessageType.state:
+          state.message_state = action.payload.message;
+          break;
+        case StatusBarMessageType.listening:
+          state.message_listening = action.payload.message;
+          break;
+        default:
+      }
+      return { ...state };
+    }
+    case NAVBAR_HIDE: {
+      state.navbar_toggle = false;
+      return { ...state };
+    }
+    case NAVBAR_TOGGLE: {
+      state.navbar_toggle = !state.navbar_toggle;
+      return { ...state };
+    }
+case PAGE_CONTENT_TOP:
+      state.page_content_top = action.payload;
+      return state;
+    case PAGE_FONTDOWN_ENABLED:
+      state.page_fontDown_enabled = action.payload;
+      return state;
+    case PAGE_HOME:
+      if (state.page_restore_requested) {
+        state.page_home_requested = false;
+      } else {
+        state.page_home_requested = true;
+      }
+      return state;
+    case PAGE_HOMED:
       state.page_home_requested = false;
-      state.content_scroll_top_initial = -1;
-      // state.cursor_sentenceIdx = 0;
+      state.page_home_enabled = false;
+      state.page_previous_enabled = false;
       return state;
-    case PAGE_TOP:
-      setTerminalState([state.pageContext.firstTerminalIdx]);
+    case PAGE_HOME_ENABLED:
+      state.page_home_enabled = action.payload;
       return state;
     case PAGE_LINKTO:
       // if payload contains a valid link idx (from an image)
@@ -1436,8 +1464,36 @@ export const rootReducer = (
         currentTermIdx:
           state.pageContext.linkList[linkIdx].destination.terminalIdx
       };
+      state.page_pop_requested = false;
+      state.page_home_requested = false;
       state.page_loaded = false;
       // }
+      return state;
+    case PAGE_LOAD:
+      state.page_requested = {
+        ...state.page_requested,
+        page: action.payload.page as string
+      };
+      // state.page_requested = (action.payload.page as string) + ".json";      // cannot validate these idxs without proper context that will not
+      // be available until the accompanying (payload) page is loaded
+      // savePageLinkInitialState(
+      //   action.payload.page,
+      //   action.payload.linkType,
+      //   action.payload.headingIdx,
+      //   action.payload.sectionIdx,
+      //   action.payload.terminalIdx
+      // );
+      state.page_pop_requested = false;
+      state.page_home_requested = false;
+      state.page_loaded = false;
+      return state;
+    case PAGE_LOADED:
+      state.page_loaded = action.payload as boolean;
+      state.page_requested = { ...state.page_requested, page: "" };
+      state.page_pop_requested = false;
+      state.page_home_requested = false;
+      state.content_scroll_top_initial = -1;
+      // state.cursor_sentenceIdx = 0;
       return state;
     case PAGE_POP:
       state.page_pop_requested = true;
@@ -1451,212 +1507,18 @@ export const rootReducer = (
     case PAGE_RESTORED:
       state.page_restore_requested = false;
       return state;
-    case PAGE_HOME:
-      if (state.page_restore_requested) {
-        state.page_home_requested = false;
-      } else {
-        state.page_home_requested = true;
-      }
-      return state;
-    case PAGE_HOMED:
-      state.page_home_requested = false;
-      state.page_home_enabled = false;
-      state.page_previous_enabled = false;
-      return state;
-    case PAGE_HOME_ENABLED:
-      state.page_home_enabled = action.payload;
-      return state;
     case PAGE_PREVIOUS_ENABLED:
       state.page_previous_enabled = action.payload;
       return state;
     case PAGE_SPACINGDOWN_ENABLED:
       state.page_spacingDown_enabled = action.payload;
       return state;
-    case PAGE_FONTDOWN_ENABLED:
-      state.page_fontDown_enabled = action.payload;
-      return state;
-    case PAGE_CONTENT_TOP:
-      state.page_content_top = action.payload;
-      return state;
-    case CONTENT_SCROLL_TOP:
-      state.content_scroll_top = action.payload;
-      return state;
-    case CONTENT_SCROLL_TOP_INITIAL:
-      // console.log(`reducer: contentlayoutcompleted=${action.payload}`);
-      state.content_scroll_top_initial = action.payload;
+    case PAGE_TOP:
+      setTerminalState([state.pageContext.firstTerminalIdx]);
       return state;
     case PAGE_SITEMAP_ENABLED:
       state.page_previous_enabled = action.payload;
       return state;
-    case CONTEXT_SET:
-      // cast object into class instance with methods
-      // strictly a read only reference to react context NOT a copy.
-      // alternatively, could access via useContext iff in provider/consumer
-      // scope
-      state.pageContext = action.payload as CPageLists;
-      // setPageLinkInitialState();
-      return state;
-    case SECTION_CHANGE:
-      let sectionIdx: number = +action.payload;
-      console.log(sectionIdx in state.pageContext.sectionList);
-      if (
-        state.pageContext !== undefined &&
-        state.pageContext !== null &&
-        sectionIdx in state.pageContext.sectionList
-      ) {
-        state.cursor_sectionIdx = sectionIdx;
-        state.cursor_terminalIdx =
-          state.pageContext.sectionList[sectionIdx].firstTermIdx;
-        state.cursor_sentenceIdx =
-          state.pageContext.terminalList[state.cursor_terminalIdx].sentenceIdx;
-      } else {
-        // should report out-of-bound condition. How?
-        state.cursor_sectionIdx = 0;
-        state.cursor_terminalIdx = 0;
-      }
-      return state;
-    case LISTENING_MATCH:
-      // resetListeningRetries();
-      setListeningMessage(action.payload);
-      setToNextTerminalState();
-      // Recognition_reset_retries();
-      state.listen_wordRetries = 0; // reset
-      return { ...state };
-    case LISTENING_MESSAGE:
-      setListeningMessage(action.payload);
-      return { ...state };
-    case LISTENING_WORDRETRIES:
-      console.log(`@@@ LISTENING wordRetries=${+action.payload.retries} limit=${+action.payload.limit}`);
-      state.listen_wordRetries = +action.payload.retries;
-      // change limit iff explicit value is provided
-      if (+action.payload.limit >= 0) state.listen_wordRetries_limit = +action.payload.limit;
-      return { ...state };
-    case LISTENING_WORDRETRIES_INCREMENT:
-      console.log(`@@@ LISTENING wordRetries=${state.listen_wordRetries}`);
-      state.listen_wordRetries = state.listen_wordRetries + 1;
-      state.listen_wordRetries_limit_progress = state.listen_wordRetries/state.listen_wordRetries_limit;
-      state.listen_wordRetries_limit_exceeded = state.listen_wordRetries > state.listen_wordRetries_limit
-      if (state.listen_wordRetries > state.listen_wordRetries_limit) {
-        console.log(`@@@ LISTENING wordRetries=${state.listen_wordRetries} exceeded limit=${state.listen_wordRetries_limit_exceeded}`);
-        state.listen_wordRetries_limit_exceeded = true;
-      }
-      return { ...state };
-    case LISTENING_WORDRETRIES_RESET:
-      resetWordRetriesState();
-      if (action.payload.limit !== undefined) state.listen_wordRetries_limit = +action.payload.limit;
-      return { ...state };
-    case LISTENING_WORDRETRIES_SETLIMIT:
-      resetWordRetriesState();
-      state.listen_wordRetries_limit = +action.payload.limit;
-      return { ...state };
-    case WORD_NEXT:
-      setListeningMessage(action.payload);
-      setToNextTerminalState();
-      return { ...state };
-    case WORD_PREVIOUS:
-      setToPrevTerminalState();
-      return { ...state };
-    case WORD_SETCURRENTFILLIN:
-      state.fillin_currentTerminalIdx = +action.payload;
-      return { ...state };
-    case SENTENCE_DISABLETRANSITIONS:
-      state.listen_announcementEnabled = false; // "e.g. listening"
-      state.sentence_useDefaultTransitions = false
-      return { ...state };
-    case SENTENCE_ENABLETRANSITIONS:
-      state.listen_announcementEnabled = true; // "e.g. listening"
-      state.sentence_useDefaultTransitions = true
-      return { ...state };
-    case SENTENCE_NEXT:
-      setToNextSentenceTerminalState();
-      return { ...state };
-    case SENTENCE_PREVIOUS:
-      setToPrevSentenceTerminalState();
-      return { ...state };
-    case SENTENCE_RESETOPACITY:
-      state.sentence_opacity = ObscuredTextDegreeEnum.unobscured;
-      state.sentence_idxObscured = IDX_INITIALIZER;
-      console.log(`@@@ reset opacity=${action.payload} idxObscured=${state.sentence_idxObscured}`);
-      // );
-      // gets reset when sentence transitions
-      return { ...state };
-    case SENTENCE_SETOPACITY:
-      state.sentence_opacity = +action.payload;
-      state.sentence_idxObscured = state.cursor_sentenceIdx;
-      // console.log(
-      //   `@@@ opacity=${action.payload} idxObscured=${state.sentence_idxObscured} state.cursor_sentenceIdx=${state.cursor_sentenceIdx}`
-      // );
-      // gets reset when sentence transitions
-      return { ...state };
-    case WORD_SELECT:
-      setTerminalState([+action.payload]);
-      return { ...state };
-    case LISTENING_TOGGLE:
-      if (state.listen_available) {
-        state.listen_active = !state.listen_active;
-        console.log(`toggle: listen_active=${state.listen_active}`);
-        // if (state.listen_active) {
-        //   state.listen_retries_max = +action.payload;
-        //   resetListeningRetries();
-        // }
-      }
-      return { ...state };
-    case LISTENING_START:
-      if (state.listen_available) {
-        state.listen_stopAtEOS = action.payload;
-        state.listen_active = true;
-        console.log(`start: listen_active=${state.listen_active}`);
-      }
-      return { ...state };
-    case LISTENING_STOP:
-      console.log(`stop: listen_active=${state.listen_active}`);
-      state.listen_active = false;
-      state.listen_stopAtEOS = false; // reset
-      // state.listen_retries = 0;
-      // state.listen_retriesExceeded = false;
-      setListeningMessage((!state.listen_active).toString());
-      // console.log(`stop: listen_active=${state.listen_active}`);
-      return { ...state };
-    case LISTENING_AVAILABLE:
-      state.listen_available = action.payload;
-      setListeningMessage(state.listen_available.toString());
-      return { ...state };
-    // case LISTENING_FLUSH:
-    //   state.listen_flush = true; // resets transcript
-    //   resetListeningRetries();
-    //   setListeningMessage("flushing transcript");
-    //   return state;
-    // case LISTENING_FLUSHED:
-    //   state.listen_flush = false; // resets transcript
-    //   setListeningMessage("transcript flushed");
-    //   return state;
-    // case LISTENING_RETRY:
-    //   state.listen_retries++;
-    //   state.listen_retriesExceeded =
-    //     state.listen_retries_max > 0 &&
-    //     state.listen_retries > state.listen_retries_max;
-    //   setListeningMessage(action.payload);
-    //   return state;
-    // case LISTENING_RETRY_RESET:
-    //   state.listen_retries = 0;
-    //   state.listen_retriesExceeded = false;
-    //   setListeningMessage(action.payload);
-    //   return state;
-    case ANNOUNCE_MESSAGE:
-      state.announce_message = action.payload; // resets transcript
-      return { ...state };
-    case ANNOUNCE_ACKNOWLEDGED:
-      state.announce_message = ""; // resets transcript
-      return { ...state };
-    case TRANSITION_ACKNOWLEDGE:
-      state.cursor_nextPageTransition = false;
-      state.cursor_nextSectionTransition = false;
-      state.cursor_nextSentenceTransition = false;
-      state.cursor_beginningOfPageReached = false;
-      state.cursor_endOfPageReached = false;
-      state.announce_message = "";
-      return { ...state };
-    //All RECITE_START*() are relative to the currentTerminalIdx.
     case RECITE_START:
       state.recite_requested = true;
       state.recite_completed = false;
@@ -1761,41 +1623,165 @@ export const rootReducer = (
       state.recite_word_requested = false;
       state.recite_completed = false;
       return { ...state };
-    case SETTINGS_TOGGLE:
-      state.settings_toggle = !state.settings_toggle;
-      if (state.settings_toggle) {
-        state.listen_active = false;
-        console.log(`settingtoggle: listen_active=${state.listen_active}`);
-
-        state.listen_stopAtEOS = false; // reset
+    case RECOGNITION_ACTIVE:
+      state.recognition_active = true;
+      return { ...state };
+    case RECOGNITION_AVAILABLE:
+      state.recognition_available = action.payload;
+      setListeningMessage(state.recognition_available.toString());
+      return { ...state };
+    case RECOGNITION_INACTIVE:
+      state.recognition_active = false;
+      return { ...state };
+    case RECOGNITION_MATCH:
+      // resetListeningRetries();
+      setListeningMessage(action.payload);
+      setToNextTerminalState();
+      // Recognition_reset_retries();
+      state.recognition_wordRetries = 0; // reset
+      return { ...state };
+    case RECOGNITION_MESSAGE:
+      setListeningMessage(action.payload);
+      return { ...state };
+    case RECOGNITION_START_REQUESTED:
+      if (state.recognition_available) {
+        state.recognition_stopAtEOS = action.payload;
+        // console.log(`REDUCER: before start requested: recognition_requested=${state.recognition_requested}`);
+        state.recognition_requested = true;
+        // console.log(`REDUCER: after start requested: recognition_requested=${state.recognition_requested}`);
       }
       return { ...state };
+    case RECOGNITION_STOP_REQUESTED:
+      // console.log(`REDUCER: before stop requested: recognition_requested=${state.recognition_requested}`);
+      state.recognition_requested = false;
+      // console.log(`REDUCER: after stop requested: recognition_requested=${state.recognition_requested}`);
+      state.recognition_stopAtEOS = false; // reset
+      // state.recognition_retries = 0;
+      // state.recognition_retriesExceeded = false;
+      setListeningMessage((!state.recognition_active).toString());
+      // console.log(`stop: recognition_active=${state.recognition_active}`);
+      return { ...state };
+    case RECOGNITION_TOGGLE_REQUESTED:
+      if (state.recognition_available) {
+        state.recognition_requested = !state.recognition_active;
+        // console.log(`toggle: recognition_active=${state.recognition_active}`);
+        // if (state.recognition_active) {
+        //   state.recognition_retries_max = +action.payload;
+        //   resetListeningRetries();
+        // }
+      }
+      return { ...state };
+    case RECOGNITION_WORDRETRIES:
+      console.log(`@@@ LISTENING wordRetries=${+action.payload.retries} limit=${+action.payload.limit}`);
+      state.recognition_wordRetries = +action.payload.retries;
+      // change limit iff explicit value is provided
+      if (+action.payload.limit >= 0) state.recognition_wordRetries_limit = +action.payload.limit;
+      return { ...state };
+    case RECOGNITION_WORDRETRIES_INCREMENT:
+      console.log(`@@@ LISTENING wordRetries=${state.recognition_wordRetries}`);
+      state.recognition_wordRetries = state.recognition_wordRetries + 1;
+      state.recognition_wordRetries_limit_progress = state.recognition_wordRetries/state.recognition_wordRetries_limit;
+      state.recognition_wordRetries_limit_exceeded = state.recognition_wordRetries > state.recognition_wordRetries_limit
+      console.log(`@@@ REDUCER wordRetries=${state.recognition_wordRetries} recognition_wordRetries_limit_progress=${state.recognition_wordRetries_limit_progress} recognition_wordRetries_limit_exceeded=${state.recognition_wordRetries_limit_exceeded}`);
+      if (state.recognition_wordRetries > state.recognition_wordRetries_limit) {
+        console.log(`@@@ LISTENING wordRetries=${state.recognition_wordRetries} exceeded limit=${state.recognition_wordRetries_limit_exceeded}`);
+        state.recognition_wordRetries_limit_exceeded = true;
+      }
+      return { ...state };
+    case RECOGNITION_WORDRETRIES_RESET:
+      resetWordRetriesState();
+      if (action.payload.limit !== undefined) state.recognition_wordRetries_limit = +action.payload.limit;
+      return { ...state };
+    case RECOGNITION_WORDRETRIES_SETLIMIT:
+      resetWordRetriesState();
+      state.recognition_wordRetries_limit = +action.payload.limit;
+      return { ...state };
+    case SECTION_CHANGE:
+      let sectionIdx: number = +action.payload;
+      console.log(sectionIdx in state.pageContext.sectionList);
+      if (
+        state.pageContext !== undefined &&
+        state.pageContext !== null &&
+        sectionIdx in state.pageContext.sectionList
+      ) {
+        state.cursor_sectionIdx = sectionIdx;
+        state.cursor_terminalIdx =
+          state.pageContext.sectionList[sectionIdx].firstTermIdx;
+        state.cursor_sentenceIdx =
+          state.pageContext.terminalList[state.cursor_terminalIdx].sentenceIdx;
+      } else {
+        // should report out-of-bound condition. How?
+        state.cursor_sectionIdx = 0;
+        state.cursor_terminalIdx = 0;
+      }
+      return state;
     case SENTENCE_ACKNOWLEDGETRANSITION:
       state.cursor_nextSentenceTransition = false;
       return { ...state };
+    case SENTENCE_DISABLETRANSITIONS:
+      state.recognition_announcementEnabled = false; // "e.g. listening"
+      state.sentence_useDefaultTransitions = false
+      return { ...state };
+    case SENTENCE_ENABLETRANSITIONS:
+      state.recognition_announcementEnabled = true; // "e.g. listening"
+      state.sentence_useDefaultTransitions = true
+      return { ...state };
+    case SENTENCE_NEXT:
+      setToNextSentenceTerminalState();
+      return { ...state };
+    case SENTENCE_PREVIOUS:
+      setToPrevSentenceTerminalState();
+      return { ...state };
+    case SENTENCE_RESETOPACITY:
+      state.sentence_opacity = ObscuredTextDegreeEnum.unobscured;
+      state.sentence_idxObscured = IDX_INITIALIZER;
+      console.log(`@@@ reset opacity=${action.payload} idxObscured=${state.sentence_idxObscured}`);
+      // );
+      // gets reset when sentence transitions
+      return { ...state };
+    case SENTENCE_SETOPACITY:
+      state.sentence_opacity = +action.payload;
+      state.sentence_idxObscured = state.cursor_sentenceIdx;
+      // console.log(
+      //   `@@@ opacity=${action.payload} idxObscured=${state.sentence_idxObscured} state.cursor_enceIdx=${state.cursor_sentenceIdx}`
+      // );
+      // gets reset when sentence transitions
+      return { ...state };
+    case SETTINGS_TOGGLE:
+      state.settings_toggle = !state.settings_toggle;
+      if (state.settings_toggle) {
+        state.recognition_active = false;
+        console.log(`settingtoggle: recognition_active=${state.recognition_active}`);
+
+        state.recognition_stopAtEOS = false; // reset
+      }
+      return { ...state };
+    case WORD_NEXT:
+      setListeningMessage(action.payload);
+      setToNextTerminalState();
+      return { ...state };
+    case WORD_PREVIOUS:
+      setToPrevTerminalState();
+      return { ...state };
+    case WORD_SETCURRENTFILLIN:
+      state.fillin_currentTerminalIdx = +action.payload;
+      return { ...state };
+    case WORD_SELECT:
+      // should check validity of payload
+      setTerminalState([+action.payload]);
+      return { ...state };
+    case TRANSITION_ACKNOWLEDGE:
+      state.cursor_nextPageTransition = false;
+      state.cursor_nextSectionTransition = false;
+      state.cursor_nextSentenceTransition = false;
+      state.cursor_beginningOfPageReached = false;
+      state.cursor_endOfPageReached = false;
+      state.announce_message = "";
+      return { ...state };
+    //All RECITE_START*() are relative to the currentTerminalIdx.
     case STATUSBAR_MESSAGE_SET:
       state.statusBar_message1 = action.payload;
       return { ...state };
-    case MESSAGE_SET: {
-      switch (action.payload.messageType as StatusBarMessageType) {
-        case StatusBarMessageType.application:
-          state.message_application = action.payload.message;
-          break;
-        case StatusBarMessageType.state:
-          state.message_state = action.payload.message;
-          break;
-        case StatusBarMessageType.listening:
-          state.message_listening = action.payload.message;
-          break;
-        default:
-      }
-      return { ...state };
-    }
-    case FILLIN_RESETSECTION: {
-      state.fillin_resetSectionIdx = action.payload;
-      state.fillin_showTerminalIdx = IDX_INITIALIZER;
-      return { ...state };
-    }
     // case FILLIN_TOGGLETAGSSECTION: {
     //   state.fillin_toggleShowTagsSectionIdx = action.payload;
     //   return state;
@@ -1804,98 +1790,9 @@ export const rootReducer = (
     //   state.fillin_selectLayoutSectionIdx = action.payload;
     //   return state;
     // }
-    case INLINEBUTTON_AUTOADVANCE:
-      state.inlinebutton_autoadvance = true;
-      state.inlinebutton_idx_prev = state.inlinebutton_idx
-      state.inlinebutton_idx = action.payload;
-      state.inlinebutton_reclicks = 1;
-      return { ...state }
-    case INLINEBUTTON_CANCELED:
-      if (action.payload === state.inlinebutton_idx) {
-        state.inlinebutton_reclicks = 0;
-        state.inlinebutton_autoadvance = false;
-        state.inlinebutton_idx_prev = IDX_INITIALIZER
-        state.inlinebutton_idx = IDX_INITIALIZER;
-      }
-      return { ...state }
-    case INLINEBUTTON_CLICKED:
-      // if idx and idx_prev are the same, then this is a repeat click
-      state.inlinebutton_autoadvance = false;
-      if (state.inlinebutton_idx === action.payload) {
-        // clicked on the same inlinebutton again
-        state.inlinebutton_reclicks += 1;
-        if (state.inlinebutton_idx !== IDX_INITIALIZER) {
-          // second consecutive click (while active) => pause
-        } else { 
-          // second consecutive click (while active) => pause
-          // state.inlinebutton_idx_prev = IDX_INITIALIZER;
-        }
-      } else {
-        // clicked on a new inlinebutton
-        state.inlinebutton_reclicks = 0;
-      }
-      // with subsequent inlinebutton clicks, should the opacity increase?
-      console.log(
-        `@@@ reducer: inlinebutton_clicked idx=${state.inlinebutton_idx} previdx=${state.inlinebutton_idx_prev} action.payload=${action.payload} prevIdx=${state.inlinebutton_idx_prev} action.payload=${action.payload} inlinebutton_reclicks=${state.inlinebutton_reclicks};
-`)
-      state.inlinebutton_idx_prev = state.inlinebutton_idx
-      state.inlinebutton_idx = action.payload;
-
-      return { ...state };
-    case MESSAGE_CLEAR: {
-      let msgType: number =
-        action.payload.messageType === undefined
-          ? StatusBarMessageType.all
-          : action.payload.messageType;
-      switch (msgType) {
-        case StatusBarMessageType.all:
-          state.message_application = "";
-          state.message_listening = "";
-          state.message_state = "";
-          break;
-        case StatusBarMessageType.application:
-          state.message_application = "";
-          break;
-        case StatusBarMessageType.state:
-          state.message_state = "";
-          break;
-        case StatusBarMessageType.listening:
-          state.message_listening = "";
-          break;
-        default:
-      }
-      return { ...state };
-    }
-    case NAVBAR_HIDE: {
-      state.navbar_toggle = false;
-      return { ...state };
-    }
-    case NAVBAR_TOGGLE: {
-      state.navbar_toggle = !state.navbar_toggle;
-      return { ...state };
-    }
-    case MODELING_START_BUTTON:
-      state.modeling_requested = true;
-      state.modeling_requested_scope = ModelingScopeEnumType.inlineButton;
-      state.modeling_requested_buttonIdx = action.payload;
-      return {...state}
-    case MODELING_START_SENTENCE:
-      state.modeling_requested = true;
-      state.modeling_requested_scope = ModelingScopeEnumType.sentence;
-      state.modeling_requested_sentenceIdx =action.payload.sentenceIdx;
-      return {...state}
-    case MODELING_START_WORD:
-      state.modeling_requested = true;
-      state.modeling_requested_scope = ModelingScopeEnumType.word;
-      state.modeling_requested_wordIdx = action.payload.wordIdx;
-      return {...state}
-    case MODELING_STOP:
-    case MODELING_CANCEL:
-      state.modeling_requested = false;
-      return {...state}
     // case ACTION_CANCEL: {
     //   // state.inlinebutton_idx = action.payload;
-    //   state.action_listen_completed = false;
+    //   state.action_recognition_completed = false;
     //   state.action_cursormove_completed = false;
     //   state.action_recite_completed = false;
     //   state.action_signal_completed = false;
@@ -1904,24 +1801,24 @@ export const rootReducer = (
     // case ACTION_CANCEL: {
     //   state.inlinebutton_idx = action.payload;
     //   state.recite_requested_passthru = [];
-    //   state.inlinebutton_listen_requested = false;
+    //   state.inlinebutton_recognition_requested = false;
     //   state.inlinebutton_move_requested = false;
     //   state.inlinebutton_recite_requested = false;
     //   state.inlinebutton_signal_requested = false;
     //   return state;
     // }
     // case ACTION_LISTEN_STARTING: {
-    //   // state.action_listen_initiated = true;
-    //   state.action_listen_completed = false;
+    //   // state.action_recognition_initiated = true;
+    //   state.action_recognition_completed = false;
     //   return state;
     // }
     // case ACTION_LISTEN_COMPLETED: {
-    //   // state.action_listen_initiated = false;
-    //   state.action_listen_completed = true;
+    //   // state.action_recognition_initiated = false;
+    //   state.action_recognition_completed = true;
     //   return state;
     // }
     // // case ACTION_LISTENED: {
-    // //   state.inlinebutton_listen_requested = false;
+    // //   state.inlinebutton_recognition_requested = false;
     // //   return state;
     // // }
     // case ACTION_CURSORMOVE_STARTING: {
