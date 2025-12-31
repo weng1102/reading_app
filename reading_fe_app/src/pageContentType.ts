@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2024 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2025 Wen Eng - All Rights Reserved
  *
  * File name: PageContentType.ts
  *
@@ -8,8 +8,10 @@
  *
  **/
 export const IDX_INITIALIZER = -9999;
-export const PageContentVersion = "20250718.1";
-// 20250718 - Added more IInlineButtonItem fields// 20250109 - Added nextButtonIdx IInlineButtonItem
+export const PageContentVersion = "20251227.1";
+// 20251227 - Added skipSchemaCheck in IPageRequestItem
+// 20250109 - Added nextButtonIdx IInlineButtonItem
+// 20250718 - Added more IInlineButtonItem fields
 // 20250109 - Added nextButtonIdx IInlineButtonItem
 // 20230916 - Modified inlineButtonItem.sectionIdx
 // 20240821 - Added inlineButtonItem.nextTermIdx
@@ -1652,12 +1654,14 @@ export enum PageRequestItemType {
 export interface IPageRequestItem {
   page: string;
   currentTermIdx: number;
+  skipSchemaCheck: boolean
 }
 export function PageRequestItemInitializer(
   page: string = "",
-  currentIdx: number = 0
+  currentIdx: number = 0,
+  skipSchemaCheck: boolean = false
 ): IPageRequestItem {
-  return { page: page, currentTermIdx: currentIdx };
+  return { page: page, currentTermIdx: currentIdx, skipSchemaCheck };
 }
 
 // export interface ISectionFillinList {
