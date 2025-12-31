@@ -134,7 +134,9 @@ export const SettingsDialog = (props: ISettingsDialogPropsType) => {
   if (!props.isActive) {
     return null;
   } else {
-    dispatch(Request.Recognition_stop());
+    dispatch(Request.Recognition_stop_requested());
+    console.log(`@@@@ stop requested6`);
+
     return (
       <>
         <div className="settings-overlay" />
