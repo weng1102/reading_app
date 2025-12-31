@@ -9,7 +9,6 @@
  **/
 export const IDX_INITIALIZER = -9999;
 export const PageContentVersion = "20251227.1";
-// 20251227 - Added skipSchemaCheck in IPageRequestItem
 // 20250109 - Added nextButtonIdx IInlineButtonItem
 // 20250718 - Added more IInlineButtonItem fields
 // 20250109 - Added nextButtonIdx IInlineButtonItem
@@ -1654,14 +1653,12 @@ export enum PageRequestItemType {
 export interface IPageRequestItem {
   page: string;
   currentTermIdx: number;
-  skipSchemaCheck: boolean
 }
 export function PageRequestItemInitializer(
   page: string = "",
   currentIdx: number = 0,
-  skipSchemaCheck: boolean = false
 ): IPageRequestItem {
-  return { page: page, currentTermIdx: currentIdx, skipSchemaCheck };
+  return { page: page, currentTermIdx: currentIdx };
 }
 
 // export interface ISectionFillinList {

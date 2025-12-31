@@ -1,4 +1,4 @@
-/** Copyright (C) 2020 - 2024 Wen Eng - All Rights Reserved
+/** Copyright (C) 2020 - 2025 Wen Eng - All Rights Reserved
  *
  * File name: PageContentType.ts
  *
@@ -8,7 +8,9 @@
  *
  **/
 export const IDX_INITIALIZER = -9999;
-export const PageContentVersion = "20250109.1";
+export const PageContentVersion = "20251227.1";
+// 20250109 - Added nextButtonIdx IInlineButtonItem
+// 20250718 - Added more IInlineButtonItem fields
 // 20250109 - Added nextButtonIdx IInlineButtonItem
 // 20230916 - Modified inlineButtonItem.sectionIdx
 // 20240821 - Added inlineButtonItem.nextTermIdx
@@ -1524,6 +1526,9 @@ export interface IInlineButtonItem {
   nextTermIdx: number;
   nextButtonIdx: number;
   toBeRecited: string;
+  continuation: number; // continuation of modeling
+  repetitions: number;
+  obscurityIndex: number
 }
 export function IInlineButtonItemInitializer(
   buttonIdx = IDX_INITIALIZER,
@@ -1538,7 +1543,10 @@ export function IInlineButtonItemInitializer(
   voiceIndex = 0,
   nextTermIdx = IDX_INITIALIZER,
   nextButtonIdx = IDX_INITIALIZER,
-  toBeRecited = ""
+  toBeRecited = "",
+  continuation = 0,
+  repetitions = 0,
+  obscurityIndex = 0
 ): IInlineButtonItem {
   return {
     buttonIdx,
@@ -1553,7 +1561,10 @@ export function IInlineButtonItemInitializer(
     voiceIndex,
     nextTermIdx,
     nextButtonIdx,
-    toBeRecited
+    toBeRecited,
+    continuation,
+    repetitions,
+    obscurityIndex
   };
 }
 // export interface IFillinItem {
@@ -1645,7 +1656,7 @@ export interface IPageRequestItem {
 }
 export function PageRequestItemInitializer(
   page: string = "",
-  currentIdx: number = 0
+  currentIdx: number = 0,
 ): IPageRequestItem {
   return { page: page, currentTermIdx: currentIdx };
 }
